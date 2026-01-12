@@ -26,7 +26,6 @@ namespace HJScarletRework.Projs.Ranged
             set => Projectile.ai[0] = (float)value;
         }
         internal ref bool Update => ref Projectile.netUpdate;
-        private bool MouseRight = false;
         public override string Texture => GetInstance<AetherfireSmasher>().Texture;
         #region 基础数值
         protected override BoomerangDefault BoomerangStat => new

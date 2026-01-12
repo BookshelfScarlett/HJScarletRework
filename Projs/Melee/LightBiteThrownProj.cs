@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Projectiles;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
@@ -13,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class LightBiteThrownProj : ThrownSpearProjClass
     {
-        public override string Texture => GetInstance<LightBiteThrown>().Texture;
+        public override string Texture => GetInstance<LightBite>().Texture;
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailingMode[Type] = 2;
@@ -49,8 +50,6 @@ namespace HJScarletRework.Projs.Melee
         SpriteBatch SB { get => Main.spriteBatch; }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.GetTexture(out Texture2D projTex, out Vector2 orig, out Vector2 drawPos);
-
             int length = Projectile.oldPos.Length;
             Texture2D star = TextureAssets.Extra[ExtrasID.SharpTears].Value;
             for (int i = 0; i < length; i++)
@@ -60,19 +59,7 @@ namespace HJScarletRework.Projs.Melee
                 Main.spriteBatch.Draw(star, Projectile.oldPos[i] + Projectile.PosToCenter() + Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2) * 1f, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.oldRot[i] + PiOver2, star.Size() / 2, Projectile.scale * new Vector2(0.8f, 1.5f), 0, 0);
             }
             //绘制发光边缘
-            for (int i =0; i < 8; i++)
-            {
-                SB.Draw(projTex, drawPos + ToRadians(i * 60f).ToRotationVector2() * 2f, null, Color.White with { A = 0 }, Projectile.rotation + PiOver4, orig, Projectile.scale, 0, 0f);
-            }
-            //绘制射弹
-            for (int i = 0; i < Projectile.oldPos.Length;i++)
-            {
-                Vector2 trailPos = drawPos - Projectile.velocity * i * 0.7f;
-                float faded = MathF.Pow(1 - i / (float)Projectile.oldPos.Length, 2);
-                Color trailColor = Color.White * faded;
-                SB.Draw(projTex, trailPos, null, trailColor, Projectile.oldRot[i] + PiOver4, orig, Projectile.scale, 0, 0);
-            }
-            SB.Draw(projTex, drawPos, null, Color.White, Projectile.rotation + PiOver4, orig, Projectile.scale, 0, 0);
+            Projectile.DrawProj(Color.White, Projectile.oldPos.Length, 0.7f, ToRadians(135));
             return false;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)

@@ -13,7 +13,6 @@ namespace HJScarletRework.Projs.Melee
     {
         public override string Texture => GetInstance<WildPointerThrown>().Texture;
         public override void SetStaticDefaults() => Projectile.ToTrailSetting();
-        private bool HitWall = false;
         private bool CanHomingToTarget
         {
             get => Projectile.ai[0] == 1;

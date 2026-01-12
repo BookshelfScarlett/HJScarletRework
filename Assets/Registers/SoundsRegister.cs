@@ -54,6 +54,5 @@ namespace HJScarletRework.Assets.Registers
                 Misc_KnifeToss2,
                 Misc_KnifeToss3,
             ];
-        #endregion
     }
 }

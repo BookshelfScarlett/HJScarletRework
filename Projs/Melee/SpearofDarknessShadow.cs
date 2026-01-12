@@ -89,8 +89,12 @@ namespace HJScarletRework.Projs.Melee
         {
             if (Osci == 0f)
                 SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { MaxInstances = 0, Pitch = Main.rand.NextFloat(0.3f, 0.7f), Volume = Main.rand.NextFloat(0.4f, 0.5f) });
-            if (!Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true, 600))
+            if (!Projectile.GetTargetSafe(out NPC target, true, 600))
+            {
+                //记得处死
+                Projectile.Kill();
                 return;
+            }
             if (Projectile.timeLeft < StrikeTime)
             {
                 //锁住生命值让其确保能攻击到目标

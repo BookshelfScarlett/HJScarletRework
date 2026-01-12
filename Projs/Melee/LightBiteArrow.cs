@@ -48,8 +48,8 @@ namespace HJScarletRework.Projs.Melee
             if (Timer > 45)
             {
                 Projectile.penetrate = 1;
-                if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex,true))
-                    Projectile.HomingTarget(target.Center, 9999f, 12f, 20f);
+                if (Projectile.GetTargetSafe(out NPC target, true))
+                    Projectile.HomingTarget(target.Center, -1, 12f, 20f);
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

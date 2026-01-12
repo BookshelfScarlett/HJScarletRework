@@ -12,3 +12,4 @@ C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\obj\Debug\net8.0\refint\HJScarletRework.dll
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\obj\Debug\net8.0\HJScarletRework.pdb
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\obj\Debug\net8.0\ref\HJScarletRework.dll
+C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\obj\Debug\net8.0\HJScarletRework.sourcelink.json

@@ -86,7 +86,6 @@ namespace HJScarletRework.Projs.Melee
                     ((EvolutionEnergyPortal)proj.ModProjectile).SpawnEvolutionArrow = true;
                 }
                 //在玩家处生成启动音效
-//Utils.SelectRandom(Main.rand, HJScarletSounds.Atom_Strike)
                 SoundStyle select = HJScarletSounds.Hammer_Shoot[1];
                 SoundEngine.PlaySound(select with { Pitch = 0.8f, MaxInstances = 0, Volume = 0.3f }, Owner.MountedCenter);
             }

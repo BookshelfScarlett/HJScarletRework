@@ -53,8 +53,6 @@ namespace HJScarletRework.Projs.Melee
                     new StarShape(pos, Projectile.SafeDir() * 4f, Color.White, 0.15f * Projectile.Opacity, 10).Spawn();
                 }
             }
-            //new TurbulenceShinyOrb(Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), 1f, Color.Green.RandLerpTo(Color.LawnGreen), 40, 0.08f * Projectile.Opacity, Main.rand.NextFloat(TwoPi)).Spawn();
-            //new Petal(Projectile.Center + Main.rand.NextVector2Circular(6f, 6f), Projectile.velocity / 4f, Color.DarkGreen.RandLerpTo(Color.Green), 40, Main.rand.NextFloat(TwoPi), 1f, 0.1f, 1f).Spawn();
             //在这个过程生成需要的粒子
             if (AttackType == Style.Attack)
             {
@@ -62,7 +60,7 @@ namespace HJScarletRework.Projs.Melee
                 if (Projectile.GetTargetSafe(out NPC target, true, 1200f))
                 {
                     Projectile.extraUpdates = 5;
-                    Projectile.HomingTarget(target.Center, 1800f, 20f, 35f);
+                    Projectile.HomingTarget(target.Center, -1f, 20f, 35f);
                 }
                 else
                     Projectile.extraUpdates = 4;
