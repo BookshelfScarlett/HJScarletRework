@@ -88,7 +88,7 @@ namespace HJScarletRework.Projs.Melee
         private void UpdateIdlePos()
         {
             if (Osci == 0f)
-                SoundEngine.PlaySound(HJScarletSounds.Mana_Toss with { MaxInstances = 0, Pitch = Main.rand.NextFloat(0.3f, 0.7f), Volume = Main.rand.NextFloat(0.4f, 0.5f) });
+                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { MaxInstances = 0, Pitch = Main.rand.NextFloat(0.3f, 0.7f), Volume = Main.rand.NextFloat(0.4f, 0.5f) });
             if (!Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true, 600))
                 return;
             if (Projectile.timeLeft < StrikeTime)

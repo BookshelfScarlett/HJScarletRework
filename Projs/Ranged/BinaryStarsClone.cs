@@ -158,10 +158,10 @@ namespace HJScarletRework.Projs.Ranged
                 SB.End();
                 SB.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
                 float spinRotation = Main.GlobalTimeWrappedHourly * 5.2f;
-                DrawTrails(HJScarletTexture.Trail_ManaStreak, Color.Violet);
-                DrawTrails(HJScarletTexture.Trail_ManaStreak, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
-                DrawTrails(HJScarletTexture.Trail_ManaStreak, Color.Orchid, 0.4f, 0.8f, offsetHeight: -12f);
-                DrawTrails(HJScarletTexture.Trail_ParaLine, Color.White, 0.4f,alphaValue: 1f);
+                DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Violet);
+                DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
+                DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: -12f);
+                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f,alphaValue: 1f);
 
                 SB.End();
                 SB.BeginDefault();

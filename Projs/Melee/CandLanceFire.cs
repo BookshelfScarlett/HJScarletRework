@@ -55,7 +55,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     //向下方向，生成一个小型的鬼魂粒子
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitY.ToRandVelocity(PiOver4) * Main.rand.NextFloat(3f, 4f), ProjectileType<CandLanceBeam>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
-                    SoundEngine.PlaySound(HJScarletSounds.Mana_Toss2 with { Volume = 0.7f, MaxInstances = 0, Pitch = 0.7f }, Projectile.Center);
+                    SoundEngine.PlaySound(HJScarletSounds.Evolution_Thrown with { Volume = 0.7f, MaxInstances = 0, Pitch = 0.7f }, Projectile.Center);
                 }
             }
             else
@@ -79,8 +79,8 @@ namespace HJScarletRework.Projs.Melee
             //为其绘制一个发光的环。
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-            SB.Draw(HJScarletTexture.Texture_BloomShockwave.Value, Projectile.Center - Main.screenPosition, null, Color.DeepSkyBlue * Projectile.Opacity, 0, HJScarletTexture.Texture_BloomShockwave.Size() / 2, 0.13f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
-            SB.Draw(HJScarletTexture.Particle_CrossGlow.Value, Projectile.Center - Main.screenPosition, null, Color.SkyBlue * Projectile.Opacity, 0, HJScarletTexture.Particle_CrossGlow.Size() / 2, 0.20f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
+            SB.Draw(HJScarletTexture.Texture_BloomShockwave.Value, Projectile.Center - Main.screenPosition, null, Color.DeepSkyBlue * Projectile.Opacity, 0, HJScarletTexture.Texture_BloomShockwave.Origin, 0.13f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
+            SB.Draw(HJScarletTexture.Particle_CrossGlow.Value, Projectile.Center - Main.screenPosition, null, Color.SkyBlue * Projectile.Opacity, 0, HJScarletTexture.Particle_CrossGlow.Origin, 0.20f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
             SB.End();
             SB.BeginDefault();
             return false;

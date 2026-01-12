@@ -88,7 +88,7 @@ namespace HJScarletRework.Projs.Ranged
             if (HJScarletMethods.OutOffScreen(Projectile.Center, 1.2f) && !Owner.HasProj<DeathTollsMinion>(out int projID))
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, projID, Projectile.damage, 0f, Projectile.owner);
-                SoundEngine.PlaySound(HJScarletSounds.Mana_Toss, Owner.Center);
+                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss, Owner.Center);
                 //而后，杀死射弹。
                 Projectile.Kill();
             }
@@ -101,7 +101,7 @@ namespace HJScarletRework.Projs.Ranged
                 if (Owner.HasProj<DeathTollsMinion>())
                 {
                     //压制音量，这里由仆从锤的射线声作为主导
-                    SoundEngine.PlaySound(HJScarletSounds.Mana_Toss with { Pitch = 0.4f, Volume = 0.2f, MaxInstances = 0 }, Owner.Center);
+                    SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Pitch = 0.4f, Volume = 0.2f, MaxInstances = 0 }, Owner.Center);
                 }
                 else
                     SoundEngine.PlaySound(SoundID.Item103, Owner.Center);
@@ -159,7 +159,7 @@ namespace HJScarletRework.Projs.Ranged
             if (!Owner.HasProj<DeathTollsMinion>(out int minionID))
             {
                 Projectile hangingProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, minionID, Projectile.damage, Projectile.knockBack, Projectile.owner);
-                SoundEngine.PlaySound(HJScarletSounds.Mana_Toss, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss, Projectile.Center);
             }
             else if (!Owner.HasProj<DeathTollsCloneProj>(out int projID))
             {

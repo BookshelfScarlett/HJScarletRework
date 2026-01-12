@@ -153,7 +153,7 @@ namespace HJScarletRework.Projs.Ranged
             //这里的放缩会被lerp进行一次总控。
             Vector2 dynamicBackgroundScale = Vector2.Lerp(Vector2.Zero, new Vector2(1.4f,1.4f), GeneralProgress) * Projectile.scale * 1.1f;
             Vector2 dynamicBloomScale = Vector2.Lerp(Vector2.Zero, new Vector2(0.8f,0.8f), GeneralProgress) * Projectile.scale * 1.1f;
-            Vector2 ori = HJScarletTexture.Particle_HRStar.Size() / 2;
+            Vector2 ori = HJScarletTexture.Particle_HRStar.Origin;
             //最后我们实际绘制他。
             SB.End();
             SB.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);

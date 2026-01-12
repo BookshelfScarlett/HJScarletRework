@@ -36,7 +36,7 @@ namespace HJScarletRework.Particles
             float brightness = (float)Math.Pow(Lighting.Brightness((int)(Position.X / 16f), (int)(Position.Y / 16f)), 0.15);
             Texture2D texture = HJScarletTexture.Particle_Fire.Value;
 
-            Rectangle frame = HJScarletTexture.Particle_Fire.Frame(8, 8, (int)(LifetimeRatio * 64) % 8, (int)(LifetimeRatio * 8));
+            Rectangle frame = HJScarletTexture.Particle_Fire.Texture.Frame(8, 8, (int)(LifetimeRatio * 64) % 8, (int)(LifetimeRatio * 8));
             Vector2 origin = frame.Size() * 0.5f;
             spriteBatch.Draw(texture, Position - Main.screenPosition, frame, DrawColor * brightness * Opacity, Rotation, origin, Scale, 0, 0f);
         }

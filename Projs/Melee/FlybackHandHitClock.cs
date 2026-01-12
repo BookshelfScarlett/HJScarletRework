@@ -80,7 +80,7 @@ namespace HJScarletRework.Projs.Melee
             }
             SB.EnterShaderArea();
             //SB.Draw(ring, Projectile.Center - Main.screenPosition, null, Color.LightYellow, 0, ring.Size() / 2, 0.45f * Timer, 0, 0);
-            SB.Draw(HJScarletTexture.Particle_HRShinyOrbMedium.Value, Projectile.Center - Main.screenPosition, null, Color.LightYellow * 0.8f, 0, HJScarletTexture.Particle_HRShinyOrbMedium.Size() / 2, 5f * Timer, 0, 0);
+            SB.Draw(HJScarletTexture.Particle_HRShinyOrbMedium.Value, Projectile.Center - Main.screenPosition, null, Color.LightYellow * 0.8f, 0, HJScarletTexture.Particle_HRShinyOrbMedium.Origin, 5f * Timer, 0, 0);
             //圆球
             //SB.Draw(HJScarletTexture.Particle_OpticalLineGlow.Value, Projectile.Center - Main.screenPosition, null, Color.Gold, 0, HJScarletTexture.Particle_OpticalLineGlow.Origin, Timer * 0.10f, 0, 0);
             SB.EndShaderArea();

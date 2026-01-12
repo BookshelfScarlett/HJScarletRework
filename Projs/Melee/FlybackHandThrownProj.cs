@@ -171,10 +171,10 @@ namespace HJScarletRework.Projs.Melee
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             float widthOffset = -80f;
-            DrawTrails(Color.Gold, HJScarletTexture.Trail_ManaStreak, 13f, 12f, widthOffset, 0.7f * Projectile.Opacity);
-            DrawTrails(Color.LightYellow, HJScarletTexture.Trail_ManaStreak, 7f, 12f, widthOffset, 1f * Projectile.Opacity);
-            DrawTrails(Color.Gold, HJScarletTexture.Trail_ManaStreak, 7f, -12f, widthOffset, 0.7f * Projectile.Opacity);
-            DrawTrails(Color.LightYellow, HJScarletTexture.Trail_ManaStreak, 7f, -12f, widthOffset, 1f * Projectile.Opacity );
+            DrawTrails(Color.Gold, HJScarletTexture.Trail_ManaStreak.Texture, 13f, 12f, widthOffset, 0.7f * Projectile.Opacity);
+            DrawTrails(Color.LightYellow, HJScarletTexture.Trail_ManaStreak.Texture, 7f, 12f, widthOffset, 1f * Projectile.Opacity);
+            DrawTrails(Color.Gold, HJScarletTexture.Trail_ManaStreak.Texture, 7f, -12f, widthOffset, 0.7f * Projectile.Opacity);
+            DrawTrails(Color.LightYellow, HJScarletTexture.Trail_ManaStreak.Texture, 7f, -12f, widthOffset, 1f * Projectile.Opacity );
             SB.End();
             SB.BeginDefault();
 
@@ -190,7 +190,7 @@ namespace HJScarletRework.Projs.Melee
                 SB.Draw(star, starPos, null, drawColor with { A = 125 }, Projectile.rotation + PiOver4, star.Size() / 2, new Vector2(1.5f, 0.2f) * Projectile.Opacity, 0, 0);
                 SB.Draw(star, starPos, null, drawColor with { A = 125 }, Projectile.rotation + ToRadians(135), star.Size() / 2, new Vector2(1.5f, 0.2f) * Projectile.Opacity, 0, 0);
             }
-            SB.Draw(HJScarletTexture.Particle_ShinyOrb.Value, drawPos, null, Color.White with { A = 0 }, 0f, HJScarletTexture.Particle_ShinyOrb.Size() / 2, Projectile.scale * 1f * Projectile.Opacity, 0, 0);
+            SB.Draw(HJScarletTexture.Particle_ShinyOrb.Value, drawPos, null, Color.White with { A = 0 }, 0f, HJScarletTexture.Particle_ShinyOrb.Origin, Projectile.scale * 1f * Projectile.Opacity, 0, 0);
         }
         //这里的实现原理是用一个切边棱形不断叠层
         private void FillColor(Texture2D star)

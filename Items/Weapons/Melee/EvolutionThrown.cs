@@ -22,7 +22,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.damage = 106;
             Item.useTime = Item.useAnimation = 25;
             Item.knockBack = 12f;
-            Item.UseSound = HJScarletSounds.Mana_Toss2 with { MaxInstances = 0};
+            Item.UseSound = HJScarletSounds.Evolution_Thrown with { MaxInstances = 0};
             Item.shootSpeed = 16;
             Item.shoot = ProjectileType<EvolutionThrownProj>();
             Item.rare = ItemRarityID.Purple;

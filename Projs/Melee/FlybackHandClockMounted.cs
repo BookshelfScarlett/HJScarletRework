@@ -123,11 +123,11 @@ namespace HJScarletRework.Projs.Melee
         {
             Texture2D sharpTears = HJScarletTexture.Specific_Clock.Value;
             //底图
-            SB.Draw(HJScarletTexture.Texture_BloomShockwave.Value, Projectile.Center - Main.screenPosition, null, Color.SkyBlue, 0, HJScarletTexture.Texture_BloomShockwave.Size()/2, 0.215f * Projectile.scale, SpriteEffects.None, 0);
+            SB.Draw(HJScarletTexture.Texture_BloomShockwave.Value, Projectile.Center - Main.screenPosition, null, Color.SkyBlue, 0, HJScarletTexture.Texture_BloomShockwave.Origin, 0.215f * Projectile.scale, SpriteEffects.None, 0);
             SB.End();
             //光圈，叠加
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-            SB.Draw(HJScarletTexture.Texture_SoftCircleEdge.Value, Projectile.Center - Main.screenPosition, null, Color.SkyBlue with { A = 100 }, 0, HJScarletTexture.Texture_SoftCircleEdge.Size()/2, 0.7f * Projectile.scale, SpriteEffects.None, 0);
+            SB.Draw(HJScarletTexture.Texture_SoftCircleEdge.Value, Projectile.Center - Main.screenPosition, null, Color.SkyBlue with { A = 100 }, 0, HJScarletTexture.Texture_SoftCircleEdge.Origin, 0.7f * Projectile.scale, SpriteEffects.None, 0);
             SB.End();
             SB.BeginDefault();
             //时钟处理

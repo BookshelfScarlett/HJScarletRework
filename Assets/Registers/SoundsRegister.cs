@@ -5,11 +5,12 @@ namespace HJScarletRework.Assets.Registers
     public class HJScarletSounds
     {
         public static string SoundsPath => "HJScarletRework/Assets/Sounds/";
-        public static SoundStyle Mana_Toss => new($"{SoundsPath}{nameof(Mana_Toss)}");
-        public static SoundStyle Mana_Toss2 => new($"{SoundsPath}{nameof(Mana_Toss2)}");
+        public static SoundStyle DeathsToll_Toss => new($"{SoundsPath}{nameof(DeathsToll_Toss)}");
+        public static SoundStyle Evolution_Thrown => new($"{SoundsPath}{nameof(Evolution_Thrown)}");
         public static SoundStyle GrabCharge => new($"{SoundsPath}{nameof(GrabCharge)}");
         public static SoundStyle Dialectics_Throw => new ($"{SoundsPath}{nameof(Dialectics_Throw)}");
         public static SoundStyle Dialectics_Hit => new ($"{SoundsPath}{nameof(Dialectics_Hit)}");
+
         #region 锤子们
         private static SoundStyle Smash_AirHeavy1 => new($"{SoundsPath}{nameof(Smash_AirHeavy1)}");
         private static SoundStyle Smash_AirHeavy2 => new($"{SoundsPath}{nameof(Smash_AirHeavy2)}");
@@ -17,6 +18,8 @@ namespace HJScarletRework.Assets.Registers
         private static SoundStyle Hammer_Shoot1 => new($"{SoundsPath}{nameof(Hammer_Shoot1)}");
         private static SoundStyle Hammer_Shoot2 => new($"{SoundsPath}{nameof(Hammer_Shoot2)}");
         private static SoundStyle Hammer_Shoot3 => new($"{SoundsPath}{nameof(Hammer_Shoot3)}");
+        #endregion
+        
         private static SoundStyle Atom_Strike1 => new($"{SoundsPath}{nameof(Atom_Strike1)}");
         private static SoundStyle Atom_Strike2 => new($"{SoundsPath}{nameof(Atom_Strike2)}");
         private static SoundStyle Atom_Strike3 => new($"{SoundsPath}{nameof(Atom_Strike3)}");

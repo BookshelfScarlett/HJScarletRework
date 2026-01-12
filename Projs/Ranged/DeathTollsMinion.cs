@@ -49,7 +49,7 @@ namespace HJScarletRework.Projs.Ranged
             //锤子生命值即将结束的时候，让锤子本身直接去撞击距离最近的敌人
             if (Projectile.timeLeft < 200 && !IsReadyToDead)
             {
-                SoundEngine.PlaySound(HJScarletSounds.Mana_Toss with { MaxInstances = 0}, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { MaxInstances = 0}, Projectile.Center);
                 IsReadyToDead = true;
                 ShootTimer = 0;
             }
