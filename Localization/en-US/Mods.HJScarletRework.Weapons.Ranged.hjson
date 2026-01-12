@@ -1,0 +1,34 @@
+AetherfireSmasher: {
+	DisplayName: Aetherfire Smasher
+	Tooltip: ""
+
+	Color: {
+		Red: Pure Red
+		Blue: Royal Blue
+		Gold: Gold
+		Purple: Dark Purle
+		Green: Green
+		IcyBlue: Icy Blue
+		Sakura: Light Pink
+	}
+}
+
+BinaryStars: {
+	DisplayName: Binary Stars
+	Tooltip: ""
+}
+
+ScarletHammer: {
+	General: ""
+	HoldShiftKeys: ""
+}
+
+DeathTolls: {
+	DisplayName: Death Tolls
+	Tooltip: ""
+}
+
+Judgement: {
+	DisplayName: Judgement
+	Tooltip: ""
+}

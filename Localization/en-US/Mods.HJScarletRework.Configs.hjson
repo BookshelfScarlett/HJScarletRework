@@ -1,0 +1,8 @@
+HJScarletConfigServer: {
+	DisplayName: H J Scarlet Config Server
+
+	EnableSameItemShimmer: {
+		Label: Enable Same Item Shimmer
+		Tooltip: ""
+	}
+}

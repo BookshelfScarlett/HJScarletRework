@@ -1,0 +1,74 @@
+CandLanceThrown: {
+	DisplayName: Cand Lance Thrown
+	Tooltip: ""
+}
+
+DialecticsThrown: {
+	DisplayName: Dialectics Thrown
+	Tooltip: ""
+}
+
+FlybackHandThrown: {
+	DisplayName: Flyback Hand Thrown
+	Tooltip: ""
+}
+
+LightBiteThrown: {
+	DisplayName: Light Bite Thrown
+	Tooltip: ""
+}
+
+SpearofDarknessThrown: {
+	DisplayName: Spearof Darkness Thrown
+	Tooltip: ""
+}
+
+SweetStabThrown: {
+	DisplayName: Sweet Stab Thrown
+	Tooltip: ""
+}
+
+WildPointerThrown: {
+	DisplayName: Wild Pointer Thrown
+	Tooltip: ""
+}
+
+Wreach: {
+	DisplayName: Wreach
+	Tooltip: ""
+}
+
+StormSpear: {
+	DisplayName: Storm Spear
+	Tooltip: ""
+}
+
+DeepToneThrown: {
+	DisplayName: Deep Tone Thrown
+	Tooltip: ""
+}
+
+EvolutionThrown: {
+	DisplayName: Evolution Thrown
+	Tooltip: ""
+}
+
+SpearofEscapeThrown: {
+	DisplayName: Spearof Escape Thrown
+	Tooltip: ""
+}
+
+TonbogiriThrown: {
+	DisplayName: Tonbogiri Thrown
+	Tooltip: ""
+}
+
+TheDisaster: {
+	DisplayName: The Disaster
+	Tooltip: ""
+}
+
+Bamboomerang: {
+	DisplayName: Bamboomerang
+	Tooltip: ""
+}

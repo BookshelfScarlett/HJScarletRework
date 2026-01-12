@@ -1,0 +1,9 @@
+HoneyRegenAlt: {
+	// DisplayName: Honey Regen Alt
+	// Description: Mods.HJScarletRework.Buffs.HoneyRegenAlt.Description
+}
+
+RewardsofWarriorBuff: {
+	DisplayName: 高歌猛进
+	Description: 显著强化攻击速度
+}

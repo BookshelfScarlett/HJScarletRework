@@ -1,0 +1,65 @@
+Melee: {
+	BamboomerangProj.DisplayName: Bamboomerang Proj
+	CandLanceBeam.DisplayName: Cand Lance Beam
+	CandLanceFire.DisplayName: Cand Lance Fire
+	CandLanceThrownProj.DisplayName: Cand Lance Thrown Proj
+	DeepToneTenctacle.DisplayName: Deep Tone Tenctacle
+	DeepToneThrownProj.DisplayName: Deep Tone Thrown Proj
+	DialecticsBeam.DisplayName: Dialectics Beam
+	DialecticsFirstShoot.DisplayName: Dialectics First Shoot
+	DialecticsMinion.DisplayName: Dialectics Minion
+	DialecticsThrownProj.DisplayName: Dialectics Thrown Proj
+	EvolutionArrow.DisplayName: Evolution Arrow
+	EvolutionThrownProj.DisplayName: Evolution Thrown Proj
+	FlybackHandClockMounted.DisplayName: Flyback Hand Clock Mounted
+	FlybackHandEdgeProj.DisplayName: Flyback Hand Edge Proj
+	FlybackHandStar.DisplayName: Flyback Hand Star
+	FlybackHandThrownProj.DisplayName: Flyback Hand Thrown Proj
+	LightBiteArrow.DisplayName: Light Bite Arrow
+	LightBiteBounceBall.DisplayName: Light Bite Bounce Ball
+	LightBiteThrownProj.DisplayName: Light Bite Thrown Proj
+	SpearofDarknessShadow.DisplayName: Spearof Darkness Shadow
+	SpearofDarknessThrownProj.DisplayName: Spearof Darkness Thrown Proj
+	StormSpearSpinProj.DisplayName: Storm Spear Spin Proj
+	StormSpearThrownProj.DisplayName: Storm Spear Thrown Proj
+	SweetStabThrownProj.DisplayName: Sweet Stab Thrown Proj
+	TheDisasterProj.DisplayName: The Disaster Proj
+	WildPointerHoming.DisplayName: Wild Pointer Homing
+	WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
+	BinaryStarsClone.DisplayName: Binary Stars Clone
+	TheDisasterFireball.DisplayName: The Disaster Fireball
+	DialecticsCubeProj.DisplayName: Dialectics Cube Proj
+	DialecticsSkyFall.DisplayName: Dialectics Sky Fall
+	DialecticsSpiningBlock.DisplayName: Dialectics Spining Block
+	DeepToneShockwave.DisplayName: Deep Tone Shockwave
+	FlybackHandHitClock.DisplayName: Flyback Hand Hit Clock
+	DeepToneMinion.DisplayName: Deep Tone Minion
+}
+
+Typeless: {
+	EvolutionEnergyPortal.DisplayName: Evolution Energy Portal
+	RegenOrbsPink.DisplayName: Regen Orbs Pink
+}
+
+Ranged: {
+	Aetherfireball.DisplayName: Aetherfireball
+	AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
+	AetherfireSmasherMain.DisplayName: Aetherfire Smasher Main
+	AetherfireVolcano.DisplayName: Aetherfire Volcano
+	BinartStarsPhantom.DisplayName: Binart Stars Phantom
+	BinartStarsPhantomClone.DisplayName: Binart Stars Phantom Clone
+	BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
+	BinaryStarsMain.DisplayName: Binary Stars Main
+	DeathTollsCloneProj.DisplayName: Death Tolls Clone Proj
+	DeathTollsDarkEnergy.DisplayName: Death Tolls Dark Energy
+	DeathTollsMainProj.DisplayName: Death Tolls Main Proj
+	DeathTollsMinion.DisplayName: Death Tolls Minion
+	DeathTollsNightmareArrow.DisplayName: Death Tolls Nightmare Arrow
+	DeathTollsStreak.DisplayName: Death Tolls Streak
+	JudgementHolyCross.DisplayName: Judgement Holy Cross
+	JudgementHolyCrossMounted.DisplayName: Judgement Holy Cross Mounted
+	JudgementLock.DisplayName: Judgement Lock
+	JudgementMainProj.DisplayName: Judgement Main Proj
+	JudgementPunishStar.DisplayName: Judgement Punish Star
+	JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
+}

@@ -1,0 +1,129 @@
+CandLanceThrown: {
+	DisplayName: 滴蜡枪-投掷
+	Tooltip:
+		'''
+		投掷一把不受重力影响的滴蜡枪
+		命中单位后，点燃并升起魂火灯
+		魂火灯会延迟落下追踪多个目标的魂火射弹
+		'''
+}
+
+DialecticsThrown: {
+	DisplayName: 辩证法-投掷
+	Tooltip:
+		'''
+		投掷时以正弦波、方波、双极性方波和平行波的方式交替轮换
+		正弦波使矛无限穿透，且每次穿透时伤害递增
+		方波使矛标记命中的敌人，重复打击时造成额外伤害
+		双极性方波使矛沿途滞留多个延迟追踪距离最近敌人的方块零件
+		平行波使矛刺入敌人，并不断召唤额外弹幕追击
+		'''
+}
+
+FlybackHandThrown: {
+	DisplayName: 归零针-投掷
+	Tooltip:
+		'''
+		命中时，依据游戏内时间给予玩家不同增益
+		右键投掷一块时钟水晶，在一定时间后再次按下右键时将传送回水晶位置
+		返程后强化武器投掷速度，并为玩家回复在此过程中损失状态的1/2
+		“时间将会修复一切，也许吧。”
+		'''
+}
+
+LightBiteThrown: {
+	DisplayName: 烛光矛-投掷
+	Tooltip:
+		'''
+		允许穿透10个单位
+		撞击墙体时生成延迟追踪的可穿墙射弹
+		'''
+}
+
+SpearofDarknessThrown: {
+	DisplayName: 黑暗之矛-投掷
+	Tooltip: 准许穿墙，命中敌人后回击
+}
+
+SweetStabThrown: {
+	DisplayName: 甜蜜之刺-投掷
+	Tooltip:
+		'''
+		穿透三个单位并受重力影响
+		撞击墙体后刺入，治疗任何尝试拾取的玩家
+		'''
+}
+
+WildPointerThrown: {
+	DisplayName: 野指针-投掷
+	Tooltip:
+		'''
+		一定概率追踪世界范围内所有可用目标
+		可用目标范围包括友方单位
+		'''
+}
+
+Wreach: {
+	DisplayName: 绯色小扳手
+	Tooltip:
+		'''
+		调试道具，可能根据实际版本不同有不同的功能
+		不过你是怎么看到这个小玩意的？
+		'''
+}
+
+StormSpear: {
+	DisplayName: 风暴战戟
+	Tooltip:
+		'''
+		直接投掷一个会自动找寻距离指针位置最近的，不断自转的战戟
+		场上存在一把自转战戟时，则以一个不受重力影响的风暴投矛代替
+		风暴投矛造成暴击时以一定概率造成风暴龙卷
+		"将被折断的剑身进行简易重组后的产物"
+		'''
+}
+
+DeepToneThrown: {
+	DisplayName: 低吼-投掷
+	Tooltip:
+		'''
+		命中时追击深渊触手
+		所有触手无视无敌帧，并带一定的伤害衰减
+		'''
+}
+
+EvolutionThrown: {
+	DisplayName: 进化-投掷
+	Tooltip:
+		'''
+		飞行过程中滞留传送门，并标记第一个命中的敌人
+		传送门会搜索距离最近的敌人，并在发射追踪能量箭矢后消失
+		如果有被标记的敌人，所有的传送门都会向标记的单位发起攻击
+		"他们在生长。"
+		'''
+}
+
+SpearofEscapeThrown: {
+	DisplayName: 逃逸速度-投掷
+	Tooltip: ""
+}
+
+TonbogiriThrown: {
+	DisplayName: 御手秆-投掷
+	Tooltip: ""
+}
+
+TheDisaster: {
+	// DisplayName: The Disaster
+	// Tooltip: ""
+}
+
+Bamboomerang: {
+	DisplayName: 回旋竹
+	Tooltip:
+		'''
+		命中时会尝试继续攻击下一个敌人
+		场上最多存在三把回旋竹
+		"谁想出来的把竹子做成回旋镖的主意？"
+		'''
+}

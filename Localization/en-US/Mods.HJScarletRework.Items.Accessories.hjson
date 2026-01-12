@@ -1,0 +1,44 @@
+StardustBless: {
+	DisplayName: Stardust Bless
+	Tooltip: ""
+}
+
+StardustRune: {
+	DisplayName: Stardust Rune
+	Tooltip: ""
+}
+
+HeartoftheCrystal: {
+	DisplayName: Heartofthe Crystal
+	Tooltip: ""
+}
+
+HeartoftheMountain: {
+	DisplayName: Heartofthe Mountain
+	Tooltip: ""
+}
+
+PreciousAim: {
+	DisplayName: Precious Aim
+	Tooltip: ""
+}
+
+PreciousTarget: {
+	DisplayName: Precious Target
+	Tooltip: ""
+}
+
+RewardofKingdom: {
+	DisplayName: Rewardof Kingdom
+	Tooltip: ""
+}
+
+RewardofWarrior: {
+	DisplayName: Rewardof Warrior
+	Tooltip: ""
+}
+
+CrimsonRune: {
+	DisplayName: Crimson Rune
+	Tooltip: ""
+}
