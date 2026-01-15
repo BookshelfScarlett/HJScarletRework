@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class FlybackHandEdgeProj: HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public ref float MountedX => ref Projectile.localAI[0];
         public ref float MountedY => ref Projectile.localAI[1];

@@ -1,13 +1,13 @@
-HJScarletConfigServer: {
-	DisplayName: ����֮�裺����������
+﻿HJScarletConfigServer: {
+	DisplayName: 空想之歌：服务器设置
 
 	EnableSameItemShimmer: {
-		Label: ����ͬ����Ʒ΢��ת��
+		Label: 启用同类物品微光转化
 		Tooltip:
 			'''
-			��������֮��ģ���ڲ�����ԭģ�飨���˹�;����ͬ����Ʒ����΢��ת��
-			�ر�ʱ����תΪ��Ӧ����ͬ�Ļ�ȡ��ʽ
-			Ĭ�Ͽ���
+			允许空想之歌模组内部分与原模组（旅人归途）相同的物品进行微光转化
+			关闭时，则转为对应的相同的获取方式
+			默认开启
 			'''
 	}
 }

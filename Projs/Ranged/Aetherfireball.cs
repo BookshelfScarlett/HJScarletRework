@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class Aetherfireball : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override void SetStaticDefaults()
         {

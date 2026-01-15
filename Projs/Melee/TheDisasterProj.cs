@@ -10,7 +10,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class TheDisasterProj : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletItemProj.Proj_Disaster.Path;
         public override void SetStaticDefaults() => Projectile.ToTrailSetting(16, 2);
         public override void ExSD()

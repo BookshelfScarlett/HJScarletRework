@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Ranged
     public class AetherfireSmasherClone : HJScarletFriendlyProj
     {
         public override string Texture => GetInstance<AetherfireSmasherMain>().Texture;
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         private ref float AttackTimer => ref Projectile.ai[0];
         private ref float CanDamageTimer => ref Projectile.ai[1];
         private bool CanSpawnVolcano = false;

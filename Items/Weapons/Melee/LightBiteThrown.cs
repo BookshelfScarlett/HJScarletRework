@@ -22,11 +22,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.shoot = ProjectileType<LightBiteThrownProj>();
             Item.shootSpeed = 16;
         }
+        public override Color MainTooltipColor => Color.DarkOrange;
         public override void ModifyWeaponCrit(Player player, ref float crit) => crit += 4;
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            string path = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.Tooltip");
-            tooltips.ReplaceAllTooltip(path, Color.DarkOrange);
-        }
     }
 }

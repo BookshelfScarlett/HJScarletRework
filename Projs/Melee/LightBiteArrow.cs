@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class LightBiteArrow : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         private ref float Timer => ref Projectile.ai[0];
         public override string Texture => GetInstance<LightBite_2>().Texture;
         public override void SetStaticDefaults()

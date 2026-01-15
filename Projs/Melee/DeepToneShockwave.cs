@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class DeepToneShockwave : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override void SetStaticDefaults()
         {

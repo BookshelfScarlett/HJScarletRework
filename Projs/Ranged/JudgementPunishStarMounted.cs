@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Ranged
     public class JudgementPunishStarMounted : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         private ref float MountedX => ref Projectile.localAI[0];
         private ref float MountedY => ref Projectile.localAI[1];
         public ref float AttackTimer => ref Projectile.HJScarlet().ExtraAI[1];

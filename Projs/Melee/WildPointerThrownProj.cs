@@ -42,9 +42,12 @@ namespace HJScarletRework.Projs.Melee
             Projectile.timeLeft = 150;
         }
         public bool Init = false;
+        public bool HomeToPlayer = false;
         public bool FoundTarget = false;
         public NPC NeedTarget = null;
+        public Player NeedPlayer = null;
         public List<NPC> ValidTarget = [];
+        public List<Player> ValidPlayer = [];
         public override void AI()
         {
             Projectile.light = Projectile.Opacity;
@@ -73,19 +76,30 @@ namespace HJScarletRework.Projs.Melee
             //锁住生命值
             Projectile.timeLeft = 100;
             Timer++;
-            //一秒内没找到任何敌人，直接进入处死
-            if (Timer > 60 && !FoundTarget)
+            if (!HomeToPlayer)
+                JustHomeToEnemy();
+            else
+                JustHomeToPlayer();
+        }
+        public void JustHomeToEnemy()
+        {
+            void DisappearCode()
             {
                 AttackType = Styles.Decay;
                 Projectile.netUpdate = true;
+            }
+
+            //一秒内没找到任何敌人，直接进入处死
+            if (Timer > 60 && !FoundTarget)
+            {
+                DisappearCode();
                 Timer = 0;
                 //天顶世界下，这玩意会炸你游戏.
                 //毕竟他是野指针
             }
-
-            //随机追踪这一块
             if (!FoundTarget)
             {
+                //随机追踪这一块
                 foreach (var target in Main.ActiveNPCs)
                 {
                     //野指针的攻击目标会选择几乎所有可能可以用的NPC
@@ -93,23 +107,88 @@ namespace HJScarletRework.Projs.Melee
                         continue;
                     ValidTarget.Add(target);
                 }
-                //而后我们随机从可用列表中选择一个
+                //没有合适的目标，直接在这里执行消失代码
+                if (ValidTarget.Count <= 0)
+                {
+                    DisappearCode();
+                    //及时返回避免某些巨大的问题
+                    return;
+                }
                 NeedTarget = Utils.SelectRandom(Main.rand, ValidTarget.ToArray());
+                //最后，跳出这个循环
                 FoundTarget = true;
+            }
+            //如果单位不可被追踪，更新
+            if (!NeedTarget.CanBeChasedBy(Projectile) || NeedTarget == null)
+            {
+                DisappearCode();
+                //返回
                 return;
             }
-            if (!NeedTarget.CanBeChasedBy(Projectile) || NeedTarget == null)
+            //最后使用lerp来让矛朝向得到修改。
+            Projectile.rotation = Projectile.rotation.AngleLerp(Projectile.velocity.ToRotation(), 0.3f);
+            //追踪敌人
+            Projectile.HomingTarget(NeedTarget.Center, 9999f, 20f, 20f, 5f);
+    
+        }
+        public void JustHomeToPlayer()
+        {
+            void DisappearCode()
             {
                 AttackType = Styles.Decay;
                 Projectile.netUpdate = true;
             }
-            float angleToWhat = (NeedTarget.Center - Projectile.Center).SafeNormalize(Vector2.One).ToRotation();
+            //一秒内没找到任何敌人，直接进入处死
+            if (Timer > 60 && !FoundTarget)
+            {
+                DisappearCode();
+                Timer = 0;
+                //天顶世界下，这玩意会炸你游戏.
+                //毕竟他是野指针
+            }
+            if (!FoundTarget)
+            {
+                //随机追踪这一块
+                foreach (var target in Main.ActivePlayers)
+                {
+                    //野指针的攻击目标会选择几乎所有可能可以用的NPC
+                    if(target.dead)
+                        continue;
+                    ValidPlayer.Add(target);
+                }
+                //没有合适的目标，直接在这里执行消失代码
+                if (ValidPlayer.Count <= 0)
+                {
+                    DisappearCode();
+                    //及时返回避免某些巨大的问题
+                    return;
+                }
+                NeedPlayer = Utils.SelectRandom(Main.rand, ValidPlayer.ToArray());
+                //最后，跳出这个循环
+                FoundTarget = true;
+            }
+            //如果单位不可被追踪，更新
+            if (NeedPlayer == null)
+            {
+                DisappearCode();
+                //返回
+                return;
+            }
             //最后使用lerp来让矛朝向得到修改。
-            Projectile.rotation = Projectile.rotation.AngleLerp(angleToWhat, 0.3f);
+            Projectile.rotation = Projectile.rotation.AngleLerp(Projectile.velocity.ToRotation(), 0.3f);
             //追踪敌人
-            Projectile.HomingTarget(NeedTarget.Center, 9999f, 20f, 20f);
-        }
+            //记得干掉伤害，追踪玩家的时候是不会有伤害的了
+            Projectile.damage *= 0;
+            Projectile.HomingTarget(NeedPlayer.Center, 9999f, 20f, 10f, 5f);
+            Projectile.ExpandHitboxBy(36,36);
+            //如果接触了，则执行decayAI
+            if(Projectile.Hitbox.Intersects(NeedPlayer.Hitbox))
+            {
+                DisappearCode();
+                return;
+            }
 
+        }
         private void DoDecay()
         {
 
@@ -128,7 +207,11 @@ namespace HJScarletRework.Projs.Melee
 
             Projectile.velocity *= 0f;
             if (CanHomingToTarget)
+            {
+                if (Main.rand.NextBool(3))
+                    HomeToPlayer = true;
                 AttackType = Styles.Homing;
+            }
             else
                 AttackType = Styles.Decay;
             Projectile.netUpdate = true;

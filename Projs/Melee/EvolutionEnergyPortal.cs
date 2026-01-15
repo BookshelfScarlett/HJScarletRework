@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class EvolutionEnergyPortal : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Typeless;
+        public override ClassCategory Category => ClassCategory.Typeless;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public bool SpawnEvolutionArrow = false;
         public bool StopSpawnArrow = false;
@@ -55,6 +55,8 @@ namespace HJScarletRework.Projs.Melee
             else if(StopSpawnArrow || Timer >60f)
             {
                 Projectile.Opacity -= 0.1f;
+                if (Projectile.Opacity <= 0f)
+                    Projectile.Kill();
             }
         }
 

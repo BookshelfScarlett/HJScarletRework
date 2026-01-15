@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Tiles.Abyss;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
@@ -7,9 +6,6 @@ using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 
@@ -17,7 +13,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class CandLanceBeam : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public List<NPC> TargetThatAlreadyHit = [];
         public int TargetHitTime
@@ -44,13 +40,23 @@ namespace HJScarletRework.Projs.Melee
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
         }
+        private float SearchTargetDistance = 600f;
+        private int TotalTargetHitTime = 3;
         public override void AI()
         {
             float offset = 0;
             Timer += 1;
 
             if (!Projectile.HJScarlet().FirstFrame)
+            {
                 InitDust();
+                if(HJScarletMethods.HasFuckingCalamity)
+                {
+                    SearchTargetDistance = 1800f;
+                    Projectile.timeLeft = 1000;
+                    TotalTargetHitTime = 9;
+                }
+            }
 
             if (TargetThatAlreadyHit.Count > 0)
                 offset = LatterBeamAI(offset);
@@ -86,6 +92,11 @@ namespace HJScarletRework.Projs.Melee
         }
         public float LatterBeamAI(float offset)
         {
+            if (!TargetThatNextCanHit.CanBeChasedBy() || TargetThatNextCanHit == null)
+            {
+                Projectile.Kill();
+                return 0f;
+            }
             float angleOffset = WrapAngle(Projectile.AngleTo(TargetThatNextCanHit.Center) - Projectile.velocity.ToRotation());
             //此处，需要锐角拐弯
             angleOffset = Clamp(angleOffset, -0.8f, 0.8f);
@@ -104,11 +115,11 @@ namespace HJScarletRework.Projs.Melee
             //如果目标单位不在列表里面，我们把当前单位添加进去
             if (!TargetThatAlreadyHit.Contains(target))
                 TargetThatAlreadyHit.Add(target);
-            //如果同时攻击了超过6个单位，处死他 
-            if (TargetHitTime > 6)
+            //如果同时攻击了超过了需要的单位，处死他 
+            if (TargetHitTime > TotalTargetHitTime)
                 Projectile.Kill();
             //创建一个链表，搜索附近可能的单位
-            float searchDist = 600f;
+            float searchDist = SearchTargetDistance;
             List<NPC> availableTarget = [];
             foreach (NPC needTar in Main.ActiveNPCs)
             {

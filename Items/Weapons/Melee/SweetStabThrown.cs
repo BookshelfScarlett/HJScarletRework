@@ -26,11 +26,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.shoot = ProjectileType<SweetStabThrownProj>();
             Item.UseSound = SoundID.Grass;
         }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            string path = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.Tooltip");
-            tooltips.ReplaceAllTooltip(path, Color.Orange);
-        }
+        public override Color MainTooltipColor => Color.Orange;
 
     }
     public abstract class ThrownSpearClass : ModItem, ILocalizedModType
@@ -62,6 +58,25 @@ namespace HJScarletRework.Items.Weapons.Melee
             if (GhostFrame >= 16)
                 GhostFrame = 1;
             ExUpdateInventory(player);
+        }
+        public virtual Color MainTooltipColor { get; }
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+            string localAddress = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}");
+            string path = $"{localAddress}.Tooltip";
+            tooltips.ReplaceAllTooltip(path, MainTooltipColor);
+
+            if (HJScarletMethods.HasFuckingCalamity)
+            {
+                string calamityPath = $"{localAddress}.CalamitySupport";
+                tooltips.QuickAddTooltipDirect(calamityPath.ToLangValue(), new(220, 20, 6));
+            }
+            ExModifyTooltips(tooltips, localAddress);
+            
+        }
+        public virtual void ExModifyTooltips(List<TooltipLine> tooltips, string localAddress)
+        {
+
         }
         public virtual void ExUpdateInventory(Player player) { }
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)

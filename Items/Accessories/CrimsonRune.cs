@@ -9,7 +9,7 @@ namespace HJScarletRework.Items.Accessories
     public class CrimsonRune : HJScarletItems
     {
         public override ItemCategory ItemCate => ItemCategory.Accessories;
-        public override string Texture => HJScarletItemProj.Item_CrimsonRune.Path;
+        public override string Texture => HJScarletItemProj.Equip_CrimsonRune.Path;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

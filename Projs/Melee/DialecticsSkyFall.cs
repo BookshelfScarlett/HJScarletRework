@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class DialecticsSkyFall : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => GetInstance<Materialism>().Texture;
         public override void SetStaticDefaults()
         {

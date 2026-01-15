@@ -3,9 +3,7 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
@@ -23,10 +21,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.shootSpeed = 14f;
             Item.shoot = ProjectileType<SpearofDarknessThrownProj>();
         }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            string path = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.Tooltip");
-            tooltips.ReplaceAllTooltip(path, Color.MediumPurple);
-        }
+        public override Color MainTooltipColor => Color.MediumPurple;
     }
 }

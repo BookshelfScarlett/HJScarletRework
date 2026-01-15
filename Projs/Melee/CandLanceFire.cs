@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
+using Microsoft.NET.StringTools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -17,7 +18,7 @@ namespace HJScarletRework.Projs.Melee
     public class CandLanceFire : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletItemProj.Proj_CandLanceFire.Path;
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public ref float AttackTimer => ref Projectile.ai[0];
         
         public ref float RandomValue => ref Projectile.ai[2];
@@ -36,8 +37,13 @@ namespace HJScarletRework.Projs.Melee
             Projectile.timeLeft = 300;
             Projectile.penetrate = -1;
         }
+        private int SpawnBeamCounts = 3;
         public override void AI()
         {
+            if(Projectile.HJScarlet().FirstFrame && HJScarletMethods.HasFuckingCalamity)
+            {
+                SpawnBeamCounts = 6;
+            }
             //本质上控的是火焰方向，不过写在这里也为了方便一些操作
             Projectile.velocity *= 0.92f;
             DrawGlowScale = Clamp(Math.Abs(MathF.Sin(Osci / 4)) * 1.2f, 1f, 1.2f);
@@ -49,7 +55,7 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.velocity.Length() > 4f)
                 return;
             AttackTimer += 1;
-            if (AttackTimer < AttackDelay * 4)
+            if (AttackTimer < AttackDelay * (SpawnBeamCounts+1))
             {
                 if (AttackTimer % AttackDelay == 0)
                 {

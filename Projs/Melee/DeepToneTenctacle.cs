@@ -19,7 +19,7 @@ namespace HJScarletRework.Projs.Melee
     public class DeepToneTenctacle : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory UseDamage => base.UseDamage;
+        public override ClassCategory Category => base.Category;
         public ref float Timer => ref Projectile.localAI[1];
         public ref float ScaleProgress => ref Projectile.localAI[0];
         public ref float SpeedXProgress => ref Projectile.ai[0];

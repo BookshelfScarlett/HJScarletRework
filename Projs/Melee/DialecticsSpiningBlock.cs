@@ -5,20 +5,13 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
     public class DialecticsSpiningBlock : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletTexture.Specific_AimLabBox.Path;
         public ref float Timer => ref Projectile.ai[0];
         public override void ExSD()

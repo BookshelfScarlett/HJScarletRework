@@ -15,7 +15,7 @@ namespace HJScarletRework.Core.Configs
         public override ConfigScope Mode => ConfigScope.ServerSide;
         public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref NetworkText message) => false;
         [BackgroundColor(192, 54, 64, 192)]
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         [ReloadRequired]
         public bool EnableSameItemShimmer { get; set; }
 

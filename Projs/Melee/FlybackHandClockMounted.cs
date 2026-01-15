@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class FlybackHandClockMounted : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public ref float Timer => ref Projectile.ai[0];
         public ref float ActualTimer => ref Projectile.ai[1];

@@ -18,7 +18,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class BinartStarsPhantomClone : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         //攻击枚举
         private enum AttackStyle
         {

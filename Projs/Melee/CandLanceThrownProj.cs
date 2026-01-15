@@ -56,7 +56,6 @@ namespace HJScarletRework.Projs.Melee
             }
             
         }
-
         private void DoShooted()
         {
             Vector2 speedOffset = Projectile.velocity / 4;
@@ -64,7 +63,6 @@ namespace HJScarletRework.Projs.Melee
             Vector2 mountedPos = Projectile.Center + dir * 60f;
             //总体在底下绘制一些别的粒子，这里用的是树叶
             Timer += 0.42f;
-            Vector2 randomSpeed = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(1.2f, 2.0f);
             for (int i = 0; i < 4; i++)
             {
                 Vector2 spawnPos = mountedPos + dir.RotatedBy(PiOver2) * MathF.Sin(Timer - i * 0.1f) * (9.0f);

@@ -10,7 +10,7 @@ namespace HJScarletRework.Projs
     public class RegenOrbsPink : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory UseDamage => ClassCategory.Typeless;
+        public override ClassCategory Category => ClassCategory.Typeless;
         private enum Styles
         {
             Slowdown,

@@ -27,15 +27,7 @@ namespace HJScarletRework.Items
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<DialecticsThrownProj>(), damage, knockback, player.whoAmI);
-            //将列表继承至此
-            var CurStyle = Main.rand.Next(3) switch
-            {
-                0 => WaveStyle.Sin,
-                1 => WaveStyle.Square,
-                _ => WaveStyle.Paraline,
-            };
-            ((DialecticsThrownProj)proj.ModProjectile).CurWaveStyle = CurStyle;
+            Projectile proj = Projectile.NewProjectileDirect(source, player.LocalMouseWorld(), velocity, ProjectileType<FlybackHandHitClock>(), damage, knockback, player.whoAmI);
             //添加需要的攻击单位
             return false;
         }

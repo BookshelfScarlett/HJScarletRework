@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class AetherfireVolcano : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         //写在全局里防止局部多次调用。
         private int InitPhase = 10;
         private int EarlyPhase = 20;

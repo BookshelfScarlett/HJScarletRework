@@ -21,10 +21,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.UseSound = HJScarletSounds.Misc_MagicStaffFire with { MaxInstances = 0, Pitch = 0.1f, Volume = 0.18f, PitchVariance = 0.2f};
             Item.useTime = Item.useAnimation = 40;
         }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            string path = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.Tooltip");
-            tooltips.ReplaceAllTooltip(path, Color.SkyBlue);
-        }
+        public override Color MainTooltipColor => Color.SkyBlue;
     }
 }

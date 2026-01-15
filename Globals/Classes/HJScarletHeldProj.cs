@@ -11,11 +11,11 @@ namespace HJScarletRework.Globals.Classes
 {
     public abstract class HJScarletHeldProj: ModProjectile, ILocalizedModType
     {
-        public new string LocalizationCategory => $"Projs.HeldProj.{UseDamage}";
+        public new string LocalizationCategory => $"Projs.HeldProj.{Category}";
         /// <summary>
         /// 职业类型，用于本地化的分类
         /// </summary>
-        public virtual ClassCategory UseDamage { get; }
+        public virtual ClassCategory Category { get; }
         /// <summary>
         /// 贴图转角修正
         /// </summary>

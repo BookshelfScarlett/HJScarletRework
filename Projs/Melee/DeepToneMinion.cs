@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
     public class DeepToneMinion : HJScarletFriendlyProj
     {
         public override string Texture => GetInstance<DeepToneThrownProj>().Texture;
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting();

@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class DeathTollsDarkEnergy : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         //完全重做这个玩意的AI
         private ref float AttackTimer => ref Projectile.ai[0];

@@ -1,5 +1,6 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -115,8 +116,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             CreateRecipe().
                 AddIngredient<Judgement>().
                 AddIngredient(ItemID.PaladinsHammer).
-                AddIngredient(ItemID.HellstoneBar,10).
-                AddIngredient(ItemID.BeetleHusk, 10).
+                AddIngredient<DisasterBar>(10).
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }

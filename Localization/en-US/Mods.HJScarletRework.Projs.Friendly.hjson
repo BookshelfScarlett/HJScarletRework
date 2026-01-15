@@ -34,6 +34,12 @@ Melee: {
 	DeepToneShockwave.DisplayName: Deep Tone Shockwave
 	FlybackHandHitClock.DisplayName: Flyback Hand Hit Clock
 	DeepToneMinion.DisplayName: Deep Tone Minion
+	TonbogiriBoom.DisplayName: Tonbogiri Boom
+	TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
+	FierySpearFireball.DisplayName: Fiery Spear Fireball
+	FierySpearProj.DisplayName: Fiery Spear Proj
+	TonbogiriPortal.DisplayName: Tonbogiri Portal
+	TonbogiriSideProj.DisplayName: Tonbogiri Side Proj
 }
 
 Typeless: {

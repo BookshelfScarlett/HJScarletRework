@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class JudgementHolyCross : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         private ref float Counter => ref Projectile.ai[0];
         private float OriginalSpeed => Projectile.ai[1];
         private ref float Rotation => ref Projectile.ai[2];

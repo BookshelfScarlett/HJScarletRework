@@ -30,12 +30,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useTime = Item.useAnimation = 40;
             Item.shoot = ProjectileType<DialecticsThrownProj>();
         }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            string path = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.Tooltip");
-            tooltips.ReplaceAllTooltip(path, Color.LightBlue);
-
-        }
+        public override Color MainTooltipColor => Color.LightBlue;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             var curStyle = UsePhase switch

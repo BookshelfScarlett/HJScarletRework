@@ -6,6 +6,12 @@ CandLanceThrown: {
 		命中单位后，点燃并升起魂火灯
 		魂火灯会延迟落下追踪多个目标的魂火射弹
 		'''
+	CalamitySupport:
+		'''
+		灾厄联动适配：
+		魂火灯会落下更多的魂火射弹
+		魂火射弹会尝试追踪更多更远的单位，并强化持续时间
+		'''
 }
 
 DialecticsThrown: {
@@ -18,6 +24,7 @@ DialecticsThrown: {
 		双极性方波使矛沿途滞留多个延迟追踪距离最近敌人的方块零件
 		平行波使矛刺入敌人，并不断召唤额外弹幕追击
 		'''
+	// CalamitySupport: ""
 }
 
 FlybackHandThrown: {
@@ -29,6 +36,7 @@ FlybackHandThrown: {
 		返程后强化武器投掷速度，并为玩家回复在此过程中损失状态的1/2
 		“时间将会修复一切，也许吧。”
 		'''
+	// CalamitySupport: ""
 }
 
 LightBiteThrown: {
@@ -38,11 +46,18 @@ LightBiteThrown: {
 		允许穿透10个单位
 		撞击墙体时生成延迟追踪的可穿墙射弹
 		'''
+	CalamitySupport:
+		'''
+		灾厄联动适配：
+		准许无限穿透
+		强化武器攻击速度
+		'''
 }
 
 SpearofDarknessThrown: {
 	DisplayName: 黑暗之矛-投掷
 	Tooltip: 准许穿墙，命中敌人后回击
+	// CalamitySupport: ""
 }
 
 SweetStabThrown: {
@@ -52,6 +67,12 @@ SweetStabThrown: {
 		穿透三个单位并受重力影响
 		撞击墙体后刺入，治疗任何尝试拾取的玩家
 		'''
+	CalamitySupport:
+		'''
+		灾厄联动适配：
+		提高飞行速度
+		显著提升治疗的效果
+		'''
 }
 
 WildPointerThrown: {
@@ -59,7 +80,13 @@ WildPointerThrown: {
 	Tooltip:
 		'''
 		一定概率追踪世界范围内所有可用目标
-		可用目标范围包括友方单位
+		可用目标范围包括友方单位与城镇NPC
+		'''
+	CalamitySupport:
+		'''
+		灾厄联动适配：
+		不再会直接搜索任何友方单位
+		提升发起追踪的概率
 		'''
 }
 
@@ -81,6 +108,7 @@ StormSpear: {
 		风暴投矛造成暴击时以一定概率造成风暴龙卷
 		"将被折断的剑身进行简易重组后的产物"
 		'''
+	// CalamitySupport: ""
 }
 
 DeepToneThrown: {
@@ -90,6 +118,7 @@ DeepToneThrown: {
 		命中时追击深渊触手
 		所有触手无视无敌帧，并带一定的伤害衰减
 		'''
+	// CalamitySupport: ""
 }
 
 EvolutionThrown: {
@@ -101,21 +130,35 @@ EvolutionThrown: {
 		如果有被标记的敌人，所有的传送门都会向标记的单位发起攻击
 		"他们在生长。"
 		'''
+	// CalamitySupport: ""
 }
 
 SpearofEscapeThrown: {
 	DisplayName: 逃逸速度-投掷
 	Tooltip: ""
+	// CalamitySupport: ""
 }
 
 TonbogiriThrown: {
 	DisplayName: 御手秆-投掷
-	Tooltip: ""
+	Tooltip:
+		'''
+		命中敌人时造成一个范围性的爆炸
+		会根据近战伤害的加成额外提供攻击速度的加成
+		当前获得的攻击速度加成为{0}
+		'''
+	// CalamitySupport: ""
 }
 
 TheDisaster: {
-	// DisplayName: The Disaster
-	// Tooltip: ""
+	DisplayName: 索多玛之灾
+	Tooltip:
+		'''
+		刺入受害者体内，并持续造成爆炸
+		同时，从天上降下大量的天灾火球攻击受害者
+		"灭顶之灾"
+		'''
+	// CalamitySupport: ""
 }
 
 Bamboomerang: {
@@ -125,5 +168,23 @@ Bamboomerang: {
 		命中时会尝试继续攻击下一个敌人
 		场上最多存在三把回旋竹
 		"谁想出来的把竹子做成回旋镖的主意？"
+		'''
+	// CalamitySupport: ""
+}
+
+FierySpear: {
+	DisplayName: 炽焰巨矛
+	Tooltip:
+		'''
+		消失时向后生成两枚火球
+		火球撞墙后自动搜寻附近敌人
+		矛直接击中敌人时，则火球撞墙后直接追踪该敌人
+		'''
+	CalamitySupport:
+		'''
+		灾厄联动适配：
+		消失时生成四枚火球而非两枚火球
+		大幅度强化矛的飞行速度与火球的飞行速度
+		大幅度强化火球的索敌范围与存续时间
 		'''
 }

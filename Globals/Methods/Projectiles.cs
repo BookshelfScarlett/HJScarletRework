@@ -53,6 +53,7 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="proj"></param>
         /// <returns></returns>
         public static Vector2 SafeDirByRot(this Projectile proj) => proj.rotation.ToRotationVector2();
+        public static Vector2 SafeDirByRot(this Projectile proj, float rotDegree) => proj.rotation.ToRotationVector2().RotatedBy(ToRadians(rotDegree));
         public static Texture2D GetTexture(this Projectile proj) => TextureAssets.Projectile[proj.type].Value;
         public static void GetTexture(this Projectile proj, out Texture2D projTex, out Vector2 orig, out Vector2 drawPos)
         {
@@ -285,6 +286,8 @@ namespace HJScarletRework.Globals.Methods
             int drawLength = drawTime > proj.oldPos.Length ? proj.oldPos.Length : drawTime;
             for (int i = 1; i < drawLength; i++)
             {
+                if (proj.oldPos[i] == Vector2.Zero)
+                    continue;
                 Vector2 trailingDrawPos = useOldPos ? proj.oldPos[i] + proj.PosToCenter() : drawPos - proj.velocity * i * offset;
                 float faded = 1 - i / (float)drawLength;
                 //平方放缩
@@ -345,6 +348,11 @@ namespace HJScarletRework.Globals.Methods
         public static void ExpandHitboxBy(this Projectile projectile, float expandRatio)
         {
             projectile.ExpandHitboxBy((int)((float)projectile.width * expandRatio), (int)((float)projectile.height * expandRatio));
+        }
+        public static bool TooAwayFromOwner(this Projectile proj, float distance = 1800f)
+        {
+            Player owner = Main.player[proj.owner];
+            return Vector2.Distance(owner.MountedCenter, proj.Center) > distance;
         }
     }
 }

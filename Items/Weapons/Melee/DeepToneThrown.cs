@@ -21,10 +21,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.shootSpeed = 14f;
             Item.shoot = ProjectileType<DeepToneThrownProj>();
         }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            string path = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.Tooltip");
-            tooltips.ReplaceAllTooltip(path, Color.LightSeaGreen);
-        }
+        public override Color MainTooltipColor => Color.LightSeaGreen;
     }
 }

@@ -1,36 +1,43 @@
 CandLanceThrown: {
 	DisplayName: Cand Lance Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 DialecticsThrown: {
 	DisplayName: Dialectics Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 FlybackHandThrown: {
 	DisplayName: Flyback Hand Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 LightBiteThrown: {
 	DisplayName: Light Bite Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 SpearofDarknessThrown: {
 	DisplayName: Spearof Darkness Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 SweetStabThrown: {
 	DisplayName: Sweet Stab Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 WildPointerThrown: {
 	DisplayName: Wild Pointer Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 Wreach: {
@@ -41,34 +48,47 @@ Wreach: {
 StormSpear: {
 	DisplayName: Storm Spear
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 DeepToneThrown: {
 	DisplayName: Deep Tone Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 EvolutionThrown: {
 	DisplayName: Evolution Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 SpearofEscapeThrown: {
 	DisplayName: Spearof Escape Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 TonbogiriThrown: {
 	DisplayName: Tonbogiri Thrown
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 TheDisaster: {
 	DisplayName: The Disaster
 	Tooltip: ""
+	CalamitySupport: ""
 }
 
 Bamboomerang: {
 	DisplayName: Bamboomerang
 	Tooltip: ""
+	CalamitySupport: ""
+}
+
+FierySpear: {
+	DisplayName: Fiery Spear
+	Tooltip: ""
+	CalamitySupport: ""
 }

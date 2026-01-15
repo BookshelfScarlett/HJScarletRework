@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class JudgementHolyCrossMounted : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         private enum DoType
         {

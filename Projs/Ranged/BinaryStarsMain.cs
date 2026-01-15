@@ -518,7 +518,7 @@ namespace HJScarletRework.Projs.Ranged
     }
     public abstract class ThrownHammerProj : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         public HJScarletPlayer ModPlayer => Owner.HJScarlet();
         public HJScarletGlobalProjs ModProj => Projectile.HJScarlet();
         public bool Stealth => ModProj.FocusStrike;

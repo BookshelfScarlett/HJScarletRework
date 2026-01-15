@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class JudgementLock : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         public override string Texture => GetInstance<JudgementMainProj>().Texture;
         public override void SetStaticDefaults()
         {

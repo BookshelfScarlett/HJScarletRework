@@ -8,8 +8,8 @@ namespace HJScarletRework.Globals.Classes
     public abstract class HJScarletFriendlyProj : ModProjectile, ILocalizedModType
     {
         public Player Owner => Main.player[Projectile.owner];
-        public virtual ClassCategory UseDamage { get; }
-        public new string LocalizationCategory => $"Projs.Friendly.{UseDamage}";
+        public virtual ClassCategory Category { get; }
+        public new string LocalizationCategory => $"Projs.Friendly.{Category}";
         public override void SetDefaults()
         {
             Projectile.friendly = true;
@@ -20,7 +20,7 @@ namespace HJScarletRework.Globals.Classes
         {
             get
             {
-                return UseDamage switch
+                return Category switch
                 {
                     ClassCategory.Melee => DamageClass.Melee,
                     ClassCategory.Ranged => DamageClass.Ranged,

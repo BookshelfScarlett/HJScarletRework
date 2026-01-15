@@ -10,7 +10,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class DeathTollsStreak : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public int HitCount = 0;
         public bool FirstFrameInit = false;

@@ -18,6 +18,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Particle_CrossGlow { get; set; }
         public static Tex2DWithPath Particle_Petal { get; set; }
         public static Tex2DWithPath Particle_OpticalLineGlow { get; set; }
+        public static Tex2DWithPath Particle_FusableBall { get; set; }
 
         public static Tex2DWithPath Texture_BloomRing { get; set; }
         public static Tex2DWithPath Texture_BloomShockwave { get; set; }
@@ -25,6 +26,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Texture_WhiteCube { get; set; }
         public static Tex2DWithPath Texture_WhiteCubeBig { get; set; }
         public static Tex2DWithPath Texture_WhiteCircle { get; set; }
+        public static Tex2DWithPath Texture_Spirite { get; set; }
 
         public static Tex2DWithPath Specific_DialectBall { get; set; }
         public static Tex2DWithPath Specific_DialectCube { get; set; }
@@ -67,6 +69,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_CrossGlow = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_CrossGlow)}");
             Particle_Petal = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_Petal)}");
             Particle_OpticalLineGlow = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_OpticalLineGlow)}");
+            Particle_FusableBall = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_FusableBall)}");
 
             Specific_DialectBall = new Tex2DWithPath($"{Path_Particle}{nameof(Specific_DialectBall)}");
             Specific_DialectCube = new Tex2DWithPath($"{Path_Particle}{nameof(Specific_DialectCube)}");
@@ -80,6 +83,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_WhiteCube = new Tex2DWithPath($"{Path_General}{nameof(Texture_WhiteCube)}");
             Texture_WhiteCubeBig = new Tex2DWithPath($"{Path_General}{nameof(Texture_WhiteCubeBig)}");
             Texture_WhiteCircle = new Tex2DWithPath($"{Path_General}{nameof(Texture_WhiteCircle)}");
+            Texture_Spirite = new Tex2DWithPath($"{Path_General}{nameof(Texture_Spirite)}");
 
 
             Trail_ManaStreak = new Tex2DWithPath($"{Path_General}{nameof(Trail_ManaStreak)}");
@@ -110,6 +114,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_CrossGlow = null;
             Particle_Petal = null;
             Particle_OpticalLineGlow = null;
+            Particle_FusableBall = null;
 
             Specific_DialectCube = null;
             Specific_DialectBall = null;
@@ -122,6 +127,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_WhiteCube = null;
             Texture_WhiteCubeBig = null;
             Texture_WhiteCircle = null;
+            Texture_Spirite = null;
 
             Trail_ManaStreak = null;
             Trail_ParaLine = null;

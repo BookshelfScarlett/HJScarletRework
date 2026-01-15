@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class DeathTollsNightmareArrow : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         private enum DoType
         {
             IsSpawned,

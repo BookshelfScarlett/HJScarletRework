@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Items.Materials;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,14 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.noUseGraphic = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.DD2_MonkStaffSwing;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient<FierySpear>().
+                AddIngredient<DisasterBar>(10).
+                AddTile(TileID.MythrilAnvil).
+                Register();
         }
     }
 }

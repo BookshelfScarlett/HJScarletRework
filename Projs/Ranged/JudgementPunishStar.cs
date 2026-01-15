@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Ranged
     public class JudgementPunishStar : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 12;

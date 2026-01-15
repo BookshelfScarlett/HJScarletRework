@@ -29,11 +29,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             Item.useTime = Item.useAnimation = player.HJScarlet().FlybackBuffTime > 0 ? (10 + (int)(15f * (1f - (float)player.HJScarlet().FlybackBuffTime / player.HJScarlet().CurrentFullFlyBackTime))) : 25;
         }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            string path = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.Tooltip");
-            tooltips.ReplaceAllTooltip(path, Color.Yellow);
-        }
+        public override Color MainTooltipColor => Color.Yellow;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
 

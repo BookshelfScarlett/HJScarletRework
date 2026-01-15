@@ -27,11 +27,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.shoot = ProjectileType<EvolutionThrownProj>();
             Item.rare = ItemRarityID.Purple;
         }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            string path = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.Tooltip");
-            tooltips.ReplaceAllTooltip(path, Color.LightGreen);
-
-        }
+        public override Color MainTooltipColor => Color.LightGreen;
     }
 }

@@ -22,7 +22,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.ToTrailSetting(20, 2);
             Main.projFrames[Type] = 8;
         }
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public ref float Timer => ref Projectile.ai[0];
         public ref float AddAngle => ref Projectile.localAI[0];
         public override void ExSD()

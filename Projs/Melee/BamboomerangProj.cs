@@ -10,7 +10,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class BamboomerangProj : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => GetInstance<Bamboomerang>().Texture;
         public override void SetStaticDefaults() => Projectile.ToTrailSetting(4, 2);
         public enum Style
@@ -62,6 +62,14 @@ namespace HJScarletRework.Projs.Melee
                 if (Projectile.Hitbox.Intersects(Owner.Hitbox))
                     Projectile.Kill();
             }
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            if (Projectile.velocity.X != oldVelocity.X)
+                Projectile.velocity.X = -oldVelocity.X;
+            if (Projectile.velocity.Y != oldVelocity.Y)
+                Projectile.velocity.Y = -oldVelocity.Y;
+            return false;
         }
         public override bool PreKill(int timeLeft)
         {

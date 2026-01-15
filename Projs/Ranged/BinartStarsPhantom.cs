@@ -21,7 +21,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class BinartStarsPhantom: HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         public HJScarletGlobalProjs ModProj => Projectile.HJScarlet();
         public override string Texture => GetInstance<BinaryStarsMain>().Texture;
         public int TargetIndex

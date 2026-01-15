@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class DeathTollsMinion : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Ranged;
         public override string Texture => GetInstance<DeathTollsMainProj>().Texture;
         private ref float Timer => ref Projectile.ai[1];
         private ref float ShootTimer => ref Projectile.ai[2];

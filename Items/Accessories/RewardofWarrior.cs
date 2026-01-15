@@ -9,7 +9,7 @@ namespace HJScarletRework.Items.Accessories
 {
     public class RewardofWarrior : HJScarletItems
     {
-        public override string Texture => HJScarletItemProj.Item_RewardofWarrior.Path;
+        public override string Texture => HJScarletItemProj.Equip_RewardofWarrior.Path;
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;

@@ -11,7 +11,7 @@ namespace HJScarletRework.Items.Accessories
 {
     public class RewardofKingdom : HJScarletItems
     {
-        public override string Texture => HJScarletItemProj.Item_RewardofKingdom.Path;
+        public override string Texture => HJScarletItemProj.Equip_RewardofKingdom.Path;
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;

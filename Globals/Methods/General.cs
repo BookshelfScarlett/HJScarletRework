@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.Serialization;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -30,7 +31,6 @@ namespace HJScarletRework.Globals.Methods
             return HasProj<T>(player);
         }
         public static Color RandLerpTo(this Color srcColor, Color endColor) => Color.Lerp(srcColor, endColor, Main.rand.NextFloat(0f, 1f));
-        public static Vector2 ToRandVelocity(this Vector2 srcVel, float randRads, float speed = 1f) => srcVel.SafeNormalize(Vector2.UnitX).RotatedBy(Main.rand.NextFloat(randRads) * Main.rand.NextBool().ToDirectionInt()) * speed;
         public static bool OutOffScreen(Vector2 pos)
         {
             if (pos.X < Main.screenPosition.X - Main.screenWidth / 2)
@@ -118,6 +118,14 @@ namespace HJScarletRework.Globals.Methods
         }
         public static void ShimmerEach<T>(this int type, bool shouldDisableConfig = false) where T : ModItem => ShimmerEach(type, ItemType<T>(), shouldDisableConfig);
         public static Vector2 GetRandPos() => Main.rand.NextFloat(TwoPi).ToRotationVector2() * 2f;
+        public static Vector2 ToMouseVector2(this Player player, Vector2? safeValue = null)
+        {
+            Vector2 safe = safeValue ?? Vector2.UnitX;
+            return (player.LocalMouseWorld() - player.MountedCenter).SafeNormalize(safe);
+        }
+        public static Vector2 ToRandVelocity(this Vector2 srcVel, float randRads, float speed = 1f) => srcVel.SafeNormalize(Vector2.UnitX).RotatedBy(Main.rand.NextFloat(randRads) * Main.rand.NextBool().ToDirectionInt()) * speed;
+        public static Vector2 ToRandDirection(this Vector2 srcDir, float randRads) => srcDir.RotatedBy(Main.rand.NextFloat(randRads) * Main.rand.NextBool().ToDirectionInt());
+
         public static string ToPercent(this float value)
         {
             float value2 = value * 100f;
@@ -153,7 +161,7 @@ namespace HJScarletRework.Globals.Methods
 
                 //然后，将24个整数小时转为12小时
                 if (intTime > 12)
-                    intTime -= 12;
+                    intTime = 12;
                 return intTime;
             }
         }

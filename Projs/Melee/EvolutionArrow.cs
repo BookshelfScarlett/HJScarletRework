@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class EvolutionArrow : HJScarletFriendlyProj
     {
-        public override ClassCategory UseDamage => ClassCategory.Melee;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override void SetStaticDefaults() => Projectile.ToTrailSetting(20, 2);
         public enum Style

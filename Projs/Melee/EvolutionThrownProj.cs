@@ -109,6 +109,8 @@ namespace HJScarletRework.Projs.Melee
             //谁tm会在这里用顶点绘制啊
             for (int i = 0; i < length; i++)
             {
+                if (Projectile.oldPos[i] == Vector2.Zero)
+                    continue;
                 float rads = (float)i / length;
                 Color drawColor = (Color.Lerp(Color.Green, Color.ForestGreen, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
                 Main.spriteBatch.Draw(star, Projectile.Center -Main.screenPosition + Projectile.SafeDir() * 60f - Projectile.velocity * 0.7f * i, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.oldRot[i] - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(0.8f, 1.5f), 0, 0);

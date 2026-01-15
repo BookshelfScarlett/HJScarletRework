@@ -147,6 +147,8 @@ namespace HJScarletRework.Projs.Melee
             ExSD();
         }
         public virtual void ExSD() { }
+        public SpriteBatch SB { get => Main.spriteBatch; }
+        public GraphicsDevice GD { get => Main.graphics.GraphicsDevice; }
     }
 
 }
