@@ -12,8 +12,8 @@ namespace HJScarletRework.Items.Accessories
     public class StardustBless : HJScarletItems
     {
         public int MinionSlots = 2;
-        public override string Texture => HJScarletItemProj.Equip_StardustBless.Path;
         public override ItemCategory ItemCate => ItemCategory.Accessories;
+        public override AssetCategory GetAssetCategory => AssetCategory.Equip;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs("10%", MinionSlots);
         public override void SetDefaults()
         {

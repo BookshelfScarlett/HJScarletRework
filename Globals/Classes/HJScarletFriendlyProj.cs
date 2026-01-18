@@ -10,6 +10,7 @@ namespace HJScarletRework.Globals.Classes
         public Player Owner => Main.player[Projectile.owner];
         public virtual ClassCategory Category { get; }
         public new string LocalizationCategory => $"Projs.Friendly.{Category}";
+        public static string ProjPath => $"HJScarletRework/Assets/Texture/Projs/Proj_";
         public override void SetDefaults()
         {
             Projectile.friendly = true;

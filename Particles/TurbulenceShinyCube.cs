@@ -13,13 +13,17 @@ namespace HJScarletRework.Particles
 {
     public class TurbulenceShinyCube : BaseParticle
     {
-        public TurbulenceShinyCube(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale)
+        public int RandPosMoveValue;
+        public bool ShouldRandPosMove;
+        public TurbulenceShinyCube(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, bool shouldRandPosMove = true,int randPosMoveValue = 13)
         {
             Position = position;
             Velocity = velocity;
             DrawColor = color;
             Lifetime = lifetime;
             Scale = scale;
+            ShouldRandPosMove = shouldRandPosMove;
+            RandPosMoveValue = randPosMoveValue;
         }
         public override void Update()
         {
@@ -28,9 +32,9 @@ namespace HJScarletRework.Particles
             Velocity *= 0.95f;
             Scale *= 0.98f;
 
-            if (Time % 3 == 0)
+            if (Time % 3 == 0 && ShouldRandPosMove)
             {
-                Position += Main.rand.NextVector2Circular(13, 13);
+                Position += Main.rand.NextVector2Circular(RandPosMoveValue, RandPosMoveValue);
             }
         }
         public override void Draw(SpriteBatch spriteBatch)

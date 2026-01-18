@@ -1,13 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Enums;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HJScarletRework.Globals.Enums;
 using Terraria;
-using Terraria.GameContent.UI;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -17,8 +9,8 @@ namespace HJScarletRework.Items.Accessories
     public class StardustRune : HJScarletItems
     {
         public int MinionSlots = 2;
-        public override string Texture => HJScarletItemProj.Equip_StardustRune.Path;
         public override ItemCategory ItemCate => ItemCategory.Accessories;
+        public override AssetCategory GetAssetCategory => AssetCategory.Equip;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs("10%", MinionSlots);
         public override void SetDefaults()
         {

@@ -47,7 +47,6 @@ namespace HJScarletRework.Projs.Melee
             new TurbulenceShinyOrb(spawnPos, 1f, Firecolor, 40, 0.20f * Projectile.Opacity, Main.rand.NextFloat(TwoPi)).Spawn();
 
         }
-        SpriteBatch SB { get => Main.spriteBatch; }
         public override bool PreDraw(ref Color lightColor)
         {
             int length = Projectile.oldPos.Length;

@@ -408,7 +408,6 @@ namespace HJScarletRework.Projs.Melee
             DrawCubeAndBall(ref lightColor);
             return false;
         }
-        SpriteBatch SB { get => Main.spriteBatch; }
         public void DrawCubeAndBall(ref Color lightColor)
         {
             //此处，结合上方的Timer，让球体与方块绕着射弹本身动起来

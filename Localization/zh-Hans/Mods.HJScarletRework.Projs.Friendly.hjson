@@ -1,45 +1,44 @@
 Melee: {
 	// BamboomerangProj.DisplayName: Bamboomerang Proj
+	// BeetleSpearProj.DisplayName: Beetle Spear Proj
 	// CandLanceBeam.DisplayName: Cand Lance Beam
 	// CandLanceFire.DisplayName: Cand Lance Fire
 	// CandLanceThrownProj.DisplayName: Cand Lance Thrown Proj
+	// DeepToneMinion.DisplayName: Deep Tone Minion
+	// DeepToneShockwave.DisplayName: Deep Tone Shockwave
 	// DeepToneTenctacle.DisplayName: Deep Tone Tenctacle
 	// DeepToneThrownProj.DisplayName: Deep Tone Thrown Proj
-	// DialecticsBeam.DisplayName: Dialectics Beam
-	// DialecticsFirstShoot.DisplayName: Dialectics First Shoot
-	// DialecticsMinion.DisplayName: Dialectics Minion
+	// DialecticsCubeProj.DisplayName: Dialectics Cube Proj
+	// DialecticsSkyFall.DisplayName: Dialectics Sky Fall
+	// DialecticsSpiningBlock.DisplayName: Dialectics Spining Block
 	// DialecticsThrownProj.DisplayName: Dialectics Thrown Proj
 	// EvolutionArrow.DisplayName: Evolution Arrow
 	// EvolutionThrownProj.DisplayName: Evolution Thrown Proj
+	// FierySpearFireball.DisplayName: Fiery Spear Fireball
+	// FierySpearProj.DisplayName: Fiery Spear Proj
 	// FlybackHandClockMounted.DisplayName: Flyback Hand Clock Mounted
 	// FlybackHandEdgeProj.DisplayName: Flyback Hand Edge Proj
+	// FlybackHandHitClock.DisplayName: Flyback Hand Hit Clock
 	// FlybackHandStar.DisplayName: Flyback Hand Star
 	// FlybackHandThrownProj.DisplayName: Flyback Hand Thrown Proj
 	// LightBiteArrow.DisplayName: Light Bite Arrow
-	// LightBiteBounceBall.DisplayName: Light Bite Bounce Ball
 	// LightBiteThrownProj.DisplayName: Light Bite Thrown Proj
 	// SpearofDarknessShadow.DisplayName: Spearof Darkness Shadow
 	// SpearofDarknessThrownProj.DisplayName: Spearof Darkness Thrown Proj
 	// StormSpearSpinProj.DisplayName: Storm Spear Spin Proj
 	// StormSpearThrownProj.DisplayName: Storm Spear Thrown Proj
 	// SweetStabThrownProj.DisplayName: Sweet Stab Thrown Proj
+	// TheDisasterFireball.DisplayName: The Disaster Fireball
 	// TheDisasterProj.DisplayName: The Disaster Proj
-	// WildPointerHoming.DisplayName: Wild Pointer Homing
+	// TheMarsPhantom.DisplayName: The Mars Phantom
+	// TheMarsProj.DisplayName: The Mars Proj
+	// TheMarsSpark.DisplayName: The Mars Spark
+	// TonbogiriBoom.DisplayName: Tonbogiri Boom
+	// TonbogiriBubble.DisplayName: Tonbogiri Bubble
+	// TonbogiriLaser.DisplayName: Tonbogiri Laser
+	// TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
 	// WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
 	// BinaryStarsClone.DisplayName: Binary Stars Clone
-	// TheDisasterFireball.DisplayName: The Disaster Fireball
-	// DialecticsCubeProj.DisplayName: Dialectics Cube Proj
-	// DialecticsSkyFall.DisplayName: Dialectics Sky Fall
-	// DialecticsSpiningBlock.DisplayName: Dialectics Spining Block
-	// DeepToneShockwave.DisplayName: Deep Tone Shockwave
-	// FlybackHandHitClock.DisplayName: Flyback Hand Hit Clock
-	// DeepToneMinion.DisplayName: Deep Tone Minion
-	// TonbogiriBoom.DisplayName: Tonbogiri Boom
-	// TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
-	// FierySpearFireball.DisplayName: Fiery Spear Fireball
-	// FierySpearProj.DisplayName: Fiery Spear Proj
-	// TonbogiriPortal.DisplayName: Tonbogiri Portal
-	// TonbogiriSideProj.DisplayName: Tonbogiri Side Proj
 }
 
 Typeless: {

@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,7 +21,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class FierySpearProj : ThrownSpearProjClass
     {
-        public override string Texture => HJScarletItemProj.Proj_FierySpear.Path;
+        public override string Texture => ProjPath +"Proj_" + nameof(FierySpear);
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(10, 2);

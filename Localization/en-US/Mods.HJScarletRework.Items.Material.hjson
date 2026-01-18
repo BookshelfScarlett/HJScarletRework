@@ -2,3 +2,8 @@ DisasterBar: {
 	DisplayName: Disaster Bar
 	Tooltip: ""
 }
+
+DisasterEssence: {
+	DisplayName: Disaster Essence
+	Tooltip: ""
+}

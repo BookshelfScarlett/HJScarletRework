@@ -130,7 +130,6 @@ namespace HJScarletRework.Projs.Melee
                 AlreadyHit = true;
             }
         }
-        SpriteBatch SB { get => Main.spriteBatch; }
         public override bool PreDraw(ref Color lightColor)
         {
             int length = Projectile.oldPos.Length;

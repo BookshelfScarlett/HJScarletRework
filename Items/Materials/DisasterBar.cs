@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Materials
     public class DisasterBar : HJScarletItems
     {
         public override ItemCategory ItemCate => ItemCategory.Material;
-        public override string Texture => HJScarletItemProj.Material_DisasterBar.Path;
+        public override AssetCategory GetAssetCategory => AssetCategory.Material;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

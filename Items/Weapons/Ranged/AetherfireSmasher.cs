@@ -16,7 +16,6 @@ namespace HJScarletRework.Items.Weapons.Ranged
 {
     public class AetherfireSmasher: ThrownHammerItem
     {
-        public override string Texture => HJScarletItemProj.Item_AetherfireSmasher.Path;
         public override int ShootProjID => ProjectileType<AetherfireSmasherMain>();
         public override int NeedFocusStrikeTime => 40;
         public override void ExSD()

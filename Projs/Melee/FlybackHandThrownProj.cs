@@ -149,8 +149,7 @@ namespace HJScarletRework.Projs.Melee
             Owner.HJScarlet().FlybackHitBuffTimer = 180;
         }
         public override bool? CanDamage() => Ishit == false;
-        private SpriteBatch SB { get => Main.spriteBatch; }
-        private GraphicsDevice GD { get => Main.graphics.GraphicsDevice; }
+
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D star = TextureAssets.Extra[ExtrasID.SharpTears].Value;

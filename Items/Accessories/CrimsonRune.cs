@@ -9,7 +9,7 @@ namespace HJScarletRework.Items.Accessories
     public class CrimsonRune : HJScarletItems
     {
         public override ItemCategory ItemCate => ItemCategory.Accessories;
-        public override string Texture => HJScarletItemProj.Equip_CrimsonRune.Path;
+        public override AssetCategory GetAssetCategory => AssetCategory.Equip;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -31,5 +31,7 @@ namespace HJScarletRework.Items.Accessories
     {
         public virtual ItemCategory ItemCate { get; }
         public new string LocalizationCategory => $"Items.{ItemCate}";
+        public virtual AssetCategory GetAssetCategory {  get; }
+        public override string Texture => $"HJScarletRework/Assets/Texture/Items/{GetAssetCategory}s/{GetAssetCategory}_{GetType().Name}";
     }
 }

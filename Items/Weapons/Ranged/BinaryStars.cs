@@ -16,7 +16,6 @@ namespace HJScarletRework.Items.Weapons.Ranged
 {
     public class BinaryStars : ThrownHammerItem
     {
-        public override string Texture => HJScarletItemProj.Item_BinaryStars.Path;
         public override int ShootProjID => ProjectileType<BinaryStarsMain>();
         public override int NeedFocusStrikeTime => 30;
         public override void ExSSD()

@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Buffs;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
@@ -126,7 +127,6 @@ namespace HJScarletRework.Projs.Melee
             //不要处死他
             return false;
         }
-        SpriteBatch SB { get => Main.spriteBatch; }
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.DrawGlowEdge(Color.Gold, rotFix: PiOver4);
@@ -138,10 +138,11 @@ namespace HJScarletRework.Projs.Melee
     {
         public Player Owner => Main.player[Projectile.owner];
         public new string LocalizationCategory => "Projs.Friendly.Melee";
+        public string ProjPath => "HJScarletRework/Assets/Texture/Projs/";
         public override void SetDefaults()
         {
             Projectile.height = Projectile.width = 16;
-            Projectile.DamageType = DamageClass.Melee;
+            Projectile.DamageType = DamageClass.MeleeNoSpeed;
             Projectile.noEnchantmentVisuals = true;
             Projectile.friendly = true;
             ExSD();

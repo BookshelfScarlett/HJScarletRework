@@ -1,6 +1,7 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Configs;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
@@ -32,6 +33,8 @@ namespace HJScarletRework.Items.Weapons.Melee
     public abstract class ThrownSpearClass : ModItem, ILocalizedModType
     {
         public new string LocalizationCategory => "Weapons.Melee";
+        public static AssetCategory TexturePath => AssetCategory.Weapon;
+        public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/Item_{GetType().Name}";
         public override void SetDefaults()
         {
             Item.DamageType = DamageClass.Melee;

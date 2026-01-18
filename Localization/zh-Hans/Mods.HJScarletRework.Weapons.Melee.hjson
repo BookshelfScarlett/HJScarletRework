@@ -188,3 +188,18 @@ FierySpear: {
 		大幅度强化火球的索敌范围与存续时间
 		'''
 }
+
+BeetleSpear: {
+	// DisplayName: Beetle Spear
+	// Tooltip: ""
+}
+
+TheMars: {
+	DisplayName: 玛尔斯
+	Tooltip:
+		'''
+		沿途检索可被标记的最大6个敌对单位
+		消失时，向被标记的所有敌对单位追击潮汐之矛
+		"外星的造物"
+		'''
+}

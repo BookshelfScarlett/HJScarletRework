@@ -2,14 +2,7 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Projs.Melee;
-using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Melee
@@ -17,7 +10,6 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class Bamboomerang : HJScarletWeapon
     {
         public override ClassCategory Category => ClassCategory.Melee;
-        public override string Texture => HJScarletItemProj.Item_Bamboomerang.Path;
         public override void ExSD()
         {
             Item.width = Item.height = 46;

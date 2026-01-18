@@ -4,12 +4,13 @@ using HJScarletRework.Globals.Methods;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Enums;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class RewardofWarrior : HJScarletItems
     {
-        public override string Texture => HJScarletItemProj.Equip_RewardofWarrior.Path;
+        public override AssetCategory GetAssetCategory => AssetCategory.Equip;
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;

@@ -16,7 +16,6 @@ namespace HJScarletRework.Items.Weapons.Ranged
 {
     public class DeathTolls: ThrownHammerItem
     {
-        public override string Texture => HJScarletItemProj.Item_DeathTolls.Path;
         public override int ShootProjID => ProjectileType<DeathTollsMainProj>();
         public override int NeedFocusStrikeTime => 20;
         public override void ExSSD()

@@ -10,7 +10,6 @@ namespace HJScarletRework.Items.Weapons.Melee
 {
     public class FierySpear : ThrownSpearClass
     {
-        public override string Texture => HJScarletItemProj.Item_FierySpear.Path;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

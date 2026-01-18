@@ -1,17 +1,12 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Melee
 {
@@ -111,7 +106,6 @@ namespace HJScarletRework.Projs.Melee
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
         }
 
-        SpriteBatch SB { get => Main.spriteBatch; }
         public override bool PreDraw(ref Color lightColor)
         {
             DrawProjItSelf();

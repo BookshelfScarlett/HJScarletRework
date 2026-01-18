@@ -27,7 +27,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.knockBack = 12f;
             Item.UseSound = SoundID.DD2_MonkStaffSwing;
             Item.shootSpeed = 16;
-            Item.channel = true;
             //这里的shoot是为了适配weaponoutlite。实际上我们不会直接shoot这个东西
             Item.shoot = ProjectileType<TonbogiriThrownProj>();
         }

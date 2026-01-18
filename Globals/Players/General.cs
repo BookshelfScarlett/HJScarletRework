@@ -52,13 +52,13 @@ namespace HJScarletRework.Globals.Players
                     else
                         Player.statDefense += 15;
                 }
-                //白天下午与夜间后半夜：给予15近战速度加成/10%伤害减免
+                //白天下午与夜间后半夜：给予15近战速度加成/15%伤害减免
                 else
                 {
                     if(Main.dayTime)
                         Player.GetAttackSpeed<MeleeDamageClass>() += 0.15f;
                     else
-                        Player.endurance += 0.1f;
+                        Player.endurance += 0.15f;
                 }
             }
         }

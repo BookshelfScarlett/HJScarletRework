@@ -22,7 +22,6 @@ namespace HJScarletRework.Globals.Players
         internal bool OldMouseRight;
         public bool MouseRight;
 
-        internal bool OldJustPressedWeaponSKill;
         public bool JustPressedWeaponSKill;
         public void UpdateNetPacket()
         {
@@ -68,16 +67,6 @@ namespace HJScarletRework.Globals.Players
                     packet.Write((byte)HJScarletNetCode.MessageType.SyncMouseRight);
                     packet.Write((byte)Player.whoAmI);
                     packet.Write(Main.mouseRight);
-                    packet.Send();
-                }
-            }
-            if (JustPressedWeaponSKill != OldJustPressedWeaponSKill)
-            {
-                if (Main.netMode == NetmodeID.MultiplayerClient && Main.myPlayer == Player.whoAmI)
-                {
-                    ModPacket packet = Mod.GetPacket();
-                    packet.Write((byte)HJScarletNetCode.MessageType.SyncWeaponSkillKey);
-                    packet.Write((byte)Player.whoAmI);
                     packet.Send();
                 }
             }

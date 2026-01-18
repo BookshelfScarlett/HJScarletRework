@@ -13,6 +13,7 @@ namespace HJScarletRework.Globals.Methods
     public static partial class HJScarletMethods
     {
         public static Vector2 PosToCenter(this Projectile proj) => proj.Size / 2 - Main.screenPosition;
+        public static Vector2 ToOrigin(this Texture2D tex) => tex.Size() / 2;
         public static void GetHeldProjDrawState(this Projectile proj, float rotFix, out Texture2D projTex, out Vector2 drawPos, out Vector2 drawOri, out float projRot, out SpriteEffects projSP)
         {
             projTex = proj.GetTexture();

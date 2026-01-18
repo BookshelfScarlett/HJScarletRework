@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Accessories
     public class HeartoftheCrystal: HJScarletItems
     {
         public override ItemCategory ItemCate => ItemCategory.Accessories;
-        public override string Texture => HJScarletItemProj.Equip_HeartoftheCrystal.Path;
+        public override AssetCategory GetAssetCategory => AssetCategory.Equip;
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;

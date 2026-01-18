@@ -8,7 +8,7 @@ namespace HJScarletRework.Items.Accessories
     public class PreciousTarget : HJScarletItems
     {
         public override ItemCategory ItemCate => ItemCategory.Accessories;
-        public override string Texture => HJScarletItemProj.Equip_PreciousTarget.Path;
+        public override AssetCategory GetAssetCategory => AssetCategory.Equip;
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;

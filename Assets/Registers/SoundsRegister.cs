@@ -10,6 +10,8 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle GrabCharge => new($"{SoundsPath}{nameof(GrabCharge)}");
         public static SoundStyle Dialectics_Throw => new ($"{SoundsPath}{nameof(Dialectics_Throw)}");
         public static SoundStyle Dialectics_Hit => new ($"{SoundsPath}{nameof(Dialectics_Hit)}");
+        public static SoundStyle TheMars_Toss=> new ($"{SoundsPath}{nameof(TheMars_Toss)}");
+        public static SoundStyle TheMars_Hit => new ($"{SoundsPath}{nameof(TheMars_Hit)}");
 
         #region 锤子们
         private static SoundStyle Smash_AirHeavy1 => new($"{SoundsPath}{nameof(Smash_AirHeavy1)}");

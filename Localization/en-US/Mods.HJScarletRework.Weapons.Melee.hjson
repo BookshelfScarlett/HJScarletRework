@@ -92,3 +92,13 @@ FierySpear: {
 	Tooltip: ""
 	CalamitySupport: ""
 }
+
+BeetleSpear: {
+	DisplayName: Beetle Spear
+	Tooltip: ""
+}
+
+TheMars: {
+	DisplayName: The Mars
+	Tooltip: ""
+}

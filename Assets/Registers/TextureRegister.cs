@@ -1,7 +1,11 @@
 ﻿using HJScarletRework.Particles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Security;
+using Terraria;
+using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Assets.Registers
@@ -48,6 +52,7 @@ namespace HJScarletRework.Assets.Registers
 
         public static Tex2DWithPath ScarletGhost { get;set; }
         public static Tex2DWithPath InvisAsset { get; private set; }
+        public static Texture2D Particle_SharpTear => TextureAssets.Extra[ExtrasID.SharpTears].Value;
         private string TexPath => "HJScarletRework/Assets/Texture";
         private string Path_Particle => $"{TexPath}/Particles/";
         private string Path_General => $"{TexPath}/General/";

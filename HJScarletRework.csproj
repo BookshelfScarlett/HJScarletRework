@@ -8,6 +8,12 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
+	  <AdditionalFiles Remove="Assets\Texture\Items\Weapons\New\**" />
+	  <Compile Remove="Assets\Texture\Items\Weapons\New\**" />
+	  <EmbeddedResource Remove="Assets\Texture\Items\Weapons\New\**" />
+	  <None Remove="Assets\Texture\Items\Weapons\New\**" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Reference Include="ContinentOfJourney">
 	    <HintPath>..\ModAssemblies\ContinentOfJourney_v0.8.70.46.dll</HintPath>
 	  </Reference>

@@ -10,7 +10,6 @@ namespace HJScarletRework.Items.Weapons.Ranged
 {
     public class Judgement: ThrownHammerItem
     {
-        public override string Texture => HJScarletItemProj.Item_Judgement.Path;
         public override int ShootProjID => ProjectileType<JudgementMainProj>();
         public override int NeedFocusStrikeTime => 30;
         public override void ExSD()

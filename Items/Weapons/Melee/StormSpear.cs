@@ -8,7 +8,6 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class StormSpear : HJScarletWeapon
     {
         public override ClassCategory Category => ClassCategory.Melee;
-        public override string Texture => HJScarletItemProj.Item_StormSpear.Path;
         public override void ExSD()
         {
             Item.width = 72;

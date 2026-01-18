@@ -1,22 +1,16 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.Primitives.Trail;
-using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Projs.Melee
 {
     public class StormSpearSpinProj : HJScarletFriendlyProj
     {
-        public override string Texture => HJScarletItemProj.Proj_StormSpear.Path;
+        public override string Texture => ProjPath + nameof(StormSpear);
         public List<Vector2> PosList = [];
         public List<float> RotList = [];
         public override void SetStaticDefaults() => Projectile.ToTrailSetting(16, 2);

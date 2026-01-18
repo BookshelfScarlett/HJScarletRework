@@ -13,7 +13,6 @@ namespace HJScarletRework.Items.Weapons.Melee
 {
     public class TheDisaster : HJScarletWeapon
     {
-        public override string Texture => HJScarletItemProj.Item_Disaster.Path;
         public override ClassCategory Category => ClassCategory.Melee;
         public override void ExSD()
         {
