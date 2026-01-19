@@ -94,3 +94,13 @@ CrimsonRune: {
 		延长受伤后的无敌帧，并缩短25%治疗药水的冷却时间
 		'''
 }
+
+CreationHat: {
+	// DisplayName: Creation Hat
+	// Tooltip: ""
+}
+
+SacarbWings: {
+	// DisplayName: Sacarb Wings
+	// Tooltip: ""
+}

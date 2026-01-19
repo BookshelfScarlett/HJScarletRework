@@ -150,12 +150,12 @@ TonbogiriThrown: {
 	// CalamitySupport: ""
 }
 
-TheDisaster: {
+SodomsDisaster: {
 	DisplayName: 索多玛之灾
 	Tooltip:
 		'''
-		刺入受害者体内，并持续造成爆炸
-		同时，从天上降下大量的天灾火球攻击受害者
+		穿透多个单位，且对被命中的所有单位造成一次爆炸
+		同时，从天上降下天灾火球攻击被命中的敌人
 		"灭顶之灾"
 		'''
 	// CalamitySupport: ""
@@ -198,7 +198,7 @@ TheMars: {
 	DisplayName: 玛尔斯
 	Tooltip:
 		'''
-		沿途检索可被标记的最大6个敌对单位
+		沿途检索可被标记的最大三名敌对单位
 		消失时，向被标记的所有敌对单位追击潮汐之矛
 		"外星的造物"
 		'''

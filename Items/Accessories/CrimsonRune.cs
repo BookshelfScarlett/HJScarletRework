@@ -32,6 +32,7 @@ namespace HJScarletRework.Items.Accessories
         public virtual ItemCategory ItemCate { get; }
         public new string LocalizationCategory => $"Items.{ItemCate}";
         public virtual AssetCategory GetAssetCategory {  get; }
+        public string AssetPath => $"HJScarletRework/Assets/Texture/Items/{GetAssetCategory}s/";
         public override string Texture => $"HJScarletRework/Assets/Texture/Items/{GetAssetCategory}s/{GetAssetCategory}_{GetType().Name}";
     }
 }

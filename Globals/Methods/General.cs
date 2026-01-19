@@ -129,7 +129,7 @@ namespace HJScarletRework.Globals.Methods
         public static string ToPercent(this float value)
         {
             float value2 = value * 100f;
-            return $"{value2}%";
+            return $"{(int)value2}%";
         }
         public static int TerrariaCurrentHour
         {

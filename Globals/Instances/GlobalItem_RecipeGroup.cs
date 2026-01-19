@@ -13,13 +13,16 @@ namespace HJScarletRework.Globals.Instances
     public class HJScarletRecipeGroup : ModSystem
     {
         public static RecipeGroup AnyCopperBar;
+        public static RecipeGroup AnyMagicHat;
         public override void Load()
         {
             CreateRecipeGroup(ref AnyCopperBar,  nameof(AnyCopperBar), ItemID.CopperBar, ItemID.TinBar);
+            CreateRecipeGroup(ref AnyMagicHat, nameof(AnyMagicHat), ItemID.MagicHat, ItemID.WizardHat, ItemID.WizardsHat);
         }
         public override void Unload()
         {
             AnyCopperBar = null;
+            AnyMagicHat = null;
         }
         public static void CreateRecipeGroup(ref RecipeGroup rg, string name, params int[] AllItem)
         {

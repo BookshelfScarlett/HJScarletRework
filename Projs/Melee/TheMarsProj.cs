@@ -16,10 +16,8 @@ namespace HJScarletRework.Projs.Melee
     {
         public override string Texture => ProjPath + $"Proj_{nameof(TheMars)}";
         public float RingRotation = 0;
-        public List<Projectile> SparkProj = [];
         public List<NPC> LegalTargetList = [];
         public ref float Timer => ref Projectile.ai[0];
-        public bool IsTargetIndex = false;
         public enum Style
         {
             Shoot,
@@ -41,7 +39,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
             Projectile.ignoreWater = true;
-            Projectile.tileCollide = true;
+            Projectile.tileCollide = false;
             //此处的Timeleft与实际时长无关。下面会用一个计时器手动控制射弹的处死
             Projectile.timeLeft = 9999;
         }
@@ -49,7 +47,7 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             RingRotation += ToRadians(1);
-            Projectile.velocity *= 0.97f;
+            Projectile.velocity *= 0.967f;
             if (Vector2.Distance(Projectile.Center, Owner.MountedCenter) > 1800f)
                 Projectile.Kill();
             switch (AttackType)
@@ -69,7 +67,8 @@ namespace HJScarletRework.Projs.Melee
             Projectile.rotation = Projectile.velocity.ToRotation();
             for (int i = 0; i < 3; i++)
             {
-                new TurbulenceShinyCube(Projectile.Center + Projectile.SafeDirByRot() * 80f + Main.rand.NextVector2Circular(4f, 4f), Projectile.velocity / 2, Color.White.RandLerpTo(Color.Green), 20, Projectile.rotation, 1, 0.28f, randPosMoveValue: 8).Spawn();
+                Vector2 spawnPos = Projectile.Center + Projectile.SafeDirByRot() * 80f + Main.rand.NextVector2Circular(4f, 4f);
+                new TurbulenceShinyCube(spawnPos, Projectile.velocity / 2, Color.White.RandLerpTo(Color.Green), 20, Projectile.rotation, 1, 0.28f, randPosMoveValue: 8).Spawn();
             }
             //全局寻找并锁定需要的单位，这里最多锁定6个单位
             if (LegalTargetList.Count < 6)
@@ -109,52 +108,52 @@ namespace HJScarletRework.Projs.Melee
             {
                 for (int i = 0; i < LegalTargetList.Count; i++)
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), LegalTargetList[i].Center, Vector2.Zero, ProjectileType<TheMarsSpark>(), 0, 0, Owner.whoAmI);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), LegalTargetList[i].Center, Vector2.Zero, ProjectileType<TheMarsMark>(), 0, 0, Owner.whoAmI);
                     proj.HJScarlet().GlobalTargetIndex = LegalTargetList[i].whoAmI;
                     proj.originalDamage = Projectile.damage;
                 }
-                Timer++;
             }
-            if (Timer != 0f)
-                Timer++;
+            Timer++;
             //启用计时器，并在一定时间后直接处死射弹
-            if (Timer < 30f)
+            if (Timer < 90f)
                 return;
             Projectile.Opacity -= 0.1f;
             //为射弹直接提供一个向上的加速度
             if (Projectile.Opacity <= 0f)
                 Projectile.Kill();
         }
-        public override bool PreKill(int timeLeft)
-        {
-            return true;
-        }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-        }
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D starShape = HJScarletTexture.Particle_SharpTear;
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
+            //是的孩子们，为了绘制这把武器的轨迹，这个棱形贴图被绘制了超过120次
             Vector2 projDir = Projectile.SafeDirByRot();
+            //绘制两边的轨迹
             DrawEdgeTrail(projDir, drawPos, starShape);
-            DrawBackGroundColor(projDir, drawPos, starShape);
+            //填充轨迹颜色
+            DrawBackGroundColor();
+            //绘制光圈
             DrawCirlceGlow(projDir, drawPos, starShape);
+            //在有可用目标的时候，往可用目标上绘制光圈
+            //是的没错，光圈绘制是在这个射弹进行的
             if (LegalTargetList.Count > 0)
-            {
-                for (int i = 0; i < LegalTargetList.Count; i++)
-                {
-                    if (!LegalTargetList[i].CanBeChasedBy() || LegalTargetList[i] == null)
-                        continue;
-                    else
-                        DrawTargetCircle(LegalTargetList[i].Center - Main.screenPosition, starShape);
-                }
-            }
+                DrawMarkCircle(starShape);
             Projectile.DrawGlowEdge(Color.White * Projectile.Opacity, rotFix: PiOver4);
             Projectile.DrawProj(Color.White * Projectile.Opacity, rotFix: PiOver4);
             return false;
         }
-        private void DrawBackGroundColor(Vector2 projDir, Vector2 drawPos, Texture2D starShape)
+        private void DrawMarkCircle(Texture2D starShape)
+        {
+            for (int i = 0; i < LegalTargetList.Count; i++)
+            {
+                if (!LegalTargetList[i].CanBeChasedBy() || LegalTargetList[i] == null)
+                    continue;
+                else
+                    DrawTargetCircle(LegalTargetList[i].Center - Main.screenPosition, starShape);
+            }
+        }
+
+        private void DrawBackGroundColor()
         {
             Texture2D star = HJScarletTexture.Particle_SharpTear;
             Rectangle cutSource = star.Bounds;
@@ -190,7 +189,7 @@ namespace HJScarletRework.Projs.Melee
                 }
             }
         }
-        public void DrawTargetCircle(Vector2 drawPos,Texture2D starShape)
+        public void DrawTargetCircle(Vector2 drawPos, Texture2D starShape)
         {
             float starDrawTime = 20f;
             for (float i = 0; i < starDrawTime; i++)
@@ -199,12 +198,11 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 starPos = drawPos + argDir;
                 Vector2 scale = Projectile.scale * new Vector2(0.2f, 0.5f) * 0.7f * Projectile.Opacity;
                 SB.Draw(starShape, starPos, null, Color.DeepSkyBlue with { A = 0 }, argDir.ToRotation(), starShape.ToOrigin(), scale, 0, 0);
-                if(i % 4 == 0)
+                if (i % 4 == 0)
                 {
-                    SB.Draw(starShape, starPos, null, Color.White with { A = 0}, argDir.ToRotation() + PiOver2, starShape.Size() / 2, scale, 0, 0);
+                    SB.Draw(starShape, starPos, null, Color.White with { A = 0 }, argDir.ToRotation() + PiOver2, starShape.Size() / 2, scale, 0, 0);
                 }
             }
-
         }
         public void DrawCirlceGlow(Vector2 projDir, Vector2 drawPos, Texture2D starShape)
         {
@@ -213,7 +211,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 argDir = projDir.RotatedBy(ToRadians(360f / starDrawTime * i) + RingRotation) * 23f;
                 Vector2 starPos = drawPos + argDir + projDir * 20f;
-                Vector2 scale = Projectile.scale * new Vector2(0.2f, 0.5f) * 0.7f * Projectile.Opacity;
+                Vector2 scale = Projectile.scale * new Vector2(0.2f, 0.5f) * 0.8f * Projectile.Opacity;
                 SB.Draw(starShape, starPos, null, Color.LawnGreen with { A = 0 }, argDir.ToRotation(), starShape.ToOrigin(), scale, 0, 0);
                 if(i % 4 == 0)
                 {

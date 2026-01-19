@@ -31,7 +31,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.extraUpdates = 3;
             Projectile.ignoreWater = true;
-            Projectile.tileCollide = true;
+            Projectile.tileCollide = false;
             Projectile.timeLeft = 600;
             Projectile.Opacity = 0f;
             Projectile.usesLocalNPCImmunity = true;
@@ -42,34 +42,24 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             if (!Projectile.HJScarlet().FirstFrame)
-            {
-                Vector2 dir = Projectile.velocity.SafeNormalize(Vector2.UnitX) * Projectile.scale;
-                for (float i = 0; i < 18f; i++)
-                {
-                    Vector2 dir2 = ToRadians(360f / 18f * i).ToRotationVector2() * Projectile.scale;
-                    dir2.X /= 3.6f;
-                    dir2 = dir2.RotatedBy(Projectile.velocity.ToRotation());
-                    Vector2 pos = Projectile.Center + dir * 12f + dir2 * 18f;
-                    ShinyOrbParticle shinyOrbParticle = new ShinyOrbParticle(pos, dir2 * 1f, Color.DeepSkyBlue.RandLerpTo(Color.White), 40, 0.3f * (3.5f - Math.Abs(8f - i) / 2f), BlendStateID.Additive);
-                    shinyOrbParticle.Spawn();
-                }
-            }
+                InitParticle();
             Projectile.Opacity = Clamp(Projectile.Opacity, 0, 1);
             Projectile.rotation = Projectile.velocity.ToRotation();
+
             GeneralParticle();
+
             if (AttackType == Style.Shoot)
             {
-                
                 Projectile.Opacity += 0.2f;
                 //注意这里：这里会一直锁住追踪目标
                 if (Projectile.GetTargetSafe(out NPC target, false))
-                {
                     Projectile.HomingTarget(target.Center, -1, 11f, 20f, 10);
-                }
                 //否则，直接处死他，模拟波涌剑气行为
                 else
                 {
-                    Projectile.Kill();
+                    AttackType = Style.Fade;
+                    //直接将当前剑气标记为超过3次命中次数，避免后续生成
+                    TotalShootTime = 9;
                 }
             }
             else
@@ -77,6 +67,19 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.Opacity -= 0.05f;
                 if (Projectile.Opacity <= 0f)
                     Projectile.Kill();
+            }
+        }
+        public void InitParticle()
+        {
+            Vector2 dir = Projectile.velocity.SafeNormalize(Vector2.UnitX) * Projectile.scale;
+            for (float i = 0; i < 18f; i++)
+            {
+                Vector2 dir2 = ToRadians(360f / 18f * i).ToRotationVector2() * Projectile.scale;
+                dir2.X /= 3.6f;
+                dir2 = dir2.RotatedBy(Projectile.velocity.ToRotation());
+                Vector2 pos = Projectile.Center + dir * 12f + dir2 * 18f;
+                ShinyOrbParticle shinyOrbParticle = new ShinyOrbParticle(pos, dir2 * 1f, Color.DeepSkyBlue.RandLerpTo(Color.White), 40, 0.3f * (3.5f - Math.Abs(8f - i) / 2f), BlendStateID.Additive);
+                shinyOrbParticle.Spawn();
             }
         }
         public void GeneralParticle()
@@ -93,14 +96,6 @@ namespace HJScarletRework.Projs.Melee
                 i++;
             }
 
-        }
-        public override bool? CanDamage()
-        {
-            return true;
-        }
-        public override bool PreKill(int timeLeft)
-        {
-            return true;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

@@ -10,6 +10,7 @@ namespace HJScarletRework.Globals.Enums
     public enum AssetCategory
     {
         Equip,
+        Armor,
         Material,
         Weapon,
         Pet,

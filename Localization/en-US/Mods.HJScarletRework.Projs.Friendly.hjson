@@ -28,8 +28,8 @@ Melee: {
 	StormSpearSpinProj.DisplayName: Storm Spear Spin Proj
 	StormSpearThrownProj.DisplayName: Storm Spear Thrown Proj
 	SweetStabThrownProj.DisplayName: Sweet Stab Thrown Proj
-	TheDisasterFireball.DisplayName: The Disaster Fireball
-	TheDisasterProj.DisplayName: The Disaster Proj
+	SodomsDisasterFireball.DisplayName: The Disaster Fireball
+	SodomsDisasterProj.DisplayName: The Disaster Proj
 	TheMarsPhantom.DisplayName: The Mars Phantom
 	TheMarsProj.DisplayName: The Mars Proj
 	TheMarsSpark.DisplayName: The Mars Spark
@@ -39,6 +39,8 @@ Melee: {
 	TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
 	WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
 	BinaryStarsClone.DisplayName: Binary Stars Clone
+	TheMarsMark.DisplayName: The Mars Mark
+	SodomsDisasterBoom.DisplayName: Sodoms Disaster Boom
 }
 
 Typeless: {

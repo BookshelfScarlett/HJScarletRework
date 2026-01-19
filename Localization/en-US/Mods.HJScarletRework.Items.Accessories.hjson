@@ -42,3 +42,13 @@ CrimsonRune: {
 	DisplayName: Crimson Rune
 	Tooltip: ""
 }
+
+CreationHat: {
+	DisplayName: Creation Hat
+	Tooltip: ""
+}
+
+SacarbWings: {
+	DisplayName: Sacarb Wings
+	Tooltip: ""
+}

@@ -1,9 +1,9 @@
-BambooSong: {
-	// DisplayName: Bamboo Song
-	// Tooltip: ""
+﻿BambooSong: {
+	DisplayName: 竹笛
+	Tooltip: ""
 }
 
 ShatterSongs: {
-	// DisplayName: Shatter Songs
-	// Tooltip: ""
+	DisplayName: 崩碎之歌
+	Tooltip: ""
 }

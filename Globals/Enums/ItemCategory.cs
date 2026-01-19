@@ -9,6 +9,7 @@ namespace HJScarletRework.Globals.Enums
     public enum ItemCategory
     {
         Accessories,
+        Armor,
         Material,
         Misc
     }

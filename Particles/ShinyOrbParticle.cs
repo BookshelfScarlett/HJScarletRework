@@ -24,7 +24,7 @@ namespace HJScarletRework.Particles
             DrawColor = InitColor = color;
             Lifetime = lifeTime;
             Scale = scale;
-            BlendStateType = blendState.HasValue ? blendState.Value : BlendStateID.Additive;
+            BlendStateType = blendState ?? BlendStateID.Additive;
             AffectedByGravity = affactedByGravity;
             GlowCenter = glowCenter;
             GlowCenterScale = glowCenterScale;

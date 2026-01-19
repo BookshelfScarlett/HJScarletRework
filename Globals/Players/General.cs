@@ -26,6 +26,9 @@ namespace HJScarletRework.Globals.Players
         public int CurrentLostHP = 0;
         public int CurrentLostMana = 0;
         public int FlybackHitBuffTimer = 0;
+
+        public bool CreationHatSet = false;
+
         #region Accessories
         public bool Player_RewardofWarrior = false;
         public bool Player_RewardofKingdom = false;
@@ -34,6 +37,33 @@ namespace HJScarletRework.Globals.Players
         public int KingdomDefenseTime = 0;
         public int RewardLevel = 0;
         #endregion
+        public override void ResetEffects()
+        {
+            CreationHatSet = false;
+        }
+        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
+        {
+            base.ModifyHitNPCWithItem(item, target, ref modifiers);
+        }
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (CreationHatSet && modifiers.DamageType == DamageClass.Magic)
+            {
+                //将所有伤害直接设置为暴击类型，这里先过暴击情况
+                modifiers.SetCrit();
+                //而后开始依据当前的暴击率设置需要的暴击伤害
+                //首先将溢出的暴击概率等价转化
+                float baseCritsbuff = Math.Max(0f, GetWantedCrits<MagicDamageClass>());
+                //转化成功后，将值/2f，取暴击率的1/2（即20%-> 10%)
+                baseCritsbuff /= 2f;
+                //最后。直接将暴击伤害设置
+                modifiers.CritDamage += baseCritsbuff;
+            }
+        }
+        public float GetWantedCrits<Type>() where Type : DamageClass
+        {
+            return (Player.GetTotalCritChance<Type>() + 4f - 100f);
+        }
         public override void PostUpdateMiscEffects()
         {
             UpdateTimer();

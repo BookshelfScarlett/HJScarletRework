@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.ParticleSystem;
+using Terraria;
 
 namespace HJScarletRework.Core.ParticleSystem
 {
@@ -44,6 +45,12 @@ namespace HJScarletRework.Core.ParticleSystem
             if (!p.Important && BaseParticleManager.PriorityActiveParticlesNonPremultiplied.Count > 10000)
                 BaseParticleManager.PriorityActiveParticlesNonPremultiplied.RemoveAt(0);
             BaseParticleManager.PriorityActiveParticlesNonPremultiplied.Add(p);
+        }
+        public static void ShowCurrentParticleCounts()
+        {
+            int totalCounts = BaseParticleManager.PriorityActiveParticlesNonPremultiplied.Count + BaseParticleManager.PriorityActiveParticlesAdditive.Count + BaseParticleManager.PriorityActiveParticlesAlpha.Count +
+                                BaseParticleManager.ActiveParticlesAdditive.Count + BaseParticleManager.ActiveParticlesNonPremultiplied.Count + BaseParticleManager.PriorityActiveParticlesAlpha.Count;
+            Main.NewText("当前粒子数量：" + totalCounts);
         }
     }
 }

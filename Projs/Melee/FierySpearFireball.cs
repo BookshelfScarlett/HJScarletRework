@@ -53,7 +53,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.rotation = Projectile.velocity.ToRotation();
 
             Timer++;
-            bool additionRequire = Timer > 20f && BounceTime > 0;
+            bool additionRequire = (Timer > 15f && Projectile.HJScarlet().GlobalTargetIndex != -1) || BounceTime > 0;
             if (Projectile.GetTargetSafe(out NPC target, true, SearchDistance) && additionRequire)
                 Projectile.HomingTarget(target.Center, -1, 12f, 20f);
             else
@@ -63,10 +63,10 @@ namespace HJScarletRework.Projs.Melee
                     Projectile.velocity.Y = 10f;
             }
             //粒子
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 2; i++)
             {
-                Vector2 spawnPos = Projectile.Center + Projectile.SafeDirByRot() * -i * 1.4f + Main.rand.NextVector2CircularEdge(8, 8);
-                Vector2 speed = Projectile.SafeDirByRot() * Main.rand.NextFloat(1.2f, 4.4f);
+                Vector2 spawnPos = Projectile.Center + Projectile.SafeDirByRot() * -i * 1.2f + Main.rand.NextVector2CircularEdge(8, 8);
+                Vector2 speed = Projectile.SafeDirByRot() * Main.rand.NextFloat(1.2f, 1.9f);
                 Dust d = Dust.NewDustPerfect(spawnPos, DustID.Torch);
                 d.velocity = speed;
                 d.position += Projectile.SafeDirByRot(90) * 1.2f;
