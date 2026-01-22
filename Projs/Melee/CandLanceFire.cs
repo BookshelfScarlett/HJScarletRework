@@ -100,7 +100,7 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 xOffset = dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-4f, 9f);
                 Vector2 spawnPos = Projectile.Center - dir * 12f * i + dir * 12f - xOffset;
                 Vector2 fireVel = dir * Main.rand.NextFloat(1.2f, 1.7f);
-                new Fire(spawnPos, fireVel, Color.SkyBlue.RandLerpTo(Color.DeepSkyBlue), 40, dir.ToRotation(), 0.8f * Projectile.Opacity, Main.rand.NextFloat(0.08f, 0.10f) * Projectile.Opacity).Spawn();
+                new Fire(spawnPos, fireVel, RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), 40, dir.ToRotation(), 0.8f * Projectile.Opacity, Main.rand.NextFloat(0.08f, 0.10f) * Projectile.Opacity).Spawn();
             }
             //在底下用一圈圆弧粒子将其盘起来
             Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), DustID.UnusedWhiteBluePurple);

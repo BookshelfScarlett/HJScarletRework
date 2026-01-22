@@ -28,6 +28,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             CreateRecipe().
                 AddIngredient<FierySpear>().
+                AddIngredient<LightBiteThrown>().
                 AddIngredient<DisasterBar>(10).
                 AddTile(TileID.MythrilAnvil).
                 Register();

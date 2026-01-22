@@ -49,7 +49,7 @@ namespace HJScarletRework.Projs.Melee
                 for (int i = 0; i < 2; i++)
                 {
                     Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(6f, 6f);
-                    new StarShape(pos, Projectile.SafeDir() * 4f, Color.Green.RandLerpTo(Color.LimeGreen), 0.4f * Projectile.Opacity, 10).Spawn();
+                    new StarShape(pos, Projectile.SafeDir() * 4f, RandLerpColor(Color.Green, Color.LimeGreen), 0.4f * Projectile.Opacity, 10).Spawn();
                     new StarShape(pos, Projectile.SafeDir() * 4f, Color.White, 0.15f * Projectile.Opacity, 10).Spawn();
                 }
             }

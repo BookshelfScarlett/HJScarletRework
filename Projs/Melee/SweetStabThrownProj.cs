@@ -85,8 +85,10 @@ namespace HJScarletRework.Projs.Melee
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Timer > 10)
             {
-                Projectile.velocity.Y += 0.18f;
-                Projectile.velocity.X *= 0.96f;
+                Projectile.velocity *= 0.98f;
+                Projectile.velocity.X *= 1f;
+                if (Projectile.velocity.Y < 30f)
+                    Projectile.velocity.Y += 0.17f;
             }
             //我要往你身上滴蜡
             //后面再搞一个水滴的粒子在这
@@ -129,8 +131,8 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawGlowEdge(Color.Gold, rotFix: PiOver4);
-            Projectile.DrawProj(Color.White, drawTime: 4,rotFix: PiOver4);
+            Projectile.DrawGlowEdge(Color.White * 0.5f, rotFix: PiOver4);
+            Projectile.DrawProj(Color.White * lightColor.A, drawTime: 4,rotFix: PiOver4);
             return false;
         }
     }
@@ -139,6 +141,12 @@ namespace HJScarletRework.Projs.Melee
         public Player Owner => Main.player[Projectile.owner];
         public new string LocalizationCategory => "Projs.Friendly.Melee";
         public string ProjPath => "HJScarletRework/Assets/Texture/Projs/";
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.NoMeleeSpeedVelocityScaling[Type] = true;
+            ExSSD();
+        }
+        public virtual void ExSSD() { }
         public override void SetDefaults()
         {
             Projectile.height = Projectile.width = 16;

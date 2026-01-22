@@ -29,7 +29,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             //这里直接用MainMW应该没问题，多人同步后面再看看
-            Vector2 direction = player.ToMouseVector2().ToRandDirection(ToRadians(15));
+            Vector2 direction = player.ToMouseVector2().ToRandVelocity(ToRadians(15));
             Vector2 spawnPos = player.MountedCenter + direction * 25f + direction.RotatedBy(PiOver2 * Main.rand.NextBool().ToDirectionInt()) * Main.rand.NextFloat(15f * Main.rand.NextBool().ToDirectionInt());
             int ai0 = Main.rand.NextBool(5).ToInt();
             Projectile proj = Projectile.NewProjectileDirect(source, spawnPos, direction * Item.shootSpeed, type, damage, knockback, player.whoAmI, ai0);

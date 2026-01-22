@@ -13,6 +13,7 @@ namespace HJScarletRework.Globals.Enums
         Armor,
         Material,
         Weapon,
+        Useable,
         Pet,
         Proj,
         Buff

@@ -74,8 +74,6 @@ namespace HJScarletRework.Assets.Registers
         internal static Tex2DWithPath Proj_CandLanceFire { get; private set; }
         internal static Tex2DWithPath Proj_Dialectics { get; private set; }
 
-        
-
         public override void Load()
         {
             Wreach = new Tex2DWithPath($"{ItemPath}/{nameof(Wreach)}");

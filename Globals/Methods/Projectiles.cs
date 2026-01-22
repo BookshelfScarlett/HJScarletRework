@@ -47,7 +47,7 @@ namespace HJScarletRework.Globals.Methods
         /// </summary>
         /// <param name="proj"></param>
         /// <returns></returns>
-        public static Vector2 SafeDir(this Projectile proj) => proj.velocity.SafeNormalize(Vector2.UnitX);
+        public static Vector2 SafeDir(this Projectile proj) => proj.velocity.ToSafeNormalize();
         /// <summary>
         /// 将proj的rot转化为单位向量
         /// </summary>
@@ -72,7 +72,7 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="searchSecondTarget"></param>
         /// <param name="searchDistance"></param>
         /// <returns></returns>
-        public static bool GetTargetSafe(this Projectile proj, out NPC target, int targetIndex, bool searchSecondTarget = true, float searchDistance = 600f)
+        public static bool GetTargetSafe(this Projectile proj, out NPC target, int targetIndex, bool searchSecondTarget = true, float searchDistance = 600f, bool canPassWall = false)
         {
             target = null;
             if (targetIndex != -1)
@@ -82,14 +82,14 @@ namespace HJScarletRework.Globals.Methods
                     return true;
                 else if (searchSecondTarget)
                 {
-                    target = proj.FindClosestTarget(searchDistance);
+                    target = proj.FindClosestTarget(searchDistance, ignoreTiles:canPassWall);
                     if (target != null && target.CanBeChasedBy(proj))
                         return true;
                 }
             }
             else if (searchSecondTarget)
             {
-                target = proj.FindClosestTarget(searchDistance);
+                target = proj.FindClosestTarget(searchDistance, ignoreTiles: canPassWall);
                 if (target != null && target.CanBeChasedBy(proj))
                     return true;
             }
@@ -105,7 +105,7 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="searchSecondTarget"></param>
         /// <param name="searchDistance"></param>
         /// <returns></returns>
-        public static bool GetTargetSafe(this Projectile proj, out NPC target, bool searchSecondTarget = true, float searchDistance = 600f)
+        public static bool GetTargetSafe(this Projectile proj, out NPC target, bool searchSecondTarget = true, float searchDistance = 600f, bool canPassWall = false)
         {
             target = null;
             if (proj.HJScarlet().GlobalTargetIndex!= -1)
@@ -115,14 +115,14 @@ namespace HJScarletRework.Globals.Methods
                     return true;
                 else if (searchSecondTarget)
                 {
-                    target = proj.FindClosestTarget(searchDistance);
+                    target = proj.FindClosestTarget(searchDistance, ignoreTiles:canPassWall);
                     if (target != null && target.CanBeChasedBy(proj))
                         return true;
                 }
             }
             else if (searchSecondTarget)
             {
-                target = proj.FindClosestTarget(searchDistance);
+                target = proj.FindClosestTarget(searchDistance, ignoreTiles:canPassWall);
                 if (target != null && target.CanBeChasedBy(proj))
                     return true;
             }
@@ -325,15 +325,6 @@ namespace HJScarletRework.Globals.Methods
             if (proj.HJScarlet().GlobalTargetIndex == -1)
                 return null;
             return Main.npc[proj.HJScarlet().GlobalTargetIndex];
-        }
-        /// <summary>
-        /// 我也不知道为什么我要写这种拓展
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static Projectile NewProjectileDirect<T>(this Projectile proj, IEntitySource src, Vector2 position, Vector2 velocity, int damage, float kb, int owner = -1, float ai0 = 0, float ai1 = 0, float ai2=0) where T : ModProjectile
-        {
-            return Projectile.NewProjectileDirect(src,position,velocity,ProjectileType<T>(),damage,kb,owner,ai0,ai1,ai2);
         }
         public static void ExpandHitboxBy(this Projectile projectile, int width, int height)
         {

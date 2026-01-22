@@ -167,7 +167,7 @@ namespace HJScarletRework.Projs.Ranged
                 Dust d = Dust.NewDustPerfect(spawnPos, PickTagDust, glowDustVelocity);
                 d.scale *= 1.2f;
                 d.noGravity = true;
-                Color glowColor = baseColor.RandLerpTo(targetColor);
+                Color glowColor = RandLerpColor(baseColor, targetColor);
                 new ShinyOrbParticle(spawnPos, glowDustVelocity, glowColor, 40, 0.5f, BlendStateID.Additive, glowCenter: true).Spawn();
             }
         }

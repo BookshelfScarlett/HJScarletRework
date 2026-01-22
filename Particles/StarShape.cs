@@ -11,12 +11,33 @@ namespace HJScarletRework.Particles
 {
     public class StarShape : BaseParticle
     {
-        public bool NoGravity;
         public int BlendStateType;
+        public bool NoGravity = true;
         public Color SparkColor;
-        public bool DrawGlow;
-        public float GlowScale;
+        public bool DrawGlow = true;
+        public float GlowScale = 0.45f;
+        public bool HasRotation;
         public override int UseBlendStateID => BlendStateType;
+        public StarShape(Vector2 position, Vector2 velocity, Color drawColor, float scale, int lifeTime)
+        {
+            Position = position;
+            Velocity = velocity;
+            DrawColor = drawColor;
+            Scale = scale;
+            Lifetime = lifeTime;
+            BlendStateType = BlendStateID.Additive;
+        }
+        public StarShape(Vector2 position, Vector2 velocity, Color drawColor, float scale, int lifeTime, float rot)
+        {
+            Position = position;
+            Velocity = velocity;
+            DrawColor = drawColor;
+            Scale = scale;
+            Lifetime = lifeTime;
+            BlendStateType = BlendStateID.Additive;
+            HasRotation = true;
+            Rotation = rot;
+        }
         public StarShape(Vector2 position, Vector2 velocity, Color drawColor, float scale, int lifeTime, int? blendStateID = null, bool noGravity = true, bool drawGlow = true, float glowScale = 0.45f)
         {
             Position = position;
@@ -31,7 +52,10 @@ namespace HJScarletRework.Particles
         }
         public override void Update()
         {
-            Scale *= 0.95f;
+            if (!HasRotation)
+                Scale *= 0.95f;
+            else
+                Scale *= 0.99f;
             SparkColor = Color.Lerp(DrawColor, Color.Transparent, (float)Math.Pow(LifetimeRatio, 3D));
             Velocity *= 0.95f;
             if (Velocity.Length() < 12f && !NoGravity)
@@ -39,7 +63,7 @@ namespace HJScarletRework.Particles
                 Velocity.X *= 0.94f;
                 Velocity.Y += 0.25f;
             }
-            Rotation = Velocity.ToRotation() + PiOver2;
+            Rotation = HasRotation ? Rotation : Velocity.ToRotation() + PiOver2;
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

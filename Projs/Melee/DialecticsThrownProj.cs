@@ -26,10 +26,7 @@ namespace HJScarletRework.Projs.Melee
         public WaveStyle CurWaveStyle = WaveStyle.Sin;
         public ref float DrawCubeAndBallTimer => ref Projectile.localAI[0];
         public bool IsHit = false;
-        public override void SetStaticDefaults()
-        {
-            Projectile.ToTrailSetting(20, 2);
-        }
+        public override void ExSSD() => Projectile.ToTrailSetting(20, 2);
         public Vector2 MountedTargetPos = Vector2.Zero; 
         public override void ExSD()
         {
@@ -98,7 +95,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 for (int i = 0; i < 1; i++)
                 {
-                    new StarShape(starPos - dir * 30f, starVel, Color.LightBlue.RandLerpTo(Color.MediumBlue), 0.8f, 40).Spawn();
+                    new StarShape(starPos - dir * 30f, starVel, RandLerpColor(Color.LightBlue, Color.MediumBlue), 0.8f, 40).Spawn();
                     new StarShape(starPos - dir * 30f, starVel, Color.White, 0.4f, 40).Spawn();
                 }
             }
@@ -212,7 +209,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 vel = Projectile.SafeDir() * Main.rand.NextFloat(1.2f, 1.4f);
                 Vector2 spawnPos = Projectile.Center + Main.rand.NextVector2CircularEdge(6f, 6f);
-                new StarShape(spawnPos, -vel, Color.Blue.RandLerpTo(Color.MediumBlue), 0.7f, 40).Spawn();
+                new StarShape(spawnPos, -vel, RandLerpColor(Color.Blue, Color.MediumBlue), 0.7f, 40).Spawn();
                 new StarShape(spawnPos, -vel, Color.White, 0.3f, 40).Spawn();
             }
             for (int k = -1; k < 2; k += 2)
@@ -221,7 +218,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     Vector2 drawPos = Projectile.Center - Projectile.SafeDir() * 10f;
                     Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2);
-                    Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                    Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                     float sacle = 0.1f;
                     new TrailGlowBall(drawPos + offset * k * (Amp - 10f) + Projectile.velocity / 4 * i, Projectile.SafeDir() * 2, drawColor, 40, sacle * 0.7f,true).Spawn();
                     new TrailGlowBall(drawPos + offset * k * (Amp - 10f) + Projectile.velocity / 4 * i, Projectile.SafeDir() * 2, Color.White, 40, sacle * 0.4f,true).Spawn();
@@ -240,7 +237,7 @@ namespace HJScarletRework.Projs.Melee
             for (int i = 0; i < 3; i++)
             {
                 Vector2 vel = Projectile.SafeDir() * Main.rand.NextFloat(1.2f, 1.4f) * 2f * Main.rand.NextBool().ToDirectionInt();
-                new TurbulenceShinyCube(Projectile.Center, vel, Color.White.RandLerpTo(Color.Blue), 20, Projectile.rotation, 0.8f, 0.5f).Spawn();
+                new TurbulenceShinyCube(Projectile.Center, vel, RandLerpColor(Color.White, Color.Blue), 20, Projectile.rotation, 0.8f, 0.5f).Spawn();
             }
             Vector2 drawPos = Projectile.Center - Projectile.SafeDir() * 10f;
             Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2);
@@ -254,7 +251,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     for (int i = -3; i <= 5; i++)
                     {
-                        Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                        Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                         Vector2 pos = drawPos + offset * k * Amp + Projectile.velocity / 5 * i;
                         new HRShinyOrb(pos, vel2, drawColor, 40, 0f, 1f, 0.1f).Spawn();
                         new HRShinyOrb(pos, vel2, Color.White, 40, 0f, 1f, 0.05f).Spawn();
@@ -268,7 +265,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     for (int k = -1; k < 2; k += 2)
                     {
-                        Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                        Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                         Vector2 pos = drawPos + offset * k * j + Projectile.velocity / 5;
                         new HRShinyOrb(pos, vel2, drawColor, 40, 0f, 1f, 0.1f).Spawn();
                         new HRShinyOrb(pos, vel2, Color.White, 40, 0f, 1f, 0.05f).Spawn();
@@ -282,7 +279,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     for (int i = -3; i <= 5; i++)
                     {
-                        Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                        Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                         Vector2 pos = drawPos + offset * k * (Amp - 10f) + Projectile.velocity / 5 * i;
                         new HRShinyOrb(pos, vel2, drawColor, 40, 0f, 1f, 0.1f).Spawn();
                         new HRShinyOrb(pos, vel2, Color.White, 40, 0f, 1f, 0.05f).Spawn();
@@ -297,7 +294,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     for (int k = -1; k < 2; k += 2)
                     {
-                        Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                        Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                         Vector2 pos = drawPos + offset * k * j + Projectile.velocity / 5;
                         new HRShinyOrb(pos, vel2, drawColor, 40, 0f, 1f, 0.1f).Spawn();
                         new HRShinyOrb(pos, vel2, Color.White, 40, 0f, 1f, 0.05f).Spawn();
@@ -322,7 +319,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 for (int i = -5; i <= 5; i++)
                 {
-                    Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                    Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                     Vector2 pos = drawPos + offset * Amp + Projectile.velocity / 5 * i;
                     new HRShinyOrb(pos, vel, drawColor, 25, 0, 1, 0.1f).Spawn();
                     new HRShinyOrb(pos, vel, Color.White, 25, 0, 1, 0.07f).Spawn();
@@ -334,7 +331,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 for (float j = Amp; j >= -Amp; j -= 2f)
                 {
-                    Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                    Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                     Vector2 pos = drawPos + offset * j;
                     new HRShinyOrb(pos, vel, drawColor, 25, 0, 1, 0.1f).Spawn();
                     new HRShinyOrb(pos, vel, Color.White, 25, 0, 1, 0.07f).Spawn();
@@ -345,7 +342,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 for (int i = -5; i <= 5; i++)
                 {
-                    Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                    Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                     Vector2 pos = drawPos + offset * -Amp + Projectile.velocity / 5 * i;
                     new HRShinyOrb(pos, vel , drawColor, 25, 0, 1, 0.1f).Spawn();
                     new HRShinyOrb(pos, vel, Color.White, 25, 0, 1, 0.07f).Spawn();
@@ -357,7 +354,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 for (float j = -Amp; j <= +Amp; j += 2f)
                 {
-                    Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                    Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                     Vector2 pos = drawPos + offset * j;
                     new HRShinyOrb(pos, vel, drawColor, 25, 0, 1, 0.1f).Spawn();
                     new HRShinyOrb(pos, vel, Color.White, 25, 0, 1, 0.07f).Spawn();
@@ -379,7 +376,7 @@ namespace HJScarletRework.Projs.Melee
             Vector2 randomSpeed = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(1.2f, 2.0f);
             for (int i = 0; i < 5; i++)
             {
-                Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                 Vector2 spawnPos = mountedPos + dir.RotatedBy(PiOver2) * MathF.Sin(Timer - i * 0.16f) * (25.0f);
                 new HRShinyOrb(spawnPos - speedOffset * i, dir * 1.2f, drawColor, 25, 0, 1, 0.1f).Spawn();
                 new HRShinyOrb(spawnPos - speedOffset * i, dir * 1.2f, Color.White, 25, 0, 1, 0.07f).Spawn();
@@ -387,7 +384,7 @@ namespace HJScarletRework.Projs.Melee
             //第二条line
             for (int i = 0; i < 5;i++)
             {
-                Color drawColor = Color.MediumBlue.RandLerpTo(Color.Blue);
+                Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                 Vector2 spawnPos = mountedPos + dir.RotatedBy(PiOver2) * MathF.Sin(Timer - i * 0.16f) * (-25.0f);
                 new HRShinyOrb(spawnPos - speedOffset * i, dir * 1.2f, drawColor, 25, 0, 1, 0.1f).Spawn();
                 new HRShinyOrb(spawnPos - speedOffset * i, dir * 1.2f, Color.White, 25, 0, 1, 0.07f).Spawn();

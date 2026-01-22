@@ -16,7 +16,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Ranged
 {
-    public class BinartStarsPhantomClone : HJScarletFriendlyProj
+    public class BinaryStarsPhantomClone : HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Ranged;
         //攻击枚举

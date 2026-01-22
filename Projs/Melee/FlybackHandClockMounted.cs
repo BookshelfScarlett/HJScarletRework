@@ -92,7 +92,7 @@ namespace HJScarletRework.Projs.Melee
                 for (int i = 0; i < 40; i++)
                 {
                     Vector2 pos = Projectile.Center + Main.rand.NextVector2Circular(40f, 40f);
-                    new TurbulenceShinyOrb(pos, 2f, Color.SkyBlue.RandLerpTo(Color.AliceBlue), 40, Main.rand.NextFloat(0.1f, 0.12f), Main.rand.NextFloat(TwoPi), true).Spawn();
+                    new TurbulenceShinyOrb(pos, 2f, RandLerpColor(Color.SkyBlue, Color.AliceBlue), 40, Main.rand.NextFloat(0.1f, 0.12f), Main.rand.NextFloat(TwoPi), true).Spawn();
                 }
             }
         }
@@ -100,7 +100,7 @@ namespace HJScarletRework.Projs.Melee
         private void UpdateGeneralParticle()
         {
             if (Main.rand.NextBool())
-                new StarShape(NextPos + Main.rand.NextVector2Circular(14f, 14f), -Vector2.UnitY * Main.rand.NextFloat(0.1f, 0.4f), Color.White.RandLerpTo(Color.AliceBlue), 0.15f, 30).SpawnToPriority();
+                new StarShape(NextPos + Main.rand.NextVector2Circular(14f, 14f), -Vector2.UnitY * Main.rand.NextFloat(0.1f, 0.4f), RandLerpColor(Color.White, Color.AliceBlue), 0.15f, 30).SpawnToPriority();
         }
 
         private void UpdateClockEdge()

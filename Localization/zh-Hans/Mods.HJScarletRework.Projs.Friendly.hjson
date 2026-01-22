@@ -41,6 +41,8 @@ Melee: {
 	// BinaryStarsClone.DisplayName: Binary Stars Clone
 	// TheMarsMark.DisplayName: The Mars Mark
 	// SodomsDisasterBoom.DisplayName: Sodoms Disaster Boom
+	// IceSpearEnergy.DisplayName: Ice Spear Energy
+	// IceSpearProj.DisplayName: Ice Spear Proj
 }
 
 Typeless: {
@@ -53,7 +55,7 @@ Ranged: {
 	// AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
 	// AetherfireSmasherMain.DisplayName: Aetherfire Smasher Main
 	// AetherfireVolcano.DisplayName: Aetherfire Volcano
-	// BinartStarsPhantom.DisplayName: Binart Stars Phantom
+	// BinaryStarsPhantom.DisplayName: Binart Stars Phantom
 	// BinartStarsPhantomClone.DisplayName: Binart Stars Phantom Clone
 	// BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
 	// BinaryStarsMain.DisplayName: Binary Stars Main
@@ -69,4 +71,5 @@ Ranged: {
 	// JudgementMainProj.DisplayName: Judgement Main Proj
 	// JudgementPunishStar.DisplayName: Judgement Punish Star
 	// JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
+	// BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
 }

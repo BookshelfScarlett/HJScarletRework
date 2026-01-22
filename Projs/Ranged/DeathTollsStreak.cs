@@ -40,9 +40,9 @@ namespace HJScarletRework.Projs.Ranged
             if (HJScarletMethods.OutOffScreen(Projectile.Center, 0.3f))
                 return;
             Vector2 offset = Main.rand.NextVector2Circular(12, 12) + new Vector2(-48, 0).RotatedBy(Projectile.rotation);
-            Color color = Color.Purple.RandLerpTo(Color.BlueViolet);
+            Color color = RandLerpColor(Color.Purple, Color.BlueViolet);
             Vector2 fireVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero);
-            Color Firecolor = Color.Black.RandLerpTo(Color.DarkViolet);
+            Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
             new Fire(Projectile.Center, fireVelocity * 4.5f, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.1f).SpawnToPriorityNonPreMult();
             new TrailGlowBall(Projectile.Center + offset, fireVelocity * 4.5f, color, 90, 0.1f, true).Spawn();
             for (int i = 0; i < 3; i++)
@@ -59,7 +59,7 @@ namespace HJScarletRework.Projs.Ranged
             new CrossGlow(Projectile.Center, Vector2.Zero, Color.DarkViolet, 30, 1f, 0.4f).Spawn();
             for (int i = 0; i < 10; i++)
             {
-                Color Firecolor = Color.Black.RandLerpTo(Color.DarkViolet);
+                Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
                 new Fire(Projectile.Center, Vector2.UnitX.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0.2f, 1.2f) * 4, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.3f).SpawnToPriorityNonPreMult();
             }
             FirstFrameInit = true;

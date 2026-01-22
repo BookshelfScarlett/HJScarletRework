@@ -16,10 +16,10 @@ namespace HJScarletRework.Projs.Melee
 {
     public class EvolutionThrownProj : ThrownSpearProjClass
     {
-        public override void SetStaticDefaults() => Projectile.ToTrailSetting(20, 2);
         public override string Texture => GetInstance<Evolution>().Texture;
         public ref float Timer => ref Projectile.ai[0];
         public List<int> PortalProjList = [];
+        public override void ExSSD() => Projectile.ToTrailSetting(20, 2);
         public override void ExSD()
         {
             Projectile.extraUpdates = 5;
@@ -61,13 +61,13 @@ namespace HJScarletRework.Projs.Melee
             Vector2 vel = Projectile.velocity * 0.8f;
             vel -= Vector2.UnitY * Main.rand.NextFloat(10f, 12f);
 
-            Color drawColor = Color.GreenYellow.RandLerpTo(Color.LightGreen);
+            Color drawColor = RandLerpColor(Color.GreenYellow, Color.LightGreen);
             new Petal(spawnPos, vel, drawColor, 60, Main.rand.NextFloat(TwoPi), 1f, 0.1f, 1f).Spawn();
             for (int i = 0; i <= 3; i++)
             {
                 Color beginColor = new(77, 42, 26);
                 Color endColor = new(97, 67,64);
-                Color treeSkinColor = beginColor.RandLerpTo(endColor);
+                Color treeSkinColor = RandLerpColor(beginColor, endColor);
                 Vector2 offset = Projectile.SafeDir() * i * 5f + Main.rand.NextVector2Circular(10f, 10f);
                 new StarShape(Projectile.Center - offset, Projectile.SafeDir() * -1.2f, treeSkinColor, 0.3f, 60).SpawnToPriorityNonPreMult();
             }

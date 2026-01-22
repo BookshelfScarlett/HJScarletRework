@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Melee
     public class SpearofDarknessShadow : ThrownSpearProjClass
     {
         public override string Texture => GetInstance<SpearofDarknessThrown>().Texture;
-        public override void SetStaticDefaults()
+        public override void ExSSD()
         {
             Projectile.ToTrailSetting();
         }

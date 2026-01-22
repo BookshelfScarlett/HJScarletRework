@@ -17,13 +17,12 @@ namespace HJScarletRework.Particles
         public int SeedOffset = 0;
 
         public float BeginScale = 1f;
-        public HRShinyOrbMedium(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, float speed)
+        public HRShinyOrbMedium(Vector2 position, Vector2 velocity, Color color, int lifetime, float opacity, float scale, float speed)
         {
             Position = position;
             Velocity = velocity;
             DrawColor = color;
             Lifetime = lifetime;
-            Rotation = Rot;
             Opacity = opacity;
             Scale = scale;
             BeginScale = scale;
@@ -60,7 +59,7 @@ namespace HJScarletRework.Particles
         public override void Draw(SpriteBatch spriteBatch)
         {
             Texture2D texture = HJScarletTexture.Particle_HRShinyOrbMedium.Value;
-            spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor * Opacity, Rotation, texture.Size() / 2, Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor * Opacity, 0, texture.Size() / 2, Scale, SpriteEffects.None, 0);
         }
     }
 }

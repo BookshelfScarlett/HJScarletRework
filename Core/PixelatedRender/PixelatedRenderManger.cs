@@ -104,7 +104,7 @@ namespace HJScarletRework.Core.PixelatedRender
             {
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
                 Effect effect = HJScarletShader.Pixelation;
-                effect.Parameters["uTargetResolution"].SetValue(HJScarletMethods.ScreenSize() / 2);
+                effect.Parameters["uTargetResolution"].SetValue(HJScarletMethods.GetScreenSize / 2);
                 effect.CurrentTechnique.Passes[0].Apply();
                 Main.spriteBatch.Draw(BeforePlayerTarget, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                 Main.spriteBatch.End();
@@ -118,7 +118,7 @@ namespace HJScarletRework.Core.PixelatedRender
             {
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
                 Effect effect = HJScarletShader.Pixelation;
-                effect.Parameters["uTargetResolution"].SetValue(HJScarletMethods.ScreenSize() / 2);
+                effect.Parameters["uTargetResolution"].SetValue(HJScarletMethods.GetScreenSize / 2);
                 effect.CurrentTechnique.Passes[0].Apply();
                 Main.spriteBatch.Draw(BeforeDustTarget, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                 Main.spriteBatch.End();

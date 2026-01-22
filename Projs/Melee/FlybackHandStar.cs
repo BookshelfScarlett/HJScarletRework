@@ -47,7 +47,7 @@ namespace HJScarletRework.Projs.Melee
             }
             else if(Timer < 30)
             {
-                new Fire(Projectile.Center + Main.rand.NextVector2Circular(6f, 6f), Projectile.velocity / 3, Color.Gold.RandLerpTo(Color.Yellow), 60, Projectile.rotation, 1f, 0.1f).Spawn();
+                new Fire(Projectile.Center + Main.rand.NextVector2Circular(6f, 6f), Projectile.velocity / 3, RandLerpColor(Color.Gold, Color.Yellow), 60, Projectile.rotation, 1f, 0.1f).Spawn();
                 Projectile.velocity *= 0.93f;
             }
             //闪亮的星辰啊……

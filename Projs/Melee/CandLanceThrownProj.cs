@@ -61,7 +61,7 @@ namespace HJScarletRework.Projs.Melee
             for (int i = 0; i < 4; i++)
             {
                 Vector2 spawnPos = mountedPos + dir.RotatedBy(PiOver2) * MathF.Sin(Timer - i * 0.1f) * (9.0f);
-                new ShinyOrbParticle(spawnPos - speedOffset * i, dir * 1.2f, Color.DeepSkyBlue.RandLerpTo(Color.LightBlue), 25, 0.4f).Spawn();
+                new ShinyOrbParticle(spawnPos - speedOffset * i, dir * 1.2f, RandLerpColor(Color.DeepSkyBlue,Color.LightBlue), 25, 0.4f).Spawn();
                 Dust shinyDust = Dust.NewDustPerfect(mountedPos + Main.rand.NextVector2Circular(8f, 8f), DustID.UnusedWhiteBluePurple);
                 shinyDust.scale *= Main.rand.NextFloat(1.1f, 1.2f);
                 shinyDust.velocity = dir * 1.2f;
@@ -87,7 +87,7 @@ namespace HJScarletRework.Projs.Melee
             Vector2 mountedPos = Projectile.Center + dir * 80f - 4f  * dir.RotatedBy(PiOver2);
             for (int i = 0; i < 2; i++)
             {
-                new Fire(mountedPos - dir * 60f * i + Main.rand.NextVector2Circular(8f, 6f), Vector2.Zero, Color.SkyBlue.RandLerpTo(Color.Blue), 40, dir.ToRotation(), 1f, 0.1f).Spawn();
+                new Fire(mountedPos - dir * 60f * i + Main.rand.NextVector2Circular(8f, 6f), Vector2.Zero, RandLerpColor(Color.SkyBlue, Color.Blue), 40, dir.ToRotation(), 1f, 0.1f).Spawn();
             }
             if (Projectile.Opacity <= 0f)
                 Projectile.Kill();
@@ -100,7 +100,7 @@ namespace HJScarletRework.Projs.Melee
         {
             //本地跑切割特效
             for (int i = 0; i < 13; i++)
-                new StarShape(Projectile.Center, Projectile.velocity.ToRandVelocity(ToRadians(10f), Main.rand.NextFloat(3f, 7f)), Color.SkyBlue.RandLerpTo(Color.DeepSkyBlue), Main.rand.NextFloat(0.8f, 1.3f), 30).Spawn();
+                new StarShape(Projectile.Center, Projectile.velocity.ToRandVelocity(ToRadians(10f), 3f, 7f), RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), Main.rand.NextFloat(0.8f, 1.3f), 30).Spawn();
             //不用考虑特判倒是
             AttackType = Style.Hit;
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;

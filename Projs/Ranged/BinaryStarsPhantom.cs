@@ -19,7 +19,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Ranged
 {
-    public class BinartStarsPhantom: HJScarletFriendlyProj
+    public class BinaryStarsPhantom: HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Ranged;
         public HJScarletGlobalProjs ModProj => Projectile.HJScarlet();
@@ -276,7 +276,7 @@ namespace HJScarletRework.Projs.Ranged
                 if (projectile.owner == Main.myPlayer)
                 {
                     Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), spawnPos, velDir * Main.rand.NextFloat(15f, 19f), ProjectileType<BinaryStarsLightArrow>(), useDamage, 2.5f, projectile.owner, target.whoAmI);
-                    proj.ai[0] = target.whoAmI;
+                    proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                     proj.HJScarlet().ExtraAI[1] = canSpawnDust.ToInt();
                 }
             }
@@ -328,7 +328,7 @@ namespace HJScarletRework.Projs.Ranged
         public override bool PreKill(int timeLeft)
         {
             //即将死亡的时候，生成一个克隆锤子。
-            int projID = ProjectileType<BinartStarsPhantomClone>();
+            int projID = ProjectileType<BinaryStarsPhantomClone>();
             //获取当前锤子到玩家的向量，归一化后转90°
             Vector2 dir = (Projectile.Center - Owner.Center).SafeNormalize(Vector2.UnitX).RotatedBy(PiOver2 * IsFlip.ToDirectionInt());
             //转化为实际速度

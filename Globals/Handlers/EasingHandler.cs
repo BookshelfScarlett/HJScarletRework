@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HJScarletRework.Globals
+namespace HJScarletRework.Globals.Handlers
 {
     public static class EasingHandler
     {

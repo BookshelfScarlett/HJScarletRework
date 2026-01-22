@@ -12,11 +12,21 @@ namespace HJScarletRework.Particles
     {
         public int BlendStateType;
         public override int UseBlendStateID => BlendStateType;
-        public bool AffectedByGravity;
-        public bool GlowCenter;
+        public bool AffectedByGravity = false;
+        public bool GlowCenter = true;
         public float FadeOut;
         public Color InitColor;
-        public float GlowCenterScale;
+        public float GlowCenterScale = 0.5f;
+        public ShinyOrbParticle(Vector2 position, Vector2 velocity, Color color, int lifeTime, float scale)
+        {
+            Position = position;
+            Velocity = velocity;
+            DrawColor = InitColor = color;
+            Lifetime = lifeTime;
+            Scale = scale;
+            BlendStateType = BlendStateID.Additive;
+            FadeOut = 1f;
+        }
         public ShinyOrbParticle(Vector2 position, Vector2 velocity, Color color, int lifeTime, float scale, int? blendState = null, bool affactedByGravity = false, bool glowCenter = true, float glowCenterScale = 0.5f)
         {
             Position = position;
@@ -30,6 +40,7 @@ namespace HJScarletRework.Particles
             GlowCenterScale = glowCenterScale;
             FadeOut = 1f;
         }
+
         public override void Update()
         {
             FadeOut -= 0.05f;

@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
@@ -28,7 +29,7 @@ namespace HJScarletRework.Projs.Melee
             get => (Style)Projectile.ai[1];
             set => Projectile.ai[1] = (float)value;
         }
-        public override void SetStaticDefaults()
+        public override void ExSSD()
         {
             Projectile.ToTrailSetting();
         }
@@ -50,6 +51,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.velocity *= 0.967f;
             if (Vector2.Distance(Projectile.Center, Owner.MountedCenter) > 1800f)
                 Projectile.Kill();
+
             switch (AttackType)
             {
                 case Style.Shoot:
@@ -65,12 +67,13 @@ namespace HJScarletRework.Projs.Melee
         {
             Timer++;
             Projectile.rotation = Projectile.velocity.ToRotation();
+            //全局寻找并锁定需要的单位，这里最多锁定6个单位
             for (int i = 0; i < 3; i++)
             {
-                Vector2 spawnPos = Projectile.Center + Projectile.SafeDirByRot() * 80f + Main.rand.NextVector2Circular(4f, 4f);
-                new TurbulenceShinyCube(spawnPos, Projectile.velocity / 2, Color.White.RandLerpTo(Color.Green), 20, Projectile.rotation, 1, 0.28f, randPosMoveValue: 8).Spawn();
+                Vector2 spawnPos = Projectile.Center.ToRandCirclePos(4f);
+                new TurbulenceShinyCube(spawnPos, Projectile.velocity / 2, RandLerpColor(Color.White, Color.Green) * Clamp(Projectile.velocity.Length(), 0, 1), 20, Projectile.rotation, 1, 0.28f * Projectile.Opacity, randPosMoveValue: 8).Spawn();
             }
-            //全局寻找并锁定需要的单位，这里最多锁定6个单位
+
             if (LegalTargetList.Count < 6)
                 GetLegalTarget();
             //如果存在时间超过1秒，进入处死状态
@@ -116,7 +119,16 @@ namespace HJScarletRework.Projs.Melee
             Timer++;
             //启用计时器，并在一定时间后直接处死射弹
             if (Timer < 90f)
+            {
+                float rad = Clamp(Projectile.velocity.Length(), 0, 1);
+                int count = rad < 0.5f ? 1 : 2;
+                for (int i = 0; i < count; i++)
+                {
+                    Vector2 spawnPos = Projectile.Center.ToRandCirclePos(6f);
+                    new TurbulenceShinyCube(spawnPos, Projectile.velocity / 2, RandLerpColor(Color.White, Color.Green) * rad, 20, Projectile.rotation, 1 * rad, 0.28f * rad , randPosMoveValue: 8).Spawn();
+                }
                 return;
+            }
             Projectile.Opacity -= 0.1f;
             //为射弹直接提供一个向上的加速度
             if (Projectile.Opacity <= 0f)
@@ -166,21 +178,21 @@ namespace HJScarletRework.Projs.Melee
             {
                 float rads = (float)i / length;
                 Color drawColor = (Color.Lerp(Color.SkyBlue, Color.Gray, rads) with { A = 150 }) * 0.7f * Projectile.Opacity * (1 - rads);
-                Vector2 trailPos = Projectile.Center - Main.screenPosition - Projectile.SafeDir() * 2.1f * i + Projectile.SafeDir() * 19f;
-                SB.Draw(star, trailPos, null, drawColor * Projectile.Opacity, Projectile.rotation, ori, Projectile.scale * new Vector2(1.0f, 0.6f) * 0.5f, 0, 0);
+                Vector2 trailPos = Projectile.Center - Main.screenPosition - Projectile.SafeDir() * 2.1f * i + Projectile.SafeDir() * 36f;
+                SB.Draw(star, trailPos, null, drawColor * Projectile.Opacity, Projectile.rotation, ori, Projectile.scale * new Vector2(1.0f, 0.6f), 0, 0);
             }
         }
 
         private void DrawEdgeTrail(Vector2 projDir, Vector2 drawPos, Texture2D starShape)
         {
-            Vector2 trailScale = Projectile.scale * new Vector2(0.5f, 1.5f) * 1f * Projectile.Opacity;
+            Vector2 trailScale = Projectile.scale * new Vector2(0.20f, 1.5f) * 1f * Projectile.Opacity;
             float starDrawTime = 16f;
             for (float j = -1;j <= 2;j += 2)
             {
                 for (float i = 0; i < starDrawTime; i++)
                 {
                     float rads = (float)i / starDrawTime;
-                    Vector2 starPos = drawPos + projDir * 10f + projDir.RotatedBy(PiOver2 * j) * 10f - projDir * 8f * i;
+                    Vector2 starPos = drawPos + projDir * 20f + projDir.RotatedBy(PiOver2 * j) * 10f - projDir * 8f * i;
                     Color drawColor = (Color.Lerp(Color.DarkGreen, Color.Silver, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
                     //中心高光的颜色
                     Color drawColor2 = (Color.Lerp(Color.AliceBlue, Color.White, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
@@ -210,7 +222,7 @@ namespace HJScarletRework.Projs.Melee
             for (float i = 0; i < starDrawTime; i++)
             {
                 Vector2 argDir = projDir.RotatedBy(ToRadians(360f / starDrawTime * i) + RingRotation) * 23f;
-                Vector2 starPos = drawPos + argDir + projDir * 20f;
+                Vector2 starPos = drawPos + argDir + projDir * 45f;
                 Vector2 scale = Projectile.scale * new Vector2(0.2f, 0.5f) * 0.8f * Projectile.Opacity;
                 SB.Draw(starShape, starPos, null, Color.LawnGreen with { A = 0 }, argDir.ToRotation(), starShape.ToOrigin(), scale, 0, 0);
                 if(i % 4 == 0)

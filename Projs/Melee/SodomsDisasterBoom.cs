@@ -51,14 +51,14 @@ namespace HJScarletRework.Projs.Melee
                     randY *= speed;
                     Vector2 vel = new Vector2(randX, randY) * Main.rand.NextFloat(0.24f, 0.28f);
                     Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
-                    new ShinyOrbParticle(pos, vel, Color.Red.RandLerpTo(Color.DarkRed), 30, 1f).Spawn();
+                    new ShinyOrbParticle(pos, vel, RandLerpColor(Color.Red, Color.DarkRed), 30, 1f).Spawn();
                     new ShinyOrbParticle(pos, vel, Color.White, 30, 0.4f).Spawn();
                 }
                 new CrossGlow(Projectile.Center, Vector2.Zero, Color.Black, 30, 1f, 0.4f).Spawn();
                 new CrossGlow(Projectile.Center, Vector2.Zero, Color.DarkRed, 30, 1f, 0.4f).Spawn();
                 for (int i = 0; i < 5; i++)
                 {
-                    Color Firecolor = Color.Black.RandLerpTo(Color.DarkRed);
+                    Color Firecolor = RandLerpColor(Color.Black, Color.DarkRed);
                     new Fire(Projectile.Center, Vector2.UnitX.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0.2f, 1.2f) * 4, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.3f).SpawnToPriorityNonPreMult();
                 }
             }

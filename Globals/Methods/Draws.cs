@@ -70,9 +70,13 @@ namespace HJScarletRework.Globals.Methods
                 });
             }
         }
-        public static Vector2 ScreenSize()
+        public static Vector2 GetScreenSize
         {
-            return new Vector2(Main.screenWidth, Main.screenHeight);
+            get
+            {
+                return new Vector2(Main.screenWidth, Main.screenHeight);
+            }
         }
+        public static Color ToAddColor(this Color color, byte alphaValue = 0) => color with { A = alphaValue };
     }
 }

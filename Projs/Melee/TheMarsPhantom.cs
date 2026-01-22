@@ -78,19 +78,19 @@ namespace HJScarletRework.Projs.Melee
                 dir2.X /= 3.6f;
                 dir2 = dir2.RotatedBy(Projectile.velocity.ToRotation());
                 Vector2 pos = Projectile.Center + dir * 12f + dir2 * 18f;
-                ShinyOrbParticle shinyOrbParticle = new ShinyOrbParticle(pos, dir2 * 1f, Color.DeepSkyBlue.RandLerpTo(Color.White), 40, 0.3f * (3.5f - Math.Abs(8f - i) / 2f), BlendStateID.Additive);
+                ShinyOrbParticle shinyOrbParticle = new ShinyOrbParticle(pos, dir2 * 1f, RandLerpColor(Color.DeepSkyBlue, Color.White), 40, 0.3f * (3.5f - Math.Abs(8f - i) / 2f), BlendStateID.Additive);
                 shinyOrbParticle.Spawn();
             }
         }
         public void GeneralParticle()
         {
-            Color fireColor = Color.DeepSkyBlue.RandLerpTo(Color.White);
+            Color fireColor = RandLerpColor(Color.DeepSkyBlue, Color.White);
             Vector2 firePos = Projectile.Center + Main.rand.NextVector2CircularEdge(3f, 3f);
             new StarShape(firePos, -Projectile.SafeDirByRot() * 1.2f, fireColor * Projectile.Opacity, 0.6f, 30).Spawn();
             int i = 0;
             while (i < 2)
             {
-                Color orbColor = Color.DeepSkyBlue.RandLerpTo(Color.White) * Projectile.Opacity;
+                Color orbColor = RandLerpColor(Color.DeepSkyBlue, Color.White) * Projectile.Opacity;
                 Vector2 orbPos = Projectile.Center + Main.rand.NextVector2CircularEdge(2f, 2f);
                 new TurbulenceShinyCube(orbPos, -Projectile.velocity / 8f, orbColor, 20, 0f, Projectile.Opacity, 0.24f, randPosMoveValue: 4).Spawn();
                 i++;
@@ -104,7 +104,7 @@ namespace HJScarletRework.Projs.Melee
             SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 1, PitchVariance = 0.2f }, Projectile.Center);
             AttackType = Style.Fade;
             Timer = 0;
-            if (TotalShootTime > 2)
+            if (TotalShootTime > 1)
                 return;
             //随机取当前射弹结束的位置+
             Vector2 projPos = target.Center + Vector2.UnitY.RotatedByRandom(TwoPi) * Main.rand.Next(150, 200);

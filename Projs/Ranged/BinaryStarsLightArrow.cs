@@ -29,7 +29,6 @@ namespace HJScarletRework.Projs.Ranged
             None,
             DoFlip
         }
-        private ref float TargetIndex => ref Projectile.ai[0];
         private ref float Accele => ref Projectile.ai[1];
         private bool CanSpawnDust
         {
@@ -105,7 +104,7 @@ namespace HJScarletRework.Projs.Ranged
         private void DoHomingToTarget()
         {
             //重新搜索一次单位
-            if (!Projectile.GetTargetSafe(out NPC target, (int)TargetIndex, true, 3600))
+            if (!Projectile.GetTargetSafe(out NPC target, true, 3600))
             {
                 Projectile.extraUpdates = 2;
                 return;

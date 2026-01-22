@@ -10,6 +10,7 @@ namespace HJScarletRework.Globals.Enums
     {
         Accessories,
         Armor,
+        Useable,
         Material,
         Misc
     }

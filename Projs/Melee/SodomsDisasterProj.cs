@@ -59,20 +59,20 @@ namespace HJScarletRework.Projs.Melee
             for (int k = 0; k < 2;k++)
             {
                 Vector2 starShapePos = Projectile.Center + Main.rand.NextVector2CircularEdge(6f, 6f) - dir * Main.rand.NextFloat(0.9f, 1.2f);
-                Color drawColor = Color.Black.RandLerpTo(Color.DarkRed);
+                Color drawColor = RandLerpColor(Color.Black, Color.DarkRed);
                 new StarShape(starShapePos, dir * 2f, drawColor, 0.6f, 20).SpawnToPriorityNonPreMult();
             }
 
             for (int j = 0; j < 1; j++)
             {
-                Color Firecolor = Color.Red.RandLerpTo(Color.DarkRed);
-                new Fire(Projectile.Center + Main.rand.NextVector2Circular(8, 8), dir * Main.rand.NextFloat(1.2f, 2.3f), Firecolor, Main.rand.Next(20, 30), Main.rand.NextFloat(TwoPi), 1f, Main.rand.NextFloat(0.12f, 0.18f)).SpawnToNonPreMult();
+                Color Firecolor = RandLerpColor(Color.DarkRed, Color.Crimson);
+                new SmokeParticle(Projectile.Center + Main.rand.NextVector2Circular(4, 4), dir * Main.rand.NextFloat(2.4f, 3.6f), Firecolor, Main.rand.Next(30, 41), Main.rand.NextFloat(TwoPi), 1f, Main.rand.NextFloat(0.24f, 0.29f)).SpawnToNonPreMult();
             }
 
             Vector2 drawPos = Projectile.Center + dir * 30f;
             for (int i = 0;i< 2;i++)
             {
-                new ShinyOrbParticle(drawPos + Main.rand.NextVector2CircularEdge(4f, 4f), dir * Main.rand.NextFloat(2.4f, 3.6f), Color.DarkRed.RandLerpTo(Color.Red), 20, 0.46f).Spawn();
+                new ShinyOrbParticle(drawPos + Main.rand.NextVector2CircularEdge(4f, 4f), dir * Main.rand.NextFloat(2.4f, 3.6f), RandLerpColor(Color.DarkRed, Color.Red), 20, 0.43f).Spawn();
             }
         }
         public override bool PreKill(int timeLeft)
@@ -129,18 +129,22 @@ namespace HJScarletRework.Projs.Melee
 
         public void DrawTheTrail(Vector2 drawPos, Texture2D starShape)
         {
-            Vector2 offset = Projectile.SafeDirByRot() * 50f;
-            int length = 32;
+            Vector2 offset = Projectile.SafeDirByRot() +Projectile.SafeDirByRot() * 30f;
+            int length = Projectile.oldPos.Length;
             for (int i = 0; i < length; i++)
             {
-                float rads = (float)i / length;
-                Color drawColor = (Color.Lerp(Color.DarkRed, Color.Red, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
-                Color drawColor2 = (Color.Lerp(Color.OrangeRed, Color.DarkOrange, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
-                Vector2 scale = Projectile.scale * new Vector2(0.8f, 1.3f) * 0.94f;
-                SB.Draw(starShape, drawPos + offset - Projectile.SafeDirByRot() * 7.2f * i, null, drawColor, Projectile.rotation - PiOver2, starShape.Size() / 2, scale, 0, 0);
-                if (i > 30)
+                if (Projectile.oldPos[i].Equals(Vector2.Zero))
                     continue;
-                SB.Draw(starShape, drawPos + offset - Projectile.SafeDirByRot() * 7.2f * i, null, drawColor2, Projectile.rotation - PiOver2, starShape.Size() / 2, scale * 0.3f, 0, 0);
+                Vector2 thePos = drawPos + offset - Projectile.SafeDirByRot() * 5.2f * i;
+                drawPos = Projectile.oldPos[i] + Projectile.PosToCenter() + offset;
+                float rads = (float)i / length;
+                Color drawColor = (Color.Lerp(Color.DarkRed, Color.Red, rads)) * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
+                Color drawColor2 = (Color.Lerp(Color.White, Color.Crimson, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
+                Vector2 scale = Projectile.scale * new Vector2(0.8f, 2f);
+                SB.Draw(starShape, thePos, null, drawColor, Projectile.oldRot[i] - PiOver2, starShape.Size() / 2, scale, 0, 0);
+                if (i > 18)
+                    continue;
+                SB.Draw(starShape, thePos, null, drawColor2, Projectile.oldRot[i] - PiOver2, starShape.Size() / 2, scale * 0.4f, 0, 0);
             }
         }
     }

@@ -39,6 +39,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.localNPCHitCooldown = 60 * Projectile.extraUpdates;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
+            Projectile.noEnchantmentVisuals = true;
         }
         private float SearchTargetDistance = 600f;
         private int TotalTargetHitTime = 3;
@@ -73,7 +74,7 @@ namespace HJScarletRework.Projs.Melee
             Vector2 speed = Projectile.SafeDir() * 0.8f;
             for (int k = 0; k < 2; k++)
             {
-                Color waterColor = Color.DeepSkyBlue.RandLerpTo(Color.SkyBlue);
+                Color waterColor = RandLerpColor(Color.DeepSkyBlue, Color.SkyBlue);
                 Vector2 veloffset = Projectile.velocity / 2 * k;
                 Vector2 spawnPos = Projectile.Center + Main.rand.NextVector2Circular(3, 3) + veloffset;
                 if (offset > 0.1f)
@@ -160,7 +161,7 @@ namespace HJScarletRework.Projs.Melee
             for (int i = 0; i < 15; i++)
             {
                 float rotOffset = (float)i / TwoPi; 
-                new TurbulenceShinyOrb(Projectile.Center + Projectile.SafeDir().RotatedBy(ToRadians(rotOffset)) * 4f, 0.8f, Color.LightCyan.RandLerpTo(Color.LightBlue), 40, 0.1f, Projectile.velocity.ToRandVelocity(ToRadians(10f)).ToRotation()).SpawnToNonPreMult();
+                new TurbulenceShinyOrb(Projectile.Center + Projectile.SafeDir().RotatedBy(ToRadians(rotOffset)) * 4f, 0.8f, RandLerpColor(Color.LightCyan, Color.LightBlue), 40, 0.1f, Projectile.velocity.ToRandVelocity(ToRadians(10f)).ToRotation()).SpawnToNonPreMult();
             }
         }
         private void SpawnWaterDust(Vector2 needVel)

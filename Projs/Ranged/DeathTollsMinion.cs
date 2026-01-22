@@ -89,7 +89,7 @@ namespace HJScarletRework.Projs.Ranged
                 return;
             //在这里绘制火焰粒子
             Vector2 fireVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero);
-            Color Firecolor = Color.Black.RandLerpTo(Color.DarkViolet);
+            Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
             new Fire(Projectile.Center, fireVelocity * 4.5f, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.25f).SpawnToPriorityNonPreMult(); 
         }
         private void ShootLaserIfNeed()

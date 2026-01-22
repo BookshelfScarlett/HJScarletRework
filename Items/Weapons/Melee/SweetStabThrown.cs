@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -33,6 +34,8 @@ namespace HJScarletRework.Items.Weapons.Melee
     public abstract class ThrownSpearClass : ModItem, ILocalizedModType
     {
         public new string LocalizationCategory => "Weapons.Melee";
+        public override bool MeleePrefix() => true;
+        public override bool AllowPrefix(int pre) => true;
         public static AssetCategory TexturePath => AssetCategory.Weapon;
         public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/Item_{GetType().Name}";
         public override void SetDefaults()

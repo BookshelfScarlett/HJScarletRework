@@ -129,7 +129,7 @@ namespace HJScarletRework.Projs.Ranged
                 //两把锤子有属于自己的转角
                 //不会这里写成了一个终极史山吧？
                 float arcAngle = i * (PiOver2 + PiOver4 * 1.1f);
-                int echo = Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, spawnVelocity, ProjectileType<BinartStarsPhantom>(), Projectile.damage / 2, 0f, Owner.whoAmI, targetIndex, 0f, arcAngle);
+                int echo = Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, spawnVelocity, ProjectileType<BinaryStarsPhantom>(), Projectile.damage / 2, 0f, Owner.whoAmI, targetIndex, 0f, arcAngle);
                 Main.projectile[echo].HJScarlet().FocusStrike = true;
             }
         }
@@ -158,7 +158,7 @@ namespace HJScarletRework.Projs.Ranged
             }
             //生成一点星云射线。
             Projectile.netUpdate = true;
-            BinartStarsPhantom.SpawnNebulaShot(Owner, Projectile, target, 2, false);
+            BinaryStarsPhantom.SpawnNebulaShot(Owner, Projectile, target, 2, false);
         }
         private void PrettySpark(int hitDamage)
         {

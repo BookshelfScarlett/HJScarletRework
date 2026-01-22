@@ -54,7 +54,7 @@ namespace HJScarletRework.Projs.Melee
             if (!Ishit)
             {
                 for (int j = 0; j < 2; j++)
-                    new TurbulenceShinyOrb(Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), 0.5f, Color.Gold.RandLerpTo(Color.PaleGoldenrod), 40, 0.1f * Projectile.Opacity, Projectile.rotation).SpawnToNonPreMult();
+                    new TurbulenceShinyOrb(Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), 0.5f, RandLerpColor(Color.Gold, Color.PaleGoldenrod), 40, 0.1f * Projectile.Opacity, Projectile.rotation).SpawnToNonPreMult();
             }
             else
             {
@@ -62,7 +62,7 @@ namespace HJScarletRework.Projs.Melee
                 for (int i = 0; i < 3; i++)
                 {
                     Vector2 mountedPos = Projectile.Center + dir * 60f;
-                    new TurbulenceShinyOrb(mountedPos - dir * i + Main.rand.NextVector2Circular(10f, 10f), 0.5f, Color.Gold.RandLerpTo(Color.PaleGoldenrod), (int)((float)40 * Projectile.Opacity), 0.1f * Projectile.Opacity, Projectile.rotation).SpawnToNonPreMult();
+                    new TurbulenceShinyOrb(mountedPos - dir * i + Main.rand.NextVector2Circular(10f, 10f), 0.5f, RandLerpColor(Color.Gold, Color.PaleGoldenrod), (int)((float)40 * Projectile.Opacity), 0.1f * Projectile.Opacity, Projectile.rotation).SpawnToNonPreMult();
                 }
             }
         }
@@ -143,7 +143,7 @@ namespace HJScarletRework.Projs.Melee
                 float val = (1 - i / counts);
                 Color lerpColor = Color.Lerp(Color.LightGoldenrodYellow, Color.LightYellow, Clamp(val, 0, 1)) with { A = 50 } * 0.9f;
                 Vector2 pos = Vector2.UnitY.RotatedBy(ToRadians(360 / counts * i));
-                new HRShinyOrbMedium(target.Center + pos * 150f, Color.Gold.RandLerpTo(Color.White), 60, 0.15f, 0).Spawn();
+                new HRShinyOrbMedium(target.Center + pos * 150f, RandLerpColor(Color.Gold, Color.White), 60, 0.15f, 0).Spawn();
             }
             //准备依据时间的不同给予增益
             Owner.HJScarlet().FlybackHitBuffTimer = 180;

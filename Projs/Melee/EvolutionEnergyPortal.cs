@@ -71,7 +71,7 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 dir = -Vector2.UnitY.RotatedBy(ToRadians(360 / count * i));
                 Vector2 vel =  dir * 1.05f;
                 //new ShinyOrbParticle(Projectile.Center + dir * 1.2f, vel, Color.DarkGreen.RandLerpTo(Color.PaleGreen), 40, 0.65f, glowCenter: false).SpawnToPriority();
-                new TurbulenceShinyOrb(Projectile.Center + dir * 1.2f, 1.2f, Color.DarkGreen.RandLerpTo(Color.PaleGreen), 40, 0.12f, dir.ToRotation()).SpawnToPriority();
+                new TurbulenceShinyOrb(Projectile.Center + dir * 1.2f, 1.2f, RandLerpColor(Color.DarkGreen, Color.PaleGreen), 40, 0.12f, dir.ToRotation()).SpawnToPriority();
             }
         }
 

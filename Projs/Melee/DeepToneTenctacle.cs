@@ -127,7 +127,7 @@ namespace HJScarletRework.Projs.Melee
                     Vector2 vel = Projectile.velocity * 0.1f;
                     vel -= Projectile.velocity * (1.4f - Projectile.scale);
                     float scale = 0.7f + Projectile.scale * 0.75f;
-                    Color drawColor = Color.DarkOliveGreen.RandLerpTo(Color.DarkSeaGreen);
+                    Color drawColor = RandLerpColor(Color.DarkOliveGreen, Color.DarkSeaGreen);
                     scaleLoopCheck++;
                     new ShinyOrbParticle(spawnPos, vel, drawColor, (int)(60 * Projectile.scale), scale * 0.24f, glowCenter: false).Spawn();
                 }

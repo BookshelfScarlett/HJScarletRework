@@ -102,3 +102,8 @@ TheMars: {
 	DisplayName: The Mars
 	Tooltip: ""
 }
+
+IceSpear: {
+	DisplayName: Ice Spear
+	Tooltip: ""
+}

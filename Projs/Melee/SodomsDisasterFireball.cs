@@ -64,16 +64,16 @@ namespace HJScarletRework.Projs.Melee
             for (int k = 0; k < 1; k++)
             {
                 Vector2 starShapePos = basePos + Main.rand.NextVector2CircularEdge(3f, 3f);
-                Color drawColor = Color.Red.RandLerpTo(Color.DarkRed);
+                Color drawColor = RandLerpColor(Color.Red, Color.DarkRed);
                 new StarShape(starShapePos, dir * -2.4f, drawColor, 0.6f, 15, glowScale: 0.68f).SpawnToPriorityNonPreMult();
             }
 
-            Color Firecolor = Color.DarkGray.RandLerpTo(Color.DarkRed);
+            Color Firecolor = RandLerpColor(Color.DarkGray, Color.DarkRed);
             new Fire(basePos + Main.rand.NextVector2Circular(3, 3), dir * -Main.rand.NextFloat(1.2f, 2.3f), Firecolor, Main.rand.Next(15, 20), Main.rand.NextFloat(TwoPi), 1f, Main.rand.NextFloat(0.1f, 0.14f)).SpawnToNonPreMult();
 
             for (int i = 0; i < 1; i++)
             {
-                new ShinyOrbParticle(basePos + Main.rand.NextVector2CircularEdge(3f, 3f), dir * -Main.rand.NextFloat(2.4f, 3.6f), Color.DarkRed.RandLerpTo(Color.Red), 15, 0.5f).Spawn();
+                new ShinyOrbParticle(basePos + Main.rand.NextVector2CircularEdge(3f, 3f), dir * -Main.rand.NextFloat(2.4f, 3.6f), RandLerpColor(Color.DarkRed, Color.Red), 15, 0.5f).Spawn();
             }
         }
 
@@ -85,14 +85,14 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 dir = Projectile.SafeDirByRot();
             for (int i = 0; i < 5; i++)
             {
-                Color Firecolor = Color.Black.RandLerpTo(Color.DarkRed);
-                new Fire(Projectile.Center, Vector2.UnitX.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0.2f, 1.2f) * 3, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.24f).SpawnToPriorityNonPreMult();
+                Color Firecolor = RandLerpColor(Color.Black, Color.DarkRed);
+                new SmokeParticle(Projectile.Center, RandVelTwoPi(0.2f, 1.2f) * 3, Firecolor, 40, RandRotTwoPi, 1f, 0.30f).SpawnToPriorityNonPreMult();
             }
             for (int i = 0; i < 10; i++)
             {
                 Vector2 spawnPos = Projectile.Center + dir * -5f + Main.rand.NextVector2CircularEdge(5f, 5f);
-                Vector2 velDir = dir.ToRandDirection(ToRadians(15)) * Main.rand.NextFloat(3.2f, 6.2f);
-                new ShinyOrbParticle(spawnPos, velDir, Color.Red.RandLerpTo(Color.DarkRed), 40, 0.8f).Spawn();
+                Vector2 velDir = dir.ToRandVelocity(ToRadians(15)) * Main.rand.NextFloat(3.2f, 6.2f);
+                new ShinyOrbParticle(spawnPos, velDir, RandLerpColor(Color.Red, Color.DarkRed), 40, 0.8f).Spawn();
                 new ShinyOrbParticle(spawnPos, velDir, Color.White, 40, 0.4f).Spawn();
             }
 
@@ -112,8 +112,8 @@ namespace HJScarletRework.Projs.Melee
                 Color color = Color.Lerp(Color.Red, Color.DarkRed, 1 - radius) * radius;
                 Vector2 scale = Projectile.scale * new Vector2(0.8f * (radius), 1.3f) * 0.9f;
                 Vector2 thedrawPos = Projectile.oldPos[i] + Projectile.PosToCenter();
-                SB.Draw(sharpTear, thedrawPos, null, color with { A = 0 }, Projectile.oldRot[i] + PiOver2, sharpTear.Size() / 2, scale, 0, 0);
-                SB.Draw(sharpTear, thedrawPos, null, Color.White with { A = 0 }, Projectile.oldRot[i] + PiOver2, sharpTear.Size() / 2, scale * 0.4f, 0, 0);
+                SB.Draw(sharpTear, thedrawPos, null, color, Projectile.oldRot[i] + PiOver2, sharpTear.Size() / 2, scale, 0, 0);
+                SB.Draw(sharpTear, thedrawPos, null, Color.White with { A = 0 }, Projectile.oldRot[i] + PiOver2, sharpTear.Size() / 2, scale * 0.6f, 0, 0);
             }
             return false;
         }

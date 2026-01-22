@@ -70,7 +70,7 @@ namespace HJScarletRework.Projs.Ranged
             if (Owner.HasProj<DeathTollsMinion>())
             {
                 Vector2 fireVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero);
-                Color Firecolor = Color.Black.RandLerpTo(Color.DarkViolet);
+                Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
                 new Fire(Projectile.Center + Main.rand.NextVector2Circular(8,8), fireVelocity * 4.5f, Firecolor, Main.rand.Next(60,90), Main.rand.NextFloat(TwoPi), 1f, Main.rand.NextFloat(0.20f,0.25f)).SpawnToPriorityNonPreMult();
             }
         }
@@ -193,10 +193,10 @@ namespace HJScarletRework.Projs.Ranged
             if (Stealth && Main.rand.NextBool(2) && AttackType == DoType.IsStealth)
                 return;
             Vector2 spawnPos = Projectile.Center + Main.rand.NextVector2Circular(11, 11);
-            Color Firecolor = Color.Purple.RandLerpTo(Color.DarkViolet);
+            Color Firecolor = RandLerpColor(Color.Purple, Color.DarkViolet);
             new TurbulenceShinyOrb(spawnPos, 0.8f, Firecolor, 40, 0.32f, Projectile.velocity.SafeNormalize(Vector2.UnitX).ToRotation()).Spawn();
             bool drawBlack = Main.rand.NextBool();
-            Color glowColor = drawBlack ? Color.Black : Color.Violet.RandLerpTo(Color.DarkViolet);
+            Color glowColor = drawBlack ? Color.Black : RandLerpColor(Color.Violet, Color.DarkViolet);
             Vector2 glowDustVelocity = Projectile.velocity.SafeNormalize(Vector2.UnitX).RotatedBy(Main.rand.NextFloat(-PiOver4 / 2f, PiOver4 / 2f))* 4f;
             new ShinyOrbParticle(spawnPos, glowDustVelocity, glowColor, 40, 0.8f, drawBlack ? BlendStateID.Alpha : BlendStateID.Additive).Spawn();
         }
