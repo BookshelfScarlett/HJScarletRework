@@ -104,3 +104,13 @@ SacarbWings: {
 	// DisplayName: Sacarb Wings
 	// Tooltip: ""
 }
+
+SakurabaEmma: {
+	DisplayName: 异世樱花
+	Tooltip:
+		'''
+		好奇怪的樱花
+		佩戴后是不是还会有什么意料之外的效果……
+		-支援者物品-
+		'''
+}

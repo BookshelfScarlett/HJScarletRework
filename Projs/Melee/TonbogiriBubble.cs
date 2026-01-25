@@ -113,7 +113,7 @@ namespace HJScarletRework.Projs.Melee
             //处死时生成点粒子
             for (int i = 0;i < 10;i++)
             {
-                new TurbulenceShinyOrb(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), 0.24f, RandLerpColor(Color.DarkViolet, Color.Pink), 40, 0.1f, Main.rand.NextFloat(TwoPi)).Spawn();
+                new TurbulenceGlowOrb(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), 0.24f, RandLerpColor(Color.DarkViolet, Color.Pink), 40, 0.1f, Main.rand.NextFloat(TwoPi)).Spawn();
             }
             return base.PreKill(timeLeft);
         }

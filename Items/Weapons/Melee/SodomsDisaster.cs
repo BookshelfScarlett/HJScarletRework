@@ -1,8 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Melee;
+using HJScarletRework.Rarity;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -15,13 +17,23 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.width = Item.height = 50;
             Item.damage = 75;
             Item.useTime = Item.useAnimation = 24;
-            Item.rare = ItemRarityID.Red;
+            Item.rare = RarityType<DisasterRarity>();
             Item.shootSpeed = 14;
             Item.shoot = ProjectileType<SodomsDisasterProj>();
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = HJScarletSounds.SodomsDisaster_Toss with { MaxInstances = 0, Pitch= 0.21f, Volume = 0.74f};
+            Item.HJScarlet().CritsDamageBonus = 0.12f + 0.28f * HJScarletMethods.HasFuckingCalamity.ToInt();
+        }
+        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        {
+            if(line.Mod == "Terraria" && line.Name =="ItemName")
+            {
+                DisasterRarity.DrawCustomTooltipLine(line);
+                return false;
+            }
+            return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override Color MainTooltipColor => Color.Crimson;
         public override void AddRecipes()

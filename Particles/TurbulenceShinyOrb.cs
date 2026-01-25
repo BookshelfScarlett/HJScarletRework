@@ -17,7 +17,7 @@ namespace HJScarletRework.Particles
         public float TurBulenceDirection = 0f;
         public bool DrawGlowCenter;
         public float GlowCenterMult;
-        public TurbulenceShinyOrb(Vector2 position, float speed, Color color, int lifetime, float scale, float direction, bool drawGlowCenter = false, float glowCenterMult = 0.5f)
+        public TurbulenceShinyOrb(Vector2 position, float speed, Color color, int lifetime, float scale, float direction)
         {
             Position = position;
             Speed = speed;
@@ -26,7 +26,19 @@ namespace HJScarletRework.Particles
             Scale = scale;
             BeginScale = scale;
             TurBulenceDirection = direction;
-            DrawGlowCenter = drawGlowCenter;
+            DrawGlowCenter = false;
+            GlowCenterMult = 0f;
+        }
+        public TurbulenceShinyOrb(Vector2 position, float speed, Color color, int lifetime, float scale, float direction, float glowCenterMult)
+        {
+            Position = position;
+            Speed = speed;
+            DrawColor = color;
+            Lifetime = lifetime;
+            Scale = scale;
+            BeginScale = scale;
+            TurBulenceDirection = direction;
+            DrawGlowCenter = true;
             GlowCenterMult = glowCenterMult;
         }
         public override void OnSpawn()
@@ -49,10 +61,10 @@ namespace HJScarletRework.Particles
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Texture2D texture = HJScarletTexture.Particle_HRShinyOrbSmall.Value;
+            Texture2D texture = HJScarletTexture.Particle_ShinyOrb.Value;
             spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor * Opacity, Rotation, texture.Size() / 2, Scale, SpriteEffects.None, 0);
             if (DrawGlowCenter)
-                spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor * Opacity, Rotation, texture.Size() / 2, Scale * GlowCenterMult, SpriteEffects.None, 0);
+                spriteBatch.Draw(texture, Position - Main.screenPosition, null, Color.White * Opacity, Rotation, texture.Size() / 2, GlowCenterMult, SpriteEffects.None, 0);
 
         }
     }

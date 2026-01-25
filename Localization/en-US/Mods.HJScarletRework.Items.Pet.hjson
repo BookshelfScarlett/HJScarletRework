@@ -1,0 +1,24 @@
+WhaleItem: {
+	DisplayName: Whale Item
+	Tooltip: ""
+}
+
+NoneItem: {
+	DisplayName: None Item
+	Tooltip: ""
+}
+
+ShadowItem: {
+	DisplayName: Shadow Item
+	Tooltip: ""
+}
+
+SquidItem: {
+	DisplayName: Squid Item
+	Tooltip: ""
+}
+
+WatcherItem: {
+	DisplayName: Watcher Item
+	Tooltip: ""
+}

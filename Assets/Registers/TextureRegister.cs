@@ -42,6 +42,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Texture_Swirl3 { get; set; }
         public static Tex2DWithPath Texture_Swirl4 { get; set; }
         public static Tex2DWithPath Texture_Swirl5 { get; set; }
+        public static Tex2DWithPath Texture_RarityGlow { get; set; }
 
         public static Tex2DWithPath Specific_DialectBall { get; set; }
         public static Tex2DWithPath Specific_DialectCube { get; set; }
@@ -109,6 +110,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_Swirl3 = new Tex2DWithPath($"{Path_General}{nameof(Texture_Swirl3)}");
             Texture_Swirl4 = new Tex2DWithPath($"{Path_General}{nameof(Texture_Swirl4)}");
             Texture_Swirl5 = new Tex2DWithPath($"{Path_General}{nameof(Texture_Swirl5)}");
+            Texture_RarityGlow = new Tex2DWithPath($"{Path_General}{nameof(Texture_RarityGlow)}");
 
 
             Trail_ManaStreak = new Tex2DWithPath($"{Path_General}{nameof(Trail_ManaStreak)}");
@@ -163,6 +165,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_Swirl3 = null;
             Texture_Swirl4 = null;
             Texture_Swirl5 = null;
+            Texture_RarityGlow= null;
 
             Trail_ManaStreak = null;
             Trail_ParaLine = null;

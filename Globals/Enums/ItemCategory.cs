@@ -12,6 +12,7 @@ namespace HJScarletRework.Globals.Enums
         Armor,
         Useable,
         Material,
+        Pet,
         Misc
     }
 }

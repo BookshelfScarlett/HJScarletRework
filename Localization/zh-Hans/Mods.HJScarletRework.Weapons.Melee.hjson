@@ -214,3 +214,21 @@ IceSpear: {
 		在消失时追加两枚寒霜弹
 		'''
 }
+
+GalvanizedHandThrown: {
+	// DisplayName: Galvanized Hand Thrown
+	// Tooltip: ""
+}
+
+IceFireSpear: {
+	DisplayName: 冰与火之歌
+	Tooltip:
+		'''
+		无限穿透，掷出一定时间后消失
+		消失时，在玩家身后的位置追加多个追踪火球
+		追踪火球会强锁定距离最近的敌人或Boss单位，只有命中该敌人才会消失
+		掷出过程中命中敌人时生成寒霜传送门，释放可反弹墙体的穿透寒霜弹
+		寒霜弹若距离玩家过远，且没有发生过一次反弹，则会尝试返程至玩家，并为玩家提供治疗
+		"和而不同"
+		'''
+}

@@ -19,8 +19,7 @@
 	  </Reference>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Items\Pets\" />
-	  <Folder Include="Projs\Pets\" />
+	  <Folder Include="Assets\Sounds\SakurabaEmmaSounds\" />
 	</ItemGroup>
 
 	<!-- References -->

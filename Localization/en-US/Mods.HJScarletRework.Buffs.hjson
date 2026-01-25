@@ -7,3 +7,28 @@ RewardsofWarriorBuff: {
 	DisplayName: Rewardsof Warrior Buff
 	Description: Mods.HJScarletRework.Buffs.RewardsofWarriorBuff.Description
 }
+
+WhaleBuff: {
+	DisplayName: Whale Buff
+	Description: Mods.HJScarletRework.Buffs.WhaleBuff.Description
+}
+
+NoneBuff: {
+	DisplayName: None Buff
+	Description: Mods.HJScarletRework.Buffs.NoneBuff.Description
+}
+
+ShadowBuff: {
+	DisplayName: Shadow Buff
+	Description: Mods.HJScarletRework.Buffs.ShadowBuff.Description
+}
+
+SquidBuff: {
+	DisplayName: Squid Buff
+	Description: Mods.HJScarletRework.Buffs.SquidBuff.Description
+}
+
+WatcherBuff: {
+	DisplayName: Watcher Buff
+	Description: Mods.HJScarletRework.Buffs.WatcherBuff.Description
+}

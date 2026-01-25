@@ -44,7 +44,7 @@ namespace HJScarletRework.Projs.Melee
             Vector2 mountedPos = Projectile.Center + offset;
             Dust d = Dust.NewDustPerfect(mountedPos + Main.rand.NextVector2Circular(6f, 6f), DustID.IceTorch);
             d.noGravity = true;
-            new TurbulenceShinyOrb(mountedPos + Main.rand.NextVector2Circular(6f, 6f), 1.2f, RandLerpColor(Color.DeepSkyBlue, Color.Blue), 40, 0.1f, Projectile.SafeDir().ToRotation()).SpawnToPriority();
+            new TurbulenceGlowOrb(mountedPos + Main.rand.NextVector2Circular(6f, 6f), 1.2f, RandLerpColor(Color.DeepSkyBlue, Color.Blue), 40, 0.1f, Projectile.SafeDir().ToRotation()).SpawnToPriority();
 
         }
         public override bool OnTileCollide(Vector2 oldVelocity)

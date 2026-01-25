@@ -55,8 +55,8 @@ namespace HJScarletRework.Projs.Ranged
         {
             if (FirstFrameInit)
                 return;
-            new CrossGlow(Projectile.Center, Vector2.Zero, Color.Violet, 30, 1f, 0.4f).Spawn();
-            new CrossGlow(Projectile.Center, Vector2.Zero, Color.DarkViolet, 30, 1f, 0.4f).Spawn();
+            new CrossGlow(Projectile.Center, Color.Violet, 30, 1f, 0.4f).Spawn();
+            new CrossGlow(Projectile.Center, Color.DarkViolet, 30, 1f, 0.4f).Spawn();
             for (int i = 0; i < 10; i++)
             {
                 Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
@@ -75,8 +75,8 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnKill(int timeLeft)
         {
-            new CrossGlow(Projectile.Center, Vector2.Zero, Color.Violet, 30, 1f, 0.4f).Spawn();
-            new CrossGlow(Projectile.Center, Vector2.Zero, Color.DarkViolet, 30, 1f, 0.4f).Spawn();
+            new CrossGlow(Projectile.Center, Color.Violet, 30, 1f, 0.4f).Spawn();
+            new CrossGlow(Projectile.Center, Color.DarkViolet, 30, 1f, 0.4f).Spawn();
         }
     }
 }

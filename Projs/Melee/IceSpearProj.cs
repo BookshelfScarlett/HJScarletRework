@@ -1,7 +1,4 @@
-﻿using ContinentOfJourney.Items.ThrowerWeapons;
-using HJScarletRework.Core.ParticleSystem;
-using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.ParticleSystem;
+﻿using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
@@ -41,7 +38,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.noEnchantmentVisuals = true;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 60;
+            Projectile.localNPCHitCooldown = -1;
             Projectile.extraUpdates = 1;
             Projectile.Opacity = 0f;
             Projectile.timeLeft = 300;
@@ -53,6 +50,11 @@ namespace HJScarletRework.Projs.Melee
                 Speed = Projectile.velocity.Length();
                 Projectile.originalDamage = Projectile.damage;
                 Projectile.rotation = Projectile.velocity.ToRotation();
+                if (HJScarletMethods.HasFuckingCalamity)
+                {
+                    Projectile.localNPCHitCooldown = 30;
+                    Projectile.tileCollide = false;
+                }
             }
             //天塌下来了我也要用我的shinyorb和smoke
             Projectile.Opacity = Clamp(Projectile.Opacity, 0f, 1f);
@@ -148,8 +150,8 @@ namespace HJScarletRework.Projs.Melee
                     new SmokeParticle(pos, vel, RandLerpColor(Color.DeepSkyBlue, Color.Gray), 40, 0.5f, 1f, 0.14f).SpawnToPriorityNonPreMult();
                 }
             }
-            new CrossGlow(spawnPos + posOffset, Vector2.Zero, Color.SkyBlue, 40, 1f, 0.25f).Spawn();
-            new CrossGlow(spawnPos + posOffset, Vector2.Zero, Color.White, 40, 0.5f, 0.2f).Spawn();
+            new CrossGlow(spawnPos + posOffset, Color.SkyBlue, 40, 1f, 0.25f).Spawn();
+            new CrossGlow(spawnPos + posOffset, Color.White, 40, 0.5f, 0.2f).Spawn();
             for (int i = 0; i < 15; i++)
                 new SmokeParticle(posOffset + spawnPos.ToRandCirclePosEdge(4f), RandDirTwoPi * 1f, RandLerpColor(Color.DeepSkyBlue, Color.Gray), 40, RandRotTwoPi, 1f, 0.24f).SpawnToPriorityNonPreMult();
         }
@@ -177,7 +179,7 @@ namespace HJScarletRework.Projs.Melee
                 if (AttackType == Style.SpinAndFade)
                     continue;
                 float rads = (float)i / length;
-                Color lerpColor = Color.Lerp(Color.DeepSkyBlue, Color.Lerp(Color.SkyBlue, Color.AliceBlue, rads * 0.7f), rads).ToAddColor(100) * Clamp(Projectile.velocity.Length(), 0f, 1f) * 0.90f;
+                Color lerpColor = Color.Lerp(Color.DeepSkyBlue, Color.Lerp(Color.SkyBlue, Color.AliceBlue, rads * 0.7f), rads).ToAddColor(0) * Clamp(Projectile.velocity.Length(), 0f, 1f) * 0.50f;
                 SB.Draw(projTex, Projectile.oldPos[i] + Projectile.PosToCenter(), null, lerpColor, rot + PiOver4, ori, 1f, 0, 0);
             }
             for (int i = 0; i < 8; i++)

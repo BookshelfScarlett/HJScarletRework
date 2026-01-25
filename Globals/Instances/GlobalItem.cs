@@ -9,6 +9,7 @@ namespace HJScarletRework.Globals.Instances
     public class HJScarletGlobalItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
+        public float CritsDamageBonus = -1f;
         public override string IsArmorSet(Item head, Item body, Item legs)
         {
             return base.IsArmorSet(head, body, legs);

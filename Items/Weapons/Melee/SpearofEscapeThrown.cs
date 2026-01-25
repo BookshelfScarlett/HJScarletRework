@@ -1,11 +1,5 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Globals.Methods;
-using Steamworks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Melee

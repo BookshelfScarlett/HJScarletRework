@@ -1,0 +1,44 @@
+WhaleItem: {
+	DisplayName: 鲸埙
+	Tooltip:
+		'''
+		召唤死去的鲸鱼
+		“吹奏鲸鱼之声”
+		'''
+}
+
+NoneItem: {
+	DisplayName: 神秘学符号
+	Tooltip:
+		'''
+		召唤
+		“404 not found”
+		'''
+}
+
+ShadowItem: {
+	DisplayName: 缩小灯
+	Tooltip:
+		'''
+		召唤微缩过的暗影墙
+		“来自未来的道具，你使用它照向了深渊，发生了一些奇妙的事情”
+		'''
+}
+
+SquidItem: {
+	DisplayName: 迷你鱿鱼饵
+	Tooltip:
+		'''
+		召唤一只鱿鱼宝宝
+		“更适合鱿鱼宝宝体质”
+		'''
+}
+
+WatcherItem: {
+	DisplayName: 极视铃铛
+	Tooltip:
+		'''
+		召唤时间神的幼体
+		“铃声可以在时间长河中泛起涟漪”
+		'''
+}

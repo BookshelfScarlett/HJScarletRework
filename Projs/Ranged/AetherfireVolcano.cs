@@ -297,7 +297,6 @@ namespace HJScarletRework.Projs.Ranged
                     Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, cutSource, drawColor, 0f, ori, scale2, SpriteEffects.None, 0);
                 }
             }
-
         }
         //封装一个缩放进程方法
         private Vector2 GetScaleFromAI()

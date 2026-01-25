@@ -37,7 +37,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
-            if (!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame && !HJScarletMethods.OutOffScreen(Projectile.Center))
             {
                 int dustCount = 25;
                 for (int i = 0; i < dustCount; ++i)
@@ -54,8 +54,8 @@ namespace HJScarletRework.Projs.Melee
                     new ShinyOrbParticle(pos, vel, RandLerpColor(Color.Red, Color.DarkRed), 30, 1f).Spawn();
                     new ShinyOrbParticle(pos, vel, Color.White, 30, 0.4f).Spawn();
                 }
-                new CrossGlow(Projectile.Center, Vector2.Zero, Color.Black, 30, 1f, 0.4f).Spawn();
-                new CrossGlow(Projectile.Center, Vector2.Zero, Color.DarkRed, 30, 1f, 0.4f).Spawn();
+                new CrossGlow(Projectile.Center, Color.Black, 30, 1f, 0.4f).Spawn();
+                new CrossGlow(Projectile.Center, Color.DarkRed, 30, 1f, 0.4f).Spawn();
                 for (int i = 0; i < 5; i++)
                 {
                     Color Firecolor = RandLerpColor(Color.Black, Color.DarkRed);

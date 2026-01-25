@@ -37,132 +37,34 @@ namespace HJScarletRework.Globals.Players
         public int KingdomDefenseTime = 0;
         public int RewardLevel = 0;
         #endregion
+        #region Pets
+        public bool WhalePet = false;
+        public bool NonePet = false;
+        public bool ShadowPet = false;
+        public bool SquidPet = false;
+        public bool WatcherPet = false;
+        #endregion
         public override void ResetEffects()
         {
             CreationHatSet = false;
-        }
-        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
-        {
-            base.ModifyHitNPCWithItem(item, target, ref modifiers);
-        }
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if (CreationHatSet && modifiers.DamageType == DamageClass.Magic)
-            {
-                //将所有伤害直接设置为暴击类型，这里先过暴击情况
-                modifiers.SetCrit();
-                //而后开始依据当前的暴击率设置需要的暴击伤害
-                //首先将溢出的暴击概率等价转化
-                float baseCritsbuff = Math.Max(0f, GetWantedCrits<MagicDamageClass>());
-                //转化成功后，将值/2f，取暴击率的1/2（即20%-> 10%)
-                baseCritsbuff /= 2f;
-                //最后。直接将暴击伤害设置
-                modifiers.CritDamage += baseCritsbuff;
-            }
-        }
-        public float GetWantedCrits<Type>() where Type : DamageClass
-        {
-            return (Player.GetTotalCritChance<Type>() + 4f - 100f);
-        }
-        public override void PostUpdateMiscEffects()
-        {
-            UpdateTimer();
-            if(Player_RewardofKingdom && RewardofWarriorCounter > 0)
-            {
-                Player.statDefense += KingdomDefenseTime;
-            }
-            //归零针buff
-            if (FlybackHitBuffTimer > 0 && (Player.HeldItem.type == ItemType<FlybackHandThrown>() || ModLoader.HasMod(HJScarletMethods.CalamityMod)))
-            {
-                //白天上午与夜间前半夜：给予15%近战伤害加成/15防御力加成
-                if (HJScarletMethods.TerrariaCurrentHour <= 6)
-                {
-                    if (Main.dayTime)
-                        Player.GetDamage<MeleeDamageClass>() += 0.15f;
-                    else
-                        Player.statDefense += 15;
-                }
-                //白天下午与夜间后半夜：给予15近战速度加成/15%伤害减免
-                else
-                {
-                    if(Main.dayTime)
-                        Player.GetAttackSpeed<MeleeDamageClass>() += 0.15f;
-                    else
-                        Player.endurance += 0.15f;
-                }
-            }
+            UnloadPets();
         }
 
-        private void UpdateTimer()
+        private void UnloadPets()
         {
-            if (FlybackBuffTime > 0)
-                FlybackBuffTime--;
-            
-            if (FlybackBuffTime == 0)
-                CurrentFullFlyBackTime = 0;
-
-            if (RewardofWarriorCounter> 0)
-                RewardofWarriorCounter-= 0;
-
-            if (RewardofWarriorCounter == 0)
-                KingdomDefenseTime--;
-
-            if (KingdomDefenseTime < 0)
-                KingdomDefenseTime = 0;
-
-            if (FlybackHitBuffTimer > 0)
-                FlybackHitBuffTimer--;
+            WhalePet = false;
+            NonePet = false;
+            ShadowPet = false;
+            SquidPet = false;
+            WatcherPet = false;
         }
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            GlobalOnHitNPCWithSomething(target, hit, damageDone);
-        }
-        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            GlobalOnHitNPCWithSomething(target, hit, damageDone);
-        }
-        public void GlobalOnHitNPCWithSomething(NPC target,  NPC.HitInfo hit, int damageDone)
-        {
-            //帝国的荣耀相关buff都写在里面了
-            if (!target.friendly && target.lifeMax >= 5 && target.CanBeChasedBy() && Player_RewardofWarrior)
-            {
-                RewardofWarriorCounter = 180;
-                //给予5帧短暂的cd
-                if (RewardofWarriorHitCD == 0)
-                {
-                    RewardofWarriorHitCD = 5;
-                    RewardLevel += 1;
-                }
-                
-                if (RewardLevel > 30)
-                {
-                    if (!Player.HasBuff<RewardsofWarriorBuff>())
-                    {
-                        Player.AddBuff(BuffType<RewardsofWarriorBuff>(), 300);
-                        RewardLevel = 0;
-                    }
-                    else
-                    {
-                        RewardLevel = 30;
-                    }
-                }
-                //如果佩戴了上位饰品，在下方进行防御力递增
-                if (Player_RewardofKingdom)
-                {
-                    //这里的Counter必须得启用，每次过来都会刷新
-                    //顶多就是续一个180秒，持续攻击这一块
-                    if (KingdomDefenseTime < 30)
-                        KingdomDefenseTime += 1;
-                }
-                
-            }
 
-        }
         public override void UpdateDead()
         {
             FocusStrikeTime = 0;
             FlybackBuffTime = 0;
             CurrentFullFlyBackTime = 0;
+            UnloadPets();
         }
         public override void PostUpdate()
         {

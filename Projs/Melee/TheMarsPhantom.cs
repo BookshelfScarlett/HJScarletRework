@@ -104,7 +104,7 @@ namespace HJScarletRework.Projs.Melee
             SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 1, PitchVariance = 0.2f }, Projectile.Center);
             AttackType = Style.Fade;
             Timer = 0;
-            if (TotalShootTime > 1)
+            if (TotalShootTime > 2)
                 return;
             //随机取当前射弹结束的位置+
             Vector2 projPos = target.Center + Vector2.UnitY.RotatedByRandom(TwoPi) * Main.rand.Next(150, 200);

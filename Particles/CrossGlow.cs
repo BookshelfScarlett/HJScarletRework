@@ -13,20 +13,18 @@ namespace HJScarletRework.Particles
         public float BeginScale;
         public SpriteEffects se = SpriteEffects.None;
         public bool UseFadeIn = true;
-        public CrossGlow(Vector2 position, Vector2 velocity, Color color, int lifetime, float opacity, float scale)
+        public CrossGlow(Vector2 position, Color color, int lifetime, float opacity, float scale)
         {
             Position = position;
-            Velocity = velocity;
             DrawColor = color;
             Lifetime = lifetime;
             Opacity = opacity;
             Scale = scale;
             BeginScale = scale;
         }
-        public CrossGlow(Vector2 position, Vector2 velocity, Color color, int lifetime, float opacity, float scale, bool useFadeIn)
+        public CrossGlow(Vector2 position, Color color, int lifetime, float opacity, float scale, bool useFadeIn)
         {
             Position = position;
-            Velocity = velocity;
             DrawColor = color;
             Lifetime = lifetime;
             Opacity = opacity;

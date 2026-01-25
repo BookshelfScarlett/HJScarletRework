@@ -92,7 +92,7 @@ namespace HJScarletRework.Projs.Melee
                 for (int i = 0; i < 40; i++)
                 {
                     Vector2 pos = Projectile.Center + Main.rand.NextVector2Circular(40f, 40f);
-                    new TurbulenceShinyOrb(pos, 2f, RandLerpColor(Color.SkyBlue, Color.AliceBlue), 40, Main.rand.NextFloat(0.1f, 0.12f), Main.rand.NextFloat(TwoPi), true).Spawn();
+                    new TurbulenceGlowOrb(pos, 2f, RandLerpColor(Color.SkyBlue, Color.AliceBlue), 40, Main.rand.NextFloat(0.1f, 0.12f), Main.rand.NextFloat(TwoPi), true).Spawn();
                 }
             }
         }

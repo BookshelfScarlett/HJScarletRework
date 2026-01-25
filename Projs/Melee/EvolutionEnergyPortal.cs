@@ -62,8 +62,10 @@ namespace HJScarletRework.Projs.Melee
 
         private void DrawArrowSpawnDust()
         {
-            new CrossGlow(Projectile.Center, Vector2.Zero, Color.Green, 40, 1f, 0.2f).Spawn();
-            new CrossGlow(Projectile.Center, Vector2.Zero, Color.White, 40, 1f, 0.1f).Spawn();
+            if (HJScarletMethods.OutOffScreen(Projectile.Center))
+                return;
+            new CrossGlow(Projectile.Center, Color.Green, 40, 1f, 0.2f).Spawn();
+            new CrossGlow(Projectile.Center, Color.White, 40, 1f, 0.1f).Spawn();
             int count = 36;
             for (int i = 1; i <= count; i++)
             {
@@ -71,7 +73,7 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 dir = -Vector2.UnitY.RotatedBy(ToRadians(360 / count * i));
                 Vector2 vel =  dir * 1.05f;
                 //new ShinyOrbParticle(Projectile.Center + dir * 1.2f, vel, Color.DarkGreen.RandLerpTo(Color.PaleGreen), 40, 0.65f, glowCenter: false).SpawnToPriority();
-                new TurbulenceShinyOrb(Projectile.Center + dir * 1.2f, 1.2f, RandLerpColor(Color.DarkGreen, Color.PaleGreen), 40, 0.12f, dir.ToRotation()).SpawnToPriority();
+                new TurbulenceGlowOrb(Projectile.Center + dir * 1.2f, 1.2f, RandLerpColor(Color.DarkGreen, Color.PaleGreen), 40, 0.12f, dir.ToRotation()).SpawnToPriority();
             }
         }
 

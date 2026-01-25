@@ -4,6 +4,31 @@ HoneyRegenAlt: {
 }
 
 RewardsofWarriorBuff: {
-	DisplayName: �߸��ͽ�
-	Description: ����ǿ�������ٶ�
+	DisplayName: �߸��ͽ�
+	Description: ����ǿ�������ٶ�
+}
+
+WhaleBuff: {
+	DisplayName: 小小鲸鱼
+	Description: 一头已经死去的鲸鱼幼崽，祂还不足以接过死神的衣钵
+}
+
+NoneBuff: {
+	DisplayName: _
+	Description: _真的存在大和小的区别吗？但无论怎么样，祂现在追随着你
+}
+
+ShadowBuff: {
+	DisplayName: 微缩化暗影墙
+	Description: 他会注视着你，永远
+}
+
+SquidBuff: {
+	DisplayName: 小小鱿鱼
+	Description: 他在海底汉堡店兼职暑假工
+}
+
+WatcherBuff: {
+	DisplayName: 极视幼表
+	Description: 时间的无数同僚中最为幼小的一只
 }

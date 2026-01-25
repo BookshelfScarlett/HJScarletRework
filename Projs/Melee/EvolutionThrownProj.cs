@@ -34,7 +34,8 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            SpawnLeafs();
+            if (!HJScarletMethods.OutOffScreen(Projectile.Center))
+                SpawnLeafs();
             Timer++;
             //在这个过程中生成需要的材质球
             if (Timer % 15 == 0)

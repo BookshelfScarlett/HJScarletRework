@@ -43,6 +43,10 @@ Melee: {
 	SodomsDisasterBoom.DisplayName: Sodoms Disaster Boom
 	IceSpearEnergy.DisplayName: Ice Spear Energy
 	IceSpearProj.DisplayName: Ice Spear Proj
+	IceFireBloomFireball.DisplayName: Ice Fire Bloom Fireball
+	IceFireEnergy.DisplayName: Ice Fire Energy
+	IceFireFrostBoom.DisplayName: Ice Fire Frost Boom
+	IceFireSpearProj.DisplayName: Ice Fire Spear Proj
 }
 
 Typeless: {
@@ -72,4 +76,12 @@ Ranged: {
 	JudgementPunishStar.DisplayName: Judgement Punish Star
 	JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
 	BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
+}
+
+Pets: {
+	WhaleProj.DisplayName: Whale Proj
+	NoneProj.DisplayName: None Proj
+	ShadowProj.DisplayName: Shadow Proj
+	SquidProj.DisplayName: Squid Proj
+	WatcherProj.DisplayName: Watcher Proj
 }

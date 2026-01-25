@@ -80,7 +80,7 @@ namespace HJScarletRework.Projs.Melee
                 if (offset > 0.1f)
                     SpawnWaterDust(spawnPos);
                 new ShinyOrbParticle(spawnPos, speed, waterColor, 40, 0.32f * Main.rand.NextFloat(0.8f, 1.2f), glowCenterScale: 0.2f).Spawn();
-                new TurbulenceShinyOrb(spawnPos, 0.2f, waterColor, 40, 0.10f, Main.rand.NextFloat(TwoPi), false).Spawn();
+                new TurbulenceGlowOrb(spawnPos, 0.2f, waterColor, 40, 0.10f, Main.rand.NextFloat(TwoPi), false).Spawn();
             }
         }
         public void FirstBeamAI()
@@ -161,7 +161,7 @@ namespace HJScarletRework.Projs.Melee
             for (int i = 0; i < 15; i++)
             {
                 float rotOffset = (float)i / TwoPi; 
-                new TurbulenceShinyOrb(Projectile.Center + Projectile.SafeDir().RotatedBy(ToRadians(rotOffset)) * 4f, 0.8f, RandLerpColor(Color.LightCyan, Color.LightBlue), 40, 0.1f, Projectile.velocity.ToRandVelocity(ToRadians(10f)).ToRotation()).SpawnToNonPreMult();
+                new TurbulenceGlowOrb(Projectile.Center + Projectile.SafeDir().RotatedBy(ToRadians(rotOffset)) * 4f, 0.8f, RandLerpColor(Color.LightCyan, Color.LightBlue), 40, 0.1f, Projectile.velocity.ToRandVelocity(ToRadians(10f)).ToRotation()).SpawnToNonPreMult();
             }
         }
         private void SpawnWaterDust(Vector2 needVel)

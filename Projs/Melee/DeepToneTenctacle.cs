@@ -96,8 +96,8 @@ namespace HJScarletRework.Projs.Melee
 
         private void InitDust()
         {
-            new CrossGlow(Projectile.Center, Vector2.Zero, Color.DarkOliveGreen, 40, 1f, 0.15f).Spawn();
-            new ShinyOrbParticle(Projectile.Center, Vector2.Zero, Color.LightSeaGreen, 40, 0.8f).Spawn();
+            new CrossGlow(Projectile.Center, Color.DarkOliveGreen, 40, 1f, 0.15f).Spawn();
+            new ShinyOrbParticle(Projectile.Center, Vector2.Zero,Color.LightSeaGreen, 40, 0.8f).Spawn();
         }
 
         private void InitTenctacleSpeed()

@@ -194,7 +194,7 @@ namespace HJScarletRework.Projs.Ranged
                 return;
             Vector2 spawnPos = Projectile.Center + Main.rand.NextVector2Circular(11, 11);
             Color Firecolor = RandLerpColor(Color.Purple, Color.DarkViolet);
-            new TurbulenceShinyOrb(spawnPos, 0.8f, Firecolor, 40, 0.32f, Projectile.velocity.SafeNormalize(Vector2.UnitX).ToRotation()).Spawn();
+            new TurbulenceGlowOrb(spawnPos, 0.8f, Firecolor, 40, 0.32f, Projectile.velocity.SafeNormalize(Vector2.UnitX).ToRotation()).Spawn();
             bool drawBlack = Main.rand.NextBool();
             Color glowColor = drawBlack ? Color.Black : RandLerpColor(Color.Violet, Color.DarkViolet);
             Vector2 glowDustVelocity = Projectile.velocity.SafeNormalize(Vector2.UnitX).RotatedBy(Main.rand.NextFloat(-PiOver4 / 2f, PiOver4 / 2f))* 4f;

@@ -28,7 +28,7 @@ namespace HJScarletRework.Items
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 ownerMW = player.LocalMouseWorld();
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<SodomsDisasterFireball>(), damage, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, ownerMW, velocity, ProjectileType<IceFireFrostBoom>(), damage, knockback, player.whoAmI);
             //添加需要的攻击单位
             return false;
         }

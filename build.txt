@@ -1,4 +1,4 @@
-displayName = 旅人归途：空想之歌 Homeward Journey Scarlet
+displayName = 空想归途 Lostbelt Journey Scarlet
 modReferences = ContinentOfJourney
 author = ScarletShelf
 version = 0.1

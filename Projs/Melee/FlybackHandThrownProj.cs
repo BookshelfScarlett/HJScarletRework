@@ -54,7 +54,7 @@ namespace HJScarletRework.Projs.Melee
             if (!Ishit)
             {
                 for (int j = 0; j < 2; j++)
-                    new TurbulenceShinyOrb(Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), 0.5f, RandLerpColor(Color.Gold, Color.PaleGoldenrod), 40, 0.1f * Projectile.Opacity, Projectile.rotation).SpawnToNonPreMult();
+                    new TurbulenceGlowOrb(Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), 0.5f, RandLerpColor(Color.Gold, Color.PaleGoldenrod), 40, 0.1f * Projectile.Opacity, Projectile.rotation).SpawnToNonPreMult();
             }
             else
             {
@@ -62,7 +62,7 @@ namespace HJScarletRework.Projs.Melee
                 for (int i = 0; i < 3; i++)
                 {
                     Vector2 mountedPos = Projectile.Center + dir * 60f;
-                    new TurbulenceShinyOrb(mountedPos - dir * i + Main.rand.NextVector2Circular(10f, 10f), 0.5f, RandLerpColor(Color.Gold, Color.PaleGoldenrod), (int)((float)40 * Projectile.Opacity), 0.1f * Projectile.Opacity, Projectile.rotation).SpawnToNonPreMult();
+                    new TurbulenceGlowOrb(mountedPos - dir * i + Main.rand.NextVector2Circular(10f, 10f), 0.5f, RandLerpColor(Color.Gold, Color.PaleGoldenrod), (int)((float)40 * Projectile.Opacity), 0.1f * Projectile.Opacity, Projectile.rotation).SpawnToNonPreMult();
                 }
             }
         }

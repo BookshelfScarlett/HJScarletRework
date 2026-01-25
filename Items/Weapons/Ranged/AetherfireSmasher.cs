@@ -2,6 +2,7 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Ranged;
+using HJScarletRework.Rarity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -26,7 +27,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.useTime = 8;
             Item.useAnimation = 8;
             Item.shootSpeed = 18f;
-            Item.rare = ItemRarityID.Yellow;
+            Item.rare = RarityType<DisasterRarity>();
         }
         public override float StealthDamageMultipler => 0.25f;
         private void DrawSpecialColor(DrawableTooltipLine line, Color drawColor, string colorValue)

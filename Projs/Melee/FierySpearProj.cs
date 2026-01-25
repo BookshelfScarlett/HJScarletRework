@@ -48,7 +48,7 @@ namespace HJScarletRework.Projs.Melee
                 int i = 0;
                 while (i < 2)
                 {
-                    new TurbulenceShinyOrb(drawPos.ToRandCirclePosEdge(12f), 0.8f, RandLerpColor(Color.OrangeRed, Color.Orange), 40, 0.12f, RandRotTwoPi).Spawn();
+                    new TurbulenceGlowOrb(drawPos.ToRandCirclePosEdge(12f), 0.8f, RandLerpColor(Color.OrangeRed, Color.Orange), 40, 0.12f, RandRotTwoPi).Spawn();
                     i++;
                 }
             }

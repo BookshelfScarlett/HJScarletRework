@@ -15,6 +15,7 @@ namespace HJScarletRework.Globals.Methods
         public static HJScarletPlayer HJScarlet(this Player player) => player.GetModPlayer<HJScarletPlayer>();
         public static HJScarletGlobalProjs HJScarlet(this Projectile proj) => proj.GetGlobalProjectile<HJScarletGlobalProjs>();
         public static HJScarletGlobalNPCs HJScarlet(this NPC npc) => npc.GetGlobalNPC<HJScarletGlobalNPCs>();
+        public static HJScarletGlobalItem HJScarlet(this Item item) => item.GetGlobalItem<HJScarletGlobalItem>();
         public static bool HasProj<T>(this Player player) where T : ModProjectile => HasProj(player, ProjectileType<T>());
         public static bool HasProj(this Player player, int projID) => player.ownedProjectileCounts[projID] > 0;
 

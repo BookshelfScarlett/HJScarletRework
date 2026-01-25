@@ -60,7 +60,7 @@ namespace HJScarletRework.Projs.Melee
             Vector2 mountedPos = Projectile.Center + offset;
             Dust d = Dust.NewDustPerfect(mountedPos + Main.rand.NextVector2Circular(6f, 6f), DustID.GreenTorch);
             d.noGravity = true;
-            new TurbulenceShinyOrb(mountedPos + Main.rand.NextVector2Circular(6f, 6f), 1.2f, RandLerpColor(Color.DarkOliveGreen, Color.DarkSeaGreen), 40, 0.1f, Projectile.SafeDir().ToRotation()).SpawnToPriority();
+            new TurbulenceGlowOrb(mountedPos + Main.rand.NextVector2Circular(6f, 6f), 1.2f, RandLerpColor(Color.DarkOliveGreen, Color.DarkSeaGreen), 40, 0.1f, Projectile.SafeDir().ToRotation()).SpawnToPriority();
             //除非超出这个最大点位数，不然添加传送门了
         }
         public void DoStuck()

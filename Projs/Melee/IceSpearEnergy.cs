@@ -72,7 +72,7 @@ namespace HJScarletRework.Projs.Melee
         {
             SoundEngine.PlaySound(SoundID.Item48 with { MaxInstances = 1, Volume = 0.754f}, Projectile.Center);
             for (int i = 0; i < 10; i++)
-                new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(2f), 0.8f, RandLerpColor(Color.SkyBlue, Color.AliceBlue), 40, Main.rand.NextFloat(0.1f, 0.12f), RandRotTwoPi, true).Spawn();
+                new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(2f), 0.8f, RandLerpColor(Color.SkyBlue, Color.AliceBlue), 40, Main.rand.NextFloat(0.1f, 0.12f), RandRotTwoPi, true).Spawn();
             for (int i = 0; i < 5; i++)
                 new SmokeParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(1.2f), RandLerpColor(Color.DeepSkyBlue, Color.Gray), 20, RandRotTwoPi, 1f, 0.2f).Spawn();
         }

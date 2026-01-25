@@ -44,7 +44,7 @@ namespace HJScarletRework.Projs.Melee
             //挥发性粒子
             Vector2 spawnPos = Projectile.Center + Main.rand.NextVector2Circular(11, 11) - Projectile.rotation.ToRotationVector2() * 20f;
             Color Firecolor = Color.Lerp(Color.Gold, Color.Yellow, Main.rand.NextFloat(0, 1));
-            new TurbulenceShinyOrb(spawnPos, 1f, Firecolor, 40, 0.20f * Projectile.Opacity, Main.rand.NextFloat(TwoPi)).Spawn();
+            new TurbulenceGlowOrb(spawnPos, 1f, Firecolor, 40, 0.20f * Projectile.Opacity, Main.rand.NextFloat(TwoPi)).Spawn();
 
         }
         public override bool PreDraw(ref Color lightColor)

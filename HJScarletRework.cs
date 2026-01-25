@@ -14,12 +14,14 @@ namespace HJScarletRework
         public static Mod CrossMod_Calamity;
         public static Mod CrossMod_HomewardJourney;
         public static Mod CrossMod_UCA;
+        public static Mod CrossMod_FuckEmma = null;
         public override void Load()
         {
             Instance = this;
             ModLoader.TryGetMod(HJScarletMethods.CalamityMod, out CrossMod_Calamity);
             ModLoader.TryGetMod(HJScarletMethods.HomewardJourney, out CrossMod_HomewardJourney);
             ModLoader.TryGetMod(HJScarletMethods.HomewardJourney, out CrossMod_UCA);
+            ModLoader.TryGetMod("Sounds_SakurabaEma", out CrossMod_FuckEmma);
         }
         public override void Unload()
         {
@@ -27,6 +29,7 @@ namespace HJScarletRework
             CrossMod_Calamity = null;
             CrossMod_HomewardJourney = null;
             CrossMod_Calamity = null;
+            CrossMod_FuckEmma = null;
         }
     }
 }
