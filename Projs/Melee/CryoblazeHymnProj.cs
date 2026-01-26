@@ -124,7 +124,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 for (int j = 0; j < 2; j++)
                 {
-                    Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(4f) + Projectile.SafeDir() * -60f * Projectile.SafeDir() *i *5f;
+                    Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(4f) + Projectile.SafeDir() * -60f + Projectile.SafeDir() *i *5f;
                     new TurbulenceShinyOrb(spawnPos, RandZeroToOne, RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), 30, Main.rand.NextFloat(0.24f, 0.36f), RandRotTwoPi).Spawn();
                     new TurbulenceShinyOrb(spawnPos, RandZeroToOne, RandLerpColor(Color.Orange, Color.OrangeRed), 30, Main.rand.NextFloat(0.24f, 0.36f), RandRotTwoPi).Spawn();
                 }

@@ -75,7 +75,7 @@ namespace HJScarletRework.Projs.Melee
         private void DoAttack()
         {
             Timer++;
-            if(Timer > 40f)
+            if(Timer > 28f)
             {
                 //回弹
                 AttackType = Style.Bounce;
