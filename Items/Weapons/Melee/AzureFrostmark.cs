@@ -4,7 +4,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
-    public class IceSpear : ThrownSpearClass
+    public class AzureFrostmark : ThrownSpearClass
     {
         public override void ExSD()
         {
@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useTime = Item.useAnimation = 40;
             Item.knockBack = 8;
             Item.shootSpeed = 17f;
-            Item.shoot = ProjectileType<IceSpearProj>();
+            Item.shoot = ProjectileType<AzureFrostmarkProj>();
             Item.UseSound = SoundID.Item1;
         }
         public override Color MainTooltipColor => Color.RoyalBlue;

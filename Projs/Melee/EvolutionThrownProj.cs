@@ -114,7 +114,7 @@ namespace HJScarletRework.Projs.Melee
                     continue;
                 float rads = (float)i / length;
                 Color drawColor = (Color.Lerp(Color.Green, Color.ForestGreen, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
-                Main.spriteBatch.Draw(star, Projectile.Center -Main.screenPosition + Projectile.SafeDir() * 60f - Projectile.velocity * 0.7f * i, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.oldRot[i] - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(0.8f, 1.5f), 0, 0);
+                SB.Draw(star, Projectile.Center -Main.screenPosition + Projectile.SafeDir() * 60f - Projectile.velocity * 0.7f * i, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.oldRot[i] - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(0.8f, 1.5f), 0, 0);
             }
             Projectile.DrawGlowEdge(Color.Green, rotFix: ToRadians(135));
             Projectile.DrawProj(Color.White, 6, 0.5f, ToRadians(135));

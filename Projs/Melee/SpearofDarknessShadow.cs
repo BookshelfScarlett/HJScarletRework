@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
@@ -26,9 +25,11 @@ namespace HJScarletRework.Projs.Melee
             get => (int)Projectile.ai[0];
             set => Projectile.ai[0] = value;
         }
+        public Vector2 MountedVec = Vector2.Zero;
         public float Osci = 0f;
         private int StrikeTime = 260;
         private int CanDamageTime = 0;
+        private float GeneralProgress = 0;
 
         public override void SetDefaults()
         {
@@ -39,7 +40,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.penetrate = -1;
             Projectile.extraUpdates = 0;
             Projectile.timeLeft = 300;
-            Projectile.DamageType = DamageClass.Melee;
+            Projectile.DamageType = DamageClass.MeleeNoSpeed;
             Projectile.friendly = true;
             Projectile.noEnchantmentVisuals = true;
         }
@@ -48,6 +49,7 @@ namespace HJScarletRework.Projs.Melee
         {
             CanDamageTime +=1;
             SpawnDarkParticle();
+            GeneralProgress = Clamp(CanDamageTime / 50f, 0f, 1f);
             if (!AlreadyHit)
                 UpdateIdlePos();
             else
@@ -70,18 +72,11 @@ namespace HJScarletRework.Projs.Melee
 
         private void SpawnDarkParticle()
         {
-            if (Projectile.Opacity < Main.rand.NextFloat(0.42f))
-                return;
             //火焰
-            Color Firecolor2 = Color.Lerp(Color.Purple, Color.DarkViolet, Main.rand.NextFloat(0, 1));
-            Vector2 fireOffset = Projectile.rotation.ToRotationVector2() * 20f + Main.rand.NextVector2Circular(4f, 4f);
-            if (Main.rand.NextBool(4))
-                new Fire(Projectile.Center - fireOffset, Vector2.UnitX.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0.2f, 1.2f) * 1.2f, Firecolor2, 30, Main.rand.NextFloat(TwoPi), 1, 0.1f * Projectile.Opacity).SpawnToPriorityNonPreMult();
-
-            //挥发性粒子
-            Vector2 spawnPos = Projectile.Center + Main.rand.NextVector2Circular(11, 11);
-            Color Firecolor = Color.Lerp(Color.Black, Color.DarkViolet, Main.rand.NextFloat(0, 1));
-            new TurbulenceGlowOrb(spawnPos, 1f, Firecolor, 40, 0.20f * Projectile.Opacity, Main.rand.NextFloat(TwoPi)).SpawnToNonPreMult();
+            Vector2 firePos = Projectile.Center.ToRandCirclePos(12f);
+            Vector2 fireVel = Projectile.SafeDirByRot() * Main.rand.NextFloat(1f, 3f) * -2f;
+            new Fire(firePos, fireVel, RandLerpColor(Color.Purple, Color.DarkMagenta), 30, RandRotTwoPi, 1, 0.1f * Projectile.Opacity * GeneralProgress).SpawnToPriorityNonPreMult();
+            new TurbulenceShinyOrb(firePos, RandZeroToOne, RandLerpColor(Color.DarkViolet, Color.DarkMagenta), 40, Main.rand.NextFloat(0.16f, 0.24f) * Projectile.Opacity, RandRotTwoPi).Spawn();
         }
 
         #region 挂载状态
@@ -95,7 +90,7 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.Kill();
                 return;
             }
-            if (Projectile.timeLeft < StrikeTime)
+            if (CanDamageTime > 50)
             {
                 //锁住生命值让其确保能攻击到目标
                 Projectile.HomingTarget(target.Center, 600f, 20f, 20f);
@@ -107,11 +102,9 @@ namespace HJScarletRework.Projs.Melee
             Osci += 0.025f;
             //基本的挂机状态，此处使用了正弦曲线来让矛常规上下偏移
             //这里的位置通过相对位置的硬编码实现
-            //第一步，取基本向上为方向
-            Vector2 anchorPos = new Vector2(target.Center.X, target.Center.Y - 170f);
-            //第二步，依据射弹情况来更新实际需要的位置
-            anchorPos = anchorPos.RotatedBy(PiOver4 * (IdlePosIndex - 1),target.Center);
-            //第三步计算更新位置，此处需要先计算单位向量
+            //第1步，取基本向上为方向
+            Vector2 anchorPos = target.Center + MountedVec.RotatedBy(ToRadians(20) * IdlePosIndex) * 170f;
+            //第2步计算更新位置，此处需要先计算单位向量
             Vector2 signalDir = (target.Center - anchorPos).SafeNormalize(Vector2.Zero);
             //而后，实际更新位置
             anchorPos = anchorPos + signalDir * (MathF.Sin(Osci) / 9f);
@@ -137,11 +130,15 @@ namespace HJScarletRework.Projs.Melee
             for (int i = 0; i < length; i++)
             {
                 float rads = (float)i / length;
-                Color drawColor = (Color.Lerp(Color.Black, Color.DarkOrchid, rads) with { A = 0 }) * 0.9f * Projectile.Opacity * (1 - rads);
+                Color drawColor = (Color.Lerp(Color.Black, Color.DarkOrchid, rads) with { A = 0 }) * 0.9f * Projectile.Opacity * (1 - rads) * GeneralProgress;
                 SB.Draw(star, Projectile.oldPos[i] + Projectile.PosToCenter(), null, drawColor * Projectile.Opacity, Projectile.oldRot[i] - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(0.8f, 1.5f), 0, 0);
             }
-            Projectile.DrawGlowEdge(Color.Purple  * Projectile.Opacity, drawTime: 16, posMove: 2.5f,rotFix: PiOver4);
-            Projectile.DrawProj(Color.Black * Projectile.Opacity, rotFix: PiOver4, useOldPos:true);
+            Texture2D projTex = IdlePosIndex == 0 ? Request<Texture2D>(GetInstance<SpearofDarknessThrownProj>().Texture).Value : Projectile.GetTexture();
+            for (int i = 0; i < 8; i++)
+            {
+                SB.Draw(projTex, Projectile.Center - Main.screenPosition + ToRadians(i * 60f).ToRotationVector2() * 2f, null, Color.Purple.ToAddColor() * Projectile.Opacity, Projectile.rotation + PiOver4, projTex.ToOrigin(), Projectile.scale, 0, 0);
+            }
+            SB.Draw(projTex, Projectile.Center - Main.screenPosition, null, Color.Black * Projectile.Opacity, Projectile.rotation + PiOver4, projTex.ToOrigin(), Projectile.scale, 0, 0);
 
             return false;
         }

@@ -9,9 +9,9 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class IceSpearProj : ThrownSpearProjClass
+    public class AzureFrostmarkProj : ThrownSpearProjClass
     {
-        public override string Texture => ProjPath + "Proj_" + nameof(IceSpear);
+        public override string Texture => ProjPath + "Proj_" + nameof(AzureFrostmark);
         public enum Style
         {
             Shoot,
@@ -136,7 +136,7 @@ namespace HJScarletRework.Projs.Melee
             for (int i = -1; i < 2; i += 2)
             {
                 Vector2 dir = projDir.RotatedBy(Main.rand.NextFloat(ToRadians(10f), ToRadians(15f)) * i + Main.rand.NextFloat(ToRadians(-5f), ToRadians(5f)));
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posOffset + spawnPos, dir * 8f, ProjectileType<IceSpearEnergy>(), Projectile.damage / 2, Projectile.knockBack);
+                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posOffset + spawnPos, dir * 8f, ProjectileType<AzureFrostmarkEnergy>(), Projectile.damage / 2, Projectile.knockBack);
                 //天王老子来了我都要用自己的粒子
                 //不服憋着
                 for (int j = 0; j < 15; j++)

@@ -84,7 +84,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            for (int i = 0;i < 8;i++)
+            for (int i = 0; i < 8; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(30, 30), Main.rand.NextBool() ? DustID.GrassBlades : DustID.JungleGrass);
                 d.scale *= Main.rand.NextFloat(1.1f, 1.35f);

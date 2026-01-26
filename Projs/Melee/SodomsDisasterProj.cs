@@ -18,17 +18,6 @@ namespace HJScarletRework.Projs.Melee
         public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => ProjPath  + nameof(SodomsDisaster);
         public override void SetStaticDefaults() => Projectile.ToTrailSetting(16, 2);
-        public enum Style
-        {
-            Shoot,
-            StabOnTarget,
-            StabOnGround
-        }
-        public Style AttackType
-        {
-            get => (Style)Projectile.ai[0];
-            set => Projectile.ai[0] = (float)value;
-        }
         public ref float Timer => ref Projectile.ai[1];
         public Vector2 StabPosition = Vector2.Zero;
         public ref int TargetIndex => ref Projectile.HJScarlet().GlobalTargetIndex;
@@ -89,7 +78,6 @@ namespace HJScarletRework.Projs.Melee
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
         }
-        public override bool ShouldUpdatePosition() => AttackType == Style.Shoot && Projectile.velocity.Length() > 0f;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<SodomsDisasterBoom>(), Projectile.damage, 12f, Owner.whoAmI);

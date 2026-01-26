@@ -117,3 +117,13 @@ IceFireSpear: {
 	DisplayName: Ice Fire Spear
 	Tooltip: ""
 }
+
+AzureFrostmark: {
+	DisplayName: Azure Frostmark
+	Tooltip: ""
+}
+
+CryoblazeHymn: {
+	DisplayName: Cryoblaze Hymn
+	Tooltip: ""
+}

@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Methods;
+using Microsoft.Build.ObjectModelRemoting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace HJScarletRework.Globals.Players
 {
     public partial class HJScarletPlayer : ModPlayer
     {
+        public float GeneralCrtiDamageAdd = 0f;
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
@@ -43,12 +45,7 @@ namespace HJScarletRework.Globals.Players
                 //最后。直接将暴击伤害设置
                 totalCritsBonus += baseCritsbuff;
             }
-
-            float itemCritBonus = Player.HeldItem.HJScarlet().CritsDamageBonus; 
-            if(itemCritBonus != -1f)
-            {
-                totalCritsBonus += itemCritBonus;
-            }
+            totalCritsBonus += GeneralCrtiDamageAdd;
             modifiers.CritDamage += totalCritsBonus;
 
         }

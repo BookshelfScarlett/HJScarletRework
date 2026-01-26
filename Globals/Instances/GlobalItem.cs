@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Items.Armor;
+﻿using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Armor;
 using HJScarletRework.Items.Materials;
 using Terraria;
 using Terraria.ID;
@@ -9,7 +10,15 @@ namespace HJScarletRework.Globals.Instances
     public class HJScarletGlobalItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
-        public float CritsDamageBonus = -1f;
+        public bool EnableCritDamage = false;
+        public float CritsDamageBonus = 0f;
+        public override void HoldItem(Item item, Player player)
+        {
+            if (EnableCritDamage)
+            {
+                player.HJScarlet().GeneralCrtiDamageAdd += CritsDamageBonus;
+            }
+        }
         public override string IsArmorSet(Item head, Item body, Item legs)
         {
             return base.IsArmorSet(head, body, legs);

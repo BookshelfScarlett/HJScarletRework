@@ -5,9 +5,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
 using Terraria;
 
 namespace HJScarletRework.Projs.Melee

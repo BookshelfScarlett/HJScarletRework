@@ -14,6 +14,7 @@ namespace HJScarletRework.Globals.Players
             UpdateFlybackBuff();
             if(Player_RewardofKingdom && RewardofWarriorCounter > 0)
                 Player.statDefense += KingdomDefenseTime;
+            GeneralCrtiDamageAdd = 0;
         }
         public void UpdateFlybackBuff()
         {

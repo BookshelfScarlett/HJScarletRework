@@ -24,8 +24,10 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.noUseGraphic = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = HJScarletSounds.SodomsDisaster_Toss with { MaxInstances = 0, Pitch= 0.21f, Volume = 0.74f};
-            Item.HJScarlet().CritsDamageBonus = 0.12f + 0.28f * HJScarletMethods.HasFuckingCalamity.ToInt();
+            Item.HJScarlet().EnableCritDamage = true;
+            Item.HJScarlet().CritsDamageBonus = 0.30f + 0.70f * HJScarletMethods.HasFuckingCalamity.ToInt();
         }
+        public override void ModifyWeaponCrit(Player player, ref float crit) => crit += 12f;
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
             if(line.Mod == "Terraria" && line.Name =="ItemName")
@@ -35,7 +37,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
-        public override Color MainTooltipColor => Color.Crimson;
+        public override Color MainTooltipColor => Color.IndianRed;
         public override void AddRecipes()
         {
             CreateRecipe().

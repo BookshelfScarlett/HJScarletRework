@@ -47,6 +47,13 @@ Melee: {
 	// IceFireEnergy.DisplayName: Ice Fire Energy
 	// IceFireFrostBoom.DisplayName: Ice Fire Frost Boom
 	// IceFireSpearProj.DisplayName: Ice Fire Spear Proj
+	// CryoblazeHymnFirePortal.DisplayName: Ice Fire Flame Bloom
+	// AzureFrostmarkEnergy.DisplayName: Azure Frostmark Energy
+	// AzureFrostmarkProj.DisplayName: Azure Frostmark Proj
+	// CryoblazeHymnFireball.DisplayName: Cryoblaze Hymn Fireball
+	// CryoblazeHymnFrostEnergy.DisplayName: Cryoblaze Hymn Frost Energy
+	// CryoblazeHymnFrostPortal.DisplayName: Cryoblaze Hymn Frost Portal
+	// CryoblazeHymnProj.DisplayName: Cryoblaze Hymn Proj
 }
 
 Typeless: {

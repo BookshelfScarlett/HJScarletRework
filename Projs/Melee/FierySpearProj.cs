@@ -33,7 +33,7 @@ namespace HJScarletRework.Projs.Melee
         {
             if (HJScarletMethods.HasFuckingCalamity && !Projectile.HJScarlet().FirstFrame)
             {
-                Projectile.extraUpdates = 5;
+                Projectile.extraUpdates = 3;
                 Projectile.penetrate = 2;
             }
             Projectile.rotation = Projectile.velocity.ToRotation();
