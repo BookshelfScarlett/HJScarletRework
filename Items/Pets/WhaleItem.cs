@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Buffs.Pets;
 using HJScarletRework.Projs.Pets;
-using HJScarletRework.Rarity;
+using HJScarletRework.Rarity.RarityShiny;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

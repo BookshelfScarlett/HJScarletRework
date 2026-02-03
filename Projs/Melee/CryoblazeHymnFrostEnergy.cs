@@ -55,12 +55,13 @@ namespace HJScarletRework.Projs.Melee
             {
                 Speed = Projectile.velocity.Length();
             }
+
             ParticleSpawn();
             if (AttackType == Style.Slowdown)
             {
-                Projectile.velocity *= 0.93f;
+                Projectile.velocity *= 0.92f;
                 Timer++;
-                if (Timer < 20f)
+                if (Timer < 15f)
                     return;
                 Projectile.netUpdate = true;
                 AttackType = Style.Attacking;
@@ -71,8 +72,8 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.rotation = Projectile.velocity.ToRotation();
                 Timer++;
                 //如果是首次过来，而且没有命中的情况，我们才让寒霜弹自主索敌
-                if (Projectile.GetTargetSafe(out NPC target, AttackType == Style.Attacking, 1200, true) && Timer > 10f)
-                    Projectile.HomingTarget(target.Center, -1f, 12f, 20f);
+                if (Projectile.GetTargetSafe(out NPC target, AttackType == Style.Attacking, 800, true))
+                    Projectile.HomingTarget(target.Center, -1f, Speed, 20f);
                 else
                 {
                     if(Projectile.velocity.LengthSquared() < Speed * Speed)

@@ -15,6 +15,24 @@ namespace HJScarletRework.Globals.Players
             if(Player_RewardofKingdom && RewardofWarriorCounter > 0)
                 Player.statDefense += KingdomDefenseTime;
             GeneralCrtiDamageAdd = 0;
+
+            if(PreciousTargetAcc)
+            {
+                 Player.GetCritChance<GenericDamageClass>() = PreciousTargetCrtis;
+                if (PreciousTargetCrtis > 150)
+                    PreciousTargetCrtis = 150;
+            }
+            //星月夜
+            if (DesterrennachtAcc)
+            {
+                if (Player.statLife < 100)
+                    Player.statLife = 100;
+                if (Player.statLife < Player.statLifeMax2 && DesterranHeal > 600)
+                {
+                    Player.Heal(100);
+                    DesterranHeal = 0;
+                }
+            }
         }
         public void UpdateFlybackBuff()
         {
@@ -70,6 +88,17 @@ namespace HJScarletRework.Globals.Players
 
             if (FlybackHitBuffTimer > 0)
                 FlybackHitBuffTimer--;
+            if(DesterranTimer > 0)
+                DesterranTimer--;
+            if (DesterranTimer <= 0)
+            {
+                DesterrannachtImmortal = false;
+                DesterranImmortalTime = 0;
+                DesterranTimer = 0;
+            }
+
+            if (DesterranHeal <= 600)
+                DesterranHeal += 1;
         }
 
     }

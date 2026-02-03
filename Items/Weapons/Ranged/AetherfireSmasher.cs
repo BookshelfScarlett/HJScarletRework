@@ -2,7 +2,7 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Ranged;
-using HJScarletRework.Rarity;
+using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;

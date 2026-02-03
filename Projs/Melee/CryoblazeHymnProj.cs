@@ -9,7 +9,9 @@ using rail;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.Enums;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Melee
@@ -30,7 +32,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public ref float IcePortalTimer => ref Projectile.localAI[0];
         public float Speed = 0f;
-        public float SpinMoveTime = 35f;
+        public float SpinMoveTime = 25f;
         public float GeneralProgress = 0f;
         public bool SpawnPortals = false;
         public override void ExSSD()
@@ -76,9 +78,7 @@ namespace HJScarletRework.Projs.Melee
                 if (Timer < SpinMoveTime)
                     Projectile.velocity = Projectile.SafeDir() * Speed * (1f - Timer / (SpinMoveTime));
                 else
-                {
                     Projectile.Kill();
-                }
             }
         }
         public void SpawnParticles()
@@ -119,6 +119,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 QuickSpawn(true, ProjectileType<CryoblazeHymnFirePortal>());
                 QuickSpawn(false, ProjectileType<CryoblazeHymnFrostPortal>());
+                SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1 },Projectile.Center);
             }
             for (int i = 0; i < 30; i++)
             {
@@ -135,7 +136,7 @@ namespace HJScarletRework.Projs.Melee
         public void QuickSpawn(bool reverse, int type)
         {
             Vector2 spawnPos = Projectile.Center + Projectile.SafeDir() * 40f * reverse.ToDirectionInt();
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, Projectile.SafeDir() * -18f * reverse.ToDirectionInt(), type, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, Projectile.SafeDir() * -(18f) * reverse.ToDirectionInt(), type, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
             proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -149,12 +150,6 @@ namespace HJScarletRework.Projs.Melee
                 Timer = 0;
                 Projectile.netUpdate = true;
                 
-            }
-            if(!SpawnPortals)
-            {
-                QuickSpawn(true, ProjectileType<CryoblazeHymnFirePortal>());
-                QuickSpawn(false, ProjectileType<CryoblazeHymnFrostPortal>());
-                SpawnPortals = true;
             }
         }
 

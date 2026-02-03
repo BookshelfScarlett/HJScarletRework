@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Rarity.RarityParticles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,7 +12,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI.Chat;
 
-namespace HJScarletRework.Rarity
+namespace HJScarletRework.Rarity.RarityDrawHandler
 {
     public static class RarityDrawHelper
     {
@@ -20,30 +21,43 @@ namespace HJScarletRework.Rarity
             string textValue = tooltipLine.Text;
             Vector2 textSize = tooltipLine.Font.MeasureString(textValue);
             Vector2 textCenter = textSize * 0.5f;
-            // The position to draw the text.
             Vector2 textPosition = new(tooltipLine.X, tooltipLine.Y);
-            // Get the position to draw the glow behind the text.
             Vector2 glowPosition = new(tooltipLine.X + textCenter.X, tooltipLine.Y + textCenter.Y / 1.5f);
-            // Get the scale of the glow texture based off of the text size.
             Vector2 glowScale = new Vector2(textSize.X * 0.135f, 0.6f) * glowScaleMult;
-            // Draw the glow texture.
+            //绘制需要的……发光背景。
             Main.spriteBatch.Draw(HJScarletTexture.Texture_RarityGlow.Value, glowPosition, null, glowColor.ToAddColor() * 0.85f, 0f, HJScarletTexture.Texture_RarityGlow.Origin, glowScale, SpriteEffects.None, 0f);
 
-            // Get an offset to the afterimageOffset based on a sine wave.
             float sine = (float)((1 + Math.Sin(Main.GlobalTimeWrappedHourly * 2.5f)) / 2);
             float sineOffset = Lerp(0.5f, 1f, sine);
 
-            // Draw text backglow effects.
+            //绘制发光描边，带渐变
             for (int i = 0; i < 12; i++)
             {
-                Vector2 afterimageOffset = (TwoPi * i / 12f).ToRotationVector2() * (2f * sineOffset);
-                // Draw the text. Rotate the position based on i.
+                Vector2 afterimageOffset = (TwoPi * i / 12f).ToRotationVector2() * (1.5f * sineOffset);
                 ChatManager.DrawColorCodedString(Main.spriteBatch, tooltipLine.Font, textValue, (textPosition + afterimageOffset).RotatedBy(TwoPi * (i / 12)), edgeColor * 0.9f, tooltipLine.Rotation, tooltipLine.Origin, tooltipLine.BaseScale);
             }
 
-            // Draw the main inner text.
+            //绘制主文本颜色
             Color mainTextColor = mainColor;
             ChatManager.DrawColorCodedString(Main.spriteBatch, tooltipLine.Font, textValue, textPosition, mainTextColor, tooltipLine.Rotation, tooltipLine.Origin, tooltipLine.BaseScale);
+        }
+        /// <summary>
+        /// 炼狱复制
+        /// </summary>
+        public static void UpdateTooltipParticles(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> sparklesList)
+        {
+            Vector2 textSize = tooltipLine.Font.MeasureString(tooltipLine.Text);
+            //手动在这里更新一下所有的draw
+            for (int i = 0; i < sparklesList.Count; i++)
+            {
+                sparklesList[i].CustomUpdate();
+                sparklesList[i].Time++;
+            }
+            //在需要的时候删除掉粒子
+            sparklesList.RemoveAll((RaritySparkle s) => s.LifetimeRatio >= 1);
+            //而后，绘制所有的粒子
+            foreach (RaritySparkle sparkle in sparklesList)
+                sparkle.CustomDraw(Main.spriteBatch, new Vector2(tooltipLine.X, tooltipLine.Y) + textSize * 0.5f + sparkle.Position);
         }
     }
 }

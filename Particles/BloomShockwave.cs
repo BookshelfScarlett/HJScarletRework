@@ -12,7 +12,8 @@ namespace HJScarletRework.Particles
     {
         public override int UseBlendStateID => BlendStateID.Additive;
         public float BeginScale;
-        public BloomShockwave(Vector2 position, Color color, int lifetime, float opacity, float scale)
+        public bool FadeIn;
+        public BloomShockwave(Vector2 position, Color color, int lifetime, float opacity, float scale, bool fadeIn = true)
         {
             Position = position;
             DrawColor = color;
@@ -20,15 +21,16 @@ namespace HJScarletRework.Particles
             Opacity = opacity;
             Scale = scale;
             BeginScale = scale;
+            FadeIn = fadeIn;
         }
         public override void OnSpawn()
         {
         }
         public override void Update()
         {
-            if (LifetimeRatio < 0.5f)
+            if (LifetimeRatio < 0.5f && FadeIn)
             {
-                Scale = Lerp(0f, BeginScale, EaseOutCubic(LifetimeRatio * 2));
+                Scale = Lerp(BeginScale/2f, BeginScale, EaseOutCubic(LifetimeRatio * 2));
             }
             else
             {

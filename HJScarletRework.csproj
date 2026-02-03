@@ -14,6 +14,12 @@
 	  <None Remove="Assets\Texture\Items\Weapons\New\**" />
 	</ItemGroup>
 	<ItemGroup>
+	  <AdditionalFiles Remove="Assets\Texture\Items\Equips\SakurabaEmma_Waist.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Assets\Texture\Items\Equips\SakurabaEmma_Waist.png" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Reference Include="ContinentOfJourney">
 	    <HintPath>..\ModAssemblies\ContinentOfJourney_v0.8.70.46.dll</HintPath>
 	  </Reference>

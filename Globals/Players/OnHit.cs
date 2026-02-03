@@ -45,6 +45,12 @@ namespace HJScarletRework.Globals.Players
                 //最后。直接将暴击伤害设置
                 totalCritsBonus += baseCritsbuff;
             }
+            //精确打击取溢出暴击率的100伤害。
+            if (PreciousTargetCrtis > 0 && PreciousTargetAcc)
+            {
+                float critBuff = Math.Max(0f, GetWantedCrits<GenericDamageClass>());
+                totalCritsBonus += critBuff;
+            }
             totalCritsBonus += GeneralCrtiDamageAdd;
             modifiers.CritDamage += totalCritsBonus;
 
@@ -54,8 +60,10 @@ namespace HJScarletRework.Globals.Players
             return (Player.GetTotalCritChance<Type>() + 4f - 100f);
         }
 
-        public void GlobalOnHitNPCWithSomething(NPC target,  NPC.HitInfo hit, int damageDone)
+        public void GlobalOnHitNPCWithSomething(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (PreciousTargetAcc && hit.Crit)
+                PreciousTargetCrtis += 5;
             //帝国的荣耀相关buff都写在里面了
             if (!target.friendly && target.lifeMax >= 5 && target.CanBeChasedBy() && Player_RewardofWarrior)
             {

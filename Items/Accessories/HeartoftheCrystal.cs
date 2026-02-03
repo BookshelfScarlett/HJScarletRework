@@ -1,10 +1,4 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HJScarletRework.Globals.Enums;
 using Terraria;
 using Terraria.ID;
 
@@ -12,8 +6,7 @@ namespace HJScarletRework.Items.Accessories
 {
     public class HeartoftheCrystal: HJScarletItems
     {
-        public override ItemCategory ItemCate => ItemCategory.Accessories;
-        public override AssetCategory GetAssetCategory => AssetCategory.Equip;
+        public override ItemCategory LocalCategory => ItemCategory.Accessories;
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;

@@ -57,3 +57,13 @@ SakurabaEmma: {
 	DisplayName: Sakuraba Emma
 	Tooltip: ""
 }
+
+ShadowCast: {
+	DisplayName: Shadow Cast
+	Tooltip: ""
+}
+
+LifeBalloon: {
+	DisplayName: Life Balloon
+	Tooltip: ""
+}

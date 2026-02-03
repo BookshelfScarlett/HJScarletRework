@@ -37,7 +37,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool MeleePrefix() => true;
         public override bool AllowPrefix(int pre) => true;
         public static AssetCategory TexturePath => AssetCategory.Weapon;
-        public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/Item_{GetType().Name}";
+        public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/{GetType().Name}";
         public override void SetDefaults()
         {
             Item.DamageType = DamageClass.Melee;

@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
@@ -7,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
@@ -32,6 +34,33 @@ namespace HJScarletRework.Projs.Melee
         }
         public void SpawnEnegry()
         {
+            SoundEngine.PlaySound(HJScarletSounds.HymnFireball_Release with { MaxInstances = 1 }, Projectile.Center);
+            if (!HJScarletMethods.OutOffScreen(Projectile.Center))
+                    TheParticleThatCanSpawn();
+            for (int i = 0; i < 3; i++)
+            {
+                
+                if (Projectile.GetTargetSafe(out NPC target, true, 800f, true))
+                {
+                    Vector2 dir = Projectile.SafeDir().ToRandVelocity(ToRadians(30f));
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 34f, ProjectileType<CryoblazeHymnFireball>(), Projectile.damage / 2, Projectile.knockBack);
+                    proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                    for (int j = 0; j < 10; j++)
+                    {
+                        //最大的原因是白天过曝看不到
+                        //这里的光球粒子需要携带一个暗色的烟出来
+                        Vector2 pos = Projectile.Center.ToRandCirclePos(8f);
+                        Vector2 vel = dir.ToRandVelocity(ToRadians(10f)) * Main.rand.NextFloat(8f);
+                        //由于粒子绘制原因。shinyorn的速度需要更短
+                        new ShinyOrbParticle(pos, vel * 0.8f, RandLerpColor(Color.Orange, Color.OrangeRed), 40, 0.7f).Spawn();
+                        new SmokeParticle(pos, vel, RandLerpColor(Color.Orange, Color.Gray), 40, 0.5f, 1f, 0.14f).SpawnToPriorityNonPreMult();
+                    }
+                }
+            }
+
+        }
+        private void TheParticleThatCanSpawn()
+        {
             new CrossGlow(Projectile.Center, Color.Orange, 40, 1f, 0.35f).Spawn();
             new CrossGlow(Projectile.Center, Color.White, 40, 0.5f, 0.3f).Spawn();
             //而后我们开始生成火球
@@ -50,29 +79,14 @@ namespace HJScarletRework.Projs.Melee
                 randY *= speed;
                 Vector2 vel = new Vector2(randX, randY) * Main.rand.NextFloat(0.24f, 0.28f);
                 Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
-                new ShinyOrbParticle(pos, vel, RandLerpColor(Color.OrangeRed, Color.Orange), 30, 0.8f).Spawn();
-                new ShinyOrbParticle(pos, vel, Color.White, 30, 0.3f).Spawn();
+                Dust d = Dust.NewDustPerfect(pos, DustID.Torch, vel);
+                d.scale *= 1.25f;
+                d.noGravity = true;
+                //new ShinyOrbParticle(pos, vel, RandLerpColor(Color.OrangeRed, Color.Orange), 30, 0.8f).Spawn();
+                //new ShinyOrbParticle(pos, vel, Color.White, 30, 0.3f).Spawn();
             }
-            new CrossGlow(Projectile.Center, Color.White, 40, 0.5f, 0.2f).Spawn();
-            new OpticalLineGlow(Projectile.Center, Color.Orange, 40, 1f, 0.25f).Spawn();
-
-            for (int i = 0; i < 3; i++)
-            {
-
-                Vector2 dir = Projectile.SafeDir().ToRandVelocity(ToRadians(30f));
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 12f, ProjectileType<CryoblazeHymnFireball>(), Projectile.damage / 2, Projectile.knockBack);
-                proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
-                for (int j = 0; j < 10; j++)
-                {
-                    //最大的原因是白天过曝看不到
-                    //这里的光球粒子需要携带一个暗色的烟出来
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(8f);
-                    Vector2 vel = dir.ToRandVelocity(ToRadians(10f)) * Main.rand.NextFloat(8f);
-                    //由于粒子绘制原因。shinyorn的速度需要更短
-                    new ShinyOrbParticle(pos, vel * 0.8f, RandLerpColor(Color.Orange, Color.OrangeRed), 40, 0.7f).Spawn();
-                    new SmokeParticle(pos, vel, RandLerpColor(Color.Orange, Color.Gray), 40, 0.5f, 1f, 0.14f).SpawnToPriorityNonPreMult();
-                }
-            }
+            new OpticalLineGlow(Projectile.Center, Color.Orange, 40, 1f, 0.15f).Spawn();
+            //new BloomShockwave(Projectile.Center, Color.Gold, 40, 0.74f, 0.15f).Spawn();
 
         }
         public override void AI()
@@ -91,9 +105,13 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.velocity *= .89f;
             }
             //这里实际上结合了原版粒子去用，这样尽量会减少场上同时存在的粒子数量
+            //yysy这里确实不如用原版的火花粒子
             for (int i = 0; i < 3; i++)
             {
-                new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(32f), Main.rand.NextFloat(0.4f, 0.8f), RandLerpColor(Color.Orange, Color.SkyBlue), 40, 0.1f, RandRotTwoPi).Spawn();
+                Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(32f), DustID.Torch, RandVelTwoPi(0.4f, 0.8f));
+                d.noGravity = true;
+                d.scale *= 1.25f;
+                //new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(32f), Main.rand.NextFloat(0.4f, 0.8f), RandLerpColor(Color.Orange, Color.OrangeRed), 40, 0.18f, RandRotTwoPi).Spawn();
             }
         }
 

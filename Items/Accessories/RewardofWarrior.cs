@@ -10,7 +10,7 @@ namespace HJScarletRework.Items.Accessories
 {
     public class RewardofWarrior : HJScarletItems
     {
-        public override AssetCategory GetAssetCategory => AssetCategory.Equip;
+        public override ItemCategory LocalCategory => ItemCategory.Accessories;
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;

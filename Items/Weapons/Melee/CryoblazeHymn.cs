@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
-using HJScarletRework.Rarity;
+using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;

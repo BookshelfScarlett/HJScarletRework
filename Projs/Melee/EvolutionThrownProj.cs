@@ -29,7 +29,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.timeLeft = 600;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 10;
         }
         public override void AI()
         {

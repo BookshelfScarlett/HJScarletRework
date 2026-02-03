@@ -33,6 +33,7 @@ namespace HJScarletRework.Globals.Handlers
             float edgeY = valueY ?? valueX;
             return pos + Main.rand.NextVector2Circular(valueX, edgeY);
         }
+        public static int GetSeconds(int seconds) => seconds * 60;
         public static Color RandLerpColor(Color beginColor, Color endColor) => Color.Lerp(beginColor, endColor, RandZeroToOne);
     }
 }

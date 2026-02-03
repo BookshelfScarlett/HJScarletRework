@@ -7,7 +7,7 @@ namespace HJScarletRework.Globals.Classes
     {
         public virtual ClassCategory Category { get; }
         public new string LocalizationCategory => $"Weapons.{Category}";
-        public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/Item_{GetType().Name}";
+        public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/{GetType().Name}";
         public override void SetDefaults()
         {
             Item.DamageType = GetDamageClass;

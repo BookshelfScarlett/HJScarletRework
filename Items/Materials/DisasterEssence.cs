@@ -12,8 +12,8 @@ namespace HJScarletRework.Items.Materials
 {
     public class DisasterEssence : HJScarletItems
     {
-        public override ItemCategory ItemCate => ItemCategory.Material;
-        public override AssetCategory GetAssetCategory => AssetCategory.Material;
+        public override ItemCategory LocalCategory => ItemCategory.Material;
+        public override string Texture => GetAsset(AssetCategory.Material);
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

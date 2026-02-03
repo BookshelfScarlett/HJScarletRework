@@ -4,13 +4,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
@@ -29,6 +23,7 @@ namespace HJScarletRework.Projs.Melee
             get => (Style)Projectile.ai[1];
             set => Projectile.ai[1] = (float)value;
         }
+        public float Speed = 0f;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(13, 2);
@@ -50,6 +45,7 @@ namespace HJScarletRework.Projs.Melee
         {
             if(!Projectile.HJScarlet().FirstFrame)
             {
+                Speed = Projectile.velocity.Length();
             }
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer++;
@@ -65,6 +61,8 @@ namespace HJScarletRework.Projs.Melee
                     DoSlowdown();
                     break;
             }
+            if (HJScarletMethods.OutOffScreen(Projectile.Center))
+                return;
             for (int i = 0;i<2;i++)
             {
                 new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(4f), 0.5f, RandLerpColor(Color.Orange, Color.OrangeRed), 30, Main.rand.NextFloat(0.1f, 0.12f), RandRotTwoPi).Spawn();
@@ -75,7 +73,8 @@ namespace HJScarletRework.Projs.Melee
         private void DoAttack()
         {
             Timer++;
-            if(Timer > 28f)
+            Projectile.velocity *= 0.86f;
+            if(Timer > 30f)
             {
                 //回弹
                 AttackType = Style.Bounce;
@@ -88,12 +87,13 @@ namespace HJScarletRework.Projs.Melee
         {
             if (Projectile.GetTargetSafe(out NPC target))
             {
-
-                Projectile.extraUpdates = 1;
-                Projectile.HomingTarget(target.Center, -1, 12f, 20f);
+                Projectile.HomingTarget(target.Center, -1, 16f, 20f);
             }
             else
-                Projectile.extraUpdates = 0;
+            {
+                if(Projectile.velocity.LengthSquared() < 16f*16f)
+                    Projectile.velocity *= 1.1f;
+            }
         }
 
         private void DoSlowdown()
@@ -142,8 +142,8 @@ namespace HJScarletRework.Projs.Melee
                 scale *= 0.90f;
                 float rads = (float)i / length;
                 Color edgeColor = Color.Lerp(Color.Orange, Color.Lerp(Color.Orange, Color.OrangeRed, rads * 0.7f), (1 - rads)).ToAddColor(10) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads);
-                Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.40f);
-                float rot = Lerp(Projectile.oldRot[i], Projectile.oldRot[0], 0.78f);
+                Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.70f);
+                float rot = Lerp(Projectile.oldRot[i], Projectile.oldRot[0], 1f);
                 SB.Draw(projTex, lerpPos + Projectile.PosToCenter(), null, edgeColor, rot, ori, oriScale * scale * Projectile.scale, 0, 0);
             }
             SB.Draw(projTex, projPos, null, Color.Orange.ToAddColor(50), Projectile.rotation, ori, oriScale * Projectile.scale, 0, 0);

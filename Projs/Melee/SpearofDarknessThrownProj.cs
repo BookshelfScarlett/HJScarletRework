@@ -1,6 +1,4 @@
-﻿using ContinentOfJourney.Items;
-using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
@@ -72,7 +70,7 @@ namespace HJScarletRework.Projs.Melee
                 if (Timer < SpinMoveTime + 30f)
                     return;
                 //这里的i固定成这样，因为会同时控制三个不同的黑暗矛的位置的。
-                if (Projectile.GetTargetSafe(out NPC target) && Projectile.Opacity == 1)
+                if (Projectile.GetTargetSafe(out NPC target,canPassWall:true) && Projectile.Opacity == 1)
                 {
                     for (int i = -1; i < 2; i += 1)
                     {

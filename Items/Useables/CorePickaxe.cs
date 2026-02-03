@@ -13,8 +13,8 @@ namespace HJScarletRework.Items.Useables
 {
     public class CorePickaxe : HJScarletItems
     {
-        public override ItemCategory ItemCate => ItemCategory.Useable;
-        public override AssetCategory GetAssetCategory => AssetCategory.Useable;
+        public override ItemCategory LocalCategory => ItemCategory.Useable;
+        public override string Texture => GetAsset(AssetCategory.Useable);
         public override void SetDefaults()
         {
             Item.width = Item.height = 48;

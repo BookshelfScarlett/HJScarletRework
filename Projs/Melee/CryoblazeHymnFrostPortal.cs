@@ -6,6 +6,7 @@ using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
@@ -31,22 +32,27 @@ namespace HJScarletRework.Projs.Melee
         }
         public void SpawnEnegry()
         {
-            new CrossGlow(Projectile.Center, Color.SkyBlue, 40, 1f, 0.35f).Spawn();
-            new CrossGlow(Projectile.Center, Color.White, 40, 0.5f, 0.3f).Spawn();
+            SoundEngine.PlaySound(SoundID.Item109 with { MaxInstances = 1 }, Projectile.Center);
+            new CrossGlow(Projectile.Center, Color.SkyBlue, 40, 1f, 0.25f,false).Spawn();
+            new CrossGlow(Projectile.Center, Color.White, 40, 0.5f, 0.20f,false).Spawn();
             for (int i = 0; i < 3; i++)
             {
                 Vector2 dir = Projectile.SafeDir().ToRandVelocity(ToRadians(30f));
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 15f, ProjectileType<CryoblazeHymnFrostEnergy>(), Projectile.damage / 2, Projectile.knockBack);
-                proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
-                for (int j = 0; j < 10; j++)
+                //注意这里：如果没有找到正常的敌人，这里是不会尝试生成的
+                if (Projectile.GetTargetSafe(out NPC target, searchDistance: 800, canPassWall: true))
                 {
-                    //最大的原因是白天过曝看不到
-                    //这里的光球粒子需要携带一个暗色的烟出来
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(8f);
-                    Vector2 vel = dir.ToRandVelocity(ToRadians(10f)) * Main.rand.NextFloat(8f);
-                    //由于粒子绘制原因。shinyorn的速度需要更短
-                    new ShinyOrbParticle(pos, vel * 0.8f, RandLerpColor(Color.DeepSkyBlue, Color.SkyBlue), 40, 0.7f).Spawn();
-                    new SmokeParticle(pos, vel, RandLerpColor(Color.DeepSkyBlue, Color.Gray), 40, 0.5f, 1f, 0.14f).SpawnToPriorityNonPreMult();
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 15f, ProjectileType<CryoblazeHymnFrostEnergy>(), Projectile.damage / 2, Projectile.knockBack);
+                    proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                    for (int j = 0; j < 10; j++)
+                    {
+                        //最大的原因是白天过曝看不到
+                        //这里的光球粒子需要携带一个暗色的烟出来
+                        Vector2 pos = Projectile.Center.ToRandCirclePos(8f);
+                        Vector2 vel = dir.ToRandVelocity(ToRadians(10f)) * Main.rand.NextFloat(8f);
+                        //由于粒子绘制原因。shinyorn的速度需要更短
+                        new ShinyOrbParticle(pos, vel * 0.8f, RandLerpColor(Color.DeepSkyBlue, Color.SkyBlue), 40, 0.7f).Spawn();
+                        new SmokeParticle(pos, vel, RandLerpColor(Color.DeepSkyBlue, Color.Gray), 40, 0.5f, 1f, 0.14f).SpawnToPriorityNonPreMult();
+                    }
                 }
             }
         }
@@ -65,7 +71,7 @@ namespace HJScarletRework.Projs.Melee
             else
                 Projectile.velocity *= .89f;
             for (int i = 0; i < 3; i++)
-                new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(32f), Main.rand.NextFloat(0.4f, 0.8f), RandLerpColor(Color.DeepSkyBlue, Color.SkyBlue), 40, 0.1f, RandRotTwoPi).Spawn();
+                new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(32f), Main.rand.NextFloat(0.4f, 0.8f), RandLerpColor(Color.DeepSkyBlue, Color.SkyBlue), 30, 0.18f, RandRotTwoPi).Spawn();
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

@@ -6,6 +6,7 @@ using HJScarletRework.Globals.ParticleSystem;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Specialized;
 using Terraria;
 using Terraria.Audio;
 
@@ -16,6 +17,7 @@ namespace HJScarletRework.Projs.Melee
         public override string Texture => ProjPath + GetType().Name;
         public override ClassCategory Category => ClassCategory.Melee;
         public ref float Timer => ref Projectile.ai[0];
+        public NPC CurrentTargetHit = null;
         public enum Style
         {
             Shoot,
@@ -71,6 +73,8 @@ namespace HJScarletRework.Projs.Melee
         }
         public void InitParticle()
         {
+            //存储射弹的原始伤害
+            Projectile.originalDamage = Projectile.damage;
             Vector2 dir = Projectile.velocity.SafeNormalize(Vector2.UnitX) * Projectile.scale;
             for (float i = 0; i < 18f; i++)
             {
@@ -99,17 +103,24 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            //等一下处理
+            
             //如果已经生成了超过3个幻影投矛，做掉下方所有的ai
             SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 1, PitchVariance = 0.2f }, Projectile.Center);
-            AttackType = Style.Fade;
+            //此处需要做一个额外的处理，如果命中的敌对单位不是我们需要的单位，则不要生成后续的射弹
+            //尽管如此，他仍然可以进行多穿
+            //if (target.whoAmI != Projectile.HJScarlet().GlobalTargetIndex)
+            //    return;
+            //在这里直接干掉射弹的伤害
+            Projectile.damage *= 0; 
+            //只有在这里正式执行消失逻辑
             Timer = 0;
+            AttackType = Style.Fade;
             if (TotalShootTime > 2)
                 return;
             //随机取当前射弹结束的位置+
             Vector2 projPos = target.Center + Vector2.UnitY.RotatedByRandom(TwoPi) * Main.rand.Next(150, 200);
             Vector2 vel = (target.Center - projPos).SafeNormalize(Vector2.UnitX) * Main.rand.NextFloat(3f, 6f);
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), projPos, vel, Type, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), projPos, vel, Type, Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
             ((TheMarsPhantom)proj.ModProjectile).TotalShootTime = TotalShootTime + 1;
             proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
         }

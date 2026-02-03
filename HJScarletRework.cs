@@ -4,6 +4,9 @@ global using static HJScarletRework.Globals.Handlers.EasingHandler;
 global using static HJScarletRework.Globals.Handlers.RandHandler;
 using Terraria.ModLoader;
 using HJScarletRework.Globals.Methods;
+using Terraria;
+using System.IO;
+using System.Formats.Asn1;
 
 namespace HJScarletRework
 {

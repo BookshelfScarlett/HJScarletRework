@@ -3,9 +3,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
-using System.Security.Cryptography.X509Certificates;
 using Terraria;
-using Terraria.Graphics;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -15,9 +13,8 @@ namespace HJScarletRework.Items.Armor
     [AutoloadEquip(EquipType.Head)]
     public class CreationHat : HJScarletItems
     {
-        public override string Texture => $"{AssetPath}Item_{GetType().Name}";
-        public override ItemCategory ItemCate => ItemCategory.Armor;
-        public override AssetCategory GetAssetCategory => AssetCategory.Armor;
+        public override ItemCategory LocalCategory => ItemCategory.Armor;
+        public override string Texture => GetAsset(AssetCategory.Armor);
         public override void SetStaticDefaults()
         {
             ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;

@@ -74,8 +74,7 @@ namespace HJScarletRework.Projs.Melee
                 new TurbulenceShinyCube(spawnPos, Projectile.velocity / 2, RandLerpColor(Color.White, Color.Green) * Clamp(Projectile.velocity.Length(), 0, 1), 20, Projectile.rotation, 1, 0.28f * Projectile.Opacity, randPosMoveValue: 8).Spawn();
             }
 
-            if (LegalTargetList.Count < 6)
-                GetLegalTarget();
+            GetLegalTarget();
             //如果存在时间超过1秒，进入处死状态
             if(Timer > 10f * Projectile.MaxUpdates)
             {
@@ -90,6 +89,19 @@ namespace HJScarletRework.Projs.Melee
         {
             //创建一个链表，搜索附近可能的单位
             float searchDist = SearchTargetDistance;
+            //先遍历列表内原有的元素，这里是逆向遍历（如果有的话）
+            if(LegalTargetList!=null&LegalTargetList.Count>0)
+            {
+                for(int i =LegalTargetList.Count-1;i>=0;i--)
+                {
+                    NPC tar = LegalTargetList[i];
+                    bool legalTarget = Vector2.Distance(tar.Center, Projectile.Center) < searchDist && tar.CanBeChasedBy();
+                    //不合规的目标先被排除
+                    if (!legalTarget)
+                        LegalTargetList.RemoveAt(i);
+                }
+            }
+            NPC curTarget = null;
             foreach (NPC needTar in Main.ActiveNPCs)
             {
                 bool legalTarget = needTar.CanBeChasedBy();
@@ -100,6 +112,23 @@ namespace HJScarletRework.Projs.Melee
                     //把可用单位甩进去
                     LegalTargetList.Add(needTar);
                 }
+            }
+            //从这里开始排序一遍列表内的所有元素，按照距离由小到大
+            if(LegalTargetList.Count > 1)
+            {
+                LegalTargetList.Sort((a, b) =>
+                {
+                    float distA = Vector2.Distance(a.Center, Projectile.Center);
+                    float distB = Vector2.Distance(b.Center, Projectile.Center);
+                    return distA.CompareTo(distB);
+                });
+            }
+            if (curTarget != null)
+                LegalTargetList.Add(curTarget);
+            //如果当前射弹存储了超过3的单位，移除当前列表内的第一个单位
+            if(LegalTargetList.Count > 3)
+            {
+                LegalTargetList.RemoveAt(0);
             }
         }
 

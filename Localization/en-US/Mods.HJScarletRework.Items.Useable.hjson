@@ -2,3 +2,8 @@ CorePickaxe: {
 	DisplayName: Core Pickaxe
 	Tooltip: ""
 }
+
+SuicideKnife: {
+	DisplayName: Suicide Knife
+	Tooltip: ""
+}

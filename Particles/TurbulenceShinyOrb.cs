@@ -57,6 +57,10 @@ namespace HJScarletRework.Particles
             }
             Velocity *= 0.9f;
             Scale = Lerp(BeginScale, 0, EaseOutCubic(LifetimeRatio));
+            //Scale大于0.45的时候把TimeLeft的值直接设置为……Time的大小，以处死射弹
+            if (Scale <= BeginScale * 0.25f)
+                Time = Lifetime;
+                
         }
 
         public override void Draw(SpriteBatch spriteBatch)

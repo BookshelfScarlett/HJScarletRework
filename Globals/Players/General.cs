@@ -1,15 +1,13 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Buffs;
-using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Items.Weapons.Ranged;
-using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Default;
 using Terraria.ModLoader.IO;
 
 namespace HJScarletRework.Globals.Players
@@ -30,12 +28,26 @@ namespace HJScarletRework.Globals.Players
         public bool CreationHatSet = false;
 
         #region Accessories
+
+        public bool ShadowCastAcc = false;
+        public bool LifeBalloonAcc = false;
+        public int LifeBalloonAccJumps;
         public bool Player_RewardofWarrior = false;
         public bool Player_RewardofKingdom = false;
         public int RewardofWarriorHitCD = 0;
         public int RewardofWarriorCounter  = 0;
         public int KingdomDefenseTime = 0;
         public int RewardLevel = 0;
+        public bool DesterrennachtAcc = false;
+        public bool DesterrannachtImmortal = false;
+        public int DesterranImmortalTime = 0;
+        public int DesterranHeal = 0;
+        public int DesterranTimer = 0;
+
+        public bool PreciousTargetAcc = false;
+        public bool PreciousAimAcc = false;
+        public int PreciousTargetCrtis = 10;
+        public int PreciousCritsMin = 0;
         #endregion
         #region Pets
         public bool WhalePet = false;
@@ -47,7 +59,18 @@ namespace HJScarletRework.Globals.Players
         public override void ResetEffects()
         {
             CreationHatSet = false;
+            ShadowCastAcc = false;
+            LifeBalloonAcc = false;
+            UnloadAcc();
             UnloadPets();
+        }
+
+        private void UnloadAcc()
+        {
+            PreciousTargetAcc = false;
+            PreciousAimAcc = false;
+            PreciousCritsMin = 0;
+            DesterrennachtAcc = false;
         }
 
         private void UnloadPets()
@@ -64,6 +87,14 @@ namespace HJScarletRework.Globals.Players
             FocusStrikeTime = 0;
             FlybackBuffTime = 0;
             CurrentFullFlyBackTime = 0;
+            DesterranHeal = 0;
+            PreciousTargetCrtis = 10;
+            LifeBalloonAcc = false;
+
+            DesterrannachtImmortal = false;
+            DesterranImmortalTime = 0;
+            DesterranTimer = 0;
+            UnloadAcc();
             UnloadPets();
         }
         public override void PostUpdate()

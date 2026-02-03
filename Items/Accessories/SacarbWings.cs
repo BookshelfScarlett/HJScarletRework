@@ -14,8 +14,7 @@ namespace HJScarletRework.Items.Accessories
     [AutoloadEquip(EquipType.Wings)]
     public class SacarbWings : HJScarletItems
     {
-        public override ItemCategory ItemCate => ItemCategory.Accessories;
-        public override AssetCategory GetAssetCategory => AssetCategory.Equip;
+        public override ItemCategory LocalCategory => ItemCategory.Accessories;
         public override void SetStaticDefaults()
         {
             ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(180, 9f, 2.5f);

@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Enums;
+using HJScarletRework.Items.Weapons.Melee;
 using Microsoft.Build.ObjectModelRemoting;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -78,8 +79,8 @@ namespace HJScarletRework.Assets.Registers
         {
             Wreach = new Tex2DWithPath($"{ItemPath}/{nameof(Wreach)}");
 
-            Item_SpearofDarknessThrown = new Tex2DWithPath($"{WeaponPath}/{nameof(Item_SpearofDarknessThrown)}");
-            Item_DialecticsThrown = new Tex2DWithPath($"{WeaponPath}/{nameof(Item_DialecticsThrown)}");
+            Item_SpearofDarknessThrown = new Tex2DWithPath($"{WeaponPath}/{nameof(SpearofDarknessThrown)}");
+            Item_DialecticsThrown = new Tex2DWithPath($"{WeaponPath}/{nameof(DialecticsThrown)}");
 
             Proj_SpearofDarkness = new Tex2DWithPath($"{ProjPath}/{nameof(Proj_SpearofDarkness)}");
             Proj_CandLanceFire = new Tex2DWithPath($"{ProjPath}/{nameof(Proj_CandLanceFire)}");

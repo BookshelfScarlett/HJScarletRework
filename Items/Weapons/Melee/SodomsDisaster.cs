@@ -2,7 +2,7 @@
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Melee;
-using HJScarletRework.Rarity;
+using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -32,7 +32,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             if(line.Mod == "Terraria" && line.Name =="ItemName")
             {
-                DisasterRarity.DrawCustomTooltipLine(line);
+                DisasterRarity.DrawRarity(line);
                 return false;
             }
             return base.PreDrawTooltipLine(line, ref yOffset);

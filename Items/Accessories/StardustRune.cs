@@ -9,8 +9,7 @@ namespace HJScarletRework.Items.Accessories
     public class StardustRune : HJScarletItems
     {
         public int MinionSlots = 2;
-        public override ItemCategory ItemCate => ItemCategory.Accessories;
-        public override AssetCategory GetAssetCategory => AssetCategory.Equip;
+        public override ItemCategory LocalCategory => ItemCategory.Accessories;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs("10%", MinionSlots);
         public override void SetDefaults()
         {
