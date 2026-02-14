@@ -7,6 +7,7 @@ namespace HJScarletRework.Items.Weapons.Melee
 {
     public class TheMars : ThrownSpearClass
     {
+        public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {
             Item.damage = 104;

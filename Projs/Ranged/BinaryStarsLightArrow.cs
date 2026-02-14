@@ -173,7 +173,7 @@ namespace HJScarletRework.Projs.Ranged
             GD.Textures[0] = HJScarletTexture.Trail_ManaStreak.Value;
             GD.SamplerStates[0] = SamplerState.PointClamp;
             //直接获取需要的贝塞尔曲线。
-            List<VertexPositionColorTexture2D> list = [];
+            List<ScarletVertex> list = [];
             int totalpoints = validPosition.Count;
             //创建顶点列表
             for (int i = 0; i < validPosition.Count; i++)
@@ -181,8 +181,8 @@ namespace HJScarletRework.Projs.Ranged
                 Vector2 oldCenter = validPosition[i] + Projectile.Size / 2  - Main.screenPosition;
                 float progress = (float)i / (validPosition.Count - 1);
                 Vector2 posOffset = new Vector2(0, height * DrawScale * ((float)(totalpoints - i) / totalpoints)).RotatedBy(validRot[i]);
-                VertexPositionColorTexture2D upClass = new(oldCenter - posOffset, trailColor, new Vector3(progress, 0, 0f));
-                VertexPositionColorTexture2D downClass = new(oldCenter + posOffset, trailColor, new Vector3(progress, 1, 0f));
+                ScarletVertex upClass = new(oldCenter - posOffset, trailColor, new Vector3(progress, 0, 0f));
+                ScarletVertex downClass = new(oldCenter + posOffset, trailColor, new Vector3(progress, 1, 0f));
                 list.Add(upClass);
                 list.Add(downClass);    
             }

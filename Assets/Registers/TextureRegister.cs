@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Particles;
+﻿using ContinentOfJourney.Projectiles;
+using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -49,6 +50,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Specific_AimLabBox { get; set; }
         public static Tex2DWithPath Specific_Clock { get; set; }
         public static Texture2D Specific_IceSpearBlade => Request<Texture2D>($"HJScarletRework/Assets/Texture/Particles/{nameof(Specific_IceSpearBlade)}").Value;
+        public static Tex2DWithPath  Specific_RocketTrail { get; set; }
 
         public static Tex2DWithPath Trail_ManaStreak { get; set; }
         public static Tex2DWithPath Trail_RvSlash { get; set; }
@@ -59,6 +61,8 @@ namespace HJScarletRework.Assets.Registers
 
         public static Tex2DWithPath Noise_Misc { get; set; }
         public static Tex2DWithPath Noise_Misc2 { get; set; }
+
+        public static Tex2DWithPath ColorMap_Aqua {  get; set; }
 
         public static Tex2DWithPath Metaball_ShadowNebula { get; set; }
 
@@ -95,6 +99,7 @@ namespace HJScarletRework.Assets.Registers
             Specific_DialectCube = new Tex2DWithPath($"{Path_Particle}{nameof(Specific_DialectCube)}");
             Specific_AimLabBox = new Tex2DWithPath($"{Path_Particle}{nameof(Specific_AimLabBox)}");
             Specific_Clock = new Tex2DWithPath($"{Path_Particle}{nameof(Specific_Clock)}");
+            Specific_RocketTrail = new Tex2DWithPath($"{Path_Particle}{nameof(Specific_RocketTrail)}");
             
             Texture_BloomRing = new Tex2DWithPath($"{Path_General}{nameof(Texture_BloomRing)}");
             Texture_BloomShockwave = new Tex2DWithPath($"{Path_General}{nameof(Texture_BloomShockwave)}");
@@ -125,6 +130,8 @@ namespace HJScarletRework.Assets.Registers
             Noise_Misc = new Tex2DWithPath($"{Path_General}{nameof(Noise_Misc)}");
             Noise_Misc2 = new Tex2DWithPath($"{Path_General}{nameof(Noise_Misc2)}");
 
+            ColorMap_Aqua = new Tex2DWithPath($"{Path_General}{nameof(ColorMap_Aqua)}");
+
         }
         public override void Unload()
         {
@@ -150,6 +157,7 @@ namespace HJScarletRework.Assets.Registers
             Specific_DialectBall = null;
             Specific_AimLabBox = null;
             Specific_Clock = null;
+            Specific_RocketTrail = null;
 
             Texture_BloomRing = null;
             Texture_BloomShockwave = null;
@@ -178,6 +186,8 @@ namespace HJScarletRework.Assets.Registers
 
             Noise_Misc = null;
             Noise_Misc2 = null;
+
+            ColorMap_Aqua = null;
         }
     }
 }

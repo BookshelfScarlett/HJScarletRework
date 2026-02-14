@@ -3,6 +3,7 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
+using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -22,7 +23,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void ExSD()
         {
             Item.damage = 120;
-            Item.rare = ItemRarityID.Red;
+            Item.rare = RarityType<MatterRarity>();
             //不需要声音，在shoot里手动控制
             Item.UseSound = null;
             Item.shootSpeed = 15f;

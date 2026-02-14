@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetStaticDefaults() => Type.ShimmerEach<SweetSweetStab>();
         public override void ExSD()
         {
-            Item.damage = 26;
+            Item.damage = 20;
             Item.rare = ItemRarityID.Green;
             Item.useTime = Item.useAnimation = 40;
             Item.knockBack = 8;
@@ -37,6 +37,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool MeleePrefix() => true;
         public override bool AllowPrefix(int pre) => true;
         public static AssetCategory TexturePath => AssetCategory.Weapon;
+        public virtual bool NotHomewardJourneySpear => false;
         public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/{GetType().Name}";
         public override void SetDefaults()
         {
@@ -76,6 +77,11 @@ namespace HJScarletRework.Items.Weapons.Melee
             {
                 string calamityPath = $"{localAddress}.CalamitySupport";
                 tooltips.QuickAddTooltipDirect(calamityPath.ToLangValue(), new(220, 20, 6));
+            }
+            if (!NotHomewardJourneySpear)
+            {
+                string keyPath = Mod.GetLocalizationKey($"SwitchWeaponTooltip");
+                tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), Color.Lime);
             }
             ExModifyTooltips(tooltips, localAddress);
             

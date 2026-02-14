@@ -156,7 +156,7 @@ namespace HJScarletRework.Projs.Ranged
             if (!HJScarletMethods.OutOffScreen(Projectile.Center))
             {
                 SB.End();
-                SB.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+                SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
                 float spinRotation = Main.GlobalTimeWrappedHourly * 5.2f;
                 DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Violet);
                 DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
@@ -186,7 +186,7 @@ namespace HJScarletRework.Projs.Ranged
             GD.Textures[0] = useTex.Value;
             GD.SamplerStates[0] = SamplerState.PointClamp;
             //直接获取需要的贝塞尔曲线。
-            List<VertexPositionColorTexture2D> list = [];
+            List<ScarletVertex> list = [];
             int totalpoints = validPosition.Count;
             //创建顶点列表
             for (int i = 0; i < validPosition.Count - 1; i++)
@@ -195,8 +195,8 @@ namespace HJScarletRework.Projs.Ranged
                 float rotated = (validPosition[i + 1] - validPosition[i]).ToRotation();
                 Vector2 oldCenter = validPosition[i] + Projectile.Size / 2 + rotated.ToRotationVector2().RotatedBy(PiOver2) * offsetHeight - Main.screenPosition;
                 Vector2 posOffset = new Vector2(0, SetProjWidth(progress) * multipleSize).RotatedBy(rotated);
-                VertexPositionColorTexture2D upClass = new(oldCenter - posOffset, BinaryStarsMain.TrailColor, new Vector3(progress, 0, 0f));
-                VertexPositionColorTexture2D downClass = new(oldCenter + posOffset, BinaryStarsMain.TrailColor, new Vector3(progress, 1, 0f));
+                ScarletVertex upClass = new(oldCenter - posOffset, BinaryStarsMain.TrailColor, new Vector3(progress, 0, 0f));
+                ScarletVertex downClass = new(oldCenter + posOffset, BinaryStarsMain.TrailColor, new Vector3(progress, 1, 0f));
                 list.Add(upClass);
                 list.Add(downClass);
             }

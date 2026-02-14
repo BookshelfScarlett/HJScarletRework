@@ -1,11 +1,13 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Magic
 {
     public class BambooSong : HJScarletWeapon
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ClassCategory Category => ClassCategory.Magic;
         public override void ExSD()
         {

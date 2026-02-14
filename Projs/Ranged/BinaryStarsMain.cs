@@ -1,3 +1,4 @@
+using ContinentOfJourney.Projectiles.Meelee;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
@@ -89,7 +90,7 @@ namespace HJScarletRework.Projs.Ranged
             {
                 SoundStyle select = Utils.SelectRandom(Main.rand, HJScarletSounds.Smash_AirHeavy);
                 SoundEngine.PlaySound(select, Projectile.Center);
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, -80 * Owner.direction, 23, Projectile.rotation, 0.2f, true, 1000);
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, -80 * Owner.direction, 43, Projectile.rotation, 0.2f, true, 1000);
             }
             return true;
         }
@@ -215,7 +216,7 @@ namespace HJScarletRework.Projs.Ranged
             if (!HJScarletMethods.OutOffScreen(Projectile.Center) && Stealth)
             {
                 SB.End();
-                SB.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+                SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
                 float spinRotation = Main.GlobalTimeWrappedHourly * 5.2f;
                 DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Violet);
                 DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);

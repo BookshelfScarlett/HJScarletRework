@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace HJScarletRework.Core.Primitives.Trail
 {
-    public readonly struct VertexPositionColorTexture2D(Vector2 position, Color color, Vector3 textureCoordinates) : IVertexType
+    public readonly struct ScarletVertex(Vector2 position, Color color, Vector3 textureCoordinates) : IVertexType
     {
         public readonly Vector2 Position = position;
 

@@ -124,7 +124,7 @@ namespace HJScarletRework.Projs.Ranged
         {
             Projectile.ClearInvaidData(out List<Vector2> validPos, out List<float> validRot);
             BezierCurveHandler.GetValidBeizerCurvePow(validPos, validRot, out List<Vector2> smoothPosList, out List<float> smootRotList, 4);
-            List<VertexPositionColorTexture2D> list = [];
+            List<ScarletVertex> list = [];
             for (int i = 0; i < smoothPosList.Count; i++)
             {
                 Vector2 oldCenter = smoothPosList[i] + Projectile.Size / 2 - Main.screenPosition;
@@ -134,8 +134,8 @@ namespace HJScarletRework.Projs.Ranged
                 handleHeight *= DrawScale;
                 Vector2 posOffset = new Vector2(0, handleHeight).RotatedBy(smootRotList[i]);
                 Color color = drawColor * (1f - progress * 0.5f);
-                VertexPositionColorTexture2D upClass = new(oldCenter + posOffset, color, new Vector3(progress, 0, 0f));
-                VertexPositionColorTexture2D downClass = new(oldCenter - posOffset, color, new Vector3(progress, 1, 0f));
+                ScarletVertex upClass = new(oldCenter + posOffset, color, new Vector3(progress, 0, 0f));
+                ScarletVertex downClass = new(oldCenter - posOffset, color, new Vector3(progress, 1, 0f));
                 list.Add(upClass);
                 list.Add(downClass);
             }

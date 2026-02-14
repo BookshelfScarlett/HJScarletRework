@@ -10,6 +10,7 @@ namespace HJScarletRework.Items.Accessories
 {
     public class RewardofWarrior : HJScarletItems
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ItemCategory LocalCategory => ItemCategory.Accessories;
         public override void SetDefaults()
         {

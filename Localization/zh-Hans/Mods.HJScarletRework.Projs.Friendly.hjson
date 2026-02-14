@@ -54,6 +54,15 @@ Melee: {
 	// CryoblazeHymnFrostEnergy.DisplayName: Cryoblaze Hymn Frost Energy
 	// CryoblazeHymnFrostPortal.DisplayName: Cryoblaze Hymn Frost Portal
 	// CryoblazeHymnProj.DisplayName: Cryoblaze Hymn Proj
+	// GalvanizedHandSideProj.DisplayName: Galvanized Hand Side Proj
+	// GalvanizedHandThrownProj.DisplayName: Galvanized Hand Thrown Proj
+	// GalvanizedHandArrow.DisplayName: Galvanized Hand Arrow
+	// GalvanizedHandArrowMounted.DisplayName: Galvanized Hand Arrow Mounted
+	// LightBiteDarkStar.DisplayName: Light Bite Dark Star
+	// SpearofEscapeRider.DisplayName: Spearof Escape Rider
+	// SpearofEscapeThrownProj.DisplayName: Spearof Escape Thrown Proj
+	// SpearofEscapeMissile.DisplayName: Spearof Escape Missile
+	// SpearofEscapeBoom.DisplayName: Spearof Escape Boom
 }
 
 Typeless: {

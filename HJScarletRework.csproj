@@ -24,9 +24,6 @@
 	    <HintPath>..\ModAssemblies\ContinentOfJourney_v0.8.70.46.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Assets\Sounds\SakurabaEmmaSounds\" />
-	</ItemGroup>
 
 	<!-- References -->
 

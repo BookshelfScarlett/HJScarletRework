@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetStaticDefaults() => Type.ShimmerEach<DeepTone>();
         public override void ExSD()
         {
-            Item.damage = 34;
+            Item.damage = 93;
             Item.useTime = Item.useAnimation = 24;
             Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { Pitch = 0.5f, PitchVariance = 0.1f, MaxInstances = 0 };
             Item.knockBack = 12f;

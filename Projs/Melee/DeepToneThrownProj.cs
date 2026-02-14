@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Projectiles;
+using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
@@ -26,17 +27,17 @@ namespace HJScarletRework.Projs.Melee
             set => Projectile.ai[0] = (float)value;
         }
         public List<Vector2> PortalPosList = [];
-        public ref float AttackTimer => ref Projectile.ai[0];
+        public ref float AttackTimer => ref Projectile.ai[1];
         public Vector2 ImpactPos = Vector2.Zero;
         public override void ExSD()
         {
-            Projectile.extraUpdates = 5;
+            Projectile.extraUpdates = 4;
             Projectile.height = Projectile.width = 16;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 4;
             Projectile.ignoreWater = true;
-            Projectile.tileCollide = false;
+            Projectile.tileCollide = true;
             Projectile.timeLeft = 300;
         }
         public override void AI()
@@ -54,8 +55,16 @@ namespace HJScarletRework.Projs.Melee
 
         public void DoShoot()
         {
+            AttackTimer += 1;
+            if (AttackTimer > 30f)
+            {
+                //SpawnTenctacle(-1);
+                AttackTimer = 0;
+            }
             Projectile.rotation = Projectile.velocity.ToRotation();
             //粒子
+            if (HJScarletMethods.OutOffScreen(Projectile.Center))
+                return;
             Vector2 offset = Projectile.SafeDir() * 90f + Projectile.SafeDir().RotatedBy(PiOver2) * 2.1f;
             Vector2 mountedPos = Projectile.Center + offset;
             Dust d = Dust.NewDustPerfect(mountedPos + Main.rand.NextVector2Circular(6f, 6f), DustID.GreenTorch);
@@ -78,9 +87,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreKill(int timeLeft)
         {
-            NPC target = Projectile.ToHJScarletNPC();
-            if (target != null)
-                target.HJScarlet().DeepToneThrownMark = false;
+            SpawnTenctacle(-1);
             return true;
         }
 
@@ -90,56 +97,22 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            switch(AttackType)
-            {
-                case Style.Shoot:
-                    DoShoot_OnHit(target, hit, damageDone);
-                    break;
-                case Style.Stuck:
-                    DoStuck_OnHit(target, hit, damageDone);
-                    break;
-            }
+                    DoShoot_OnHit(target);
         }
 
         private void DoStuck_OnHit(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            SpawnTenctacle_Portal(target, hit, damageDone);
         }
-        private void DoShoot_OnHit(NPC target, NPC.HitInfo hit, int damageDone)
+        private void DoShoot_OnHit(NPC target)
         {
-            SpawnTenctacle(target, hit, damageDone);
+            SpawnTenctacle(target.whoAmI);
         }
-        private void SpawnTenctacle_Portal(NPC target, NPC.HitInfo hit, int damageDone)
+        private void SpawnTenctacle_Portal(int targetindex, NPC.HitInfo hit, int damageDone)
         {
-            for (int j = 0; j < 3; j++)
-            {
-                //随机生成的位置方向
-                Vector2 realspawnPos = Projectile.Center + Vector2.UnitY.RotatedBy(Main.rand.NextFloat(PiOver4) * Main.rand.NextBool().ToDirectionInt()) * -30f;
-                //什么玩意，为啥咋生成出来的位置都是一样的
-                Vector2 dir = (realspawnPos - target.Center).SafeNormalize(Vector2.UnitX);
-                for (int k = 0; k < 3; k++)
-                {
-                    //让开始的方向有一定的偏差
-                    Vector2 randDir = dir.RotatedBy(Main.rand.NextFloat(ToRadians(10f) * Main.rand.NextBool().ToDirectionInt()));
-                    float tentacleYDirection = Main.rand.Next(10, 120) * 0.001f;
-                    if (Main.rand.NextBool())
-                    {
-                        tentacleYDirection *= -1f;
-                    }
-                    float tentacleXDirection = Main.rand.Next(10, 120) * 0.001f;
-                    if (Main.rand.NextBool())
-                    {
-                        tentacleXDirection *= -1f;
-                    }
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), realspawnPos, randDir * Main.rand.NextFloat(12f, 18f), ProjectileType<DeepToneTenctacle>(), Projectile.damage, 0f, Owner.whoAmI, tentacleXDirection, tentacleYDirection);
-                    proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
-                    ((DeepToneTenctacle)proj.ModProjectile).InitPos = realspawnPos;
-                }
-            }
         }
-        private void SpawnTenctacle(NPC target, NPC.HitInfo hit, int damageDone)
+        private void SpawnTenctacle(int targetIndex)
         {
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Vector2 randDir = Main.rand.NextFloat(TwoPi).ToRotationVector2();
                 float tentacleYDirection = (float)Main.rand.Next(10, 160) * 0.001f;
@@ -152,9 +125,9 @@ namespace HJScarletRework.Projs.Melee
                 {
                     tentacleXDirection *= -1f;
                 }
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, randDir * Main.rand.NextFloat(12f, 18f), ProjectileType<DeepToneTenctacle>(), Projectile.damage, 0f, Owner.whoAmI, tentacleXDirection, tentacleYDirection);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, randDir * Main.rand.NextFloat(12f, 18f), ProjectileType<DeepToneTenctacle>(), (int)(Projectile.damage * 0.5f), 0f, Owner.whoAmI, tentacleXDirection, tentacleYDirection);
                 ((DeepToneTenctacle)proj.ModProjectile).InitPos = Projectile.Center;
-                proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                proj.HJScarlet().GlobalTargetIndex = targetIndex;
             }
         }
         public override bool PreDraw(ref Color lightColor)

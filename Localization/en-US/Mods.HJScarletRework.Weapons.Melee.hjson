@@ -103,18 +103,8 @@ TheMars: {
 	Tooltip: ""
 }
 
-IceSpear: {
-	DisplayName: Ice Spear
-	Tooltip: ""
-}
-
 GalvanizedHandThrown: {
 	DisplayName: Galvanized Hand Thrown
-	Tooltip: ""
-}
-
-IceFireSpear: {
-	DisplayName: Ice Fire Spear
 	Tooltip: ""
 }
 

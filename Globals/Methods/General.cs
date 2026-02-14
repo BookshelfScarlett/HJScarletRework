@@ -137,6 +137,18 @@ namespace HJScarletRework.Globals.Methods
             return $"{(int)value2}%";
         }
         public static int SetAxePower(this int percent) => percent / 5;
+        /// <summary>
+        /// 将玩家的鼠标向量获取的值限制在1080p屏幕内，类似于天顶剑
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static Vector2 ToClampMouseVector2(this Player player)
+        {
+            Vector2 mouseWorld = player.LocalMouseWorld();
+            mouseWorld.X = mouseWorld.X >= player.MountedCenter.X ? MathF.Min(mouseWorld.X, player.MountedCenter.X + 960f) : MathF.Max(mouseWorld.X, player.MountedCenter.X - 960f);
+            mouseWorld.Y = mouseWorld.Y >= player.MountedCenter.Y ? MathF.Min(mouseWorld.Y, player.MountedCenter.Y + 540f) : MathF.Max(mouseWorld.Y, player.MountedCenter.Y - 540f);
+            return mouseWorld;
+        }
         public static int TerrariaCurrentHour
         {
             get

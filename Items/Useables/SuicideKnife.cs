@@ -13,6 +13,7 @@ namespace HJScarletRework.Items.Useables
 {
     public class SuicideKnife : HJScarletItems
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ItemCategory LocalCategory => ItemCategory.Useable;
         public override string Texture => GetAsset(AssetCategory.Useable);
         public override void SetDefaults()

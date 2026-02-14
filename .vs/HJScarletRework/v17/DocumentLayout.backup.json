@@ -3,68 +3,30 @@
   "WorkspaceRootPath": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\globals\\classes\\hjscarletpets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:globals\\classes\\hjscarletpets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\accessories\\heartofthemountain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\accessories\\heartofthemountain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\pets\\whaleproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\pets\\whaleproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\weapons\\melee\\candlancethrown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\weapons\\melee\\candlancethrown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\pets\\watcherproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\pets\\watcherproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\accessories\\desterrennacht.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\accessories\\desterrennacht.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\pets\\shadowproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\pets\\shadowproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\AppData\\Local\\SourceServer\\875292e33d7578cce3664f56de12a7377a7709a9364029c7388e4ae6625c1299\\Common\\Drawing\\ScreenTarget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\pets\\squidproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\pets\\squidproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\melee\\themarsproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\melee\\themarsproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\pets\\whaleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\pets\\whaleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\AppData\\Local\\SourceServer\\9f884ce65d0d0b044a71d64db3d55e30539617ef31ee0f305bb8329a544333fc\\Core\\Graphics\\PixelatedRender\\PixelatedRenderManger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\pets\\watcheritem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\pets\\watcheritem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\pets\\squiditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\pets\\squiditem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\localization\\zh-hans\\mods.hjscarletrework.items.pet.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:localization\\zh-hans\\mods.hjscarletrework.items.pet.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\localization\\zh-hans\\mods.hjscarletrework.buffs.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:localization\\zh-hans\\mods.hjscarletrework.buffs.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\pets\\shadowitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\pets\\shadowitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\rarity\\disasterrarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:rarity\\disasterrarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\rarity\\rarepets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:rarity\\rarepets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\rarity\\raritydrawhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:rarity\\raritydrawhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\pets\\noneitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\pets\\noneitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\buffs\\pets\\watcherbuff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:buffs\\pets\\watcherbuff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\weapons\\melee\\themars.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\weapons\\melee\\themars.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,21 +36,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 203,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HJScarletPets.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Globals\\Classes\\HJScarletPets.cs",
-              "RelativeDocumentMoniker": "Globals\\Classes\\HJScarletPets.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Globals\\Classes\\HJScarletPets.cs",
-              "RelativeToolTip": "Globals\\Classes\\HJScarletPets.cs",
-              "ViewState": "AgIAANMAAAAAAAAAAAArwNkAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:37:59.059Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -103,197 +52,93 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ShadowProj.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Pets\\ShadowProj.cs",
-              "RelativeDocumentMoniker": "Projs\\Pets\\ShadowProj.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Pets\\ShadowProj.cs",
-              "RelativeToolTip": "Projs\\Pets\\ShadowProj.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:37:52.227Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SquidProj.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Pets\\SquidProj.cs",
-              "RelativeDocumentMoniker": "Projs\\Pets\\SquidProj.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Pets\\SquidProj.cs",
-              "RelativeToolTip": "Projs\\Pets\\SquidProj.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:37:50.389Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Mods.HJScarletRework.Items.Pet.hjson",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Localization\\zh-Hans\\Mods.HJScarletRework.Items.Pet.hjson",
-              "RelativeDocumentMoniker": "Localization\\zh-Hans\\Mods.HJScarletRework.Items.Pet.hjson",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Localization\\zh-Hans\\Mods.HJScarletRework.Items.Pet.hjson",
-              "RelativeToolTip": "Localization\\zh-Hans\\Mods.HJScarletRework.Items.Pet.hjson",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACoAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-01-25T15:36:00.28Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Mods.HJScarletRework.Buffs.hjson",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Localization\\zh-Hans\\Mods.HJScarletRework.Buffs.hjson",
-              "RelativeDocumentMoniker": "Localization\\zh-Hans\\Mods.HJScarletRework.Buffs.hjson",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Localization\\zh-Hans\\Mods.HJScarletRework.Buffs.hjson",
-              "RelativeToolTip": "Localization\\zh-Hans\\Mods.HJScarletRework.Buffs.hjson",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-01-25T15:35:18.258Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "WhaleProj.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Pets\\WhaleProj.cs",
-              "RelativeDocumentMoniker": "Projs\\Pets\\WhaleProj.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Pets\\WhaleProj.cs",
-              "RelativeToolTip": "Projs\\Pets\\WhaleProj.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAApAAAAAAAAAA==",
+              "Title": "CandLanceThrown.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\CandLanceThrown.cs",
+              "RelativeDocumentMoniker": "Items\\Weapons\\Melee\\CandLanceThrown.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\CandLanceThrown.cs",
+              "RelativeToolTip": "Items\\Weapons\\Melee\\CandLanceThrown.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:33:43.293Z",
+              "WhenOpened": "2026-02-14T12:00:47.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HeartoftheMountain.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Accessories\\HeartoftheMountain.cs",
+              "RelativeDocumentMoniker": "Items\\Accessories\\HeartoftheMountain.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Accessories\\HeartoftheMountain.cs",
+              "RelativeToolTip": "Items\\Accessories\\HeartoftheMountain.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-14T12:00:38.27Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "WatcherProj.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Pets\\WatcherProj.cs",
-              "RelativeDocumentMoniker": "Projs\\Pets\\WatcherProj.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Pets\\WatcherProj.cs",
-              "RelativeToolTip": "Projs\\Pets\\WatcherProj.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAYwB8AAAAgAAAAAAAAAA==",
+              "Title": "Desterrennacht.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Accessories\\Desterrennacht.cs",
+              "RelativeDocumentMoniker": "Items\\Accessories\\Desterrennacht.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Accessories\\Desterrennacht.cs",
+              "RelativeToolTip": "Items\\Accessories\\Desterrennacht.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:33:42.611Z",
+              "WhenOpened": "2026-02-14T12:00:22.696Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "RarityDrawHelper.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Rarity\\RarityDrawHelper.cs",
-              "RelativeDocumentMoniker": "Rarity\\RarityDrawHelper.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Rarity\\RarityDrawHelper.cs",
-              "RelativeToolTip": "Rarity\\RarityDrawHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "ScreenTarget.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\AppData\\Local\\SourceServer\\875292e33d7578cce3664f56de12a7377a7709a9364029c7388e4ae6625c1299\\Common\\Drawing\\ScreenTarget.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\875292e33d7578cce3664f56de12a7377a7709a9364029c7388e4ae6625c1299\\Common\\Drawing\\ScreenTarget.cs",
+              "ToolTip": "C:\\Users\\25239\\AppData\\Local\\SourceServer\\875292e33d7578cce3664f56de12a7377a7709a9364029c7388e4ae6625c1299\\Common\\Drawing\\ScreenTarget.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\875292e33d7578cce3664f56de12a7377a7709a9364029c7388e4ae6625c1299\\Common\\Drawing\\ScreenTarget.cs",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAUwL8AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:30:20.207Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "RarePets.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Rarity\\RarePets.cs",
-              "RelativeDocumentMoniker": "Rarity\\RarePets.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Rarity\\RarePets.cs",
-              "RelativeToolTip": "Rarity\\RarePets.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:30:17.084Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "DisasterRarity.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Rarity\\DisasterRarity.cs",
-              "RelativeDocumentMoniker": "Rarity\\DisasterRarity.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Rarity\\DisasterRarity.cs",
-              "RelativeToolTip": "Rarity\\DisasterRarity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:30:16.247Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "WatcherItem.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Pets\\WatcherItem.cs",
-              "RelativeDocumentMoniker": "Items\\Pets\\WatcherItem.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Pets\\WatcherItem.cs",
-              "RelativeToolTip": "Items\\Pets\\WatcherItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:30:08.682Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ShadowItem.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Pets\\ShadowItem.cs",
-              "RelativeDocumentMoniker": "Items\\Pets\\ShadowItem.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Pets\\ShadowItem.cs",
-              "RelativeToolTip": "Items\\Pets\\ShadowItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:29:46.728Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "NoneItem.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Pets\\NoneItem.cs",
-              "RelativeDocumentMoniker": "Items\\Pets\\NoneItem.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Pets\\NoneItem.cs",
-              "RelativeToolTip": "Items\\Pets\\NoneItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:29:44.128Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SquidItem.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Pets\\SquidItem.cs",
-              "RelativeDocumentMoniker": "Items\\Pets\\SquidItem.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Pets\\SquidItem.cs",
-              "RelativeToolTip": "Items\\Pets\\SquidItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABTAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:29:43.071Z",
+              "WhenOpened": "2026-02-14T11:59:54.438Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "WhaleItem.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Pets\\WhaleItem.cs",
-              "RelativeDocumentMoniker": "Items\\Pets\\WhaleItem.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Pets\\WhaleItem.cs",
-              "RelativeToolTip": "Items\\Pets\\WhaleItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "PixelatedRenderManger.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\AppData\\Local\\SourceServer\\9f884ce65d0d0b044a71d64db3d55e30539617ef31ee0f305bb8329a544333fc\\Core\\Graphics\\PixelatedRender\\PixelatedRenderManger.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\9f884ce65d0d0b044a71d64db3d55e30539617ef31ee0f305bb8329a544333fc\\Core\\Graphics\\PixelatedRender\\PixelatedRenderManger.cs",
+              "ToolTip": "C:\\Users\\25239\\AppData\\Local\\SourceServer\\9f884ce65d0d0b044a71d64db3d55e30539617ef31ee0f305bb8329a544333fc\\Core\\Graphics\\PixelatedRender\\PixelatedRenderManger.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\9f884ce65d0d0b044a71d64db3d55e30539617ef31ee0f305bb8329a544333fc\\Core\\Graphics\\PixelatedRender\\PixelatedRenderManger.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAASwGUAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:29:40.487Z",
+              "WhenOpened": "2026-02-14T11:56:19.008Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "WatcherBuff.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Buffs\\Pets\\WatcherBuff.cs",
-              "RelativeDocumentMoniker": "Buffs\\Pets\\WatcherBuff.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Buffs\\Pets\\WatcherBuff.cs",
-              "RelativeToolTip": "Buffs\\Pets\\WatcherBuff.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "TheMarsProj.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\TheMarsProj.cs",
+              "RelativeDocumentMoniker": "Projs\\Melee\\TheMarsProj.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\TheMarsProj.cs",
+              "RelativeToolTip": "Projs\\Melee\\TheMarsProj.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAIwIoAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-25T15:29:37.319Z",
+              "WhenOpened": "2026-02-14T11:55:51.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TheMars.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\TheMars.cs",
+              "RelativeDocumentMoniker": "Items\\Weapons\\Melee\\TheMars.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\TheMars.cs",
+              "RelativeToolTip": "Items\\Weapons\\Melee\\TheMars.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-14T11:55:47.621Z",
               "EditorCaption": ""
             }
           ]

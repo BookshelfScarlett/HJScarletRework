@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Build.ObjectModelRemoting;
+using rail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,8 @@ namespace HJScarletRework.Globals.Players
             //精确打击取溢出暴击率的100伤害。
             if (PreciousTargetCrtis > 0 && PreciousTargetAcc)
             {
-                float critBuff = Math.Max(0f, GetWantedCrits<GenericDamageClass>());
+                float critBuff = Player.HeldItem.crit;
+                Main.NewText(critBuff);
                 totalCritsBonus += critBuff;
             }
             totalCritsBonus += GeneralCrtiDamageAdd;

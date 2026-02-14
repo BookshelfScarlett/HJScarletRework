@@ -6,10 +6,15 @@ using ContinentOfJourney.Items.Placables;
 using ContinentOfJourney.Items.Placables.FishingCrate;
 using ContinentOfJourney.Items.Rockets;
 using ContinentOfJourney.Items.ThrowerWeapons;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
+using HJScarletRework.Items.Weapons.Melee;
+using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -27,36 +32,77 @@ namespace HJScarletRework.Globals.Instances
         }
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
-            //天塌下来了这也只能打表
-            int[] livingItem = [
-                ItemType<Evolution>(),
-                ItemType<ForceANature>(),
-                ItemType<LivingBar>(),
-                ItemType<PillarStaff>(),
-                ItemType<ForestHelmet>(),
-                ItemType<ForestBreastplate>(),
-                ItemType<ForestLeggings>(),
-                ItemType<EntropyReduction>(),
-                ItemType<Virtue>(),
-                ItemType<Lifesaber>(),
-                ItemType<HornofHarvest>(),
-                ItemType<EssenceofLife>(),
-                ItemType<DoctorExpeller>()
-                ];
-            //继续遍历直到没有内容为止
-            for (int i = 0; i < livingItem.Length; i++)
+            if (line.Name == "ItemName" && line.Mod == "Terraria")
             {
-                if (item.type != livingItem[i])
-                    continue;
-                if (line.Name == "ItemName" && line.Mod == "Terraria")
+                foreach (var (itemIDs, drawMethods) in _rarityDrawMap)
                 {
-                    LivingRarity.DrawRarity(line);
-                    return false;
+                    if (itemIDs.Contains(item.type))
+                    {
+                        drawMethods(line);
+                        return false;
+                    }
                 }
-                
             }
+            
             return base.PreDrawTooltipLine(item, line, ref yOffset);
         }
+        /// <summary>
+        /// 这里每帧都会高频调用，所以该创建哈希表了孩子们。
+        /// </summary>
+        private static readonly Dictionary<HashSet<int>, Action<DrawableTooltipLine>> _rarityDrawMap = new()
+        {
+            {
+                new HashSet<int>
+                {
+                    ItemType<Evolution>(),
+                    ItemType<ForceANature>(),
+                    ItemType<LivingBar>(),
+                    ItemType<PillarStaff>(),
+                    ItemType<ForestHelmet>(),
+                    ItemType<ForestBreastplate>(),
+                    ItemType<ForestLeggings>(),
+                    ItemType<EntropyReduction>(),
+                    ItemType<Virtue>(),
+                    ItemType<Lifesaber>(),
+                    ItemType<HornofHarvest>(),
+                    ItemType<EssenceofLife>(),
+                    ItemType<DoctorExpeller>()
+                },
+                LivingRarity.DrawRarity
+            },
+            {
+                new HashSet<int>
+                {
+                    ItemType<GalvanizedHand>(),
+                    ItemType<GalvanizedHandThrown>(),
+                    ItemType<FlybackHand>(),
+                    ItemType<FlybackHandThrown>()
+                },
+                TimeRarity.DrawRarity
+            },
+            {
+                new HashSet<int>
+                {
+                    ItemType<Dialectics>(),
+                    ItemType<DialecticsThrown>()
+
+                },
+                MatterRarity.DrawRarity
+            }
+        };
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            if (HJScarletCategoryList.HJSpearList.Contains(item.type))
+            {
+                string keyPath = Mod.GetLocalizationKey($"SwitchWeaponTooltip");
+                tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), Color.Lime);
+            }
+            base.ModifyTooltips(item, tooltips);
+        }
+        private void DrawSpecialRarityName(Item item, DrawableTooltipLine line, ref int y)
+        {
+        }
+
         public override void HoldItem(Item item, Player player)
         {
             if (EnableCritDamage)

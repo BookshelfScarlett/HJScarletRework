@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetStaticDefaults() => Type.ShimmerEach<SpearOfDarkness>();
         public override void ExSD()
         {
-            Item.damage = 34;
+            Item.damage = 39;
             Item.useTime = Item.useAnimation = 24;
             Item.UseSound = SoundID.Item103;
             Item.knockBack = 12f;

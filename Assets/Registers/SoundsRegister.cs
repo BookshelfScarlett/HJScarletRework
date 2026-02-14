@@ -37,6 +37,11 @@ namespace HJScarletRework.Assets.Registers
         private static SoundStyle Misc_KnifeToss1 => new SoundStyle($"{SoundsPath}{nameof(Misc_KnifeToss1)}");
         private static SoundStyle Misc_KnifeToss2 => new SoundStyle($"{SoundsPath}{nameof(Misc_KnifeToss2)}");
         private static SoundStyle Misc_KnifeToss3 => new SoundStyle($"{SoundsPath}{nameof(Misc_KnifeToss3)}");
+        public static SoundStyle GalvanizedHand_Hit => new SoundStyle($"{SoundsPath}{nameof(GalvanizedHand_Hit)}", numVariants: 2);
+        public static SoundStyle GalvanizedHand_Toss => new SoundStyle($"{SoundsPath}{nameof(GalvanizedHand_Toss)}", numVariants: 3);
+        public static SoundStyle GalvanizedHand_Charge => new SoundStyle($"{SoundsPath}{nameof(GalvanizedHand_Charge)}", numVariants: 2);
+        public static SoundStyle SpearofEscape_Toss => new SoundStyle($"{SoundsPath}{nameof(SpearofEscape_Toss)}", numVariants: 3);
+        public static SoundStyle SpearofEscape_Boom => new SoundStyle($"{SoundsPath}{nameof(SpearofEscape_Boom)}");
         public static SoundStyle[] Hammer_Shoot =>
             [
                 Hammer_Shoot1,

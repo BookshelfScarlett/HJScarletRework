@@ -10,6 +10,7 @@ namespace HJScarletRework.Items.Weapons.Melee
 {
     public class CryoblazeHymn : ThrownSpearClass
     {
+        public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {
             Item.damage = 34;

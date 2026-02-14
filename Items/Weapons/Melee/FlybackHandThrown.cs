@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetStaticDefaults() => Type.ShimmerEach<FlybackHand>();
         public override void ExSD()
         {
-            Item.damage = 100;
+            Item.damage = 233;
             Item.useTime = Item.useAnimation = 25;
             Item.rare = ItemRarityID.Red;
             Item.shoot = ProjectileType<FlybackHandThrownProj>();

@@ -131,3 +131,8 @@ LifeBalloon: {
 	// DisplayName: Life Balloon
 	// Tooltip: ""
 }
+
+Desterrennacht: {
+	// DisplayName: Desterrennacht
+	// Tooltip: ""
+}

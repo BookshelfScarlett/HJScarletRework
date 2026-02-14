@@ -74,7 +74,7 @@ namespace HJScarletRework.Projs.Melee
                 new TurbulenceShinyCube(spawnPos, Projectile.velocity / 2, RandLerpColor(Color.White, Color.Green) * Clamp(Projectile.velocity.Length(), 0, 1), 20, Projectile.rotation, 1, 0.28f * Projectile.Opacity, randPosMoveValue: 8).Spawn();
             }
 
-            GetLegalTarget();
+                GetLegalTarget();
             //如果存在时间超过1秒，进入处死状态
             if(Timer > 10f * Projectile.MaxUpdates)
             {
@@ -90,17 +90,6 @@ namespace HJScarletRework.Projs.Melee
             //创建一个链表，搜索附近可能的单位
             float searchDist = SearchTargetDistance;
             //先遍历列表内原有的元素，这里是逆向遍历（如果有的话）
-            if(LegalTargetList!=null&LegalTargetList.Count>0)
-            {
-                for(int i =LegalTargetList.Count-1;i>=0;i--)
-                {
-                    NPC tar = LegalTargetList[i];
-                    bool legalTarget = Vector2.Distance(tar.Center, Projectile.Center) < searchDist && tar.CanBeChasedBy();
-                    //不合规的目标先被排除
-                    if (!legalTarget)
-                        LegalTargetList.RemoveAt(i);
-                }
-            }
             NPC curTarget = null;
             foreach (NPC needTar in Main.ActiveNPCs)
             {
@@ -128,7 +117,7 @@ namespace HJScarletRework.Projs.Melee
             //如果当前射弹存储了超过3的单位，移除当前列表内的第一个单位
             if(LegalTargetList.Count > 3)
             {
-                LegalTargetList.RemoveAt(0);
+                LegalTargetList.RemoveAt(3);
             }
         }
 
@@ -149,13 +138,6 @@ namespace HJScarletRework.Projs.Melee
             //启用计时器，并在一定时间后直接处死射弹
             if (Timer < 90f)
             {
-                float rad = Clamp(Projectile.velocity.Length(), 0, 1);
-                int count = rad < 0.5f ? 1 : 2;
-                for (int i = 0; i < count; i++)
-                {
-                    Vector2 spawnPos = Projectile.Center.ToRandCirclePos(6f);
-                    new TurbulenceShinyCube(spawnPos, Projectile.velocity / 2, RandLerpColor(Color.White, Color.Green) * rad, 20, Projectile.rotation, 1 * rad, 0.28f * rad , randPosMoveValue: 8).Spawn();
-                }
                 return;
             }
             Projectile.Opacity -= 0.1f;

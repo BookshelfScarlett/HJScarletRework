@@ -11,6 +11,7 @@ namespace HJScarletRework.Particles
     public class TurbulenceShinyOrb : BaseParticle
     {
         public override int UseBlendStateID => BlendStateID.Additive;
+        public bool SeedHasHandValue = false;
         public float Speed = 5f;
         public int SeedOffset = 0;
         public float BeginScale = 1f;
@@ -29,6 +30,21 @@ namespace HJScarletRework.Particles
             DrawGlowCenter = false;
             GlowCenterMult = 0f;
         }
+        public TurbulenceShinyOrb(Vector2 position, float speed, Color color, int lifetime, float scale, float direction, int seedValue)
+        {
+            Position = position;
+            Speed = speed;
+            DrawColor = color;
+            Lifetime = lifetime;
+            Scale = scale;
+            BeginScale = scale;
+            TurBulenceDirection = direction;
+            DrawGlowCenter = false;
+            GlowCenterMult = 0f;
+            SeedHasHandValue = true;
+            SeedOffset = seedValue;
+        }
+
         public TurbulenceShinyOrb(Vector2 position, float speed, Color color, int lifetime, float scale, float direction, float glowCenterMult)
         {
             Position = position;
@@ -43,7 +59,8 @@ namespace HJScarletRework.Particles
         }
         public override void OnSpawn()
         {
-            SeedOffset = Main.rand.Next(0, 100000);
+            if (!SeedHasHandValue)
+                SeedOffset = Main.rand.Next(0, 100000);
         }
 
         public override void Update()
@@ -58,7 +75,7 @@ namespace HJScarletRework.Particles
             Velocity *= 0.9f;
             Scale = Lerp(BeginScale, 0, EaseOutCubic(LifetimeRatio));
             //Scale大于0.45的时候把TimeLeft的值直接设置为……Time的大小，以处死射弹
-            if (Scale <= BeginScale * 0.25f)
+            if (Scale <= BeginScale * 0.10f)
                 Time = Lifetime;
                 
         }

@@ -37,7 +37,8 @@ namespace HJScarletRework.Projs.Melee
             Projectile.usesLocalNPCImmunity = true;
             Projectile.tileCollide = false;
             Projectile.localNPCHitCooldown = 60;
-            Projectile.penetrate = 4;
+            Projectile.penetrate = 1;
+            Projectile.scale *= 1.1f;
             Projectile.noEnchantmentVisuals = true;
             Projectile.timeLeft = 100;
         }
@@ -63,11 +64,13 @@ namespace HJScarletRework.Projs.Melee
             }
             if (HJScarletMethods.OutOffScreen(Projectile.Center))
                 return;
-            for (int i = 0;i<2;i++)
+            for (int i = 0; i < 2; i++)
             {
                 new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(4f), 0.5f, RandLerpColor(Color.Orange, Color.OrangeRed), 30, Main.rand.NextFloat(0.1f, 0.12f), RandRotTwoPi).Spawn();
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(16f), -Projectile.velocity / 3, RandLerpColor(Color.DarkOrange, Color.Black), 30, RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f,0.16f)).SpawnToPriorityNonPreMult();
-            }
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(8f), -Projectile.velocity / 8f, RandLerpColor(Color.OrangeRed, Color.DarkGray), 30, RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f, 0.16f) * 1.1f).SpawnToPriorityNonPreMult();
+                }
+            Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(10f), 0.8f, 1.4f);
+            new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f), vel, RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.3f, ToRadians(10f)).Spawn();
         }
 
         private void DoAttack()
@@ -142,7 +145,7 @@ namespace HJScarletRework.Projs.Melee
                 scale *= 0.90f;
                 float rads = (float)i / length;
                 Color edgeColor = Color.Lerp(Color.Orange, Color.Lerp(Color.Orange, Color.OrangeRed, rads * 0.7f), (1 - rads)).ToAddColor(10) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads);
-                Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.70f);
+                Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.50f);
                 float rot = Lerp(Projectile.oldRot[i], Projectile.oldRot[0], 1f);
                 SB.Draw(projTex, lerpPos + Projectile.PosToCenter(), null, edgeColor, rot, ori, oriScale * scale * Projectile.scale, 0, 0);
             }

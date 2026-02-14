@@ -17,11 +17,25 @@ namespace HJScarletRework.Particles
         public override int UseBlendStateID => BlendStateID.Additive;
         public bool UseRandomTexture = true;
         public int PickLine;
+        private Color FireColor;
+        private Color TargetColor;
         public FireShiny(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale)
         {
             Position = position;
             Velocity = velocity;
-            DrawColor = color;
+            DrawColor = FireColor = color;
+            TargetColor = Color.DarkGray;
+            Lifetime = lifetime;
+            Rotation = Rot;
+            Opacity = opacity;
+            Scale = scale;
+        }
+        public FireShiny(Vector2 position, Vector2 velocity, Color beginColor, Color targetColor, int lifetime, float Rot, float opacity, float scale)
+        {
+            Position = position;
+            Velocity = velocity;
+            DrawColor = FireColor = beginColor;
+            TargetColor = targetColor;
             Lifetime = lifetime;
             Rotation = Rot;
             Opacity = opacity;
@@ -31,7 +45,7 @@ namespace HJScarletRework.Particles
         {
             Position = position;
             Velocity = velocity;
-            DrawColor = color;
+            DrawColor = FireColor = color;
             Lifetime = lifetime;
             Rotation = Rot;
             Opacity = opacity;
@@ -48,6 +62,10 @@ namespace HJScarletRework.Particles
         {
             Velocity *= 0.9f;
             Opacity = Lerp(Opacity, Lerp(Opacity, 0, 0.3f), 0.12f);
+            //Scale *= 0.93f;
+            //火焰的颜色应该逐渐向灰看齐
+            //无论是啥火焰都差不多
+            DrawColor = Color.Lerp(FireColor, TargetColor, LifetimeRatio);
         }
         // 这里采样没有问题，他贴图就是这样
         public override void Draw(SpriteBatch spriteBatch)

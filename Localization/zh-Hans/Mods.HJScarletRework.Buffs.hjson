@@ -32,3 +32,8 @@ WatcherBuff: {
 	DisplayName: 极视幼表
 	Description: 时间的无数同僚中最为幼小的一只
 }
+
+PanicBuff: {
+	// DisplayName: Panic Buff
+	// Description: Mods.HJScarletRework.Buffs.PanicBuff.Description
+}

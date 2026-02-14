@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HJScarletRework.Globals.Enums;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 
@@ -35,5 +38,7 @@ namespace HJScarletRework.Globals.Handlers
         }
         public static int GetSeconds(int seconds) => seconds * 60;
         public static Color RandLerpColor(Color beginColor, Color endColor) => Color.Lerp(beginColor, endColor, RandZeroToOne);
+        public static string GetVanillaAssetPath(VanillaAsset vanillaAsset, int id)=> $"Terraria/Images/{vanillaAsset}_{id}";
+        public static Asset<Texture2D> GetVanillaAsset(VanillaAsset vanillaAsset, int id)=> Request<Texture2D>($"Terraria/Images/{vanillaAsset}_{id}");
     }
 }

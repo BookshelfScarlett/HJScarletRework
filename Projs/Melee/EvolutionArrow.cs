@@ -123,7 +123,7 @@ namespace HJScarletRework.Projs.Melee
             GD.SamplerStates[0] = SamplerState.PointClamp;
             Projectile.ClearInvaidData(out List<Vector2> validPos, out List<float> validRot);
             //直接获取需要的贝塞尔曲线。
-            List<VertexPositionColorTexture2D> list = [];
+            List<ScarletVertex> list = [];
             int totalpoints = validPos.Count;
             //创建顶点列表
             for (int i = 0; i < validPos.Count; i++)
@@ -131,8 +131,8 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 oldCenter = validPos[i] + Projectile.Size / 2 - Main.screenPosition;
                 float progress = (float)i / (validPos.Count - 1);
                 Vector2 posOffset = new Vector2(0, 40f * heightMul).RotatedBy(validRot[i]);
-                VertexPositionColorTexture2D upClass = new(oldCenter - posOffset, color, new Vector3(progress, 0, 0f));
-                VertexPositionColorTexture2D downClass = new(oldCenter + posOffset, color, new Vector3(progress, 1, 0f));
+                ScarletVertex upClass = new(oldCenter - posOffset, color, new Vector3(progress, 0, 0f));
+                ScarletVertex downClass = new(oldCenter + posOffset, color, new Vector3(progress, 1, 0f));
                 list.Add(upClass);
                 list.Add(downClass);
             }

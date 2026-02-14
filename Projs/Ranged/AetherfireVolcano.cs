@@ -274,7 +274,6 @@ namespace HJScarletRework.Projs.Ranged
             shader.Parameters["UseColor"].SetValue(true);
             shader.Parameters["uFadeRange"].SetValue(0.6f);
             return shader;
-
         }
         private void DrawPillar(Texture2D tex, Vector2 scale, Rectangle cutSource, Vector2 ori)
         {

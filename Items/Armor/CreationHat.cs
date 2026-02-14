@@ -13,6 +13,7 @@ namespace HJScarletRework.Items.Armor
     [AutoloadEquip(EquipType.Head)]
     public class CreationHat : HJScarletItems
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ItemCategory LocalCategory => ItemCategory.Armor;
         public override string Texture => GetAsset(AssetCategory.Armor);
         public override void SetStaticDefaults()

@@ -1,6 +1,10 @@
 ﻿using ContinentOfJourney.Items;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
-using Terraria.ID;
+using HJScarletRework.Projs.Melee;
+using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.DataStructures;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
@@ -11,10 +15,23 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void ExSD()
         {
             Item.damage = 106;
-            Item.useTime = Item.useAnimation = 20;
+            Item.useTime = Item.useAnimation = 50;
             Item.knockBack = 12f;
-            Item.UseSound = SoundID.DD2_MonkStaffSwing;
-            Item.shootSpeed = 16;
+            Item.UseSound = HJScarletSounds.SpearofEscape_Toss;
+            Item.shootSpeed = 24;
+            Item.shoot = ProjectileType<SpearofEscapeRider>();
+        }
+        public override Color MainTooltipColor => Color.SkyBlue;
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            Vector2 ownerToSky = new Vector2(Lerp(player.ToClampMouseVector2().X, player.Center.X, 0.55f), player.Center.Y) + new Vector2(0, -500) - player.Center;
+            Vector2 skyDir = (ownerToSky).ToSafeNormalize();
+            Projectile proj = Projectile.NewProjectileDirect(source, position, skyDir * Item.shootSpeed, type, damage, knockback, player.whoAmI);
+            return false;
+        }
+        public override void HoldItem(Player player)
+        {
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using HJScarletRework.Buffs;
 using HJScarletRework.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
+using Steamworks;
 using System;
 using Terraria;
 using Terraria.DataStructures;
@@ -26,6 +27,8 @@ namespace HJScarletRework.Globals.Players
         public int FlybackHitBuffTimer = 0;
 
         public bool CreationHatSet = false;
+        public bool galvanizedHandProjHanging = false;
+        
 
         #region Accessories
 
@@ -49,6 +52,7 @@ namespace HJScarletRework.Globals.Players
         public int PreciousTargetCrtis = 10;
         public int PreciousCritsMin = 0;
         #endregion
+
         #region Pets
         public bool WhalePet = false;
         public bool NonePet = false;
@@ -61,6 +65,7 @@ namespace HJScarletRework.Globals.Players
             CreationHatSet = false;
             ShadowCastAcc = false;
             LifeBalloonAcc = false;
+            GeneralCrtiDamageAdd = 0;
             UnloadAcc();
             UnloadPets();
         }
@@ -90,6 +95,7 @@ namespace HJScarletRework.Globals.Players
             DesterranHeal = 0;
             PreciousTargetCrtis = 10;
             LifeBalloonAcc = false;
+            galvanizedHandProjHanging = true;
 
             DesterrannachtImmortal = false;
             DesterranImmortalTime = 0;
@@ -100,6 +106,19 @@ namespace HJScarletRework.Globals.Players
         public override void PostUpdate()
         {
             UpdateNetPacket();
+            SwitchWeaponSystem();
+        }
+        public override void ModifyWeaponCrit(Item item, ref float crit)
+        {
+            //确保武器起码有伤害
+            if(PreciousTargetAcc && item.damage > 0)
+            {
+                crit = PreciousTargetCrtis;
+                if (PreciousTargetCrtis > 150)
+                    PreciousTargetCrtis = 150;
+            }
+
+            base.ModifyWeaponCrit(item, ref crit);
         }
         public override void SaveData(TagCompound tag)
         {

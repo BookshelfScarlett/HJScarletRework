@@ -16,12 +16,6 @@ namespace HJScarletRework.Globals.Players
                 Player.statDefense += KingdomDefenseTime;
             GeneralCrtiDamageAdd = 0;
 
-            if(PreciousTargetAcc)
-            {
-                 Player.GetCritChance<GenericDamageClass>() = PreciousTargetCrtis;
-                if (PreciousTargetCrtis > 150)
-                    PreciousTargetCrtis = 150;
-            }
             //星月夜
             if (DesterrennachtAcc)
             {

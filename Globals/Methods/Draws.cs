@@ -19,6 +19,12 @@ namespace HJScarletRework.Globals.Methods
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.PointWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
         }
+        public static void EnterShaderArea(this SpriteBatch SB, BlendState blendState)
+        {
+            SB.End();
+            SB.Begin(SpriteSortMode.Immediate, blendState, SamplerState.PointWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+        }
+
         public static void EndShaderArea(this SpriteBatch SB)
         {
             SB.End();

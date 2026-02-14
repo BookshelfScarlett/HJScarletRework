@@ -10,6 +10,7 @@ namespace HJScarletRework.Items.Weapons.Melee
 {
     public class FierySpear : ThrownSpearClass
     {
+        public override bool NotHomewardJourneySpear => true;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

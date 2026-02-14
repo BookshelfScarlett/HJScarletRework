@@ -346,5 +346,26 @@ namespace HJScarletRework.Globals.Methods
             Player owner = Main.player[proj.owner];
             return Vector2.Distance(owner.MountedCenter, proj.Center) > distance;
         }
+        /// <summary>
+        /// 用于预判性的精确瞄准，对于一些不需要追踪的射弹来说很有帮助，
+        /// </summary>
+        /// <param name="startingPosition"></param>
+        /// <param name="targetPosition"></param>
+        /// <param name="targetVelocity"></param>
+        /// <param name="shootSpeed"></param>
+        /// <param name="iterations"></param>
+        /// <returns></returns>
+        public static Vector2 PredictAimToTarget(Vector2 startingPosition, Vector2 targetPosition, Vector2 targetVelocity, float shootSpeed, int iterations = 4)
+        {
+            float previousTimeToReachDestination = 0f;
+            Vector2 currentTargetPosition = targetPosition;
+            for (int i = 0; i < iterations; i++)
+            {
+                float timeToReachDestination = Vector2.Distance(startingPosition, currentTargetPosition) / shootSpeed;
+                currentTargetPosition += targetVelocity * (timeToReachDestination - previousTimeToReachDestination);
+                previousTimeToReachDestination = timeToReachDestination;
+            }
+            return (currentTargetPosition - startingPosition).SafeNormalize(Vector2.UnitY) * shootSpeed;
+        }
     }
 }

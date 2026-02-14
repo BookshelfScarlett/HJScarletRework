@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetStaticDefaults() => Type.ShimmerEach<Evolution>();
         public override void ExSD()
         {
-            Item.damage = 106;
+            Item.damage = 313;
             Item.useTime = Item.useAnimation = 25;
             Item.knockBack = 12f;
             Item.UseSound = HJScarletSounds.Evolution_Thrown with { MaxInstances = 0};

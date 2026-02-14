@@ -1,11 +1,13 @@
 ﻿using HJScarletRework.Globals.Enums;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class HeartoftheCrystal: HJScarletItems
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ItemCategory LocalCategory => ItemCategory.Accessories;
         public override void SetDefaults()
         {

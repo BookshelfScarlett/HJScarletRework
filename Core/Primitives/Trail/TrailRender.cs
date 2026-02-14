@@ -15,7 +15,7 @@ namespace HJScarletRework.Core.Primitives.Trail
 
         public static void DrawTrail(TrailDrawDate[] DrawDate, DrawSetting drawSetting)
         {
-            List<VertexPositionColorTexture2D> Vertexlist = new List<VertexPositionColorTexture2D>();
+            List<ScarletVertex> Vertexlist = new List<ScarletVertex>();
 
             for (int i = 0; i < DrawDate.Length; i++)
             {
@@ -31,8 +31,8 @@ namespace HJScarletRework.Core.Primitives.Trail
                 float PrimitivesHeightRot = DrawDate[i].PrimitivesHeightRot;
                 Color DrawColor = DrawDate[i].DrawColor;
 
-                Vertexlist.Add(new VertexPositionColorTexture2D(DrawPos - PrimitivesHeight.RotatedBy(PrimitivesHeightRot), DrawColor, new Vector3(progress, 0, 0)));
-                Vertexlist.Add(new VertexPositionColorTexture2D(DrawPos + PrimitivesHeight.RotatedBy(PrimitivesHeightRot), DrawColor, new Vector3(progress, 1, 0)));
+                Vertexlist.Add(new ScarletVertex(DrawPos - PrimitivesHeight.RotatedBy(PrimitivesHeightRot), DrawColor, new Vector3(progress, 0, 0)));
+                Vertexlist.Add(new ScarletVertex(DrawPos + PrimitivesHeight.RotatedBy(PrimitivesHeightRot), DrawColor, new Vector3(progress, 1, 0)));
             }
 
             Main.graphics.GraphicsDevice.Textures[0] = drawSetting.texture;

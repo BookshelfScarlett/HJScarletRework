@@ -12,6 +12,7 @@ namespace HJScarletRework.Items.Accessories
 {
     public class Desterrennacht : HJScarletItems
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public int MinionSlots = 2;
         public override ItemCategory LocalCategory => ItemCategory.Accessories;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs("10%", MinionSlots);

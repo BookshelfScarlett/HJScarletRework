@@ -29,8 +29,8 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.width = 40;
             Projectile.height = 40;
-            Projectile.penetrate = 5;
-            Projectile.MaxUpdates = 3;
+            Projectile.penetrate = 10;
+            Projectile.extraUpdates = 1;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 5;
             Projectile.noEnchantmentVisuals = true;
@@ -56,6 +56,15 @@ namespace HJScarletRework.Projs.Melee
                     Projectile.Kill();
             }
 
+        }
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            return base.Colliding(projHitbox, targetHitbox);
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.SourceDamage *= (Projectile.penetrate / 10f) ;
+            base.ModifyHitNPC(target, ref modifiers);
         }
         public override void AI()
         {
@@ -91,6 +100,7 @@ namespace HJScarletRework.Projs.Melee
                 InitTenctacleSpeed();
             if (ScaleProgress >= 0.95f)
                 return;
+            if(!HJScarletMethods.OutOffScreen(Projectile.Center))
             SpawnTenctacleDust();
         }
 
@@ -129,10 +139,9 @@ namespace HJScarletRework.Projs.Melee
                     float scale = 0.7f + Projectile.scale * 0.75f;
                     Color drawColor = RandLerpColor(Color.DarkOliveGreen, Color.DarkSeaGreen);
                     scaleLoopCheck++;
-                    new ShinyOrbParticle(spawnPos, vel, drawColor, (int)(60 * Projectile.scale), scale * 0.24f, glowCenter: false).Spawn();
+                    new ShinyOrbParticle(spawnPos, vel, drawColor, (int)(50 * Projectile.scale), scale * 0.24f, glowCenter: false).Spawn();
                 }
             }
-
         }
         public override bool PreDraw(ref Color lightColor)
         {

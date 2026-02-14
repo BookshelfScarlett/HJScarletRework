@@ -2,11 +2,13 @@
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class ShadowCast : HJScarletItems
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ItemCategory LocalCategory => ItemCategory.Accessories;
         public override void SetDefaults()
         {

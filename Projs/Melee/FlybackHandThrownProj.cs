@@ -207,7 +207,6 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 trailPos = Projectile.Center - Main.screenPosition - Projectile.SafeDir() * 2.5f * i + Projectile.SafeDir() * 50f;
                 SB.Draw(star, trailPos, null, drawColor * Projectile.Opacity, Projectile.rotation , ori, Projectile.scale * new Vector2(1.0f, 0.6f), 0, 0);
             }
-
         }
         public void DrawTrails(Color trailColor, Asset<Texture2D> useTex, float height, float offset = 1f, float rotationVectorOffset = 1f, float alphaValue = 1f, int laserLength = 50)
         {

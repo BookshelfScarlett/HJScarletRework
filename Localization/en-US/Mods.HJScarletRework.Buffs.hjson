@@ -32,3 +32,8 @@ WatcherBuff: {
 	DisplayName: Watcher Buff
 	Description: Mods.HJScarletRework.Buffs.WatcherBuff.Description
 }
+
+PanicBuff: {
+	DisplayName: Panic Buff
+	Description: Mods.HJScarletRework.Buffs.PanicBuff.Description
+}

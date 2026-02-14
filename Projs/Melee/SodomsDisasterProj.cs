@@ -51,11 +51,14 @@ namespace HJScarletRework.Projs.Melee
                 Color drawColor = RandLerpColor(Color.Black, Color.DarkRed);
                 new StarShape(starShapePos, dir * 2f, drawColor, 0.6f, 20).SpawnToPriorityNonPreMult();
             }
-
-            for (int j = 0; j < 1; j++)
+            //烟雾粒子需要减少生成量以让矛本身出来
+            if (Main.rand.NextBool())
             {
-                Color Firecolor = RandLerpColor(Color.DarkRed, Color.Crimson);
-                new SmokeParticle(Projectile.Center + Main.rand.NextVector2Circular(4, 4), dir * Main.rand.NextFloat(2.4f, 3.6f), Firecolor, Main.rand.Next(30, 41), Main.rand.NextFloat(TwoPi), 1f, Main.rand.NextFloat(0.24f, 0.29f)).SpawnToNonPreMult();
+                for (int j = 0; j < 1; j++)
+                {
+                    Color Firecolor = RandLerpColor(Color.DarkRed, Color.Crimson);
+                    new SmokeParticle(Projectile.Center + Main.rand.NextVector2Circular(4, 4), dir * Main.rand.NextFloat(2.4f, 3.6f), Firecolor, Main.rand.Next(30, 41), Main.rand.NextFloat(TwoPi), 1f, Main.rand.NextFloat(0.24f, 0.29f)).SpawnToNonPreMult();
+                }
             }
 
             Vector2 drawPos = Projectile.Center + dir * 30f;

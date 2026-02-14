@@ -12,6 +12,7 @@ namespace HJScarletRework.Items.Weapons.Melee
 {
     public class SodomsDisaster : ThrownSpearClass
     {
+        public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {
             Item.width = Item.height = 50;

@@ -7,11 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Materials
 {
     public class DisasterEssence : HJScarletItems
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ItemCategory LocalCategory => ItemCategory.Material;
         public override string Texture => GetAsset(AssetCategory.Material);
         public override void SetStaticDefaults()
