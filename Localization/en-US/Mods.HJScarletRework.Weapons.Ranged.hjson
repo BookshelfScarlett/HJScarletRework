@@ -26,6 +26,7 @@ ScarletHammer: {
 DeathTolls: {
 	DisplayName: Death Tolls
 	Tooltip: ""
+	FlavorTooltips: ""
 }
 
 Judgement: {

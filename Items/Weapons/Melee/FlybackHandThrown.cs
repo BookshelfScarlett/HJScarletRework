@@ -2,30 +2,41 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
+using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
     public class FlybackHandThrown : ThrownSpearClass
     {
         public override string Texture => GetInstance<FlybackHand>().Texture;
-        public override void SetStaticDefaults() => Type.ShimmerEach<FlybackHand>();
         public override void ExSD()
         {
-            Item.damage = 233;
-            Item.useTime = Item.useAnimation = 25;
+            Item.damage = 276;
+            Item.useTime = Item.useAnimation = 20;
             Item.rare = ItemRarityID.Red;
             Item.shoot = ProjectileType<FlybackHandThrownProj>();
             Item.UseSound = HJScarletSounds.Misc_KnifeExpired with { MaxInstances = 0 , Volume = 1.5f,Pitch = 0.3f, PitchVariance = 0.1f};
             Item.shootSpeed = 26f;
         }
         public override bool AltFunctionUse(Player player) => true;
+        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        {
+            if (line.Name == "ItemName" && line.Mod == "Terraria")
+            {
+                TimeRarity.DrawRarity(line);
+                return false;
+            }
+            return base.PreDrawTooltipLine(line, ref yOffset);
+        }
+
         public override void ExUpdateInventory(Player player)
         {
-            Item.useTime = Item.useAnimation = player.HJScarlet().FlybackBuffTime > 0 ? (10 + (int)(15f * (1f - (float)player.HJScarlet().FlybackBuffTime / player.HJScarlet().CurrentFullFlyBackTime))) : 25;
+            Item.useTime = Item.useAnimation = player.HJScarlet().FlybackBuffTime > 0 ? (10 + (int)(10f * (1f - (float)player.HJScarlet().FlybackBuffTime / player.HJScarlet().CurrentFullFlyBackTime))) : 20;
         }
         public override Color MainTooltipColor => Color.Yellow;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

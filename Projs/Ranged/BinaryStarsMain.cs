@@ -360,7 +360,7 @@ namespace HJScarletRework.Projs.Ranged
             Vector2 mw = Main.MouseWorld;
             Vector2 pos = new Vector2(mw.X + Main.rand.NextFloat(-300f, 300f), mw.Y - 1200f);
             Vector2 vel = (mw - pos).SafeNormalize(Vector2.UnitX) * 22f;
-            Projectile extraHammer = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, ProjectileType<BinaryStarsClone>(), Projectile.damage / 2, Projectile.knockBack);
+            Projectile extraHammer = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, ProjectileType<BinaryStarsHeldClone>(), Projectile.damage / 2, Projectile.knockBack);
             extraHammer.extraUpdates = 6;
         }
         #region 一个比较顺滑的，圆弧运动示例

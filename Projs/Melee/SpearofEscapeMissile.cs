@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
@@ -91,9 +92,10 @@ namespace HJScarletRework.Projs.Melee
         private void DoAttack()
         {
             //原本预定的目标不可用，我们才跑追踪方法全局遍历可用单位。
-            if (HomingTarget != null)
+            if (HomingTarget != null && HomingTarget.CanBeChasedBy())
             {
                 Projectile.HomingTarget(HomingTarget.Center, -1f, 12f, 10f, 20f);
+                //Main.NewText(11);
             }
             else if (GetTargetOnNeed(out NPC target, false))
             {
@@ -101,7 +103,7 @@ namespace HJScarletRework.Projs.Melee
             }
             else
             {
-                if (Projectile.velocity.LengthSquared() < 12f * 12f)
+                if (Projectile.velocity.LengthSquared() < 8f * 8f)
                     Projectile.velocity *= 1.1f;
             }
         }
@@ -202,7 +204,11 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            return base.OnTileCollide(oldVelocity);
+            if (Projectile.velocity.X != oldVelocity.X)
+                Projectile.velocity.X = -oldVelocity.X;
+            if (Projectile.velocity.Y != oldVelocity.Y)
+                Projectile.velocity.Y = -oldVelocity.Y;
+            return false;
         }
         public override bool? CanDamage()
         {
@@ -214,6 +220,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(5));
             base.OnHitNPC(target, hit, damageDone);
         }
         internal static string TheProjPath = "HJScarletRework/Assets/Texture/Projs";

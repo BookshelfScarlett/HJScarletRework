@@ -70,6 +70,10 @@ namespace HJScarletRework.Projs.Melee
                 new SmokeParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(1.2f), RandLerpColor(Color.DeepSkyBlue, Color.Gray), 20, RandRotTwoPi, 1f, 0.2f).Spawn();
         }
         public override bool? CanDamage() => Timer > 15f;
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.Frostburn, GetSeconds(5));
+        }
         public override bool PreKill(int timeLeft)
         {
             //粒子。 

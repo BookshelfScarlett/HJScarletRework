@@ -111,7 +111,7 @@ namespace HJScarletRework.Globals.Methods
             if (proj.HJScarlet().GlobalTargetIndex!= -1)
             {
                 target = Main.npc[proj.HJScarlet().GlobalTargetIndex];
-                if (target.CanBeChasedBy(proj) && target != null)
+                if (target.CanBeChasedBy() && target != null)
                     return true;
                 else if (searchSecondTarget)
                 {
@@ -126,7 +126,8 @@ namespace HJScarletRework.Globals.Methods
                 if (target != null && target.CanBeChasedBy(proj))
                     return true;
             }
-            return target != null;
+            //默认返回否值
+            return false;
         }
 
         /// <summary>

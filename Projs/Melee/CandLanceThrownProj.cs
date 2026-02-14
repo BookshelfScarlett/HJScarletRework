@@ -20,17 +20,19 @@ namespace HJScarletRework.Projs.Melee
             Shooted,
             Hit
         }
+        public bool DonRiseLamp = false;
         public Style AttackType
         {
             get => (Style)Projectile.ai[0];
             set => Projectile.ai[0] = (float)value;
         }
+        public ref float ExtraTimer => ref Projectile.ai[1];
         public override void ExSD()
         {
             Projectile.height = Projectile.width = 16;
             Projectile.noEnchantmentVisuals = true;
             Projectile.ignoreWater = true;
-            Projectile.tileCollide = false;
+            Projectile.tileCollide = true;
             Projectile.extraUpdates = 2;
             Projectile.localNPCHitCooldown = -1;
             Projectile.usesLocalNPCImmunity = true;
@@ -49,38 +51,61 @@ namespace HJScarletRework.Projs.Melee
                     DoHit();
                     break;
             }
-            
-        }
-        private void DoShooted()
-        {
             Vector2 speedOffset = Projectile.velocity / 4;
             Vector2 dir = Projectile.SafeDir();
             Vector2 mountedPos = Projectile.Center + dir * 60f;
             //总体在底下绘制一些别的粒子，这里用的是树叶
-            Timer += 0.42f;
+            ExtraTimer += 0.42f;
             for (int i = 0; i < 4; i++)
             {
-                Vector2 spawnPos = mountedPos + dir.RotatedBy(PiOver2) * MathF.Sin(Timer - i * 0.1f) * (9.0f);
+                Vector2 spawnPos = mountedPos + dir.RotatedBy(PiOver2) * MathF.Sin(ExtraTimer - i * 0.1f) * (9.0f);
                 new ShinyOrbParticle(spawnPos - speedOffset * i, dir * 1.2f, RandLerpColor(Color.DeepSkyBlue,Color.LightBlue), 25, 0.4f).Spawn();
                 Dust shinyDust = Dust.NewDustPerfect(mountedPos + Main.rand.NextVector2Circular(8f, 8f), DustID.UnusedWhiteBluePurple);
                 shinyDust.scale *= Main.rand.NextFloat(1.1f, 1.2f);
                 shinyDust.velocity = dir * 1.2f;
             }
 
+            
+        }
+        private void DoShooted()
+        {
+            Timer = 1;    
+
         }
 
         private void DoHit()
         {
             //在AI这里向上投射火焰，方便一些同步问题
-            if (Timer > 0f)
+            if (Timer > 0f && !DonRiseLamp)
             {
+                //这里需要遍历一遍所取位置是否处于wall里面。如果是则回退直到适合为止
+                Vector2 projDir = Projectile.SafeDirByRot();
+                Vector2 spawnPos = Projectile.Center;
+                Vector2 possibleLampPos = new(Projectile.Center.X - 30, Projectile.Center.Y - 30);
+                bool ifHitWall = Collision.SolidCollision(possibleLampPos, 60, 60);
+                if (ifHitWall)
+                {
+                    for (int i = 0; i < 12; i++)
+                    {
+                        Vector2 fixedPos = possibleLampPos - projDir * i * 10f;
+                        //魂火灯本身的体积大小
+                        bool isStillHitWall = Collision.SolidCollision(fixedPos, 60, 60);
+                        //如果当前的位置已经合适，将spawnPos重设
+                        if (!isStillHitWall)
+                        {
+                            spawnPos = fixedPos;
+                            break;
+                        }
+                    }
+                }
                 Timer = -1;
-                Projectile fireLight = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, -Vector2.UnitY.RotatedBy(Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))) * Main.rand.NextFloat(14f, 18f), ProjectileType<CandLanceFire>(), Projectile.damage, 0f, Owner.whoAmI);
+                Projectile fireLight = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, -Vector2.UnitY.RotatedBy(Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))) * Main.rand.NextFloat(14f, 18f), ProjectileType<CandLanceFire>(), Projectile.damage, 0f, Owner.whoAmI);
                 fireLight.timeLeft = Main.rand.Next(100, 150);
                 fireLight.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
                 fireLight.ai[2] = Main.rand.NextFloat(-10f, 10f);
             }
             //是的孩子们，这是他妈的硬编码
+            Projectile.damage *= 0;
             Projectile.Opacity -= 0.02f;
             Projectile.velocity *= 0.94f;
             Vector2 dir = Projectile.rotation.ToRotationVector2();
@@ -91,6 +116,18 @@ namespace HJScarletRework.Projs.Melee
             }
             if (Projectile.Opacity <= 0f)
                 Projectile.Kill();
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            if (AttackType == Style.Shooted)
+            {
+                //撞墙需要直接处死不要燃起魂火灯。
+                AttackType = Style.Hit;
+                Projectile.tileCollide = false;
+                DonRiseLamp = true;
+                Projectile.velocity = oldVelocity;
+            }
+            return false;
         }
         public override bool PreKill(int timeLeft)
         {

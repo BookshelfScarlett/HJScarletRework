@@ -1,4 +1,4 @@
-﻿HJScarletConfigServer: {
+HJScarletConfigServer: {
 	DisplayName: 空想之歌：服务器设置
 
 	EnableSameItemShimmer: {
@@ -9,5 +9,19 @@
 			关闭时，则转为对应的相同的获取方式
 			默认开启
 			'''
+	}
+
+	SpecialRarity: {
+		// Label: Special Rarity
+		// Tooltip: ""
+	}
+}
+
+HJScarletConfigClient: {
+	// DisplayName: H J Scarlet Config Client
+
+	SpecialRarity: {
+		// Label: Special Rarity
+		// Tooltip: ""
 	}
 }

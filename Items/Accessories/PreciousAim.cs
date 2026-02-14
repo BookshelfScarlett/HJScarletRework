@@ -25,6 +25,7 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().PreciousTargetAcc = true;
+            player.HJScarlet().PreciousAimAcc = true;
             player.HJScarlet().PreciousCritsMin = 20;
         }
         public override void AddRecipes()

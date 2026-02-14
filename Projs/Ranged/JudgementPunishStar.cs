@@ -60,7 +60,6 @@ namespace HJScarletRework.Projs.Ranged
             //下方会进行手动处死，这里需要全程保证射弹存活维持演出效果
             Projectile.timeLeft = 2;
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true, 1800);
 
             if ((Projectile.Center - Owner.Center).Length() > 1800f)
                 Projectile.Kill();
@@ -169,10 +168,15 @@ namespace HJScarletRework.Projs.Ranged
             //正式执行追踪AI
             if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true))
             {
-                Projectile.HomingTarget(target.Center, 600f, 20f, 20f);
+                Projectile.HomingTarget(target.Center, -1f, 20f, 20f);
             }
+            //我草别直接杀死射弹了
             else
-                Projectile.Kill();
+            {
+                AttackType = DoType.IsFading;
+                Projectile.netUpdate = true;
+            }
+
             
 
         }

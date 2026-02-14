@@ -142,6 +142,7 @@ namespace HJScarletRework.Projs.Melee
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //不断更新当前射弹所命中的敌对单位。因为这个targetindex会给寒霜弹使用
+            target.AddBuff(BuffID.Oiled, GetSeconds(5));
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
             //立刻跳转第二攻击模式，即减速
             if (AttackType == Style.Shoot)

@@ -63,6 +63,7 @@ Melee: {
 	// SpearofEscapeThrownProj.DisplayName: Spearof Escape Thrown Proj
 	// SpearofEscapeMissile.DisplayName: Spearof Escape Missile
 	// SpearofEscapeBoom.DisplayName: Spearof Escape Boom
+	// BinaryStarsHeldClone.DisplayName: Binary Stars Held Clone
 }
 
 Typeless: {
@@ -92,6 +93,8 @@ Ranged: {
 	// JudgementPunishStar.DisplayName: Judgement Punish Star
 	// JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
 	// BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
+	// DeathTollsHeldMinion.DisplayName: Death Tolls Held Minion
+	// JudgementHeldLock.DisplayName: Judgement Held Lock
 }
 
 Pets: {

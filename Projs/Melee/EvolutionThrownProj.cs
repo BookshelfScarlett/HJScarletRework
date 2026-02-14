@@ -29,10 +29,13 @@ namespace HJScarletRework.Projs.Melee
             Projectile.timeLeft = 600;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
-            Projectile.penetrate = 10;
+            Projectile.penetrate = 7;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
         }
         public override void AI()
         {
+            if (!Projectile.HJScarlet().FirstFrame)
+                Projectile.originalDamage = Projectile.damage;
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (!HJScarletMethods.OutOffScreen(Projectile.Center))
                 SpawnLeafs();
@@ -42,7 +45,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 portalVel = Projectile.SafeDir() * Main.rand.NextFloat(10f, 14f);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, portalVel, ProjectileType<EvolutionEnergyPortal>(), 0, Projectile.knockBack, Owner.whoAmI);
-                proj.originalDamage = Projectile.damage;
+                proj.originalDamage = Projectile.originalDamage;
                 //直接存入即可，后面在传送门里面进行判断
                 proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
                 if (proj.active && proj != null)

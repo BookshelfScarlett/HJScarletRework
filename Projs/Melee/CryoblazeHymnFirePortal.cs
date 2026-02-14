@@ -43,7 +43,7 @@ namespace HJScarletRework.Projs.Melee
                 if (Projectile.GetTargetSafe(out NPC target, true, 800f, true))
                 {
                     Vector2 dir = Projectile.SafeDir().ToRandVelocity(ToRadians(30f));
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 34f, ProjectileType<CryoblazeHymnFireball>(), Projectile.damage / 2, Projectile.knockBack);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 34f, ProjectileType<CryoblazeHymnFireball>(), Projectile.damage, Projectile.knockBack);
                     proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                     for (int j = 0; j < 10; j++)
                     {
@@ -111,7 +111,6 @@ namespace HJScarletRework.Projs.Melee
                 Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(32f), DustID.Torch, RandVelTwoPi(0.4f, 0.8f));
                 d.noGravity = true;
                 d.scale *= 1.25f;
-                //new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(32f), Main.rand.NextFloat(0.4f, 0.8f), RandLerpColor(Color.Orange, Color.OrangeRed), 40, 0.18f, RandRotTwoPi).Spawn();
             }
         }
 

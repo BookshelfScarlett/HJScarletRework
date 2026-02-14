@@ -3,10 +3,12 @@ using ContinentOfJourney.Tiles;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
+using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -31,7 +33,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             //这里的UseTime是有意改的很慢的
             Item.useAnimation = 18;
             Item.shootSpeed = 24f;
-            Item.rare = ItemRarityID.Red;
+            Item.rare = RarityType<NightRarity>();
             //这里不会给音效，因为要考虑一些射弹的联动
             //实际音效会在射弹初始化的时候提供
             Item.UseSound = null;
@@ -39,12 +41,34 @@ namespace HJScarletRework.Items.Weapons.Ranged
 
         }
         public override float StealthDamageMultipler => 0.35f;
-        public override void ExModifyTooltips(List<TooltipLine> tooltips)
+        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        {
+            if (line.Name == "ItemName" && line.Mod == "Terraria")
+            {
+                NightRarity.DrawRarity(line);
+                return false;
+            }
+            if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
+            {
+                NightRarity.DrawFlavorRarity(line);
+                return false;
+            }
+            return base.PreDrawTooltipLine(line, ref yOffset);
+        }
+
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             string path = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.ShimmerTooltip");
             bool downedAnyGods = DownedBossSystem.downedMatterGod || DownedBossSystem.downedLifeGod || DownedBossSystem.downedTimeGod;
             if (downedAnyGods && !Main.LocalPlayer.HJScarlet().NoGuideForBinaryStars)
                 tooltips.CreateTooltip(path, Color.LightPink);
+            int flavorTooltipIndex = tooltips.FindIndex(line => line.Name == "ItemName" && line.Mod == "Terraria");
+            //通过本地化路径搜索需要的特殊文本
+            string value = this.GetLocalizedValue("FlavorTooltips").ToLangValue();
+            //实例化toolti并注册名字
+            TooltipLine flavorTooltips = new TooltipLine(Mod, "FlavorTooltipsName", value);
+            //植入Tooltip
+            tooltips.Insert(flavorTooltipIndex + 1, flavorTooltips);
         }
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {

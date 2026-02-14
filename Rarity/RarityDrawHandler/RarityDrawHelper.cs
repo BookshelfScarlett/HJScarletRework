@@ -41,6 +41,26 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
             Color mainTextColor = mainColor;
             ChatManager.DrawColorCodedString(Main.spriteBatch, tooltipLine.Font, textValue, textPosition, mainTextColor, tooltipLine.Rotation, tooltipLine.Origin, tooltipLine.BaseScale);
         }
+        public static void DrawCustomTooltipLine(DrawableTooltipLine tooltipLine, Color edgeColor, Color mainColor)
+        {
+            string textValue = tooltipLine.Text;
+            Vector2 textPosition = new(tooltipLine.X, tooltipLine.Y);
+            //绘制需要的……发光背景。
+            float sine = (float)((1 + Math.Sin(Main.GlobalTimeWrappedHourly * 2.5f)) / 2);
+            float sineOffset = Lerp(0.5f, 1f, sine);
+
+            //绘制发光描边，带渐变
+            for (int i = 0; i < 12; i++)
+            {
+                Vector2 afterimageOffset = (TwoPi * i / 12f).ToRotationVector2() * (1.5f * sineOffset);
+                ChatManager.DrawColorCodedString(Main.spriteBatch, tooltipLine.Font, textValue, (textPosition + afterimageOffset).RotatedBy(TwoPi * (i / 12)), edgeColor * 0.9f, tooltipLine.Rotation, tooltipLine.Origin, tooltipLine.BaseScale);
+            }
+
+            //绘制主文本颜色
+            Color mainTextColor = mainColor;
+            ChatManager.DrawColorCodedString(Main.spriteBatch, tooltipLine.Font, textValue, textPosition, mainTextColor, tooltipLine.Rotation, tooltipLine.Origin, tooltipLine.BaseScale);
+        }
+
         /// <summary>
         /// 炼狱复制
         /// </summary>

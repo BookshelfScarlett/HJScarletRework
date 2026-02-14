@@ -5,6 +5,7 @@ using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
@@ -90,11 +91,11 @@ namespace HJScarletRework.Projs.Melee
         {
             if (Projectile.GetTargetSafe(out NPC target))
             {
-                Projectile.HomingTarget(target.Center, -1, 16f, 20f);
+                Projectile.HomingTarget(target.Center, -1, 24f, 20f);
             }
             else
             {
-                if(Projectile.velocity.LengthSquared() < 16f*16f)
+                if (Projectile.velocity.LengthSquared() < 16f * 16f)
                     Projectile.velocity *= 1.1f;
             }
         }
@@ -123,6 +124,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(5));
             if(AttackType == Style.Bounce)
             {
                 AttackType = Style.Slowdown;

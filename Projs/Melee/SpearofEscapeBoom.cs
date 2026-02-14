@@ -23,7 +23,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.width = Projectile.height = 200;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 60;
+            Projectile.localNPCHitCooldown = 15;
             Projectile.timeLeft = 45;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;

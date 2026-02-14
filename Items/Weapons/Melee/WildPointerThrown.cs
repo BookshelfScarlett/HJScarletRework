@@ -13,17 +13,17 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class WildPointerThrown : ThrownSpearClass
     {
         public override string Texture => GetInstance<WildPointer>().Texture;
-        public override void SetStaticDefaults() => Type.ShimmerEach<WildPointer>();
         internal int UseTime = 0;
         public override void ExSD()
         {
-            Item.damage = 25;
+            Item.damage = 19;
             Item.useTime = 5;
             Item.useAnimation = 5;
             Item.rare = ItemRarityID.Green;
             Item.UseSound = SoundID.Item91 with { Volume = 0.7f, Pitch = 0.4f};
             Item.shoot = ProjectileType<WildPointerThrownProj>();
-            Item.shootSpeed = 14;
+            Item.shootSpeed = 16;
+            Item.knockBack = 2f;
         }
         public override Color MainTooltipColor => Color.SkyBlue;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

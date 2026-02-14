@@ -64,7 +64,7 @@ namespace HJScarletRework.Projs.Ranged
             if (!Stealth && !ModProj.IsHitOnEnablFocusMechanicProj)
                 ModProj.IsHitOnEnablFocusMechanicProj = true;
             TargetIndex = target.whoAmI;
-            float vol = Owner.HasProj<JudgementLock>() ? 0.4f : 0.7f;
+            float vol = Owner.HasProj<JudgementHeldLock>() ? 0.4f : 0.7f;
             if (Projectile.numHits % 3 == 0)
             {
                 NormalShootPunishmentStar(target);
@@ -106,7 +106,7 @@ namespace HJScarletRework.Projs.Ranged
             Vector2 dir = Projectile.velocity.SafeNormalize(Vector2.UnitX);
             int div = 3;
             //已有挂载射弹，将生成位置更新在玩家身上
-            if (Owner.ownedProjectileCounts[ProjectileType<JudgementLock>()] > 0)
+            if (Owner.ownedProjectileCounts[ProjectileType<JudgementHeldLock>()] > 0)
             {
                 center = Owner.Center;
                 randsRad = PiOver2;
@@ -120,6 +120,7 @@ namespace HJScarletRework.Projs.Ranged
                 Vector2 velocity = dir.RotatedBy(Main.rand.NextFloat(-randsRad / div, randsRad / div)) * 8f;
                 Projectile star = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), center, velocity, ProjectileType<JudgementPunishStar>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 star.timeLeft = 100;
+                star.HJScarlet().GlobalTargetIndex = target.whoAmI;
                 star.penetrate = 1;
             }
         }
@@ -143,10 +144,10 @@ namespace HJScarletRework.Projs.Ranged
                     //音效
                     SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit with { MaxInstances = 0, Pitch = 0.5f}, Projectile.Center);
                     //当前没有任何挂载锤，则正常进入挂载状态
-                    if (!Owner.HasProj<JudgementLock>())
+                    if (!Owner.HasProj<JudgementHeldLock>())
                     {
                         Projectile.Center.CirclrDust(24, 3f, DustID.HallowedWeapons, 10);
-                        Projectile lockHammer = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<JudgementLock>(), Projectile.damage, 0f, Owner.whoAmI);
+                        Projectile lockHammer = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<JudgementHeldLock>(), Projectile.damage, 0f, Owner.whoAmI);
                         lockHammer.ai[1] = TargetIndex;
                         //处死射弹。
                     }

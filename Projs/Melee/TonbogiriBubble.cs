@@ -106,6 +106,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.Venom, GetSeconds(5));
             base.OnHitNPC(target, hit, damageDone);
         }
         public override bool PreKill(int timeLeft)

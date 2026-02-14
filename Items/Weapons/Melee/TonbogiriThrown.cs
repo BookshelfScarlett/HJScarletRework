@@ -18,7 +18,6 @@ namespace HJScarletRework.Items.Weapons.Melee
         public static readonly int MaxBubbles = 8;
         public override void SetStaticDefaults()
         {
-            Type.ShimmerEach<Tonbogiri>();
             ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 2f;
         }
         public override void ExSD()

@@ -80,6 +80,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire, GetSeconds(5));
             base.OnHitNPC(target, hit, damageDone);
         }
         public override bool OnTileCollide(Vector2 oldVelocity)

@@ -114,6 +114,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.Frostburn2, GetSeconds(5));
             SoundEngine.PlaySound(SoundID.Item48 with { MaxInstances = 1, Volume = 0.754f }, Projectile.Center);
             for (int i = 0; i < 10; i++)
                 new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(2f), 0.8f, RandLerpColor(Color.SkyBlue, Color.AliceBlue), 40, Main.rand.NextFloat(0.1f, 0.12f), RandRotTwoPi, true).Spawn();

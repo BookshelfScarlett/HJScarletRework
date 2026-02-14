@@ -4,10 +4,8 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
-using System.Collections.Specialized;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.Graphics;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -17,7 +15,6 @@ namespace HJScarletRework.Items.Weapons.Melee
     {
         public Projectile CurrentProj = null;
         public override string Texture => GetInstance<GalvanizedHand>().Texture;
-        public override void SetStaticDefaults() => Type.ShimmerEach<GalvanizedHand>();
         public override void ExSD()
         {
             Item.damage = 512;
@@ -30,6 +27,16 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.rare = RarityType<TimeRarity>();
         }
         public override Color MainTooltipColor => Color.Yellow;
+        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        {
+            if (line.Name == "ItemName" && line.Mod == "Terraria")
+            {
+                TimeRarity.DrawRarity(line);
+                return false;
+            }
+            return base.PreDrawTooltipLine(line, ref yOffset);
+        }
+
         public override bool CanUseItem(Player player)
         {
             if (player.HasProj(Item.shoot))
@@ -41,7 +48,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                     if (proj.AttackType == GalvanizedHandThrownProj.Style.Stab)
                     {
                         Item.useStyle = ItemUseStyleID.Shoot;
-                        Item.useTime = Item.useAnimation = 15;
+                        Item.useTime = Item.useAnimation = 12;
                         return true;
                     }
                 }
@@ -67,7 +74,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                 ShootSideProj(player, source, spawnPos, dirToVel, ProjectileType<GalvanizedHandSideProj>(), damage, knockback);
             }
             else
-                CurrentProj = Projectile.NewProjectileDirect(source, spawnPos, dirToVel, type, damage, knockback, player.whoAmI);
+                CurrentProj = Projectile.NewProjectileDirect(source, spawnPos, dirToVel, type, damage * 2, knockback, player.whoAmI);
             return false;
         }
         public void ShootSideProj(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

@@ -59,7 +59,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreKill(int timeLeft)
         {
-            Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofEscapeBoom>(), Projectile.damage, Projectile.knockBack);
+            Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofEscapeBoom>(), (int)(Projectile.damage * 1.5f), Projectile.knockBack);
             SoundEngine.PlaySound(HJScarletSounds.SpearofEscape_Boom, Projectile.Center);
             if (IsHit)
                 return true;
@@ -88,6 +88,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.Oiled, GetSeconds(5));
             IsHit = true;
             int totalCounts = 8;
             for (float i = 0; i < totalCounts; i++)

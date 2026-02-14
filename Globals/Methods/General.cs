@@ -79,6 +79,26 @@ namespace HJScarletRework.Globals.Methods
         {
             return !player.HJScarlet().MouseLeft && player.HJScarlet().MouseRight;
         }
+        public static bool GetImmnue(this Player player, int cooldownSlot, int frames, bool blink = false)
+        {
+            if (!((cooldownSlot < 0) ? (player.immuneTime < frames) : (player.hurtCooldowns[cooldownSlot] < frames)))
+            {
+                return false;
+            }
+
+            player.immune = true;
+            player.immuneNoBlink = !blink;
+            if (cooldownSlot < 0)
+            {
+                player.immuneTime = frames;
+            }
+            else
+            {
+                player.hurtCooldowns[cooldownSlot] = frames;
+            }
+
+            return true;
+        }
         /// <summary>
         /// 快速生成一个简单明了的圆形粒子组
         /// </summary>
@@ -110,15 +130,12 @@ namespace HJScarletRework.Globals.Methods
             float point = 0f;
             return rect.Contains((int)start.X, (int)start.Y) || rect.Contains((int)end.X, (int)end.Y) || Collision.CheckAABBvLineCollision(rect.TopLeft(), rect.Size(), start, end, lineWidth, ref point);
         }
-        public static void ShimmerEach(this int type, int shimmerType, bool shouldDisableConfig = false)
+        public static void ShimmerEach(this int type, int shimmerType)
         {
-            if (shouldDisableConfig || HJScarletConfigServer.Instance.EnableSameItemShimmer)
-            {
-                ItemID.Sets.ShimmerTransformToItem[type] = shimmerType;
-                ItemID.Sets.ShimmerTransformToItem[shimmerType] = type;
-            }
+            ItemID.Sets.ShimmerTransformToItem[type] = shimmerType;
+            ItemID.Sets.ShimmerTransformToItem[shimmerType] = type;
         }
-        public static void ShimmerEach<T>(this int type, bool shouldDisableConfig = false) where T : ModItem => ShimmerEach(type, ItemType<T>(), shouldDisableConfig);
+        public static void ShimmerEach<T>(this int type) where T : ModItem => ShimmerEach(type, ItemType<T>());
         public static Vector2 ToMouseVector2(this Player player, Vector2? safeValue = null)
         {
             Vector2 safe = safeValue ?? Vector2.UnitX;

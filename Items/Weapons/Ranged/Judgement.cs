@@ -1,10 +1,13 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Projs.Ranged;
+using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Ranged
 {
@@ -22,6 +25,19 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.rare = ItemRarityID.LightRed;
         }
         public override float StealthDamageMultipler => 0.25f;
+        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        {
+            if (line.Name == "ItemName" && line.Mod == "Terraria")
+            {
+                HallowedRarity.DrawRarity(line);
+                return false;
+            }
+            return base.PreDrawTooltipLine(line, ref yOffset);
+        }
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+            base.ModifyTooltips(tooltips);
+        }
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D tex = TextureAssets.Item[Type].Value;

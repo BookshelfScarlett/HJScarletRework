@@ -43,6 +43,10 @@ namespace HJScarletRework.Items.Weapons.Ranged
             spriteBatch.Draw(tex, position, iFrame, Color.White, 0f, tex.Size() / 2, scale, 0f, 0f);
             return false;
         }
+        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        {
+            return base.PreDrawTooltipLine(line, ref yOffset);
+        }
         public override bool AltFunctionUse(Player player)
         {
             return false;
@@ -87,7 +91,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
         public const float BaseMaxStealth = 0.1f;
         public override bool WeaponPrefix() => true;
         //你灾组到现在都没让盗贼伤害成功不吃远程词缀的加成
-        public override bool RangedPrefix() => false;
+        public override bool RangedPrefix() => true;
         public override void SetStaticDefaults()
         {
             Item.ResearchUnlockCount = 1;
@@ -109,16 +113,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            string keys = Mod.GetLocalizationKey($"{LocalizationCategory}.ScarletHammer.");
-            if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt))
-                tooltips.ReplaceAllTooltip(keys + "General");
-            else
-            {
-                tooltips.CreateTooltip(keys + "HoldShiftKeys");
-                ExModifyTooltips(tooltips);
-            }
         }
-        public virtual void ExModifyTooltips(List<TooltipLine> tooltips) { }
         public virtual float StealthDamageMultipler => 0.5f;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

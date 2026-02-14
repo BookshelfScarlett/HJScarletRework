@@ -25,6 +25,7 @@ namespace HJScarletRework.Projs.Melee
         public ref float DrawGlowScale => ref Projectile.localAI[0];
         public float Osci = 0.025f;
         public float AttackDelay = 4;
+        public bool IsHitTile = false;
         float RotFix = ToRadians(38);
         public override void ExSD()
         {
@@ -45,7 +46,8 @@ namespace HJScarletRework.Projs.Melee
                 SpawnBeamCounts = 6;
             }
             //本质上控的是火焰方向，不过写在这里也为了方便一些操作
-            Projectile.velocity *= 0.92f;
+            IsHitTile = Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height);
+            Projectile.velocity *= !IsHitTile ? 0.92f : 0.74f;
             DrawGlowScale = Clamp(Math.Abs(MathF.Sin(Osci / 4)) * 1.2f, 1f, 1.2f);
             if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, false))
                 Projectile.position.X = Lerp(Projectile.position.X + RandomValue, target.position.X, 0.2f);
@@ -55,7 +57,7 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.velocity.Length() > 4f)
                 return;
             AttackTimer += 1;
-            if (AttackTimer < AttackDelay * (SpawnBeamCounts+1))
+            if (AttackTimer < AttackDelay * (SpawnBeamCounts + 1))
             {
                 if (AttackTimer % AttackDelay == 0)
                 {
@@ -70,6 +72,16 @@ namespace HJScarletRework.Projs.Melee
                 if (Projectile.Opacity == 0)
                     Projectile.Kill();
             }
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            if (!IsHitTile)
+            {
+                IsHitTile = true;
+                Projectile.tileCollide = false;
+                Projectile.velocity = oldVelocity;
+            }
+            return false;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

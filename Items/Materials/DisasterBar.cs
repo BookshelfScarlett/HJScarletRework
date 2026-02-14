@@ -25,14 +25,13 @@ namespace HJScarletRework.Items.Materials
             Item.maxStack = 9999;
             Item.rare = ItemRarityID.Red;
         }
-        //public override void AddRecipes()
-        //{
-        //    CreateRecipe().
-        //        AddIngredient(ItemID.HellstoneBar, 5).
-        //        AddIngredient(ItemID.SoulofNight, 1).
-        //        AddIngredient(ItemID.BeetleHusk, 1).
-        //        AddTile(TileID.MythrilAnvil).
-        //        Register();
-        //}
+        public override void AddRecipes()
+        {
+            CreateRecipe(5).
+                AddIngredient(ItemID.HellstoneBar, 5).
+                AddIngredient<DisasterEssence>().
+                AddTile(TileID.MythrilAnvil).
+                Register();
+        }
     }
 }

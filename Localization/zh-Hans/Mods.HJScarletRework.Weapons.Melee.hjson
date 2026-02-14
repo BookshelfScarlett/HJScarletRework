@@ -40,11 +40,11 @@ FlybackHandThrown: {
 }
 
 LightBiteThrown: {
-	DisplayName: 烛光矛-投掷
+	DisplayName: 蚀光矛-投掷
 	Tooltip:
 		'''
 		准许穿透10个敌人
-		命中后沿速度方向追加两枚烛光之星
+		飞行过程中滞留拥有较弱追踪力量的黑蚀之星
 		'''
 	CalamitySupport:
 		'''
@@ -167,8 +167,8 @@ SodomsDisaster: {
 		手持时增加30%近战暴击伤害
 		穿透多个单位，且对被命中的所有单位造成一次爆炸
 		同时，从天上降下天灾火球攻击被命中的敌人
-		"漆黑兽影，吞天噬日，炎唤来兽，兽唤来咒，此乃末日预兆之二"
 		'''
+	FlavorTooltips: -漆黑兽影，吞天噬日，炎唤来兽，兽唤来咒，此乃末日预兆之二-
 	CalamitySupport:
 		'''
 		灾厄联动适配：

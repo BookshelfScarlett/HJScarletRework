@@ -1,17 +1,13 @@
 ﻿using ContinentOfJourney.Items;
-using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
     public class LightBiteThrown : ThrownSpearClass
     {
-        public override void SetStaticDefaults() => Type.ShimmerEach<LightBite>();
         public override string Texture => GetInstance<LightBite>().Texture;
         public override void ExSD()
         {

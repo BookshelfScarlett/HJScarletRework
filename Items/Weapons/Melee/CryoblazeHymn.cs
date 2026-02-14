@@ -13,9 +13,9 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {
-            Item.damage = 34;
-            Item.useTime = Item.useAnimation = 32;
-            Item.knockBack = 12f;
+            Item.damage = 94;
+            Item.useTime = Item.useAnimation = 28;
+            Item.knockBack = 6f;
             Item.UseSound = SoundID.Item45 with { MaxInstances = 0 };
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<CryoblazeHymnProj>();
@@ -24,11 +24,11 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override Color MainTooltipColor => Color.AliceBlue;
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if(line.Name == "ItemName" && line.Mod == "Terraria")
-            {
-                RarePets.DrawCustomTooltipLine(line);
-                return false;
-            }
+            //if(line.Name == "ItemName" && line.Mod == "Terraria")
+            //{
+            //    RarePets.DrawCustomTooltipLine(line);
+            //    return false;
+            //}
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override void AddRecipes()
@@ -40,7 +40,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                     AddIngredient<AzureFrostmark>().
                     AddIngredient(ItemID.SoulofFright, 15).
                     AddIngredient(ItemID.SoulofSight, 15).
-                    AddIngredient(ItemID.SoulofFright, 15).
+                    AddIngredient(ItemID.SoulofMight, 15).
                     AddTile(TileID.MythrilAnvil).
                     Register();
             }

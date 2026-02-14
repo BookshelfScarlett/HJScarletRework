@@ -1,17 +1,13 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
     public class DeepToneThrown : ThrownSpearClass
     {
         public override string Texture => GetInstance<DeepTone>().Texture;
-        public override void SetStaticDefaults() => Type.ShimmerEach<DeepTone>();
         public override void ExSD()
         {
             Item.damage = 93;

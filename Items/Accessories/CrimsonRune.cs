@@ -24,6 +24,17 @@ namespace HJScarletRework.Items.Accessories
             player.longInvince = true;
             player.pStone = true;
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.CharmofMyths).
+                AddIngredient(ItemID.CrossNecklace).
+                AddIngredient(ItemID.SoulofFright, 5).
+                AddIngredient(ItemID.SoulofSight, 5).
+                AddIngredient(ItemID.SoulofMight, 5).
+                AddTile(TileID.MythrilAnvil).
+                Register();
+        }
     }
     public abstract class HJScarletItems : ModItem, ILocalizedModType
     {

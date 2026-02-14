@@ -15,7 +15,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Ranged
 {
-    public class BinaryStarsClone: HJScarletFriendlyProj
+    public class BinaryStarsHeldClone: HJScarletFriendlyProj
     {
         public override string Texture => GetInstance<BinaryStarsMain>().Texture;
         private enum DoType

@@ -78,6 +78,7 @@ TonbogiriThrown: {
 SodomsDisaster: {
 	DisplayName: The Disaster
 	Tooltip: ""
+	FlavorTooltips: ""
 	CalamitySupport: ""
 }
 

@@ -5,19 +5,19 @@ using Terraria.ModLoader.Config;
 
 namespace HJScarletRework.Core.Configs
 {
-    public class HJScarletConfigServer : ModConfig, ILocalizedModType
+    public class HJScarletConfigClient : ModConfig, ILocalizedModType
     {
-        public static HJScarletConfigServer Instance;
+        public static HJScarletConfigClient Instance;
         public override void OnLoaded()
         {
             Instance = this;
         }
-        public override ConfigScope Mode => ConfigScope.ServerSide;
+        public override ConfigScope Mode => ConfigScope.ClientSide;
         public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref NetworkText message) => false;
         [BackgroundColor(192, 54, 64, 192)]
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         [ReloadRequired]
-        public bool EnableSameItemShimmer { get; set; }
+        public bool SpecialRarity { get; set; }
 
 
     }

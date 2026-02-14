@@ -17,13 +17,12 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class SweetStabThrown : ThrownSpearClass
     {
         public override string Texture => GetInstance<SweetSweetStab>().Texture;
-        public override void SetStaticDefaults() => Type.ShimmerEach<SweetSweetStab>();
         public override void ExSD()
         {
             Item.damage = 20;
             Item.rare = ItemRarityID.Green;
             Item.useTime = Item.useAnimation = 40;
-            Item.knockBack = 8;
+            Item.knockBack = 6f;
             Item.shootSpeed = 14f;
             Item.shoot = ProjectileType<SweetStabThrownProj>();
             Item.UseSound = SoundID.Grass;
@@ -103,12 +102,5 @@ namespace HJScarletRework.Items.Weapons.Melee
             return base.PreDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
         }
         public virtual bool ExPreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) => false;
-        public virtual void AddCustomRecipe() { }
-        public override void AddRecipes()
-        {
-            if (HJScarletConfigServer.Instance.EnableSameItemShimmer)
-                return;
-            AddCustomRecipe();
-        }
     }
 }

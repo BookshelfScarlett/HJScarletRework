@@ -90,6 +90,8 @@ namespace HJScarletRework.Globals.Players
                 DesterranImmortalTime = 0;
                 DesterranTimer = 0;
             }
+            if (NoSlowFall > 0)
+                NoSlowFall--;
 
             if (DesterranHeal <= 600)
                 DesterranHeal += 1;

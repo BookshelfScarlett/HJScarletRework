@@ -67,7 +67,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void PostAI()
         {
-            if (Owner.HasProj<DeathTollsMinion>())
+            if (Owner.HasProj<DeathTollsHeldMinion>())
             {
                 Vector2 fireVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero);
                 Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
@@ -85,7 +85,7 @@ namespace HJScarletRework.Projs.Ranged
                 Projectile.extraUpdates = 4;
 
             //如果超出了玩家屏幕范围，且玩家仍然没有仆从锤，生成仆从锤
-            if (HJScarletMethods.OutOffScreen(Projectile.Center, 1.2f) && !Owner.HasProj<DeathTollsMinion>(out int projID))
+            if (HJScarletMethods.OutOffScreen(Projectile.Center, 1.2f) && !Owner.HasProj<DeathTollsHeldMinion>(out int projID))
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, projID, Projectile.damage, 0f, Projectile.owner);
                 SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss, Owner.Center);
@@ -98,7 +98,7 @@ namespace HJScarletRework.Projs.Ranged
         {
             if (AttackTimer == 0)
             {
-                if (Owner.HasProj<DeathTollsMinion>())
+                if (Owner.HasProj<DeathTollsHeldMinion>())
                 {
                     //压制音量，这里由仆从锤的射线声作为主导
                     SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Pitch = 0.4f, Volume = 0.2f, MaxInstances = 0 }, Owner.Center);
@@ -147,7 +147,7 @@ namespace HJScarletRework.Projs.Ranged
             {
                 NightmareArrowDrop(target, Projectile.damage / 2);
                 //有仆从锤时，额外降下一个梦魇之星
-                if (Owner.HasProj<DeathTollsMinion>())
+                if (Owner.HasProj<DeathTollsHeldMinion>())
                     NightmareArrowDrop(target, Projectile.damage / 2);
             }
             if (AttackType != DoType.IsStealth)
@@ -156,7 +156,7 @@ namespace HJScarletRework.Projs.Ranged
             SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit, Projectile.Center);
             //优先生成挂载射弹
             
-            if (!Owner.HasProj<DeathTollsMinion>(out int minionID))
+            if (!Owner.HasProj<DeathTollsHeldMinion>(out int minionID))
             {
                 Projectile hangingProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, minionID, Projectile.damage, Projectile.knockBack, Projectile.owner);
                 SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss, Projectile.Center);

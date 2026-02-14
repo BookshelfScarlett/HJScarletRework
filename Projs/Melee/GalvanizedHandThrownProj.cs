@@ -112,9 +112,9 @@ namespace HJScarletRework.Projs.Melee
             }
             if (ShouldPull)
             {
-                Owner.maxFallSpeed = 180;
+                Owner.HJScarlet().NoSlowFall = 120;
                 Owner.velocity = dir * 80;
-                if(!BeginPull)
+                if (!BeginPull)
                 {
                     BeginPull = true;
                     ScreenShakeSystem.AddScreenShakes(Owner.Center, 80 * Owner.direction, 23, Owner.velocity.ToRotation(), 0.2f, true, 1000);
@@ -126,8 +126,10 @@ namespace HJScarletRework.Projs.Melee
                 //不需要过于精确，只要大概就行了
                 if ((Owner.Center - target.Center).Length() < 50f)
                 {
+                    Owner.HJScarlet().NoSlowFall = 10;
+                    //1秒左右的无敌
+                    Owner.GetImmnue(ImmunityCooldownID.General, 60);
                     //震屏。
-                    Owner.maxFallSpeed = 0;
                     ScreenShakeSystem.AddScreenShakes(Projectile.Center, -80 * Owner.direction, 23, Owner.velocity.ToRotation(), 0.2f, true, 1000);
                     for (int i = 0; i < 8; i++)
                     {
@@ -137,15 +139,14 @@ namespace HJScarletRework.Projs.Melee
                         arrow.HJScarlet().GlobalTargetIndex = target.whoAmI;
                     }
                     SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit, Owner.Center);
-                    Projectile.Kill();
                     //三倍伤害，单次的判定
                     Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<LightBiteArrow>(), Projectile.damage * 3, 0f, Owner.whoAmI);
                     Owner.HJScarlet().galvanizedHandProjHanging = false;
-                    Owner.velocity = Projectile.rotation.ToRotationVector2() * -OriginalSpeed * 0.8f;
-
+                    //把人飞出去
+                    Owner.velocity = Projectile.rotation.ToRotationVector2() * -OriginalSpeed * 0.6f;
+                    Projectile.Kill();
                 }
             }
-
         }
 
         private void SpawnOwnerParticle()
@@ -209,6 +210,8 @@ namespace HJScarletRework.Projs.Melee
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            if (AttackType == Style.Shoot)
+                modifiers.SetCrit();
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -219,6 +222,7 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.netUpdate = true;
                 Projectile.velocity = Vector2.Zero;
                 Projectile.extraUpdates = 0;
+                Projectile.localNPCHitCooldown = 20;
                 Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
                 SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { MaxInstances = 1}, Projectile.Center);
                 HitParticle(target.Center);

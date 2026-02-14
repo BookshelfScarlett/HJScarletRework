@@ -1,10 +1,6 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs.Melee;
+﻿using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
@@ -19,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             Item.damage = 34;
             Item.useTime = Item.useAnimation = 32;
-            Item.knockBack = 12f;
+            Item.knockBack = 8f;
             Item.UseSound = SoundID.Item45 with { MaxInstances = 0 };
             Item.shootSpeed = 11f;
             Item.shoot = ProjectileType<FierySpearProj>();

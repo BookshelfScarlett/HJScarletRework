@@ -118,6 +118,7 @@ namespace HJScarletRework.Projs.Melee
         #endregion
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.ShadowFlame, GetSeconds(5));
             if (!AlreadyHit)
             {
                 AlreadyHit = true;

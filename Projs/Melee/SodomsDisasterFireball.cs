@@ -75,7 +75,7 @@ namespace HJScarletRework.Projs.Melee
         {
             //粒子
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = 0.3f }, Projectile.Center);
-                Vector2 dir = Projectile.SafeDirByRot();
+            Vector2 dir = Projectile.SafeDirByRot();
             for (int i = 0; i < 5; i++)
             {
                 Color Firecolor = RandLerpColor(Color.Black, Color.DarkRed);
@@ -88,8 +88,8 @@ namespace HJScarletRework.Projs.Melee
                 new ShinyOrbParticle(spawnPos, velDir, RandLerpColor(Color.Red, Color.DarkRed), 40, 0.8f).Spawn();
                 new ShinyOrbParticle(spawnPos, velDir, Color.White, 40, 0.4f).Spawn();
             }
-
         }
+
         public override bool? CanDamage()
         {
             return base.CanDamage();

@@ -18,20 +18,28 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class DialecticsThrown : ThrownSpearClass
     {
         public override string Texture => HJScarletItemProj.Item_DialecticsThrown.Path;
-        public override void SetStaticDefaults() => Type.ShimmerEach<Dialectics>();
         public int UsePhase = 0;
         public override void ExSD()
         {
-            Item.damage = 120;
+            Item.damage = 160;
             Item.rare = RarityType<MatterRarity>();
             //不需要声音，在shoot里手动控制
             Item.UseSound = null;
-            Item.shootSpeed = 15f;
+            Item.shootSpeed = 17f;
             Item.autoReuse = true;
-            Item.useTime = Item.useAnimation = 40;
+            Item.useTime = Item.useAnimation = 32;
             Item.shoot = ProjectileType<DialecticsThrownProj>();
         }
         public override Color MainTooltipColor => Color.LightBlue;
+        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        {
+            if (line.Name == "ItemName" && line.Mod == "Terraria")
+            {
+                MatterRarity.DrawRarity(line);
+                return false;
+            }
+            return base.PreDrawTooltipLine(line, ref yOffset);
+        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             var curStyle = UsePhase switch
@@ -45,7 +53,8 @@ namespace HJScarletRework.Items.Weapons.Melee
                 SoundEngine.PlaySound(HJScarletSounds.Dialectics_Throw with { MaxInstances = 0, Pitch = 0.5f, Volume =0.7f });
             else
                 SoundEngine.PlaySound(HJScarletSounds.Atom_Strike[0] with { MaxInstances = 1 });
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
+            int realDamage = curStyle == WaveStyle.Square ? damage * 3 : damage;
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, realDamage, knockback, player.whoAmI);
             ((DialecticsThrownProj)proj.ModProjectile).CurWaveStyle = curStyle;
             UsePhase++;
             if (UsePhase > 3)

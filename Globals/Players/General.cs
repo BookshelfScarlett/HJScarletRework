@@ -28,7 +28,9 @@ namespace HJScarletRework.Globals.Players
 
         public bool CreationHatSet = false;
         public bool galvanizedHandProjHanging = false;
-        
+
+        // 用于向上向下冲刺禁用羽落
+        public int NoSlowFall = 0;
 
         #region Accessories
 

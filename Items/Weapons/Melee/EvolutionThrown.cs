@@ -12,7 +12,6 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class EvolutionThrown : ThrownSpearClass
     {
         public override string Texture => GetInstance<Evolution>().Texture;
-        public override void SetStaticDefaults() => Type.ShimmerEach<Evolution>();
         public override void ExSD()
         {
             Item.damage = 313;

@@ -12,7 +12,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Ranged
 {
-    public class DeathTollsMinion : HJScarletFriendlyProj
+    public class DeathTollsHeldMinion : HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Ranged;
         public override string Texture => GetInstance<DeathTollsMainProj>().Texture;

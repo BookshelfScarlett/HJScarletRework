@@ -162,6 +162,12 @@ namespace HJScarletRework.Projs.Ranged
                 //更新射弹位置
                 Projectile.Center = target.Center + offsetPos;
             }
+            else
+            {
+                //不合规的时候立刻跳转消失
+                Projectile.Kill();
+                return;
+            }
             AttackTimer += 1;
             float progress = AttackTimer / 5f;
             Projectile.scale = Clamp(EaseInCubic(progress), 0f, 1f);
@@ -179,41 +185,6 @@ namespace HJScarletRework.Projs.Ranged
             //重新给予射弹向上的初速度。
         }
         #endregion
-        /*
-        private void DrawTrail(float height)
-        {
-            //干掉可能存在零向量
-            Color color = Color.Black;
-            Projectile.ClearInvaidData(out List<Vector2> validPositions, out List<float> validRot);
-            int drawPointTime = 4;
-            //自定义尝试获取贝塞尔曲线
-            BezierCurveHandler.GetValidBeizerCurvePow(validPositions, validRot, out List<Vector2> smoothPositions, out List<float> smoothRots, drawPointTime);
-            List<VertexPosition2DColorTexture> vertexList = [];
-            for (int i = 0; i < smoothPositions.Count; i++)
-            {
-                Vector2 worldCenter = smoothPositions[i] + Projectile.Size / 2;
-                float progress = (float)i / (smoothPositions.Count - 1);
-                Vector2 posOffset = new Vector2(0, height).RotatedBy(smoothRots[i]);
-                Vector2 oldCenter = worldCenter - Main.screenPosition;
-                //添加顶点
-                VertexPosition2DColorTexture UpClass = new(oldCenter + posOffset, color, new Vector2(progress, 0), 0);
-                VertexPosition2DColorTexture DownClass = new(oldCenter - posOffset, color, new Vector2(progress, 1), 0);
-                vertexList.Add(UpClass);
-                vertexList.Add(DownClass);
-            }
-            if (vertexList.Count >= 3)
-            {
-                GraphicsDevice GD = Main.graphics.GraphicsDevice;
-                //我不会用Shader，我只能先这样搞
-                Texture2D value = UCATextureRegister.Trail_RvSlash.Value;
-                //贴图
-                GD.Textures[0] = value;
-                //绘制
-                GD.DrawUserPrimitives(PrimitiveType.TriangleStrip, vertexList.ToArray(), 0, vertexList.Count - 2);
-            }
-
-        }
-        */
         public override bool PreDraw(ref Color lightColor)
         {
             return false;

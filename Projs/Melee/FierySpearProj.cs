@@ -55,6 +55,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire, GetSeconds(5));
             SpawnVolcanoDustAndProj(target.whoAmI);
         }
         public override bool OnTileCollide(Vector2 oldVelocity)

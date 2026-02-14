@@ -17,6 +17,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.ToTrailSetting(15, 2);
         }
         public ref float Timer => ref Projectile.ai[0];
+        public ref float SpawnStar => ref Projectile.ai[1];
         public float MaxTime = 10f;
         public float Ratios = 0f;
         public override void ExSD()
@@ -27,14 +28,22 @@ namespace HJScarletRework.Projs.Melee
             Projectile.tileCollide = true;
             Projectile.penetrate = 10;
             Projectile.extraUpdates = 1;
-            Projectile.timeLeft = 300;
+            Projectile.timeLeft = 250;
         }
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
             Projectile.light = 0.5f;
             Timer++;
+            SpawnStar += 1f;
             Ratios = Clamp( Timer / MaxTime, 0f, 1f);
+            if (SpawnStar > 3f * Projectile.MaxUpdates)
+            {
+                SpawnStar = 0;
+                Projectile star = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePosEdge(10f), Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f, 12f), ProjectileType<LightBiteDarkStar>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                star.localAI[0] = RandRotTwoPi;
+                star.ai[2] = Main.rand.NextFloat(0.7f, 1.1f);
+            }
             if (!HJScarletMethods.OutOffScreen(Projectile.Center))
                 DrawParticle();
 
@@ -97,12 +106,6 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            for (int i = -1; i < 2; i += 2)
-            {
-                Projectile star = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center.ToRandCirclePosEdge(10f), Projectile.velocity.ToRandVelocity(ToRadians(5f), 4f, 7f) * i, ProjectileType<LightBiteDarkStar>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
-                star.localAI[0] = RandRotTwoPi;
-                star.ai[2] = Main.rand.NextFloat(0.7f, 1.1f);
-            }
             for (float i = 0; i < 12f; i += 1f)
             {
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(12f), Projectile.oldVelocity * Main.rand.NextFloat(0.4f, 0.7f), RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.75f * Main.rand.NextFloat(0.5f, 1f), Main.rand.NextFloat(ToRadians(-5f), ToRadians(7f))).Spawn();
@@ -113,7 +116,6 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FinalDamage *= 0.90f;
             base.ModifyHitNPC(target, ref modifiers);
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

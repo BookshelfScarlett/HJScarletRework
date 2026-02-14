@@ -5,4 +5,18 @@ HJScarletConfigServer: {
 		Label: Enable Same Item Shimmer
 		Tooltip: ""
 	}
+
+	SpecialRarity: {
+		Label: Special Rarity
+		Tooltip: ""
+	}
+}
+
+HJScarletConfigClient: {
+	DisplayName: H J Scarlet Config Client
+
+	SpecialRarity: {
+		Label: Special Rarity
+		Tooltip: ""
+	}
 }

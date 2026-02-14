@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Ranged
 {
-    public class JudgementLock : HJScarletFriendlyProj
+    public class JudgementHeldLock : HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Ranged;
         public override string Texture => GetInstance<JudgementMainProj>().Texture;
@@ -68,7 +68,7 @@ namespace HJScarletRework.Projs.Ranged
                 Oscillation += 0.025f / 3;
                 //记得清零射弹当前的速度，因为下方实际上使用正弦曲线来精确控制
                 Projectile.velocity *= 0;
-                if (Owner.HasProj<DeathTollsMinion>())
+                if (Owner.HasProj<DeathTollsHeldMinion>())
                     UpdateIfNoTargetNearbyAndHasNightmareProj();
                 else
                     UpdateIfNoTargetNearby();

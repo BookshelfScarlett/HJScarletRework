@@ -6,6 +6,7 @@ using ContinentOfJourney.Items.Placables;
 using ContinentOfJourney.Items.Placables.FishingCrate;
 using ContinentOfJourney.Items.Rockets;
 using ContinentOfJourney.Items.ThrowerWeapons;
+using HJScarletRework.Core.Configs;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
@@ -32,7 +33,7 @@ namespace HJScarletRework.Globals.Instances
         }
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Name == "ItemName" && line.Mod == "Terraria")
+            if (line.Name == "ItemName" && line.Mod == "Terraria" && HJScarletConfigClient.Instance.SpecialRarity)
             {
                 foreach (var (itemIDs, drawMethods) in _rarityDrawMap)
                 {
@@ -74,9 +75,7 @@ namespace HJScarletRework.Globals.Instances
                 new HashSet<int>
                 {
                     ItemType<GalvanizedHand>(),
-                    ItemType<GalvanizedHandThrown>(),
                     ItemType<FlybackHand>(),
-                    ItemType<FlybackHandThrown>()
                 },
                 TimeRarity.DrawRarity
             },
@@ -84,7 +83,6 @@ namespace HJScarletRework.Globals.Instances
                 new HashSet<int>
                 {
                     ItemType<Dialectics>(),
-                    ItemType<DialecticsThrown>()
 
                 },
                 MatterRarity.DrawRarity
@@ -113,6 +111,15 @@ namespace HJScarletRework.Globals.Instances
         public override string IsArmorSet(Item head, Item body, Item legs)
         {
             return base.IsArmorSet(head, body, legs);
+        }
+        public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
+        {
+            switch(item.type)
+            {
+                case ItemID.GolemBossBag:
+                    itemLoot.AddLoot<DisasterEssence>(1, 10, 20);
+                    break;
+            }
         }
         public override void AddRecipes()
         {
