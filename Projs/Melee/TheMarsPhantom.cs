@@ -40,6 +40,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.localNPCHitCooldown = -1;
             Projectile.noEnchantmentVisuals = true; 
             Projectile.penetrate = -1;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
         }
         public override void AI()
         {

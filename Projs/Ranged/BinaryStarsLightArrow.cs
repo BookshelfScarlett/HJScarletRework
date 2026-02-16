@@ -104,7 +104,7 @@ namespace HJScarletRework.Projs.Ranged
         private void DoHomingToTarget()
         {
             //重新搜索一次单位
-            if (!Projectile.GetTargetSafe(out NPC target, true, 3600))
+            if (!Projectile.GetTargetSafe(out NPC target, true, 3600,canPassWall:true))
             {
                 Projectile.extraUpdates = 2;
                 return;

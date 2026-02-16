@@ -1,1 +1,36 @@
-This description will show up on the steam page, check out https://steamcommunity.com/comment/Guide/formattinghelp.
+﻿空想归途是一个（暂时）的旅人归途的附属模组，主要为旅人归途模组提供较大拓展性的游戏内容
+并为旅人归途原有的内容做出优化
+目前模组内为所有旅人长矛提供了经过深度打磨的投矛模式，并填充了一些原创投矛来保证完整的游戏流程
+同时也有一些有待进行更多拓展的物品……
+该模组仍然处于开发与打磨状态，包括特效、平衡等地方都需要进行一定程度的改进，感谢理解！
+
+
+模组主要内容（目前）：
+-为下方所有武器提供了投矛模式
+ 甜蜜一刺、野指针、滴蜡枪、黑暗之矛、蚀光矛、低吼、御手杆、归零针、进化、辩证法、电表镀针、逃逸速度
+-为黑暗之矛与辩证法提供了重绘贴图（投矛版本限定）
+-在流程内添加了一定数量的原创投矛保证投矛流程全覆盖
+-四把制作质量超级高的锤子（也可能非常超模）！
+
+未来计划：
+-旅人归途的投刀类武器重置
+-在不修改旅人归途武器攻击模组的情况下，优化武器的特效（类似于VFX+）
+-数不清的原创内容扩展
+-型月。
+
+Lostbelt Journey is a (temporary) add-on mod for Homeward Journey, designed to provide expanded gameplay content and offer optimizations for the original features of Homeward Journey.
+The mod currently introduces a polished javelin mechanics for all of Homeward Journey’s spears, along with several original javelins to support a complete gameplay experience.
+It also includes some unique items that are still waiting to be further expanded.
+This mod is still in active development and refinement. Effects, balance, and other aspects will continue to be improved. Thank you for your understanding!
+Current Features:
+-All of the weapons below now can be turned into Javelin:
+ Sweet Sweet Stab, Wild Pointer, Candlance, Spear of Darkness, Light Bite, Deep Tone, Tonbogiri, Flyback Hand, Evolution, Dialectis, Galvanized Hand, Spear of Escape
+-Provided a resprite for Spear of Darkness and Dialectis, javelin mode only
+-Added some original javelin to fill up a full playthrough
+-Four heavily polished thrown hammer.(might be overpowered too)
+
+Future:
+-Reworks for Daggers.
+-Improved most of vfx for Homewards Journey, without affacting its function, similar to VFX+
+-Countless expansion
+-Type-Moon.

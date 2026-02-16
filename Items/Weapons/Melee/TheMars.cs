@@ -10,7 +10,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {
-            Item.damage = 104;
+            Item.damage = 164;
             Item.useTime = Item.useAnimation = 38;
             Item.knockBack = 1f;
             Item.UseSound = HJScarletSounds.TheMars_Toss with { MaxInstances = 0 , Volume = 0.85f};

@@ -20,12 +20,27 @@ HeartoftheMountain: {
 
 PreciousAim: {
 	DisplayName: Precious Aim
-	Tooltip: ""
+	Tooltip:
+		'''
+		Sets critical strike chance to 20%.
+		Increases critical strike chance by 5% on crit, up to a maximum of 150%.
+		Excess critical strike chance is converted to critical damage boost at a ratio.
+		While excess critical strike chance is above 50%, increases the flight speed of most projectiles you directly fire.
+		The boost is reduced upon taking damage.
+		"Seems somewhat familiar."
+		'''
 }
 
 PreciousTarget: {
 	DisplayName: Precious Target
-	Tooltip: ""
+	Tooltip:
+		'''
+		Sets critical strike chance to 10%.
+		Increases critical strike chance by 5% on crit, up to a maximum of 150%.
+		Excess critical strike chance is converted to critical damage boost at a ratio.
+		The boost is reduced upon taking damage.
+		"Seems somewhat familiar."
+		'''
 }
 
 RewardofKingdom: {
@@ -40,7 +55,11 @@ RewardofWarrior: {
 
 CrimsonRune: {
 	DisplayName: Crimson Rune
-	Tooltip: ""
+	Tooltip:
+		'''
+		+1 HP/s life regeneration
+		Increases invincibility frames after being damaged, and reduces healing potion cooldown by 25%
+		'''
 }
 
 CreationHat: {
@@ -49,8 +68,12 @@ CreationHat: {
 }
 
 SacarbWings: {
-	DisplayName: Sacarb Wings
-	Tooltip: ""
+	DisplayName: Wings of Sacarb
+	Tooltip:
+		'''
+		Allows flight and slow falls
+		Grants infinite flight time
+		'''
 }
 
 SakurabaEmma: {

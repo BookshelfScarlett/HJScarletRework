@@ -272,7 +272,7 @@ namespace HJScarletRework.Projs.Ranged
                 return;
             }
 
-            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true, 4800f))
+            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true, 4800f,canPassWall:true))
             {
                 //以超高的速度冲向你的敌怪
                 Projectile.extraUpdates = 6;

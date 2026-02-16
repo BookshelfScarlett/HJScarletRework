@@ -16,10 +16,13 @@ namespace HJScarletRework.Buffs.Pets
     {
         internal static string BuffPath = "HJScarletRework/Assets/Texture/Pets/Pet_";
         public override string Texture => BuffPath + GetType().Name;
+        public virtual bool IsLightPet => false; 
         public override void SetStaticDefaults()
         {
             Main.buffNoTimeDisplay[Type] = true;
             Main.vanityPet[Type] = true;
+            if (IsLightPet)
+                Main.lightPet[Type] = true;
         }
     }
 }

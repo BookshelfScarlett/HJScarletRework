@@ -13,6 +13,9 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
+    /// <summary>
+    /// 我草辩证法代码变成一坨大便了
+    /// </summary>
     public class DialecticsThrownProj : ThrownSpearProjClass
     {
         public override string Texture => HJScarletItemProj.Proj_Dialectics.Path;
@@ -25,6 +28,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public WaveStyle CurWaveStyle = WaveStyle.Sin;
         public ref float DrawCubeAndBallTimer => ref Projectile.localAI[0];
+        public int SinAttackCounts = 0;
         public bool IsHit = false;
         public override void ExSSD() => Projectile.ToTrailSetting(20, 2);
         public Vector2 MountedTargetPos = Vector2.Zero; 
@@ -40,6 +44,8 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
+            if (!Projectile.HJScarlet().FirstFrame)
+                SetUpBasiceData();
             if (Vector2.Distance(Projectile.Center, Owner.MountedCenter) > 1800f)
                 Projectile.Kill();
             DrawCubeAndBallTimer += 0.025f;
@@ -64,9 +70,28 @@ namespace HJScarletRework.Projs.Melee
             }
         }
 
+        private void SetUpBasiceData()
+        {
+            switch (CurWaveStyle)
+            {
+                case WaveStyle.Sin:
+                    Projectile.penetrate = 6;
+                    break;
+                case WaveStyle.Square:
+                    break;
+                case WaveStyle.ParaSquare:
+                    Projectile.penetrate = -1;
+                    Projectile.localNPCHitCooldown = -1;
+                    break;
+                case WaveStyle.Paraline:
+                    break;
+
+            }
+        }
+
         private void ParaSquareWaveAttack()
         {
-            //平行波，沿途滞留可追踪敌人的小方块
+            //平行方波，沿途滞留可追踪敌人的小方块
             if (Timer % 5 == 0)
             {
                 for (int k = -1; k < 2; k+=2)
@@ -102,6 +127,7 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.GetTargetSafe(out NPC target, true))
             {
                 Projectile.Center = target.Center + MountedTargetPos;
+
                 if(Projectile.timeLeft % 60 == 0)
                 {
                     for (int i = 0; i < 2 ;i++)
@@ -118,8 +144,6 @@ namespace HJScarletRework.Projs.Melee
         //矩形波：命中后追加AimlabBox
         private void SquareWaveAttack()
         {
-            Projectile.penetrate = -1;
-            Projectile.localNPCHitCooldown = -1;
             for (int i = 0; i < 2; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustID.DungeonWater);
@@ -170,6 +194,11 @@ namespace HJScarletRework.Projs.Melee
                 }
                 IsHit = true;
                 target.HJScarlet().Dialectics_Timer = 180;
+            }
+            else if (CurWaveStyle == WaveStyle.Sin)
+            {
+                modifiers.SourceDamage *= (1 + SinAttackCounts * 0.1f); 
+                SinAttackCounts++;
             }
         }
         public override bool PreKill(int timeLeft)

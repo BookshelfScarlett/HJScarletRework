@@ -18,6 +18,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.UseSound = SoundID.Item103;
             Item.knockBack = 4f;
             Item.shootSpeed = 14f;
+            Item.rare = ItemRarityID.Pink;
             Item.shoot = ProjectileType<SpearofDarknessThrownProj>();
         }
         public override Color MainTooltipColor => Color.MediumPurple;

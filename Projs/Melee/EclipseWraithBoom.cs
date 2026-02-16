@@ -15,7 +15,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class SodomsDisasterBoom : HJScarletFriendlyProj
+    public class EclipseWraithBoom : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override ClassCategory Category => ClassCategory.Melee;

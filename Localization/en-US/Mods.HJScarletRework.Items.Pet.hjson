@@ -1,24 +1,44 @@
 WhaleItem: {
-	DisplayName: Whale Item
-	Tooltip: ""
+	DisplayName: Whale Xun
+	Tooltip:
+		'''
+		Summons a departed whale
+		"Play the song of the whale"
+		'''
 }
 
 NoneItem: {
-	DisplayName: None Item
-	Tooltip: ""
+	DisplayName: Arcane Symbol
+	Tooltip:
+		'''
+		Summons
+		"404 not found"
+		'''
 }
 
 ShadowItem: {
-	DisplayName: Shadow Item
-	Tooltip: ""
+	DisplayName: Shrink Ray
+	Tooltip:
+		'''
+		Summons a miniaturized Shadow Wall
+		"A relic from the future. You shine it into the abyss, and something wonderful happens."
+		'''
 }
 
 SquidItem: {
-	DisplayName: Squid Item
-	Tooltip: ""
+	DisplayName: Mini Squid Bait
+	Tooltip:
+		'''
+		Summons a baby squid
+		"Specially formulated for baby squids"
+		'''
 }
 
 WatcherItem: {
-	DisplayName: Watcher Item
-	Tooltip: ""
+	DisplayName: Bell of Ultimate Sight
+	Tooltip:
+		'''
+		Summons a larva of the Time God
+		"Its bell rings ripple across the river of time"
+		'''
 }

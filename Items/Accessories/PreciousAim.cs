@@ -5,6 +5,9 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria.ModLoader;
+using ContinentOfJourney.Items.Material;
+using ContinentOfJourney.Tiles;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace HJScarletRework.Items.Accessories
 {
@@ -30,7 +33,11 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void AddRecipes()
         {
-            base.AddRecipes();
+            CreateRecipe().
+                AddIngredient<PreciousTarget>().
+                AddIngredient<EssenceofLife>(10).
+                AddTile<FinalAnvil>().
+                Register();
         }
     }
 }

@@ -32,10 +32,11 @@ namespace HJScarletRework.Projs.Melee
         }
         public void SpawnEnegry()
         {
+            int spawnCounts = HJScarletMethods.HasFuckingCalamity ? 6 : 3;
             SoundEngine.PlaySound(SoundID.Item109 with { MaxInstances = 1 }, Projectile.Center);
             new CrossGlow(Projectile.Center, Color.SkyBlue, 40, 1f, 0.25f,false).Spawn();
             new CrossGlow(Projectile.Center, Color.White, 40, 0.5f, 0.20f,false).Spawn();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < spawnCounts; i++)
             {
                 Vector2 dir = Projectile.SafeDir().ToRandVelocity(ToRadians(30f));
                 //注意这里：如果没有找到正常的敌人，这里是不会尝试生成的

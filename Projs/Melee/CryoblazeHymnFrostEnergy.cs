@@ -54,6 +54,12 @@ namespace HJScarletRework.Projs.Melee
             if(!Projectile.HJScarlet().FirstFrame)
             {
                 Speed = Projectile.velocity.Length();
+                if(HJScarletMethods.HasFuckingCalamity)
+                {
+                    Projectile.penetrate = 4;
+                    Projectile.timeLeft = 800;
+                    Projectile.extraUpdates = 1;
+                }
             }
 
             ParticleSpawn();

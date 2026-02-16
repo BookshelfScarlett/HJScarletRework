@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.damage = 19;
             Item.useTime = 5;
             Item.useAnimation = 5;
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item91 with { Volume = 0.7f, Pitch = 0.4f};
             Item.shoot = ProjectileType<WildPointerThrownProj>();
             Item.shootSpeed = 16;
@@ -31,7 +31,10 @@ namespace HJScarletRework.Items.Weapons.Melee
             //这里直接用MainMW应该没问题，多人同步后面再看看
             Vector2 direction = player.ToMouseVector2().ToRandVelocity(ToRadians(15));
             Vector2 spawnPos = player.MountedCenter + direction * 25f + direction.RotatedBy(PiOver2 * Main.rand.NextBool().ToDirectionInt()) * Main.rand.NextFloat(15f * Main.rand.NextBool().ToDirectionInt());
-            int ai0 = Main.rand.NextBool(5).ToInt();
+            int chance = 5;
+            if (HJScarletMethods.HasFuckingCalamity)
+                chance = 2;
+            int ai0 = Main.rand.NextBool(chance).ToInt();
             Projectile proj = Projectile.NewProjectileDirect(source, spawnPos, direction * Item.shootSpeed, type, damage, knockback, player.whoAmI, ai0);
             return false;
         }

@@ -3,60 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\weapons\\melee\\sodomsdisaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\weapons\\melee\\sodomsdisaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\description.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:description.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\melee\\lightbitedarkstar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\melee\\lightbitedarkstar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\localization\\zh-hans\\mods.hjscarletrework.weapons.melee.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:localization\\zh-hans\\mods.hjscarletrework.weapons.melee.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\description_workshop.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:description_workshop.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\build.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:build.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\melee\\evolutionthrownproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\melee\\evolutionthrownproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\ranged\\binarystarsphantomclone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\ranged\\binarystarsphantomclone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\weapons\\melee\\evolutionthrown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\weapons\\melee\\evolutionthrown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\ranged\\aetherfiresmashermain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\ranged\\aetherfiresmashermain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\weapons\\melee\\flybackhandthrown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\weapons\\melee\\flybackhandthrown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\ranged\\binarystarsmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\ranged\\binarystarsmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\melee\\spearofescapemissile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\melee\\spearofescapemissile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\ranged\\binarystarsphantom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\ranged\\binarystarsphantom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\melee\\fieryspearfireball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\melee\\fieryspearfireball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\ranged\\binarystarslightarrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\ranged\\binarystarslightarrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\melee\\fieryspearproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\melee\\fieryspearproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\ranged\\binarystarsheldclone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\ranged\\binarystarsheldclone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\weapons\\melee\\dialecticsthrown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\weapons\\melee\\dialecticsthrown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\melee\\tonbogiribubble.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\melee\\tonbogiribubble.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\melee\\spearofdarknessshadow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\melee\\spearofdarknessshadow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\melee\\lightbitethrownproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\melee\\lightbitethrownproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\localization\\zh-hans\\mods.hjscarletrework.weapons.melee.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:localization\\zh-hans\\mods.hjscarletrework.weapons.melee.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,24 +50,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 203,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SodomsDisaster.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\SodomsDisaster.cs",
-              "RelativeDocumentMoniker": "Items\\Weapons\\Melee\\SodomsDisaster.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\SodomsDisaster.cs",
-              "RelativeToolTip": "Items\\Weapons\\Melee\\SodomsDisaster.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:25:54.134Z",
+              "DocumentIndex": 1,
+              "Title": "description_workshop.txt",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\description_workshop.txt",
+              "RelativeDocumentMoniker": "description_workshop.txt",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\description_workshop.txt",
+              "RelativeToolTip": "description_workshop.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-02-15T20:52:16.554Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "description.txt",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\description.txt",
+              "RelativeDocumentMoniker": "description.txt",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\description.txt",
+              "RelativeToolTip": "description.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-02-15T20:52:15.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "build.txt",
               "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\build.txt",
               "RelativeDocumentMoniker": "build.txt",
@@ -91,163 +100,98 @@
               "RelativeToolTip": "build.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2026-02-14T21:12:15.445Z",
+              "WhenOpened": "2026-02-15T20:52:09.401Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "EvolutionThrownProj.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\EvolutionThrownProj.cs",
-              "RelativeDocumentMoniker": "Projs\\Melee\\EvolutionThrownProj.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\EvolutionThrownProj.cs",
-              "RelativeToolTip": "Projs\\Melee\\EvolutionThrownProj.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAkAAAAAAAAAA==",
+              "Title": "AetherfireSmasherMain.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\AetherfireSmasherMain.cs",
+              "RelativeDocumentMoniker": "Projs\\Ranged\\AetherfireSmasherMain.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\AetherfireSmasherMain.cs",
+              "RelativeToolTip": "Projs\\Ranged\\AetherfireSmasherMain.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAcwJMAAABdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:11:11.226Z",
+              "WhenOpened": "2026-02-15T20:47:09.512Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "EvolutionThrown.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\EvolutionThrown.cs",
-              "RelativeDocumentMoniker": "Items\\Weapons\\Melee\\EvolutionThrown.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\EvolutionThrown.cs",
-              "RelativeToolTip": "Items\\Weapons\\Melee\\EvolutionThrown.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAyAAAAAAAAAA==",
+              "Title": "BinaryStarsMain.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\BinaryStarsMain.cs",
+              "RelativeDocumentMoniker": "Projs\\Ranged\\BinaryStarsMain.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\BinaryStarsMain.cs",
+              "RelativeToolTip": "Projs\\Ranged\\BinaryStarsMain.cs",
+              "ViewState": "AgIAAAkBAAAAAAAAAAAQwBIBAABiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:11:06.181Z",
+              "WhenOpened": "2026-02-15T20:46:52.027Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "FierySpearFireball.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\FierySpearFireball.cs",
-              "RelativeDocumentMoniker": "Projs\\Melee\\FierySpearFireball.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\FierySpearFireball.cs",
-              "RelativeToolTip": "Projs\\Melee\\FierySpearFireball.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAwwGEAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "BinaryStarsPhantomClone.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\BinaryStarsPhantomClone.cs",
+              "RelativeDocumentMoniker": "Projs\\Ranged\\BinaryStarsPhantomClone.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\BinaryStarsPhantomClone.cs",
+              "RelativeToolTip": "Projs\\Ranged\\BinaryStarsPhantomClone.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAkwJcAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:08:57.589Z",
+              "WhenOpened": "2026-02-15T20:46:36.921Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "SpearofEscapeMissile.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\SpearofEscapeMissile.cs",
-              "RelativeDocumentMoniker": "Projs\\Melee\\SpearofEscapeMissile.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\SpearofEscapeMissile.cs",
-              "RelativeToolTip": "Projs\\Melee\\SpearofEscapeMissile.cs",
-              "ViewState": "AgIAAL8AAAAAAAAAAAAUwNIAAAAZAAAAAAAAAA==",
+              "Title": "BinaryStarsLightArrow.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\BinaryStarsLightArrow.cs",
+              "RelativeDocumentMoniker": "Projs\\Ranged\\BinaryStarsLightArrow.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\BinaryStarsLightArrow.cs",
+              "RelativeToolTip": "Projs\\Ranged\\BinaryStarsLightArrow.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAwwGoAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:08:47.329Z",
+              "WhenOpened": "2026-02-15T20:46:05.783Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BinaryStarsHeldClone.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\BinaryStarsHeldClone.cs",
+              "RelativeDocumentMoniker": "Projs\\Ranged\\BinaryStarsHeldClone.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\BinaryStarsHeldClone.cs",
+              "RelativeToolTip": "Projs\\Ranged\\BinaryStarsHeldClone.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAADwv1wAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-15T20:45:46.929Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "FlybackHandThrown.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\FlybackHandThrown.cs",
-              "RelativeDocumentMoniker": "Items\\Weapons\\Melee\\FlybackHandThrown.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\FlybackHandThrown.cs",
-              "RelativeToolTip": "Items\\Weapons\\Melee\\FlybackHandThrown.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAdAAAAAAAAAA==",
+              "Title": "BinaryStarsPhantom.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\BinaryStarsPhantom.cs",
+              "RelativeDocumentMoniker": "Projs\\Ranged\\BinaryStarsPhantom.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Ranged\\BinaryStarsPhantom.cs",
+              "RelativeToolTip": "Projs\\Ranged\\BinaryStarsPhantom.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAuwGsAAABbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:08:33.991Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Mods.HJScarletRework.Weapons.Melee.hjson",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Localization\\zh-Hans\\Mods.HJScarletRework.Weapons.Melee.hjson",
-              "RelativeDocumentMoniker": "Localization\\zh-Hans\\Mods.HJScarletRework.Weapons.Melee.hjson",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Localization\\zh-Hans\\Mods.HJScarletRework.Weapons.Melee.hjson",
-              "RelativeToolTip": "Localization\\zh-Hans\\Mods.HJScarletRework.Weapons.Melee.hjson",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAAC4AAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-14T21:06:52.617Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "TonbogiriBubble.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\TonbogiriBubble.cs",
-              "RelativeDocumentMoniker": "Projs\\Melee\\TonbogiriBubble.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\TonbogiriBubble.cs",
-              "RelativeToolTip": "Projs\\Melee\\TonbogiriBubble.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAswG4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:06:16.95Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "SpearofDarknessShadow.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\SpearofDarknessShadow.cs",
-              "RelativeDocumentMoniker": "Projs\\Melee\\SpearofDarknessShadow.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\SpearofDarknessShadow.cs",
-              "RelativeToolTip": "Projs\\Melee\\SpearofDarknessShadow.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:06:10.01Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "LightBiteThrownProj.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\LightBiteThrownProj.cs",
-              "RelativeDocumentMoniker": "Projs\\Melee\\LightBiteThrownProj.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\LightBiteThrownProj.cs",
-              "RelativeToolTip": "Projs\\Melee\\LightBiteThrownProj.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:06:09.082Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LightBiteDarkStar.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\LightBiteDarkStar.cs",
-              "RelativeDocumentMoniker": "Projs\\Melee\\LightBiteDarkStar.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\LightBiteDarkStar.cs",
-              "RelativeToolTip": "Projs\\Melee\\LightBiteDarkStar.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAcwHQAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:06:08.484Z",
+              "WhenOpened": "2026-02-15T20:45:45.032Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "FierySpearProj.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\FierySpearProj.cs",
-              "RelativeDocumentMoniker": "Projs\\Melee\\FierySpearProj.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\FierySpearProj.cs",
-              "RelativeToolTip": "Projs\\Melee\\FierySpearProj.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:06:06.643Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DialecticsThrown.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\DialecticsThrown.cs",
-              "RelativeDocumentMoniker": "Items\\Weapons\\Melee\\DialecticsThrown.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Weapons\\Melee\\DialecticsThrown.cs",
-              "RelativeToolTip": "Items\\Weapons\\Melee\\DialecticsThrown.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-14T21:05:51.208Z",
+              "Title": "Mods.HJScarletRework.Weapons.Melee.hjson",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Localization\\zh-Hans\\Mods.HJScarletRework.Weapons.Melee.hjson",
+              "RelativeDocumentMoniker": "Localization\\zh-Hans\\Mods.HJScarletRework.Weapons.Melee.hjson",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Localization\\zh-Hans\\Mods.HJScarletRework.Weapons.Melee.hjson",
+              "RelativeToolTip": "Localization\\zh-Hans\\Mods.HJScarletRework.Weapons.Melee.hjson",
+              "ViewState": "AgIAAAUBAAAAAAAAAAAAACEBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-15T20:41:12.805Z",
               "EditorCaption": ""
             }
           ]

@@ -53,7 +53,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                 SoundEngine.PlaySound(HJScarletSounds.Dialectics_Throw with { MaxInstances = 0, Pitch = 0.5f, Volume =0.7f });
             else
                 SoundEngine.PlaySound(HJScarletSounds.Atom_Strike[0] with { MaxInstances = 1 });
-            int realDamage = curStyle == WaveStyle.Square ? damage * 3 : damage;
+            int realDamage = curStyle == WaveStyle.Square ? damage * (3 + HJScarletMethods.HasFuckingCalamity.ToInt() * 7) : damage;
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, realDamage, knockback, player.whoAmI);
             ((DialecticsThrownProj)proj.ModProjectile).CurWaveStyle = curStyle;
             UsePhase++;

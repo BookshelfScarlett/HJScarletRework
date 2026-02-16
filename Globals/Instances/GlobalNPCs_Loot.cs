@@ -1,4 +1,11 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using ContinentOfJourney.NPCs.Boss_MarquisMoonsquid;
+using ContinentOfJourney.NPCs.Boss_ScarabBelief;
+using ContinentOfJourney.NPCs.Boss_TheOverwatcher;
+using ContinentOfJourney.NPCs.Boss_WallofShadow;
+using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
+using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Pets;
 using HJScarletRework.Items.Weapons.Melee;
 using System;
 using System.Collections.Generic;
@@ -20,6 +27,20 @@ namespace HJScarletRework.Globals.Instances
                 case NPCID.MartianSaucerCore:
                     npcLoot.AddLootSimple(ItemType<TheMars>(), 4);
                     break;
+            }
+            if (!Main.masterMode)
+                return;
+            if (npc.type == NPCType<WorldsEndEverlastingFallingWhale>())
+                npcLoot.AddLootSimple(ItemType<WhaleItem>(), 4);
+            if (npc.type == NPCType<TheOverwatcher>())
+                npcLoot.AddLootSimple(ItemType<WatcherItem>(), 4);
+            if (npc.type == NPCType<WallofShadow>())
+                npcLoot.AddLootSimple(ItemType<ShadowItem>(), 4);
+            if (npc.type == NPCType<MarquisMoonsquid>())
+                npcLoot.AddLootSimple(ItemType<SquidItem>(), 4);
+            if (npc.type == NPCType<ScarabBelief>())
+            {
+                npcLoot.AddLootSimple(ItemType<NoneItem>(), 4);
             }
         }
     }

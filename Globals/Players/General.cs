@@ -19,6 +19,7 @@ namespace HJScarletRework.Globals.Players
         public bool NoGuideForBinaryStars = false;
         public bool CanDisableGuideForGrandHammer = false;
         public bool CanGiveFreeBinaryStars = false;
+        public int FlybackClockCD = 0;
         public int FlybackBuffTime = 0;
         public int CurrentFullFlyBackTime = 0;
         //用给归零针，查阅玩家当前损失的HP量
@@ -27,6 +28,8 @@ namespace HJScarletRework.Globals.Players
         public int FlybackHitBuffTimer = 0;
 
         public bool CreationHatSet = false;
+        //电表镀针的冲刺冷却
+        public int GalvanizedHandDashCD = 0;
         public bool galvanizedHandProjHanging = false;
 
         // 用于向上向下冲刺禁用羽落
@@ -93,10 +96,12 @@ namespace HJScarletRework.Globals.Players
         {
             FocusStrikeTime = 0;
             FlybackBuffTime = 0;
+            FlybackClockCD = 0;
             CurrentFullFlyBackTime = 0;
             DesterranHeal = 0;
             PreciousTargetCrtis = 10;
             LifeBalloonAcc = false;
+            GalvanizedHandDashCD = 0;
             galvanizedHandProjHanging = true;
 
             DesterrannachtImmortal = false;

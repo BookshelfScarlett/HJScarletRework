@@ -48,7 +48,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                     if (proj.AttackType == GalvanizedHandThrownProj.Style.Stab)
                     {
                         Item.useStyle = ItemUseStyleID.Shoot;
-                        Item.useTime = Item.useAnimation = 12;
+                        Item.useTime = Item.useAnimation = 15;
                         return true;
                     }
                 }

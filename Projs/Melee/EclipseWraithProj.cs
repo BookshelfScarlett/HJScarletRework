@@ -13,10 +13,10 @@ using Terraria.Audio;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class SodomsDisasterProj : HJScarletFriendlyProj
+    public class EclipseWraithProj : HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Melee;
-        public override string Texture => ProjPath  + nameof(SodomsDisaster);
+        public override string Texture => ProjPath  + nameof(EclipseWraith);
         public override void SetStaticDefaults() => Projectile.ToTrailSetting(16, 2);
         public ref float Timer => ref Projectile.ai[1];
         public Vector2 StabPosition = Vector2.Zero;
@@ -36,6 +36,10 @@ namespace HJScarletRework.Projs.Melee
         //和转角问题
         public override void AI()
         {
+            if(HJScarletMethods.HasFuckingCalamity && !Projectile.HJScarlet().FirstFrame)
+            {
+                Projectile.penetrate = -1;
+            }
             Projectile.rotation = Projectile.velocity.ToRotation();
             Vector2 dir = Projectile.SafeDirByRot();
             //超出距离立刻处死射弹
@@ -74,7 +78,7 @@ namespace HJScarletRework.Projs.Melee
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             //直接处死
-            Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SodomsDisasterBoom>(), Projectile.damage, 12f, Owner.whoAmI);
+            Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<EclipseWraithBoom>(), Projectile.damage, 12f, Owner.whoAmI);
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1 }, Projectile.Center);
             return true;
         }
@@ -83,7 +87,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<SodomsDisasterBoom>(), Projectile.damage, 12f, Owner.whoAmI);
+            Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<EclipseWraithBoom>(), Projectile.damage, 12f, Owner.whoAmI);
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1 }, Projectile.Center);
             for (int i = 0; i < 3;i++)
             {
@@ -91,7 +95,7 @@ namespace HJScarletRework.Projs.Melee
                 float spawnY = target.Center.Y - Main.rand.NextFloat(1200f, 1800f);
                 Vector2 spawnPos = new Vector2(spawnX, spawnY);
                 Vector2 dir = (target.Center - spawnPos).SafeNormalize(Vector2.UnitX);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, dir * Main.rand.NextFloat(12f, 16f), ProjectileType<SodomsDisasterFireball>(), Projectile.damage, 12f, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, dir * Main.rand.NextFloat(12f, 16f), ProjectileType<EclipseWraithFireball>(), Projectile.damage, 12f, Owner.whoAmI);
                 proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
             }
         }

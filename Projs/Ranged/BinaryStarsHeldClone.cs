@@ -89,7 +89,7 @@ namespace HJScarletRework.Projs.Ranged
             if (AttackTimer > 10f)
             {
                 AttackTimer = 10f;
-                if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex,searchDistance: 1800f))
+                if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex,searchDistance: 1800f,canPassWall:true))
                 {
                     Projectile.extraUpdates = 8;
                     Projectile.HomingTarget(target.Center, 1800f, 24f, 18f);

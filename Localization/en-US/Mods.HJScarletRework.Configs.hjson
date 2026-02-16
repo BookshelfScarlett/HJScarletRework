@@ -13,10 +13,15 @@ HJScarletConfigServer: {
 }
 
 HJScarletConfigClient: {
-	DisplayName: H J Scarlet Config Client
+	DisplayName: Lostbelt Journey Client Config
 
 	SpecialRarity: {
-		Label: Special Rarity
-		Tooltip: ""
+		Label: Special Rarity Overrides Orignal Mod
+		Tooltip:
+			'''
+			Allows Lostbelt Journey to override the rarity of certain items in Homeward Journey with special rarities.
+			Currently only applies to items related to deities.
+			Disabled by default.
+			'''
 	}
 }

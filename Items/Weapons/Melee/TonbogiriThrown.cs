@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
     {
         public override string Texture => GetInstance<Tonbogiri>().Texture;
         public float CurrentAttackSpeedBonues = 0f;
-        public static readonly int MaxBubbles = 8;
+        public static readonly int MaxBubbles = HJScarletMethods.HasFuckingCalamity ? 16 : 8;
         public override void SetStaticDefaults()
         {
             ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 2f;
@@ -26,6 +26,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 12f;
             Item.shootSpeed = 16;
+            Item.rare = ItemRarityID.Cyan;
             //这里的shoot是为了适配weaponoutlite。实际上我们不会直接shoot这个东西
             Item.shoot = ProjectileType<TonbogiriThrownProj>();
             Item.UseSound = SoundID.Item71;
@@ -68,6 +69,8 @@ namespace HJScarletRework.Items.Weapons.Melee
                     theCritBonuse = 0;
                 int totalBubble = theCritBonuse + (int)attackSpeed;
                 totalBubble = (int)Clamp(totalBubble, 1, MaxBubbles);
+                if (HJScarletMethods.HasFuckingCalamity)
+                    totalBubble *= 2;
                 return totalBubble;
             }
         }

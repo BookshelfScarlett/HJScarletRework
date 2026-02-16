@@ -1,6 +1,10 @@
 CorePickaxe: {
 	DisplayName: Core Pickaxe
-	Tooltip: ""
+	Tooltip:
+		'''
+		A tool hot enough to smelt ores for you...
+		"Core of the Earth"
+		'''
 }
 
 SuicideKnife: {

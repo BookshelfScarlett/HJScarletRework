@@ -1,106 +1,89 @@
 Melee: {
-	// BamboomerangProj.DisplayName: Bamboomerang Proj
-	// BeetleSpearProj.DisplayName: Beetle Spear Proj
-	// CandLanceBeam.DisplayName: Cand Lance Beam
-	// CandLanceFire.DisplayName: Cand Lance Fire
-	// CandLanceThrownProj.DisplayName: Cand Lance Thrown Proj
-	// DeepToneMinion.DisplayName: Deep Tone Minion
-	// DeepToneShockwave.DisplayName: Deep Tone Shockwave
-	// DeepToneTenctacle.DisplayName: Deep Tone Tenctacle
-	// DeepToneThrownProj.DisplayName: Deep Tone Thrown Proj
-	// DialecticsCubeProj.DisplayName: Dialectics Cube Proj
-	// DialecticsSkyFall.DisplayName: Dialectics Sky Fall
-	// DialecticsSpiningBlock.DisplayName: Dialectics Spining Block
-	// DialecticsThrownProj.DisplayName: Dialectics Thrown Proj
-	// EvolutionArrow.DisplayName: Evolution Arrow
-	// EvolutionThrownProj.DisplayName: Evolution Thrown Proj
-	// FierySpearFireball.DisplayName: Fiery Spear Fireball
-	// FierySpearProj.DisplayName: Fiery Spear Proj
-	// FlybackHandClockMounted.DisplayName: Flyback Hand Clock Mounted
-	// FlybackHandEdgeProj.DisplayName: Flyback Hand Edge Proj
-	// FlybackHandHitClock.DisplayName: Flyback Hand Hit Clock
-	// FlybackHandStar.DisplayName: Flyback Hand Star
-	// FlybackHandThrownProj.DisplayName: Flyback Hand Thrown Proj
-	// LightBiteArrow.DisplayName: Light Bite Arrow
-	// LightBiteThrownProj.DisplayName: Light Bite Thrown Proj
-	// SpearofDarknessShadow.DisplayName: Spearof Darkness Shadow
-	// SpearofDarknessThrownProj.DisplayName: Spearof Darkness Thrown Proj
-	// StormSpearSpinProj.DisplayName: Storm Spear Spin Proj
-	// StormSpearThrownProj.DisplayName: Storm Spear Thrown Proj
-	// SweetStabThrownProj.DisplayName: Sweet Stab Thrown Proj
-	// SodomsDisasterFireball.DisplayName: The Disaster Fireball
-	// SodomsDisasterProj.DisplayName: The Disaster Proj
-	// TheMarsPhantom.DisplayName: The Mars Phantom
-	// TheMarsProj.DisplayName: The Mars Proj
-	// TheMarsSpark.DisplayName: The Mars Spark
-	// TonbogiriBoom.DisplayName: Tonbogiri Boom
-	// TonbogiriBubble.DisplayName: Tonbogiri Bubble
-	// TonbogiriLaser.DisplayName: Tonbogiri Laser
-	// TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
-	// WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
-	// BinaryStarsClone.DisplayName: Binary Stars Clone
-	// TheMarsMark.DisplayName: The Mars Mark
-	// SodomsDisasterBoom.DisplayName: Sodoms Disaster Boom
-	// IceSpearEnergy.DisplayName: Ice Spear Energy
-	// IceSpearProj.DisplayName: Ice Spear Proj
-	// IceFireBloomFireball.DisplayName: Ice Fire Bloom Fireball
-	// IceFireEnergy.DisplayName: Ice Fire Energy
-	// IceFireFrostBoom.DisplayName: Ice Fire Frost Boom
-	// IceFireSpearProj.DisplayName: Ice Fire Spear Proj
-	// CryoblazeHymnFirePortal.DisplayName: Ice Fire Flame Bloom
-	// AzureFrostmarkEnergy.DisplayName: Azure Frostmark Energy
-	// AzureFrostmarkProj.DisplayName: Azure Frostmark Proj
-	// CryoblazeHymnFireball.DisplayName: Cryoblaze Hymn Fireball
-	// CryoblazeHymnFrostEnergy.DisplayName: Cryoblaze Hymn Frost Energy
-	// CryoblazeHymnFrostPortal.DisplayName: Cryoblaze Hymn Frost Portal
-	// CryoblazeHymnProj.DisplayName: Cryoblaze Hymn Proj
-	// GalvanizedHandSideProj.DisplayName: Galvanized Hand Side Proj
-	// GalvanizedHandThrownProj.DisplayName: Galvanized Hand Thrown Proj
-	// GalvanizedHandArrow.DisplayName: Galvanized Hand Arrow
-	// GalvanizedHandArrowMounted.DisplayName: Galvanized Hand Arrow Mounted
-	// LightBiteDarkStar.DisplayName: Light Bite Dark Star
-	// SpearofEscapeRider.DisplayName: Spearof Escape Rider
-	// SpearofEscapeThrownProj.DisplayName: Spearof Escape Thrown Proj
-	// SpearofEscapeMissile.DisplayName: Spearof Escape Missile
-	// SpearofEscapeBoom.DisplayName: Spearof Escape Boom
-	// BinaryStarsHeldClone.DisplayName: Binary Stars Held Clone
+	AzureFrostmarkEnergy.DisplayName: 湛蓝霜痕-寒霜球
+	AzureFrostmarkProj.DisplayName: 湛蓝霜痕
+	BamboomerangProj.DisplayName: 回旋竹
+	CandLanceBeam.DisplayName: 滴蜡枪-魂火
+	CandLanceFire.DisplayName: 滴蜡枪-魂火灯
+	CandLanceThrownProj.DisplayName: 滴蜡枪-投掷
+	CryoblazeHymnFireball.DisplayName: 冰火颂歌-火焰弹
+	CryoblazeHymnFirePortal.DisplayName: 冰火颂歌-火焰传送门
+	CryoblazeHymnFrostEnergy.DisplayName: 冰火颂歌-寒霜弹
+	CryoblazeHymnFrostPortal.DisplayName: 冰火颂歌-寒霜传送门
+	CryoblazeHymnProj.DisplayName: 冰火颂歌
+	DeepToneMinion.DisplayName: Deep Tone Minion
+	DeepToneShockwave.DisplayName: Deep Tone Shockwave
+	DeepToneTenctacle.DisplayName: 低吼-投掷-触手
+	DeepToneThrownProj.DisplayName: 低吼-投掷
+	DialecticsCubeProj.DisplayName: 辩证法-投掷-方块零件
+	DialecticsSkyFall.DisplayName: 辩证法-投掷-唯物射弹
+	DialecticsSpiningBlock.DisplayName: 辩证法-投掷-标记
+	DialecticsThrownProj.DisplayName: 辩证法-投掷
+	EclipseWraithBoom.DisplayName: 蚀日兽影-爆炸
+	EclipseWraithFireball.DisplayName: 蚀日兽影-天灾火球
+	EclipseWraithProj.DisplayName: 蚀日兽影
+	EvolutionArrow.DisplayName: 进化-投掷-追踪能量箭矢
+	EvolutionThrownProj.DisplayName: 进化-投掷
+	FierySpearFireball.DisplayName: 炽焰巨矛-火球
+	FierySpearProj.DisplayName: 炽焰巨矛
+	FlybackHandClockMounted.DisplayName: 归零针-投掷-时钟水晶
+	FlybackHandEdgeProj.DisplayName: 归零针-投掷-治疗珠
+	FlybackHandStar.DisplayName: 归零针-投掷-时间之星
+	FlybackHandThrownProj.DisplayName: 归零针-投掷
+	GalvanizedHandArrow.DisplayName: 电表镀针-投掷-指针
+	GalvanizedHandArrowMounted.DisplayName: 电表镀针-投掷-指针挂载
+	GalvanizedHandSideProj.DisplayName: 电表镀针-投掷-幻影镀针
+	GalvanizedHandThrownProj.DisplayName: 电表镀针-投掷
+	LightBiteArrow.DisplayName: 神秘通用小爆炸
+	LightBiteDarkStar.DisplayName: 蚀光矛-投掷-黑蚀之星
+	LightBiteThrownProj.DisplayName: 蚀光矛
+	SpearofDarknessShadow.DisplayName: 黑暗长矛-投掷-暗影栅栏
+	SpearofDarknessThrownProj.DisplayName: 黑暗长矛-投掷
+	SpearofEscapeBoom.DisplayName: 逃逸速度-投掷-爆炸
+	SpearofEscapeMissile.DisplayName: 逃逸速度-投掷-分裂导弹
+	SpearofEscapeRider.DisplayName: 逃逸速度-投掷
+	SpearofEscapeThrownProj.DisplayName: Spearof Escape Thrown Proj
+	SweetStabThrownProj.DisplayName: 甜蜜一刺-投掷
+	TheMarsMark.DisplayName: 玛尔斯-标记
+	TheMarsPhantom.DisplayName: 玛尔斯-潮汐之矛
+	TheMarsProj.DisplayName: 玛尔斯
+	TonbogiriBubble.DisplayName: 御手杆-投掷-毒泡
+	TonbogiriThrownProj.DisplayName: 御手杆-投掷
+	WildPointerThrownProj.DisplayName: 野指针-投掷
+	BinaryStarsHeldClone.DisplayName: 双子星-天降锤
 }
 
 Typeless: {
-	// EvolutionEnergyPortal.DisplayName: Evolution Energy Portal
-	// RegenOrbsPink.DisplayName: Regen Orbs Pink
-}
-
-Ranged: {
-	// Aetherfireball.DisplayName: Aetherfireball
-	// AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
-	// AetherfireSmasherMain.DisplayName: Aetherfire Smasher Main
-	// AetherfireVolcano.DisplayName: Aetherfire Volcano
-	// BinaryStarsPhantom.DisplayName: Binart Stars Phantom
-	// BinartStarsPhantomClone.DisplayName: Binart Stars Phantom Clone
-	// BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
-	// BinaryStarsMain.DisplayName: Binary Stars Main
-	// DeathTollsCloneProj.DisplayName: Death Tolls Clone Proj
-	// DeathTollsDarkEnergy.DisplayName: Death Tolls Dark Energy
-	// DeathTollsMainProj.DisplayName: Death Tolls Main Proj
-	// DeathTollsMinion.DisplayName: Death Tolls Minion
-	// DeathTollsNightmareArrow.DisplayName: Death Tolls Nightmare Arrow
-	// DeathTollsStreak.DisplayName: Death Tolls Streak
-	// JudgementHolyCross.DisplayName: Judgement Holy Cross
-	// JudgementHolyCrossMounted.DisplayName: Judgement Holy Cross Mounted
-	// JudgementLock.DisplayName: Judgement Lock
-	// JudgementMainProj.DisplayName: Judgement Main Proj
-	// JudgementPunishStar.DisplayName: Judgement Punish Star
-	// JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
-	// BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
-	// DeathTollsHeldMinion.DisplayName: Death Tolls Held Minion
-	// JudgementHeldLock.DisplayName: Judgement Held Lock
+	EvolutionEnergyPortal.DisplayName: 进化-投掷-能量传送门
+	RegenOrbsPink.DisplayName: Regen Orbs Pink
 }
 
 Pets: {
-	// WhaleProj.DisplayName: Whale Proj
-	// NoneProj.DisplayName: None Proj
-	// ShadowProj.DisplayName: Shadow Proj
-	// SquidProj.DisplayName: Squid Proj
-	// WatcherProj.DisplayName: Watcher Proj
+	NoneProj.DisplayName: _
+	ShadowProj.DisplayName: 暗影墙宠物
+	SquidProj.DisplayName: 鱿鱼宠物
+	WatcherProj.DisplayName: 钟表宠物
+	WhaleProj.DisplayName: 鲸鱼宠物
+}
+
+Ranged: {
+	Aetherfireball.DisplayName: 天炎破-火球
+	AetherfireSmasherClone.DisplayName: 天炎破-挂载
+	AetherfireSmasherMain.DisplayName: 天炎破
+	AetherfireVolcano.DisplayName: 天炎破-火山
+	BinaryStarsLightArrow.DisplayName: 双子星-星云箭矢
+	BinaryStarsMain.DisplayName: 双子星
+	BinaryStarsPhantom.DisplayName: 双子星-幻影
+	BinaryStarsPhantomClone.DisplayName: 双子星-幻影
+	DeathTollsCloneProj.DisplayName: 死亡丧钟-挂载
+	DeathTollsDarkEnergy.DisplayName: 死亡丧钟-冥思能量
+	DeathTollsHeldMinion.DisplayName: 死亡丧钟-仆从
+	DeathTollsMainProj.DisplayName: 死亡丧钟
+	DeathTollsNightmareArrow.DisplayName: 死亡丧钟-梦魇之星
+	DeathTollsStreak.DisplayName: 死亡丧钟-仆从射线
+	JudgementHeldLock.DisplayName: 神代裁决-挂载
+	JudgementHolyCross.DisplayName: 神代裁决-十字激光
+	JudgementHolyCrossMounted.DisplayName: Judgement Holy Cross Mounted
+	JudgementMainProj.DisplayName: 神代裁决
+	JudgementPunishStar.DisplayName: 神代裁决-神圣新星
+	JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
 }

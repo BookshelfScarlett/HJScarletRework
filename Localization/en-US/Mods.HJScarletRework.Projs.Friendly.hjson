@@ -1,9 +1,15 @@
 Melee: {
+	AzureFrostmarkEnergy.DisplayName: Azure Frostmark Energy
+	AzureFrostmarkProj.DisplayName: Azure Frostmark Proj
 	BamboomerangProj.DisplayName: Bamboomerang Proj
-	BeetleSpearProj.DisplayName: Beetle Spear Proj
 	CandLanceBeam.DisplayName: Cand Lance Beam
 	CandLanceFire.DisplayName: Cand Lance Fire
 	CandLanceThrownProj.DisplayName: Cand Lance Thrown Proj
+	CryoblazeHymnFireball.DisplayName: Cryoblaze Hymn Fireball
+	CryoblazeHymnFirePortal.DisplayName: Cryoblaze Hymn Fire Portal
+	CryoblazeHymnFrostEnergy.DisplayName: Cryoblaze Hymn Frost Energy
+	CryoblazeHymnFrostPortal.DisplayName: Cryoblaze Hymn Frost Portal
+	CryoblazeHymnProj.DisplayName: Cryoblaze Hymn Proj
 	DeepToneMinion.DisplayName: Deep Tone Minion
 	DeepToneShockwave.DisplayName: Deep Tone Shockwave
 	DeepToneTenctacle.DisplayName: Deep Tone Tenctacle
@@ -12,57 +18,37 @@ Melee: {
 	DialecticsSkyFall.DisplayName: Dialectics Sky Fall
 	DialecticsSpiningBlock.DisplayName: Dialectics Spining Block
 	DialecticsThrownProj.DisplayName: Dialectics Thrown Proj
+	EclipseWraithBoom.DisplayName: Eclipse Wraith Boom
+	EclipseWraithFireball.DisplayName: Eclipse Wraith Fireball
+	EclipseWraithProj.DisplayName: Eclipse Wraith Proj
 	EvolutionArrow.DisplayName: Evolution Arrow
 	EvolutionThrownProj.DisplayName: Evolution Thrown Proj
 	FierySpearFireball.DisplayName: Fiery Spear Fireball
 	FierySpearProj.DisplayName: Fiery Spear Proj
 	FlybackHandClockMounted.DisplayName: Flyback Hand Clock Mounted
 	FlybackHandEdgeProj.DisplayName: Flyback Hand Edge Proj
-	FlybackHandHitClock.DisplayName: Flyback Hand Hit Clock
 	FlybackHandStar.DisplayName: Flyback Hand Star
 	FlybackHandThrownProj.DisplayName: Flyback Hand Thrown Proj
+	GalvanizedHandArrow.DisplayName: Galvanized Hand Arrow
+	GalvanizedHandArrowMounted.DisplayName: Galvanized Hand Arrow Mounted
+	GalvanizedHandSideProj.DisplayName: Galvanized Hand Side Proj
+	GalvanizedHandThrownProj.DisplayName: Galvanized Hand Thrown Proj
 	LightBiteArrow.DisplayName: Light Bite Arrow
+	LightBiteDarkStar.DisplayName: Light Bite Dark Star
 	LightBiteThrownProj.DisplayName: Light Bite Thrown Proj
 	SpearofDarknessShadow.DisplayName: Spearof Darkness Shadow
 	SpearofDarknessThrownProj.DisplayName: Spearof Darkness Thrown Proj
-	StormSpearSpinProj.DisplayName: Storm Spear Spin Proj
-	StormSpearThrownProj.DisplayName: Storm Spear Thrown Proj
-	SweetStabThrownProj.DisplayName: Sweet Stab Thrown Proj
-	SodomsDisasterFireball.DisplayName: The Disaster Fireball
-	SodomsDisasterProj.DisplayName: The Disaster Proj
-	TheMarsPhantom.DisplayName: The Mars Phantom
-	TheMarsProj.DisplayName: The Mars Proj
-	TheMarsSpark.DisplayName: The Mars Spark
-	TonbogiriBoom.DisplayName: Tonbogiri Boom
-	TonbogiriBubble.DisplayName: Tonbogiri Bubble
-	TonbogiriLaser.DisplayName: Tonbogiri Laser
-	TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
-	WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
-	BinaryStarsClone.DisplayName: Binary Stars Clone
-	TheMarsMark.DisplayName: The Mars Mark
-	SodomsDisasterBoom.DisplayName: Sodoms Disaster Boom
-	IceSpearEnergy.DisplayName: Ice Spear Energy
-	IceSpearProj.DisplayName: Ice Spear Proj
-	IceFireBloomFireball.DisplayName: Ice Fire Bloom Fireball
-	IceFireEnergy.DisplayName: Ice Fire Energy
-	IceFireFrostBoom.DisplayName: Ice Fire Frost Boom
-	IceFireSpearProj.DisplayName: Ice Fire Spear Proj
-	CryoblazeHymnFirePortal.DisplayName: Ice Fire Flame Bloom
-	AzureFrostmarkEnergy.DisplayName: Azure Frostmark Energy
-	AzureFrostmarkProj.DisplayName: Azure Frostmark Proj
-	CryoblazeHymnFireball.DisplayName: Cryoblaze Hymn Fireball
-	CryoblazeHymnFrostEnergy.DisplayName: Cryoblaze Hymn Frost Energy
-	CryoblazeHymnFrostPortal.DisplayName: Cryoblaze Hymn Frost Portal
-	CryoblazeHymnProj.DisplayName: Cryoblaze Hymn Proj
-	GalvanizedHandSideProj.DisplayName: Galvanized Hand Side Proj
-	GalvanizedHandThrownProj.DisplayName: Galvanized Hand Thrown Proj
-	GalvanizedHandArrow.DisplayName: Galvanized Hand Arrow
-	GalvanizedHandArrowMounted.DisplayName: Galvanized Hand Arrow Mounted
-	LightBiteDarkStar.DisplayName: Light Bite Dark Star
+	SpearofEscapeBoom.DisplayName: Spearof Escape Boom
+	SpearofEscapeMissile.DisplayName: Spearof Escape Missile
 	SpearofEscapeRider.DisplayName: Spearof Escape Rider
 	SpearofEscapeThrownProj.DisplayName: Spearof Escape Thrown Proj
-	SpearofEscapeMissile.DisplayName: Spearof Escape Missile
-	SpearofEscapeBoom.DisplayName: Spearof Escape Boom
+	SweetStabThrownProj.DisplayName: Sweet Stab Thrown Proj
+	TheMarsMark.DisplayName: The Mars Mark
+	TheMarsPhantom.DisplayName: The Mars Phantom
+	TheMarsProj.DisplayName: The Mars Proj
+	TonbogiriBubble.DisplayName: Tonbogiri Bubble
+	TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
+	WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
 	BinaryStarsHeldClone.DisplayName: Binary Stars Held Clone
 }
 
@@ -71,36 +57,33 @@ Typeless: {
 	RegenOrbsPink.DisplayName: Regen Orbs Pink
 }
 
+Pets: {
+	NoneProj.DisplayName: None Proj
+	ShadowProj.DisplayName: Shadow Proj
+	SquidProj.DisplayName: Squid Proj
+	WatcherProj.DisplayName: Watcher Proj
+	WhaleProj.DisplayName: Whale Proj
+}
+
 Ranged: {
 	Aetherfireball.DisplayName: Aetherfireball
 	AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
 	AetherfireSmasherMain.DisplayName: Aetherfire Smasher Main
 	AetherfireVolcano.DisplayName: Aetherfire Volcano
-	BinaryStarsPhantom.DisplayName: Binart Stars Phantom
-	BinartStarsPhantomClone.DisplayName: Binart Stars Phantom Clone
 	BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
 	BinaryStarsMain.DisplayName: Binary Stars Main
+	BinaryStarsPhantom.DisplayName: Binary Stars Phantom
+	BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
 	DeathTollsCloneProj.DisplayName: Death Tolls Clone Proj
 	DeathTollsDarkEnergy.DisplayName: Death Tolls Dark Energy
+	DeathTollsHeldMinion.DisplayName: Death Tolls Held Minion
 	DeathTollsMainProj.DisplayName: Death Tolls Main Proj
-	DeathTollsMinion.DisplayName: Death Tolls Minion
 	DeathTollsNightmareArrow.DisplayName: Death Tolls Nightmare Arrow
 	DeathTollsStreak.DisplayName: Death Tolls Streak
+	JudgementHeldLock.DisplayName: Judgement Held Lock
 	JudgementHolyCross.DisplayName: Judgement Holy Cross
 	JudgementHolyCrossMounted.DisplayName: Judgement Holy Cross Mounted
-	JudgementLock.DisplayName: Judgement Lock
 	JudgementMainProj.DisplayName: Judgement Main Proj
 	JudgementPunishStar.DisplayName: Judgement Punish Star
 	JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
-	BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
-	DeathTollsHeldMinion.DisplayName: Death Tolls Held Minion
-	JudgementHeldLock.DisplayName: Judgement Held Lock
-}
-
-Pets: {
-	WhaleProj.DisplayName: Whale Proj
-	NoneProj.DisplayName: None Proj
-	ShadowProj.DisplayName: Shadow Proj
-	SquidProj.DisplayName: Squid Proj
-	WatcherProj.DisplayName: Watcher Proj
 }

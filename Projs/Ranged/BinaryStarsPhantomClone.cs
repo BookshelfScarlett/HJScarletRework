@@ -146,7 +146,7 @@ namespace HJScarletRework.Projs.Ranged
         private void IsReverse()
         {
             AttackTimer += 1f;
-            bool hasTarget = Projectile.GetTargetSafe(out NPC target, TargetIndex, true);
+            bool hasTarget = Projectile.GetTargetSafe(out NPC target, TargetIndex, true, canPassWall: true);
             Projectile.extraUpdates = 3 + hasTarget.ToInt();
             //在这个过程中持续检查target合法性。
             if (hasTarget)

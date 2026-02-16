@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override string Texture => GetInstance<Evolution>().Texture;
         public override void ExSD()
         {
-            Item.damage = 313;
+            Item.damage = 240;
             Item.useTime = Item.useAnimation = 25;
             Item.knockBack = 12f;
             Item.UseSound = HJScarletSounds.Evolution_Thrown with { MaxInstances = 0};

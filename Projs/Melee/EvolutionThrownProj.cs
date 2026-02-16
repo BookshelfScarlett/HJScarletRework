@@ -29,13 +29,20 @@ namespace HJScarletRework.Projs.Melee
             Projectile.timeLeft = 600;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
-            Projectile.penetrate = 7;
+            Projectile.penetrate = 4;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
         }
         public override void AI()
         {
             if (!Projectile.HJScarlet().FirstFrame)
+            {
                 Projectile.originalDamage = Projectile.damage;
+                if (HJScarletMethods.HasFuckingCalamity)
+                {
+                    Projectile.penetrate = -1;
+                    Projectile.stopsDealingDamageAfterPenetrateHits = false;
+                }
+            }
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (!HJScarletMethods.OutOffScreen(Projectile.Center))
                 SpawnLeafs();

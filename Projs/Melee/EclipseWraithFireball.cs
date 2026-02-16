@@ -10,7 +10,7 @@ using Terraria.Audio;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class SodomsDisasterFireball : HJScarletFriendlyProj
+    public class EclipseWraithFireball : HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
@@ -21,7 +21,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.extraUpdates = 4;
             Projectile.width = Projectile.height = 16;
-            Projectile.tileCollide = true;
+            Projectile.tileCollide = !HJScarletMethods.HasFuckingCalamity;
             Projectile.ignoreWater = true;
             Projectile.noEnchantmentVisuals = true;
             Projectile.usesLocalNPCImmunity = true;

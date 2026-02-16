@@ -1,6 +1,6 @@
 HoneyRegenAlt: {
-	// DisplayName: Honey Regen Alt
-	// Description: Mods.HJScarletRework.Buffs.HoneyRegenAlt.Description
+	DisplayName: 甜蜜恢复
+	Description: 加速生命恢复速度
 }
 
 RewardsofWarriorBuff: {

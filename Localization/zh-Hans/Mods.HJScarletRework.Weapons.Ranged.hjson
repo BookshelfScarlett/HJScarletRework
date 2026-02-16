@@ -32,11 +32,6 @@ BinaryStars: {
 		'''
 }
 
-ScarletHammer: {
-	// General: ""
-	// HoldShiftKeys: ""
-}
-
 DeathTolls: {
 	DisplayName: 死亡丧钟
 	Tooltip:

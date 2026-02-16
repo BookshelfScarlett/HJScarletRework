@@ -1,6 +1,10 @@
 CorePickaxe: {
 	DisplayName: 地核镐
-	Tooltip: “地球中心”
+	Tooltip:
+		'''
+		一把足够炙热，能够为你熔炼矿物的工具……
+		"地球中心"
+		'''
 }
 
 SuicideKnife: {

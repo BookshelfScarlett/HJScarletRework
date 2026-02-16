@@ -1,4 +1,6 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Buffs;
+using ContinentOfJourney.Items.Accessories;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
@@ -72,7 +74,6 @@ namespace HJScarletRework.Projs.Melee
             {
                 bool hasCal = ModLoader.HasMod(HJScarletMethods.CalamityMod);
                 Owner.Center = Projectile.Center;
-                Projectile.Kill();
                 SoundEngine.PlaySound(HJScarletSounds.GrabCharge, Projectile.Center);
                 //将损失的血量等拆分，包括魔力也是，然后再根据敲钟次数进行迭代
                 int shouldHeal = (Owner.HJScarlet().CurrentLostHP / 2) / totalBellTime * PlayBellTime;
@@ -88,13 +89,43 @@ namespace HJScarletRework.Projs.Melee
                 int buffTime = 60 * 2 * PlayBellTime;
                 Owner.HJScarlet().FlybackBuffTime = buffTime;
                 Owner.HJScarlet().CurrentFullFlyBackTime = buffTime;
+                Owner.HJScarlet().FlybackClockCD = GetSeconds(1) * PlayBellTime;
+                ImmnueDebuffOnNeed();
                 //粒子。 
                 for (int i = 0; i < 40; i++)
                 {
                     Vector2 pos = Projectile.Center + Main.rand.NextVector2Circular(40f, 40f);
                     new TurbulenceGlowOrb(pos, 2f, RandLerpColor(Color.SkyBlue, Color.AliceBlue), 40, Main.rand.NextFloat(0.1f, 0.12f), Main.rand.NextFloat(TwoPi), true).Spawn();
                 }
+                //最后杀死射弹
+                Projectile.Kill();
             }
+        }
+
+        private void ImmnueDebuffOnNeed()
+        {
+
+            Owner.buffImmune[BuffID.OnFire] = true;
+            Owner.buffImmune[BuffID.OnFire3] = true;
+            Owner.buffImmune[BuffID.Frostburn] = true;
+            Owner.buffImmune[BuffID.Frostburn2] = true;
+            Owner.buffImmune[BuffID.Bleeding] = true;
+            Owner.buffImmune[BuffID.BrokenArmor] = true;
+            Owner.buffImmune[BuffID.Burning] = true;
+            Owner.buffImmune[BuffID.Chilled] = true;
+            Owner.buffImmune[BuffID.Confused] = true;
+            Owner.buffImmune[BuffID.Cursed] = true;
+            Owner.buffImmune[BuffID.Weak] = true;
+            Owner.buffImmune[BuffID.Stoned] = true;
+            Owner.buffImmune[BuffID.Slow] = true;
+            Owner.buffImmune[BuffID.Silenced] = true;
+            Owner.buffImmune[BuffID.Poisoned] = true;
+            Owner.buffImmune[BuffID.Darkness] = true;
+
+            Owner.buffImmune[BuffID.ShadowFlame] = true;
+            Owner.buffImmune[BuffID.Venom] = true;
+            Owner.buffImmune[BuffType<DivineFireBuff>()] = true;
+            Owner.buffImmune[BuffType<PlagueBuff>()] = true;
         }
 
         private void UpdateGeneralParticle()

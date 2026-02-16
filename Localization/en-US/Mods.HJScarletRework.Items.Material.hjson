@@ -1,9 +1,9 @@
 DisasterBar: {
-	DisplayName: Disaster Bar
-	Tooltip: ""
+	DisplayName: Sunwheel Bar
+	Tooltip: Scorching
 }
 
 DisasterEssence: {
-	DisplayName: Disaster Essence
+	DisplayName: Essence of Beast
 	Tooltip: ""
 }

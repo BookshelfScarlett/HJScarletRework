@@ -1,6 +1,10 @@
 ﻿using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
+using HJScarletRework.Particles;
+using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
@@ -67,12 +71,12 @@ namespace HJScarletRework.Globals.Players
         {
             if (FlybackBuffTime > 0)
                 FlybackBuffTime--;
-            
+
             if (FlybackBuffTime == 0)
                 CurrentFullFlyBackTime = 0;
 
-            if (RewardofWarriorCounter> 0)
-                RewardofWarriorCounter-= 0;
+            if (RewardofWarriorCounter > 0)
+                RewardofWarriorCounter -= 0;
 
             if (RewardofWarriorCounter == 0)
                 KingdomDefenseTime--;
@@ -82,7 +86,21 @@ namespace HJScarletRework.Globals.Players
 
             if (FlybackHitBuffTimer > 0)
                 FlybackHitBuffTimer--;
-            if(DesterranTimer > 0)
+
+            if (GalvanizedHandDashCD > 0)
+            {
+                if (GalvanizedHandDashCD == 1)
+                {
+                    SoundEngine.PlaySound(SoundID.Item35, Player.Center);
+                    for (int i = 0; i<25;i++)
+                    {
+                        new TurbulenceShinyOrb(Player.Center.ToRandCirclePosEdge(10), 2f, RandLerpColor(Color.SkyBlue, Color.White), 120 , 0.4f, RandRotTwoPi).Spawn();
+                    }
+                }
+                GalvanizedHandDashCD--;
+            }
+
+            if (DesterranTimer > 0)
                 DesterranTimer--;
             if (DesterranTimer <= 0)
             {
@@ -90,6 +108,10 @@ namespace HJScarletRework.Globals.Players
                 DesterranImmortalTime = 0;
                 DesterranTimer = 0;
             }
+
+            if (FlybackClockCD > 0)
+                FlybackClockCD--;
+
             if (NoSlowFall > 0)
                 NoSlowFall--;
 

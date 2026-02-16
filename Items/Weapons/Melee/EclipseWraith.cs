@@ -12,17 +12,17 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
-    public class SodomsDisaster : ThrownSpearClass
+    public class EclipseWraith : ThrownSpearClass
     {
         public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {
             Item.width = Item.height = 50;
-            Item.damage = 105;
+            Item.damage = 110;
             Item.useTime = Item.useAnimation = 24;
             Item.rare = RarityType<DisasterRarity>();
             Item.shootSpeed = 16f;
-            Item.shoot = ProjectileType<SodomsDisasterProj>();
+            Item.shoot = ProjectileType<EclipseWraithProj>();
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.useStyle = ItemUseStyleID.Swing;

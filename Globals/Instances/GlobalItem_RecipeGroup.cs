@@ -8,26 +8,32 @@ namespace HJScarletRework.Globals.Instances
 {
     public class HJScarletRecipeGroup : ModSystem
     {
-        public static RecipeGroup AnyCopperBar;
-        public static RecipeGroup AnyMagicHat;
-        public static RecipeGroup AnyMechBossSoul;
-        public override void Load()
+        public static string AnyCopperBar;
+        public static string AnyMagicHat;
+        public static string AnyMechBossSoul;
+        public static string AnyLunarPickaxe;
+        public override void AddRecipeGroups()
         {
-            CreateRecipeGroup(ref AnyCopperBar,  nameof(AnyCopperBar), ItemID.CopperBar, ItemID.TinBar);
-            CreateRecipeGroup(ref AnyMagicHat, nameof(AnyMagicHat), ItemID.MagicHat, ItemID.WizardHat, ItemID.WizardsHat);
-            CreateRecipeGroup(ref AnyMechBossSoul, nameof(AnyMechBossSoul), ItemID.SoulofFright, ItemID.SoulofSight, ItemID.SoulofMight);
+            AnyCopperBar = CreateRecipeGroup(nameof(AnyCopperBar), ItemID.CopperBar, ItemID.TinBar);
+            AnyMagicHat = CreateRecipeGroup(nameof(AnyMagicHat), ItemID.WizardHat, ItemID.MagicHat, ItemID.WizardsHat);
+            AnyMechBossSoul = CreateRecipeGroup(nameof(AnyMechBossSoul), ItemID.SoulofFright, ItemID.SoulofSight, ItemID.SoulofMight);
+            AnyLunarPickaxe = CreateRecipeGroup(nameof(AnyLunarPickaxe), ItemID.SolarFlarePickaxe, ItemID.VortexPickaxe, ItemID.NebulaPickaxe, ItemID.StardustPickaxe);
         }
         public override void Unload()
         {
             AnyCopperBar = null;
             AnyMagicHat = null;
             AnyMechBossSoul = null;
+            AnyLunarPickaxe = null;
+
         }
-        public static void CreateRecipeGroup(ref RecipeGroup rg, string name, params int[] AllItem)
+        public static string CreateRecipeGroup(string name, params int[] AllItem)
         {
-            Func<string> creator = () => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(AllItem[0])}";
-            rg = new RecipeGroup(creator, AllItem);
-            RecipeGroup.RegisterGroup("ScarletRework:" + name, rg);
+            Func<string> getName = () => Language.GetTextValue("LegacyMisc.37") + " " + Lang.GetItemNameValue(AllItem[0]);
+            RecipeGroup rec = new RecipeGroup(getName, AllItem);
+            string realName = "Scarlet:" + name;
+            RecipeGroup.RegisterGroup(realName, rec);
+            return realName;
         }
 
     }

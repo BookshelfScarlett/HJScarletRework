@@ -50,7 +50,6 @@ namespace HJScarletRework.Globals.Players
             if (PreciousTargetCrtis > 0 && PreciousTargetAcc)
             {
                 float critBuff = Player.HeldItem.crit;
-                Main.NewText(critBuff);
                 totalCritsBonus += critBuff;
             }
             totalCritsBonus += GeneralCrtiDamageAdd;

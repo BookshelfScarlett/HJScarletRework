@@ -103,8 +103,12 @@ CreationHat: {
 }
 
 SacarbWings: {
-	// DisplayName: Sacarb Wings
-	// Tooltip: ""
+	DisplayName: 圣甲虫之翼
+	Tooltip:
+		'''
+		可飞行或缓降
+		拥有无限飞行时间
+		'''
 }
 
 SakurabaEmma: {

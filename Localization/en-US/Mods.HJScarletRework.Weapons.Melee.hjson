@@ -1,48 +1,81 @@
 CandLanceThrown: {
-	DisplayName: Cand Lance Thrown
-	Tooltip: ""
+	DisplayName: Candlance Javelin
+	Tooltip:
+		'''
+		Ignit a Soulfire Lantern on hit.
+		The lantern delays, then falls and fires homing soulfire at multiple targets.
+		'''
 	CalamitySupport: ""
 }
 
 DialecticsThrown: {
-	DisplayName: Dialectics Thrown
-	Tooltip: ""
+	DisplayName: Dialectics Javelin
+	Tooltip:
+		'''
+		When thrown, alternates between sine wave, square wave, bipolar square wave, and parallel wave patterns.
+		Sine wave makes javelin penetrates for 6 times, and its damage increases with each penetration.
+		Square wave makes javelin deals 3x damage, marks your target
+		Bipolar square wave makes javelin leaves multiple lingering blocks that home in on your enemy
+		Parallel wave makes javelin stabs into your target, continuously summons additional projectiles.
+		'''
 	CalamitySupport: ""
 }
 
 FlybackHandThrown: {
-	DisplayName: Flyback Hand Thrown
-	Tooltip: ""
+	DisplayName: Flybackhand Javelin
+	Tooltip:
+		'''
+		Grant different buffs based on the in-game time on hit.
+		Right-click to throw a Time Crystal. After a short time, press right-click again to teleport back to the crystal's position.
+		Upon returning, increase the attack speed and restore 1/2 of the stats the player lost during this process.
+		"Time will mend everything...perhaps."
+		'''
 	CalamitySupport: ""
 }
 
 LightBiteThrown: {
-	DisplayName: Light Bite Thrown
-	Tooltip: ""
+	DisplayName: Light Bite Javelin
+	Tooltip:
+		'''
+		Penetrates up to 10 enemies.
+		Leaves behind weakly homing eclipse stars during flight.
+		'''
 	CalamitySupport: ""
 }
 
 SpearofDarknessThrown: {
-	DisplayName: Spearof Darkness Thrown
-	Tooltip: ""
+	DisplayName: Spear of Darkness Javelin
+	Tooltip:
+		'''
+		Can pass through walls.
+		Returns after being thrown for a short time.
+		'''
 	CalamitySupport: ""
 }
 
 SweetStabThrown: {
-	DisplayName: Sweet Stab Thrown
-	Tooltip: ""
+	DisplayName: Sweet Seet Stab Javelin
+	Tooltip:
+		'''
+		Affected by gravilty and penetrates 3 targets
+		Stab in on hitting wall, heal every player that try to pick up
+		'''
 	CalamitySupport: ""
 }
 
 WildPointerThrown: {
-	DisplayName: Wild Pointer Thrown
-	Tooltip: ""
+	DisplayName: Wild Pointer Javelin
+	Tooltip:
+		'''
+		Has a chance to home in on all valid targets worldwide.
+		Valid targets include you and your friends.
+		'''
 	CalamitySupport: ""
 }
 
 Wreach: {
 	DisplayName: Wreach
-	Tooltip: ""
+	Tooltip: Debug item, might have different function base on your current mod
 }
 
 StormSpear: {
@@ -52,45 +85,84 @@ StormSpear: {
 }
 
 DeepToneThrown: {
-	DisplayName: Deep Tone Thrown
-	Tooltip: ""
+	DisplayName: Deep Tone Javelin
+	Tooltip:
+		'''
+		Penetrates 4 enemies.
+		Spawns tentacles at an extremely high rate on hit.
+		'''
 	CalamitySupport: ""
 }
 
 EvolutionThrown: {
-	DisplayName: Evolution Thrown
-	Tooltip: ""
+	DisplayName: Evolution Javelin
+	Tooltip:
+		'''
+		Leaves portals during flight and marks the first enemy hit.
+		Portals seek the nearest enemy, fire homing energy bolts, then vanish.
+		If a marked enemy exists, all portals target it.
+		"They are growing."
+		'''
 	CalamitySupport: ""
 }
 
 SpearofEscapeThrown: {
-	DisplayName: Spearof Escape Thrown
-	Tooltip: ""
+	DisplayName: Spear of Escape Javelin
+	Tooltip:
+		'''
+		Ignites the rocket, which explodes in mid-air and splits into multiple homing rockets.
+		The homing rockets fall downward and prioritize enemies nearest to the cursor.
+		"We will not stay in our dangerous cradle forever!"
+		'''
 	CalamitySupport: ""
 }
 
 TonbogiriThrown: {
-	DisplayName: Tonbogiri Thrown
-	Tooltip: ""
+	DisplayName: Tonbogiri Javelin
+	Tooltip:
+		'''
+		Spawns additional poison bubbles on impact.
+		The number of bubbles is boosted by melee attack speed and critical strike chance.
+		Minimum 1 bubble, maximum {1} bubbles.
+		Current: {0} bubbles.
+		'''
 	CalamitySupport: ""
 }
 
 SodomsDisaster: {
-	DisplayName: The Disaster
-	Tooltip: ""
-	FlavorTooltips: ""
-	CalamitySupport: ""
+	DisplayName: Eclipse Wraith
+	Tooltip:
+		'''
+		Increases melee critical damage by 30% while being held
+		Penetrates multiple enemies and explodes on all hit targets.
+		Calls down celestial fireballs from above to strike all hit enemies.
+		'''
+	FlavorTooltips: -Umbral beast, devour the sun. Fire and curse, second sign of doom-
+	CalamitySupport:
+		'''
+		Increases melee critcal damage by 100% instead of 30%
+		Allows infinitly penetrates
+		'''
 }
 
 Bamboomerang: {
 	DisplayName: Bamboomerang
-	Tooltip: ""
+	Tooltip:
+		'''
+		Attempts to attack the next enemy on hit.
+		Up to 3 Boomerang can exist at once.
+		"Who came up with the idea of making a boomerang out of bamboo?"
+		'''
 	CalamitySupport: ""
 }
 
 FierySpear: {
 	DisplayName: Fiery Spear
-	Tooltip: ""
+	Tooltip:
+		'''
+		Spawns two fireballs home in on your target on hit.
+		Fireballs seek nearby enemies if directly hit the walls. 
+		'''
 	CalamitySupport: ""
 }
 
@@ -101,20 +173,64 @@ BeetleSpear: {
 
 TheMars: {
 	DisplayName: The Mars
-	Tooltip: ""
+	Tooltip:
+		'''
+		Marks up to 3 nearby hostile units along its path.
+		Upon vanishing, launches Tidal Spears at all marked targets.
+		"The Creation of Alien"
+		'''
+	CalamitySupport: ""
 }
 
 GalvanizedHandThrown: {
-	DisplayName: Galvanized Hand Thrown
-	Tooltip: ""
+	DisplayName: Galvanized Hand Javelin
+	Tooltip:
+		'''
+		Summon high-speed Galvanized Hand from above.
+		The main speaar impales the enemy, dealing continuous damage.
+		After the main spear hits, all follow-up attacks become precise spears that aim directly at the locked target without homing.
+		Press Right Click to dash toward the enemy locked by the main needle, dealing high damage and granting invincibility frames.
+		On successful impact, release multiple Meter Needles to chase foes.
+		'''
+	CalamitySupport: ""
+	TileTextvalue: ""
 }
 
 AzureFrostmark: {
 	DisplayName: Azure Frostmark
-	Tooltip: ""
+	Tooltip:
+		'''
+		Disappears after being thrown for a short time.
+		Fires two additional Frost Bombs upon vanishing.
+		'''
+	CalamitySupport: ""
 }
 
 CryoblazeHymn: {
 	DisplayName: Cryoblaze Hymn
-	Tooltip: ""
+	Tooltip:
+		'''
+		Vanishes after a short time once thrown or hitting an enemy.
+		Upon vanishing, creates alternating Frost and Fire Portals that fire Frost Bolts and Fire Bolts.
+		Frost Bolts are slower and target two separate enemies.
+		Fire Bolts are faster and deal more damage, prioritizing enemies directly hit by the spear.
+		"Though vastly different, they sing aloud in the same melody."
+		'''
+	CalamitySupport: ""
+}
+
+EclipseWraith: {
+	DisplayName: Eclipse Wraith
+	Tooltip:
+		'''
+		Increases melee critical damage by 30% while being held
+		Penetrates multiple enemies and explodes on all hit targets.
+		Calls down celestial fireballs from above to strike all hit enemies.
+		'''
+	FlavorTooltips: -Umbral beast, devour the sun. Fire and curse, second sign of doom-
+	CalamitySupport:
+		'''
+		Increases melee critcal damage by 100% instead of 30%
+		Allows infinitly penetrates
+		'''
 }

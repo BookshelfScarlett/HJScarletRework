@@ -36,11 +36,13 @@ namespace HJScarletRework.Projs.Melee
             Projectile.extraUpdates = 4;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 60;
+            Projectile.localNPCHitCooldown = -1;
             Projectile.noEnchantmentVisuals = true;
         }
         public override void AI()
         {
+            if(!Projectile.HJScarlet().FirstFrame && HJScarletMethods.HasFuckingCalamity)
+                Projectile.localNPCHitCooldown = 15;
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer += 0.025f;
 

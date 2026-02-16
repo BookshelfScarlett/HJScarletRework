@@ -18,10 +18,15 @@ HJScarletConfigServer: {
 }
 
 HJScarletConfigClient: {
-	// DisplayName: H J Scarlet Config Client
+	DisplayName: 空想之歌：客户端设置
 
 	SpecialRarity: {
-		// Label: Special Rarity
-		// Tooltip: ""
+		Label: 特殊稀有度覆盖旅人物品
+		Tooltip:
+			'''
+			允许空想之歌对旅人归途内的部分物品覆盖特殊稀有度
+			目前覆盖的都是与神明有关的物品
+			默认关闭
+			'''
 	}
 }

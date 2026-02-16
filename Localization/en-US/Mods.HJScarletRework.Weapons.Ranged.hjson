@@ -1,6 +1,13 @@
 AetherfireSmasher: {
 	DisplayName: Aetherfire Smasher
-	Tooltip: ""
+	Tooltip:
+		'''
+		Throws a mighty Blazing Hammer that explodes on impact.
+		Focus Attack activates after hitting enemies more than 30 times.
+		During Focus Attack, the hammer strikes back on return, attaches to enemies, and deals continuous damage.
+		While attached, press Right Click to dash the hammer toward your cursor, then strike back at the attached target.
+		Releases a massive fire pillar when the hammer expires.
+		'''
 
 	Color: {
 		Red: Pure Red
@@ -15,21 +22,41 @@ AetherfireSmasher: {
 
 BinaryStars: {
 	DisplayName: Binary Stars
-	Tooltip: ""
-}
-
-ScarletHammer: {
-	General: ""
-	HoldShiftKeys: ""
+	Tooltip:
+		'''
+		Throw a powerful Galaxy Hammer.
+		Fires swift Nebula Arrows when hitting enemies.
+		Focus Attack activates after hitting enemies more than 30 times.
+		During Focus Attack, throw two Galaxy Hammers at once; they strike enemies on their return.
+		Upon impact, they split into two smaller hammers that attach to enemies and deal continuous damage.
+		When the attach effect ends, the smaller hammers return to you and strike again once more.
+		'''
 }
 
 DeathTolls: {
 	DisplayName: Death Tolls
-	Tooltip: ""
-	FlavorTooltips: ""
+	Tooltip:
+		'''
+		Throw a powerful Death Hammer that release regular Nightmare Star upon hitting enemies
+		Enable Focus Attack after hitting enemies more than 20 times.
+		During Focus Attack, the Death Hammer will return as a Servant Hammer after boomeranging back.
+		While the Servant Hammer is active, Focus Attack makes the Death Hammer delay its attach, releasing Shadow Demonic Energy and Nightmare Arrows.
+		The hanging Servant Hammer mimics the player's actions, does not disappear when switching weapons, and strengthens the Death Hammer's normal attacks.
+		The Servant Hammer's duration is only consumed while attacking, and it will dash toward the player's cursor before its duration runs out.
+		Only one attached Hammer and one Servant Hammer can exist at the same time.
+		'''
+	FlavorTooltips: -Meditate in the death, return the falling stars, unleash nightmares to devour-
 }
 
 Judgement: {
 	DisplayName: Judgement
-	Tooltip: ""
+	Tooltip:
+		'''
+		Throw a Judgment Hammer. It unleashes a Judgment Nova on hit.
+		Focus Attack activates after hitting enemies more than 20 times.
+		During Focus Attack, the Judgment Hammer strikes back upon returning, attaches to enemies, and deals continuous damage.
+		While attached, it continuously fires Judgment Stars, and fires a Judgment Ray when it expires.
+		The attached Holy Hammer only consumes its duration when attacking enemies.
+		While the attached hammer is active, hitting enemies does not increase the Focus Attack hit count.
+		'''
 }

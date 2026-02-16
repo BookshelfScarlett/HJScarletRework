@@ -24,12 +24,13 @@ namespace HJScarletRework.Projs.Melee
         public bool Ishit = false;
         public override void ExSD()
         {
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 3;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
             Projectile.extraUpdates = 2;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.rotation = Projectile.velocity.ToRotation();
         }
         public override void AI()
@@ -148,7 +149,7 @@ namespace HJScarletRework.Projs.Melee
             //准备依据时间的不同给予增益
             Owner.HJScarlet().FlybackHitBuffTimer = 180;
         }
-        public override bool? CanDamage() => Ishit == false;
+        public override bool? CanDamage() => true;
 
         public override bool PreDraw(ref Color lightColor)
         {

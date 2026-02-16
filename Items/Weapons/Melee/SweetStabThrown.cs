@@ -74,8 +74,10 @@ namespace HJScarletRework.Items.Weapons.Melee
 
             if (HJScarletMethods.HasFuckingCalamity)
             {
+                string calamityName = Mod.GetLocalizationKey("CrossModSupport.Calamity");
+                tooltips.QuickAddTooltipDirect(calamityName.ToLangValue(), new(220, 20, 6));
                 string calamityPath = $"{localAddress}.CalamitySupport";
-                tooltips.QuickAddTooltipDirect(calamityPath.ToLangValue(), new(220, 20, 6));
+                tooltips.QuickAddTooltipDirect(calamityPath.ToLangValue(), MainTooltipColor);
             }
             if (!NotHomewardJourneySpear)
             {

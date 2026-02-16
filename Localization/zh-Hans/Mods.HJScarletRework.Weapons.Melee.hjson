@@ -8,7 +8,6 @@ CandLanceThrown: {
 		'''
 	CalamitySupport:
 		'''
-		灾厄联动适配：
 		魂火灯会落下更多的魂火射弹
 		魂火射弹会尝试追踪更多更远的单位，并强化持续时间
 		'''
@@ -19,12 +18,18 @@ DialecticsThrown: {
 	Tooltip:
 		'''
 		投掷时以正弦波、方波、双极性方波和平行波的方式交替轮换
-		正弦波使矛无限穿透，且每次穿透时伤害递增
+		正弦波使矛穿透6次，且每次穿透时伤害递增
 		方波使矛造成武器面板的3倍伤害，并标记这名敌人
 		双极性方波使矛沿途滞留多个延迟追踪距离最近敌人的方块零件
 		平行波使矛刺入敌人，并不断召唤额外弹幕追击
 		'''
-	// CalamitySupport: ""
+	CalamitySupport:
+		'''
+		正弦波矛无限穿透
+		方波矛现在造成武器面板的十倍伤害
+		双极性方波矛延迟生成的方块零件有更高的索敌范围
+		平行波矛刺入敌人时造成的伤害频率提升
+		'''
 }
 
 FlybackHandThrown: {
@@ -36,7 +41,11 @@ FlybackHandThrown: {
 		返程后强化武器投掷速度，并为玩家回复在此过程中损失状态的1/2
 		“时间将会修复一切，也许吧。”
 		'''
-	// CalamitySupport: ""
+	CalamitySupport:
+		'''
+		常驻所有因时间导致的不同的增益加成
+		允许启用时钟水晶时恢复全部状态
+		'''
 }
 
 LightBiteThrown: {
@@ -48,7 +57,6 @@ LightBiteThrown: {
 		'''
 	CalamitySupport:
 		'''
-		灾厄联动适配：
 		准许无限穿透
 		强化武器攻击速度
 		'''
@@ -57,11 +65,11 @@ LightBiteThrown: {
 SpearofDarknessThrown: {
 	DisplayName: 黑暗之矛-投掷
 	Tooltip: 准许穿墙，掷出一定时间后回击
-	// CalamitySupport: ""
+	CalamitySupport: 大幅度强化武器的攻击速度
 }
 
 SweetStabThrown: {
-	DisplayName: 甜蜜之刺-投掷
+	DisplayName: 甜美一刺-投掷
 	Tooltip:
 		'''
 		穿透三个单位并受重力影响
@@ -69,7 +77,6 @@ SweetStabThrown: {
 		'''
 	CalamitySupport:
 		'''
-		灾厄联动适配：
 		提高飞行速度
 		显著提升治疗的效果
 		'''
@@ -84,7 +91,6 @@ WildPointerThrown: {
 		'''
 	CalamitySupport:
 		'''
-		灾厄联动适配：
 		不再会直接搜索任何友方单位
 		提升发起追踪的概率
 		'''
@@ -115,10 +121,10 @@ DeepToneThrown: {
 	DisplayName: 低吼-投掷
 	Tooltip:
 		'''
-		穿透四个敌人，命中时生成极高频率的触手
-		触手会有较大的伤害衰减
+		穿透四个敌人
+		命中时追加超高频率的触手
 		'''
-	// CalamitySupport: ""
+	CalamitySupport: 移除触手的伤害衰减
 }
 
 EvolutionThrown: {
@@ -130,7 +136,11 @@ EvolutionThrown: {
 		如果有被标记的敌人，所有的传送门都会向标记的单位发起攻击
 		"他们在生长。"
 		'''
-	// CalamitySupport: ""
+	CalamitySupport:
+		'''
+		准许无限穿透
+		能量箭矢将会试图造成15的局部无敌帧
+		'''
 }
 
 SpearofEscapeThrown: {
@@ -139,25 +149,27 @@ SpearofEscapeThrown: {
 		'''
 		点燃火箭，并在空中爆炸，分裂出多个追踪火箭
 		追踪火箭将会下落并优先搜索距离指针最近的敌人
+		右键则直接向指针位置发射火箭，但不会在自爆时分裂
+		"我们永远不会活在危险的摇篮里！"
 		'''
-	// CalamitySupport: ""
+	CalamitySupport:
+		'''
+		爆炸会造成更加夸张的伤害
+		分裂更多的追踪火箭
+		'''
 }
 
 TonbogiriThrown: {
 	DisplayName: 御手秆-投掷
 	Tooltip:
 		'''
+
 		撞击时追加毒泡
 		毒泡数量会受到近战攻击速度和暴击概率的加成
 		最低追加1个毒泡，最高追加{1}个毒泡
 		当前可追加{0}个毒泡
 		'''
-	CalamitySupport:
-		'''
-		灾厄联动适配：
-		允许获得真近战的伤害加成
-		提高追加毒泡的数量
-		'''
+	CalamitySupport: 提高追加毒泡的数量
 }
 
 SodomsDisaster: {
@@ -171,7 +183,6 @@ SodomsDisaster: {
 	FlavorTooltips: -漆黑兽影，吞天噬日，炎唤来兽，兽唤来咒，此乃末日预兆之二-
 	CalamitySupport:
 		'''
-		灾厄联动适配：
 		手持时增加100%暴击伤害而非30%暴击伤害
 		准许无限穿透，天灾火球将完全穿墙且生成数量更多
 		'''
@@ -187,7 +198,6 @@ Bamboomerang: {
 		'''
 	CalamitySupport:
 		'''
-		灾厄联动适配：
 		移除存在限制
 		大幅度增强索敌能力
 		'''
@@ -197,13 +207,11 @@ FierySpear: {
 	DisplayName: 炽焰巨矛
 	Tooltip:
 		'''
-		消失时向后生成两枚火球
-		火球撞墙后自动搜寻附近敌人
-		矛直接击中敌人时，则火球撞墙后直接追踪该敌人
+		命中时追加两枚追击火球
+		若直接撞击墙体，则追加的火球在撞墙后自动搜寻附近敌人
 		'''
 	CalamitySupport:
 		'''
-		灾厄联动适配：
 		消失时生成四枚火球而非两枚火球
 		大幅度强化矛的飞行速度与火球的飞行速度
 		大幅度强化火球的索敌范围与存续时间
@@ -223,19 +231,25 @@ TheMars: {
 		消失时，向被标记的所有敌对单位追击潮汐之矛
 		"外星的造物"
 		'''
+	CalamitySupport:
+		'''
+		现在检索超过九名敌对单位而非三名敌对单位
+		潮汐之矛的追击次数翻倍
+		'''
 }
 
 GalvanizedHandThrown: {
 	DisplayName: 电表镀针-投掷
 	Tooltip:
 		'''
-		召唤超高速的镀针从天而降
-		主镀针刺入敌人内部，造成持续伤害
-		成功刺入主镀针时，接下来的攻击都会变为高精度的幻影镀针
-		幻影镀针会直接瞄准被主镀针锁定的敌人，但不会追踪
-		按下右键将玩家冲向至镀针锁定的敌人，造成高额伤害并获得无敌帧
-		撞击成功时，释放多个电表指针追击
+		召唤超高速镀针从天而降
+		主镀针刺入敌人体内，造成持续伤害
+		主镀针命中后，后续攻击将变为高精度幻影镀针，直接瞄准被锁定目标
+		按下右键可冲向被主镀针锁定的敌人，造成高额伤害并获得无敌帧
+		撞击成功后释放多枚电表指针追击敌人
 		'''
+	CalamitySupport: 你所有的攻击都会默认造成暴击伤害
+	TileTextvalue: 冲刺路径存在阻挡
 }
 
 AzureFrostmark: {
@@ -245,6 +259,7 @@ AzureFrostmark: {
 		掷出一段时间后消失
 		在消失时追加两枚寒霜弹
 		'''
+	CalamitySupport: 提升基础的投掷速度
 }
 
 CryoblazeHymn: {
@@ -256,5 +271,26 @@ CryoblazeHymn: {
 		寒霜弹速度较慢，并尝试攻击两名不同的敌人
 		火焰弹速度较快，且造成的伤害更高，并优先攻击被矛本体优先命中的敌人
 		"纵使迥然不同，也以同样的旋律高声颂歌"
+		'''
+	CalamitySupport:
+		'''
+		大幅度增强寒霜球与火焰弹的性能
+		合成表修改为任意机械Boss的魂，而非同时需要三个机械Boss的魂
+		'''
+}
+
+EclipseWraith: {
+	DisplayName: 蚀日兽影
+	Tooltip:
+		'''
+		手持时增加30%近战暴击伤害
+		穿透多个单位，且对被命中的所有单位造成一次爆炸
+		同时，从天上降下天灾火球攻击被命中的敌人
+		'''
+	FlavorTooltips: -漆黑兽影，吞天噬日，炎唤来兽，兽唤来咒，此乃末日预兆之二-
+	CalamitySupport:
+		'''
+		手持时增加100%暴击伤害而非30%暴击伤害
+		准许无限穿透，天灾火球将完全穿墙且生成数量更多
 		'''
 }

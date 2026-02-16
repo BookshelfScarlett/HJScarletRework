@@ -105,7 +105,7 @@ namespace HJScarletRework.Projs.Ranged
                 return;
             }
 
-            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true))
+            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true,canPassWall:true))
             {
                 Projectile.extraUpdates = 4;
                 Projectile.HomingTarget(target.Center, 1800f, 20f, 20f);

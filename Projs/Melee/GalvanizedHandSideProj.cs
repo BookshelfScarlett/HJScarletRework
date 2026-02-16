@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Buffs;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -8,14 +7,9 @@ using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {

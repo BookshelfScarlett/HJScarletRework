@@ -119,14 +119,11 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if (AttackType == Style.Shooted)
-            {
                 //撞墙需要直接处死不要燃起魂火灯。
                 AttackType = Style.Hit;
                 Projectile.tileCollide = false;
                 DonRiseLamp = true;
                 Projectile.velocity = oldVelocity;
-            }
             return false;
         }
         public override bool PreKill(int timeLeft)

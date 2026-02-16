@@ -47,8 +47,8 @@ namespace HJScarletRework.Projs.Melee
         private float SearchTargetDistance = 800f;
         public override void AI()
         {
-            RingRotation += ToRadians(1);
             Projectile.velocity *= 0.967f;
+            RingRotation += ToRadians(1f);
             if (Vector2.Distance(Projectile.Center, Owner.MountedCenter) > 1800f)
                 Projectile.Kill();
 
@@ -66,6 +66,7 @@ namespace HJScarletRework.Projs.Melee
         public void DoShoot()
         {
             Timer++;
+            GetLegalTarget();
             Projectile.rotation = Projectile.velocity.ToRotation();
             //全局寻找并锁定需要的单位，这里最多锁定6个单位
             for (int i = 0; i < 3; i++)
@@ -73,16 +74,12 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 spawnPos = Projectile.Center.ToRandCirclePos(4f);
                 new TurbulenceShinyCube(spawnPos, Projectile.velocity / 2, RandLerpColor(Color.White, Color.Green) * Clamp(Projectile.velocity.Length(), 0, 1), 20, Projectile.rotation, 1, 0.28f * Projectile.Opacity, randPosMoveValue: 8).Spawn();
             }
-
-                GetLegalTarget();
             //如果存在时间超过1秒，进入处死状态
             if(Timer > 10f * Projectile.MaxUpdates)
             {
                 AttackType = Style.Fade;
                 Projectile.netUpdate = true;
                 Timer = 0;
-                //这里要干掉额外更新避免意外
-                Projectile.extraUpdates = 2;
             }
         }
         private void GetLegalTarget()
@@ -90,34 +87,42 @@ namespace HJScarletRework.Projs.Melee
             //创建一个链表，搜索附近可能的单位
             float searchDist = SearchTargetDistance;
             //先遍历列表内原有的元素，这里是逆向遍历（如果有的话）
-            NPC curTarget = null;
             foreach (NPC needTar in Main.ActiveNPCs)
             {
-                bool legalTarget = needTar.CanBeChasedBy();
+                bool legalTarget = needTar.CanBeChasedBy() && needTar != null;
                 float distPerTar = Vector2.Distance(needTar.Center, Projectile.Center);
                 if (legalTarget && distPerTar < searchDist && !LegalTargetList.Contains(needTar))
                 {
                     searchDist = distPerTar;
-                    //把可用单位甩进去
-                    LegalTargetList.Add(needTar);
+                    //需要在这里对比不同敌人的距离。
+                    if (LegalTargetList.Count >= 3)
+                    {
+                        //搜索当前列表中距离最远的敌人
+                        //找到列表中距离射弹最远的NPC及其索引
+                        int farthestIndex = 0;
+                        float farthestDist = Vector2.Distance(LegalTargetList[0].Center, Projectile.Center);
+                        for (int i = 1; i < LegalTargetList.Count; i++)
+                        {
+                            float tempDist = Vector2.Distance(LegalTargetList[i].Center, Projectile.Center);
+                            if (tempDist > farthestDist)
+                            {
+                                farthestDist = tempDist;
+                                farthestIndex = i;
+                            }
+                        }
+
+                        //如果当前NPC比列表中最远的目标更近，则替换
+                        if (searchDist < farthestDist)
+                        {
+                            LegalTargetList.RemoveAt(farthestIndex);
+                            LegalTargetList.Add(needTar);
+                        }
+                    }
+                    else
+                        //把可用单位甩进去
+                        LegalTargetList.Add(needTar);
+
                 }
-            }
-            //从这里开始排序一遍列表内的所有元素，按照距离由小到大
-            if(LegalTargetList.Count > 1)
-            {
-                LegalTargetList.Sort((a, b) =>
-                {
-                    float distA = Vector2.Distance(a.Center, Projectile.Center);
-                    float distB = Vector2.Distance(b.Center, Projectile.Center);
-                    return distA.CompareTo(distB);
-                });
-            }
-            if (curTarget != null)
-                LegalTargetList.Add(curTarget);
-            //如果当前射弹存储了超过3的单位，移除当前列表内的第一个单位
-            if(LegalTargetList.Count > 3)
-            {
-                LegalTargetList.RemoveAt(3);
             }
         }
 

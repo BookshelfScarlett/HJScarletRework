@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Projectiles;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
@@ -25,7 +26,9 @@ namespace HJScarletRework.Projs.Melee
             Direct
         }
         public ref float Timer => ref Projectile.ai[0];
+        public bool DontUseMouseHoming = false;
         public NPC HomingTarget = null;
+        public int BounceTime = 0;
         public Style AttackType
         {
             get => (Style)Projectile.ai[1];
@@ -109,11 +112,14 @@ namespace HJScarletRework.Projs.Melee
         }
         private void DoSpawn()
         {
-             //在这个过程中搜索玩家指针最近的那个敌人
+            //在这个过程中搜索玩家指针最近的那个敌人
             //如果我们搜不到了，我们才让射弹继续自然下落并让射弹自己找
-            if (GetTargetOnNeed(out NPC target, true))
+            if (!DontUseMouseHoming)
             {
-                HomingTarget = target;
+                if (GetTargetOnNeed(out NPC target, true))
+                {
+                    HomingTarget = target;
+                }
             }
             Timer++;
             if (Timer > 30f * Projectile.MaxUpdates)
@@ -208,7 +214,9 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.velocity.X = -oldVelocity.X;
             if (Projectile.velocity.Y != oldVelocity.Y)
                 Projectile.velocity.Y = -oldVelocity.Y;
-            return false;
+            BounceTime++;
+            bool dontKillProj = AttackType == Style.Direct && BounceTime < 2;
+            return !dontKillProj;
         }
         public override bool? CanDamage()
         {

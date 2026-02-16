@@ -1,6 +1,6 @@
 HoneyRegenAlt: {
-	DisplayName: Honey Regen Alt
-	Description: Mods.HJScarletRework.Buffs.HoneyRegenAlt.Description
+	DisplayName: Honey Regen
+	Description: Accelerating life regen speed
 }
 
 RewardsofWarriorBuff: {
@@ -9,28 +9,28 @@ RewardsofWarriorBuff: {
 }
 
 WhaleBuff: {
-	DisplayName: Whale Buff
-	Description: Mods.HJScarletRework.Buffs.WhaleBuff.Description
+	DisplayName: Little Whale
+	Description: A deceased whale calf. It is not yet ready to inherit the mantle of Death.
 }
 
 NoneBuff: {
-	DisplayName: None Buff
-	Description: Mods.HJScarletRework.Buffs.NoneBuff.Description
+	DisplayName: _
+	Description: Does a difference between great and small truly exist? Regardless, it follows you now.
 }
 
 ShadowBuff: {
-	DisplayName: Shadow Buff
-	Description: Mods.HJScarletRework.Buffs.ShadowBuff.Description
+	DisplayName: Miniature Shadow Wall
+	Description: It will watch you, forever.
 }
 
 SquidBuff: {
-	DisplayName: Squid Buff
-	Description: Mods.HJScarletRework.Buffs.SquidBuff.Description
+	DisplayName: Little Squid
+	Description: It works part-time at the Underwater Burger Shop for summer break.
 }
 
 WatcherBuff: {
-	DisplayName: Watcher Buff
-	Description: Mods.HJScarletRework.Buffs.WatcherBuff.Description
+	DisplayName: Young Watcher of Time
+	Description: The youngest among countless companions of time.
 }
 
 PanicBuff: {

@@ -55,6 +55,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.netImportant = true;
             Projectile.ignoreWater = true;
+            Projectile.timeLeft = GetSeconds(10);
             Projectile.tileCollide = false;
         }
 
@@ -98,17 +99,35 @@ namespace HJScarletRework.Projs.Melee
         }
         private void StabAI(NPC target)
         {
+            if (AttackTime > 0)
+                AttackTime--;
             Projectile.Center = target.Center + StoredPosition;
             Vector2 dir = (target.Center - Owner.MountedCenter).ToSafeNormalize();
             //立刻锁住玩家的手臂
             Owner.ChangeDir(((Projectile.Center.X - Owner.MountedCenter.X) > 0).ToDirectionInt());
             Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, dir.ToRotation() - PiOver2);
-
             DrawMountedParticle();
-            if (Owner.JustPressRightClick() && ShouldPull == false && Owner.HeldItem.type == ItemType<GalvanizedHandThrown>())
+            if (Owner.JustPressRightClick() && Owner.HeldItem.type == ItemType<GalvanizedHandThrown>() && Owner.HJScarlet().GalvanizedHandDashCD == 0)
             {
-                SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Charge, Owner.Center);
-                ShouldPull = true;
+                //过一个玩家与射弹之间是否存在墙体的安全性检查
+                if (Collision.CanHit(Owner.position, Owner.width, Owner.height, target.position, target.width, target.height))
+                {
+                    if (!ShouldPull)
+                    {
+                        SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Charge, Owner.Center);
+                        ShouldPull = true;
+                        //让当前发起冲刺的射弹重设定为3秒的cd
+                        //一般情况下是够用的，这里主要目的是为了防止玩家撞墙之后死在那的问题
+                        Projectile.timeLeft = GetSeconds(3);
+                    }
+                }
+                else if (AttackTime == 0)
+                {
+                    string value = Mod.GetLocalizationKey($"Weapons.Melee.{nameof(GalvanizedHandThrown)}.TileTextvalue").ToLangValue();
+                    CombatText.NewText(Owner.Hitbox, new Color(111, 247, 200), value, true);
+                    //有意给60帧左右的cd
+                    AttackTime = 60;
+                }
             }
             if (ShouldPull)
             {
@@ -124,9 +143,10 @@ namespace HJScarletRework.Projs.Melee
                 SpawnOwnerParticle();
                 //改为了判距离
                 //不需要过于精确，只要大概就行了
-                if ((Owner.Center - target.Center).Length() < 50f)
+                if ((Owner.Center - target.Center).LengthSquared() < 50f * 50f)
                 {
                     Owner.HJScarlet().NoSlowFall = 10;
+                    Owner.HJScarlet().GalvanizedHandDashCD = GetSeconds(1) + 30;
                     //1秒左右的无敌
                     Owner.GetImmnue(ImmunityCooldownID.General, 60);
                     //震屏。
@@ -141,7 +161,6 @@ namespace HJScarletRework.Projs.Melee
                     SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit, Owner.Center);
                     //三倍伤害，单次的判定
                     Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<LightBiteArrow>(), Projectile.damage * 3, 0f, Owner.whoAmI);
-                    Owner.HJScarlet().galvanizedHandProjHanging = false;
                     //把人飞出去
                     Owner.velocity = Projectile.rotation.ToRotationVector2() * -OriginalSpeed * 0.6f;
                     Projectile.Kill();

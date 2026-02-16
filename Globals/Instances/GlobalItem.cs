@@ -9,6 +9,7 @@ using ContinentOfJourney.Items.ThrowerWeapons;
 using HJScarletRework.Core.Configs;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Melee;
@@ -120,6 +121,13 @@ namespace HJScarletRework.Globals.Instances
                     itemLoot.AddLoot<DisasterEssence>(1, 10, 20);
                     break;
             }
+            if(!Main.masterMode)
+            {
+                return;                
+
+            }
+            if (item.type == ItemType<ScarabBeliefTreasureBag>())
+                itemLoot.AddLoot<SacarbWings>(10);
         }
         public override void AddRecipes()
         {
@@ -141,6 +149,14 @@ namespace HJScarletRework.Globals.Instances
                 AddIngredient(ItemID.LihzahrdBrick, 25).
                 DisableDecraft().
                 AddTile(TileID.MythrilAnvil).
+                Register();
+
+            Recipe.Create(ItemType<AncientBlessing>()).
+                AddIngredient<CrimsonRune>().
+                AddIngredient(ItemID.CelestialShell).
+                AddIngredient<TankOfThePastJungle>(5).
+                DisableDecraft().
+                AddTile(TileID.TinkerersWorkbench).
                 Register();
 
         }

@@ -97,15 +97,25 @@ namespace HJScarletRework.Projs.Melee
         public override bool? CanDamage() => AttackType == Style.HomeToTarget;
         public override bool PreKill(int timeLeft)
         {
+            for (int i = 0; i < 15; i++)
+            {
+                Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(5f), DustID.BlueTorch);
+                d.velocity = RandVelTwoPi(2f, 4f);
+                d.noGravity = true;
+            }
             return base.PreKill(timeLeft);
         }
         private void DoHomeToTarget()
         {
-            if (!Projectile.GetTargetSafe(out NPC target, true, 600))
+            int getTarDistance = 600;
+            if (HJScarletMethods.HasFuckingCalamity)
+                getTarDistance = 1800;
+            if (!Projectile.GetTargetSafe(out NPC target, true, getTarDistance))
             {
                 Projectile.Kill();
                 return;
             }
+             
             Projectile.HomingTarget(target.Center, 1800, 20f, 30f);
             Projectile.rotation = Projectile.velocity.ToRotation();
         }

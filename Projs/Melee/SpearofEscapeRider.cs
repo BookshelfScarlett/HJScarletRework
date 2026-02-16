@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
@@ -17,6 +18,7 @@ namespace HJScarletRework.Projs.Melee
     {
         public override string Texture => GetInstance<SpearOfEscape_2>().Texture;
         public bool IsHit = false;
+        public ref float SignForRightClick => ref Projectile.ai[0];
         public override void ExSSD()
         {
             Projectile.ToTrailSetting(16, 2);
@@ -40,9 +42,19 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.timeLeft > 50)
                 Projectile.timeLeft = 50;
             Projectile.rotation = Projectile.velocity.ToRotation();
+            //如果启用右键功能，带着玩家飞过去
+            if (SignForRightClick ==1f)
+            {
+                Owner.Center = Projectile.Center;
+                Owner.velocity = Projectile.velocity;
+            }
             if (HJScarletMethods.OutOffScreen(Projectile.Center))
                 return;
-            //速度本身太快了，这里的粒子需要尽可能堆量
+            DrawParticles();
+        }
+        private void DrawParticles()
+        {
+             //速度本身太快了，这里的粒子需要尽可能堆量
             for (int k = 0; k < 3; k++)
             {
                 float GeneralScaleMul = 1.1f * RandZeroToOne;
@@ -56,23 +68,41 @@ namespace HJScarletRework.Projs.Melee
                     new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f) - offset, Projectile.velocity.ToRandVelocity(ToRadians(10f), 0.8f, 1.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), GetLifeTime(), RandRotTwoPi, 1f, 0.3f * GeneralScaleMul, ToRadians(10f)).Spawn();
                 }
             }
+
         }
         public override bool PreKill(int timeLeft)
         {
-            Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofEscapeBoom>(), (int)(Projectile.damage * 1.5f), Projectile.knockBack);
+            int boomDamage = SignForRightClick == 1f ? Projectile.damage : (int)(Projectile.damage * 2f);
+            if (HJScarletMethods.HasFuckingCalamity)
+                boomDamage *= 3;
+            Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofEscapeBoom>(), boomDamage, Projectile.knockBack);
             SoundEngine.PlaySound(HJScarletSounds.SpearofEscape_Boom, Projectile.Center);
-            if (IsHit)
-                return true;
-            //biu biu biu
-            float totalCounts = 8;
-            for (float i = 0; i < totalCounts;i++)
+            if (SignForRightClick == 1f)
             {
-                float rotArgs = ToRadians(360f / totalCounts * i);
-                Vector2 dir = (Projectile.rotation+rotArgs + Main.rand.NextFloat(ToRadians(-15f),ToRadians(15f))).ToRotationVector2() * Main.rand.NextFloat(6f, 10f);
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                //务必在这里把玩家弹开，我们不给无敌帧了
+                Owner.velocity = Projectile.velocity.ToRandVelocity(ToRadians(15f), 12f, 18f) * -1;
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 70, Owner.velocity.ToSafeNormalize().ToRotation(), ToRadians(40f));
             }
 
-            return base.PreKill(timeLeft);
+            if (IsHit)
+            {
+                return true;
+            }
+            //biu biu biu
+            float totalCounts = 8;
+            if (HJScarletMethods.HasFuckingCalamity)
+                totalCounts = 16;
+            for (float i = 0; i < totalCounts; i++)
+            {
+                float rotArgs = ToRadians(360f / totalCounts * i);
+                Vector2    dir = (Projectile.rotation + rotArgs + Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))).ToRotationVector2() * Main.rand.NextFloat(6f, 10f);
+                if (SignForRightClick == 1f)
+                    dir += Owner.velocity.ToRandVelocity(ToRadians(10f), 8f, 12f) * -1;
+                Projectile proj= Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                ((SpearofEscapeMissile)proj.ModProjectile).DontUseMouseHoming = true;
+            }
+
+            return true;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
@@ -90,16 +120,18 @@ namespace HJScarletRework.Projs.Melee
         {
             target.AddBuff(BuffID.Oiled, GetSeconds(5));
             IsHit = true;
-            int totalCounts = 8;
+            float totalCounts = 8;
+            if (HJScarletMethods.HasFuckingCalamity)
+                totalCounts = 16;
+
             for (float i = 0; i < totalCounts; i++)
             {
                 float rotArgs = ToRadians(360f / totalCounts * i);
                 Vector2 dir = (Projectile.rotation + rotArgs + Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))).ToRotationVector2() * Main.rand.NextFloat(10f, 13f);
-                Projectile proj= Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 ((SpearofEscapeMissile)proj.ModProjectile).AttackType = SpearofEscapeMissile.Style.Direct;
                 proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
             }
-
         }
         public override bool PreDraw(ref Color lightColor)
         {
