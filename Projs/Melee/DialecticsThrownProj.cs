@@ -31,7 +31,7 @@ namespace HJScarletRework.Projs.Melee
         public int SinAttackCounts = 0;
         public bool IsHit = false;
         public override void ExSSD() => Projectile.ToTrailSetting(20, 2);
-        public Vector2 MountedTargetPos = Vector2.Zero; 
+        public Vector2 MountedTargetPos = Vector2.Zero;
         public override void ExSD()
         {
             Projectile.usesLocalNPCImmunity = true;
@@ -46,7 +46,7 @@ namespace HJScarletRework.Projs.Melee
         {
             if (!Projectile.HJScarlet().FirstFrame)
                 SetUpBasiceData();
-            if (Vector2.Distance(Projectile.Center, Owner.MountedCenter) > 1800f)
+            if (Projectile.TooAwayFromOwner())
                 Projectile.Kill();
             DrawCubeAndBallTimer += 0.025f;
             switch (CurWaveStyle)
@@ -84,26 +84,33 @@ namespace HJScarletRework.Projs.Melee
                     Projectile.localNPCHitCooldown = -1;
                     break;
                 case WaveStyle.Paraline:
+                    Projectile.extraUpdates = 7;
                     break;
 
             }
         }
 
+        /// <summary>
+        /// 平行方波攻击模组
+        /// 沿途滞留追踪敌人的方块零件
+        /// </summary>
         private void ParaSquareWaveAttack()
         {
-            //平行方波，沿途滞留可追踪敌人的小方块
             if (Timer % 5 == 0)
             {
-                for (int k = -1; k < 2; k+=2)
+                for (int k = -1; k < 2; k += 2)
                 {
-                    Vector2 vel2 = Projectile.SafeDir().RotatedBy(PiOver4 *k);
+                    Vector2 vel2 = Projectile.SafeDir().RotatedBy(PiOver4 * k);
                     Projectile cube = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), vel2 * -13, ProjectileType<DialecticsCubeProj>(), Projectile.damage / 3, 1f);
                     cube.rotation = Projectile.velocity.ToRotation();
                 }
             }
 
         }
-        //平行波：超高速飞行，命中敌人时候刺入，并于天上降下矛
+        /// <summary>
+        /// 平行波攻击模组
+        /// 刺入敌人，并从下方召唤射弹
+        /// </summary>
         private void ParalineWaveAttack()
         {
             if (Projectile.HJScarlet().GlobalTargetIndex == -1)
@@ -127,10 +134,9 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.GetTargetSafe(out NPC target, true))
             {
                 Projectile.Center = target.Center + MountedTargetPos;
-
-                if(Projectile.timeLeft % 60 == 0)
+                if (Projectile.timeLeft % 60 == 0)
                 {
-                    for (int i = 0; i < 2 ;i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         Vector2 spawnPos = new Vector2(target.Center.X + Main.rand.NextBool().ToDirectionInt() * Main.rand.NextFloat(10f, 200f), target.Center.Y + Main.rand.NextFloat(1200f, 1800f));
                         Vector2 vel = (spawnPos - target.Center).SafeNormalize(Vector2.UnitX) * Main.rand.NextFloat(12f, 16f);
@@ -141,33 +147,24 @@ namespace HJScarletRework.Projs.Melee
                 }
             }
         }
-        //矩形波：命中后追加AimlabBox
+        /// <summary>
+        /// 矩形波：命中成功时追加标记
+        /// </summary>
         private void SquareWaveAttack()
         {
-            for (int i = 0; i < 2; i++)
-            {
-                Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustID.DungeonWater);
-                d.velocity = Projectile.velocity /3;
-                d.scale *= Main.rand.NextFloat(1.2f, 1.4f);
-                d.noGravity = true;
-            }
-            if(IsHit)
-            {
-                Projectile.velocity *= 0.95f;
-                Projectile.Opacity-=0.1f;
-                if (Projectile.Opacity == 0f)
-                    Projectile.Kill();
-            }
+            if (!IsHit)
+                return;
+            Projectile.velocity *= 0.95f;
+            Projectile.Opacity -= 0.1f;
+            if (Projectile.Opacity == 0f)
+                Projectile.Kill();
         }
+        /// <summary>
+        /// 正弦波：多穿与伤害递增
+        /// 这里就是什么也没有的，但是为了保证协调仍然做了保留
+        /// </summary>
         private void SinWaveAttack()
         {
-            for (int i = 0; i < 2; i++)
-            {
-                Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustID.MushroomSpray);
-                d.velocity = Projectile.velocity /3;
-                d.scale *= Main.rand.NextFloat(1.2f, 1.4f);
-                d.noGravity = true;
-            }
 
         }
         public override bool? CanDamage() => true;
@@ -177,9 +174,9 @@ namespace HJScarletRework.Projs.Melee
             {
                 Projectile.velocity *= 0f;
             }
-            else if(CurWaveStyle == WaveStyle.Square)
+            else if (CurWaveStyle == WaveStyle.Square)
             {
-                if(Owner.HasProj<DialecticsSpiningBlock>(out int projID))
+                if (Owner.HasProj<DialecticsSpiningBlock>(out int projID))
                 {
                     //过一个是否有mark的标记
                     modifiers.SourceDamage *= (1f + 0.1f * target.HJScarlet().Dialectics_HitTime);
@@ -197,7 +194,7 @@ namespace HJScarletRework.Projs.Melee
             }
             else if (CurWaveStyle == WaveStyle.Sin)
             {
-                modifiers.SourceDamage *= (1 + SinAttackCounts * 0.1f); 
+                modifiers.SourceDamage *= (1 + SinAttackCounts * 0.1f);
                 SinAttackCounts++;
             }
         }
@@ -207,7 +204,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Projectile.HJScarlet().GlobalTargetIndex == -1 &&CurWaveStyle == WaveStyle.Paraline)
+            if (Projectile.HJScarlet().GlobalTargetIndex == -1 && CurWaveStyle == WaveStyle.Paraline)
             {
                 Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
                 MountedTargetPos = Projectile.Center - target.Center;
@@ -225,11 +222,14 @@ namespace HJScarletRework.Projs.Melee
         public float Omega = 3f;
         //波形幅度
         public float Amp = 20f;
-        private void DrawParalineWave(bool stopTimer = false)
+        /// <summary>
+        /// 平行正弦波
+        /// </summary>
+        /// <param name="stopTimer"></param>
+        private void DrawParalineWave()
         {
-            Projectile.extraUpdates = 7;
             Timer += 1;
-            
+
             //这里的特效需要进行控制
             if (Projectile.HJScarlet().GlobalTargetIndex != -1)
                 return;
@@ -249,11 +249,11 @@ namespace HJScarletRework.Projs.Melee
                     Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2);
                     Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                     float sacle = 0.1f;
-                    new TrailGlowBall(drawPos + offset * k * (Amp - 10f) + Projectile.velocity / 4 * i, Projectile.SafeDir() * 2, drawColor, 40, sacle * 0.7f,true).Spawn();
-                    new TrailGlowBall(drawPos + offset * k * (Amp - 10f) + Projectile.velocity / 4 * i, Projectile.SafeDir() * 2, Color.White, 40, sacle * 0.4f,true).Spawn();
+                    new TrailGlowBall(drawPos + offset * k * (Amp - 10f) + Projectile.velocity / 4 * i, Projectile.SafeDir() * 2, drawColor, 40, sacle * 0.7f, true).Spawn();
+                    new TrailGlowBall(drawPos + offset * k * (Amp - 10f) + Projectile.velocity / 4 * i, Projectile.SafeDir() * 2, Color.White, 40, sacle * 0.4f, true).Spawn();
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -263,11 +263,21 @@ namespace HJScarletRework.Projs.Melee
         {
             //轨迹特效
             Projectile.rotation = Projectile.velocity.ToRotation();
+
+            for (int i = 0; i < 2; i++)
+            {
+                Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustID.DungeonWater);
+                d.velocity = Projectile.velocity / 3;
+                d.scale *= Main.rand.NextFloat(1.2f, 1.4f);
+                d.noGravity = true;
+            }
+
             for (int i = 0; i < 3; i++)
             {
                 Vector2 vel = Projectile.SafeDir() * Main.rand.NextFloat(1.2f, 1.4f) * 2f * Main.rand.NextBool().ToDirectionInt();
                 new TurbulenceShinyCube(Projectile.Center, vel, RandLerpColor(Color.White, Color.Blue), 20, Projectile.rotation, 0.8f, 0.5f).Spawn();
             }
+
             Vector2 drawPos = Projectile.Center - Projectile.SafeDir() * 10f;
             Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2);
             Timer += 1;
@@ -336,7 +346,6 @@ namespace HJScarletRework.Projs.Melee
         //绘制矩形波
         private void DrawSquareWave()
         {
-            //DrawParalineWave(true);
             Projectile.rotation = Projectile.velocity.ToRotation();
             Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2);
             Timer += 1f;
@@ -373,7 +382,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                     Vector2 pos = drawPos + offset * -Amp + Projectile.velocity / 5 * i;
-                    new HRShinyOrb(pos, vel , drawColor, 25, 0, 1, 0.1f).Spawn();
+                    new HRShinyOrb(pos, vel, drawColor, 25, 0, 1, 0.1f).Spawn();
                     new HRShinyOrb(pos, vel, Color.White, 25, 0, 1, 0.07f).Spawn();
 
                 }
@@ -395,14 +404,20 @@ namespace HJScarletRework.Projs.Melee
         }
         private void DrawSinWave()
         {
-            //DrawParalineWave(true);
             Projectile.rotation = Projectile.velocity.ToRotation();
             Vector2 speedOffset = Projectile.velocity / 5;
             Vector2 dir = Projectile.SafeDir();
             Vector2 mountedPos = Projectile.Center - dir * 10f;
             Timer += 0.8f;
-            //总体在底下绘制一些别的粒子，这里用的是树叶
-            Vector2 randomSpeed = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(1.2f, 2.0f);
+
+            for (int i = 0; i < 2; i++)
+            {
+                Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustID.MushroomSpray);
+                d.velocity = Projectile.velocity / 3;
+                d.scale *= Main.rand.NextFloat(1.2f, 1.4f);
+                d.noGravity = true;
+            }
+
             for (int i = 0; i < 5; i++)
             {
                 Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
@@ -411,7 +426,7 @@ namespace HJScarletRework.Projs.Melee
                 new HRShinyOrb(spawnPos - speedOffset * i, dir * 1.2f, Color.White, 25, 0, 1, 0.07f).Spawn();
             }
             //第二条line
-            for (int i = 0; i < 5;i++)
+            for (int i = 0; i < 5; i++)
             {
                 Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                 Vector2 spawnPos = mountedPos + dir.RotatedBy(PiOver2) * MathF.Sin(Timer - i * 0.16f) * (-25.0f);

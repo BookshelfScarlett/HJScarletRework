@@ -60,3 +60,8 @@ Judgement: {
 		While the attached hammer is active, hitting enemies does not increase the Focus Attack hit count.
 		'''
 }
+
+TheMoss: {
+	DisplayName: The Moss
+	Tooltip: ""
+}

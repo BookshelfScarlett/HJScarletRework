@@ -86,6 +86,7 @@ namespace HJScarletRework.Projs.Melee
 
             if (IsHit)
             {
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 70, Projectile.velocity.ToSafeNormalize().ToRotation(), ToRadians(40f));
                 return true;
             }
             //biu biu biu

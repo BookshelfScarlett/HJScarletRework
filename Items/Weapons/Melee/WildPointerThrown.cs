@@ -23,13 +23,13 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.UseSound = SoundID.Item91 with { Volume = 0.7f, Pitch = 0.4f};
             Item.shoot = ProjectileType<WildPointerThrownProj>();
             Item.shootSpeed = 16;
-            Item.knockBack = 2f;
+            Item.knockBack = 0.5f;
         }
         public override Color MainTooltipColor => Color.SkyBlue;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             //这里直接用MainMW应该没问题，多人同步后面再看看
-            Vector2 direction = player.ToMouseVector2().ToRandVelocity(ToRadians(15));
+            Vector2 direction = player.ToMouseVector2().ToRandVelocity(ToRadians(35));
             Vector2 spawnPos = player.MountedCenter + direction * 25f + direction.RotatedBy(PiOver2 * Main.rand.NextBool().ToDirectionInt()) * Main.rand.NextFloat(15f * Main.rand.NextBool().ToDirectionInt());
             int chance = 5;
             if (HJScarletMethods.HasFuckingCalamity)

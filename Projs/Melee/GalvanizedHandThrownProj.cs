@@ -107,7 +107,7 @@ namespace HJScarletRework.Projs.Melee
             Owner.ChangeDir(((Projectile.Center.X - Owner.MountedCenter.X) > 0).ToDirectionInt());
             Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, dir.ToRotation() - PiOver2);
             DrawMountedParticle();
-            if (Owner.JustPressRightClick() && Owner.HeldItem.type == ItemType<GalvanizedHandThrown>() && Owner.HJScarlet().GalvanizedHandDashCD == 0)
+            if (Owner.JustPressRightClick() && Owner.HeldItem.type == ItemType<GalvanizedHandThrown>() && Owner.HJScarlet().galvanizedHandDashCD == 0)
             {
                 //过一个玩家与射弹之间是否存在墙体的安全性检查
                 if (Collision.CanHit(Owner.position, Owner.width, Owner.height, target.position, target.width, target.height))
@@ -146,7 +146,7 @@ namespace HJScarletRework.Projs.Melee
                 if ((Owner.Center - target.Center).LengthSquared() < 50f * 50f)
                 {
                     Owner.HJScarlet().NoSlowFall = 10;
-                    Owner.HJScarlet().GalvanizedHandDashCD = GetSeconds(1) + 30;
+                    Owner.HJScarlet().galvanizedHandDashCD = GetSeconds(1) + 30;
                     //1秒左右的无敌
                     Owner.GetImmnue(ImmunityCooldownID.General, 60);
                     //震屏。

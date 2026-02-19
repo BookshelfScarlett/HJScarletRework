@@ -26,6 +26,7 @@ namespace HJScarletRework.Projs.Melee
         public float Osci = 0.025f;
         public float AttackDelay = 4;
         public bool IsHitTile = false;
+        public float SpawnTime = 0;
         float RotFix = ToRadians(38);
         public override void ExSD()
         {
@@ -62,7 +63,11 @@ namespace HJScarletRework.Projs.Melee
                 if (AttackTimer % AttackDelay == 0)
                 {
                     //向下方向，生成一个小型的鬼魂粒子
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitY.ToRandVelocity(PiOver4) * Main.rand.NextFloat(3f, 4f), ProjectileType<CandLanceBeam>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                    SpawnTime += 1f;
+                    int fireDamage = (int)(Projectile.damage * (SpawnTime / SpawnBeamCounts));
+                    if (HJScarletMethods.HasFuckingCalamity)
+                        fireDamage = Projectile.damage;
+                    Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitY.ToRandVelocity(PiOver4) * Main.rand.NextFloat(3f, 4f), ProjectileType<CandLanceBeam>(), fireDamage, Projectile.knockBack, Owner.whoAmI);
                     SoundEngine.PlaySound(HJScarletSounds.Evolution_Thrown with { Volume = 0.7f, MaxInstances = 0, Pitch = 0.7f }, Projectile.Center);
                 }
             }
@@ -83,6 +88,7 @@ namespace HJScarletRework.Projs.Melee
             }
             return false;
         }
+        public override bool? CanDamage() => false;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //水蜡烛本身也具有范围伤害

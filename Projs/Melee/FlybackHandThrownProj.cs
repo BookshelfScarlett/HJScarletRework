@@ -73,8 +73,11 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Ishit = true;
-            ClockDust(target);
+            if (!Ishit)
+            {
+                Ishit = true;
+                ClockDust(target);
+            }
         }
         public void ClockDust(NPC target)
         {
@@ -147,7 +150,7 @@ namespace HJScarletRework.Projs.Melee
                 new HRShinyOrbMedium(target.Center + pos * 150f, RandLerpColor(Color.Gold, Color.White), 60, 0.15f, 0).Spawn();
             }
             //准备依据时间的不同给予增益
-            Owner.HJScarlet().FlybackHitBuffTimer = 180;
+            Owner.HJScarlet().flybackInGameTimeBuff = 180;
         }
         public override bool? CanDamage() => true;
 
@@ -227,6 +230,8 @@ namespace HJScarletRework.Projs.Melee
             int posCount = validPosition.Count;
             for (int j = 0; j < posCount - 1; j++)
             {
+                if (validPosition[j] == Vector2.Zero)
+                    continue;
                 Vector2 Position = validPosition[j];
                 Vector2 NextPosition = validPosition[j + 1];
                 float rot = (NextPosition - Position).ToRotation();

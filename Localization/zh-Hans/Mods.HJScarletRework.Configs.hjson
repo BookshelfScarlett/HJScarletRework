@@ -29,4 +29,9 @@ HJScarletConfigClient: {
 			默认关闭
 			'''
 	}
+
+	MaxParticleCounts: {
+		// Label: Max Particle Counts
+		// Tooltip: ""
+	}
 }

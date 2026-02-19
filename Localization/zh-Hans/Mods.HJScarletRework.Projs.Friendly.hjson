@@ -86,4 +86,6 @@ Ranged: {
 	JudgementMainProj.DisplayName: 神代裁决
 	JudgementPunishStar.DisplayName: 神代裁决-神圣新星
 	JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
+	// TheMossHeldLock.DisplayName: The Moss Held Lock
+	// TheMossMainProj.DisplayName: The Moss Main Proj
 }

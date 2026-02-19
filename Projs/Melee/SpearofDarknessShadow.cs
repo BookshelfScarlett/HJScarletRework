@@ -34,10 +34,11 @@ namespace HJScarletRework.Projs.Melee
         public override void SetDefaults()
         {
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = -1;
+            Projectile.localNPCHitCooldown = 60;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.extraUpdates = 0;
             Projectile.timeLeft = 300;
             Projectile.DamageType = DamageClass.MeleeNoSpeed;
@@ -47,7 +48,7 @@ namespace HJScarletRework.Projs.Melee
         public bool AlreadyHit = false;
         public override void AI()
         {
-            CanDamageTime +=1;
+            CanDamageTime += 1;
             SpawnDarkParticle();
             GeneralProgress = Clamp(CanDamageTime / 50f, 0f, 1f);
             if (!AlreadyHit)
@@ -57,6 +58,10 @@ namespace HJScarletRework.Projs.Melee
 
         }
         public override bool? CanDamage() => CanDamageTime > 50;
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            return base.Colliding(projHitbox, targetHitbox);
+        }
         private void UpdateHit()
         {
             //固定频率
@@ -94,6 +99,8 @@ namespace HJScarletRework.Projs.Melee
             {
                 //锁住生命值让其确保能攻击到目标
                 Projectile.HomingTarget(target.Center, 600f, 20f, 20f);
+                if ((Projectile.Center - target.Center).LengthSquared() < 50f * 50f)
+                    AlreadyHit = true;
                 Projectile.extraUpdates = 2;
                 return;
             }
@@ -119,10 +126,6 @@ namespace HJScarletRework.Projs.Melee
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.ShadowFlame, GetSeconds(5));
-            if (!AlreadyHit)
-            {
-                AlreadyHit = true;
-            }
         }
         public override bool PreDraw(ref Color lightColor)
         {

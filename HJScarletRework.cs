@@ -83,7 +83,18 @@ namespace HJScarletRework
                 SmeltList.AddOres(TileType<ContinentOfJourney.Tiles.EternalOre>(), ItemType<EternalBar>());
                 SmeltList.AddOres(TileType<ContinentOfJourney.Tiles.LivingOre>(), ItemType<LivingBar>());
                 SmeltList.AddOres(TileType<ContinentOfJourney.Tiles.CubistOre>(), ItemType<CubistBar>());
+                if (CrossMod_Calamity != null)
+                {
+                    
+                }
             }
+        }
+        public int GetModTileSoftCalamity(string name)
+        {
+            if (CrossMod_Calamity.TryFind<ModTile>(name, out ModTile value))
+                return value.Type;
+            else
+                return -1;
         }
     }
 }

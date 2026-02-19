@@ -76,8 +76,8 @@ namespace HJScarletRework.Projs.Melee
                 Owner.Center = Projectile.Center;
                 SoundEngine.PlaySound(HJScarletSounds.GrabCharge, Projectile.Center);
                 //将损失的血量等拆分，包括魔力也是，然后再根据敲钟次数进行迭代
-                int shouldHeal = (Owner.HJScarlet().CurrentLostHP / 2) / totalBellTime * PlayBellTime;
-                int shouldRestoreMana = (Owner.HJScarlet().CurrentLostMana / 2) / totalBellTime * PlayBellTime;
+                int shouldHeal = (Owner.HJScarlet().flybackhandHealthRecord / 2) / totalBellTime * PlayBellTime;
+                int shouldRestoreMana = (Owner.HJScarlet().flybackHandManaRecord / 2) / totalBellTime * PlayBellTime;
                 //如果玩家启用了灾厄，则全价恢复所有的状态
                 Owner.Heal(shouldHeal + shouldHeal * hasCal.ToInt());
                 Owner.statMana = Math.Max(shouldRestoreMana + shouldRestoreMana * hasCal.ToInt(), Owner.statManaMax2);
@@ -87,9 +87,9 @@ namespace HJScarletRework.Projs.Melee
 
                 //顺便增加玩家归零针的普攻攻速，5秒左右
                 int buffTime = 60 * 2 * PlayBellTime;
-                Owner.HJScarlet().FlybackBuffTime = buffTime;
-                Owner.HJScarlet().CurrentFullFlyBackTime = buffTime;
-                Owner.HJScarlet().FlybackClockCD = GetSeconds(1) * PlayBellTime;
+                Owner.HJScarlet().flybackhandBuffTime = buffTime;
+                Owner.HJScarlet().flybackhandBuffTimeCurrent = buffTime;
+                Owner.HJScarlet().flybackhandCloclCD = GetSeconds(1) * PlayBellTime * 2;
                 ImmnueDebuffOnNeed();
                 //粒子。 
                 for (int i = 0; i < 40; i++)

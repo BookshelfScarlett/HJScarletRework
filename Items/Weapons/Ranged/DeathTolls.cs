@@ -40,7 +40,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.value = Item.buyPrice(gold: 12);
 
         }
-        public override float StealthDamageMultipler => 0.35f;
+        public override float FocusDamageAddictive => 0.35f;
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
             if (line.Name == "ItemName" && line.Mod == "Terraria")

@@ -3,3 +3,19 @@ CreationHat: {
 	Tooltip: ��ܾ���ǰ�ķ��۴���Ҳ���������벻����Ч������
 	SetBonus: ""
 }
+
+DragonSlayerBody: {
+	DisplayName: Dragon Slayer Body
+	Tooltip: ""
+}
+
+DragonSlayerHead: {
+	DisplayName: Dragon Slayer Head
+	Tooltip: ""
+	SetBouns: ""
+}
+
+DragonSlayerLegs: {
+	DisplayName: Dragon Slayer Legs
+	Tooltip: ""
+}

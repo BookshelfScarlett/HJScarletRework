@@ -86,11 +86,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
         public virtual int NeedFocusStrikeTime { get; }
         public override ClassCategory Category => ClassCategory.Ranged;
         public virtual int ShootProjID { get; }
-        public virtual string GhostDashType { get; }
-        //锤类武器初始提供的潜伏值
-        public const float BaseMaxStealth = 0.1f;
         public override bool WeaponPrefix() => true;
-        //你灾组到现在都没让盗贼伤害成功不吃远程词缀的加成
         public override bool RangedPrefix() => true;
         public override void SetStaticDefaults()
         {
@@ -114,12 +110,12 @@ namespace HJScarletRework.Items.Weapons.Ranged
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
         }
-        public virtual float StealthDamageMultipler => 0.5f;
+        public virtual float FocusDamageAddictive => 0.5f;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             bool stealth = player.HJScarlet().FocusStrikeTime > NeedFocusStrikeTime;
             //锤子的潜伏固定1.5倍伤害
-            damage = (int)(damage * (1 + StealthDamageMultipler * stealth.ToInt()));
+            damage = (int)(damage * (1 + FocusDamageAddictive * stealth.ToInt()));
             Projectile st = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
             st.HJScarlet().UseFocusStrikeMechanic = true;
             if (stealth)

@@ -182,7 +182,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.HomingTarget(NeedPlayer.Center, 9999f, 20f, 10f, 5f);
             Projectile.ExpandHitboxBy(36,36);
             //如果接触了，则执行decayAI
-            if(Projectile.Hitbox.Intersects(NeedPlayer.Hitbox))
+            if((Projectile.Center - NeedPlayer.Center).LengthSquared() < 50f * 50f)
             {
                 DisappearCode();
                 return;
@@ -200,7 +200,7 @@ namespace HJScarletRework.Projs.Melee
 
         private void DoAttack()
         {
-            Projectile.velocity *= 0.935f;
+            Projectile.velocity *= 0.875f;
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.velocity.Length() > 0.15f)
                 return;

@@ -29,6 +29,10 @@ namespace HJScarletRework.Projs.Melee
             Projectile.extraUpdates = 1;
             Projectile.timeLeft = 300;
         }
+        public override void ModifyDamageHitbox(ref Rectangle hitbox)
+        {
+            base.ModifyDamageHitbox(ref hitbox);
+        }
         public override void AI()
         {
             if (HJScarletMethods.HasFuckingCalamity && !Projectile.HJScarlet().FirstFrame)

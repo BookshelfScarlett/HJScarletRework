@@ -29,7 +29,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.timeLeft = 600;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
-            Projectile.penetrate = 4;
+            Projectile.penetrate = 7;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
         }
         public override void AI()
@@ -52,9 +52,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 portalVel = Projectile.SafeDir() * Main.rand.NextFloat(10f, 14f);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, portalVel, ProjectileType<EvolutionEnergyPortal>(), 0, Projectile.knockBack, Owner.whoAmI);
-                proj.originalDamage = Projectile.originalDamage;
-                //直接存入即可，后面在传送门里面进行判断
-                proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
+                proj.originalDamage = (int)(Projectile.originalDamage * 0.75f);
                 if (proj.active && proj != null)
                 {
                     //存储索引而非射弹本身，避免一些编译器误判问题
@@ -62,7 +60,7 @@ namespace HJScarletRework.Projs.Melee
                 }
             }
             //距离过远强制处死
-            if (Vector2.Distance(Projectile.Center, Owner.MountedCenter) > 1800f)
+            if (Projectile.TooAwayFromOwner())
                 Projectile.Kill();
         }
 
@@ -93,6 +91,8 @@ namespace HJScarletRework.Projs.Melee
                 for (int i = 0; i < PortalProjList.Count; i++)
                 {
                     Projectile proj = Main.projectile[PortalProjList[i]];
+                    //Prekill之前更新一遍target索引
+                    proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
                     //激活传送门发射箭矢
                     ((EvolutionEnergyPortal)proj.ModProjectile).SpawnEvolutionArrow = true;
                 }

@@ -86,4 +86,6 @@ Ranged: {
 	JudgementMainProj.DisplayName: Judgement Main Proj
 	JudgementPunishStar.DisplayName: Judgement Punish Star
 	JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
+	TheMossHeldLock.DisplayName: The Moss Held Lock
+	TheMossMainProj.DisplayName: The Moss Main Proj
 }

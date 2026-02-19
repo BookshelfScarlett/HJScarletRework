@@ -33,10 +33,10 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             Projectile.velocity *= 0.82f;
-            Timer+=1f;
+            Timer += 1f;
             //除非附近有可用单位，否则这个传送门不会为您生成任何箭矢
             //额外的，如果进化矛本身直接命中了敌对单位，则所有的箭矢都会直接攻击他
-            if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1200f) && SpawnEvolutionArrow && !StopSpawnArrow)
+            if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1200f,canPassWall:true) && SpawnEvolutionArrow && !StopSpawnArrow)
             {
                 //每个传送门都只生成1根箭矢
                 Vector2 dir = (target.Center - Projectile.Center).SafeNormalize(Vector2.UnitX);

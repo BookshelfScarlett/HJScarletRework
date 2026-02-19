@@ -200,6 +200,7 @@ namespace HJScarletRework.Globals.Methods
                 return intTime;
             }
         }
+        public static bool IsItemName(this DrawableTooltipLine line) => line.Name == "ItemName" && line.Mod == "Terraria";
         /// <summary>
         /// 杀了玩家
         /// </summary>

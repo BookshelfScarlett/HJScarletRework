@@ -38,13 +38,16 @@ namespace HJScarletRework.Projs.Melee
             Projectile.localNPCHitCooldown = 30;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 2;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.extraUpdates = 2;
             Projectile.timeLeft = 240;
         }
         public bool AlreadyHit = false;
         public override void AI()
         {
+            if (!Projectile.HJScarlet().FirstFrame)
+                Projectile.originalDamage = Projectile.damage;
             SpawnDarkParticle();
             switch (AttackType)
             {
@@ -74,7 +77,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     for (int i = -1; i < 2; i += 1)
                     {
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofDarknessShadow>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofDarknessShadow>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
 
                         proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                         ((SpearofDarknessShadow)proj.ModProjectile).MountedVec = Projectile.SafeDirByRot().RotatedBy(ToRadians(360f / 4f * StrikeTimes));

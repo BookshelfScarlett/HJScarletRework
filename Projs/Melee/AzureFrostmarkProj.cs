@@ -174,7 +174,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             int length = Projectile.oldPos.Length;
             float rot = Projectile.velocity.ToRotation();
-            for (int i = 0; i < length; i++)
+            for (int i = length - 1; i >= 0; i++)
             {
                 if (AttackType == Style.SpinAndFade)
                     continue;

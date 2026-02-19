@@ -19,6 +19,7 @@ namespace HJScarletRework.Items.Accessories
             Item.width = Item.height = 60;
             Item.accessory = true;
             Item.rare = ItemRarityID.Purple;
+            Item.value = Item.buyPrice(gold: 75);
 
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)

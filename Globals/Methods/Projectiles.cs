@@ -286,7 +286,7 @@ namespace HJScarletRework.Globals.Methods
             Vector2 orig = tex.Size() / 2;
             Vector2 drawPos = proj.Center - Main.screenPosition;
             int drawLength = drawTime > proj.oldPos.Length ? proj.oldPos.Length : drawTime;
-            for (int i = 1; i < drawLength; i++)
+            for (int i = drawLength - 1; i >= 0; i--)
             {
                 if (proj.oldPos[i] == Vector2.Zero)
                     continue;
@@ -297,8 +297,6 @@ namespace HJScarletRework.Globals.Methods
                 Color trailColor = color * faded;
                 Main.spriteBatch.Draw(tex, trailingDrawPos, null, trailColor, proj.oldRot[i] + rotFix, orig, proj.scale, 0, 0);
             }
-            //直接绘制主射弹位于最顶层
-            Main.spriteBatch.Draw(tex, drawPos, null, color, proj.rotation + rotFix, orig, proj.scale, 0, 0.1f);
         }
         /// <summary>
         /// 将TargetIndex转化为NPC。这里直接调用的模组内部的GlobalTargetIndex字段

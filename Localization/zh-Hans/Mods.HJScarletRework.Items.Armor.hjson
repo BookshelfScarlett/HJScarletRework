@@ -10,3 +10,31 @@ CreationHat: {
 		溢出的暴击概率以1/2的形式等价转模为你的魔法暴击伤害加成
 		'''
 }
+
+DragonSlayerBody: {
+	DisplayName: 巨龙重铠
+	Tooltip:
+		'''
+		增加40%召唤伤害
+		+8 HP/s 生命恢复速度
+		'''
+}
+
+DragonSlayerHead: {
+	DisplayName: 巨龙战盔
+	Tooltip:
+		'''
+		增加20%伤害
+		+2 最大哨兵上限
+		'''
+	SetBouns: ""
+}
+
+DragonSlayerLegs: {
+	DisplayName: 巨龙护腿
+	Tooltip:
+		'''
+		增加30%暴击概率
+		增加30%移动速度
+		'''
+}

@@ -53,6 +53,7 @@ namespace HJScarletRework.Projs.Melee
                 else if (Timer > 20f)
                 {
                     AttackType = Style.Return;
+                    Projectile.penetrate = -1;
                     Projectile.netUpdate = true;
                 }
             }

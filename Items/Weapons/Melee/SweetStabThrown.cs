@@ -47,6 +47,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.UseSound = SoundID.Item1;
             Item.noMelee = true;
             Item.noUseGraphic = true;
+            Item.value = Item.buyPrice(gold: 15);
             ExSD();
         }
         public virtual void ExSD() { }

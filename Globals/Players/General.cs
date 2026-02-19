@@ -2,38 +2,34 @@
 using HJScarletRework.Buffs;
 using HJScarletRework.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
-using Steamworks;
-using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Default;
-using Terraria.ModLoader.IO;
 
 namespace HJScarletRework.Globals.Players
 {
     public partial class HJScarletPlayer : ModPlayer
     {
-        public int FocusStrikeTime = 0;
         public bool NoGuideForBinaryStars = false;
         public bool CanDisableGuideForGrandHammer = false;
         public bool CanGiveFreeBinaryStars = false;
-        public int FlybackClockCD = 0;
-        public int FlybackBuffTime = 0;
-        public int CurrentFullFlyBackTime = 0;
+        public int flybackhandCloclCD = 0;
+        public int flybackhandBuffTime = 0;
+        public int flybackhandBuffTimeCurrent = 0;
         //用给归零针，查阅玩家当前损失的HP量
-        public int CurrentLostHP = 0;
-        public int CurrentLostMana = 0;
-        public int FlybackHitBuffTimer = 0;
+        public int flybackhandHealthRecord = 0;
+        public int flybackHandManaRecord = 0;
+        public int flybackInGameTimeBuff = 0;
 
         public bool CreationHatSet = false;
         //电表镀针的冲刺冷却
-        public int GalvanizedHandDashCD = 0;
-        public bool galvanizedHandProjHanging = false;
+        public int galvanizedHandDashCD = 0;
 
         // 用于向上向下冲刺禁用羽落
         public int NoSlowFall = 0;
+
+
 
         #region Accessories
 
@@ -65,6 +61,11 @@ namespace HJScarletRework.Globals.Players
         public bool SquidPet = false;
         public bool WatcherPet = false;
         #endregion
+
+        #region 专注攻击
+        public int FocusStrikeTime = 0;
+        public int cacheFocusWeapon = -1;
+        #endregion
         public override void ResetEffects()
         {
             CreationHatSet = false;
@@ -73,8 +74,34 @@ namespace HJScarletRework.Globals.Players
             GeneralCrtiDamageAdd = 0;
             UnloadAcc();
             UnloadPets();
+
+            //专注攻击：当前武器与上一把缓存的武器不同时，清除原本的专注攻击效果
+            if(cacheFocusWeapon == -1 || Player.HeldItem.type != cacheFocusWeapon)
+            {
+                FocusStrikeTime = 0;
+                cacheFocusWeapon = Player.HeldItem.type;
+            }    
         }
 
+
+        public override void UpdateDead()
+        {
+            FocusStrikeTime = 0;
+            cacheFocusWeapon = -1;
+            flybackhandBuffTime = 0;
+            flybackhandCloclCD = 0;
+            flybackhandBuffTimeCurrent = 0;
+            DesterranHeal = 0;
+            PreciousTargetCrtis = 10;
+            LifeBalloonAcc = false;
+            galvanizedHandDashCD = 0;
+
+            DesterrannachtImmortal = false;
+            DesterranImmortalTime = 0;
+            DesterranTimer = 0;
+            UnloadAcc();
+            UnloadPets();
+        }
         private void UnloadAcc()
         {
             PreciousTargetAcc = false;
@@ -92,61 +119,15 @@ namespace HJScarletRework.Globals.Players
             WatcherPet = false;
         }
 
-        public override void UpdateDead()
-        {
-            FocusStrikeTime = 0;
-            FlybackBuffTime = 0;
-            FlybackClockCD = 0;
-            CurrentFullFlyBackTime = 0;
-            DesterranHeal = 0;
-            PreciousTargetCrtis = 10;
-            LifeBalloonAcc = false;
-            GalvanizedHandDashCD = 0;
-            galvanizedHandProjHanging = true;
-
-            DesterrannachtImmortal = false;
-            DesterranImmortalTime = 0;
-            DesterranTimer = 0;
-            UnloadAcc();
-            UnloadPets();
-        }
-        public override void PostUpdate()
-        {
-            UpdateNetPacket();
-            SwitchWeaponSystem();
-        }
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
             //确保武器起码有伤害
-            if(PreciousTargetAcc && item.damage > 0)
+            if (PreciousTargetAcc && item.damage > 0)
             {
                 crit = PreciousTargetCrtis;
                 if (PreciousTargetCrtis > 150)
                     PreciousTargetCrtis = 150;
             }
-
-            base.ModifyWeaponCrit(item, ref crit);
-        }
-        public override void SaveData(TagCompound tag)
-        {
-            HammerTagSave(tag);
-        }
-        public override void LoadData(TagCompound tag)
-        {
-            HammerTagLoad(tag);
-        }
-        private void HammerTagSave(TagCompound tag)
-        {
-            tag.Add(nameof(NoGuideForBinaryStars), NoGuideForBinaryStars);
-            tag.Add(nameof(CanDisableGuideForGrandHammer), CanDisableGuideForGrandHammer);
-            tag.Add(nameof(CanGiveFreeBinaryStars), CanGiveFreeBinaryStars);
-        }
-
-        private void HammerTagLoad(TagCompound tag)
-        {
-            NoGuideForBinaryStars = tag.GetBool(nameof(NoGuideForBinaryStars));
-            CanDisableGuideForGrandHammer = tag.GetBool(nameof(CanDisableGuideForGrandHammer));
-            CanGiveFreeBinaryStars = tag.GetBool(nameof(CanGiveFreeBinaryStars));
         }
         public override bool OnPickup(Item item)
         {

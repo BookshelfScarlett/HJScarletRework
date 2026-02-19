@@ -24,4 +24,9 @@ HJScarletConfigClient: {
 			Disabled by default.
 			'''
 	}
+
+	MaxParticleCounts: {
+		Label: Max Particle Counts
+		Tooltip: ""
+	}
 }

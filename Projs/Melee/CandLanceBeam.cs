@@ -36,7 +36,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.extraUpdates = 1;
             Projectile.timeLeft = 300;
             //下方会考虑手动控制处死，或者之类的。
-            Projectile.localNPCHitCooldown = 60 * Projectile.extraUpdates;
+            Projectile.localNPCHitCooldown = -1;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.noEnchantmentVisuals = true;

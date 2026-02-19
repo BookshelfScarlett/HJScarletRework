@@ -33,9 +33,9 @@ namespace HJScarletRework.Projs.Melee
             Projectile.ignoreWater = false;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.noEnchantmentVisuals = true;
-            Projectile.timeLeft = 600;
+            Projectile.timeLeft = GetSeconds(3);
         }
-        private float SearchDistance = 300f;
+        private float SearchDistance = 150f;
         private int TotalBounceTime = 4;
         private float KillDistance = 1800f;
         public override void AI()
@@ -98,12 +98,16 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.velocity.X != oldVelocity.X)
                 Projectile.velocity.X = -oldVelocity.X;
             if (Projectile.velocity.Y != oldVelocity.Y)
-                Projectile.velocity.Y = -oldVelocity.Y * 0.8f;
+                Projectile.velocity.Y = -oldVelocity.Y * 0.6f;
             BounceTime += 1;
             return BounceTime > TotalBounceTime;
         }
         public override void OnKill(int timeLeft)
         {
+            for (int i = 0;i<15;i++)
+            {
+                new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(16f), 1.2f, RandLerpColor(Color.Orange, Color.OrangeRed), 20, 0.5f, RandRotTwoPi).Spawn();
+            }
             base.OnKill(timeLeft);
         }
         public override bool PreDraw(ref Color lightColor)

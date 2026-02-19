@@ -22,7 +22,7 @@ namespace HJScarletRework.Projs.Melee
         public float TheScale = 0.8f; 
         public override void ExSD()
         {
-            Projectile.width = Projectile.height = 200;
+            Projectile.width = Projectile.height = 50;
             Projectile.extraUpdates = 0;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
@@ -31,6 +31,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.timeLeft = 30;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
+            Projectile.ownerHitCheck = true;
             Projectile.Opacity = 0f;
             Projectile.scale = 1f;
             Projectile.noEnchantmentVisuals = true;

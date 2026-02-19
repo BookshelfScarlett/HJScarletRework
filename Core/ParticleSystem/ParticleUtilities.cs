@@ -1,11 +1,12 @@
-﻿using HJScarletRework.Globals.ParticleSystem;
+﻿using HJScarletRework.Core.Configs;
+using HJScarletRework.Globals.ParticleSystem;
 using Terraria;
 
 namespace HJScarletRework.Core.ParticleSystem
 {
     public static class ParticleUtilities
     {
-        public static int MaxParticles = 30000;
+        public static int MaxParticles = HJScarletConfigClient.Instance.MaxParticleCounts;
         public static void AddToAlpha(this BaseParticle p)
         {
             if (!p.Important && BaseParticleManager.ActiveParticlesAlpha.Count > MaxParticles)

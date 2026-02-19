@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.shootSpeed = 18f;
             Item.rare = ItemRarityID.LightRed;
         }
-        public override float StealthDamageMultipler => 0.25f;
+        public override float FocusDamageAddictive => 0.25f;
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
             if (line.Name == "ItemName" && line.Mod == "Terraria")

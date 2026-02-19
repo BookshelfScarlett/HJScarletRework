@@ -59,3 +59,8 @@ Judgement: {
 		挂载锤在场时，命中敌对单位不会增加专注攻击次数
 		'''
 }
+
+TheMoss: {
+	// DisplayName: The Moss
+	// Tooltip: ""
+}

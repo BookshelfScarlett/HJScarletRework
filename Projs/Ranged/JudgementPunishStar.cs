@@ -48,6 +48,7 @@ namespace HJScarletRework.Projs.Ranged
             Projectile.friendly = true;
             Projectile.ignoreWater = true;
             //这里的判定也是为了演出效果+dps，重点是演出效果
+            Projectile.tileCollide = true;
             //所以做平衡的也别tm动这！！
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 30;
@@ -57,6 +58,8 @@ namespace HJScarletRework.Projs.Ranged
         public override bool? CanDamage() => CanHitTarget;
         public override void AI()
         {
+            if (!Projectile.HJScarlet().FirstFrame)
+                Projectile.tileCollide = !CanArcRotate;
             //下方会进行手动处死，这里需要全程保证射弹存活维持演出效果
             Projectile.timeLeft = 2;
             Projectile.rotation = Projectile.velocity.ToRotation();
@@ -166,7 +169,7 @@ namespace HJScarletRework.Projs.Ranged
             //允许造成伤害
             CanHitTarget = true;
             //正式执行追踪AI
-            if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true))
+            if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true,canPassWall:true))
             {
                 Projectile.HomingTarget(target.Center, -1f, 20f, 20f);
             }

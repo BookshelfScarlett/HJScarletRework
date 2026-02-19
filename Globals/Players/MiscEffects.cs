@@ -35,7 +35,7 @@ namespace HJScarletRework.Globals.Players
         public void UpdateFlybackBuff()
         {
             //归零针buff
-            bool hasBuff = (FlybackHitBuffTimer > 0 || HJScarletMethods.HasFuckingCalamity) && (Player.HeldItem.type == ItemType<FlybackHandThrown>());
+            bool hasBuff = (flybackInGameTimeBuff > 0 || HJScarletMethods.HasFuckingCalamity) && (Player.HeldItem.type == ItemType<FlybackHandThrown>());
             if (!hasBuff)
                 return;
             //白天上午与夜间前半夜：给予15%近战伤害加成/15防御力加成
@@ -69,11 +69,11 @@ namespace HJScarletRework.Globals.Players
         }
         private void UpdateTimer()
         {
-            if (FlybackBuffTime > 0)
-                FlybackBuffTime--;
+            if (flybackhandBuffTime > 0)
+                flybackhandBuffTime--;
 
-            if (FlybackBuffTime == 0)
-                CurrentFullFlyBackTime = 0;
+            if (flybackhandBuffTime == 0)
+                flybackhandBuffTimeCurrent = 0;
 
             if (RewardofWarriorCounter > 0)
                 RewardofWarriorCounter -= 0;
@@ -84,12 +84,12 @@ namespace HJScarletRework.Globals.Players
             if (KingdomDefenseTime < 0)
                 KingdomDefenseTime = 0;
 
-            if (FlybackHitBuffTimer > 0)
-                FlybackHitBuffTimer--;
+            if (flybackInGameTimeBuff > 0)
+                flybackInGameTimeBuff--;
 
-            if (GalvanizedHandDashCD > 0)
+            if (galvanizedHandDashCD > 0)
             {
-                if (GalvanizedHandDashCD == 1)
+                if (galvanizedHandDashCD == 1)
                 {
                     SoundEngine.PlaySound(SoundID.Item35, Player.Center);
                     for (int i = 0; i<25;i++)
@@ -97,7 +97,7 @@ namespace HJScarletRework.Globals.Players
                         new TurbulenceShinyOrb(Player.Center.ToRandCirclePosEdge(10), 2f, RandLerpColor(Color.SkyBlue, Color.White), 120 , 0.4f, RandRotTwoPi).Spawn();
                     }
                 }
-                GalvanizedHandDashCD--;
+                galvanizedHandDashCD--;
             }
 
             if (DesterranTimer > 0)
@@ -109,8 +109,8 @@ namespace HJScarletRework.Globals.Players
                 DesterranTimer = 0;
             }
 
-            if (FlybackClockCD > 0)
-                FlybackClockCD--;
+            if (flybackhandCloclCD > 0)
+                flybackhandCloclCD--;
 
             if (NoSlowFall > 0)
                 NoSlowFall--;

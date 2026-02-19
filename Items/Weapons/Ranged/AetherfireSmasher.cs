@@ -29,7 +29,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.shootSpeed = 18f;
             Item.rare = RarityType<DisasterRarity>();
         }
-        public override float StealthDamageMultipler => 0.25f;
+        public override float FocusDamageAddictive => 0.25f;
         private void DrawSpecialColor(DrawableTooltipLine line, Color drawColor, string colorValue)
         {
             //获取全局Sin值，让描边发生一定程度的动态变化

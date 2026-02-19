@@ -17,6 +17,7 @@ namespace HJScarletRework.Items.Accessories
             Item.rare = ItemRarityID.Yellow;
             Item.defense = 5;
             Item.accessory = true;
+            Item.value = Item.buyPrice(gold: 25);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

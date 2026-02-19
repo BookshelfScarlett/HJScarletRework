@@ -66,7 +66,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 if (Projectile.Hitbox.Intersects(needPlayer.Hitbox))
                 {
-                    int healAmt = HJScarletMethods.HasFuckingCalamity ? 20 : 5;
+                    int healAmt = HJScarletMethods.HasFuckingCalamity ? 20 : Main.rand.Next(3, 6);
                     needPlayer.Heal(healAmt);
                     needPlayer.AddBuff(BuffType<HoneyRegenAlt>(), 60);
                     //生成粒子，追加树叶音效

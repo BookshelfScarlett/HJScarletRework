@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override string Texture => GetInstance<FlybackHand>().Texture;
         public override void ExSD()
         {
-            Item.damage = 298;
+            Item.damage = 400;
             Item.useTime = Item.useAnimation = 20;
             Item.rare = ItemRarityID.Red;
             Item.shoot = ProjectileType<FlybackHandThrownProj>();
@@ -36,7 +36,7 @@ namespace HJScarletRework.Items.Weapons.Melee
 
         public override void ExUpdateInventory(Player player)
         {
-            Item.useTime = Item.useAnimation = player.HJScarlet().FlybackBuffTime > 0 ? (10 + (int)(10f * (1f - (float)player.HJScarlet().FlybackBuffTime / player.HJScarlet().CurrentFullFlyBackTime))) : 20;
+            Item.useTime = Item.useAnimation = player.HJScarlet().flybackhandBuffTime > 0 ? (10 + (int)(10f * (1f - (float)player.HJScarlet().flybackhandBuffTime / player.HJScarlet().flybackhandBuffTimeCurrent))) : 20;
         }
         public override Color MainTooltipColor => Color.Yellow;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -44,7 +44,7 @@ namespace HJScarletRework.Items.Weapons.Melee
 
             if (player.altFunctionUse == 2)
             {
-                if (!player.HasProj<FlybackHandClockMounted>(out int projID) && player.HJScarlet().FlybackClockCD == 0)
+                if (!player.HasProj<FlybackHandClockMounted>(out int projID) && player.HJScarlet().flybackhandCloclCD == 0)
                     Projectile.NewProjectileDirect(source, position, velocity, projID, 0, 0, player.whoAmI);
                 else
                 {

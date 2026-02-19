@@ -34,15 +34,19 @@ namespace HJScarletRework.Projs.Melee
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.extraUpdates = 4;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
             Projectile.noEnchantmentVisuals = true;
         }
         public override void AI()
         {
-            if(!Projectile.HJScarlet().FirstFrame && HJScarletMethods.HasFuckingCalamity)
+            if (!Projectile.HJScarlet().FirstFrame && HJScarletMethods.HasFuckingCalamity)
+            {
+                Projectile.penetrate = 10;
                 Projectile.localNPCHitCooldown = 15;
+            }
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer += 0.025f;
 
@@ -58,7 +62,12 @@ namespace HJScarletRework.Projs.Melee
             //在这个过程生成需要的粒子
             if (AttackType == Style.Attack)
             {
-                
+                //在这个过程中如果penetrate提前变为了0，进入别的状态 
+                if (Projectile.penetrate == -1 && Projectile.damage == 0)
+                {
+                    Projectile.netUpdate = true;
+                    AttackType = Style.Fade;
+                }
                 if (Projectile.GetTargetSafe(out NPC target, true, 1200f))
                 {
                     Projectile.extraUpdates = 5;
@@ -74,7 +83,6 @@ namespace HJScarletRework.Projs.Melee
                 if (Projectile.Opacity == 0)
                     Projectile.Kill();
             }
-            
         }
         public override bool? CanDamage()
         {

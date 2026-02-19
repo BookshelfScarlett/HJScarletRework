@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
 {
     public partial class HJScarletPlayer :ModPlayer
     {
-        
+        public override void PostUpdate()
+        {
+            UpdateNetPacket();
+            SwitchWeaponSystem();
+        }
+
         public override void PostUpdateRunSpeeds()
         {
             if (NoSlowFall > 0)
