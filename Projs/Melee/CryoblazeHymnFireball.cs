@@ -69,7 +69,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(4f), 0.5f, RandLerpColor(Color.Orange, Color.OrangeRed), 30, Main.rand.NextFloat(0.1f, 0.12f), RandRotTwoPi).Spawn();
                 new SmokeParticle(Projectile.Center.ToRandCirclePos(8f), -Projectile.velocity / 8f, RandLerpColor(Color.OrangeRed, Color.DarkGray), 30, RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f, 0.16f) * 1.1f).SpawnToPriorityNonPreMult();
-                }
+            }
             Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(10f), 0.8f, 1.4f);
             new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f), vel, RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.3f, ToRadians(10f)).Spawn();
         }
@@ -109,15 +109,6 @@ namespace HJScarletRework.Projs.Melee
 
         }
 
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            if (Projectile.velocity.X != oldVelocity.X)
-                Projectile.velocity.X = -oldVelocity.X;
-            if (Projectile.velocity.Y != oldVelocity.Y)
-                Projectile.velocity.Y = -oldVelocity.Y;
-            BounceTime++;
-            return BounceTime > 4;
-        }
         public override bool PreKill(int timeLeft)
         {
             return base.PreKill(timeLeft);

@@ -18,19 +18,19 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void ExSD()
         {
             Item.width = Item.height = 50;
-            Item.damage = 110;
-            Item.useTime = Item.useAnimation = 24;
+            Item.damage = 95;
+            Item.useTime = Item.useAnimation = 26;
             Item.rare = RarityType<DisasterRarity>();
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<EclipseWraithProj>();
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.UseSound = HJScarletSounds.SodomsDisaster_Toss with { MaxInstances = 0, Pitch= 0.21f, Volume = 0.74f};
+            Item.UseSound = HJScarletSounds.SodomsDisaster_Toss with { MaxInstances = 0, Pitch = 0.21f, Volume = 0.74f };
             Item.HJScarlet().EnableCritDamage = true;
             Item.HJScarlet().CritsDamageBonus = 0.30f + 0.70f * HJScarletMethods.HasFuckingCalamity.ToInt();
         }
-        public override void ModifyWeaponCrit(Player player, ref float crit) => crit += 16f;
+        public override void ModifyWeaponCrit(Player player, ref float crit) => crit += 26f;
         public override void ExModifyTooltips(List<TooltipLine> tooltips, string localAddress)
         {
             int flavorTooltipIndex = tooltips.FindIndex(line => line.Name == "ItemName" && line.Mod == "Terraria");

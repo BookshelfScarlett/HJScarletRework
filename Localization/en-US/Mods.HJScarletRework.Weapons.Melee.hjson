@@ -31,6 +31,7 @@ FlybackHandThrown: {
 		"Time will mend everything...perhaps."
 		'''
 	CalamitySupport: ""
+	TimeClockOnCDText: "Time Crystal Cooldown: {0} seconds! "
 }
 
 LightBiteThrown: {

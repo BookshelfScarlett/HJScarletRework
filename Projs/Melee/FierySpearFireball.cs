@@ -35,7 +35,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.noEnchantmentVisuals = true;
             Projectile.timeLeft = GetSeconds(3);
         }
-        private float SearchDistance = 150f;
+        private float SearchDistance = 200f;
         private int TotalBounceTime = 4;
         private float KillDistance = 1800f;
         public override void AI()
@@ -54,8 +54,9 @@ namespace HJScarletRework.Projs.Melee
 
             Timer++;
             bool additionRequire = (Timer > 15f && Projectile.HJScarlet().GlobalTargetIndex != -1) || BounceTime > 0;
+            float homingSpeed = Projectile.HJScarlet().GlobalTargetIndex != -1 ? 12f : 8f;
             if (Projectile.GetTargetSafe(out NPC target, true, SearchDistance) && additionRequire)
-                Projectile.HomingTarget(target.Center, -1, 12f, 20f);
+                Projectile.HomingTarget(target.Center, -1, homingSpeed, 20f);
             else
             {
                 Projectile.velocity.Y += 0.18f;

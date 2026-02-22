@@ -65,7 +65,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
-            if(!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame)
                 OriginalSpeed = Projectile.velocity.Length();
             ActiveAI();
             //玩家死亡时候立刻击杀射弹
@@ -97,16 +97,35 @@ namespace HJScarletRework.Projs.Melee
                 }
             }
         }
-        private void StabAI(NPC target)
+        #region 刺入AI
+        private void PullHit(NPC target)
         {
-            if (AttackTime > 0)
-                AttackTime--;
-            Projectile.Center = target.Center + StoredPosition;
-            Vector2 dir = (target.Center - Owner.MountedCenter).ToSafeNormalize();
-            //立刻锁住玩家的手臂
-            Owner.ChangeDir(((Projectile.Center.X - Owner.MountedCenter.X) > 0).ToDirectionInt());
-            Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, dir.ToRotation() - PiOver2);
-            DrawMountedParticle();
+            Owner.HJScarlet().NoSlowFall = 10;
+            Owner.HJScarlet().galvanizedHandDashCD = GetSeconds(1) + 30;
+            //1秒左右的无敌
+            Owner.GetImmnue(ImmunityCooldownID.General, 60);
+            //震屏。
+            ScreenShakeSystem.AddScreenShakes(Projectile.Center, -80 * Owner.direction, 23, Owner.velocity.ToRotation(), 0.2f, true, 1000);
+            if (Projectile.IsMe())
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    float rotArgs = ToRadians(360f / 8 * i);
+                    Vector2 arrowDir = Owner.velocity.ToSafeNormalize().RotatedBy(rotArgs);
+                    Projectile arrow = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, arrowDir * 12f, ProjectileType<GalvanizedHandArrow>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                    arrow.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                }
+                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<LightBiteArrow>(), Projectile.damage * 3, 0f, Owner.whoAmI);
+            }
+            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit, Owner.Center);
+            //三倍伤害，单次的判定
+            //把人飞出去
+            Owner.velocity = Projectile.rotation.ToRotationVector2() * -OriginalSpeed * 0.6f;
+            Projectile.Kill();
+
+        }
+        private void JustStab(NPC target)
+        {
             if (Owner.JustPressRightClick() && Owner.HeldItem.type == ItemType<GalvanizedHandThrown>() && Owner.HJScarlet().galvanizedHandDashCD == 0)
             {
                 //过一个玩家与射弹之间是否存在墙体的安全性检查
@@ -129,6 +148,20 @@ namespace HJScarletRework.Projs.Melee
                     AttackTime = 60;
                 }
             }
+
+        }
+        #endregion
+        private void StabAI(NPC target)
+        {
+            if (AttackTime > 0)
+                AttackTime--;
+            Projectile.Center = target.Center + StoredPosition;
+            Vector2 dir = (target.Center - Owner.MountedCenter).ToSafeNormalize();
+            //立刻锁住玩家的手臂
+            Owner.ChangeDir(((Projectile.Center.X - Owner.MountedCenter.X) > 0).ToDirectionInt());
+            Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, dir.ToRotation() - PiOver2);
+            DrawMountedParticle();
+            JustStab(target);
             if (ShouldPull)
             {
                 Owner.HJScarlet().NoSlowFall = 120;
@@ -145,25 +178,7 @@ namespace HJScarletRework.Projs.Melee
                 //不需要过于精确，只要大概就行了
                 if ((Owner.Center - target.Center).LengthSquared() < 50f * 50f)
                 {
-                    Owner.HJScarlet().NoSlowFall = 10;
-                    Owner.HJScarlet().galvanizedHandDashCD = GetSeconds(1) + 30;
-                    //1秒左右的无敌
-                    Owner.GetImmnue(ImmunityCooldownID.General, 60);
-                    //震屏。
-                    ScreenShakeSystem.AddScreenShakes(Projectile.Center, -80 * Owner.direction, 23, Owner.velocity.ToRotation(), 0.2f, true, 1000);
-                    for (int i = 0; i < 8; i++)
-                    {
-                        float rotArgs = ToRadians(360f / 8 * i);
-                        Vector2 arrowDir = Owner.velocity.ToSafeNormalize().RotatedBy(rotArgs);
-                        Projectile arrow = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, arrowDir * 12f, ProjectileType<GalvanizedHandArrow>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
-                        arrow.HJScarlet().GlobalTargetIndex = target.whoAmI;
-                    }
-                    SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit, Owner.Center);
-                    //三倍伤害，单次的判定
-                    Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<LightBiteArrow>(), Projectile.damage * 3, 0f, Owner.whoAmI);
-                    //把人飞出去
-                    Owner.velocity = Projectile.rotation.ToRotationVector2() * -OriginalSpeed * 0.6f;
-                    Projectile.Kill();
+                    PullHit(target);
                 }
             }
         }
@@ -179,8 +194,8 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 shapePos = Owner.Center + dir.RotatedBy(PiOver2) * 15f * i + dir * 10f - dir * Math.Abs(i) * 15f;
                 Vector2 shapeVel = dir * -Main.rand.NextFloat(16f);
                 float shapeScale = Main.rand.NextFloat(0.65f, 0.75f);
-                new StarShape(shapePos.ToRandCirclePosEdge(6.2f) - dir *Main.rand.NextFloat(12f), shapeVel, RandLerpColor(Color.CornflowerBlue, Color.RoyalBlue), shapeScale, 40).Spawn();
-                new ShinyOrbParticle(shapePos.ToRandCirclePos(3.1f), shapeVel * 0.5f, RandLerpColor(Color.CornflowerBlue, Color.RoyalBlue), 40,shapeScale * 1.1f).Spawn();
+                new StarShape(shapePos.ToRandCirclePosEdge(6.2f) - dir * Main.rand.NextFloat(12f), shapeVel, RandLerpColor(Color.CornflowerBlue, Color.RoyalBlue), shapeScale, 40).Spawn();
+                new ShinyOrbParticle(shapePos.ToRandCirclePos(3.1f), shapeVel * 0.5f, RandLerpColor(Color.CornflowerBlue, Color.RoyalBlue), 40, shapeScale * 1.1f).Spawn();
 
             }
         }
@@ -196,8 +211,8 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 shapePos = Projectile.Center + dir.RotatedBy(PiOver2) * 15f * i + dir * 70f - dir * Math.Abs(i) * 15f;
                 Vector2 shapeVel = dir * -Main.rand.NextFloat(16f * (Timer / DeadTime));
                 float shapeScale = (Timer / DeadTime) * Main.rand.NextFloat(0.65f, 0.75f);
-                new StarShape(shapePos.ToRandCirclePosEdge(6.2f) - dir *Main.rand.NextFloat(12f), shapeVel, RandLerpColor(Color.CornflowerBlue, Color.RoyalBlue), shapeScale, 40).Spawn();
-                new ShinyOrbParticle(shapePos.ToRandCirclePos(3.1f), shapeVel * 0.5f, RandLerpColor(Color.CornflowerBlue, Color.RoyalBlue), 40,shapeScale * 1.1f).Spawn();
+                new StarShape(shapePos.ToRandCirclePosEdge(6.2f) - dir * Main.rand.NextFloat(12f), shapeVel, RandLerpColor(Color.CornflowerBlue, Color.RoyalBlue), shapeScale, 40).Spawn();
+                new ShinyOrbParticle(shapePos.ToRandCirclePos(3.1f), shapeVel * 0.5f, RandLerpColor(Color.CornflowerBlue, Color.RoyalBlue), 40, shapeScale * 1.1f).Spawn();
             }
         }
 
@@ -243,7 +258,7 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.extraUpdates = 0;
                 Projectile.localNPCHitCooldown = 20;
                 Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
-                SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { MaxInstances = 1}, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { MaxInstances = 1 }, Projectile.Center);
                 HitParticle(target.Center);
             }
         }
@@ -272,10 +287,10 @@ namespace HJScarletRework.Projs.Melee
             DrawTrail(Color.DeepSkyBlue, 12f, alphaRatio);
             DrawTrail(Color.White, 8f, alphaRatio);
             SB.EnterShaderArea();
-            DrawBack(Color.DeepSkyBlue, 15f, 0.85f *alphaRatio);
+            DrawBack(Color.DeepSkyBlue, 15f, 0.85f * alphaRatio);
             SB.EndShaderArea();
-            Projectile.DrawGlowEdge(Color.White * (Timer / 120f), rotFix:fix);
-            Projectile.DrawProj(Color.White, 2,.4f, rotFix: fix);
+            Projectile.DrawGlowEdge(Color.White * (Timer / 120f), rotFix: fix);
+            Projectile.DrawProj(Color.White, 2, .4f, rotFix: fix);
             return false;
         }
         public void DrawBack(Color trailColor, float primitiveHeight, float alphaValue = 1f)
@@ -296,7 +311,7 @@ namespace HJScarletRework.Projs.Melee
             //创建顶点列表
             for (int i = 0; i < totalpoints - 1; i++)
             {
-                if (validPosition[i+1] - validPosition[i] == Vector2.Zero)
+                if (validPosition[i + 1] - validPosition[i] == Vector2.Zero)
                     continue;
                 float progress = (float)i / (totalpoints - 1);
                 float rot = (validPosition[i + 1] - validPosition[i]).ToRotation();
@@ -330,7 +345,7 @@ namespace HJScarletRework.Projs.Melee
             int totalpoints = validPosition.Count;
             for (int i = 0; i < totalpoints - 1; i++)
             {
-                if (validPosition[i+1] - validPosition[i] == Vector2.Zero)
+                if (validPosition[i + 1] - validPosition[i] == Vector2.Zero)
                     continue;
                 float progress = (float)i / (totalpoints - 1);
                 float rot = (validPosition[i + 1] - validPosition[i]).ToRotation();
@@ -351,7 +366,7 @@ namespace HJScarletRework.Projs.Melee
                 GD.DrawUserPrimitives(PrimitiveType.TriangleStrip, list3.ToArray(), 0, list.Count - 2);
             }
         }
-        public void QuickGetClass(ref List<ScarletVertex> list,Vector2 oldCenter, Vector2 posOffset, float progress)
+        public void QuickGetClass(ref List<ScarletVertex> list, Vector2 oldCenter, Vector2 posOffset, float progress)
         {
             ScarletVertex upClass = new(oldCenter - posOffset, Color.White, new Vector3(progress, 0, 0f));
             ScarletVertex downClass = new(oldCenter + posOffset, Color.White, new Vector3(progress, 1, 0f));

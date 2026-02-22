@@ -37,7 +37,8 @@ namespace HJScarletRework.Projs.Melee
             Projectile.tileCollide = false;
             Projectile.noEnchantmentVisuals = true;
             Projectile.timeLeft = 300;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
         }
         private int SpawnBeamCounts = 3;
         public override void AI()
@@ -60,13 +61,13 @@ namespace HJScarletRework.Projs.Melee
             AttackTimer += 1;
             if (AttackTimer < AttackDelay * (SpawnBeamCounts + 1))
             {
-                if (AttackTimer % AttackDelay == 0)
+                if (AttackTimer % AttackDelay == 0 && Projectile.IsMe())
                 {
                     //向下方向，生成一个小型的鬼魂粒子
                     SpawnTime += 1f;
-                    int fireDamage = (int)(Projectile.damage * (SpawnTime / SpawnBeamCounts));
+                    int fireDamage = (int)(Projectile.originalDamage * (SpawnTime / SpawnBeamCounts));
                     if (HJScarletMethods.HasFuckingCalamity)
-                        fireDamage = Projectile.damage;
+                        fireDamage = Projectile.originalDamage;
                     Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitY.ToRandVelocity(PiOver4) * Main.rand.NextFloat(3f, 4f), ProjectileType<CandLanceBeam>(), fireDamage, Projectile.knockBack, Owner.whoAmI);
                     SoundEngine.PlaySound(HJScarletSounds.Evolution_Thrown with { Volume = 0.7f, MaxInstances = 0, Pitch = 0.7f }, Projectile.Center);
                 }

@@ -13,8 +13,8 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {
-            Item.damage = 94;
-            Item.useTime = Item.useAnimation = 28;
+            Item.damage = 74;
+            Item.useTime = Item.useAnimation = 30;
             Item.knockBack = 6f;
             Item.UseSound = SoundID.Item45 with { MaxInstances = 0 };
             Item.shootSpeed = 16f;
@@ -22,15 +22,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.rare = ItemRarityID.Orange;
         }
         public override Color MainTooltipColor => Color.AliceBlue;
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            //if(line.Name == "ItemName" && line.Mod == "Terraria")
-            //{
-            //    RarePets.DrawCustomTooltipLine(line);
-            //    return false;
-            //}
-            return base.PreDrawTooltipLine(line, ref yOffset);
-        }
         public override void AddRecipes()
         {
             if (!HJScarletMethods.HasFuckingCalamity)

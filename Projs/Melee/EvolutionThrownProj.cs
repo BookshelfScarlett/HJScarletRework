@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using rail;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -20,6 +21,8 @@ namespace HJScarletRework.Projs.Melee
         public ref float Timer => ref Projectile.ai[0];
         public List<int> PortalProjList = [];
         public override void ExSSD() => Projectile.ToTrailSetting(20, 2);
+        public int SpawnCounter = 4;
+        public int HitTime = 0;
         public override void ExSD()
         {
             Projectile.extraUpdates = 5;
@@ -29,30 +32,22 @@ namespace HJScarletRework.Projs.Melee
             Projectile.timeLeft = 600;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
-            Projectile.penetrate = 7;
-            Projectile.stopsDealingDamageAfterPenetrateHits = true;
+            Projectile.penetrate = -1;
         }
         public override void AI()
         {
-            if (!Projectile.HJScarlet().FirstFrame)
-            {
-                Projectile.originalDamage = Projectile.damage;
-                if (HJScarletMethods.HasFuckingCalamity)
-                {
-                    Projectile.penetrate = -1;
-                    Projectile.stopsDealingDamageAfterPenetrateHits = false;
-                }
-            }
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (!HJScarletMethods.OutOffScreen(Projectile.Center))
                 SpawnLeafs();
             Timer++;
             //在这个过程中生成需要的材质球
-            if (Timer % 15 == 0)
+            if (Timer % 15 == 0 && Projectile.IsMe())
             {
                 Vector2 portalVel = Projectile.SafeDir() * Main.rand.NextFloat(10f, 14f);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, portalVel, ProjectileType<EvolutionEnergyPortal>(), 0, Projectile.knockBack, Owner.whoAmI);
-                proj.originalDamage = (int)(Projectile.originalDamage * 0.75f);
+                float ratios = Clamp(SpawnCounter * 0.1f, 0.4f, 1f);
+                proj.originalDamage = (int)(Projectile.originalDamage * ratios);
+                SpawnCounter++;
                 if (proj.active && proj != null)
                 {
                     //存储索引而非射弹本身，避免一些编译器误判问题
@@ -102,14 +97,18 @@ namespace HJScarletRework.Projs.Melee
             }
             return true;
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            float ratios = Clamp(1f - HitTime * 0.15f, 0f, 1f);
+            modifiers.SourceDamage *= (ratios);
+            HitTime++;
+            base.ModifyHitNPC(target, ref modifiers);
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //将命中的第一个可用单位存储起来
             if (Projectile.HJScarlet().GlobalTargetIndex == -1 && target.CanBeChasedBy() && target.lifeMax > 5)
                 Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
-            //而后，我们再考虑命中时生成的特效
-            
-            base.OnHitNPC(target, hit, damageDone);
         }
         public override bool PreDraw(ref Color lightColor)
         {

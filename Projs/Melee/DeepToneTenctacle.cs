@@ -25,11 +25,12 @@ namespace HJScarletRework.Projs.Melee
         public ref float SpeedXProgress => ref Projectile.ai[0];
         public ref float SpeedYProgress => ref Projectile.ai[1];
         public Vector2 InitPos = Vector2.Zero;
+        public int MaxPenetrate = 10;
         public override void ExSD()
         {
             Projectile.width = 40;
             Projectile.height = 40;
-            Projectile.penetrate = 10;
+            Projectile.penetrate = MaxPenetrate;
             Projectile.extraUpdates = 1;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 5;
@@ -64,8 +65,7 @@ namespace HJScarletRework.Projs.Melee
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (!HJScarletMethods.HasFuckingCalamity)
-                modifiers.SourceDamage *= (Projectile.penetrate / 10f);
-            base.ModifyHitNPC(target, ref modifiers);
+                modifiers.SourceDamage *= (MaxPenetrate - Projectile.penetrate) * 0.2f;
         }
         public override void AI()
         {

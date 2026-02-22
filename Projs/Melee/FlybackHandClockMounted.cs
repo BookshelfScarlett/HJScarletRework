@@ -86,10 +86,10 @@ namespace HJScarletRework.Projs.Melee
                     Owner.RefreshMovementAbilities();
 
                 //顺便增加玩家归零针的普攻攻速，5秒左右
-                int buffTime = 60 * 2 * PlayBellTime;
+                int buffTime = GetSeconds(1) * PlayBellTime;
                 Owner.HJScarlet().flybackhandBuffTime = buffTime;
                 Owner.HJScarlet().flybackhandBuffTimeCurrent = buffTime;
-                Owner.HJScarlet().flybackhandCloclCD = GetSeconds(1) * PlayBellTime * 2;
+                Owner.HJScarlet().flybackhandCloclCD = GetSeconds(1) * PlayBellTime * 3;
                 ImmnueDebuffOnNeed();
                 //粒子。 
                 for (int i = 0; i < 40; i++)

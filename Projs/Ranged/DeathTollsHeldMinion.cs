@@ -30,6 +30,7 @@ namespace HJScarletRework.Projs.Ranged
             Projectile.width = Projectile.height = 66;
             Projectile.extraUpdates = 0;
             Projectile.timeLeft = 1500;
+            Projectile.netImportant = true;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
@@ -58,11 +59,11 @@ namespace HJScarletRework.Projs.Ranged
                 //发起撞击前，先做好一段时间的准备
                 if (ShootTimer < 45f)
                     UpdateMinionReadyToStrikeState();
+                DrawFireDust();
                 DirectlyStrikeToTarget();
                 //超出屏幕范围，做掉锤子
-                if (HJScarletMethods.OutOffScreen(Projectile.Center, 1.2f))
+                if (Projectile.TooAwayFromOwner())
                     Projectile.Kill();
-                DrawFireDust();
             }
             else
             {
@@ -75,11 +76,13 @@ namespace HJScarletRework.Projs.Ranged
                 else
                 {
                     //锁定当前的生存时间避免处死，这里只有在玩家发起攻击的时候才会消耗生命值
+                    //也会刷新攻击的计时器    
                     //至于其他情况，无所谓，我故意的
+                    ShootTimer = 0;
                     Projectile.timeLeft = CurrentTimeLeft;
                 }
                 //无论如何，更新仆从的运动状态
-                UpdateMinionIdleState();
+                UpdateMinionIdleState(Owner.JustPressLeftClick());
             }
         }
         private void DrawFireDust()
@@ -115,6 +118,7 @@ namespace HJScarletRework.Projs.Ranged
                 Projectile.extraUpdates = 4;
                 Projectile.velocity = dir * 18f;
                 Projectile.rotation = Projectile.velocity.ToRotation();
+                Projectile.netUpdate = true;
             }
         }
         private void DrawTrailingDust()
@@ -158,24 +162,21 @@ namespace HJScarletRework.Projs.Ranged
 
 
         private float Oscillation = 0;
-        private void UpdateMinionIdleState()
+        private void UpdateMinionIdleState(bool isPressingLeftClick)
         {
-            bool switchAnchorPosToOverHead = Owner.JustPressLeftClick();
-            if (!switchAnchorPosToOverHead)
-                ShootTimer = 0;
-            float offset = 90f * switchAnchorPosToOverHead.ToInt();
-            Vector2 center = switchAnchorPosToOverHead ? Owner.LocalMouseWorld() : Owner.MountedCenter;
+            //锤子应当朝向的位置
+            Vector2 aimVec = isPressingLeftClick ? Owner.LocalMouseWorld() : Owner.MountedCenter;
+            float anchorPosX = Owner.MountedCenter.X - (isPressingLeftClick ? 0 : Owner.direction * 88f);
+            float anchorPosY = Owner.MountedCenter.Y - (60f * MathF.Sin(Oscillation) / 9f + (isPressingLeftClick ? 90f : 0f));
             //递增的值越大，锤子的摆动幅度越大
             Oscillation += 0.025f;
             //基本的挂机状态，此处使用了正弦曲线来让锤子常规上下偏移
-            float anchorX = Owner.MountedCenter.X - Owner.direction * 88f * (!switchAnchorPosToOverHead).ToInt();
-            float anchorY = Owner.MountedCenter.Y - (offset + 60f * (MathF.Sin(Oscillation) / 9f));
-            Vector2 anchorPos = new(anchorX, anchorY);
+            Vector2 anchorPos = new(anchorPosX, anchorPosY);
             //实际更新位置
             Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, 0.15f);
             //计算锤子需要的朝向。
             //这里会依据玩家是否按下左键来使朝向取反，即按住左键的时候，锤头朝向指针，其他情况下，锤柄朝向玩家
-            float angleToWhat = ((center - Projectile.Center) * switchAnchorPosToOverHead.ToDirectionInt()).SafeNormalize(Vector2.One).ToRotation();
+            float angleToWhat = ((aimVec - Projectile.Center) * isPressingLeftClick.ToDirectionInt()).SafeNormalize(Vector2.One).ToRotation();
             //最后使用lerp来让锤子朝向得到修改。
             Projectile.rotation = Projectile.rotation.AngleLerp(angleToWhat, 0.18f);
             

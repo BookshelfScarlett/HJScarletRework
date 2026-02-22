@@ -117,8 +117,8 @@ namespace HJScarletRework.Projs.Melee
         {
             if (!SpawnPortals)
             {
-                QuickSpawn(true, ProjectileType<CryoblazeHymnFirePortal>());
-                QuickSpawn(false, ProjectileType<CryoblazeHymnFrostPortal>());
+                QuickSpawn(true, ProjectileType<CryoblazeHymnFirePortal>(), (int)(Projectile.damage * 0.80f));
+                QuickSpawn(false, ProjectileType<CryoblazeHymnFrostPortal>(), (int)(Projectile.damage * 0.50f));
                 SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1 },Projectile.Center);
             }
             for (int i = 0; i < 30; i++)
@@ -133,11 +133,14 @@ namespace HJScarletRework.Projs.Melee
             }
             return true;
         }
-        public void QuickSpawn(bool reverse, int type)
+        public void QuickSpawn(bool reverse, int type, int damage)
         {
+            if (!Projectile.IsMe())
+                return;
             Vector2 spawnPos = Projectile.Center + Projectile.SafeDir() * 40f * reverse.ToDirectionInt();
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, Projectile.SafeDir() * -(18f) * reverse.ToDirectionInt(), type, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, Projectile.SafeDir() * -(18f) * reverse.ToDirectionInt(), type, 0, Projectile.knockBack, Owner.whoAmI);
             proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
+            proj.originalDamage = damage;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -152,11 +155,6 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.netUpdate = true;
                 
             }
-        }
-
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            return base.OnTileCollide(oldVelocity);
         }
         public void DrawSideStreak(Color beginColor, Color targetColor, bool NeedPi, float scaleMult)
         {

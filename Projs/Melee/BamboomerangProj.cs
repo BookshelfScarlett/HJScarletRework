@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 
@@ -59,6 +60,7 @@ namespace HJScarletRework.Projs.Melee
             }
             else
             {
+                Projectile.tileCollide = false;
                 Projectile.HomingTarget(Owner.MountedCenter, 1800f, 18f, 10f);
                 if (Projectile.Hitbox.Intersects(Owner.Hitbox))
                     Projectile.Kill();
@@ -82,6 +84,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            modifiers.HitDirectionOverride = (int)Math.Abs(target.Center.X - Owner.Center.X);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -115,7 +118,6 @@ namespace HJScarletRework.Projs.Melee
                 //返程，也别让射弹中途意外处死
                 Projectile.penetrate = -1;
                 Projectile.netUpdate = true;
-                Projectile.tileCollide = false;
                 return;
             }
             //最后将当前敌对单位扔到全局的index里面

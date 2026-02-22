@@ -63,7 +63,7 @@ namespace HJScarletRework.Globals.Players
         {
             if(PreciousTargetAcc && info.Damage > 5)
             {
-                PreciousTargetCrtis -= 10;
+                PreciousTargetCrtis -= 300;
                 if (PreciousTargetCrtis < PreciousCritsMin)
                     PreciousTargetCrtis = PreciousCritsMin;
             }

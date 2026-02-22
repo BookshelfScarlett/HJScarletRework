@@ -43,7 +43,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.rotation += ToRadians(1f);
             //锁住射弹位置
-            if (Projectile.GetTargetSafe(out NPC target, false))
+            if (Projectile.GetTargetSafe(out NPC target, false) && Projectile.IsMe())
             {
                 //这里的Timer只会用于生成第一个射弹，然后消失
                 Timer++;

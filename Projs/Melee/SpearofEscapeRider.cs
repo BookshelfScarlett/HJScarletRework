@@ -72,18 +72,20 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreKill(int timeLeft)
         {
+            SoundEngine.PlaySound(HJScarletSounds.SpearofEscape_Boom, Projectile.Center);
             int boomDamage = SignForRightClick == 1f ? Projectile.damage : (int)(Projectile.damage * 2f);
             if (HJScarletMethods.HasFuckingCalamity)
                 boomDamage *= 3;
-            Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofEscapeBoom>(), boomDamage, Projectile.knockBack);
-            SoundEngine.PlaySound(HJScarletSounds.SpearofEscape_Boom, Projectile.Center);
+
+            if (Projectile.IsMe())
+                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofEscapeBoom>(), boomDamage, Projectile.knockBack);
+
             if (SignForRightClick == 1f)
             {
                 //务必在这里把玩家弹开，我们不给无敌帧了
                 Owner.velocity = Projectile.velocity.ToRandVelocity(ToRadians(15f), 12f, 18f) * -1;
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 70, Owner.velocity.ToSafeNormalize().ToRotation(), ToRadians(40f));
             }
-
             if (IsHit)
             {
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 70, Projectile.velocity.ToSafeNormalize().ToRotation(), ToRadians(40f));
@@ -93,29 +95,20 @@ namespace HJScarletRework.Projs.Melee
             float totalCounts = 8;
             if (HJScarletMethods.HasFuckingCalamity)
                 totalCounts = 16;
-            for (float i = 0; i < totalCounts; i++)
+            if (Projectile.IsMe())
             {
-                float rotArgs = ToRadians(360f / totalCounts * i);
-                Vector2    dir = (Projectile.rotation + rotArgs + Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))).ToRotationVector2() * Main.rand.NextFloat(6f, 10f);
-                if (SignForRightClick == 1f)
-                    dir += Owner.velocity.ToRandVelocity(ToRadians(10f), 8f, 12f) * -1;
-                Projectile proj= Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
-                ((SpearofEscapeMissile)proj.ModProjectile).DontUseMouseHoming = true;
+                for (float i = 0; i < totalCounts; i++)
+                {
+                    float rotArgs = ToRadians(360f / totalCounts * i);
+                    Vector2 dir = (Projectile.rotation + rotArgs + Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))).ToRotationVector2() * Main.rand.NextFloat(6f, 10f);
+                    if (SignForRightClick == 1f)
+                        dir += Owner.velocity.ToRandVelocity(ToRadians(10f), 8f, 12f) * -1;
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                    ((SpearofEscapeMissile)proj.ModProjectile).DontUseMouseHoming = true;
+                }
             }
 
             return true;
-        }
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            return base.OnTileCollide(oldVelocity);
-        }
-        public override bool? CanDamage()
-        {
-            return base.CanDamage();
-        }
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            base.ModifyHitNPC(target, ref modifiers);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

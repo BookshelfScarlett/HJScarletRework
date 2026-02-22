@@ -71,14 +71,11 @@ namespace HJScarletRework.Projs.Melee
                 new ShinyOrbParticle(drawPos + Main.rand.NextVector2CircularEdge(4f, 4f), dir * Main.rand.NextFloat(2.4f, 3.6f), RandLerpColor(Color.DarkRed, Color.Red), 20, 0.43f).Spawn();
             }
         }
-        public override bool PreKill(int timeLeft)
-        {
-            return true;
-        }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             //直接处死
-            Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<EclipseWraithBoom>(), Projectile.damage, 12f, Owner.whoAmI);
+            if (Projectile.IsMe())
+                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<EclipseWraithBoom>(), Projectile.damage, 12f, Owner.whoAmI);
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1 }, Projectile.Center);
             return true;
         }
@@ -87,6 +84,8 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (!Projectile.IsMe())
+                return;
             Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<EclipseWraithBoom>(), Projectile.damage, 12f, Owner.whoAmI);
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1 }, Projectile.Center);
             for (int i = 0; i < 3;i++)

@@ -4,6 +4,7 @@ global using static Microsoft.Xna.Framework.MathHelper;
 global using static Terraria.ModLoader.ModContent;
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Tiles;
+using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Tiles;
 using System.Formats.Asn1;
@@ -41,9 +42,9 @@ namespace HJScarletRework
         }
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {
-            ModPacket packet = GetPacket();
-
-            if (Main.netMode == NetmodeID.Server)
+            ModPacket packet = this.GetPacket();
+            int id = reader.ReadInt32();
+            if (Main.netMode == NetmodeID.Server && id == 20260221)
             {
                 ushort x = reader.ReadUInt16(), y = reader.ReadUInt16();
                 ushort chance = reader.ReadUInt16();
@@ -52,7 +53,7 @@ namespace HJScarletRework
                 packet.Write(y);
                 packet.Write(chance);
                 packet.Send(-1, whoAmI);
-                SoulGlobalTile autoSmelt = ModContent.GetInstance<SoulGlobalTile>();
+                HJScarletGlobalTiles autoSmelt = GetInstance<HJScarletGlobalTiles>();
                 autoSmelt.SmeltOres(x, y, chance, targetType);
             }
             else
@@ -60,7 +61,7 @@ namespace HJScarletRework
                 ushort x = reader.ReadUInt16(), y = reader.ReadUInt16();
                 ushort chance = reader.ReadUInt16();
                 ushort targetType = reader.ReadUInt16();
-                SoulGlobalTile autoSmelt = ModContent.GetInstance<SoulGlobalTile>();
+                HJScarletGlobalTiles autoSmelt = GetInstance<HJScarletGlobalTiles>();
                 autoSmelt.SmeltOres(x, y, chance, targetType);
             }
         }

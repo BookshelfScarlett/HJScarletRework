@@ -51,6 +51,8 @@ namespace HJScarletRework.Globals.Instances
             //干掉没有伤害的射弹
             if (projectile.damage < 5)
                 return;
+            if (projectile.MaxUpdates > 1)
+                return;
             //给当前射弹设置额外eu
             projectile.extraUpdates += 1;
 

@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
@@ -25,6 +26,7 @@ namespace HJScarletRework.Projs.Melee
         public ref float Timer => ref Projectile.ai[1];
         public float Speed = 0f;
         public float SpinMoveTime = 45f;
+        public bool HitTarget = false;
         public override void ExSSD()
         {
             Projectile.ToTrailSetting(8, 2);
@@ -49,7 +51,6 @@ namespace HJScarletRework.Projs.Melee
             {
                 Speed = Projectile.velocity.Length();
                 Projectile.originalDamage = Projectile.damage;
-                Projectile.rotation = Projectile.velocity.ToRotation();
                 if (HJScarletMethods.HasFuckingCalamity)
                 {
                     Projectile.localNPCHitCooldown = 30;
@@ -73,6 +74,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Timer++;
             Projectile.Opacity += 0.1f;
+            Projectile.rotation = Projectile.velocity.ToRotation();
             float ratio = Timer / (SpinMoveTime) ;
             float reverseRatio = 1 - ratio;
             Vector2 dustVel = Projectile.velocity.ToRandVelocity(ToRadians(25f)) * Main.rand.NextFloat(1.2f, 1.6f) * -3f * reverseRatio;
@@ -93,7 +95,6 @@ namespace HJScarletRework.Projs.Melee
                 //重置属性然后跳转
                 Projectile.ResetLocalNPCHitImmunity();
                 Projectile.damage = Projectile.originalDamage;
-                Projectile.tileCollide = false;
                 AttackType = Style.SpinAndFade;
                 Timer *= 0f;
             }
@@ -113,6 +114,8 @@ namespace HJScarletRework.Projs.Melee
         }
         private void SpawnEnergyBall()
         {
+            if (!Projectile.IsMe())
+                return;
             //这里需要遍历一遍所取位置是否处于wall里面。如果是则回退直到适合为止
             Vector2 projDir = Projectile.SafeDirByRot();
             Vector2 spawnPos = Projectile.Center;
@@ -136,7 +139,8 @@ namespace HJScarletRework.Projs.Melee
             for (int i = -1; i < 2; i += 2)
             {
                 Vector2 dir = projDir.RotatedBy(Main.rand.NextFloat(ToRadians(10f), ToRadians(15f)) * i + Main.rand.NextFloat(ToRadians(-5f), ToRadians(5f)));
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posOffset + spawnPos, dir * 8f, ProjectileType<AzureFrostmarkEnergy>(), Projectile.damage / 2, Projectile.knockBack);
+                Projectile ball= Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posOffset + spawnPos, dir * 8f, ProjectileType<AzureFrostmarkEnergy>(), Projectile.damage / 2, Projectile.knockBack);
+                ball.ai[0] = 13f * HitTarget.ToInt();
                 //天王老子来了我都要用自己的粒子
                 //不服憋着
                 for (int j = 0; j < 15; j++)
@@ -157,24 +161,27 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if (AttackType == Style.Shoot)
-            {
-                Timer = SpinMoveTime - 15f;
-                Projectile.tileCollide = false;
-                Projectile.velocity = Projectile.oldVelocity;
-            }
+            if (AttackType == Style.SpinAndFade)
+                return false;
+            AttackType = Style.SpinAndFade;
+            Projectile.rotation = oldVelocity.ToRotation();
+            //将矛刺入墙体内
+            Projectile.position += oldVelocity.SafeNormalize(Vector2.UnitX) * 10;
+            //刷新持续时间，并做掉速度
+            Projectile.velocity = Vector2.Zero;
+            Timer = 0;
             return false;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            base.OnHitNPC(target, hit, damageDone);
+            HitTarget = true;
         }
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             int length = Projectile.oldPos.Length;
-            float rot = Projectile.velocity.ToRotation();
-            for (int i = length - 1; i >= 0; i++)
+            float rot = Projectile.rotation;
+            for (int i = length - 1; i >= 0; i--)
             {
                 if (AttackType == Style.SpinAndFade)
                     continue;

@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override string Texture => GetInstance<Candlance>().Texture;
         public override void ExSD()
         {
-            Item.damage = 26;
+            Item.damage = 28;
             Item.shoot = ProjectileType<CandLanceThrownProj>();
             Item.shootSpeed = 12f;
             Item.rare = ItemRarityID.Orange;

@@ -46,6 +46,7 @@ FlybackHandThrown: {
 		常驻所有因时间导致的不同的增益加成
 		允许启用时钟水晶时恢复全部状态
 		'''
+	TimeClockOnCDText: 时钟水晶剩余CD：{0}秒！
 }
 
 LightBiteThrown: {

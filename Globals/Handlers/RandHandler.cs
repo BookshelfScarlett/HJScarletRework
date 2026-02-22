@@ -40,5 +40,6 @@ namespace HJScarletRework.Globals.Handlers
         public static Color RandLerpColor(Color beginColor, Color endColor) => Color.Lerp(beginColor, endColor, RandZeroToOne);
         public static string GetVanillaAssetPath(VanillaAsset vanillaAsset, int id)=> $"Terraria/Images/{vanillaAsset}_{id}";
         public static Asset<Texture2D> GetVanillaAsset(VanillaAsset vanillaAsset, int id)=> Request<Texture2D>($"Terraria/Images/{vanillaAsset}_{id}");
+        
     }
 }

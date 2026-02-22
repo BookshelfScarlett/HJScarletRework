@@ -71,6 +71,7 @@ namespace HJScarletRework.Globals.Players
         {
             Item targetWeapon = new Item();
             int heldPrefix = Player.HeldItem.prefix;
+            bool favor = Player.HeldItem.favorited;
             if (alterPrefix)
             {
                 if (heldPrefix == PrefixID.Demonic || heldPrefix == PrefixID.Godly)
@@ -82,6 +83,7 @@ namespace HJScarletRework.Globals.Players
             targetWeapon.SetDefaults(targetWeapons);
             //继承词缀
             targetWeapon.Prefix(heldPrefix);
+            targetWeapon.favorited = favor; 
             //直接……干掉玩家的物品
             Player.inventory[Player.selectedItem] = targetWeapon;
             SoundEngine.PlaySound(SoundID.ResearchComplete, Player.Center);

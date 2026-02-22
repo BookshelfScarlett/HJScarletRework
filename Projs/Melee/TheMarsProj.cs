@@ -130,7 +130,7 @@ namespace HJScarletRework.Projs.Melee
         {
             //假定我们有实际且可用的单位，为所有单位生成标记射弹
             //这个标记射弹不会有任何视觉效果
-            if (LegalTargetList.Count > 0 && Timer == 0f)
+            if (LegalTargetList.Count > 0 && Timer == 0f && Projectile.IsMe())
             {
                 for (int i = 0; i < LegalTargetList.Count; i++)
                 {

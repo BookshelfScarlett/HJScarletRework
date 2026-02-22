@@ -5,6 +5,7 @@ using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -42,6 +43,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
+            Lighting.AddLight(Projectile.Center, TorchID.Orange);
             switch (AttackType)
             {
                 case Style.Attack:
@@ -52,14 +54,11 @@ namespace HJScarletRework.Projs.Melee
                     break;
             }
         }
-
-        private void DoStab()
+        private void DirectlyHeal(Vector2 dir)
         {
-            //粒子。
-            Vector2 dir = Projectile.rotation.ToRotationVector2();
-            Dust d = Dust.NewDustPerfect(Projectile.Center + dir * Main.rand.NextFloat(-35f, 30f) + dir.RotatedBy(Main.rand.NextBool().ToDirectionInt() * PiOver2) * Main.rand.NextFloat(-10f,10f), Main.rand.NextBool() ? DustID.Honey2: DustID.Honey);
-            d.velocity = Vector2.UnitY * -Main.rand.NextFloat(0.4f, 0.8f);
-            d.noGravity = false;
+            //避免刚投掷出去时就被弄死了
+            if (Timer < 10f)
+                return;
             //在接触玩家时，处死射弹，并给予玩家一定程度的治疗
             //这个可以给所有玩家吃
             foreach (var needPlayer in Main.ActivePlayers)
@@ -79,10 +78,21 @@ namespace HJScarletRework.Projs.Melee
                     Projectile.Kill();
                 }
             }
+
+        }
+        private void DoStab()
+        {
+            //粒子。
+            Vector2 dir = Projectile.rotation.ToRotationVector2();
+            Dust d = Dust.NewDustPerfect(Projectile.Center + dir * Main.rand.NextFloat(-35f, 30f) + dir.RotatedBy(Main.rand.NextBool().ToDirectionInt() * PiOver2) * Main.rand.NextFloat(-10f, 10f), Main.rand.NextBool() ? DustID.Honey2 : DustID.Honey);
+            d.velocity = Vector2.UnitY * -Main.rand.NextFloat(0.4f, 0.8f);
+            d.noGravity = false;
+            DirectlyHeal(dir);
         }
 
         private void DoAttack()
         {
+            DirectlyHeal(Projectile.rotation.ToRotationVector2());
             Timer += 1;
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Timer > 10)
@@ -98,7 +108,10 @@ namespace HJScarletRework.Projs.Melee
             d.velocity = Vector2.UnitY.RotatedBy(Main.rand.NextFloat(PiOver2 / 2) * Main.rand.NextBool().ToDirectionInt()) * -Main.rand.NextFloat(2.4f, 2.8f);
             d.noGravity = false;
         }
-
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = (int)(Math.Abs(target.Center.X - Owner.Center.X));
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Owner.AddBuff(BuffID.Honey, 360);
@@ -122,11 +135,13 @@ namespace HJScarletRework.Projs.Melee
             if (AttackType == Style.Stab)
                 return false;
             AttackType = Style.Stab;
+            Projectile.penetrate = 6;
+            Projectile.localNPCHitCooldown = 15;
             Projectile.rotation = oldVelocity.ToRotation();
             //将矛刺入墙体内
             Projectile.position += oldVelocity.SafeNormalize(Vector2.UnitX) * 10;
             //刷新持续时间，并做掉速度
-            Projectile.timeLeft = 150;
+            Projectile.timeLeft = GetSeconds(3);
             Projectile.velocity = Vector2.Zero;
             //不要处死他
             return false;

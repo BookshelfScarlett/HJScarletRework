@@ -43,8 +43,11 @@ namespace HJScarletRework.Projs.Melee
                 if (Projectile.GetTargetSafe(out NPC target, true, 800f, true))
                 {
                     Vector2 dir = Projectile.SafeDir().ToRandVelocity(ToRadians(30f));
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 34f, ProjectileType<CryoblazeHymnFireball>(), Projectile.damage, Projectile.knockBack);
-                    proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                    if (Projectile.IsMe())
+                    {
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 34f, ProjectileType<CryoblazeHymnFireball>(), Projectile.originalDamage, Projectile.knockBack);
+                        proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                    }
                     for (int j = 0; j < 10; j++)
                     {
                         //最大的原因是白天过曝看不到

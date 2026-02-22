@@ -34,9 +34,10 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.extraUpdates = 1;
             //有意为之
             Projectile.timeLeft = 150;
@@ -200,7 +201,7 @@ namespace HJScarletRework.Projs.Melee
 
         private void DoAttack()
         {
-            Projectile.velocity *= 0.875f;
+            Projectile.velocity *= 0.855f;
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.velocity.Length() > 0.15f)
                 return;

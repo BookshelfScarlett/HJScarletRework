@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override string Texture => GetInstance<FlybackHand>().Texture;
         public override void ExSD()
         {
-            Item.damage = 400;
+            Item.damage = 415;
             Item.useTime = Item.useAnimation = 20;
             Item.rare = ItemRarityID.Red;
             Item.shoot = ProjectileType<FlybackHandThrownProj>();
@@ -48,11 +48,13 @@ namespace HJScarletRework.Items.Weapons.Melee
                     Projectile.NewProjectileDirect(source, position, velocity, projID, 0, 0, player.whoAmI);
                 else
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
-                    proj.rotation = velocity.ToRotation();
+
+                    string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.TimeClockOnCDText").ToLangValue().ToFormatValue(player.HJScarlet().flybackhandCloclCD / 60);
+                    CombatText.NewText(player.Hitbox, Color.SkyBlue, value, true);
+                    return false;
                 }
             }
-            else
+            else 
             {
                 Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
                 proj.rotation = velocity.ToRotation();

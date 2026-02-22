@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         internal int UseTime = 0;
         public override void ExSD()
         {
-            Item.damage = 19;
+            Item.damage = 21;
             Item.useTime = 5;
             Item.useAnimation = 5;
             Item.rare = ItemRarityID.Orange;

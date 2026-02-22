@@ -19,15 +19,19 @@ namespace HJScarletRework.Items.Weapons.Melee
     {
         public override string Texture => HJScarletItemProj.Item_DialecticsThrown.Path;
         public int UsePhase = 0;
+        public override void SetStaticDefaults()
+        {
+            ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.75f;
+        }
         public override void ExSD()
         {
-            Item.damage = 160;
+            Item.damage = 180;
             Item.rare = RarityType<MatterRarity>();
             //不需要声音，在shoot里手动控制
             Item.UseSound = null;
             Item.shootSpeed = 17f;
             Item.autoReuse = true;
-            Item.useTime = Item.useAnimation = 32;
+            Item.useTime = Item.useAnimation = 29;
             Item.shoot = ProjectileType<DialecticsThrownProj>();
         }
         public override Color MainTooltipColor => Color.LightBlue;

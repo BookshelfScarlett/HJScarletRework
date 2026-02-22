@@ -36,11 +36,14 @@ namespace HJScarletRework.Projs.Melee
             Projectile.extraUpdates = 2;
             Projectile.localNPCHitCooldown = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.timeLeft = 200;
         }
         public override void AI()
         {
+            if (!Projectile.HJScarlet().FirstFrame)
+                Projectile.originalDamage = Projectile.damage;  
             Projectile.rotation = Projectile.velocity.ToRotation();
             switch(AttackType)
             {
@@ -75,6 +78,8 @@ namespace HJScarletRework.Projs.Melee
 
         private void DoHit()
         {
+            if (!Projectile.IsMe())
+                return;
             //在AI这里向上投射火焰，方便一些同步问题
             if (Timer > 0f && !DonRiseLamp)
             {
@@ -99,13 +104,13 @@ namespace HJScarletRework.Projs.Melee
                     }
                 }
                 Timer = -1;
-                Projectile fireLight = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, -Vector2.UnitY.RotatedBy(Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))) * Main.rand.NextFloat(14f, 18f), ProjectileType<CandLanceFire>(), Projectile.damage, 0f, Owner.whoAmI);
+                Projectile fireLight = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, -Vector2.UnitY.RotatedBy(Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))) * Main.rand.NextFloat(14f, 18f), ProjectileType<CandLanceFire>(), 0, 0f, Owner.whoAmI);
                 fireLight.timeLeft = Main.rand.Next(100, 150);
                 fireLight.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
                 fireLight.ai[2] = Main.rand.NextFloat(-10f, 10f);
+                fireLight.originalDamage = Projectile.originalDamage;
             }
             //是的孩子们，这是他妈的硬编码
-            Projectile.damage *= 0;
             Projectile.Opacity -= 0.02f;
             Projectile.velocity *= 0.94f;
             Vector2 dir = Projectile.rotation.ToRotationVector2();
@@ -119,16 +124,12 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-                //撞墙需要直接处死不要燃起魂火灯。
-                AttackType = Style.Hit;
-                Projectile.tileCollide = false;
-                DonRiseLamp = true;
-                Projectile.velocity = oldVelocity;
+            //撞墙需要直接处死不要燃起魂火灯。
+            AttackType = Style.Hit;
+            Projectile.tileCollide = false;
+            DonRiseLamp = true;
+            Projectile.velocity = oldVelocity;
             return false;
-        }
-        public override bool PreKill(int timeLeft)
-        {
-            return true;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

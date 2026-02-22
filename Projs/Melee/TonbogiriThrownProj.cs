@@ -49,8 +49,11 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            SpawnDust(Projectile.Center, Projectile.SafeDirByRot());
-            SpawnBubbles();
+            if (Projectile.IsMe())
+            {
+                SpawnDust(Projectile.Center, Projectile.SafeDirByRot());
+                SpawnBubbles();
+            }
             return true;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

@@ -91,27 +91,19 @@ namespace HJScarletRework.Projs.Melee
             return true;
         }
 
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            base.ModifyHitNPC(target, ref modifiers);
-        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-                    DoShoot_OnHit(target);
+            DoShoot_OnHit(target);
         }
 
-        private void DoStuck_OnHit(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-        }
         private void DoShoot_OnHit(NPC target)
         {
             SpawnTenctacle(target.whoAmI);
         }
-        private void SpawnTenctacle_Portal(int targetindex, NPC.HitInfo hit, int damageDone)
-        {
-        }
         private void SpawnTenctacle(int targetIndex)
         {
+            if (!Projectile.IsMe())
+                return;
             for (int i = 0; i < 4; i++)
             {
                 Vector2 randDir = Main.rand.NextFloat(TwoPi).ToRotationVector2();

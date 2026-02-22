@@ -73,12 +73,12 @@ namespace HJScarletRework.Projs.Melee
                 if (Timer < SpinMoveTime + 30f)
                     return;
                 //这里的i固定成这样，因为会同时控制三个不同的黑暗矛的位置的。
-                if (Projectile.GetTargetSafe(out NPC target,canPassWall:true) && Projectile.Opacity == 1)
+                if (Projectile.GetTargetSafe(out NPC target, canPassWall: true) && Projectile.Opacity == 1 && Projectile.IsMe())
                 {
                     for (int i = -1; i < 2; i += 1)
                     {
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofDarknessShadow>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
-
+                        int damage = i != 0 ? Projectile.originalDamage / 2 : Projectile.originalDamage;
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofDarknessShadow>(), damage, Projectile.knockBack, Owner.whoAmI);
                         proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                         ((SpearofDarknessShadow)proj.ModProjectile).MountedVec = Projectile.SafeDirByRot().RotatedBy(ToRadians(360f / 4f * StrikeTimes));
                         proj.ai[0] = i;

@@ -119,12 +119,13 @@ namespace HJScarletRework.Projs.Melee
             float minuteAngle = PiOver2 - (TwoPi / 60f) * minute;
             minuteAngle *= -1f;
             Vector2 minuteVector = minuteAngle.ToRotationVector2();
+            int damage = Owner.HJScarlet().flybackhandBuffTimeCurrent > 0 ? Projectile.damage : Projectile.damage / 2;
             //最后。开始生成需要的星辰
-            Projectile star1 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, hourVector * 12f, ProjectileType<FlybackHandStar>(), Projectile.damage, 10f, Owner.whoAmI);
+            Projectile star1 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, hourVector * 12f, ProjectileType<FlybackHandStar>(), damage, 10f, Owner.whoAmI);
             star1.extraUpdates = 1;
             star1.HJScarlet().GlobalTargetIndex = target.whoAmI;
             
-            Projectile star2 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, minuteVector * 12f, ProjectileType<FlybackHandStar>(), Projectile.damage, 10f, Owner.whoAmI);
+            Projectile star2 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, minuteVector * 12f, ProjectileType<FlybackHandStar>(), damage, 10f, Owner.whoAmI);
             star2.extraUpdates = 1;
             star2.HJScarlet().GlobalTargetIndex = target.whoAmI;
             for (float i = 0; i < 10f; i++)

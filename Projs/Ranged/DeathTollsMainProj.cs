@@ -51,7 +51,8 @@ namespace HJScarletRework.Projs.Ranged
         {
             Projectile.rotation += 0.2f;
             Lighting.AddLight(Projectile.Center, TorchID.Purple);
-            DrawTrailingDust();
+            if (!HJScarletMethods.OutOffScreen(Projectile.Center))
+                DrawTrailingDust();
             switch (AttackType)
             {
                 case DoType.IsShooted:
@@ -85,7 +86,7 @@ namespace HJScarletRework.Projs.Ranged
                 Projectile.extraUpdates = 4;
 
             //如果超出了玩家屏幕范围，且玩家仍然没有仆从锤，生成仆从锤
-            if (HJScarletMethods.OutOffScreen(Projectile.Center, 1.2f) && !Owner.HasProj<DeathTollsHeldMinion>(out int projID))
+            if (Projectile.TooAwayFromOwner(1200f) && !Owner.HasProj<DeathTollsHeldMinion>(out int projID) && Projectile.IsMe())
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, projID, Projectile.damage, 0f, Projectile.owner);
                 SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss, Owner.Center);
@@ -96,15 +97,11 @@ namespace HJScarletRework.Projs.Ranged
         //首次投掷出去时的AI
         private void DoShooted()
         {
-            if (AttackTimer == 0)
+            if (Projectile.HJScarlet().FirstFrame)
             {
-                if (Owner.HasProj<DeathTollsHeldMinion>())
-                {
-                    //压制音量，这里由仆从锤的射线声作为主导
-                    SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Pitch = 0.4f, Volume = 0.2f, MaxInstances = 0 }, Owner.Center);
-                }
-                else
-                    SoundEngine.PlaySound(SoundID.Item103, Owner.Center);
+                //压制音量，这里由仆从锤的射线声作为主导
+                SoundStyle pickSound = Owner.HasProj<DeathTollsHeldMinion>() ? HJScarletSounds.DeathsToll_Toss with { Pitch = 0.4f, Volume = 0.2f, MaxInstances = 0 } : SoundID.Item103;
+                SoundEngine.PlaySound(pickSound, Owner.Center);
             }
             AttackTimer += 1;
             if (AttackTimer > BoomerangStat.ReturnTime)
@@ -140,32 +137,36 @@ namespace HJScarletRework.Projs.Ranged
         {
             SoundEngine.PlaySound(SoundID.Item88, Projectile.Center);
             target.AddBuff(BuffID.ShadowFlame, 360);
-            if (!Stealth && !ModProj.IsHitOnEnablFocusMechanicProj)
-                ModProj.IsHitOnEnablFocusMechanicProj = true;
-
-            if (!Stealth && Projectile.numHits % 2 == 0)
+            bool hasMinion = Owner.HasProj<DeathTollsHeldMinion>(out int minionID);
+            //普攻
+            if (!Stealth)
             {
-                NightmareArrowDrop(target, Projectile.damage / 2);
-                //有仆从锤时，额外降下一个梦魇之星
-                if (Owner.HasProj<DeathTollsHeldMinion>())
-                    NightmareArrowDrop(target, Projectile.damage / 2);
+                //下面这个会扔到一个统一的管理里面。
+                if (!ModProj.IsHitOnEnablFocusMechanicProj && ModProj.UseFocusStrikeMechanic)
+                    ModProj.IsHitOnEnablFocusMechanicProj = true;
+
+                if (Projectile.numHits % 2 == 0)
+                {
+                    int counts = 1 + hasMinion.ToInt();
+                    for (int i = 0; i < counts; i++)
+                        NightmareArrowDrop(target, Projectile.damage / 2);
+                }
             }
             if (AttackType != DoType.IsStealth)
                 return;
 
             SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit, Projectile.Center);
             //优先生成挂载射弹
-            
-            if (!Owner.HasProj<DeathTollsHeldMinion>(out int minionID))
+            if (!hasMinion)
             {
-                Projectile hangingProj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, minionID, Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, minionID, Projectile.damage, Projectile.knockBack, Projectile.owner);
                 SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss, Projectile.Center);
             }
             else if (!Owner.HasProj<DeathTollsCloneProj>(out int projID))
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, projID, Projectile.damage, 0f, Projectile.owner);
+                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, projID, Projectile.damage, 0f, Projectile.owner);
             }
-                //然后直接处死这个射弹
+            //然后直接处死这个射弹
             Projectile.Kill();
         }
         public override bool PreDraw(ref Color lightColor)

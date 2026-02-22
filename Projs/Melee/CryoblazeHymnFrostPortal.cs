@@ -16,6 +16,7 @@ namespace HJScarletRework.Projs.Melee
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override ClassCategory Category => ClassCategory.Melee;
         public bool UseFireColor = false;
+        public NPC HomingTarget = null;
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 100;
@@ -42,8 +43,11 @@ namespace HJScarletRework.Projs.Melee
                 //注意这里：如果没有找到正常的敌人，这里是不会尝试生成的
                 if (Projectile.GetTargetSafe(out NPC target, searchDistance: 800, canPassWall: true))
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 15f, ProjectileType<CryoblazeHymnFrostEnergy>(), Projectile.damage / 2, Projectile.knockBack);
-                    proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                    if (Projectile.IsMe())
+                    {
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 15f, ProjectileType<CryoblazeHymnFrostEnergy>(), Projectile.originalDamage / 2, Projectile.knockBack);
+                        proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                    }
                     for (int j = 0; j < 10; j++)
                     {
                         //最大的原因是白天过曝看不到
@@ -73,10 +77,6 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.velocity *= .89f;
             for (int i = 0; i < 3; i++)
                 new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(32f), Main.rand.NextFloat(0.4f, 0.8f), RandLerpColor(Color.DeepSkyBlue, Color.SkyBlue), 30, 0.18f, RandRotTwoPi).Spawn();
-        }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            base.OnHitNPC(target, hit, damageDone);
         }
           public override bool PreDraw(ref Color lightColor)
         {

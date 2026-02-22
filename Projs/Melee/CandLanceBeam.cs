@@ -32,7 +32,8 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.height = Projectile.width = 10;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.extraUpdates = 1;
             Projectile.timeLeft = 300;
             //下方会考虑手动控制处死，或者之类的。
@@ -109,7 +110,10 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.velocity *= 0.9f;
             return offset;
         }
-        public override bool? CanDamage() => Timer > 10;
+        public override bool? CanDamage()
+        {
+            return Timer > 10f;
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //由于这是个类似于射线的东西，我不需要考虑处理贴图转角一类的情况，直接新建一个额外的射弹，然后做伪追踪更好
@@ -117,7 +121,7 @@ namespace HJScarletRework.Projs.Melee
             if (!TargetThatAlreadyHit.Contains(target))
                 TargetThatAlreadyHit.Add(target);
             //如果同时攻击了超过了需要的单位，处死他 
-            if (TargetHitTime > TotalTargetHitTime)
+            if (TargetHitTime >= TotalTargetHitTime)
                 Projectile.Kill();
             //创建一个链表，搜索附近可能的单位
             float searchDist = SearchTargetDistance;
@@ -145,6 +149,7 @@ namespace HJScarletRework.Projs.Melee
             int maxIndex = Math.Min(availableTarget.Count, 2);
             NPC targetThatHit = availableTarget[Main.rand.Next(0, maxIndex)];
             //最后，直接生成新的射弹
+            //Main.NewText(TargetHitTime);
             TargetHitTime += 1;
             var src = Projectile.GetSource_FromThis();
             Projectile anotherShot = Projectile.NewProjectileDirect(src, Projectile.Center, Projectile.velocity, Type, Projectile.damage, Projectile.knockBack, Owner.whoAmI, TargetHitTime, targetThatHit.whoAmI);

@@ -5,10 +5,8 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SteelSeries.GameSense;
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -109,14 +107,6 @@ namespace HJScarletRework.Projs.Melee
         {
             bool canDamage = Timer > 10f && AttackType != Style.Slowdown;
             return canDamage;
-        }
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            return base.OnTileCollide(oldVelocity);
-        }
-        public override bool PreKill(int timeLeft)
-        {
-            return base.PreKill(timeLeft);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

@@ -96,12 +96,14 @@ namespace HJScarletRework.Projs.Melee
         /// </summary>
         private void ParaSquareWaveAttack()
         {
+            if (!Projectile.IsMe())
+                return;
             if (Timer % 5 == 0)
             {
                 for (int k = -1; k < 2; k += 2)
                 {
                     Vector2 vel2 = Projectile.SafeDir().RotatedBy(PiOver4 * k);
-                    Projectile cube = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), vel2 * -13, ProjectileType<DialecticsCubeProj>(), Projectile.damage / 3, 1f);
+                    Projectile cube = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), vel2 * -13, ProjectileType<DialecticsCubeProj>(), Projectile.damage / 4, 1f);
                     cube.rotation = Projectile.velocity.ToRotation();
                 }
             }
@@ -131,6 +133,8 @@ namespace HJScarletRework.Projs.Melee
                     new StarShape(starPos - dir * 30f, starVel, Color.White, 0.4f, 40).Spawn();
                 }
             }
+            if (!Projectile.IsMe())
+                return;
             if (Projectile.GetTargetSafe(out NPC target, true))
             {
                 Projectile.Center = target.Center + MountedTargetPos;
@@ -140,7 +144,7 @@ namespace HJScarletRework.Projs.Melee
                     {
                         Vector2 spawnPos = new Vector2(target.Center.X + Main.rand.NextBool().ToDirectionInt() * Main.rand.NextFloat(10f, 200f), target.Center.Y + Main.rand.NextFloat(1200f, 1800f));
                         Vector2 vel = (spawnPos - target.Center).SafeNormalize(Vector2.UnitX) * Main.rand.NextFloat(12f, 16f);
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<DialecticsSkyFall>(), Projectile.damage, 12f, Owner.whoAmI);
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<DialecticsSkyFall>(), Projectile.damage / 2, 12f, Owner.whoAmI);
                         proj.rotation = vel.ToRotation();
                         proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                     }
@@ -182,7 +186,7 @@ namespace HJScarletRework.Projs.Melee
                     modifiers.SourceDamage *= (1f + 0.1f * target.HJScarlet().Dialectics_HitTime);
                     target.HJScarlet().Dialectics_HitTime += 1;
                 }
-                else
+                else if (Projectile.IsMe())
                 {
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, projID, 0, 0, Owner.whoAmI);
                     proj.rotation = Projectile.rotation;
@@ -197,10 +201,6 @@ namespace HJScarletRework.Projs.Melee
                 modifiers.SourceDamage *= (1 + SinAttackCounts * 0.1f);
                 SinAttackCounts++;
             }
-        }
-        public override bool PreKill(int timeLeft)
-        {
-            return base.PreKill(timeLeft);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -225,11 +225,12 @@ namespace HJScarletRework.Projs.Melee
         /// <summary>
         /// 平行正弦波
         /// </summary>
-        /// <param name="stopTimer"></param>
         private void DrawParalineWave()
         {
+            
             Timer += 1;
-
+            if (HJScarletMethods.OutOffScreen(Projectile.Center))
+                return;
             //这里的特效需要进行控制
             if (Projectile.HJScarlet().GlobalTargetIndex != -1)
                 return;
@@ -261,6 +262,8 @@ namespace HJScarletRework.Projs.Melee
         /// </summary>
         private void DrawParaSquareWave()
         {
+            if (HJScarletMethods.OutOffScreen(Projectile.Center))
+                return;
             //轨迹特效
             Projectile.rotation = Projectile.velocity.ToRotation();
 
@@ -349,6 +352,8 @@ namespace HJScarletRework.Projs.Melee
             Projectile.rotation = Projectile.velocity.ToRotation();
             Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2);
             Timer += 1f;
+            if (HJScarletMethods.OutOffScreen(Projectile.Center))
+                return;
             //孩子们，力大砖飞来了！
             Vector2 drawPos = Projectile.Center - Projectile.SafeDir() * 10f;
             Vector2 vel = Projectile.velocity / 3;
@@ -409,6 +414,8 @@ namespace HJScarletRework.Projs.Melee
             Vector2 dir = Projectile.SafeDir();
             Vector2 mountedPos = Projectile.Center - dir * 10f;
             Timer += 0.8f;
+            if (HJScarletMethods.OutOffScreen(Projectile.Center))
+                return;
 
             for (int i = 0; i < 2; i++)
             {

@@ -36,20 +36,21 @@ namespace HJScarletRework.Projs.Melee
             Timer += 1f;
             //除非附近有可用单位，否则这个传送门不会为您生成任何箭矢
             //额外的，如果进化矛本身直接命中了敌对单位，则所有的箭矢都会直接攻击他
-            if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1200f,canPassWall:true) && SpawnEvolutionArrow && !StopSpawnArrow)
+            bool legal = SpawnEvolutionArrow && !StopSpawnArrow && Projectile.IsMe();
+            if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1200f, canPassWall: true) && legal)
             {
                 //每个传送门都只生成1根箭矢
                 Vector2 dir = (target.Center - Projectile.Center).SafeNormalize(Vector2.UnitX);
                 Vector2 toRandDir = dir.RotatedBy(Main.rand.NextFloat(ToRadians(5) * Main.rand.NextBool().ToDirectionInt()));
-                Vector2 vel =  toRandDir * Main.rand.NextFloat(10f, 12f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center - dir * 10f, vel, ProjectileType<EvolutionArrow>(),Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
+                Vector2 vel = toRandDir * Main.rand.NextFloat(10f, 12f);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center - dir * 10f, vel, ProjectileType<EvolutionArrow>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
                 proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                 //生成时，附带粒子
                 DrawArrowSpawnDust();
                 //生成结束后让传送门缓慢消失
                 StopSpawnArrow = true;
             }
-            else if(StopSpawnArrow || Timer >60f)
+            else if (StopSpawnArrow || Timer > 60f)
             {
                 Projectile.Opacity -= 0.1f;
                 if (Projectile.Opacity <= 0f)
