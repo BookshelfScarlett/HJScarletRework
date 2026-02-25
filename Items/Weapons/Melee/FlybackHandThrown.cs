@@ -14,9 +14,10 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class FlybackHandThrown : ThrownSpearClass
     {
         public override string Texture => GetInstance<FlybackHand>().Texture;
+        public override bool HasLegendary => true;
         public override void ExSD()
         {
-            Item.damage = 415;
+            Item.damage = 400;
             Item.useTime = Item.useAnimation = 20;
             Item.rare = ItemRarityID.Red;
             Item.shoot = ProjectileType<FlybackHandThrownProj>();

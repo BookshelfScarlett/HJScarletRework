@@ -125,8 +125,9 @@ namespace HJScarletRework.Globals.Players
             if (PreciousTargetAcc && item.damage > 0)
             {
                 crit = PreciousTargetCrtis;
-                if (PreciousTargetCrtis > 150)
-                    PreciousTargetCrtis = 150;
+                int limitedCrit = PreciousAimAcc ? 125 : 115;
+                if (PreciousTargetCrtis > limitedCrit)
+                    PreciousTargetCrtis = limitedCrit;
             }
         }
         public override bool OnPickup(Item item)

@@ -97,7 +97,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         private void DoChasingToTarget()
         {
-            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true, 1800f))
+            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true, 1800f, true))
             {
                 Projectile.extraUpdates = 7;
                 Projectile.HomingTarget(target.Center, 1800f, 24f, 20f);

@@ -89,6 +89,10 @@ namespace HJScarletRework.Projs.Melee
                 new ShinyOrbParticle(spawnPos, velDir, Color.White, 40, 0.4f).Spawn();
             }
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.DefenseEffectiveness *= 0;
+        }
 
         public override bool? CanDamage()
         {

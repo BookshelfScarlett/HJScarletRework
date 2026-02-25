@@ -19,6 +19,10 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         public override bool IsLoadingEnabled(Mod mod) => false;
         public override ItemCategory LocalCategory => ItemCategory.Armor;
         public override string Texture => GetAsset(AssetCategory.Armor);
+        public override void Load()
+        {
+            //EquipLoader.AddEquipTexture(Mod, )
+        }
         public override void SetDefaults()
         {
             Item.width = 26;

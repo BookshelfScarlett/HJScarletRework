@@ -1,10 +1,12 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
@@ -42,6 +44,7 @@ namespace HJScarletRework.Projs.Melee
             //有意为之
             Projectile.timeLeft = 150;
         }
+        public float RandDecelartion = .855f;
         public bool Init = false;
         public bool HomeToPlayer = false;
         public bool FoundTarget = false;
@@ -51,6 +54,23 @@ namespace HJScarletRework.Projs.Melee
         public List<Player> ValidPlayer = [];
         public override void AI()
         {
+            if(!Projectile.HJScarlet().FirstFrame)
+            {
+                //随机取0.835的减速到0.902的减速，90-180的生命值
+                RandDecelartion = Main.rand.NextFloat(.785f, .902f);
+                Projectile.timeLeft = Main.rand.Next(90, 180);
+                Projectile.netUpdate = true;
+            }
+            //每一帧都有概率直接处死 
+            if (Main.rand.NextBool(300))
+            {
+                //处死成功时候，生成粒子
+                new WildPointerRed(Projectile.Center, Main.rand.Next(30, 60), Projectile.rotation + PiOver4, Projectile.scale, Projectile.Opacity).SpawnToNonPreMult();
+                if(Projectile.Opacity > 0.2f)
+                SoundEngine.PlaySound(HJScarletSounds.Buzz with { Volume = 0.3f, PitchRange = (-0.3f, 0.3f)}, Projectile.Center);
+                Projectile.Kill();
+                return;
+            }
             Projectile.light = Projectile.Opacity;
             //超出距离直接处死，避免这东西真的全图跑
             if (Vector2.Distance(Projectile.Center, Owner.MountedCenter) > 3600f)
@@ -201,7 +221,7 @@ namespace HJScarletRework.Projs.Melee
 
         private void DoAttack()
         {
-            Projectile.velocity *= 0.855f;
+            Projectile.velocity *= RandDecelartion;
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.velocity.Length() > 0.15f)
                 return;
@@ -209,7 +229,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.velocity *= 0f;
             if (CanHomingToTarget)
             {
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(2))
                     HomeToPlayer = true;
                 AttackType = Styles.Homing;
             }

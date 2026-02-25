@@ -4,14 +4,8 @@ using ContinentOfJourney.NPCs.Boss_TheOverwatcher;
 using ContinentOfJourney.NPCs.Boss_WallofShadow;
 using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Pets;
 using HJScarletRework.Items.Weapons.Melee;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,8 +22,6 @@ namespace HJScarletRework.Globals.Instances
                     npcLoot.AddLootSimple(ItemType<TheMars>(), 4);
                     break;
             }
-            if (!Main.masterMode)
-                return;
             if (npc.type == NPCType<WorldsEndEverlastingFallingWhale>())
                 npcLoot.AddLootSimple(ItemType<WhaleItem>(), 4);
             if (npc.type == NPCType<TheOverwatcher>())

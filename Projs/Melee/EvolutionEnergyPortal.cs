@@ -28,7 +28,15 @@ namespace HJScarletRework.Projs.Melee
             Projectile.tileCollide = false;
             Projectile.timeLeft = 300;
             Projectile.extraUpdates = 0;
+            Projectile.penetrate = 1;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
             Projectile.damage = 0;
+        }
+        public override bool? CanDamage()
+        {
+            return SpawnEvolutionArrow || Timer > 60f;
         }
         public override void AI()
         {
@@ -44,7 +52,9 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 toRandDir = dir.RotatedBy(Main.rand.NextFloat(ToRadians(5) * Main.rand.NextBool().ToDirectionInt()));
                 Vector2 vel = toRandDir * Main.rand.NextFloat(10f, 12f);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center - dir * 10f, vel, ProjectileType<EvolutionArrow>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
+                bool hasPriotyTarget = Projectile.HJScarlet().GlobalTargetIndex != -1;
                 proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                ((EvolutionArrow)proj.ModProjectile).HasPrioityTarget = hasPriotyTarget;
                 //生成时，附带粒子
                 DrawArrowSpawnDust();
                 //生成结束后让传送门缓慢消失

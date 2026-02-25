@@ -57,6 +57,11 @@ namespace HJScarletRework.Projs.Melee
                 UpdateHit();
 
         }
+        public override bool? CanHitNPC(NPC target)
+        {
+            bool canHit = Projectile.HJScarlet().GlobalTargetIndex == -1 || (Projectile.HJScarlet().GlobalTargetIndex != -1 && target == Main.npc[Projectile.HJScarlet().GlobalTargetIndex]);
+            return canHit;
+        }
         public override bool? CanDamage() => CanDamageTime > 50;
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {

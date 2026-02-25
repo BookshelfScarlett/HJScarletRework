@@ -50,6 +50,8 @@ Melee: {
 	TonbogiriThrownProj.DisplayName: 御手杆-投掷
 	WildPointerThrownProj.DisplayName: 野指针-投掷
 	BinaryStarsHeldClone.DisplayName: 双子星-天降锤
+	// CactusSpearProj.DisplayName: Cactus Spear Proj
+	// CactusSpearSpike.DisplayName: Cactus Spear Spike
 }
 
 Typeless: {

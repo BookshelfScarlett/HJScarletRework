@@ -50,6 +50,8 @@ Melee: {
 	TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
 	WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
 	BinaryStarsHeldClone.DisplayName: Binary Stars Held Clone
+	CactusSpearProj.DisplayName: Cactus Spear Proj
+	CactusSpearSpike.DisplayName: Cactus Spear Spike
 }
 
 Typeless: {

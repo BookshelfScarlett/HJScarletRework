@@ -38,6 +38,7 @@ namespace HJScarletRework.Projs.Melee
         public bool ShouldPull = false;
         public bool BeginPull = false;
         public float DeadTime = 120f;
+        private Vector2 OriginalPos = Vector2.Zero; 
         /// <summary>
         /// 手持射弹完全接管其行为
         /// </summary>
@@ -48,7 +49,7 @@ namespace HJScarletRework.Projs.Melee
         public override void ExSD()
         {
             Projectile.height = Projectile.width = 16;
-            Projectile.extraUpdates = 3;
+            Projectile.extraUpdates = 14;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
             Projectile.penetrate = -1;
@@ -66,7 +67,10 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             if (!Projectile.HJScarlet().FirstFrame)
+            {
                 OriginalSpeed = Projectile.velocity.Length();
+                OriginalPos = Projectile.Center;
+            }
             ActiveAI();
             //玩家死亡时候立刻击杀射弹
             if (Owner.dead || !Owner.active || Projectile.TooAwayFromOwner())
@@ -117,7 +121,7 @@ namespace HJScarletRework.Projs.Melee
                 }
                 Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<LightBiteArrow>(), Projectile.damage * 3, 0f, Owner.whoAmI);
             }
-            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit, Owner.Center);
+            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit2, Owner.Center);
             //三倍伤害，单次的判定
             //把人飞出去
             Owner.velocity = Projectile.rotation.ToRotationVector2() * -OriginalSpeed * 0.6f;
@@ -258,7 +262,7 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.extraUpdates = 0;
                 Projectile.localNPCHitCooldown = 20;
                 Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
-                SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { MaxInstances = 1 }, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit2, Projectile.Center);
                 HitParticle(target.Center);
             }
         }

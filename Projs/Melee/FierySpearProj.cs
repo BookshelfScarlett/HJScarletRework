@@ -35,6 +35,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
+            Lighting.AddLight(Projectile.Center, TorchID.Orange);
             if (HJScarletMethods.HasFuckingCalamity && !Projectile.HJScarlet().FirstFrame)
             {
                 Projectile.extraUpdates = 3;
@@ -70,11 +71,12 @@ namespace HJScarletRework.Projs.Melee
         }
         public void SpawnVolcanoDustAndProj(int targetIndex = -1)
         {
-            int spawnBallCounts = 2 + HJScarletMethods.HasFuckingCalamity.ToInt() * 2;
+            int spawnBallCounts = 2 + HJScarletMethods.HasFuckingCalamity.ToInt() * 8;
             for (int i = 0; i < spawnBallCounts; i++)
             {
                 Vector2 dir = Projectile.SafeDirByRot().ToRandVelocity(PiOver4);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * -Main.rand.NextFloat(6f, 12f), ProjectileType<FierySpearFireball>(), Projectile.damage / 2, Owner.whoAmI);
+                float speed = targetIndex == -1 ? -Main.rand.NextFloat(6f, 8f) : -Main.rand.NextFloat(6f, 12f);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * speed, ProjectileType<FierySpearFireball>(), Projectile.damage / 2, Owner.whoAmI);
                 proj.HJScarlet().GlobalTargetIndex = targetIndex;
                 for (int j = 0; j < 30; j++)
                 {

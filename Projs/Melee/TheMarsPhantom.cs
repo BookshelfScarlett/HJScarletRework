@@ -29,6 +29,7 @@ namespace HJScarletRework.Projs.Melee
             set => Projectile.ai[1] = (float)value;
         }
         public int TotalShootTime = 0;
+        public int MaxHitTime = 3;
         public override void ExSD()
         {
             Projectile.extraUpdates = 3;
@@ -109,19 +110,20 @@ namespace HJScarletRework.Projs.Melee
             SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 1, PitchVariance = 0.2f }, Projectile.Center);
             //此处需要做一个额外的处理，如果命中的敌对单位不是我们需要的单位，则不要生成后续的射弹
             //尽管如此，他仍然可以进行多穿
-            //if (target.whoAmI != Projectile.HJScarlet().GlobalTargetIndex)
-            //    return;
             //在这里直接干掉射弹的伤害
             Projectile.damage *= 0; 
             //只有在这里正式执行消失逻辑
             Timer = 0;
             AttackType = Style.Fade;
-            if (TotalShootTime > 2)
+            if (TotalShootTime >= MaxHitTime)
                 return;
             //随机取当前射弹结束的位置+
+            int damage = Projectile.originalDamage;
+            if(TotalShootTime >= 1)
+                damage = (int)(Projectile.originalDamage * (1f - ((TotalShootTime - 1) / (float)MaxHitTime)));
             Vector2 projPos = target.Center + Vector2.UnitY.RotatedByRandom(TwoPi) * Main.rand.Next(150, 200);
             Vector2 vel = (target.Center - projPos).SafeNormalize(Vector2.UnitX) * Main.rand.NextFloat(3f, 6f);
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), projPos, vel, Type, Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), projPos, vel, Type, damage, Projectile.knockBack, Owner.whoAmI);
             ((TheMarsPhantom)proj.ModProjectile).TotalShootTime = TotalShootTime + 1;
             proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
         }

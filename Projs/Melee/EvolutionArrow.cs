@@ -28,6 +28,8 @@ namespace HJScarletRework.Projs.Melee
             set => Projectile.ai[0] = (float)value;
         }
         public ref float Timer => ref Projectile.ai[1];
+        public bool HasPrioityTarget = false;
+        public bool SetToPriotyTarget = false;
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 16;
@@ -39,17 +41,50 @@ namespace HJScarletRework.Projs.Melee
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
             Projectile.noEnchantmentVisuals = true;
+            Projectile.timeLeft = 600;
         }
         public override void AI()
         {
-            if (!Projectile.HJScarlet().FirstFrame && HJScarletMethods.HasFuckingCalamity)
+            if (!Projectile.HJScarlet().FirstFrame)
             {
-                Projectile.penetrate = 10;
-                Projectile.localNPCHitCooldown = 15;
+                Projectile.penetrate = HasPrioityTarget ? 3 : 1;
             }
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer += 0.025f;
+            //在这个过程生成需要的粒子
+            if (AttackType == Style.Attack)
+                AttackAI();
+            else
+            {
+                Projectile.damage *= 0;
+                Projectile.velocity *= 0.98f;
+                Projectile.Opacity -= 0.025f;
+                if (Projectile.Opacity == 0)
+                    Projectile.Kill();
+            }
+            SpawnParticle();
+        }
+        public void AttackAI()
+        {
+            if (Projectile.GetTargetSafe(out NPC target, true, 1200f))
+            {
+                Projectile.extraUpdates = 5;
+                Projectile.HomingTarget(target.Center, -1f, 20f, 35f);
+            }
+            else
+                Projectile.extraUpdates = 4;
+            //在这个过程中如果penetrate提前变为了0，进入别的状态 
+            bool shouldDisapper = (Projectile.penetrate == -1 && Projectile.damage == 0) || (!Projectile.ToHJScarletNPC().CanBeChasedBy()) || ((Projectile.ToHJScarletNPC().Center - Projectile.Center).LengthSquared() < 50f * 50f);
+            if (shouldDisapper)
+            {
+                Projectile.netUpdate = true;
+                AttackType = Style.Fade;
+            }
+            
 
+        }
+        public void SpawnParticle()
+        {
             if (Main.rand.NextBool(3))
             {
                 for (int i = 0; i < 2; i++)
@@ -59,41 +94,21 @@ namespace HJScarletRework.Projs.Melee
                     new StarShape(pos, Projectile.SafeDir() * 4f, Color.White, 0.15f * Projectile.Opacity, 10).Spawn();
                 }
             }
-            //在这个过程生成需要的粒子
-            if (AttackType == Style.Attack)
-            {
-                //在这个过程中如果penetrate提前变为了0，进入别的状态 
-                if (Projectile.penetrate == -1 && Projectile.damage == 0)
-                {
-                    Projectile.netUpdate = true;
-                    AttackType = Style.Fade;
-                }
-                if (Projectile.GetTargetSafe(out NPC target, true, 1200f))
-                {
-                    Projectile.extraUpdates = 5;
-                    Projectile.HomingTarget(target.Center, -1f, 20f, 35f);
-                }
-                else
-                    Projectile.extraUpdates = 4;
-            }
-            else
-            {
-                Projectile.velocity *= 0.98f;
-                Projectile.Opacity -= 0.025f;
-                if (Projectile.Opacity == 0)
-                    Projectile.Kill();
-            }
         }
-        public override bool? CanDamage()
+        public override bool? CanHitNPC(NPC target)
         {
-            return true;
+
+            bool isNextHit = Projectile.penetrate == 1 && target == Projectile.ToHJScarletNPC();
+            bool isFirstHit = Projectile.penetrate != 1;
+            bool canHit = HasPrioityTarget == false || isNextHit || isFirstHit;
+            return canHit;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (AttackType == Style.Attack)
             {
                 //如果有传入的目标，或者说压根没目标，我们才正常切换状态
-                if (Projectile.HJScarlet().GlobalTargetIndex == -1 || Projectile.HJScarlet().GlobalTargetIndex == target.whoAmI)
+                if (Projectile.HJScarlet().GlobalTargetIndex == target.whoAmI)
                 {
                     AttackType = Style.Fade;
                     Projectile.netUpdate = true;

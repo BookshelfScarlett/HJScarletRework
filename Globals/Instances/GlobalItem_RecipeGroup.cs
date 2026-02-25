@@ -12,12 +12,14 @@ namespace HJScarletRework.Globals.Instances
         public static string AnyMagicHat;
         public static string AnyMechBossSoul;
         public static string AnyLunarPickaxe;
+        public static string AnyIceCrate;
         public override void AddRecipeGroups()
         {
             AnyCopperBar = CreateRecipeGroup(nameof(AnyCopperBar), ItemID.CopperBar, ItemID.TinBar);
             AnyMagicHat = CreateRecipeGroup(nameof(AnyMagicHat), ItemID.WizardHat, ItemID.MagicHat, ItemID.WizardsHat);
             AnyMechBossSoul = CreateRecipeGroup(nameof(AnyMechBossSoul), ItemID.SoulofFright, ItemID.SoulofSight, ItemID.SoulofMight);
             AnyLunarPickaxe = CreateRecipeGroup(nameof(AnyLunarPickaxe), ItemID.SolarFlarePickaxe, ItemID.VortexPickaxe, ItemID.NebulaPickaxe, ItemID.StardustPickaxe);
+            AnyIceCrate = CreateRecipeGroup(nameof(AnyIceCrate), ItemID.FrozenCrate, ItemID.FrozenCrateHard);
         }
         public override void Unload()
         {
@@ -25,6 +27,7 @@ namespace HJScarletRework.Globals.Instances
             AnyMagicHat = null;
             AnyMechBossSoul = null;
             AnyLunarPickaxe = null;
+            AnyIceCrate = null;
 
         }
         public static string CreateRecipeGroup(string name, params int[] AllItem)

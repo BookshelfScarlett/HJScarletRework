@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override string Texture => GetInstance<SweetSweetStab>().Texture;
         public override void ExSD()
         {
-            Item.damage = 20;
+            Item.damage = 36;
             Item.rare = ItemRarityID.Green;
             Item.useTime = Item.useAnimation = 40;
             Item.knockBack = 6f;
@@ -33,7 +33,8 @@ namespace HJScarletRework.Items.Weapons.Melee
     public abstract class ThrownSpearClass : ModItem, ILocalizedModType
     {
         public new string LocalizationCategory => "Weapons.Melee";
-        public override bool MeleePrefix() => true;
+        public virtual bool HasLegendary => false;
+        public override bool MeleePrefix() => HasLegendary;
         public override bool AllowPrefix(int pre) => true;
         public static AssetCategory TexturePath => AssetCategory.Weapon;
         public virtual bool NotHomewardJourneySpear => false;

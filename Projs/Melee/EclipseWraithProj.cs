@@ -94,7 +94,7 @@ namespace HJScarletRework.Projs.Melee
                 float spawnY = target.Center.Y - Main.rand.NextFloat(1200f, 1800f);
                 Vector2 spawnPos = new Vector2(spawnX, spawnY);
                 Vector2 dir = (target.Center - spawnPos).SafeNormalize(Vector2.UnitX);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, dir * Main.rand.NextFloat(12f, 16f), ProjectileType<EclipseWraithFireball>(), Projectile.damage, 12f, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, dir * Main.rand.NextFloat(12f, 16f), ProjectileType<EclipseWraithFireball>(), Projectile.damage / 3, 12f, Owner.whoAmI);
                 proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
             }
         }

@@ -235,3 +235,8 @@ EclipseWraith: {
 		Allows infinitly penetrates
 		'''
 }
+
+CactusSpear: {
+	DisplayName: Cactus Spear
+	Tooltip: ""
+}

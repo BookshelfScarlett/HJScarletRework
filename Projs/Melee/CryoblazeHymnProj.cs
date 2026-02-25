@@ -117,8 +117,8 @@ namespace HJScarletRework.Projs.Melee
         {
             if (!SpawnPortals)
             {
-                QuickSpawn(true, ProjectileType<CryoblazeHymnFirePortal>(), (int)(Projectile.damage * 0.80f));
-                QuickSpawn(false, ProjectileType<CryoblazeHymnFrostPortal>(), (int)(Projectile.damage * 0.50f));
+                QuickSpawn(true, ProjectileType<CryoblazeHymnFirePortal>(), (int)(Projectile.damage * 0.75f));
+                QuickSpawn(false, ProjectileType<CryoblazeHymnFrostPortal>(), (int)(Projectile.damage * 0.40f));
                 SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1 },Projectile.Center);
             }
             for (int i = 0; i < 30; i++)

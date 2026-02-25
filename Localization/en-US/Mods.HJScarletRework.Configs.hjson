@@ -26,7 +26,11 @@ HJScarletConfigClient: {
 	}
 
 	MaxParticleCounts: {
-		Label: Max Particle Counts
-		Tooltip: ""
+		Label: Limited Mod Particles
+		Tooltip:
+			'''
+			Limited the particles that provided by Lostbelt Journey
+			10000 at max by default
+			'''
 	}
 }

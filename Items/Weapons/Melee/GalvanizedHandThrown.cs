@@ -15,6 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
     {
         public Projectile CurrentProj = null;
         public override string Texture => GetInstance<GalvanizedHand>().Texture;
+        public override bool HasLegendary => true;
         public override void ExSD()
         {
             Item.damage = 512;

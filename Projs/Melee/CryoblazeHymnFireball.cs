@@ -91,7 +91,7 @@ namespace HJScarletRework.Projs.Melee
         {
             if (Projectile.GetTargetSafe(out NPC target))
             {
-                Projectile.HomingTarget(target.Center, -1, 24f, 20f);
+                Projectile.HomingTarget(target.Center, -1, 26f, 20f);
             }
             else
             {

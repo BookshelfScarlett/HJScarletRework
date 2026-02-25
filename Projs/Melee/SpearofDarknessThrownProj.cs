@@ -77,7 +77,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     for (int i = -1; i < 2; i += 1)
                     {
-                        int damage = i != 0 ? Projectile.originalDamage / 2 : Projectile.originalDamage;
+                        int damage = i != 0 ? Projectile.originalDamage / 2 : Projectile.originalDamage / 3;
                         Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofDarknessShadow>(), damage, Projectile.knockBack, Owner.whoAmI);
                         proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                         ((SpearofDarknessShadow)proj.ModProjectile).MountedVec = Projectile.SafeDirByRot().RotatedBy(ToRadians(360f / 4f * StrikeTimes));
@@ -93,7 +93,6 @@ namespace HJScarletRework.Projs.Melee
                     Projectile.Kill();
             }
         }
-
         private void DoAttack()
         {
             //对，这个函数只做了这些

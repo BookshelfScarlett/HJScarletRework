@@ -63,7 +63,7 @@ namespace HJScarletRework.Projs.Ranged
             Projectile.height = 72;
             Projectile.usesLocalNPCImmunity = true;
             //4eu, 12 => 3
-            Projectile.localNPCHitCooldown = 40;
+            Projectile.localNPCHitCooldown = 60;
             Projectile.extraUpdates = 4;
         }
         public override void AI()
@@ -159,7 +159,7 @@ namespace HJScarletRework.Projs.Ranged
             }
             //生成一点星云射线。
             Projectile.netUpdate = true;
-            BinaryStarsPhantom.SpawnNebulaShot(Owner, Projectile, target, 2, false);
+            BinaryStarsPhantom.SpawnNebulaShot(Owner, Projectile, target, 2, false, damage: Projectile.damage / 2);
         }
         private void PrettySpark(int hitDamage)
         {
@@ -174,6 +174,7 @@ namespace HJScarletRework.Projs.Ranged
                 ShinyOrbParticle shinyOrbParticle = new ShinyOrbParticle(pos, dir2 * 5f, Main.rand.NextBool() ? Color.White : Color.HotPink, 40, 3.5f - Math.Abs(18f - i) / 6f, BlendStateID.Additive);
                 shinyOrbParticle.Spawn();
             }
+
             //从灾厄抄写的锤子特效
             float damageInterpolant = Utils.GetLerpValue(950f, 2000f, hitDamage, true);
             Vector2 splatterDirection = Projectile.velocity * 0.8f;
@@ -551,6 +552,7 @@ namespace HJScarletRework.Projs.Ranged
             Projectile.friendly = true;
             Projectile.tileCollide = false;
             Projectile.extraUpdates = 3;
+            Projectile.DamageType = DamageClass.Ranged;
             ExSD();
         }
     }

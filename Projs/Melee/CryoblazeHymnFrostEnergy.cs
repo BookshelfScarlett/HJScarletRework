@@ -38,7 +38,7 @@ namespace HJScarletRework.Projs.Melee
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 24;
-            Projectile.penetrate = 2;
+            Projectile.penetrate = 3;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.extraUpdates = 0;

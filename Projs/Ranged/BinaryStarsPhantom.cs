@@ -253,7 +253,7 @@ namespace HJScarletRework.Projs.Ranged
                 int ownedProjCounts = Owner.ownedProjectileCounts[Type]; 
                 //每轮生成两个，超过3把以上的锤子在场时生成一个
                 int maxCount = ownedProjCounts < 3 ? 2 : 1;
-                SpawnNebulaShot(Owner, Projectile, target, maxCount, damage:(int)(Projectile.damage * 0.2f));
+                SpawnNebulaShot(Owner, Projectile, target, maxCount, damage:(int)(Projectile.damage * 0.1f));
             }
             
         }

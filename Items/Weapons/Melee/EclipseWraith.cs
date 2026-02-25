@@ -15,10 +15,11 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class EclipseWraith : ThrownSpearClass
     {
         public override bool NotHomewardJourneySpear => true;
+        public override bool HasLegendary => true;
         public override void ExSD()
         {
             Item.width = Item.height = 50;
-            Item.damage = 95;
+            Item.damage = 75;
             Item.useTime = Item.useAnimation = 26;
             Item.rare = RarityType<DisasterRarity>();
             Item.shootSpeed = 16f;

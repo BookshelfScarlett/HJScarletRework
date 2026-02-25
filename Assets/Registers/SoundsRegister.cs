@@ -25,6 +25,7 @@ namespace HJScarletRework.Assets.Registers
         private static SoundStyle Hammer_Shoot2 => new($"{SoundsPath}{nameof(Hammer_Shoot2)}");
         private static SoundStyle Hammer_Shoot3 => new($"{SoundsPath}{nameof(Hammer_Shoot3)}");
         #endregion
+        public static SoundStyle Buzz => new($"{SoundsPath}{nameof(Buzz)}");
         
         private static SoundStyle Atom_Strike1 => new($"{SoundsPath}{nameof(Atom_Strike1)}");
         private static SoundStyle Atom_Strike2 => new($"{SoundsPath}{nameof(Atom_Strike2)}");
@@ -38,6 +39,7 @@ namespace HJScarletRework.Assets.Registers
         private static SoundStyle Misc_KnifeToss2 => new SoundStyle($"{SoundsPath}{nameof(Misc_KnifeToss2)}");
         private static SoundStyle Misc_KnifeToss3 => new SoundStyle($"{SoundsPath}{nameof(Misc_KnifeToss3)}");
         public static SoundStyle GalvanizedHand_Hit => new SoundStyle($"{SoundsPath}{nameof(GalvanizedHand_Hit)}", numVariants: 2);
+        public static SoundStyle GalvanizedHand_Hit2 => new SoundStyle($"{SoundsPath}{nameof(GalvanizedHand_Hit2)}");
         public static SoundStyle GalvanizedHand_Toss => new SoundStyle($"{SoundsPath}{nameof(GalvanizedHand_Toss)}", numVariants: 3);
         public static SoundStyle GalvanizedHand_Charge => new SoundStyle($"{SoundsPath}{nameof(GalvanizedHand_Charge)}", numVariants: 2);
         public static SoundStyle SpearofEscape_Toss => new SoundStyle($"{SoundsPath}{nameof(SpearofEscape_Toss)}", numVariants: 3);

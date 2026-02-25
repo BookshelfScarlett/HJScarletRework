@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Ranged
 {
@@ -52,8 +53,10 @@ namespace HJScarletRework.Projs.Ranged
             Projectile.ignoreWater = true;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 10;
-            Projectile.penetrate = 3;
+            Projectile.penetrate = 2;
             Projectile.extraUpdates = 2;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
+            Projectile.DamageType = DamageClass.Ranged;
             Projectile.timeLeft = 500;
             Projectile.friendly = true;
         }
@@ -115,6 +118,10 @@ namespace HJScarletRework.Projs.Ranged
             Projectile.extraUpdates = 4;
             //这里的惯性有意降的非常低
             Projectile.HomingTarget(target.Center, 3600f, 24f + maxAccele, 10f);
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.DefenseEffectiveness *= 0f;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

@@ -10,11 +10,12 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class SpearofDarknessThrown : ThrownSpearClass
     {
         public override string Texture => HJScarletItemProj.Item_SpearofDarknessThrown.Path;
+        public override bool HasLegendary => false;
         public int StrikeTime = 0;
         public override void ExSD()
         {
-            Item.damage = 39;
-            Item.useTime = Item.useAnimation = 24;
+            Item.damage = 43;
+            Item.useTime = Item.useAnimation = 29;
             Item.UseSound = SoundID.Item103;
             Item.knockBack = 4f;
             Item.shootSpeed = 14f;

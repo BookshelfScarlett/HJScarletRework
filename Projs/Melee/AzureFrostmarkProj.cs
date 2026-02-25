@@ -47,6 +47,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
+            Lighting.AddLight(Projectile.Center, TorchID.Ice);
             if (!Projectile.HJScarlet().FirstFrame)
             {
                 Speed = Projectile.velocity.Length();

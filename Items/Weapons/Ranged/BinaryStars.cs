@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
         public override void ExSD()
         {
             Item.width = Item.height = 86;
-            Item.damage = 421;
+            Item.damage = 321;
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.shootSpeed = 20f;

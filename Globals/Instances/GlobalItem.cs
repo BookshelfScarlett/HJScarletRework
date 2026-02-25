@@ -2,17 +2,13 @@
 using ContinentOfJourney.Items.Accessories;
 using ContinentOfJourney.Items.Armor;
 using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Items.Placables;
-using ContinentOfJourney.Items.Placables.FishingCrate;
 using ContinentOfJourney.Items.Rockets;
-using ContinentOfJourney.Items.ThrowerWeapons;
 using HJScarletRework.Core.Configs;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using System;
@@ -98,10 +94,6 @@ namespace HJScarletRework.Globals.Instances
             }
             base.ModifyTooltips(item, tooltips);
         }
-        private void DrawSpecialRarityName(Item item, DrawableTooltipLine line, ref int y)
-        {
-        }
-
         public override void HoldItem(Item item, Player player)
         {
             if (EnableCritDamage)
@@ -119,6 +111,10 @@ namespace HJScarletRework.Globals.Instances
             {
                 case ItemID.GolemBossBag:
                     itemLoot.AddLoot<DisasterEssence>(1, 10, 20);
+                    break;
+                case ItemID.FrozenCrate:
+                case ItemID.FrozenCrateHard:
+                    itemLoot.AddLoot<AzureFrostmark>(4);
                     break;
             }
             if(!Main.masterMode)
@@ -158,7 +154,12 @@ namespace HJScarletRework.Globals.Instances
                 DisableDecraft().
                 AddTile(TileID.TinkerersWorkbench).
                 Register();
-
+            if (!ModLoader.TryGetMod("Fargowiltas", out Mod fargoWiltas))
+                return;
+            Recipe.Create(ItemType<AzureFrostmark>()).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyIceCrate, 5).
+                AddTile(TileID.Anvils).
+                Register();
         }
     }
 }

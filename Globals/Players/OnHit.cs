@@ -49,7 +49,7 @@ namespace HJScarletRework.Globals.Players
             //精确打击取溢出暴击率的100伤害。
             if (PreciousTargetCrtis > 0 && PreciousTargetAcc)
             {
-                float critBuff = Player.HeldItem.crit;
+                float critBuff = PreciousTargetCrtis / 100f;
                 totalCritsBonus += critBuff;
             }
             totalCritsBonus += GeneralCrtiDamageAdd;

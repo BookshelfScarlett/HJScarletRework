@@ -18,14 +18,14 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class DialecticsThrown : ThrownSpearClass
     {
         public override string Texture => HJScarletItemProj.Item_DialecticsThrown.Path;
+        public override bool HasLegendary => true;
         public int UsePhase = 0;
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.75f;
         }
         public override void ExSD()
         {
-            Item.damage = 180;
+            Item.damage = 135;
             Item.rare = RarityType<MatterRarity>();
             //不需要声音，在shoot里手动控制
             Item.UseSound = null;

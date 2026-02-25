@@ -118,7 +118,7 @@ namespace HJScarletRework.Projs.Ranged
             DoArcRot();
             //Timer应延后自增避免出现执行问题
             AttackTimer += 1;
-            if(Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true, 1800))
+            if(Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true, 1800, true))
                 ReleaseDarkEnegry();
             if (RotateTime > 1)
             {
@@ -130,7 +130,7 @@ namespace HJScarletRework.Projs.Ranged
         private void DoHanging()
         {
             Projectile.rotation += 0.1f;
-            if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true, 1800f))
+            if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true, 1800f, true))
             {
                 Projectile.HomingTarget(target.Center, 1800f, 24f, 20f);
                 Projectile.extraUpdates = 4;

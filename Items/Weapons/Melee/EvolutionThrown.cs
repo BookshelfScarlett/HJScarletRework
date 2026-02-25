@@ -1,10 +1,8 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
@@ -12,9 +10,10 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class EvolutionThrown : ThrownSpearClass
     {
         public override string Texture => GetInstance<Evolution>().Texture;
+        public override bool HasLegendary => true;
         public override void ExSD()
         {
-            Item.damage = 215;
+            Item.damage = 245;
             Item.useTime = Item.useAnimation = 28;
             Item.knockBack = 12f;
             Item.UseSound = HJScarletSounds.Evolution_Thrown with { MaxInstances = 0};

@@ -18,20 +18,25 @@ HJScarletConfigServer: {
 }
 
 HJScarletConfigClient: {
-	DisplayName: 空想之歌：客户端设置
+	DisplayName: 空想归途：客户端设置
 
 	SpecialRarity: {
 		Label: 特殊稀有度覆盖旅人物品
 		Tooltip:
 			'''
-			允许空想之歌对旅人归途内的部分物品覆盖特殊稀有度
+			允许空想归途对旅人归途内的部分物品覆盖特殊稀有度
 			目前覆盖的都是与神明有关的物品
 			默认关闭
 			'''
 	}
 
 	MaxParticleCounts: {
-		// Label: Max Particle Counts
-		// Tooltip: ""
+		Label: 模组粒子上限
+		Tooltip:
+			'''
+			限制模组内粒子最大的存在上限
+			只作用于由模组制作的武器和粒子
+			默认值为10000个
+			'''
 	}
 }

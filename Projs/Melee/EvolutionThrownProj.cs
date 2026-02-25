@@ -21,7 +21,6 @@ namespace HJScarletRework.Projs.Melee
         public ref float Timer => ref Projectile.ai[0];
         public List<int> PortalProjList = [];
         public override void ExSSD() => Projectile.ToTrailSetting(20, 2);
-        public int SpawnCounter = 4;
         public int HitTime = 0;
         public override void ExSD()
         {
@@ -44,10 +43,7 @@ namespace HJScarletRework.Projs.Melee
             if (Timer % 15 == 0 && Projectile.IsMe())
             {
                 Vector2 portalVel = Projectile.SafeDir() * Main.rand.NextFloat(10f, 14f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, portalVel, ProjectileType<EvolutionEnergyPortal>(), 0, Projectile.knockBack, Owner.whoAmI);
-                float ratios = Clamp(SpawnCounter * 0.1f, 0.4f, 1f);
-                proj.originalDamage = (int)(Projectile.originalDamage * ratios);
-                SpawnCounter++;
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, portalVel, ProjectileType<EvolutionEnergyPortal>(), Projectile.originalDamage / 2, Projectile.knockBack, Owner.whoAmI);
                 if (proj.active && proj != null)
                 {
                     //存储索引而非射弹本身，避免一些编译器误判问题
@@ -99,7 +95,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            float ratios = Clamp(1f - HitTime * 0.15f, 0f, 1f);
+            float ratios = Clamp(1f - HitTime * 0.10f, 0f, 1f);
             modifiers.SourceDamage *= (ratios);
             HitTime++;
             base.ModifyHitNPC(target, ref modifiers);

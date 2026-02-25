@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Ranged
 {
@@ -44,6 +45,7 @@ namespace HJScarletRework.Projs.Ranged
             Projectile.localNPCHitCooldown = 15;
             Projectile.extraUpdates = 6;
             Projectile.penetrate = -1;
+            Projectile.DamageType = DamageClass.Ranged;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
         }

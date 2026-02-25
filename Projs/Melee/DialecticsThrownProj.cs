@@ -103,7 +103,7 @@ namespace HJScarletRework.Projs.Melee
                 for (int k = -1; k < 2; k += 2)
                 {
                     Vector2 vel2 = Projectile.SafeDir().RotatedBy(PiOver4 * k);
-                    Projectile cube = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), vel2 * -13, ProjectileType<DialecticsCubeProj>(), Projectile.damage / 4, 1f);
+                    Projectile cube = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), vel2 * -13, ProjectileType<DialecticsCubeProj>(), Projectile.damage / 3, 1f);
                     cube.rotation = Projectile.velocity.ToRotation();
                 }
             }
@@ -144,7 +144,7 @@ namespace HJScarletRework.Projs.Melee
                     {
                         Vector2 spawnPos = new Vector2(target.Center.X + Main.rand.NextBool().ToDirectionInt() * Main.rand.NextFloat(10f, 200f), target.Center.Y + Main.rand.NextFloat(1200f, 1800f));
                         Vector2 vel = (spawnPos - target.Center).SafeNormalize(Vector2.UnitX) * Main.rand.NextFloat(12f, 16f);
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<DialecticsSkyFall>(), Projectile.damage / 2, 12f, Owner.whoAmI);
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<DialecticsSkyFall>(), (int)(Projectile.damage * 0.75f), 12f, Owner.whoAmI);
                         proj.rotation = vel.ToRotation();
                         proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                     }

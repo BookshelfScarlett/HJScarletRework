@@ -35,6 +35,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
+            Lighting.AddLight(Projectile.Center, TorchID.Ice);
             //向上喷火的粒子，使用原版的更加合适一些。
             Vector2 pos = Projectile.Center.ToRandCirclePos(4f);
             Vector2 vel = -Projectile.velocity / 4;

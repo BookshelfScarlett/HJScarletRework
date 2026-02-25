@@ -125,7 +125,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawProj(Color.White);
+            Projectile.DrawProj(lightColor);
             return false;
         }
     }

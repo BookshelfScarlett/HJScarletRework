@@ -35,26 +35,33 @@ namespace HJScarletRework.Projs.Melee
             Projectile.noEnchantmentVisuals = true;
             Projectile.timeLeft = GetSeconds(3);
         }
-        private float SearchDistance = 200f;
+        private float SearchDistance = 260f;
         private int TotalBounceTime = 4;
         private float KillDistance = 1800f;
         public override void AI()
         {
+            Lighting.AddLight(Projectile.Center, TorchID.Orange);
             //如果开了灾厄，则加强索敌距离，生存时间和提供1eu
-            if (HJScarletMethods.HasFuckingCalamity && Timer == 0f)
+            if(!Projectile.HJScarlet().FirstFrame)
             {
-                Projectile.timeLeft = 1800;
-                SearchDistance = 1800;
-                KillDistance = 3600;
-                TotalBounceTime = 8;
-                Projectile.extraUpdates = 1;
+                if (Projectile.HJScarlet().GlobalTargetIndex == -1)
+                    TotalBounceTime = 1;
+                if(HJScarletMethods.HasFuckingCalamity)
+                {
+                    Projectile.timeLeft = 1800;
+                    SearchDistance = 1800;
+                    KillDistance = 3600;
+                    TotalBounceTime = 8;
+                    Projectile.extraUpdates = 1;
+                }
+                    
             }
 
             Projectile.rotation = Projectile.velocity.ToRotation();
 
             Timer++;
             bool additionRequire = (Timer > 15f && Projectile.HJScarlet().GlobalTargetIndex != -1) || BounceTime > 0;
-            float homingSpeed = Projectile.HJScarlet().GlobalTargetIndex != -1 ? 12f : 8f;
+            float homingSpeed = Projectile.HJScarlet().GlobalTargetIndex != -1 ? 12f : 6f;
             if (Projectile.GetTargetSafe(out NPC target, true, SearchDistance) && additionRequire)
                 Projectile.HomingTarget(target.Center, -1, homingSpeed, 20f);
             else
@@ -97,9 +104,9 @@ namespace HJScarletRework.Projs.Melee
                 }
             }
             if (Projectile.velocity.X != oldVelocity.X)
-                Projectile.velocity.X = -oldVelocity.X;
+                Projectile.velocity.X = -oldVelocity.X * 0.5f;
             if (Projectile.velocity.Y != oldVelocity.Y)
-                Projectile.velocity.Y = -oldVelocity.Y * 0.6f;
+                Projectile.velocity.Y = -oldVelocity.Y * 0.5f;
             BounceTime += 1;
             return BounceTime > TotalBounceTime;
         }

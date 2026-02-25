@@ -97,7 +97,7 @@ namespace HJScarletRework.Projs.Ranged
         //首次投掷出去时的AI
         private void DoShooted()
         {
-            if (Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame)
             {
                 //压制音量，这里由仆从锤的射线声作为主导
                 SoundStyle pickSound = Owner.HasProj<DeathTollsHeldMinion>() ? HJScarletSounds.DeathsToll_Toss with { Pitch = 0.4f, Volume = 0.2f, MaxInstances = 0 } : SoundID.Item103;
@@ -160,7 +160,7 @@ namespace HJScarletRework.Projs.Ranged
             if (!hasMinion)
             {
                 Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, minionID, Projectile.damage, Projectile.knockBack, Projectile.owner);
-                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Volume = 0.75f}, Projectile.Center);
             }
             else if (!Owner.HasProj<DeathTollsCloneProj>(out int projID))
             {

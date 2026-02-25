@@ -50,7 +50,7 @@ namespace HJScarletRework.Projs.Ranged
             //锤子生命值即将结束的时候，让锤子本身直接去撞击距离最近的敌人
             if (Projectile.timeLeft < 200 && !IsReadyToDead)
             {
-                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { MaxInstances = 0}, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Volume = 0.75f}, Projectile.Center);
                 IsReadyToDead = true;
                 ShootTimer = 0;
             }
@@ -113,7 +113,7 @@ namespace HJScarletRework.Projs.Ranged
             ShootTimer += 1;
             if (ShootTimer == 45f)
             {
-                SoundEngine.PlaySound(HJScarletSounds.Misc_MagicStaffFire, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Misc_MagicStaffFire with { Volume = 0.45f}, Projectile.Center);
                 Vector2 dir = (Owner.LocalMouseWorld() - Projectile.Center).SafeNormalize(Vector2.UnitX);
                 Projectile.extraUpdates = 4;
                 Projectile.velocity = dir * 18f;

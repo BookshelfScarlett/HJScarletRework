@@ -50,7 +50,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.velocity *= 0.95f;
             //事实上，敌对单位是会移动的，因此这里提供的速度是相对于较快的
             if (Projectile.GetTargetSafe(out NPC tar, true, 200) && Projectile.timeLeft < 40)
-                Projectile.HomingTarget(tar.Center, -1, 5f, 20f);
+                Projectile.HomingTarget(tar.Center, -1, 4f, 20f);
             Projectile.scale += 0.05f;
             if (Projectile.scale > RandScale)
                 Projectile.scale = RandScale;

@@ -1,6 +1,8 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -20,6 +22,11 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.shoot = ProjectileType<TheMarsProj>();
             Item.rare = ItemRarityID.Red;
+        }
+        public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
+        {
+            if (DownedBossSystem.downedBarrier)
+                damage *= 1.15f;
         }
         public override Color MainTooltipColor => Color.LightGray;
     }

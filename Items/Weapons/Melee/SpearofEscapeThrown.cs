@@ -13,6 +13,7 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class SpearofEscapeThrown : ThrownSpearClass
     {
         public override string Texture => GetInstance<SpearOfEscape>().Texture;
+        public override bool HasLegendary => true;
         public override void SetStaticDefaults()
         {
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;

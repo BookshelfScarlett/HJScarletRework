@@ -45,7 +45,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     if (Projectile.IsMe())
                     {
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 15f, ProjectileType<CryoblazeHymnFrostEnergy>(), Projectile.originalDamage / 2, Projectile.knockBack);
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 18f, ProjectileType<CryoblazeHymnFrostEnergy>(), Projectile.originalDamage / 2, Projectile.knockBack);
                         proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                     }
                     for (int j = 0; j < 10; j++)

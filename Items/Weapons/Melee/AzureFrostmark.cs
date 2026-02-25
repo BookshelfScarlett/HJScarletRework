@@ -9,7 +9,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {
-            Item.damage = 23;
+            Item.damage = 27;
             Item.rare = ItemRarityID.Green;
             Item.useTime = Item.useAnimation = 40;
             Item.knockBack = 4f;
@@ -18,15 +18,5 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.UseSound = SoundID.Item1;
         }
         public override Color MainTooltipColor => Color.RoyalBlue;
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddIngredient(ItemID.Spear).
-                AddIngredient(ItemID.Sapphire).
-                AddIngredient(ItemID.Shiverthorn, 5).
-                AddIngredient(ItemID.IceBlock, 10).
-                AddTile(TileID.Anvils).
-                Register();
-        }
     }
 }

@@ -36,12 +36,13 @@ namespace HJScarletRework.Projs.Melee
             Projectile.extraUpdates = 2;
             Projectile.localNPCHitCooldown = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 2;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.timeLeft = 200;
         }
         public override void AI()
         {
+            Lighting.AddLight(Projectile.Center + Projectile.rotation.ToRotationVector2() * 30f, TorchID.Blue);
             if (!Projectile.HJScarlet().FirstFrame)
                 Projectile.originalDamage = Projectile.damage;  
             Projectile.rotation = Projectile.velocity.ToRotation();
@@ -73,15 +74,13 @@ namespace HJScarletRework.Projs.Melee
         private void DoShooted()
         {
             Timer = 1;    
-
         }
 
         private void DoHit()
         {
-            if (!Projectile.IsMe())
-                return;
+            
             //在AI这里向上投射火焰，方便一些同步问题
-            if (Timer > 0f && !DonRiseLamp)
+            if (Timer > 0f && !DonRiseLamp && Projectile.IsMe())
             {
                 //这里需要遍历一遍所取位置是否处于wall里面。如果是则回退直到适合为止
                 Vector2 projDir = Projectile.SafeDirByRot();
