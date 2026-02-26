@@ -21,7 +21,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Reference Include="ContinentOfJourney">
-	    <HintPath>..\ModAssemblies\ContinentOfJourney_v0.8.70.46.dll</HintPath>
+	    <HintPath>..\..\ModReader\ContinentOfJourney\ContinentOfJourney.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 

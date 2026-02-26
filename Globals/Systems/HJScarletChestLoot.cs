@@ -119,10 +119,17 @@ namespace HJScarletRework.Globals.Systems
             }
 
         }
-        public override void PostUpdateWorld()
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
+        {
+            base.ModifyWorldGenTasks(tasks, ref totalWeight);
+        }
+        public override void PostWorldGen()
         {
             PlaceManaCrystal();
             PlaceIceSpear();
+        }
+        public override void PostUpdateWorld()
+        {
         }
     }
 }

@@ -6,10 +6,11 @@ C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\bin\Debug\net8.0\HJScarletRework.deps.json
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\bin\Debug\net8.0\HJScarletRework.dll
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\bin\Debug\net8.0\HJScarletRework.pdb
-C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\bin\Debug\net8.0\ContinentOfJourney_v0.8.70.46.dll
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\obj\Debug\net8.0\HJScarle.2C6DF29C.Up2Date
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\obj\Debug\net8.0\HJScarletRework.dll
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\obj\Debug\net8.0\refint\HJScarletRework.dll
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\obj\Debug\net8.0\HJScarletRework.pdb
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\obj\Debug\net8.0\ref\HJScarletRework.dll
 C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\obj\Debug\net8.0\HJScarletRework.sourcelink.json
+C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\bin\Debug\net8.0\ContinentOfJourney.dll
+C:\Users\25239\Documents\My Games\Terraria\tModLoader\ModSources\HJScarletRework\bin\Debug\net8.0\ContinentOfJourney.pdb

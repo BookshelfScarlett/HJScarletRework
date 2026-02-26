@@ -1,3 +1,18 @@
 SwitchWeaponTooltip: Lostbelt Journey: Press Middle Click while holding the weapon to switch
-SwitchWeaponVisual: ""
+SwitchWeaponVisual: Lostbelt Journey: Press Middle Click while holding the weapon to change its visual effect
+
+SwitchWeapon: {
+	Tooltip:
+		'''
+		Lostbelt Journey:
+		Press Middle Click while holding the weapon to switch
+		'''
+	Visual:
+		'''
+		Lostbelt Journey:
+		Press Middle Click while holding the weapon to change its visual effect
+		'''
+	AllFix: Also can apply to: {0}
+}
+
 CrossModSupport.Calamity: ""

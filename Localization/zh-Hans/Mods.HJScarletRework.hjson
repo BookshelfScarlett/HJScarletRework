@@ -1,3 +1,18 @@
 SwitchWeaponTooltip: 空想归途：手持该武器，按下鼠标中键以切换形态
 SwitchWeaponVisual: 空想归途：手持该武器，按下鼠标中键以更改视觉效果
+
+SwitchWeapon: {
+	Tooltip:
+		'''
+		空想归途：
+		手持该武器，按下鼠标中键以切换形态
+		'''
+	Visual:
+		'''
+		空想归途：
+		手持该武器，按下鼠标中键以更改视觉效果
+		'''
+	AllFix: 同样应用于: {0}
+}
+
 CrossModSupport.Calamity: 灾厄联动适配
