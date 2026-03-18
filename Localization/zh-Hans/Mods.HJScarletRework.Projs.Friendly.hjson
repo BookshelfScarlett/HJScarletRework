@@ -52,6 +52,14 @@ Melee: {
 	BinaryStarsHeldClone.DisplayName: 双子星-天降锤
 	// CactusSpearProj.DisplayName: Cactus Spear Proj
 	// CactusSpearSpike.DisplayName: Cactus Spear Spike
+	// ColdSakuraProj.DisplayName: Cold Sakura Proj
+	// ColdSakuraArrow.DisplayName: Cold Sakura Arrow
+	// TerraSpearArrow.DisplayName: Terra Spear Arrow
+	// TerraSpearPortal.DisplayName: Terra Spear Portal
+	// TerraSpearProj.DisplayName: Terra Spear Proj
+	// TerraSpearSideProj.DisplayName: Terra Spear Side Proj
+	// TerraSpearLaser.DisplayName: Terra Spear Laser
+	// AbyssalWorldProj.DisplayName: Abyssal World Proj
 }
 
 Typeless: {
@@ -90,4 +98,33 @@ Ranged: {
 	JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
 	// TheMossHeldLock.DisplayName: The Moss Held Lock
 	// TheMossMainProj.DisplayName: The Moss Main Proj
+}
+
+Executor: {
+	// CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
+	// ExsanguinationBulletProj.DisplayName: Exsanguination Bullet Proj
+	// ExsanguinationHeldProj.DisplayName: Exsanguination Held Proj
+	// BlazingStrikerProj.DisplayName: Blazing Striker Proj
+	// DungeonBreakerProj.DisplayName: Dungeon Breaker Proj
+	// FleshGrinderProj.DisplayName: Flesh Grinder Proj
+	// JungleMadness.DisplayName: Jungle Madness
+	// PerferctNightProj.DisplayName: Perferct Night Proj
+	// JungleMadnessProj.DisplayName: Jungle Madness Proj
+	// FleshGrinderFocusProj.DisplayName: Flesh Grinder Focus Proj
+	// Aetherfireball.DisplayName: Aetherfireball
+	// AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
+	// AetherfireSmasherMain.DisplayName: Aetherfire Smasher Main
+	// AetherfireVolcano.DisplayName: Aetherfire Volcano
+	// BinaryStarsHeldClone.DisplayName: Binary Stars Held Clone
+	// BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
+	// BinaryStarsMain.DisplayName: Binary Stars Main
+	// DeathTollsMainProj.DisplayName: Death Tolls Main Proj
+	// JudgementMainProj.DisplayName: Judgement Main Proj
+	// TheMossFocusProj.DisplayName: The Moss Focus Proj
+	// TheMossProj.DisplayName: The Moss Proj
+	// BlazingStrikerFocusProj.DisplayName: Blazing Striker Focus Proj
+	// DungeonBreakFocusProj.DisplayName: Dungeon Break Focus Proj
+	// BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
+	// DungeonBreakerFocusProj.DisplayName: Dungeon Breaker Focus Proj
+	// DungeonBreakShockwave.DisplayName: Dungeon Break Shockwave
 }

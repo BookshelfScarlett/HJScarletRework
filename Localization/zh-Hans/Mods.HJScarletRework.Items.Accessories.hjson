@@ -137,6 +137,24 @@ LifeBalloon: {
 }
 
 Desterrennacht: {
-	// DisplayName: Desterrennacht
-	// Tooltip: ""
+	DisplayName: 星月夜
+	Tooltip:
+		'''
+		攻击命中时恢复50点生命值
+		每隔一段时间自动恢复100点生命值
+		承受致死伤害时以50%的生命值再起
+		再起成功后，获得3次闪避所有攻击的机会
+		你的生命值永远不会低于100点，但仍然会受到致死的伤害
+		「依仗星旋，赠君握手」
+		'''
+}
+
+FakeManaContainer: {
+	DisplayName: 魔力储蓄罐
+	Tooltip:
+		'''
+		提供魔力上限，随魔力水晶使用次数增加而降低
+		最大提供150点魔力上限
+		当前提供{0}点魔力上限
+		'''
 }

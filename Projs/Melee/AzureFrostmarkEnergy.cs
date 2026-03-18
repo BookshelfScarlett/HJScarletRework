@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
     public class AzureFrostmarkEnergy :HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Melee;
-        public override string Texture => HJScarletTexture.Particle_ShinyOrbHard.Path;
+        public override string Texture => HJScarletTexture.InvisAsset.Path;
         public ref float Timer => ref Projectile.ai[0];
         public int BounceTime
         {
@@ -83,7 +83,9 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 projPos, out Vector2 ori);
+            Texture2D projTex = HJScarletTexture.Particle_ShinyOrbHard.Value;
+            Vector2 projPos = Projectile.Center - Main.screenPosition;
+            Vector2 ori = projTex.ToOrigin();
             //绘制残影
             float oriScale = 0.64f;
             float scale = 1f;

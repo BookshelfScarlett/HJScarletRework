@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 using HJScarletRework.Core.ParticleSystem;
+using System.Threading;
 
 namespace HJScarletRework.Particles
 {
@@ -17,38 +18,38 @@ namespace HJScarletRework.Particles
         public bool DrawGlow = true;
         public float GlowScale = 0.45f;
         public bool HasRotation;
+        public float BeginScale = 0;
         public override int UseBlendStateID => BlendStateType;
         public StarShape(Vector2 position, Vector2 velocity, Color drawColor, float scale, int lifeTime)
         {
             Position = position;
             Velocity = velocity;
             DrawColor = drawColor;
-            Scale = scale;
+            Scale = BeginScale =scale;
             Lifetime = lifeTime;
             BlendStateType = BlendStateID.Additive;
+        }
+        public StarShape(Vector2 position, Vector2 velocity, Color drawColor, float scale, int lifeTime, bool drawGlow)
+        {
+            Position = position;
+            Velocity = velocity;
+            DrawColor = drawColor;
+            Scale = BeginScale = scale;
+            Lifetime = lifeTime;
+            BlendStateType = BlendStateID.Additive;
+            HasRotation = false;
+            DrawGlow = drawGlow;
         }
         public StarShape(Vector2 position, Vector2 velocity, Color drawColor, float scale, int lifeTime, float rot)
         {
             Position = position;
             Velocity = velocity;
             DrawColor = drawColor;
-            Scale = scale;
+            Scale = BeginScale =scale;
             Lifetime = lifeTime;
             BlendStateType = BlendStateID.Additive;
             HasRotation = true;
             Rotation = rot;
-        }
-        public StarShape(Vector2 position, Vector2 velocity, Color drawColor, float scale, int lifeTime, int? blendStateID = null, bool noGravity = true, bool drawGlow = true, float glowScale = 0.45f)
-        {
-            Position = position;
-            Velocity = velocity;
-            DrawColor = drawColor;
-            Scale = scale;
-            Lifetime = lifeTime;
-            BlendStateType = blendStateID ?? BlendStateID.Additive;
-            NoGravity = noGravity;
-            DrawGlow = drawGlow;
-            GlowScale = glowScale;
         }
         public override void Update()
         {
@@ -64,6 +65,8 @@ namespace HJScarletRework.Particles
                 Velocity.Y += 0.25f;
             }
             Rotation = HasRotation ? Rotation : Velocity.ToRotation() + PiOver2;
+            if (Scale < 0.10f * BeginScale)
+                Time = Lifetime;
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -71,7 +74,7 @@ namespace HJScarletRework.Particles
             Texture2D texture = TextureAssets.Extra[ExtrasID.SharpTears].Value;
             spriteBatch.Draw(texture, Position - Main.screenPosition, null, SparkColor, Rotation, texture.Size() * 0.5f, scale, 0, 0f);
             if (DrawGlow)
-                spriteBatch.Draw(texture, Position - Main.screenPosition, null, SparkColor, Rotation, texture.Size() * 0.5f, scale * new Vector2(GlowScale, 1f), 0, 0f);
+                spriteBatch.Draw(texture, Position - Main.screenPosition, null, Color.White, Rotation, texture.Size() * 0.5f, scale * new Vector2(GlowScale, 1f), 0, 0f);
         }
     }
 }

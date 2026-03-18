@@ -16,3 +16,23 @@ SwitchWeapon: {
 }
 
 CrossModSupport.Calamity: 灾厄联动适配
+
+DamageClasses: {
+	ExecutorDamageClass: {
+		FocusTime: 命中{0}次启用专注攻击，按住左Alt查看
+		DisplayName: 代行者伤害
+
+		Prefixs: {
+			Alterego.DisplayName: 他人格
+			Digital.DisplayName: 电子
+			Evolution.DisplayName: 变革
+			Fake.DisplayName: 虚假
+			Foreigner.DisplayName: 降临
+			Mysterious.DisplayName: 神秘
+			Phantasmic.DisplayName: 空想
+			FocusTimeLine: "{0}启动专注攻击次数"
+			FocusDamageLine: "{0}%专注攻击伤害"
+			ArmorPenetrationLine: "{0}护甲穿透"
+		}
+	}
+}

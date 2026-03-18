@@ -12,10 +12,8 @@ namespace HJScarletRework.Items.Accessories
 {
     public class Desterrennacht : HJScarletItems
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
-        public int MinionSlots = 2;
+        public override bool IsLoadingEnabled(Mod mod) => true;
         public override ItemCategory LocalCategory => ItemCategory.Accessories;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs("10%", MinionSlots);
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;
@@ -31,7 +29,6 @@ namespace HJScarletRework.Items.Accessories
         {
             CreateRecipe().
                 AddIngredient<StardustRune>().
-                AddIngredient(ItemID.MasterNinjaGear).
                 AddIngredient<EssenceofDeath>(5).
                 AddIngredient(ItemID.FragmentStardust, 10).
                 AddTile<FinalAnvil>().

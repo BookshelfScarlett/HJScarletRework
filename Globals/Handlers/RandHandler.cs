@@ -36,6 +36,8 @@ namespace HJScarletRework.Globals.Handlers
             float edgeY = valueY ?? valueX;
             return pos + Main.rand.NextVector2Circular(valueX, edgeY);
         }
+        public static bool RandBoolen(int chance = 2) => Main.rand.NextBool(chance);
+        public static float RandFloat(float minValue = 0f, float maxValue = 1f) => Main.rand.NextFloat(minValue, maxValue);
         public static int GetSeconds(int seconds) => seconds * 60;
         public static Color RandLerpColor(Color beginColor, Color endColor) => Color.Lerp(beginColor, endColor, RandZeroToOne);
         public static string GetVanillaAssetPath(VanillaAsset vanillaAsset, int id)=> $"Terraria/Images/{vanillaAsset}_{id}";

@@ -6,11 +6,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 
@@ -121,7 +117,6 @@ namespace HJScarletRework.Projs.Melee
             SB.EnterShaderArea();
             Vector2 dir = Projectile.SafeDirByRot();
             Vector2 glowCirclePos = drawPos + dir * 10f;
-            //SB.Draw(HJScarletTexture.Texture_Swirl5.Value, glowCirclePos, null, Color.CornflowerBlue, Projectile.rotation, HJScarletTexture.Texture_Swirl5.Origin, Projectile.scale * 0.5f, 0, 0);
             Tex2DWithPath lineGlow = HJScarletTexture.Particle_OpticalLineGlow;
             Vector2 glowScale = Projectile.scale * new Vector2(1.2f, 0.7f);
             SB.Draw(lineGlow.Value, drawPos + dir * 10f, null, Color.CornflowerBlue * Projectile.Opacity, Projectile.rotation, lineGlow.Origin, glowScale * 0.10f, 0, 0);
@@ -162,9 +157,7 @@ namespace HJScarletRework.Projs.Melee
                 list.Add(downClass);
             }
             if (list.Count >= 3)
-            {
                 GD.DrawUserPrimitives(PrimitiveType.TriangleStrip, list.ToArray(), 0, list.Count - 2);
-            }
             SB.EndShaderArea();
         }
     }

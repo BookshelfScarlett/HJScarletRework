@@ -6,8 +6,6 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 using HJScarletRework.Core.ParticleSystem;
-using System.Runtime.Intrinsics.Arm;
-using HJScarletRework.Globals.Methods;
 
 namespace HJScarletRework.Particles
 {

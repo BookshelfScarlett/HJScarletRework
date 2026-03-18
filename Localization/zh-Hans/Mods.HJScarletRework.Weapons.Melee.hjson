@@ -304,3 +304,27 @@ CactusSpear: {
 		"仙人掌就应该做成一把投矛！"
 		'''
 }
+
+ColdSakura: {
+	DisplayName: 冷樱
+	Tooltip:
+		'''
+		快速投掷凌厉高速的樱花之矛
+		命中时追及樱之矢
+		'''
+}
+
+TerraSpear: {
+	DisplayName: 泰拉投枪
+	Tooltip:
+		'''
+		沿途滞留多个泰拉传送门，一定时间后释放追踪的泰拉之箭
+		掷出直接命中时从场外呼叫大量长枪进行支援
+		"它不叫泰拉长枪，别搞砸了。"
+		'''
+}
+
+AbyssalWorld: {
+	DisplayName: 时限残片
+	Tooltip: '''"不要被那些乍看之下美妙的东西所迷惑，触手可及不意味着立刻得到。"'''
+}

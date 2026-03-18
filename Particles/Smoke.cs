@@ -3,11 +3,8 @@ using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Particles
@@ -15,7 +12,8 @@ namespace HJScarletRework.Particles
     public class SmokeParticle : BaseParticle
     {
         public override int UseBlendStateID => BlendStateID.Additive;
-        public SmokeParticle(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale)
+        public bool UseAlt;
+        public SmokeParticle(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, bool useAlt = false)
         {
             Position = position;
             Velocity = velocity;
@@ -24,6 +22,7 @@ namespace HJScarletRework.Particles
             Rotation = Rot;
             Opacity = opacity;
             Scale = scale;
+            UseAlt = useAlt;
         }
         public override void OnSpawn()
         {
@@ -38,11 +37,11 @@ namespace HJScarletRework.Particles
         public override void Draw(SpriteBatch spriteBatch)
         {
             float brightness = (float)Math.Pow(Lighting.Brightness((int)(Position.X / 16f), (int)(Position.Y / 16f)), 0.15);
-            Texture2D texture = HJScarletTexture.Particle_Smoke.Value;
+            Asset<Texture2D> texture = UseAlt ? HJScarletTexture.Particle_SmokeAlt.Texture : HJScarletTexture.Particle_Smoke.Texture;
 
-            Rectangle frame = HJScarletTexture.Particle_Smoke.Texture.Frame(4, 4, (int)(LifetimeRatio * 16) % 4, (int)(LifetimeRatio * 4));
+            Rectangle frame = texture.Frame(4, 4, (int)(LifetimeRatio * 16) % 4, (int)(LifetimeRatio * 4));
             Vector2 origin = frame.Size() * 0.5f;
-            spriteBatch.Draw(texture, Position - Main.screenPosition, frame, DrawColor * brightness * Opacity, Rotation, origin, Scale, 0, 0f);
+            spriteBatch.Draw(texture.Value, Position - Main.screenPosition, frame, DrawColor * brightness * Opacity, Rotation, origin, Scale, 0, 0f);
         }
     }
 }

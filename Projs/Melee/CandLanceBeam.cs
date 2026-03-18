@@ -160,7 +160,7 @@ namespace HJScarletRework.Projs.Melee
             //确保链表正确
             if (availableTarget.Count == 0)
             {
-                Projectile.Kill();
+                Projectile.timeLeft = 2;
                 return;
             }
             //将链表进行逆向操作，方便索引遍历
@@ -176,7 +176,7 @@ namespace HJScarletRework.Projs.Melee
             //添加需要的攻击单位
             ((CandLanceBeam)anotherShot.ModProjectile).TargetThatAlreadyHit.Add(targetThatHit);
             ((CandLanceBeam)anotherShot.ModProjectile).HasInflicedConfused = HasInflicedConfused;
-            Projectile.Kill();
+            Projectile.timeLeft = 2;
         }
         private void InitDust()
         {

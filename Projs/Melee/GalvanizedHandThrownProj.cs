@@ -49,7 +49,7 @@ namespace HJScarletRework.Projs.Melee
         public override void ExSD()
         {
             Projectile.height = Projectile.width = 16;
-            Projectile.extraUpdates = 14;
+            Projectile.extraUpdates = 5;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
             Projectile.penetrate = -1;
@@ -119,12 +119,18 @@ namespace HJScarletRework.Projs.Melee
                     Projectile arrow = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, arrowDir * 12f, ProjectileType<GalvanizedHandArrow>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                     arrow.HJScarlet().GlobalTargetIndex = target.whoAmI;
                 }
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<LightBiteArrow>(), Projectile.damage * 3, 0f, Owner.whoAmI);
+                for (int i = 0; i < 3; i++)
+                {
+                    Vector2 spawnPos = Owner.Center - (Owner.Center - target.Center).ToSafeNormalize().RotatedByRandom(PiOver4) * (900f + (i * 150f));
+                    Vector2 vel = HJScarletMethods.PredictAimToTarget(spawnPos, target.Center, target.velocity, 28f, 0);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<GalvanizedHandSideProj>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
+                    proj.extraUpdates += 1;
+                }
             }
             SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit2, Owner.Center);
             //三倍伤害，单次的判定
             //把人飞出去
-            Owner.velocity = Projectile.rotation.ToRotationVector2() * -OriginalSpeed * 0.6f;
+            Owner.velocity = Owner.velocity.ToSafeNormalize() * OriginalSpeed * -0.6f;
             Projectile.Kill();
 
         }
@@ -170,6 +176,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Owner.HJScarlet().NoSlowFall = 120;
                 Owner.velocity = dir * 80;
+                Owner.GetImmnue(ImmunityCooldownID.General, 2);
                 if (!BeginPull)
                 {
                     BeginPull = true;
@@ -183,6 +190,18 @@ namespace HJScarletRework.Projs.Melee
                 if ((Owner.Center - target.Center).LengthSquared() < 50f * 50f)
                 {
                     PullHit(target);
+                }
+            }
+            else
+            {
+                if(Projectile.timeLeft % GetSeconds(1) == 0)
+                {
+                    Vector2 spawnPos = Owner.Center + (Owner.Center - target.Center).ToSafeNormalize().RotatedByRandom(PiOver4) * (1200f); 
+                    Vector2 vel = HJScarletMethods.PredictAimToTarget(spawnPos, target.Center, target.velocity, 28f, 0);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<GalvanizedHandSideProj>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
+                    proj.extraUpdates += 1;
+                    proj.scale *= 0.8f;
+
                 }
             }
         }
@@ -255,6 +274,13 @@ namespace HJScarletRework.Projs.Melee
         {
             if (AttackType == Style.Shoot)
             {
+                for (int i = 0; i < 3; i++)
+                {
+                    Vector2 spawnPos = Owner.Center + (Owner.Center - target.Center).ToSafeNormalize().RotatedByRandom(PiOver4) * (900f + (i * 150f));
+                    Vector2 vel = HJScarletMethods.PredictAimToTarget(spawnPos, target.Center, target.velocity, 28f, 0);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<GalvanizedHandSideProj>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
+                    proj.extraUpdates += 1;
+                }
                 StoredPosition = Projectile.Center - target.Center;
                 AttackType = Style.Stab;
                 Projectile.netUpdate = true;
@@ -267,7 +293,7 @@ namespace HJScarletRework.Projs.Melee
             }
         }
 
-        private void HitParticle(Vector2 center)
+        private void HitParticle(Vector2 _)
         {
             Vector2 dir = Projectile.SafeDirByRot();
             for (int i = -1; i < 2; i += 1)
@@ -306,7 +332,7 @@ namespace HJScarletRework.Projs.Melee
             HJScarletShader.TerrarRayLaser.Parameters["uColor"].SetValue(trailColor.ToVector4() * alphaValue);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeoutLength"].SetValue(1.3f);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeinLength"].SetValue(0.1f);
-            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> validRot, Projectile.oldPos, Projectile.oldRot);
+            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> _, Projectile.oldPos, Projectile.oldRot);
             GD.Textures[0] = tex.Value;
             GD.SamplerStates[0] = SamplerState.PointClamp;
             HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();
@@ -339,7 +365,7 @@ namespace HJScarletRework.Projs.Melee
             HJScarletShader.TerrarRayLaser.Parameters["uFadeoutLength"].SetValue(1f);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeinLength"].SetValue(0.1f);
 
-            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> validRot, Projectile.oldPos, Projectile.oldRot);
+            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> _, Projectile.oldPos, Projectile.oldRot);
             GD.Textures[0] = tex.Value;
             GD.SamplerStates[0] = SamplerState.PointClamp;
             HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();

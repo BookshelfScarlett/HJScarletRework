@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ContinentOfJourney.Items;
+using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Melee;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -13,6 +16,8 @@ namespace HJScarletRework.Globals.Instances
         public static string AnyMechBossSoul;
         public static string AnyLunarPickaxe;
         public static string AnyIceCrate;
+        public static string AnySpearofDarkness;
+        public static string AnyEvilHammer;
         public override void AddRecipeGroups()
         {
             AnyCopperBar = CreateRecipeGroup(nameof(AnyCopperBar), ItemID.CopperBar, ItemID.TinBar);
@@ -20,6 +25,8 @@ namespace HJScarletRework.Globals.Instances
             AnyMechBossSoul = CreateRecipeGroup(nameof(AnyMechBossSoul), ItemID.SoulofFright, ItemID.SoulofSight, ItemID.SoulofMight);
             AnyLunarPickaxe = CreateRecipeGroup(nameof(AnyLunarPickaxe), ItemID.SolarFlarePickaxe, ItemID.VortexPickaxe, ItemID.NebulaPickaxe, ItemID.StardustPickaxe);
             AnyIceCrate = CreateRecipeGroup(nameof(AnyIceCrate), ItemID.FrozenCrate, ItemID.FrozenCrateHard);
+            AnySpearofDarkness = CreateRecipeGroup(nameof(AnySpearofDarkness), ItemType<SpearofDarknessThrown>(), ItemType<SpearOfDarkness>());
+            AnyEvilHammer = CreateRecipeGroup(nameof(AnyEvilHammer), ItemType<TheMoss>(), ItemType<FleshGrinder>());
         }
         public override void Unload()
         {
@@ -28,6 +35,8 @@ namespace HJScarletRework.Globals.Instances
             AnyMechBossSoul = null;
             AnyLunarPickaxe = null;
             AnyIceCrate = null;
+            AnySpearofDarkness = null;
+            AnyEvilHammer = null;
 
         }
         public static string CreateRecipeGroup(string name, params int[] AllItem)

@@ -42,7 +42,7 @@ namespace HJScarletRework.ReVisual.Class
         /// <summary>
         /// 复写这个钩子，以绘制需要的东西，或者你想做点什么，也可以。
         /// 尽量不要动原本的代码
-        /// 如果ShouldApplyRevisual返回为真，不会执行。
+        /// 如果ShouldApplyRevisual返回为真执行。
         /// </summary>
         /// <param name="proj"></param>
         public virtual void RevisualUpdate(Projectile proj)
@@ -92,6 +92,28 @@ namespace HJScarletRework.ReVisual.Class
                 RotList.RemoveAt(0);
             if (PosList.Count > TotalListCount)
                 PosList.RemoveAt(0);
+        }
+        public void AddOldPosRotList(Projectile proj, Vector2? oldPos = null, float? oldRot = null)
+        {
+            Vector2 pos = oldPos ?? proj.Center;
+            float rot = oldRot ?? proj.rotation;
+            if(!proj.HJScarlet().FirstFrame)
+            {
+                PosList.Clear();
+                RotList.Clear();
+                for (int i = 0; i < TotalListCount; i++)
+                {
+                    PosList.Add(Vector2.Zero);
+                    RotList.Add(0);
+                }
+            }
+            PosList.Add(pos);
+            RotList.Add(rot);
+            if (RotList.Count > TotalListCount)
+                RotList.RemoveAt(0);
+            if (PosList.Count > TotalListCount)
+                PosList.RemoveAt(0);
+
 
         }
     }

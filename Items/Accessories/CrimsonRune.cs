@@ -24,6 +24,7 @@ namespace HJScarletRework.Items.Accessories
             player.lifeRegen += 1;
             player.longInvince = true;
             player.pStone = true;
+            player.GetArmorPenetration<GenericDamageClass>() += 25f;
         }
         public override void AddRecipes()
         {

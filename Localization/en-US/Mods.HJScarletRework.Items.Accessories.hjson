@@ -95,3 +95,8 @@ Desterrennacht: {
 	DisplayName: Desterrennacht
 	Tooltip: ""
 }
+
+FakeManaContainer: {
+	DisplayName: Fake Mana Container
+	Tooltip: "{0}"
+}

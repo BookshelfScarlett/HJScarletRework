@@ -28,26 +28,7 @@ namespace HJScarletRework.ReVisual.Projs
         }
         public override void RevisualUpdate(Projectile proj)
         {
-            if (!proj.HJScarlet().FirstFrame)
-            {
-                PosList.Clear();
-                RotList.Clear();
-                for (int i = 0; i < TotalListCount; i++)
-                {
-                    PosList.Add(Vector2.Zero);
-                    RotList.Add(0);
-                }
-            }
-            PosList.Add(proj.Center);
-            RotList.Add(proj.velocity.ToRotation());
-            if (RotList.Count > TotalListCount)
-                RotList.RemoveAt(0);
-            if (PosList.Count > TotalListCount)
-                PosList.RemoveAt(0);
-            if (Main.rand.NextBool())
-            {
-                //new StarShape((proj.Center - proj.SafeDir() * 24f).ToRandCirclePosEdge(4f), proj.SafeDir() * Main.rand.NextFloat(1f, 1.8f) * 0.5f, RandLerpColor(Color.Gold, Color.LightYellow), 0.8f, 40).Spawn();
-            }
+            AddOldPosRotList(proj, oldRot: proj.velocity.ToRotation());
 
         }
         public void DrawCirlceGlow(Projectile proj, Vector2 projDir, Vector2 drawPos)

@@ -2,11 +2,7 @@
 using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityParticles;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -27,6 +23,11 @@ namespace HJScarletRework.Rarity.RarityShiny
             PostDrawFlavorParticle(ref FlavorSparkles, drawableTooltipLine);
             RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.DarkViolet, Color.Black);
         }
+        public static void DrawMisc(DrawableTooltipLine drawableTooltipLine)
+        {
+            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.DarkViolet, Color.Black);
+        }
+
         private static void PostDrawFlavorParticle(ref List<RaritySparkle> particleList, DrawableTooltipLine tooltipLine)
         {
             //在这里手动创建新的粒子，然后我们再将其添加进需要的表单内

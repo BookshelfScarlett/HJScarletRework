@@ -3,14 +3,17 @@ using ContinentOfJourney.Items.Accessories;
 using ContinentOfJourney.Items.Armor;
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Rockets;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Configs;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
+using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -23,7 +26,36 @@ namespace HJScarletRework.Globals.Instances
     {
         public override bool InstancePerEntity => true;
         public bool EnableCritDamage = false;
+        public bool CanDrawIcon = false;
         public float CritsDamageBonus = 0f;
+        private int GhostTimer = 0;
+        private int GhostFrame = 0;
+        public override void UpdateInventory(Item item, Player player)
+        {
+            if (HJScarletConfigClient.Instance.DrawIcon && CanDrawIcon)
+            {
+                //在UpdateInventory内更新帧图的绘制，因为tooltip的draw实际上只会执行一次
+                GhostTimer++;
+                if (GhostTimer > 5)
+                {
+                    GhostFrame++;
+                    GhostTimer = 0;
+                }
+                if (GhostFrame >= 16)
+                    GhostFrame = 1;
+            }
+        }
+        public override void PostDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+        {
+            if (HJScarletConfigClient.Instance.DrawIcon &&CanDrawIcon)
+            {
+                Vector2 iconPosition = position + new Vector2(8f, 8f);
+                float iconScale = 0.35f;
+                Rectangle rect = new(0, GhostFrame * 44, 46, 42);
+                Vector2 recorigin = new(23, 21);
+                spriteBatch.Draw(HJScarletTexture.ScarletGhost.Value, iconPosition, rect, Color.White, 0f, recorigin, iconScale, SpriteEffects.None, 0f);
+            }
+        }
         public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             base.ModifyShootStats(item, player, ref position, ref velocity, ref type, ref damage, ref knockback);
@@ -80,6 +112,7 @@ namespace HJScarletRework.Globals.Instances
                 new HashSet<int>
                 {
                     ItemType<Dialectics>(),
+                    ItemType<Apocalypse>()
 
                 },
                 MatterRarity.DrawRarity

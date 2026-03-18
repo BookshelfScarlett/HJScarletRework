@@ -25,7 +25,26 @@ namespace HJScarletRework.ReVisual.Projs
         }
         public override void RevisualUpdate(Projectile proj)
         {
-            AddListOnNeed(proj);
+            AddOldPosRotList(proj);
+            AddExtraList(proj);
+            UpdateParticle(proj);
+        }
+
+        private void UpdateParticle(Projectile proj)
+        {
+            Timer++;
+            if (Timer == 40f)
+                SpinDirection = Math.Sign(proj.velocity.X);
+            if (Main.rand.NextBool())
+                new ShinyOrbParticle(proj.Center.ToRandCirclePosEdge(8f), proj.velocity.ToRandVelocity(ToRadians(5f), 2f), RandLerpColor(Color.DarkGray, Color.Silver), 40, 0.4f).Spawn();
+            Dust d = Dust.NewDustPerfect(proj.Center.ToRandCirclePosEdge(4f), DustID.SilverCoin, -proj.velocity.ToRandVelocity(ToRadians(5f), 2f));
+            d.noGravity = true;
+            d.scale *= 1.1f;
+
+        }
+
+        public void AddExtraList(Projectile proj)
+        {
             if (!proj.HJScarlet().FirstFrame)
             {
                 RotList2.Clear();
@@ -42,15 +61,6 @@ namespace HJScarletRework.ReVisual.Projs
                 PosList2.RemoveAt(0);
             if (RotList2.Count > TotalListCount + 2)
                 RotList2.RemoveAt(0);
-            Timer++;
-            if (Timer == 40f)
-                SpinDirection = Math.Sign(proj.velocity.X);
-            if (Main.rand.NextBool())
-                new ShinyOrbParticle(proj.Center.ToRandCirclePosEdge(8f), proj.velocity.ToRandVelocity(ToRadians(5f), 2f), RandLerpColor(Color.DarkGray, Color.Silver), 40, 0.4f).Spawn();
-            Dust d = Dust.NewDustPerfect(proj.Center.ToRandCirclePosEdge(4f), DustID.SilverCoin, -proj.velocity.ToRandVelocity(ToRadians(5f), 2f));
-            d.noGravity = true;
-            d.scale *= 1.1f;
-
         }
         public override void PreDrawRevisual(Projectile proj, ref Color lightColor)
         {

@@ -14,7 +14,7 @@ namespace HJScarletRework.ReVisual.Projs
     public class ReChlorophyteKnifeProj : ReVisualProjClass
     {
         public override int ApplyProj => ProjectileType<ChlorophyteKnife>();
-        public override int TotalListCount => 6;
+        public override int TotalListCount => 8;
         public override bool PreKill(Projectile projectile, int timeLeft)
         {
             for (int i = 0; i < 6; i++)
@@ -25,26 +25,9 @@ namespace HJScarletRework.ReVisual.Projs
         public override void RevisualUpdate(Projectile projectile)
         {
             Lighting.AddLight(projectile.Center, TorchID.Jungle);
-            if (!projectile.HJScarlet().FirstFrame)
-            {
-                PosList.Clear();
-                RotList.Clear();
-                for (int i = 0; i < TotalListCount + 2; i++)
-                {
-                    PosList.Add(Vector2.Zero);
-                    RotList.Add(0);
-                }
-            }
-            PosList.Add(projectile.Center);
-            RotList.Add(projectile.velocity.ToRotation());
-            if (RotList.Count > TotalListCount + 2)
-                RotList.RemoveAt(0);
-            if (PosList.Count > TotalListCount + 2)
-                PosList.RemoveAt(0);
+            AddOldPosRotList(projectile, oldRot: projectile.velocity.ToRotation());
             if (Main.rand.NextBool())
-            {
                 new ShinyOrbParticle(projectile.Center.ToRandCirclePosEdge(4f), projectile.velocity.ToRandVelocity(ToRadians(6f), 1.8f), RandLerpColor(Color.DarkGreen, Color.LimeGreen), 30, Main.rand.NextFloat(.55f, .65f) * 1f).Spawn();
-            }
         }
         public override bool ShouldApplyRevisual(Projectile proj, ReVisualPlayer vp)
         {

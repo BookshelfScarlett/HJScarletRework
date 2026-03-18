@@ -33,6 +33,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.localNPCHitCooldown = 60;
             Projectile.timeLeft = 600;
             Projectile.penetrate = 3;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.extraUpdates = 3;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
@@ -80,7 +81,7 @@ namespace HJScarletRework.Projs.Melee
             }
 
         }
-        private void HitParticle(Vector2 center)
+        private void HitParticle()
         {
             Vector2 dir = Projectile.SafeDirByRot();
             SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { MaxInstances = 1 }, Projectile.Center);
@@ -102,7 +103,7 @@ namespace HJScarletRework.Projs.Melee
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             IsAlreadyHitToTarget = true;
-            HitParticle(target.Center);
+            HitParticle();
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -126,7 +127,7 @@ namespace HJScarletRework.Projs.Melee
             HJScarletShader.TerrarRayLaser.Parameters["uColor"].SetValue(trailColor.ToVector4() * alphaValue);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeoutLength"].SetValue(1.3f);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeinLength"].SetValue(0.1f);
-            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> validRot, Projectile.oldPos, Projectile.oldRot);
+            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> _, Projectile.oldPos, Projectile.oldRot);
             GD.Textures[0] = tex.Value;
             GD.SamplerStates[0] = SamplerState.PointClamp;
             HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();
@@ -159,7 +160,7 @@ namespace HJScarletRework.Projs.Melee
             HJScarletShader.TerrarRayLaser.Parameters["uFadeoutLength"].SetValue(1f);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeinLength"].SetValue(0.1f);
 
-            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> validRot, Projectile.oldPos, Projectile.oldRot);
+            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> _, Projectile.oldPos, Projectile.oldRot);
             GD.Textures[0] = tex.Value;
             GD.SamplerStates[0] = SamplerState.PointClamp;
             HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();

@@ -16,6 +16,7 @@ namespace HJScarletRework.Core
             On_Main.DrawDust += PixelatedRenderManger.DrawTarget_BeforeDust;
             On_Main.DrawPlayers_AfterProjectiles += PixelatedRenderManger.DrawTarget_BeforePlayers;
         }
+
         public override void Unload()
         {
             On_Main.DrawDust -= MetaBallManager.DrawRenderTarget;

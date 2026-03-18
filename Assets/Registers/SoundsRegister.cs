@@ -16,6 +16,10 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle SodomsDisaster_Hit => new ($"{SoundsPath}{nameof(SodomsDisaster_Hit)}");
         public static SoundStyle SodomsDisaster_Toss => new ($"{SoundsPath}{nameof(SodomsDisaster_Toss)}");
         public static SoundStyle HymnFireball_Release => new($"{SoundsPath}{nameof(HymnFireball_Release)}");
+        public static SoundStyle Light_Fire => new SoundStyle($"{SoundsPath}{nameof(Light_Fire)}", numVariants: 3);
+        public static SoundStyle Light_CrackedShield => new SoundStyle($"{SoundsPath}{nameof(Light_CrackedShield)}", numVariants: 4);
+        public static SoundStyle Light_FleshHit => new SoundStyle($"{SoundsPath}{nameof(Light_FleshHit)}", numVariants: 4);
+        public static SoundStyle Light_ShieldHit => new SoundStyle($"{SoundsPath}{nameof(Light_ShieldHit)}", numVariants: 2);
 
         #region 锤子们
         private static SoundStyle Smash_AirHeavy1 => new($"{SoundsPath}{nameof(Smash_AirHeavy1)}");

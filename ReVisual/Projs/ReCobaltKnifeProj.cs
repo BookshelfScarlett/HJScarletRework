@@ -44,7 +44,6 @@ namespace HJScarletRework.ReVisual.Projs
                 SpinDirection = Math.Sign(proj.velocity.X);
             if (Main.rand.NextBool())
                 new ShinyOrbParticle(proj.Center.ToRandCirclePosEdge(8f), proj.velocity.ToRandVelocity(ToRadians(5f), 2f), RandLerpColor(Color.DeepSkyBlue, Color.SkyBlue), 40, 0.4f).Spawn();
-            
         }
         public override void PreDrawRevisual(Projectile proj, ref Color lightColor)
         {

@@ -3,6 +3,7 @@ using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using System.Security;
 using Terraria;
 using Terraria.GameContent;
@@ -11,22 +12,8 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Assets.Registers
 {
-    public class HJScarletTexture : ModSystem
+    public partial class HJScarletTexture : ModSystem
     {
-        public static Tex2DWithPath Particle_ShinyOrb { get; set; }
-        public static Tex2DWithPath Particle_HRShinyOrb { get; set; }
-        public static Tex2DWithPath Particle_HRShinyOrbMedium { get; set; }
-        public static Tex2DWithPath Particle_HRShinyOrbSmall { get; set; }
-        public static Tex2DWithPath Particle_HRStar { get; set; }
-        public static Tex2DWithPath Particle_Fire { get; set; }
-        public static Tex2DWithPath Particle_Leafs { get; set; }
-        public static Tex2DWithPath Particle_CrossGlow { get; set; }
-        public static Tex2DWithPath Particle_Petal { get; set; }
-        public static Tex2DWithPath Particle_OpticalLineGlow { get; set; }
-        public static Tex2DWithPath Particle_FusableBall { get; set; }
-        public static Tex2DWithPath Particle_FireShiny { get; set; }
-        public static Tex2DWithPath Particle_Smoke { get; set; }
-        public static Tex2DWithPath Particle_ShinyOrbHard { get; set; }
 
 
         public static Tex2DWithPath Texture_BloomRing { get; set; }
@@ -49,8 +36,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Specific_DialectCube { get; set; }
         public static Tex2DWithPath Specific_AimLabBox { get; set; }
         public static Tex2DWithPath Specific_Clock { get; set; }
-        public static Texture2D Specific_IceSpearBlade => Request<Texture2D>($"HJScarletRework/Assets/Texture/Particles/{nameof(Specific_IceSpearBlade)}").Value;
-        public static Tex2DWithPath  Specific_RocketTrail { get; set; }
+        public static Tex2DWithPath Specific_RocketTrail { get; set; }
 
         public static Tex2DWithPath Trail_ManaStreak { get; set; }
         public static Tex2DWithPath Trail_RvSlash { get; set; }
@@ -79,21 +65,7 @@ namespace HJScarletRework.Assets.Registers
         {
             InvisAsset = new Tex2DWithPath(InvisAssetPath);
             ScarletGhost = new Tex2DWithPath($"{TexPath}/{nameof(ScarletGhost)}");
-
-            Particle_ShinyOrb = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_ShinyOrb)}");
-            Particle_HRShinyOrb = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_HRShinyOrb)}");
-            Particle_HRShinyOrbMedium = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_HRShinyOrbMedium)}");
-            Particle_HRShinyOrbSmall = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_HRShinyOrbSmall)}");
-            Particle_HRStar = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_HRStar)}");
-            Particle_Fire = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_Fire)}");
-            Particle_Leafs = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_Leafs)}");
-            Particle_CrossGlow = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_CrossGlow)}");
-            Particle_Petal = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_Petal)}");
-            Particle_OpticalLineGlow = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_OpticalLineGlow)}");
-            Particle_FusableBall = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_FusableBall)}");
-            Particle_FireShiny = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_FireShiny)}");
-            Particle_Smoke = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_Smoke)}");
-            Particle_ShinyOrbHard = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_ShinyOrbHard)}");
+            LoadParticle();
 
             Specific_DialectBall = new Tex2DWithPath($"{Path_Particle}{nameof(Specific_DialectBall)}");
             Specific_DialectCube = new Tex2DWithPath($"{Path_Particle}{nameof(Specific_DialectCube)}");
@@ -133,25 +105,13 @@ namespace HJScarletRework.Assets.Registers
             ColorMap_Aqua = new Tex2DWithPath($"{Path_General}{nameof(ColorMap_Aqua)}");
 
         }
+
+
         public override void Unload()
         {
             InvisAsset = null;
             ScarletGhost = null;
-
-            Particle_ShinyOrb = null;
-            Particle_HRShinyOrb = null;
-            Particle_HRShinyOrbMedium = null;
-            Particle_HRShinyOrbSmall = null;
-            Particle_HRStar = null;
-            Particle_Fire = null;
-            Particle_Leafs = null;
-            Particle_CrossGlow = null;
-            Particle_Petal = null;
-            Particle_OpticalLineGlow = null;
-            Particle_FusableBall = null;
-            Particle_FireShiny = null;
-            Particle_Smoke = null;
-            Particle_ShinyOrbHard = null;
+            UnLoadParticle();
 
             Specific_DialectCube = null;
             Specific_DialectBall = null;

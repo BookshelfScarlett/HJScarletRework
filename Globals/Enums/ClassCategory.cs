@@ -12,6 +12,7 @@ namespace HJScarletRework.Globals.Enums
         Ranged,
         Magic,
         Summon,
+        Executor,
         Typeless
     }
 }

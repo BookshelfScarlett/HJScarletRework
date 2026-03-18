@@ -165,19 +165,6 @@ namespace HJScarletRework.Projs.Melee
             {
                 GD.DrawUserPrimitives(PrimitiveType.TriangleStrip, list.ToArray(), 0, list.Count - 2);
             }
-            /*
-            DrawSetting drawSetting = new DrawSetting(trail, true, false);
-            List<TrailDrawDate> trailDrawDates = [];
-            int posCount = validPos.Count;
-            for (int j = 0; j < posCount - 1; j++)
-            {
-                float rot = (validPos[j + 1] - validPos[j]).ToRotation();
-                float ratio = j / (posCount - 1);
-                Vector2 posOffset = rot.ToRotationVector2().RotatedBy(PiOver2);
-                trailDrawDates.Add(new(validPos[j] + Projectile.Size / 2 + posOffset, color, new Vector2(0, 33f * heightMul), rot));
-            }
-            TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
-            */
         }
     }
 }

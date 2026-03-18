@@ -1,20 +1,11 @@
-﻿using ContinentOfJourney.Dusts;
-using ContinentOfJourney.Projectiles;
-using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.ParticleSystem;
-using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
-using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Steamworks;
-using System;
 using Terraria;
 using Terraria.GameContent;
-using Terraria.GameContent.Biomes;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Melee
 {

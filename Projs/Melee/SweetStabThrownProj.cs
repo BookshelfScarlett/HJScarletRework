@@ -1,5 +1,4 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Buffs;
+﻿using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
@@ -172,6 +171,14 @@ namespace HJScarletRework.Projs.Melee
             Projectile.friendly = true;
             ExSD();
         }
+        public override void AI()
+        {
+            if (!Projectile.HJScarlet().FirstFrame)
+                FirstFrameAI();
+            SpearAI();
+        }
+        public virtual void FirstFrameAI() { }
+        public virtual void SpearAI() { }
         public virtual void ExSD() { }
         public SpriteBatch SB { get => Main.spriteBatch; }
         public GraphicsDevice GD { get => Main.graphics.GraphicsDevice; }

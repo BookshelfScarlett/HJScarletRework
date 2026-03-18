@@ -54,7 +54,7 @@ namespace HJScarletRework.Projs.Melee
 
             if (AttackType == Style.Shoot)
             {
-                Projectile.Opacity += 0.2f;
+                Projectile.Opacity = Lerp(Projectile.Opacity, 1f, 0.4f);
                 //注意这里：这里会一直锁住追踪目标
                 if (Projectile.GetTargetSafe(out NPC target, false))
                     Projectile.HomingTarget(target.Center, -1, 11f, 20f, 10);
@@ -84,7 +84,7 @@ namespace HJScarletRework.Projs.Melee
                 dir2.X /= 3.6f;
                 dir2 = dir2.RotatedBy(Projectile.velocity.ToRotation());
                 Vector2 pos = Projectile.Center + dir * 12f + dir2 * 18f;
-                ShinyOrbParticle shinyOrbParticle = new ShinyOrbParticle(pos, dir2 * 1f, RandLerpColor(Color.DeepSkyBlue, Color.White), 40, 0.3f * (3.5f - Math.Abs(8f - i) / 2f), BlendStateID.Additive);
+                ShinyOrbParticle shinyOrbParticle = new ShinyOrbParticle(pos, dir2 * 1f, RandLerpColor(Color.DeepSkyBlue, Color.White), 40, 0.3f * (3.5f - Math.Abs(8f - i) / 2f));
                 shinyOrbParticle.Spawn();
             }
         }
@@ -129,7 +129,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawProj(Color.Azure * Projectile.Opacity, rotFix:PiOver4);
+            Projectile.DrawProj(Color.White* Projectile.Opacity, rotFix:PiOver4);
             return false;
         }
     }

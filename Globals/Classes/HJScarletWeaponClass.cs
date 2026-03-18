@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Methods;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Classes
@@ -11,6 +12,7 @@ namespace HJScarletRework.Globals.Classes
         public override void SetDefaults()
         {
             Item.DamageType = GetDamageClass;
+            Item.HJScarlet().CanDrawIcon = true;
             ExSD();
         }
         public virtual void ExSD() { }

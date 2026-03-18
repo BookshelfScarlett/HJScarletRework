@@ -153,7 +153,7 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D starShape = HJScarletTexture.Particle_SharpTear;
-            Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
+            Projectile.GetProjDrawData(out Texture2D _, out Vector2 drawPos, out Vector2 ori);
             //是的孩子们，为了绘制这把武器的轨迹，这个棱形贴图被绘制了超过120次
             Vector2 projDir = Projectile.SafeDirByRot();
             //绘制两边的轨迹
@@ -188,7 +188,7 @@ namespace HJScarletRework.Projs.Melee
             //切边。
             cutSource.Height /= 2;
             //重新设定原点
-            Vector2 ori = new Vector2(cutSource.Width / 2, cutSource.Height);
+            Vector2 ori = new(cutSource.Width / 2, cutSource.Height);
             int length = 45;
             for (int i = 0; i < length; i++)
             {

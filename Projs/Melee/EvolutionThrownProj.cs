@@ -1,12 +1,9 @@
-﻿using ContinentOfJourney;
-using ContinentOfJourney.Projectiles;
+﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using rail;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -62,7 +59,7 @@ namespace HJScarletRework.Projs.Melee
             vel -= Vector2.UnitY * Main.rand.NextFloat(10f, 12f);
 
             Color drawColor = RandLerpColor(Color.GreenYellow, Color.LightGreen);
-            new Petal(spawnPos, vel, drawColor, 60, Main.rand.NextFloat(TwoPi), 1f, 0.1f, 1f).Spawn();
+            new PetalNoCollision(spawnPos, vel, drawColor, 60, RandRotTwoPi, 1f, 0.1f, 1f,true).Spawn();
             for (int i = 0; i <= 3; i++)
             {
                 Color beginColor = new(77, 42, 26);

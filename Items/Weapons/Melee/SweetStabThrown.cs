@@ -49,6 +49,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.value = Item.buyPrice(gold: 15);
+            Item.HJScarlet().CanDrawIcon = true;
             ExSD();
         }
         public virtual void ExSD() { }
@@ -56,15 +57,6 @@ namespace HJScarletRework.Items.Weapons.Melee
         private int GhostFrame = 0;
         public override void UpdateInventory(Player player)
         {
-            //在UpdateInventory内更新帧图的绘制，因为tooltip的draw实际上只会执行一次
-            GhostTimer++;
-            if (GhostTimer > 5)
-            {
-                GhostFrame++;
-                GhostTimer = 0;
-            }
-            if (GhostFrame >= 16)
-                GhostFrame = 1;
             ExUpdateInventory(player);
         }
         public virtual Color MainTooltipColor { get; }
@@ -73,14 +65,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             string localAddress = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}");
             string path = $"{localAddress}.Tooltip";
             tooltips.ReplaceAllTooltip(path, MainTooltipColor);
-
-            if (HJScarletMethods.HasFuckingCalamity)
-            {
-                string calamityName = Mod.GetLocalizationKey("CrossModSupport.Calamity");
-                tooltips.QuickAddTooltipDirect(calamityName.ToLangValue(), new(220, 20, 6));
-                string calamityPath = $"{localAddress}.CalamitySupport";
-                tooltips.QuickAddTooltipDirect(calamityPath.ToLangValue(), MainTooltipColor);
-            }
             if (!NotHomewardJourneySpear)
             {
                 string keyPath = Mod.GetLocalizationKey($"SwitchWeaponTooltip");
@@ -98,11 +82,6 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             if (ExPreDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale))
                 return false;
-            Vector2 iconPosition = position + new Vector2(8f, 8f);
-            float iconScale = 0.35f;
-            Rectangle rect = new(0, GhostFrame * 44, 46, 42);
-            Vector2 recorigin = new(23, 21);
-            spriteBatch.Draw(HJScarletTexture.ScarletGhost.Value, iconPosition, rect, Color.White, 0f, recorigin, iconScale, SpriteEffects.None, 0f);
             return base.PreDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
         }
         public virtual bool ExPreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) => false;

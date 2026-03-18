@@ -27,7 +27,6 @@ namespace HJScarletRework.Particles
         {
             DrawColor *= (1 - LifetimeRatio); 
         }
-        // 这里采样没有问题，他贴图就是这样
         public override void Draw(SpriteBatch spriteBatch)
         {
             Texture2D texture = Request<Texture2D>(GetInstance<WildPointerThrown>().Texture).Value;

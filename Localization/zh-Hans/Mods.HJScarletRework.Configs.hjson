@@ -39,4 +39,9 @@ HJScarletConfigClient: {
 			默认值为10000个
 			'''
 	}
+
+	DrawIcon: {
+		// Label: Draw Icon
+		// Tooltip: ""
+	}
 }

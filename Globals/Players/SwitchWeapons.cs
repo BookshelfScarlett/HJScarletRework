@@ -81,8 +81,10 @@ namespace HJScarletRework.Globals.Players
                 heldPrefix = PrefixID.Godly;
 
             targetWeapon.SetDefaults(targetWeapons);
-            if (!targetWeapon.CanApplyPrefix(PrefixID.Legendary))
+            if (!targetWeapon.CanApplyPrefix(PrefixID.Legendary) && heldPrefix == PrefixID.Legendary)
+            {
                 heldPrefix = PrefixID.Godly;
+            }
             //继承词缀
             targetWeapon.Prefix(heldPrefix);
             targetWeapon.favorited = favor; 

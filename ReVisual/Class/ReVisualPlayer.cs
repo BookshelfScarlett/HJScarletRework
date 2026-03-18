@@ -39,6 +39,8 @@ namespace HJScarletRework.ReVisual.Class
         public bool reVisualFryingPan = false;
         [SaveableBool]
         public bool reVisualDesertScourge = false;
+        [SaveableBool]
+        public bool reVisualAccelerationism = false;
 
 
 

@@ -45,18 +45,6 @@ namespace HJScarletRework.Particles
             SeedOffset = seedValue;
         }
 
-        public TurbulenceShinyOrb(Vector2 position, float speed, Color color, int lifetime, float scale, float direction, float glowCenterMult)
-        {
-            Position = position;
-            Speed = speed;
-            DrawColor = color;
-            Lifetime = lifetime;
-            Scale = scale;
-            BeginScale = scale;
-            TurBulenceDirection = direction;
-            DrawGlowCenter = true;
-            GlowCenterMult = glowCenterMult;
-        }
         public override void OnSpawn()
         {
             if (!SeedHasHandValue)

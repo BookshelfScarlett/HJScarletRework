@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool HasLegendary => true;
         public override void ExSD()
         {
-            Item.damage = 245;
+            Item.damage = 345;
             Item.useTime = Item.useAnimation = 28;
             Item.knockBack = 12f;
             Item.UseSound = HJScarletSounds.Evolution_Thrown with { MaxInstances = 0};

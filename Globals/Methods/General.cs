@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Core.Configs;
+﻿using ContinentOfJourney.Items.Accessories.ThrowerWraps;
+using HJScarletRework.Core.Configs;
 using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
@@ -147,7 +148,7 @@ namespace HJScarletRework.Globals.Methods
             return srcVel.ToRandVelocity(randRads, Main.rand.NextFloat(minSpeed, maxSpeed));
         }
         public static Vector2 ToSafeNormalize(this Vector2 srcVel, Vector2? what = null) => srcVel.SafeNormalize(what ?? Vector2.UnitX);
-        
+
         public static string ToPercent(this float value)
         {
             float value2 = value * 100f;
@@ -201,6 +202,29 @@ namespace HJScarletRework.Globals.Methods
             }
         }
         public static bool IsItemName(this DrawableTooltipLine line) => line.Name == "ItemName" && line.Mod == "Terraria";
+        /// <summary>
+        /// 控制玩家的臂膀
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="armRot"></param>
+        /// <param name="specificArm">指定要玩家哪一条手臂，默认值为0，即双手，低于<0的值，则为背部的手，高于>0的值，则为前部的手</param>
+        public static void ControlPlayerArm(this Player player, float armRot, int specificArm = 0, float customArmRot = PiOver2)
+        {
+            float armType = Math.Sign(specificArm);
+            switch (armType)
+            {
+                case 1:
+                    player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot - customArmRot);
+                    break;
+                case -1:
+                    player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, armRot - customArmRot);
+                    break;
+                default:
+                    player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armRot - customArmRot);
+                    player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, armRot - customArmRot);
+                    break;
+            }
+        }
         /// <summary>
         /// 杀了玩家
         /// </summary>

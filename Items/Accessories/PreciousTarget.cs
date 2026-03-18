@@ -5,6 +5,7 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using Terraria.ModLoader;
 using HJScarletRework.Items.Materials;
+using HJScarletRework.Globals.Players;
 
 namespace HJScarletRework.Items.Accessories
 {
@@ -22,6 +23,7 @@ namespace HJScarletRework.Items.Accessories
         {
             player.HJScarlet().PreciousTargetAcc = true;
             player.HJScarlet().PreciousCritsMin = 10;
+
         }
         public override void AddRecipes()
         {

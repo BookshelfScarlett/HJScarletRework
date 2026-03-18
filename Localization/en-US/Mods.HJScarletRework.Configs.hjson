@@ -33,4 +33,9 @@ HJScarletConfigClient: {
 			10000 at max by default
 			'''
 	}
+
+	DrawIcon: {
+		Label: Draw Icon
+		Tooltip: ""
+	}
 }

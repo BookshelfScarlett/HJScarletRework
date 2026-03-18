@@ -1,0 +1,46 @@
+Exsanguination: {
+	DisplayName: Exsanguination
+	Tooltip: ""
+	FocusStrike: ""
+}
+
+BlazingStriker: {
+	DisplayName: Blazing Striker
+	Tooltip: ""
+	FocusStrike: ""
+}
+
+DungeonBreaker: {
+	DisplayName: Dungeon Breaker
+	Tooltip: ""
+	FocusStrike: ""
+}
+
+FleshGrinder: {
+	DisplayName: Flesh Grinder
+	Tooltip: ""
+	FocusStrike: ""
+}
+
+JungleMadness: {
+	DisplayName: Jungle Madness
+	Tooltip: ""
+	FocusStrike: ""
+}
+
+PerfectNight: {
+	DisplayName: Perfect Night
+	Tooltip: ""
+	FocusStrike: ""
+}
+
+TheMoss: {
+	DisplayName: The Moss
+	Tooltip: ""
+	FocusStrike: ""
+}
+
+Apocalypse: {
+	DisplayName: Apocalypse
+	Tooltip: ""
+}

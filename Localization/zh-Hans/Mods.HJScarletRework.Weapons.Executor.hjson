@@ -1,0 +1,69 @@
+Exsanguination: {
+	DisplayName: 放血疗法
+	Tooltip:
+		'''
+		以超高的频率发射超高速的子弹流
+		射出的所有子弹都会造成真实伤害
+		专注攻击启动时，彻底粉碎敌人的护盾，并使接下来的15秒内造成100倍的子弹伤害
+		'''
+	// FocusStrike: ""
+}
+
+BlazingStriker: {
+	DisplayName: 地幔
+	Tooltip:
+		'''
+		命中时，从敌人身上弹起，而后进行一次重击
+		在返程的时候不会发起这个效果
+		'''
+	FocusStrike:
+		'''
+		地幔将会尝试在你的敌人上挂载，持续造成伤害
+		在造成固定频次的伤害后，地幔将会尝试进行两次力度更大的重击
+		'''
+}
+
+DungeonBreaker: {
+	DisplayName: 地牢破坏者
+	Tooltip: ""
+	FocusStrike: ""
+}
+
+FleshGrinder: {
+	DisplayName: 碾肉机
+	Tooltip: 命中时，碾压敌人的血肉使其爆开
+	FocusStrike:
+		'''
+		碾肉机会尝试搜索多名敌人
+		每检索到一名可用敌人时，碾肉机都会尝试攻击这名敌人5次
+		最大可攻击3名敌人
+		'''
+}
+
+JungleMadness: {
+	DisplayName: 丛林狂怒
+	Tooltip: ""
+	FocusStrike: ""
+}
+
+PerfectNight: {
+	DisplayName: 无梦之夜
+	Tooltip: ""
+	FocusStrike: ""
+}
+
+TheMoss: {
+	DisplayName: 玷污者
+	Tooltip: 命中时，感染敌人的血肉使其糜烂
+	FocusStrike:
+		'''
+		武器会尝试搜索多名敌人
+		每检索到一名可用敌人时，碾肉机都会尝试攻击这名敌人3次
+		最大可攻击6名敌人
+		'''
+}
+
+Apocalypse: {
+	DisplayName: 战争启示录
+	Tooltip: ""
+}

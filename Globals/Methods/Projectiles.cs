@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Buffs;
+using HJScarletRework.Globals.Enums;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -15,17 +16,6 @@ namespace HJScarletRework.Globals.Methods
         public static Vector2 PosToCenter(this Projectile proj) => proj.Size / 2 - Main.screenPosition;
         public static Vector2 ToOrigin(this Texture2D tex) => tex.Size() / 2;
         public static bool IsMe(this Projectile proj) => proj.owner == Main.myPlayer;
-        public static void GetHeldProjDrawState(this Projectile proj, float rotFix, out Texture2D projTex, out Vector2 drawPos, out Vector2 drawOri, out float projRot, out SpriteEffects projSP)
-        {
-            projTex = proj.GetTexture();
-            drawPos = proj.Center - Main.screenPosition;
-            Player player = Main.player[proj.owner];
-            projRot = proj.rotation + (player.direction == -1 ? Pi : 0f) + rotFix * player.direction;
-
-            drawOri = projTex.Size() / 2;
-
-            projSP = player.direction * player.gravDir == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-        }
         public static void GetProjDrawData(this Projectile proj, out Texture2D projTex, out Vector2 drawPos, out Vector2 ori)
         {
             projTex = proj.GetTexture();
@@ -57,11 +47,27 @@ namespace HJScarletRework.Globals.Methods
         public static Vector2 SafeDirByRot(this Projectile proj) => proj.rotation.ToRotationVector2();
         public static Vector2 SafeDirByRot(this Projectile proj, float rotDegree) => proj.rotation.ToRotationVector2().RotatedBy(ToRadians(rotDegree));
         public static Texture2D GetTexture(this Projectile proj) => TextureAssets.Projectile[proj.type].Value;
-        public static void GetTexture(this Projectile proj, out Texture2D projTex, out Vector2 orig, out Vector2 drawPos)
+        /// <summary>
+        /// 从GlobalTargetIndex中获取需要的合规NPC
+        /// 多判定一个是否允许穿墙
+        /// 如果不合规会直接返回为否
+        /// </summary>
+        /// <param name="proj"></param>
+        /// <param name="target"></param>
+        /// <param name="shouldPassWall"></param>
+        /// <returns></returns>
+        public static bool GetLegalTarget(this Projectile proj, out NPC target, bool shouldPassWall = false)
         {
-            projTex = TextureAssets.Projectile[proj.type].Value;
-            orig = projTex.Size() / 2;
-            drawPos = proj.Center - Main.screenPosition;
+            target = null;
+            int targetIndex = proj.HJScarlet().GlobalTargetIndex;
+            if (targetIndex == -1)
+                return false;
+            target = Main.npc[targetIndex];
+            if (target.CanBeChasedBy() && target != null && (shouldPassWall || Collision.CanHit(proj.Center, 1, 1, target.Center, 1, 1)))
+            {
+                return true;
+            }
+            return false;
         }
         /// <summary>
         /// 获取一个单位，这里优先判定输入的NPC索引
@@ -102,7 +108,6 @@ namespace HJScarletRework.Globals.Methods
         /// </summary>
         /// <param name="proj"></param>
         /// <param name="target"></param>
-        /// <param name="targetIndex"></param>
         /// <param name="searchSecondTarget"></param>
         /// <param name="searchDistance"></param>
         /// <returns></returns>
@@ -303,22 +308,6 @@ namespace HJScarletRework.Globals.Methods
         /// 将TargetIndex转化为NPC。这里直接调用的模组内部的GlobalTargetIndex字段
         /// </summary>
         /// <param name="proj"></param>
-        /// <param name="target"></param>
-        /// <returns></returns>
-        public static bool ToHJScarletNPC(this Projectile proj, out NPC target)
-        {
-            if (proj.HJScarlet().GlobalTargetIndex == -1)
-            {
-                target = null;
-                return false;
-            }
-            target = Main.npc[proj.HJScarlet().GlobalTargetIndex];
-            return true;
-        }
-        /// <summary>
-        /// 将TargetIndex转化为NPC。这里直接调用的模组内部的GlobalTargetIndex字段
-        /// </summary>
-        /// <param name="proj"></param>
         /// <returns></returns>
         public static NPC ToHJScarletNPC(this Projectile proj)
         {
@@ -366,6 +355,54 @@ namespace HJScarletRework.Globals.Methods
                 previousTimeToReachDestination = timeToReachDestination;
             }
             return (currentTargetPosition - startingPosition).SafeNormalize(Vector2.UnitY) * shootSpeed;
+        }
+        public static Vector2 BetterRotatedBy(this Vector2 spinningpoint, double radians, Vector2 center = default, float Xmult = 1f, float Ymult = 1f)
+        {
+            float num = (float)Math.Cos(radians);
+            float num2 = (float)Math.Sin(radians);
+            Vector2 vector = spinningpoint - center;
+            Vector2 result = center;
+            result.X += (vector.X * num - vector.Y * num2) * Xmult;
+            result.Y += (vector.X * num2 + vector.Y * num) * Ymult;
+            return result;
+        }
+        public static void SetupImmnuity(this Projectile proj, int hitCooldown, ImmnuityType isLocal = ImmnuityType.Local)
+        {
+            switch (isLocal)
+            {
+                case ImmnuityType.Local:
+                    proj.usesLocalNPCImmunity = true;
+                    proj.localNPCHitCooldown = hitCooldown;
+                    break;
+                case ImmnuityType.Static:
+                    proj.usesIDStaticNPCImmunity = true;
+                    proj.idStaticNPCHitCooldown= hitCooldown;
+                    break;
+                default:
+                    break;
+            }
+        }
+        public static void ResetBoomerangReturn(this Projectile proj, int pene =-1)
+        {
+            proj.tileCollide = false;
+            proj.penetrate = pene;
+            proj.stopsDealingDamageAfterPenetrateHits = true;
+        }
+        public static bool IntersectOwnerByDistance(this Projectile proj, float dist = 70f)
+        {
+            return (proj.Center - Main.player[proj.owner].Center).LengthSquared() < dist * dist;
+        }
+        public static float SpeedAffectRotation(this Projectile proj, float xMult = 3f, float yMult = 3f) => Math.Abs(proj.velocity.X) / xMult + Math.Abs(proj.velocity.Y) / yMult;
+        public static bool MeetMaxUpdatesFrame(this Projectile proj, float timer, float maxFrame) => timer > proj.MaxUpdates * maxFrame;
+        public static bool FinalUpdateNextBool(this Projectile proj, int boolValue = 2) => proj.numUpdates == 0 && Main.rand.NextBool(boolValue);
+        public static bool FinalUpdate(this Projectile proj) => proj.numUpdates == 0;
+        public static bool IsOutScreen(this Projectile proj, float mult = 1f) => OutOffScreen(proj.Center, mult);
+        public static void BounceOnTile(this Projectile proj, Vector2 oldVelocity, float xMult = 1f, float yMult = 1f)
+        {
+            if (proj.velocity.X != oldVelocity.X)
+                proj.velocity.X = -oldVelocity.X * xMult;
+            if (proj.velocity.Y != oldVelocity.Y)
+                proj.velocity.Y = -oldVelocity.Y * yMult;
         }
     }
 }

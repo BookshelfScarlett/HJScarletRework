@@ -2,8 +2,8 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.Melee;
-using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -21,8 +21,8 @@ namespace HJScarletRework.Items
             Item.width = Item.height = 50;
             Item.damage = 20;
             Item.rare = ItemRarityID.Red;
-            Item.shoot = ProjectileType<TheMossHeldLock>();
-            Item.shootSpeed = 10f;
+            Item.shoot = ProjectileType<BlazingStrikerFocusProj>();
+            Item.shootSpeed = 18f;
             Item.useTime = Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Swing;
         }

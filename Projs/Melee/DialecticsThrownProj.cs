@@ -1,10 +1,13 @@
 ﻿using ContinentOfJourney.Projectiles.Meelee;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
+using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using Terraria;
 using Terraria.Audio;
@@ -235,23 +238,20 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.HJScarlet().GlobalTargetIndex != -1)
                 return;
             //特效
-            for (int i = 0; i < 2; i++)
-            {
-                Vector2 vel = Projectile.SafeDir() * Main.rand.NextFloat(1.2f, 1.4f);
-                Vector2 spawnPos = Projectile.Center + Main.rand.NextVector2CircularEdge(6f, 6f);
-                new StarShape(spawnPos, -vel, RandLerpColor(Color.Blue, Color.MediumBlue), 0.7f, 40).Spawn();
-                new StarShape(spawnPos, -vel, Color.White, 0.3f, 40).Spawn();
-            }
             for (int k = -1; k < 2; k += 2)
             {
+
                 for (int i = 0; i <= 4; i++)
                 {
                     Vector2 drawPos = Projectile.Center - Projectile.SafeDir() * 10f;
                     Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2);
                     Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
-                    float sacle = 0.1f;
-                    new TrailGlowBall(drawPos + offset * k * (Amp - 10f) + Projectile.velocity / 4 * i, Projectile.SafeDir() * 2, drawColor, 40, sacle * 0.7f, true).Spawn();
-                    new TrailGlowBall(drawPos + offset * k * (Amp - 10f) + Projectile.velocity / 4 * i, Projectile.SafeDir() * 2, Color.White, 40, sacle * 0.4f, true).Spawn();
+                    float sacle = 1f;
+                    Vector2 pos = drawPos + offset * k * (Amp - 6f) + Projectile.SafeDir() * 5f + Projectile.velocity / 4 * i;
+                    Vector2 vel = Projectile.SafeDir() * 2;
+                    new StarShape(pos, vel, drawColor, sacle, 40).Spawn();
+                    new StarShape(pos, vel, Color.White, sacle * 0.5f, 40).Spawn();
+
                 }
             }
 
@@ -445,16 +445,49 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D star = TextureAssets.Extra[ExtrasID.SharpTears].Value;
-            for (int i = 0; i < 10; i++)
-            {
-                float rads = (float)i / 10;
-                Color drawColor = (Color.Lerp(Color.Blue, Color.LightSkyBlue, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
-                Main.spriteBatch.Draw(star, Projectile.Center - Main.screenPosition + Projectile.SafeDir() * 20f - Projectile.velocity * 0.7f * i, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.oldRot[i] - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(0.8f, 1.5f), 0, 0);
-            }
             Projectile.DrawGlowEdge(Color.Blue, rotFix: PiOver4);
             Projectile.DrawProj(Color.White, 4, rotFix: PiOver4);
             DrawCubeAndBall(ref lightColor);
             return false;
+        }
+        public void DrawBack(Color trailColor, float primitiveHeight, float alphaValue = 1f)
+        {
+            Asset<Texture2D> tex = HJScarletTexture.Trail_ManaStreak.Texture;
+            HJScarletShader.TerrarRayLaser.Parameters["LaserTextureSize"].SetValue(tex.Size());
+            HJScarletShader.TerrarRayLaser.Parameters["targetSize"].SetValue(new Vector2(10, tex.Height()));
+            HJScarletShader.TerrarRayLaser.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -5.2f);
+            HJScarletShader.TerrarRayLaser.Parameters["uColor"].SetValue(trailColor.ToVector4() * alphaValue);
+            HJScarletShader.TerrarRayLaser.Parameters["uFadeoutLength"].SetValue(1.3f);
+            HJScarletShader.TerrarRayLaser.Parameters["uFadeinLength"].SetValue(0.1f);
+            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> validRot, Projectile.oldPos, Projectile.oldRot);
+            GD.Textures[0] = tex.Value;
+            GD.SamplerStates[0] = SamplerState.PointClamp;
+            HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();
+            List<ScarletVertex> list = [];
+            int totalpoints = validPosition.Count;
+            //创建顶点列表
+            for (int i = 0; i < totalpoints - 1; i++)
+            {
+                if (validPosition[i + 1] - validPosition[i] == Vector2.Zero)
+                    continue;
+                float progress = (float)i / (totalpoints - 1);
+                float rot = (validPosition[i + 1] - validPosition[i]).ToRotation();
+                Vector2 posOffset = new Vector2(0, primitiveHeight).RotatedBy(rot);
+                Vector2 oldCenter = validPosition[i] + Projectile.Size / 2 - Main.screenPosition + rot.ToRotationVector2() * 30f;
+                QuickGetClass(ref list, oldCenter, posOffset, progress);
+            }
+            if (list.Count >= 3)
+            {
+                GD.DrawUserPrimitives(PrimitiveType.TriangleStrip, list.ToArray(), 0, list.Count - 2);
+            }
+
+        }
+        public void QuickGetClass(ref List<ScarletVertex> list, Vector2 oldCenter, Vector2 posOffset, float progress)
+        {
+            ScarletVertex upClass = new(oldCenter - posOffset, Color.White, new Vector3(progress, 0, 0f));
+            ScarletVertex downClass = new(oldCenter + posOffset, Color.White, new Vector3(progress, 1, 0f));
+            list.Add(upClass);
+            list.Add(downClass);
         }
         public void DrawCubeAndBall(ref Color lightColor)
         {

@@ -1,6 +1,6 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Buffs;
-using HJScarletRework.Items.Weapons.Ranged;
+using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -52,6 +52,7 @@ namespace HJScarletRework.Globals.Players
         public bool PreciousAimAcc = false;
         public int PreciousTargetCrtis = 10;
         public int PreciousCritsMin = 0;
+        public int fakeManaContainer = 0;
         #endregion
 
         #region Pets
@@ -108,6 +109,7 @@ namespace HJScarletRework.Globals.Players
             PreciousAimAcc = false;
             PreciousCritsMin = 0;
             DesterrennachtAcc = false;
+            fakeManaContainer = 0;
         }
 
         private void UnloadPets()

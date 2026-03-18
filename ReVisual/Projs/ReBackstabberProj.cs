@@ -25,28 +25,12 @@ namespace HJScarletRework.ReVisual.Projs
         {
             return base.PreKill(projectile, timeLeft);
         }
-        public List<Vector2> TrailPos = [];
-        public List<float> TrailRot = [];
         public float Timer = 0;
         public float SpinDirection = 0;
 
         public override void RevisualUpdate(Projectile proj)
         {
             AddListOnNeed(proj);
-            if (!proj.HJScarlet().FirstFrame)
-            {
-                for (int i = 0; i < TotalListCount; i++)
-                {
-                    TrailPos.Add(Vector2.Zero);
-                    TrailRot.Add(0);
-                }
-            }
-            TrailPos.Add(proj.Center);
-            TrailRot.Add(proj.velocity.ToRotation());
-            if (TrailPos.Count > TotalListCount)
-                TrailPos.RemoveAt(0);
-            if (TrailRot.Count > TotalListCount)
-                TrailRot.RemoveAt(0);
             Timer++;
             if (SpinDirection == 0)
                 proj.rotation = proj.velocity.ToRotation();

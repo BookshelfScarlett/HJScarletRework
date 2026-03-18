@@ -23,11 +23,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.shoot = ProjectileType<TheMarsProj>();
             Item.rare = ItemRarityID.Red;
         }
-        public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
-        {
-            if (DownedBossSystem.downedBarrier)
-                damage *= 1.15f;
-        }
         public override Color MainTooltipColor => Color.LightGray;
     }
 }

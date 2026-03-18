@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Buffs.Pets;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Pets;
 using HJScarletRework.Rarity.RarityShiny;
 using Terraria;
@@ -30,6 +31,7 @@ namespace HJScarletRework.Items.Pets
             BuffAndProj();
             Item.rare = RarityType<RarePets>();
             Item.value = Item.sellPrice(gold: 50);
+            Item.HJScarlet().CanDrawIcon = true;
         }
         public override bool? UseItem(Player player)
         {

@@ -59,7 +59,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 starShapePos = basePos + Main.rand.NextVector2CircularEdge(3f, 3f);
                 Color drawColor = RandLerpColor(Color.Red, Color.DarkRed);
-                new StarShape(starShapePos, dir * -2.4f, drawColor, 0.6f, 15, glowScale: 0.68f).SpawnToPriorityNonPreMult();
+                new StarShape(starShapePos, dir * -2.4f, drawColor, 0.6f, 15).SpawnToPriorityNonPreMult();
             }
 
             Color Firecolor = RandLerpColor(Color.DarkGray, Color.DarkRed);

@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
@@ -7,7 +6,6 @@ using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 

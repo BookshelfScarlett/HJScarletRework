@@ -1,5 +1,4 @@
 ﻿using ContinentOfJourney.Buffs;
-using ContinentOfJourney.Items.Accessories;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;

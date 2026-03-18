@@ -1,11 +1,9 @@
 ﻿using ContinentOfJourney.Projectiles;
-using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;

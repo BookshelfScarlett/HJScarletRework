@@ -16,3 +16,23 @@ SwitchWeapon: {
 }
 
 CrossModSupport.Calamity: ""
+
+DamageClasses: {
+	ExecutorDamageClass: {
+		FocusTime: "{0}"
+		DisplayName: Executor Damage Class
+
+		Prefixs: {
+			Alterego.DisplayName: Alterego
+			Digital.DisplayName: Digital
+			Evolution.DisplayName: Evolution
+			Fake.DisplayName: Fake
+			Foreigner.DisplayName: Foreigner
+			Mysterious.DisplayName: Mysterious
+			Phantasmic.DisplayName: Phantasmic
+			FocusTimeLine: ""
+			FocusDamageLine: ""
+			ArmorPenetrationLine: ""
+		}
+	}
+}

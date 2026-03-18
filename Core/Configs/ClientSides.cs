@@ -19,11 +19,13 @@ namespace HJScarletRework.Core.Configs
         [ReloadRequired]
         public bool SpecialRarity { get; set; }
         [BackgroundColor(192, 54, 64, 192)]
-        [Range(5000, 50000)]
+        [Range(50, 50000)]
         [Increment(1)]
         [DefaultValue(15000)]
         public int MaxParticleCounts { get; set; }
-
+        [BackgroundColor(192, 54, 64, 192)]
+        [DefaultValue(false)]
+        public bool DrawIcon { get; set; }
 
     }
 }

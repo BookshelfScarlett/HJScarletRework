@@ -33,7 +33,6 @@ namespace HJScarletRework.ReVisual.Projs
 
             for (int i = 0; i < 2; i++)
                 new TurbulenceShinyCube(proj.Center, proj.SafeDir().ToRandVelocity(ToRadians(5f), 4f), RandLerpColor(Color.Crimson, Color.Silver), 10, proj.velocity.ToRotation(), RandZeroToOne, 0.2f, randPosMoveValue: 4).SpawnToNonPreMult();
-            //new TrailGlowBall(proj.Center, proj.SafeDir() * 1.5f, RandLerpColor(Color.Crimson, Color.Silver), 10, 0.15f).Spawn();
         }
         public void AddListForAda(Projectile proj)
         {

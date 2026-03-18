@@ -240,3 +240,18 @@ CactusSpear: {
 	DisplayName: Cactus Spear
 	Tooltip: ""
 }
+
+ColdSakura: {
+	DisplayName: Cold Sakura
+	Tooltip: ""
+}
+
+TerraSpear: {
+	DisplayName: Terra Spear
+	Tooltip: ""
+}
+
+AbyssalWorld: {
+	DisplayName: Abyssal World
+	Tooltip: ""
+}

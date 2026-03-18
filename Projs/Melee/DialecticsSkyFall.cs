@@ -4,12 +4,9 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Dialectics = ContinentOfJourney.Items.Dialectics;
 using Materialism = ContinentOfJourney.Projectiles.Meelee.Materialism;
 
 namespace HJScarletRework.Projs.Melee

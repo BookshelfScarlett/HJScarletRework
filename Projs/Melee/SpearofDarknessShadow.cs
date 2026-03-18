@@ -27,7 +27,6 @@ namespace HJScarletRework.Projs.Melee
         }
         public Vector2 MountedVec = Vector2.Zero;
         public float Osci = 0f;
-        private int StrikeTime = 260;
         private int CanDamageTime = 0;
         private float GeneralProgress = 0;
 
@@ -60,7 +59,9 @@ namespace HJScarletRework.Projs.Melee
         public override bool? CanHitNPC(NPC target)
         {
             bool canHit = Projectile.HJScarlet().GlobalTargetIndex == -1 || (Projectile.HJScarlet().GlobalTargetIndex != -1 && target == Main.npc[Projectile.HJScarlet().GlobalTargetIndex]);
-            return canHit;
+            if (canHit)
+                return null;
+            return false;
         }
         public override bool? CanDamage() => CanDamageTime > 50;
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -144,9 +145,7 @@ namespace HJScarletRework.Projs.Melee
             }
             Texture2D projTex = IdlePosIndex == 0 ? Request<Texture2D>(GetInstance<SpearofDarknessThrownProj>().Texture).Value : Projectile.GetTexture();
             for (int i = 0; i < 8; i++)
-            {
                 SB.Draw(projTex, Projectile.Center - Main.screenPosition + ToRadians(i * 60f).ToRotationVector2() * 2f, null, Color.Purple.ToAddColor() * Projectile.Opacity, Projectile.rotation + PiOver4, projTex.ToOrigin(), Projectile.scale, 0, 0);
-            }
             SB.Draw(projTex, Projectile.Center - Main.screenPosition, null, Color.Black * Projectile.Opacity, Projectile.rotation + PiOver4, projTex.ToOrigin(), Projectile.scale, 0, 0);
 
             return false;

@@ -4,15 +4,8 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {

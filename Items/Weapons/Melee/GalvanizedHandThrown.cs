@@ -49,7 +49,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                     if (proj.AttackType == GalvanizedHandThrownProj.Style.Stab)
                     {
                         Item.useStyle = ItemUseStyleID.Shoot;
-                        Item.useTime = Item.useAnimation = 15;
+                        Item.useTime = Item.useAnimation = 20;
                         return true;
                     }
                 }
@@ -75,7 +75,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                 ShootSideProj(player, source, spawnPos, dirToVel, ProjectileType<GalvanizedHandSideProj>(), damage, knockback);
             }
             else
-                CurrentProj = Projectile.NewProjectileDirect(source, spawnPos, dirToVel, type, damage * 2, knockback, player.whoAmI);
+                CurrentProj = Projectile.NewProjectileDirect(source, position, velocity, type, damage * 2, knockback, player.whoAmI);
             return false;
         }
         public void ShootSideProj(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
