@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Executor;
+﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
 using Terraria.ID;

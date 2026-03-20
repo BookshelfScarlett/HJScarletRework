@@ -27,6 +27,10 @@ namespace HJScarletRework.Projs.Executor
         {
             base.OnFirstFrame();
         }
+        public override bool? CanHitNPC(NPC target)
+        {
+            return base.CanHitNPC(target);
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             base.OnHitNPC(target, hit, damageDone);

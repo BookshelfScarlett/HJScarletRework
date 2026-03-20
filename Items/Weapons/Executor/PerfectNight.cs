@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Executor;
+﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Instances;
 using Terraria.ID;
 

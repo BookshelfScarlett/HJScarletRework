@@ -1,10 +1,13 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
@@ -42,6 +45,8 @@ namespace HJScarletRework.Projs.Executor
             Projectile.penetrate = -1;
             Projectile.extraUpdates = 1;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
+            Projectile.tileCollide = false;
+            Projectile.ownerHitCheck = true;
         }
         public override void OnFirstFrame()
         {
@@ -49,6 +54,7 @@ namespace HJScarletRework.Projs.Executor
             Helper.MaxProgress[1] = 38;
             if (Projectile.GetTargetSafe(out NPC target, false))
                 CurTarget = target;
+            SetUpPushParticle(1);
         }
         public override void ProjAI()
         {
@@ -57,7 +63,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void UpdateAttackAI()
         {
-            switch(AttackType)
+            switch (AttackType)
             {
                 case State.Shoot:
                     DoShoot();
@@ -85,7 +91,10 @@ namespace HJScarletRework.Projs.Executor
                     Projectile.rotation += 0.2f;
                 }
                 else
+                {
+                    SoundEngine.PlaySound(SoundID.Item76, Projectile.Center);
                     UpdateToNextAttack(State.Return);
+                }
             }
         }
         public void UpdateToNextAttack(State id)
@@ -102,11 +111,21 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.velocity *= 0.84f;
                 Projectile.rotation = Projectile.SpeedAffectRotation();
                 Helper.UpdateAniState(1);
+
                 return;
+            }
+            else if (Helper.IsDone[1])
+            {
+                if (Timer == 0f)
+                {
+                    Timer = 1;
+                    SoundEngine.PlaySound(SoundID.Item76 with { MaxInstances = 0, Pitch = -0.15f }, Projectile.Center);
+                    SetUpPushParticle(-1);
+                }
             }
             Projectile.rotation += 0.2f;
             Projectile.HomingTarget(Owner.Center, -1, 20, 10);
-            if(Projectile.IntersectOwnerByDistance(50f))
+            if (Projectile.IntersectOwnerByDistance(50f))
                 Projectile.Kill();
         }
 
@@ -126,28 +145,49 @@ namespace HJScarletRework.Projs.Executor
                 d.scale = Main.rand.NextFloat(0.8f, 1.15f);
                 d.noGravity = true;
             }
+            if (Projectile.FinalUpdateNextBool(3))
+            {
+                new EmptyRing(Projectile.Center.ToRandCirclePosEdge(16f), RandVelTwoPi(0.4f,1.4f), RandLerpColor(Color.DarkGreen, Color.Green), 40, 0.25f, 1, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
+            }
+
 
         }
-
+        public void SetUpPushParticle(int reverse)
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(16), DustID.JunglePlants);
+                d.velocity = Projectile.velocity.ToRandVelocity(ToRadians(20f), 1f, 2.4f) * reverse;
+                d.scale = 1.65f;
+                d.noGravity = true;
+            }
+        }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             return base.OnTileCollide(oldVelocity);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { MaxInstances = 2, Pitch = 0.3f }, Projectile.Center);
             if (AttackType == State.Shoot && Helper.IsDone[0])
             {
-                Timer += 1;
                 IsHit = true;
-                if (Timer < TotalHitTime)
+                Timer += 1;
+                Vector2 dir = Vector2.UnitX.RotatedBy(ToRadians(360f / TotalHitTime * Timer)) * 8f;
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<JungleMadnessLeafs>(), Projectile.damage, 1f, Owner.whoAmI);
+                ((JungleMadnessLeafs)proj.ModProjectile).AIStatement = JungleMadnessLeafs.LeafState.Execution;
+                proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                proj.timeLeft = GetSeconds(2);
+                if (Timer <= TotalHitTime)
                     return;
-                Projectile.velocity = (Projectile.Center - Owner.Center).ToSafeNormalize().RotatedBy(Main.rand.NextBool().ToDirectionInt() * ToRadians(65)) * 36f;
+                Projectile.velocity = (Projectile.Center - Owner.Center).ToSafeNormalize().RotatedBy(Main.rand.NextBool().ToDirectionInt() * ToRadians(55)) * 36f;
+                SetUpPushParticle(1);
+                SoundEngine.PlaySound(SoundID.Item76 with { MaxInstances = 1, Pitch = -0.5f }, Projectile.Center);
                 UpdateToNextAttack(State.Return);
             }
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawGlowEdge(Color.White);
             Projectile.DrawProj(lightColor);
             return false;
         }

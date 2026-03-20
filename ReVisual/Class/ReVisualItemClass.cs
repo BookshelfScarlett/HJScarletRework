@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Globals.Methods;
-using HJScarletRework.Particles;
+using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;

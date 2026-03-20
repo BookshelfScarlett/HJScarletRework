@@ -100,3 +100,8 @@ FakeManaContainer: {
 	DisplayName: Fake Mana Container
 	Tooltip: "{0}"
 }
+
+CycleMadness: {
+	DisplayName: Cycle Madness
+	Tooltip: ""
+}

@@ -1,5 +1,5 @@
-﻿using HJScarletRework.Executor;
-using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;

@@ -1,6 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Particles;
+using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;

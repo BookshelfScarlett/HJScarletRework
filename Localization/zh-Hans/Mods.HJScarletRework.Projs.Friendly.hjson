@@ -127,4 +127,7 @@ Executor: {
 	// TheMossFocusProj.DisplayName: The Moss Focus Proj
 	// TheMossProj.DisplayName: The Moss Proj
 	// JungleMadnessFocusProj.DisplayName: Jungle Madness Focus Proj
+	// JungleMadnessLeafs.DisplayName: Jungle Madness Leafs
+	// PerfectNightBeam.DisplayName: Perfect Night Beam
+	// PerfectNightMinion.DisplayName: Perfect Night Minion
 }

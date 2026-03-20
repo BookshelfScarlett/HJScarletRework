@@ -5,7 +5,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.ParticleSystem;
-using HJScarletRework.Particles;
+using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;

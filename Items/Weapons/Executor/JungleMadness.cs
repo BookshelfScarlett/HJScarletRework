@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Executor;
+﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Projs.Executor;
 using Terraria.ID;
 
@@ -7,7 +7,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class JungleMadness: ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 0.5f;
-        public override int ExecutionTime => 5;
+        public override int ExecutionTime => 15;
         public override int ExecutionProj => base.ExecutionProj;
         public override void ExSD()
         {

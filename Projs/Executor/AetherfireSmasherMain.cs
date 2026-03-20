@@ -1,6 +1,6 @@
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;

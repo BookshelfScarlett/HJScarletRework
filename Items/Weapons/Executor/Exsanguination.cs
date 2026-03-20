@@ -1,5 +1,5 @@
 ﻿using ContinentOfJourney.Items;
-using HJScarletRework.Executor;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
