@@ -1,19 +1,13 @@
 ﻿using HJScarletRework.Items.Weapons.Melee;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.GameContent.Generation;
 using Terraria.ID;
-using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
 namespace HJScarletRework.Globals.Systems
 {
-    public class HJScarletChestLoot : ModSystem
+    public partial class HJScarletGeneralSystem : ModSystem
     {
         public void PlaceIceSpear()
         {

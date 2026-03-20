@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Projectiles.Meelee;
-using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
@@ -8,7 +7,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameContent.Biomes;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee

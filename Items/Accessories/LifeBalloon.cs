@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Buffs;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using System;
@@ -10,10 +11,10 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class LifeBalloon : HJScarletItems
+    public class LifeBalloon : HJScarletItemClass
     {
         public override bool IsLoadingEnabled(Mod mod) => false;
-        public override ItemCategory LocalCategory => ItemCategory.Accessories;
+        public override string AssetPath => AssetHandler.Equips;
         public override void SetDefaults()
         {
             Item.width = Item.height = 30;

@@ -1,14 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
-using Microsoft.Build.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json.Serialization;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -78,7 +74,6 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(4f);
                 Vector2 vel = -Projectile.velocity.ToRandVelocity(ToRadians(5f), 1.0f, 16.4f);
                 new StarShape(spawnPos, vel, RandLerpColor(Color.Lime, Color.Green), 0.75f, 80).Spawn();
-                new StarShape(spawnPos, vel, Color.White, 0.75f * 0.5f, 80).Spawn();
             }
         }
         public void InitPosList()
@@ -135,15 +130,13 @@ namespace HJScarletRework.Projs.Melee
                 for (int i = 0; i < 2; i++)
                 {
                     Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(6f, 6f) - Projectile.SafeDir() * 20f;
-                    new StarShape(pos, Projectile.velocity / 6f, RandLerpColor(Color.Green, Color.LimeGreen), 0.4f * Projectile.Opacity, 60).Spawn();
-                    new StarShape(pos, Projectile.velocity / 6f, Color.White, 0.4f * 0.5f * Projectile.Opacity, 60).Spawn();
+                    //new StarShape(pos, Projectile.velocity / 6f, RandLerpColor(Color.Green, Color.LimeGreen), 0.94f * Projectile.Opacity, 60).Spawn();
                 }
             }
             if (Main.rand.NextBool())
             {
                 Vector2 spawnPos = Projectile.Center.ToRandCirclePos(10f) - Projectile.SafeDir() * 20f;
                 new ShinyOrbParticle(spawnPos, Projectile.velocity / 4f, RandLerpColor(Color.Lime, Color.LightGreen), 130, 0.846f).Spawn();
-                new ShinyOrbParticle(spawnPos, Projectile.velocity / 4f, Color.White, 130, 0.846f * 0.5f).Spawn();
             }
             if (Main.rand.NextBool())
             {

@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 namespace HJScarletRework.Projs.Executor
 {
     public class DeathTollsMainProj: ThrownHammerProj
@@ -123,7 +122,7 @@ namespace HJScarletRework.Projs.Executor
                     Projectile.Kill();
                     Update = true;
                     if (ModProj.IsHitOnEnablFocusMechanicProj)
-                        ModPlayer.FocusStrikeTime += 1;
+                        ModPlayer.ExecutionTime += 1;
                 }
                 else
                 {
@@ -142,7 +141,7 @@ namespace HJScarletRework.Projs.Executor
             if (!Stealth)
             {
                 //下面这个会扔到一个统一的管理里面。
-                if (!ModProj.IsHitOnEnablFocusMechanicProj && ModProj.UseFocusStrikeMechanic)
+                if (!ModProj.IsHitOnEnablFocusMechanicProj && ModProj.HasExecutionMechanic)
                     ModProj.IsHitOnEnablFocusMechanicProj = true;
 
                 if (Projectile.numHits % 2 == 0)

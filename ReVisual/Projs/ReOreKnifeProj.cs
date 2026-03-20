@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.ID;
 

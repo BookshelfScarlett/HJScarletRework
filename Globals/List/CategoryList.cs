@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.List
 {
-    public class HJScarletCategoryList : ModSystem
+    public partial class HJScarletList : ModSystem
     {
         public static List<int> ThrownSpearList = [];
         public static List<int> HJSpearList=[];

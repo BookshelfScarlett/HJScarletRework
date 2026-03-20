@@ -1,11 +1,7 @@
-﻿using ContinentOfJourney.Items.Accessories.ThrowerWraps;
-using HJScarletRework.Core.Configs;
-using HJScarletRework.Globals.Instances;
+﻿using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
 using System;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.Serialization;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -224,6 +220,13 @@ namespace HJScarletRework.Globals.Methods
                     player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, armRot - customArmRot);
                     break;
             }
+        }
+        public static Tile GetTileCoord(int x, int y)
+        {
+            if (!WorldGen.InWorld(x, y))
+                return new Tile();
+
+            return Main.tile[x, y];
         }
         /// <summary>
         /// 杀了玩家

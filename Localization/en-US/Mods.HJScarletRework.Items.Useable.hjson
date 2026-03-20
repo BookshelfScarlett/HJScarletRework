@@ -1,14 +1,4 @@
 CorePickaxe: {
 	DisplayName: Core Pickaxe
-	Tooltip:
-		'''
-		A tool hot enough to smelt ores for you...
-		Disable on mutilplayer
-		"Core of the Earth"
-		'''
-}
-
-SuicideKnife: {
-	DisplayName: Suicide Knife
 	Tooltip: ""
 }

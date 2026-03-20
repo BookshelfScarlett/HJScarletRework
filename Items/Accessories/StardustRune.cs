@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -6,11 +7,10 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class StardustRune : HJScarletItems
+    public class StardustRune : HJScarletItemClass
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
         public int MinionSlots = 2;
-        public override ItemCategory LocalCategory => ItemCategory.Accessories;
+        public override string AssetPath => AssetHandler.Equips;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs("10%", MinionSlots);
         public override void SetDefaults()
         {

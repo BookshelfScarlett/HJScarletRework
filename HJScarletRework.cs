@@ -3,16 +3,13 @@ global using static HJScarletRework.Globals.Handlers.RandHandler;
 global using static Microsoft.Xna.Framework.MathHelper;
 global using static Terraria.ModLoader.ModContent;
 using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Tiles;
 using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Tiles;
-using System.Formats.Asn1;
 using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static HJScarletRework.Globals.Instances.HJScarletGlobalTiles;
 
 namespace HJScarletRework
 {

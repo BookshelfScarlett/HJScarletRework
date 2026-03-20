@@ -1,8 +1,6 @@
-﻿using ContinentOfJourney.Projectiles;
-using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Executor

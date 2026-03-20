@@ -1,5 +1,4 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Projs.Melee;
 using Terraria;

@@ -1,10 +1,6 @@
 ﻿using ContinentOfJourney.Items;
-using HJScarletRework.Particles;
 using HJScarletRework.ReVisual.Class;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.ReVisual.Items
 {

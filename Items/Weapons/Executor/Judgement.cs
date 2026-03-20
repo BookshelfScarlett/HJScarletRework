@@ -1,10 +1,8 @@
-using HJScarletRework.Assets.Registers;
 using HJScarletRework.Executor;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -12,12 +10,19 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class Judgement: ThrownHammerItem
+    public class Judgement: ExecutorWeaponClass
     {
-        public override int ShootProjID => ProjectileType<JudgementMainProj>();
-        public override int NeedFocusStrikeTime => 30;
+        public override int ExecutionTime => 30;
+        public override float ExecutionStrikeDamageMult => 0.25f;
         public override void ExSD()
         {
+            Item.noUseGraphic = true;
+            Item.noMelee = true;
+            Item.autoReuse = true;
+            Item.useStyle = ItemUseStyleID.Swing;
+            Item.UseSound = SoundID.Item1;
+            Item.shoot = ProjectileType<JudgementMainProj>();
+            Item.knockBack = 12f;
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = Item.height = 58;
             Item.damage = 50;
@@ -26,7 +31,6 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shootSpeed = 18f;
             Item.rare = ItemRarityID.LightRed;
         }
-        public override float FocusDamageAddictive => 0.25f;
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
             if (line.Name == "ItemName" && line.Mod == "Terraria")
@@ -35,10 +39,6 @@ namespace HJScarletRework.Items.Weapons.Executor
                 return false;
             }
             return base.PreDrawTooltipLine(line, ref yOffset);
-        }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            base.ModifyTooltips(tooltips);
         }
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {

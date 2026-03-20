@@ -15,12 +15,19 @@ using static HJScarletRework.Projs.Executor.AetherfireSmasherName;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class AetherfireSmasher: ThrownHammerItem
+    public class AetherfireSmasher: ExecutorWeaponClass
     {
-        public override int ShootProjID => ProjectileType<AetherfireSmasherMain>();
-        public override int NeedFocusStrikeTime => 40;
+        public override int ExecutionTime => 40;
+        public override float ExecutionStrikeDamageMult => 0.25f;
         public override void ExSD()
         {
+            Item.noUseGraphic = true;
+            Item.noMelee = true;
+            Item.autoReuse = true;
+            Item.useStyle = ItemUseStyleID.Swing;
+            Item.UseSound = SoundID.Item1;
+            Item.shoot = ProjectileType<AetherfireSmasherMain>();
+            Item.knockBack = 12f;
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = Item.height = 66;
             Item.damage = 70;
@@ -30,7 +37,6 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shootSpeed = 18f;
             Item.rare = RarityType<DisasterRarity>();
         }
-        public override float FocusDamageAddictive => 0.25f;
         private void DrawSpecialColor(DrawableTooltipLine line, Color drawColor, string colorValue)
         {
             //获取全局Sin值，让描边发生一定程度的动态变化

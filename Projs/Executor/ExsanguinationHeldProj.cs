@@ -3,10 +3,8 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -18,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<Exsanguination>().Texture;
-        public int FocusStrikeTime = GetInstance<Exsanguination>().FocusStrikeTime;
+        public int ExecutionTime = GetInstance<Exsanguination>().ExecutionTime;
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()
         {

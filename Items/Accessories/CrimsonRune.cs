@@ -1,13 +1,14 @@
-﻿using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class CrimsonRune : HJScarletItems
+    public class CrimsonRune : HJScarletItemClass
     {
-        public override ItemCategory LocalCategory => ItemCategory.Accessories;
+        public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -36,18 +37,6 @@ namespace HJScarletRework.Items.Accessories
                 AddIngredient(ItemID.SoulofMight, 5).
                 AddTile(TileID.MythrilAnvil).
                 Register();
-        }
-    }
-    public abstract class HJScarletItems : ModItem, ILocalizedModType
-    {
-        public virtual ItemCategory LocalCategory { get; }
-        public new string LocalizationCategory => $"Items.{LocalCategory}";
-        public static string AssetPath => $"HJScarletRework/Assets/Texture/Items";
-        public override string Texture => GetAsset(AssetCategory.Equip);
-        public string GetAsset(AssetCategory assetCategory)
-        {
-            string path = $"{AssetPath}/{assetCategory}s/{GetType().Name}";
-            return path;
         }
     }
 }

@@ -61,8 +61,8 @@ namespace HJScarletRework.Projs.Melee
             Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(5f);
             if (Main.rand.NextBool())
             {
-                new StarShape(Projectile.Center.ToRandCirclePosEdge(5f), Projectile.velocity / 3, RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed),Main.rand.NextFloat(0.5f, 0.75f), 30).Spawn();
-                new StarShape(spawnPos, Projectile.velocity / 3, Color.Black, Main.rand.NextFloat(0.5f, 0.75f), 30).SpawnToNonPreMult();
+                new StarShape(Projectile.Center.ToRandCirclePosEdge(5f), Projectile.velocity / 3, RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed),Main.rand.NextFloat(0.5f, 0.75f) * 1.1f, 30,false).Spawn();
+                new StarShape(spawnPos, Projectile.velocity / 3, Color.Black, Main.rand.NextFloat(0.5f, 0.75f) * 1.1f, 30,false).SpawnToNonPreMult();
             }
             if (Main.rand.NextBool())
             {

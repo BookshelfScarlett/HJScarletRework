@@ -19,7 +19,8 @@ CrossModSupport.Calamity: 灾厄联动适配
 
 DamageClasses: {
 	ExecutorDamageClass: {
-		FocusTime: 命中{0}次启用专注攻击，按住左Alt查看
+		ExecutionTime: 命中{0}次以发起处刑，按住左Alt查看
+		ExecutionDescriptionName: 处决执行时：
 		DisplayName: 代行者伤害
 
 		Prefixs: {

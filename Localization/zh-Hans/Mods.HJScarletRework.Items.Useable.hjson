@@ -7,8 +7,3 @@ CorePickaxe: {
 		"地球中心"
 		'''
 }
-
-SuicideKnife: {
-	// DisplayName: Suicide Knife
-	// Tooltip: ""
-}

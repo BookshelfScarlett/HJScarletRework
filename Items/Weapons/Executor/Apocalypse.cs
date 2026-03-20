@@ -8,8 +8,8 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Apocalypse : ExecutorWeaponClass
     {
-        public override float FocusStrikeDamageMultipler => 1.0f;
-        public override int FocusStrikeTime => 15;
+        public override float ExecutionStrikeDamageMult => 1.0f;
+        public override int ExecutionTime => 15;
         public override void ExSD()
         {
             Item.width = Item.height = 120;

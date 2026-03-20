@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using Terraria;

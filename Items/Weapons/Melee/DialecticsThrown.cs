@@ -1,15 +1,11 @@
-﻿using ContinentOfJourney.Items;
-using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.ModLoader;
 using static HJScarletRework.Projs.Melee.DialecticsThrownProj;
 

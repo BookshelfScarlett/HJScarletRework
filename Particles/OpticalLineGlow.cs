@@ -13,16 +13,7 @@ namespace HJScarletRework.Particles
         public float BeginScale;
         public SpriteEffects se = SpriteEffects.None;
         public bool UseFadeIn = true;
-        public OpticalLineGlow(Vector2 position, Color color, int lifetime, float opacity, float scale)
-        {
-            Position = position;
-            DrawColor = color;
-            Lifetime = lifetime;
-            Opacity = opacity;
-            Scale = scale;
-            BeginScale = scale;
-        }
-        public OpticalLineGlow(Vector2 position, Color color, int lifetime, float opacity, float scale, bool useFadeIn)
+        public OpticalLineGlow(Vector2 position, Color color, int lifetime, float opacity, float scale, bool useFadeIn = true)
         {
             Position = position;
             DrawColor = color;

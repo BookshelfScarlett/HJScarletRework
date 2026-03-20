@@ -21,7 +21,7 @@ namespace HJScarletRework.Particles
         private float swingOffsetX;
         private bool NoLighting;
         private bool DrawGlowingOrbParticle;
-        public NoahButterfly(Vector2 position, Vector2 beginVector, Color color, int lifeTime, float opacity, float scale, float speed, bool noLighting = false, bool drawGlowingOrbParticle= false)
+        public NoahButterfly(Vector2 position, Vector2 beginVector, Color color, int lifeTime, float opacity, float scale, float speed, bool noLighting = false, bool drawGlowingOrbParticle = false)
         {
             Position = position;
             BeginVector = beginVector;

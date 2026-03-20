@@ -1,11 +1,5 @@
 ﻿using ContinentOfJourney.Items;
-using ContinentOfJourney.Tiles.Paintings;
 using HJScarletRework.ReVisual.Class;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.ReVisual.Items

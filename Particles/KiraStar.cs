@@ -17,7 +17,7 @@ namespace HJScarletRework.Particles
         private bool FadeIn;
         private float MaxOpacity;
         public override int UseBlendStateID => TheBlendStateID;
-        public KiraStar(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, float spinSpeed = 0f, bool fadeIn = false)
+        public KiraStar(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, float spinSpeed = 0f, bool fadeIn = false, int? blendstateID = null)
         {
             Position = position;
             Velocity = velocity;
@@ -27,20 +27,7 @@ namespace HJScarletRework.Particles
             Opacity = opacity;
             Scale = BeginScale = scale;
             SpinSpeed = spinSpeed;
-            TheBlendStateID = BlendStateID.Additive;
-            FadeIn = fadeIn;
-        }
-        public KiraStar(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, int theBlendStateID, float spinSpeed = 0f, bool fadeIn = false)
-        {
-            Position = position;
-            Velocity = velocity;
-            InitColor = color;
-            Lifetime = lifetime;
-            Rotation = Rot;
-            Opacity = opacity;
-            Scale = BeginScale = scale;
-            SpinSpeed = spinSpeed;
-            TheBlendStateID = theBlendStateID;
+            TheBlendStateID = blendstateID ?? BlendStateID.Additive;
             FadeIn = fadeIn;
         }
         public override void OnSpawn()

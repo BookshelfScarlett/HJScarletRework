@@ -7,7 +7,6 @@ using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -61,7 +60,7 @@ namespace HJScarletRework.Projs.Executor
         private void UpdateAttackAI()
         {
 
-            Projectile.direction = Math.Sign(Projectile.velocity.X);
+            Projectile.direction = Projectile.spriteDirection = Math.Sign(Projectile.velocity.X);
             switch(AttackType)
             {
                 case State.Idle:
@@ -116,6 +115,7 @@ namespace HJScarletRework.Projs.Executor
         }
         private void DoStrike()
         {
+            Projectile.tileCollide = false;
             Timer++;
             if (Projectile.GetTargetSafe(out NPC CurTarget, false))
             {
@@ -280,7 +280,7 @@ namespace HJScarletRework.Projs.Executor
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D tex = Projectile.GetTexture();
-            SpriteEffects se = Projectile.direction > 0 ? SpriteEffects.FlipVertically : SpriteEffects.None;
+            SpriteEffects se = Projectile.spriteDirection > 0 ? SpriteEffects.FlipVertically : SpriteEffects.None;
             for (int i = Projectile.oldPos.Length - 1; i >= 0; i--)
             {
                 float ratios = ((float)i / (Projectile.oldPos.Length - 1));

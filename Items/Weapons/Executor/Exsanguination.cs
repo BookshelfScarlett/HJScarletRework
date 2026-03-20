@@ -13,8 +13,8 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Exsanguination : ExecutorWeaponClass
     {
-        public override int FocusStrikeTime => 150;
-        public override float FocusStrikeDamageMultipler => 50f;
+        public override int ExecutionTime => 150;
+        public override float ExecutionStrikeDamageMult => 50f;
         public override void ExSD()
         {
             Item.width = 172;
@@ -40,16 +40,6 @@ namespace HJScarletRework.Items.Weapons.Executor
             if (line.Mod == "Terraria" && line.Name == "Damage")
             {
                 DisasterRarity.DrawMisc(line);
-                return false;
-            }
-            if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
-            {
-                DisasterRarity.DrawMisc(line);
-                return false;
-            }
-            if (line.Name == "FocusTooltipName" && line.Mod == Mod.Name)
-            {
-                DisasterRarity.DrawFlavorRarity2(line);
                 return false;
             }
             return base.PreDrawTooltipLine(line, ref yOffset);

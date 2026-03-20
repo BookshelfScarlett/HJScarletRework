@@ -1,6 +1,4 @@
 ﻿using HJScarletRework.Executor;
-using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
@@ -13,10 +11,9 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class CrimsonScythe : HJScarletWeapon
+    public class CrimsonScythe : ExecutorWeaponClass
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
-        public int FocusStrikeTime = 30;
+        public override int ExecutionTime => 30;
         public int CurSwingTime = 0;
         public override void ExSD()
         {
@@ -35,24 +32,14 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shootSpeed = 10;
             Item.knockBack = 5;
         }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        public override void ExModifyTooltips(List<TooltipLine> tooltips)
         {
-            int flavorTooltipIndex2 = tooltips.FindIndex(line => line.Name == "Damage" && line.Mod == "Terraria");
-            //通过本地化路径搜索需要的特殊文本
-            string value2 = Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.FocusTime").ToLangValue().ToFormatValue(FocusStrikeTime);
-            //实例化toolti并注册名字
-            TooltipLine flavorTooltips2 = new TooltipLine(Mod, "FocusTooltipName", value2);
-            //植入Tooltip
-            tooltips.Insert(flavorTooltipIndex2 + 1, flavorTooltips2);
-            //通过本地化路径搜索需要的特殊文本
+            int flavorTooltipIndex2 = tooltips.FindIndex(line => line.Name == "ItemName" && line.Mod == "Terraria");
             string value = this.GetLocalizedValue("FlavorTooltips").ToLangValue();
             //实例化toolti并注册名字
             TooltipLine flavorTooltips = new TooltipLine(Mod, "FlavorTooltipsName", value);
             //植入Tooltip
-            tooltips.Insert(flavorTooltipIndex2 + 1, flavorTooltips);
-
-            if(Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt))
-                tooltips.ReplaceAllTooltip(this.GetLocalizationKey("FocusStrike"));
+            tooltips.Insert(flavorTooltipIndex2+1, flavorTooltips);
 
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
@@ -62,23 +49,22 @@ namespace HJScarletRework.Items.Weapons.Executor
                 DisasterRarity.DrawRarity2(line);
                 return false;
             }
-            if(line.Mod == "Terraria" && (line.Name == "Damage" ))
+            if(line.Mod == "Terraria" && (line.Name == "CritChance"))
             {
                 DisasterRarity.DrawMisc(line);
                 return false;
-
-            }
-            if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
-            {
-                DisasterRarity.DrawFlavorRarity2(line);
-                return false;
-            }
-            if (line.Name == "FocusTooltipName" && line.Mod == Mod.Name)
-            {
-                DisasterRarity.DrawFlavorRarity2(line);
-                return false;
             }
 
+            if(line.Mod == "Terraria" && (line.Name == "Damage"))
+            {
+                DisasterRarity.DrawMisc(line);
+                return false;
+            }
+            if(line.Mod == Mod.Name && (line.Name == "FlavorTooltipsName"))
+            {
+                DisasterRarity.DrawMisc(line);
+                return false;
+            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override bool CanUseItem(Player player)

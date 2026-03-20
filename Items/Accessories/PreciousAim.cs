@@ -1,19 +1,18 @@
 ﻿using Terraria.ID;
-using HJScarletRework.Globals.Enums;
 using Terraria;
-using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria.ModLoader;
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Tiles;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class PreciousAim : HJScarletItems
+    public class PreciousAim : HJScarletItemClass
     {
-        public override ItemCategory LocalCategory => ItemCategory.Accessories;
+        public override string AssetPath => AssetHandler.Equips;
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;

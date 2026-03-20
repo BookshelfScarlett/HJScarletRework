@@ -2,11 +2,9 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.ParticleSystem;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Specialized;
 using Terraria;
 using Terraria.Audio;
 

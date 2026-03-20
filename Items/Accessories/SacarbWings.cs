@@ -1,9 +1,5 @@
-﻿using HJScarletRework.Globals.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -12,9 +8,9 @@ using Terraria.ModLoader;
 namespace HJScarletRework.Items.Accessories
 {
     [AutoloadEquip(EquipType.Wings)]
-    public class SacarbWings : HJScarletItems
+    public class SacarbWings : HJScarletItemClass
     {
-        public override ItemCategory LocalCategory => ItemCategory.Accessories;
+        public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {
             ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(180, 9f, 2.5f);

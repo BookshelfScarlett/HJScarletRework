@@ -1,14 +1,8 @@
 ﻿using ContinentOfJourney.Items;
-using HJScarletRework.Assets.Registers;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
-using rail;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;

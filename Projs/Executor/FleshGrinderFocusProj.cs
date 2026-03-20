@@ -6,7 +6,6 @@ using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -94,7 +93,7 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.Hitbox.Intersects(Owner.Hitbox))
             {
                 if (Projectile.HJScarlet().AddFocusHit)
-                    Owner.HJScarlet().FocusStrikeTime += 1;
+                    Owner.HJScarlet().ExecutionTime += 1;
                 Projectile.Kill();
             }
         }

@@ -6,7 +6,6 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 using HJScarletRework.Core.ParticleSystem;
-using System.Threading;
 
 namespace HJScarletRework.Particles
 {
@@ -65,7 +64,7 @@ namespace HJScarletRework.Particles
                 Velocity.Y += 0.25f;
             }
             Rotation = HasRotation ? Rotation : Velocity.ToRotation() + PiOver2;
-            if (Scale < 0.10f * BeginScale)
+            if (Scale < 0.05f * BeginScale)
                 Time = Lifetime;
         }
         public override void Draw(SpriteBatch spriteBatch)
@@ -74,7 +73,7 @@ namespace HJScarletRework.Particles
             Texture2D texture = TextureAssets.Extra[ExtrasID.SharpTears].Value;
             spriteBatch.Draw(texture, Position - Main.screenPosition, null, SparkColor, Rotation, texture.Size() * 0.5f, scale, 0, 0f);
             if (DrawGlow)
-                spriteBatch.Draw(texture, Position - Main.screenPosition, null, Color.White, Rotation, texture.Size() * 0.5f, scale * new Vector2(GlowScale, 1f), 0, 0f);
+                spriteBatch.Draw(texture, Position - Main.screenPosition, null, Color.White, Rotation, texture.Size() * 0.5f, scale * 0.5f, 0, 0f);
         }
     }
 }

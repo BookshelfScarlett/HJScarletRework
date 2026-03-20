@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Projectiles.Meelee;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
@@ -8,7 +7,6 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;

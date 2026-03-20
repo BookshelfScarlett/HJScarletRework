@@ -1,5 +1,4 @@
-﻿using HJScarletRework.Buffs;
-using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;

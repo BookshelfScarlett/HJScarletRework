@@ -2,8 +2,6 @@
 using HJScarletRework.Globals.ParticleSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using Terraria;
 
 namespace HJScarletRework.Rarity.RarityDrawHandler
 {

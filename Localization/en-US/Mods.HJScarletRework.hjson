@@ -19,7 +19,8 @@ CrossModSupport.Calamity: ""
 
 DamageClasses: {
 	ExecutorDamageClass: {
-		FocusTime: "{0}"
+		ExecutionTime: "{0}"
+		ExecutionDescriptionName: ""
 		DisplayName: Executor Damage Class
 
 		Prefixs: {

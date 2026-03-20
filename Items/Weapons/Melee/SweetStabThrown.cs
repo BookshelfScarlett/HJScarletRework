@@ -1,14 +1,10 @@
 ﻿using ContinentOfJourney.Items;
-using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.Configs;
-using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -36,7 +32,6 @@ namespace HJScarletRework.Items.Weapons.Melee
         public virtual bool HasLegendary => false;
         public override bool MeleePrefix() => HasLegendary;
         public override bool AllowPrefix(int pre) => true;
-        public static AssetCategory TexturePath => AssetCategory.Weapon;
         public virtual bool NotHomewardJourneySpear => false;
         public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/{GetType().Name}";
         public override void SetDefaults()
@@ -53,12 +48,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             ExSD();
         }
         public virtual void ExSD() { }
-        private int GhostTimer = 0;
-        private int GhostFrame = 0;
-        public override void UpdateInventory(Player player)
-        {
-            ExUpdateInventory(player);
-        }
         public virtual Color MainTooltipColor { get; }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {

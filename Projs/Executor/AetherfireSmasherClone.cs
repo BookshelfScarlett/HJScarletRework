@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 using static HJScarletRework.Projs.Executor.AetherfireSmasherName;
 
 namespace HJScarletRework.Projs.Executor

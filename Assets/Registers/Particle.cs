@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
 
 namespace HJScarletRework.Assets.Registers
 {
@@ -30,6 +25,8 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Particle_RingHard { get; set; }
         public static Tex2DWithPath Particle_ScytheBlood { get; set; }
         public static Tex2DWithPath Particle_SmokeAlt  { get; set; }
+        public static Tex2DWithPath Particle_BoomSparkle  { get; set; }
+        
 
         public void LoadParticle()
         {
@@ -54,6 +51,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_MusicSymbol = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_MusicSymbol)}");
             Particle_ScytheBlood = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_ScytheBlood)}");
             Particle_SmokeAlt = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_SmokeAlt)}");
+            Particle_BoomSparkle= new Tex2DWithPath($"{Path_Particle}{nameof(Particle_BoomSparkle)}");
 
         }
         public void UnLoadParticle()
@@ -79,6 +77,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_MusicSymbol = null;
             Particle_ScytheBlood = null;
             Particle_SmokeAlt = null;
+            Particle_BoomSparkle = null;
         }
     }
 }

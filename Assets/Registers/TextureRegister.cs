@@ -1,11 +1,4 @@
-﻿using ContinentOfJourney.Projectiles;
-using HJScarletRework.Particles;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System;
-using System.Security;
-using Terraria;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;

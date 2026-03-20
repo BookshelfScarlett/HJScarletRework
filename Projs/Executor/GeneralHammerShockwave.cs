@@ -5,7 +5,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -20,7 +19,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ExSD()
         {
             Projectile.height = Projectile.width = Hitbox;
-            Projectile.SetupImmnuity(ImmunityTime);
+            Projectile.SetupImmnuity(-1);
             Projectile.penetrate = TotalHitTime;
             Projectile.ownerHitCheck = true;
             Projectile.tileCollide = true;
@@ -66,21 +65,21 @@ namespace HJScarletRework.Projs.Executor
             base.PlayParticleOnProjAI();
         }
     }
-    public class DungeonBreakShockwave : ExecutorHammerShockwave
+    public class DungeonBreakerShockwave : ExecutorHammerShockwave
     {
-        public override int Hitbox => 50;
+        public override int Hitbox => 200;
         public override void PlayParticleOnFirstFrame()
         {
-            for (int i = 0; i < 32; i++)
+            for (int i = 0; i < 60; i++)
             {
                 Vector2 dir = Vector2.UnitX.RotatedBy(ToRadians(360f / 32 * i));
-                Dust d = Dust.NewDustPerfect(Projectile.Center + dir * 30f, DustID.UnusedWhiteBluePurple);
-                d.velocity *= Vector2.Zero;
-                d.scale = 1.41f;
-                //d.noGravity = true;
+                new ShinyCrossStar(Projectile.Center + dir * 75f, dir * 1.4f, RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 120, dir.ToRotation(), 1f, 0.8f,false).Spawn();
             }
-            //new BloomShockwave(Projectile.Center, Color.RoyalBlue, 40, 1f, .1f).Spawn();
-            //new EmptyRing(Projectile.Center, Vector2.Zero, Color.RoyalBlue, 40, 0.7f, 1f, fadeIn:true,altRing: Main.rand.NextBool()).Spawn();
+            for (int i = 0; i < 40; i++)
+            {
+                Vector2 dir = Vector2.UnitX.RotatedBy(ToRadians(360f / 32 * i));
+                new ShinyCrossStar(Projectile.Center + dir * 40f, dir * 1.4f, RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 120, dir.ToRotation(), 1f, 0.8f,false).Spawn();
+            }
         }
         public override void PlayParticleOnProjAI()
         {

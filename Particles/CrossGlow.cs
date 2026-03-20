@@ -12,17 +12,10 @@ namespace HJScarletRework.Particles
         public override int UseBlendStateID => BlendStateID.Additive;
         public float BeginScale;
         public SpriteEffects se = SpriteEffects.None;
+        public bool UseBoomLight = false;
         public bool UseFadeIn = true;
-        public CrossGlow(Vector2 position, Color color, int lifetime, float opacity, float scale)
-        {
-            Position = position;
-            DrawColor = color;
-            Lifetime = lifetime;
-            Opacity = opacity;
-            Scale = scale;
-            BeginScale = scale;
-        }
-        public CrossGlow(Vector2 position, Color color, int lifetime, float opacity, float scale, bool useFadeIn)
+        public int BlendstateID;
+        public CrossGlow(Vector2 position, Color color, int lifetime, float opacity, float scale, bool useFadeIn = true, bool useBoomLight = false)
         {
             Position = position;
             DrawColor = color;
@@ -31,6 +24,7 @@ namespace HJScarletRework.Particles
             Scale = scale;
             BeginScale = scale;
             UseFadeIn = useFadeIn;
+            UseBoomLight = useBoomLight;
         }
         public override void OnSpawn()
         {
@@ -56,7 +50,7 @@ namespace HJScarletRework.Particles
         // 这里采样没有问题，他贴图就是这样
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Texture2D texture = HJScarletTexture.Particle_CrossGlow.Value;
+            Texture2D texture = UseBoomLight ? HJScarletTexture.Particle_BoomSparkle.Value : HJScarletTexture.Particle_CrossGlow.Value;
             spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor * Opacity, Rotation, texture.Size() / 2, Scale, se, 0f);
         }
     }

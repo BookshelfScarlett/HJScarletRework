@@ -1,20 +1,13 @@
-﻿using HJScarletRework.Globals.Enums;
-using HJScarletRework.Items.Accessories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Materials
 {
-    public class DisasterEssence : HJScarletItems
+    public class DisasterEssence : HJScarletItemClass
     {
-        public override ItemCategory LocalCategory => ItemCategory.Material;
-        public override string Texture => GetAsset(AssetCategory.Material);
+        public override string AssetPath => AssetHandler.Materials;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

@@ -1,4 +1,3 @@
-using ContinentOfJourney.Projectiles.Meelee;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
@@ -6,7 +5,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.ParticleSystem;
 using HJScarletRework.Globals.Players;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Particles;
@@ -131,7 +129,7 @@ namespace HJScarletRework.Projs.Executor
                 //不会这里写成了一个终极史山吧？
                 float arcAngle = i * (PiOver2 + PiOver4 * 1.1f);
                 int echo = Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, spawnVelocity, ProjectileType<BinaryStarsPhantom>(), Projectile.damage / 2, 0f, Owner.whoAmI, targetIndex, 0f, arcAngle);
-                Main.projectile[echo].HJScarlet().FocusStrike = true;
+                Main.projectile[echo].HJScarlet().ExecutionStrike = true;
             }
         }
         public void NormalHit(NPC target)
@@ -350,7 +348,7 @@ namespace HJScarletRework.Projs.Executor
             else
             {
                 if (ModProj.IsHitOnEnablFocusMechanicProj)
-                    Owner.HJScarlet().FocusStrikeTime += 1;
+                    Owner.HJScarlet().ExecutionTime += 1;
                 Projectile.Kill();
                 Update = true;
             }
@@ -523,7 +521,7 @@ namespace HJScarletRework.Projs.Executor
         public override ClassCategory Category => ClassCategory.Executor;
         public HJScarletPlayer ModPlayer => Owner.HJScarlet();
         public HJScarletGlobalProjs ModProj => Projectile.HJScarlet();
-        public bool Stealth => ModProj.FocusStrike;
+        public bool Stealth => ModProj.ExecutionStrike;
         public int AttackTimer
         {
             get => (int)Projectile.ai[1];

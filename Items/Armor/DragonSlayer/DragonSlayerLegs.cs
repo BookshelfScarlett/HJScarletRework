@@ -1,12 +1,8 @@
-﻿using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Accessories;
 using HJScarletRework.Rarity.RarityShiny;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,11 +10,10 @@ using Terraria.ModLoader;
 namespace HJScarletRework.Items.Armor.DragonSlayer
 {
     [AutoloadEquip(EquipType.Legs)]
-    public class DragonSlayerLegs : HJScarletItems
+    public class DragonSlayerLegs : HJScarletItemClass
     {
         public override bool IsLoadingEnabled(Mod mod) => false;
-        public override ItemCategory LocalCategory => ItemCategory.Armor;
-        public override string Texture => GetAsset(AssetCategory.Armor);
+        public override string AssetPath => AssetHandler.Armor;
         public override void SetDefaults()
         {
             Item.width = 26;

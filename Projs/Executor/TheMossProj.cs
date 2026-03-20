@@ -7,7 +7,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -37,7 +36,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.tileCollide = true;
             Projectile.width = Projectile.height = 32;
-            Projectile.SetupImmnuity(30);
+            Projectile.SetupImmnuity(60);
             Projectile.penetrate = 6;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.extraUpdates = 1;
@@ -73,8 +72,8 @@ namespace HJScarletRework.Projs.Executor
                 return;
 
             if (Projectile.HJScarlet().AddFocusHit)
-                Owner.HJScarlet().FocusStrikeTime += 1;
-            if (Projectile.HJScarlet().FocusStrike)
+                Owner.HJScarlet().ExecutionTime += 1;
+            if (Projectile.HJScarlet().ExecutionStrike)
                 CanFocusStrike();
 
             Projectile.Kill();
@@ -88,7 +87,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 vel = dir.RotatedBy(Main.rand.NextFloat(ToRadians(30f), ToRadians(60f)) * Main.rand.NextBool().ToDirectionInt()) * Main.rand.NextFloat(22f, 26f);
             ScreenShakeSystem.AddScreenShakes(Projectile.Center, 12f, 40, vel.ToRotation(), ToRadians(30f));
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.Center, vel, projID, Projectile.originalDamage, 2f, Owner.whoAmI);
-            proj.HJScarlet().FocusStrike = true;
+            proj.HJScarlet().ExecutionStrike = true;
             proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
 
             for (int i = 0; i < 16; i++)

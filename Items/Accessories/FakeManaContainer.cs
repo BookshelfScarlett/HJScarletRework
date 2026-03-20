@@ -1,19 +1,16 @@
-﻿using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class FakeManaContainer : HJScarletItems
+    public class FakeManaContainer : HJScarletItemClass
     {
-        public override ItemCategory LocalCategory => ItemCategory.Accessories;
+        public override string AssetPath => AssetHandler.Equips;
         public int GiveMana = 0;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(GiveMana);
         public override void SetDefaults()

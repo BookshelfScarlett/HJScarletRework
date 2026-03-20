@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Executor;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Executor;
 using HJScarletRework.Projs.Executor;
 using Terraria.ID;
 
@@ -6,8 +7,9 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class DungeonBreaker: ExecutorWeaponClass
     {
-        public override float FocusStrikeDamageMultipler => 0.5f;
-        public override int FocusStrikeTime => 20;
+        public override float ExecutionStrikeDamageMult => 0.5f;
+        public override int ExecutionTime => 8;
+        public override int ExecutionProj => ProjectileType<DungeonBreakerFocusProj>();
         public override void ExSD()
         {
             Item.width = Item.height = 66;
@@ -15,11 +17,11 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.knockBack = 8f;
             Item.noUseGraphic = true;
             Item.noMelee = true;
-            Item.shootSpeed = 12f;
+            Item.shootSpeed = 19f;
             Item.useTime = Item.useAnimation = 38;
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.UseSound = SoundID.Item1;
-            Item.shoot = ProjectileType<DungeonBreakerFocusProj>();
+            Item.UseSound = HJScarletSounds.Misc_KnifeToss[1] with { Pitch = -0.4f, PitchVariance = 0.1f };
+            Item.shoot = ProjectileType<DungeonBreakerProj>();
             Item.rare = ItemRarityID.LightPurple;
         }
     }

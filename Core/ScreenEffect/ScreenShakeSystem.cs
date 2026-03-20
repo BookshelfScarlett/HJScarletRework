@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -50,8 +46,9 @@ namespace HJScarletRework.Core.ScreenEffect
                 // 计算与本地玩家的距离
                 Player player = Main.LocalPlayer;
 
-                float toPlayerLength = (ShakePosition - player.Center).Length();
-                Shake *= 1 - toPlayerLength / ShakeEffectDistance;
+                float toPlayerLength = (ShakePosition - player.Center).LengthSquared();
+                float ratios = Clamp((toPlayerLength / (ShakeEffectDistance *ShakeEffectDistance)), 0f, 1f);
+                Shake *= 1 - ratios;
             }
 
             Main.screenPosition += Vector2.UnitX.RotatedBy(ShakeDirection).RotatedByRandom(ShakeAngleOffset) * Shake;

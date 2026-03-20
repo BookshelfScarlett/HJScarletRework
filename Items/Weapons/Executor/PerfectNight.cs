@@ -6,8 +6,8 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class PerfectNight: ExecutorWeaponClass
     {
-        public override float FocusStrikeDamageMultipler => 0.5f;
-        public override int FocusStrikeTime => 20;
+        public override float ExecutionStrikeDamageMult => 0.5f;
+        public override int ExecutionTime => 20;
         public override void ExSD()
         {
             Item.width = Item.height = 66;

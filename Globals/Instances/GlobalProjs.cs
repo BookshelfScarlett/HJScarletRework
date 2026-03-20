@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Globals.Methods;
-using System;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -14,11 +13,11 @@ namespace HJScarletRework.Globals.Instances
         /// <summary>
         /// 射弹是否正在启用专注攻击的字段
         /// </summary>
-        public bool FocusStrike = false;
+        public bool ExecutionStrike = false;
         /// <summary>
         /// 当前射弹是否允许使用专注机制，标记用
         /// </summary>
-        public bool UseFocusStrikeMechanic = false;
+        public bool HasExecutionMechanic = false;
         /// <summary>
         /// 启用了专注机制的射弹是否命中了一次NPC
         /// </summary>
@@ -26,7 +25,7 @@ namespace HJScarletRework.Globals.Instances
         public float[] ExtraAI = new float[10];
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (UseFocusStrikeMechanic)
+            if (HasExecutionMechanic)
                 AddFocusHit = true;
         }
         public override void AI(Projectile projectile)

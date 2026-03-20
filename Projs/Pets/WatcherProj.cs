@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.GameContent;
 
 namespace HJScarletRework.Projs.Pets
 {

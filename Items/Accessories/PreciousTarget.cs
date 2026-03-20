@@ -1,17 +1,14 @@
 ﻿using Terraria.ID;
-using HJScarletRework.Globals.Enums;
 using Terraria;
-using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
-using Terraria.ModLoader;
-using HJScarletRework.Items.Materials;
-using HJScarletRework.Globals.Players;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class PreciousTarget : HJScarletItems
+    public class PreciousTarget : HJScarletItemClass
     {
-        public override ItemCategory LocalCategory => ItemCategory.Accessories;
+        public override string AssetPath => AssetHandler.Equips;
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;

@@ -1,13 +1,10 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ScreenEffect;
-using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Particles;
-using Humanizer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;

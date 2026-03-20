@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.ParticleSystem
 {

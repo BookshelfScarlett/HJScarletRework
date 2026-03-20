@@ -120,7 +120,7 @@ namespace HJScarletRework.Globals.Instances
         };
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (HJScarletCategoryList.HJSpearList.Contains(item.type))
+            if (HJScarletList.HJSpearList.Contains(item.type))
             {
                 string keyPath = Mod.GetLocalizationKey($"SwitchWeaponTooltip");
                 tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), Color.Lime);

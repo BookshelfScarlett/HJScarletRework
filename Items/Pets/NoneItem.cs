@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Buffs.Pets;
 using HJScarletRework.Projs.Pets;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Pets
 {

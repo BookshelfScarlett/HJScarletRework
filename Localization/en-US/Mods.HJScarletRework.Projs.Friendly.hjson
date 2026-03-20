@@ -101,16 +101,6 @@ Ranged: {
 }
 
 Executor: {
-	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
-	ExsanguinationBulletProj.DisplayName: Exsanguination Bullet Proj
-	ExsanguinationHeldProj.DisplayName: Exsanguination Held Proj
-	BlazingStrikerProj.DisplayName: Blazing Striker Proj
-	DungeonBreakerProj.DisplayName: Dungeon Breaker Proj
-	FleshGrinderProj.DisplayName: Flesh Grinder Proj
-	JungleMadness.DisplayName: Jungle Madness
-	PerferctNightProj.DisplayName: Perferct Night Proj
-	JungleMadnessProj.DisplayName: Jungle Madness Proj
-	FleshGrinderFocusProj.DisplayName: Flesh Grinder Focus Proj
 	Aetherfireball.DisplayName: Aetherfireball
 	AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
 	AetherfireSmasherMain.DisplayName: Aetherfire Smasher Main
@@ -118,13 +108,23 @@ Executor: {
 	BinaryStarsHeldClone.DisplayName: Binary Stars Held Clone
 	BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
 	BinaryStarsMain.DisplayName: Binary Stars Main
+	BlazingStrikerFocusProj.DisplayName: Blazing Striker Focus Proj
+	BlazingStrikerProj.DisplayName: Blazing Striker Proj
+	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
+	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
 	DeathTollsMainProj.DisplayName: Death Tolls Main Proj
+	DungeonBreakerFocusProj.DisplayName: Dungeon Breaker Focus Proj
+	DungeonBreakerProj.DisplayName: Dungeon Breaker Proj
+	DungeonBreakerShockwave.DisplayName: Dungeon Breaker Shockwave
+	DungeonBreakerWaterbolt.DisplayName: Dungeon Breaker Waterbolt
+	ExsanguinationBulletProj.DisplayName: Exsanguination Bullet Proj
+	ExsanguinationHeldProj.DisplayName: Exsanguination Held Proj
+	FleshGrinderFocusProj.DisplayName: Flesh Grinder Focus Proj
+	FleshGrinderProj.DisplayName: Flesh Grinder Proj
 	JudgementMainProj.DisplayName: Judgement Main Proj
+	JungleMadnessProj.DisplayName: Jungle Madness Proj
+	PerferctNightProj.DisplayName: Perferct Night Proj
 	TheMossFocusProj.DisplayName: The Moss Focus Proj
 	TheMossProj.DisplayName: The Moss Proj
-	BlazingStrikerFocusProj.DisplayName: Blazing Striker Focus Proj
-	DungeonBreakFocusProj.DisplayName: Dungeon Break Focus Proj
-	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
-	DungeonBreakerFocusProj.DisplayName: Dungeon Breaker Focus Proj
-	DungeonBreakShockwave.DisplayName: Dungeon Break Shockwave
+	JungleMadnessFocusProj.DisplayName: Jungle Madness Focus Proj
 }

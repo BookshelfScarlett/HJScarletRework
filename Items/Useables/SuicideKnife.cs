@@ -1,7 +1,6 @@
-﻿using ContinentOfJourney.Items;
-using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
@@ -11,11 +10,10 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Useables
 {
-    public class SuicideKnife : HJScarletItems
+    public class SuicideKnife : HJScarletItemClass
     {
         public override bool IsLoadingEnabled(Mod mod) => false;
-        public override ItemCategory LocalCategory => ItemCategory.Useable;
-        public override string Texture => GetAsset(AssetCategory.Useable);
+        public override string AssetPath => AssetHandler.Useables;
         public override void SetDefaults()
         {
             Item.width = Item.height = 48;

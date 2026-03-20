@@ -51,7 +51,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 starShapePos = Projectile.Center + Main.rand.NextVector2CircularEdge(6f, 6f) - dir * Main.rand.NextFloat(0.9f, 1.2f);
                 Color drawColor = RandLerpColor(Color.Black, Color.DarkRed);
-                new StarShape(starShapePos, dir * 2f, drawColor, 0.6f, 20).SpawnToPriorityNonPreMult();
+                new StarShape(starShapePos, dir * 2f, drawColor, 0.6f, 20,false).SpawnToPriorityNonPreMult();
             }
             //烟雾粒子需要减少生成量以让矛本身出来
             if (Main.rand.NextBool())
@@ -64,7 +64,7 @@ namespace HJScarletRework.Projs.Melee
             }
 
             Vector2 drawPos = Projectile.Center + dir * 30f;
-            for (int i = 0;i< 2;i++)
+            for (int i = 0; i < 2; i++)
             {
                 new ShinyOrbParticle(drawPos + Main.rand.NextVector2CircularEdge(4f, 4f), dir * Main.rand.NextFloat(2.4f, 3.6f), RandLerpColor(Color.DarkRed, Color.Red), 20, 0.43f).Spawn();
             }

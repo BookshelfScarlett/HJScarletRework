@@ -6,7 +6,7 @@ Exsanguination: {
 		射出的所有子弹都会造成真实伤害
 		专注攻击启动时，彻底粉碎敌人的护盾，并使接下来的15秒内造成100倍的子弹伤害
 		'''
-	// FocusStrike: ""
+	// ExecutionStrike: ""
 }
 
 BlazingStriker: {
@@ -16,7 +16,7 @@ BlazingStriker: {
 		命中时，从敌人身上弹起，而后进行一次重击
 		在返程的时候不会发起这个效果
 		'''
-	FocusStrike:
+	ExecutionStrike:
 		'''
 		地幔将会尝试在你的敌人上挂载，持续造成伤害
 		在造成固定频次的伤害后，地幔将会尝试进行两次力度更大的重击
@@ -25,14 +25,23 @@ BlazingStriker: {
 
 DungeonBreaker: {
 	DisplayName: 地牢破坏者
-	Tooltip: ""
-	FocusStrike: ""
+	Tooltip:
+		'''
+		命中时，造成一次范围伤害的冲击
+		会直接破坏地牢内的危险类物块
+		'''
+	ExecutionStrike:
+		'''
+		高速掷出且允许无限穿透
+		撞击墙体时砸入墙内，并强制震开附近所有小型敌人
+		其将会不断向后释放可以在墙体上反弹的小型水箭
+		'''
 }
 
 FleshGrinder: {
 	DisplayName: 碾肉机
 	Tooltip: 命中时，碾压敌人的血肉使其爆开
-	FocusStrike:
+	ExecutionStrike:
 		'''
 		碾肉机会尝试搜索多名敌人
 		每检索到一名可用敌人时，碾肉机都会尝试攻击这名敌人5次
@@ -43,19 +52,19 @@ FleshGrinder: {
 JungleMadness: {
 	DisplayName: 丛林狂怒
 	Tooltip: ""
-	FocusStrike: ""
+	ExecutionStrike: ""
 }
 
 PerfectNight: {
 	DisplayName: 无梦之夜
 	Tooltip: ""
-	FocusStrike: ""
+	ExecutionStrike: ""
 }
 
 TheMoss: {
 	DisplayName: 玷污者
 	Tooltip: 命中时，感染敌人的血肉使其糜烂
-	FocusStrike:
+	ExecutionStrike:
 		'''
 		武器会尝试搜索多名敌人
 		每检索到一名可用敌人时，碾肉机都会尝试攻击这名敌人3次
@@ -66,4 +75,61 @@ TheMoss: {
 Apocalypse: {
 	DisplayName: 战争启示录
 	Tooltip: ""
+	// ExecutionStrike: ""
+}
+
+AetherfireSmasher: {
+	DisplayName: 天炎破
+	Tooltip: 命中时，对敌人造成爆炸
+	ExecutionStrike:
+		'''
+		锤子返程时将回击，并挂载在敌人上造成持续伤害
+		挂载状态时按下右键，将会使锤子高速冲向指针位置后回击挂载单位
+		锤子消亡时将自动释放巨型火柱 
+		'''
+	// Color: ""
+}
+
+BinaryStars: {
+	DisplayName: 双子星
+	Tooltip: 命中时，追击迅捷的星云之矢
+	ExecutionStrike:
+		'''
+		同时掷出两把星系之锤，返程时回击敌人
+		撞击敌人后分裂成两个子锤，并挂载在敌人上造成持续伤害
+		挂载结束后，子锤将会返程至玩家手中并再进行一次回击
+		'''
+}
+
+CrimsonScythe: {
+	DisplayName: 猩红重镰
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltips: "[-红月之下，无人能逃过她的收割-]"
+}
+
+DeathTolls: {
+	DisplayName: 死亡丧钟
+	Tooltip: 命中时，引梦魇之箭从天而降
+	ExecutionStrike:
+		'''
+		回击成功时返程成为仆从锤
+		仆从锤在场时，专注攻击将会使死亡锤延迟挂载，并释放暗影魔能与梦魇之箭
+		悬挂的仆从锤将模拟玩家行动，且不会在切换武器后消失，并强化死亡锤的普通攻击
+		只有攻击时才会消耗仆从锤的在场时间，且在场时间殆尽前将会朝玩家指针位置冲刺
+		场上最多只存在一个挂载锤与一个仆从锤
+		'''
+	FlavorTooltips: -于丧钟中冥思，召陨星归位，释梦魇噬敌-
+}
+
+Judgement: {
+	DisplayName: 神代裁决
+	Tooltip: 命中时，迸发裁决新星
+	ExecutionStrike:
+		'''
+		裁决之锤将在返程后回击，并挂载在敌人上造成持续伤害
+		挂载时持续释放裁决之星，并在消失后追加裁决射线
+		挂载圣锤只有在攻击敌人时才会消耗在场时间
+		挂载锤在场时，命中敌对单位不会增加专注攻击次数
+		'''
 }

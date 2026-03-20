@@ -1,6 +1,4 @@
 using ContinentOfJourney;
-using ContinentOfJourney.Tiles;
-using HJScarletRework.Assets.Registers;
 using HJScarletRework.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
@@ -9,7 +7,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -17,16 +14,19 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class DeathTolls: ThrownHammerItem
+    public class DeathTolls: ExecutorWeaponClass
     {
-        public override int ShootProjID => ProjectileType<DeathTollsMainProj>();
-        public override int NeedFocusStrikeTime => 20;
-        public override void ExSSD()
-        {
-            ItemID.Sets.ShimmerTransformToItem[ItemType<DeathTolls>()] = ItemType<BinaryStars>();
-        }
+        public override float ExecutionStrikeDamageMult => 1.0f;
+        public override int ExecutionTime => 20;
         public override void ExSD()
         {
+            Item.noUseGraphic = true;
+            Item.noMelee = true;
+            Item.autoReuse = true;
+            Item.useStyle = ItemUseStyleID.Swing;
+            Item.UseSound = SoundID.Item1;
+            Item.shoot = ProjectileType<DeathTollsMainProj>();
+            Item.knockBack = 12f;
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = 88;
             Item.height = 94;
@@ -42,7 +42,6 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.value = Item.buyPrice(gold: 12);
 
         }
-        public override float FocusDamageAddictive => 0.35f;
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
             if (line.Name == "ItemName" && line.Mod == "Terraria")
@@ -61,7 +60,6 @@ namespace HJScarletRework.Items.Weapons.Executor
                 return false;
             }
 
-
             if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
             {
                 NightRarity.DrawFlavorRarity(line);
@@ -70,12 +68,8 @@ namespace HJScarletRework.Items.Weapons.Executor
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
 
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        public override void ExModifyTooltips(List<TooltipLine> tooltips)
         {
-            string path = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.ShimmerTooltip");
-            bool downedAnyGods = DownedBossSystem.downedMatterGod || DownedBossSystem.downedLifeGod || DownedBossSystem.downedTimeGod;
-            if (downedAnyGods && !Main.LocalPlayer.HJScarlet().NoGuideForBinaryStars)
-                tooltips.CreateTooltip(path, Color.LightPink);
             int flavorTooltipIndex = tooltips.FindIndex(line => line.Name == "ItemName" && line.Mod == "Terraria");
             //通过本地化路径搜索需要的特殊文本
             string value = this.GetLocalizedValue("FlavorTooltips").ToLangValue();
@@ -86,16 +80,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
-            Texture2D tex = TextureAssets.Item[Type].Value;
-            Vector2 position = Item.position - Main.screenPosition + tex.Size() / 2;
-            Rectangle iFrame = tex.Frame();
-            //为锤子添加描边，并时刻更新大小
-            for (int i = 0; i < 16; i++)
-                spriteBatch.Draw(tex, position + ToRadians(i * 60f).ToRotationVector2() * 2.4f, null, Color.Purple with { A = 0 }, 0f, tex.Size() / 2, scale, 0, 0f);
-            //然后绘制锤子本身。
-            spriteBatch.Draw(tex, position, iFrame, Color.White, 0f, tex.Size() / 2, scale, 0f, 0f);
-            Lighting.AddLight(position, TorchID.UltraBright);
-            return false;
+            return base.PreDrawInWorld(spriteBatch, lightColor, alphaColor, ref rotation, ref scale, whoAmI);
         }
         private static float UpdatePos
         {
@@ -107,27 +92,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
-            //草拟吗瑞德
-            //没有击倒任意3神，正常绘制这把锤子
-            bool downedAnyGods = DownedBossSystem.downedMatterGod || DownedBossSystem.downedLifeGod || DownedBossSystem.downedTimeGod;
-            if (!downedAnyGods)
-                return true;
-            //第二个判定，如果已经获得了弑神锤，返回
-
-            if (Main.LocalPlayer.HJScarlet().NoGuideForBinaryStars)
-                return true;
-
-            //否则绘制这把锤子的其他效果。
-            Texture2D tex = TextureAssets.Item[Type].Value;
-            Rectangle iFrame = tex.Frame();
-            //为锤子添加描边，并时刻更新大小
-            for (int i = 0; i < 16; i++)
-                spriteBatch.Draw(tex, position + ToRadians(i * 60f).ToRotationVector2() * UpdatePos, null, Color.Pink with { A = 0 }, 0f, origin, scale, 0, 0f);
-            //然后绘制锤子本身。
-            spriteBatch.Draw(tex, position, iFrame, drawColor, 0f, origin, scale, SpriteEffects.None, 0f);
-            return false;
+            return base.PreDrawInInventory(spriteBatch, position,frame,drawColor,itemColor,origin,scale);
         }
-        //移除了合成表
-        //现在死亡丧钟扔给了暗影墙掉落
     }
 }

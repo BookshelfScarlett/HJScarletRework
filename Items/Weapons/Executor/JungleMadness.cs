@@ -6,8 +6,9 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class JungleMadness: ExecutorWeaponClass
     {
-        public override float FocusStrikeDamageMultipler => 0.5f;
-        public override int FocusStrikeTime => 20;
+        public override float ExecutionStrikeDamageMult => 0.5f;
+        public override int ExecutionTime => 5;
+        public override int ExecutionProj => base.ExecutionProj;
         public override void ExSD()
         {
             Item.width = Item.height = 66;

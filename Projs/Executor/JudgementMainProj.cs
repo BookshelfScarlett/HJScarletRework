@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -135,7 +134,7 @@ namespace HJScarletRework.Projs.Executor
                 if (!Stealth)
                 {
                     if (ModProj.IsHitOnEnablFocusMechanicProj)
-                        ModPlayer.FocusStrikeTime += 1;
+                        ModPlayer.ExecutionTime += 1;
                     Update = true;
                 }
                 //其余情况下，根据情况进行潜伏攻击

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Terraria.ID;
-using Terraria.ModLoader;
 
-namespace HJScarletRework.Tiles
+namespace HJScarletRework.Globals.List
 {
     public class SmeltList
     {

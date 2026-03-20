@@ -6,8 +6,8 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class BlazingStriker : ExecutorWeaponClass
     {
-        public override float FocusStrikeDamageMultipler => 0.5f;
-        public override int FocusStrikeTime => 6;
+        public override float ExecutionStrikeDamageMult => 0.5f;
+        public override int ExecutionTime => 6;
         public override void ExSD()
         {
             Item.width = Item.height = 66;
@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.shootSpeed = 16f;
-            Item.useTime = Item.useAnimation = 45;
+            Item.useTime = Item.useAnimation = 42;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
             Item.shoot = ProjectileType<BlazingStrikerProj>();

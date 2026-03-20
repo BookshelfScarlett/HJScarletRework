@@ -1,46 +1,80 @@
 Exsanguination: {
 	DisplayName: Exsanguination
 	Tooltip: ""
-	FocusStrike: ""
+	ExecutionStrike: ""
 }
 
 BlazingStriker: {
 	DisplayName: Blazing Striker
 	Tooltip: ""
-	FocusStrike: ""
+	ExecutionStrike: ""
 }
 
 DungeonBreaker: {
 	DisplayName: Dungeon Breaker
 	Tooltip: ""
-	FocusStrike: ""
+	ExecutionStrike: ""
 }
 
 FleshGrinder: {
 	DisplayName: Flesh Grinder
 	Tooltip: ""
-	FocusStrike: ""
+	ExecutionStrike: ""
 }
 
 JungleMadness: {
 	DisplayName: Jungle Madness
 	Tooltip: ""
-	FocusStrike: ""
+	ExecutionStrike: ""
 }
 
 PerfectNight: {
 	DisplayName: Perfect Night
 	Tooltip: ""
-	FocusStrike: ""
+	ExecutionStrike: ""
 }
 
 TheMoss: {
 	DisplayName: The Moss
 	Tooltip: ""
-	FocusStrike: ""
+	ExecutionStrike: ""
 }
 
 Apocalypse: {
 	DisplayName: Apocalypse
 	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+AetherfireSmasher: {
+	DisplayName: Aetherfire Smasher
+	Tooltip: ""
+	ExecutionStrike: ""
+	Color: ""
+}
+
+BinaryStars: {
+	DisplayName: Binary Stars
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+CrimsonScythe: {
+	DisplayName: Crimson Scythe
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltips: ""
+}
+
+DeathTolls: {
+	DisplayName: Death Tolls
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltips: ""
+}
+
+Judgement: {
+	DisplayName: Judgement
+	Tooltip: ""
+	ExecutionStrike: ""
 }

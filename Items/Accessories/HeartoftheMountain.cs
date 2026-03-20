@@ -1,15 +1,13 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Handlers;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class HeartoftheMountain : HJScarletItems
+    public class HeartoftheMountain : HJScarletItemClass
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
-        public override ItemCategory LocalCategory => ItemCategory.Accessories;
+        public override string AssetPath => AssetHandler.Equips;
         public override void SetDefaults()
         {
             Item.width = Item.height = 60;

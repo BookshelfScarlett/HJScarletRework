@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Particles;

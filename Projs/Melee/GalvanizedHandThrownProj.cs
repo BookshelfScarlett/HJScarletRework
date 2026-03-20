@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items.Placables.Furniture.Life;
-using ContinentOfJourney.Projectiles;
+﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
@@ -11,7 +10,6 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;

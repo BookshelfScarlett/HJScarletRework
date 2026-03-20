@@ -1,12 +1,10 @@
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.ParticleSystem;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 using static HJScarletRework.Projs.Executor.AetherfireSmasherName;
 
 namespace HJScarletRework.Projs.Executor
@@ -85,7 +83,7 @@ namespace HJScarletRework.Projs.Executor
         //终 极 史 山
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (!Stealth && !ModProj.IsHitOnEnablFocusMechanicProj && ModProj.UseFocusStrikeMechanic)
+            if (!Stealth && !ModProj.IsHitOnEnablFocusMechanicProj && ModProj.HasExecutionMechanic)
                 ModProj.IsHitOnEnablFocusMechanicProj = true;
             target.AddBuff(BuffID.Daybreak, 500);
             //攻击的敌怪传入
@@ -129,7 +127,7 @@ namespace HJScarletRework.Projs.Executor
                     Projectile.Kill();
                     Update = true;
                     if (ModProj.IsHitOnEnablFocusMechanicProj)
-                        ModPlayer.FocusStrikeTime += 1;
+                        ModPlayer.ExecutionTime += 1;
                     return;
                 }
                 else

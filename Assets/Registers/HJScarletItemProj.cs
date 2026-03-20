@@ -1,7 +1,4 @@
-﻿using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Melee;
-using Microsoft.Build.ObjectModelRemoting;
+﻿using HJScarletRework.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -41,10 +38,6 @@ namespace HJScarletRework.Assets.Registers
                 return Size / 2;
             }
         }
-    }
-    public static class InstallMethods
-    {
-        public static string GetItemTexture(this string name, AssetCategory type) => $"HJScarletRework/Assets/Texture/{type}s/{type}_{name}";
     }
     internal class HJScarletBuffIcon : ModSystem
     {

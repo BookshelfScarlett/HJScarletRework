@@ -3,7 +3,6 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;

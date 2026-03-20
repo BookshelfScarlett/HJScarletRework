@@ -1,14 +1,11 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
-using static HJScarletRework.Projs.Melee.DialecticsThrownProj;
 
 namespace HJScarletRework.Items
 {

@@ -1,5 +1,4 @@
 ﻿using ContinentOfJourney.Projectiles;
-using ContinentOfJourney.Tiles.Theatre;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Methods;
@@ -8,8 +7,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data.Common;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;

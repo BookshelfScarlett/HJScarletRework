@@ -64,7 +64,7 @@ namespace HJScarletRework.Globals.Players
         #endregion
 
         #region 专注攻击
-        public int FocusStrikeTime = 0;
+        public int ExecutionTime = 0;
         public int cacheFocusWeapon = -1;
         #endregion
         public override void ResetEffects()
@@ -79,7 +79,7 @@ namespace HJScarletRework.Globals.Players
             //专注攻击：当前武器与上一把缓存的武器不同时，清除原本的专注攻击效果
             if(cacheFocusWeapon == -1 || Player.HeldItem.type != cacheFocusWeapon)
             {
-                FocusStrikeTime = 0;
+                ExecutionTime = 0;
                 cacheFocusWeapon = Player.HeldItem.type;
             }    
         }
@@ -87,7 +87,7 @@ namespace HJScarletRework.Globals.Players
 
         public override void UpdateDead()
         {
-            FocusStrikeTime = 0;
+            ExecutionTime = 0;
             cacheFocusWeapon = -1;
             flybackhandBuffTime = 0;
             flybackhandCloclCD = 0;

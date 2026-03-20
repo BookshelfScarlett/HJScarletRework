@@ -2,10 +2,7 @@
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework.Graphics;
-using NVorbis.Contracts;
-using System;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Classes
