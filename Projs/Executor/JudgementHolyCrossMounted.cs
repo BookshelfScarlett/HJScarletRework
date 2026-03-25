@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
@@ -11,9 +12,12 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class JudgementHolyCrossMounted : HJScarletFriendlyProj
+    public class JudgementHolyCrossMounted : HJScarletFriendlyProj, IPixelatedRenderer
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public BlendState BlendState => BlendState.AlphaBlend;
+
+        public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         private enum DoType
         {
@@ -113,9 +117,12 @@ namespace HJScarletRework.Projs.Executor
                     float rot = ToRadians(i * rotArg);
                     Vector2 offsetPos = new Vector2(12f + j * 12, 0f).RotatedBy(rot);
                     Vector2 dVel = new Vector2(4f + 4 * j, 0f).RotatedBy(rot);
-                    float scale = 0.15f;
-                    new HRShinyOrb(Projectile.Center + offsetPos, dVel, Main.rand.NextBool() ? Color.Gold : Color.White, 80, 0f, 1f, scale).Spawn();
-                    new HRShinyOrb(Projectile.Center + offsetPos, dVel, Color.White, 80, 0f, 1f, scale * 0.25f).Spawn();
+                    float scale = 0.815f;
+                    new ShinyCrossStar(Projectile.Center + offsetPos, dVel, RandLerpColor(Color.Goldenrod, Color.Orange), 80, rot, 1, scale, false).Spawn();
+                }
+                for (int k = 0; k < 8; k++)
+                {
+                    new KiraStar(Projectile.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.Goldenrod, Color.Orange), 40, 0, 1, 0.28f).Spawn();
                 }
             }
             //处死时释放
@@ -123,7 +130,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 //666我还要存他们的数组信息来着
                 float curRadians = ToRadians(ToDegrees(Projectile.rotation) + 90f * i);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, curRadians.ToRotationVector2() * 16f, ProjectileType<JudgementHolyCross>(), (int)(Projectile.damage * 0.35f), 0f, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, curRadians.ToRotationVector2() * 16f, ProjectileType<JudgementHolyCross>(), (int)(Projectile.damage), 0f, Projectile.owner);
                 proj.ai[1] = 16f;
                 //这里必须得保留，确保初始生成的射线角度是正确的
                 proj.rotation = curRadians;
@@ -138,7 +145,7 @@ namespace HJScarletRework.Projs.Executor
             //等待一段时间后自然死亡。
             //遍历所有可能存在的射弹
             int[] array = [.. BeamList];
-            for (int i = 0; i < array.Length;i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 //这里写的一堆shit本质上是为了更新四个射线的中心点。
                 Main.projectile[array[i]].localAI[0] = Projectile.Center.X;
@@ -150,20 +157,27 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            PixelatedRenderManager.BeginDrawProj = true;
             //这里的放缩会被lerp进行一次总控。
-            Vector2 dynamicBackgroundScale = Vector2.Lerp(Vector2.Zero, new Vector2(1.4f,1.4f), GeneralProgress) * Projectile.scale * 1.1f;
-            Vector2 dynamicBloomScale = Vector2.Lerp(Vector2.Zero, new Vector2(0.8f,0.8f), GeneralProgress) * Projectile.scale * 1.1f;
-            Vector2 ori = HJScarletTexture.Particle_HRStar.Origin;
-            //最后我们实际绘制他。
-            SB.End();
-            SB.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-
-            SB.Draw(HJScarletTexture.Particle_HRStar.Value, Projectile.Center - Main.screenPosition, null, Color.Yellow, Projectile.rotation, ori, dynamicBackgroundScale, SpriteEffects.None, 0.1f);
-            SB.Draw(HJScarletTexture.Particle_HRStar.Value, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, ori, dynamicBloomScale, SpriteEffects.None, 0.1f);
-
-            SB.End();
-            SB.BeginDefault();
             return false;
         }
+        public void RenderPixelated(SpriteBatch sb)
+        {
+            HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
+            //这里的放缩会被lerp进行一次总控。
+            Vector2 dynamicBackgroundScale = Vector2.Lerp(Vector2.Zero, new Vector2(1.0f, 1.0f), GeneralProgress) * Projectile.scale * 4.1f;
+            Vector2 dynamicBloomScale = Vector2.Lerp(Vector2.Zero, new Vector2(0.5f, 0.5f), GeneralProgress) * Projectile.scale * 4.1f;
+            float ringScale = Lerp(0, 1.28f, GeneralProgress) * Projectile.scale;
+            Texture2D tex = HJScarletTexture.Particle_KiraStar.Value;
+            Texture2D ring = HJScarletTexture.Particle_Ring.Value;
+            Vector2 ori = tex.Size() / 2;
+            //最后我们实际绘制他。
+            sb.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.Gold, Projectile.rotation, ori, dynamicBackgroundScale, SpriteEffects.None, 0.1f);
+            sb.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, ori, dynamicBloomScale, SpriteEffects.None, 0.1f);
+            sb.Draw(ring, Projectile.Center - Main.screenPosition, null, Color.Gold, Projectile.rotation, ring.ToOrigin(), ringScale, 0, 0);
+            sb.Draw(ring, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, ring.ToOrigin(), ringScale, 0, 0);
+            HJScarletMethods.EndShaderAreaPixel();
+        }
+
     }
 }

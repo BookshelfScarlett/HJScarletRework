@@ -20,9 +20,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override int ExecutionTime => 20;
         public override void ExSD()
         {
-            Item.noUseGraphic = true;
-            Item.noMelee = true;
-            Item.autoReuse = true;
+            Item.SetUpNoUseGraphicItem();
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
             Item.shoot = ProjectileType<DeathTollsMainProj>();

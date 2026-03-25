@@ -228,6 +228,31 @@ namespace HJScarletRework.Globals.Methods
 
             return Main.tile[x, y];
         }
+        public static int ApplyWeaponAttackSpeed(this Player player, Item item, int time, int Min)
+        {
+            float a = player.GetWeaponAttackSpeed(item);
+            float Mult = 1f / a;
+            int RealAttack = (int)(time * Mult);
+            if (RealAttack < Min)
+                return Min;
+            else
+                return RealAttack;
+        }
+        public static void SetUpNoUseGraphicItem(this Item item, bool channel = false, bool autoReuse = true)
+        {
+            item.noMelee = true;
+            item.noUseGraphic = true;
+            item.channel = channel;
+            if (channel)
+                item.autoReuse = true;
+            else
+                item.autoReuse = autoReuse;
+        }
+        public static void SetUpRarityPrice(this Item item, int rarityID)
+        {
+            item.rare = rarityID;
+            item.value = HJScarletShopPrice.ConvertedToValue(rarityID);
+        }
         /// <summary>
         /// 杀了玩家
         /// </summary>

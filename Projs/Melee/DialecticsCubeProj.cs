@@ -108,8 +108,6 @@ namespace HJScarletRework.Projs.Melee
         private void DoHomeToTarget()
         {
             int getTarDistance = 600;
-            if (HJScarletMethods.HasFuckingCalamity)
-                getTarDistance = 1800;
             if (!Projectile.GetTargetSafe(out NPC target, true, getTarDistance))
             {
                 Projectile.Kill();

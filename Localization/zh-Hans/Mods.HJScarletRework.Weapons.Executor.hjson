@@ -51,17 +51,28 @@ FleshGrinder: {
 
 JungleMadness: {
 	DisplayName: 丛林狂怒
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: 命中时，追加短暂飞行的穿墙树叶
+	ExecutionStrike:
+		'''
+		返程后回击，并挂载在敌人上造成12次伤害
+		每次造成伤害时都会追加穿墙的旋转树叶
+		'''
 }
 
-PerfectNight: {
+DreamlessNight: {
 	DisplayName: 无梦之夜
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: 掷出命中时，释放梦境之花
+	ExecutionStrike:
+		'''
+		命中时，返程变为仆从锤
+		悬挂的仆从锤将模拟玩家行动，且不会在切换武器后消失，并强化无梦之锤的普通攻击
+		只有攻击时才会消耗仆从锤的在场时间，且在场时间殆尽前将会朝玩家指针位置冲刺
+		场上最多只存在一把仆从锤，且仆从锤在场时不会增加处决叠层次数
+		'''
+	FlavorTooltips: "[-我于那漫漫长夜中，思念着梦的存在-]"
 }
 
-TheMoss: {
+TheDefiler: {
 	DisplayName: 玷污者
 	Tooltip: 命中时，感染敌人的血肉使其糜烂
 	ExecutionStrike:
@@ -73,8 +84,8 @@ TheMoss: {
 }
 
 Apocalypse: {
-	DisplayName: 战争启示录
-	Tooltip: ""
+	DisplayName: 终焉战争
+	Tooltip: 命中时，降下惩戒闪电
 	// ExecutionStrike: ""
 }
 
@@ -103,8 +114,18 @@ BinaryStars: {
 
 CrimsonScythe: {
 	DisplayName: 猩红重镰
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip:
+		'''
+		向你周围的敌人挥砍巨型镰刀
+		第三下挥砍会进一步增加攻击范围
+		每次命中都会对敌人放血，并释放其中的灵魂
+		你可以通过按下右键以吸收灵魂恢复你的生命，也可以通过劈砍的方式将灵魂打回原主
+		'''
+	ExecutionStrike:
+		'''
+		你接下来的15秒内所有攻击，都以一定的概率处决敌人1%当前生命值
+		触发处决后将自动吸收从该名敌人体内释放的灵魂
+		'''
 	FlavorTooltips: "[-红月之下，无人能逃过她的收割-]"
 }
 
@@ -123,7 +144,7 @@ DeathTolls: {
 }
 
 Judgement: {
-	DisplayName: 神代裁决
+	DisplayName: 圣神断罪
 	Tooltip: 命中时，迸发裁决新星
 	ExecutionStrike:
 		'''
@@ -132,4 +153,16 @@ Judgement: {
 		挂载圣锤只有在攻击敌人时才会消耗在场时间
 		挂载锤在场时，命中敌对单位不会增加专注攻击次数
 		'''
+}
+
+DreamingLight: {
+	DisplayName: 铸梦之光
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltips: "[-我于那长眠之夜中，构建着梦的到来-]"
+}
+
+ThePunishment: {
+	DisplayName: 神明裁决
+	Tooltip: ""
 }

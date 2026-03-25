@@ -57,7 +57,6 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (!HJScarletMethods.HasFuckingCalamity)
                 modifiers.SourceDamage *= (MaxPenetrate - Projectile.penetrate) * 0.2f;
         }
         public override void AI()

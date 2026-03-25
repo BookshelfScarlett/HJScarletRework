@@ -7,17 +7,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terraria;
+using Terraria.ID;
 
-namespace HJScarletRework.Projs.Executor
+namespace HJScarletRework.Projs.Melee
 {
-    public class PerfectNightBeam : HJScarletProj
+    public class AbyssalWorldVortex : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override ClassCategory Category => ClassCategory.Melee;
         public override void SetStaticDefaults()
         {
-            base.SetStaticDefaults();
+            ProjectileID.Sets.NoMeleeSpeedVelocityScaling[Type] = true;
         }
         public override void ExSD()
         {
@@ -31,17 +31,9 @@ namespace HJScarletRework.Projs.Executor
         {
             base.ProjAI();
         }
-        public override bool? CanHitNPC(NPC target)
+        public override bool? CanDamage()
         {
-            return base.CanHitNPC(target);
-        }
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            return base.OnTileCollide(oldVelocity);
-        }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            base.OnHitNPC(target, hit, damageDone);
+            return base.CanDamage();
         }
         public override bool PreDraw(ref Color lightColor)
         {

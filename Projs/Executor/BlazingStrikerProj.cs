@@ -132,7 +132,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 16f, 20f);
             if (Projectile.Hitbox.Intersects(Owner.Hitbox))
             {
-                if (!Owner.HasProj<BlazingStrikerFocusProj>(out int projID))
+                if (!Owner.HasProj<BlazingStrikerExecution>(out int projID))
                 {
                     if (Projectile.HJScarlet().AddFocusHit)
                         Owner.HJScarlet().ExecutionTime += 1;
@@ -188,7 +188,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen())
                 return;
-            bool isState = Owner.HasProj<BlazingStrikerFocusProj>() && Main.rand.NextBool() && (AttackType == State.Hit || AttackType == State.ReadyHeavyHit);
+            bool isState = Owner.HasProj<BlazingStrikerExecution>() && Main.rand.NextBool() && (AttackType == State.Hit || AttackType == State.ReadyHeavyHit);
             if (isState)
                 return;
             if (Projectile.FinalUpdateNextBool())
@@ -277,7 +277,7 @@ namespace HJScarletRework.Projs.Executor
                     UpdateToNextAttack(State.Return);
                     //这里会简单过一个检查。
                     //有挂载锤的情况下我们不会做额外的特效和震屏，避免枪走挂载锤的风头
-                    bool directReturn = CurTarget == null || Owner.HasProj<BlazingStrikerFocusProj>();
+                    bool directReturn = CurTarget == null || Owner.HasProj<BlazingStrikerExecution>();
                     float pitch = Owner.HJScarlet().ExecutionTime * 0.1f;
                     if (Projectile.HJScarlet().ExecutionStrike)
                         pitch = GetInstance<BlazingStriker>().ExecutionTime * 0.1f;

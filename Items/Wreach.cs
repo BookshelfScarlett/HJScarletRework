@@ -18,17 +18,18 @@ namespace HJScarletRework.Items
             Item.width = Item.height = 50;
             Item.damage = 20;
             Item.rare = ItemRarityID.Red;
-            Item.shoot = ProjectileType<BlazingStrikerFocusProj>();
-            Item.shootSpeed = 18f;
+            Item.shoot = ProjectileType<DreamingLightBeam>();
+            Item.shootSpeed = 6f;
             Item.useTime = Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Swing;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             //Vector2 ownerMW = player.LocalMouseWorld();
-            //Projectile proj = Projectile.NewProjectileDirect(source, ownerMW, velocity * 0f, ProjectileType<SpearofEscapeBoom>(), damage, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<ThePunishmentExecution>(), damage, knockback, player.whoAmI);
+            proj.ai[2] = 1;
             //添加需要的攻击单位
-            return true;
+            return false;
         }
     }
 }

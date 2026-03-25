@@ -41,10 +41,6 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             Lighting.AddLight(Projectile.Center, TorchID.Blue);
-            if(Projectile.HJScarlet().FirstFrame && HJScarletMethods.HasFuckingCalamity)
-            {
-                SpawnBeamCounts = 6;
-            }
             //本质上控的是火焰方向，不过写在这里也为了方便一些操作
             IsHitTile = Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height);
             Projectile.velocity *= !IsHitTile ? 0.92f : 0.74f;
@@ -64,8 +60,6 @@ namespace HJScarletRework.Projs.Melee
                     //向下方向，生成一个小型的鬼魂粒子
                     SpawnTime += 1f;
                     int fireDamage = (int)(Projectile.originalDamage * (SpawnTime / SpawnBeamCounts));
-                    if (HJScarletMethods.HasFuckingCalamity)
-                        fireDamage = Projectile.originalDamage;
                     Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitY.ToRandVelocity(PiOver4) * Main.rand.NextFloat(3f, 4f), ProjectileType<CandLanceBeam>(), fireDamage, 12f, Owner.whoAmI);
                     SoundEngine.PlaySound(HJScarletSounds.Evolution_Thrown with { Volume = 0.7f, MaxInstances = 0, Pitch = 0.7f }, Projectile.Center);
                 }

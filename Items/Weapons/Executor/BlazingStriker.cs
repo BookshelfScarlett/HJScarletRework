@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria.ID;
 
@@ -13,14 +14,13 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.width = Item.height = 66;
             Item.damage = 44;
             Item.knockBack = 8f;
-            Item.noUseGraphic = true;
-            Item.noMelee = true;
             Item.shootSpeed = 16f;
             Item.useTime = Item.useAnimation = 42;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
             Item.shoot = ProjectileType<BlazingStrikerProj>();
-            Item.rare = ItemRarityID.LightPurple;
+            Item.SetUpRarityPrice(ItemRarityID.Orange);
+            Item.SetUpNoUseGraphicItem();
         }
         public override void AddRecipes()
         {

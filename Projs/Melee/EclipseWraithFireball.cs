@@ -21,7 +21,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.extraUpdates = 4;
             Projectile.width = Projectile.height = 16;
-            Projectile.tileCollide = !HJScarletMethods.HasFuckingCalamity;
+            Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.noEnchantmentVisuals = true;
             Projectile.usesLocalNPCImmunity = true;

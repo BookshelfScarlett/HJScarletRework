@@ -31,9 +31,7 @@ namespace HJScarletRework.Globals.Instances
             if (npc.type == NPCType<MarquisMoonsquid>())
                 npcLoot.AddLootSimple(ItemType<SquidItem>(), 4);
             if (npc.type == NPCType<ScarabBelief>())
-            {
                 npcLoot.AddLootSimple(ItemType<NoneItem>(), 4);
-            }
         }
     }
 }

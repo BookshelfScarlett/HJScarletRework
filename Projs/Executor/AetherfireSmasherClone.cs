@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class AetherfireSmasherClone : HJScarletProj
     {
-        public override string Texture => GetInstance<AetherfireSmasherMain>().Texture;
+        public override string Texture => GetInstance<AetherfireSmasherProj>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;
         private ref float AttackTimer => ref Projectile.ai[0];
         private ref float CanDamageTimer => ref Projectile.ai[1];

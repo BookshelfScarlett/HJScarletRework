@@ -47,6 +47,12 @@
             float progress = animationStruct.Progress[id] / (float)animationStruct.MaxProgress[id];
             return Clamp(progress, 0f, 1f);
         }
+        public static float GetAniProgress(this AnimationStruct animationStruct, int slotID)
+        {
+            int id = (int)slotID;
+            float progress = animationStruct.Progress[id] / (float)animationStruct.MaxProgress[id];
+            return Clamp(progress, 0f, 1f);
+        }
         public static float UpdateAngle(this AnimationStruct animationHelper, float BeginAngle, float EndAngle, int Filp, float Progress, float PreFilpAdd = 0)
         {
             float startAngleOffset = ToRadians(BeginAngle);

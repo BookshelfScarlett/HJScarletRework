@@ -12,6 +12,7 @@ namespace HJScarletRework.Globals.Executor
         public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/{GetType().Name}";
         public virtual int ExecutionProj => -1;
         public new string LocalizationCategory => $"Weapons.Executor";
+        public override bool RangedPrefix() => false;
         public virtual int ExecutionTime => 10;
         public virtual float ExecutionStrikeDamageMult => 1.0f;
         public override void SetDefaults()

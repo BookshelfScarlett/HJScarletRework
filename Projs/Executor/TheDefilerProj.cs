@@ -13,9 +13,9 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class TheMossProj : HJScarletProj
+    public class TheDefilerProj : HJScarletProj
     {
-        public override string Texture => GetInstance<TheMoss>().Texture;
+        public override string Texture => GetInstance<TheDefiler>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;
         public enum State
         {
@@ -80,7 +80,7 @@ namespace HJScarletRework.Projs.Executor
         }
         private void CanFocusStrike()
         {
-            if (Owner.HasProj<TheMossFocusProj>(out int projID))
+            if (Owner.HasProj<TheDefilerExecution>(out int projID))
                 return;
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_Hit with { MaxInstances = 0, Pitch = -0.2f }, Projectile.Center);
             Vector2 dir = Projectile.velocity.ToSafeNormalize();

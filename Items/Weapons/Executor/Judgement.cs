@@ -1,4 +1,5 @@
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
@@ -16,20 +17,18 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override float ExecutionStrikeDamageMult => 0.25f;
         public override void ExSD()
         {
-            Item.noUseGraphic = true;
-            Item.noMelee = true;
-            Item.autoReuse = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ProjectileType<JudgementMainProj>();
-            Item.knockBack = 12f;
+            Item.shoot = ProjectileType<JudgementProj>();
+            Item.knockBack = 8f;
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = Item.height = 58;
             Item.damage = 50;
             Item.useTime = 13;
             Item.useAnimation = 13;
             Item.shootSpeed = 18f;
-            Item.rare = ItemRarityID.LightRed;
+            Item.SetUpRarityPrice(ItemRarityID.LightRed);
+            Item.SetUpNoUseGraphicItem();
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
@@ -56,12 +55,8 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.Pwnhammer).
-                AddIngredient(ItemID.SoulofMight, 10).
-                AddIngredient(ItemID.SoulofFright, 10).
-                AddIngredient(ItemID.SoulofSight, 10).
-                AddIngredient(ItemID.Diamond, 5).
-                AddIngredient(ItemID.Amethyst, 5).
+                AddIngredient<ThePunishment>().
+                AddIngredient(ItemID.ChlorophyteBar, 10).
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }

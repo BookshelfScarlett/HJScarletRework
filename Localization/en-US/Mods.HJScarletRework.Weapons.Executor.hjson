@@ -28,13 +28,14 @@ JungleMadness: {
 	ExecutionStrike: ""
 }
 
-PerfectNight: {
+DreamlessNight: {
 	DisplayName: Perfect Night
 	Tooltip: ""
 	ExecutionStrike: ""
+	FlavorTooltips: ""
 }
 
-TheMoss: {
+TheDefiler: {
 	DisplayName: The Moss
 	Tooltip: ""
 	ExecutionStrike: ""
@@ -77,4 +78,16 @@ Judgement: {
 	DisplayName: Judgement
 	Tooltip: ""
 	ExecutionStrike: ""
+}
+
+DreamingLight: {
+	DisplayName: Dreaming Light
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltips: ""
+}
+
+ThePunishment: {
+	DisplayName: The Punishment
+	Tooltip: ""
 }

@@ -12,9 +12,9 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class TheMossFocusProj: HJScarletProj
+    public class FleshGrinderExecution : HJScarletProj
     {
-        public override string Texture => GetInstance<TheMossProj>().Texture;
+        public override string Texture => GetInstance<FleshGrinderProj>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;
         public enum State
         {
@@ -36,8 +36,7 @@ namespace HJScarletRework.Projs.Executor
         public List<NPC> HitTargetList = [];
         public NPC CurHittingTarget = null;
         public bool IsHitting = false;
-        public int TotalHitTime = 3;
-        public int HitTargetCounts = 6;
+        public int TotalHitTime = 5;
 
         public override void SetStaticDefaults()
         {
@@ -67,7 +66,7 @@ namespace HJScarletRework.Projs.Executor
 
         private void UpdateAttack()
         {
-            if (Projectile.TooAwayFromOwner() || Projectile.timeLeft < 100 || HitTargetList.Count > HitTargetCounts)
+            if (Projectile.TooAwayFromOwner() || Projectile.timeLeft < 100 || HitTargetList.Count > 3)
                 AttackType = State.Return;
             Timer++;
             switch (AttackType)
@@ -142,17 +141,17 @@ namespace HJScarletRework.Projs.Executor
                 return;
 
             if (Projectile.numUpdates == 0 && Main.rand.NextBool(3))
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.5f, 1.1f), false).SpawnToNonPreMult();
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.5f, 1.1f), false).SpawnToNonPreMult();
 
             if (Projectile.numUpdates == 0 && Main.rand.NextBool(5))
-                new EmptyRing(Projectile.Center.ToRandCirclePos(30f), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.25f, 1f, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
-            Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(30f), DustID.CorruptionThorns);
+                new EmptyRing(Projectile.Center.ToRandCirclePos(30f), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkRed, Color.Crimson), 40, 0.25f, 1f, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
+            Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(30f), DustID.Blood);
             d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(15f), 1.2f, 1.8f);
             d.scale *= Main.rand.NextFloat(1.2f, 1.4f);
             d.noGravity = true;
 
             if (Projectile.numUpdates == 0 && Main.rand.NextBool(5))
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.5f, 1.1f), true).SpawnToNonPreMult();
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.5f, 1.1f), true).SpawnToNonPreMult();
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -169,14 +168,14 @@ namespace HJScarletRework.Projs.Executor
             {
                 Vector2 pos = Main.rand.NextVector2FromRectangle(Utils.CenteredRectangle(Projectile.Center, new Vector2(32, 32)));
                 Vector2 dVel = vel * Main.rand.NextFloat(4.4f, 8.8f);
-                new SmokeParticle(pos, dVel, RandLerpColor(Color.DarkViolet, Color.Purple), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.50f, 1.1f), RandBoolen()).SpawnToNonPreMult();
+                new SmokeParticle(pos, dVel, RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.50f, 1.1f), RandBoolen()).SpawnToNonPreMult();
             }
             for (int i = 0; i < 8; i++)
             {
 
                 Vector2 pos = Main.rand.NextVector2FromRectangle(Utils.CenteredRectangle(Projectile.Center, new Vector2(32, 32)));
                 Vector2 dVel = vel * Main.rand.NextFloat(4.4f, 4.8f);
-                new ShinyOrbHard(pos, dVel, RandLerpColor(Color.DarkGreen, Color.SeaGreen), 40, Main.rand.NextFloat(0.4f, 0.8f)).SpawnToNonPreMult();
+                new ShinyOrbHard(pos, dVel, RandLerpColor(Color.DarkRed, Color.Crimson), 40, Main.rand.NextFloat(0.4f, 0.8f)).SpawnToNonPreMult();
             }
         }
 
@@ -201,11 +200,11 @@ namespace HJScarletRework.Projs.Executor
         private void UpdateHitParticle(Vector2 center)
         {
             for (int i = 0; i < 24; i++)
-                new Fire(center.ToRandCirclePos(6f), RandVelTwoPi(1,7f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, RandRotTwoPi, 1f, 0.1f).SpawnToNonPreMult();
+                new Fire(center.ToRandCirclePos(6f), RandVelTwoPi(1,7f), RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 1f, 0.1f).SpawnToNonPreMult();
             for (int i = 0; i < 24; i++)
-                new ShinyOrbHard(center.ToRandCirclePos(10f), RandVelTwoPi(3, 8f), RandLerpColor(Color.DarkGreen, Color.SeaGreen), 40, Main.rand.NextFloat(0.4f, 0.8f)).SpawnToNonPreMult();
+                new ShinyOrbHard(center.ToRandCirclePos(10f), RandVelTwoPi(3, 8f), RandLerpColor(Color.DarkRed, Color.Crimson), 40, Main.rand.NextFloat(0.4f, 0.8f)).SpawnToNonPreMult();
             for (int i = 0; i < 7; i++)
-                new EmptyRing(Projectile.Center.ToRandCirclePos(20f), -RandVelTwoPi(2f, 4f), RandLerpColor(Color.DarkViolet, Color.Purple), 60, 0.25f * Main.rand.NextFloat(0.75f,1.1f), 1f, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
+                new EmptyRing(Projectile.Center.ToRandCirclePos(20f), -RandVelTwoPi(2f, 4f), RandLerpColor(Color.DarkRed, Color.Crimson), 60, 0.25f * Main.rand.NextFloat(0.75f,1.1f), 1f, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
 
         }
         private void StrikeCurTarget(NPC target)

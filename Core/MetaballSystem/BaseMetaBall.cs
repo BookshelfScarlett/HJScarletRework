@@ -11,6 +11,7 @@ namespace HJScarletRework.Core.MetaballSystem
     {
         public int Type = 0;
 
+        public int MetaballTimer;
         // 这个元球对应的渲染目标
         public RenderTarget2D AlphaTexture;
         // 这个元球对应的背景

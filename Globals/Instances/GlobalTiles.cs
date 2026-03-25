@@ -44,15 +44,11 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-            if (Main.netMode != NetmodeID.SinglePlayer)
-                return;
-
             bool dummy = true;
             if (Main.gameMenu || fail || !CanKillTile(i, j, type, ref dummy))
                 return;
             //抄的，我其实看不懂物块更新
-            Player usPlayer = Main.LocalPlayer;
-            var soulPlayer = usPlayer.HJScarlet();
+            Player usPlayer = Main.player[Player.FindClosest(new Vector2(i, j), 16, 16)];
             if (Main.netMode != NetmodeID.Server && Main.LocalPlayer == usPlayer && !usPlayer.CCed && !usPlayer.noBuilding && !usPlayer.HasBuff(BuffID.DrillMount) && !usPlayer.noItems)
             {
                 if (usPlayer.HeldItem.type == ItemType<CorePickaxe>() && usPlayer.HeldItem.ModItem is CorePickaxe)

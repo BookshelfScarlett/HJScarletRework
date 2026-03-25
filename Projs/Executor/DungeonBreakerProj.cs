@@ -65,6 +65,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateParticle()
         {
+            Lighting.AddLight(Projectile.Center, Color.RoyalBlue.R / 255f, Color.RoyalBlue.G / 255f, Color.RoyalBlue.B / 255f);
             if (Projectile.IsOutScreen())
                 return;
             if (Projectile.FinalUpdateNextBool())
@@ -103,7 +104,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 Vector2 dir = (Owner.Center - Projectile.Center).ToSafeNormalize();
                 Projectile.velocity = dir.RotatedBy(ToRadians(30) * Main.rand.NextBool().ToDirectionInt()) * 24f;
-                SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Pitch = -0.5f}, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Pitch = -0.5f }, Projectile.Center);
                 GenerateBackDust(-1);
                 UpdateToNextState(State.Return);
             }
@@ -195,9 +196,9 @@ namespace HJScarletRework.Projs.Executor
             bool updateToBounce = AttackType == State.Shoot;
             if (updateToBounce)
             {
+                BreakTiles();
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<DungeonBreakerShockwave>(), Projectile.damage, Owner.whoAmI);
                 BounceUpdate();
-                BreakTiles();
             }
             return false;
         }
@@ -219,20 +220,37 @@ namespace HJScarletRework.Projs.Executor
                         TileID.CrackedBlueDungeonBrick,
                         TileID.Spikes
                     ];
-            for (int i = -15; i < 15; i++)
+            int radius = 16;
+            if (Main.dedServ)
             {
-                Point pointToCheck = new Vector2(Projectile.Center.X + i, Projectile.Center.Y + i).ToTileCoordinates();
-                Tile CurTiles = HJScarletMethods.GetTileCoord(pointToCheck.X, pointToCheck.Y);
-
-                if (!CurTiles.HasTile || !tileTypeList.Contains(CurTiles.TileType))
-                    continue;
-
-                if (!WorldGen.CanKillTile(pointToCheck.X, pointToCheck.Y))
-                    continue;
-
-                WorldGen.KillTile(pointToCheck.X, pointToCheck.Y);
-                if (Main.netMode == NetmodeID.MultiplayerClient)
-                    NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, pointToCheck.X, pointToCheck.Y);
+                Point center = Utils.ToTileCoordinates(Projectile.Center);
+                NetMessage.SendTileSquare(-1, center.X - radius * 2, center.Y - radius * 2, 4 * radius);
+            }
+            for (int i = -radius; i <= radius; i++)
+            {
+                for (int j = -radius; j <= radius; j++)
+                {
+                    int tilePosX = (int)((float)i + Projectile.Center.X / 16f);
+                    int tilePosY = (int)((float)j + Projectile.Center.Y / 16f);
+                    if (tilePosX >= 0 && tilePosX < Main.maxTilesX && tilePosY >= 0 && tilePosY < Main.maxTilesY)
+                    {
+                        Tile tile = Main.tile[tilePosX, tilePosY];
+                        if ((i * i + j * j) <= radius && !tile.IsActuated)
+                        {
+                            if (!tileTypeList.Contains(tile.TileType))
+                                continue;
+                            if (WorldGen.CanKillTile(tilePosX, tilePosY))
+                            {
+                                WorldGen.KillTile(tilePosX, tilePosY);
+                                
+                            }
+                            for (int k = 0; k < 8; k++)
+                            {
+                                Dust d = Dust.NewDustDirect(new Vector2(tilePosX, tilePosY), 10, 10, DustID.WaterCandle, 2, 2);
+                            }
+                        }
+                    }
+                }
             }
         }
     }

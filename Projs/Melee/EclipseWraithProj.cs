@@ -34,12 +34,9 @@ namespace HJScarletRework.Projs.Melee
         //和转角问题
         public override void AI()
         {
-            if(HJScarletMethods.HasFuckingCalamity && !Projectile.HJScarlet().FirstFrame)
-            {
-                Projectile.penetrate = -1;
-            }
             Projectile.rotation = Projectile.velocity.ToRotation();
             Vector2 dir = Projectile.SafeDirByRot();
+            Vector2 generalMountedPos = Projectile.Center - Projectile.SafeDir() * 70;
             //超出距离立刻处死射弹
             if (Projectile.TooAwayFromOwner())
                 Projectile.Kill();
@@ -49,7 +46,7 @@ namespace HJScarletRework.Projs.Melee
             //先生成starShape, 而后生成需要的火焰粒子，最后再生成需要的shinyorb
             for (int k = 0; k < 2;k++)
             {
-                Vector2 starShapePos = Projectile.Center + Main.rand.NextVector2CircularEdge(6f, 6f) - dir * Main.rand.NextFloat(0.9f, 1.2f);
+                Vector2 starShapePos = generalMountedPos+ Main.rand.NextVector2CircularEdge(6f, 6f) - dir * Main.rand.NextFloat(0.9f, 1.2f);
                 Color drawColor = RandLerpColor(Color.Black, Color.DarkRed);
                 new StarShape(starShapePos, dir * 2f, drawColor, 0.6f, 20,false).SpawnToPriorityNonPreMult();
             }
@@ -59,11 +56,11 @@ namespace HJScarletRework.Projs.Melee
                 for (int j = 0; j < 1; j++)
                 {
                     Color Firecolor = RandLerpColor(Color.DarkRed, Color.Crimson);
-                    new SmokeParticle(Projectile.Center + Main.rand.NextVector2Circular(4, 4), dir * Main.rand.NextFloat(2.4f, 3.6f), Firecolor, Main.rand.Next(30, 41), Main.rand.NextFloat(TwoPi), 1f, Main.rand.NextFloat(0.24f, 0.29f)).SpawnToNonPreMult();
+                    new SmokeParticle(generalMountedPos + Main.rand.NextVector2Circular(4, 4), dir * Main.rand.NextFloat(2.4f, 3.6f), Firecolor, Main.rand.Next(30, 41), Main.rand.NextFloat(TwoPi), 1f, Main.rand.NextFloat(0.24f, 0.29f)).SpawnToNonPreMult();
                 }
             }
 
-            Vector2 drawPos = Projectile.Center + dir * 30f;
+            Vector2 drawPos = generalMountedPos + dir * 30f;
             for (int i = 0; i < 2; i++)
             {
                 new ShinyOrbParticle(drawPos + Main.rand.NextVector2CircularEdge(4f, 4f), dir * Main.rand.NextFloat(2.4f, 3.6f), RandLerpColor(Color.DarkRed, Color.Red), 20, 0.43f).Spawn();
@@ -101,8 +98,9 @@ namespace HJScarletRework.Projs.Melee
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             Texture2D starShape = HJScarletTexture.Particle_SharpTear;
             DrawTheTrail(drawPos, starShape);
-            Projectile.DrawGlowEdge(Color.Red,posMove: 1.4f, rotFix:PiOver4);
-            Projectile.DrawProj(Color.White, rotFix:PiOver4);
+            Vector2 offsetFixer = Projectile.SafeDir() * 70;
+            Projectile.DrawGlowEdge(Color.Red,posMove: 1.4f, rotFix:PiOver4, drawPosOffset:offsetFixer);
+            Projectile.DrawProj(Color.White, rotFix:PiOver4, drawPosOffset:offsetFixer);
             DrawGlow(drawPos);
             return false;
         }
@@ -111,18 +109,19 @@ namespace HJScarletRework.Projs.Melee
         {
             SB.EnterShaderArea();
             Vector2 dir = Projectile.SafeDirByRot();
-            Vector2 glowCirclePos = drawPos + dir * 68f;
+            Vector2 glowCirclePos = drawPos + dir * 68f - Projectile.SafeDir() * 70;
             SB.Draw(HJScarletTexture.Texture_SoftCircleEdge.Value, glowCirclePos, null, Color.Red, Projectile.rotation, HJScarletTexture.Texture_SoftCircleEdge.Origin, Projectile.scale * 0.30f, 0, 0);
             Tex2DWithPath lineGlow = HJScarletTexture.Particle_OpticalLineGlow;
             Vector2 glowScale = Projectile.scale * new Vector2(1.2f, 0.7f);
-            SB.Draw(lineGlow.Value, drawPos + dir * 52f, null, Color.DarkRed, Projectile.rotation, lineGlow.Origin, glowScale * 0.22f, 0, 0);
+            SB.Draw(lineGlow.Value, drawPos + dir * 52f - Projectile.SafeDir() * 70, null, Color.DarkRed, Projectile.rotation, lineGlow.Origin, glowScale * 0.22f, 0, 0);
             SB.EndShaderArea();
         }
 
         public void DrawTheTrail(Vector2 drawPos, Texture2D starShape)
         {
-            Vector2 offset = Projectile.SafeDirByRot() +Projectile.SafeDirByRot() * 30f;
+            Vector2 offset = Projectile.SafeDirByRot() + Projectile.SafeDirByRot() * 50f - Projectile.SafeDir() * 70;
             int length = Projectile.oldPos.Length;
+
             for (int i = 0; i < length; i++)
             {
                 if (Projectile.oldPos[i].Equals(Vector2.Zero))

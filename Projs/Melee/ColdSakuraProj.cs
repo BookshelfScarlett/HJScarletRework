@@ -1,4 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.PixelatedRender;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
@@ -9,9 +11,12 @@ using Terraria;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class ColdSakuraProj : ThrownSpearProjClass
+    public class ColdSakuraProj : ThrownSpearProjClass, IPixelatedRenderer
     {
         public override string Texture => ProjPath + "Proj_ColdSakura";
+        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public BlendState BlendState => BlendState.AlphaBlend;
+
         public enum Style
         {
             Attack,
@@ -45,19 +50,19 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
-            if(!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame)
                 InitInFirstFrame();
             //手动存点用于绘制轨迹
             //而且这里的轨迹是用ex98的预制素材而不是纯顶点绘制
             //最主要是为了尽量与双子星区分
             TrailPosList.Add(Projectile.Center);
-            TrailRotList.Add(Projectile.rotation);
+            TrailRotList.Add(Projectile.velocity.ToRotation());
             if (TrailPosList.Count > TotalTrailCounts)
                 TrailPosList.RemoveAt(0);
             if (TrailRotList.Count > TotalTrailCounts)
                 TrailRotList.RemoveAt(0);
             Lighting.AddLight(Projectile.Center, new Vector3(Color.HotPink.R / 255f, Color.HotPink.G / 255f, Color.HotPink.B / 255f));
-            switch(AttackType)
+            switch (AttackType)
             {
                 case Style.Attack:
                     DoAttack();
@@ -66,10 +71,10 @@ namespace HJScarletRework.Projs.Melee
                     DoDecay();
                     break;
             }
-            if(Main.rand.NextBool(6))
+            if (Main.rand.NextBool(6))
             {
                 Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(30f), 2f, 6f);
-                new PetalNoCollision(Projectile.Center.ToRandCirclePosEdge(4f), vel, RandLerpColor(Color.DeepPink, Color.HotPink).ToAddColor(), 30, RandRotTwoPi, 1f, .1f, 0.8f,true).Spawn();
+                new PetalNoCollision(Projectile.Center.ToRandCirclePosEdge(4f), vel, RandLerpColor(Color.LightPink, Color.Violet).ToAddColor(), 30, RandRotTwoPi, 1f, .1f, 0.8f, true).Spawn();
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -123,24 +128,24 @@ namespace HJScarletRework.Projs.Melee
             }
             new CrossGlow(spawnPos + Projectile.SafeDir() * 5f, color, 20, 1, 0.05f).Spawn();
             new BloomShockwave(spawnPos + Projectile.SafeDir() * 5f, color, 20, 1, 0.015f).Spawn();
-            for (int i = 0;i<18;i++)
+            for (int i = 0; i < 18; i++)
             {
-                Vector2 dVel = Math.Sign(i - 18/2) * Main.rand.NextFloat(3f) * Projectile.SafeDir();
+                Vector2 dVel = Math.Sign(i - 18 / 2) * Main.rand.NextFloat(3f) * Projectile.SafeDir();
                 Vector2 pos = spawnPos.ToRandCirclePos(8);
                 float dscale = Main.rand.NextFloat(0.8f, 1.2f);
-                new ShinyCrossStar(pos, dVel, RandLerpColor(Color.HotPink, color), 40, RandRotTwoPi, 1f, dscale * 0.2f, 0.2f).Spawn();
+                new ShinyCrossStar(pos, dVel, RandLerpColor(Color.HotPink, color), 40, RandRotTwoPi, 1f, dscale * 0.2f, false, 0.2f).Spawn();
             }
         }
         //花
-       
+
         private void DoAttack()
         {
-            if(Main.rand.NextBool())
-            new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 4f, RandLerpColor(Color.HotPink, Color.LightPink), 40, RandRotTwoPi, 1f, 0.2f, 0.2f).Spawn();
+            if (Main.rand.NextBool())
+                new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 4f, RandLerpColor(Color.HotPink, Color.Violet), 40, RandRotTwoPi, 1f, 0.60f, false, 0.2f).Spawn();
             Projectile.Opacity = Lerp(Projectile.Opacity, 1f, 0.15f);
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer++;
-            if(Timer > 45f * Projectile.MaxUpdates)
+            if (Timer > 45f * Projectile.MaxUpdates)
             {
                 AttackType = Style.Decay;
                 Projectile.netUpdate = true;
@@ -151,7 +156,7 @@ namespace HJScarletRework.Projs.Melee
         private void DoDecay()
         {
             Projectile.velocity *= 0.96f;
-            if(Projectile.velocity.LengthSquared() < 10f*10f)
+            if (Projectile.velocity.LengthSquared() < 10f * 10f)
             {
                 Projectile.Kill();
             }
@@ -161,22 +166,29 @@ namespace HJScarletRework.Projs.Melee
         {
             float rotFixer = PiOver4;
             //我有点预制素材上瘾……
-            DrawStarShapeTrail();
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             drawPos -= Projectile.SafeDir() * 60f;
+            DrawStarShapeTrail(SB);
             if (Projectile.Opacity > 0.5f)
             {
                 for (int i = 0; i < 8; i++)
                     SB.Draw(projTex, drawPos + ToRadians(i * 60).ToRotationVector2() * 2f, null, Color.White.ToAddColor() * Projectile.Opacity, Projectile.rotation + rotFixer, ori, Projectile.scale, 0, 0);
             }
             SB.Draw(projTex, drawPos, null, Color.White * Projectile.Opacity, Projectile.rotation + rotFixer, ori, Projectile.scale, 0, 0);
+            PixelatedRenderManager.BeginDrawProj = true;
             return false;
         }
-        public void DrawStarShapeTrail()
+        public void RenderPixelated(SpriteBatch sb)
+        {
+            HJScarletMethods.EnterShaderAreaPixel(BlendState.AlphaBlend);
+            //DrawStarShapeTrail(sb);
+            HJScarletMethods.EndShaderAreaPixel();
+        }
+
+        public void DrawStarShapeTrail(SpriteBatch sb)
         {
             Texture2D starShape = HJScarletTexture.Particle_SharpTear;
-            Texture2D tex = Projectile.GetTexture();
-            Vector2 scale = new Vector2(.55f, 1.4f);
+            Vector2 scale = new Vector2(.45f, 1.4f);
             List<Vector2> PosList = TrailPosList;
             List<float> RotList = TrailRotList;
             for (int i = 0; i < PosList.Count; i++)
@@ -184,18 +196,17 @@ namespace HJScarletRework.Projs.Melee
                 if (PosList[i] == Vector2.Zero)
                     continue;
                 float rads = 1f - i / (float)PosList.Count;
-                Color drawColor = (Color.Lerp(Color.HotPink, Color.Pink, rads) with { A = 50 }) * 0.9f * Projectile.Opacity * (1 - rads);
+                Color drawColor = (Color.Lerp(Color.HotPink, Color.Pink, rads) with { A = 80 }) * 0.9f * Projectile.Opacity * (1 - rads);
                 Vector2 shapeScale = scale * Clamp(i / ((float)PosList.Count - 4f), 0f, 1f);
-                Vector2 lerpPos = PosList[i] - Main.screenPosition + Projectile.SafeDir() * 60f - Projectile.SafeDir() * 60f;
+                Vector2 lerpPos = PosList[i] - Main.screenPosition;
                 if (shapeScale.X > 0.3f && shapeScale.Y > 0.5f)
                 {
-                    SB.Draw(starShape, lerpPos, null, drawColor, RotList[i] + PiOver2, starShape.ToOrigin(), shapeScale, 0, 0);
-                    SB.Draw(starShape, lerpPos - Projectile.SafeDir() * 10f, null, drawColor, RotList[i] + PiOver2, starShape.ToOrigin(), shapeScale, 0, 0);
-                    SB.Draw(starShape, lerpPos, null, Color.White.ToAddColor(50), RotList[i] + PiOver2, starShape.ToOrigin(), shapeScale * 0.35f, 0, 0);
-                    SB.Draw(starShape, lerpPos - Projectile.SafeDir() * 10f, null, Color.White.ToAddColor(50), RotList[i] + PiOver2, starShape.ToOrigin(), shapeScale * 0.35f, 0, 0);
+                    sb.Draw(starShape, lerpPos, null, drawColor, RotList[i] + PiOver2, starShape.ToOrigin(), shapeScale, 0, 0);
+                    sb.Draw(starShape, lerpPos - Projectile.SafeDir() * 10f, null, drawColor, RotList[i] + PiOver2, starShape.ToOrigin(), shapeScale, 0, 0);
+                    sb.Draw(starShape, lerpPos, null, Color.White.ToAddColor(50), RotList[i] + PiOver2, starShape.ToOrigin(), shapeScale * 0.25f, 0, 0);
+                    sb.Draw(starShape, lerpPos - Projectile.SafeDir() * 10f, null, Color.White.ToAddColor(50), RotList[i] + PiOver2, starShape.ToOrigin(), shapeScale * 0.25f, 0, 0);
                 }
             }
         }
-
     }
 }

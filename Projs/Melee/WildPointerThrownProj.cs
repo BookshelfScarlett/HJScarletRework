@@ -96,7 +96,7 @@ namespace HJScarletRework.Projs.Melee
             //锁住生命值
             Projectile.timeLeft = 100;
             Timer++;
-            if (!HomeToPlayer || HJScarletMethods.HasFuckingCalamity)
+            if (!HomeToPlayer)
                 JustHomeToEnemy();
             else
                 JustHomeToPlayer();

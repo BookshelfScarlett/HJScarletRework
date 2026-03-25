@@ -33,7 +33,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public void SpawnEnegry()
         {
-            int spawnCounts = HJScarletMethods.HasFuckingCalamity ? 6 : 3;
+            int spawnCounts =  3;
             SoundEngine.PlaySound(SoundID.Item109 with { MaxInstances = 1 }, Projectile.Center);
             new CrossGlow(Projectile.Center, Color.SkyBlue, 40, 1f, 0.25f,false).Spawn();
             new CrossGlow(Projectile.Center, Color.White, 40, 0.5f, 0.20f,false).Spawn();

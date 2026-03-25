@@ -8,7 +8,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;

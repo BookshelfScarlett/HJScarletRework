@@ -15,7 +15,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class DungeonBreakerFocusProj : HJScarletProj
+    public class DungeonBreakerExecution : HJScarletProj
     {
         public override string Texture => GetInstance<DungeonBreakerProj>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;

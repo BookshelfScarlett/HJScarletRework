@@ -20,6 +20,7 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle Light_CrackedShield => new($"{SoundsPath}{nameof(Light_CrackedShield)}", numVariants: 4);
         public static SoundStyle Light_FleshHit => new($"{SoundsPath}{nameof(Light_FleshHit)}", numVariants: 4);
         public static SoundStyle Light_ShieldHit => new($"{SoundsPath}{nameof(Light_ShieldHit)}", numVariants: 2);
+        public static SoundStyle Dream_Toss => new($"{SoundsPath}{nameof(Dream_Toss)}");
 
         #region 锤子们
         private static SoundStyle Smash_AirHeavy1 => new($"{SoundsPath}{nameof(Smash_AirHeavy1)}");

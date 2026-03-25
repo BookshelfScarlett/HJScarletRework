@@ -89,9 +89,8 @@ namespace HJScarletRework.Projs.Executor
         {
             SoundEngine.PlaySound(SoundID.Item76, Projectile.Center);
             Vector2 vel = Vector2.UnitY * Main.rand.NextBool().ToDirectionInt() * 28f;
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel, ProjectileType<JungleMadnessFocusProj>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
-            proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
-            proj.penetrate = 3;
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel, ProjectileType<JungleMadnessExecution>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
+            ((JungleMadnessExecution)proj.ModProjectile).CurTarget = Projectile.ToHJScarletNPC();
         }
 
         public void UpdateParticle()
@@ -120,6 +119,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
+            Projectile.originalDamage = Projectile.damage;
             base.OnFirstFrame();
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -140,11 +140,13 @@ namespace HJScarletRework.Projs.Executor
                 proj.HJScarlet().GlobalTargetIndex = targetIndex;
                 proj.timeLeft = 45;
                 proj.localNPCHitCooldown = -1;
+                proj.penetrate = 3;
             }
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
+            Projectile.DrawGlowEdge(Color.GreenYellow);
             Projectile.DrawProj(lightColor);
             return false;
         }

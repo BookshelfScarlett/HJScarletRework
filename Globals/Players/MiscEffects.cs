@@ -35,7 +35,7 @@ namespace HJScarletRework.Globals.Players
         public void UpdateFlybackBuff()
         {
             //归零针buff
-            bool hasBuff = (flybackInGameTimeBuff > 0 || HJScarletMethods.HasFuckingCalamity) && (Player.HeldItem.type == ItemType<FlybackHandThrown>());
+            bool hasBuff = (flybackInGameTimeBuff > 0) && (Player.HeldItem.type == ItemType<FlybackHandThrown>());
             if (!hasBuff)
                 return;
             //白天上午与夜间前半夜：给予15%近战伤害加成/15防御力加成

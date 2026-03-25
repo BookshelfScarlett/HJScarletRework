@@ -28,6 +28,7 @@ namespace HJScarletRework.Globals.Players
 
         // 用于向上向下冲刺禁用羽落
         public int NoSlowFall = 0;
+        public int ownerMinionHammerCount = 0;
 
 
 

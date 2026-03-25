@@ -45,14 +45,6 @@ namespace HJScarletRework.Projs.Melee
             {
                 if (Projectile.HJScarlet().GlobalTargetIndex == -1)
                     TotalBounceTime = 1;
-                if(HJScarletMethods.HasFuckingCalamity)
-                {
-                    Projectile.timeLeft = 1800;
-                    SearchDistance = 1800;
-                    KillDistance = 3600;
-                    TotalBounceTime = 8;
-                    Projectile.extraUpdates = 1;
-                }
                     
             }
 

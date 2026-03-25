@@ -80,7 +80,7 @@ namespace HJScarletRework.Projs.Executor
         }
         private void CanFocusStrike()
         {
-            if (Owner.HasProj<FleshGrinderFocusProj>(out int projID))
+            if (Owner.HasProj<FleshGrinderExecution>(out int projID))
                 return;
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_Hit with { MaxInstances = 0, Pitch = -0.2f }, Projectile.Center);
             Vector2 dir = -Projectile.velocity.ToSafeNormalize();

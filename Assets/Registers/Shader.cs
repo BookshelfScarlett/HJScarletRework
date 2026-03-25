@@ -15,6 +15,7 @@ namespace HJScarletRework.Assets.Registers
         public static Effect VolcanoEruptingShader;
         public static Effect Pixelation;
         public static Effect MetaBallShader;
+        public static Effect AlphaFade;
         public override void Load()
         {
             if (Main.dedServ)
@@ -28,11 +29,13 @@ namespace HJScarletRework.Assets.Registers
             VolcanoEruptingShader = LoadShader(nameof(VolcanoEruptingShader));
             Pixelation = LoadShader(nameof(Pixelation));
             MetaBallShader = LoadShader(nameof(MetaBallShader));
+            AlphaFade = LoadShader(nameof(AlphaFade));
 
             RegisterMiscShader(TerrarRayLaser, "HJScarletReworkTerrarRayLaserPass", nameof(TerrarRayLaser));
             RegisterMiscShader(VolcanoEruptingShader, ToPassName(nameof(VolcanoEruptingShader)), nameof(VolcanoEruptingShader));
             RegisterMiscShader(Pixelation, ToPassName(nameof(Pixelation)), nameof(Pixelation));
             RegisterMiscShader(MetaBallShader, ToPassName(nameof(MetaBallShader)), nameof(MetaBallShader));
+            RegisterMiscShader(AlphaFade, ToPassName(nameof(AlphaFade)), nameof(AlphaFade));
         }
         public override void Unload()
         {
@@ -40,6 +43,7 @@ namespace HJScarletRework.Assets.Registers
             VolcanoEruptingShader = null;
             Pixelation = null;
             MetaBallShader = null;
+            AlphaFade = null;
         }
         public static string ToPassName(string oriShadername) => ShaderPrefix + oriShadername + "Pass";
         public static void RegisterMiscShader(Effect shader, string passName, string registrationName)

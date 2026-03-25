@@ -60,11 +60,15 @@ Melee: {
 	TerraSpearSideProj.DisplayName: Terra Spear Side Proj
 	TerraSpearLaser.DisplayName: Terra Spear Laser
 	AbyssalWorldProj.DisplayName: Abyssal World Proj
+	AbyssalWorldVortex.DisplayName: Abyssal World Vortex
 }
 
 Typeless: {
 	EvolutionEnergyPortal.DisplayName: Evolution Energy Portal
 	RegenOrbsPink.DisplayName: Regen Orbs Pink
+	DreamingLightBeam.DisplayName: Dreaming Light Beam
+	JudgementStarAlt.DisplayName: Judgement Star Alt
+	JudgementStarNormal.DisplayName: Judgement Star Normal
 }
 
 Pets: {
@@ -78,7 +82,7 @@ Pets: {
 Ranged: {
 	Aetherfireball.DisplayName: Aetherfireball
 	AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
-	AetherfireSmasherMain.DisplayName: Aetherfire Smasher Main
+	AetherfireSmasherProj.DisplayName: Aetherfire Smasher Main
 	AetherfireVolcano.DisplayName: Aetherfire Volcano
 	BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
 	BinaryStarsMain.DisplayName: Binary Stars Main
@@ -103,31 +107,43 @@ Ranged: {
 Executor: {
 	Aetherfireball.DisplayName: Aetherfireball
 	AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
-	AetherfireSmasherMain.DisplayName: Aetherfire Smasher Main
+	AetherfireSmasherProj.DisplayName: Aetherfire Smasher Proj
 	AetherfireVolcano.DisplayName: Aetherfire Volcano
 	BinaryStarsHeldClone.DisplayName: Binary Stars Held Clone
 	BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
 	BinaryStarsMain.DisplayName: Binary Stars Main
-	BlazingStrikerFocusProj.DisplayName: Blazing Striker Focus Proj
+	BlazingStrikerExecution.DisplayName: Blazing Striker Focus Proj
 	BlazingStrikerProj.DisplayName: Blazing Striker Proj
 	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
 	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
 	DeathTollsMainProj.DisplayName: Death Tolls Main Proj
-	DungeonBreakerFocusProj.DisplayName: Dungeon Breaker Focus Proj
+	DungeonBreakerExecution.DisplayName: Dungeon Breaker Focus Proj
 	DungeonBreakerProj.DisplayName: Dungeon Breaker Proj
 	DungeonBreakerShockwave.DisplayName: Dungeon Breaker Shockwave
 	DungeonBreakerWaterbolt.DisplayName: Dungeon Breaker Waterbolt
 	ExsanguinationBulletProj.DisplayName: Exsanguination Bullet Proj
 	ExsanguinationHeldProj.DisplayName: Exsanguination Held Proj
-	FleshGrinderFocusProj.DisplayName: Flesh Grinder Focus Proj
+	FleshGrinderExecution.DisplayName: Flesh Grinder Focus Proj
 	FleshGrinderProj.DisplayName: Flesh Grinder Proj
 	JudgementMainProj.DisplayName: Judgement Main Proj
 	JungleMadnessProj.DisplayName: Jungle Madness Proj
-	PerferctNightProj.DisplayName: Perferct Night Proj
-	TheMossFocusProj.DisplayName: The Moss Focus Proj
-	TheMossProj.DisplayName: The Moss Proj
-	JungleMadnessFocusProj.DisplayName: Jungle Madness Focus Proj
+	DreamlessNightProj.DisplayName: Perferct Night Proj
+	TheDefilerExecution.DisplayName: The Moss Focus Proj
+	TheDefilerProj.DisplayName: The Moss Proj
+	JungleMadnessExecution.DisplayName: Jungle Madness Focus Proj
 	JungleMadnessLeafs.DisplayName: Jungle Madness Leafs
-	PerfectNightBeam.DisplayName: Perfect Night Beam
-	PerfectNightMinion.DisplayName: Perfect Night Minion
+	DreamlessNightBeam.DisplayName: Perfect Night Beam
+	DreamlessNightMinion.DisplayName: Perfect Night Minion
+	DreamlessNightArrow.DisplayName: Dreamless Night Arrow
+	DreamingLightMinion.DisplayName: Dreaming Light Minion
+	DreamingLightProj.DisplayName: Dreaming Light Proj
+	JudgementProj.DisplayName: Judgement Proj
+	ThePunishmentExecution.DisplayName: Punishment Execution
+	ThePunishmentProj.DisplayName: Punishment Proj
+	JudgementHolyCross.DisplayName: Judgement Holy Cross
+	JudgementHolyCrossMounted.DisplayName: Judgement Holy Cross Mounted
+	JudgementMinion.DisplayName: Judgement Minion
+	JudgementStarExecution.DisplayName: Judgement Star Execution
+	JudgementStarExecutionMounted.DisplayName: Judgement Star Execution Mounted
+	ThePunishmentStar.DisplayName: The Punishment Star
 }

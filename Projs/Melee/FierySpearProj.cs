@@ -16,6 +16,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.ToTrailSetting(10, 2);
         }
+        public Vector2 PosOffsetFix => Projectile.SafeDir() * 60f;
         public override void ExSD()
         {
             Projectile.noEnchantmentVisuals = true;
@@ -33,16 +34,11 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             Lighting.AddLight(Projectile.Center, TorchID.Orange);
-            if (HJScarletMethods.HasFuckingCalamity && !Projectile.HJScarlet().FirstFrame)
-            {
-                Projectile.extraUpdates = 3;
-                Projectile.penetrate = 2;
-            }
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Main.rand.NextBool())
             {
                 //获得最前面的顶点位置
-                new SmokeParticle(Projectile.Center.ToRandCirclePosEdge(6f), -Projectile.velocity / 4, RandLerpColor(Color.Orange, Color.OrangeRed), 40, RandRotTwoPi, 1, 0.24f).Spawn();
+                new SmokeParticle(Projectile.Center.ToRandCirclePosEdge(6f), -Projectile.velocity / 4, RandLerpColor(Color.Orange, Color.OrangeRed), 40, RandRotTwoPi, 1, 0.24f,Main.rand.NextBool()).Spawn();
                 Vector2 dir = Projectile.SafeDirByRot();
                 Vector2 drawPos = Projectile.Center + dir * 60f;
                 //而后，获取粒子需要的方向
@@ -68,7 +64,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public void SpawnVolcanoDustAndProj(int targetIndex = -1)
         {
-            int spawnBallCounts = 2 + HJScarletMethods.HasFuckingCalamity.ToInt() * 8;
+            int spawnBallCounts = 2;
             for (int i = 0; i < spawnBallCounts; i++)
             {
                 Vector2 dir = Projectile.SafeDirByRot().ToRandVelocity(PiOver4);
@@ -88,9 +84,9 @@ namespace HJScarletRework.Projs.Melee
         {
             Texture2D star = TextureAssets.Extra[ExtrasID.SharpTears].Value;
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
-            DrawSideStreak(star, drawPos);
-            Projectile.DrawGlowEdge(Color.Gold, rotFix: PiOver4);
-            Projectile.DrawProj(Color.White, offset: 0.3f, rotFix: PiOver4);
+            DrawSideStreak(star, PosOffsetFix);
+            Projectile.DrawGlowEdge(Color.Gold, rotFix: PiOver4,drawPosOffset:PosOffsetFix);
+            Projectile.DrawProj(Color.White, offset: 0.3f, rotFix: PiOver4,drawPosOffset:PosOffsetFix);
             
             return false;
         }
@@ -101,8 +97,11 @@ namespace HJScarletRework.Projs.Melee
                 if (Projectile.oldPos[i] == Vector2.Zero)
                     continue;
                 float rads = (float)i / 10;
-                Color drawColor = (Color.Lerp(Color.OrangeRed, Color.Orange, rads) with { A = 0 }) * 0.7f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
-                Main.spriteBatch.Draw(star, Projectile.oldPos[i] + Projectile.PosToCenter(), null, drawColor, Projectile.oldRot[i] - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(0.5f, 1.0f) * 1.2f, 0, 0);
+                Color drawColor = (Color.Lerp(Color.OrangeRed, Color.Orange, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
+                Vector2 starScale = new Vector2(0.5f, 1.6f) * Projectile.scale;
+                Vector2 pos = Projectile.oldPos[i] + Projectile.PosToCenter() - Projectile.SafeDir() * 20f;
+                SB.Draw(star, pos, null, drawColor, Projectile.oldRot[i] - PiOver2, star.Size() / 2, starScale, 0, 0);
+                SB.Draw(star, pos, null, Color.White.ToAddColor(50), Projectile.oldRot[i] - PiOver2, star.Size() / 2, starScale * 0.42f, 0, 0);
             }
         }
     }

@@ -26,7 +26,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.autoReuse = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ProjectileType<AetherfireSmasherMain>();
+            Item.shoot = ProjectileType<AetherfireSmasherProj>();
             Item.knockBack = 12f;
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = Item.height = 66;

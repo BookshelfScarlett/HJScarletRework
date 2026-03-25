@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria.ID;
 
@@ -6,7 +7,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class JungleMadness: ExecutorWeaponClass
     {
-        public override float ExecutionStrikeDamageMult => 0.5f;
+        public override float ExecutionStrikeDamageMult => 1f;
         public override int ExecutionTime => 15;
         public override int ExecutionProj => base.ExecutionProj;
         public override void ExSD()
@@ -21,16 +22,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.UseSound = SoundID.Item1;
             Item.shoot = ProjectileType<JungleMadnessProj>();
             Item.useTime = Item.useAnimation = 30;
-            Item.rare = ItemRarityID.LightPurple;
-        }
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddIngredient(ItemID.RichMahoganyHammer).
-                AddIngredient(ItemID.JungleSpores, 10).
-                AddIngredient(ItemID.Stinger, 10).
-                AddTile(TileID.Anvils).
-                Register();
+            Item.SetUpRarityPrice(ItemRarityID.Blue);
         }
     }
 }

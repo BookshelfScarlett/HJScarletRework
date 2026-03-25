@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
@@ -11,8 +12,10 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class DungeonBreakerWaterbolt : HJScarletProj
+    public class DungeonBreakerWaterbolt : HJScarletProj, IPixelatedRenderer
     {
+        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public BlendState BlendState => BlendState.AlphaBlend;
         public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public int BouceTime = 0;
@@ -54,7 +57,7 @@ namespace HJScarletRework.Projs.Executor
                 BouceTime = TotalBounceTime;
                 Projectile.Kill();
             }
-            new ShinyCrossStar(Projectile.Center.ToRandCirclePos(4), Vector2.Zero, Color.RoyalBlue, 40, oldVelocity.ToRotation(), 1f, 1.6f, false).Spawn();
+            new ShinyCrossStar(Projectile.Center.ToRandCirclePos(4), Vector2.Zero, Color.RoyalBlue, 40, oldVelocity.ToRotation(), 1f, 2.24f, false).Spawn();
             SpawnSparkle(oldVelocity);
             Projectile.BounceOnTile(oldVelocity);
             return false;
@@ -75,13 +78,26 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            PixelatedRenderManager.BeginDrawProj = true;
+            return false;
+        }
+        public void RenderPixelated(SpriteBatch sb)
+        {
+            HJScarletMethods.EnterShaderAreaPixel(BlendState.AlphaBlend);
             Texture2D starShape = HJScarletTexture.Particle_SharpTear;
+            Effect effect = HJScarletShader.AlphaFade;
+            effect.Parameters["uFadeoutLeftLength"].SetValue(0.1f);
+            effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
+            effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
+            effect.CurrentTechnique.Passes[0].Apply();
             for (int i = 0; i < 7; i++)
             {
-                Vector2 scale = new Vector2(0.25f, 0.65f) * 1.1f;
-                SB.Draw(starShape, Projectile.Center - Main.screenPosition - Projectile.SafeDir() * 3.5f * i - Projectile.SafeDir() * 10f, null, Color.RoyalBlue.ToAddColor(50), Projectile.velocity.ToRotation() + PiOver2, starShape.ToOrigin(), scale, 0, 0);
+                Vector2 scale = new Vector2(Lerp(0.35f, 0.25f, i / 7f), Lerp(0.85f, 1.15f, i / 7f)) * 1.05f;
+                sb.Draw(starShape, Projectile.Center - Main.screenPosition - Projectile.SafeDir() * 5.5f * i - Projectile.SafeDir() * 10f, null,Color.White.ToAddColor(100), Projectile.velocity.ToRotation() + PiOver2, starShape.ToOrigin(), scale * 0.5f, 0, 0);
+                sb.Draw(starShape, Projectile.Center - Main.screenPosition - Projectile.SafeDir() * 5.5f * i - Projectile.SafeDir() * 10f, null, Color.Lerp(Color.RoyalBlue, Color.MidnightBlue, i / 7f).ToAddColor(50), Projectile.velocity.ToRotation() + PiOver2, starShape.ToOrigin(), scale, 0, 0);
             }
-            return false;
+
+            HJScarletMethods.EndShaderAreaPixel();
         }
     }
 }

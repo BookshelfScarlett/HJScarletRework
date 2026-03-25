@@ -10,7 +10,7 @@ using static HJScarletRework.Projs.Executor.AetherfireSmasherName;
 namespace HJScarletRework.Projs.Executor
 {
     //Todo：按下鼠标右键后应当刷新一次生命值
-    public class AetherfireSmasherMain: ThrownHammerProj
+    public class AetherfireSmasherProj: ThrownHammerProj
     {
         private enum DoType
         {

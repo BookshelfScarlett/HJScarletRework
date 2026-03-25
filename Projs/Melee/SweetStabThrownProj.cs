@@ -37,7 +37,6 @@ namespace HJScarletRework.Projs.Melee
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
             Projectile.penetrate = 3;
-            Projectile.extraUpdates = HJScarletMethods.HasFuckingCalamity.ToInt();
             Projectile.timeLeft = 200;
         }
         public override void AI()
@@ -64,7 +63,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 if (Projectile.Hitbox.Intersects(needPlayer.Hitbox))
                 {
-                    int healAmt = HJScarletMethods.HasFuckingCalamity ? 20 : Main.rand.Next(3, 6);
+                    int healAmt =  Main.rand.Next(3, 6);
                     needPlayer.Heal(healAmt);
                     needPlayer.AddBuff(BuffType<HoneyRegenAlt>(), 60);
                     //生成粒子，追加树叶音效

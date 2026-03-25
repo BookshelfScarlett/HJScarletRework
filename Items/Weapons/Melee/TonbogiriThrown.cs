@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Melee
     {
         public override string Texture => GetInstance<Tonbogiri>().Texture;
         public float CurrentAttackSpeedBonues = 0f;
-        public static readonly int MaxBubbles = HJScarletMethods.HasFuckingCalamity ? 16 : 8;
+        public static readonly int MaxBubbles = 8;
         public override void SetStaticDefaults()
         {
             ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 2f;
@@ -36,12 +36,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             string localAddress = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}");
             string path = $"{localAddress}.Tooltip";
             tooltips.ReplaceAllTooltip(path, MainTooltipColor, GetBubblesCount, MaxBubbles);
-
-            if (HJScarletMethods.HasFuckingCalamity)
-            {
-                string calamityPath = $"{localAddress}.CalamitySupport";
-                tooltips.QuickAddTooltipDirect(calamityPath.ToLangValue(), new(220, 20, 6));
-            }
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
@@ -68,8 +62,6 @@ namespace HJScarletRework.Items.Weapons.Melee
                     theCritBonuse = 0;
                 int totalBubble = theCritBonuse + (int)attackSpeed;
                 totalBubble = (int)Clamp(totalBubble, 1, MaxBubbles);
-                if (HJScarletMethods.HasFuckingCalamity)
-                    totalBubble *= 2;
                 return totalBubble;
             }
         }

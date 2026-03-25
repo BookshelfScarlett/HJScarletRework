@@ -51,11 +51,6 @@ namespace HJScarletRework.Projs.Melee
             {
                 Speed = Projectile.velocity.Length();
                 Projectile.originalDamage = Projectile.damage;
-                if (HJScarletMethods.HasFuckingCalamity)
-                {
-                    Projectile.localNPCHitCooldown = 30;
-                    Projectile.tileCollide = false;
-                }
             }
             //天塌下来了我也要用我的shinyorb和smoke
             Projectile.Opacity = Clamp(Projectile.Opacity, 0f, 1f);
@@ -181,13 +176,15 @@ namespace HJScarletRework.Projs.Melee
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             int length = Projectile.oldPos.Length;
             float rot = Projectile.rotation;
+            Vector2 offset = Projectile.SafeDir() * 60f;
+            drawPos -= offset;
             for (int i = length - 1; i >= 0; i--)
             {
                 if (AttackType == Style.SpinAndFade)
                     continue;
                 float rads = (float)i / length;
                 Color lerpColor = Color.Lerp(Color.DeepSkyBlue, Color.Lerp(Color.SkyBlue, Color.AliceBlue, rads * 0.7f), rads).ToAddColor(0) * Clamp(Projectile.velocity.Length(), 0f, 1f) * 0.50f;
-                SB.Draw(projTex, Projectile.oldPos[i] + Projectile.PosToCenter(), null, lerpColor, rot + PiOver4, ori, 1f, 0, 0);
+                SB.Draw(projTex, Projectile.oldPos[i] + Projectile.PosToCenter() - offset, null, lerpColor, rot + PiOver4, ori, 1f, 0, 0);
             }
             for (int i = 0; i < 8; i++)
                 SB.Draw(projTex, drawPos + ToRadians(60f * i).ToRotationVector2() * 1.5f, null, Color.SkyBlue.ToAddColor(0) * Projectile.Opacity, rot + PiOver4, ori, 1f, 0, 0);

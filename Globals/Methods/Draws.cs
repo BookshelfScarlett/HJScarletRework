@@ -6,6 +6,16 @@ namespace HJScarletRework.Globals.Methods
 {
     public static partial class HJScarletMethods
     {
+        public static void EndShaderAreaPixel()
+        {
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.None, RasterizerState.CullNone, null);
+        }
+        public static void EnterShaderAreaPixel(BlendState blendState)
+        {
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, blendState, SamplerState.PointWrap, DepthStencilState.None, RasterizerState.CullNone, null);
+        }
         public static void BeginDefault(this SpriteBatch SB) =>
           SB.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
         public static void EnterShaderArea()

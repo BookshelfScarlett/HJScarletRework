@@ -51,24 +51,27 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreDraw(ref Color lightColor)
         {
             DrawTrail();
-            Projectile.DrawGlowEdge(Color.Lerp(Color.Black, Color.Gold, Ratios), rotFix: ToRadians(135));
-            Projectile.DrawProj(Color.Lerp(Color.White, Color.Black, Ratios), 1, 0.7f, ToRadians(135));
+            Vector2 posOffset = Projectile.SafeDir() * 60;
+            Projectile.DrawGlowEdge(Color.Lerp(Color.Black, Color.Gold, Ratios), rotFix: ToRadians(135),drawPosOffset:posOffset);
+            Projectile.DrawProj(Color.Lerp(Color.White, Color.Black, Ratios), 1, 0.7f, ToRadians(135),drawPosOffset:posOffset);
             return false;
         }
 
         private void DrawParticle()
         {
-            Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(5f);
+            Vector2 posOffset = Projectile.SafeDir() * 60;
+            Vector2 mountedPos = Projectile.Center - posOffset;
+            Vector2 spawnPos = mountedPos.ToRandCirclePosEdge(5f);
             if (Main.rand.NextBool())
             {
-                new StarShape(Projectile.Center.ToRandCirclePosEdge(5f), Projectile.velocity / 3, RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed),Main.rand.NextFloat(0.5f, 0.75f) * 1.1f, 30,false).Spawn();
+                new StarShape(mountedPos.ToRandCirclePosEdge(5f), Projectile.velocity / 3, RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed),Main.rand.NextFloat(0.5f, 0.75f) * 1.1f, 30,false).Spawn();
                 new StarShape(spawnPos, Projectile.velocity / 3, Color.Black, Main.rand.NextFloat(0.5f, 0.75f) * 1.1f, 30,false).SpawnToNonPreMult();
             }
             if (Main.rand.NextBool())
             {
                 Vector2 dVel = Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f, 6f);
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(12f), dVel, RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, dVel.ToRotation(), 1f, 0.75f, Main.rand.NextFloat(ToRadians(-5f),ToRadians(5f))).Spawn();
-                new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(8f), dVel * Main.rand.NextFloat(0.8f, 1.2f), RandLerpColor(Color.Orange, Color.OrangeRed), 40, 0.95f).Spawn();
+                new ShinyCrossStar(mountedPos.ToRandCirclePos(12f), dVel, RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, dVel.ToRotation(), 1f, 0.75f, false,Main.rand.NextFloat(ToRadians(-5f),ToRadians(5f))).Spawn();
+                new ShinyOrbParticle(mountedPos.ToRandCirclePos(8f), dVel * Main.rand.NextFloat(0.8f, 1.2f), RandLerpColor(Color.Orange, Color.OrangeRed), 40, 0.95f).Spawn();
             }
         }
 
@@ -87,7 +90,7 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 drawScale = Projectile.scale * new Vector2(1f, 1.2f) * scaleRatios;
                 float drawRot = Projectile.oldRot[i] - PiOver2;
                 Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.2f);
-                Vector2 drawPos = lerpPos + Projectile.PosToCenter() + Projectile.SafeDirByRot().RotatedBy(PiOver2) * -2.5f + Projectile.SafeDirByRot() * 30f;
+                Vector2 drawPos = lerpPos + Projectile.PosToCenter() + Projectile.SafeDirByRot().RotatedBy(PiOver2) * -2.5f + Projectile.SafeDirByRot() * 30f - Projectile.SafeDir() * 60f;
                 SB.Draw(star, drawPos, null, drawColor, drawRot, star.Size() / 2, drawScale, 0, 0);
                 drawColor = (Color.Lerp(Color.Orange, Color.OrangeRed, rads * generalProgress).ToAddColor()) * 0.9f * clampValue;
                 SB.Draw(star, drawPos, null, drawColor, drawRot, star.Size() / 2, drawScale * 0.7f, 0, 0);

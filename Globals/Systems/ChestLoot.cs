@@ -1,4 +1,6 @@
-﻿using HJScarletRework.Items.Weapons.Melee;
+﻿using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -9,6 +11,98 @@ namespace HJScarletRework.Globals.Systems
 {
     public partial class HJScarletGeneralSystem : ModSystem
     {
+        public void PlaceDungeonBreaker()
+        {
+            // Place some additional items in Frozen Chests:
+            // These are the 3 new items we will place.
+            int[] itemsToPlaceInFrozenChests = [ItemType<DungeonBreaker>()];
+            // This variable will help cycle through the items so that different Frozen Chests get different items
+            int itemsToPlaceInFrozenChestsChoice = 0;
+            // Rather than place items in each chest, we'll place up to 6 items (2 of each).
+            int itemsPlaced = 0;
+            int maxItems = 3;
+            // Loop over all the chests
+            for (int chestIndex = 0; chestIndex < Main.maxChests; chestIndex++)
+            {
+                Chest chest = Main.chest[chestIndex];
+                if (chest == null)
+                {
+                    continue;
+                }
+                Tile chestTile = Main.tile[chest.x, chest.y];
+                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 2 * 36)
+                {
+                    // We have found a Frozen Chest
+                    // If we don't want to add one of the items to every Frozen Chest, we can randomly skip this chest with a 33% chance.
+                    if (WorldGen.genRand.NextBool(3))
+                        continue;
+                    // Next we need to find the first empty slot for our item
+                    for (int inventoryIndex = 0; inventoryIndex < Chest.maxItems; inventoryIndex++)
+                    {
+                        if (chest.item[inventoryIndex].type == ItemID.None)
+                        {
+                            // Place the item
+                            chest.item[inventoryIndex].SetDefaults(itemsToPlaceInFrozenChests[itemsToPlaceInFrozenChestsChoice]);
+                            // Decide on the next item that will be placed.
+                            itemsPlaced++;
+                            break;
+                        }
+                    }
+                }
+                // Once we've placed as many items as we wanted, break out of the loop
+                if (itemsPlaced >= maxItems)
+                {
+                    break;
+                }
+            }
+        }
+
+        public void PlaceJungleMadness()
+        {
+            // Place some additional items in Frozen Chests:
+            // These are the 3 new items we will place.
+            int[] itemsToPlaceInFrozenChests = [ItemType<JungleMadness>()];
+            // This variable will help cycle through the items so that different Frozen Chests get different items
+            int itemsToPlaceInFrozenChestsChoice = 0;
+            // Rather than place items in each chest, we'll place up to 6 items (2 of each).
+            int itemsPlaced = 0;
+            int maxItems = 6;
+            // Loop over all the chests
+            for (int chestIndex = 0; chestIndex < Main.maxChests; chestIndex++)
+            {
+                Chest chest = Main.chest[chestIndex];
+                if (chest == null)
+                {
+                    continue;
+                }
+                Tile chestTile = Main.tile[chest.x, chest.y];
+                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 10 * 36)
+                {
+                    // We have found a Frozen Chest
+                    // If we don't want to add one of the items to every Frozen Chest, we can randomly skip this chest with a 33% chance.
+                    if (WorldGen.genRand.NextBool(3))
+                        continue;
+                    // Next we need to find the first empty slot for our item
+                    for (int inventoryIndex = 0; inventoryIndex < Chest.maxItems; inventoryIndex++)
+                    {
+                        if (chest.item[inventoryIndex].type == ItemID.None)
+                        {
+                            // Place the item
+                            chest.item[inventoryIndex].SetDefaults(itemsToPlaceInFrozenChests[itemsToPlaceInFrozenChestsChoice]);
+                            // Decide on the next item that will be placed.
+                            itemsPlaced++;
+                            break;
+                        }
+                    }
+                }
+                // Once we've placed as many items as we wanted, break out of the loop
+                if (itemsPlaced >= maxItems)
+                {
+                    break;
+                }
+            }
+        }
+
         public void PlaceIceSpear()
         {
             // Place some additional items in Frozen Chests:
@@ -62,12 +156,12 @@ namespace HJScarletRework.Globals.Systems
         {
             // Place some additional items in Frozen Chests:
             // These are the 3 new items we will place.
-            int[] itemsToPlaceInFrozenChests = [ItemID.ManaCrystal, ItemID.Compass, ItemID.DepthMeter];
+            int[] itemsToPlaceInFrozenChests = [ItemID.ManaCrystal, ItemID.Compass, ItemID.DepthMeter, ItemType<FakeManaContainer>()];
             // This variable will help cycle through the items so that different Frozen Chests get different items
             int itemsToPlaceInFrozenChestsChoice = 0;
             // Rather than place items in each chest, we'll place up to 6 items (2 of each).
             int itemsPlaced = 0;
-            int maxItems = 48;
+            int maxItems = 60;
             // Loop over all the chests
             for (int chestIndex = 0; chestIndex < Main.maxChests; chestIndex++)
             {

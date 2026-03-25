@@ -22,7 +22,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Instances
 {
-    public class HJScarletGlobalItem : GlobalItem
+    public partial class HJScarletGlobalItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
         public bool EnableCritDamage = false;
@@ -149,14 +149,19 @@ namespace HJScarletRework.Globals.Instances
                 case ItemID.FrozenCrateHard:
                     itemLoot.AddLoot<AzureFrostmark>(4);
                     break;
+                case ItemID.JungleFishingCrate:
+                case ItemID.JungleFishingCrateHard:
+                    itemLoot.AddLoot<JungleMadness>(4);
+                    break;
             }
-            if(!Main.masterMode)
+            if (Main.masterMode)
             {
-                return;                
+                if (item.type == ItemType<ScarabBeliefTreasureBag>())
+                    itemLoot.AddLoot<SacarbWings>(10);
+                if (item.type == ItemType<WallofShadowTreasureBag>())
+                    itemLoot.AddLoot<DeathTolls>(4);
 
             }
-            if (item.type == ItemType<ScarabBeliefTreasureBag>())
-                itemLoot.AddLoot<SacarbWings>(10);
         }
         public override void AddRecipes()
         {
@@ -191,6 +196,10 @@ namespace HJScarletRework.Globals.Instances
                 return;
             Recipe.Create(ItemType<AzureFrostmark>()).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyIceCrate, 5).
+                AddTile(TileID.Anvils).
+                Register();
+            Recipe.Create(ItemType<JungleMadness>()).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyJungleCrate, 5).
                 AddTile(TileID.Anvils).
                 Register();
         }

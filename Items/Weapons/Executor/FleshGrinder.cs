@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria.ID;
 
@@ -20,7 +21,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shoot = ProjectileType<FleshGrinderProj>();
             Item.UseSound = SoundID.Item1;
             Item.useTime = Item.useAnimation = 30;
-            Item.rare = ItemRarityID.LightPurple;
+            Item.SetUpRarityPrice(ItemRarityID.Green);
         }
         public override void AddRecipes()
         {

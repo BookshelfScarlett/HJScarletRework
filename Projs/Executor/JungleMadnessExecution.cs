@@ -12,7 +12,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class JungleMadnessFocusProj : HJScarletProj
+    public class JungleMadnessExecution : HJScarletProj
     {
         public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<JungleMadnessProj>().Texture;
@@ -46,13 +46,12 @@ namespace HJScarletRework.Projs.Executor
             Projectile.extraUpdates = 1;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.tileCollide = false;
-            Projectile.ownerHitCheck = true;
         }
         public override void OnFirstFrame()
         {
             Helper.MaxProgress[0] = 38;
             Helper.MaxProgress[1] = 38;
-            if (Projectile.GetTargetSafe(out NPC target, false))
+            if (Projectile.GetTargetSafe(out NPC target, true))
                 CurTarget = target;
             SetUpPushParticle(1);
         }
@@ -188,6 +187,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            Projectile.DrawGlowEdge(Color.GreenYellow);
             Projectile.DrawProj(lightColor);
             return false;
         }

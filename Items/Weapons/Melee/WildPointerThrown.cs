@@ -30,8 +30,6 @@ namespace HJScarletRework.Items.Weapons.Melee
             Vector2 direction = player.ToMouseVector2().ToRandVelocity(ToRadians(15));
             Vector2 spawnPos = player.MountedCenter + direction * 25f + direction.RotatedBy(PiOver2 * Main.rand.NextBool().ToDirectionInt()) * Main.rand.NextFloat(15f * Main.rand.NextBool().ToDirectionInt());
             int chance = 5;
-            if (HJScarletMethods.HasFuckingCalamity)
-                chance = 2;
             int ai0 = Main.rand.NextBool(chance).ToInt();
             Projectile proj = Projectile.NewProjectileDirect(source, spawnPos, direction * Item.shootSpeed, type, damage, knockback, player.whoAmI, ai0);
             return false;

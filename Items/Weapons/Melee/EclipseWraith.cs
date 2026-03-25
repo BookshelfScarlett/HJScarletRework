@@ -28,7 +28,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = HJScarletSounds.SodomsDisaster_Toss with { MaxInstances = 0, Pitch = 0.21f, Volume = 0.74f };
             Item.HJScarlet().EnableCritDamage = true;
-            Item.HJScarlet().CritsDamageBonus = 0.30f + 0.70f * HJScarletMethods.HasFuckingCalamity.ToInt();
+            Item.HJScarlet().CritsDamageBonus = 0.30f;
         }
         public override void ModifyWeaponCrit(Player player, ref float crit) => crit += 26f;
         public override void ExModifyTooltips(List<TooltipLine> tooltips, string localAddress)

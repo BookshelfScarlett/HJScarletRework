@@ -28,14 +28,13 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.shootSpeed = 20f;
+            Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.rare = RarityType<NebulaRarity>();
-            Item.noUseGraphic = true;
-            Item.noMelee = true;
-            Item.autoReuse = true;
+            Item.SetUpNoUseGraphicItem();
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
             Item.shoot = ProjectileType<BinaryStarsMain>();
-            Item.knockBack = 18f;
+            Item.knockBack = 12f;
         }
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {

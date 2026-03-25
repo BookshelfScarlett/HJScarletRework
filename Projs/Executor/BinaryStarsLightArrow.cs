@@ -1,4 +1,5 @@
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -12,9 +13,12 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class BinaryStarsLightArrow : HJScarletProj
+    public class BinaryStarsLightArrow : HJScarletProj, IPixelatedRenderer
     {
         public override ClassCategory Category => ClassCategory.Executor;
+        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public BlendState BlendState => BlendState.AlphaBlend;
+
         private enum DoType
         {
             IsHomingToTarget,
@@ -137,6 +141,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
+
+            //PixelatedRenderManager.BeginDrawProj = true;
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             DrawNebulaTrail(Color.MediumPurple, 14f); 
@@ -154,8 +160,13 @@ namespace HJScarletRework.Projs.Executor
             }
             SB.End();
             SB.BeginDefault();
+            
             return false;
         }
+        public void RenderPixelated(SpriteBatch sb)
+        {
+        }
+
         public void DrawStar(Vector2 drawPos, float rot,Color starColor)
         {
             Texture2D sharpTears = HJScarletTexture.Particle_HRStar.Value;

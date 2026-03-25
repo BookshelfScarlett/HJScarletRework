@@ -116,7 +116,7 @@ namespace HJScarletRework.Projs.Melee
                 }
             }
             Timer++;
-            if (Timer > 30f * Projectile.MaxUpdates)
+            if (Timer > 26f * Projectile.MaxUpdates)
             {
                 AttackType = Style.Attack;
                 Projectile.netUpdate = true;

@@ -74,9 +74,9 @@ namespace HJScarletRework.Projs.Melee
             if (HJScarletMethods.OutOffScreen(Projectile.Center))
                 return;
             for (int i = 0; i < 2; i++)
-                new StarShape(Projectile.Center - Projectile.velocity / 2 * i, Projectile.velocity.ToSafeNormalize(), RandLerpColor(Color.HotPink, Color.DeepPink), .80f, 40).Spawn();
+                new StarShape(Projectile.Center - Projectile.velocity / 2 * i, Projectile.velocity.ToSafeNormalize(), RandLerpColor(Color.HotPink, Color.DeepPink), .80f, 40,false).Spawn();
             if (Main.rand.NextBool())
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(5f), Projectile.velocity.ToRandVelocity(ToRadians(15), 1), RandLerpColor(Color.HotPink, Color.DeepPink), 40, RandRotTwoPi, 1f, 0.4f, 0.2f).Spawn();
+                new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(5f), Projectile.velocity.ToRandVelocity(ToRadians(15), 1), RandLerpColor(Color.HotPink, Color.DeepPink), 40, RandRotTwoPi, 1f, 0.46f, false, 0.2f).Spawn();
         }
         public void SpawnFlower()
         {

@@ -272,22 +272,26 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="drawTime"></param>
         /// <param name="posMove"></param>
         /// <param name="rotFix"></param>
-        public static void DrawGlowEdge(this Projectile proj, Color color, int drawTime = 8, float posMove = 2f, float rotFix = 0f)
+        public static void DrawGlowEdge(this Projectile proj, Color color, int drawTime = 8, float posMove = 2f, float rotFix = 0f, Vector2? drawPosOffset = null)
         {
+            Vector2 offset = drawPosOffset ?? Vector2.Zero;
             //绘制发光边缘
             for (int i = 0; i < drawTime; i++)
-                Main.spriteBatch.Draw(proj.GetTexture(), proj.Center - Main.screenPosition + ToRadians(i * 60f).ToRotationVector2() * posMove, null, color with { A = 0 }, proj.rotation + rotFix, proj.GetTexture().Size() / 2, proj.scale, 0, 0f);
+            {
+                Main.spriteBatch.Draw(proj.GetTexture(), proj.Center - Main.screenPosition + ToRadians(i * 60f).ToRotationVector2() * posMove - offset, null, color with { A = 0 }, proj.rotation + rotFix, proj.GetTexture().Size() / 2, proj.scale, 0, 0f);
+            }
         }
         /// <summary>
         /// 预制射弹绘制
         /// </summary>
         /// <param name="proj"></param>
 
-        public static void DrawProj(this Projectile proj, Color color, int drawTime = 4, float offset = 0.7f, float rotFix = 0, bool useOldPos = false)
+        public static void DrawProj(this Projectile proj, Color color, int drawTime = 4, float offset = 0.7f, float rotFix = 0, bool useOldPos = false, Vector2? drawPosOffset = null)
         {
             Texture2D tex = proj.GetTexture();
             Vector2 orig = tex.Size() / 2;
-            Vector2 drawPos = proj.Center - Main.screenPosition;
+            Vector2 offsetValue = drawPosOffset ?? Vector2.Zero;
+            Vector2 drawPos = proj.Center - Main.screenPosition - offsetValue;
             int drawLength = drawTime > proj.oldPos.Length ? proj.oldPos.Length : drawTime;
             for (int i = drawLength - 1; i >= 0; i--)
             {
@@ -400,6 +404,11 @@ namespace HJScarletRework.Globals.Methods
                 proj.velocity.X = -oldVelocity.X * xMult;
             if (proj.velocity.Y != oldVelocity.Y)
                 proj.velocity.Y = -oldVelocity.Y * yMult;
+        }
+        public static float MountedOwnerPosX(this Projectile proj, float value, bool reverse = false)
+        {
+            Player owner = Main.player[proj.owner];
+            return owner.MountedCenter.X + reverse.ToDirectionInt() * value;
         }
     }
 }

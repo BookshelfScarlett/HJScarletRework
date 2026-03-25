@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
@@ -11,14 +12,13 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class JudgementHeldLock : HJScarletFriendlyProj
+    public class JudgementMinion : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
-        public override string Texture => GetInstance<JudgementMainProj>().Texture;
+        public override ClassCategory Category => ClassCategory.Executor;
+        public override string Texture => GetInstance<JudgementProj>().Texture;
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Type] = 4;
-            ProjectileID.Sets.TrailingMode[Type] = 2;
+            Projectile.ToTrailSetting();
         }
         private ref float AttackTimer => ref Projectile.ai[0];
         private int MountedIndex = -1;
@@ -32,8 +32,10 @@ namespace HJScarletRework.Projs.Executor
             get => (int)Projectile.ai[1];
             set => Projectile.ai[1] = value;
         }
+        public AnimationStruct Helper = new(3);
         private ref float Oscillation => ref Projectile.ai[2];
         private int CurrentLifeTime = -1;
+        public NPC TargetNPC = null;
         public override void ExSD()
         {
             //基类被我手动刻了一个useLocal
@@ -47,56 +49,61 @@ namespace HJScarletRework.Projs.Executor
             Projectile.extraUpdates = 3;
             Projectile.penetrate = -1;
         }
-        public override void AI()
+        public override void OnFirstFrame()
+        {
+            Helper.MaxProgress[0] = 60;
+        }
+        public override void ProjAI()
         {
             UpdateMountedStarProj();
+            UpdateMountedProjAI();
+        }
+
+        public void UpdateMountedProjAI()
+        {
+            if (!Helper.IsDone[0])
+            {
+                Projectile.velocity *= 0.93f;
+                Projectile.rotation = Projectile.SpeedAffectRotation();
+                Helper.UpdateAniState(0);
+                return;
+            }
             //追踪敌人，与其他
-            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true, 1000f))
+            if (Projectile.GetTargetSafe(out NPC target, true, 1000f))
             {
                 Projectile.rotation += ToRadians(5f);
                 Projectile.HomingTarget(target.Center, 1800f, 13f, 20f);
                 CanSpawnHolyPunishment = true;
                 Dust d = Dust.NewDustPerfect(Projectile.Center, Main.rand.NextBool() ? DustID.HallowedWeapons : DustID.GemDiamond, Projectile.velocity * 0.25f + Main.rand.NextVector2CircularEdge(5f, 5f) * 1.2f);
                 d.noGravity = true;
-
+                TargetNPC = target;
                 //更新当前的生存时间
                 CurrentLifeTime = Projectile.timeLeft;
             }
             else
             {
+                TargetNPC = null;
                 Oscillation += 0.025f / 3;
                 //记得清零射弹当前的速度，因为下方实际上使用正弦曲线来精确控制
                 Projectile.velocity *= 0;
-                if (Owner.HasProj<DeathTollsHeldMinion>())
-                    UpdateIfNoTargetNearbyAndHasNightmareProj();
-                else
                     UpdateIfNoTargetNearby();
                 CanSpawnHolyPunishment = false;
                 //锁定当前的生存时间避免出现意外处死
                 Projectile.timeLeft = CurrentLifeTime;
             }
+
         }
+
         private void UpdateIfNoTargetNearbyAndHasNightmareProj()
         {
-            //基本的挂机状态，此处使用了正弦曲线
-            Vector2 anchorPos = new Vector2(Owner.MountedCenter.X + Owner.direction * 75f, Owner.MountedCenter.Y - 100f - 60f * (MathF.Sin(Oscillation) / 9f));
-            //实际更新位置
-            Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, 0.1f / Projectile.extraUpdates);
-            //计算锤子需要的朝向。
-            //这里会依据玩家是否按下左键来使朝向取反，即按住左键的时候，锤头朝向指针，其他情况下，锤柄朝向玩家
-            float angleToWhat = (-(Owner.MountedCenter - Projectile.Center)).SafeNormalize(Vector2.One).ToRotation();
-            //最后使用lerp来让锤子朝向得到修改。
-            Projectile.rotation = Projectile.rotation.AngleLerp(angleToWhat, 0.18f);
         }
         private void UpdateIfNoTargetNearby()
         {
             //基本的挂机状态，此处使用了正弦曲线
-            Vector2 anchorPos = new Vector2(Owner.MountedCenter.X - Owner.direction * 54f, Owner.MountedCenter.Y - 60f * (MathF.Sin(Oscillation) / 9f));
+            Vector2 anchorPos = new Vector2(Owner.MountedCenter.X -  0f *MathF.Sin((Oscillation) / 15f), Owner.MountedCenter.Y - 85f +  100f * (MathF.Sin(Oscillation) / 9f));
             //实际更新位置
             Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, 0.1f / Projectile.extraUpdates);
-            float angleToWhat = ToRadians(115f);
-            if (Owner.direction < 0)
-                angleToWhat = ToRadians(60f); 
+            float angleToWhat = (-(Projectile.Center - Owner.MountedCenter)).ToRotation();
             Projectile.rotation = Projectile.rotation.AngleLerp(angleToWhat, 0.1f);
         }
         public override void OnKill(int timeLeft)
@@ -129,7 +136,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 AttackTimer = 1;
                 CurrentLifeTime = Projectile.timeLeft;
-                int type = ProjectileType<JudgementPunishStarMounted>();
+                int type = ProjectileType<JudgementStarExecutionMounted>();
                 //生成神圣新星用的挂载弹
                 if (Owner.ownedProjectileCounts[type] < 1)
                 {
@@ -151,6 +158,9 @@ namespace HJScarletRework.Projs.Executor
                 proj.localAI[1] = Projectile.Center.Y;
                 //控制挂载弹的情况
                 proj.HJScarlet().ExtraAI[0] = CanSpawnHolyPunishment.ToInt();
+                //时刻更新挂载弹里面的仆从情况
+                if (TargetNPC != null && TargetNPC.CanBeChasedBy())
+                    ((JudgementStarExecutionMounted)proj.ModProjectile).TargetNPC = TargetNPC;
             }
         }
         

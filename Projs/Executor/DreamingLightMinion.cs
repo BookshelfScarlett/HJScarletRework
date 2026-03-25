@@ -1,43 +1,46 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class PerferctNightProj : HJScarletProj
+    public class DreamingLightMinion : HJScarletProj
     {
-        public override string Texture => GetInstance<PerfectNight>().Texture;
+        public override string Texture => GetInstance<DreamingLightProj>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;
         public override void SetStaticDefaults()
         {
-            Projectile.ToTrailSetting();
+            base.SetStaticDefaults();
         }
         public override void ExSD()
         {
             base.ExSD();
         }
-        public override void ProjAI()
+        public override bool ShouldUpdatePosition()
         {
-            base.ProjAI();
+            return base.ShouldUpdatePosition();
         }
         public override void OnFirstFrame()
         {
             base.OnFirstFrame();
         }
+        public override void ProjAI()
+        {
+            base.ProjAI();
+        }
         public override bool? CanHitNPC(NPC target)
         {
             return base.CanHitNPC(target);
         }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            base.OnHitNPC(target, hit, damageDone);
-        }
         public override bool PreDraw(ref Color lightColor)
         {
-            return false;
+            return base.PreDraw(ref lightColor);
         }
     }
 }

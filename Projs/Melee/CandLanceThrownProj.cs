@@ -64,10 +64,11 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 spawnPos = mountedPos + dir.RotatedBy(PiOver2) * MathF.Sin(ExtraTimer - i * 0.1f) * (9.0f);
                 new ShinyOrbParticle(spawnPos - speedOffset * i, dir * 1.2f, RandLerpColor(Color.DeepSkyBlue,Color.LightBlue), 25, 0.4f).Spawn();
-                Dust shinyDust = Dust.NewDustPerfect(mountedPos + Main.rand.NextVector2Circular(8f, 8f), DustID.UnusedWhiteBluePurple);
-                shinyDust.scale *= Main.rand.NextFloat(1.1f, 1.2f);
-                shinyDust.velocity = dir * 1.2f;
+                //Dust shinyDust = Dust.NewDustPerfect(mountedPos + Main.rand.NextVector2Circular(8f, 8f), DustID.UnusedWhiteBluePurple);
+                //shinyDust.scale *= Main.rand.NextFloat(1.1f, 1.2f);
+                //shinyDust.velocity = dir * 1.2f;
             }
+                new ShinyCrossStar(mountedPos.ToRandCirclePos(8f), dir * 1.2f, RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 60, Projectile.rotation, 1f, 0.40f, false).Spawn();
 
             
         }

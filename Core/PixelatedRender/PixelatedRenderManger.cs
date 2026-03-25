@@ -9,15 +9,18 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Core.PixelatedRender
 {
-    public class PixelatedRenderManger : ModSystem
+    public class PixelatedRenderManager : ModSystem
     {
         public static bool BeginDrawProj = false;
         public static RenderTarget2D BeforePlayerTarget;
         public static RenderTarget2D BeforeDustTarget;
+        public static RenderTarget2D BeforeProjTarget;
         public static List<IPixelatedRenderer> BeforePlayers = [];
         public static bool BeginDrawBeforePlayers = false;
         public static List<IPixelatedRenderer> BeforeDusts = [];
         public static bool BeginDrawBeforeDusts = false;
+        public static List<IPixelatedRenderer> BeforeProjs = [];
+        public static bool BeginDrawBeforeProjs = false;
         // public static Matrix PixelRenderMatrix;
         public override void Load()
         {
@@ -27,6 +30,7 @@ namespace HJScarletRework.Core.PixelatedRender
             {
                 BeforePlayerTarget = HJScarletMethods.NewRT2D();
                 BeforeDustTarget = HJScarletMethods.NewRT2D();
+                BeforeProjTarget = HJScarletMethods.NewRT2D();
             });
             On_Main.CheckMonoliths += PrepareRenderTarget;
         }
@@ -40,6 +44,8 @@ namespace HJScarletRework.Core.PixelatedRender
                 BeforePlayerTarget = null;
                 BeforeDustTarget?.Dispose();
                 BeforeDustTarget = null;
+                BeforeProjTarget?.Dispose();
+                BeforeProjTarget = null;
             });
             On_Main.CheckMonoliths -= PrepareRenderTarget;
         }
@@ -54,6 +60,7 @@ namespace HJScarletRework.Core.PixelatedRender
             // 收集所有接口的信息
             BeforePlayers.Clear();
             BeforeDusts.Clear();
+            BeforeProjs.Clear();
             // 创建像素化矩阵，暂时用不到
             // float pixelScale = 2f;
             // Matrix shrinkMatrix = Matrix.CreateScale(1f / pixelScale, 1f / pixelScale, 1f);
@@ -68,6 +75,8 @@ namespace HJScarletRework.Core.PixelatedRender
                             BeforePlayers.Add(pRPlayer);
                         if (pRPlayer.LayerToRenderTo.HasFlag(HJScarletDrawLayer.BeforeDusts))
                             BeforeDusts.Add(pRPlayer);
+                        if (pRPlayer.LayerToRenderTo.HasFlag(HJScarletDrawLayer.BeforeProjectiles))
+                            BeforeProjs.Add(pRPlayer);
                     }
                 }
                 // 收集到绘制到玩家图层前的才绘制
@@ -81,6 +90,12 @@ namespace HJScarletRework.Core.PixelatedRender
                 {
                     DrawToRenderTarget(BeforeDustTarget, BeforeDusts);
                     BeginDrawBeforeDusts = true;// 打一个可以绘制出来粒子层的标记
+                }
+                if(BeforeProjs.Count != 0)
+                {
+                    DrawToRenderTarget(BeforeProjTarget, BeforeDusts);
+                    BeginDrawBeforeDusts = true;// 打一个可以绘制出来弹幕层的标记
+
                 }
                 Main.graphics.GraphicsDevice.SetRenderTarget(null);
                 BeginDrawProj = false;
@@ -97,6 +112,22 @@ namespace HJScarletRework.Core.PixelatedRender
                 Main.spriteBatch.End();
             }
         }
+        public static void On_Main_DrawProj(On_Main.orig_DrawProj orig, Main self, int i)
+        {
+            // 只有当前面标记启用时才会尝试画出
+            if (BeginDrawBeforeProjs)
+            {
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
+                Effect effect = HJScarletShader.Pixelation;
+                effect.Parameters["uTargetResolution"].SetValue(HJScarletMethods.GetScreenSize / 2);
+                effect.CurrentTechnique.Passes[0].Apply();
+                Main.spriteBatch.Draw(BeforePlayerTarget, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                Main.spriteBatch.End();
+                BeginDrawBeforeProjs = false;
+            }
+            orig(self, i);
+        }
+
         public static void DrawTarget_BeforePlayers(On_Main.orig_DrawPlayers_AfterProjectiles orig, Main self)
         {
             // 只有当前面标记启用时才会尝试画出

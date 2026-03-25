@@ -54,12 +54,6 @@ namespace HJScarletRework.Projs.Melee
             if (!Projectile.HJScarlet().FirstFrame)
             {
                 InitDust();
-                if(HJScarletMethods.HasFuckingCalamity)
-                {
-                    SearchTargetDistance = 1800f;
-                    Projectile.timeLeft = 1000;
-                    TotalTargetHitTime = 9;
-                }
             }
 
             if (TargetThatAlreadyHit.Count > 0)

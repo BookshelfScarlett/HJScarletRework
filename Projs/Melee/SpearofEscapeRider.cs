@@ -71,8 +71,6 @@ namespace HJScarletRework.Projs.Melee
         {
             SoundEngine.PlaySound(HJScarletSounds.SpearofEscape_Boom, Projectile.Center);
             int boomDamage = SignForRightClick == 1f ? Projectile.damage : (int)(Projectile.damage * 2f);
-            if (HJScarletMethods.HasFuckingCalamity)
-                boomDamage *= 3;
 
             if (Projectile.IsMe())
                 Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SpearofEscapeBoom>(), boomDamage, Projectile.knockBack);
@@ -90,8 +88,6 @@ namespace HJScarletRework.Projs.Melee
             }
             //biu biu biu
             float totalCounts = 8;
-            if (HJScarletMethods.HasFuckingCalamity)
-                totalCounts = 16;
             if (Projectile.IsMe())
             {
                 for (float i = 0; i < totalCounts; i++)
@@ -101,7 +97,7 @@ namespace HJScarletRework.Projs.Melee
                     if (SignForRightClick == 1f)
                         dir += Owner.velocity.ToRandVelocity(ToRadians(10f), 8f, 12f) * -1;
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
-                    ((SpearofEscapeMissile)proj.ModProjectile).DontUseMouseHoming = true;
+                    ((SpearofEscapeMissile)proj.ModProjectile).DontUseMouseHoming = false;
                 }
             }
 
@@ -112,15 +108,13 @@ namespace HJScarletRework.Projs.Melee
             target.AddBuff(BuffID.Oiled, GetSeconds(5));
             IsHit = true;
             float totalCounts = 8;
-            if (HJScarletMethods.HasFuckingCalamity)
-                totalCounts = 16;
-
             for (float i = 0; i < totalCounts; i++)
             {
                 float rotArgs = ToRadians(360f / totalCounts * i);
                 Vector2 dir = (Projectile.rotation + rotArgs + Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))).ToRotationVector2() * Main.rand.NextFloat(10f, 13f);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 ((SpearofEscapeMissile)proj.ModProjectile).AttackType = SpearofEscapeMissile.Style.Direct;
+                ((SpearofEscapeMissile)proj.ModProjectile).DontUseMouseHoming= true;
                 proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
             }
         }
