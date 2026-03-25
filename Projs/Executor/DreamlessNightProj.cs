@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
@@ -85,7 +86,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Timer++;
             Projectile.rotation += 0.15f;
-            if (Projectile.MeetMaxUpdatesFrame(Timer, 8))
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 5))
                 UpdateToNextAttackID(State.Return);
         }
         public void DoReturn()
@@ -202,7 +203,8 @@ namespace HJScarletRework.Projs.Executor
             //当然，前提是条件合理
             if (!Owner.HasProj<DreamlessNightMinion>(out int projID) && Projectile.HJScarlet().ExecutionStrike)
             {
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, projID, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, projID, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                proj.rotation = Projectile.rotation;
                 for (int i = 0; i < 8; i++)
                     new Fire(target.Center.ToRandCirclePos(6), RandVelTwoPi(0.1f, 8.8f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, 1, 0.25f).SpawnToNonPreMult();
             }

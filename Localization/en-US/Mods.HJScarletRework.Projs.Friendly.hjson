@@ -49,7 +49,7 @@ Melee: {
 	TonbogiriBubble.DisplayName: Tonbogiri Bubble
 	TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
 	WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
-	BinaryStarsHeldClone.DisplayName: Binary Stars Held Clone
+	BinaryStarsExecution.DisplayName: Binary Stars Held Clone
 	CactusSpearProj.DisplayName: Cactus Spear Proj
 	CactusSpearSpike.DisplayName: Cactus Spear Spike
 	ColdSakuraProj.DisplayName: Cold Sakura Proj
@@ -80,19 +80,19 @@ Pets: {
 }
 
 Ranged: {
-	Aetherfireball.DisplayName: Aetherfireball
-	AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
+	AetherfireSmasherFireball.DisplayName: AetherfireSmasherFireball
+	AetherfireSmasherExecution.DisplayName: Aetherfire Smasher Clone
 	AetherfireSmasherProj.DisplayName: Aetherfire Smasher Main
-	AetherfireVolcano.DisplayName: Aetherfire Volcano
-	BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
-	BinaryStarsMain.DisplayName: Binary Stars Main
+	AetherfireSmasherVolcano.DisplayName: Aetherfire Volcano
+	BinaryStarsArrow.DisplayName: Binary Stars Light Arrow
+	BinaryStarsProj.DisplayName: Binary Stars Main
 	BinaryStarsPhantom.DisplayName: Binary Stars Phantom
 	BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
-	DeathTollsCloneProj.DisplayName: Death Tolls Clone Proj
+	DeathTollsExecution.DisplayName: Death Tolls Clone Proj
 	DeathTollsDarkEnergy.DisplayName: Death Tolls Dark Energy
-	DeathTollsHeldMinion.DisplayName: Death Tolls Held Minion
-	DeathTollsMainProj.DisplayName: Death Tolls Main Proj
-	DeathTollsNightmareArrow.DisplayName: Death Tolls Nightmare Arrow
+	DeathTollsMinion.DisplayName: Death Tolls Held Minion
+	DeathTollsProj.DisplayName: Death Tolls Main Proj
+	DeathTollsArrow.DisplayName: Death Tolls Nightmare Arrow
 	DeathTollsStreak.DisplayName: Death Tolls Streak
 	JudgementHeldLock.DisplayName: Judgement Held Lock
 	JudgementHolyCross.DisplayName: Judgement Holy Cross
@@ -105,18 +105,18 @@ Ranged: {
 }
 
 Executor: {
-	Aetherfireball.DisplayName: Aetherfireball
-	AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
+	AetherfireSmasherFireball.DisplayName: AetherfireSmasherFireball
+	AetherfireSmasherExecution.DisplayName: Aetherfire Smasher Clone
 	AetherfireSmasherProj.DisplayName: Aetherfire Smasher Proj
-	AetherfireVolcano.DisplayName: Aetherfire Volcano
-	BinaryStarsHeldClone.DisplayName: Binary Stars Held Clone
-	BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
-	BinaryStarsMain.DisplayName: Binary Stars Main
+	AetherfireSmasherVolcano.DisplayName: Aetherfire Volcano
+	BinaryStarsExecution.DisplayName: Binary Stars Held Clone
+	BinaryStarsArrow.DisplayName: Binary Stars Light Arrow
+	BinaryStarsProj.DisplayName: Binary Stars Main
 	BlazingStrikerExecution.DisplayName: Blazing Striker Focus Proj
 	BlazingStrikerProj.DisplayName: Blazing Striker Proj
 	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
 	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
-	DeathTollsMainProj.DisplayName: Death Tolls Main Proj
+	DeathTollsProj.DisplayName: Death Tolls Main Proj
 	DungeonBreakerExecution.DisplayName: Dungeon Breaker Focus Proj
 	DungeonBreakerProj.DisplayName: Dungeon Breaker Proj
 	DungeonBreakerShockwave.DisplayName: Dungeon Breaker Shockwave

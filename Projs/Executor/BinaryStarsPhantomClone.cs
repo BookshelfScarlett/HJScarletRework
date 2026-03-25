@@ -27,7 +27,7 @@ namespace HJScarletRework.Projs.Executor
             DoArcRotating,
             DoReverse
         }
-        public override string Texture => GetInstance<BinaryStarsMain>().Texture;
+        public override string Texture => GetInstance<BinaryStarsProj>().Texture;
         //切换至返程玩家的AI时间
         private const float SwitchToReturning = 12f;
         //进行圆弧运动的总时间
@@ -232,7 +232,7 @@ namespace HJScarletRework.Projs.Executor
         public Color SetTrailColor(float ratio)
         {
             float velocityOpacityFadeout = Utils.GetLerpValue(2f, 5f, Projectile.velocity.Length(), true);
-            Color c = BinaryStarsMain.TrailColor * Projectile.Opacity * 0.8f * (1f - ratio);
+            Color c = BinaryStarsProj.TrailColor * Projectile.Opacity * 0.8f * (1f - ratio);
             return c * Utils.GetLerpValue(0.04f, 0.08f, ratio, true) * velocityOpacityFadeout;
         }
         //DrawOffset
@@ -291,8 +291,8 @@ namespace HJScarletRework.Projs.Executor
                 float rotated = (validPosition[i + 1] - validPosition[i]).ToRotation();
                 Vector2 oldCenter = validPosition[i] + Projectile.Size / 2 + rotated.ToRotationVector2().RotatedBy(PiOver2) * offsetHeight - Main.screenPosition;
                 Vector2 posOffset = new Vector2(0, SetProjWidth(progress) * multipleSize).RotatedBy(rotated);
-                ScarletVertex upClass = new(oldCenter - posOffset, BinaryStarsMain.TrailColor, new Vector3(progress, 0, 0f));
-                ScarletVertex downClass = new(oldCenter + posOffset, BinaryStarsMain.TrailColor, new Vector3(progress, 1, 0f));
+                ScarletVertex upClass = new(oldCenter - posOffset, BinaryStarsProj.TrailColor, new Vector3(progress, 0, 0f));
+                ScarletVertex downClass = new(oldCenter + posOffset, BinaryStarsProj.TrailColor, new Vector3(progress, 1, 0f));
                 list.Add(upClass);
                 list.Add(downClass);
             }

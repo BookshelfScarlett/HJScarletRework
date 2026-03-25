@@ -45,6 +45,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.ignoreWater = true;
             Projectile.penetrate = 2;
             Projectile.Opacity = 0;
+            Projectile.scale = 0;
             Projectile.localNPCHitCooldown = 30;
             Projectile.usesLocalNPCImmunity = true;
         }
@@ -142,7 +143,8 @@ namespace HJScarletRework.Projs.Melee
         {
             if (Main.rand.NextBool())
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 4f, RandLerpColor(Color.HotPink, Color.Violet), 40, RandRotTwoPi, 1f, 0.60f, false, 0.2f).Spawn();
-            Projectile.Opacity = Lerp(Projectile.Opacity, 1f, 0.15f);
+            Projectile.Opacity = Lerp(Projectile.Opacity, 1f, 0.2f);
+            Projectile.scale = Lerp(Projectile.scale, 1f, 0.2f);
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer++;
             if (Timer > 45f * Projectile.MaxUpdates)

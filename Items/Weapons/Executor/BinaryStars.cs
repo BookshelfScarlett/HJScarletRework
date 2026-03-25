@@ -33,7 +33,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.SetUpNoUseGraphicItem();
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ProjectileType<BinaryStarsMain>();
+            Item.shoot = ProjectileType<BinaryStarsProj>();
             Item.knockBack = 12f;
         }
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)

@@ -49,7 +49,7 @@ Melee: {
 	TonbogiriBubble.DisplayName: 御手杆-投掷-毒泡
 	TonbogiriThrownProj.DisplayName: 御手杆-投掷
 	WildPointerThrownProj.DisplayName: 野指针-投掷
-	BinaryStarsHeldClone.DisplayName: 双子星-天降锤
+	BinaryStarsExecution.DisplayName: 双子星-天降锤
 	// CactusSpearProj.DisplayName: Cactus Spear Proj
 	// CactusSpearSpike.DisplayName: Cactus Spear Spike
 	// ColdSakuraProj.DisplayName: Cold Sakura Proj
@@ -80,19 +80,19 @@ Pets: {
 }
 
 Ranged: {
-	Aetherfireball.DisplayName: 天炎破-火球
-	AetherfireSmasherClone.DisplayName: 天炎破-挂载
+	AetherfireSmasherFireball.DisplayName: 天炎破-火球
+	AetherfireSmasherExecution.DisplayName: 天炎破-挂载
 	AetherfireSmasherProj.DisplayName: 天炎破
-	AetherfireVolcano.DisplayName: 天炎破-火山
-	BinaryStarsLightArrow.DisplayName: 双子星-星云箭矢
-	BinaryStarsMain.DisplayName: 双子星
+	AetherfireSmasherVolcano.DisplayName: 天炎破-火山
+	BinaryStarsArrow.DisplayName: 双子星-星云箭矢
+	BinaryStarsProj.DisplayName: 双子星
 	BinaryStarsPhantom.DisplayName: 双子星-幻影
 	BinaryStarsPhantomClone.DisplayName: 双子星-幻影
-	DeathTollsCloneProj.DisplayName: 死亡丧钟-挂载
+	DeathTollsExecution.DisplayName: 死亡丧钟-挂载
 	DeathTollsDarkEnergy.DisplayName: 死亡丧钟-冥思能量
-	DeathTollsHeldMinion.DisplayName: 死亡丧钟-仆从
-	DeathTollsMainProj.DisplayName: 死亡丧钟
-	DeathTollsNightmareArrow.DisplayName: 死亡丧钟-梦魇之星
+	DeathTollsMinion.DisplayName: 死亡丧钟-仆从
+	DeathTollsProj.DisplayName: 死亡丧钟
+	DeathTollsArrow.DisplayName: 死亡丧钟-梦魇之星
 	DeathTollsStreak.DisplayName: 死亡丧钟-仆从射线
 	JudgementHeldLock.DisplayName: 神代裁决-挂载
 	JudgementHolyCross.DisplayName: 神代裁决-十字激光
@@ -105,18 +105,18 @@ Ranged: {
 }
 
 Executor: {
-	// Aetherfireball.DisplayName: Aetherfireball
-	// AetherfireSmasherClone.DisplayName: Aetherfire Smasher Clone
+	// AetherfireSmasherFireball.DisplayName: AetherfireSmasherFireball
+	// AetherfireSmasherExecution.DisplayName: Aetherfire Smasher Clone
 	// AetherfireSmasherProj.DisplayName: Aetherfire Smasher Proj
-	// AetherfireVolcano.DisplayName: Aetherfire Volcano
-	// BinaryStarsHeldClone.DisplayName: Binary Stars Held Clone
-	// BinaryStarsLightArrow.DisplayName: Binary Stars Light Arrow
-	// BinaryStarsMain.DisplayName: Binary Stars Main
+	// AetherfireSmasherVolcano.DisplayName: Aetherfire Volcano
+	// BinaryStarsExecution.DisplayName: Binary Stars Held Clone
+	// BinaryStarsArrow.DisplayName: Binary Stars Light Arrow
+	// BinaryStarsProj.DisplayName: Binary Stars Main
 	// BlazingStrikerExecution.DisplayName: Blazing Striker Focus Proj
 	// BlazingStrikerProj.DisplayName: Blazing Striker Proj
 	// BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
 	// CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
-	// DeathTollsMainProj.DisplayName: Death Tolls Main Proj
+	// DeathTollsProj.DisplayName: Death Tolls Main Proj
 	// DungeonBreakerExecution.DisplayName: Dungeon Breaker Focus Proj
 	// DungeonBreakerProj.DisplayName: Dungeon Breaker Proj
 	// DungeonBreakerShockwave.DisplayName: Dungeon Breaker Shockwave

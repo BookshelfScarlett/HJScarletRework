@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -51,10 +52,6 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             Helper.MaxProgress[0] = 30; 
-            bool hasProj = Owner.HasProj<JudgementMinion>();
-            if(hasProj)
-            {
-            }
         }
         public override void ProjAI()
         {
@@ -127,14 +124,29 @@ namespace HJScarletRework.Projs.Executor
         public void SpawnExecutionProj()
         {
             //音效
-            SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit with { MaxInstances = 0, Pitch = 0.5f }, Projectile.Center);
             //当前没有任何挂载锤，则正常进入挂载状态
             if (!Owner.HasProj<JudgementMinion>())
             {
-                Projectile.Center.CirclrDust(24, 3f, DustID.HallowedWeapons, 10);
+                SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit with { MaxInstances = 0, Pitch = 0.5f }, Projectile.Center);
                 Projectile lockHammer = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<JudgementMinion>(), Projectile.damage, 0f, Owner.whoAmI);
                 ScreenShakeSystem.AddScreenShakes(lockHammer.Center, 60f, 100, lockHammer.velocity.ToRotation(), 0.1f);
                 //处死射弹。
+            }
+            for (int i = -1; i < 2; i += 2)
+            {
+                for (int j = 0; j < 30; j++)
+                {
+                    for (int k = 0; k < 2; k++)
+                    {
+                        new StarShape(Projectile.Center.ToRandCirclePosEdge(3), Projectile.velocity.ToRandVelocity(0, -2f, 10f).RotatedBy(k * PiOver2) * i, RandLerpColor(Color.Orange, Color.Goldenrod), 0.8f, 40).Spawn();
+                        new StarShape(Projectile.Center.ToRandCirclePosEdge(3), Projectile.velocity.ToRandVelocity(0, -1f, 4.5f).RotatedBy(PiOver4 + k * PiOver2) * i, RandLerpColor(Color.Orange, Color.Goldenrod), 0.8f, 40).Spawn();
+                    }
+                }
+            }
+            for (int j = 0; j < 60; j++)
+            {
+                Vector2 rotArg = ToRadians(360f / 60f * j).ToRotationVector2();
+                new ShinyCrossStar(Projectile.Center + rotArg * 30f, rotArg * 1.2f, RandLerpColor(Color.DarkOrange, Color.DarkGoldenrod), 40, rotArg.ToRotation(), 1f, 0.84f, false).Spawn();
             }
         }
 

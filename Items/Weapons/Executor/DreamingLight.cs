@@ -28,7 +28,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shootSpeed = 20f;
             Item.useTime = Item.useAnimation = 40;
             Item.rare = ItemRarityID.LightPurple;
-            Item.shoot = ProjectileType<DreamlessNightProj>();
+            Item.shoot = ProjectileType<DreamingLightProj>();
             Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { MaxInstances = 0, Pitch = -0.5f };
             Item.useStyle = ItemUseStyleID.Swing;
         }

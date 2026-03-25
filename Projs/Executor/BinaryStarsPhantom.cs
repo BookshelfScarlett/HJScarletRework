@@ -23,7 +23,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override ClassCategory Category => ClassCategory.Ranged;
         public HJScarletGlobalProjs ModProj => Projectile.HJScarlet();
-        public override string Texture => GetInstance<BinaryStarsMain>().Texture;
+        public override string Texture => GetInstance<BinaryStarsProj>().Texture;
         public int TargetIndex
         {
             get => (int)Projectile.ai[0];
@@ -161,7 +161,7 @@ namespace HJScarletRework.Projs.Executor
         public Color SetTrailColor(float ratio)
         {
             float velocityOpacityFadeout = Utils.GetLerpValue(1f, 5f, Projectile.velocity.Length(), true);
-            Color c = BinaryStarsMain.TrailColor * Projectile.Opacity * (1f - ratio);
+            Color c = BinaryStarsProj.TrailColor * Projectile.Opacity * (1f - ratio);
             return c * Utils.GetLerpValue(0.04f, 0.1f, ratio, true) * velocityOpacityFadeout;
         }
         //DrawOffset
@@ -217,8 +217,8 @@ namespace HJScarletRework.Projs.Executor
                 float rotated = (validPosition[i + 1] - validPosition[i]).ToRotation();
                 Vector2 oldCenter = validPosition[i] + Projectile.Size / 2 + rotated.ToRotationVector2().RotatedBy(PiOver2) * offsetHeight - Main.screenPosition;
                 Vector2 posOffset = new Vector2(0, SetProjWidth(progress) * multipleSize).RotatedBy(rotated);
-                ScarletVertex upClass = new(oldCenter - posOffset, BinaryStarsMain.TrailColor, new Vector3(progress, 0, 0f));
-                ScarletVertex downClass = new(oldCenter + posOffset, BinaryStarsMain.TrailColor, new Vector3(progress, 1, 0f));
+                ScarletVertex upClass = new(oldCenter - posOffset, BinaryStarsProj.TrailColor, new Vector3(progress, 0, 0f));
+                ScarletVertex downClass = new(oldCenter + posOffset, BinaryStarsProj.TrailColor, new Vector3(progress, 1, 0f));
                 list.Add(upClass);
                 list.Add(downClass);
             }
@@ -245,7 +245,7 @@ namespace HJScarletRework.Projs.Executor
                 dust.velocity = velOffset;
                 dust.scale = 1.2f;
             }
-            SoundEngine.PlaySound(BinaryStarsMain.HitSound with {Volume = 0.8f }, Projectile.Center);
+            SoundEngine.PlaySound(BinaryStarsProj.HitSound with {Volume = 0.8f }, Projectile.Center);
             SoundEngine.PlaySound(SoundID.Item109 with {MaxInstances = 1, Pitch = 0.2f, PitchVariance = 0.1f }, Owner.Center);
             TargetIndex = target.whoAmI;
             if (Projectile.numHits % 2 is 0)
@@ -275,7 +275,7 @@ namespace HJScarletRework.Projs.Executor
                 SpawnDust(spawnPos, velDir);
                 if (projectile.owner == Main.myPlayer)
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), spawnPos, velDir * Main.rand.NextFloat(15f, 19f), ProjectileType<BinaryStarsLightArrow>(), useDamage, 2.5f, projectile.owner, target.whoAmI);
+                    Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), spawnPos, velDir * Main.rand.NextFloat(15f, 19f), ProjectileType<BinaryStarsArrow>(), useDamage, 2.5f, projectile.owner, target.whoAmI);
                     proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                     proj.HJScarlet().ExtraAI[1] = canSpawnDust.ToInt();
                 }
@@ -297,7 +297,7 @@ namespace HJScarletRework.Projs.Executor
                     float angle = j * (float)(TwoPi / totalParticleCounts);
                     //而后使用封装的一个自定义方法，为射弹自动分配自己的位置
                     Vector2 edge = spawnPos + GetCertainPointBaseOnVectorCircle(angle, shortAxis, longAxis, baseRot);
-                    Color drawColor = Color.Lerp(BinaryStarsMain.TrailColor with { A = 75 }, Color.MediumPurple with { A = 75 }, (totalParticleCounts - j) / (float)totalParticleCounts);
+                    Color drawColor = Color.Lerp(BinaryStarsProj.TrailColor with { A = 75 }, Color.MediumPurple with { A = 75 }, (totalParticleCounts - j) / (float)totalParticleCounts);
                     ShinyOrbParticle orbs = new ShinyOrbParticle(edge, dir * 0.2f, drawColor, 30, Main.rand.NextFloat(0.11f, 0.22f), BlendStateID.Alpha);
                     orbs.Spawn();
                 }

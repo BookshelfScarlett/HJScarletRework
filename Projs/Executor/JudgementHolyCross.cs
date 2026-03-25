@@ -51,7 +51,6 @@ namespace HJScarletRework.Projs.Executor
             //刚加入时的初始化。
             if (Counter == 0)
             {
-                SoundEngine.PlaySound(HJScarletSounds.Misc_AngelBlast with { Pitch =-0.125f}, Projectile.Center);
                 InitVec = Projectile.velocity.ToRotation();
                 Projectile.rotation = InitVec;
             }
@@ -106,7 +105,8 @@ namespace HJScarletRework.Projs.Executor
             Vector2 baseScale = Projectile.scale * 0.32f * new Vector2(1, opc);
             DrawLaser(warn, drawPos, Color.DarkOrange * opc, baseScale * new Vector2(laserLengthScale, 1.2f));
             DrawLaser(warn, drawPos, Color.Orange* opc, baseScale * new Vector2(laserLengthScale, 0.8f));
-            DrawLaser(warn, drawPos, Color.LightYellow* opc, baseScale * new Vector2(laserLengthScale, 0.45f));
+            DrawLaser(warn, drawPos, Color.LightYellow* opc, baseScale * new Vector2(laserLengthScale, 0.65f));
+            DrawLaser(warn, drawPos, Color.White* opc, baseScale * new Vector2(laserLengthScale, 0.35f));
 
             HJScarletMethods.EndShaderAreaPixel();
         }

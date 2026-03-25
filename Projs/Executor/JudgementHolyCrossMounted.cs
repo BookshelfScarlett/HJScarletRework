@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
@@ -117,15 +118,16 @@ namespace HJScarletRework.Projs.Executor
                     float rot = ToRadians(i * rotArg);
                     Vector2 offsetPos = new Vector2(12f + j * 12, 0f).RotatedBy(rot);
                     Vector2 dVel = new Vector2(4f + 4 * j, 0f).RotatedBy(rot);
-                    float scale = 0.815f;
+                    float scale = 0.915f;
                     new ShinyCrossStar(Projectile.Center + offsetPos, dVel, RandLerpColor(Color.Goldenrod, Color.Orange), 80, rot, 1, scale, false).Spawn();
                 }
-                for (int k = 0; k < 8; k++)
+                for (int k = 0; k < 12; k++)
                 {
-                    new KiraStar(Projectile.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.Goldenrod, Color.Orange), 40, 0, 1, 0.28f).Spawn();
+                    new KiraStar(Projectile.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.Yellow, Color.DarkOrange),60, 0, 1, 0.28f).Spawn();
                 }
             }
             //处死时释放
+                SoundEngine.PlaySound(HJScarletSounds.Misc_AngelBlast with { Pitch =-0.075f}, Projectile.Center);
             for (int i = 0; i < 4; i++)
             {
                 //666我还要存他们的数组信息来着

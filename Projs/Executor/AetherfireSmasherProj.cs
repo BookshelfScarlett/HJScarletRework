@@ -74,7 +74,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < totalCount; i++)
             {
                 Vector2 dir = Projectile.velocity.SafeNormalize(Vector2.UnitX).RotatedBy(Main.rand.NextFloat(-PiOver4 / 4, PiOver4 / 4)) * Main.rand.NextFloat(14f, 18f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<Aetherfireball>(), Projectile.damage, Projectile.knockBack);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<AetherfireSmasherFireball>(), Projectile.damage, Projectile.knockBack);
                 proj.timeLeft = 480;
                 proj.ai[0] = initTime;
                 proj.extraUpdates = eu;
@@ -92,7 +92,7 @@ namespace HJScarletRework.Projs.Executor
             if (AttackType == DoType.IsStealth && Projectile.timeLeft < 15 && CanSpawnVolcano)
             {
                 Vector2 center = new Vector2(target.Center.X, target.Center.Y + 30f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), center, Vector2.Zero, ProjectileType<AetherfireVolcano>(), Projectile.damage, Projectile.knockBack);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), center, Vector2.Zero, ProjectileType<AetherfireSmasherVolcano>(), Projectile.damage, Projectile.knockBack);
                 proj.ai[1] = target.whoAmI;
                 CanSpawnVolcano = false;
             }

@@ -23,7 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.SetUpNoUseGraphicItem();
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ProjectileType<DeathTollsMainProj>();
+            Item.shoot = ProjectileType<DeathTollsProj>();
             Item.knockBack = 12f;
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = 88;
