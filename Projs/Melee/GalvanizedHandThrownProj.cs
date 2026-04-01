@@ -174,7 +174,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Owner.HJScarlet().NoSlowFall = 120;
                 Owner.velocity = dir * 80;
-                Owner.GetImmnue(ImmunityCooldownID.General, 2);
+                Owner.GetImmnue(ImmunityCooldownID.General, 12);
                 if (!BeginPull)
                 {
                     BeginPull = true;

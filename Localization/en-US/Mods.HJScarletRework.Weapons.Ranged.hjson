@@ -67,3 +67,8 @@ CrimsonScythe: {
 	FlavorTooltips: ""
 	ExecutionStrike: ""
 }
+
+ClimaticHawstring: {
+	DisplayName: Climatic Hawstring
+	Tooltip: ""
+}

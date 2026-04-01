@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DeathTollsMinion : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<DeathTollsProj>().Texture;
         private ref float Timer => ref Projectile.ai[1];
         private ref float ShootTimer => ref Projectile.ai[2];
@@ -85,6 +85,10 @@ namespace HJScarletRework.Projs.Executor
                 UpdateMinionIdleState(Owner.JustPressLeftClick());
             }
         }
+        public void ShootDarkEnergy()
+        {
+
+        }
         private void DrawFireDust()
         {
             //速度为零的情况下，降低火焰生成
@@ -93,7 +97,7 @@ namespace HJScarletRework.Projs.Executor
             //在这里绘制火焰粒子
             Vector2 fireVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero);
             Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
-            new Fire(Projectile.Center, fireVelocity * 4.5f, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.25f).SpawnToPriorityNonPreMult(); 
+            new Fire(Projectile.Center, fireVelocity * 4.5f, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.185f).SpawnToPriorityNonPreMult(); 
         }
         private void ShootLaserIfNeed()
         {

@@ -105,3 +105,13 @@ CycleMadness: {
 	DisplayName: Cycle Madness
 	Tooltip: ""
 }
+
+DefenderEmblem: {
+	DisplayName: Defender Emblem
+	Tooltip: ""
+}
+
+ExecutorEmblem: {
+	DisplayName: Executor Emblem
+	Tooltip: ""
+}

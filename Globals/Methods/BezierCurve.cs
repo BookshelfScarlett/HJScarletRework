@@ -94,7 +94,7 @@ namespace HJScarletRework.Globals.Methods
             validRot = [];
             for (int i = 0; i < rawPos.Length; i++)
             {
-                if (rawPos[i] == Vector2.Zero)
+                if (rawPos[i].Equals( Vector2.Zero))
                     continue;
                 validPos.Add(rawPos[i]);
                 validRot.Add(rawRot[i]);

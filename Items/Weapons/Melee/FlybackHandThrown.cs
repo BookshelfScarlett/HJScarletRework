@@ -35,7 +35,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
 
-        public override void ExUpdateInventory(Player player)
+        public override void UpdateInventory(Player player)
         {
             Item.useTime = Item.useAnimation = player.HJScarlet().flybackhandBuffTime > 0 ? (10 + (int)(10f * (1f - (float)player.HJScarlet().flybackhandBuffTime / player.HJScarlet().flybackhandBuffTimeCurrent))) : 20;
         }

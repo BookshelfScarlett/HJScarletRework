@@ -3,6 +3,7 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DeathTollsDarkEnergy : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         //完全重做这个玩意的AI
         private ref float AttackTimer => ref Projectile.ai[0];
@@ -54,6 +55,9 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
             Lighting.AddLight(Projectile.Center, TorchID.White);
+            if (!Projectile.IsOutScreen())
+                UpdateParticle();
+
             switch (AttackType)
             {
                 case DoType.IsSpawned:
@@ -67,6 +71,13 @@ namespace HJScarletRework.Projs.Executor
                     break;
             }
         }
+
+        private void UpdateParticle()
+        {
+            if (Main.rand.NextBool(8))
+                new ShinyOrbHard(Projectile.Center.ToRandCirclePos(10f), Projectile.velocity /8f, RandLerpColor(Color.DarkViolet, Color.Black), 40, 0.46f).SpawnToNonPreMult();
+        }
+
         private void DoSpawned()
         {
             AttackTimer += 1;

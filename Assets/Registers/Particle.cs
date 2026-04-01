@@ -30,6 +30,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Particle_ScytheBlood { get; set; }
         public static Tex2DWithPath Particle_SmokeAlt  { get; set; }
         public static Tex2DWithPath Particle_BoomSparkle  { get; set; }
+        public static Tex2DWithPath Particle_SharpTearClean { get; set; }
         public static Texture2D Particle_SharpTear => TextureAssets.Extra[ExtrasID.SharpTears].Value;
         
 
@@ -58,6 +59,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_ScytheBlood = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_ScytheBlood)}");
             Particle_SmokeAlt = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_SmokeAlt)}");
             Particle_BoomSparkle= new Tex2DWithPath($"{Path_Particle}{nameof(Particle_BoomSparkle)}");
+            Particle_SharpTearClean = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_SharpTearClean)}");
 
         }
         public void UnLoadParticle()
@@ -85,6 +87,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_ScytheBlood = null;
             Particle_SmokeAlt = null;
             Particle_BoomSparkle = null;
+            Particle_SharpTearClean = null;
         }
     }
 }

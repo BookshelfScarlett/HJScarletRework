@@ -90,4 +90,5 @@ DreamingLight: {
 ThePunishment: {
 	DisplayName: The Punishment
 	Tooltip: ""
+	ExecutionStrike: ""
 }

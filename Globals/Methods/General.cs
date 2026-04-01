@@ -71,6 +71,11 @@ namespace HJScarletRework.Globals.Methods
         {
             return player.HJScarlet().MouseLeft && !player.HJScarlet().MouseRight;
         }
+        public static bool HoldingTools(this Player player, int damageThreshold = 5)
+        {
+            Item item = player.HeldItem;
+            return item.pick > 0 || item.axe > 0 || item.damage < damageThreshold;
+        }
 
         public static bool JustPressRightClick(this Player player)
         {
@@ -137,6 +142,12 @@ namespace HJScarletRework.Globals.Methods
         {
             Vector2 safe = safeValue ?? Vector2.UnitX;
             return (player.LocalMouseWorld() - player.MountedCenter).SafeNormalize(safe);
+        }
+        public static Vector2 ToMouseVector2(this Vector2 center, Vector2? safeValue = null)
+        {
+            Vector2 safe = safeValue ?? Vector2.UnitX;
+            return (Main.MouseWorld - center).SafeNormalize(safe);
+
         }
         public static Vector2 ToRandVelocity(this Vector2 srcVel, float randRads, float speed = 1f) => srcVel.ToSafeNormalize().RotatedBy(Main.rand.NextFloat(randRads) * Main.rand.NextBool().ToDirectionInt()) * speed;
         public static Vector2 ToRandVelocity(this Vector2 srcVel, float randRads, float minSpeed, float maxSpeed)
@@ -243,10 +254,17 @@ namespace HJScarletRework.Globals.Methods
             item.noMelee = true;
             item.noUseGraphic = true;
             item.channel = channel;
-            if (channel)
-                item.autoReuse = true;
-            else
                 item.autoReuse = autoReuse;
+        }
+        public static bool IsLegalFriendlyProj(this Projectile proj, DamageClass damageClass = null)
+        {
+            if (damageClass != null)
+            {
+                return proj.DamageType == damageClass && proj.damage > 5 && proj.friendly && !proj.hostile;
+            }
+            else
+                return proj.damage > 5 && proj.friendly && !proj.hostile;
+                
         }
         public static void SetUpRarityPrice(this Item item, int rarityID)
         {

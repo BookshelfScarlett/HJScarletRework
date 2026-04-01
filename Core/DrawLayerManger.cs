@@ -10,21 +10,20 @@ namespace HJScarletRework.Core
     {
         public override void Load()
         {
-            On_Main.DrawDust += MetaBallManager.DrawRenderTarget;
+            On_Main.DrawDust += MetaballManager.DrawRenderTarget;
             On_Main.DrawDust += BaseParticleManager.DrawParticles;
-            //On_Main.DrawDust += NodeManager.DrawNode;
-            //On_Main.DrawProj += PixelatedRenderManager.On_Main_DrawProj;
+            On_Main.DrawPlayers_BehindNPCs += MetaballManager.DrawRenderTargetPiority;
+            On_Main.DrawProjectiles += PixelatedRenderManager.On_Main_DrawProjectiles;
             On_Main.DrawDust += PixelatedRenderManager.DrawTarget_BeforeDust;
             On_Main.DrawPlayers_AfterProjectiles += PixelatedRenderManager.DrawTarget_BeforePlayers;
         }
 
-
         public override void Unload()
         {
-            On_Main.DrawDust -= MetaBallManager.DrawRenderTarget;
+            On_Main.DrawDust -= MetaballManager.DrawRenderTarget;
             On_Main.DrawDust -= BaseParticleManager.DrawParticles;
-            //On_Main.DrawDust -= NodeManager.DrawNode;
-            //On_Main.DrawProj -= PixelatedRenderManager.On_Main_DrawProj;
+            On_Main.DrawPlayers_BehindNPCs -= MetaballManager.DrawRenderTargetPiority;
+            On_Main.DrawProjectiles -= PixelatedRenderManager.On_Main_DrawProjectiles;
             On_Main.DrawDust -= PixelatedRenderManager.DrawTarget_BeforeDust;
             On_Main.DrawPlayers_AfterProjectiles -= PixelatedRenderManager.DrawTarget_BeforePlayers;
         }

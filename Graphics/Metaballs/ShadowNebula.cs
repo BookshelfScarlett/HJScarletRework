@@ -3,16 +3,12 @@ using HJScarletRework.Core.MetaballSystem;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Graphics.Metaballs
 {
-    public class ShadowNebulaVector2 : BaseMetaBall
+    public class ShadowNebulaVector2 : BaseMetaball
     {
         public class ShadowNebulaParticleVector2(Vector2 center, Vector2 vel, Vector2 scale, float rotation, int lifeTime, Texture2D shapeTex)
         {
@@ -33,7 +29,7 @@ namespace HJScarletRework.Graphics.Metaballs
         }
         public override Color EdgeColor => Color.Lerp(Color.DarkViolet, Color.WhiteSmoke, 0.4f);
         public static List<ShadowNebulaParticleVector2> ParticleList = [];
-        public override Texture2D BgTexture => HJScarletTexture.Metaball_ShadowNebula.Value;
+        public override Texture2D BackgroundTexture => HJScarletTexture.Metaball_ShadowNebula.Value;
         public static void SpawnParticle(Vector2 pos, Vector2 vel, Vector2 scale, float rotation, int lifeTime, Texture2D shapeTex) => ParticleList.Add(new(pos, vel, scale, rotation, lifeTime, shapeTex));
         public override bool Active()
         {
@@ -58,7 +54,7 @@ namespace HJScarletRework.Graphics.Metaballs
             }
         }
     }
-    public class ShadowNebula : BaseMetaBall
+    public class ShadowNebula : BaseMetaball
     {
         public class ShadowNebulaParticle(Vector2 center, Vector2 vel, float scale, Texture2D shapeTex)
         {
@@ -75,7 +71,7 @@ namespace HJScarletRework.Graphics.Metaballs
         }
         public override Color EdgeColor => Color.Lerp(Color.DarkViolet,Color.WhiteSmoke,0.3f);
         public static List<ShadowNebulaParticle> ParticleList = [];
-        public override Texture2D BgTexture => HJScarletTexture.Metaball_ShadowNebula.Value;
+        public override Texture2D BackgroundTexture => HJScarletTexture.Metaball_ShadowNebula.Value;
         public static void SpawnParticle(Vector2 pos, Vector2 vel, float scale, Texture2D shapeTex) => ParticleList.Add(new(pos, vel, scale, shapeTex));
         public override bool Active()
         {

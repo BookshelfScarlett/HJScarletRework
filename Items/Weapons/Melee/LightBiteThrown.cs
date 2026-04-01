@@ -1,5 +1,4 @@
 ﻿using ContinentOfJourney.Items;
-using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using Terraria;

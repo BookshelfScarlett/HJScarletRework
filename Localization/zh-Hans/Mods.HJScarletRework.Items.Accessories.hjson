@@ -169,3 +169,18 @@ CycleMadness: {
 		使你受到额外的20%乘算伤害
 		'''
 }
+
+DefenderEmblem: {
+	DisplayName: 先锋徽章
+	Tooltip:
+		'''
+		处刑攻击命中时给予一段无敌时间
+		无敌时间的长短依据武器允许发起处刑攻击的次数决定
+		该效果触发后进入冷却，且无法多次触发
+		'''
+}
+
+ExecutorEmblem: {
+	DisplayName: 刽子手徽章
+	Tooltip: 增加15%代行者伤害
+}

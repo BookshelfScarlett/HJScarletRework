@@ -43,10 +43,7 @@ namespace HJScarletRework.Globals.Players
             //不过背包判定，因为下面的搜字典的判定相对占用高
             int ownerItemType = Player.HeldItem.type;
             //按下鼠标中键进行切换
-            if (!Main.mouseMiddle)
-                return;
-
-            if (!Main.mouseMiddleRelease)
+            if (!CanSwitchWeaponType)
                 return;
             //替换武器
             if (WeaponSwapMaps.TryGetValue(ownerItemType, out int targetWeapons))
@@ -60,6 +57,7 @@ namespace HJScarletRework.Globals.Players
                 ReplaceWeaponsOnNeed(reverseWeapon, true);
                 return;
             }
+            CanSwitchWeaponType = false;
         }
         private void ReplaceWeaponsOnNeed(int targetWeapons, bool alterPrefix)
         {

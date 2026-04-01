@@ -192,6 +192,14 @@ namespace HJScarletRework.Globals.Instances
                 DisableDecraft().
                 AddTile(TileID.TinkerersWorkbench).
                 Register();
+
+            Recipe.Create(ItemID.NorthPole).
+                AddIngredient<AzureFrostmark>().
+                AddIngredient(ItemID.Ectoplasm, 50).
+                AddTile(TileID.Autohammer).
+                DisableDecraft().
+                Register();
+
             if (!ModLoader.TryGetMod("Fargowiltas", out Mod fargoWiltas))
                 return;
             Recipe.Create(ItemType<AzureFrostmark>()).

@@ -10,7 +10,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DeathTollsStreak : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public int HitCount = 0;
         public bool FirstFrameInit = false;
@@ -43,20 +43,23 @@ namespace HJScarletRework.Projs.Executor
             Color color = RandLerpColor(Color.Purple, Color.BlueViolet);
             Vector2 fireVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero);
             Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
-            new Fire(Projectile.Center, fireVelocity * 4.5f, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.1f).SpawnToPriorityNonPreMult();
+            new Fire(Projectile.Center, fireVelocity * 4.5f, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.24f).SpawnToPriorityNonPreMult();
             new TrailGlowBall(Projectile.Center + offset, fireVelocity * 4.5f, color, 90, 0.1f, true).Spawn();
-            for (int i = 0; i < 3; i++)
+            new TrailGlowBall(Projectile.Center + offset, fireVelocity * 4.5f, Color.White, 90, 0.1f * 0.5f, true).Spawn();
+            for (int i = 0; i < 4; i++)
             {
-                Vector2 VecOffset = Projectile.velocity / 3f;
-                new ShinyOrbParticle(Projectile.Center + VecOffset * i, fireVelocity * 0.5f, Color.BlueViolet, 60, 0.8f).Spawn();
+                Vector2 VecOffset = Projectile.velocity / 4f;
+                new ShinyOrbParticle(Projectile.Center + VecOffset * i, fireVelocity * 0.5f, Color.DarkViolet, 60, 0.68f).Spawn();
+                new ShinyOrbParticle(Projectile.Center + VecOffset * i, fireVelocity * 0.5f, Color.White, 60, 0.38f).Spawn();
             }
         }
         public void FirstFrame()
         {
             if (FirstFrameInit)
                 return;
-            new CrossGlow(Projectile.Center, Color.Violet, 30, 1f, 0.4f).Spawn();
             new CrossGlow(Projectile.Center, Color.DarkViolet, 30, 1f, 0.4f).Spawn();
+            new CrossGlow(Projectile.Center, Color.Violet, 30, 1f, 0.3f).Spawn();
+            new CrossGlow(Projectile.Center, Color.White, 30, 1f, 0.2f).Spawn();
             for (int i = 0; i < 10; i++)
             {
                 Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);

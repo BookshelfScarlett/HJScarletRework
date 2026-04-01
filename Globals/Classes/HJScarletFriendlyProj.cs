@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Core.Configs;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,6 +15,7 @@ namespace HJScarletRework.Globals.Classes
         public static string ProjPath => $"HJScarletRework/Assets/Texture/Projs/";
         public override string Texture => ProjPath + GetType().Name;
         public new string LocalizationCategory => $"Projs.Friendly.{Category}";
+        public bool PerformanceMode = HJScarletConfigClient.Instance.PerformanceMode;
         public override void SetDefaults()
         {
             Projectile.friendly = true;

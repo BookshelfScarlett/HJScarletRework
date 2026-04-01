@@ -48,7 +48,7 @@ namespace HJScarletRework.Projs.Executor
             float clampValue = Clamp(Projectile.velocity.Length(), 0.2f, 1);
             if (Projectile.IsOutScreen())
                 return;
-            if (Main.rand.NextBool(3))
+            if (Main.rand.NextBool(3 + PerformanceMode.ToInt()))
                 return;
             if (Main.rand.NextFloat() < clampValue)
             {

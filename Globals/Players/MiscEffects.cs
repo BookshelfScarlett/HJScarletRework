@@ -117,6 +117,9 @@ namespace HJScarletRework.Globals.Players
 
             if (DesterranHeal <= 600)
                 DesterranHeal += 1;
+
+            if (defenderEmblemCD > 0)
+                defenderEmblemCD--;
         }
 
     }

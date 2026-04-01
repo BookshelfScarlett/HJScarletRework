@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -66,13 +65,5 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
 
         }
-        public virtual void ExUpdateInventory(Player player) { }
-        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
-        {
-            if (ExPreDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale))
-                return false;
-            return base.PreDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
-        }
-        public virtual bool ExPreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) => false;
     }
 }

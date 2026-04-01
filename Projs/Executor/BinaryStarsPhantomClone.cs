@@ -18,7 +18,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class BinaryStarsPhantomClone : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Executor;
         //攻击枚举
         private enum AttackStyle
         {
@@ -254,10 +254,10 @@ namespace HJScarletRework.Projs.Executor
                 SB.End();
                 SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
                 float spinRotation = Main.GlobalTimeWrappedHourly * 5.2f;
-                DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Violet);
-                DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
-                DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: -12f);
-                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f, alphaValue: 1f);
+                DrawTrails(HJScarletTexture.Trail_MegaBeam.Texture, Color.Violet);
+                DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
+                DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: -12f);
+                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f,alphaValue: 1f);
 
                 SB.End();
                 SB.BeginDefault();
@@ -269,7 +269,7 @@ namespace HJScarletRework.Projs.Executor
             float laserLength = 50;
             HJScarletShader.TerrarRayLaser.Parameters["LaserTextureSize"].SetValue(useTex.Size());
             HJScarletShader.TerrarRayLaser.Parameters["targetSize"].SetValue(new Vector2(laserLength, useTex.Height()));
-            HJScarletShader.TerrarRayLaser.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -5.2f);
+            HJScarletShader.TerrarRayLaser.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -50.2f);
             HJScarletShader.TerrarRayLaser.Parameters["uColor"].SetValue(drawColor.ToVector4() * alphaValue * Projectile.Opacity);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeoutLength"].SetValue(0.8f);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeinLength"].SetValue(0.1f);

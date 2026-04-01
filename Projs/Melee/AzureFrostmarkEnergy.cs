@@ -42,9 +42,9 @@ namespace HJScarletRework.Projs.Melee
             //这里的球比起雪球，更接近于霜火球
             //因此，会沿途留下烟火轨迹
             //烟的粒子会靠后一点，并且会先生成让原版的冰粒子正常绘制
-            new SmokeParticle(pos - Projectile.SafeDir() * 15f, vel * 0.5f, RandLerpColor(Color.DeepSkyBlue, Color.White), 20, 0.5f,1f, 0.15f).SpawnToPriorityNonPreMult();
+            new SmokeParticle(pos - Projectile.SafeDir() * 15f, vel * 0.5f, RandLerpColor(Color.DeepSkyBlue, Color.White), 20, 0.5f,1f, 0.15f * Main.rand.NextFloat(0.78f,1.11f), Main.rand.NextBool()).SpawnToPriorityNonPreMult();
             //生成光球类粒子。增效
-            new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(8f), Projectile.velocity.ToRandVelocity(ToRadians(10f), -1.2f), RandLerpColor(Color.DeepSkyBlue, Color.LightBlue), 20, 0.35f).Spawn();
+            new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(8f), Projectile.velocity.ToRandVelocity(ToRadians(10f), -1.2f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20, 0.35f).Spawn();
             Projectile.rotation = Projectile.velocity.ToRotation();
             Projectile.velocity *= 0.98f;
             Projectile.velocity.X *= 1f;
@@ -54,10 +54,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if (Projectile.velocity.X != oldVelocity.X)
-                Projectile.velocity.X = -oldVelocity.X;
-            if (Projectile.velocity.Y != oldVelocity.Y)
-                Projectile.velocity.Y = -oldVelocity.Y * 0.8f;
+            Projectile.BounceOnTile(oldVelocity, 1f,0.8f);
             SpawnHitParticle();
             BounceTime++;
             return BounceTime > 2;

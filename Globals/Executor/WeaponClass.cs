@@ -13,6 +13,7 @@ namespace HJScarletRework.Globals.Executor
         public virtual int ExecutionProj => -1;
         public new string LocalizationCategory => $"Weapons.Executor";
         public override bool RangedPrefix() => false;
+        public override bool AllowPrefix(int pre) => true;
         public virtual int ExecutionTime => 10;
         public virtual float ExecutionStrikeDamageMult => 1.0f;
         public override void SetDefaults()

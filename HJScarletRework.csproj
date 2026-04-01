@@ -24,10 +24,6 @@
 	    <HintPath>..\..\ModReader\ContinentOfJourney\ContinentOfJourney.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Items\Weapons\Ranged\" />
-	  <Folder Include="Projs\Ranged\" />
-	</ItemGroup>
 
 	<!-- References -->
 

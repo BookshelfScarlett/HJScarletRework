@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -95,7 +94,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.timeLeft = 300;
             MinionProjAI = State.Idle;
 
-            bool isPressingLeftClick = Owner.JustPressLeftClick();
+            bool isPressingLeftClick = Owner.JustPressLeftClick() && !Owner.HoldingTools();
             UpdateIdleAI(isPressingLeftClick);
 
             Timer += isPressingLeftClick.ToInt();
@@ -245,7 +244,7 @@ namespace HJScarletRework.Projs.Executor
                 float anchorPosY = Owner.MountedCenter.Y - (60f * MathF.Sin(Oscillation) / 9f);
                 //递增的值越大，锤子的摆动幅度越大
                 //基本的挂机状态，此处使用了正弦曲线来让锤子常规上下偏移
-                Vector2 anchorPos = new(anchorPosX, anchorPosY);
+                Vector2 anchorPos = new Vector2(anchorPosX, anchorPosY);
                 //实际更新位置
                 Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, 0.15f);
                 //计算锤子需要的朝向。

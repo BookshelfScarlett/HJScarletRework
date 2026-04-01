@@ -54,18 +54,6 @@ namespace HJScarletRework.Projs.Melee
         public bool GrowUp = false;
         public void AddFrame()
         {
-            Projectile.frameCounter += 1;
-            if (Projectile.frameCounter > 3)
-            {
-                Projectile.frame++;
-                Projectile.frameCounter = 0;
-            }
-            if (Projectile.frame > 8)
-            {
-                GrowUp = false;
-                Projectile.frame = 0;
-
-            }
         }
         public override bool? CanDamage()
         {

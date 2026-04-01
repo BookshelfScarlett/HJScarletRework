@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
@@ -8,7 +7,6 @@ using HJScarletRework.Graphics.Metaballs;
 using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;

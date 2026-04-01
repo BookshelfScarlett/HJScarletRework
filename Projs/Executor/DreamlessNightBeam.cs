@@ -1,21 +1,13 @@
-﻿using ContinentOfJourney.Projectiles.Random________Go;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.ParticleSystem;
 using HJScarletRework.Graphics.Metaballs;
 using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -110,13 +102,16 @@ namespace HJScarletRework.Projs.Executor
 
             int lifeTime = 80;
             new FusableBall(Projectile.Center.ToRandCirclePos(4f), Projectile.velocity.ToRandVelocity(0.1f, 1.1f, 2.4f), RandLerpColor(Color.DarkViolet, Color.Purple), lifeTime / 4, 0.475f, new Vector2(1.25f, 0.5f) * 0.230f).SpawnToPriority();
-            for (int i = 0; i < 4; i++)
+            int dCount = PerformanceMode ? 2 : 4;
+            for (int i = 0; i < dCount; i++)
             {
                 Vector2 nebulaPos = Projectile.Center.ToRandCirclePos(2) + Projectile.SafeDir() * i * 2.5f;
                 Vector2 nebulaVel = Projectile.velocity.ToRandVelocity(ToRadians(10), 1.1f, 3.4f);
                 float nebulaScale = Main.rand.NextFloat(0.1f, 0.125f) * 0.80f;
                 ShadowNebula.SpawnParticle(nebulaPos, nebulaVel, nebulaScale, HJScarletTexture.Texture_WhiteCircle.Value);
             }
+            if (PerformanceMode && Main.rand.NextBool())
+                return;
             if (Main.rand.NextBool(8))
             {
                 //尽量远离即可。
@@ -134,7 +129,6 @@ namespace HJScarletRework.Projs.Executor
                 float scale = Main.rand.NextFloat(0.30f, 0.36f);
                 new ShinyCrossStar(starPos, starVel, starColor, lifeTime, RandRotTwoPi, 1f, scale, false,0.1f).Spawn();
             }
-
         }
 
         public void UpdateMininoBeamAI()
@@ -159,7 +153,7 @@ namespace HJScarletRework.Projs.Executor
         {
             int lifeTime = 80;
             new FusableBall(Projectile.Center.ToRandCirclePos(4f), Projectile.velocity.ToRandVelocity(0.1f, 1.1f, 2.4f), RandLerpColor(Color.DarkViolet, Color.Purple), lifeTime / 4, 0.675f, new Vector2(1.25f, 0.5f) * 0.230f).SpawnToPriority();
-            int dCount = 5;
+            int dCount = PerformanceMode ? 2 : 4;
             for (int i = 0; i < dCount; i++)
             {
                 Vector2 nebulaPos = Projectile.Center.ToRandCirclePos(2) + Projectile.velocity / dCount * i + RandVelTwoPi(1.1f,1.6f);
@@ -167,6 +161,9 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 nebulaScale = Main.rand.NextFloat(0.136f, 0.148f) * Vector2.One;
                 ShadowNebulaVector2.SpawnParticle(nebulaPos, nebulaVel, nebulaScale, Projectile.velocity.ToRotation(), 100, HJScarletTexture.Texture_WhiteCircle.Value);
             }
+            if (PerformanceMode && Main.rand.NextBool())
+                return;
+
             if (Main.rand.NextBool(3))
             {
                 Vector2 starPos = Projectile.Center.ToRandCirclePos(2);
@@ -203,13 +200,17 @@ namespace HJScarletRework.Projs.Executor
             //粒子。
             int lifeTime = 80;
             new FusableBall(Projectile.Center.ToRandCirclePos(4f), Projectile.velocity.ToRandVelocity(0.1f, 1.1f, 2.4f), RandLerpColor(Color.DarkViolet, Color.Purple), lifeTime / 4, 0.475f, new Vector2(1.25f, 0.5f) * 0.230f).SpawnToPriority();
-            for (int i = 0; i < 4; i++)
+            int count = PerformanceMode ? 2 : 4;
+            for (int i = 0; i < count; i++)
             {
                 Vector2 nebulaPos = Projectile.Center.ToRandCirclePos(2) + Projectile.SafeDir() * i * 2.5f;
                 Vector2 nebulaVel = Projectile.velocity.ToRandVelocity(ToRadians(10), 1.1f, 3.4f);
                 float nebulaScale = Main.rand.NextFloat(0.1f, 0.125f) * 0.80f;
                 ShadowNebula.SpawnParticle(nebulaPos, nebulaVel, nebulaScale, HJScarletTexture.Texture_WhiteCircle.Value);
             }
+            if (PerformanceMode && Main.rand.NextBool())
+                return;
+
             if (Main.rand.NextBool(4))
             {
                 Vector2 starPos = Projectile.Center.ToRandCirclePosEdge(4);

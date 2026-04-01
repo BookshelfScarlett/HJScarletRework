@@ -60,15 +60,13 @@ namespace HJScarletRework.Projs.Melee
             Vector2 mountedPos = Projectile.Center + dir * 60f;
             //总体在底下绘制一些别的粒子，这里用的是树叶
             ExtraTimer += 0.42f;
+            Vector2 of = Projectile.SafeDir() * 80f;
             for (int i = 0; i < 4; i++)
             {
                 Vector2 spawnPos = mountedPos + dir.RotatedBy(PiOver2) * MathF.Sin(ExtraTimer - i * 0.1f) * (9.0f);
-                new ShinyOrbParticle(spawnPos - speedOffset * i, dir * 1.2f, RandLerpColor(Color.DeepSkyBlue,Color.LightBlue), 25, 0.4f).Spawn();
-                //Dust shinyDust = Dust.NewDustPerfect(mountedPos + Main.rand.NextVector2Circular(8f, 8f), DustID.UnusedWhiteBluePurple);
-                //shinyDust.scale *= Main.rand.NextFloat(1.1f, 1.2f);
-                //shinyDust.velocity = dir * 1.2f;
+                new ShinyOrbParticle(spawnPos - speedOffset * i - of, dir * 1.2f, RandLerpColor(Color.DeepSkyBlue,Color.LightBlue), 25, 0.4f).Spawn();
             }
-                new ShinyCrossStar(mountedPos.ToRandCirclePos(8f), dir * 1.2f, RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 60, Projectile.rotation, 1f, 0.40f, false).Spawn();
+                new ShinyCrossStar(mountedPos.ToRandCirclePos(8f) - of, dir * 1.2f, RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 60, Projectile.rotation, 1f, 0.40f, false).Spawn();
 
             
         }
@@ -114,7 +112,8 @@ namespace HJScarletRework.Projs.Melee
             Projectile.Opacity -= 0.02f;
             Projectile.velocity *= 0.94f;
             Vector2 dir = Projectile.rotation.ToRotationVector2();
-            Vector2 mountedPos = Projectile.Center + dir * 80f - 4f  * dir.RotatedBy(PiOver2);
+            Vector2 of = Projectile.SafeDir() * 80f;
+            Vector2 mountedPos = Projectile.Center + dir * 80f - 4f  * dir.RotatedBy(PiOver2) - of;
             for (int i = 0; i < 2; i++)
             {
                 new Fire(mountedPos - dir * 60f * i + Main.rand.NextVector2Circular(8f, 6f), Vector2.Zero, RandLerpColor(Color.SkyBlue, Color.Blue), 40, dir.ToRotation(), 1f, 0.1f).Spawn();
@@ -151,19 +150,21 @@ namespace HJScarletRework.Projs.Melee
 
         private void DrawProjItSelf()
         {
-            Projectile.DrawGlowEdge(Color.White * Projectile.Opacity, rotFix: ToRadians(135));
-            Projectile.DrawProj(Color.White * Projectile.Opacity, 4, 0.7f, rotFix: ToRadians(135));
+            Vector2 of = Projectile.SafeDir() * 80f;
+            Projectile.DrawGlowEdge(Color.White * Projectile.Opacity, rotFix: ToRadians(135),drawPosOffset:of);
+            Projectile.DrawProj(Color.White * Projectile.Opacity, 4, 0.7f, rotFix: ToRadians(135), drawPosOffset: of);
         }
 
         public void DrawFireGlow()
         {
+            Vector2 of = Projectile.SafeDir() * 80f;
             Texture2D glow = HJScarletTexture.Particle_CrossGlow.Value;
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             Vector2 drawPos = Projectile.Center - Main.screenPosition + Projectile.SafeDir() * 80f;
             Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2) * 3f;
-            SB.Draw(glow, drawPos + offset, null, Color.DeepSkyBlue * Projectile.Opacity, Projectile.rotation, glow.Size() / 2, 0.25f * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
-            SB.Draw(glow, drawPos + offset, null, Color.AliceBlue * Projectile.Opacity, Projectile.rotation, glow.Size() / 2, 0.20f * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
+            SB.Draw(glow, drawPos + offset - of, null, Color.DeepSkyBlue * Projectile.Opacity, 0, glow.Size() / 2, 0.225f * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
+            SB.Draw(glow, drawPos + offset - of, null, Color.AliceBlue * Projectile.Opacity, 0, glow.Size() / 2, 0.181f * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
             SB.End();
             SB.BeginDefault();
         }

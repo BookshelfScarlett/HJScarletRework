@@ -1,10 +1,12 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.ParticleSystem;
 using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -13,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DeathTollsExecution : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Executor;
         private enum DoType
         {
             IsArcRotating,
@@ -30,7 +32,7 @@ namespace HJScarletRework.Projs.Executor
             get => (int)Projectile.ai[2];
             set => Projectile.ai[2] = value;
         }
-
+        public float RotProgress = 0;
         public override string Texture => GetInstance<DeathTollsProj>().Texture;
         public override void SetStaticDefaults()
         {
@@ -52,6 +54,16 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void AI()
         {
+            Projectile.rotation += 0.15f;
+            if(!Projectile.HJScarlet().FirstFrame)
+            {
+                for(int i =0;i<60;i++)
+                {
+                    PosList.Add(Vector2.Zero);
+                    PosListAlt.Add(Vector2.Zero);
+                }
+
+            }
             DrawTrailingDust();
             switch (AttackType)
             {
@@ -71,10 +83,26 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawGlowEdge(Color.DarkMagenta, 6);
+            Projectile.DrawGlowEdge(Color.DarkMagenta, 8);
             Projectile.DrawProj(Color.White);
             return false;
         }
+        public List<Vector2> PosList = [];
+        public List<Vector2> PosListAlt = [];
+        public List<float> RotList = [];
+        private void DrawTrailingDust()
+        {
+            if (Main.rand.NextBool(6))
+                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(32f), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, RandRotTwoPi, 1, 0.46f, false).Spawn();
+            if (Main.rand.NextBool(6))
+                new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(32f), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Violet), 40,  0.46f).Spawn();
+        }
+
+        public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
+        {
+            
+        }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //非挂载情况返回不执行。
@@ -105,9 +133,7 @@ namespace HJScarletRework.Projs.Executor
 
             //在滞留所有的射弹
             Projectile sparks = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), srcPos, Vector2.Zero, ProjectileType<DeathTollsArrow>(), flareDamage, 1.1f, Owner.whoAmI);
-            sparks.ai[2] = target.whoAmI;
-            sparks.localAI[0] = xDist;
-            sparks.localAI[1] = yDist;
+            ((DeathTollsArrow)sparks.ModProjectile).CurTarget = target;
         }
 
         private int StartSpinTime => 30 * Projectile.extraUpdates;
@@ -128,7 +154,6 @@ namespace HJScarletRework.Projs.Executor
         }
         private void DoHanging()
         {
-            Projectile.rotation += 0.1f;
             if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true, 1800f, true))
             {
                 Projectile.HomingTarget(target.Center, 1800f, 24f, 20f);
@@ -168,17 +193,17 @@ namespace HJScarletRework.Projs.Executor
                 float progress = RotateTime == 0 
                     ? (float)AttackTimer / StartSpinTime
                     : (float)(AttackTimer - StartSpinTime) / StartSpinTime;
-                Projectile.rotation = _arcStartRotation + TotalArcAngle * progress;
+                float curRot = _arcStartRotation + TotalArcAngle * progress;
                 //加速
                 float speed = Projectile.velocity.Length() + 0.21f * AttackTimer;
                 if (speed > _originalSpeed)
                     speed = _originalSpeed;
 
-                Projectile.velocity = Projectile.rotation.ToRotationVector2() * speed;
+                Projectile.velocity = curRot.ToRotationVector2() * speed;
                 //如果进程结束
                 if (progress >= 1f)
                 {
-                    Projectile.velocity = Projectile.rotation.ToRotationVector2() * _originalSpeed;
+                    Projectile.velocity = curRot.ToRotationVector2() * _originalSpeed;
                     _isArcRotating = false;
                     //首次反向结束，重置计时器准备反向
                     AttackTimer = StartSpinTime;
@@ -222,42 +247,6 @@ namespace HJScarletRework.Projs.Executor
                 Projectile flares = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ProjectileType<DeathTollsDarkEnergy>(), flareDamage, 1.1f, Owner.whoAmI, 0f, Main.rand.Next(3));
                 flares.extraUpdates = 3;
                 flares.tileCollide = false;
-            }
-        }
-        private void DrawTrailingDust()
-        {
-            //正弦波频率
-            float freq = 0.2f;
-            //振幅
-            float amp = 35f;
-            Vector2 direction = Projectile.velocity.SafeNormalize(Vector2.UnitX);
-            //基础速度
-            Vector2 speedValue = direction * 2.5f;
-            for (int i = -1; i < 2; i+= 2)
-            {
-                //基础横向偏移，用于控制射弹与路径的距离。
-                float baseOffset = 5f;
-                //让相位差不变，使他们在零点上同步
-                float angle = AttackTimer * freq;
-                //曲线1使用Sin，曲线2使用-Sin确保反向运动
-                float wave = (float)Math.Sin(angle) * i;
-                //计算垂直方向向量。
-                Vector2 perpendDir = direction.RotatedBy(PiOver2);
-                //最终确定生成位置的偏差
-                Vector2 waveOffset = perpendDir * wave * amp + perpendDir * baseOffset;
-                //修改粒子生成位置。
-                Vector2 spawnPosition = Projectile.Center + waveOffset;
-                //计算例子速度，粒子需要在零点反向运动。因为总体上，他们是在原点位置被“推开”的
-                //这里是一个数学问题：Sin开导实际上就是Cos曲线。也就是“速度”
-                float verticleVel = (float)Math.Cos(angle) * 1.2f * i;
-                Vector2 realVel = speedValue + perpendDir * verticleVel;
-                //跳过屏幕外绘制
-                if (HJScarletMethods.OutOffScreen(spawnPosition))
-                    continue;
-                //最终生成粒子。
-                Color drawColor = i > 0 ? Color.Black : new(75, 0, 130);
-                ShinyOrbParticle shinyOrbParticle = new ShinyOrbParticle(spawnPosition, realVel, drawColor, 140, 1.2f, i < 0 ? BlendStateID.Additive : BlendStateID.Alpha);
-                shinyOrbParticle.Spawn();
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Buffs;
 using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -30,7 +31,7 @@ namespace HJScarletRework.Globals.Players
         public int NoSlowFall = 0;
         public int ownerMinionHammerCount = 0;
 
-
+        public int climaticHawstringLaserCounter = 0;
 
         #region Accessories
 
@@ -54,6 +55,9 @@ namespace HJScarletRework.Globals.Players
         public int PreciousTargetCrtis = 10;
         public int PreciousCritsMin = 0;
         public int fakeManaContainer = 0;
+
+        public bool defenderEmblem = false;
+        public int defenderEmblemCD = 0;
         #endregion
 
         #region Pets
@@ -70,6 +74,8 @@ namespace HJScarletRework.Globals.Players
         #endregion
         public override void ResetEffects()
         {
+            climaticHawstringLaserCounter *= (Player.HeldItem.type == ItemType<ClimaticHawstring>()).ToInt();
+
             CreationHatSet = false;
             ShadowCastAcc = false;
             LifeBalloonAcc = false;
@@ -97,10 +103,12 @@ namespace HJScarletRework.Globals.Players
             PreciousTargetCrtis = 10;
             LifeBalloonAcc = false;
             galvanizedHandDashCD = 0;
+            climaticHawstringLaserCounter = 0 ;
 
             DesterrannachtImmortal = false;
             DesterranImmortalTime = 0;
             DesterranTimer = 0;
+            defenderEmblemCD = 0;
             UnloadAcc();
             UnloadPets();
         }
@@ -111,6 +119,7 @@ namespace HJScarletRework.Globals.Players
             PreciousCritsMin = 0;
             DesterrennachtAcc = false;
             fakeManaContainer = 0;
+            defenderEmblem = false;
         }
 
         private void UnloadPets()

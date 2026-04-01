@@ -38,4 +38,9 @@ HJScarletConfigClient: {
 		Label: Draw Icon
 		Tooltip: ""
 	}
+
+	PerformanceMode: {
+		Label: Performance Mode
+		Tooltip: ""
+	}
 }

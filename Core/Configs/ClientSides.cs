@@ -26,6 +26,10 @@ namespace HJScarletRework.Core.Configs
         [BackgroundColor(192, 54, 64, 192)]
         [DefaultValue(false)]
         public bool DrawIcon { get; set; }
+        [BackgroundColor(192, 54, 64, 192)]
+        [DefaultValue(false)]
+        public bool PerformanceMode {  get; set; }
+
 
     }
 }

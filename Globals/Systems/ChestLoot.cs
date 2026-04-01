@@ -161,7 +161,7 @@ namespace HJScarletRework.Globals.Systems
             int itemsToPlaceInFrozenChestsChoice = 0;
             // Rather than place items in each chest, we'll place up to 6 items (2 of each).
             int itemsPlaced = 0;
-            int maxItems = 60;
+            int maxItems = 80;
             // Loop over all the chests
             for (int chestIndex = 0; chestIndex < Main.maxChests; chestIndex++)
             {
@@ -215,6 +215,8 @@ namespace HJScarletRework.Globals.Systems
         {
             PlaceManaCrystal();
             PlaceIceSpear();
+            PlaceDungeonBreaker();
+            PlaceJungleMadness();
         }
         public override void PostUpdateWorld()
         {

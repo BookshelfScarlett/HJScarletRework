@@ -1,19 +1,24 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.PixelatedRender;
+using HJScarletRework.Core.Primitives.Trail;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class CrimsonScytheHeldProj : HJScarletProj
+    public class CrimsonScytheProj : HJScarletProj, IPixelatedRenderer
     {
+        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public BlendState BlendState => BlendState.Additive;
         public override ClassCategory Category => ClassCategory.Executor;
-        public override string Texture => GetInstance<CrimsonScythe>().Texture;
         /// <summary>
         /// 挥砍的目标位置
         /// </summary>
@@ -27,6 +32,7 @@ namespace HJScarletRework.Projs.Executor
             RightHalf,
             FullCircle
         }
+        public List<Vector2> OldAimPos = [];
         public AnimationStruct ScytheAnimation = new(3);
         public SwingState SwingType
         {
@@ -34,6 +40,7 @@ namespace HJScarletRework.Projs.Executor
             set => Projectile.ai[0] = (float)value;
         }
         public ref float Timer => ref Projectile.ai[1];
+        public bool PlaySound = false;
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[Type] = true;
@@ -52,15 +59,27 @@ namespace HJScarletRework.Projs.Executor
             Projectile.ownerHitCheck = true;
             Projectile.manualDirectionChange = true;
             Projectile.usesLocalNPCImmunity = true;
+            Projectile.extraUpdates = 10;
             Projectile.localNPCHitCooldown = 3;
             Projectile.noEnchantmentVisuals = true;
         }
         public override void OnFirstFrame()
         {
-            ScytheAnimation.MaxProgress[AniState.Begin] = 25;
-            ScytheAnimation.MaxProgress[AniState.Mid] = 15;
-            ScytheAnimation.MaxProgress[AniState.End] = 10;
-            Projectile.direction = Projectile.spriteDirection = ((SwingType != SwingState.RightHalf).ToDirectionInt());
+            switch (SwingType)
+            {
+
+                case SwingState.RightHalf:
+                    ScytheAnimation.MaxProgress[AniState.Begin] = 10 * Projectile.extraUpdates;
+                    ScytheAnimation.MaxProgress[AniState.Mid] = 35 * Projectile.extraUpdates;
+                    ScytheAnimation.MaxProgress[AniState.End] = 20 * Projectile.extraUpdates;
+                    break;
+                default:
+                    ScytheAnimation.MaxProgress[AniState.Begin] = 8 * Projectile.extraUpdates;
+                    ScytheAnimation.MaxProgress[AniState.Mid] = 15 * Projectile.extraUpdates;
+                    ScytheAnimation.MaxProgress[AniState.End] = 15 * Projectile.extraUpdates;
+                    break;
+            }
+            Projectile.direction = Projectile.spriteDirection = ((SwingType != SwingState.RightHalf).ToDirectionInt()) * Owner.direction;
             InitVector = Owner.ToMouseVector2();
             TargetRotation = Owner.ToMouseVector2().ToRotation();
             Projectile.rotation = TargetRotation;
@@ -73,6 +92,8 @@ namespace HJScarletRework.Projs.Executor
             UpdateScytheAnimation();
             UpdateScytheState();
             UpdatePlayerState();
+            if (OldAimPos.Count > 50)
+                OldAimPos.RemoveAt(0);
         }
         private void UpdatePlayerState()
         {
@@ -85,8 +106,7 @@ namespace HJScarletRework.Projs.Executor
         private void UpdateScytheState()
         {
         }
-        
-        private float SwingProgress;
+
         //类似于状态机，但仍然有点差距。
         public void UpdateScytheAnimation()
         {
@@ -129,10 +149,10 @@ namespace HJScarletRework.Projs.Executor
 
         private void FullCircleAniHandlerBegin()
         {
-            float easedProgress = EaseInOutExpo(ScytheAnimation.GetAniProgress(AniID.Begin));
-            float curRotation = ScytheAnimation.UpdateAngle(-125, -115, Projectile.direction, easedProgress);
+            float easedProgress = (ScytheAnimation.GetAniProgress(AniID.Begin));
+            float curRotation = ScytheAnimation.UpdateAngle(-105, -115, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult(easedProgress);
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
@@ -141,25 +161,33 @@ namespace HJScarletRework.Projs.Executor
 
         private void FullCircleAniHandlerMid()
         {
-            float easedProgress = EaseInOutExpo(ScytheAnimation.GetAniProgress(AniID.Mid));
-            float curRotation = ScytheAnimation.UpdateAngle(-115, 260, Projectile.direction, easedProgress);
+            if (!PlaySound)
+            {
+                PlaySound = true;
+                SoundEngine.PlaySound(HJScarletSounds.Hammer_Shoot[2], Owner.Center);
+            }
+
+            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.Mid));
+            float curRotation = ScytheAnimation.UpdateAngle(-115, 200, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult2(easedProgress);
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
+            OldAimPos.Add(tarPos * 200f);
 
         }
 
         private void FullCircleAniHandlerEnd()
         {
-            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.End));
-            float curRotation = ScytheAnimation.UpdateAngle(260, 270, Projectile.direction, easedProgress);
+            float easedProgress = EaseOutCubic(ScytheAnimation.GetAniProgress(AniID.End));
+            float curRotation = ScytheAnimation.UpdateAngle(200, 220, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult3(easedProgress);
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
+            OldAimPos.Add(tarPos * 200f);
 
         }
         #endregion
@@ -190,10 +218,10 @@ namespace HJScarletRework.Projs.Executor
 
         private void RightHalftAniHandlerBegin()
         {
-            float easedProgress = EaseInOutExpo(ScytheAnimation.GetAniProgress(AniID.Begin));
-            float curRotation = ScytheAnimation.UpdateAngle(-110, -125, Projectile.direction, easedProgress);
+            float easedProgress = (ScytheAnimation.GetAniProgress(AniID.Begin));
+            float curRotation = ScytheAnimation.UpdateAngle(200, 190, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetLerp_Mid(easedProgress, 0);
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
@@ -201,26 +229,52 @@ namespace HJScarletRework.Projs.Executor
         }
 
         private void RightHalftAniHandlerMid()
+
         {
-            float easedProgress = EaseInOutExpo(ScytheAnimation.GetAniProgress(AniID.Mid));
-            float curRotation = ScytheAnimation.UpdateAngle(-125, 210, Projectile.direction, easedProgress);
+
+            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.Mid));
+            if (!PlaySound && easedProgress > 0.15f)
+            {
+                PlaySound = true;
+                SoundEngine.PlaySound(HJScarletSounds.Hammer_Shoot[1], Owner.Center);
+            }
+            float curRotation = ScytheAnimation.UpdateAngle(190, 800, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetLerp_Mid(easedProgress, 1);
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
-
+            OldAimPos.Add(tarPos * 200f);
         }
         private void RightHalftAniHandlerEnd()
         {
-            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.End));
-            float curRotation = ScytheAnimation.UpdateAngle(210, 220, Projectile.direction, easedProgress);
+            float easedProgress = EaseOutCubic(ScytheAnimation.GetAniProgress(AniID.End));
+            float curRotation = ScytheAnimation.UpdateAngle(800, 820, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetLerp_Mid(easedProgress, 2);
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
+            OldAimPos.Add(tarPos * 200f);
 
+        }
+        public float GetLerp_Mid(float t, int id)
+        {
+            if (id == 0)
+            {
+                return Lerp(0.75f, 1.0f, t);
+            }
+            else if (id == 1)
+            {
+                if (t < 0.2f)
+                    return Lerp(1.0f, 1.05f, (t) / 0.2f);
+                else if (t < 0.8f)
+                    return Lerp(1.05f, 1.15f, (t - 0.2f) / (0.8f - 0.2f));
+                else
+                    return Lerp(1.15f, 1.0f, (t - 0.8f) / (1f - 0.8f));
+            }
+            else
+                return Lerp(1.0f, 0.75f, t);
         }
 
         #endregion
@@ -248,10 +302,10 @@ namespace HJScarletRework.Projs.Executor
         }
         private void LeftHalftAniHandlerBegin()
         {
-            float easedProgress = EaseInOutExpo(ScytheAnimation.GetAniProgress(AniID.Begin));
-            float curRotation = ScytheAnimation.UpdateAngle(-110, -125, Projectile.direction, easedProgress);
+            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.Begin));
+            float curRotation = ScytheAnimation.UpdateAngle(-150, -160, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult(easedProgress);
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
@@ -259,26 +313,52 @@ namespace HJScarletRework.Projs.Executor
 
         private void LeftHalftAniHandlerMid()
         {
-            float easedProgress = EaseInOutExpo(ScytheAnimation.GetAniProgress(AniID.Mid));
-            float curRotation = ScytheAnimation.UpdateAngle(-125, 170, Projectile.direction, easedProgress);
+            if (!PlaySound)
+            {
+                PlaySound = true;
+                SoundEngine.PlaySound(HJScarletSounds.Hammer_Shoot[0], Owner.Center);
+            }
+
+            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.Mid));
+
+            float curRotation = ScytheAnimation.UpdateAngle(-160, 140, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult2(easedProgress);
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
+            OldAimPos.Add(tarPos * 200f);
         }
 
         private void LeftHalftAniHandlerEnd()
         {
-            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.End));
-            float curRotation = ScytheAnimation.UpdateAngle(170, 180, Projectile.direction, easedProgress);
+            float easedProgress = EaseOutCubic(ScytheAnimation.GetAniProgress(AniID.End));
+            float curRotation = ScytheAnimation.UpdateAngle(140, 150, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult3(easedProgress);
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
+            OldAimPos.Add(tarPos * 200f);
         }
 
+        #endregion
+        #region lerp函数
+        public float GetScaleMult(float t)
+        {
+            return Lerp(0.75f, 1.0f, t);
+        }
+        public float GetScaleMult2(float t)
+        {
+            if (t < 0.5f)
+                return Lerp(1.0f, 1.15f, t * 2f);
+            else
+                return Lerp(1.15f, 1f, (t - 0.5f) * 2f);
+        }
+        public float GetScaleMult3(float t)
+        {
+            return Lerp(1.0f, 0.75f, t);
+        }
         #endregion
 
         public bool CheckOwnerDead()
@@ -296,13 +376,69 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            PixelatedRenderManager.BeginDrawProj = true;
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             Vector2 rotationPoint = Projectile.spriteDirection == -1 ? new Vector2(projTex.Width, projTex.Height) : new Vector2(0, projTex.Height);
             SpriteEffects flipSprite = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             float drawRotation = Projectile.rotation + (Projectile.spriteDirection == -1 ? PiOver2 + PiOver4 : PiOver4);
             Vector2 origin = new Vector2(projTex.Width / 2 - 50, projTex.Height / 2 + 50);
             SB.Draw(projTex, drawPos, null, Color.White, drawRotation, rotationPoint, Projectile.scale * 1.4f, flipSprite, 0);
+            Texture2D slash = HJScarletTexture.Texture_Swirl.Value;
+            rotationPoint = Projectile.spriteDirection == -1 ? new Vector2(slash.Width, slash.Height) : new Vector2(0, slash.Height);
+            SB.EnterShaderArea();
+            Texture2D texture = HJScarletTexture.Trail_RvSlash.Value;
+            Effect effect = HJScarletShader.AlphaFade;
+            effect.Parameters["uFadeoutLeftLength"].SetValue(0.1f);
+            effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
+            effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
+            effect.CurrentTechnique.Passes[0].Apply();
+            DrawSlash(texture, Color.Crimson* 0.9f, 0.95f);
+            DrawSlash(texture, Color.Crimson* 0.6f, 0.7f);
+            DrawSlash(texture, Color.Crimson* 0.4f, 0.3f);
+            DrawSlash(texture, Color.Crimson * 0.3f, 0.2f);
+
+            SB.EndShaderArea();
             return false;
+        }
+        public void RenderPixelated(SpriteBatch spriteBatch)
+        {
+
+            HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
+            HJScarletMethods.EndShaderAreaPixel();
+        }
+        public void DrawSlash(Texture2D texture, Color drawcolor, float mult = 0.8f)
+        {
+            if (OldAimPos.Count < 3)
+                return;
+            List<ScarletVertex> Vertexlist = new List<ScarletVertex>();
+            for (int i = 0; i < OldAimPos.Count; i++)
+            {
+                float progress = (float)i / OldAimPos.Count;
+                Vector2 DrawPos_Head = OldAimPos[i] + Owner.Center - Main.screenPosition;
+                Vector2 DrawPos_Source = OldAimPos[i] * mult + Owner.Center - Main.screenPosition;
+                Vertexlist.Add(new ScarletVertex(DrawPos_Head, drawcolor * 1, new Vector3(progress, 0, 0)));
+                Vertexlist.Add(new ScarletVertex(DrawPos_Source, drawcolor * 1, new Vector3(progress, 1, 0)));
+            }
+            Main.graphics.GraphicsDevice.Textures[0] = texture;
+            Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+            Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, Vertexlist.ToArray(), 0, Vertexlist.Count - 2);
+        }
+        public void DrawSlash2(Texture2D texture, Color drawcolor, float mult = 0.8f)
+        {
+            if (OldAimPos.Count < 3)
+                return;
+            List<ScarletVertex> Vertexlist = new List<ScarletVertex>();
+            for (int i = 0; i < OldAimPos.Count; i++)
+            {
+                float progress = (float)i / OldAimPos.Count;
+                Vector2 DrawPos_Head = OldAimPos[i] * 0.5f + Owner.Center - Main.screenPosition;
+                Vector2 DrawPos_Source = OldAimPos[i] * mult * 0.5f + Owner.Center - Main.screenPosition;
+                Vertexlist.Add(new ScarletVertex(DrawPos_Head, drawcolor * 1, new Vector3(progress, 0, 0)));
+                Vertexlist.Add(new ScarletVertex(DrawPos_Source, drawcolor * 1, new Vector3(progress, 1, 0)));
+            }
+            Main.graphics.GraphicsDevice.Textures[0] = texture;
+            Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+            Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, Vertexlist.ToArray(), 0, Vertexlist.Count - 2);
         }
     }
 }

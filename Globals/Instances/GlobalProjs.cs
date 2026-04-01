@@ -1,5 +1,11 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Methods;
+using HJScarletRework.Graphics.Particles;
+using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Instances
@@ -22,11 +28,14 @@ namespace HJScarletRework.Globals.Instances
         /// 启用了专注机制的射弹是否命中了一次NPC
         /// </summary>
         public bool AddFocusHit = false;
+        public bool DefenderBuff = false;
         public float[] ExtraAI = new float[10];
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (HasExecutionMechanic)
                 AddFocusHit = true;
+            Player Owner = Main.player[projectile.owner];
+            ModifyDefenderProj(Owner, projectile, target);
         }
         public override void AI(Projectile projectile)
         {
@@ -41,6 +50,30 @@ namespace HJScarletRework.Globals.Instances
         {
             Player Owner = Main.player[projectile.owner];
             ModifyPreciousTargets(Owner, projectile);
+            ModifyDefenderEmblemBuff(Owner, projectile);
+        }
+
+        private void ModifyDefenderEmblemBuff(Player owner, Projectile projectile)
+        {
+            bool legal = owner.HJScarlet().defenderEmblem && owner.HJScarlet().defenderEmblemCD == 0;
+            if (!legal)
+                return;
+            bool anohterBool = projectile.IsLegalFriendlyProj(ExecutorDamageClass.Instance) && projectile.HJScarlet().ExecutionStrike;
+            DefenderBuff = legal && anohterBool;
+        }
+
+        public void ModifyDefenderProj(Player owner, Projectile projectile, NPC target)
+        {
+            if(DefenderBuff && target.IsLegal())
+            {
+                owner.GetImmnue(ImmunityCooldownID.General, 60, true);
+                SoundEngine.PlaySound(HJScarletSounds.GrabCharge with { MaxInstances= 0},owner.Center);
+                owner.HJScarlet().defenderEmblemCD = 90;
+                for (int i = 0; i < 30; i++)
+                    new TurbulenceShinyOrb(owner.Center.ToRandCirclePos(15f), 2.4f, Color.White, 120, 0.885f, RandRotTwoPi).Spawn();
+                DefenderBuff = false;
+            }
+
         }
 
         private void ModifyPreciousTargets(Player owner, Projectile projectile)

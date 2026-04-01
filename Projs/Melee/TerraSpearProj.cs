@@ -125,14 +125,6 @@ namespace HJScarletRework.Projs.Melee
             if (Timer % (3f) == 0 && spawnTrail)
                 SpawnPortals();
 
-            if (Main.rand.NextBool(2) && AttackType == State.Striker)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(6f, 6f) - Projectile.SafeDir() * 20f;
-                    //new StarShape(pos, Projectile.velocity / 6f, RandLerpColor(Color.Green, Color.LimeGreen), 0.94f * Projectile.Opacity, 60).Spawn();
-                }
-            }
             if (Main.rand.NextBool())
             {
                 Vector2 spawnPos = Projectile.Center.ToRandCirclePos(10f) - Projectile.SafeDir() * 20f;
@@ -203,13 +195,14 @@ namespace HJScarletRework.Projs.Melee
             {
                 float randRot = RandRotTwoPi;
                 Vector2 spawnProjPos = target.Center - Vector2.UnitX.RotatedBy(randRot + (ToRadians(10 * CurSpawnTime))) * Main.rand.NextFloat(1000f, 1300f);
-                Vector2 dir = (spawnProjPos - target.Center).ToSafeNormalize() * -22f;
+                Vector2 dir = HJScarletMethods.PredictAimToTarget(spawnProjPos, target.Center, target.velocity, 22f);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnProjPos, dir, Type, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 ((TerraSpearProj)proj.ModProjectile).AttackType = State.Skyfallen;
                 if (AttackType == State.Skyfallen)
                 {
                     ((TerraSpearProj)proj.ModProjectile).CurSpawnTime = CurSpawnTime + 1;
                     proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                    proj.penetrate = 4;
                 }
                 else
                     proj.ai[2] = randRot;

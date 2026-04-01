@@ -236,9 +236,9 @@ namespace HJScarletRework.Projs.Executor
             if (HangingHitTime > TotalHitTime)
             {
                 Projectile.velocity = -Vector2.UnitY * 34f + target.velocity.ToSafeNormalize() * Clamp(target.velocity.Length(), 0f, 12f);
-                SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center);
                 UpdateMiscHitParticle(target.Center);
                 UpdateNextAttack(State.Strike);
+                SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center);
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 40, Projectile.velocity.ToRotation(), ToRadians(30f));
             }
         }

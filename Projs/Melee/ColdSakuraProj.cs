@@ -11,10 +11,10 @@ using Terraria;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class ColdSakuraProj : ThrownSpearProjClass, IPixelatedRenderer
+    public class ColdSakuraProj : ThrownSpearProjClass
     {
         public override string Texture => ProjPath + "Proj_ColdSakura";
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeProjectiles;
         public BlendState BlendState => BlendState.AlphaBlend;
 
         public enum Style
@@ -179,12 +179,6 @@ namespace HJScarletRework.Projs.Melee
             SB.Draw(projTex, drawPos, null, Color.White * Projectile.Opacity, Projectile.rotation + rotFixer, ori, Projectile.scale, 0, 0);
             PixelatedRenderManager.BeginDrawProj = true;
             return false;
-        }
-        public void RenderPixelated(SpriteBatch sb)
-        {
-            HJScarletMethods.EnterShaderAreaPixel(BlendState.AlphaBlend);
-            //DrawStarShapeTrail(sb);
-            HJScarletMethods.EndShaderAreaPixel();
         }
 
         public void DrawStarShapeTrail(SpriteBatch sb)

@@ -82,7 +82,7 @@ namespace HJScarletRework.Graphics.Particles
         public Vector2 GetScale(float t)
         {
             Vector2 starScale = new(1.2f, 0.8f);
-            Vector2 beginScale = new(0.2f, 0.01f);
+            Vector2 beginScale = new(0.2f, 0.05f);
             return Vector2.Lerp(beginScale, starScale, t);
         }
     }

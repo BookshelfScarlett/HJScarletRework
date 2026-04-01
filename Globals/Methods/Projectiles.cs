@@ -305,6 +305,28 @@ namespace HJScarletRework.Globals.Methods
                 Main.spriteBatch.Draw(tex, trailingDrawPos, null, trailColor, proj.oldRot[i] + rotFix, orig, proj.scale, 0, 0);
             }
         }
+        public static void DrawProjWithSpriteDirection(this Projectile proj, Color color, int drawTime = 4, float offset = 0.7f, float rotFix = 0, bool useOldPos = false, Vector2? drawPosOffset = null)
+        {
+            SpriteEffects se = proj.spriteDirection < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            float rotSe = proj.spriteDirection < 0 ? PiOver2 : 0;
+            Texture2D tex = proj.GetTexture();
+            Vector2 orig = tex.Size() / 2;
+            Vector2 offsetValue = drawPosOffset ?? Vector2.Zero;
+            Vector2 drawPos = proj.Center - Main.screenPosition - offsetValue;
+            int drawLength = drawTime > proj.oldPos.Length ? proj.oldPos.Length : drawTime;
+            for (int i = drawLength - 1; i >= 0; i--)
+            {
+                if (proj.oldPos[i] == Vector2.Zero)
+                    continue;
+                Vector2 trailingDrawPos = useOldPos ? proj.oldPos[i] + proj.PosToCenter() : drawPos - proj.velocity * i * offset;
+                float faded = 1 - i / (float)drawLength;
+                //平方放缩
+                faded = MathF.Pow(faded, 2);
+                Color trailColor = color * faded;
+                Main.spriteBatch.Draw(tex, trailingDrawPos, null, trailColor, proj.oldRot[i] + rotFix + rotSe, orig, proj.scale, se, 0);
+            }
+        }
+
         /// <summary>
         /// 将TargetIndex转化为NPC。这里直接调用的模组内部的GlobalTargetIndex字段
         /// </summary>
@@ -367,6 +389,16 @@ namespace HJScarletRework.Globals.Methods
             result.Y += (vector.X * num2 + vector.Y * num) * Ymult;
             return result;
         }
+        public static void SetUpHeldProj(this Projectile proj, int eu = 0)
+        {
+            proj.ignoreWater = true;
+            proj.tileCollide = false;
+            proj.usesLocalNPCImmunity = true;
+            proj.penetrate = -1;
+            proj.extraUpdates = eu;
+            proj.noEnchantmentVisuals = true;
+            proj.timeLeft = 10000;
+        }
         public static void SetupImmnuity(this Projectile proj, int hitCooldown, ImmnuityType isLocal = ImmnuityType.Local)
         {
             switch (isLocal)
@@ -383,6 +415,26 @@ namespace HJScarletRework.Globals.Methods
                     break;
             }
         }
+        public static void SetupImmnuity(this Projectile proj, int hitCooldown, int penetrates, bool stopDealingDamage = false, ImmnuityType isLocal = ImmnuityType.Local)
+        {
+            switch (isLocal)
+            {
+                case ImmnuityType.Local:
+                    proj.usesLocalNPCImmunity = true;
+                    proj.localNPCHitCooldown = hitCooldown;
+                    break;
+                case ImmnuityType.Static:
+                    proj.usesIDStaticNPCImmunity = true;
+                    proj.idStaticNPCHitCooldown= hitCooldown;
+                    break;
+                default:
+                    break;
+            }
+            proj.penetrate = penetrates;
+            proj.stopsDealingDamageAfterPenetrateHits = stopDealingDamage;
+        }
+
+        public static bool IsLegal(this NPC target) => target != null && target.CanBeChasedBy();
         public static void ResetBoomerangReturn(this Projectile proj, int pene =-1)
         {
             proj.tileCollide = false;
@@ -394,6 +446,13 @@ namespace HJScarletRework.Globals.Methods
             return (proj.Center - Main.player[proj.owner].Center).LengthSquared() < dist * dist;
         }
         public static float SpeedAffectRotation(this Projectile proj, float xMult = 3f, float yMult = 3f) => Math.Abs(proj.velocity.X) / xMult + Math.Abs(proj.velocity.Y) / yMult;
+        public static void AffactedByGrav(this Projectile proj, float velMult = 0.96f, float yMult = 1f, float yAdd = 0.11f, float maxGravSpeed = 30f)
+        {
+            proj.velocity *= velMult;
+            proj.velocity.Y *= yMult;
+            if (proj.velocity.Y < maxGravSpeed)
+                proj.velocity.Y += yAdd;
+        }
         public static bool MeetMaxUpdatesFrame(this Projectile proj, float timer, float maxFrame) => timer > proj.MaxUpdates * maxFrame;
         public static bool FinalUpdateNextBool(this Projectile proj, int boolValue = 2) => proj.numUpdates == 0 && Main.rand.NextBool(boolValue);
         public static bool FinalUpdate(this Projectile proj) => proj.numUpdates == 0;
@@ -409,6 +468,20 @@ namespace HJScarletRework.Globals.Methods
         {
             Player owner = Main.player[proj.owner];
             return owner.MountedCenter.X + reverse.ToDirectionInt() * value;
+        }
+        public static void AddFrames(this Projectile proj, int frameCounts = 3,int totalFrames = 8)
+        {
+            proj.frameCounter += 1;
+            if (proj.frameCounter > frameCounts)
+            {
+                proj.frame++;
+                proj.frameCounter = 0;
+            }
+            if (proj.frame >= totalFrames)
+            {
+                proj.frame = 0;
+            }
+
         }
     }
 }

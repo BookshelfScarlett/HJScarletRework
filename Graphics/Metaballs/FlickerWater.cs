@@ -3,16 +3,12 @@ using HJScarletRework.Core.MetaballSystem;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Graphics.Metaballs
 {
-    public class FlickerWater: BaseMetaBall
+    public class FlickerWater: BaseMetaball
     {
         public class FlickerWaterParticle(Vector2 center, Vector2 vel, Vector2 scale, float rotation, int lifeTime, Texture2D shapeTex)
         {
@@ -33,7 +29,7 @@ namespace HJScarletRework.Graphics.Metaballs
         }
         public override Color EdgeColor => Color.Lerp(Color.DeepSkyBlue, Color.White, 0.64f);
         public static List<FlickerWaterParticle> ParticleList = [];
-        public override Texture2D BgTexture => HJScarletTexture.Metaball_FlickerWater.Value;
+        public override Texture2D BackgroundTexture => HJScarletTexture.Metaball_FlickerWater.Value;
         public static void SpawnParticle(Vector2 pos, Vector2 vel, Vector2 scale, float rotation, int lifeTime, Texture2D shapeTex) => ParticleList.Add(new(pos, vel, scale, rotation, lifeTime, shapeTex));
         public override bool Active()
         {
@@ -47,6 +43,10 @@ namespace HJScarletRework.Graphics.Metaballs
             {
                 return particleList.Timer / (float)particleList.LifeTime >= 1f;
             });
+        }
+        public override bool PreDrawRT2D()
+        {
+            return base.PreDrawRT2D();
         }
         public override void PrepareRenderTarget()
         {

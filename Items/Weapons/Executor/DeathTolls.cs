@@ -1,4 +1,3 @@
-using ContinentOfJourney;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
@@ -8,7 +7,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -32,7 +30,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.useTime = 18;
             //这里的UseTime是有意改的很慢的
             Item.useAnimation = 18;
-            Item.shootSpeed = 24f;
+            Item.shootSpeed = 19f;
             Item.rare = RarityType<NightRarity>();
             //这里不会给音效，因为要考虑一些射弹的联动
             //实际音效会在射弹初始化的时候提供

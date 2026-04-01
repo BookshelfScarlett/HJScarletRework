@@ -7,9 +7,9 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Core.MetaballSystem
 {
-    public class MetaBallManager : ModSystem
+    public class MetaballManager : ModSystem
     {
-        public static List<BaseMetaBall> MetaBallCollection = [];
+        public static List<BaseMetaball> MetaballList = [];
 
         #region 加载卸载
         public override void Load()
@@ -18,7 +18,6 @@ namespace HJScarletRework.Core.MetaballSystem
                 return;
 
             On_Main.CheckMonoliths += PrepareRenderTarget;
-            // On_Main.DrawDust += DrawRenderTarget;
         }
 
         public override void Unload()
@@ -29,23 +28,22 @@ namespace HJScarletRework.Core.MetaballSystem
             Main.QueueMainThreadAction(() =>
             {
                 // 卸载资源
-                foreach (BaseMetaBall baseMetaBall in MetaBallCollection)
+                foreach (BaseMetaball baseMetaBall in MetaballList)
                 {
                     baseMetaBall.AlphaTexture?.Dispose();
                     baseMetaBall.AlphaTexture = null;
                 }
             });
-            MetaBallCollection.Clear();
+            MetaballList.Clear();
 
             On_Main.CheckMonoliths -= PrepareRenderTarget;
-            // On_Main.DrawDust -= DrawRenderTarget;
         }
         #endregion
 
         #region 更新每一个元球
         public override void PostUpdateDusts()
         {
-            foreach (BaseMetaBall baseMetaBall in MetaBallCollection)
+            foreach (BaseMetaball baseMetaBall in MetaballList)
             {
                 if (!baseMetaBall.Active())
                     continue;
@@ -72,11 +70,13 @@ namespace HJScarletRework.Core.MetaballSystem
 
             orig();
 
-            foreach (BaseMetaBall baseMetaBall in MetaBallCollection)
+            foreach (BaseMetaball baseMetaBall in MetaballList)
             {
                 if (!baseMetaBall.Active())
                     continue;
-
+                if (baseMetaBall.SetPority)
+                    continue;
+                
                 HJScarletMethods.SwapToTarget(baseMetaBall.AlphaTexture);
 
                 Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null);
@@ -87,10 +87,56 @@ namespace HJScarletRework.Core.MetaballSystem
 
                 Main.graphics.GraphicsDevice.SetRenderTargets(null);
             }
+            foreach (BaseMetaball baseMetaBall1 in MetaballList)
+            {
+                if (!baseMetaBall1.Active())
+                    continue;
+                if (!baseMetaBall1.SetPority)
+                    continue;
+                HJScarletMethods.SwapToTarget(baseMetaBall1.AlphaTexture);
+
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null);
+
+                baseMetaBall1.PrepareRenderTarget();
+
+                Main.spriteBatch.End();
+
+                Main.graphics.GraphicsDevice.SetRenderTargets(null);
+
+            }
         }
         #endregion
 
         #region 最终输出渲染
+        public static void DrawRenderTargetPiority(On_Main.orig_DrawPlayers_BehindNPCs orig, Main self)
+        {
+            if (Main.dedServ)
+            {
+                orig(self);
+                return;
+            }
+
+            orig(self);
+
+            foreach (BaseMetaball baseMetaBall in MetaballList)
+            {
+                if (!baseMetaBall.Active())
+                    continue;
+                if (!baseMetaBall.SetPority)
+                    continue;
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+
+                if (baseMetaBall.PreDrawRT2D())
+                {
+                    baseMetaBall.PrepareShader();
+                    Main.spriteBatch.Draw(baseMetaBall.AlphaTexture, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                }
+
+                Main.spriteBatch.End();
+            }
+
+        }
+
         public static void DrawRenderTarget(On_Main.orig_DrawDust orig, Main self)
         {
             if (Main.dedServ)
@@ -101,13 +147,15 @@ namespace HJScarletRework.Core.MetaballSystem
 
             orig(self);
 
-            foreach (BaseMetaBall baseMetaBall in MetaBallCollection)
+            foreach (BaseMetaball baseMetaBall in MetaballList)
             {
                 if (!baseMetaBall.Active())
                     continue;
+                if (baseMetaBall.SetPority)
+                    continue;
 
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-              
+
                 if (baseMetaBall.PreDrawRT2D())
                 {
                     baseMetaBall.PrepareShader();

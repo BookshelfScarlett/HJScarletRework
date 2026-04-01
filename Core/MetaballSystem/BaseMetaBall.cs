@@ -7,15 +7,15 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Core.MetaballSystem
 {
-    public abstract class BaseMetaBall : ModType
+    public abstract class BaseMetaball : ModType
     {
         public int Type = 0;
-
+        public virtual bool SetPority => false;
         public int MetaballTimer;
         // 这个元球对应的渲染目标
         public RenderTarget2D AlphaTexture;
         // 这个元球对应的背景
-        public virtual Texture2D BgTexture => HJScarletTexture.Metaball_ShadowNebula.Value;
+        public virtual Texture2D BackgroundTexture => HJScarletTexture.Metaball_ShadowNebula.Value;
 
         /// <summary>
         /// 描边颜色
@@ -37,11 +37,9 @@ namespace HJScarletRework.Core.MetaballSystem
 
         protected sealed override void Register()
         {
-            if (!MetaBallManager.MetaBallCollection.Contains(this))
-                MetaBallManager.MetaBallCollection.Add(this);
-
-            Type = MetaBallManager.MetaBallCollection.Count;
-
+            if (!MetaballManager.MetaballList.Contains(this))
+                MetaballManager.MetaballList.Add(this);
+            Type = MetaballManager.MetaballList.Count;
             if (Main.netMode == NetmodeID.Server)
                 return;
 
@@ -70,12 +68,12 @@ namespace HJScarletRework.Core.MetaballSystem
             Main.graphics.GraphicsDevice.Textures[0] = AlphaTexture;
             Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
-            Main.graphics.GraphicsDevice.Textures[1] = BgTexture;
+            Main.graphics.GraphicsDevice.Textures[1] = BackgroundTexture;
             Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointClamp;
 
             Effect shader = HJScarletShader.MetaBallShader;
             shader.Parameters["renderTargetSize"].SetValue(AlphaTexture.Size());
-            shader.Parameters["bakcGroundSize"].SetValue(BgTexture.Size());
+            shader.Parameters["bakcGroundSize"].SetValue(BackgroundTexture.Size());
             shader.Parameters["edgeColor"].SetValue(EdgeColor.ToVector4());
             shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly);
             shader.CurrentTechnique.Passes[0].Apply();

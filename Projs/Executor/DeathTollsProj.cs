@@ -1,6 +1,5 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.ParticleSystem;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
@@ -9,7 +8,7 @@ using Terraria.Audio;
 using Terraria.ID;
 namespace HJScarletRework.Projs.Executor
 {
-    public class DeathTollsProj: ThrownHammerProj
+    public class DeathTollsProj : ThrownHammerProj
     {
         internal ref bool Update => ref Projectile.netUpdate;
         //攻击枚举
@@ -44,14 +43,18 @@ namespace HJScarletRework.Projs.Executor
             Projectile.timeLeft = 300;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 30;
-            Projectile.extraUpdates = 4;
+            Projectile.extraUpdates = 3;
         }
         public override void AI()
         {
-            Projectile.rotation += 0.2f;
+            Projectile.rotation += 0.12f;
             Lighting.AddLight(Projectile.Center, TorchID.Purple);
-            if (!HJScarletMethods.OutOffScreen(Projectile.Center))
-                DrawTrailingDust();
+            DrawTrailingDust();
+            AttackAIHanlder();
+        }
+
+        public void AttackAIHanlder()
+        {
             switch (AttackType)
             {
                 case DoType.IsShooted:
@@ -65,24 +68,11 @@ namespace HJScarletRework.Projs.Executor
                     break;
             }
         }
-        public override void PostAI()
-        {
-            if (Owner.HasProj<DeathTollsMinion>())
-            {
-                Vector2 fireVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero);
-                Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
-                new Fire(Projectile.Center + Main.rand.NextVector2Circular(8,8), fireVelocity * 4.5f, Firecolor, Main.rand.Next(60,90), Main.rand.NextFloat(TwoPi), 1f, Main.rand.NextFloat(0.20f,0.25f)).SpawnToPriorityNonPreMult();
-            }
-        }
+
         private void DoStealth()
         {
             if (Projectile.GetTargetSafe(out NPC target, TargetIndex))
-            {
-                Projectile.extraUpdates = 5;
                 Projectile.HomingTarget(target.Center, 600f, 24f, 20f);
-            }
-            else
-                Projectile.extraUpdates = 4;
 
             //如果超出了玩家屏幕范围，且玩家仍然没有仆从锤，生成仆从锤
             if (Projectile.TooAwayFromOwner(1200f) && !Owner.HasProj<DeathTollsMinion>(out int projID) && Projectile.IsMe())
@@ -99,11 +89,11 @@ namespace HJScarletRework.Projs.Executor
             if (!Projectile.HJScarlet().FirstFrame)
             {
                 //压制音量，这里由仆从锤的射线声作为主导
-                SoundStyle pickSound = Owner.HasProj<DeathTollsMinion>() ? HJScarletSounds.DeathsToll_Toss with { Pitch = 0.4f, Volume = 0.2f, MaxInstances = 0 } : SoundID.Item103;
+                SoundStyle pickSound = HJScarletSounds.GalvanizedHand_Toss with { Pitch = -0.45f, PitchVariance = 0.1f, MaxInstances = 2, Volume = 0.95f };
                 SoundEngine.PlaySound(pickSound, Owner.Center);
             }
             AttackTimer += 1;
-            if (AttackTimer > BoomerangStat.ReturnTime)
+            if (Projectile.MeetMaxUpdatesFrame(AttackTimer, 12))
             {
                 AttackTimer = 0;
                 AttackType = DoType.IsReturning;
@@ -135,7 +125,6 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             SoundEngine.PlaySound(SoundID.Item88, Projectile.Center);
-            target.AddBuff(BuffID.ShadowFlame, 360);
             bool hasMinion = Owner.HasProj<DeathTollsMinion>(out int minionID);
             //普攻
             if (!Stealth)
@@ -143,9 +132,15 @@ namespace HJScarletRework.Projs.Executor
                 //下面这个会扔到一个统一的管理里面。
                 if (!ModProj.IsHitOnEnablFocusMechanicProj && ModProj.HasExecutionMechanic)
                     ModProj.IsHitOnEnablFocusMechanicProj = true;
-
+            
                 if (Projectile.numHits % 2 == 0)
                 {
+                    for (int i = 0; i < 16; i++)
+                        new ShinyCrossStar(target.Center.ToRandCirclePos(7f), RandVelTwoPi(0f, 8f), RandLerpColor(Color.Violet, Color.DarkViolet), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.44f, 0.70f), false).Spawn();
+                    for (int i = 0; i < 8; i++)
+                        new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(6f), 1f, RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.45f, RandRotTwoPi).Spawn();
+                    for (int i = 0; i < 18; i++)
+                        new SmokeParticle(target.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, .81f, 0.21f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
                     int counts = 1 + hasMinion.ToInt();
                     for (int i = 0; i < counts; i++)
                         NightmareArrowDrop(target, Projectile.damage / 2);
@@ -159,7 +154,7 @@ namespace HJScarletRework.Projs.Executor
             if (!hasMinion)
             {
                 Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, minionID, Projectile.damage, Projectile.knockBack, Projectile.owner);
-                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Volume = 0.75f}, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Volume = 0.75f }, Projectile.Center);
             }
             else if (!Owner.HasProj<DeathTollsExecution>(out int projID))
             {
@@ -183,22 +178,21 @@ namespace HJScarletRework.Projs.Executor
             Vector2 srcPos = target.Center + new Vector2(xDist, -yDist);
             //在滞留所有的射弹
             Projectile spark = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), srcPos, Vector2.Zero, ProjectileType<DeathTollsArrow>(), flareDamage, 1.1f, Projectile.owner);
-            spark.ai[2] = target.whoAmI;
-            spark.localAI[0] = xDist;
-            spark.localAI[1] = yDist;
+            if (target.CanBeChasedBy())
+                ((DeathTollsArrow)spark.ModProjectile).CurTarget = target;
         }
-         
+
         private void DrawTrailingDust()
         {
-            if (Stealth && Main.rand.NextBool(2) && AttackType == DoType.IsStealth)
+            if (Projectile.IsOutScreen())
                 return;
-            Vector2 spawnPos = Projectile.Center + Main.rand.NextVector2Circular(11, 11);
-            Color Firecolor = RandLerpColor(Color.Purple, Color.DarkViolet);
-            new TurbulenceGlowOrb(spawnPos, 0.8f, Firecolor, 40, 0.32f, Projectile.velocity.SafeNormalize(Vector2.UnitX).ToRotation()).Spawn();
-            bool drawBlack = Main.rand.NextBool();
-            Color glowColor = drawBlack ? Color.Black : RandLerpColor(Color.Violet, Color.DarkViolet);
-            Vector2 glowDustVelocity = Projectile.velocity.SafeNormalize(Vector2.UnitX).RotatedBy(Main.rand.NextFloat(-PiOver4 / 2f, PiOver4 / 2f))* 4f;
-            new ShinyOrbParticle(spawnPos, glowDustVelocity, glowColor, 40, 0.8f, drawBlack ? BlendStateID.Alpha : BlendStateID.Additive).Spawn();
+
+            if (Projectile.FinalUpdate())
+                new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(32f), Projectile.velocity.ToRandVelocity(0.1f, 2.4f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, 0.65f).Spawn();
+            if (Projectile.FinalUpdateNextBool(3))
+                new EmptyRing(Projectile.Center.ToRandCirclePos(36), Projectile.SafeDir() * Main.rand.NextFloat(0f, 2.1f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, 0.2f, 1, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
+
+
         }
     }
 }

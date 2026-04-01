@@ -69,6 +69,7 @@ Typeless: {
 	// DreamingLightBeam.DisplayName: Dreaming Light Beam
 	// JudgementStarAlt.DisplayName: Judgement Star Alt
 	// JudgementStarNormal.DisplayName: Judgement Star Normal
+	// DeathTollsProj.DisplayName: Death Tolls Proj
 }
 
 Pets: {
@@ -79,71 +80,66 @@ Pets: {
 	WhaleProj.DisplayName: 鲸鱼宠物
 }
 
-Ranged: {
-	AetherfireSmasherFireball.DisplayName: 天炎破-火球
-	AetherfireSmasherExecution.DisplayName: 天炎破-挂载
-	AetherfireSmasherProj.DisplayName: 天炎破
-	AetherfireSmasherVolcano.DisplayName: 天炎破-火山
-	BinaryStarsArrow.DisplayName: 双子星-星云箭矢
-	BinaryStarsProj.DisplayName: 双子星
-	BinaryStarsPhantom.DisplayName: 双子星-幻影
-	BinaryStarsPhantomClone.DisplayName: 双子星-幻影
-	DeathTollsExecution.DisplayName: 死亡丧钟-挂载
-	DeathTollsDarkEnergy.DisplayName: 死亡丧钟-冥思能量
-	DeathTollsMinion.DisplayName: 死亡丧钟-仆从
-	DeathTollsProj.DisplayName: 死亡丧钟
-	DeathTollsArrow.DisplayName: 死亡丧钟-梦魇之星
-	DeathTollsStreak.DisplayName: 死亡丧钟-仆从射线
-	JudgementHeldLock.DisplayName: 神代裁决-挂载
-	JudgementHolyCross.DisplayName: 神代裁决-十字激光
-	JudgementHolyCrossMounted.DisplayName: Judgement Holy Cross Mounted
-	JudgementMainProj.DisplayName: 神代裁决
-	JudgementPunishStar.DisplayName: 神代裁决-神圣新星
-	JudgementPunishStarMounted.DisplayName: Judgement Punish Star Mounted
-	// TheMossHeldLock.DisplayName: The Moss Held Lock
-	// TheMossMainProj.DisplayName: The Moss Main Proj
-}
-
 Executor: {
-	// AetherfireSmasherFireball.DisplayName: AetherfireSmasherFireball
-	// AetherfireSmasherExecution.DisplayName: Aetherfire Smasher Clone
+	// AetherfireSmasherExecution.DisplayName: Aetherfire Smasher Execution
+	// AetherfireSmasherFireball.DisplayName: Aetherfire Smasher Fireball
 	// AetherfireSmasherProj.DisplayName: Aetherfire Smasher Proj
-	// AetherfireSmasherVolcano.DisplayName: Aetherfire Volcano
-	// BinaryStarsExecution.DisplayName: Binary Stars Held Clone
-	// BinaryStarsArrow.DisplayName: Binary Stars Light Arrow
-	// BinaryStarsProj.DisplayName: Binary Stars Main
-	// BlazingStrikerExecution.DisplayName: Blazing Striker Focus Proj
+	// AetherfireSmasherVolcano.DisplayName: Aetherfire Smasher Volcano
+	// BinaryStarsArrow.DisplayName: Binary Stars Arrow
+	// BinaryStarsExecution.DisplayName: Binary Stars Execution
+	// BinaryStarsPhantom.DisplayName: Binary Stars Phantom
+	// BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
+	// BinaryStarsProj.DisplayName: Binary Stars Proj
+	// BlazingStrikerExecution.DisplayName: Blazing Striker Execution
 	// BlazingStrikerProj.DisplayName: Blazing Striker Proj
 	// BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
 	// CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
-	// DeathTollsProj.DisplayName: Death Tolls Main Proj
-	// DungeonBreakerExecution.DisplayName: Dungeon Breaker Focus Proj
+	// DeathTollsArrow.DisplayName: Death Tolls Arrow
+	// DeathTollsDarkEnergy.DisplayName: Death Tolls Dark Energy
+	// DeathTollsExecution.DisplayName: Death Tolls Execution
+	// DeathTollsMinion.DisplayName: Death Tolls Minion
+	// DeathTollsProj.DisplayName: Death Tolls Proj
+	// DeathTollsStreak.DisplayName: Death Tolls Streak
+	// DreamingLightFireball.DisplayName: Dreaming Light Fireball
+	// DreamingLightMinion.DisplayName: Dreaming Light Minion
+	// DreamingLightProj.DisplayName: Dreaming Light Proj
+	// DreamlessNightArrow.DisplayName: Dreamless Night Arrow
+	// DreamlessNightBeam.DisplayName: Dreamless Night Beam
+	// DreamlessNightMinion.DisplayName: Dreamless Night Minion
+	// DreamlessNightProj.DisplayName: Dreamless Night Proj
+	// DungeonBreakerExecution.DisplayName: Dungeon Breaker Execution
 	// DungeonBreakerProj.DisplayName: Dungeon Breaker Proj
 	// DungeonBreakerShockwave.DisplayName: Dungeon Breaker Shockwave
 	// DungeonBreakerWaterbolt.DisplayName: Dungeon Breaker Waterbolt
 	// ExsanguinationBulletProj.DisplayName: Exsanguination Bullet Proj
 	// ExsanguinationHeldProj.DisplayName: Exsanguination Held Proj
-	// FleshGrinderExecution.DisplayName: Flesh Grinder Focus Proj
+	// FleshGrinderExecution.DisplayName: Flesh Grinder Execution
 	// FleshGrinderProj.DisplayName: Flesh Grinder Proj
-	// JudgementMainProj.DisplayName: Judgement Main Proj
-	// JungleMadnessProj.DisplayName: Jungle Madness Proj
-	// DreamlessNightProj.DisplayName: Perferct Night Proj
-	// TheDefilerExecution.DisplayName: The Moss Focus Proj
-	// TheDefilerProj.DisplayName: The Moss Proj
-	// JungleMadnessExecution.DisplayName: Jungle Madness Focus Proj
-	// JungleMadnessLeafs.DisplayName: Jungle Madness Leafs
-	// DreamlessNightBeam.DisplayName: Perfect Night Beam
-	// DreamlessNightMinion.DisplayName: Perfect Night Minion
-	// DreamlessNightArrow.DisplayName: Dreamless Night Arrow
-	// DreamingLightMinion.DisplayName: Dreaming Light Minion
-	// DreamingLightProj.DisplayName: Dreaming Light Proj
-	// JudgementProj.DisplayName: Judgement Proj
-	// ThePunishmentExecution.DisplayName: Punishment Execution
-	// ThePunishmentProj.DisplayName: Punishment Proj
 	// JudgementHolyCross.DisplayName: Judgement Holy Cross
 	// JudgementHolyCrossMounted.DisplayName: Judgement Holy Cross Mounted
 	// JudgementMinion.DisplayName: Judgement Minion
+	// JudgementProj.DisplayName: Judgement Proj
 	// JudgementStarExecution.DisplayName: Judgement Star Execution
 	// JudgementStarExecutionMounted.DisplayName: Judgement Star Execution Mounted
+	// JudgementStarNormal.DisplayName: Judgement Star Normal
+	// JungleMadnessExecution.DisplayName: Jungle Madness Execution
+	// JungleMadnessLeafs.DisplayName: Jungle Madness Leafs
+	// JungleMadnessProj.DisplayName: Jungle Madness Proj
+	// TheDefilerExecution.DisplayName: The Defiler Execution
+	// TheDefilerProj.DisplayName: The Defiler Proj
+	// ThePunishmentExecution.DisplayName: The Punishment Execution
+	// ThePunishmentProj.DisplayName: The Punishment Proj
 	// ThePunishmentStar.DisplayName: The Punishment Star
+	// DreamingLightStriker.DisplayName: Dreaming Light Striker
+	// DreamingLightBeam.DisplayName: Dreaming Light Beam
+	// DeathTollsBell.DisplayName: Death Tolls Bell
+	// CrimsonScytheProj.DisplayName: Crimson Scythe Proj
+}
+
+Ranged: {
+	// ClimaticHawstringArrow.DisplayName: Climatic Hawstring Arrow
+	// ClimaticHawstringBeam.DisplayName: Climatic Hawstring Beam
+	// ClimaticHawstringLaser.DisplayName: Climatic Hawstring Laser
+	// ClimaticHawstringMinion.DisplayName: Climatic Hawstring Minion
+	// ClimaticHawstringProj.DisplayName: Climatic Hawstring Proj
 }

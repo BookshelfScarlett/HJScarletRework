@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Core.Keybinds;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -26,18 +27,15 @@ namespace HJScarletRework.ReVisual.Class
         public override void HoldItem(Item item, Player player)
         {
             //只允许在本地玩家执行
-            if(Main.myPlayer == player.whoAmI)
+            if (Main.myPlayer == player.whoAmI)
             {
                 var vp = player.GetModPlayer<ReVisualPlayer>();
-                if (Main.mouseMiddle)
+                if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
                 {
-                    if (Main.mouseMiddleRelease)
-                    {
-                        SoundEngine.PlaySound(SoundID.ResearchComplete, player.Center);
+                    SoundEngine.PlaySound(SoundID.ResearchComplete, player.Center);
                     for (int i = 0; i < 30; i++)
                         new TurbulenceShinyOrb(player.Center.ToRandCirclePosEdge(30f), 1.2f, Color.White, 120, 0.4f, RandRotTwoPi).Spawn();
-                        ExHoldItem(item, player, vp);
-                    }
+                    ExHoldItem(item, player, vp);
                 }
             }
         }
