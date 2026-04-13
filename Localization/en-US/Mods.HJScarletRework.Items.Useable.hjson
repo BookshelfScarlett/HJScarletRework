@@ -2,3 +2,12 @@ CorePickaxe: {
 	DisplayName: Core Pickaxe
 	Tooltip: ""
 }
+
+TerrariaRecipe: {
+	DisplayName: Terraria Recipe
+	Tooltip: ""
+	Eaten: ""
+	NotEaten: ""
+	Active: ""
+	FoodList: "{0}{1}{2}{3}"
+}

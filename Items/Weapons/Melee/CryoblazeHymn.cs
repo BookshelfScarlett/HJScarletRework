@@ -38,7 +38,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                 CreateRecipe().
                     AddIngredient<FierySpear>().
                     AddIngredient<AzureFrostmark>().
-                    AddRecipeGroup(HJScarletRecipeGroup.AnyMechBossSoul, 15).
+                    AddRecipeGroup(HJScarletRecipeGroup.AnyMechBossSoul).
                     AddTile(TileID.MythrilAnvil).
                     Register();
             }

@@ -77,6 +77,7 @@ namespace HJScarletRework.Projs.Ranged
         {
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             Texture2D starShape = HJScarletTexture.Particle_ShinyOrb.Value;
+            Vector2 projDir = Projectile.velocity.SafeNormalize(Vector2.UnitX);
             Vector2 scale = new Vector2(0.35f, 3.05f) * 0.825f;
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             for (int i  =0;i< 10;i++)
@@ -85,10 +86,10 @@ namespace HJScarletRework.Projs.Ranged
                 Color lerpColor = Color.Lerp(Color.DarkGoldenrod, Color.Goldenrod, ratios) * 0.85f;
                 if (i < 2 || i > 8)
                     scale = new Vector2(0.35f, 2.80f) * 0.825f;
-                SB.Draw(starShape, drawPos - Projectile.SafeDir() * i * 3f, null, lerpColor, Projectile.rotation + PiOver2, starShape.ToOrigin(), Projectile.scale * scale, 0, 0);
+                SB.Draw(starShape, drawPos - projDir * i * 3f, null, lerpColor, Projectile.rotation + PiOver2, starShape.ToOrigin(), Projectile.scale * scale, 0, 0);
                 lerpColor = Color.Lerp(Color.Goldenrod, Color.LightGoldenrodYellow, ratios) * 0.85f;
-                SB.Draw(starShape, drawPos - Projectile.SafeDir() * i * 6f, null, lerpColor * 0.85f, Projectile.rotation + PiOver2, starShape.ToOrigin(), Projectile.scale * scale, 0, 0);
-                SB.Draw(starShape, drawPos - Projectile.SafeDir() * i * 3f, null, Color.White, Projectile.rotation + PiOver2, starShape.ToOrigin(), Projectile.scale * scale * 0.535f, 0, 0);
+                SB.Draw(starShape, drawPos - projDir * i * 6f, null, lerpColor * 0.85f, Projectile.rotation + PiOver2, starShape.ToOrigin(), Projectile.scale * scale, 0, 0);
+                SB.Draw(starShape, drawPos - projDir * i * 3f, null, Color.White, Projectile.rotation + PiOver2, starShape.ToOrigin(), Projectile.scale * scale * 0.535f, 0, 0);
             }
 
 

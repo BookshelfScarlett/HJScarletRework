@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -11,20 +12,24 @@ namespace HJScarletRework.Items.Accessories
     {
         public int MinionSlots = 2;
         public override string AssetPath => AssetHandler.Equips;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs("10%", MinionSlots);
-        public override void SetDefaults()
+        public override void ExSD()
         {
             Item.width = Item.height = 60;
             Item.accessory = true;
-            Item.rare = ItemRarityID.Purple;
+            Item.SetUpRarityPrice(ItemRarityID.Red);
 
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetDamage<SummonDamageClass>() += 0.1f;
-            player.maxMinions += MinionSlots;
-            player.dashType = 1;
-            player.blackBelt = true;
+            player.HJScarlet().stardustRune = true;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.CrossNecklace).
+                AddIngredient(ItemID.FragmentStardust, 20).
+                AddTile(TileID.LunarCraftingStation).
+                Register();
         }
     }
 }

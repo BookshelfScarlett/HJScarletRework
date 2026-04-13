@@ -111,8 +111,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Projectile.Kill();
                     Update = true;
-                    if (ModProj.IsHitOnEnablFocusMechanicProj)
-                        ModPlayer.ExecutionTime += 1;
+                    Projectile.AddExecutionTime(ItemType<DeathTolls>());
                 }
                 else
                 {
@@ -130,8 +129,6 @@ namespace HJScarletRework.Projs.Executor
             if (!Stealth)
             {
                 //下面这个会扔到一个统一的管理里面。
-                if (!ModProj.IsHitOnEnablFocusMechanicProj && ModProj.HasExecutionMechanic)
-                    ModProj.IsHitOnEnablFocusMechanicProj = true;
             
                 if (Projectile.numHits % 2 == 0)
                 {
@@ -141,11 +138,12 @@ namespace HJScarletRework.Projs.Executor
                         new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(6f), 1f, RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.45f, RandRotTwoPi).Spawn();
                     for (int i = 0; i < 18; i++)
                         new SmokeParticle(target.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, .81f, 0.21f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
+                }
+            }
                     int counts = 1 + hasMinion.ToInt();
                     for (int i = 0; i < counts; i++)
                         NightmareArrowDrop(target, Projectile.damage / 2);
-                }
-            }
+
             if (AttackType != DoType.IsStealth)
                 return;
 

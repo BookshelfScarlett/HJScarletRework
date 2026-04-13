@@ -39,19 +39,6 @@ namespace HJScarletRework.Assets.Registers
             }
         }
     }
-    internal class HJScarletBuffIcon : ModSystem
-    {
-        internal static string BuffPath = "HJScarletRework/Assets/Texture/Buffs";
-        internal static Tex2DWithPath Buff_RewardsofWarrior { get; private set; }
-        public override void Load()
-        {
-            Buff_RewardsofWarrior = new Tex2DWithPath($"{BuffPath}/{nameof(Buff_RewardsofWarrior)}");
-        }
-        public override void Unload()
-        {
-            Buff_RewardsofWarrior = null;
-        }
-    }
     internal class HJScarletItemProj : ModSystem
     {
         internal static string ItemPath = "HJScarletRework/Assets/Texture/Items";

@@ -41,10 +41,13 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             Projectile.rotation += ToRadians(20f);
-            Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(30, 30), DustID.GrassBlades);
+            Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(10, 10), DustID.GrassBlades);
             d.scale *= Main.rand.NextFloat(1.1f, 1.3f);
             d.velocity = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(1.2f, 1.8f);
             d.noGravity = true;
+                Dust d2 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.JungleGrass);
+                d2.scale = Main.rand.NextFloat(0.8f, 1.15f);
+                d2.noGravity = true;
             if (AttackType == Style.Attack)
             {
                 Timer++;

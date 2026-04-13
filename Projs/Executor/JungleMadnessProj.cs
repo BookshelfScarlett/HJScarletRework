@@ -75,8 +75,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 18, 20);
             if (Projectile.IntersectOwnerByDistance(40))
             {
-                if (Projectile.HJScarlet().AddFocusHit)
-                    Owner.HJScarlet().ExecutionTime += 1;
+                Projectile.AddExecutionTime(ItemType<JungleMadness>());
                 if (Projectile.HJScarlet().ExecutionStrike)
                     SpawnFocus();
                 Projectile.Kill();

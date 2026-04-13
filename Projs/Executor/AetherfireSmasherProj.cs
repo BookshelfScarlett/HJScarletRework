@@ -83,8 +83,6 @@ namespace HJScarletRework.Projs.Executor
         //终 极 史 山
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (!Stealth && !ModProj.IsHitOnEnablFocusMechanicProj && ModProj.HasExecutionMechanic)
-                ModProj.IsHitOnEnablFocusMechanicProj = true;
             target.AddBuff(BuffID.Daybreak, 500);
             //攻击的敌怪传入
             SoundEngine.PlaySound(SoundID.Item89 with { MaxInstances = 0, Pitch = 0.8f }, Projectile.Center);
@@ -126,8 +124,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Projectile.Kill();
                     Update = true;
-                    if (ModProj.IsHitOnEnablFocusMechanicProj)
-                        ModPlayer.ExecutionTime += 1;
+                    Projectile.AddExecutionTime(ItemType<AetherfireSmasher>());
                     return;
                 }
                 else

@@ -18,6 +18,7 @@ namespace HJScarletRework.Projs.Executor
         public override string Texture => GetInstance<Exsanguination>().Texture;
         public int ExecutionTime = GetInstance<Exsanguination>().ExecutionTime;
         public ref float Timer => ref Projectile.ai[0];
+        public int BuffTime = 0;
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.NeedsUUID[Projectile.type] = true;
@@ -49,20 +50,39 @@ namespace HJScarletRework.Projs.Executor
         private void UpdateAttack()
         {
             Projectile.timeLeft = 2;
+            ref int buffTimer = ref Owner.HJScarlet().exsanguinationBuffTime;
             Timer++;
             if (Timer % 2f == 0)
-                SoundEngine.PlaySound(HJScarletSounds.Light_Fire, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Light_Fire with { Volume = 0.45f}, Projectile.Center);
             if (Timer % 1f == 0)
             {
                 for (int i = -1; i < 2; i += 2)
                 {
                     Vector2 safedir = Projectile.rotation.ToRotationVector2();
                     Vector2 shootPos = Projectile.Center + safedir * 60f - (safedir.RotatedBy(PiOver2) * 5f * Projectile.direction);
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), shootPos + safedir.RotatedBy(PiOver2 * i) * 7f * Main.rand.NextFloat(), safedir * 10f, ProjectileType<ExsanguinationBulletProj>(), Projectile.damage, Projectile.knockBack);
+                    if(Owner.HJScarlet().ExecutionListStored.TryGetValue(ItemType<Exsanguination>(), out int value))
+                    {
+                        if (value > ExecutionTime)
+                        {
+                            buffTimer = GetSeconds(30);
+                            Owner.RemoveSlot(ItemType<Exsanguination>());
+                            SoundEngine.PlaySound(HJScarletSounds.Light_CrackedShield with { MaxInstances = 0 }, Owner.Center);
+                        }
+                    }
+                    int damage = Projectile.damage;
+                    if (buffTimer!= 0)
+                        damage *= 100;
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), shootPos + safedir.RotatedBy(PiOver2 * i) * 7f * Main.rand.NextFloat(), safedir * 10f, ProjectileType<ExsanguinationBulletProj>(), damage, Projectile.knockBack);
+                    proj.HJScarlet().HasExecutionMechanic = BuffTime == 0;
                 }
             }
+            if (buffTimer> 0)
+                buffTimer--;
         }
-
+        public static void RemoveSlot(Player player, int curItemType)
+        {
+            player.HJScarlet().ExecutionListStored.Remove(curItemType);
+        }
         private void UpdateHeldAnimation()
         {
             //震动这把枪。

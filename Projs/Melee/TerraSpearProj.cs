@@ -1,11 +1,14 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Graphics.Particles;
+using HJScarletRework.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -17,7 +20,7 @@ namespace HJScarletRework.Projs.Melee
         public override string Texture => ProjPath + $"Proj_{nameof(TerraSpear)}";
         public override void ExSSD()
         {
-            Projectile.ToTrailSetting(20, 2);
+            Projectile.ToTrailSetting(36, 2);
         }
         public enum State
         {
@@ -34,26 +37,30 @@ namespace HJScarletRework.Projs.Melee
         public List<Vector2> TrailPosList = [];
         public List<float> TrailRotList = [];
         public float TotalTrailCounts = 36;
-        public int TotalSpawnTime = 3;
+        public int TotalSpawnTime = 4;
         public int CurSpawnTime = 0;
         public bool GoSpawn = false;
         public int ArrowSpawnTime = 0;
+        public NPC CurTarget = null;
+        public int ProjDamage = 0;
         public ref float Timer => ref Projectile.ai[0];
         public override void ExSD()
         {
-            Projectile.width = Projectile.height = 16;
+            //必须得大几圈
+            Projectile.width = Projectile.height = 100;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 30;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            Projectile.penetrate = 2;
-            Projectile.extraUpdates = 5;
+            Projectile.penetrate = 1;
+            Projectile.extraUpdates =6;
             Projectile.ownerHitCheck = true;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.timeLeft = 150;
         }
         public override void FirstFrameAI()
         {
+            Projectile.originalDamage = Projectile.damage;
             InitPosList();
             SpawnParticles();
         }
@@ -105,14 +112,28 @@ namespace HJScarletRework.Projs.Melee
         private void UpdateProjAttack()
         {
             Timer++;
-            if (Timer % 16f == 0 && AttackType == State.Striker)
-                SpawnArrow();
             Projectile.rotation = Projectile.velocity.ToRotation();
-            if (Projectile.penetrate == -1 && Projectile.damage == 0)
+            if (AttackType == State.Skyfallen)
+            {
+                
+                if(Projectile.GetTargetSafe(out NPC target, false, canPassWall:true) && Projectile.numHits < 1)
+                {
+                    Projectile.HomingTarget(target.Center, -1, 22f, 5f, 10f);
+                }
+            }
+            else
+            {
+                if (Projectile.TooAwayFromOwner())
+                    Projectile.Kill();
+            }
+            if (Projectile.penetrate == -1 && Projectile.damage == 0 && AttackType == State.Skyfallen)
             {
                 DisapperAI();
                 return;
             }
+            if (Timer % 16f == 0 && AttackType == State.Striker)
+                SpawnArrow();
+
 
         }
 
@@ -146,7 +167,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 vel = -Projectile.velocity.ToSafeNormalize().RotatedBy(ToRadians(10 * i)) * 40f * Main.rand.NextFloat(0.8f, 1.4f);
                 Vector2 pos = Projectile.Center - Projectile.SafeDir() * 20f;
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, ProjectileType<TerraSpearPortal>(), Projectile.damage / 2, 1, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, ProjectileType<TerraSpearPortal>(), Projectile.originalDamage / 2, 1, Owner.whoAmI);
                 ((TerraSpearPortal)proj.ModProjectile).PortalType = TerraSpearPortal.State.InitSpawnState;
             }
             ArrowSpawnTime += 1;
@@ -195,19 +216,23 @@ namespace HJScarletRework.Projs.Melee
             {
                 float randRot = RandRotTwoPi;
                 Vector2 spawnProjPos = target.Center - Vector2.UnitX.RotatedBy(randRot + (ToRadians(10 * CurSpawnTime))) * Main.rand.NextFloat(1000f, 1300f);
-                Vector2 dir = HJScarletMethods.PredictAimToTarget(spawnProjPos, target.Center, target.velocity, 22f);
+                Vector2 dir = HJScarletMethods.PredictAimToTarget(spawnProjPos, target.Center, target.velocity, 22f, 0);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnProjPos, dir, Type, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 ((TerraSpearProj)proj.ModProjectile).AttackType = State.Skyfallen;
+                    proj.penetrate = 4;
+                proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                 if (AttackType == State.Skyfallen)
                 {
                     ((TerraSpearProj)proj.ModProjectile).CurSpawnTime = CurSpawnTime + 1;
-                    proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
-                    proj.penetrate = 4;
                 }
                 else
                     proj.ai[2] = randRot;
             }
 
+        }
+        public override bool? CanHitNPC(NPC target)
+        {
+                return null;
         }
         private void SpawnDirectionParticle()
         {
@@ -246,10 +271,45 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             float rotFixer = PiOver4;
-            DrawStarShapeTrail();
+            //DrawStarShapeTrail();
+            SB.EnterShaderArea();
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DarkGreen, 1.26f, 1f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.GreenYellow, 0.8f, 1f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.58f);
+            SB.EndShaderArea();
             Vector2 drawOffset = Projectile.SafeDirByRot() * 100f;
+            
+
             SB.Draw(projTex, drawPos - drawOffset, null, Color.White * Projectile.Opacity, Projectile.rotation + rotFixer, ori, Projectile.scale, 0, 0);
             return false;
+        }
+        public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
+        {
+            float laserLength = 50;
+            HJScarletShader.TerrarRayLaser.Parameters["LaserTextureSize"].SetValue(useTex.Size());
+            HJScarletShader.TerrarRayLaser.Parameters["targetSize"].SetValue(new Vector2(laserLength, useTex.Height()));
+            HJScarletShader.TerrarRayLaser.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -5.2f);
+            HJScarletShader.TerrarRayLaser.Parameters["uColor"].SetValue(drawColor.ToVector4() * alphaValue);
+            HJScarletShader.TerrarRayLaser.Parameters["uFadeoutLength"].SetValue(0.8f);
+            HJScarletShader.TerrarRayLaser.Parameters["uFadeinLength"].SetValue(0.1f);
+            HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();
+            HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();
+            if (Projectile.oldPos.Length < 3)
+                return;
+            //做掉可能存在的零向量
+            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> validRot, Projectile.oldPos, Projectile.oldRot);
+            DrawSetting drawSetting = new DrawSetting(useTex.Value, true, false);
+            Vector2 drawOffset = Projectile.SafeDirByRot() * 50f;
+            List<TrailDrawDate> trailDrawDates = [];
+            int posCount = validPosition.Count;
+            for (int j = 0; j < posCount - 1; j++)
+            {
+                float rot = (validPosition[j + 1] - validPosition[j]).ToRotation();
+                float ratio = j / (posCount - 1);
+                Vector2 posOffset = rot.ToRotationVector2().RotatedBy(PiOver2) * offsetHeight;
+                trailDrawDates.Add(new(validPosition[j] + Projectile.Size / 2 + posOffset - drawOffset , drawColor, new Vector2(0, 20 * multipleSize * Projectile.scale), rot));
+            }
+            TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
         }
         public void DrawStarShapeTrail()
         {

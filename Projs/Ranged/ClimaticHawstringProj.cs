@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
@@ -8,7 +7,6 @@ using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -16,12 +14,10 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Ranged
 {
-    public class ClimaticHawstringProj : HJScarletProj, IPixelatedRenderer
+    public class ClimaticHawstringProj : HJScarletProj
     {
         public override ClassCategory Category => ClassCategory.Ranged;
         public override string Texture => GetInstance<ClimaticHawstring>().Texture;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
-        public BlendState BlendState => BlendState.Additive;
         public AnimationStruct Helper = new(2);
 
         public override void SetStaticDefaults()
@@ -36,11 +32,14 @@ namespace HJScarletRework.Projs.Ranged
         {
             Projectile.width = 28;
             Projectile.height = 60;
-            Projectile.SetupImmnuity(-1);
-            Projectile.SetUpHeldProj();
-        }
-        public override void OnKill(int timeLeft)
-        {
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.penetrate = -1;
+            Projectile.extraUpdates = 0;
+            Projectile.noEnchantmentVisuals = true;
+            Projectile.timeLeft = 10000;
+
         }
         public override bool ShouldUpdatePosition() => false;
         public override bool? CanDamage() => false;
@@ -93,9 +92,7 @@ namespace HJScarletRework.Projs.Ranged
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos + dir * 17f, dir * 12f, ProjectileType<ClimaticHawstringArrow>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 proj.rotation = dir.ToRotation();
                 for (int j = 0; j < 16; j++)
-                {
                     new StarShape(pos.ToRandCirclePos(4f) + dir * 17f, dir * Main.rand.NextFloat(0.1f, 6.2f), RandLerpColor(Color.Goldenrod, Color.DarkGoldenrod), Main.rand.NextFloat(0.35f, 0.45f) * 1.2f, 40).Spawn();
-                }
                 new ShinyCrossStar(pos + dir * 17f, Vector2.Zero, RandLerpColor(Color.DarkGoldenrod, Color.Goldenrod), 40, 0, 1, 1.2f, false).Spawn();
             }
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_Hit with { MaxInstances = 0 }, Owner.Center);
@@ -120,14 +117,15 @@ namespace HJScarletRework.Projs.Ranged
             if (!Owner.HasProj<ClimaticHawstringMinion>(out int projID))
             {
                 SoundEngine.PlaySound(SoundID.Item44 with { MaxInstances = 0 }, Owner.Center);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.MountedCenter + Vector2.UnitX * 500f - Vector2.UnitY * 1000f, Vector2.Zero, projID, Projectile.damage, 0f, Owner.whoAmI);
-                proj.rotation = (-Vector2.UnitX).ToRotation();
-                ((ClimaticHawstringMinion)proj.ModProjectile).Reverse = true;
-                proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.MountedCenter- Vector2.UnitX * 500f - Vector2.UnitY * 1000f, Vector2.Zero, projID, Projectile.damage, 0f, Owner.whoAmI);
-                proj.rotation = (-Vector2.UnitX).ToRotation();
-                ((ClimaticHawstringMinion)proj.ModProjectile).Reverse = false;
+                SpawnProj(1);
+                SpawnProj(-1);
             }
-
+            void SpawnProj(int reverse)
+            {
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.MountedCenter + Vector2.UnitX * 500f * reverse - Vector2.UnitY * 1000f, Vector2.Zero, ProjectileType<ClimaticHawstringMinion>(), Projectile.damage, 1f, Owner.whoAmI);
+                proj.rotation = (-Vector2.UnitX).ToRotation();
+                ((ClimaticHawstringMinion)proj.ModProjectile).Reverse = reverse > 0;
+            }
             UpdateAttackAI();
             UpdateBowStatement();
             UpdatePlayerState();
@@ -163,32 +161,7 @@ namespace HJScarletRework.Projs.Ranged
                 SB.Draw(tex, drawPos + offset.RotatedBy(drawRot) + ToRadians(60 * i).ToRotationVector2() * 2f, null, edgeColor, drawRot, rotationPoint, Projectile.scale, flipSprite, default);
             }
             SB.Draw(tex, drawPos + offset.RotatedBy(drawRot), null, lightColor, drawRot, rotationPoint, Projectile.scale, flipSprite, default);
-
             return false;
         }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            //overWiresUI.Add(index);
-        }
-        public void RenderPixelated(SpriteBatch sb)
-        {
-            //HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
-            ////这里的放缩会被lerp进行一次总控。
-            //float GeneralProgress = (float)Timer / GetUseTime;
-            //Vector2 dynamicBackgroundScale = Vector2.Lerp(Vector2.Zero, new Vector2(1.0f, 1.0f), GeneralProgress) * Projectile.scale * 0.55f;
-            //Vector2 dynamicBloomScale = Vector2.Lerp(Vector2.Zero, new Vector2(0.5f, 0.5f), GeneralProgress) * Projectile.scale *.55f;
-            //float ringScale = Lerp(0, 1.28f, GeneralProgress) * Projectile.scale;
-            //Texture2D tex = HJScarletTexture.Particle_HRStar.Value;
-            //Texture2D ring = HJScarletTexture.Particle_Ring.Value;
-            //Vector2 ori = tex.Size() / 2;
-            //Vector2 offset = Projectile.SafeDir() * 20f - Main.screenPosition;
-            ////最后我们实际绘制他。
-            //sb.Draw(tex, Projectile.Center + offset + Projectile.SafeDir().RotatedBy(PiOver2) * 15f, null, Color.Gold, Projectile.rotation + PiOver4, ori, dynamicBackgroundScale, SpriteEffects.None, 0.1f);
-            //sb.Draw(tex, Projectile.Center + offset + Projectile.SafeDir().RotatedBy(PiOver2) * 15f, null, Color.White, Projectile.rotation + PiOver4, ori, dynamicBloomScale, SpriteEffects.None, 0.1f);
-            //HJScarletMethods.EndShaderAreaPixel();
-
-
-        }
-
     }
 }

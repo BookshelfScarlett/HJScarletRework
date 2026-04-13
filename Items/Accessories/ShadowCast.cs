@@ -9,7 +9,7 @@ namespace HJScarletRework.Items.Accessories
     public class ShadowCast : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
-        public override void SetDefaults()
+        public override void ExSD()
         {
             Item.width = Item.height = 24;
             Item.accessory = true;

@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Projectiles;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
@@ -31,6 +32,7 @@ namespace HJScarletRework.Projs.Melee
             get => (Style)Projectile.ai[1];
             set => Projectile.ai[1] = (float)value;
         }
+        public float HomingDistance = 400f;
         public ref float SpriteRotation => ref Projectile.localAI[0];
         public int SourceDamage => Projectile.originalDamage;
         public override void ExSD()
@@ -87,10 +89,10 @@ namespace HJScarletRework.Projs.Melee
             Vector2 spawnPos = Projectile.Center;
             Vector2 offset = dir * Main.rand.NextFloat(4.5f) + dir.RotatedBy(PiOver2 * Main.rand.NextBool().ToDirectionInt()) * Main.rand.NextFloat(4.4f);
             Vector2 vel = dir * Main.rand.NextFloat(1.2f, 1.4f);
-            new ShinyOrbParticle(spawnPos + offset, vel, RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.3f).Spawn();
+            new ShinyOrbParticle(spawnPos + offset - vel, vel, RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.3f).Spawn();
 
             //用这个Timer发射laser，这里只会一次发射两个
-            if (Projectile.GetTargetSafe(out NPC target))
+            if (Projectile.GetTargetSafe(out NPC target, searchDistance:HomingDistance))
                 Projectile.HomingTarget(target.Center, -1f, 15f, 30f);
             else
                 Projectile.Kill();

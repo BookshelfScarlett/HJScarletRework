@@ -1,8 +1,8 @@
-﻿using ContinentOfJourney;
-using HJScarletRework.Buffs;
-using HJScarletRework.Items.Weapons.Executor;
+﻿using HJScarletRework.Buffs;
+using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -32,23 +32,33 @@ namespace HJScarletRework.Globals.Players
         public int ownerMinionHammerCount = 0;
 
         public int climaticHawstringLaserCounter = 0;
+        #region 护甲
+        public bool runeWizardExecutor = false;
+        public bool cowboyExecutor = false;
+        public int cowboyRevolverTimer = 0;
 
+        public bool floretProtectorExecutor = false;
+        public int floretProtectorTimer = 0;
+        public bool raincoatExecutor = false;
+        public bool redDragonKnight = false;
+
+        #endregion
         #region Accessories
+        public bool heartoftheCrystal = false;
+        public bool loveRing = false;
+        public bool isBeingLove = false;
+        public int genderChangeTimer = 0;
 
         public bool ShadowCastAcc = false;
         public bool LifeBalloonAcc = false;
         public int LifeBalloonAccJumps;
-        public bool Player_RewardofWarrior = false;
-        public bool Player_RewardofKingdom = false;
-        public int RewardofWarriorHitCD = 0;
-        public int RewardofWarriorCounter  = 0;
-        public int KingdomDefenseTime = 0;
-        public int RewardLevel = 0;
-        public bool DesterrennachtAcc = false;
-        public bool DesterrannachtImmortal = false;
-        public int DesterranImmortalTime = 0;
-        public int DesterranHeal = 0;
-        public int DesterranTimer = 0;
+
+        public bool stardustRune = false;
+        public bool desterrennacht = false;
+        public int stardustRuneHitHealTimer = 0;
+        public int stardustRuneStaticHealTimer = 0;
+        public int desterrannachtImmortalTime = 0;
+        public int desterranRespawnChargeTimer = 0;
 
         public bool PreciousTargetAcc = false;
         public bool PreciousAimAcc = false;
@@ -58,6 +68,11 @@ namespace HJScarletRework.Globals.Players
 
         public bool defenderEmblem = false;
         public int defenderEmblemCD = 0;
+        public int blackKeyHeal = 0;
+        public float blackKeyDefenseBuff = 0;
+        public int blackKeyTimer = 0;
+        public bool blackKeyDoT = false;
+        public int blackKeyReduceDefense = 0;
         #endregion
 
         #region Pets
@@ -68,107 +83,70 @@ namespace HJScarletRework.Globals.Players
         public bool WatcherPet = false;
         #endregion
 
-        #region 专注攻击
+        #region 处刑攻击
+        public bool tacticalExecution = false;
+        public int tacticalTime = 0;
+        public bool executorAscension = false;
+        public int tacticalPunishTime = 0;
         public int ExecutionTime = 0;
-        public int cacheFocusWeapon = -1;
+        public int bonusExecutionReduce = 0;
+        public Dictionary<int, int> ExecutionListStored = new Dictionary<int, int>();
+        public bool StopExecutionInit = false;
+
+        //用于hud绘制的计时器
+        public int Executor_AFKTimer = 0;
+        public float Executor_BarOpacity = 0;
+        public bool Executor_DrawFadeIn = false;
+        public bool Executor_DrawFadeOut = false;
+
+        public int exsanguinationBuffTime = 0;
+
         #endregion
+        public bool terraRecipe = false;
+        public int terraRecipe_EatenFoods = 0;
+        public int terraRecipe_LifeMaxMultTime = 0;
+        public int terraRecipe_LifeMaxIncre = 20;
+        public List<int> terraRecipe_CurEat = new List<int>();
+        public List<int> terraRecipe_haventEat = new List<int>();
         public override void ResetEffects()
         {
             climaticHawstringLaserCounter *= (Player.HeldItem.type == ItemType<ClimaticHawstring>()).ToInt();
-
             CreationHatSet = false;
             ShadowCastAcc = false;
             LifeBalloonAcc = false;
-            GeneralCrtiDamageAdd = 0;
-            UnloadAcc();
-            UnloadPets();
-
-            //专注攻击：当前武器与上一把缓存的武器不同时，清除原本的专注攻击效果
-            if(cacheFocusWeapon == -1 || Player.HeldItem.type != cacheFocusWeapon)
-            {
-                ExecutionTime = 0;
-                cacheFocusWeapon = Player.HeldItem.type;
-            }    
+            critDamageAll = 0;
+            critDamageExecutor = 0;
+            bonusExecutionReduce = 0;
+            ResetAcc();
+            ResetPets();
+            ResetArmor();
         }
-
-
         public override void UpdateDead()
         {
             ExecutionTime = 0;
-            cacheFocusWeapon = -1;
             flybackhandBuffTime = 0;
             flybackhandCloclCD = 0;
             flybackhandBuffTimeCurrent = 0;
-            DesterranHeal = 0;
             PreciousTargetCrtis = 10;
             LifeBalloonAcc = false;
             galvanizedHandDashCD = 0;
             climaticHawstringLaserCounter = 0 ;
 
-            DesterrannachtImmortal = false;
-            DesterranImmortalTime = 0;
-            DesterranTimer = 0;
+            desterrannachtImmortalTime = 0;
+            desterranRespawnChargeTimer = 0;
+            stardustRuneHitHealTimer = 0;
             defenderEmblemCD = 0;
-            UnloadAcc();
-            UnloadPets();
-        }
-        private void UnloadAcc()
-        {
-            PreciousTargetAcc = false;
-            PreciousAimAcc = false;
-            PreciousCritsMin = 0;
-            DesterrennachtAcc = false;
-            fakeManaContainer = 0;
-            defenderEmblem = false;
-        }
+            exsanguinationBuffTime = 0;
+            tacticalTime = 0;
+            tacticalPunishTime = 0;
+            blackKeyTimer = 0;
+            ResetAcc();
+            ResetPets();
+            ResetArmor();
 
-        private void UnloadPets()
-        {
-            WhalePet = false;
-            NonePet = false;
-            ShadowPet = false;
-            SquidPet = false;
-            WatcherPet = false;
+            cowboyRevolverTimer = 0;
+            floretProtectorTimer = 0;
         }
-
-        public override void ModifyWeaponCrit(Item item, ref float crit)
-        {
-            //确保武器起码有伤害
-            if (PreciousTargetAcc && item.damage > 0)
-            {
-                crit = PreciousTargetCrtis;
-                int limitedCrit = PreciousAimAcc ? 125 : 115;
-                if (PreciousTargetCrtis > limitedCrit)
-                    PreciousTargetCrtis = limitedCrit;
-            }
-        }
-        public override bool OnPickup(Item item)
-        {
-            return base.OnPickup(item);
-        }
-        /// <summary>
-        /// 梦魇锤投掷微光转为弑神锤的引导
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public bool StopGodHammerShimemrGuide(Item item)
-        {
-            bool downedAnyGods = DownedBossSystem.downedMatterGod || DownedBossSystem.downedLifeGod || DownedBossSystem.downedTimeGod;
-            if (item.type == ItemType<BinaryStars>() && downedAnyGods)
-            {
-                NoGuideForBinaryStars = true;
-                return true;
-            }
-            /*
-            if (item.type == ItemType<ThunderHammer>() && DownedBossSystem.downedCalamitas && DownedBossSystem.downedExoMechs)
-            {
-                CanDisableGuideForGrandHammer = true;
-                return true;
-            }
-            */
-            return false;
-        }
-
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
             if (Player.HasBuff<HoneyRegenAlt>())
@@ -176,11 +154,26 @@ namespace HJScarletRework.Globals.Players
                 Player owner = drawInfo.drawPlayer;
                 if (Main.rand.NextBool(3))
                 {
-                    Dust d = Dust.NewDustDirect(drawInfo.Position, owner.width + 4, owner.height + 4, Main.rand.NextBool() ? DustID.Honey : DustID.Honey2);
-                    d.velocity = new Vector2(Player.velocity.X * 0.4f, Player.velocity.Y * 0.4f);
-                    d.alpha = 100;
-                    d.scale *= 1f;
+                    int d = Dust.NewDust(drawInfo.Position, owner.width + 4, owner.height + 4, Main.rand.NextBool() ? DustID.Honey : DustID.Honey2);
+                    Main.dust[d].velocity = new Vector2(Player.velocity.X * 0.4f, Player.velocity.Y * 0.4f);
+                    Main.dust[d].alpha = 100;
+                    Main.dust[d].scale *= 1f;
+                    drawInfo.DustCache.Add(d);
                 }
+            }
+            if (isBeingLove)
+            {
+                DrawLoveRingParticle(drawInfo.Position, drawInfo.drawPlayer);
+            }
+        }
+
+        public void DrawLoveRingParticle(Vector2 position, Player drawPlayer)
+        {
+            if (Main.rand.NextBool(12))
+            {
+                Rectangle rec = Utils.CenteredRectangle(drawPlayer.Center, new Vector2(drawPlayer.width, drawPlayer.height));
+                Vector2 pos = Main.rand.NextVector2FromRectangle(rec) + Vector2.UnitY * 20f + Vector2.UnitX * Main.rand.NextFloat(10f, 20f) * Main.rand.NextBool().ToDirectionInt();
+                new HeartParticle(pos, Vector2.UnitY * -Main.rand.NextFloat(0.51f, 2.3f), RandLerpColor(Color.Crimson, Color.HotPink), 40, 0.08f, 0.8f, fadeIn: true).Spawn();
             }
         }
     }

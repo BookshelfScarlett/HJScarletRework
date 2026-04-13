@@ -45,7 +45,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.friendly = true;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
-            Projectile.penetrate = 3;
+            Projectile.penetrate = 8;
             Projectile.extraUpdates = 10;
             Projectile.DamageType = DamageClass.MeleeNoSpeed;
             Projectile.timeLeft = 700;

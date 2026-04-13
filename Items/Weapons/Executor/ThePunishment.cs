@@ -16,14 +16,13 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public override float ExecutionStrikeDamageMult => 1f;
         public override int ExecutionTime => 40;
-        public override string Texture => GetVanillaAssetPath(Globals.Enums.VanillaAsset.Item, ItemID.Pwnhammer);
         public override void ExSD()
         {
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
             Item.shoot = ProjectileType<ThePunishmentProj>();
             Item.knockBack = 8f;
-            Item.width = Item.height = 58;
+            Item.width = Item.height = 44;
             Item.damage = 50;
             Item.useTime = 13;
             Item.useAnimation = 13;
@@ -55,13 +54,26 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override void AddRecipes()
         {
-            CreateRecipe().
-                AddIngredient(ItemID.Pwnhammer).
-                AddRecipeGroup(HJScarletRecipeGroup.AnyMechBossSoul, 5).
-                AddIngredient(ItemID.Diamond, 5).
-                AddIngredient(ItemID.Amethyst, 5).
-                AddTile(TileID.MythrilAnvil).
-                Register();
+            if (HJScarletMethods.HasFuckingCalamity)
+            {
+                CreateRecipe().
+                    AddIngredient(ItemID.Pwnhammer).
+                    AddRecipeGroup(HJScarletRecipeGroup.AnyMechBossSoul, 5).
+                    AddIngredient(ItemID.Diamond, 5).
+                    AddIngredient(ItemID.Amethyst, 5).
+                    AddTile(TileID.MythrilAnvil).
+                    Register();
+            }
+            else
+            {
+                CreateRecipe().
+                        AddIngredient(ItemID.Pwnhammer).
+                        AddIngredient(ItemID.HallowedBar, 5).
+                        AddIngredient(ItemID.Diamond, 5).
+                        AddIngredient(ItemID.Amethyst, 5).
+                        AddTile(TileID.MythrilAnvil).
+                        Register();
+            }
         }
     }
 }

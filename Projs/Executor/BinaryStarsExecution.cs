@@ -46,7 +46,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.localNPCHitCooldown = 15;
             Projectile.extraUpdates = 6;
             Projectile.penetrate = -1;
-            Projectile.DamageType = DamageClass.Ranged;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
         }

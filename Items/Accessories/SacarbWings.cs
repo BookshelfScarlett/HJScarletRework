@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -17,11 +18,11 @@ namespace HJScarletRework.Items.Accessories
             base.SetStaticDefaults();
         }
 
-        public override void SetDefaults()
+        public override void ExSD()
         {
             Item.width = 40;
             Item.height = 50;
-            Item.rare = ItemRarityID.Red;
+            Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.accessory = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)

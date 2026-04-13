@@ -34,9 +34,6 @@ namespace HJScarletRework.Projs.Ranged
             Projectile.ignoreWater = true;
             Projectile.noEnchantmentVisuals = true;
         }
-        public override void OnFirstFrame()
-        {
-        }
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
@@ -44,14 +41,6 @@ namespace HJScarletRework.Projs.Ranged
                 return;
             if (Main.rand.NextFloat() < Projectile.scale && Projectile.FinalUpdateNextBool(3))
                 new ShinyOrbParticle(Projectile.Center.ToRandCirclePosEdge(6f), Projectile.velocity / 6f, RandLerpColor(Color.Goldenrod, Color.PaleGoldenrod), 40, Main.rand.NextFloat(0.24f, 0.35f) * Projectile.scale).Spawn();
-        }
-        public override bool? CanDamage()
-        {
-            return base.CanDamage();
-        }
-        public override bool? CanHitNPC(NPC target)
-        {
-            return base.CanHitNPC(target);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -107,9 +96,7 @@ namespace HJScarletRework.Projs.Ranged
             DrawTrails(HJScarletTexture.Trail_ManaMegaBeam.Texture, Color.DarkGoldenrod, 1.26f, 1f);
             DrawTrails(HJScarletTexture.Trail_ManaMegaBeam.Texture, Color.Goldenrod, 0.8f, 1f);
             DrawTrails(HJScarletTexture.Trail_MegaBeam.Texture, Color.White, 0.58f);
-
-            HJScarletMethods.EndShaderArea();
-
+            HJScarletMethods.EndShaderAreaPixel();
         }
         public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
         {
@@ -141,7 +128,8 @@ namespace HJScarletRework.Projs.Ranged
 
         public void DrawTrail()
         {
-            Vector2 drawPos = Projectile.Center - Main.screenPosition + Projectile.SafeDir() * 10f;
+            Vector2 projDir = Projectile.velocity.SafeNormalize(Vector2.UnitX);
+            Vector2 drawPos = Projectile.Center - Main.screenPosition + projDir * 10f;
             Texture2D star = HJScarletTexture.Particle_SharpTear;
             int length = 16;
             for (int i = 0; i < length; i++)
@@ -149,8 +137,8 @@ namespace HJScarletRework.Projs.Ranged
                 float rads = (float)i / length;
                 Vector2 lerpPos = drawPos;
                 Color drawColor = (Color.Lerp(Color.DarkGoldenrod, Color.Gold, rads) with { A = 255 }) * 0.9f * (1 - rads) * Projectile.scale * Projectile.Opacity;
-                SB.Draw(star, lerpPos - Projectile.SafeDir() * i * 15f, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.rotation - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(1.0f, 1.5f) * 0.85f, 0, 0);
-                SB.Draw(star, lerpPos - Projectile.SafeDir() * 5f - Projectile.SafeDir() * i * 15f, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.rotation - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(1.0f, 1.5f) * 0.85f, 0, 0);
+                SB.Draw(star, lerpPos - projDir * i * 15f, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.rotation - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(1.0f, 1.5f) * 0.85f, 0, 0);
+                SB.Draw(star, lerpPos - projDir * 5f - projDir * i * 15f, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.rotation - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(1.0f, 1.5f) * 0.85f, 0, 0);
             }
         }
     }

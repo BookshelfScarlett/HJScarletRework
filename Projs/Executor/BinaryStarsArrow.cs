@@ -3,6 +3,7 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -46,8 +47,7 @@ namespace HJScarletRework.Projs.Executor
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Type] = 20;
-            ProjectileID.Sets.TrailingMode[Type] = 2;
+            Projectile.ToTrailSetting(22, 2);
         }
         public override void SetDefaults()
         {
@@ -55,14 +55,13 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = 8;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.friendly = true;
+            Projectile.DamageType = ExecutorDamageClass.Instance;
+            Projectile.SetupImmnuity(10);
             Projectile.penetrate = 2;
             Projectile.extraUpdates = 2;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
-            Projectile.DamageType = DamageClass.Ranged;
             Projectile.timeLeft = 500;
-            Projectile.friendly = true;
         }
         private float DrawScale = 1f;
         public override void AI()

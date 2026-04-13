@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
+using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -93,8 +94,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 20f, 20f);
             if (Projectile.Hitbox.Intersects(Owner.Hitbox))
             {
-                if (Projectile.HJScarlet().AddFocusHit)
-                    Owner.HJScarlet().ExecutionTime += 1;
+                Projectile.AddExecutionTime(ItemType<TheDefiler>());
                 Projectile.Kill();
             }
         }

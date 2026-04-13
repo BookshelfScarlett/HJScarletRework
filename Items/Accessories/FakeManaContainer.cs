@@ -12,13 +12,12 @@ namespace HJScarletRework.Items.Accessories
     {
         public override string AssetPath => AssetHandler.Equips;
         public int GiveMana = 0;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(GiveMana);
-        public override void SetDefaults()
+        public override void ExSD()
         {
             Item.width = 30;
             Item.height = 30;
             Item.accessory = true;
-            Item.rare = ItemRarityID.Green;
+            Item.SetUpRarityPrice(ItemRarityID.Green);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

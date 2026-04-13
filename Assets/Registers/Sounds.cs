@@ -50,6 +50,7 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle GalvanizedHand_Charge => new($"{SoundsPath}{nameof(GalvanizedHand_Charge)}", numVariants: 2);
         public static SoundStyle SpearofEscape_Toss => new($"{SoundsPath}{nameof(SpearofEscape_Toss)}", numVariants: 3);
         public static SoundStyle SpearofEscape_Boom => new($"{SoundsPath}{nameof(SpearofEscape_Boom)}");
+        public static SoundStyle Heal_Minor => new SoundStyle($"{SoundsPath}{nameof(Heal_Minor)}");
         public static SoundStyle[] Hammer_Shoot =>
             [
                 Hammer_Shoot1,

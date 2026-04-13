@@ -57,9 +57,7 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.HomingTarget(target.Center, -1, homingSpeed, 20f);
             else
             {
-                Projectile.velocity.Y += 0.18f;
-                if (Projectile.velocity.Y > 10f)
-                    Projectile.velocity.Y = 10f;
+                Projectile.Kill();
             }
             //粒子
             for (int i = 0; i < 2; i++)

@@ -11,22 +11,23 @@ namespace HJScarletRework.Items.Accessories
     public class Desterrennacht : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
-        public override void SetDefaults()
+        public override void ExSD()
         {
             Item.width = Item.height = 60;
             Item.accessory = true;
-            Item.rare = ItemRarityID.Purple;
+            Item.SetUpRarityPrice(ItemRarityID.Purple);
 
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.HJScarlet().DesterrennachtAcc = true;
+            player.HJScarlet().desterrennacht = true;
+            player.HJScarlet().stardustRune = true;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
                 AddIngredient<StardustRune>().
-                AddIngredient<EssenceofDeath>(5).
+                AddIngredient<EssenceofMatter>(5).
                 AddIngredient(ItemID.FragmentStardust, 10).
                 AddTile<FinalAnvil>().
                 Register();

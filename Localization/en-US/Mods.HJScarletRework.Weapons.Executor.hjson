@@ -4,7 +4,7 @@ Exsanguination: {
 	ExecutionStrike: ""
 }
 
-BlazingStriker: {
+MantleLayer: {
 	DisplayName: Blazing Striker
 	Tooltip: ""
 	ExecutionStrike: ""
@@ -41,23 +41,42 @@ TheDefiler: {
 	ExecutionStrike: ""
 }
 
-Apocalypse: {
-	DisplayName: Apocalypse
+GrandFinale: {
+	DisplayName: GrandFinale
 	Tooltip: ""
 	ExecutionStrike: ""
 }
 
 AetherfireSmasher: {
 	DisplayName: Aetherfire Smasher
-	Tooltip: ""
-	ExecutionStrike: ""
-	Color: ""
+	Tooltip: Throws a mighty Blazing Hammer that explodes on impact.
+	ExecutionStrike:
+		'''
+		Hammer strikes back on return, attaches to enemies, and deals continuous damage.
+		While attached, press Right Click to dash the hammer toward your cursor, then strike back at the attached target.
+		Releases a massive fire pillar when the hammer expires.
+		'''
+
+	Color: {
+		Red: Pure Red
+		Blue: Royal Blue
+		Gold: Gold
+		Purple: Dark Purle
+		Green: Green
+		IcyBlue: Icy Blue
+		Sakura: Light Pink
+	}
 }
 
 BinaryStars: {
 	DisplayName: Binary Stars
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Throws a powerful Galaxy Hammer fires swift Nebula Arrows when hitting enemies.
+	ExecutionStrike:
+		'''
+		Throw two Galaxy Hammers at once, they strike enemies on their return.
+		Upon impact, they split into two smaller hammers that attach to enemies and deal continuous damage.
+		When the attach effect ends, the smaller hammers return to you and strike again once more.
+		'''
 }
 
 CrimsonScythe: {
@@ -69,15 +88,33 @@ CrimsonScythe: {
 
 DeathTolls: {
 	DisplayName: Death Tolls
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltips: ""
+	Tooltip: Throw a powerful Death Hammer that release regular Nightmare Star upon hitting enemies
+	ExecutionStrike:
+		'''
+		Death Hammer will return as a Servant Hammer after boomeranging back.
+		While the Servant Hammer is active, Execution Strike makes the Death Hammer delay its attach, releasing Shadow Demonic Energy and Nightmare Arrows.
+		The hanging Servant Hammer mimics the player's actions, does not disappear when switching weapons, and strengthens the Death Tolls's normal attacks.
+		The Servant Hammer's duration is only consumed while attacking, and it will dash toward the player's cursor before its duration runs out.
+		Only one attached Hammer and one Servant Hammer can exist at the same time.
+		'''
+	FlavorTooltips: " -Meditate in the death, return the falling stars, unleash nightmares to devour-"
 }
 
-Judgement: {
-	DisplayName: Judgement
-	Tooltip: ""
-	ExecutionStrike: ""
+TheJudgement: {
+	DisplayName: TheJudgement
+	Tooltip:
+		'''
+		Throw a Judgment Hammer unleashes a Judgment Nova on hit.
+		Focus Attack activates after hitting enemies more than 20 times.
+		During Focus Attack
+		'''
+	ExecutionStrike:
+		'''
+		The Judgment strikes back upon returning, attaches to enemies, and deals continuous damage.
+		While attached, it continuously fires Judgment Stars, and fires a Judgment Ray when it expires.
+		The attached Holy Hammer only consumes its duration when attacking enemies.
+		While the attached hammer is active, hitting enemies does not increase the Execution Attack hit count.
+		'''
 }
 
 DreamingLight: {
@@ -89,6 +126,19 @@ DreamingLight: {
 
 ThePunishment: {
 	DisplayName: The Punishment
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+TrueScarlet: {
+	DisplayName: True Scarlet
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltips: ""
+}
+
+SimpleHandAxe: {
+	DisplayName: Simple Hand Axe
 	Tooltip: ""
 	ExecutionStrike: ""
 }

@@ -118,8 +118,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 20f, 12f);
             if (Projectile.IntersectOwnerByDistance(50))
             {
-                if (Projectile.HJScarlet().AddFocusHit)
-                    Owner.HJScarlet().ExecutionTime += 1;
+                Projectile.AddExecutionTime(ItemType<DungeonBreaker>());
                 Projectile.Kill();
             }
         }

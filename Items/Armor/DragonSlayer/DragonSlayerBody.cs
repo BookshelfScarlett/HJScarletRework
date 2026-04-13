@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Rarity.RarityShiny;
@@ -12,8 +13,7 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
     [AutoloadEquip(EquipType.Body)]
     public class DragonSlayerBody : HJScarletItemClass
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
-        public override string AssetPath => AssetHandler.Armor;
+        public override string AssetPath => AssetHandler.Armors;
         public override void Load()
         {
             //EquipLoader.AddEquipTexture(Mod, )
@@ -23,8 +23,8 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
             Item.width = 26;
             Item.height = 28;
             Item.defense = 35;
+            Item.SetUpRarityPrice(ItemRarityID.Purple);
             Item.rare = RarityType<DisasterRarity>();
-            Item.value = Item.buyPrice(gold: 50);
 
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -36,7 +36,7 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         {
             if (line.IsItemName())
             {
-                DisasterRarity.DrawRarity(line);
+                DisasterRarity.DrawRarity2(line);
                 return false;
             }
             return true;
@@ -44,19 +44,20 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
 
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage<SummonDamageClass>() += 0.30f;
+            player.GetDamage<GenericDamageClass>() += 0.10f;
             player.lifeRegen += 16;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.SquireAltShirt).
-                AddIngredient(ItemID.HuntressAltShirt).
-                AddIngredient(ItemID.ApprenticeAltShirt).
-                AddIngredient(ItemID.MonkAltShirt).
-                AddIngredient(ItemID.DefenderMedal, 20).
-                AddTile(TileID.MythrilAnvil).
+                AddIngredient(ItemID.FragmentSolar, 15).
+                AddIngredient(ItemID.FragmentVortex, 15).
+                AddIngredient(ItemID.FragmentNebula, 15).
+                AddIngredient(ItemID.FragmentStardust, 15).
+                AddIngredient(ItemID.LunarBar, 15).
+                AddTile(TileID.LunarCraftingStation).
                 Register();
+
         }
     }
 }

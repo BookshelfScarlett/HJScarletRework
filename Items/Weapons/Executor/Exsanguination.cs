@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Exsanguination : ExecutorWeaponClass
     {
-        public override int ExecutionTime => 150;
+        public override int ExecutionTime => 2500;
         public override float ExecutionStrikeDamageMult => 50f;
         public override void ExSD()
         {

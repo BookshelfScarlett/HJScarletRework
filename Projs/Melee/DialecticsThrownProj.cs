@@ -5,6 +5,7 @@ using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using SteelSeries.GameSense;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -35,6 +36,7 @@ namespace HJScarletRework.Projs.Melee
         public Vector2 MountedTargetPos = Vector2.Zero;
         public override void ExSD()
         {
+            Projectile.width = Projectile.height = 50;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 30;
             Projectile.ignoreWater = true;
@@ -130,8 +132,8 @@ namespace HJScarletRework.Projs.Melee
             {
                 for (int i = 0; i < 1; i++)
                 {
-                    new StarShape(starPos - dir * 30f, starVel, RandLerpColor(Color.LightBlue, Color.MediumBlue), 0.8f, 40).Spawn();
-                    new StarShape(starPos - dir * 30f, starVel, Color.White, 0.4f, 40).Spawn();
+                    new StarShape(starPos - dir * 30f, starVel, RandLerpColor(Color.LightBlue, Color.RoyalBlue), 0.8f, 30, false).Spawn();
+                    new StarShape(starPos - dir * 30f, starVel, Color.White, 0.4f, 30, false).Spawn();
                 }
             }
             if (!Projectile.IsMe())
@@ -141,11 +143,12 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.Center = target.Center + MountedTargetPos;
                 if (Projectile.timeLeft % 60 == 0)
                 {
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < 4; i++)
                     {
-                        Vector2 spawnPos = new Vector2(target.Center.X + Main.rand.NextBool().ToDirectionInt() * Main.rand.NextFloat(10f, 200f), target.Center.Y + Main.rand.NextFloat(1200f, 1800f));
-                        Vector2 vel = (spawnPos - target.Center).SafeNormalize(Vector2.UnitX) * Main.rand.NextFloat(12f, 16f);
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<DialecticsSkyFall>(), (int)(Projectile.damage * 0.75f), 12f, Owner.whoAmI);
+                        Vector2 toSafeDir = (target.Center - Owner.Center).ToSafeNormalize().RotatedBy(ToRadians(4f) * (i <2).ToDirectionInt());
+                        Vector2 spawnPos = Owner.Center - toSafeDir * Main.rand.NextFloat(1800f, 2400f) + Vector2.UnitY * Main.rand.NextFloat(10f, 160f) * Main.rand.NextBool().ToDirectionInt();
+                        Vector2 vel = (target.Center - spawnPos).ToSafeNormalize() * Main.rand.NextFloat(22f, 28f);
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<DialecticsSkyFall>(), (int)(Projectile.damage * 0.50f), 12f, Owner.whoAmI);
                         proj.rotation = vel.ToRotation();
                         proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                     }
@@ -244,11 +247,11 @@ namespace HJScarletRework.Projs.Melee
                     Vector2 drawPos = Projectile.Center - Projectile.SafeDir() * 10f;
                     Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2);
                     Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
-                    float sacle = 1f;
                     Vector2 pos = drawPos + offset * k * (Amp - 6f) + Projectile.SafeDir() * 5f + Projectile.velocity / 4 * i;
                     Vector2 vel = Projectile.SafeDir() * 2;
-                    new StarShape(pos, vel, drawColor, sacle, 40).Spawn();
-                    new StarShape(pos, vel, Color.White, sacle * 0.5f, 40).Spawn();
+
+                    new HRShinyOrb(pos, vel, drawColor, 30, 0, 1, 0.12f).Spawn();
+                    new HRShinyOrb(pos, vel, Color.White, 30, 0, 1, 0.09f).Spawn();
 
                 }
             }
@@ -264,20 +267,6 @@ namespace HJScarletRework.Projs.Melee
                 return;
             //轨迹特效
             Projectile.rotation = Projectile.velocity.ToRotation();
-
-            for (int i = 0; i < 2; i++)
-            {
-                Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustID.DungeonWater);
-                d.velocity = Projectile.velocity / 3;
-                d.scale *= Main.rand.NextFloat(1.2f, 1.4f);
-                d.noGravity = true;
-            }
-
-            for (int i = 0; i < 3; i++)
-            {
-                Vector2 vel = Projectile.SafeDir() * Main.rand.NextFloat(1.2f, 1.4f) * 2f * Main.rand.NextBool().ToDirectionInt();
-                new TurbulenceShinyCube(Projectile.Center, vel, RandLerpColor(Color.White, Color.Blue), 20, Projectile.rotation, 0.8f, 0.5f).Spawn();
-            }
 
             Vector2 drawPos = Projectile.Center - Projectile.SafeDir() * 10f;
             Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2);
@@ -417,10 +406,6 @@ namespace HJScarletRework.Projs.Melee
 
             for (int i = 0; i < 2; i++)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), DustID.MushroomSpray);
-                d.velocity = Projectile.velocity / 3;
-                d.scale *= Main.rand.NextFloat(1.2f, 1.4f);
-                d.noGravity = true;
             }
 
             for (int i = 0; i < 5; i++)

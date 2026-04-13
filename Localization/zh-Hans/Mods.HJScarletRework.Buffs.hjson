@@ -3,7 +3,7 @@ HoneyRegenAlt: {
 	Description: 加速生命恢复速度
 }
 
-RewardsofWarriorBuff: {
+BlackKeyExecutionBuff: {
 	DisplayName: �߸��ͽ�
 	Description: ����ǿ�������ٶ�
 }
@@ -36,4 +36,9 @@ WatcherBuff: {
 PanicBuff: {
 	// DisplayName: Panic Buff
 	// Description: Mods.HJScarletRework.Buffs.PanicBuff.Description
+}
+
+HerbBagBuff: {
+	// DisplayName: Herb Bag Buff
+	// Description: Mods.HJScarletRework.Buffs.HerbBagBuff.Description
 }

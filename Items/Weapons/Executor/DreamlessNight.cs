@@ -72,8 +72,8 @@ namespace HJScarletRework.Items.Weapons.Executor
                 AddRecipeGroup(HJScarletRecipeGroup.AnyEvilHammer).
                 AddIngredient<JungleMadness>().
                 AddIngredient<DungeonBreaker>().
-                AddIngredient<BlazingStriker>().
-                AddTile(TileID.Anvils).
+                AddIngredient<MantleLayer>().
+                AddTile(TileID.Beds).
                 Register();
         }
     }

@@ -121,7 +121,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient<Judgement>().
+                AddIngredient<TheJudgement>().
                 AddIngredient(ItemID.PaladinsHammer).
                 AddIngredient<DisasterBar>(10).
                 AddTile(TileID.MythrilAnvil).

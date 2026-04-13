@@ -7,12 +7,12 @@ Exsanguination: {
 		'''
 	ExecutionStrike:
 		'''
-		启动后彻底粉碎敌人的护盾
-		并在接下来的一段时间内造成武器面板的百倍伤害
+		启动后彻底粉碎被命中的敌人的护盾
+		在接下来的一段时间内对该名敌人造成武器面板的20倍伤害
 		'''
 }
 
-BlazingStriker: {
+MantleLayer: {
 	DisplayName: 地幔
 	Tooltip:
 		'''
@@ -72,7 +72,7 @@ DreamlessNight: {
 		只有攻击时才会消耗仆从锤的在场时间，且在场时间殆尽前将会朝玩家指针位置冲刺
 		场上最多只存在一把仆从锤，且仆从锤在场时不会增加处决叠层次数
 		'''
-	FlavorTooltips: "[-我于那漫漫长夜中，思念着梦的存在-]"
+	FlavorTooltips: 「-我于那漫漫长夜中，思念着梦的存在-」
 }
 
 TheDefiler: {
@@ -86,7 +86,7 @@ TheDefiler: {
 		'''
 }
 
-Apocalypse: {
+GrandFinale: {
 	DisplayName: 终焉战争
 	Tooltip: 命中时，降下惩戒闪电
 	// ExecutionStrike: ""
@@ -101,7 +101,16 @@ AetherfireSmasher: {
 		挂载状态时按下右键，将会使锤子高速冲向指针位置后回击挂载单位
 		锤子消亡时将自动释放巨型火柱 
 		'''
-	// Color: ""
+
+	Color: {
+		Red: 绯红
+		Blue: 皇家蓝
+		Gold: 金
+		Purple: 暗紫
+		Green: 绿
+		IcyBlue: 冰蓝
+		Sakura: 樱粉
+	}
 }
 
 BinaryStars: {
@@ -129,7 +138,7 @@ CrimsonScythe: {
 		你接下来的15秒内所有攻击，都以一定的概率处决敌人1%当前生命值
 		触发处决后将自动吸收从该名敌人体内释放的灵魂
 		'''
-	FlavorTooltips: "[-红月之下，无人能逃过她的收割-]"
+	FlavorTooltips: 「-红月之下，无人能逃过她的收割-」
 }
 
 DeathTolls: {
@@ -143,10 +152,10 @@ DeathTolls: {
 		只有攻击时才会消耗仆从锤的在场时间，且在场时间殆尽前将会朝玩家指针位置冲刺
 		场上最多只存在一个挂载锤与一个仆从锤
 		'''
-	FlavorTooltips: -于丧钟中冥思，召陨星归位，释梦魇噬敌-
+	FlavorTooltips: 「-于丧钟中冥思，召陨星归位，释梦魇噬敌-」
 }
 
-Judgement: {
+TheJudgement: {
 	DisplayName: 圣神断罪
 	Tooltip: 命中时，迸发断罪之星
 	ExecutionStrike:
@@ -168,7 +177,7 @@ DreamingLight: {
 		只有攻击时才会消耗仆从锤的在场时间，且在场时间殆尽前将会朝玩家指针位置冲刺
 		场上最多只存在一把仆从锤，且仆从锤在场时不会增加处决叠层次数
 		'''
-	FlavorTooltips: "[-我于那长眠之夜中，铸就了梦的归来-]"
+	FlavorTooltips: 「-我于那长眠之夜中，铸就了梦的归来-」
 }
 
 ThePunishment: {
@@ -180,4 +189,20 @@ ThePunishment: {
 		挂载锤只有在攻击敌人时才会消耗在场时间
 		最多只存在一把挂载锤，且挂载锤在场时不会增加处决叠层次数
 		'''
+}
+
+TrueScarlet: {
+	DisplayName: 无极绯红
+	Tooltip:
+		'''
+		命中时，追加猩红重锤
+		猩红重锤回收时提供治疗
+		'''
+	ExecutionStrike: "[-铭刻与我，掘墓为你-]"
+	FlavorTooltips: "[-黑暗，欢腾，渴望，堕落，铭刻与我，掘墓为你-]"
+}
+
+SimpleHandAxe: {
+	DisplayName: 简易双刃斧
+	Tooltip: 可穿透一名敌人
 }

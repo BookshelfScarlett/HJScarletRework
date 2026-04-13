@@ -120,8 +120,9 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 20f, 12f);
             if (Projectile.IntersectOwnerByDistance(90))
             {
-                if (Projectile.HJScarlet().AddFocusHit && !Owner.HasProj<DreamingLightMinion>())
-                    Owner.HJScarlet().ExecutionTime += 1;
+
+                if (!Owner.HasProj<DreamingLightMinion>())
+                    Projectile.AddExecutionTime(ItemType<DreamingLight>());
                 Projectile.Kill();
             }
         }

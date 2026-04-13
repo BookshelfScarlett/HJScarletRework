@@ -70,9 +70,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 12f, 20f);
             if (!Projectile.Hitbox.Intersects(Owner.Hitbox))
                 return;
-
-            if (Projectile.HJScarlet().AddFocusHit)
-                Owner.HJScarlet().ExecutionTime += 1;
+            Projectile.AddExecutionTime(ItemType<TheDefiler>());
             if (Projectile.HJScarlet().ExecutionStrike)
                 CanFocusStrike();
 

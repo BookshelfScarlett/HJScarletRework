@@ -1,7 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
+using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -32,10 +34,20 @@ namespace HJScarletRework.Globals.Instances
         public float[] ExtraAI = new float[10];
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (HasExecutionMechanic)
-                AddFocusHit = true;
             Player Owner = Main.player[projectile.owner];
+            if (HasExecutionMechanic && !AddFocusHit && projectile.numHits < 1)
+            {
+                AddFocusHit = true;
+            }
             ModifyDefenderProj(Owner, projectile, target);
+            if (Owner.HJScarlet().blackKeyDoT && ExecutionStrike && Owner.HJScarlet().blackKeyTimer == 0)
+            {
+                //对的没错，这个鬼东西的减防数据存在了玩家类里面。
+                Owner.AddBuff(BuffType<BlackKeyExecutionBuff>(), GetSeconds(5));
+                target.HJScarlet().blackKeyDefensesReduces = Owner.HJScarlet().blackKeyReduceDefense;
+                target.AddBuff(BuffType<BlackKeyExecutionBuff>(), GetSeconds(5));
+                Owner.HJScarlet().blackKeyTimer = GetSeconds(8);
+            }
         }
         public override void AI(Projectile projectile)
         {

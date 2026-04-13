@@ -9,12 +9,11 @@ namespace HJScarletRework.Items.Accessories
     public class PreciousTarget : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
-        public override void SetDefaults()
+        public override void ExSD()
         {
             Item.width = Item.height = 60;
             Item.accessory = true;
-            Item.rare = ItemRarityID.Red;
-            Item.value = Item.buyPrice(gold: 45);
+            Item.SetUpRarityPrice(ItemRarityID.Red);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

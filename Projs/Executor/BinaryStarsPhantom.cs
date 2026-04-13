@@ -57,7 +57,6 @@ namespace HJScarletRework.Projs.Executor
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 66;
-            Projectile.DamageType = DamageClass.Ranged;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 6;

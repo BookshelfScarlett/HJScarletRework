@@ -3,11 +3,13 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
+using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -60,15 +62,44 @@ namespace HJScarletRework.Projs.Executor
             if (Main.rand.NextBool())
                 return;
             if (Main.rand.NextBool(10))
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(1), Projectile.velocity / 2f, RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 40, Projectile.rotation,1,0.4f * Main.rand.NextFloat(0.5f,0.9f)).Spawn();
+                new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(1), Projectile.velocity / 2f, RandLerpColor(Color.AliceBlue, Color.RoyalBlue), 40, Projectile.rotation,1,0.4f * Main.rand.NextFloat(0.5f,0.9f)).Spawn();
             if (Main.rand.NextBool(10))
-                new StarShape(Projectile.Center.ToRandCirclePosEdge(4), Projectile.velocity * Main.rand.NextFromList(0.8f,1.2f), RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue),0.5f * Main.rand.NextFloat(0.5f,0.9f),40).Spawn();
+                new StarShape(Projectile.Center.ToRandCirclePosEdge(4), Projectile.velocity * Main.rand.NextFromList(0.8f,1.2f), RandLerpColor(Color.AliceBlue, Color.RoyalBlue),0.5f * Main.rand.NextFloat(0.5f,0.9f),40).Spawn();
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            base.ModifyHitNPC(target, ref modifiers);
-            SoundEngine.PlaySound(HJScarletSounds.Light_ShieldHit with { MaxInstances = 4}, Projectile.Center);
+            modifiers.DefenseEffectiveness *= 0;
+            bool hasBuff = Owner.HJScarlet().exsanguinationBuffTime != 0;
+            SoundStyle style = hasBuff ? HJScarletSounds.Light_FleshHit with { MaxInstances = 4, Volume = 0.70f } : HJScarletSounds.Light_ShieldHit with { MaxInstances = 4, Volume = 0.70f };
+            SoundEngine.PlaySound(style, Projectile.Center);
+        }
+        public override void OnKill(int timeLeft)
+        {
+            bool hasBuff = Owner.HJScarlet().exsanguinationBuffTime != 0;
+            //初始化。
+            if (!Owner.HJScarlet().ExecutionListStored.ContainsKey(ItemType<Exsanguination>()))
+                Owner.HJScarlet().ExecutionListStored.TryAdd(ItemType<Exsanguination>(), 0);
+            else if (!hasBuff)
+                Projectile.AddExecutionTime(ItemType<Exsanguination>());
+            if(!hasBuff)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(4f), DustID.PlatinumCoin);
+                    d.velocity = Projectile.velocity.ToRandVelocity(ToRadians(10f), 1f, 8f);
+                    d.scale = 1.2f;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(4f), Main.rand.NextBool(4) ? DustID.PlatinumCoin : DustID.Blood);
+                    d.velocity = Projectile.velocity.ToRandVelocity(ToRadians(10f), 1f, 8f);
+                    d.scale = 1.2f;
+                }
+            }
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -85,7 +116,7 @@ namespace HJScarletRework.Projs.Executor
                 if (PosList[i] == Vector2.Zero)
                     continue;
                 float rads = 1f - i / (float)PosList.Count;
-                Color drawColor = (Color.Lerp(Color.SkyBlue, Color.RoyalBlue, rads) with { A = 250 }) * 0.9f * Projectile.Opacity * (1 - rads);
+                Color drawColor = (Color.Lerp(Color.White, Color.White, rads) with { A = 200 }) * 0.9f * Projectile.Opacity * (1 - rads);
                 Vector2 shapeScale = scale * Clamp(i / ((float)PosList.Count - 4f), 0f, 1f) * 0.4f;
                 Vector2 lerpPos = PosList[i] - Main.screenPosition;
                 SB.Draw(tex, lerpPos, null, drawColor, RotList[i] + PiOver2, ori, Projectile.scale * (1f - rads), 0, 0);

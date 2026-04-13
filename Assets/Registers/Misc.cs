@@ -1,9 +1,12 @@
-﻿using Terraria.ModLoader;
+﻿using ReLogic.Content;
+using ReLogic.Graphics;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Assets.Registers
 {
     public partial class HJScarletTexture : ModSystem
     {
+        private string Path_Fonts => "HJScarletRework/Assets/Fonts/";
         public static Tex2DWithPath Specific_DialectBall { get; set; }
         public static Tex2DWithPath Specific_DialectCube { get; set; }
         public static Tex2DWithPath Specific_AimLabBox { get; set; }
@@ -13,10 +16,13 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Noise_Misc { get; set; }
         public static Tex2DWithPath Noise_Misc2 { get; set; }
 
-        public static Tex2DWithPath ColorMap_Aqua {  get; set; }
+        public static Tex2DWithPath ColorMap_Aqua { get; set; }
 
         public static Tex2DWithPath Metaball_ShadowNebula { get; set; }
         public static Tex2DWithPath Metaball_FlickerWater { get; set; }
+        public static Tex2DWithPath Metaball_ShinyStardust { get; set; }
+        public static Asset<DynamicSpriteFont> Font_Eras_Bold { get; set; }
+        public static Asset<DynamicSpriteFont> Font_MGR { get; set; }
 
         public void LoadMisc()
         {
@@ -28,12 +34,15 @@ namespace HJScarletRework.Assets.Registers
 
             Metaball_ShadowNebula = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_ShadowNebula)}");
             Metaball_FlickerWater = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_FlickerWater)}");
+            Metaball_ShinyStardust = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_ShinyStardust)}");
 
             Noise_Misc = new Tex2DWithPath($"{Path_General}{nameof(Noise_Misc)}");
             Noise_Misc2 = new Tex2DWithPath($"{Path_General}{nameof(Noise_Misc2)}");
 
             ColorMap_Aqua = new Tex2DWithPath($"{Path_General}{nameof(ColorMap_Aqua)}");
 
+            Font_Eras_Bold = Request<DynamicSpriteFont>($"{Path_Fonts}{nameof(Font_Eras_Bold)}");
+            Font_MGR = Request<DynamicSpriteFont>($"{Path_Fonts}{nameof(Font_MGR)}");
         }
         public void UnloadMisc()
         {
@@ -45,12 +54,15 @@ namespace HJScarletRework.Assets.Registers
 
             Metaball_ShadowNebula = null;
             Metaball_FlickerWater = null;
+            Metaball_ShinyStardust = null;
 
             Noise_Misc = null;
             Noise_Misc2 = null;
 
             ColorMap_Aqua = null;
 
+            Font_Eras_Bold = null;
+            Font_MGR = null;
         }
     }
 }

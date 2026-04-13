@@ -9,36 +9,51 @@ namespace HJScarletRework.Globals.Players
     {
         public bool CanSwitchWeaponType = false;
         public bool CanRevisual = false;
+        public bool CanExecution = false;
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
             if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
             {
-                //如果玩家开启背包的情况下，则统一优先执行开启背包的硬编码顺序 
-                if (Main.playerInventory)
-                {
-                }
-                else
-                {
-                    //按情况提供硬编码
-
-                    //第一个顺序：查看武器转化
-                    //获取这个列表的第一个值，对比玩家手持的情况，符合则打一个标记出去
-                    int heldItem = Player.HeldItem.type;
-                    bool hasValue = WeaponSwapMaps.ContainsKey(heldItem) || WeaponSwapMaps.ContainsValue(heldItem);
-                    if (!CanSwitchWeaponType && hasValue)
-                    {
-                        //打一个标记出去
-                        CanSwitchWeaponType = true;
-                    }
-
-                    //第二个顺序：reVisual的标记
-                    //是否允许重置特效的武器已经被类名硬编码了，所以不需要做额外的遍历
-                    if (!CanRevisual)
-                    {
-
-                    }
-                }
+                bool tier1 = PiorityTier1();
+                if (tier1)
+                    return;
+                bool tier2 = PiorityTier2();
+                if (tier2) 
+                    return;
             }
+        }
+        /// <summary>
+        /// 第一批优先度梯队：物品切换，代行者手动触发的处刑攻击
+        /// </summary>
+        /// <returns></returns>
+        private bool PiorityTier1()
+        {
+            bool anyPiorityTier1Active = false;
+            //按情况提供硬编码
+            //第一批顺序：查看武器转化
+            //获取这个列表的第一个值，对比玩家手持的情况，符合则打一个标记出去
+            int heldItem = Player.HeldItem.type;
+            bool hasValue = WeaponSwapMaps.ContainsKey(heldItem) || ArmorMaps.Contains(heldItem) || WeaponSwapMaps.ContainsValue(heldItem);
+            if (!CanSwitchWeaponType && hasValue)
+            {
+                //打一个标记出去
+                CanSwitchWeaponType = true;
+                anyPiorityTier1Active = true;
+            }
+            if (!CanExecution && tacticalExecution)
+            {
+                CanExecution = true;
+                anyPiorityTier1Active = true;
+            }
+            return anyPiorityTier1Active;
+        }
+        /// <summary>
+        /// 第二批优先梯队：盔甲技能，部分武器技能
+        /// </summary>
+        /// <returns></returns>
+        private bool PiorityTier2()
+        {
+            return false;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace HJScarletRework.Graphics.Particles
         public float GlowScale = 0.45f;
         public bool HasRotation;
         public float BeginScale = 0;
+        private Color GlowColor;
         public override int UseBlendStateID => BlendStateType;
         public StarShape(Vector2 position, Vector2 velocity, Color drawColor, float scale, int lifeTime)
         {
@@ -57,6 +58,7 @@ namespace HJScarletRework.Graphics.Particles
             else
                 Scale *= 0.99f;
             SparkColor = Color.Lerp(DrawColor, Color.Transparent, (float)Math.Pow(LifetimeRatio, 3D));
+            GlowColor = Color.Lerp(Color.White, Color.Transparent, (float)Math.Pow(LifetimeRatio, 3D));
             Velocity *= 0.95f;
             if (Velocity.Length() < 12f && !NoGravity)
             {
@@ -73,7 +75,7 @@ namespace HJScarletRework.Graphics.Particles
             Texture2D texture = TextureAssets.Extra[ExtrasID.SharpTears].Value;
             spriteBatch.Draw(texture, Position - Main.screenPosition, null, SparkColor, Rotation, texture.Size() * 0.5f, scale, 0, 0f);
             if (DrawGlow)
-                spriteBatch.Draw(texture, Position - Main.screenPosition, null, Color.White, Rotation, texture.Size() * 0.5f, scale * 0.5f, 0, 0f);
+                spriteBatch.Draw(texture, Position - Main.screenPosition, null, GlowColor, Rotation, texture.Size() * 0.5f, scale * 0.5f, 0, 0f);
         }
     }
 }

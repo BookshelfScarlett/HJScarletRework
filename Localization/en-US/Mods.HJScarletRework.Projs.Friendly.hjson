@@ -67,9 +67,14 @@ Typeless: {
 	EvolutionEnergyPortal.DisplayName: Evolution Energy Portal
 	RegenOrbsPink.DisplayName: Regen Orbs Pink
 	DreamingLightBeam.DisplayName: Dreaming Light Beam
-	JudgementStarAlt.DisplayName: Judgement Star Alt
-	JudgementStarNormal.DisplayName: Judgement Star Normal
+	JudgementStarAlt.DisplayName: TheJudgement Star Alt
+	TheJudgementStar.DisplayName: TheJudgement Star Normal
 	DeathTollsProj.DisplayName: Death Tolls Proj
+	DesterrennachtHealProj.DisplayName: Desterrennacht Heal Proj
+	CowboyBullet.DisplayName: Cowboy Bullet
+	CowboyRevolverProj.DisplayName: Cowboy Revolver Proj
+	RuneWizardProj.DisplayName: Rune Wizard Proj
+	FloatingPlants.DisplayName: Floating Plants
 }
 
 Pets: {
@@ -90,8 +95,8 @@ Executor: {
 	BinaryStarsPhantom.DisplayName: Binary Stars Phantom
 	BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
 	BinaryStarsProj.DisplayName: Binary Stars Proj
-	BlazingStrikerExecution.DisplayName: Blazing Striker Execution
-	BlazingStrikerProj.DisplayName: Blazing Striker Proj
+	MantleLayerExecution.DisplayName: Blazing Striker Execution
+	MantleLayerProj.DisplayName: Blazing Striker Proj
 	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
 	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
 	DeathTollsArrow.DisplayName: Death Tolls Arrow
@@ -115,13 +120,13 @@ Executor: {
 	ExsanguinationHeldProj.DisplayName: Exsanguination Held Proj
 	FleshGrinderExecution.DisplayName: Flesh Grinder Execution
 	FleshGrinderProj.DisplayName: Flesh Grinder Proj
-	JudgementHolyCross.DisplayName: Judgement Holy Cross
-	JudgementHolyCrossMounted.DisplayName: Judgement Holy Cross Mounted
-	JudgementMinion.DisplayName: Judgement Minion
-	JudgementProj.DisplayName: Judgement Proj
-	JudgementStarExecution.DisplayName: Judgement Star Execution
-	JudgementStarExecutionMounted.DisplayName: Judgement Star Execution Mounted
-	JudgementStarNormal.DisplayName: Judgement Star Normal
+	TheJudgementCross.DisplayName: TheJudgement Holy Cross
+	TheJudgementCrossMounted.DisplayName: TheJudgement Holy Cross Mounted
+	TheJudgementMinion.DisplayName: TheJudgement Minion
+	TheJudgementProj.DisplayName: TheJudgement Proj
+	TheJudgementStarExecution.DisplayName: TheJudgement Star Execution
+	TheJudgementStarExecutionMounted.DisplayName: TheJudgement Star Execution Mounted
+	TheJudgementStar.DisplayName: TheJudgement Star Normal
 	JungleMadnessExecution.DisplayName: Jungle Madness Execution
 	JungleMadnessLeafs.DisplayName: Jungle Madness Leafs
 	JungleMadnessProj.DisplayName: Jungle Madness Proj
@@ -134,6 +139,13 @@ Executor: {
 	DreamingLightBeam.DisplayName: Dreaming Light Beam
 	DeathTollsBell.DisplayName: Death Tolls Bell
 	CrimsonScytheProj.DisplayName: Crimson Scythe Proj
+	TrueScarletProj.DisplayName: True Scarlet Proj
+	GrandFinaleLightning.DisplayName: Grand Finale Lighting
+	GrandFinaleProj.DisplayName: Grand Finale Proj
+	GrandFinaleExecution.DisplayName: Grand Finale Execution
+	GrandFinaleStriker.DisplayName: Grand Finale Striker
+	SimpleHandAxeExecution.DisplayName: Simple Hand Axe Execution
+	SimpleHandAxeProj.DisplayName: Simple Hand Axe Proj
 }
 
 Ranged: {
@@ -142,4 +154,5 @@ Ranged: {
 	ClimaticHawstringLaser.DisplayName: Climatic Hawstring Laser
 	ClimaticHawstringMinion.DisplayName: Climatic Hawstring Minion
 	ClimaticHawstringProj.DisplayName: Climatic Hawstring Proj
+	BambooStick.DisplayName: Bamboo Stick
 }

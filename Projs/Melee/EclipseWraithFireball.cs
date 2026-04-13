@@ -21,7 +21,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.extraUpdates = 4;
             Projectile.width = Projectile.height = 16;
-            Projectile.tileCollide = true;
+            Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.noEnchantmentVisuals = true;
             Projectile.usesLocalNPCImmunity = true;
@@ -32,7 +32,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
             //刚生成时不要撞墙上
-            Projectile.tileCollide = Timer > 30f;
+            Projectile.tileCollide = Timer > 50f;
             Timer++;
             DrawParticle();
             

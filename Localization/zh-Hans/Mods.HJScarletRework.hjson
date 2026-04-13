@@ -1,11 +1,11 @@
-SwitchWeaponTooltip: 空想归途：手持该武器，按下鼠标中键以切换形态
+SwitchWeaponTooltip: 空想归途：手持该物品，按下鼠标中键以切换形态
 SwitchWeaponVisual: 空想归途：手持该武器，按下鼠标中键以更改视觉效果
 
 SwitchWeapon: {
 	Tooltip:
 		'''
 		空想归途：
-		手持该武器，按下鼠标中键以切换形态
+		手持该物品，按下鼠标中键以切换形态
 		'''
 	Visual:
 		'''
@@ -32,8 +32,10 @@ DamageClasses: {
 			Mysterious.DisplayName: 神秘
 			Phantasmic.DisplayName: 空想
 			FocusTimeLine: "{0}启动专注攻击次数"
-			FocusDamageLine: "{0}%专注攻击伤害"
+			FocusDamageLine: "{0}%处刑攻击伤害"
 			ArmorPenetrationLine: "{0}护甲穿透"
 		}
 	}
 }
+
+Keybinds.GeneralActionKeybind.DisplayName: 互动键

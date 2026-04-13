@@ -71,8 +71,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation += 0.2f;
             if (Projectile.IntersectOwnerByDistance(75))
             {
-                if (Projectile.HJScarlet().AddFocusHit)
-                    Owner.HJScarlet().ExecutionTime += 1;
+                Projectile.AddExecutionTime(ItemType<ThePunishment>());
                 if (Projectile.HJScarlet().ExecutionStrike)
                     SpawnExecution();
                 Projectile.Kill();

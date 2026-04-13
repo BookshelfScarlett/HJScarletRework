@@ -12,15 +12,14 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
     [AutoloadEquip(EquipType.Legs)]
     public class DragonSlayerLegs : HJScarletItemClass
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
-        public override string AssetPath => AssetHandler.Armor;
+        public override string AssetPath => AssetHandler.Armors;
         public override void SetDefaults()
         {
             Item.width = 26;
             Item.height = 28;
             Item.defense = 30;
+            Item.SetUpRarityPrice(ItemRarityID.Purple);
             Item.rare = RarityType<DisasterRarity>();
-            Item.value = Item.buyPrice(gold: 50);
 
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -32,7 +31,7 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         {
             if (line.IsItemName())
             {
-                DisasterRarity.DrawRarity(line);
+                DisasterRarity.DrawRarity2(line);
                 return false;
             }
             return true;
@@ -40,18 +39,19 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
 
         public override void UpdateEquip(Player player)
         {
-            player.GetCritChance<GenericDamageClass>() += 20f;
+            player.GetCritChance<GenericDamageClass>() += 10;
+            player.moveSpeed += 0.20f;
             player.maxTurrets += 2;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.SquireAltPants).
-                AddIngredient(ItemID.HuntressAltPants).
-                AddIngredient(ItemID.ApprenticeAltPants).
-                AddIngredient(ItemID.MonkAltPants).
-                AddIngredient(ItemID.DefenderMedal, 20).
-                AddTile(TileID.MythrilAnvil).
+                AddIngredient(ItemID.FragmentSolar, 5).
+                AddIngredient(ItemID.FragmentVortex, 5).
+                AddIngredient(ItemID.FragmentNebula, 5).
+                AddIngredient(ItemID.FragmentStardust, 5).
+                AddIngredient(ItemID.LunarBar, 5).
+                AddTile(TileID.LunarCraftingStation).
                 Register();
         }
 

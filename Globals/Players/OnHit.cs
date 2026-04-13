@@ -1,4 +1,9 @@
 ﻿using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.General;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -7,15 +12,21 @@ namespace HJScarletRework.Globals.Players
 {
     public partial class HJScarletPlayer : ModPlayer
     {
-        public float GeneralCrtiDamageAdd = 0f;
+        public float critDamageAll = 0f;
+        public float critDamageExecutor = 0;
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
+            if (proj.DamageType == ExecutorDamageClass.Instance)
+                GlobalExecutorOnHit(target, hit, damageDone);
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
+            if (item.DamageType == ExecutorDamageClass.Instance)
+                GlobalExecutorOnHit(target, hit, damageDone);
         }
+
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
             ModifyCritDamage(target, ref modifiers);
@@ -27,7 +38,7 @@ namespace HJScarletRework.Globals.Players
         public void ModifyCritDamage(NPC target, ref NPC.HitModifiers modifiers)
         {
             float totalCritsBonus = 0f;
-            if (CreationHatSet && modifiers.DamageType == DamageClass.Magic)
+            if (CreationHatSet && modifiers.DamageType.CountsAsClass( DamageClass.Magic))
             {
                 //将所有伤害直接设置为暴击类型，这里先过暴击情况
                 modifiers.SetCrit();
@@ -45,7 +56,11 @@ namespace HJScarletRework.Globals.Players
                 float critBuff = PreciousTargetCrtis / 100f;
                 totalCritsBonus += critBuff;
             }
-            totalCritsBonus += GeneralCrtiDamageAdd;
+            if (modifiers.DamageType == ExecutorDamageClass.Instance)
+            {
+                totalCritsBonus += critDamageExecutor;
+            }
+            totalCritsBonus += critDamageAll;
             modifiers.CritDamage += totalCritsBonus;
 
         }
@@ -53,43 +68,36 @@ namespace HJScarletRework.Globals.Players
         {
             return (Player.GetTotalCritChance<Type>() + 4f - 100f);
         }
+        public void GlobalExecutorOnHit(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            if (cowboyExecutor && cowboyRevolverTimer == 0)
+            {
+                cowboyRevolverTimer = Player.ApplyWeaponAttackSpeed(Player.HeldItem, Player.HeldItem.useTime, 5);
+                int revolverDamage = Player.GetWeaponDamage(Player.HeldItem);
+                if (Main.rand.NextBool(6))
+                    revolverDamage *= 5;
+                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), target.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(35f), 9f, 11f), ProjectileType<CowboyRevolverProj>(), revolverDamage, 0f, Player.whoAmI);
+                proj.timeLeft = 300;
+                if (target.CanBeChasedBy())
+                    ((CowboyRevolverProj)proj.ModProjectile).CurTarget = target;
+            }
+        }
+
 
         public void GlobalOnHitNPCWithSomething(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (stardustRune && stardustRuneHitHealTimer == 0)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    Vector2 randPos = target.ToRandRec();
+                    Vector2 vel = RandVelTwoPi(18f, 23f);
+                    Projectile.NewProjectileDirect(Player.GetSource_FromThis(), randPos, vel, ProjectileType<DesterrennachtHealProj>(), 0, 0, Player.whoAmI);
+                }
+                stardustRuneHitHealTimer = GetSeconds(3);
+            }
             if (PreciousTargetAcc && hit.Crit)
                 PreciousTargetCrtis += 5;
-            //帝国的荣耀相关buff都写在里面了
-            if (!target.friendly && target.lifeMax >= 5 && target.CanBeChasedBy() && Player_RewardofWarrior)
-            {
-                RewardofWarriorCounter = 180;
-                //给予5帧短暂的cd
-                if (RewardofWarriorHitCD == 0)
-                {
-                    RewardofWarriorHitCD = 5;
-                    RewardLevel += 1;
-                }
-                
-                if (RewardLevel > 30)
-                {
-                    if (!Player.HasBuff<RewardsofWarriorBuff>())
-                    {
-                        Player.AddBuff(BuffType<RewardsofWarriorBuff>(), 300);
-                        RewardLevel = 0;
-                    }
-                    else
-                    {
-                        RewardLevel = 30;
-                    }
-                }
-                //如果佩戴了上位饰品，在下方进行防御力递增
-                if (Player_RewardofKingdom)
-                {
-                    //这里的Counter必须得启用，每次过来都会刷新
-                    //顶多就是续一个180秒，持续攻击这一块
-                    if (KingdomDefenseTime < 30)
-                        KingdomDefenseTime += 1;
-                }
-            }
         }
     }
 }

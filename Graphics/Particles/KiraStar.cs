@@ -16,8 +16,9 @@ namespace HJScarletRework.Graphics.Particles
         private int TheBlendStateID;
         private bool FadeIn;
         private float MaxOpacity;
+        private bool UseAlt;
         public override int UseBlendStateID => TheBlendStateID;
-        public KiraStar(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, float spinSpeed = 0f, bool fadeIn = false, int? blendstateID = null)
+        public KiraStar(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, float spinSpeed = 0f, bool fadeIn = false, bool useAlt=false,int? blendstateID = null)
         {
             Position = position;
             Velocity = velocity;
@@ -29,11 +30,13 @@ namespace HJScarletRework.Graphics.Particles
             SpinSpeed = spinSpeed;
             TheBlendStateID = blendstateID ?? BlendStateID.Additive;
             FadeIn = fadeIn;
+            UseAlt = useAlt;
         }
         public override void OnSpawn()
         {
             MaxOpacity = Opacity;
-            Opacity = 0;
+            if (FadeIn)
+                Opacity = 0;
         }
 
         public override void Update()
@@ -55,7 +58,7 @@ namespace HJScarletRework.Graphics.Particles
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Texture2D star = HJScarletTexture.Particle_KiraStar.Value;
+            Texture2D star = UseAlt ? HJScarletTexture.Particle_KiraStarGlow.Value : HJScarletTexture.Particle_KiraStar.Value;
             Vector2 drawPos = Position - Main.screenPosition;
 
             spriteBatch.Draw(star, drawPos, null, DrawColor * Opacity, Rotation, star.Size()/2, Scale, SpriteEffects.None, 0);

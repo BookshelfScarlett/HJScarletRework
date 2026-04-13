@@ -65,14 +65,22 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
-            Vector2 dir = Projectile.rotation.ToRotationVector2();
+            SB.Draw(projTex, drawPos, null, Color.DeepSkyBlue, Projectile.rotation, ori, Projectile.scale * 0.8f, 0, 0);
             SB.Draw(projTex, drawPos, null, Color.LightBlue, Projectile.rotation, ori, Projectile.scale * 0.8f, 0, 0);
-            Tex2DWithPath cube = HJScarletTexture.Texture_WhiteCube;
-            SB.Draw(cube.Value, drawPos + dir.RotatedBy(PiOver2) * 30f, null, Color.SkyBlue, Projectile.rotation, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f, 0, 0);
-            SB.Draw(cube.Value, drawPos + dir.RotatedBy(Pi) * 30f, null, Color.SkyBlue, Projectile.rotation + PiOver2, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f, 0, 0);
-            SB.Draw(cube.Value, drawPos + dir.RotatedBy(PiOver2) * -30f, null, Color.SkyBlue, Projectile.rotation, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f, 0, 0);
-            SB.Draw(cube.Value, drawPos + dir.RotatedBy(Pi) * -30f, null, Color.SkyBlue, Projectile.rotation + PiOver2, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f, 0, 0);
+            DrawCube(Color.DeepSkyBlue, 1.1f);
+            DrawCube(Color.DeepSkyBlue, 1f);
             return false;
+        }
+        public void DrawCube(Color color,float scale)
+        {
+            Vector2 drawPos = Projectile.Center - Main.screenPosition;
+            Vector2 dir = Projectile.rotation.ToRotationVector2();
+            Tex2DWithPath cube = HJScarletTexture.Texture_WhiteCube;
+            SB.Draw(cube.Value, drawPos + dir.RotatedBy(PiOver2) * 30f, null, color, Projectile.rotation, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
+            SB.Draw(cube.Value, drawPos + dir.RotatedBy(Pi) * 30f, null, color, Projectile.rotation + PiOver2, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
+            SB.Draw(cube.Value, drawPos + dir.RotatedBy(PiOver2) * -30f, null, color, Projectile.rotation, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
+            SB.Draw(cube.Value, drawPos + dir.RotatedBy(Pi) * -30f, null, color, Projectile.rotation + PiOver2, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
+
         }
     }
 }

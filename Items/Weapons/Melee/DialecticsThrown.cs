@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using static HJScarletRework.Projs.Melee.DialecticsThrownProj;
 
@@ -17,6 +18,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public int UsePhase = 0;
         public override void SetStaticDefaults()
         {
+            ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.5f;
         }
         public override void ExSD()
         {
@@ -26,10 +28,10 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.UseSound = null;
             Item.shootSpeed = 17f;
             Item.autoReuse = true;
-            Item.useTime = Item.useAnimation = 29;
+            Item.useTime = Item.useAnimation = 30;
             Item.shoot = ProjectileType<DialecticsThrownProj>();
         }
-        public override Color MainTooltipColor => Color.LightBlue;
+        public override Color MainTooltipColor => Color.Lerp(Color.RoyalBlue,Color.AliceBlue,0.5f);
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
             if (line.Name == "ItemName" && line.Mod == "Terraria")

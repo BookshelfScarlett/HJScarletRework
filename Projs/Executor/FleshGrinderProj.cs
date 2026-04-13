@@ -71,8 +71,7 @@ namespace HJScarletRework.Projs.Executor
             if (!Projectile.Hitbox.Intersects(Owner.Hitbox))
                 return;
 
-            if (Projectile.HJScarlet().AddFocusHit)
-                Owner.HJScarlet().ExecutionTime += 1;
+            Projectile.AddExecutionTime(ItemType<FleshGrinder>());
             if (Projectile.HJScarlet().ExecutionStrike)
                 CanFocusStrike();
 

@@ -3,38 +3,96 @@ CreationHat: {
 	Tooltip: 与很久以前的法袍搭配也许会有意想不到的效果……
 	SetBonus:
 		'''
-		增加{0}点防御力
-		增加{1}最大魔力上限，减少{3}魔力消耗
+		增加{0}防御力，{1}最大魔力上限
 		增加{2}魔法伤害，{4}魔法暴击概率
-		允许所有魔法攻击造成暴击伤害
+		减少{3}魔力消耗，允许所有魔法攻击造成暴击伤害
 		溢出的暴击概率以1/2的形式等价转模为你的魔法暴击伤害加成
 		'''
 }
 
 DragonSlayerBody: {
-	DisplayName: 巨龙重铠
+	DisplayName: 红龙骑士重铠
 	Tooltip:
 		'''
-		增加40%召唤伤害
+		增加10%伤害
 		+8 HP/s 生命恢复速度
 		'''
 }
 
 DragonSlayerHead: {
-	DisplayName: 巨龙战盔
+	DisplayName: 红龙骑士战盔
 	Tooltip:
 		'''
-		增加20%伤害
-		+2 最大哨兵上限
+		增加15%代行者伤害
+		增加10%代行者暴击概率
 		'''
-	SetBouns: ""
+	SetBouns:
+		'''
+		增加120点最大魔力上限，减少20%魔力消耗
+		+3 最大仆从上限， +1 最大哨兵上限
+		将所有非代行者伤害的武器全部受到代行者的职业加成
+		所有非代行者伤害的武器都不会触发处决攻击
+		'''
 }
 
 DragonSlayerLegs: {
-	DisplayName: 巨龙护腿
+	DisplayName: 红龙骑士护腿
 	Tooltip:
 		'''
-		增加30%暴击概率
-		增加30%移动速度
+		增加5%暴击概率
+		增加20%移动速度
 		'''
+}
+
+RuneWizardExecutor: {
+	HelmetTooltip: 增加12%代行者暴击概率
+	ChestplateTooltip: 增加20%代行者伤害
+	SetBonus: 攻击时追加符文魔法
+}
+
+CowboyExecutor: {
+	HelmetTooltip: 增加10%代行者伤害
+	ChestplateTooltip: 增加10%代行者暴击概率
+	LegsTooltip: 增加15%移动速度
+	SetBonus:
+		'''
+		命中时追加一把左轮攻击
+		左轮以1/6的概率造成五倍伤害
+		这一概率在触发处刑攻击时提升至100%
+		'''
+}
+
+RaincoatExecutor: {
+	HelmetTooltip: ""
+	ChestplateTooltip: ""
+	SetBonus: ""
+}
+
+FloretProtectorExecutor: {
+	HelmetTooltip:
+		'''
+		增加10%代行者伤害
+		增加5%代行者暴击概率
+		'''
+	ChestplateTooltip:
+		'''
+		增加10%代行者伤害
+		使你免疫击退
+		'''
+	LegsTooltip:
+		'''
+		增加40%代行者伤害和暴击概率
+		增加20%移动速度
+		'''
+	SetBonus:
+		'''
+		总会以一定时间在你的周围漂浮多种草药
+		靠近时以拾取，并依据拾取草药的不同获得不同的效果
+		'''
+}
+
+FishCostumeExecutor: {
+	HelmetTooltip: ""
+	ChestplateTooltip: ""
+	SetBonus: ""
 }

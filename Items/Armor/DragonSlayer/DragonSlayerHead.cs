@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Rarity.RarityShiny;
@@ -12,15 +13,14 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
     [AutoloadEquip(EquipType.Head)]
     public class DragonSlayerHead : HJScarletItemClass
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
-        public override string AssetPath => AssetHandler.Armor;
+        public override string AssetPath => AssetHandler.Armors;
         public override void SetDefaults()
         {
             Item.width = 26;
             Item.height = 28;
             Item.defense = 25;
+            Item.SetUpRarityPrice(ItemRarityID.Purple);
             Item.rare = RarityType<DisasterRarity>();
-            Item.value = Item.buyPrice(gold: 50);
 
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -36,7 +36,7 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         {
             if (line.IsItemName())
             {
-                DisasterRarity.DrawRarity(line);
+                DisasterRarity.DrawRarity2(line);
                 return false;
             }
             return true;
@@ -44,23 +44,27 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
 
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage<GenericDamageClass>() += 0.25f;
-            player.maxTurrets += 2;
+            player.GetDamage<ExecutorDamageClass>() += 0.15f;
+            player.GetCritChance<ExecutorDamageClass>() += 10;
         }
         public override void UpdateArmorSet(Player player)
         {
-            string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBonus").ToLangValue();
-            player.setBonus += value;
+            string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBouns").ToLangValue();
+            player.HJScarlet().redDragonKnight = true;
+            player.setBonus += "\n" + value;
+            player.statManaMax2 += 120;
+            player.manaCost -= 0.2f;
+            player.maxMinions += 3;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.SquireAltHead).
-                AddIngredient(ItemID.HuntressAltHead).
-                AddIngredient(ItemID.ApprenticeAltHead).
-                AddIngredient(ItemID.MonkAltHead).
-                AddIngredient(ItemID.DefenderMedal, 20).
-                AddTile(TileID.MythrilAnvil).
+                AddIngredient(ItemID.FragmentSolar, 10).
+                AddIngredient(ItemID.FragmentVortex, 10).
+                AddIngredient(ItemID.FragmentNebula, 10).
+                AddIngredient(ItemID.FragmentStardust, 10).
+                AddIngredient(ItemID.LunarBar, 10).
+                AddTile(TileID.LunarCraftingStation).
                 Register();
         }
     }

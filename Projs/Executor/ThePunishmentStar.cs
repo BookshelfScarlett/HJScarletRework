@@ -147,6 +147,17 @@ namespace HJScarletRework.Projs.Executor
                 sb.Draw(star, drawPos, null, Color.LightGoldenrodYellow * colorAlpha, Projectile.rotation + PiOver2, star.Size() / 2, starScale * 0.5f, SpriteEffects.None, 0);
             }
         }
+        public float GetAlphaFade(float t)
+        {
+            return Lerp(0.3f, 1f, t);
+        }
+        public Vector2 GetScale(float t)
+        {
+            Vector2 starScale = new(0.9f, 1.4f);
+            Vector2 beginScale = new(0.1f, 0.2f);
+            return Vector2.Lerp(beginScale, starScale, t) * 0.91f;
+        }
+
         public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
         {
             float laserLength = 50;
@@ -156,6 +167,7 @@ namespace HJScarletRework.Projs.Executor
             HJScarletShader.TerrarRayLaser.Parameters["uColor"].SetValue(drawColor.ToVector4() * alphaValue);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeoutLength"].SetValue(0.8f);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeinLength"].SetValue(0.1f);
+            HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();
             HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();
             if (Projectile.oldPos.Length < 3)
                 return;
@@ -172,16 +184,6 @@ namespace HJScarletRework.Projs.Executor
                 trailDrawDates.Add(new(validPosition[j] + Projectile.Size / 2 + posOffset, drawColor, new Vector2(0, 8 * multipleSize * Projectile.scale), rot));
             }
             TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
-        }
-        public float GetAlphaFade(float t)
-        {
-            return Lerp(0.3f, 1f, t);
-        }
-        public Vector2 GetScale(float t)
-        {
-            Vector2 starScale = new(0.9f, 1.4f);
-            Vector2 beginScale = new(0.1f, 0.2f);
-            return Vector2.Lerp(beginScale, starScale, t) * 0.91f;
         }
     }
 }

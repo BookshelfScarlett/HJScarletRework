@@ -43,4 +43,9 @@ HJScarletConfigClient: {
 		Label: Performance Mode
 		Tooltip: ""
 	}
+
+	DrawExecutionCounter: {
+		Label: Draw Execution Counter
+		Tooltip: ""
+	}
 }

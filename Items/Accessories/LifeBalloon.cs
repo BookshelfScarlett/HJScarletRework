@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Accessories
     {
         public override bool IsLoadingEnabled(Mod mod) => false;
         public override string AssetPath => AssetHandler.Equips;
-        public override void SetDefaults()
+        public override void ExSD()
         {
             Item.width = Item.height = 30;
             Item.accessory = true;

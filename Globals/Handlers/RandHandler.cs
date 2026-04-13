@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System.Net.Http.Headers;
 using Terraria;
+using Terraria.GameContent;
 
 namespace HJScarletRework.Globals.Handlers
 {
@@ -35,12 +37,29 @@ namespace HJScarletRework.Globals.Handlers
             float edgeY = valueY ?? valueX;
             return pos + Main.rand.NextVector2Circular(valueX, edgeY);
         }
+        public static Vector2 ToRandRec(this Entity entity)
+        {
+            Rectangle rec = Utils.CenteredRectangle(entity.Center, new Vector2(entity.width, entity.height));
+            return Main.rand.NextVector2FromRectangle(rec);
+        }
         public static bool RandBoolen(int chance = 2) => Main.rand.NextBool(chance);
         public static float RandFloat(float minValue = 0f, float maxValue = 1f) => Main.rand.NextFloat(minValue, maxValue);
         public static int GetSeconds(int seconds) => seconds * 60;
         public static Color RandLerpColor(Color beginColor, Color endColor) => Color.Lerp(beginColor, endColor, RandZeroToOne);
         public static string GetVanillaAssetPath(VanillaAsset vanillaAsset, int id)=> $"Terraria/Images/{vanillaAsset}_{id}";
-        public static Asset<Texture2D> GetVanillaAsset(VanillaAsset vanillaAsset, int id)=> Request<Texture2D>($"Terraria/Images/{vanillaAsset}_{id}");
+        public static Texture2D GetVanillaAsset(VanillaAsset vanillaAsset, int id)
+        {
+            Texture2D tex = null;
+            if (vanillaAsset == VanillaAsset.Item)
+            {
+                return TextureAssets.Item[id].Value;
+            }
+            else
+            {
+                return TextureAssets.Projectile[id].Value;
+            }
+        }
+
         
     }
 }

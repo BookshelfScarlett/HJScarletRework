@@ -46,7 +46,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ExSD()
         {
-            Projectile.height = Projectile.width = 16;
+            Projectile.height = Projectile.width = 60;
             Projectile.extraUpdates = 5;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;

@@ -30,7 +30,6 @@ namespace HJScarletRework.Items.Useables
         }
         public override bool? UseItem(Player player)
         {
-            HJScarletMethods.KillPlayer(player);
             return true;
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)

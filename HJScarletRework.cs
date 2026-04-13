@@ -1,4 +1,5 @@
 global using static HJScarletRework.Globals.Handlers.EasingHandler;
+global using static HJScarletRework.Globals.Handlers.GlobalHandler;
 global using static HJScarletRework.Globals.Handlers.RandHandler;
 global using static Microsoft.Xna.Framework.MathHelper;
 global using static Terraria.ModLoader.ModContent;

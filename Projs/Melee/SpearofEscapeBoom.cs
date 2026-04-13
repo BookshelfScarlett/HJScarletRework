@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Projectiles.Meelee;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
@@ -36,10 +37,11 @@ namespace HJScarletRework.Projs.Melee
             if (!Projectile.HJScarlet().FirstFrame)
             {
                 new CrossGlow(Projectile.Center, Color.Orange, 45, 1f, Projectile.scale * 0.4f, false).Spawn();
+                new CrossGlow(Projectile.Center, Color.OrangeRed, 45, 1f, Projectile.scale * 0.24f, false).Spawn();
                 //强行用粉色的烟来把这里的范围覆盖起来
                 for (int j = 0; j < 15; j++)
                 {
-                    new SmokeParticle(Projectile.Center, RandVelTwoPi(2f, 8f), RandLerpColor(Color.Orange, Color.Black), 45, RandRotTwoPi, 1f, Projectile.scale * Main.rand.NextFloat(0.8f, 1.26f)).SpawnToPriorityNonPreMult();
+                    new SmokeParticle(Projectile.Center, RandVelTwoPi(2f, 8f), RandLerpColor(Color.Orange, Color.Black), 40, RandRotTwoPi, 1f, Projectile.scale * Main.rand.NextFloat(0.8f, 1.26f)).SpawnToPriorityNonPreMult();
                 }
                 //starShape,往周围扩散，速度最好更快
                 for (int i = 0; i < 20; i++)

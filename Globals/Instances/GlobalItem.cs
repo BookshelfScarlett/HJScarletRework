@@ -30,6 +30,11 @@ namespace HJScarletRework.Globals.Instances
         public float CritsDamageBonus = 0f;
         private int GhostTimer = 0;
         private int GhostFrame = 0;
+        public bool EnableExecutorVersion = false;
+        /// <summary>
+        /// shorthand
+        /// </summary>
+        public Player LocalPlayer => Main.LocalPlayer;
         public override void UpdateInventory(Item item, Player player)
         {
             if (HJScarletConfigClient.Instance.DrawIcon && CanDrawIcon)
@@ -43,6 +48,21 @@ namespace HJScarletRework.Globals.Instances
                 }
                 if (GhostFrame >= 16)
                     GhostFrame = 1;
+            }
+        }
+        public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
+        {
+            if (player.HJScarlet().heartoftheCrystal && item.DamageType.Equals(DamageClass.Magic))
+            {
+                mult = 0;
+            }
+            base.ModifyManaCost(item, player, ref reduce, ref mult);
+        }
+        public override void OnConsumeItem(Item item, Player player)
+        {
+            if(item.type == ItemID.GenderChangePotion)
+            {
+                player.HJScarlet().genderChangeTimer = GetSeconds(300);
             }
         }
         public override void PostDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
@@ -112,7 +132,7 @@ namespace HJScarletRework.Globals.Instances
                 new HashSet<int>
                 {
                     ItemType<Dialectics>(),
-                    ItemType<Apocalypse>()
+                    ItemType<GrandFinale>()
 
                 },
                 MatterRarity.DrawRarity
@@ -125,14 +145,50 @@ namespace HJScarletRework.Globals.Instances
                 string keyPath = Mod.GetLocalizationKey($"SwitchWeaponTooltip");
                 tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), Color.Lime);
             }
+            if (LocalPlayer.HJScarlet().terraRecipe)
+            {
+                bool foodBuff = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
+                if (foodBuff)
+
+                {
+                    //表单里有这个内容我们才写这个东西。没有则写另一条
+                    string path = Mod.GetLocalizationKey($"Items.Useable.TerrariaRecipe.");
+                    List<int> list = LocalPlayer.HJScarlet().terraRecipe_CurEat;
+                    if (list.Contains(item.type))
+                        tooltips.QuickAddTooltipDirect((path + "Eaten").ToLangValue(), Color.GreenYellow);
+                    else
+                        tooltips.QuickAddTooltipDirect((path + "NotEaten").ToLangValue(), Color.SkyBlue);
+                }
+            }
             base.ModifyTooltips(item, tooltips);
         }
         public override void HoldItem(Item item, Player player)
         {
+            var usPlayer = player.HJScarlet();
             if (EnableCritDamage)
             {
-                player.HJScarlet().GeneralCrtiDamageAdd += CritsDamageBonus;
+                usPlayer.critDamageAll += CritsDamageBonus;
             }
+        }
+        public override bool? UseItem(Item item, Player player)
+        {
+            var usPlayer = player.HJScarlet();
+            if (usPlayer.terraRecipe)
+            {
+                bool foodBuff = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
+                if (foodBuff)
+                {
+                    //物品都是独立的实例，这里必须得把表单直接扔到玩家类里进行保存
+                    if (!usPlayer.terraRecipe_CurEat.Contains(item.type))
+                    {
+                        usPlayer.terraRecipe_CurEat.Add(item.type);
+                        //这里也会尝试删除这个表的一个元素
+                        usPlayer.terraRecipe_haventEat.Remove(item.type);
+                        usPlayer.terraRecipe_EatenFoods++;
+                    }
+                }
+            }
+            return base.UseItem(item, player);
         }
         public override string IsArmorSet(Item head, Item body, Item legs)
         {
@@ -160,7 +216,8 @@ namespace HJScarletRework.Globals.Instances
                     itemLoot.AddLoot<SacarbWings>(10);
                 if (item.type == ItemType<WallofShadowTreasureBag>())
                     itemLoot.AddLoot<DeathTolls>(4);
-
+                if (item.type == ItemID.WallOfFleshBossBag)
+                    itemLoot.AddLoot<ExecutorEmblem>(3);
             }
         }
         public override void AddRecipes()
@@ -199,7 +256,14 @@ namespace HJScarletRework.Globals.Instances
                 AddTile(TileID.Autohammer).
                 DisableDecraft().
                 Register();
-
+            Recipe.Create(ItemID.AvengerEmblem).
+                AddIngredient<ExecutorEmblem>().
+                AddIngredient(ItemID.SoulofFright, 5).
+                AddIngredient(ItemID.SoulofMight, 5).
+                AddIngredient(ItemID.SoulofSight, 5).
+                AddTile(TileID.MythrilAnvil).
+                DisableDecraft().
+                Register();
             if (!ModLoader.TryGetMod("Fargowiltas", out Mod fargoWiltas))
                 return;
             Recipe.Create(ItemType<AzureFrostmark>()).

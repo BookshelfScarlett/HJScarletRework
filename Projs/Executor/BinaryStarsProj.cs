@@ -347,8 +347,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
-                if (ModProj.IsHitOnEnablFocusMechanicProj)
-                    Owner.HJScarlet().ExecutionTime += 1;
+                Projectile.AddExecutionTime(ItemType<BinaryStars>());
                 Projectile.Kill();
                 Update = true;
             }

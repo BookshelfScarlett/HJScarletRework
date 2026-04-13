@@ -27,6 +27,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.penetrate = 1;
             Projectile.extraUpdates = 2;
             Projectile.localNPCHitCooldown = 60;
+            Projectile.timeLeft = 600;
         }
         public override void AI()
         {
@@ -36,6 +37,12 @@ namespace HJScarletRework.Projs.Melee
             Dust d = Dust.NewDustPerfect(mountedPos + Main.rand.NextVector2Circular(6f, 6f), DustID.IceTorch);
             d.noGravity = true;
             new TurbulenceGlowOrb(mountedPos + Main.rand.NextVector2Circular(6f, 6f), 1.2f, RandLerpColor(Color.DeepSkyBlue, Color.Blue), 40, 0.1f, Projectile.SafeDir().ToRotation()).SpawnToPriority();
+            Timer++;
+            if(Projectile.IsMe() && Timer % 8f == 0)
+            {
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(18f), Projectile.velocity / 9f + RandVelTwoPi(4f), ProjectileType<TonbogiriBubble>(), Projectile.damage / 2, 2f, Owner.whoAmI);
+                ((TonbogiriBubble)proj.ModProjectile).HomingDistance = 400f;
+            }
 
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -54,12 +61,13 @@ namespace HJScarletRework.Projs.Melee
         }
         public void SpawnBubbles()
         {
-            for (float i  = 0; i < TotalBubbles;i++)
+            for (float i  = 0; i < 3;i++)
             {
                 Vector2 dir = Projectile.SafeDirByRot();
                 Vector2 spawnPos = Projectile.Center;
                 Vector2 velDir = dir.ToRandVelocity(ToRadians(60)) ;
-                Projectile bubble = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, velDir*  Main.rand.NextFloat(12.2f,14.2f), ProjectileType<TonbogiriBubble>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                Projectile bubble = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, velDir*  Main.rand.NextFloat(12.2f,14.2f), ProjectileType<TonbogiriBubble>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
+                ((TonbogiriBubble)bubble.ModProjectile).HomingDistance = 600f;
 
             }
         }

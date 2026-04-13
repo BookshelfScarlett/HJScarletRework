@@ -3,9 +3,9 @@ HoneyRegenAlt: {
 	Description: Accelerating life regen speed
 }
 
-RewardsofWarriorBuff: {
+BlackKeyExecutionBuff: {
 	DisplayName: Rewardsof Warrior Buff
-	Description: Mods.HJScarletRework.Buffs.RewardsofWarriorBuff.Description
+	Description: Mods.HJScarletRework.Buffs.BlackKeyExecutionBuff.Description
 }
 
 WhaleBuff: {
@@ -36,4 +36,9 @@ WatcherBuff: {
 PanicBuff: {
 	DisplayName: Panic Buff
 	Description: Mods.HJScarletRework.Buffs.PanicBuff.Description
+}
+
+HerbBagBuff: {
+	DisplayName: Herb Bag Buff
+	Description: Mods.HJScarletRework.Buffs.HerbBagBuff.Description
 }

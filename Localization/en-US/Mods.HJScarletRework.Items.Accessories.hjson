@@ -43,12 +43,12 @@ PreciousTarget: {
 		'''
 }
 
-RewardofKingdom: {
+ExecutorAscension: {
 	DisplayName: Rewardof Kingdom
 	Tooltip: ""
 }
 
-RewardofWarrior: {
+ExecutorSigil: {
 	DisplayName: Rewardof Warrior
 	Tooltip: ""
 }
@@ -113,5 +113,45 @@ DefenderEmblem: {
 
 ExecutorEmblem: {
 	DisplayName: Executor Emblem
+	Tooltip: ""
+}
+
+LoveRing: {
+	DisplayName: Love Ring
+	Tooltip: ""
+}
+
+ExecutorBadge: {
+	DisplayName: Executor Badge
+	Tooltip: ""
+}
+
+AxeofPerun: {
+	DisplayName: Axeof Perun
+	Tooltip: ""
+}
+
+BlackKey: {
+	DisplayName: Black Key
+	Tooltip: ""
+}
+
+ExecutorBow: {
+	DisplayName: Executor Bow
+	Tooltip: ""
+}
+
+ExecutorGun: {
+	DisplayName: Executor Gun
+	Tooltip: ""
+}
+
+ExecutorLauncher: {
+	DisplayName: Executor Launcher
+	Tooltip: ""
+}
+
+TinyShortsword: {
+	DisplayName: Executor Shortsword
 	Tooltip: ""
 }

@@ -49,18 +49,18 @@ namespace HJScarletRework.Items.Weapons.Executor
                 DisasterRarity.DrawRarity2(line);
                 return false;
             }
-            if(line.Mod == "Terraria" && (line.Name == "CritChance"))
+            if (line.Mod == "Terraria" && (line.Name == "CritChance"))
             {
                 DisasterRarity.DrawMisc(line);
                 return false;
             }
 
-            if(line.Mod == "Terraria" && (line.Name == "Damage"))
+            if (line.Mod == "Terraria" && (line.Name == "Damage"))
             {
                 DisasterRarity.DrawMisc(line);
                 return false;
             }
-            if(line.Mod == Mod.Name && (line.Name == "FlavorTooltipsName"))
+            if (line.Mod == Mod.Name && (line.Name == "FlavorTooltipsName"))
             {
                 DisasterRarity.DrawMisc(line);
                 return false;

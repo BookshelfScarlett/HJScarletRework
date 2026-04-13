@@ -19,3 +19,35 @@ DragonSlayerLegs: {
 	DisplayName: Dragon Slayer Legs
 	Tooltip: ""
 }
+
+RuneWizardExecutor: {
+	HelmetTooltip: ""
+	ChestplateTooltip: ""
+	SetBonus: ""
+}
+
+CowboyExecutor: {
+	HelmetTooltip: ""
+	ChestplateTooltip: ""
+	LegsTooltip: ""
+	SetBonus: ""
+}
+
+RaincoatExecutor: {
+	HelmetTooltip: ""
+	ChestplateTooltip: ""
+	SetBonus: ""
+}
+
+FloretProtectorExecutor: {
+	HelmetTooltip: ""
+	ChestplateTooltip: ""
+	LegsTooltip: ""
+	SetBonus: ""
+}
+
+FishCostumeExecutor: {
+	HelmetTooltip: ""
+	ChestplateTooltip: ""
+	SetBonus: ""
+}

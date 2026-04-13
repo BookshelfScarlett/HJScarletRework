@@ -21,6 +21,7 @@ namespace HJScarletRework.Assets.Registers
             LoadTrail();
             LoadTexture();
             LoadMisc();
+            LoadHud();
         }
         public override void Unload()
         {
@@ -30,6 +31,7 @@ namespace HJScarletRework.Assets.Registers
             UnloadTrail();
             UnloadTexture();
             UnloadMisc();
+            UnloadHud();
         }
     }
 }

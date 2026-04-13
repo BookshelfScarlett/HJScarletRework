@@ -137,8 +137,8 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 20f, 12f);
             if (Projectile.IntersectOwnerByDistance(50))
             {
-                if (Projectile.HJScarlet().AddFocusHit && !Owner.HasProj<DreamlessNightMinion>(out int projID))
-                    Owner.HJScarlet().ExecutionTime += 1;
+                if (!Owner.HasProj<DreamlessNightMinion>())
+                    Projectile.AddExecutionTime(ItemType<DreamlessNight>());
                 Projectile.Kill();
             }
         }
