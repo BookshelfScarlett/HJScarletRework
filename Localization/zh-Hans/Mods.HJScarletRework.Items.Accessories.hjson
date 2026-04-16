@@ -224,7 +224,7 @@ BlackKey: {
 		'''
 }
 
-ExecutorBow: {
+ArcBow: {
 	DisplayName: 拱形弓弩
 	Tooltip:
 		'''
@@ -233,8 +233,8 @@ ExecutorBow: {
 		'''
 }
 
-ExecutorGun: {
-	DisplayName: 加特林护身符
+MachineGunTalisman: {
+	DisplayName: 机枪护身符
 	Tooltip:
 		'''
 		增加12%代行者暴击伤害
@@ -242,7 +242,7 @@ ExecutorGun: {
 		'''
 }
 
-ExecutorLauncher: {
+RocketCharm: {
 	DisplayName: 火箭挂饰
 	Tooltip:
 		'''

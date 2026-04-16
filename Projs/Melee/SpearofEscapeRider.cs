@@ -96,7 +96,7 @@ namespace HJScarletRework.Projs.Melee
                     Vector2 dir = (Projectile.rotation + rotArgs + Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))).ToRotationVector2() * Main.rand.NextFloat(6f, 10f);
                     if (SignForRightClick == 1f)
                         dir += Owner.velocity.ToRandVelocity(ToRadians(10f), 8f, 12f) * -1;
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
                     ((SpearofEscapeMissile)proj.ModProjectile).DontUseMouseHoming = false;
                 }
             }

@@ -1,8 +1,6 @@
 ﻿using HJScarletRework.Globals.Enums;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System.Net.Http.Headers;
 using Terraria;
 using Terraria.GameContent;
 

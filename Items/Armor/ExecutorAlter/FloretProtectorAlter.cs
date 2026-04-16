@@ -1,9 +1,5 @@
-﻿using HJScarletRework.Globals.Methods;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 
@@ -17,7 +13,8 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override ArmorType Category => ArmorType.Helmet;
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
-            base.ExUpdateEquipAlter(item, player);
+            player.GetDamage<ExecutorDamageClass>() += 0.4f;
+            player.GetCritChance<ExecutorDamageClass>() += 40f;
         }
         public override string IsArmorSet(Item head, Item body, Item legs)
         {
@@ -41,20 +38,28 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         {
             if (!set.Equals(ArmorSetName))
                 return;
+            player.statLifeMax2 += 100;
             player.HJScarlet().floretProtectorExecutor = true;
             string armorCategory = Mod.GetLocalizationKey($"Items.Armor.{SetupName}Executor.SetBonus");
-            player.setBonus += "\n" + armorCategory.ToLangValue();
+            string armorCategory2 = Mod.GetLocalizationKey($"Items.Armor.{SetupName}Executor.BuffDetail");
+            string value;
+            if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt))
+                value = armorCategory2;
+            else
+                value = armorCategory;
+                player.setBonus += "\n" + value.ToLangValue();
         }
     }
     public class FlorectProtectorChestplateAlter: AlterVanillaArmor
     {
         public override int ApplyArmor => ItemID.FloretProtectorChestplate;
         public static int Defense = 60;
-        public override string SetupName => base.SetupName;
         public override ArmorType Category => ArmorType.Chestplate;
+        public override string SetupName => "FloretProtector";
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
-            base.ExUpdateEquipAlter(item, player);
+            player.GetDamage<ExecutorDamageClass>() += 0.10f;
+            player.noKnockback = true;
         }
         public override void ExSD(Item item)
         {
@@ -67,11 +72,13 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
     {
         public override int ApplyArmor => ItemID.FloretProtectorLegs;
         public static int Defense = 30;
-        public override string SetupName => base.SetupName;
+        public override string SetupName => "FloretProtector";
         public override ArmorType Category => ArmorType.Legs;
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
-            base.ExUpdateEquipAlter(item, player);
+            player.GetDamage<ExecutorDamageClass>() += 0.05f;
+            player.GetCritChance<ExecutorDamageClass>() += 5;
+            player.moveSpeed += 0.20f;
         }
         public override void ExSD(Item item)
         {

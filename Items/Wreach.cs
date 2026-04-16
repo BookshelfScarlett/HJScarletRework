@@ -3,7 +3,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
-using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -27,7 +26,7 @@ namespace HJScarletRework.Items
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            return true;
+            //return true;
             //Vector2 ownerMW = player.LocalMouseWorld();
                 Projectile proj = Projectile.NewProjectileDirect(source, Main.MouseWorld, RandVelTwoPi(2f), ProjectileType<FloatingPlants>(), 0, knockback, player.whoAmI);
             proj.rotation = RandRotTwoPi;

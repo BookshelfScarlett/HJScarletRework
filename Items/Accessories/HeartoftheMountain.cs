@@ -1,5 +1,4 @@
 ﻿using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Items.Placables;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;

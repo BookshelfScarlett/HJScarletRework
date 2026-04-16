@@ -1,5 +1,8 @@
-﻿using HJScarletRework.Buffs;
+﻿using ContinentOfJourney;
+using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
+using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -12,9 +15,6 @@ namespace HJScarletRework.Globals.Players
 {
     public partial class HJScarletPlayer : ModPlayer
     {
-        public bool NoGuideForBinaryStars = false;
-        public bool CanDisableGuideForGrandHammer = false;
-        public bool CanGiveFreeBinaryStars = false;
         public int flybackhandCloclCD = 0;
         public int flybackhandBuffTime = 0;
         public int flybackhandBuffTimeCurrent = 0;
@@ -41,8 +41,11 @@ namespace HJScarletRework.Globals.Players
         public int floretProtectorTimer = 0;
         public bool raincoatExecutor = false;
         public bool redDragonKnight = false;
-
+        public int protectorPlantID = -1;
+        public int[] protectorHerbTimerList = [0, 0, 0, 0, 0, 0, 0];
+        public bool protectorShiver = false;
         #endregion
+
         #region Accessories
         public bool heartoftheCrystal = false;
         public bool loveRing = false;
@@ -130,7 +133,7 @@ namespace HJScarletRework.Globals.Players
             PreciousTargetCrtis = 10;
             LifeBalloonAcc = false;
             galvanizedHandDashCD = 0;
-            climaticHawstringLaserCounter = 0 ;
+            climaticHawstringLaserCounter = 0;
 
             desterrannachtImmortalTime = 0;
             desterranRespawnChargeTimer = 0;
@@ -175,6 +178,120 @@ namespace HJScarletRework.Globals.Players
                 Vector2 pos = Main.rand.NextVector2FromRectangle(rec) + Vector2.UnitY * 20f + Vector2.UnitX * Main.rand.NextFloat(10f, 20f) * Main.rand.NextBool().ToDirectionInt();
                 new HeartParticle(pos, Vector2.UnitY * -Main.rand.NextFloat(0.51f, 2.3f), RandLerpColor(Color.Crimson, Color.HotPink), 40, 0.08f, 0.8f, fadeIn: true).Spawn();
             }
+        }
+        public override void OnEnterWorld()
+        {
+            for (int i = 0; i < Player.inventory.Length; i++)
+            {
+                Item item = Player.inventory[i];
+                if (item.IsAir || item is null)
+                    continue;
+                if (item.HJScarlet().EnableExecutorVersion)
+                {
+                    if (!ArmorMaps.Contains(item.type))
+                        continue;
+                    //这里实际上没什么办法，只能这样打表
+                    SwitchArmorType2(item, i);
+                }
+            }
+            for (int i = 0; i < Player.armor.Length; i++)
+            {
+                Item item = Player.armor[i];
+                if (item.IsAir || item is null)
+                    continue;
+                if (item.HJScarlet().EnableExecutorVersion)
+                {
+                    if (!ArmorMaps.Contains(item.type))
+                        continue;
+                    //这里实际上没什么办法，只能这样打表
+                    SwitchArmorType2(item, i, true);
+                }
+
+            }
+        }
+        private void SwitchArmorType2(Item item, int i, bool armorSlot = false)
+        {
+            switch (item.type)
+            {
+                case ItemID.RuneHat:
+                    AlterArmorType2(item.type, i, 14, false, armorSlot: armorSlot);
+                    break;
+                case ItemID.RuneRobe:
+                    AlterArmorType2(item.type, i, 22, false, armorSlot: armorSlot);
+                    break;
+                case ItemID.CowboyHat:
+                    AlterArmorType2(item.type, i, CowboyHelmet.Defense, false, ItemRarityID.Orange, armorSlot);
+                    break;
+                case ItemID.CowboyJacket:
+                    AlterArmorType2(item.type, i, CowboyChestplate.Defense, false, ItemRarityID.Orange, armorSlot);
+                    break;
+                case ItemID.CowboyPants:
+                    AlterArmorType2(item.type, i, CowboyHelmet.Defense, false, ItemRarityID.Orange, armorSlot);
+                    break;
+                case ItemID.RainHat:
+                    AlterArmorType2(item.type, i, RaincoatHelmet.Defense, false, armorSlot: armorSlot);
+                    break;
+                case ItemID.RainCoat:
+                    AlterArmorType2(item.type, i, RaincoatChestplate.Defense, false, armorSlot: armorSlot);
+                    break;
+                case ItemID.FishCostumeMask:
+                    AlterArmorType2(item.type, i, FishCostumeHelmet.Defense, false, armorSlot: armorSlot);
+                    break;
+                case ItemID.FishCostumeShirt:
+                    AlterArmorType2(item.type, i, FishCostumeChestplate.Defense, false, armorSlot: armorSlot);
+                    break;
+                case ItemID.FishCostumeFinskirt:
+                    AlterArmorType2(item.type, i, FishCostumeLegs.Defense, false, armorSlot: armorSlot);
+                    break;
+            }
+            if (DownedBossSystem.downedLifeGod)
+            {
+                switch (item.type)
+                {
+                    case ItemID.FloretProtectorHelmet:
+                        AlterArmorType2(item.type, i, FloretProtectorHelmetAlter.Defense, false, ItemRarityID.Red, armorSlot);
+                        break;
+                    case ItemID.FloretProtectorChestplate:
+                        AlterArmorType2(item.type, i, FlorectProtectorChestplateAlter.Defense, false, ItemRarityID.Red, armorSlot);
+                        break;
+                    case ItemID.FloretProtectorLegs:
+                        AlterArmorType2(item.type, i, FlorectProtectorLegsAlter.Defense, false, ItemRarityID.Red, armorSlot);
+                        break;
+                }
+            }
+        }
+        private void AlterArmorType2(int targetArmor, int targetindex, int defense = 0, bool vanity = true, int rarityID = -1, bool armorSlot = false)
+        {
+            Item targetItem = new Item();
+            Item inventItem;
+            if (armorSlot)
+            {
+                inventItem = Player.armor[targetindex];
+            }
+            else
+                inventItem = Player.inventory[targetindex];
+            bool favor = inventItem.favorited;
+            bool alterVersion = inventItem.HJScarlet().EnableExecutorVersion;
+            if (!alterVersion)
+            {
+                targetItem.SetDefaults(targetArmor);
+            }
+            else
+            {
+                targetItem.SetDefaults(targetArmor);
+                targetItem.vanity = vanity;
+                targetItem.HJScarlet().EnableExecutorVersion = true;
+                targetItem.defense = defense;
+                targetItem.favorited = favor;
+                if (rarityID != -1)
+                    targetItem.rare = rarityID;
+            }
+            if (armorSlot)
+            {
+                Player.armor[targetindex] = targetItem;
+            }
+            else
+                Player.inventory[targetindex] = targetItem;
         }
     }
 }

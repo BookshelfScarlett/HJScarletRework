@@ -1,11 +1,8 @@
-﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
-using Mono.Cecil.Cil;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -14,10 +11,10 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
 {
     public abstract class AlterVanillaArmor : GlobalItem
     {
-        
+
         public override void SaveData(Item item, TagCompound tag)
         {
-            if (item.type!= ApplyArmor)
+            if (item.type != ApplyArmor)
                 return;
             tag.Add("HJScarlet:AlterVersion", item.HJScarlet().EnableExecutorVersion);
         }
@@ -57,7 +54,9 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
             entity.vanity = false;
             entity.HJScarlet().CanDrawIcon = true;
             ExSD(entity);
-        
+        }
+        public override void PostUpdate(Item item)
+        {
         }
         public override string IsArmorSet(Item head, Item body, Item legs)
         {
@@ -112,11 +111,11 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
                 string path = $"{armorCategory}{Category}Tooltip".ToLangValue();
                 TooltipLine tooltipLine = new TooltipLine(Mod, "HJscarletReworkName", path);
                 tooltips.Insert(flavorTooltipIndex + 1, tooltipLine);
-                ExModifyTooltipsAlter(item, tooltips,armorCategory);
-                    
+                ExModifyTooltipsAlter(item, tooltips, armorCategory);
+
             }
         }
-        public virtual void ExModifyTooltipsAlter(Item item, List<TooltipLine> tooltips,string path)
+        public virtual void ExModifyTooltipsAlter(Item item, List<TooltipLine> tooltips, string path)
         {
         }
         public override void UpdateEquip(Item item, Player player)
@@ -166,7 +165,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         {
             if (item.type != ItemID.RuneHat)
                 return;
-            if(!item.HJScarlet().EnableExecutorVersion)
+            if (!item.HJScarlet().EnableExecutorVersion)
                 return;
             player.GetCritChance<ExecutorDamageClass>() += 11f;
         }
@@ -189,6 +188,16 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
             player.setBonus += "\n" + armorCategory.ToLangValue();
             player.HJScarlet().runeWizardExecutor = true;
         }
+        public override void AddRecipes()
+        {
+            Recipe.Create(ItemID.RuneHat).
+                AddIngredient(ItemID.UnicornHorn).
+                AddIngredient(ItemID.PixieDust, 20).
+                AddIngredient(ItemID.SoulofLight, 10).
+                DisableDecraft().
+                AddTile(TileID.CrystalBall).
+                Register();
+        }
     }
     public class RuneWizardChestplateAlter : AlterVanillaArmor
     {
@@ -205,6 +214,13 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         }
         public override void AddRecipes()
         {
+            Recipe.Create(ItemID.RuneRobe).
+                AddIngredient(ItemID.Robe).
+                AddIngredient(ItemID.PixieDust, 20).
+                AddIngredient(ItemID.SoulofLight, 10).
+                DisableDecraft().
+                AddTile(TileID.CrystalBall).
+                Register();
         }
     }
 }

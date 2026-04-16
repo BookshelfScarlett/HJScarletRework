@@ -1,5 +1,4 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
@@ -9,7 +8,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class SimpleHandAxe : ExecutorWeaponClass
     {
-        public override int ExecutionTime => 20;
+        public override int ExecutionTime => 10;
         public override int ExecutionProj => ProjectileType<SimpleHandAxeExecution>();
         public override void ExSD()
         {

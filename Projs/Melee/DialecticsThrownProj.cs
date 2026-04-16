@@ -5,7 +5,6 @@ using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using SteelSeries.GameSense;
 using System;
 using System.Collections.Generic;
 using Terraria;

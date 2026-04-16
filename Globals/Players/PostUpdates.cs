@@ -1,9 +1,11 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Melee;
+using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -20,6 +22,7 @@ namespace HJScarletRework.Globals.Players
         {
             UpdateTimer();
             UpdateFlybackBuff();
+            UpdateHerbBuff();
             critDamageAll = 0;
 
             //星月夜
@@ -36,6 +39,54 @@ namespace HJScarletRework.Globals.Players
                     Player.GetCritChance<ExecutorDamageClass>() += 30;
             }
         }
+
+        public void UpdateHerbBuff()
+        {
+            if (!floretProtectorExecutor)
+                return;
+            if (!Player.HasBuff<HerbBagBuff>())
+                return;
+            //遍历所有的目标准备赋效果
+            //妈的，天塌下来了你也只能这么打表
+            //太阳花
+            if (protectorHerbTimerList[0] > 0)
+            {
+                Player.statDefense += 10;
+            }
+            //月光花
+            if (protectorHerbTimerList[1] > 0)
+            {
+                Player.lifeRegen += 2;
+            }
+            //闪耀根
+            if (protectorHerbTimerList[2] > 0)
+            {
+                Player.pickSpeed -= 0.3f;
+
+            }
+            //水叶草
+            if (protectorHerbTimerList[3] > 0)
+            {
+                Player.luck += 25;
+            }
+            //死亡草
+            if (protectorHerbTimerList[4] > 0)
+            {
+                Player.GetDamage<ExecutorDamageClass>() += 0.15f;
+            }
+            //寒蝉
+            if (protectorHerbTimerList[5] > 0)
+            {
+                Player.endurance += 0.10f;
+            }
+            //火焰花
+            if (protectorHerbTimerList[6] > 0)
+            {
+                Player.GetCritChance<ExecutorDamageClass>() += 15;
+            }
+
+        }
+
         public void UpdateFlybackBuff()
         {
             //归零针buff
@@ -131,6 +182,14 @@ namespace HJScarletRework.Globals.Players
 
             if (blackKeyTimer > 0)
                 blackKeyTimer--;
+            if (floretProtectorTimer > 0)
+                floretProtectorTimer--;
+            protectorPlantID = Player.HasBuff<HerbBagBuff>() ? protectorPlantID : -1;
+            for (int i = 0; i < protectorHerbTimerList.Length; i++)
+            {
+                if (protectorHerbTimerList[i] != 0)
+                    protectorHerbTimerList[i]--;
+            }
         }
 
 
@@ -143,6 +202,20 @@ namespace HJScarletRework.Globals.Players
         {
             HandleTerraRecipe();
             HandleLoveRing();
+            if (floretProtectorTimer == 0 && floretProtectorExecutor)
+            {
+                int spawnTime = 0;
+                for (int i = 0; i < 4; i++)
+                {
+                    if (Main.rand.NextBool())
+                        continue;
+                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center.ToRandCirclePosEdge(160f) + RandVelTwoPi(100f, 200f), RandVelTwoPi(2f,6f), ProjectileType<FloatingPlants>(), 0, 0, Player.whoAmI);
+                    proj.rotation = RandRotTwoPi;
+                    proj.ai[1] = Main.rand.Next(0, 7);
+                    spawnTime++;
+                }
+                floretProtectorTimer = GetSeconds(2) + spawnTime * GetSeconds(1);
+            }
             if (stardustRune)
             {
                 if (Player.statLife < 100 && desterrennacht)

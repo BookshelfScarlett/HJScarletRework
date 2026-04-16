@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;

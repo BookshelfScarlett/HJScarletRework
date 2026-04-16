@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\general\\floatingflowers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\general\\floatingflowers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\armor\\executoralter\\floretprotectoralter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\armor\\executoralter\\floretprotectoralter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\executor\\dreaminglightfireball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\executor\\dreaminglightfireball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\localization\\zh-hans\\mods.hjscarletrework.items.armor.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:localization\\zh-hans\\mods.hjscarletrework.items.armor.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\armor\\executoralter\\raincoatalter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\armor\\executoralter\\raincoatalter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 167,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -29,29 +33,46 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DreamingLightFireball.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Executor\\DreamingLightFireball.cs",
-              "RelativeDocumentMoniker": "Projs\\Executor\\DreamingLightFireball.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Executor\\DreamingLightFireball.cs",
-              "RelativeToolTip": "Projs\\Executor\\DreamingLightFireball.cs",
-              "ViewState": "AgIAAJIAAAAAAAAAAAAAwJoAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T17:48:08.609Z",
+              "Title": "Mods.HJScarletRework.Items.Armor.hjson",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Localization\\zh-Hans\\Mods.HJScarletRework.Items.Armor.hjson",
+              "RelativeDocumentMoniker": "Localization\\zh-Hans\\Mods.HJScarletRework.Items.Armor.hjson",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Localization\\zh-Hans\\Mods.HJScarletRework.Items.Armor.hjson",
+              "RelativeToolTip": "Localization\\zh-Hans\\Mods.HJScarletRework.Items.Armor.hjson",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-16T22:15:17.086Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FloatingFlowers.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\General\\FloatingFlowers.cs",
-              "RelativeDocumentMoniker": "Projs\\General\\FloatingFlowers.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\General\\FloatingFlowers.cs",
-              "RelativeToolTip": "Projs\\General\\FloatingFlowers.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAA2wGUAAABMAAAAAAAAAA==",
+              "Title": "FloretProtectorAlter.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Armor\\ExecutorAlter\\FloretProtectorAlter.cs",
+              "RelativeDocumentMoniker": "Items\\Armor\\ExecutorAlter\\FloretProtectorAlter.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Armor\\ExecutorAlter\\FloretProtectorAlter.cs",
+              "RelativeToolTip": "Items\\Armor\\ExecutorAlter\\FloretProtectorAlter.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T17:47:24.434Z",
+              "WhenOpened": "2026-04-16T22:15:01.127Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RaincoatAlter.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Armor\\ExecutorAlter\\RaincoatAlter.cs",
+              "RelativeDocumentMoniker": "Items\\Armor\\ExecutorAlter\\RaincoatAlter.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Armor\\ExecutorAlter\\RaincoatAlter.cs",
+              "RelativeToolTip": "Items\\Armor\\ExecutorAlter\\RaincoatAlter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T22:15:00.636Z",
               "EditorCaption": ""
             }
           ]

@@ -1,8 +1,6 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Buffs

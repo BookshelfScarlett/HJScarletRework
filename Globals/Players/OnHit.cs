@@ -1,5 +1,4 @@
-﻿using HJScarletRework.Buffs;
-using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.General;
@@ -16,12 +15,21 @@ namespace HJScarletRework.Globals.Players
         public float critDamageExecutor = 0;
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (redDragonKnight)
+            {
+                hit.DamageType = ExecutorDamageClass.Instance;
+            }
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
             if (proj.DamageType == ExecutorDamageClass.Instance)
                 GlobalExecutorOnHit(target, hit, damageDone);
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (redDragonKnight)
+            {
+                hit.DamageType = ExecutorDamageClass.Instance;
+            }
+
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
             if (item.DamageType == ExecutorDamageClass.Instance)
                 GlobalExecutorOnHit(target, hit, damageDone);
@@ -30,15 +38,23 @@ namespace HJScarletRework.Globals.Players
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
             ModifyCritDamage(target, ref modifiers);
+            if (protectorShiver && Main.rand.NextBool(4) && modifiers.DamageType == ExecutorDamageClass.Instance)
+            {
+                modifiers.SourceDamage *= 1.1f;
+            }
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
             ModifyCritDamage(target, ref modifiers);
+            if (protectorShiver && Main.rand.NextBool(4) && modifiers.DamageType == ExecutorDamageClass.Instance)
+            {
+                modifiers.SourceDamage *= 1.1f;
+            }
         }
         public void ModifyCritDamage(NPC target, ref NPC.HitModifiers modifiers)
         {
             float totalCritsBonus = 0f;
-            if (CreationHatSet && modifiers.DamageType.CountsAsClass( DamageClass.Magic))
+            if (CreationHatSet && modifiers.DamageType.CountsAsClass(DamageClass.Magic))
             {
                 //将所有伤害直接设置为暴击类型，这里先过暴击情况
                 modifiers.SetCrit();

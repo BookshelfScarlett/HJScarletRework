@@ -23,6 +23,19 @@ namespace HJScarletRework.Globals.Players
                     PreciousTargetCrtis = limitedCrit;
             }
         }
+        //潜在的问题是，这里实际上有可能因为写法差异导致出现多乘区
+        public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
+        {
+            if(redDragonKnight && item.DamageType != ExecutorDamageClass.Instance && !item.DamageType.CountsAsClass<GenericDamageClass>() && item.damage > 0)
+            {
+                damage = StatModifier.Default;
+                float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
+                damage *= (1f + ratios);
+                if (item.consumable && item.DamageType.CountsAsClass<RangedDamageClass>())
+                    damage *= 1.10f;
+            }
+            base.ModifyWeaponDamage(item, ref damage);
+        }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if(runeWizardExecutor && item.DamageType == ExecutorDamageClass.Instance)

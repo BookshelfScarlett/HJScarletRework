@@ -136,17 +136,17 @@ BlackKey: {
 	Tooltip: ""
 }
 
-ExecutorBow: {
+ArcBow: {
 	DisplayName: Executor Bow
 	Tooltip: ""
 }
 
-ExecutorGun: {
+MachineGunTalisman: {
 	DisplayName: Executor Gun
 	Tooltip: ""
 }
 
-ExecutorLauncher: {
+RocketCharm: {
 	DisplayName: Executor Launcher
 	Tooltip: ""
 }

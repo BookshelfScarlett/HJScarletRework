@@ -174,7 +174,7 @@ namespace HJScarletRework.Projs.Executor
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
-            OldAimPos.Add(tarPos * 200f);
+            OldAimPos.Add(tarPos * 180f);
 
         }
 
@@ -187,7 +187,7 @@ namespace HJScarletRework.Projs.Executor
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
-            OldAimPos.Add(tarPos * 200f);
+            OldAimPos.Add(tarPos * 180f);
 
         }
         #endregion
@@ -244,7 +244,7 @@ namespace HJScarletRework.Projs.Executor
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
-            OldAimPos.Add(tarPos * 200f);
+            OldAimPos.Add(tarPos * 180f);
         }
         private void RightHalftAniHandlerEnd()
         {
@@ -255,7 +255,7 @@ namespace HJScarletRework.Projs.Executor
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
-            OldAimPos.Add(tarPos * 200f);
+            OldAimPos.Add(tarPos * 180f);
 
         }
         public float GetLerp_Mid(float t, int id)
@@ -327,7 +327,7 @@ namespace HJScarletRework.Projs.Executor
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
-            OldAimPos.Add(tarPos * 200f);
+            OldAimPos.Add(tarPos * 180f);
         }
 
         private void LeftHalftAniHandlerEnd()
@@ -339,7 +339,7 @@ namespace HJScarletRework.Projs.Executor
             HeldPos = InitVector.RotatedBy(curRotation).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
-            OldAimPos.Add(tarPos * 200f);
+            OldAimPos.Add(tarPos * 180f);
         }
 
         #endregion
@@ -386,16 +386,6 @@ namespace HJScarletRework.Projs.Executor
             Texture2D slash = HJScarletTexture.Texture_Swirl.Value;
             rotationPoint = Projectile.spriteDirection == -1 ? new Vector2(slash.Width, slash.Height) : new Vector2(0, slash.Height);
             SB.EnterShaderArea();
-            Texture2D texture = HJScarletTexture.Trail_RvSlash.Value;
-            Effect effect = HJScarletShader.AlphaFade;
-            effect.Parameters["uFadeoutLeftLength"].SetValue(0.1f);
-            effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
-            effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
-            effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.Crimson* 0.9f, 0.95f);
-            DrawSlash(texture, Color.Crimson* 0.6f, 0.7f);
-            DrawSlash(texture, Color.Crimson* 0.4f, 0.3f);
-            DrawSlash(texture, Color.Crimson * 0.3f, 0.2f);
 
             SB.EndShaderArea();
             return false;
@@ -404,6 +394,17 @@ namespace HJScarletRework.Projs.Executor
         {
 
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
+            Texture2D texture = HJScarletTexture.Texture_StandardGradient.Value;
+            Effect effect = HJScarletShader.AlphaFade;
+            effect.Parameters["uFadeoutLeftLength"].SetValue(0.1f);
+            effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
+            effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
+            effect.CurrentTechnique.Passes[0].Apply();
+            DrawSlash(texture, Color.DarkRed* 0.9f, 0.95f);
+            DrawSlash(texture, Color.Crimson* 0.6f, 0.7f);
+            DrawSlash(texture, Color.Crimson* 0.4f, 0.3f);
+            DrawSlash(texture, Color.Crimson * 0.3f, 0.2f);
+
             HJScarletMethods.EndShaderAreaPixel();
         }
         public void DrawSlash(Texture2D texture, Color drawcolor, float mult = 0.8f)

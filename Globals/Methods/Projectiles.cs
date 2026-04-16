@@ -282,6 +282,24 @@ namespace HJScarletRework.Globals.Methods
             }
         }
         /// <summary>
+        /// 预制发光边缘
+        /// </summary>
+        /// <param name="proj"></param>
+        /// <param name="color"></param>
+        /// <param name="drawTime"></param>
+        /// <param name="posMove"></param>
+        /// <param name="rotFix"></param>
+        public static void DrawGlowEdge(this Projectile proj,Texture2D tex, Color color, int drawTime = 8, float posMove = 2f, float rotFix = 0f, Vector2? drawPosOffset = null)
+        {
+            Vector2 offset = drawPosOffset ?? Vector2.Zero;
+            //绘制发光边缘
+            for (int i = 0; i < drawTime; i++)
+            {
+                Main.spriteBatch.Draw(tex, proj.Center - Main.screenPosition + ToRadians(i * 60f).ToRotationVector2() * posMove - offset, null, color with { A = 0 }, proj.rotation + rotFix, tex.Size() / 2, proj.scale, 0, 0f);
+            }
+        }
+
+        /// <summary>
         /// 预制射弹绘制
         /// </summary>
         /// <param name="proj"></param>
@@ -305,6 +323,25 @@ namespace HJScarletRework.Globals.Methods
                 Main.spriteBatch.Draw(tex, trailingDrawPos, null, trailColor, proj.oldRot[i] + rotFix, orig, proj.scale, 0, 0);
             }
         }
+        public static void DrawProj(this Projectile proj, Texture2D tex, Color color, int drawTime = 4, float offset = 0.7f, float rotFix = 0, bool useOldPos = false, Vector2? drawPosOffset = null)
+        {
+            Vector2 orig = tex.Size() / 2;
+            Vector2 offsetValue = drawPosOffset ?? Vector2.Zero;
+            Vector2 drawPos = proj.Center - Main.screenPosition - offsetValue;
+            int drawLength = drawTime > proj.oldPos.Length ? proj.oldPos.Length : drawTime;
+            for (int i = drawLength - 1; i >= 0; i--)
+            {
+                if (proj.oldPos[i] == Vector2.Zero)
+                    continue;
+                Vector2 trailingDrawPos = useOldPos ? proj.oldPos[i] + proj.PosToCenter() : drawPos - proj.velocity * i * offset;
+                float faded = 1 - i / (float)drawLength;
+                //平方放缩
+                faded = MathF.Pow(faded, 2);
+                Color trailColor = color * faded;
+                Main.spriteBatch.Draw(tex, trailingDrawPos, null, trailColor, proj.oldRot[i] + rotFix, orig, proj.scale, 0, 0);
+            }
+        }
+
         public static void DrawProjWithSpriteDirection(this Projectile proj, Color color, int drawTime = 4, float offset = 0.7f, float rotFix = 0, bool useOldPos = false, Vector2? drawPosOffset = null)
         {
             SpriteEffects se = proj.spriteDirection < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;

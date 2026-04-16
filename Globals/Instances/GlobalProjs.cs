@@ -3,7 +3,6 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
-using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;

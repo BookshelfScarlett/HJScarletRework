@@ -2,12 +2,8 @@
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
-using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
-using System;
-using System.Diagnostics.CodeAnalysis;
 using Terraria;
-using Terraria.GameContent;
 
 namespace HJScarletRework.Projs.Executor
 {

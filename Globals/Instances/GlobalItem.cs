@@ -31,6 +31,7 @@ namespace HJScarletRework.Globals.Instances
         private int GhostTimer = 0;
         private int GhostFrame = 0;
         public bool EnableExecutorVersion = false;
+        public bool isShivering = false;
         /// <summary>
         /// shorthand
         /// </summary>
@@ -52,17 +53,28 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
         {
-            if (player.HJScarlet().heartoftheCrystal && item.DamageType.Equals(DamageClass.Magic))
+            if ((player.HJScarlet().heartoftheCrystal || player.HJScarlet().redDragonKnight) && item.DamageType.CountsAsClass(DamageClass.Magic))
             {
                 mult = 0;
             }
             base.ModifyManaCost(item, player, ref reduce, ref mult);
+        }
+        public override void RightClick(Item item, Player player)
+        {
+            base.RightClick(item, player);
         }
         public override void OnConsumeItem(Item item, Player player)
         {
             if(item.type == ItemID.GenderChangePotion)
             {
                 player.HJScarlet().genderChangeTimer = GetSeconds(300);
+            }
+            Main.NewText(item.GetType().Name.Contains("crate"));
+            if (player.HJScarlet().protectorShiver)
+            {
+                player.QuickSpawnItem(player.GetSource_OpenItem(item.type), ItemID.GoldCoin, 50);
+                if (Main.rand.NextBool(4))
+                    player.QuickSpawnItem(player.GetSource_OpenItem(item.type), ItemID.PlatinumCoin, 30);
             }
         }
         public override void PostDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
@@ -169,6 +181,7 @@ namespace HJScarletRework.Globals.Instances
             {
                 usPlayer.critDamageAll += CritsDamageBonus;
             }
+            isShivering = usPlayer.protectorShiver;
         }
         public override bool? UseItem(Item item, Player player)
         {

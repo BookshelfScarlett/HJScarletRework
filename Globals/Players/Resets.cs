@@ -28,6 +28,7 @@ namespace HJScarletRework.Globals.Players
             floretProtectorExecutor = false;
             raincoatExecutor = false;
             redDragonKnight = false;
+            protectorShiver = true;
         }
 
         private void ResetPets()

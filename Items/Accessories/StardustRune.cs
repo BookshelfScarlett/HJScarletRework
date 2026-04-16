@@ -3,8 +3,6 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {

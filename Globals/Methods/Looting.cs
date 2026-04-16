@@ -11,5 +11,9 @@ namespace HJScarletRework.Globals.Methods
         {
             return loot.Add(ItemDropRule.Common(itemID, dropRateInt, minQuantity, maxQuantity));
         }
+        public static void AddCommon(this ItemLoot item, int itemID, int dropRateInt  =1, int minQuantity = 1, int maxQuantity =1)
+        {
+            item.Add(ItemDropRule.Common(itemID, dropRateInt, minQuantity, maxQuantity));
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Core.Keybinds;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Players;
-using System.Configuration;
 using Terraria;
 using Terraria.ModLoader;
 

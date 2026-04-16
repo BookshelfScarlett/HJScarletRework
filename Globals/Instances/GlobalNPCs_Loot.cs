@@ -8,9 +8,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Pets;
 using HJScarletRework.Items.Weapons.Melee;
-using System;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 

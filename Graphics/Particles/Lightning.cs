@@ -1,11 +1,8 @@
-﻿using ContinentOfJourney.Backgrounds;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.ParticleSystem;
-using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Text;
 using System;
 using Terraria;
 

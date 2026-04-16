@@ -65,22 +65,23 @@ namespace HJScarletRework.Globals.Players
         public override bool FreeDodge(Player.HurtInfo info)
         {
             ////星月夜的自活成功后的闪避，这里应该需要考虑一下……用什么钩子
-            //if(DesterrannachtImmortal && desterrannachtImmortalTime < 3)
-            //{
-            //    Player.AddImmuneTime(ImmunityCooldownID.General, 60);
-            //    desterrannachtImmortalTime += 1;
-            //    return true;
-            //}
             return base.FreeDodge(info);
         }
 
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
-            base.ModifyHitByNPC(npc, ref modifiers);
+            float totalProjDamageModify = 1f;
+            if (protectorShiver)
+                totalProjDamageModify -= 0.12f;
+            modifiers.FinalDamage *= totalProjDamageModify;
         }
         public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
         {
             base.ModifyHitByProjectile(proj, ref modifiers);
+            float totalProjDamageModify = 1f;
+            if (protectorShiver)
+                totalProjDamageModify -= 0.12f;
+            modifiers.FinalDamage *= totalProjDamageModify;
         }
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {

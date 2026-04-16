@@ -204,5 +204,10 @@ TrueScarlet: {
 
 SimpleHandAxe: {
 	DisplayName: 简易双刃斧
-	Tooltip: 可穿透一名敌人
+	Tooltip:
+		'''
+		可穿透一名敌人
+		“代行者的起点”
+		'''
+	ExecutionStrike: 无视重力，并在命中时追杀这名敌人
 }

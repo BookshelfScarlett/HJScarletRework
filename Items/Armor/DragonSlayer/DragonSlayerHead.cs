@@ -52,9 +52,9 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
             string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBouns").ToLangValue();
             player.HJScarlet().redDragonKnight = true;
             player.setBonus += "\n" + value;
-            player.statManaMax2 += 120;
-            player.manaCost -= 0.2f;
-            player.maxMinions += 3;
+            player.GetAttackSpeed<MeleeDamageClass>() += 0.25f;
+            player.maxMinions = 3;
+            player.maxTurrets = 3;
         }
         public override void AddRecipes()
         {

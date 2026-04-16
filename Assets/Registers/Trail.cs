@@ -1,5 +1,4 @@
-﻿using Microsoft.Build.Framework;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
 
 namespace HJScarletRework.Assets.Registers
 {

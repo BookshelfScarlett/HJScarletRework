@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Projectiles.Meelee;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;

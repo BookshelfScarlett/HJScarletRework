@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         }
         public override void ExSD()
         {
-            Item.damage = 426;
+            Item.damage = 986;
             Item.useTime = Item.useAnimation = 42;
             Item.knockBack = 12f;
             Item.UseSound = HJScarletSounds.SpearofEscape_Toss;

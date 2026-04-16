@@ -5,7 +5,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -40,12 +39,12 @@ namespace HJScarletRework.Projs.Executor
             Timer++;
             if (Timer > 30f)
             {
-                Projectile.AffactedByGrav(0.99f, yMult: 0.99f,yAdd: 0.727f,maxGravSpeed:17f);
+                Projectile.AffactedByGrav(0.98f, yMult: 0.97f,yAdd: 0.727f,maxGravSpeed:17f);
                 Projectile.rotation += Projectile.SpeedAffectRotation() / 12f;
             }
             else
             {
-                Projectile.AffactedByGrav(1, yMult: 0.99f,yAdd: 0.207f,maxGravSpeed:17f);
+                Projectile.AffactedByGrav(1, yMult: 0.99f,yAdd: 0.1207f,maxGravSpeed:17f);
                 Projectile.rotation += 0.21f;
             }
             UpdatePartilce();

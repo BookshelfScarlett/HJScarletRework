@@ -1,12 +1,6 @@
-﻿using ContinentOfJourney.NPCs;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Globals.Classes

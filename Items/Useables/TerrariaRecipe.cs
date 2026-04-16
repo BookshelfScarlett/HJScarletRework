@@ -1,14 +1,11 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Instances;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;

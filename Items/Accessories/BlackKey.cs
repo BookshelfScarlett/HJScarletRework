@@ -33,8 +33,8 @@ namespace HJScarletRework.Items.Accessories
         {
             CreateRecipe().
                 AddIngredient<TinyShortsword>().
-                AddIngredient<ExecutorGun>().
-                AddIngredient<ExecutorLauncher>().
+                AddIngredient<MachineGunTalisman>().
+                AddIngredient<RocketCharm>().
                 AddIngredient<LivingBar>().
                 AddTile(TileID.TinkerersWorkbench).
                 Register();
