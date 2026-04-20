@@ -1,7 +1,16 @@
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ScreenEffect;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
+using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Steamworks;
+using System;
+using System.Diagnostics.CodeAnalysis;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -9,195 +18,287 @@ using static HJScarletRework.Projs.Executor.AetherfireSmasherName;
 
 namespace HJScarletRework.Projs.Executor
 {
-    //Todo：按下鼠标右键后应当刷新一次生命值
-    public class AetherfireSmasherProj: ThrownHammerProj
+    public class AetherfireSmasherProj : HJScarletProj
     {
-        private enum DoType
-        {
-            IsShooted,
-            IsReturning,
-            IsStealth,
-        }
-        private DoType AttackType
-        {
-            get => (DoType)Projectile.ai[0];
-            set => Projectile.ai[0] = (float)value;
-        }
-        internal ref bool Update => ref Projectile.netUpdate;
+        public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<AetherfireSmasher>().Texture;
-        #region 基础数值
-        protected override BoomerangDefault BoomerangStat => new
-        (
-            returnTime: 40,
-            returnSpeed: 28f,
-            acceleration: 1.2f,
-            killDistance: 1000
-        );
-        //总潜伏攻击时长为五秒
-        private int StealthTotalTime => 60 * Projectile.extraUpdates;
-        //挂载锤子的攻击频率：5 * 额外更新
-        private int HangingHitCooldown => 5 * Projectile.extraUpdates;
-        private bool CanSpawnVolcano = true;
-        #endregion
+        public enum State
+        {
+            Shoot,
+            Return
+        }
+        public ref float Timer => ref Projectile.ai[0];
+        public State AttackState
+        {
+            get => (State)Projectile.ai[1];
+            set => Projectile.ai[1] = (float)value;
+        }
+        public bool ActiveDash = false;
+        public bool ActiveMiscDashHit = false;
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Type] = 5;
-            ProjectileID.Sets.TrailingMode[Type] = 2;
+            Projectile.ToTrailSetting();
         }
         public override void ExSD()
         {
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
-            Projectile.width = Projectile.height = 66;
-            Projectile.timeLeft = 120;
+            Projectile.penetrate = -1;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.extraUpdates = 2;
+            Projectile.ownerHitCheck = true;
+            Projectile.width = Projectile.height = 60;
+            Projectile.SetupImmnuity(30);
+            Projectile.noEnchantmentVisuals = true;
         }
-        public override void AI()
+        public override void OnFirstFrame()
         {
-            Lighting.AddLight(Projectile.Center, TorchID.Red);
-            DoGeneric();
-            switch (AttackType)
+            if (Projectile.HJScarlet().ExecutionStrike)
             {
-                case DoType.IsShooted:
-                    DoShooted();
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.SafeDir() * 32f, ProjectileType<AetherfireSmasherExecution>(), Projectile.damage, 2f, Owner.whoAmI);
+                proj.HJScarlet().ExecutionStrike = true;
+                Projectile.Kill();
+            }
+            Projectile.velocity = Projectile.velocity.ToRandVelocity(ToRadians(10f), 18f, 23f);
+        }
+        public override void ProjAI()
+        {
+            switch (AttackState)
+            {
+                case State.Shoot:
+                    DoShoot();
                     break;
-                case DoType.IsReturning:
-                    DoReturning();
+                case State.Return:
+                    DoReturn();
                     break;
-                case DoType.IsStealth:
-                    DoStealth();
-                    break;
+            }
+        }
+        public void DoShoot()
+        {
+            Timer++;
+            Projectile.rotation += 0.2f * (Projectile.numHits < 1).ToInt();
+            bool isHitNPC = Projectile.numHits > 0;
+            if (ActiveDash)
+            {
+                OpacityGlow = Lerp(OpacityGlow, 1.1f, 0.22f);
+                ScaleGlow = Lerp(ScaleGlow, 1.1f, 0.22f);
+                UpdateHitParticle();
+            }
+            else
+            {
+                UpdateParticle();
+            }
+            //掷出一定时间再去考虑索敌的事情。
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 3f + ActiveMiscDashHit.ToInt() * 5f))
+            {
+                if (Projectile.GetTargetSafe(out NPC target, true, 1200, canPassWall: true) && Projectile.numHits < 1)
+                {
+                    if (!ActiveDash)
+                    {
+                        Projectile.velocity = (target.Center - Projectile.Center).ToSafeNormalize() * 18f;
+                        InitActiveDashParticle();
+                        SoundEngine.PlaySound(SoundID.Item69 with { MaxInstances = 0, Pitch = -0.4f, PitchVariance = 0.1f, Volume = 0.7f }, Projectile.Center);
+                    }
+                    Projectile.rotation = Projectile.velocity.ToRotation();
+                    ActiveDash = true;
+                    Projectile.HomingTarget(target.Center, -1, 18f, 10f, 40f);
+                }
+                if (isHitNPC)
+                {
+                    Projectile.velocity *= 0.94f;
+                    float rot = (Projectile.velocity).ToSafeNormalize().ToRotation();
+                    Projectile.rotation = Projectile.rotation.AngleLerp(rot, 0.2f);
+                }
+            }
+            else if (ActiveMiscDashHit)
+            {
+                Projectile.velocity *= 0.97f;
+            }
+            if (Projectile.MeetMaxUpdatesFrame(Timer, (18 + (Projectile.numHits > 0).ToInt() * 18)))
+            {
+                if (isHitNPC)
+                {
+                    SpawnFireball();
+                    Projectile.velocity = (-(Projectile.Center - Owner.Center)).ToSafeNormalize() * 18f;
+                    InitActiveDashParticle();
+                    SoundEngine.PlaySound(SoundID.Item110 with { MaxInstances = 0, Pitch = -0.2f, PitchVariance = 0.1f }, Projectile.Center);
+                }
+                Projectile.netUpdate = true;
+                Timer = 0;
+                AttackState = State.Return;
             }
         }
 
-        private void DirectlySpawnEruptionFireBall(float initTime, int eu = 1, int totalCount = 6, bool stealth = true)
+        public void InitActiveDashParticle()
         {
-            for (int i = 0; i < totalCount; i++)
+                PickTagColor(out Color baseColor, out Color targetColor);
+            PickTagDust(out short HigherDust, out short BottemDust);
+            float numberOfDusts = 10f;
+            float rotFactor = 360f / numberOfDusts;
+            Vector2 spawnPos = Projectile.Center.ToRandCirclePos(10f);
+            for (int j = 0; j < numberOfDusts; j++)
             {
-                Vector2 dir = Projectile.velocity.SafeNormalize(Vector2.UnitX).RotatedBy(Main.rand.NextFloat(-PiOver4 / 4, PiOver4 / 4)) * Main.rand.NextFloat(14f, 18f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<AetherfireSmasherFireball>(), Projectile.damage, Projectile.knockBack);
-                proj.timeLeft = 480;
-                proj.ai[0] = initTime;
-                proj.extraUpdates = eu;
+                spawnPos = Projectile.Center.ToRandCirclePos(10f);
+                float rot = ToRadians(j * rotFactor);
+                Vector2 offset = new Vector2(4.8f, 0).RotatedBy(rot * Main.rand.NextFloat(3.1f, 4.1f));
+                Vector2 velOffset = new Vector2(2.4f, 0).RotatedBy(rot * Main.rand.NextFloat(3.1f, 4.1f));
+                new ShinyOrbParticle(spawnPos + offset, velOffset - Projectile.SafeDir() * Main.rand.NextFloat(0.8f, 3.7f), RandLerpColor(baseColor, targetColor), 40, 0.8f).Spawn();
+            }
+            for (int j = 0; j < 10; j++)
+            {
+                    int dType = Main.rand.NextBool() ? HigherDust : BottemDust;
+                Dust d = Dust.NewDustPerfect(spawnPos + Main.rand.NextVector2CircularEdge(10f, 10f), dType);
+                d.velocity = Vector2.UnitX.RotatedByRandom(TwoPi) * Main.rand.NextFloat(1.2f, 4.2f) - Projectile.SafeDir() * Main.rand.NextFloat(2.8f, 8.7f);
+                d.scale = Main.rand.NextFloat(1.4f, 1.8f);
+                d.noGravity = true;
+            }
+            for (int j = 0; j < 10; j++)
+            {
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(4f), -Projectile.velocity.ToRandVelocity(ToRadians(30f), 0.8f, 9.4f), RandLerpColor(baseColor, Color.DarkGray), 40, RandRotTwoPi, 1f, 0.28f).SpawnToNonPreMult();
             }
         }
-        //终 极 史 山
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+
+        public void SpawnFireball()
         {
-            target.AddBuff(BuffID.Daybreak, 500);
-            //攻击的敌怪传入
-            SoundEngine.PlaySound(SoundID.Item89 with { MaxInstances = 0, Pitch = 0.8f }, Projectile.Center);
-            TargetIndex = target.whoAmI;
-            if (AttackType == DoType.IsStealth && Projectile.timeLeft < 15 && CanSpawnVolcano)
+            for (int i = 0; i < 2; i++)
             {
-                Vector2 center = new Vector2(target.Center.X, target.Center.Y + 30f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), center, Vector2.Zero, ProjectileType<AetherfireSmasherVolcano>(), Projectile.damage, Projectile.knockBack);
-                proj.ai[1] = target.whoAmI;
-                CanSpawnVolcano = false;
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePosEdge(4f), Projectile.velocity.ToRandVelocity(ToRadians(25f), 8f, 12f), ProjectileType<AetherfireSmasherFireball>(), Projectile.damage / 3, 1f, Owner.whoAmI);
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+
+        public void UpdateHitParticle()
         {
-            PickTagColor(out Color baseColor, out Color targetColor);
-            Color lerpColor = Color.Lerp(baseColor, targetColor, Projectile.velocity.Length() / 26); 
-            Projectile.DrawGlowEdge(lerpColor);
-            Projectile.DrawProj(Color.White, offset:0.52f);
-            return false;   
-        }
-        
-        private void DoShooted()
-        {
-            AttackTimer += 1;
-            if (AttackTimer > BoomerangStat.ReturnTime)
+            if (Main.rand.NextBool(6))
             {
-                AttackType = DoType.IsReturning;
-                AttackTimer = 0;
-                Update = true;
+                Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(4f) + Projectile.SafeDirByRot() * 5f;
+                Vector2 dir = Projectile.SafeDir();
+                new StarShape(spawnPos.ToRandCirclePos(4f), dir * Main.rand.NextFloat(1.4f, 2.7f), RandLerpColor(Color.DarkViolet, Color.Violet), 0.7f, 40).Spawn();
             }
-        }
-        private void DoReturning()
-        {
-            Projectile.HomingTarget(Owner.Center, 3600f, BoomerangStat.ReturnSpeed, 20f);
-            if (Projectile.Hitbox.Intersects(Owner.Hitbox))
+            if (Main.rand.NextBool(5))
             {
-                //不是潜伏攻击，返回处死射弹
-                if (!Stealth)
-                {
-                    Projectile.Kill();
-                    Update = true;
-                    Projectile.AddExecutionTime(ItemType<AetherfireSmasher>());
-                    return;
-                }
-                else
-                {
-                    //二级锤子有极其高频率的攻击方式
-                    AttackType = DoType.IsStealth;
-                    Update = true;
-                    Projectile.localNPCHitCooldown = HangingHitCooldown;
-                    Projectile.timeLeft = StealthTotalTime;
-                    DirectlySpawnEruptionFireBall(18f);
-                }
+                Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(4f) + Projectile.SafeDirByRot() * 5f;
+                Vector2 dir = Projectile.SafeDir();
+                new ShinyCrossStar(spawnPos, dir * Main.rand.NextFloat(1.4f, 2.7f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, 0, 1, 0.4f, false).Spawn();
             }
-        }
-        private void DoStealth()
-        {
-            bool available = Projectile.GetTargetSafe(out NPC target, TargetIndex,true, 1800f);
-            if (available)
-                Projectile.HomingTarget(target.Center,9999f, 20f, 20f);
-        }
-        private void DoGeneric()
-        {
-            Projectile.rotation += 0.2f;
-            if (Stealth)
-                DrawTrailingDust();
-            else
-                DrawNormalDust();
-        }
-        private void DrawNormalDust()
-        {
-            if (Main.rand.NextBool(Projectile.extraUpdates + 1))
+
+            if (Main.rand.NextBool(8))
             {
                 PickTagColor(out Color baseColor, out Color targetColor);
-                Vector2 spawnPos = Projectile.Center + Main.rand.NextVector2Circular(Projectile.height / 2, Projectile.width / 2);
-                Vector2 glowDustVelocity = Projectile.velocity.SafeNormalize(Vector2.UnitX).RotatedBy(Main.rand.NextFloat(-PiOver4 / 4f, PiOver4 / 4f)) * 4f;
-                Dust d = Dust.NewDustPerfect(spawnPos, PickTagDust, glowDustVelocity);
-                d.scale *= 1.2f;
-                d.noGravity = true;
-                Color glowColor = RandLerpColor(baseColor, targetColor);
-                new ShinyOrbParticle(spawnPos, glowDustVelocity, glowColor, 40, 0.5f).Spawn();
+                Vector2 spawnPos = Projectile.SafeDirByRot().RotatedBy(Main.rand.NextBool().ToDirectionInt() * PiOver2) * Main.rand.NextFloat(05f, 30f) + Projectile.Center;
+                new ShinyOrbParticle(spawnPos, Projectile.velocity / (Main.rand.NextFloat(7.1f, 9.2f)), RandLerpColor(baseColor, targetColor), 40, 0.65f * Main.rand.NextFloat(0.78f, 1.1f)).Spawn();
             }
         }
-        public void DrawTrailingDust()
-        {
-            PickTagColor(out Color baseColor, out Color targetColor);
-            //故意不采用循环，因为要稍微处理圆弧状态粒子，但是我技术力不够，先放着了
-            Vector2 direction = Projectile.velocity.SafeNormalize(Vector2.UnitX);
-            Vector2 speedValue = direction * 3f;
-            Vector2 spawnPosition = Projectile.Center + direction.RotatedBy(PiOver2) * 8f;
-            Vector2 realVel = speedValue.RotatedBy(radians: PiOver2);
-            ShinyOrbParticle shinyOrbParticle = new(spawnPosition, realVel, Main.rand.NextBool() ? baseColor : targetColor, 20, 1.2f);
-            shinyOrbParticle.Spawn();
 
-            spawnPosition = Projectile.Center + direction.RotatedBy(-PiOver2) * 8f;
-            realVel = speedValue.RotatedBy(-PiOver2);
-            ShinyOrbParticle shinyOrbParticle2 = new(spawnPosition, realVel, Main.rand.NextBool() ? baseColor : targetColor, 20, 1.2f);
-            shinyOrbParticle2.Spawn();
-        }
-        private short PickTagDust
+        public void DoReturn()
         {
-            get 
+            Projectile.HomingTarget(Owner.Center, -1, 20f, 10f);
+            Projectile.rotation += 0.2f;
+            OpacityGlow = Lerp(OpacityGlow, 0f, 0.12f);
+            ScaleGlow = Lerp(ScaleGlow, 0f, 0.12f);
+            if (Main.rand.NextBool(4))
+                UpdateParticle();
+
+            if (Projectile.IntersectOwnerByDistance())
             {
-                short Pick = Owner.name.SelectedName() switch
+                Projectile.Kill();
+            }
+        }
+
+        public void UpdateParticle()
+        {
+            if (Projectile.IsOutScreen())
+                return;
+            PickTagColor(out Color baseColor, out Color targetColor);
+            if (Main.rand.NextBool(6))
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePosEdge(30f);
+                new ShinyOrbParticle(pos, (pos - Projectile.Center).ToSafeNormalize().RotatedBy(PiOver2) * 1.2f, RandLerpColor(baseColor, targetColor), 40, 0.8f).Spawn();
+            }
+            if (Main.rand.NextBool(8))
+            {
+                Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(12f);
+                new SmokeParticle(spawnPos, Projectile.velocity / 7f, RandLerpColor(baseColor, Color.DarkGray), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.137f, 0.21f)).Spawn();
+            }
+
+        }
+
+        public override bool? CanHitNPC(NPC target)
+        {
+            return base.CanHitNPC(target);
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            Projectile.AddExecutionTimePass(ItemType<AetherfireSmasher>());
+            SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -0.5f, Volume = 0.78f }, Projectile.Center);
+            PickTagColor(out Color baseColor, out Color targetColor);
+            PickTagDust(out short HigherDust, out short BottemDust);
+            if (AttackState == State.Shoot)
+            {
+                Projectile.velocity = Projectile.SafeDir() * 17f;
+                Projectile.netUpdate = true;
+                Vector2 spawnPos = target.Center;
+                float numberOfDusts = 36f;
+                float rotFactor = 360f / numberOfDusts;
+                for (int i = 0; i < numberOfDusts; i++)
                 {
-                    NameType.TrueScarlet => DustID.CrimsonTorch,
-                    NameType.WutivOrChaLost => DustID.YellowTorch,
-                    NameType.Emma => DustID.HallowedTorch,
-                    NameType.SherryOrAnnOrKino => DustID.BlueTorch,
-                    NameType.Shizuku => DustID.WhiteTorch,
-                    NameType.SerratAntler => DustID.DemonTorch,
-                    NameType.Hanna => DustID.JungleTorch,
-                    _ => DustID.OrangeTorch,
-                };
-                return Pick;
+                    float rot = ToRadians(i * rotFactor);
+                    Vector2 offset = new Vector2(4.8f, 0).RotatedBy(rot * Main.rand.NextFloat(3.1f, 4.1f));
+                    Vector2 velOffset = new Vector2(2.4f, 0).RotatedBy(rot * Main.rand.NextFloat(3.1f, 4.1f));
+                    new ShinyOrbParticle(spawnPos + offset, velOffset, RandLerpColor(baseColor, targetColor), 40, 0.8f).Spawn();
+                }
+                for (int i = 0; i < 30; i++)
+                {
+                    int dType = Main.rand.NextBool() ? HigherDust : BottemDust;
+                    Dust d = Dust.NewDustPerfect(spawnPos + Main.rand.NextVector2CircularEdge(10f, 10f), dType);
+                    d.velocity = Vector2.UnitX.RotatedByRandom(TwoPi) * Main.rand.NextFloat(1.2f, 4.2f);
+                    d.scale = Main.rand.NextFloat(1.4f, 1.8f);
+                    d.noGravity = true;
+                }
+            }
+        }
+        private void PickTagDust(out short HigherDust, out short BottemDust)
+        {
+            NameType pickType = Owner.name.SelectedName();
+            switch (pickType)
+            {
+                //绯红书架 - 红
+                case NameType.TrueScarlet:
+                    HigherDust = DustID.CrimsonTorch;
+                    BottemDust = DustID.RedTorch;
+                    break;
+                //雾梯/查 - 金
+                case NameType.WutivOrChaLost:
+                    BottemDust = DustID.GoldCoin;
+                    HigherDust = DustID.YellowTorch;
+                    break;
+                //雪莉/安安/kino - 蓝， 溯月先暂时放在这里，后面考虑单独粒子
+                case NameType.SherryOrAnnOrKino:
+                    HigherDust = DustID.BlueTorch;
+                    BottemDust = DustID.GemSapphire;
+                    break;
+                case NameType.Shizuku:
+                    HigherDust = DustID.IceTorch;
+                    BottemDust = DustID.WhiteTorch;
+                    break;
+                //锯角 - 紫
+                case NameType.SerratAntler:
+                    HigherDust = DustID.PurpleTorch;
+                    BottemDust = DustID.WhiteTorch;
+                    break;
+                //樱羽艾玛 - 粉色
+                case NameType.Emma:
+                    HigherDust = DustID.PinkTorch;
+                    BottemDust = DustID.WhiteTorch;
+                    break;
+                //神人漂浮女 - 绿
+                case NameType.Hanna:
+                    HigherDust = DustID.TerraBlade;
+                    BottemDust = DustID.GreenTorch;
+                    break;
+                //其他 - 正常
+                default:
+                    HigherDust = DustID.OrangeTorch;
+                    BottemDust = DustID.Torch;
+                    break;
             }
         }
         private void PickTagColor(out Color baseColor, out Color targetColor)
@@ -205,24 +306,19 @@ namespace HJScarletRework.Projs.Executor
             switch (Owner.name.SelectedName())
             {
                 case NameType.TrueScarlet:
-                    baseColor = Color.Red;
+                    baseColor = Color.LightCoral;
                     targetColor = Color.Crimson;
                     break;
                 //查 -- 金
                 case NameType.WutivOrChaLost:
-                    baseColor = new Color(255, 178, 36);
-                    targetColor = Color.Gold;
+                    baseColor = Color.LightGoldenrodYellow;
+                    targetColor = Color.Yellow;
                     break;
+                //银九 - 粉
                 case NameType.Emma:
                     baseColor = Color.HotPink;
                     targetColor = Color.Pink;
                     break;
-                //锯角 - 紫
-                case NameType.SerratAntler:
-                    baseColor = Color.Purple;
-                    targetColor = Color.DarkViolet;
-                    break;
-                //Kino - 蓝
                 case NameType.SherryOrAnnOrKino:
                     baseColor = Color.RoyalBlue;
                     targetColor = Color.LightBlue;
@@ -231,17 +327,41 @@ namespace HJScarletRework.Projs.Executor
                     baseColor = Color.LightSkyBlue;
                     targetColor = Color.AliceBlue;
                     break;
-                //绿
+
+                //聚胶 - 紫
+                case NameType.SerratAntler:
+                    targetColor = Color.White;
+                    baseColor = Color.DarkViolet;
+                    break;
                 case NameType.Hanna:
-                    baseColor = Color.Green;
-                    targetColor = Color.LimeGreen;
+                    baseColor = Color.LimeGreen;
+                    targetColor = Color.White;
                     break;
                 default:
+                    targetColor = Color.DarkRed;
                     baseColor = Color.OrangeRed;
-                    targetColor = Color.Orange;
                     break;
             }
         }
+        public float OpacityGlow = 0f;
+        public float ScaleGlow = 0f;
 
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Vector2 pos = Projectile.Center - Main.screenPosition + Projectile.SafeDirByRot() * 5f;
+            Projectile.DrawProj(Color.White, drawTime: 2, rotFix: PiOver4);
+            SB.EnterShaderArea();
+            Texture2D kiraStar = HJScarletTexture.Particle_KiraStarGlow.Value;
+            Texture2D ring = HJScarletTexture.Particle_RingHard.Value;
+            Texture2D orbs = HJScarletTexture.Particle_HRShinyOrbSmall.Value;
+            float opValue = Projectile.Opacity * OpacityGlow;
+            float scaleValue = Projectile.scale * ScaleGlow;
+            SB.Draw(ring, pos, null, Color.Purple * opValue, 0, ring.ToOrigin(), scaleValue * 0.45f, 0, 0);
+            SB.Draw(orbs, pos, null, Color.DarkViolet * opValue, 0, orbs.ToOrigin(), scaleValue * 0.45f, 0, 0);
+            SB.Draw(kiraStar, pos, null, Color.Violet * opValue, 0, kiraStar.ToOrigin(), scaleValue * 0.15f, 0, 0);
+            SB.EndShaderArea();
+
+            return false;
+        }
     }
 }

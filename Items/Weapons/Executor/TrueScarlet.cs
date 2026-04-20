@@ -10,6 +10,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class TrueScarlet : ExecutorWeaponClass
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override int ExecutionTime => 25;
         public override void ExSD()
         {

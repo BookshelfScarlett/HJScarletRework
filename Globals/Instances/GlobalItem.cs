@@ -57,6 +57,10 @@ namespace HJScarletRework.Globals.Instances
             {
                 mult = 0;
             }
+            if (player.HJScarlet().fakeManaStar)
+            {
+                reduce = 1;
+            }
             base.ModifyManaCost(item, player, ref reduce, ref mult);
         }
         public override void RightClick(Item item, Player player)
@@ -69,7 +73,6 @@ namespace HJScarletRework.Globals.Instances
             {
                 player.HJScarlet().genderChangeTimer = GetSeconds(300);
             }
-            Main.NewText(item.GetType().Name.Contains("crate"));
             if (player.HJScarlet().protectorShiver)
             {
                 player.QuickSpawnItem(player.GetSource_OpenItem(item.type), ItemID.GoldCoin, 50);
@@ -87,6 +90,10 @@ namespace HJScarletRework.Globals.Instances
                 Vector2 recorigin = new(23, 21);
                 spriteBatch.Draw(HJScarletTexture.ScarletGhost.Value, iconPosition, rect, Color.White, 0f, recorigin, iconScale, SpriteEffects.None, 0f);
             }
+        }
+        public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
+        {
+            base.ModifyWeaponDamage(item, player, ref damage);
         }
         public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
@@ -172,6 +179,20 @@ namespace HJScarletRework.Globals.Instances
                         tooltips.QuickAddTooltipDirect((path + "NotEaten").ToLangValue(), Color.SkyBlue);
                 }
             }
+            if (LocalPlayer.HJScarlet().shinobiExecutor)
+            {
+                if (item.type == ItemID.MonkStaffT1)
+                {
+                    string path = Mod.GetLocalizationKey($"Items.Armor.ShinobiHead.WeaponBuff").ToLangValue();
+                    tooltips.QuickAddTooltipDirect(path, Color.Gold, null, "ShinobiBuff", "500%", "60");
+                }
+                if (item.type == ItemID.MonkStaffT3)
+                {
+                    string path = Mod.GetLocalizationKey($"Items.Armor.ShinobiHead.WeaponBuff").ToLangValue();
+                    tooltips.QuickAddTooltipDirect(path, Color.Gold, null, "ShinobiBuff", "200%", "30");
+                }
+
+            }
             base.ModifyTooltips(item, tooltips);
         }
         public override void HoldItem(Item item, Player player)
@@ -235,6 +256,12 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void AddRecipes()
         {
+            Recipe.Create(ItemID.ManaFlower).
+                AddIngredient<FakeManaStar>().
+                AddIngredient(ItemID.NaturesGift).
+                AddTile(TileID.TinkerersWorkbench).
+                Register();
+
             Recipe.Create(ItemID.Spear).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyCopperBar, 12).
                 AddTile(TileID.Anvils).

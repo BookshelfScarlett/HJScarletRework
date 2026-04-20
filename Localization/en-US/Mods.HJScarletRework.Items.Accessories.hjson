@@ -96,7 +96,7 @@ Desterrennacht: {
 	Tooltip: ""
 }
 
-FakeManaContainer: {
+ManaContainer: {
 	DisplayName: Fake Mana Container
 	Tooltip: "{0}"
 }
@@ -153,5 +153,10 @@ RocketCharm: {
 
 TinyShortsword: {
 	DisplayName: Executor Shortsword
+	Tooltip: ""
+}
+
+FakeManaStar: {
+	DisplayName: Fake Mana Star
 	Tooltip: ""
 }

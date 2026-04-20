@@ -5,11 +5,13 @@ using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class TrueScarletProj : HJScarletProj
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<TrueScarlet>().Texture;
         public enum State

@@ -1,4 +1,6 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Projectiles;
+using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
@@ -43,14 +45,17 @@ namespace HJScarletRework.Projs.Executor
             Color color = RandLerpColor(Color.Purple, Color.BlueViolet);
             Vector2 fireVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero);
             Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
-            new Fire(Projectile.Center, fireVelocity * 4.5f, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.24f).SpawnToPriorityNonPreMult();
-            new TrailGlowBall(Projectile.Center + offset, fireVelocity * 4.5f, color, 90, 0.1f, true).Spawn();
-            new TrailGlowBall(Projectile.Center + offset, fireVelocity * 4.5f, Color.White, 90, 0.1f * 0.5f, true).Spawn();
-            for (int i = 0; i < 4; i++)
+            new Fire(Projectile.Center, fireVelocity * 4.5f, Firecolor, 60, Main.rand.NextFloat(TwoPi), 1f, 0.24f).SpawnToPriorityNonPreMult();
+            if (Projectile.numUpdates % 2 == 0)
             {
+                if (Main.rand.NextBool())
+                {
+                    new TrailGlowBall(Projectile.Center + offset, fireVelocity * 4.5f, color, 70, 0.1f, true).Spawn();
+                    new TrailGlowBall(Projectile.Center + offset, fireVelocity * 4.5f, Color.White, 70, 0.1f * 0.5f, true).Spawn();
+                }
                 Vector2 VecOffset = Projectile.velocity / 4f;
-                new ShinyOrbParticle(Projectile.Center + VecOffset * i, fireVelocity * 0.5f, Color.DarkViolet, 60, 0.68f).Spawn();
-                new ShinyOrbParticle(Projectile.Center + VecOffset * i, fireVelocity * 0.5f, Color.White, 60, 0.38f).Spawn();
+                new LightningGlow(Projectile.Center, fireVelocity * 0.5f, Color.DarkViolet, 50, 0.70f).Spawn();
+                new LightningGlow(Projectile.Center, fireVelocity * 0.5f, Color.Violet, 50, 0.70f).Spawn();
             }
         }
         public void FirstFrame()
@@ -76,10 +81,37 @@ namespace HJScarletRework.Projs.Executor
             modifiers.SourceDamage *= 1 + 0.15f * HitCount;
             HitCount++;
         }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                Vector2 dir = oldVelocity.ToSafeNormalize();
+                float rotvalue = ToRadians(360f / 8f * i) * 1f;
+                float scale = (i % 2 == 0) ? 0.5f : 0.35f;
+                for (int j = 0; j < 3; j++)
+                {
+                    new LightningGlow(Projectile.Center + dir.RotatedBy(rotvalue) * j * 1.5f, dir.RotatedBy(rotvalue), Color.DarkViolet, 50, scale).Spawn();
+                    new LightningGlow(Projectile.Center + dir.RotatedBy(rotvalue) * j * 1.5f, dir.RotatedBy(rotvalue), Color.Violet, 50, scale).Spawn();
+                }
+            }
+            for (int i =0;i<12;i++)
+            {
+                new Fire(Projectile.Center + RandVelTwoPi(2f,12.4f), RandVelTwoPi(0.8f, 5.1f), RandLerpColor(Color.Black, Color.DarkViolet), 60, RandRotTwoPi, 1f, 0.24f).SpawnToPriorityNonPreMult();
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePosEdge(12f);
+                Vector2 vel = RandVelTwoPi(1f, 4f);
+                new KiraStar(pos, vel, RandLerpColor(Color.DarkViolet, Color.Purple), 50, 0, 1, 0.070f * Main.rand.NextFloat(0.85f,1.01f), useAlt: true).Spawn();
+                new KiraStar(pos, vel, Color.White, 50, 0, 1, 0.08f * 0.5f, useAlt: true).Spawn();
+            }
+
+
+            return true;
+        }
+
         public override void OnKill(int timeLeft)
         {
-            new CrossGlow(Projectile.Center, Color.Violet, 30, 1f, 0.4f).Spawn();
-            new CrossGlow(Projectile.Center, Color.DarkViolet, 30, 1f, 0.4f).Spawn();
         }
     }
 }

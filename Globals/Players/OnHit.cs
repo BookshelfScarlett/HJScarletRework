@@ -5,6 +5,7 @@ using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
@@ -18,6 +19,19 @@ namespace HJScarletRework.Globals.Players
             if (redDragonKnight)
             {
                 hit.DamageType = ExecutorDamageClass.Instance;
+            }
+            if (shinobiExecutor && hit.DamageType.CountsAsClass<MeleeDamageClass>())
+            {
+                switch (proj.type)
+                {
+                    case ProjectileID.MonkStaffT3:
+                    case ProjectileID.MonkStaffT3_Alt:
+                    case ProjectileID.MonkStaffT3_AltShot:
+                    case 1110:
+                    case ProjectileID.MonkStaffT1:
+                        hit.DamageType = ExecutorDamageClass.Instance;
+                        break;
+                }
             }
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
             if (proj.DamageType == ExecutorDamageClass.Instance)
@@ -38,17 +52,38 @@ namespace HJScarletRework.Globals.Players
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
             ModifyCritDamage(target, ref modifiers);
-            if (protectorShiver && Main.rand.NextBool(4) && modifiers.DamageType == ExecutorDamageClass.Instance)
+            float sourceDamageModify = 1f;
+            if (floretProtectorExecutor && modifiers.DamageType == ExecutorDamageClass.Instance)
             {
-                modifiers.SourceDamage *= 1.1f;
+                if (protectorShiver)
+                {
+                    if (Main.rand.NextBool(4))
+                        sourceDamageModify += 0.15f;
+                }
+                if (protectorHerbTimerList[5] > 0)
+                {
+                    if (Main.rand.NextBool(4))
+                        sourceDamageModify += 0.1f;
+                }
             }
+            modifiers.SourceDamage *= sourceDamageModify;
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
             ModifyCritDamage(target, ref modifiers);
-            if (protectorShiver && Main.rand.NextBool(4) && modifiers.DamageType == ExecutorDamageClass.Instance)
+            float sourceDamageModify = 1f;
+            if (floretProtectorExecutor && modifiers.DamageType == ExecutorDamageClass.Instance)
             {
-                modifiers.SourceDamage *= 1.1f;
+                if (protectorShiver)
+                {
+                    if (Main.rand.NextBool(4))
+                        sourceDamageModify += 0.15f;
+                }
+                if (protectorHerbTimerList[5] > 0)
+                {
+                    if (Main.rand.NextBool(4))
+                        sourceDamageModify += 0.1f;
+                }
             }
         }
         public void ModifyCritDamage(NPC target, ref NPC.HitModifiers modifiers)

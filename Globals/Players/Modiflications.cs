@@ -22,17 +22,42 @@ namespace HJScarletRework.Globals.Players
                 if (PreciousTargetCrtis > limitedCrit)
                     PreciousTargetCrtis = limitedCrit;
             }
+            if (shinobiExecutor)
+            {
+                if(item.type == ItemID.MonkStaffT3)
+                {
+                    crit += 30;
+                }
+                if (item.type == ItemID.MonkStaffT1)
+                {
+                    crit += 60;
+                }
+            }
         }
         //潜在的问题是，这里实际上有可能因为写法差异导致出现多乘区
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if(redDragonKnight && item.DamageType != ExecutorDamageClass.Instance && !item.DamageType.CountsAsClass<GenericDamageClass>() && item.damage > 0)
+            if (redDragonKnight && item.DamageType != ExecutorDamageClass.Instance && !item.DamageType.CountsAsClass<GenericDamageClass>() && item.damage > 0)
             {
                 damage = StatModifier.Default;
                 float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
                 damage *= (1f + ratios);
                 if (item.consumable && item.DamageType.CountsAsClass<RangedDamageClass>())
                     damage *= 1.10f;
+            }
+            if (shinobiExecutor && item.type == ItemID.MonkStaffT3)
+            {
+                damage = StatModifier.Default;
+                float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
+                damage *= (1 + ratios);
+                damage *= 2;
+            }
+            if (shinobiExecutor && item.type == ItemID.MonkStaffT1)
+            {
+                damage = StatModifier.Default;
+                float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
+                damage *= (1 + ratios);
+                damage *= 5;
             }
             base.ModifyWeaponDamage(item, ref damage);
         }
@@ -50,6 +75,22 @@ namespace HJScarletRework.Globals.Players
                 }
             }
             return base.Shoot(item, source, position, velocity, type, damage, knockback);
+        }
+        public override void GetHealLife(Item item, bool quickHeal, ref int healValue)
+        {
+            base.GetHealLife(item, quickHeal, ref healValue);
+        }
+        public override void GetHealMana(Item item, bool quickHeal, ref int healValue)
+        {
+            float percent = 1f;
+            if(fakeManaStar)
+            {
+                percent -= 0.15f;
+            }
+            if (percent != 1f)
+            {
+                healValue = (int)(healValue * percent);
+            }
         }
 
     }

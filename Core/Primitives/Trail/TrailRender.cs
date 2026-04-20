@@ -34,9 +34,11 @@ namespace HJScarletRework.Core.Primitives.Trail
                 Vertexlist.Add(new ScarletVertex(DrawPos - PrimitivesHeight.RotatedBy(PrimitivesHeightRot), DrawColor, new Vector3(progress, 0, 0)));
                 Vertexlist.Add(new ScarletVertex(DrawPos + PrimitivesHeight.RotatedBy(PrimitivesHeightRot), DrawColor, new Vector3(progress, 1, 0)));
             }
-
-            Main.graphics.GraphicsDevice.Textures[0] = drawSetting.texture;
-            Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, Vertexlist.ToArray(), 0, Vertexlist.Count - 2);
+            if (Vertexlist.Count >= 3)
+            {
+                Main.graphics.GraphicsDevice.Textures[0] = drawSetting.texture;
+                Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, Vertexlist.ToArray(), 0, Vertexlist.Count - 2);
+            }
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Dusts;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -42,13 +44,15 @@ namespace HJScarletRework.Projs.Executor
             if (CheckOwnerDead())
                 return;
             UpdatePlayerState();
-            UpdateHeldAnimation();
             UpdateAttack();
+            UpdateHeldAnimation();
             Projectile.netUpdate = true;
         }
 
         private void UpdateAttack()
         {
+            if (!Projectile.HJScarlet().FirstFrame)
+                return;
             Projectile.timeLeft = 2;
             ref int buffTimer = ref Owner.HJScarlet().exsanguinationBuffTime;
             Timer++;
@@ -72,8 +76,18 @@ namespace HJScarletRework.Projs.Executor
                     int damage = Projectile.damage;
                     if (buffTimer!= 0)
                         damage *= 100;
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), shootPos + safedir.RotatedBy(PiOver2 * i) * 7f * Main.rand.NextFloat(), safedir * 10f, ProjectileType<ExsanguinationBulletProj>(), damage, Projectile.knockBack);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(),shootPos - safedir*  40f + safedir.RotatedBy(PiOver2 * i) * 7f * Main.rand.NextFloat(), safedir * 10f, ProjectileType<ExsanguinationBulletProj>(), damage, Projectile.knockBack);
                     proj.HJScarlet().HasExecutionMechanic = BuffTime == 0;
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    Vector2 safedir = Projectile.SafeDirByRot();
+                    Vector2 shootPos = Projectile.Center + safedir * 65f - (safedir.RotatedBy(PiOver2) * 5f * Projectile.direction);
+                    Vector2 dir = (shootPos - Owner.Center).ToSafeNormalize();
+                    Vector2 vel = (-dir).RotatedBy(ToRadians(70f) * Owner.direction).ToRandVelocity(ToRadians(9f), 1.2f, 4.6f);
+                    Dust d = Dust.NewDustPerfect(shootPos.ToRandCirclePos(4f), Main.rand.NextBool() ? DustID.Torch : DustID.OrangeTorch);
+                    d.velocity = vel;
+                    d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
                 }
             }
             if (buffTimer> 0)

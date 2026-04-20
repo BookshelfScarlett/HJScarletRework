@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
@@ -22,7 +23,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public List<Vector2> PosList = [];
         public List<float> RotList = [];
-        public int TotalListCount = 10;
+        public int TotalListCount = 3;
+        public ref float Timer => ref Projectile.ai[0];
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 4;
@@ -51,20 +53,23 @@ namespace HJScarletRework.Projs.Executor
                 RotList.RemoveAt(0);
             if (PosList.Count > TotalListCount + 2)
                 PosList.RemoveAt(0);
+            Timer++;
+            if (Timer < 1f * Projectile.MaxUpdates)
+                return;
             UpdateParticle();
         }
 
         private void UpdateParticle()
         {
-            if (HJScarletMethods.OutOffScreen(Projectile.Center))
+            if (Projectile.IsOutScreen())
                 return;
             //return;
             if (Main.rand.NextBool())
                 return;
             if (Main.rand.NextBool(10))
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(1), Projectile.velocity / 2f, RandLerpColor(Color.AliceBlue, Color.RoyalBlue), 40, Projectile.rotation,1,0.4f * Main.rand.NextFloat(0.5f,0.9f)).Spawn();
+                new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(1), Projectile.velocity * Main.rand.NextFloat(0.78f,1.1f), RandLerpColor(Color.AliceBlue, Color.RoyalBlue), 40, Projectile.rotation, 1, 0.4f * Main.rand.NextFloat(0.5f, 0.9f)).Spawn();
             if (Main.rand.NextBool(10))
-                new StarShape(Projectile.Center.ToRandCirclePosEdge(4), Projectile.velocity * Main.rand.NextFromList(0.8f,1.2f), RandLerpColor(Color.AliceBlue, Color.RoyalBlue),0.5f * Main.rand.NextFloat(0.5f,0.9f),40).Spawn();
+                new StarShape(Projectile.Center.ToRandCirclePosEdge(4), Projectile.velocity * Main.rand.NextFromList(0.8f, 1.2f), RandLerpColor(Color.AliceBlue, Color.RoyalBlue), 0.5f * Main.rand.NextFloat(0.5f, 0.9f), 40).Spawn();
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -105,11 +110,13 @@ namespace HJScarletRework.Projs.Executor
         {
             if (PosList.Count < 1 && RotList.Count < 1)
                 return false;
+            if (Timer < 2f * Projectile.MaxUpdates)
+                return false;
             //最顶端绘制一个star。
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             Texture2D starShape = HJScarletTexture.Particle_SharpTear;
             Texture2D tex = Projectile.GetTexture();
-            Vector2 scale = new Vector2(.6f, 1.4f);
+            Vector2 scale = new Vector2(.6f, 3.4f);
             Vector2 ori = tex.Size() / 2;
             for (int i = 0; i < PosList.Count; i++)
             {
@@ -119,7 +126,7 @@ namespace HJScarletRework.Projs.Executor
                 Color drawColor = (Color.Lerp(Color.White, Color.White, rads) with { A = 200 }) * 0.9f * Projectile.Opacity * (1 - rads);
                 Vector2 shapeScale = scale * Clamp(i / ((float)PosList.Count - 4f), 0f, 1f) * 0.4f;
                 Vector2 lerpPos = PosList[i] - Main.screenPosition;
-                SB.Draw(tex, lerpPos, null, drawColor, RotList[i] + PiOver2, ori, Projectile.scale * (1f - rads), 0, 0);
+                SB.Draw(tex, lerpPos, null, drawColor, RotList[i] + PiOver2, ori, Projectile.scale , 0, 0);
             }
                 SB.Draw(tex, drawPos, null, Color.White, Projectile.rotation + PiOver2, ori, Projectile.scale, 0, 0);
             return false;

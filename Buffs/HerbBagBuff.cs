@@ -18,47 +18,49 @@ namespace HJScarletRework.Buffs
         }
         public override void Update(Player player, ref int buffIndex)
         {
-            if (player.HJScarlet().protectorPlantID != -1)
+            if (player.HJScarlet().protectorPlantID == -1)
+                return;
+            switch (player.HJScarlet().protectorPlantID)
             {
-                switch (player.HJScarlet().protectorPlantID)
-                {
-                    case ItemID.Daybloom:
-                        player.lifeRegen += 8;
-                        player.statDefense += 30;
-                        Lighting.AddLight(player.Center, TorchID.White);
-                        UpdateDaybloomParticle(player);
-                        break;
-                    case ItemID.Moonglow:
-                        UpdateMoonglowParticle(player);
-                        break;
-                    case ItemID.Deathweed:
-                        player.GetDamage<ExecutorDamageClass>() += 0.25f;
-                        player.GetCritChance<ExecutorDamageClass>() += 0.25f;
-                        player.aggro += 500;
-                        UpdateDeathWeedParticle(player);
-                        break;
-                    case ItemID.Fireblossom:
-                        if (Collision.LavaCollision(player.Center, player.width, player.height))
-                        {
-                            player.GetDamage<ExecutorDamageClass>() += 0.50f;
-                            player.GetCritChance<ExecutorDamageClass>() += 0.50f;
-                        }
-                        UpdateFireblossomParticle(player);
-                        break;
-                    case ItemID.Waterleaf:
-                        player.luck += 50;
-                        UpdateWaterleafParticle(player);
-                        break;
-                    case ItemID.Blinkroot:
-                        player.pickSpeed -= 0.50f;
-                        UpdateBlinkrootParticle(player);
-                        break;
-                    case ItemID.Shiverthorn:
-                        UpdateShiverthornParticle(player);
-                        break;
-                }
+                case ItemID.Daybloom:
+                    player.lifeRegen += 8;
+                    player.statDefense += 30;
+                    Lighting.AddLight(player.Center, TorchID.White);
+                    UpdateDaybloomParticle(player);
+                    break;
+                case ItemID.Moonglow:
+                    player.endurance += 0.12f;
+                    player.aggro -= 1000;
+                    player.HJScarlet().protectorMoonglow = true;
+                    UpdateMoonglowParticle(player);
+                    break;
+                case ItemID.Deathweed:
+                    player.GetDamage<ExecutorDamageClass>() += 0.20f;
+                    player.GetCritChance<ExecutorDamageClass>() += 20f;
+                    player.aggro += 500;
+                    UpdateDeathWeedParticle(player);
+                    break;
+                case ItemID.Fireblossom:
+                    if (Collision.LavaCollision(player.Center, player.width, player.height))
+                    {
+                        player.GetDamage<ExecutorDamageClass>() += 0.35f;
+                        player.GetCritChance<ExecutorDamageClass>() += 35f;
+                    }
+                    UpdateFireblossomParticle(player);
+                    break;
+                case ItemID.Waterleaf:
+                    player.luck += 50;
+                    UpdateWaterleafParticle(player);
+                    break;
+                case ItemID.Blinkroot:
+                    player.pickSpeed -= 0.50f;
+                    UpdateBlinkrootParticle(player);
+                    break;
+                case ItemID.Shiverthorn:
+                    player.HJScarlet().protectorShiver = true;
+                    UpdateShiverthornParticle(player);
+                    break;
             }
-
         }
 
         private void UpdateBlinkrootParticle(Player player)

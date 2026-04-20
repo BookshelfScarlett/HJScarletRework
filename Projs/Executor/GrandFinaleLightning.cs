@@ -9,11 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class GrandFinaleLightning : HJScarletProj
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public List<Vector2> StoredCenter = [];

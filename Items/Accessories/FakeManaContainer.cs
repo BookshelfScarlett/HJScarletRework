@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class FakeManaContainer : HJScarletItemClass
+    public class ManaContainer : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
         public int GiveMana = 0;

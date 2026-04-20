@@ -65,8 +65,7 @@ namespace HJScarletRework.Projs.Executor
                     {
                         Vector2 vel = new Vector2(0f, -Main.rand.NextFloat(14f, 18f)).RotatedBy(Main.rand.NextFloat(-PiOver4 / 3, PiOver4 / 3));
                         Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), new Vector2(Projectile.Center.X, Projectile.Center.Y - Main.rand.NextFloat(160f, 320f)), vel, ProjectileType<AetherfireSmasherFireball>(), Projectile.damage, Projectile.knockBack);
-                        proj.timeLeft = 600;
-                        proj.ai[0] = 20f;
+                        proj.ai[1] = 1999;
                     }
                 }
                 if (FirePillerTimer == 30)

@@ -20,15 +20,18 @@ namespace HJScarletRework.Globals.Players
             blackKeyHeal = 0;
             blackKeyDefenseBuff = 0;
             blackKeyDoT = false;
+            fakeManaStar = false;
         }
         private void ResetArmor()
         {
             runeWizardExecutor = false;
+            shinobiExecutor = false;
             cowboyExecutor = false;
             floretProtectorExecutor = false;
             raincoatExecutor = false;
             redDragonKnight = false;
-            protectorShiver = true;
+            protectorShiver = false;
+            protectorMoonglow = false;
         }
 
         private void ResetPets()

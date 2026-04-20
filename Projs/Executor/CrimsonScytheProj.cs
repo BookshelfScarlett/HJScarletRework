@@ -11,11 +11,13 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class CrimsonScytheProj : HJScarletProj, IPixelatedRenderer
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
         public override ClassCategory Category => ClassCategory.Executor;
@@ -43,7 +45,6 @@ namespace HJScarletRework.Projs.Executor
         public bool PlaySound = false;
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[Type] = true;
             ProjectileID.Sets.TrailCacheLength[Type] = 9;
             ProjectileID.Sets.TrailingMode[Type] = -1;
         }
@@ -400,10 +401,10 @@ namespace HJScarletRework.Projs.Executor
             effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.DarkRed* 0.9f, 0.95f);
-            DrawSlash(texture, Color.Crimson* 0.6f, 0.7f);
-            DrawSlash(texture, Color.Crimson* 0.4f, 0.3f);
-            DrawSlash(texture, Color.Crimson * 0.3f, 0.2f);
+            DrawSlash(texture, Color.Red * 0.96f, 0.95f);
+            DrawSlash(texture, Color.Red * 0.9f, 0.7f);
+            DrawSlash(texture, Color.Red * 0.4f, 0.3f);
+            DrawSlash(texture, Color.Red * 0.3f, 0.2f);
 
             HJScarletMethods.EndShaderAreaPixel();
         }

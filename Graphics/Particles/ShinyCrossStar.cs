@@ -72,6 +72,7 @@ namespace HJScarletRework.Graphics.Particles
                     float colorAlpha = GetAlphaFade(1-i);
                     spriteBatch.Draw(star, drawPos, null, DrawColor * Opacity*colorAlpha, Rotation, star.Size() / 2, starScale * Scale, SpriteEffects.None, 0);
                     spriteBatch.Draw(star, drawPos, null, DrawColor * Opacity*colorAlpha, Rotation + PiOver2, star.Size() / 2, starScale * Scale, SpriteEffects.None, 0);
+                    spriteBatch.Draw(star, drawPos, null, Color.White * Opacity, Rotation + PiOver2, star.Size() / 2, starScale * Scale * 0.5f, SpriteEffects.None, 0);
                 }
             //防止过曝
         }

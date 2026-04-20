@@ -26,19 +26,25 @@ namespace HJScarletRework.Graphics.Particles
         public override void Update()
         {
             if (LifetimeRatio < 0.15f)
-                DrawColor = Color.Lerp(DrawColor, TargetColor, 0.28f);
+                DrawColor = Color.Lerp(DrawColor, TargetColor, 0.35f);
             else
                 DrawColor = Color.Lerp(DrawColor, Color.Transparent, 0.25f);
-            Offset = Main.rand.NextFloat(-2.5f, 2.6f);
+            Offset = Main.rand.NextFloat(-1.1f, 1.2f);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             Vector2 drawPos = Position - Main.screenPosition;
             Texture2D tex = HJScarletTexture.Particle_SharpTear;
-            Vector2 drawScale = new Vector2(0.8f, 1.5f);
+            //Vector2 drawScale = new Vector2(1.0f, 1.8f);
+            Vector2 drawScale = new Vector2(0.5f, 3.5f);
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    Vector2 offsetVec = Velocity.ToSafeNormalize() * i * 1.4f + Velocity.ToSafeNormalize().RotatedBy(PiOver2) * Offset;
+            //    spriteBatch.Draw(tex, drawPos + offsetVec, null, DrawColor, Velocity.ToRotation() + PiOver2, tex.ToOrigin(), Scale * drawScale, 0, 0);
+            //}
             for (int i = 0; i < 6; i++)
             {
-                Vector2 offsetVec = Velocity.ToSafeNormalize() * i * 1.1f + Velocity.ToSafeNormalize().RotatedBy(PiOver2) * Offset;
+                Vector2 offsetVec = Velocity.ToSafeNormalize() * i * 1.4f;
                 spriteBatch.Draw(tex, drawPos + offsetVec, null, DrawColor, Velocity.ToRotation() + PiOver2, tex.ToOrigin(), Scale * drawScale, 0, 0);
             }
         }

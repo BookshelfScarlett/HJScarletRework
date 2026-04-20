@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Buffs;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Armor.ExecutorAlter;
@@ -33,6 +34,7 @@ namespace HJScarletRework.Globals.Players
 
         public int climaticHawstringLaserCounter = 0;
         #region 护甲
+        public bool shinobiExecutor = false;
         public bool runeWizardExecutor = false;
         public bool cowboyExecutor = false;
         public int cowboyRevolverTimer = 0;
@@ -44,6 +46,7 @@ namespace HJScarletRework.Globals.Players
         public int protectorPlantID = -1;
         public int[] protectorHerbTimerList = [0, 0, 0, 0, 0, 0, 0];
         public bool protectorShiver = false;
+        public bool protectorMoonglow = false;
         #endregion
 
         #region Accessories
@@ -51,6 +54,7 @@ namespace HJScarletRework.Globals.Players
         public bool loveRing = false;
         public bool isBeingLove = false;
         public int genderChangeTimer = 0;
+        public bool fakeManaStar = false;
 
         public bool ShadowCastAcc = false;
         public bool LifeBalloonAcc = false;
@@ -106,6 +110,7 @@ namespace HJScarletRework.Globals.Players
 
         #endregion
         public bool terraRecipe = false;
+        public bool resetTerraRecipe = false;
         public int terraRecipe_EatenFoods = 0;
         public int terraRecipe_LifeMaxMultTime = 0;
         public int terraRecipe_LifeMaxIncre = 20;
@@ -206,8 +211,8 @@ namespace HJScarletRework.Globals.Players
                     //这里实际上没什么办法，只能这样打表
                     SwitchArmorType2(item, i, true);
                 }
-
             }
+            resetTerraRecipe = true;
         }
         private void SwitchArmorType2(Item item, int i, bool armorSlot = false)
         {

@@ -47,7 +47,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
                 value = armorCategory2;
             else
                 value = armorCategory;
-                player.setBonus += "\n" + value.ToLangValue();
+            player.setBonus += "\n" + value.ToLangValue();
         }
     }
     public class FlorectProtectorChestplateAlter: AlterVanillaArmor

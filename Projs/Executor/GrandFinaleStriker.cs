@@ -4,11 +4,13 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class GrandFinaleStriker : HJScarletProj
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override string Texture => GetInstance<GrandFinaleProj>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;
         public enum State

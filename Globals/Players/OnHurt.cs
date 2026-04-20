@@ -71,16 +71,29 @@ namespace HJScarletRework.Globals.Players
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             float totalProjDamageModify = 1f;
-            if (protectorShiver)
-                totalProjDamageModify -= 0.12f;
+            if (protectorMoonglow)
+            {
+                if (modifiers.HitDirection == Player.direction)
+                {
+                    Main.NewText(true);
+                    totalProjDamageModify -= 0.35f;
+                }
+            }
             modifiers.FinalDamage *= totalProjDamageModify;
         }
         public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
         {
             base.ModifyHitByProjectile(proj, ref modifiers);
             float totalProjDamageModify = 1f;
-            if (protectorShiver)
-                totalProjDamageModify -= 0.12f;
+            //月光花的buff，护花员的。
+            if (floretProtectorExecutor)
+            {
+                if (modifiers.HitDirection == Player.direction)
+                {
+                    totalProjDamageModify -= 0.20f * (protectorHerbTimerList[1] > 0).ToDirectionInt();
+                    totalProjDamageModify -= 0.65f * protectorMoonglow.ToDirectionInt();
+                }
+            }
             modifiers.FinalDamage *= totalProjDamageModify;
         }
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)

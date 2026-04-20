@@ -146,6 +146,10 @@ Executor: {
 	GrandFinaleStriker.DisplayName: Grand Finale Striker
 	SimpleHandAxeExecution.DisplayName: Simple Hand Axe Execution
 	SimpleHandAxeProj.DisplayName: Simple Hand Axe Proj
+	AetherfireSmasherProj2.DisplayName: Aetherfire Smasher Proj2
+	AetherfireSmasherFireball2.DisplayName: Aetherfire Smasher Fireball2
+	AetherfireSmasherExecution2.DisplayName: Aetherfire Smasher Execution2
+	MonkStaffProj.DisplayName: Monk Staff Proj
 }
 
 Ranged: {

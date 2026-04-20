@@ -52,3 +52,20 @@ FishCostumeExecutor: {
 	ChestplateTooltip: ""
 	SetBonus: ""
 }
+
+ShinobiBody: {
+	DisplayName: Shinobi Body
+	Tooltip: ""
+}
+
+ShinobiHead: {
+	DisplayName: Shinobi Head
+	Tooltip: ""
+	SetBonus: ""
+	WeaponBuff: ""
+}
+
+ShinobiLegs: {
+	DisplayName: Shinobi Legs
+	Tooltip: ""
+}

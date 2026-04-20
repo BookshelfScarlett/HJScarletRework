@@ -10,6 +10,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class GrandFinale : ExecutorWeaponClass
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override float ExecutionStrikeDamageMult => 1.0f;
         public override int ExecutionTime => 15;
         public override void ExSD()

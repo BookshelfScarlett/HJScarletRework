@@ -49,6 +49,13 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
+            if(!Projectile.HJScarlet().FirstFrame)
+            {
+                for (int i =0;i<16;i++)
+                {
+                    new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(1f), RandVelTwoPi(0.18f, 1.2f) + Projectile.velocity.ToSafeNormalize() * 0.72f, RandLerpColor(Color.DarkViolet, Color.Violet), 40, 0.8f).Spawn();
+                }
+            }
             //这里会起码延后一帧进行
             Projectile.rotation = Projectile.velocity.ToRotation(); ;
             SpriteRotation += ToRadians(10f);

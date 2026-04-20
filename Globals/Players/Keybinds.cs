@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Core.Keybinds;
+using System;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ModLoader;
@@ -10,6 +11,7 @@ namespace HJScarletRework.Globals.Players
         public bool CanSwitchWeaponType = false;
         public bool CanRevisual = false;
         public bool CanExecution = false;
+        public bool CanWeaponSpecialAbility = false;
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
             if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
@@ -43,6 +45,11 @@ namespace HJScarletRework.Globals.Players
             if (!CanExecution && tacticalExecution)
             {
                 CanExecution = true;
+                anyPiorityTier1Active = true;
+            }
+            if (!CanWeaponSpecialAbility)
+            {
+                CanWeaponSpecialAbility = true;
                 anyPiorityTier1Active = true;
             }
             return anyPiorityTier1Active;

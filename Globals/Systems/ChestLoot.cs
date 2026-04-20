@@ -156,7 +156,7 @@ namespace HJScarletRework.Globals.Systems
         {
             // Place some additional items in Frozen Chests:
             // These are the 3 new items we will place.
-            int[] itemsToPlaceInFrozenChests = [ItemID.ManaCrystal, ItemID.Compass, ItemID.DepthMeter, ItemType<FakeManaContainer>()];
+            int[] itemsToPlaceInFrozenChests = [ItemID.ManaCrystal, ItemID.Compass, ItemID.DepthMeter, ItemType<ManaContainer>()];
             // This variable will help cycle through the items so that different Frozen Chests get different items
             int itemsToPlaceInFrozenChestsChoice = 0;
             // Rather than place items in each chest, we'll place up to 6 items (2 of each).

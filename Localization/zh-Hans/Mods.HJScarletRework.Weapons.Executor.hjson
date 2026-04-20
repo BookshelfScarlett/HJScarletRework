@@ -94,7 +94,11 @@ GrandFinale: {
 
 AetherfireSmasher: {
 	DisplayName: 天炎破
-	Tooltip: 命中时，对敌人造成爆炸
+	Tooltip:
+		'''
+		掷出后飞越至附近可用的敌人
+		成功命中时追加追踪火球
+		'''
 	ExecutionStrike:
 		'''
 		锤子返程时将回击，并挂载在敌人上造成持续伤害

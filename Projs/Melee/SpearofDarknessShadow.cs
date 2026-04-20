@@ -71,6 +71,8 @@ namespace HJScarletRework.Projs.Melee
         private void UpdateHit()
         {
             //固定频率
+            if(Main.rand.NextBool(2))
+                        new StarShape(Projectile.Center.ToRandCirclePosEdge(6f), -Projectile.velocity.ToRandVelocity(ToRadians(1f), 1.2f, 6.7f), RandLerpColor(Color.DarkViolet, Color.Black), 1.12f * Projectile.Opacity, 40,false).SpawnToNonPreMult();
             Projectile.rotation = Projectile.velocity.ToRotation();
             Projectile.velocity *= 0.94f;
             Projectile.Opacity -= 0.02f;
@@ -86,8 +88,7 @@ namespace HJScarletRework.Projs.Melee
             //火焰
             Vector2 firePos = Projectile.Center.ToRandCirclePos(12f);
             Vector2 fireVel = Projectile.SafeDirByRot() * Main.rand.NextFloat(1f, 3f) * -2f;
-            new Fire(firePos, fireVel, RandLerpColor(Color.Purple, Color.DarkMagenta), 30, RandRotTwoPi, 1, 0.1f * Projectile.Opacity * GeneralProgress).SpawnToPriorityNonPreMult();
-            new TurbulenceShinyOrb(firePos, RandZeroToOne, RandLerpColor(Color.DarkViolet, Color.DarkMagenta), 40, Main.rand.NextFloat(0.16f, 0.24f) * Projectile.Opacity, RandRotTwoPi).Spawn();
+            new Fire(firePos, fireVel, RandLerpColor(Color.Purple, Color.DarkMagenta), 30, RandRotTwoPi, 1, 0.12f * Projectile.Opacity * GeneralProgress).SpawnToPriorityNonPreMult();
         }
 
         #region 挂载状态
@@ -104,10 +105,25 @@ namespace HJScarletRework.Projs.Melee
             if (CanDamageTime > 50)
             {
                 //锁住生命值让其确保能攻击到目标
+                if (Projectile.extraUpdates < 3)
+                {
+                    Projectile.velocity = (target.Center - Projectile.Center).ToSafeNormalize() * 20f;
+                    Projectile.extraUpdates = 3;
+
+                    for (int i = 0; i < 8; i++)
+                    {
+                        new SmokeParticle(Projectile.Center.ToRandCirclePosEdge(4f), -Projectile.velocity.ToRandVelocity(ToRadians(15f), 1.2f, 7.2f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, RandRotTwoPi, 1f, 0.1275f, true).SpawnToNonPreMult();
+                    }
+                    for (int i = 0; i < 8; i++)
+                    {
+                        new ShinyOrbHard(Projectile.Center.ToRandCirclePosEdge(4f), -Projectile.velocity.ToRandVelocity(ToRadians(15), 1.2f, 7.2f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.8f).SpawnToNonPreMult();
+                    }
+                }
+            if(Main.rand.NextBool(2))
+                        new StarShape(Projectile.Center.ToRandCirclePosEdge(4f), -Projectile.velocity.ToRandVelocity(ToRadians(1f), 1.2f, 6.7f), RandLerpColor(Color.DarkViolet, Color.Black), 1.18f, 40,false).SpawnToNonPreMult();
                 Projectile.HomingTarget(target.Center, 600f, 20f, 20f);
                 if ((Projectile.Center - target.Center).LengthSquared() < 50f * 50f)
                     AlreadyHit = true;
-                Projectile.extraUpdates = 2;
                 return;
             }
 
@@ -121,7 +137,7 @@ namespace HJScarletRework.Projs.Melee
             Vector2 signalDir = (target.Center - anchorPos).SafeNormalize(Vector2.Zero);
             //而后，实际更新位置
             anchorPos = anchorPos + signalDir * (MathF.Sin(Osci) / 9f);
-            Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, 0.1f);
+            Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, 0.15f);
             //计算矛需要的朝向。
             float angleToWhat = (target.Center - Projectile.Center).SafeNormalize(Vector2.One).ToRotation();
             //最后使用lerp来让矛朝向得到修改。

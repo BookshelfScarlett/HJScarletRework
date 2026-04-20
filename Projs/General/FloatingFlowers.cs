@@ -46,6 +46,7 @@ namespace HJScarletRework.Projs.General
             get => (State)Projectile.ai[2];
             set => Projectile.ai[2] = (float)value;
         }
+        public float Timer = 0f;
         public AnimationStruct Helper = new(3);
         public bool IsIntersect = false;
         public int CurLifeTime = -1;
@@ -286,17 +287,16 @@ namespace HJScarletRework.Projs.General
                     break;
                 case State.Homing:
                     Projectile.timeLeft = CurLifeTime;
-                    if (distance > (searchdist + 100f) * (searchdist + 100f))
-                    {
-                        Helper.IsDone[0] = false;
-                        AttackState = State.Floating;
-                        return;
-                    }
                     if (Helper.IsDone[0])
                     {
-
                         Projectile.rotation = Projectile.rotation.AngleLerp((Projectile.Center - Owner.Center).ToRotation(), 0.2f);
-                        Projectile.HomingTarget(Owner.Center, -1, 11f, 10f);
+                        Timer++;
+                        float speedUp = Clamp(Timer * 0.5f, 0f, 50f);
+                        Projectile.HomingTarget(Owner.Center, -1, 11f + speedUp, 0f);
+                        if(!IsIntersect &&Timer > GetSeconds(15))
+                        {
+                            Projectile.Center = Owner.Center;
+                        }
                         if (Projectile.IntersectOwnerByDistance(30))
                         {
                             if (!IsIntersect)

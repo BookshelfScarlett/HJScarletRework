@@ -8,11 +8,13 @@ using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class GrandFinaleProj : HJScarletProj
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ClassCategory Category => ClassCategory.Executor;
         public enum State
         {

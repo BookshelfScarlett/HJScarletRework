@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HJScarletRework")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cac91ca8423960af1c12569a2f45c14da4f97249")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e0492e66de0903e59ee360c225594fc7eb2ce9d")]
 [assembly: System.Reflection.AssemblyProductAttribute("HJScarletRework")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HJScarletRework")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
