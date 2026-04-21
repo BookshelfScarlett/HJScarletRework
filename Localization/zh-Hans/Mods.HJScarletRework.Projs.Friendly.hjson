@@ -50,31 +50,31 @@ Melee: {
 	TonbogiriThrownProj.DisplayName: 御手杆-投掷
 	WildPointerThrownProj.DisplayName: 野指针-投掷
 	BinaryStarsExecution.DisplayName: 双子星-天降锤
-	// CactusSpearProj.DisplayName: Cactus Spear Proj
-	// CactusSpearSpike.DisplayName: Cactus Spear Spike
-	// ColdSakuraProj.DisplayName: Cold Sakura Proj
-	// ColdSakuraArrow.DisplayName: Cold Sakura Arrow
-	// TerraSpearArrow.DisplayName: Terra Spear Arrow
-	// TerraSpearPortal.DisplayName: Terra Spear Portal
-	// TerraSpearProj.DisplayName: Terra Spear Proj
-	// TerraSpearSideProj.DisplayName: Terra Spear Side Proj
-	// TerraSpearLaser.DisplayName: Terra Spear Laser
-	// AbyssalWorldProj.DisplayName: Abyssal World Proj
-	// AbyssalWorldVortex.DisplayName: Abyssal World Vortex
+	CactusSpearProj.DisplayName: 仙人掌投矛
+	CactusSpearSpike.DisplayName: 仙人掌投矛-尖刺
+	ColdSakuraProj.DisplayName: 冷樱
+	ColdSakuraArrow.DisplayName: 冷樱-箭矢
+	TerraSpearArrow.DisplayName: 泰拉投枪-箭矢
+	TerraSpearPortal.DisplayName: 泰拉投枪-传送门
+	TerraSpearProj.DisplayName: 泰拉投枪
+	TerraSpearSideProj.DisplayName: 泰拉投枪
+	TerraSpearLaser.DisplayName: Terra Spear Laser
+	AbyssalWorldProj.DisplayName: Abyssal World Proj
+	AbyssalWorldVortex.DisplayName: Abyssal World Vortex
 }
 
 Typeless: {
 	EvolutionEnergyPortal.DisplayName: 进化-投掷-能量传送门
 	RegenOrbsPink.DisplayName: Regen Orbs Pink
-	// DreamingLightBeam.DisplayName: Dreaming Light Beam
-	// JudgementStarAlt.DisplayName: TheJudgement Star Alt
-	// TheJudgementStar.DisplayName: TheJudgement Star Normal
-	// DeathTollsProj.DisplayName: Death Tolls Proj
-	// DesterrennachtHealProj.DisplayName: Desterrennacht Heal Proj
-	// CowboyBullet.DisplayName: Cowboy Bullet
-	// CowboyRevolverProj.DisplayName: Cowboy Revolver Proj
-	// RuneWizardProj.DisplayName: Rune Wizard Proj
-	// FloatingPlants.DisplayName: Floating Plants
+	DreamingLightBeam.DisplayName: Dreaming Light Beam
+	JudgementStarAlt.DisplayName: TheJudgement Star Alt
+	TheJudgementStar.DisplayName: TheJudgement Star Normal
+	DeathTollsProj.DisplayName: Death Tolls Proj
+	DesterrennachtHealProj.DisplayName: 星月夜-治疗弹幕
+	CowboyBullet.DisplayName: 牛仔护甲核心-子弹
+	CowboyRevolverProj.DisplayName: 牛仔护甲核心-枪
+	RuneWizardProj.DisplayName: 符文法师护甲核心-魔法
+	FloatingPlants.DisplayName: 护花员护甲核心-漂浮草药
 }
 
 Pets: {
@@ -86,77 +86,77 @@ Pets: {
 }
 
 Executor: {
-	// AetherfireSmasherExecution.DisplayName: Aetherfire Smasher Execution
-	// AetherfireSmasherFireball.DisplayName: Aetherfire Smasher Fireball
-	// AetherfireSmasherProj.DisplayName: Aetherfire Smasher Proj
-	// AetherfireSmasherVolcano.DisplayName: Aetherfire Smasher Volcano
-	// BinaryStarsArrow.DisplayName: Binary Stars Arrow
-	// BinaryStarsExecution.DisplayName: Binary Stars Execution
-	// BinaryStarsPhantom.DisplayName: Binary Stars Phantom
-	// BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
-	// BinaryStarsProj.DisplayName: Binary Stars Proj
-	// MantleLayerExecution.DisplayName: Blazing Striker Execution
-	// MantleLayerProj.DisplayName: Blazing Striker Proj
-	// BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
-	// CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
-	// DeathTollsArrow.DisplayName: Death Tolls Arrow
-	// DeathTollsDarkEnergy.DisplayName: Death Tolls Dark Energy
-	// DeathTollsExecution.DisplayName: Death Tolls Execution
-	// DeathTollsMinion.DisplayName: Death Tolls Minion
-	// DeathTollsProj.DisplayName: Death Tolls Proj
-	// DeathTollsStreak.DisplayName: Death Tolls Streak
-	// DreamingLightFireball.DisplayName: Dreaming Light Fireball
-	// DreamingLightMinion.DisplayName: Dreaming Light Minion
-	// DreamingLightProj.DisplayName: Dreaming Light Proj
-	// DreamlessNightArrow.DisplayName: Dreamless Night Arrow
-	// DreamlessNightBeam.DisplayName: Dreamless Night Beam
-	// DreamlessNightMinion.DisplayName: Dreamless Night Minion
-	// DreamlessNightProj.DisplayName: Dreamless Night Proj
-	// DungeonBreakerExecution.DisplayName: Dungeon Breaker Execution
-	// DungeonBreakerProj.DisplayName: Dungeon Breaker Proj
-	// DungeonBreakerShockwave.DisplayName: Dungeon Breaker Shockwave
-	// DungeonBreakerWaterbolt.DisplayName: Dungeon Breaker Waterbolt
-	// ExsanguinationBulletProj.DisplayName: Exsanguination Bullet Proj
-	// ExsanguinationHeldProj.DisplayName: Exsanguination Held Proj
-	// FleshGrinderExecution.DisplayName: Flesh Grinder Execution
-	// FleshGrinderProj.DisplayName: Flesh Grinder Proj
-	// TheJudgementCross.DisplayName: TheJudgement Holy Cross
-	// TheJudgementCrossMounted.DisplayName: TheJudgement Holy Cross Mounted
-	// TheJudgementMinion.DisplayName: TheJudgement Minion
-	// TheJudgementProj.DisplayName: TheJudgement Proj
-	// TheJudgementStarExecution.DisplayName: TheJudgement Star Execution
-	// TheJudgementStarExecutionMounted.DisplayName: TheJudgement Star Execution Mounted
-	// TheJudgementStar.DisplayName: TheJudgement Star Normal
-	// JungleMadnessExecution.DisplayName: Jungle Madness Execution
-	// JungleMadnessLeafs.DisplayName: Jungle Madness Leafs
-	// JungleMadnessProj.DisplayName: Jungle Madness Proj
-	// TheDefilerExecution.DisplayName: The Defiler Execution
-	// TheDefilerProj.DisplayName: The Defiler Proj
-	// ThePunishmentExecution.DisplayName: The Punishment Execution
-	// ThePunishmentProj.DisplayName: The Punishment Proj
-	// ThePunishmentStar.DisplayName: The Punishment Star
-	// DreamingLightStriker.DisplayName: Dreaming Light Striker
-	// DreamingLightBeam.DisplayName: Dreaming Light Beam
-	// DeathTollsBell.DisplayName: Death Tolls Bell
-	// CrimsonScytheProj.DisplayName: Crimson Scythe Proj
-	// TrueScarletProj.DisplayName: True Scarlet Proj
-	// GrandFinaleLightning.DisplayName: Grand Finale Lighting
-	// GrandFinaleProj.DisplayName: Grand Finale Proj
-	// GrandFinaleExecution.DisplayName: Grand Finale Execution
-	// GrandFinaleStriker.DisplayName: Grand Finale Striker
-	// SimpleHandAxeExecution.DisplayName: Simple Hand Axe Execution
-	// SimpleHandAxeProj.DisplayName: Simple Hand Axe Proj
-	// AetherfireSmasherProj2.DisplayName: Aetherfire Smasher Proj2
-	// AetherfireSmasherFireball2.DisplayName: Aetherfire Smasher Fireball2
-	// AetherfireSmasherExecution2.DisplayName: Aetherfire Smasher Execution2
-	// MonkStaffProj.DisplayName: Monk Staff Proj
+	AetherfireSmasherExecution.DisplayName: 天炎破-处决
+	AetherfireSmasherFireball.DisplayName: 天炎破-火球
+	AetherfireSmasherProj.DisplayName: 天炎破
+	AetherfireSmasherVolcano.DisplayName: 天炎破-火柱
+	BinaryStarsArrow.DisplayName: 双子星-星云箭矢
+	BinaryStarsExecution.DisplayName: 双子星-处决
+	BinaryStarsPhantom.DisplayName: 双子星-幻影
+	BinaryStarsPhantomClone.DisplayName: 双子星-幻影
+	BinaryStarsProj.DisplayName: 双子星
+	MantleLayerExecution.DisplayName: 地幔-处决
+	MantleLayerProj.DisplayName: 地幔
+	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
+	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
+	DeathTollsArrow.DisplayName: 死亡丧钟-梦魇箭矢
+	DeathTollsDarkEnergy.DisplayName: 死亡丧钟-暗影能量
+	DeathTollsExecution.DisplayName: 死亡丧钟-处决
+	DeathTollsMinion.DisplayName: 死亡丧钟-仆从
+	DeathTollsProj.DisplayName: 死亡丧钟
+	DeathTollsStreak.DisplayName: 死亡丧钟-仆从射线
+	DreamingLightFireball.DisplayName: 铸梦之光-火球
+	DreamingLightMinion.DisplayName: 铸梦之光-仆从
+	DreamingLightProj.DisplayName: 铸梦之光
+	DreamlessNightArrow.DisplayName: 无梦之夜-箭矢
+	DreamlessNightBeam.DisplayName: 无梦之夜-梦境射线
+	DreamlessNightMinion.DisplayName: 无梦之夜-仆从
+	DreamlessNightProj.DisplayName: 无梦之夜
+	DungeonBreakerExecution.DisplayName: 地牢破坏者-处决
+	DungeonBreakerProj.DisplayName: 地牢破坏者
+	DungeonBreakerShockwave.DisplayName: 地牢破坏者-冲击波
+	DungeonBreakerWaterbolt.DisplayName: 地牢破坏者-水矢
+	ExsanguinationBulletProj.DisplayName: 放血疗法-子弹
+	ExsanguinationHeldProj.DisplayName: 放血疗法
+	FleshGrinderExecution.DisplayName: 碾肉机-处决
+	FleshGrinderProj.DisplayName: 碾肉机
+	TheJudgementCross.DisplayName: 圣神断罪-十字射线
+	TheJudgementCrossMounted.DisplayName: 圣神断罪-十字射线
+	TheJudgementMinion.DisplayName: 圣神断罪-仆从
+	TheJudgementProj.DisplayName: 圣神断罪
+	TheJudgementStarExecution.DisplayName: 圣神断罪-新星
+	TheJudgementStarExecutionMounted.DisplayName: 圣神断罪-新星
+	TheJudgementStar.DisplayName: 圣神断罪-新星
+	JungleMadnessExecution.DisplayName: 丛林狂怒-处决
+	JungleMadnessLeafs.DisplayName: 丛林狂怒-树叶
+	JungleMadnessProj.DisplayName: 丛林狂怒
+	TheDefilerExecution.DisplayName: 玷污者-处决
+	TheDefilerProj.DisplayName: 玷污者
+	ThePunishmentExecution.DisplayName: 神代裁决-仆从
+	ThePunishmentProj.DisplayName: 神代裁决
+	ThePunishmentStar.DisplayName: 神代裁决-新星
+	DreamingLightStriker.DisplayName: 铸梦之光-梦境之锤
+	DreamingLightBeam.DisplayName: 铸梦之光-梦境射线
+	DeathTollsBell.DisplayName: Death Tolls Bell
+	CrimsonScytheProj.DisplayName: Crimson Scythe Proj
+	TrueScarletProj.DisplayName: True Scarlet Proj
+	GrandFinaleLightning.DisplayName: Grand Finale Lighting
+	GrandFinaleProj.DisplayName: Grand Finale Proj
+	GrandFinaleExecution.DisplayName: Grand Finale Execution
+	GrandFinaleStriker.DisplayName: Grand Finale Striker
+	SimpleHandAxeExecution.DisplayName: 简易双刃斧-处决
+	SimpleHandAxeProj.DisplayName: 简易双刃斧-处决
+	AetherfireSmasherProj2.DisplayName: Aetherfire Smasher Proj2
+	AetherfireSmasherFireball2.DisplayName: Aetherfire Smasher Fireball2
+	AetherfireSmasherExecution2.DisplayName: Aetherfire Smasher Execution2
+	MonkStaffProj.DisplayName: Monk Staff Proj
 }
 
 Ranged: {
-	// ClimaticHawstringArrow.DisplayName: Climatic Hawstring Arrow
-	// ClimaticHawstringBeam.DisplayName: Climatic Hawstring Beam
-	// ClimaticHawstringLaser.DisplayName: Climatic Hawstring Laser
-	// ClimaticHawstringMinion.DisplayName: Climatic Hawstring Minion
-	// ClimaticHawstringProj.DisplayName: Climatic Hawstring Proj
-	// BambooStick.DisplayName: Bamboo Stick
+	ClimaticHawstringArrow.DisplayName: 气候钓弦-箭矢
+	ClimaticHawstringBeam.DisplayName: 气候钓弦-热能激光
+	ClimaticHawstringLaser.DisplayName: 气候钓弦-热能激光
+	ClimaticHawstringMinion.DisplayName: 气候钓弦-飞杆鱼仆从
+	ClimaticHawstringProj.DisplayName: 气候钓弦
+	BambooStick.DisplayName: 火箭竹-竹
 }
