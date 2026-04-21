@@ -19,8 +19,8 @@ CrossModSupport.Calamity: ""
 
 DamageClasses: {
 	ExecutorDamageClass: {
-		ExecutionTime: "{0}"
-		ExecutionDescriptionName: ""
+		ExecutionTime: "Strike your enemy for {0} times to Execute. Press Left Alt for details"
+		ExecutionDescriptionName: "On Execution Strike:"
 		DisplayName: Executor Damage Class
 
 		Prefixs: {
