@@ -27,6 +27,17 @@ namespace HJScarletRework.Graphics.Particles
             BlendStateType = BlendStateID.Additive;
             FadeOut = 1f;
         }
+        public ShinyOrbParticle(Vector2 position, Vector2 velocity, Color color, int lifeTime, float scale, float glowCenterScale = 0.5f)
+        {
+            Position = position;
+            Velocity = velocity;
+            DrawColor = InitColor = color;
+            Lifetime = lifeTime;
+            Scale = scale;
+            BlendStateType = BlendStateID.Additive;
+            GlowCenterScale = glowCenterScale;
+            FadeOut = 1f;
+        }
         public ShinyOrbParticle(Vector2 position, Vector2 velocity, Color color, int lifeTime, float scale, int? blendState = null, bool affactedByGravity = false, bool glowCenter = true, float glowCenterScale = 0.5f)
         {
             Position = position;
@@ -59,7 +70,7 @@ namespace HJScarletRework.Graphics.Particles
             Vector2 scale = new Vector2(1f, 1f) * Scale;
             Texture2D texture = HJScarletTexture.Particle_ShinyOrb.Value;
             spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor, Rotation, texture.Size() * 0.5f, scale, 0, 0f);
-            if (GlowCenter)
+            if (GlowCenter || GlowCenterScale >= 0)
                 spriteBatch.Draw(texture, Position - Main.screenPosition, null, Color.White * FadeOut, Rotation, texture.Size() * 0.5f, scale * GlowCenterScale, 0, 0f);
         }
     }
