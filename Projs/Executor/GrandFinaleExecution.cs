@@ -65,7 +65,7 @@ namespace HJScarletRework.Projs.Executor
             if (Main.rand.NextBool(6))
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePosEdge(40);
-                new HRShinyOrb(pos, RandVelTwoPi(4f,8f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, 0, 1, 0.1f).Spawn();
+                new HRShinyOrb(pos, RandVelTwoPi(4f,8f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, 0.1f).Spawn();
             }
             if (Main.rand.NextBool(8))
             {

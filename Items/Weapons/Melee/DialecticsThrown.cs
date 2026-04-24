@@ -22,7 +22,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         }
         public override void ExSD()
         {
-            Item.damage = 135;
+            Item.damage = 140;
             Item.rare = RarityType<MatterRarity>();
             //不需要声音，在shoot里手动控制
             Item.UseSound = null;

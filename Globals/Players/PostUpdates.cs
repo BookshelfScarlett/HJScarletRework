@@ -5,6 +5,7 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Melee;
+using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
 using System;
@@ -36,10 +37,6 @@ namespace HJScarletRework.Globals.Players
                 Player.GetDamage<ExecutorDamageClass>() *= 1.1f;
                 if (executorAscension)
                     Player.GetCritChance<ExecutorDamageClass>() += 30;
-            }
-            if (CanWeaponSpecialAbility)
-            {
-                CanWeaponSpecialAbility = false;
             }
         }
 
@@ -154,6 +151,25 @@ namespace HJScarletRework.Globals.Players
         {
             UpdateNetPacket();
             SwitchWeaponSystem();
+            if (monkStaffHeal && Player.statLife < (int)(Player.statLifeMax2 * 0.9f))
+            {
+                if (Player.miscCounter % 10 == 0)
+                    Player.Heal(Main.rand.Next(1, 4));
+                Vector2 pos = Player.Center + Vector2.UnitY * (Player.height * 0.5f);
+                if (Main.rand.NextBool())
+                {
+                    pos.X += Main.rand.NextFloat(-1f, 1.1f) * Player.width;
+                    pos.Y -= Main.rand.NextFloat(0f, 1f) * Player.height;
+                    new StarShape(pos, -Vector2.UnitY * Main.rand.NextFloat(0.1f, 0.4f), Color.Lime, 0.4f, 40).Spawn();
+                }
+                if (Main.rand.NextBool())
+                {
+                    pos = Player.Center + Vector2.UnitY * (Player.height * 0.5f);
+                    pos.X += Main.rand.NextFloat(-1f, 1.1f) * Player.width;
+                    pos.Y -= Main.rand.NextFloat(0f, 1f) * Player.height;
+                    new ShinyCrossStar(pos, -Vector2.UnitY * Main.rand.NextFloat(0.1f, .4f), RandLerpColor(Color.Lime, Color.LimeGreen), 40, 0, 1, 0.4f, false).Spawn();
+                }
+            }
             if (resetTerraRecipe)
             {
                 for (int i = 0; i < terraRecipe_haventEat.Count; i++)
@@ -163,14 +179,74 @@ namespace HJScarletRework.Globals.Players
                         continue;
                     terraRecipe_haventEat.Remove(i);
                 }
+                resetTerraRecipe = false;
+            }
+            if (CanWeaponSpecialAbility)
+            {
+                CanWeaponSpecialAbility = false;
+                if (monkExecutor && !Player.HasProj<MonkStaffProj>())
+                {
+                    //玩家拥有任何手持的棍子都会直接处死掉，不要试图打断玩家的治疗
+                    foreach (var projID in Main.ActiveProjectiles)
+                    {
+                        if (projID.owner != Player.whoAmI)
+                            continue;
 
-                    resetTerraRecipe = false;
+                        if (projID.type == ProjectileID.MonkStaffT3 || projID.type == ProjectileID.MonkStaffT3_Alt || projID.type == ProjectileID.MonkStaffT1)
+                        {
+                            switch (projID.type)
+                            {
+                                case ProjectileID.MonkStaffT3:
+                                case ProjectileID.MonkStaffT3_Alt:
+                                    for (int i = 0; i < 66; i++)
+                                    {
+                                        Vector2 pos = Player.Center.ToRandCirclePos(16f);
+                                        Dust d = Dust.NewDustPerfect(pos, DustID.IceTorch);
+                                        d.velocity = -Vector2.UnitY * Main.rand.NextFloat(0.8f, 2.6f);
+                                        d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
+                                    }
+                                    break;
+                                default:
+                                    for (int i = 0; i < 66; i++)
+                                    {
+                                        Vector2 pos = Player.Center.ToRandCirclePos(16f);
+                                        Dust d = Dust.NewDustPerfect(pos, DustID.CursedTorch);
+                                        d.velocity = -Vector2.UnitY * Main.rand.NextFloat(0.8f, 2.6f);
+                                        d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
+                                    }
+                                    break;
+
+                            }
+                            projID.Kill();
+                        }
+                    }
+
+
+                    if (Player.HeldItem.type == ItemID.MonkStaffT1)
+                    {
+                        Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffProj>(), 0, 0, Player.whoAmI);
+                        //标记为1说明是瞌睡章鱼
+                        proj.ai[0] = 1;
+                    }
+                    if (Player.HeldItem.type == ItemID.MonkStaffT3)
+                    {
+                        Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffProj>(), 0, 0, Player.whoAmI);
+                        //标记为1说明是瞌睡章鱼
+                        proj.ai[0] = 0;
+                    }
+                }
             }
         }
         public override void PostUpdateEquips()
         {
             HandleTerraRecipe();
             HandleLoveRing();
+            UpdateFloretProtectorHerbSpawn();
+            UpdateHerbBuff();
+            UpdateStardustRune();
+        }
+        public void UpdateFloretProtectorHerbSpawn()
+        {
             if (floretProtectorTimer == 0 && floretProtectorExecutor)
             {
                 if (Main.rand.NextBool())
@@ -204,8 +280,7 @@ namespace HJScarletRework.Globals.Players
                 }
                 floretProtectorTimer = 40;
             }
-            UpdateHerbBuff();
-            UpdateStardustRune();
+
         }
 
         private void UpdateStardustRune()
@@ -236,13 +311,13 @@ namespace HJScarletRework.Globals.Players
                     }
                     for (int i = 0; i < 15; i++)
                     {
-                        new HRShinyOrb(Player.ToRandRec() + Vector2.UnitY * 10f, -Vector2.UnitY, Color.RoyalBlue, 40, 0, 1, .0824f).Spawn();
+                        new HRShinyOrb(Player.ToRandRec() + Vector2.UnitY * 10f, -Vector2.UnitY, Color.RoyalBlue, 40, .0824f).Spawn();
                     }
                     for (int i = 0; i < 20; i++)
                     {
                         Vector2 spawnPos = Player.Center + Vector2.UnitY * (Player.height / 2 + 5) + Vector2.UnitY * Main.rand.NextFloat(-11f, -6f) + Vector2.UnitX * Main.rand.NextFloat(-10f, 11f);
                         Vector2 vel = Vector2.UnitY * Main.rand.NextFloat(-6f, -1f);
-                        new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, 0, 1, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
+                        new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
                     }
                 }
             }
@@ -322,7 +397,7 @@ namespace HJScarletRework.Globals.Players
             if (terraRecipe_haventEat.Count == 0)
                 terraRecipe_haventEat = HJScarletList.LegalFoodList;
             //满足这个count的时候。我们就准提供一个血上限
-            if(terraRecipe_EatenFoods > 4)
+            if (terraRecipe_EatenFoods > 4)
             {
                 //记得重置
                 terraRecipe_EatenFoods = 0;
@@ -332,11 +407,11 @@ namespace HJScarletRework.Globals.Players
                 for (int i = 0; i < 30; i++)
                 {
                     float rotArgs = ToRadians((360f / 30 * i));
-                    new ShinyCrossStar(Player.Center + Vector2.UnitX.RotatedBy( rotArgs) * 12f, rotArgs.ToRotationVector2() * 2.8f, Color.White, 40, rotArgs, 1, 1f, false).Spawn();
+                    new ShinyCrossStar(Player.Center + Vector2.UnitX.RotatedBy(rotArgs) * 12f, rotArgs.ToRotationVector2() * 2.8f, Color.White, 40, rotArgs, 1, 1f, false).Spawn();
                 }
             }
             //全局常态提供血上限。
-            Player.statLifeMax2 +=  terraRecipe_LifeMaxMultTime * terraRecipe_LifeMaxIncre;
+            Player.statLifeMax2 += terraRecipe_LifeMaxMultTime * terraRecipe_LifeMaxIncre;
         }
 
 

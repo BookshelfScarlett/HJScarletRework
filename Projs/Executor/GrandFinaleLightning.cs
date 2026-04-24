@@ -37,6 +37,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
+            
         }
         public override void ProjAI()
         {

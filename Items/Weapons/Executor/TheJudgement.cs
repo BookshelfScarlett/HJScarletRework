@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class TheJudgement: ExecutorWeaponClass
     {
         public override int ExecutionTime => 30;
-        public override float ExecutionStrikeDamageMult => 0.25f;
+        public override float ExecutionStrikeDamageMult => 1f;
         public override void ExSD()
         {
             Item.useStyle = ItemUseStyleID.Swing;
@@ -22,7 +22,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shoot = ProjectileType<TheJudgementProj>();
             Item.knockBack = 8f;
             Item.width = Item.height = 58;
-            Item.damage = 50;
+            Item.damage = 64;
             Item.useTime = 13;
             Item.useAnimation = 13;
             Item.shootSpeed = 18f;

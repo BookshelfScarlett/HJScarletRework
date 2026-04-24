@@ -66,8 +66,8 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(16f);
                 Vector2 vel = Projectile.velocity.ToRandVelocity(0, 9f, 11.4f);
-                new HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20, 0, 1f, 0.1f).Spawn();
-                new HRShinyOrb(pos, vel, Color.White, 20, 0, 1f, 0.05f).Spawn();
+                new HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20,  0.1f).Spawn();
+                new HRShinyOrb(pos, vel, Color.White, 20, 0.05f).Spawn();
             }
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)

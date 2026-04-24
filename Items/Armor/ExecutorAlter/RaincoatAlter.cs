@@ -1,6 +1,8 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.ExecutorAlter
 {
@@ -12,7 +14,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override ArmorType Category => ArmorType.Helmet;
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
-            base.ExUpdateEquipAlter(item, player);
+            player.GetCritChance<ExecutorDamageClass>() += 5f;
         }
         public override void ExSD(Item item)
         {
@@ -48,7 +50,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override ArmorType Category => ArmorType.Chestplate;
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
-            base.ExUpdateEquipAlter(item, player);
+            player.GetDamage<GenericDamageClass>() += 0.05f;
         }
         public override void ExSD(Item item)
         {

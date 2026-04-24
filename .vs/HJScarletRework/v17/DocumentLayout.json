@@ -3,59 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\executor\\monkstaffproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\executor\\monkstaffproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\AppData\\Local\\Temp\\.vsdbgsrc\\cdc1464535e74fb785119a2102bf2431d31fba9e383bb5274d3e37bbca0e5586\\SplitPlayer.g.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\melee\\galvanizedhandthrownproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\melee\\galvanizedhandthrownproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Core\\ManosabaSystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Globals\\Resources\\ResourceBarOverlayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\graphics\\particles\\shinycrossstar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:graphics\\particles\\shinycrossstar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Core\\Hud\\ManosabaHudManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Globals\\Resources\\ResourceBarParticles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\AppData\\Local\\SourceServer\\4cee6840eb0536554248e72c1108b6dde1250cbd728bbd228e71eb9ca3aa65d0\\Common\\ScreenFlashSystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Core\\Overlayer\\DrawLayerManger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\items\\wreach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:items\\wreach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\AppData\\Local\\SourceServer\\1911ff5ce7b5f8f357e8348586a0094df230d69d1084222bf00d00a05d6809dc\\Common\\Drawing\\PixelationSystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\executor\\aetherfiresmasherexecution.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\executor\\aetherfiresmasherexecution.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\hjscarletrework.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:hjscarletrework.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\projs\\executor\\crimsonscytheproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:projs\\executor\\crimsonscytheproj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\25239\\AppData\\Local\\SourceServer\\aa258e81f714e374a26fc87bbb0f9dc176c92ad71476decca8bd3f1418c857b8\\Common\\Drawing\\AdditiveDrawer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|c:\\users\\25239\\documents\\my games\\terraria\\tmodloader\\modsources\\hjscarletrework\\graphics\\particles\\kirastar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{11E13BF1-1B7D-BF1E-5119-0D7505AB127F}|HJScarletRework.csproj|solutionrelative:graphics\\particles\\kirastar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,29 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MonkStaffProj.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Executor\\MonkStaffProj.cs",
-              "RelativeDocumentMoniker": "Projs\\Executor\\MonkStaffProj.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Executor\\MonkStaffProj.cs",
-              "RelativeToolTip": "Projs\\Executor\\MonkStaffProj.cs",
-              "ViewState": "AgIAAH0AAAAAAAAAAAAswIUAAAAoAAAAAAAAAA==",
+              "Title": "KiraStar.cs",
+              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Graphics\\Particles\\KiraStar.cs",
+              "RelativeDocumentMoniker": "Graphics\\Particles\\KiraStar.cs",
+              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Graphics\\Particles\\KiraStar.cs",
+              "RelativeToolTip": "Graphics\\Particles\\KiraStar.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwCQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T19:41:25.927Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AetherfireSmasherExecution.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Executor\\AetherfireSmasherExecution.cs",
-              "RelativeDocumentMoniker": "Projs\\Executor\\AetherfireSmasherExecution.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Executor\\AetherfireSmasherExecution.cs",
-              "RelativeToolTip": "Projs\\Executor\\AetherfireSmasherExecution.cs",
-              "ViewState": "AgIAADkBAAAAAAAAAAAqwEQBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T20:12:01.34Z",
-              "IsPinned": true,
+              "WhenOpened": "2026-04-24T00:03:09.991Z",
               "EditorCaption": ""
             },
             {
@@ -102,188 +36,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SplitPlayer.g.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\AppData\\Local\\Temp\\.vsdbgsrc\\cdc1464535e74fb785119a2102bf2431d31fba9e383bb5274d3e37bbca0e5586\\SplitPlayer.g.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\cdc1464535e74fb785119a2102bf2431d31fba9e383bb5274d3e37bbca0e5586\\SplitPlayer.g.cs",
-              "ToolTip": "C:\\Users\\25239\\AppData\\Local\\Temp\\.vsdbgsrc\\cdc1464535e74fb785119a2102bf2431d31fba9e383bb5274d3e37bbca0e5586\\SplitPlayer.g.cs [\u53EA\u8BFB]",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\cdc1464535e74fb785119a2102bf2431d31fba9e383bb5274d3e37bbca0e5586\\SplitPlayer.g.cs [\u53EA\u8BFB]",
-              "ViewState": "AgIAAFcBAAAAAAAAAAAawFIBAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T21:14:04.758Z",
-              "EditorCaption": " [\u53EA\u8BFB]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GalvanizedHandThrownProj.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\GalvanizedHandThrownProj.cs",
-              "RelativeDocumentMoniker": "Projs\\Melee\\GalvanizedHandThrownProj.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Melee\\GalvanizedHandThrownProj.cs",
-              "RelativeToolTip": "Projs\\Melee\\GalvanizedHandThrownProj.cs",
-              "ViewState": "AgIAAIUAAAAAAAAAAAAuwJkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T21:13:14.756Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ShinyCrossStar.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Graphics\\Particles\\ShinyCrossStar.cs",
-              "RelativeDocumentMoniker": "Graphics\\Particles\\ShinyCrossStar.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Graphics\\Particles\\ShinyCrossStar.cs",
-              "RelativeToolTip": "Graphics\\Particles\\ShinyCrossStar.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T20:54:43.504Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ManosabaSystem.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Core\\ManosabaSystem.cs",
-              "RelativeDocumentMoniker": "..\\SakurabaEmaMod\\Core\\ManosabaSystem.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Core\\ManosabaSystem.cs",
-              "RelativeToolTip": "..\\SakurabaEmaMod\\Core\\ManosabaSystem.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAiwFgAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T20:54:17.185Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ResourceBarParticles.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Globals\\Resources\\ResourceBarParticles.cs",
-              "RelativeDocumentMoniker": "..\\SakurabaEmaMod\\Globals\\Resources\\ResourceBarParticles.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Globals\\Resources\\ResourceBarParticles.cs",
-              "RelativeToolTip": "..\\SakurabaEmaMod\\Globals\\Resources\\ResourceBarParticles.cs",
-              "ViewState": "AgIAAJYAAAAAAAAAAAAiwLwAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T20:42:09.098Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ScreenFlashSystem.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\AppData\\Local\\SourceServer\\4cee6840eb0536554248e72c1108b6dde1250cbd728bbd228e71eb9ca3aa65d0\\Common\\ScreenFlashSystem.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\4cee6840eb0536554248e72c1108b6dde1250cbd728bbd228e71eb9ca3aa65d0\\Common\\ScreenFlashSystem.cs",
-              "ToolTip": "C:\\Users\\25239\\AppData\\Local\\SourceServer\\4cee6840eb0536554248e72c1108b6dde1250cbd728bbd228e71eb9ca3aa65d0\\Common\\ScreenFlashSystem.cs",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\4cee6840eb0536554248e72c1108b6dde1250cbd728bbd228e71eb9ca3aa65d0\\Common\\ScreenFlashSystem.cs",
-              "ViewState": "AgIAANEAAAAAAAAAAAAYwOMAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T20:40:45.402Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ManosabaHudManager.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Core\\Hud\\ManosabaHudManager.cs",
-              "RelativeDocumentMoniker": "..\\SakurabaEmaMod\\Core\\Hud\\ManosabaHudManager.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Core\\Hud\\ManosabaHudManager.cs",
-              "RelativeToolTip": "..\\SakurabaEmaMod\\Core\\Hud\\ManosabaHudManager.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAYwBkAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T20:33:15.735Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PixelationSystem.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\AppData\\Local\\SourceServer\\1911ff5ce7b5f8f357e8348586a0094df230d69d1084222bf00d00a05d6809dc\\Common\\Drawing\\PixelationSystem.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\1911ff5ce7b5f8f357e8348586a0094df230d69d1084222bf00d00a05d6809dc\\Common\\Drawing\\PixelationSystem.cs",
-              "ToolTip": "C:\\Users\\25239\\AppData\\Local\\SourceServer\\1911ff5ce7b5f8f357e8348586a0094df230d69d1084222bf00d00a05d6809dc\\Common\\Drawing\\PixelationSystem.cs",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\1911ff5ce7b5f8f357e8348586a0094df230d69d1084222bf00d00a05d6809dc\\Common\\Drawing\\PixelationSystem.cs",
-              "ViewState": "AgIAABYBAAAAAAAAAAAawCgBAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T20:19:26.607Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ResourceBarOverlayer.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Globals\\Resources\\ResourceBarOverlayer.cs",
-              "RelativeDocumentMoniker": "..\\SakurabaEmaMod\\Globals\\Resources\\ResourceBarOverlayer.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Globals\\Resources\\ResourceBarOverlayer.cs",
-              "RelativeToolTip": "..\\SakurabaEmaMod\\Globals\\Resources\\ResourceBarOverlayer.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAnwEUAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T20:10:41.78Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "DrawLayerManger.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Core\\Overlayer\\DrawLayerManger.cs",
-              "RelativeDocumentMoniker": "..\\SakurabaEmaMod\\Core\\Overlayer\\DrawLayerManger.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\SakurabaEmaMod\\Core\\Overlayer\\DrawLayerManger.cs",
-              "RelativeToolTip": "..\\SakurabaEmaMod\\Core\\Overlayer\\DrawLayerManger.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T20:09:44.285Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "HJScarletRework",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\HJScarletRework.csproj",
-              "RelativeDocumentMoniker": "HJScarletRework.csproj",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\HJScarletRework.csproj",
-              "RelativeToolTip": "HJScarletRework.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-04-20T20:01:02.99Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "CrimsonScytheProj.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Executor\\CrimsonScytheProj.cs",
-              "RelativeDocumentMoniker": "Projs\\Executor\\CrimsonScytheProj.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Projs\\Executor\\CrimsonScytheProj.cs",
-              "RelativeToolTip": "Projs\\Executor\\CrimsonScytheProj.cs",
-              "ViewState": "AgIAAIwAAAAAAAAAAAAswJoAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T20:00:21.391Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "AdditiveDrawer.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\AppData\\Local\\SourceServer\\aa258e81f714e374a26fc87bbb0f9dc176c92ad71476decca8bd3f1418c857b8\\Common\\Drawing\\AdditiveDrawer.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\aa258e81f714e374a26fc87bbb0f9dc176c92ad71476decca8bd3f1418c857b8\\Common\\Drawing\\AdditiveDrawer.cs",
-              "ToolTip": "C:\\Users\\25239\\AppData\\Local\\SourceServer\\aa258e81f714e374a26fc87bbb0f9dc176c92ad71476decca8bd3f1418c857b8\\Common\\Drawing\\AdditiveDrawer.cs",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\aa258e81f714e374a26fc87bbb0f9dc176c92ad71476decca8bd3f1418c857b8\\Common\\Drawing\\AdditiveDrawer.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAYwDAAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T19:59:16.539Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Wreach.cs",
-              "DocumentMoniker": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Wreach.cs",
-              "RelativeDocumentMoniker": "Items\\Wreach.cs",
-              "ToolTip": "C:\\Users\\25239\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\HJScarletRework\\Items\\Wreach.cs",
-              "RelativeToolTip": "Items\\Wreach.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-20T19:59:05.604Z",
-              "EditorCaption": ""
             }
           ]
         }

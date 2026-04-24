@@ -20,7 +20,7 @@ namespace HJScarletRework.Globals.Players
             {
                 hit.DamageType = ExecutorDamageClass.Instance;
             }
-            if (shinobiExecutor && hit.DamageType.CountsAsClass<MeleeDamageClass>())
+            if (monkExecutor && (hit.DamageType.CountsAsClass<MeleeDamageClass>() || hit.DamageType.CountsAsClass<SummonDamageClass>()))
             {
                 switch (proj.type)
                 {
@@ -29,9 +29,13 @@ namespace HJScarletRework.Globals.Players
                     case ProjectileID.MonkStaffT3_AltShot:
                     case 1110:
                     case ProjectileID.MonkStaffT1:
+                    case ProjectileID.DD2LightningAuraT1:
+                    case ProjectileID.DD2LightningAuraT2:
+                    case ProjectileID.DD2LightningAuraT3:
                         hit.DamageType = ExecutorDamageClass.Instance;
                         break;
                 }
+                
             }
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
             if (proj.DamageType == ExecutorDamageClass.Instance)
@@ -85,6 +89,19 @@ namespace HJScarletRework.Globals.Players
                         sourceDamageModify += 0.1f;
                 }
             }
+            if (monkExecutor && (modifiers.DamageType.CountsAsClass<MeleeDamageClass>() || modifiers.DamageType.CountsAsClass<SummonDamageClass>()))
+            {
+                switch (proj.type)
+                {
+                    case ProjectileID.DD2LightningAuraT1:
+                    case ProjectileID.DD2LightningAuraT2:
+                    case ProjectileID.DD2LightningAuraT3:
+                        modifiers.FinalDamage *= 2f + shinobiExecutor.ToInt() * 8f;
+                        break;
+                }
+            }
+            modifiers.SourceDamage *= sourceDamageModify;
+
         }
         public void ModifyCritDamage(NPC target, ref NPC.HitModifiers modifiers)
         {

@@ -22,7 +22,7 @@ namespace HJScarletRework.Globals.Players
                 if (PreciousTargetCrtis > limitedCrit)
                     PreciousTargetCrtis = limitedCrit;
             }
-            if (shinobiExecutor)
+            if (monkExecutor)
             {
                 if(item.type == ItemID.MonkStaffT3)
                 {
@@ -30,7 +30,7 @@ namespace HJScarletRework.Globals.Players
                 }
                 if (item.type == ItemID.MonkStaffT1)
                 {
-                    crit += 60;
+                    crit += 30;
                 }
             }
         }
@@ -45,19 +45,22 @@ namespace HJScarletRework.Globals.Players
                 if (item.consumable && item.DamageType.CountsAsClass<RangedDamageClass>())
                     damage *= 1.10f;
             }
-            if (shinobiExecutor && item.type == ItemID.MonkStaffT3)
+            if (monkExecutor)
             {
-                damage = StatModifier.Default;
-                float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
-                damage *= (1 + ratios);
-                damage *= 2;
-            }
-            if (shinobiExecutor && item.type == ItemID.MonkStaffT1)
-            {
-                damage = StatModifier.Default;
-                float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
-                damage *= (1 + ratios);
-                damage *= 5;
+                if (item.type == ItemID.MonkStaffT3)
+                {
+                    damage = StatModifier.Default;
+                    float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
+                    damage *= (1 + ratios);
+                    damage *= 2;
+                }
+                if (item.type == ItemID.MonkStaffT1)
+                {
+                    damage = StatModifier.Default;
+                    float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
+                    damage *= (1 + ratios);
+                    damage *= 1.5f;
+                }
             }
             base.ModifyWeaponDamage(item, ref damage);
         }

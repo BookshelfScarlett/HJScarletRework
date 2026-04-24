@@ -16,12 +16,15 @@ namespace HJScarletRework.Items.Armor.Shinobi
         {
             Item.width = Item.height = 40;
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
-            Item.defense = 30;
+            Item.defense = 10;
         }
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus += "\n" + Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBonus").ToLangValue();
             player.HJScarlet().shinobiExecutor = true;
+            player.HJScarlet().monkExecutor = true;
+            player.setMonkT3 = true;
+            player.maxTurrets += 4;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -30,9 +33,7 @@ namespace HJScarletRework.Items.Armor.Shinobi
         }
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage<ExecutorDamageClass>() += 0.05f;
-            player.GetArmorPenetration<ExecutorDamageClass>() += 20;
-            player.maxTurrets += 1;
+            player.GetDamage<ExecutorDamageClass>() += 0.40f;
         }
 
     }

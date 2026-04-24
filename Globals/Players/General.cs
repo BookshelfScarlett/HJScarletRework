@@ -35,8 +35,10 @@ namespace HJScarletRework.Globals.Players
         public int climaticHawstringLaserCounter = 0;
         #region 护甲
         public bool shinobiExecutor = false;
+        public bool monkExecutor = false; 
         public bool runeWizardExecutor = false;
         public bool cowboyExecutor = false;
+        public bool monkStaffHeal = false;
         public int cowboyRevolverTimer = 0;
 
         public bool floretProtectorExecutor = false;
@@ -154,6 +156,7 @@ namespace HJScarletRework.Globals.Players
 
             cowboyRevolverTimer = 0;
             floretProtectorTimer = 0;
+            monkStaffHeal = false;
         }
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {

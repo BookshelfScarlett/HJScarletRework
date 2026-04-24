@@ -26,7 +26,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.localNPCHitCooldown = 30;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
-            Projectile.penetrate = 10;
+            Projectile.penetrate = -1;
             Projectile.extraUpdates = 1;
             Projectile.timeLeft = 250;
         }
@@ -71,7 +71,11 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 dVel = Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f, 6f);
                 new ShinyCrossStar(mountedPos.ToRandCirclePos(12f), dVel, RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, dVel.ToRotation(), 1f, 0.75f, false,Main.rand.NextFloat(ToRadians(-5f),ToRadians(5f))).Spawn();
-                new ShinyOrbParticle(mountedPos.ToRandCirclePos(8f), dVel * Main.rand.NextFloat(0.8f, 1.2f), RandLerpColor(Color.Orange, Color.OrangeRed), 40, 0.95f).Spawn();
+                Vector2 pos = mountedPos.ToRandCirclePos(8f);
+                Vector2 vel = dVel * Main.rand.NextFloat(0.8f, 1.2f);
+                new HRShinyOrb(pos, vel, RandLerpColor(Color.Orange, Color.Gold), 40,  0.12f).Spawn();
+                new HRShinyOrb(pos, vel, Color.White, 40,  0.08f).Spawn();
+                //new ShinyOrbParticle(mountedPos.ToRandCirclePos(8f), dVel * Main.rand.NextFloat(0.8f, 1.2f), RandLerpColor(Color.Orange, Color.OrangeRed), 40, 0.95f).Spawn();
             }
         }
 
@@ -103,7 +107,7 @@ namespace HJScarletRework.Projs.Melee
             for (float i = 0; i < 12f; i += 1f)
             {
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(12f), Projectile.oldVelocity * Main.rand.NextFloat(0.4f, 0.7f), RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.75f * Main.rand.NextFloat(0.5f, 1f), Main.rand.NextFloat(ToRadians(-5f), ToRadians(7f))).Spawn();
-                new HRShinyOrb(Projectile.Center.ToRandCirclePos(8f), Projectile.oldVelocity.ToRandVelocity(1f, 3.2f), RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed), 40, 0, 1, 0.12f).Spawn();
+                new HRShinyOrb(Projectile.Center.ToRandCirclePos(8f), Projectile.oldVelocity.ToRandVelocity(1f, 3.2f), RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed), 40,  0.12f).Spawn();
             }
             return true;
         }
@@ -112,13 +116,15 @@ namespace HJScarletRework.Projs.Melee
             for (float i = 0; i < 12f; i += 1f)
             {
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(12f), Projectile.oldVelocity * Main.rand.NextFloat(0.4f, 0.7f), RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.75f * Main.rand.NextFloat(0.5f, 1f), Main.rand.NextFloat(ToRadians(-5f), ToRadians(7f))).Spawn();
-                new HRShinyOrb(Projectile.Center.ToRandCirclePos(8f), Projectile.oldVelocity.ToRandVelocity(1f, 3.2f), RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed), 40, 0, 1, 0.12f).Spawn();
+                new HRShinyOrb(Projectile.Center.ToRandCirclePos(8f), Projectile.oldVelocity.ToRandVelocity(1f, 3.2f), RandLerpColor(Color.DarkGoldenrod, Color.OrangeRed), 40, 0.12f).Spawn();
             }
 
             //发射粒子
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            if (Projectile.numHits > 10)
+                modifiers.SourceDamage *= (Projectile.numHits - 10) * 0.15f;
             base.ModifyHitNPC(target, ref modifiers);
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

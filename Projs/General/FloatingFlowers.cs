@@ -152,7 +152,7 @@ namespace HJScarletRework.Projs.General
                         if (Main.rand.NextBool())
                             new ShinyCrossStar(spawnPos, dir * Main.rand.NextFloat(0.7f, 1.28f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, dir.ToRotation(), 0.5f, false).Spawn();
                         if (Main.rand.NextBool())
-                            new HRShinyOrb(spawnPos, dir.RotatedByRandom(Pi) * Main.rand.NextFloat(0.7f, 1.24f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, 1f, 0.140f * 0.40f).Spawn();
+                            new HRShinyOrb(spawnPos, dir.RotatedByRandom(Pi) * Main.rand.NextFloat(0.7f, 1.24f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40,  0.140f * 0.40f).Spawn();
                         if (Main.rand.NextBool())
                             new TurbulenceGlowOrb(spawnPos, 0.62f, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 0.14f, RandRotTwoPi).Spawn();
 
@@ -164,7 +164,7 @@ namespace HJScarletRework.Projs.General
                         if (Main.rand.NextBool())
                             new ShinyOrbParticle(spawnPos, dir * Main.rand.NextFloat(0.7f, 2.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, 0.35f).Spawn();
                         if (Main.rand.NextBool())
-                            new HRShinyOrb(spawnPos + dir * 15f, dir * Main.rand.NextFloat(0.7f, 2.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, 0, 1, 0.08f).Spawn();
+                            new HRShinyOrb(spawnPos + dir * 15f, dir * Main.rand.NextFloat(0.7f, 2.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, 0.08f).Spawn();
                         if (Main.rand.NextBool())
                             new SmokeParticle(spawnPos + dir * 10f, dir * Main.rand.NextFloat(0.7f, 4.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.18f).SpawnToNonPreMult();
                         break;
@@ -243,7 +243,7 @@ namespace HJScarletRework.Projs.General
                         if (Main.rand.NextBool())
                             new ShinyCrossStar(spawnPos, dir * Main.rand.NextFloat(0.7f, 1.28f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, dir.ToRotation(), 0.5f, false).Spawn();
                         if (Main.rand.NextBool())
-                            new HRShinyOrb(spawnPos, dir.RotatedByRandom(Pi) * Main.rand.NextFloat(0.7f, 1.24f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, 1f, 0.140f * 0.40f).Spawn();
+                            new HRShinyOrb(spawnPos, dir.RotatedByRandom(Pi) * Main.rand.NextFloat(0.7f, 1.24f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0.140f * 0.40f).Spawn();
                         if (Main.rand.NextBool())
                             new TurbulenceGlowOrb(spawnPos, 0.62f, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 0.14f, RandRotTwoPi).Spawn();
 
@@ -256,7 +256,7 @@ namespace HJScarletRework.Projs.General
                         if (Main.rand.NextBool())
                             new ShinyOrbParticle(spawnPos, dir * Main.rand.NextFloat(0.7f, 2.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, 0.35f).Spawn();
                         if (Main.rand.NextBool())
-                            new HRShinyOrb(spawnPos + dir * 15f, dir * Main.rand.NextFloat(0.7f, 2.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, 0, 1, 0.08f).Spawn();
+                            new HRShinyOrb(spawnPos + dir * 15f, dir * Main.rand.NextFloat(0.7f, 2.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, 0.08f).Spawn();
                         if (Main.rand.NextBool())
                             new SmokeParticle(spawnPos + dir * 10f, dir * Main.rand.NextFloat(0.7f, 4.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.18f).SpawnToNonPreMult();
 
@@ -409,7 +409,7 @@ namespace HJScarletRework.Projs.General
                     //寒蝉棘
                     case 5:
                         new ShinyCrossStar(spawnPos, dir * Main.rand.NextFloat(0.7f, 7.28f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, dir.ToRotation(), 0.5f, false).Spawn();
-                        new HRShinyOrb(spawnPos, dir.RotatedByRandom(Pi) * Main.rand.NextFloat(0.7f, 7.24f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, 1f, 0.140f * 0.40f).Spawn();
+                        new HRShinyOrb(spawnPos, dir.RotatedByRandom(Pi) * Main.rand.NextFloat(0.7f, 7.24f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0.140f * 0.40f).Spawn();
                         new TurbulenceGlowOrb(spawnPos, 0.62f, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 0.14f, RandRotTwoPi).Spawn();
 
                         break;
@@ -417,7 +417,7 @@ namespace HJScarletRework.Projs.General
                     //火焰花
                     case 6:
                         new ShinyOrbParticle(spawnPos, dir * Main.rand.NextFloat(0.7f, 8.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, 0.35f).Spawn();
-                        new HRShinyOrb(spawnPos + dir * 15f, dir * Main.rand.NextFloat(0.7f, 8.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, 0, 1, 0.08f).Spawn();
+                        new HRShinyOrb(spawnPos + dir * 15f, dir * Main.rand.NextFloat(0.7f, 8.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, 0.08f).Spawn();
                         new SmokeParticle(spawnPos + dir * 10f, dir * Main.rand.NextFloat(0.7f, 8.4f), RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.18f).SpawnToNonPreMult();
 
                         break;

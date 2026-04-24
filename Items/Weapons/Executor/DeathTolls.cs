@@ -26,7 +26,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.knockBack = 8f;
             Item.width = 88;
             Item.height = 94;
-            Item.damage = 197;
+            Item.damage = 214;
             Item.useTime = 18;
             //这里的UseTime是有意改的很慢的
             Item.useAnimation = 18;

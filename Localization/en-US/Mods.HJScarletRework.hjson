@@ -1,5 +1,7 @@
 SwitchWeaponTooltip: Lostbelt Journey: Press Middle Click while holding the weapon to switch
 SwitchWeaponVisual: Lostbelt Journey: Press Middle Click while holding the weapon to change its visual effect
+SwitchWeaponConditionTooltip: ""
+SwitchWeaponConditionList.DonwedLifeGods: ""
 
 SwitchWeapon: {
 	Tooltip:
@@ -19,8 +21,8 @@ CrossModSupport.Calamity: ""
 
 DamageClasses: {
 	ExecutorDamageClass: {
-		ExecutionTime: "Strike your enemy for {0} times to Execute. Press Left Alt for details"
-		ExecutionDescriptionName: "On Execution Strike:"
+		ExecutionTime: Strike your enemy for {0} times to Execute. Press Left Alt for details
+		ExecutionDescriptionName: On Execution Strike:
 		DisplayName: Executor Damage Class
 
 		Prefixs: {

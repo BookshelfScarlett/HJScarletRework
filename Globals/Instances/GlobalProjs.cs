@@ -3,7 +3,9 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
+using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -50,18 +52,127 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void AI(Projectile projectile)
         {
+            Player Owner = Main.player[projectile.owner];
+            if (Owner.whoAmI == Main.myPlayer)
+            {
+                if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT3)
+                {
+
+                    projectile.frameCounter++;
+                    if (projectile.frameCounter % 10 == 0)
+                    {
+                        //创建一个链表，搜索附近可能的单位
+                        float searchDist = 1100f;
+                        List<NPC> availableTarget = [];
+                        foreach (NPC needTar in Main.ActiveNPCs)
+                        {
+                            if (availableTarget.Count > 3)
+                                break;
+                            bool legalTarget = needTar.CanBeChasedBy();
+                            float distPerTar = Vector2.Distance(needTar.Center, projectile.Center);
+                            if (legalTarget && distPerTar < searchDist)
+                            {
+                                //把可用单位甩进去，因为我们需要最后使用一个最靠近的单位
+                                availableTarget.Add(needTar);
+                            }
+                        }
+                        //确保链表正确
+                        if (availableTarget.Count == 0)
+                        {
+                            return;
+                        }
+                        SoundEngine.PlaySound(SoundID.Item43 with { Pitch = 0.4f }, Owner.Center);
+                        for (int i = 0; i < availableTarget.Count; i++)
+                        {
+                            NPC target = availableTarget[i];
+                            Vector2 pos = Owner.Center - Vector2.UnitY * Main.rand.NextFloat(800f, 900f) + Vector2.UnitX * Main.rand.NextFloat(0f, 20f) * Main.rand.NextBool().ToDirectionInt();
+                            Vector2 vel = (target.Center - pos).ToSafeNormalize() * Main.rand.NextFloat(4f, 9f);
+
+                            Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, vel, ProjectileType<SkyDragonFuryLightning>(), projectile.damage, 3f, Owner.whoAmI);
+                            ((SkyDragonFuryLightning)proj.ModProjectile).CurTarget = target;
+                            pos = projectile.Center + (target.Center - Owner.Center).ToSafeNormalize() * 50f * projectile.scale;
+                            new CrossGlow(pos, Color.DeepSkyBlue, 30, 1, 0.12f).Spawn();
+                            new CrossGlow(pos, Color.White, 30, 1, 0.08f).Spawn();
+                            for (int j = 0; j < 8; j++)
+                            {
+                                Vector2 vel2 = (target.Center - Owner.Center).ToRandVelocity(ToRadians(30f), 1.2f, 8.8f);
+                                new SmokeParticle(pos.ToRandCirclePos(10f), RandVelTwoPi(-3.8f, 2.6f) + vel2 - vel2 * Main.rand.NextFloat(0.1f, 1.2f), RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 40, RandRotTwoPi, 1f, 0.35f).SpawnToPriorityNonPreMult();
+                            }
+                            for (int j = 0; j < 4; j++)
+                            {
+                                Vector2 vel2 = (target.Center - Owner.Center).ToRandVelocity(ToRadians(30f), 1.2f, 9.8f);
+                                Vector2 pos2 = pos.ToRandCirclePos(12f) + vel2 * 0.32f;
+                                new StarShape(pos2, vel2, RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 0.8f, 40).Spawn();
+                            }
+                            for (int j = 0; j < 6; j++)
+                            {
+                                Vector2 pos2 = pos.ToRandCirclePos(6f);
+                                new ShinyCrossStar(pos2, RandVelTwoPi(1.2f, 4f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0, 1, 0.75f, false).Spawn();
+                            }
+                            for (int j = 0; j < 6; j++)
+                            {
+                                Vector2 pos2 = pos.ToRandCirclePos(6f);
+                                Vector2 vel2 = (target.Center - Owner.Center).ToRandVelocity(ToRadians(30f), 1.2f, 9.8f);
+                                new ShinyCrossStar(pos2, vel2, RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0, 1, 0.75f, false).Spawn();
+                            }
+                        }
+                    }
+                }
+
+                if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT1)
+                {
+                    projectile.frameCounter++;
+                    if (projectile.frameCounter % 3 == 0)
+                    {
+                        Vector2 pos = projectile.Center.ToRandCirclePos(1f) + projectile.rotation.ToRotationVector2() * 40f * projectile.scale;
+                        if (Collision.SolidCollision(pos, 120, 120))
+                            pos = projectile.Center;
+                        Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(4f, 9f), ProjectileType<SleepyBubbles>(), projectile.damage, 3f, Owner.whoAmI);
+                        SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing with { MaxInstances = 0 }, projectile.Center.ToRandCirclePos(1f));
+                    }
+                }
+
+            }
             if (!FirstFrame)
             {
                 FirstFrameEffect(projectile);
                 FirstFrame = true;
+            }
+
+        }
+        public override void OnKill(Projectile projectile, int timeLeft)
+        {
+            Player owner = Main.player[projectile.owner];
+            if(owner.whoAmI == Main.myPlayer)
+            {
             }
         }
 
         private void FirstFrameEffect(Projectile projectile)
         {
             Player Owner = Main.player[projectile.owner];
+            if (Owner.whoAmI != Main.myPlayer)
+                return;
             ModifyPreciousTargets(Owner, projectile);
             ModifyDefenderEmblemBuff(Owner, projectile);
+            if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT1)
+            {
+                projectile.scale *= 1.2f;
+                projectile.localNPCHitCooldown = 5;
+                projectile.usesLocalNPCImmunity = true;
+
+            }
+            if (Owner.HJScarlet().monkExecutor && (projectile.type == ProjectileID.MonkStaffT3))
+            {
+                projectile.scale *= 2f;
+                projectile.localNPCHitCooldown = 2;
+                projectile.usesLocalNPCImmunity = true;
+            }
+            if (Owner.HJScarlet().monkExecutor && (projectile.type == ProjectileID.MonkStaffT3_Alt))
+            {
+                projectile.localNPCHitCooldown = 2;
+                projectile.usesLocalNPCImmunity = true;
+            }
         }
 
         private void ModifyDefenderEmblemBuff(Player owner, Projectile projectile)

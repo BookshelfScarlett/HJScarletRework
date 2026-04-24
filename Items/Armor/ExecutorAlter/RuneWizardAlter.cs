@@ -11,7 +11,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
 {
     public abstract class AlterVanillaArmor : GlobalItem
     {
-
         public override void SaveData(Item item, TagCompound tag)
         {
             if (item.type != ApplyArmor)

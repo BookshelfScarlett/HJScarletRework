@@ -88,7 +88,7 @@ namespace HJScarletRework.Projs.Melee
                 int buffTime = GetSeconds(1) * PlayBellTime;
                 Owner.HJScarlet().flybackhandBuffTime = buffTime;
                 Owner.HJScarlet().flybackhandBuffTimeCurrent = buffTime;
-                Owner.HJScarlet().flybackhandCloclCD = GetSeconds(1) * PlayBellTime * 3;
+                //Owner.HJScarlet().flybackhandCloclCD = GetSeconds(1) * PlayBellTime * 3;
                 ImmnueDebuffOnNeed();
                 //粒子。 
                 for (int i = 0; i < 40; i++)

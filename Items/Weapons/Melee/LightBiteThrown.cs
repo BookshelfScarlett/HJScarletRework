@@ -12,9 +12,9 @@ namespace HJScarletRework.Items.Weapons.Melee
         int UseTime =  25;
         public override void ExSD()
         {
-            Item.damage = 104;
+            Item.damage = 110;
             Item.useTime = Item.useAnimation = UseTime;
-            Item.knockBack = 12f;
+            Item.knockBack = 4;
             Item.rare = ItemRarityID.Lime;
             Item.UseSound = SoundID.DD2_MonkStaffSwing;
             Item.shoot = ProjectileType<LightBiteThrownProj>();

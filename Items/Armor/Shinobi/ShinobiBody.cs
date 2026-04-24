@@ -21,7 +21,7 @@ namespace HJScarletRework.Items.Armor.Shinobi
         {
             Item.width = Item.height = 40;
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
-            Item.defense = 30;
+            Item.defense = 26;
         }
         public override void UpdateArmorSet(Player player)
         {
@@ -30,7 +30,7 @@ namespace HJScarletRework.Items.Armor.Shinobi
         
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage<ExecutorDamageClass>() += 0.30f;
+            player.GetCritChance<ExecutorDamageClass>() += 40f;
         }
     }
 }

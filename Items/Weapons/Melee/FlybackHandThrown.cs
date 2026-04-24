@@ -45,13 +45,10 @@ namespace HJScarletRework.Items.Weapons.Melee
 
             if (player.altFunctionUse == 2)
             {
-                if (!player.HasProj<FlybackHandClockMounted>(out int projID) && player.HJScarlet().flybackhandCloclCD == 0)
+                if (!player.HasProj<FlybackHandClockMounted>(out int projID))
                     Projectile.NewProjectileDirect(source, position, velocity, projID, 0, 0, player.whoAmI);
                 else
                 {
-
-                    string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.TimeClockOnCDText").ToLangValue().ToFormatValue(player.HJScarlet().flybackhandCloclCD / 60);
-                    CombatText.NewText(player.Hitbox, Color.SkyBlue, value, true);
                     return false;
                 }
             }

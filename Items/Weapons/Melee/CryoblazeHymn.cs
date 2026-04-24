@@ -11,7 +11,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {
-            Item.damage = 74;
+            Item.damage = 69;
             Item.useTime = Item.useAnimation = 30;
             Item.knockBack = 6f;
             Item.UseSound = SoundID.Item45 with { MaxInstances = 0 };

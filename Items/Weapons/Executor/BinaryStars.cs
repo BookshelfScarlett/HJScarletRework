@@ -15,12 +15,12 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class BinaryStars : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 1.0f;
-        public override int ExecutionTime => 20;
+        public override int ExecutionTime => 25;
         public override void ExSD()
         {
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = Item.height = 86;
-            Item.damage = 321;
+            Item.damage = 328;
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.shootSpeed = 20f;

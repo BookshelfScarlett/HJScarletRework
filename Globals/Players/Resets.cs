@@ -26,6 +26,7 @@ namespace HJScarletRework.Globals.Players
         {
             runeWizardExecutor = false;
             shinobiExecutor = false;
+            monkExecutor = false;
             cowboyExecutor = false;
             floretProtectorExecutor = false;
             raincoatExecutor = false;

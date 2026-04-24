@@ -69,3 +69,21 @@ ShinobiLegs: {
 	DisplayName: Shinobi Legs
 	Tooltip: ""
 }
+
+MonkBody: {
+	DisplayName: Monk Body
+	Tooltip: ""
+}
+
+MonkHead: {
+	DisplayName: Monk Head
+	Tooltip: ""
+	SetBonus: ""
+	SleepyOctBuff: ""
+	DragonFuryBuff: ""
+}
+
+MonkLegs: {
+	DisplayName: Monk Legs
+	Tooltip: ""
+}

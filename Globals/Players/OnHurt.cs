@@ -1,7 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Graphics.Particles;
+using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -30,13 +32,13 @@ namespace HJScarletRework.Globals.Players
                 {
                     Vector2 spawnPos = Player.Center + Vector2.UnitY * (Player.height / 2 + 5) + Vector2.UnitY * Main.rand.NextFloat(-11f, -6f) + Vector2.UnitX * Main.rand.NextFloat(-10f, 11f);
                     Vector2 vel = Vector2.UnitX * Main.rand.NextFloat(-5f, 6f);
-                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, 0, 1, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
+                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40,  .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
                 }
                 for (int i = 0; i < 20; i++)
                 {
                     Vector2 spawnPos = Player.Center + Vector2.UnitY * (Player.height / 2 + 5) + Vector2.UnitY * Main.rand.NextFloat(-15f, -6f);
                     Vector2 vel = Vector2.UnitY * Main.rand.NextFloat(-8f, -1f);
-                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, 0, 1, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
+                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
                 }
                 return false;
             }
@@ -55,7 +57,7 @@ namespace HJScarletRework.Globals.Players
                 {
                     Vector2 spawnPos = Player.Center + Vector2.UnitY * (Player.height / 2 + 5) + Vector2.UnitX * Main.rand.NextFloat(-5f, 6f);
                     Vector2 vel = Vector2.UnitX * Main.rand.NextFloat(-5f, 6f);
-                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, 0, 1, .1f * Main.rand.NextFloat(0.65f,0.75f)).Spawn();
+                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
                 }
 
                 return true;
@@ -112,6 +114,20 @@ namespace HJScarletRework.Globals.Players
                 if (PreciousTargetCrtis < PreciousCritsMin)
                     PreciousTargetCrtis = PreciousCritsMin;
             }
+            if (Player.HasProj<MonkStaffProj>())
+            {
+                foreach (var projID in Main.ActiveProjectiles)
+                {
+                    if (projID.owner != Player.whoAmI)
+                        continue;
+                    if (projID.DamageType != ExecutorDamageClass.Instance)
+                        continue;
+                    if (projID.type != ProjectileType<MonkStaffProj>())
+                        continue;
+                    projID.Kill();
+                }
+            }
+            monkStaffHeal = false;
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
@@ -140,13 +156,13 @@ namespace HJScarletRework.Globals.Players
                 }
                 for (int i = 0; i < 15; i++)
                 {
-                    new HRShinyOrb(Player.ToRandRec() + Vector2.UnitY * 10f, -Vector2.UnitY, Color.RoyalBlue, 40, 0, 1, .0824f).Spawn();
+                    new HRShinyOrb(Player.ToRandRec() + Vector2.UnitY * 10f, -Vector2.UnitY, Color.RoyalBlue, 40, .0824f).Spawn();
                 }
                 for (int i = 0; i < 20; i++)
                 {
                     Vector2 spawnPos = Player.Center + Vector2.UnitY * (Player.height / 2 + 5) + Vector2.UnitY * Main.rand.NextFloat(-11f, -6f) + Vector2.UnitX * Main.rand.NextFloat(-10f, 11f);
                     Vector2 vel = Vector2.UnitY * Main.rand.NextFloat(-6f, -1f);
-                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, 0, 1, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
+                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
                 }
             }
         }

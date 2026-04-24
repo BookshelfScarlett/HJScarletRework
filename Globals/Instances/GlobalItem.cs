@@ -8,6 +8,8 @@ using HJScarletRework.Core.Configs;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Armor.Monk;
+using HJScarletRework.Items.Armor.Shinobi;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
@@ -179,17 +181,21 @@ namespace HJScarletRework.Globals.Instances
                         tooltips.QuickAddTooltipDirect((path + "NotEaten").ToLangValue(), Color.SkyBlue);
                 }
             }
-            if (LocalPlayer.HJScarlet().shinobiExecutor)
+            if (LocalPlayer.HJScarlet().monkExecutor)
             {
                 if (item.type == ItemID.MonkStaffT1)
                 {
-                    string path = Mod.GetLocalizationKey($"Items.Armor.ShinobiHead.WeaponBuff").ToLangValue();
-                    tooltips.QuickAddTooltipDirect(path, Color.Gold, null, "ShinobiBuff", "500%", "60");
+                    string path = Mod.GetLocalizationKey($"Items.Armor.{nameof(MonkHead)}.SleepyOctBuff").ToLangValue();
+                    string path2 = Mod.GetLocalizationKey($"Items.Armor.{nameof(ShinobiHead)}.WeaponBuff").ToLangValue();
+                    tooltips.QuickAddTooltipDirect(path2, Color.Bisque, null, "ShinobiBuffTitle");
+                    tooltips.QuickAddTooltipDirect(path, Color.GreenYellow, null, "ShinobiBuff", "50%", "30%", "20%");
                 }
                 if (item.type == ItemID.MonkStaffT3)
                 {
-                    string path = Mod.GetLocalizationKey($"Items.Armor.ShinobiHead.WeaponBuff").ToLangValue();
-                    tooltips.QuickAddTooltipDirect(path, Color.Gold, null, "ShinobiBuff", "200%", "30");
+                    string path = Mod.GetLocalizationKey($"Items.Armor.{nameof(MonkHead)}.DragonFuryBuff").ToLangValue();
+                    string path2 = Mod.GetLocalizationKey($"Items.Armor.{nameof(ShinobiHead)}.WeaponBuff").ToLangValue();
+                    tooltips.QuickAddTooltipDirect(path2, Color.Bisque, null, "ShinobiBuffTitle");
+                    tooltips.QuickAddTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", "100%", "30%", "200%");
                 }
 
             }

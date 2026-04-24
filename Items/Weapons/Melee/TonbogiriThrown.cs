@@ -17,11 +17,10 @@ namespace HJScarletRework.Items.Weapons.Melee
         public static readonly int MaxBubbles = 8;
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 2f;
         }
         public override void ExSD()
         {
-            Item.damage = 80;
+            Item.damage = 72;
             Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 12f;
             Item.shootSpeed = 16;
