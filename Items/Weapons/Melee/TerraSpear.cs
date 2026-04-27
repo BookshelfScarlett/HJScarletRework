@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useTime = Item.useAnimation = 55;
             Item.shootSpeed = 18f;
             Item.rare = ItemRarityID.Yellow;
-            Item.UseSound = HJScarletSounds.Hammer_Shoot[0] with {Pitch = -0.5f, MaxInstances = 0, Volume = 0.8f};
+            Item.UseSound = HJScarletSounds.Hammer_Shoot[0] with { Pitch = -0.5f, MaxInstances = 0, Volume = 0.8f };
             Item.shoot = ProjectileType<TerraSpearProj>();
 
         }

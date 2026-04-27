@@ -1,9 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.ParticleSystem;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -36,21 +36,21 @@ namespace HJScarletRework.Projs.Executor
             Projectile.localNPCHitCooldown = 20;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-            Projectile.noEnchantmentVisuals= true;
+            Projectile.noEnchantmentVisuals = true;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override void AI()
         {
-            if(Timer == 0)
+            if (Timer == 0)
                 CurrentTimeLeft = Projectile.timeLeft;
 
             DrawTrailingDust();
             //锤子生命值即将结束的时候，让锤子本身直接去撞击距离最近的敌人
             if (Projectile.timeLeft < 200 && !IsReadyToDead)
             {
-                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Volume = 0.75f}, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Volume = 0.75f }, Projectile.Center);
                 IsReadyToDead = true;
                 ShootTimer = 0;
             }
@@ -97,7 +97,7 @@ namespace HJScarletRework.Projs.Executor
             //在这里绘制火焰粒子
             Vector2 fireVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero);
             Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
-            new Fire(Projectile.Center, fireVelocity * 4.5f, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.185f).SpawnToPriorityNonPreMult(); 
+            new Fire(Projectile.Center, fireVelocity * 4.5f, Firecolor, 90, Main.rand.NextFloat(TwoPi), 1f, 0.185f).SpawnToPriorityNonPreMult();
         }
         private void ShootLaserIfNeed()
         {
@@ -108,7 +108,7 @@ namespace HJScarletRework.Projs.Executor
                 return;
             Vector2 anchorPos = Projectile.Center + Projectile.rotation.ToRotationVector2() * 18f;
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), anchorPos, (Owner.LocalMouseWorld() - anchorPos).SafeNormalize(Vector2.UnitX) * 12f, ProjectileType<DeathTollsStreak>(), Projectile.damage * 2, Projectile.knockBack, Owner.whoAmI);
-            SoundEngine.PlaySound(Utils.SelectRandom(Main.rand, HJScarletSounds.Hammer_Shoot) with { Pitch = 0.8f, Volume = 0.64f}, Projectile.Center);
+            SoundEngine.PlaySound(Utils.SelectRandom(Main.rand, HJScarletSounds.Hammer_Shoot) with { Pitch = 0.8f, Volume = 0.64f }, Projectile.Center);
             //设定为46确保其不会出现可能的情况
             ShootTimer -= rate + 2f;
         }
@@ -117,7 +117,7 @@ namespace HJScarletRework.Projs.Executor
             ShootTimer += 1;
             if (ShootTimer == 45f)
             {
-                SoundEngine.PlaySound(HJScarletSounds.Misc_MagicStaffFire with { Volume = 0.45f}, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Misc_MagicStaffFire with { Volume = 0.45f }, Projectile.Center);
                 Vector2 dir = (Owner.LocalMouseWorld() - Projectile.Center).SafeNormalize(Vector2.UnitX);
                 Projectile.extraUpdates = 4;
                 Projectile.velocity = dir * 18f;
@@ -127,7 +127,7 @@ namespace HJScarletRework.Projs.Executor
         }
         private void DrawTrailingDust()
         {
-            
+
             Timer += 1;
             //正弦波频率
             float freq = 0.15f;
@@ -136,7 +136,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 direction = Projectile.rotation.ToRotationVector2();
             //基础速度
             Vector2 speedValue = -direction * 5f;
-            for (int i = -1; i < 2; i+= 2)
+            for (int i = -1; i < 2; i += 2)
             {
                 //基础横向偏移，用于控制射弹与路径的距离。
                 float baseOffset = 0f;
@@ -159,7 +159,7 @@ namespace HJScarletRework.Projs.Executor
                     continue;
                 //最终生成粒子。
                 Color drawColor = i > 0 ? Color.Black : new(75, 0, 130);
-                ShinyOrbParticle shinyOrbParticle = new ShinyOrbParticle(spawnPosition, realVel, drawColor, 140, 1.2f, i < 0 ? BlendStateID.Additive : BlendStateID.Alpha);
+                ShinyOrbParticle shinyOrbParticle = new ShinyOrbParticle(spawnPosition, realVel, drawColor, 140, 1.2f, i < 0 ? BlendStateID.Additive : BlendStateID.Alpha, false);
                 shinyOrbParticle.Spawn();
             }
         }
@@ -183,7 +183,7 @@ namespace HJScarletRework.Projs.Executor
             float angleToWhat = ((aimVec - Projectile.Center) * isPressingLeftClick.ToDirectionInt()).SafeNormalize(Vector2.One).ToRotation();
             //最后使用lerp来让锤子朝向得到修改。
             Projectile.rotation = Projectile.rotation.AngleLerp(angleToWhat, 0.18f);
-            
+
         }
         //这里从上面复制过来的
         private void UpdateMinionReadyToStrikeState()
@@ -193,7 +193,7 @@ namespace HJScarletRework.Projs.Executor
             Oscillation += 0.025f;
             //基本的挂机状态，此处使用了正弦曲线来让锤子常规上下偏移
             Vector2 safeInitAnchor = Owner.MountedCenter + (Owner.MountedCenter - Owner.LocalMouseWorld()).SafeNormalize(Vector2.UnitX) * 140f;
-            safeInitAnchor.Y = safeInitAnchor.Y - 60f * (MathF.Sin(Oscillation) / 9f); 
+            safeInitAnchor.Y = safeInitAnchor.Y - 60f * (MathF.Sin(Oscillation) / 9f);
             Vector2 anchorPos = safeInitAnchor;
             //实际更新位置
             Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, 0.1f);
@@ -205,8 +205,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawGlowEdge(Color.White, 8, rotFix:PiOver4);
-            Projectile.DrawProj(Color.White, 2, rotFix:PiOver4);
+            Projectile.DrawGlowEdge(Color.White, 8, rotFix: PiOver4);
+            Projectile.DrawProj(Color.White, 2, rotFix: PiOver4);
             return false;
         }
     }

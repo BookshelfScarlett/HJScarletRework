@@ -4,7 +4,7 @@ using ContinentOfJourney.Items.Armor;
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Rockets;
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.Configs;
+using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
@@ -71,7 +71,7 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void OnConsumeItem(Item item, Player player)
         {
-            if(item.type == ItemID.GenderChangePotion)
+            if (item.type == ItemID.GenderChangePotion)
             {
                 player.HJScarlet().genderChangeTimer = GetSeconds(300);
             }
@@ -84,7 +84,7 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void PostDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
-            if (HJScarletConfigClient.Instance.DrawIcon &&CanDrawIcon)
+            if (HJScarletConfigClient.Instance.DrawIcon && CanDrawIcon)
             {
                 Vector2 iconPosition = position + new Vector2(8f, 8f);
                 float iconScale = 0.35f;
@@ -114,7 +114,7 @@ namespace HJScarletRework.Globals.Instances
                     }
                 }
             }
-            
+
             return base.PreDrawTooltipLine(item, line, ref yOffset);
         }
         /// <summary>
@@ -168,9 +168,8 @@ namespace HJScarletRework.Globals.Instances
             }
             if (LocalPlayer.HJScarlet().terraRecipe)
             {
-                bool foodBuff = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
-                if (foodBuff)
-
+                //bool foodBuff = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
+                if (HJScarletList.LegalFoodList.Contains(item.type))
                 {
                     //表单里有这个内容我们才写这个东西。没有则写另一条
                     string path = Mod.GetLocalizationKey($"Items.Useable.TerrariaRecipe.");
@@ -216,7 +215,7 @@ namespace HJScarletRework.Globals.Instances
             if (usPlayer.terraRecipe)
             {
                 bool foodBuff = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
-                if (foodBuff)
+                if (HJScarletList.LegalFoodList.Contains(item.type))
                 {
                     //物品都是独立的实例，这里必须得把表单直接扔到玩家类里进行保存
                     if (!usPlayer.terraRecipe_CurEat.Contains(item.type))
@@ -236,7 +235,7 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
         {
-            switch(item.type)
+            switch (item.type)
             {
                 case ItemID.GolemBossBag:
                     itemLoot.AddLoot<DisasterEssence>(1, 10, 20);

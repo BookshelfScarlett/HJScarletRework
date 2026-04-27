@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -44,6 +44,8 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             base.OnFirstFrame();
+            if (Projectile.HJScarlet().ExecutionStrike)
+                SpawnExecution();
         }
         public override void ProjAI()
         {
@@ -71,17 +73,18 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation += 0.2f;
             if (Projectile.IntersectOwnerByDistance(75))
             {
-                Projectile.AddExecutionTime(ItemType<ThePunishment>());
-                if (Projectile.HJScarlet().ExecutionStrike)
-                    SpawnExecution();
+
                 Projectile.Kill();
             }
         }
 
         public void SpawnExecution()
         {
-            SoundEngine.PlaySound(HJScarletSounds.HymnFireball_Release with { Pitch = 0.4f}, Projectile.Center);
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity * 1.5f, ProjectileType<ThePunishmentExecution>(), Projectile.damage, 1f, Owner.whoAmI);
+            SoundEngine.PlaySound(HJScarletSounds.HymnFireball_Release with { Pitch = 0.4f }, Projectile.Center);
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, -Projectile.velocity * 1.5f, ProjectileType<ThePunishmentExecution>(), Projectile.damage, 1f, Owner.whoAmI);
+            NPC target = Main.MouseWorld.FindClosestTarget(300f, ignoreTiles: false);
+            if (target.IsLegal())
+                ((ThePunishmentExecution)proj.ModProjectile).TargetNPC = target;
             for (int i = 0; i < 30; i++)
             {
                 if (Main.rand.NextBool())
@@ -136,7 +139,9 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            SoundEngine.PlaySound(HJScarletSounds.Hammer_LightHit with { MaxInstances = 0,Pitch = 0.25f, PitchVariance = 0.1f }, Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.Hammer_LightHit with { MaxInstances = 0, Pitch = 0.25f, PitchVariance = 0.1f }, Projectile.Center);
+            if (!Owner.HasProj<ThePunishmentExecution>())
+                Projectile.AddExecutionTimePass(ItemType<ThePunishment>());
             for (int i = 0; i < 10; i++)
             {
                 new ShinyCrossStar(target.Center.ToRandCirclePos(16f), RandVelTwoPi(1.3f, 5f), RandLerpColor(Color.Goldenrod, Color.Orange), 120, RandRotTwoPi, 1f, 0.48f, false).Spawn();

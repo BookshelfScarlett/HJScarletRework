@@ -1,7 +1,7 @@
 ﻿using ContinentOfJourney.Projectiles.Meelee;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.ReVisual.Class;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +17,7 @@ namespace HJScarletRework.ReVisual.Projs
         public float Timer = 0;
         public float Rotations = 0;
         public float SpinDirection = 0;
-        public List<float> RotList2 = []; 
+        public List<float> RotList2 = [];
         public override bool ShouldApplyRevisual(Projectile proj, ReVisualPlayer vp)
         {
             return proj.IsMe() && vp.reVisualPalladiumKnife;

@@ -11,3 +11,8 @@ TerrariaRecipe: {
 	Active: ""
 	FoodList: "{0}{1}{2}{3}"
 }
+
+GoldenApple: {
+	DisplayName: Golden Apple
+	Tooltip: ""
+}

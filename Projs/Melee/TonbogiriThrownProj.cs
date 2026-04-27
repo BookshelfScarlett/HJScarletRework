@@ -1,6 +1,6 @@
 ﻿using ContinentOfJourney.Projectiles;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -38,7 +38,7 @@ namespace HJScarletRework.Projs.Melee
             d.noGravity = true;
             new TurbulenceGlowOrb(mountedPos + Main.rand.NextVector2Circular(6f, 6f), 1.2f, RandLerpColor(Color.DeepSkyBlue, Color.Blue), 40, 0.1f, Projectile.SafeDir().ToRotation()).SpawnToPriority();
             Timer++;
-            if(Projectile.IsMe() && Timer % 8f == 0)
+            if (Projectile.IsMe() && Timer % 8f == 0)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(18f), Projectile.velocity / 9f + RandVelTwoPi(4f), ProjectileType<TonbogiriBubble>(), Projectile.damage / 2, 2f, Owner.whoAmI);
                 ((TonbogiriBubble)proj.ModProjectile).HomingDistance = 400f;
@@ -61,12 +61,12 @@ namespace HJScarletRework.Projs.Melee
         }
         public void SpawnBubbles()
         {
-            for (float i  = 0; i < 3;i++)
+            for (float i = 0; i < 3; i++)
             {
                 Vector2 dir = Projectile.SafeDirByRot();
                 Vector2 spawnPos = Projectile.Center;
-                Vector2 velDir = dir.ToRandVelocity(ToRadians(60)) ;
-                Projectile bubble = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, velDir*  Main.rand.NextFloat(12.2f,14.2f), ProjectileType<TonbogiriBubble>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
+                Vector2 velDir = dir.ToRandVelocity(ToRadians(60));
+                Projectile bubble = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, velDir * Main.rand.NextFloat(12.2f, 14.2f), ProjectileType<TonbogiriBubble>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
                 ((TonbogiriBubble)bubble.ModProjectile).HomingDistance = 600f;
 
             }
@@ -101,7 +101,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             DrawTrail(drawPos);
             Projectile.DrawGlowEdge(Color.White, rotFix: ToRadians(135));
-            Projectile.DrawProj(Color.White, rotFix:ToRadians(135));
+            Projectile.DrawProj(Color.White, rotFix: ToRadians(135));
             return false;
         }
         public void DrawTrail(Vector2 drawPosBase)
@@ -117,7 +117,7 @@ namespace HJScarletRework.Projs.Melee
                     continue;
                 float rads = (float)i / length;
                 Vector2 drawPos = drawPosBase + offset - projDir * 8f * i;
-                Color drawColor = (Color.Lerp(Color.Blue, Color.DeepSkyBlue, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads) * Clamp(Projectile.velocity.Length(), 0 ,1);
+                Color drawColor = (Color.Lerp(Color.Blue, Color.DeepSkyBlue, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads) * Clamp(Projectile.velocity.Length(), 0, 1);
                 //中心高光的颜色
                 Color drawColor2 = (Color.Lerp(Color.AliceBlue, Color.White, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads) * Clamp(Projectile.velocity.Length(), 0, 1);
                 SB.Draw(star, drawPos, null, drawColor, Projectile.rotation - PiOver2, star.Size() / 2, trailScale, 0, 0);

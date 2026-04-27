@@ -1,16 +1,16 @@
-﻿using ContinentOfJourney.Items;
+﻿using ContinentOfJourney;
+using ContinentOfJourney.Items;
+using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.Keybinds;
+using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HJScarletRework.Core.Keybinds;
-using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.ExecutorAlter;
-using ContinentOfJourney;
 
 namespace HJScarletRework.Globals.Players
 {
@@ -82,7 +82,7 @@ namespace HJScarletRework.Globals.Players
             }
             if (SwitchArmorType(ownerItemType))
                 return;
-            
+
         }
         public bool SwitchArmorType(int item)
         {
@@ -113,13 +113,13 @@ namespace HJScarletRework.Globals.Players
                     AlterArmorType(item, RaincoatChestplate.Defense, false);
                     break;
                 case ItemID.FishCostumeMask:
-                    AlterArmorType(item, FishCostumeHelmet.Defense, false);
+                    AlterArmorType(item, FishCostumeHelmet.Defense, false, ItemRarityID.Orange);
                     break;
                 case ItemID.FishCostumeShirt:
-                    AlterArmorType(item, FishCostumeChestplate.Defense, false);
+                    AlterArmorType(item, FishCostumeChestplate.Defense, false, ItemRarityID.Orange);
                     break;
                 case ItemID.FishCostumeFinskirt:
-                    AlterArmorType(item, FishCostumeLegs.Defense, false);
+                    AlterArmorType(item, FishCostumeLegs.Defense, false, ItemRarityID.Orange);
                     break;
             }
             if (DownedBossSystem.downedLifeGod)
@@ -137,7 +137,7 @@ namespace HJScarletRework.Globals.Players
                         break;
                 }
             }
-        return true;
+            return true;
         }
         private void AlterArmorType(int targetArmor, int defense = 0, bool vanity = true, int rarityID = -1)
         {
@@ -155,7 +155,7 @@ namespace HJScarletRework.Globals.Players
                 targetItem.HJScarlet().EnableExecutorVersion = true;
                 targetItem.defense = defense;
                 targetItem.favorited = favor;
-                if(rarityID != -1)
+                if (rarityID != -1)
                     targetItem.rare = rarityID;
             }
             Player.inventory[Player.selectedItem] = targetItem;
@@ -184,7 +184,7 @@ namespace HJScarletRework.Globals.Players
             }
             //继承词缀
             targetWeapon.Prefix(heldPrefix);
-            targetWeapon.favorited = favor; 
+            targetWeapon.favorited = favor;
             //直接……干掉玩家的物品
             Player.inventory[Player.selectedItem] = targetWeapon;
             SoundEngine.PlaySound(SoundID.ResearchComplete, Player.Center);

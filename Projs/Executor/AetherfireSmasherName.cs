@@ -28,7 +28,7 @@
             if (name.Contains("sakumara") || name.Contains("emma") || name.Contains("樱羽") || name.Contains("yinjiu") || name.Contains("银九"))
                 return NameType.Emma;
             if (name.Contains("sherry") || name.Contains("雪莉") || name.Contains("ann") || name.Contains("安安") || name.Contains("kino") || name.Contains("kinoko"))
-                return NameType.SherryOrAnnOrKino; 
+                return NameType.SherryOrAnnOrKino;
             if (name.Contains("hanna") || name.Contains("汉娜"))
                 return NameType.Hanna;
             return NameType.None;

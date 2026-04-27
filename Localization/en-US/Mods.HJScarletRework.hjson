@@ -34,7 +34,7 @@ DamageClasses: {
 			Mysterious.DisplayName: Mysterious
 			Phantasmic.DisplayName: Phantasmic
 			FocusTimeLine: ""
-			FocusDamageLine: ""
+			ExecutionDamageLine: ""
 			ArmorPenetrationLine: ""
 		}
 	}

@@ -1,7 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
@@ -44,7 +42,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             //实例化toolti并注册名字
             TooltipLine flavorTooltips = new TooltipLine(Mod, "FlavorTooltipsName", value);
             //植入Tooltip
-            tooltips.Insert(flavorTooltipIndex2+1, flavorTooltips);
+            tooltips.Insert(flavorTooltipIndex2 + 1, flavorTooltips);
 
         }
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
@@ -55,7 +53,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 
             //为锤子添加描边，并时刻更新大小
             for (int i = 0; i < 8; i++)
-                spriteBatch.Draw(tex, position + ToRadians((i * 5f) + 5f).ToRotationVector2() * 2.5f, null, Color.DarkRed with { A = 100}, 0f, tex.Size() / 2, scale * 1.02f, 0, 0f);
+                spriteBatch.Draw(tex, position + ToRadians((i * 5f) + 5f).ToRotationVector2() * 2.5f, null, Color.DarkRed with { A = 100 }, 0f, tex.Size() / 2, scale * 1.02f, 0, 0f);
             //然后绘制锤子本身。
             spriteBatch.Draw(tex, position, iFrame, Color.White, 0f, tex.Size() / 2, scale, 0f, 0f);
             return false;

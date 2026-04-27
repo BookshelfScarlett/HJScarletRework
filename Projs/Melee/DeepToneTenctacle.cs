@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -57,11 +57,11 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-                modifiers.SourceDamage *= (MaxPenetrate - Projectile.penetrate) * 0.2f;
+            modifiers.SourceDamage *= (MaxPenetrate - Projectile.penetrate) * 0.2f;
         }
         public override void AI()
         {
-            if(!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame)
             {
                 InitDust();
             }
@@ -93,14 +93,14 @@ namespace HJScarletRework.Projs.Melee
                 InitTenctacleSpeed();
             if (ScaleProgress >= 0.95f)
                 return;
-            if(!HJScarletMethods.OutOffScreen(Projectile.Center))
-            SpawnTenctacleDust();
+            if (!HJScarletMethods.OutOffScreen(Projectile.Center))
+                SpawnTenctacleDust();
         }
 
         private void InitDust()
         {
             new CrossGlow(Projectile.Center, Color.DarkOliveGreen, 40, 1f, 0.15f).Spawn();
-            new ShinyOrbParticle(Projectile.Center, Vector2.Zero,Color.LightSeaGreen, 40, 0.8f).Spawn();
+            new ShinyOrbParticle(Projectile.Center, Vector2.Zero, Color.LightSeaGreen, 40, 0.8f).Spawn();
         }
 
         private void InitTenctacleSpeed()
@@ -120,7 +120,7 @@ namespace HJScarletRework.Projs.Melee
         }
         private void SpawnTenctacleDust()
         {
-            
+
             if (Projectile.scale < 1f && Timer > 2f)
             {
                 int scaleLoopCheck = 0;

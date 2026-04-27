@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Magic
         {
             Item.height = Item.width = 50;
             Item.mana = 20;
-            Item.useAnimation = Item.useTime= 20;
+            Item.useAnimation = Item.useTime = 20;
             Item.rare = ItemRarityID.Purple;
             Item.useStyle = ItemUseStyleID.Guitar;
             Item.shootSpeed = 12f;

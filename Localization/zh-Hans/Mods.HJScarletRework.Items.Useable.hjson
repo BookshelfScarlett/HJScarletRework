@@ -28,3 +28,12 @@ TerrariaRecipe: {
 		{1}
 		'''
 }
+
+GoldenApple: {
+	DisplayName: 金苹果
+	Tooltip:
+		'''
+		所有属性大幅度提升
+		"仅仅巧合"
+		'''
+}

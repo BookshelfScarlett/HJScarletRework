@@ -1,8 +1,8 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Melee
     public class FlybackHandThrownProj : ThrownSpearProjClass
     {
         public override string Texture => GetInstance<FlybackHand>().Texture;
-        public override void SetStaticDefaults() => Projectile.ToTrailSetting(10,2);
+        public override void SetStaticDefaults() => Projectile.ToTrailSetting(10, 2);
         public ref float AttackTimer => ref Projectile.ai[1];
         public bool Ishit = false;
         public override void ExSD()
@@ -42,7 +42,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Projectile.Opacity -= 0.01f;
                 Projectile.velocity *= 0.93f;
-                if (Projectile.velocity.Length() < 0.1f && Projectile.Opacity <=0)
+                if (Projectile.velocity.Length() < 0.1f && Projectile.Opacity <= 0)
                     Projectile.Kill();
             }
         }
@@ -121,7 +121,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile star1 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, hourVector * 12f, ProjectileType<FlybackHandStar>(), damage, 10f, Owner.whoAmI);
             star1.extraUpdates = 1;
             star1.HJScarlet().GlobalTargetIndex = target.whoAmI;
-            
+
             Projectile star2 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, minuteVector * 12f, ProjectileType<FlybackHandStar>(), damage, 10f, Owner.whoAmI);
             star2.extraUpdates = 1;
             star2.HJScarlet().GlobalTargetIndex = target.whoAmI;
@@ -162,7 +162,7 @@ namespace HJScarletRework.Projs.Melee
             DrawShaderParaLine();
             //为内部填色
             FillColor(star);
-            
+
             //绘制矛尖高光
             DrawTopGlowStar(star);
             return false;
@@ -175,7 +175,7 @@ namespace HJScarletRework.Projs.Melee
             DrawTrails(Color.Gold, HJScarletTexture.Trail_ManaStreak.Texture, 13f, 12f, widthOffset, 0.7f * Projectile.Opacity);
             DrawTrails(Color.LightYellow, HJScarletTexture.Trail_ManaStreak.Texture, 7f, 12f, widthOffset, 1f * Projectile.Opacity);
             DrawTrails(Color.Gold, HJScarletTexture.Trail_ManaStreak.Texture, 7f, -12f, widthOffset, 0.7f * Projectile.Opacity);
-            DrawTrails(Color.LightYellow, HJScarletTexture.Trail_ManaStreak.Texture, 7f, -12f, widthOffset, 1f * Projectile.Opacity );
+            DrawTrails(Color.LightYellow, HJScarletTexture.Trail_ManaStreak.Texture, 7f, -12f, widthOffset, 1f * Projectile.Opacity);
             SB.End();
             SB.BeginDefault();
 
@@ -207,7 +207,7 @@ namespace HJScarletRework.Projs.Melee
                 float rads = (float)i / length;
                 Color drawColor = (Color.Lerp(Color.DarkGoldenrod, Color.DarkKhaki, rads) with { A = 150 }) * 0.4f * Projectile.Opacity * (1 - rads);
                 Vector2 trailPos = Projectile.Center - Main.screenPosition - Projectile.SafeDir() * 2.5f * i + Projectile.SafeDir() * 50f;
-                SB.Draw(star, trailPos, null, drawColor * Projectile.Opacity, Projectile.rotation , ori, Projectile.scale * new Vector2(1.0f, 0.6f), 0, 0);
+                SB.Draw(star, trailPos, null, drawColor * Projectile.Opacity, Projectile.rotation, ori, Projectile.scale * new Vector2(1.0f, 0.6f), 0, 0);
             }
         }
         public void DrawTrails(Color trailColor, Asset<Texture2D> useTex, float height, float offset = 1f, float rotationVectorOffset = 1f, float alphaValue = 1f, int laserLength = 50)

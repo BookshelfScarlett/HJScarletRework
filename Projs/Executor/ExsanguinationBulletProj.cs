@@ -1,9 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -67,7 +66,7 @@ namespace HJScarletRework.Projs.Executor
             if (Main.rand.NextBool())
                 return;
             if (Main.rand.NextBool(10))
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(1), Projectile.velocity * Main.rand.NextFloat(0.78f,1.1f), RandLerpColor(Color.AliceBlue, Color.RoyalBlue), 40, Projectile.rotation, 1, 0.4f * Main.rand.NextFloat(0.5f, 0.9f)).Spawn();
+                new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(1), Projectile.velocity * Main.rand.NextFloat(0.78f, 1.1f), RandLerpColor(Color.AliceBlue, Color.RoyalBlue), 40, Projectile.rotation, 1, 0.4f * Main.rand.NextFloat(0.5f, 0.9f)).Spawn();
             if (Main.rand.NextBool(10))
                 new StarShape(Projectile.Center.ToRandCirclePosEdge(4), Projectile.velocity * Main.rand.NextFromList(0.8f, 1.2f), RandLerpColor(Color.AliceBlue, Color.RoyalBlue), 0.5f * Main.rand.NextFloat(0.5f, 0.9f), 40).Spawn();
         }
@@ -81,13 +80,9 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
+            Projectile.AddExecutionTimePass(ItemType<Exsanguination>());
             bool hasBuff = Owner.HJScarlet().exsanguinationBuffTime != 0;
-            //初始化。
-            if (!Owner.HJScarlet().ExecutionListStored.ContainsKey(ItemType<Exsanguination>()))
-                Owner.HJScarlet().ExecutionListStored.TryAdd(ItemType<Exsanguination>(), 0);
-            else if (!hasBuff)
-                Projectile.AddExecutionTime(ItemType<Exsanguination>());
-            if(!hasBuff)
+            if (!hasBuff)
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -126,9 +121,9 @@ namespace HJScarletRework.Projs.Executor
                 Color drawColor = (Color.Lerp(Color.White, Color.White, rads) with { A = 200 }) * 0.9f * Projectile.Opacity * (1 - rads);
                 Vector2 shapeScale = scale * Clamp(i / ((float)PosList.Count - 4f), 0f, 1f) * 0.4f;
                 Vector2 lerpPos = PosList[i] - Main.screenPosition;
-                SB.Draw(tex, lerpPos, null, drawColor, RotList[i] + PiOver2, ori, Projectile.scale , 0, 0);
+                SB.Draw(tex, lerpPos, null, drawColor, RotList[i] + PiOver2, ori, Projectile.scale, 0, 0);
             }
-                SB.Draw(tex, drawPos, null, Color.White, Projectile.rotation + PiOver2, ori, Projectile.scale, 0, 0);
+            SB.Draw(tex, drawPos, null, Color.White, Projectile.rotation + PiOver2, ori, Projectile.scale, 0, 0);
             return false;
         }
     }

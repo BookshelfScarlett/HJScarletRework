@@ -40,7 +40,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_StandardGradient = new Tex2DWithPath($"{Path_General}{nameof(Texture_StandardGradient)}");
 
         }
-        public void UnloadTexture()
+        public static void UnloadTexture()
         {
             Texture_BloomRing = null;
             Texture_BloomShockwave = null;

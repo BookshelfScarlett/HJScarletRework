@@ -12,6 +12,7 @@ namespace HJScarletRework.Globals.Classes
         public override string Texture => AssetPath + GetType().Name;
         public override void SetDefaults()
         {
+            Item.width = Item.height = 16;
             Item.HJScarlet().CanDrawIcon = true;
             ExSD();
         }

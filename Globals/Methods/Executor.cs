@@ -1,5 +1,5 @@
-﻿using HJScarletRework.Core.Keybinds;
-using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.Players;
 using Terraria;
 using Terraria.ModLoader;
@@ -11,23 +11,23 @@ namespace HJScarletRework.Globals.Methods
         public static bool AddFocusHitNoFocusProj<T>(this Projectile proj) where T : ModProjectile
         {
             Player owner = Main.player[proj.owner];
-            return proj.HJScarlet().AddFocusHit && !owner.HasProj<T>();
+            return proj.HJScarlet().AddExecutionHit && !owner.HasProj<T>();
         }
-        public static void AddExecutionTime(this Projectile proj,  int itemID, int times = 1)
+        public static void AddExecutionTime(this Projectile proj, int itemID, int times = 1)
         {
-            if (!proj.HJScarlet().AddFocusHit)
+            if (!proj.HJScarlet().AddExecutionHit)
                 return;
             Player owner = Main.player[proj.owner];
             if (owner.HJScarlet().ExecutionListStored.ContainsKey(itemID))
-                owner.HJScarlet().ExecutionListStored[itemID]+=times;
+                owner.HJScarlet().ExecutionListStored[itemID] += times;
         }
-        public static void AddExecutionTimePass(this Projectile proj,  int itemID, int times = 1)
+        public static void AddExecutionTimePass(this Projectile proj, int itemID, int times = 1)
         {
-            if (proj.HJScarlet().AddFocusHit)
+            if (proj.HJScarlet().AddExecutionHit)
                 return;
             Player owner = Main.player[proj.owner];
             if (owner.HJScarlet().ExecutionListStored.ContainsKey(itemID))
-                owner.HJScarlet().ExecutionListStored[itemID]+=times;
+                owner.HJScarlet().ExecutionListStored[itemID] += times;
         }
 
         public static bool CheckExecution(this Player owner, int itemID, int executionTime)
@@ -48,7 +48,7 @@ namespace HJScarletRework.Globals.Methods
                 if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
                 {
                     bool isTrue = value >= executionTime;
-                    if(isTrue)
+                    if (isTrue)
                     {
                         if (usPlayer.tacticalTime == 0 && usPlayer.tacticalPunishTime == 0)
                         {

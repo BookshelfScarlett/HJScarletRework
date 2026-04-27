@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Classes
 {
-    public abstract class HJScarletWeapon : ModItem,ILocalizedModType
+    public abstract class HJScarletWeapon : ModItem, ILocalizedModType
     {
         public virtual ClassCategory Category { get; }
         public new string LocalizationCategory => $"Weapons.{Category}";

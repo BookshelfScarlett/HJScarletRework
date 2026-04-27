@@ -2,9 +2,9 @@
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -18,6 +18,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override string Texture => GetInstance<MantleLayer>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;
+        public override Vector2 TileHitbox => new Vector2(13, 13);
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting();
@@ -58,6 +59,10 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
+            if (Projectile.HJScarlet().ExecutionStrike)
+            {
+                ShootFocusProj(ProjectileType<MantleLayerExecution>());
+            }
         }
 
         public override void ProjAI()
@@ -68,7 +73,7 @@ namespace HJScarletRework.Projs.Executor
 
         private void UpdateAttack()
         {
-            Projectile.direction =Projectile.spriteDirection  = Math.Sign(Projectile.velocity.X);
+            Projectile.direction = Projectile.spriteDirection = Math.Sign(Projectile.velocity.X);
             switch (AttackType)
             {
                 case State.Shoot:
@@ -102,7 +107,7 @@ namespace HJScarletRework.Projs.Executor
         {
 
             Projectile.tileCollide = false;
-                Projectile.rotation = Projectile.SpeedAffectRotation(2, 2) * Projectile.spriteDirection;
+            Projectile.rotation = Projectile.SpeedAffectRotation(2, 2) * Projectile.spriteDirection;
             if (Projectile.MeetMaxUpdatesFrame(Timer, 27))
             {
                 UpdateToNextAttack(State.ReadyHeavyHit);
@@ -132,17 +137,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 16f, 20f);
             if (Projectile.Hitbox.Intersects(Owner.Hitbox))
             {
-                if (!Owner.HasProj<MantleLayerExecution>(out int projID))
-                {
-                    int itemID = ItemType<MantleLayer>();
-                    if (Projectile.HJScarlet().AddFocusHit)
-                    {
-                        if (Owner.HJScarlet().ExecutionListStored.ContainsKey(itemID))
-                            Owner.HJScarlet().ExecutionListStored[itemID] += 1;
-                    }
-                    if (Projectile.HJScarlet().ExecutionStrike)
-                        ShootFocusProj(projID);
-                }
                 Projectile.Kill();
             }
         }
@@ -154,7 +148,9 @@ namespace HJScarletRework.Projs.Executor
             ScreenShakeSystem.AddScreenShakes(Projectile.Center, 12f, 40, vel.ToRotation(), ToRadians(30f));
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.Center, vel, projID, Projectile.damage, 2f, Owner.whoAmI);
             proj.HJScarlet().ExecutionStrike = true;
-            proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
+            NPC target = Main.MouseWorld.FindClosestTarget(400f);
+            if (target.IsLegal())
+                proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
         }
 
         private void DoReadyHeavyHit()
@@ -218,7 +214,7 @@ namespace HJScarletRework.Projs.Executor
                 OnTileCollideParticle(Projectile.velocity);
                 Timer = 0;
             }
-                Projectile.BounceOnTile(oldVelocity, 0.2f, 0.2f);
+            Projectile.BounceOnTile(oldVelocity, 0.2f, 0.2f);
             return false;
         }
         public void OnTileCollideParticle(Vector2 velo)
@@ -245,6 +241,7 @@ namespace HJScarletRework.Projs.Executor
             target.AddBuff(BuffID.OnFire, 300);
             if (AttackType != State.Hit)
                 Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
+            Projectile.AddExecutionTimePass(ItemType<MantleLayer>());
 
             switch (AttackType)
             {
@@ -307,6 +304,7 @@ namespace HJScarletRework.Projs.Executor
 
         private void UpdateToNextAttack(State id)
         {
+
             Timer *= 0;
             AttackType = id;
             Projectile.netUpdate = true;

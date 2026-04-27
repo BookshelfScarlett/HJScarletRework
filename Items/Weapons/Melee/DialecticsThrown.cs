@@ -31,7 +31,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useTime = Item.useAnimation = 30;
             Item.shoot = ProjectileType<DialecticsThrownProj>();
         }
-        public override Color MainTooltipColor => Color.Lerp(Color.RoyalBlue,Color.AliceBlue,0.5f);
+        public override Color MainTooltipColor => Color.Lerp(Color.RoyalBlue, Color.AliceBlue, 0.5f);
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
             if (line.Name == "ItemName" && line.Mod == "Terraria")
@@ -51,7 +51,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                 _ => WaveStyle.Paraline,
             };
             if (curStyle != WaveStyle.Paraline)
-                SoundEngine.PlaySound(HJScarletSounds.Dialectics_Throw with { MaxInstances = 0, Pitch = 0.5f, Volume =0.7f });
+                SoundEngine.PlaySound(HJScarletSounds.Dialectics_Throw with { MaxInstances = 0, Pitch = 0.5f, Volume = 0.7f });
             else
                 SoundEngine.PlaySound(HJScarletSounds.Atom_Strike[0] with { MaxInstances = 1 });
             int realDamage = curStyle == WaveStyle.Square ? damage * (3) : damage;

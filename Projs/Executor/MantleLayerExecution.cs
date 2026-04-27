@@ -2,8 +2,8 @@
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -61,7 +61,7 @@ namespace HJScarletRework.Projs.Executor
         {
 
             Projectile.direction = Projectile.spriteDirection = Math.Sign(Projectile.velocity.X);
-            switch(AttackType)
+            switch (AttackType)
             {
                 case State.Idle:
                     DoIdle();
@@ -84,14 +84,14 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Projectile.SpeedAffectRotation();
             Projectile.velocity *= 0.858f;
             Timer++;
-            if(Projectile.MeetMaxUpdatesFrame(Timer, 15))
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 15))
                 UpdateNextAttack(State.Attack);
         }
 
         private void DoAttack()
         {
             Projectile.rotation += 0.2f;
-            if (Projectile.GetTargetSafe(out NPC target, false))
+            if (Projectile.GetTargetSafe(out NPC target, true))
                 Projectile.HomingTarget(target.Center, -1, 24, 20);
             else
                 UpdateNextAttack(State.Return);
@@ -109,7 +109,7 @@ namespace HJScarletRework.Projs.Executor
                 return;
             }
             Projectile.HomingTarget(Owner.Center, -1, 20, 20);
-            
+
             if (Projectile.Hitbox.Intersects(Owner.Hitbox))
                 Projectile.Kill();
         }
@@ -161,10 +161,10 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen() || IsHit)
                 return;
-            if(Projectile.FinalUpdateNextBool())
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity.ToRandVelocity(ToRadians(10f), 1.2f,1.8f), RandLerpColor(Color.OrangeRed, Color.DarkGray), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.4f, 0.8f) * 0.42f, Main.rand.NextBool()).SpawnToNonPreMult();
-            if(Projectile.FinalUpdateNextBool())
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(15), -Projectile.velocity.ToRandVelocity(ToRadians(10f), 1.2f,1.8f), RandLerpColor(Color.OrangeRed, Color.DarkGray), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.4f, 0.8f) * 0.32f, Main.rand.NextBool()).SpawnToNonPreMult();
+            if (Projectile.FinalUpdateNextBool())
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity.ToRandVelocity(ToRadians(10f), 1.2f, 1.8f), RandLerpColor(Color.OrangeRed, Color.DarkGray), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.4f, 0.8f) * 0.42f, Main.rand.NextBool()).SpawnToNonPreMult();
+            if (Projectile.FinalUpdateNextBool())
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(15), -Projectile.velocity.ToRandVelocity(ToRadians(10f), 1.2f, 1.8f), RandLerpColor(Color.OrangeRed, Color.DarkGray), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.4f, 0.8f) * 0.32f, Main.rand.NextBool()).SpawnToNonPreMult();
             if (Projectile.FinalUpdateNextBool(3))
                 new EmptyRing(Projectile.Center.ToRandCirclePos(15), -Projectile.velocity.ToRandVelocity(ToRadians(10f), 1.2f, 1.8f), RandLerpColor(Color.OrangeRed, Color.DarkOrange), 40, Main.rand.NextFloat(0.5f, 0.8f) * 0.30f, 1f, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
         }
@@ -182,14 +182,14 @@ namespace HJScarletRework.Projs.Executor
             IsHit = AttackType == State.Attack;
             if (AttackType == State.Attack)
             {
-                SoundEngine.PlaySound(SoundID.Item69 with { MaxInstances = 2}, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.Item69 with { MaxInstances = 2 }, Projectile.Center);
                 UpdateAttackOnHit(target);
                 UpdateAttackOnHitParticle(target);
 
             }
             if (AttackType == State.Strike && Projectile.MeetMaxUpdatesFrame(Timer, 20))
             {
-                SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Pitch = 0.2f}, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Pitch = 0.2f }, Projectile.Center);
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 40f, 40, Projectile.velocity.ToRotation(), ToRadians(30f));
                 UpdateMiscHitParticle(Projectile.Center);
                 UpdateNextAttack(State.Return);

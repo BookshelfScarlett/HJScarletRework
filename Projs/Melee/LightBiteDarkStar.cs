@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -39,7 +39,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
-            if(!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame)
             {
                 MountedCenter = Projectile.Center;
             }
@@ -80,7 +80,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 //五角星在视觉上有10个顶点，每个顶点各自实际上是36°
                 float angle = Projectile.rotation + RandRot + ToRadians(i * 36) - PiOver2; // 向上为初始方向
-                                                                                 //这里主要为了取内凹点。对于内凹的点，其距离会被设定为外角半径的0.4
+                                                                                           //这里主要为了取内凹点。对于内凹的点，其距离会被设定为外角半径的0.4
                 float radius = i % 2 == 0 ? starRadius : starRadius * 0.4f;
                 //将对应的角度与距离转化为顶点坐标。存入这个list内
                 Vector2 vertex = angle.ToRotationVector2() * radius;
@@ -92,7 +92,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 //当前顶点和下一个顶点。
                 Vector2 startVertex = starVertices[i];
-                Vector2 endVertex = starVertices[(i+ 1) % starPoints];
+                Vector2 endVertex = starVertices[(i + 1) % starPoints];
 
                 //沿两点连线均匀生成粒子
                 int connectCounts = 10;
@@ -100,10 +100,10 @@ namespace HJScarletRework.Projs.Melee
                 {
                     float t = (float)j / (connectCounts - 1);
                     Vector2 currentPos = Vector2.Lerp(startVertex, endVertex, t);
-                    float lerpValue = Lerp(MathF.Abs(i% 10 - 5) / 5f, 1, 0.6f);
+                    float lerpValue = Lerp(MathF.Abs(i % 10 - 5) / 5f, 1, 0.6f);
 
-                    Vector2 dir2 = currentPos.SafeNormalize(Vector2.UnitX) *lerpValue;
-                    ShinyOrbParticle orbs = new(Projectile.Center + currentPos, dir2 * 1f, RandLerpColor(Color.DarkOrange,Color.DarkGoldenrod), 30, 0.5f);
+                    Vector2 dir2 = currentPos.SafeNormalize(Vector2.UnitX) * lerpValue;
+                    ShinyOrbParticle orbs = new(Projectile.Center + currentPos, dir2 * 1f, RandLerpColor(Color.DarkOrange, Color.DarkGoldenrod), 30, 0.5f);
                     orbs.SpawnToPriority();
                 }
             }
@@ -207,9 +207,9 @@ namespace HJScarletRework.Projs.Melee
             Vector2 origin = frames.Size() / 2;
             for (int i = 0; i < 8; i++)
             {
-                SB.Draw(projTex, Projectile.Center - Main.screenPosition + ToRadians(60f * i).ToRotationVector2() *  2.3f, frames, Color.Gold.ToAddColor(50), Projectile.rotation + RandRot, origin, Projectile.scale, 0, 0);
+                SB.Draw(projTex, Projectile.Center - Main.screenPosition + ToRadians(60f * i).ToRotationVector2() * 2.3f, frames, Color.Gold.ToAddColor(50), Projectile.rotation + RandRot, origin, Projectile.scale, 0, 0);
             }
-            SB.Draw(projTex, Projectile.Center- Main.screenPosition, frames, Color.Black, Projectile.rotation + RandRot, origin, Projectile.scale, 0, 0);
+            SB.Draw(projTex, Projectile.Center - Main.screenPosition, frames, Color.Black, Projectile.rotation + RandRot, origin, Projectile.scale, 0, 0);
         }
     }
 }

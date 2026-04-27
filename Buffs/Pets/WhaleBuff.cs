@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Buffs.Pets
 {
-    public class WhaleBuff : PetsBuff   
+    public class WhaleBuff : PetsBuff
     {
         public override void Update(Player player, ref int buffIndex)
         {
@@ -16,7 +16,7 @@ namespace HJScarletRework.Buffs.Pets
     {
         internal static string BuffPath = "HJScarletRework/Assets/Texture/Pets/Pet_";
         public override string Texture => BuffPath + GetType().Name;
-        public virtual bool IsLightPet => false; 
+        public virtual bool IsLightPet => false;
         public override void SetStaticDefaults()
         {
             Main.buffNoTimeDisplay[Type] = true;

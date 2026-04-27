@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -46,7 +46,7 @@ namespace HJScarletRework.Projs.Melee
                 for (int i = 0; i < 20; i++)
                 {
                     Vector2 spawnPos = Projectile.Center.ToRandCirclePos(50);
-                    new StarShape(Projectile.Center.ToRandCirclePos(15f), (spawnPos - Projectile.Center).ToRandVelocity(0, 2f, 8f) * 1.85f, RandLerpColor(Color.OrangeRed, Color.Orange), Projectile.scale * 1.2f, 40,false).Spawn();
+                    new StarShape(Projectile.Center.ToRandCirclePos(15f), (spawnPos - Projectile.Center).ToRandVelocity(0, 2f, 8f) * 1.85f, RandLerpColor(Color.OrangeRed, Color.Orange), Projectile.scale * 1.2f, 40, false).Spawn();
                 }
                 //crossStar，在周围生成
                 for (int i = 0; i < 50; i++)

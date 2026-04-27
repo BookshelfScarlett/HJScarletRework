@@ -47,7 +47,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
             Recipe.Create(ApplyArmor).
                 AddIngredient(ItemID.Silk, 10).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyEvilScale, 5).
-                AddTile(TileID.Sawmill).
+                AddTile(TileID.Hellforge).
                 DisableDecraft().
                 Register();
         }
@@ -74,7 +74,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
             Recipe.Create(ApplyArmor).
                 AddIngredient(ItemID.Silk, 15).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyEvilScale, 10).
-                AddTile(TileID.Sawmill).
+                AddTile(TileID.Hellforge).
                 DisableDecraft().
                 Register();
         }
@@ -102,7 +102,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
             Recipe.Create(ApplyArmor).
                 AddIngredient(ItemID.Silk, 5).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyEvilScale, 5).
-                AddTile(TileID.Sawmill).
+                AddTile(TileID.Hellforge).
                 DisableDecraft().
                 Register();
         }

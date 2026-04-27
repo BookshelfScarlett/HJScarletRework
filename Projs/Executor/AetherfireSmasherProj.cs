@@ -1,16 +1,11 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
-using JetBrains.Annotations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Steamworks;
-using System;
-using System.Diagnostics.CodeAnalysis;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -130,7 +125,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void InitActiveDashParticle()
         {
-                PickTagColor(out Color baseColor, out Color targetColor);
+            PickTagColor(out Color baseColor, out Color targetColor);
             PickTagDust(out short HigherDust, out short BottemDust);
             float numberOfDusts = 10f;
             float rotFactor = 360f / numberOfDusts;
@@ -145,7 +140,7 @@ namespace HJScarletRework.Projs.Executor
             }
             for (int j = 0; j < 10; j++)
             {
-                    int dType = Main.rand.NextBool() ? HigherDust : BottemDust;
+                int dType = Main.rand.NextBool() ? HigherDust : BottemDust;
                 Dust d = Dust.NewDustPerfect(spawnPos + Main.rand.NextVector2CircularEdge(10f, 10f), dType);
                 d.velocity = Vector2.UnitX.RotatedByRandom(TwoPi) * Main.rand.NextFloat(1.2f, 4.2f) - Projectile.SafeDir() * Main.rand.NextFloat(2.8f, 8.7f);
                 d.scale = Main.rand.NextFloat(1.4f, 1.8f);

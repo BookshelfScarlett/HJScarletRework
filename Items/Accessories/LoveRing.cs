@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-                player.HJScarlet().loveRing = player.HJScarlet().genderChangeTimer < 1;
+            player.HJScarlet().loveRing = player.HJScarlet().genderChangeTimer < 1;
         }
         public override void AddRecipes()
         {

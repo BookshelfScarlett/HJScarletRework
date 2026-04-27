@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -45,13 +45,13 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
-            if(!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame)
             {
                 Speed = Projectile.velocity.Length();
             }
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer++;
-            switch(AttackType)
+            switch (AttackType)
             {
                 case Style.Attack:
                     DoAttack();
@@ -78,7 +78,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Timer++;
             Projectile.velocity *= 0.86f;
-            if(Timer > 30f)
+            if (Timer > 30f)
             {
                 //回弹
                 AttackType = Style.Bounce;
@@ -116,7 +116,7 @@ namespace HJScarletRework.Projs.Melee
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.OnFire3, GetSeconds(5));
-            if(AttackType == Style.Bounce)
+            if (AttackType == Style.Bounce)
             {
                 AttackType = Style.Slowdown;
                 Projectile.netUpdate = true;

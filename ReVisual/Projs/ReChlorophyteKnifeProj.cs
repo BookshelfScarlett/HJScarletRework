@@ -1,7 +1,7 @@
 ﻿using ContinentOfJourney.Projectiles.Meelee;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.ReVisual.Class;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -42,7 +42,7 @@ namespace HJScarletRework.ReVisual.Projs
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {
             bool isEnable = IsMyPlayer(projectile, out ReVisualPlayer player) && player.reVisualChlorophyteKnife;
-            if(!isEnable)
+            if (!isEnable)
                 return base.PreDraw(projectile, ref lightColor);
             if (PosList.Count < 1 && RotList.Count < 1)
                 return false;
@@ -51,7 +51,7 @@ namespace HJScarletRework.ReVisual.Projs
             Texture2D starShape = HJScarletTexture.Particle_SharpTear;
             Texture2D tex = projectile.GetTexture();
             Vector2 scale = new Vector2(.6f, 1.4f);
-            Vector2 ori = tex.Size()/2;
+            Vector2 ori = tex.Size() / 2;
             for (int i = 0; i < PosList.Count; i++)
             {
                 if (PosList[i] == Vector2.Zero)
@@ -75,8 +75,8 @@ namespace HJScarletRework.ReVisual.Projs
                 SB.Draw(tex, drawPos + ToRadians(60f * i).ToRotationVector2() * 1.5f, null, Color.White.ToAddColor(), projectile.velocity.ToRotation() + PiOver4, tex.ToOrigin(), projectile.scale, 0, 0);
             }
             SB.Draw(tex, drawPos, null, Color.White, projectile.velocity.ToRotation() + PiOver4, tex.ToOrigin(), projectile.scale, 0, 0);
-            
-;
+
+            ;
             return false;
         }
     }

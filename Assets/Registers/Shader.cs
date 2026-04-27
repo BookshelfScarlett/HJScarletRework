@@ -6,8 +6,8 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Assets.Registers
 {
-    public class HJScarletShader: ModSystem
-    {        
+    public class HJScarletShader : ModSystem
+    {
         // 当未提供特定着色器时，用作基本绘图的默认值。此着色器仅渲染顶点颜色数据，无需修改。
         private const string ShaderPath = "HJScarletRework/Assets/Effects/";
         internal const string ShaderPrefix = "HJScarletRework";
@@ -40,7 +40,7 @@ namespace HJScarletRework.Assets.Registers
             RegisterMiscShader(Pixelation, ToPassName(nameof(Pixelation)), nameof(Pixelation));
             RegisterMiscShader(MetaBallShader, ToPassName(nameof(MetaBallShader)), nameof(MetaBallShader));
             RegisterMiscShader(AlphaFade, ToPassName(nameof(AlphaFade)), nameof(AlphaFade));
-            RegisterMiscShader(StandardFlowShader, ToPassName(nameof(StandardFlowShader)),nameof(StandardFlowShader));
+            RegisterMiscShader(StandardFlowShader, ToPassName(nameof(StandardFlowShader)), nameof(StandardFlowShader));
             RegisterMiscShader(LightningShader, ToPassName(nameof(LightningShader)), nameof(LightningShader));
         }
         public override void Unload()

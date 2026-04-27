@@ -16,7 +16,7 @@ namespace HJScarletRework.Globals.Players
         public override void LoadData(TagCompound tag)
         {
             terraRecipe_CurEat = (System.Collections.Generic.List<int>)tag.GetList<int>(nameof(terraRecipe_CurEat));
-            terraRecipe_haventEat= (System.Collections.Generic.List<int>)tag.GetList<int>(nameof(terraRecipe_haventEat));
+            terraRecipe_haventEat = (System.Collections.Generic.List<int>)tag.GetList<int>(nameof(terraRecipe_haventEat));
             terraRecipe = tag.GetBool(nameof(terraRecipe));
             terraRecipe_EatenFoods = tag.GetInt(nameof(terraRecipe_EatenFoods));
             terraRecipe_LifeMaxMultTime = tag.GetInt(nameof(terraRecipe_LifeMaxMultTime));

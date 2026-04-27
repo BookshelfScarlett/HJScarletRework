@@ -2,9 +2,9 @@
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -152,7 +152,7 @@ namespace HJScarletRework.Projs.General
                         if (Main.rand.NextBool())
                             new ShinyCrossStar(spawnPos, dir * Main.rand.NextFloat(0.7f, 1.28f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, dir.ToRotation(), 0.5f, false).Spawn();
                         if (Main.rand.NextBool())
-                            new HRShinyOrb(spawnPos, dir.RotatedByRandom(Pi) * Main.rand.NextFloat(0.7f, 1.24f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40,  0.140f * 0.40f).Spawn();
+                            new HRShinyOrb(spawnPos, dir.RotatedByRandom(Pi) * Main.rand.NextFloat(0.7f, 1.24f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0.140f * 0.40f).Spawn();
                         if (Main.rand.NextBool())
                             new TurbulenceGlowOrb(spawnPos, 0.62f, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 0.14f, RandRotTwoPi).Spawn();
 
@@ -293,7 +293,7 @@ namespace HJScarletRework.Projs.General
                         Timer++;
                         float speedUp = Clamp(Timer * 0.5f, 0f, 50f);
                         Projectile.HomingTarget(Owner.Center, -1, 11f + speedUp, 0f);
-                        if(!IsIntersect &&Timer > GetSeconds(15))
+                        if (!IsIntersect && Timer > GetSeconds(15))
                         {
                             Projectile.Center = Owner.Center;
                         }
@@ -347,7 +347,7 @@ namespace HJScarletRework.Projs.General
                 }
                 SoundEngine.PlaySound(SoundID.Item35 with { MaxInstances = 0, Pitch = pitch }, Projectile.Center);
                 Owner.HJScarlet().protectorHerbTimerList[PlantType] = GetSeconds(4);
-                Owner.Heal(Main.rand.Next(1,5));
+                Owner.Heal(Main.rand.Next(1, 5));
             }
         }
 

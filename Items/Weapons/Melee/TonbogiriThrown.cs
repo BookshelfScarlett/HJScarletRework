@@ -45,7 +45,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                 theCritBonuse = 0;
             int totalBubble = theCritBonuse * (int)attackSpeed;
             totalBubble = (int)Clamp(totalBubble, 1, MaxBubbles);
-            Projectile proj =  Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
             proj.HJScarlet().ExtraAI[0] = totalBubble;
             return false;
         }

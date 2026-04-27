@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Classes
 {
-    public abstract class ScarletPetProj : ModProjectile,ILocalizedModType
+    public abstract class ScarletPetProj : ModProjectile, ILocalizedModType
     {
         public new string LocalizationCategory => "Projs.Friendly.Pets";
         public static string TexturePath = "HJScarletRework/Assets/Texture/Pets/Pet_";
@@ -150,7 +150,7 @@ namespace HJScarletRework.Globals.Classes
             //我们只需要一个距离，使用LengthSquared可以很好地减少开销
             float betweenSQ = betweenDirection.LengthSquared();
             //假如需要的位置与宠物的距离过远，我们直接让他传送到需要的位置(或者是过近)
-            bool TooFarAway = betweenSQ > TeleportThreshold * TeleportThreshold; 
+            bool TooFarAway = betweenSQ > TeleportThreshold * TeleportThreshold;
             if (TooFarAway || betweenSQ < MinDistance * MinDistance)
             {
                 Projectile.Center = desiredCenter;
@@ -220,7 +220,7 @@ namespace HJScarletRework.Globals.Classes
             }
         }
     }
-    public abstract class ScarletFlyingPet :  ScarletPetProj
+    public abstract class ScarletFlyingPet : ScarletPetProj
     {
         public enum FlyingPetState
         {
@@ -236,14 +236,14 @@ namespace HJScarletRework.Globals.Classes
         public override void AI()
         {
             //主人本身如果死掉直接干掉
-            if(!Owner.active)
+            if (!Owner.active)
             {
                 Projectile.active = false;
                 return;
             }
             SimpleAI();
-            ExAI();            
-           
+            ExAI();
+
         }
 
         /// <summary>
@@ -336,7 +336,7 @@ namespace HJScarletRework.Globals.Classes
         {
         }
 
-        
+
         /// <summary>
         /// 获取宠物是否允许传送、飞行速度等一些别的东西
         /// 即宠物跟随玩家行为的基本数据，这些会直接用于SimpleAI里面
@@ -344,7 +344,7 @@ namespace HJScarletRework.Globals.Classes
         /// </summary>
         /// <param name="FlyingSpeed">跟随速度，默认取16f</param>
         /// <param name="FlyingIneritia">跟随惯性，默认值12f</param>
-        public virtual void GetPetFlyingState(out float FlyingSpeed, out float FlyingIneritia , out bool ShouldSpeedUp, out float SpeedUpThreshold)
+        public virtual void GetPetFlyingState(out float FlyingSpeed, out float FlyingIneritia, out bool ShouldSpeedUp, out float SpeedUpThreshold)
         {
             FlyingSpeed = 16f;
             FlyingIneritia = 12f;

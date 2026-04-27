@@ -3,7 +3,6 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
@@ -22,10 +21,8 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.lifeRegen += 1;
-            player.longInvince = true;
             player.pStone = true;
-            player.GetArmorPenetration<GenericDamageClass>() += 25f;
+            player.crimsonRegen = true;
         }
         public override void AddRecipes()
         {

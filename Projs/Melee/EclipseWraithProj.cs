@@ -1,9 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
     public class EclipseWraithProj : HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Melee;
-        public override string Texture => ProjPath  + nameof(EclipseWraith);
+        public override string Texture => ProjPath + nameof(EclipseWraith);
         public override void SetStaticDefaults() => Projectile.ToTrailSetting(16, 2);
         public ref float Timer => ref Projectile.ai[1];
         public Vector2 StabPosition = Vector2.Zero;
@@ -44,11 +44,11 @@ namespace HJScarletRework.Projs.Melee
             if (HJScarletMethods.OutOffScreen(Projectile.Center))
                 return;
             //先生成starShape, 而后生成需要的火焰粒子，最后再生成需要的shinyorb
-            for (int k = 0; k < 2;k++)
+            for (int k = 0; k < 2; k++)
             {
-                Vector2 starShapePos = generalMountedPos+ Main.rand.NextVector2CircularEdge(6f, 6f) - dir * Main.rand.NextFloat(0.9f, 1.2f);
+                Vector2 starShapePos = generalMountedPos + Main.rand.NextVector2CircularEdge(6f, 6f) - dir * Main.rand.NextFloat(0.9f, 1.2f);
                 Color drawColor = RandLerpColor(Color.Black, Color.DarkRed);
-                new StarShape(starShapePos, dir * 2f, drawColor, 0.6f, 20,false).SpawnToPriorityNonPreMult();
+                new StarShape(starShapePos, dir * 2f, drawColor, 0.6f, 20, false).SpawnToPriorityNonPreMult();
             }
             //烟雾粒子需要减少生成量以让矛本身出来
             if (Main.rand.NextBool())
@@ -83,7 +83,7 @@ namespace HJScarletRework.Projs.Melee
                 return;
             Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<EclipseWraithBoom>(), Projectile.damage, 12f, Owner.whoAmI);
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1 }, Projectile.Center);
-            for (int i = 0; i < 3;i++)
+            for (int i = 0; i < 3; i++)
             {
                 float spawnX = target.Center.X + Main.rand.NextFloat(50f, 100f) * Main.rand.NextBool().ToDirectionInt();
                 float spawnY = target.Center.Y - Main.rand.NextFloat(1200f, 1800f);
@@ -99,8 +99,8 @@ namespace HJScarletRework.Projs.Melee
             Texture2D starShape = HJScarletTexture.Particle_SharpTear;
             DrawTheTrail(drawPos, starShape);
             Vector2 offsetFixer = Projectile.SafeDir() * 70;
-            Projectile.DrawGlowEdge(Color.Red,posMove: 1.4f, rotFix:PiOver4, drawPosOffset:offsetFixer);
-            Projectile.DrawProj(Color.White, rotFix:PiOver4, drawPosOffset:offsetFixer);
+            Projectile.DrawGlowEdge(Color.Red, posMove: 1.4f, rotFix: PiOver4, drawPosOffset: offsetFixer);
+            Projectile.DrawProj(Color.White, rotFix: PiOver4, drawPosOffset: offsetFixer);
             DrawGlow(drawPos);
             return false;
         }

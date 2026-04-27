@@ -22,7 +22,7 @@ namespace HJScarletRework.Items.Accessories
         {
             player.GetDamage<ExecutorDamageClass>() += 0.15f;
             player.GetArmorPenetration<ExecutorDamageClass>() += 90;
-            player.HJScarlet().critDamageExecutor += 0.15f;
+            player.HJScarlet().critDamageExecutor += 0.20f;
             player.HJScarlet().blackKeyHeal = 50;
             player.HJScarlet().blackKeyDoT = true;
             player.HJScarlet().blackKeyReduceDefense = 60;

@@ -17,7 +17,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.shootSpeed = 12f;
             Item.rare = ItemRarityID.Orange;
             Item.knockBack = 4f;
-            Item.UseSound = HJScarletSounds.Misc_MagicStaffFire with { MaxInstances = 0, Pitch = 0.1f, Volume = 0.18f, PitchVariance = 0.2f};
+            Item.UseSound = HJScarletSounds.Misc_MagicStaffFire with { MaxInstances = 0, Pitch = 0.1f, Volume = 0.18f, PitchVariance = 0.2f };
             Item.useTime = Item.useAnimation = 38;
         }
         public override Color MainTooltipColor => Color.SkyBlue;

@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.knockBack = 4f;
             Item.shootSpeed = 11f;
             Item.shoot = ProjectileType<AzureFrostmarkProj>();
-            Item.UseSound = HJScarletSounds.HymnFireball_Release with { MaxInstances = 1, Pitch = -0.20f , PitchVariance = 0.15f, Volume = 0.8f};
+            Item.UseSound = HJScarletSounds.HymnFireball_Release with { MaxInstances = 1, Pitch = -0.20f, PitchVariance = 0.15f, Volume = 0.8f };
         }
         public override Color MainTooltipColor => Color.RoyalBlue;
     }

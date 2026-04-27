@@ -61,7 +61,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateAttackAI()
         {
-            switch(AttackState)
+            switch (AttackState)
             {
                 case State.Spawn:
                     DoSpawn();
@@ -122,7 +122,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Projectile.SpeedAffectRotation() * Projectile.spriteDirection;
             Projectile.velocity *= 0.90f;
             Projectile.scale = Lerp(Projectile.scale, 0.80f, 0.2f);
-            if(Projectile.MeetMaxUpdatesFrame(Timer,18))
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 18))
             {
                 Projectile.scale = 0.8f;
                 UpdateNextState(CurTarget.IsLegal() ? State.Strike : State.Fade);
@@ -137,7 +137,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(AttackState == State.Strike)
+            if (AttackState == State.Strike)
             {
                 UpdateNextState(State.Fade);
             }

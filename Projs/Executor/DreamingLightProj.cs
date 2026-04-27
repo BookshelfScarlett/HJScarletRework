@@ -1,10 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Metaballs;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Metaballs;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using System;
@@ -121,8 +121,6 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.IntersectOwnerByDistance(90))
             {
 
-                if (!Owner.HasProj<DreamingLightMinion>())
-                    Projectile.AddExecutionTime(ItemType<DreamingLight>());
                 Projectile.Kill();
             }
         }
@@ -161,7 +159,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, projID, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 proj.rotation = Projectile.rotation;
-                for (int i = 0; i < 8-PerformanceMode.ToInt() * 4; i++)
+                for (int i = 0; i < 8 - PerformanceMode.ToInt() * 4; i++)
                     new Fire(target.Center.ToRandCirclePos(6), RandVelTwoPi(0.1f, 8.8f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, 1, 0.25f).SpawnToNonPreMult();
             }
             if (Projectile.numHits < 1 && !StopSpawnAdditionHammer)
@@ -171,6 +169,8 @@ namespace HJScarletRework.Projs.Executor
                     SpawnShadowNebulaBeam(target);
                 else
                 {
+                    if (!Projectile.HJScarlet().ExecutionStrike)
+                        Projectile.AddExecutionTimePass(ItemType<DreamingLight>());
                 }
                 SpawnDreamingStriker();
             }
@@ -182,7 +182,7 @@ namespace HJScarletRework.Projs.Executor
             new CrossGlow(target.Center, Color.Violet, 40, 1, 0.28f).Spawn();
             new CrossGlow(target.Center, Color.Violet, 40, 1, 0.18f).Spawn();
 
-                int offset = PerformanceMode ? 1 : 0;
+            int offset = PerformanceMode ? 1 : 0;
             for (int i = 0; i < 5; i++)
             {
                 Vector2 rotArg = (Projectile.velocity.ToRotation() + ToRadians(360f / 5 * i)).ToRotationVector2();
@@ -221,7 +221,7 @@ namespace HJScarletRework.Projs.Executor
                     {
                         Vector2 nebulaVel = vel.ToSafeNormalize().RotatedBy(PiOver2 * j) * (i * 0.18f - 2f);
                         Vector2 nebulaPos = spawnPos;
-                            ShadowNebula.SpawnParticle(nebulaPos, nebulaVel, 0.180f * Lerp(2.0f, 0.5f, i / 60f), HJScarletTexture.Texture_WhiteCircle.Value);
+                        ShadowNebula.SpawnParticle(nebulaPos, nebulaVel, 0.180f * Lerp(2.0f, 0.5f, i / 60f), HJScarletTexture.Texture_WhiteCircle.Value);
                     }
                 }
                 offset = PerformanceMode ? 5 : 0;

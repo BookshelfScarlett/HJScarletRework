@@ -2,9 +2,9 @@
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -28,7 +28,7 @@ namespace HJScarletRework.Projs.Ranged
             Projectile.extraUpdates = 2;
             Projectile.scale = Projectile.Opacity = 0;
             Projectile.tileCollide = false;
-            Projectile.timeLeft =300;
+            Projectile.timeLeft = 300;
         }
         public override void OnFirstFrame()
         {
@@ -80,7 +80,7 @@ namespace HJScarletRework.Projs.Ranged
             Vector2 projDir = Projectile.velocity.SafeNormalize(Vector2.UnitX);
             Vector2 scale = new Vector2(0.35f, 3.05f) * 0.825f;
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
-            for (int i  =0;i< 10;i++)
+            for (int i = 0; i < 10; i++)
             {
                 float ratios = (float)i / 10;
                 Color lerpColor = Color.Lerp(Color.DarkGoldenrod, Color.Goldenrod, ratios) * 0.85f;

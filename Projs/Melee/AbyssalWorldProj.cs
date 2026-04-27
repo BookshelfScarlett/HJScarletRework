@@ -1,10 +1,9 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -64,7 +63,7 @@ namespace HJScarletRework.Projs.Melee
                     {
                         Projectile.extraUpdates = 100;
                     }
-                        Projectile.rotation = ((Target.Center - Projectile.Center)).ToSafeNormalize().ToRotation();
+                    Projectile.rotation = ((Target.Center - Projectile.Center)).ToSafeNormalize().ToRotation();
                     Projectile.HomingTarget(Target.Center, -1, 20f, 1f);
                 }
                 else
@@ -73,8 +72,8 @@ namespace HJScarletRework.Projs.Melee
                     return;
                 }
             }
-                UpdateParticles();
-            
+            UpdateParticles();
+
         }
 
         private void ExtraParticle()

@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class DeathTolls: ExecutorWeaponClass
+    public class DeathTolls : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 1.0f;
         public override int ExecutionTime => 20;
@@ -44,12 +44,12 @@ namespace HJScarletRework.Items.Weapons.Executor
                 NightRarity.DrawRarity(line);
                 return false;
             }
-            if(line.Mod == "Terraria" && line.Name == "CritChance")
+            if (line.Mod == "Terraria" && line.Name == "CritChance")
             {
                 NightRarity.DrawMisc(line);
                 return false;
             }
-            if(line.Mod == "Terraria" && line.Name == "Damage")
+            if (line.Mod == "Terraria" && line.Name == "Damage")
             {
                 NightRarity.DrawMisc(line);
                 return false;
@@ -87,7 +87,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
-            return base.PreDrawInInventory(spriteBatch, position,frame,drawColor,itemColor,origin,scale);
+            return base.PreDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
         }
     }
 }

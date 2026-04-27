@@ -2,8 +2,8 @@
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -37,7 +37,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            
+
         }
         public override void ProjAI()
         {
@@ -51,7 +51,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.IsOutScreen())
                 return;
-            new LightningParticle(Projectile.Center.ToRandCirclePos(3f), Vector2.Zero, RandLerpColor(Color.RoyalBlue,Color.DodgerBlue), Main.rand.Next(25, 45), Projectile.rotation + PiOver2, Main.rand.NextFloat(0.3f, 0.44f),0).Spawn();
+            new LightningParticle(Projectile.Center.ToRandCirclePos(3f), Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.DodgerBlue), Main.rand.Next(25, 45), Projectile.rotation + PiOver2, Main.rand.NextFloat(0.3f, 0.44f), 0).Spawn();
             new LightningGlow(Projectile.Center, Projectile.SafeDir(), Color.RoyalBlue, 40, 0.75f).Spawn();
             if (Main.rand.NextBool(20))
             {
@@ -60,13 +60,13 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            new LightningParticle(Projectile.Center, Vector2.Zero, Color.RoyalBlue, 40, RandRotTwoPi, 0.5f * Main.rand.NextFloat(0.75f,0.95f), 2).Spawn();
+            new LightningParticle(Projectile.Center, Vector2.Zero, Color.RoyalBlue, 40, RandRotTwoPi, 0.5f * Main.rand.NextFloat(0.75f, 0.95f), 2).Spawn();
             Vector2 spawnPos = Projectile.Center + Projectile.SafeDir() * 10f;
             //new CrossGlow(spawnPos, Color.RoyalBlue, 40, 1f, 0.25f,false).Spawn();
             new OpticalLineGlow(spawnPos, Color.RoyalBlue, 40, 1f, 0.20f).Spawn();
-            new BloomShockwave(spawnPos, Color.Lerp(Color.RoyalBlue,Color.White,0.2f), 40, 1f, 0.18f).Spawn();
+            new BloomShockwave(spawnPos, Color.Lerp(Color.RoyalBlue, Color.White, 0.2f), 40, 1f, 0.18f).Spawn();
             //new BloomShockwave(spawnPos, Color.Lerp(Color.RoyalBlue,Color.White,0.2f), 40, 1f, 0.18f,false).Spawn();
-            for (int i = 0;i<6;i++)
+            for (int i = 0; i < 6; i++)
             {
                 new LightningParticle(spawnPos.ToRandCirclePos(64f), Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.DodgerBlue), Main.rand.Next(30, 40), RandRotTwoPi, 0.2f).Spawn();
             }

@@ -24,7 +24,7 @@ namespace HJScarletRework.Globals.Players
             }
             if (monkExecutor)
             {
-                if(item.type == ItemID.MonkStaffT3)
+                if (item.type == ItemID.MonkStaffT3)
                 {
                     crit += 30;
                 }
@@ -66,15 +66,18 @@ namespace HJScarletRework.Globals.Players
         }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if(runeWizardExecutor && item.DamageType == ExecutorDamageClass.Instance)
+            if (runeWizardExecutor && item.DamageType == ExecutorDamageClass.Instance)
             {
                 int count = Main.rand.Next(2, 4);
                 SoundEngine.PlaySound(SoundID.Item43 with { MaxInstances = 1, Pitch = 0.4f, PitchVariance = 0.2f, Volume = 0.75f }, Player.Center);
+                NPC target = Main.MouseWorld.FindClosestTarget(400f, ignoreTiles: false);
                 for (int i = 0; i < count; i++)
                 {
                     Vector2 vel = Player.ToMouseVector2().ToRandVelocity(ToRadians(15f), 11f, 13f);
                     Vector2 spawnPos = Player.Center - Player.ToMouseVector2() * Main.rand.NextFloat(150f, 190f);
                     Projectile proj = Projectile.NewProjectileDirect(source, spawnPos.ToRandCirclePosEdge(50f), vel, ProjectileType<RuneWizardProj>(), (damage / 2) / count, 1f, Player.whoAmI);
+                    if (target.IsLegal())
+                        proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                 }
             }
             return base.Shoot(item, source, position, velocity, type, damage, knockback);
@@ -86,7 +89,7 @@ namespace HJScarletRework.Globals.Players
         public override void GetHealMana(Item item, bool quickHeal, ref int healValue)
         {
             float percent = 1f;
-            if(fakeManaStar)
+            if (fakeManaStar)
             {
                 percent -= 0.15f;
             }

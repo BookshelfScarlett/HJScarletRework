@@ -1,9 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -84,7 +84,7 @@ namespace HJScarletRework.Projs.Executor
             else
             {
                 SpawnOnKillParticle();
-                SoundEngine.PlaySound(HJScarletSounds.Dream_Toss with { MaxInstances = 0, Pitch = 0.5f },Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Dream_Toss with { MaxInstances = 0, Pitch = 0.5f }, Projectile.Center);
                 Projectile.Kill();
             }
         }
@@ -123,11 +123,11 @@ namespace HJScarletRework.Projs.Executor
         {
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_Hit with { MaxInstances = 0, Pitch = 0.15f, PitchVariance = 0.15f }, Projectile.Center);
 
-            if(Projectile.numHits % 2 == 0)
+            if (Projectile.numHits % 2 == 0)
                 SpawnPunishmentStar(target);
             else
             {
-                for(int i = 0;i<16;i++)
+                for (int i = 0; i < 16; i++)
                 {
                     Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(5f), Main.rand.NextBool() ? DustID.GemDiamond : DustID.HallowedWeapons);
                     d.velocity = RandVelTwoPi(1.2f, 4.6f);
@@ -166,7 +166,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Color lerpValue = Color.Lerp(Color.Orange, Color.LightGoldenrodYellow, MathF.Sin(ColorLerpValue));
             float lerpValue2 = Math.Abs(MathF.Sin(ColorLerpValue));
-            Projectile.DrawGlowEdge(lerpValue, rotFix: +PiOver4, posMove : 2 + 1.2f* lerpValue2);
+            Projectile.DrawGlowEdge(lerpValue, rotFix: +PiOver4, posMove: 2 + 1.2f * lerpValue2);
             Projectile.DrawProj(lightColor, rotFix: +PiOver4);
 
             return false;

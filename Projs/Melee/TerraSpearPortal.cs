@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace HJScarletRework.Projs.Melee
         public bool LeftAngle = false;
         public List<Vector2> TrailPosList = [];
         public List<float> TrailRotList = [];
-        public float TotalTrailCounts =14;
+        public float TotalTrailCounts = 14;
 
         public override void ExSD()
         {
@@ -93,8 +93,8 @@ namespace HJScarletRework.Projs.Melee
             Projectile.velocity *= 0.86f;
             UpdateAttackAI();
             Vector2 setPos = Projectile.Center;
-            if(Main.rand.NextBool())
-            new ShinyCrossStar(setPos.ToRandCirclePosEdge(18f * Projectile.scale), RandVelTwoPi(1f), RandLerpColor(Color.LimeGreen, Color.DarkGreen), 100, RandRotTwoPi, 1f, 0.3f, 0.2f).Spawn();
+            if (Main.rand.NextBool())
+                new ShinyCrossStar(setPos.ToRandCirclePosEdge(18f * Projectile.scale), RandVelTwoPi(1f), RandLerpColor(Color.LimeGreen, Color.DarkGreen), 100, RandRotTwoPi, 1f, 0.3f, 0.2f).Spawn();
             if (Main.rand.NextBool(4))
                 new SmokeParticle(setPos.ToRandCirclePos(16f * Projectile.scale), RandVelTwoPi(1f), RandLerpColor(Color.Lime, Color.LimeGreen), 100, RandRotTwoPi, 1, 0.13f).Spawn();
         }
@@ -109,7 +109,7 @@ namespace HJScarletRework.Projs.Melee
             Timer++;
             if (Timer < 30f)
                 return;
-            if (Projectile.GetTargetSafe(out NPC target,canPassWall:true))
+            if (Projectile.GetTargetSafe(out NPC target, canPassWall: true))
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, (target.Center - Projectile.Center).ToSafeNormalize(Vector2.UnitX) * 5f, ProjectileType<TerraSpearArrow>(), Projectile.originalDamage, 2f, Owner.whoAmI);
                 proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
@@ -184,7 +184,7 @@ namespace HJScarletRework.Projs.Melee
                 Color drawColor = (Color.Lerp(Color.Green, Color.Lime, rads) with { A = 50 }) * 0.9f * Projectile.Opacity * (1 - rads);
                 Vector2 shapeScale = scale * Clamp(i / ((float)PosList.Count - 4f), 0f, 1f);
                 Vector2 lerpPos = PosList[i] - Main.screenPosition;
-                float lerpRot = TrailRotList[i] - PiOver2; 
+                float lerpRot = TrailRotList[i] - PiOver2;
                 if (shapeScale.X > 0.1f && shapeScale.Y > 0.2f)
                 {
                     SB.Draw(starShape, lerpPos, null, drawColor, lerpRot + PiOver2, starShape.ToOrigin(), shapeScale, 0, 0);
@@ -215,4 +215,4 @@ namespace HJScarletRework.Projs.Melee
             SB.EndShaderArea();
         }
     }
-    }
+}

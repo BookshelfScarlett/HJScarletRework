@@ -1,7 +1,7 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -59,14 +59,14 @@ namespace HJScarletRework.Projs.Melee
             vel -= Vector2.UnitY * Main.rand.NextFloat(10f, 12f);
 
             Color drawColor = RandLerpColor(Color.GreenYellow, Color.LightGreen);
-            new PetalNoCollision(spawnPos, vel, drawColor, 60, RandRotTwoPi, 1f, 0.1f, 1f,true).Spawn();
+            new PetalNoCollision(spawnPos, vel, drawColor, 60, RandRotTwoPi, 1f, 0.1f, 1f, true).Spawn();
             for (int i = 0; i <= 3; i++)
             {
                 Color beginColor = new(77, 42, 26);
-                Color endColor = new(97, 67,64);
+                Color endColor = new(97, 67, 64);
                 Color treeSkinColor = RandLerpColor(beginColor, endColor);
                 Vector2 offset = Projectile.SafeDir() * i * 5f + Main.rand.NextVector2Circular(10f, 10f);
-                new StarShape(Projectile.Center - offset, Projectile.SafeDir() * -1.2f, treeSkinColor, 0.3f, 60).SpawnToPriorityNonPreMult();
+                new StarShape(Projectile.Center - offset, Projectile.SafeDir() * -1.2f, treeSkinColor, 0.3f, 60, false).SpawnToPriorityNonPreMult();
             }
         }
 
@@ -116,7 +116,7 @@ namespace HJScarletRework.Projs.Melee
                     continue;
                 float rads = (float)i / length;
                 Color drawColor = (Color.Lerp(Color.Green, Color.ForestGreen, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads);
-                SB.Draw(star, Projectile.Center -Main.screenPosition + Projectile.SafeDir() * 60f - Projectile.velocity * 0.7f * i, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.oldRot[i] - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(0.8f, 1.5f), 0, 0);
+                SB.Draw(star, Projectile.Center - Main.screenPosition + Projectile.SafeDir() * 60f - Projectile.velocity * 0.7f * i, null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.oldRot[i] - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(0.8f, 1.5f), 0, 0);
             }
             Projectile.DrawGlowEdge(Color.Green, rotFix: ToRadians(135));
             Projectile.DrawProj(Color.White, 6, 0.5f, ToRadians(135));

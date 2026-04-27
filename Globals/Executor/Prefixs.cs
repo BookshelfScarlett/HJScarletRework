@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace HJScarletRework.Globals.Executor
 {
@@ -9,11 +10,15 @@ namespace HJScarletRework.Globals.Executor
     {
         public override bool InstancePerEntity => true;
         public int FocusTimeReduce = 0;
-        public float FocusDamageMult = 0;
+        public float ExecutionDamageMult = 1;
+        public override int ChoosePrefix(Item item, UnifiedRandom rand)
+        {
+            return base.ChoosePrefix(item, rand);
+        }
         public override GlobalItem Clone(Item from, Item to)
         {
             ExecutorGlobalItem executorGlobalItem = (ExecutorGlobalItem)base.Clone(from, to);
-            executorGlobalItem.FocusDamageMult = FocusDamageMult;
+            executorGlobalItem.ExecutionDamageMult = ExecutionDamageMult;
             executorGlobalItem.FocusTimeReduce = FocusTimeReduce;
             return executorGlobalItem;
         }
@@ -24,56 +29,56 @@ namespace HJScarletRework.Globals.Executor
         public override void PreReforge(Item item)
         {
             FocusTimeReduce = 0;
-            FocusDamageMult = 0;
+            ExecutionDamageMult = 0;
         }
     }
     public class Fake : ExecutorPrefixs
     {
-        public override float DamageMult => 0.90f;
-        public override int CritAdd => 15;
-        public override int ArmorPenetrationAdd => 15;
+        public override float DamageMult => 0.50f;
+        public override int CritAdd => -15;
+        public override float ExecutionDamageMult => 1f;
     }
     public class Digital : ExecutorPrefixs
     {
-        public override float UseTimeMult => 0.85f;
-        public override int CritAdd => -20;
-        public override float FocusDamageMult => 1.15f;
+        public override float DamageMult => 1.10f;
+        public override int ArmorPenetrationAdd => 5;
+        public override float ExecutionDamageMult => 1f;
     }
     public class Mysterious : ExecutorPrefixs
     {
-
-        public override int CritAdd => -10;
-        public override float UseTimeMult => 0.80f;
+        public override int CritAdd => 10;
+        public override int ArmorPenetrationAdd => 10;
     }
     public class Phantasmic : ExecutorPrefixs
     {
-        public override float DamageMult => 1.15f;
-        public override float FocusDamageMult => 1.10f;
-        public override float UseTimeMult => 0.9f;
+        public override float DamageMult => 1.10f;
+        public override float ExecutionDamageMult => 1f;
+        public override float UseTimeMult => 0.95f;
         public override int ArmorPenetrationAdd => 10;
         public override int CritAdd => 5;
     }
     public class Evolution : ExecutorPrefixs
     {
-        public override float DamageMult => 1.10f;
-        public override float FocusDamageMult => 1.05f;
-        public override float UseTimeMult => 0.95f;
+        public override float DamageMult => 1.05f;
+        public override float ExecutionDamageMult => 1;
+        public override float UseTimeMult => 1f;
         public override int ArmorPenetrationAdd => 5;
         public override int CritAdd => 3;
 
     }
     public class Foreigner : ExecutorPrefixs
     {
-        public override int ArmorPenetrationAdd => 50;
-        public override int CritAdd => 15;
-        public override float FocusDamageMult => 1.10f;
+        public override int ArmorPenetrationAdd => 30;
+        public override int CritAdd => 30;
+        public override float ExecutionDamageMult => 1f;
+        public override float UseTimeMult => 1.5f;
     }
     public class Alterego : ExecutorPrefixs
     {
-        public override int ArmorPenetrationAdd => 10;
-        public override int CritAdd => -10;
-        public override float UseTimeMult => 0.90f;
-        public override float FocusDamageMult => 0.80f;
+        public override int ArmorPenetrationAdd => 15;
+        public override int CritAdd => -30;
+        public override float UseTimeMult => 0.70f;
+        public override float ExecutionDamageMult => 0.50f;
     }
     public abstract class ExecutorPrefixs : ModPrefix, ILocalizedModType
     {
@@ -82,7 +87,7 @@ namespace HJScarletRework.Globals.Executor
         public virtual float UseTimeMult => 1f;
         public virtual int CritAdd => 0;
         public virtual int ArmorPenetrationAdd => 0;
-        public virtual float FocusDamageMult => 0f;
+        public virtual float ExecutionDamageMult => 1f;
         public override PrefixCategory Category => PrefixCategory.AnyWeapon;
         /// <summary>
         /// 使用CountAsClass会导致射手也能roll代行者的词缀
@@ -90,7 +95,7 @@ namespace HJScarletRework.Globals.Executor
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public override bool CanRoll(Item item) => item.DamageType == ExecutorDamageClass.Instance && item.maxStack == 1 && GetType() != typeof(ExecutorPrefixs);
+        public override bool CanRoll(Item item) => item.DamageType == ExecutorDamageClass.Instance;
         public override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult, ref float scaleMult, ref float shootSpeedMult, ref float manaMult, ref int critBonus)
         {
             damageMult = DamageMult;
@@ -99,45 +104,43 @@ namespace HJScarletRework.Globals.Executor
         }
         public override void ModifyValue(ref float valueMult)
         {
-            valueMult *= 1f + FocusDamageMult;
+            valueMult *= 1f + DamageMult;
         }
         public override void Apply(Item item)
         {
-            if(item.DamageType == ExecutorDamageClass.Instance && item.TryGetGlobalItem<ExecutorGlobalItem>(out var result))
+            if (item.DamageType == ExecutorDamageClass.Instance && item.TryGetGlobalItem<ExecutorGlobalItem>(out var result))
             {
                 item.ArmorPenetration += ArmorPenetrationAdd;
-                result.FocusDamageMult = FocusDamageMult;
+                result.ExecutionDamageMult = ExecutionDamageMult;
             }
         }
-        internal const string FocusTimeNameID = "HJScarletRework:PrefixFocusTime";
-        internal const string FocusDamageNameID = "HJScarletRework:PrefixFocusDamage";
+        internal const string FocusDamageNameID = "HJScarletRework:PrefixExecutionDamage";
         internal const string ArmorPenetrationNameID = "HJScarletRework:PrefixArmorPenetration";
-        public string FocusTimeValue => Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.Prefixs.FocusTimeLine").ToLangValue();
-        public string FocusDamageValue  => Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.Prefixs.FocusDamageLine").ToLangValue();
+        public string ExecutionDamageValue => Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.Prefixs.ExecutionDamageLine").ToLangValue();
         public string ArmorPenetrationValue => Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.Prefixs.ArmorPenetrationLine").ToLangValue();
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
-            if (FocusDamageMult != 0f)
+            if (ExecutionDamageMult != 1f)
             {
-                string inserValue = FocusDamageMult >= 0f ? "+" : "-";
-                string realValue = (FocusDamageMult * 100f - 100).ToString("N0");
-                TooltipLine newLine = new(Mod, FocusDamageNameID, FocusDamageValue.ToFormatValue($"{inserValue}{realValue}"))
+                string realValue = (ExecutionDamageMult * 100f - 100).ToString("N0");
+                string inserValue = ExecutionDamageMult >= 1f ? "+" : string.Empty;
+                TooltipLine newLine = new(Mod, FocusDamageNameID, ExecutionDamageValue.ToFormatValue($"{inserValue}{realValue}"))
                 {
                     IsModifier = true,
-                    IsModifierBad = FocusDamageMult < 1f
+                    IsModifierBad = ExecutionDamageMult < 1f
                 };
                 yield return newLine;
             }
 
             if (ArmorPenetrationAdd != 0)
             {
-                string insertValue = ArmorPenetrationAdd > 0 ? "+" : string.Empty; 
+                string insertValue = ArmorPenetrationAdd > 0 ? "+" : string.Empty;
                 string realValue = $"{insertValue}{ArmorPenetrationAdd}";
 
                 TooltipLine newLine = new(Mod, ArmorPenetrationNameID, ArmorPenetrationValue.ToFormatValue(realValue))
                 {
                     IsModifier = true,
-                    IsModifierBad = FocusDamageMult < 0f
+                    IsModifierBad = ExecutionDamageMult < 0f
                 };
                 yield return newLine;
             }

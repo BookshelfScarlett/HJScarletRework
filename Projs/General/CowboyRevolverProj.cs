@@ -1,9 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -43,7 +43,7 @@ namespace HJScarletRework.Projs.General
                 Projectile.velocity *= 0.96f;
                 Projectile.rotation += 0.15f * Projectile.spriteDirection;
                 //这里会时刻更新目标是否合法，因为下面不会在试图搜索一遍目标了
-                if(!CurTarget.IsLegal())
+                if (!CurTarget.IsLegal())
                 {
                     if (Projectile.GetTargetSafe(out NPC target, canPassWall: true))
                         CurTarget = target;
@@ -126,7 +126,7 @@ namespace HJScarletRework.Projs.General
                     SB.Draw(tex, Projectile.Center - Main.screenPosition + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.Lerp(Color.Transparent, Color.White, Helper.GetAniProgress(0)).ToAddColor(), Projectile.rotation, tex.ToOrigin(), Projectile.scale * 1.05f, se, 0);
                 }
             }
-            SB.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.Lerp(Color.Black, Color.White,Helper.GetAniProgress(0)) * Projectile.Opacity, Projectile.rotation, tex.ToOrigin(), Projectile.scale, se, 0);
+            SB.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.Lerp(Color.Black, Color.White, Helper.GetAniProgress(0)) * Projectile.Opacity, Projectile.rotation, tex.ToOrigin(), Projectile.scale, se, 0);
             return false;
         }
     }

@@ -25,6 +25,7 @@ namespace HJScarletRework.Globals.Players
         private void ResetArmor()
         {
             runeWizardExecutor = false;
+            fishExecutor = false;
             shinobiExecutor = false;
             monkExecutor = false;
             cowboyExecutor = false;

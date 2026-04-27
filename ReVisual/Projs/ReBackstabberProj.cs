@@ -1,6 +1,6 @@
 ﻿using ContinentOfJourney.Projectiles.Meelee;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.ReVisual.Class;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

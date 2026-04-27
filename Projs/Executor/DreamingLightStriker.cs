@@ -2,10 +2,10 @@
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Metaballs;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Metaballs;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using System;
@@ -136,7 +136,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void DoStrike()
         {
-            if(!IsLegalTarget)
+            if (!IsLegalTarget)
             {
                 StateSwitchTo(State.Return);
                 return;
@@ -322,19 +322,19 @@ namespace HJScarletRework.Projs.Executor
         }
         public void SpawnFireball(NPC target)
         {
-            if(Owner.HasProj<DreamingLightMinion>())
-            for (int i = 0; i < 6; i++)
-            {
-                Vector2 spawnPos = target.Center.ToRandCirclePos(0f);
-                Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(30f), 18f, 24f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<DreamlessNightArrow>(), Projectile.damage / 3, 0f, Owner.whoAmI);
-                ((DreamlessNightArrow)proj.ModProjectile).CurSpeed = 0;
-            }
+            if (Owner.HasProj<DreamingLightMinion>())
+                for (int i = 0; i < 6; i++)
+                {
+                    Vector2 spawnPos = target.Center.ToRandCirclePos(0f);
+                    Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(30f), 18f, 24f);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<DreamlessNightArrow>(), Projectile.damage / 3, 0f, Owner.whoAmI);
+                    ((DreamlessNightArrow)proj.ModProjectile).CurSpeed = 0;
+                }
             for (int i = 0; i < 3; i++)
             {
 
                 Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(30f), 10f, 14f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, vel, ProjectileType<DreamingLightFireball>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, vel, ProjectileType<DreamingLightFireball>(), Projectile.damage / 3, Projectile.knockBack, Owner.whoAmI);
                 ((DreamingLightFireball)proj.ModProjectile).TargetNPC = target;
             }
         }

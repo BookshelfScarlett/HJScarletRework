@@ -2,10 +2,10 @@
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -17,6 +17,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override string Texture => GetInstance<FleshGrinder>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;
+        public override Vector2 TileHitbox => new Vector2(13, 13);
         public enum State
         {
             Shoot,
@@ -71,9 +72,6 @@ namespace HJScarletRework.Projs.Executor
             if (!Projectile.Hitbox.Intersects(Owner.Hitbox))
                 return;
 
-            Projectile.AddExecutionTime(ItemType<FleshGrinder>());
-            if (Projectile.HJScarlet().ExecutionStrike)
-                CanFocusStrike();
 
             Projectile.Kill();
         }
@@ -120,16 +118,19 @@ namespace HJScarletRework.Projs.Executor
                 return;
             if (Projectile.numUpdates == 0 && Main.rand.NextBool(3))
             {
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.5f, 1.1f), false).SpawnToNonPreMult();
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(40), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.5f, 1.1f), false).SpawnToNonPreMult();
             }
-            Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(30f), DustID.Blood);
-            d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(15f), 1.2f, 1.8f);
-            d.scale *= Main.rand.NextFloat(1.2f, 1.4f);
-            d.noGravity = true;
+            if (Projectile.FinalUpdateNextBool())
+            {
+                Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(40f), DustID.Blood);
+                d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(15f), 1.2f, 1.8f);
+                d.scale *= Main.rand.NextFloat(1.2f, 1.4f);
+                d.noGravity = true;
+            }
 
 
             if (Projectile.numUpdates == 0 && Main.rand.NextBool(5))
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.5f, 1.1f), true).SpawnToNonPreMult();
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(40), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.5f, 1.1f), true).SpawnToNonPreMult();
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
@@ -161,16 +162,23 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 dVel = vel * Main.rand.NextFloat(4.4f, 4.8f);
                 new ShinyOrbHard(pos, dVel, RandLerpColor(Color.DarkRed, Color.Crimson), 40, Main.rand.NextFloat(0.4f, 0.8f)).SpawnToNonPreMult();
             }
+            Projectile.BounceOnTile(velo);
         }
 
 
         public override void OnFirstFrame()
         {
             Projectile.originalDamage = Projectile.damage;
+            if (Projectile.HJScarlet().ExecutionStrike)
+            {
+                CanFocusStrike();
+            }
+
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
+            Projectile.AddExecutionTimePass(ItemType<FleshGrinder>());
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 2, Pitch = -0.2f }, target.Center);
             for (int i = 0; i < 24; i++)
             {

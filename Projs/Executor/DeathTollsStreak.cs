@@ -1,10 +1,8 @@
-﻿using ContinentOfJourney.Projectiles;
-using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleSystem;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 
@@ -94,15 +92,15 @@ namespace HJScarletRework.Projs.Executor
                     new LightningGlow(Projectile.Center + dir.RotatedBy(rotvalue) * j * 1.5f, dir.RotatedBy(rotvalue), Color.Violet, 50, scale).Spawn();
                 }
             }
-            for (int i =0;i<12;i++)
+            for (int i = 0; i < 12; i++)
             {
-                new Fire(Projectile.Center + RandVelTwoPi(2f,12.4f), RandVelTwoPi(0.8f, 5.1f), RandLerpColor(Color.Black, Color.DarkViolet), 60, RandRotTwoPi, 1f, 0.24f).SpawnToPriorityNonPreMult();
+                new Fire(Projectile.Center + RandVelTwoPi(2f, 12.4f), RandVelTwoPi(0.8f, 5.1f), RandLerpColor(Color.Black, Color.DarkViolet), 60, RandRotTwoPi, 1f, 0.24f).SpawnToPriorityNonPreMult();
             }
             for (int i = 0; i < 4; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePosEdge(12f);
                 Vector2 vel = RandVelTwoPi(1f, 4f);
-                new KiraStar(pos, vel, RandLerpColor(Color.DarkViolet, Color.Purple), 50, 0, 1, 0.070f * Main.rand.NextFloat(0.85f,1.01f), useAlt: true).Spawn();
+                new KiraStar(pos, vel, RandLerpColor(Color.DarkViolet, Color.Purple), 50, 0, 1, 0.070f * Main.rand.NextFloat(0.85f, 1.01f), useAlt: true).Spawn();
                 new KiraStar(pos, vel, Color.White, 50, 0, 1, 0.08f * 0.5f, useAlt: true).Spawn();
             }
 

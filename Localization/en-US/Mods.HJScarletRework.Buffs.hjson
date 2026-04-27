@@ -42,3 +42,8 @@ HerbBagBuff: {
 	DisplayName: Herb Bag Buff
 	Description: Mods.HJScarletRework.Buffs.HerbBagBuff.Description
 }
+
+GoldenAppleBuff: {
+	DisplayName: Golden Apple Buff
+	Description: Mods.HJScarletRework.Buffs.GoldenAppleBuff.Description
+}

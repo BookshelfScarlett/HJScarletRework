@@ -2,8 +2,8 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -55,7 +55,7 @@ namespace HJScarletRework.Projs.Melee
             edgeOrb1.localAI[1] = Projectile.Center.Y;
 
             Projectile edgeOrb2 = Main.projectile[EdgeIndex2];
-        
+
             edgeOrb2.localAI[0] = Projectile.Center.X;
             edgeOrb2.localAI[1] = Projectile.Center.Y;
             Projectile.timeLeft = 2;
@@ -147,7 +147,7 @@ namespace HJScarletRework.Projs.Melee
             }
             if (ClockFrame > 15)
                 ClockFrame = 0;
-        
+
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -164,9 +164,9 @@ namespace HJScarletRework.Projs.Melee
             Rectangle frames = sharpTears.Frame(1, 16, 0, ClockFrame);
             Vector2 origin = frames.Size() / 2;
             Vector2 targetSize = Projectile.scale * new Vector2(1f, 1f);
-            Vector2 pos = NextPos - Main.screenPosition ;
+            Vector2 pos = NextPos - Main.screenPosition;
             for (int i = 0; i < 8; i++)
-                SB.Draw(sharpTears, pos + ToRadians( i * 60f).ToRotationVector2() * 1.2f, frames, Color.White with { A = 0}, 0, origin, targetSize, SpriteEffects.None, 0);
+                SB.Draw(sharpTears, pos + ToRadians(i * 60f).ToRotationVector2() * 1.2f, frames, Color.White with { A = 0 }, 0, origin, targetSize, SpriteEffects.None, 0);
             SB.Draw(sharpTears, pos, frames, Color.White, 0, origin, targetSize, SpriteEffects.None, 0);
             return false;
         }

@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -11,7 +10,7 @@ namespace HJScarletRework.Items.Armor.Monk
     [AutoloadEquip(EquipType.Head)]
     public class MonkHead : HJScarletArmor
     {
-        public override int[] ArmorSlots => [Type,ItemType<MonkBody>(),ItemType<MonkLegs>()];
+        public override int[] ArmorSlots => [Type, ItemType<MonkBody>(), ItemType<MonkLegs>()];
         public override bool SetUpArmorSet => true;
         public override void ExSD()
         {
@@ -26,7 +25,7 @@ namespace HJScarletRework.Items.Armor.Monk
         }
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage<ExecutorDamageClass>() += 0.30f;
+            player.GetDamage<ExecutorDamageClass>() += 0.15f;
         }
     }
 }

@@ -56,10 +56,10 @@ namespace HJScarletRework.Items.Weapons.Melee
             if (!NotHomewardJourneySpear)
             {
                 string keyPath = Mod.GetLocalizationKey($"SwitchWeaponTooltip");
-                tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), Color.Lerp(Color.LawnGreen,Color.LightGreen,0.5f));
+                tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f));
             }
             ExModifyTooltips(tooltips, localAddress);
-            
+
         }
         public virtual void ExModifyTooltips(List<TooltipLine> tooltips, string localAddress)
         {

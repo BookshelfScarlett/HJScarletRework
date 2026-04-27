@@ -2,8 +2,8 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -244,8 +244,8 @@ namespace HJScarletRework.Projs.Executor
         //TODO：下面那个轨迹把归元漩涡的轨迹改成另外一种，现在这个纯纯占位符
         public override bool PreDraw(ref Color lightColor)
         {
-            float value2 = Projectile.Opacity * ( 1 + (Projectile.Opacity < 1f).ToInt() * 1f);
-            Projectile.DrawGlowEdge(Color.White * Projectile.Opacity, posMove: 2 * Projectile.Opacity,rotFix: -PiOver4);
+            float value2 = Projectile.Opacity * (1 + (Projectile.Opacity < 1f).ToInt() * 1f);
+            Projectile.DrawGlowEdge(Color.White * Projectile.Opacity, posMove: 2 * Projectile.Opacity, rotFix: -PiOver4);
             Projectile.DrawProj(Color.White * value2, 4, 0.7f, -PiOver4);
             if (!HJScarletMethods.OutOffScreen(Projectile.Center) && Projectile.velocity.Length() > 0f)
             {
@@ -255,7 +255,7 @@ namespace HJScarletRework.Projs.Executor
                 DrawTrails(HJScarletTexture.Trail_MegaBeam.Texture, Color.Violet);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: -12f);
-                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f,alphaValue: 1f);
+                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f, alphaValue: 1f);
 
                 SB.End();
                 SB.BeginDefault();

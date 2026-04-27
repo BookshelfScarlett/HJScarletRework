@@ -10,7 +10,7 @@ using Terraria;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class FlybackHandEdgeProj: HJScarletFriendlyProj
+    public class FlybackHandEdgeProj : HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
@@ -51,7 +51,7 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             Projectile.timeLeft = 2;
-            switch(AttackType)
+            switch (AttackType)
             {
                 case Styles.Toss:
                     DoToss();
@@ -96,7 +96,7 @@ namespace HJScarletRework.Projs.Melee
         private void DoHomingBack()
         {
             //为射弹提供一个随机的初速度
-            if(Timer >= 0)
+            if (Timer >= 0)
             {
                 Projectile.velocity = Vector2.UnitY.RotatedByRandom(TwoPi) * 12f;
                 Timer = -1;
@@ -162,7 +162,7 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 Position = ribbonPositions[i];
                 Vector2 NextPosition = ribbonPositions[i + 1];
                 float rot = (NextPosition - Position).ToRotation();
-                trailDrawDate.Add(new(Position + Projectile.Size /2, Color.White, new Vector2(0, height * 0.28f), rot));
+                trailDrawDate.Add(new(Position + Projectile.Size / 2, Color.White, new Vector2(0, height * 0.28f), rot));
             }
             TrailRender.DrawTrail([.. trailDrawDate], drawSetting);
         }

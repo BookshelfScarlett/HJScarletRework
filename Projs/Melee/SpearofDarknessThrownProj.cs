@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -112,16 +112,12 @@ namespace HJScarletRework.Projs.Melee
             //根据速度情况减少下方的粒子生成
             float generalProgress = AttackType == Styles.Attack ? 1f : (1f - Timer / SpinMoveTime);
             generalProgress = Clamp(generalProgress, 0f, 1f);
-            //火焰
-            Color Firecolor2 = RandLerpColor(Color.Purple, Color.DarkViolet);
-            Vector2 fireOffset = Projectile.rotation.ToRotationVector2() * 20f + Main.rand.NextVector2Circular(4f, 4f);
-            new Fire(Projectile.Center - fireOffset, RandVelTwoPi(0.2f, 1.2f) * 1.2f, Firecolor2, 30, RandRotTwoPi, 1, 0.1f * generalProgress).SpawnToPriorityNonPreMult();
 
             //挥发性粒子
             Vector2 spawnPos = Projectile.Center + Main.rand.NextVector2Circular(11, 11);
             Color Firecolor = RandLerpColor(Color.Black, Color.DarkViolet);
             new TurbulenceGlowOrb(spawnPos, 1f, Firecolor, 40, 0.20f * generalProgress, RandRotTwoPi).SpawnToNonPreMult();
-            new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(0.2f, 1.2f) * 1.2f, RandLerpColor( Color.DarkMagenta, Color.Magenta), 40, 0.4f * generalProgress).Spawn();
+            new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(0.2f, 1.2f) * 1.2f, RandLerpColor(Color.DarkMagenta, Color.Magenta), 40, 0.4f * generalProgress).Spawn();
         }
         public override bool PreKill(int timeLeft)
         {
@@ -159,11 +155,11 @@ namespace HJScarletRework.Projs.Melee
             for (int i = 0; i < length; i++)
             {
                 float rads = (float)i / length;
-                Color drawColor = (Color.Lerp(Color.Purple, Color.DarkOrchid, rads) with { A = 0 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads) * generalProgress * Projectile.Opacity;
-                Main.spriteBatch.Draw(star, Projectile.oldPos[i] + Projectile.PosToCenter(), null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.oldRot[i] - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(0.8f, 1.5f), 0, 0);
+                Color drawColor = (Color.Lerp(Color.Purple, Color.DarkOrchid, rads) with { A = 150 }) * 0.9f * Clamp(Projectile.velocity.Length(), 0, 1) * (1 - rads) * generalProgress * Projectile.Opacity;
+                SB.Draw(star, Projectile.oldPos[i] + Projectile.PosToCenter(), null, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), Projectile.oldRot[i] - PiOver2, star.Size() / 2, Projectile.scale * new Vector2(1f, 2f), 0, 0);
             }
             Projectile.DrawGlowEdge(Color.DarkMagenta * Projectile.Opacity, drawTime: 16, posMove: 2.5f, rotFix: PiOver4);
-            Projectile.DrawProj(Color.Lerp( Color.Black, Color.White, generalProgress) * Projectile.Opacity, rotFix: PiOver4);
+            Projectile.DrawProj(Color.Lerp(Color.Black, Color.White, generalProgress) * Projectile.Opacity, rotFix: PiOver4);
             return false;
         }
     }

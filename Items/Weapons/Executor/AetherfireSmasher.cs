@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
-using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,7 +16,7 @@ using static HJScarletRework.Projs.Executor.AetherfireSmasherName;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class AetherfireSmasher: ExecutorWeaponClass
+    public class AetherfireSmasher : ExecutorWeaponClass
     {
         public override int ExecutionTime => 60;
         public override float ExecutionStrikeDamageMult => 1f;
@@ -27,12 +26,12 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.noMelee = true;
             Item.autoReuse = true;
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.UseSound = HJScarletSounds.Blunt_Swing with { MaxInstances = 1, Pitch = -0.4f, PitchVariance = 0.2f, Volume = 0.5f};
+            Item.UseSound = HJScarletSounds.Blunt_Swing with { MaxInstances = 1, Pitch = -0.4f, PitchVariance = 0.2f, Volume = 0.5f };
             Item.shoot = ProjectileType<AetherfireSmasherProj>();
             Item.knockBack = 12f;
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = Item.height = 66;
-            Item.damage = 70;
+            Item.damage = 71;
             //这里的ut有意为之
             Item.useTime = 12;
             Item.useAnimation = 12;
@@ -58,37 +57,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-           //除非你的武器不存在武器名。否则这个判定不可能过不去
-            if (line.Mod == "Terraria" && line.Name == "ItemName")
-            {
-                //暴力枚举，便于引用
-                switch(Main.LocalPlayer.name.SelectedName())
-                {
-                    case NameType.Emma:
-                        DrawSpecialColor(line, Color.HotPink, "Sakura");
-                        return false;
-                    case NameType.TrueScarlet:
-                        DrawSpecialColor(line, Color.Red, "Red");
-                        return false;
-                    case NameType.Shizuku:
-                        DrawSpecialColor(line, Color.MidnightBlue, "IcyBlue");
-                        return false;
-                    case NameType.SerratAntler:
-                        DrawSpecialColor(line, Color.Purple, "Purple");
-                        return false;
-                    case NameType.WutivOrChaLost:
-                        DrawSpecialColor(line, Color.Gold, "Gold");
-                        return false;
-                    case NameType.SherryOrAnnOrKino:
-                        DrawSpecialColor(line, Color.RoyalBlue, "Blue");
-                        return false;
-                    case NameType.Hanna:
-                        DrawSpecialColor(line, Color.Green, "Green");
-                        return false;
-                    default:
-                        break;
-                }
-            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)

@@ -3,9 +3,9 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -55,16 +55,16 @@ namespace HJScarletRework.Projs.Executor
             Helper.MaxProgress[0] = 40;
             Speed = Projectile.velocity.LengthSquared();
 
-            if(AttackState == State.OnExecution)
+            if (AttackState == State.OnExecution)
             {
                 Vector2 pos = Projectile.SafeDir() * 30f;
                 for (int i = 0; i < 8; i++)
                 {
                     new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(6f) + pos, 1f, RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 30, 0.38f, RandRotTwoPi).Spawn();
                     if (Main.rand.NextBool(8))
-                        new KiraStar(Projectile.Center.ToRandCirclePosEdge(12f) +pos, Vector2.Zero, RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 30, 0, 1, 0.18f).Spawn();
+                        new KiraStar(Projectile.Center.ToRandCirclePosEdge(12f) + pos, Vector2.Zero, RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 30, 0, 1, 0.18f).Spawn();
                 }
-                for (int j = 0; j < 16;j++)
+                for (int j = 0; j < 16; j++)
                 {
                     new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(8f) + pos, Projectile.SafeDir().ToRandVelocity(ToRadians(10f), 2f, 8f), RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 40, Main.rand.NextFloat(0.24f, 0.35f)).Spawn();
                 }
@@ -108,7 +108,7 @@ namespace HJScarletRework.Projs.Executor
                 Helper.UpdateAniState(0);
                 Projectile.scale = EaseOutExpo(Helper.GetAniProgress(0));
             }
-            
+
             if (CanFadeAway)
             {
                 Projectile.scale = Lerp(Projectile.scale, 0f, 0.28f);

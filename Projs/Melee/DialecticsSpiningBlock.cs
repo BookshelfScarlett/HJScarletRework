@@ -14,6 +14,7 @@ namespace HJScarletRework.Projs.Melee
         public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletTexture.Specific_AimLabBox.Path;
         public ref float Timer => ref Projectile.ai[0];
+        public bool ShouldDisapper = false;
         public override void ExSD()
         {
             Projectile.width = 10;
@@ -28,24 +29,36 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
-            Projectile.scale += 0.1f;
-            Projectile.scale = Clamp(Projectile.scale, 0f, 1f);
+
             Projectile.rotation += ToRadians(1f);
-            if (Owner.active && Owner.HeldItem.type == ItemType<DialecticsThrown>())
-                Projectile.timeLeft = 2;
-            if(Projectile.GetTargetSafe(out NPC target, false))
+            if (ShouldDisapper)
+            {
+                Projectile.scale = Lerp(Projectile.scale, 0f, 0.2f);
+                Projectile.Opacity = Projectile.scale;
+                if (Projectile.scale <= 0.02f)
+                    Projectile.Kill();
+                return;
+            }
+            else
+            {
+                Projectile.timeLeft = 300;
+                Projectile.scale += 0.1f;
+                Projectile.scale = Clamp(Projectile.scale, 0f, 1f);
+                ShouldDisapper = !(Owner.active && Owner.HeldItem.type == ItemType<DialecticsThrown>());
+            }
+            if (Projectile.GetTargetSafe(out NPC target, false))
             {
                 Projectile.Center = Vector2.Lerp(Projectile.Center, target.Center, 0.5f);
                 target.HJScarlet().Dialectics_Mark = true;
                 //常驻1s
                 if (target.HJScarlet().Dialectics_Timer < 5)
-                    Projectile.Kill();
-                
+                    ShouldDisapper = true;
+
             }
             else
             {
                 //单位不合法的时候立刻处死出去
-                Projectile.Kill();
+                ShouldDisapper = true;
             }
         }
         public override bool PreKill(int timeLeft)
@@ -65,13 +78,22 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
-            SB.Draw(projTex, drawPos, null, Color.DeepSkyBlue, Projectile.rotation, ori, Projectile.scale * 0.8f, 0, 0);
-            SB.Draw(projTex, drawPos, null, Color.LightBlue, Projectile.rotation, ori, Projectile.scale * 0.8f, 0, 0);
-            DrawCube(Color.DeepSkyBlue, 1.1f);
-            DrawCube(Color.DeepSkyBlue, 1f);
+            Texture2D cube = HJScarletTexture.Particle_ShinySquareSplit.Value;
+            Texture2D ring = HJScarletTexture.Particle_RingShiny.Value;
+            Texture2D kiraStar = HJScarletTexture.Particle_KiraStar.Value;
+            SB.EnterShaderArea();
+            for (int i = 0; i < 4; i++)
+            {
+                QuickDraw(PiOver2 * i, 0.41f);
+            }
+            void QuickDraw(float rotPlus, float scale)
+            {
+                SB.Draw(cube, drawPos, null, Color.RoyalBlue, Projectile.rotation + rotPlus, cube.ToOrigin(), Projectile.scale * scale, 0, 0);
+            }
+            SB.EndShaderArea();
             return false;
         }
-        public void DrawCube(Color color,float scale)
+        public void DrawCube(Color color, float scale)
         {
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             Vector2 dir = Projectile.rotation.ToRotationVector2();

@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace HJScarletRework.Globals.Instances
         public int GlobalTargetIndex = -1;
         public bool FirstFrame = false;
         public bool IsHitOnEnablFocusMechanicProj = false;
+        public bool ReducedByRaincoat = false;
         /// <summary>
         /// 射弹是否正在启用专注攻击的字段
         /// </summary>
@@ -30,17 +31,22 @@ namespace HJScarletRework.Globals.Instances
         /// <summary>
         /// 启用了专注机制的射弹是否命中了一次NPC
         /// </summary>
-        public bool AddFocusHit = false;
+        public bool AddExecutionHit = false;
         public bool DefenderBuff = false;
         public float[] ExtraAI = new float[10];
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player Owner = Main.player[projectile.owner];
-            if (HasExecutionMechanic && !AddFocusHit && projectile.numHits < 1)
+            if (HasExecutionMechanic && !AddExecutionHit && projectile.numHits < 1)
             {
-                AddFocusHit = true;
+                AddExecutionHit = true;
             }
             ModifyDefenderProj(Owner, projectile, target);
+            if (ExecutionStrike && Owner.HJScarlet().fishExecutor)
+            {
+                Owner.HJScarlet().fishDashStored = true;
+            }
+
             if (Owner.HJScarlet().blackKeyDoT && ExecutionStrike && Owner.HJScarlet().blackKeyTimer == 0)
             {
                 //对的没错，这个鬼东西的减防数据存在了玩家类里面。
@@ -50,44 +56,54 @@ namespace HJScarletRework.Globals.Instances
                 Owner.HJScarlet().blackKeyTimer = GetSeconds(8);
             }
         }
-        public override void AI(Projectile projectile)
+        public void SpawnGreenSleepyBubble(Player Owner, Projectile projectile)
         {
-            Player Owner = Main.player[projectile.owner];
-            if (Owner.whoAmI == Main.myPlayer)
+            if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT1)
             {
-                if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT3)
+                projectile.frameCounter++;
+                if (projectile.frameCounter % 3 == 0)
                 {
+                    Vector2 pos = projectile.Center.ToRandCirclePos(1f) + projectile.rotation.ToRotationVector2() * 40f * projectile.scale;
+                    if (Collision.SolidCollision(pos, 120, 120))
+                        pos = projectile.Center;
+                    Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(4f, 9f), ProjectileType<SleepyBubbles>(), projectile.damage / 2, 3f, Owner.whoAmI);
+                    SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing with { MaxInstances = 0 }, projectile.Center.ToRandCirclePos(1f));
+                }
+            }
+        }
+        public void SpawnSkyDragonLightning(Player Owner, Projectile projectile)
+        {
+            if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT3)
+            {
 
-                    projectile.frameCounter++;
-                    if (projectile.frameCounter % 10 == 0)
+                projectile.frameCounter++;
+                if (projectile.frameCounter % 10 == 0)
+                {
+                    float searchDist = 1100f;
+                    List<NPC> availableTarget = [];
+                    foreach (NPC needTar in Main.ActiveNPCs)
                     {
-                        //创建一个链表，搜索附近可能的单位
-                        float searchDist = 1100f;
-                        List<NPC> availableTarget = [];
-                        foreach (NPC needTar in Main.ActiveNPCs)
+                        if (availableTarget.Count > 3)
+                            break;
+                        bool legalTarget = needTar.CanBeChasedBy();
+                        float distPerTar = Vector2.Distance(needTar.Center, projectile.Center);
+                        if (legalTarget && distPerTar < searchDist)
                         {
-                            if (availableTarget.Count > 3)
-                                break;
-                            bool legalTarget = needTar.CanBeChasedBy();
-                            float distPerTar = Vector2.Distance(needTar.Center, projectile.Center);
-                            if (legalTarget && distPerTar < searchDist)
-                            {
-                                //把可用单位甩进去，因为我们需要最后使用一个最靠近的单位
-                                availableTarget.Add(needTar);
-                            }
+                            availableTarget.Add(needTar);
                         }
-                        //确保链表正确
-                        if (availableTarget.Count == 0)
+                    }
+                    if (availableTarget.Count == 0)
+                    {
+                        return;
+                    }
+                    SoundEngine.PlaySound(SoundID.Item43 with { Pitch = 0.4f }, Owner.Center);
+                    for (int i = 0; i < availableTarget.Count; i++)
+                    {
+                        NPC target = availableTarget[i];
+                        Vector2 pos = Owner.Center - Vector2.UnitY * Main.rand.NextFloat(800f, 900f) + Vector2.UnitX * Main.rand.NextFloat(0f, 20f) * Main.rand.NextBool().ToDirectionInt();
+                        Vector2 vel = (target.Center - pos).ToSafeNormalize() * Main.rand.NextFloat(4f, 9f);
+                        if (target.IsLegal())
                         {
-                            return;
-                        }
-                        SoundEngine.PlaySound(SoundID.Item43 with { Pitch = 0.4f }, Owner.Center);
-                        for (int i = 0; i < availableTarget.Count; i++)
-                        {
-                            NPC target = availableTarget[i];
-                            Vector2 pos = Owner.Center - Vector2.UnitY * Main.rand.NextFloat(800f, 900f) + Vector2.UnitX * Main.rand.NextFloat(0f, 20f) * Main.rand.NextBool().ToDirectionInt();
-                            Vector2 vel = (target.Center - pos).ToSafeNormalize() * Main.rand.NextFloat(4f, 9f);
-
                             Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, vel, ProjectileType<SkyDragonFuryLightning>(), projectile.damage, 3f, Owner.whoAmI);
                             ((SkyDragonFuryLightning)proj.ModProjectile).CurTarget = target;
                             pos = projectile.Center + (target.Center - Owner.Center).ToSafeNormalize() * 50f * projectile.scale;
@@ -118,20 +134,16 @@ namespace HJScarletRework.Globals.Instances
                         }
                     }
                 }
+            }
+        }
 
-                if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT1)
-                {
-                    projectile.frameCounter++;
-                    if (projectile.frameCounter % 3 == 0)
-                    {
-                        Vector2 pos = projectile.Center.ToRandCirclePos(1f) + projectile.rotation.ToRotationVector2() * 40f * projectile.scale;
-                        if (Collision.SolidCollision(pos, 120, 120))
-                            pos = projectile.Center;
-                        Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(4f, 9f), ProjectileType<SleepyBubbles>(), projectile.damage, 3f, Owner.whoAmI);
-                        SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing with { MaxInstances = 0 }, projectile.Center.ToRandCirclePos(1f));
-                    }
-                }
-
+        public override void AI(Projectile projectile)
+        {
+            Player Owner = Main.player[projectile.owner];
+            if (Owner.whoAmI == Main.myPlayer)
+            {
+                SpawnGreenSleepyBubble(Owner, projectile);
+                SpawnSkyDragonLightning(Owner, projectile);
             }
             if (!FirstFrame)
             {
@@ -143,7 +155,7 @@ namespace HJScarletRework.Globals.Instances
         public override void OnKill(Projectile projectile, int timeLeft)
         {
             Player owner = Main.player[projectile.owner];
-            if(owner.whoAmI == Main.myPlayer)
+            if (owner.whoAmI == Main.myPlayer)
             {
             }
         }
@@ -164,6 +176,7 @@ namespace HJScarletRework.Globals.Instances
             }
             if (Owner.HJScarlet().monkExecutor && (projectile.type == ProjectileID.MonkStaffT3))
             {
+
                 projectile.scale *= 2f;
                 projectile.localNPCHitCooldown = 2;
                 projectile.usesLocalNPCImmunity = true;
@@ -186,10 +199,10 @@ namespace HJScarletRework.Globals.Instances
 
         public void ModifyDefenderProj(Player owner, Projectile projectile, NPC target)
         {
-            if(DefenderBuff && target.IsLegal())
+            if (DefenderBuff && target.IsLegal())
             {
                 owner.GetImmnue(ImmunityCooldownID.General, 60, true);
-                SoundEngine.PlaySound(HJScarletSounds.GrabCharge with { MaxInstances= 0},owner.Center);
+                SoundEngine.PlaySound(HJScarletSounds.GrabCharge with { MaxInstances = 0 }, owner.Center);
                 owner.HJScarlet().defenderEmblemCD = 90;
                 for (int i = 0; i < 30; i++)
                     new TurbulenceShinyOrb(owner.Center.ToRandCirclePos(15f), 2.4f, Color.White, 120, 0.885f, RandRotTwoPi).Spawn();

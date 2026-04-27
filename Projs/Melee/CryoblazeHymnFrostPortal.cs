@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -33,10 +33,10 @@ namespace HJScarletRework.Projs.Melee
         }
         public void SpawnEnegry()
         {
-            int spawnCounts =  3;
+            int spawnCounts = 3;
             SoundEngine.PlaySound(SoundID.Item109 with { MaxInstances = 1 }, Projectile.Center);
-            new CrossGlow(Projectile.Center, Color.SkyBlue, 40, 1f, 0.25f,false).Spawn();
-            new CrossGlow(Projectile.Center, Color.White, 40, 0.5f, 0.20f,false).Spawn();
+            new CrossGlow(Projectile.Center, Color.SkyBlue, 40, 1f, 0.25f, false).Spawn();
+            new CrossGlow(Projectile.Center, Color.White, 40, 0.5f, 0.20f, false).Spawn();
             for (int i = 0; i < spawnCounts; i++)
             {
                 Vector2 dir = Projectile.SafeDir().ToRandVelocity(ToRadians(30f));
@@ -78,7 +78,7 @@ namespace HJScarletRework.Projs.Melee
             for (int i = 0; i < 3; i++)
                 new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(32f), Main.rand.NextFloat(0.4f, 0.8f), RandLerpColor(Color.DeepSkyBlue, Color.SkyBlue), 30, 0.18f, RandRotTwoPi).Spawn();
         }
-          public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             Texture2D crossGlow = HJScarletTexture.Particle_CrossGlow.Value;

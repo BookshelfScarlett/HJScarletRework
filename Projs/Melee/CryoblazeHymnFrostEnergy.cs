@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -49,7 +49,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
-            if(!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame)
             {
                 Speed = Projectile.velocity.Length();
             }
@@ -74,13 +74,13 @@ namespace HJScarletRework.Projs.Melee
                     Projectile.HomingTarget(target.Center, -1f, Speed, 20f);
                 else
                 {
-                    if(Projectile.velocity.LengthSquared() < Speed * Speed)
+                    if (Projectile.velocity.LengthSquared() < Speed * Speed)
                     {
                         Projectile.velocity *= 1.1f;
                     }
                 }
             }
-            
+
         }
         public void ParticleSpawn()
         {

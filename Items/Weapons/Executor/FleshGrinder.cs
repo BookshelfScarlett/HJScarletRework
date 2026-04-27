@@ -12,7 +12,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override void ExSD()
         {
             Item.width = Item.height = 66;
-            Item.damage = 44;
+            Item.damage = 31;
             Item.knockBack = 8f;
             Item.noUseGraphic = true;
             Item.noMelee = true;

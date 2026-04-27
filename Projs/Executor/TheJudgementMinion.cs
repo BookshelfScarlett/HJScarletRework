@@ -1,9 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -86,7 +86,7 @@ namespace HJScarletRework.Projs.Executor
                 Oscillation += 0.025f / 3;
                 //记得清零射弹当前的速度，因为下方实际上使用正弦曲线来精确控制
                 Projectile.velocity *= 0;
-                    UpdateIfNoTargetNearby();
+                UpdateIfNoTargetNearby();
                 CanSpawnHolyPunishment = false;
                 //锁定当前的生存时间避免出现意外处死
                 Projectile.timeLeft = CurrentLifeTime;
@@ -100,7 +100,7 @@ namespace HJScarletRework.Projs.Executor
         private void UpdateIfNoTargetNearby()
         {
             //基本的挂机状态，此处使用了正弦曲线
-            Vector2 anchorPos = new Vector2(Owner.MountedCenter.X -  0f *MathF.Sin((Oscillation) / 15f), Owner.MountedCenter.Y - 85f +  100f * (MathF.Sin(Oscillation) / 9f));
+            Vector2 anchorPos = new Vector2(Owner.MountedCenter.X - 0f * MathF.Sin((Oscillation) / 15f), Owner.MountedCenter.Y - 85f + 100f * (MathF.Sin(Oscillation) / 9f));
             //实际更新位置
             Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, 0.1f / Projectile.extraUpdates);
             float angleToWhat = (-(Projectile.Center - Owner.MountedCenter)).ToRotation();
@@ -110,7 +110,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (CanSpawnHolyPunishment)
             {
-                SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit with { MaxInstances = 0, Pitch = 0.5f}, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit with { MaxInstances = 0, Pitch = 0.5f }, Projectile.Center);
                 //生成准备进行十字裁决的挂载射弹
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<TheJudgementCrossMounted>(), Projectile.damage, 0f, Owner.whoAmI);
                 proj.ai[0] = TargetIndex;
@@ -125,7 +125,7 @@ namespace HJScarletRework.Projs.Executor
                     float rot = ToRadians(i * rotArg);
                     Vector2 offsetPos = new Vector2(4f, 0f).RotatedBy(rot);
                     Vector2 dVel = new Vector2(4f, 0f).RotatedBy(rot);
-                    new ShinyOrbParticle(Projectile.Center + offsetPos, dVel, Main.rand.NextBool() ? Color.Gold : Color.White,80, 1.2f).Spawn();
+                    new ShinyOrbParticle(Projectile.Center + offsetPos, dVel, Main.rand.NextBool() ? Color.Gold : Color.White, 80, 1.2f).Spawn();
                 }
             }
         }
@@ -163,7 +163,7 @@ namespace HJScarletRework.Projs.Executor
                     ((TheJudgementStarExecutionMounted)proj.ModProjectile).TargetNPC = TargetNPC;
             }
         }
-        
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //持续更新挂载单位
@@ -174,7 +174,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawGlowEdge(Color.White, rotFix:+PiOver4);
+            Projectile.DrawGlowEdge(Color.White, rotFix: +PiOver4);
             Projectile.DrawProj(Color.White, rotFix: +PiOver4);
             return false;
         }

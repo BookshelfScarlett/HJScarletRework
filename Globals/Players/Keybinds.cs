@@ -1,7 +1,7 @@
-﻿using HJScarletRework.Core.Keybinds;
-using System;
+﻿using HJScarletRework.Globals.Keybinds;
 using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
@@ -12,15 +12,18 @@ namespace HJScarletRework.Globals.Players
         public bool CanRevisual = false;
         public bool CanExecution = false;
         public bool CanWeaponSpecialAbility = false;
+        public bool CanArmorAbility = false;
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
             if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
             {
                 bool tier1 = PiorityTier1();
                 if (tier1)
+                {
                     return;
+                }
                 bool tier2 = PiorityTier2();
-                if (tier2) 
+                if (tier2)
                     return;
             }
         }
@@ -47,7 +50,7 @@ namespace HJScarletRework.Globals.Players
                 CanExecution = true;
                 anyPiorityTier1Active = true;
             }
-            if (!CanWeaponSpecialAbility)
+            if (!CanWeaponSpecialAbility && (heldItem == ItemID.MonkStaffT1 || heldItem == ItemID.MonkStaffT3))
             {
                 CanWeaponSpecialAbility = true;
                 anyPiorityTier1Active = true;
@@ -60,7 +63,13 @@ namespace HJScarletRework.Globals.Players
         /// <returns></returns>
         private bool PiorityTier2()
         {
-            return false;
+            bool anyPiorityTier2Active = false;
+            if (!CanArmorAbility)
+            {
+                CanArmorAbility = true;
+                anyPiorityTier2Active = true;
+            }
+            return anyPiorityTier2Active;
         }
     }
 }

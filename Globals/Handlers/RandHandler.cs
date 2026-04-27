@@ -44,7 +44,7 @@ namespace HJScarletRework.Globals.Handlers
         public static float RandFloat(float minValue = 0f, float maxValue = 1f) => Main.rand.NextFloat(minValue, maxValue);
         public static int GetSeconds(int seconds) => seconds * 60;
         public static Color RandLerpColor(Color beginColor, Color endColor) => Color.Lerp(beginColor, endColor, RandZeroToOne);
-        public static string GetVanillaAssetPath(VanillaAsset vanillaAsset, int id)=> $"Terraria/Images/{vanillaAsset}_{id}";
+        public static string GetVanillaAssetPath(VanillaAsset vanillaAsset, int id) => $"Terraria/Images/{vanillaAsset}_{id}";
         public static Texture2D GetVanillaAsset(VanillaAsset vanillaAsset, int id)
         {
             Texture2D tex = null;
@@ -58,6 +58,6 @@ namespace HJScarletRework.Globals.Handlers
             }
         }
 
-        
+
     }
 }

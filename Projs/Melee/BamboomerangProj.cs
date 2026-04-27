@@ -45,9 +45,9 @@ namespace HJScarletRework.Projs.Melee
             d.scale *= Main.rand.NextFloat(1.1f, 1.3f);
             d.velocity = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(1.2f, 1.8f);
             d.noGravity = true;
-                Dust d2 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.JungleGrass);
-                d2.scale = Main.rand.NextFloat(0.8f, 1.15f);
-                d2.noGravity = true;
+            Dust d2 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.JungleGrass);
+            d2.scale = Main.rand.NextFloat(0.8f, 1.15f);
+            d2.noGravity = true;
             if (AttackType == Style.Attack)
             {
                 Timer++;
@@ -98,7 +98,7 @@ namespace HJScarletRework.Projs.Melee
                 d.velocity = Projectile.SafeDir().RotatedBy(Main.rand.NextFloat(PiOver4) * Main.rand.NextBool().ToDirectionInt()) * Main.rand.NextFloat(4.2f, 4.6f);
             }
 
-             if (AttackType != Style.Attack)
+            if (AttackType != Style.Attack)
                 return;
             HitCounter += 1;
             //在onhit这尝试搜索下一个目标单位
@@ -109,7 +109,7 @@ namespace HJScarletRework.Projs.Melee
                 bool legalTar = tar != target && tar.CanBeChasedBy();
                 float distPerTar = Vector2.Distance(tar.Center, Projectile.Center);
                 //别穿墙搜索
-                if(legalTar && distPerTar < searchDistance && Collision.CanHit(Projectile.Center, 1, 1, tar.Center, 1, 1))
+                if (legalTar && distPerTar < searchDistance && Collision.CanHit(Projectile.Center, 1, 1, tar.Center, 1, 1))
                 {
                     searchDistance = distPerTar;
                     nextTarget = tar;

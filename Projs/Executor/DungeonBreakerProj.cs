@@ -1,10 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -20,6 +20,7 @@ namespace HJScarletRework.Projs.Executor
         public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<DungeonBreaker>().Texture;
         public AnimationStruct Helper = new AnimationStruct(3);
+        public override Vector2 TileHitbox => new Vector2(13, 13);
         public enum State
         {
             Shoot,
@@ -241,7 +242,7 @@ namespace HJScarletRework.Projs.Executor
                             if (WorldGen.CanKillTile(tilePosX, tilePosY))
                             {
                                 WorldGen.KillTile(tilePosX, tilePosY);
-                                
+
                             }
                             for (int k = 0; k < 8; k++)
                             {

@@ -1,16 +1,11 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json.Linq;
-using Steamworks;
-using System;
-using System.Configuration;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -58,12 +53,12 @@ namespace HJScarletRework.Projs.Executor
             Helper.MaxProgress[0] = 60;
             Helper.MaxProgress[1] = 110;
             Helper.MaxProgress[2] = 20;
-            InitVector = Owner.direction  > 0 ? PiOver4.ToRotationVector2() : (PiOver4 + PiOver2).ToRotationVector2();
+            InitVector = Owner.direction > 0 ? PiOver4.ToRotationVector2() : (PiOver4 + PiOver2).ToRotationVector2();
             TargetRotation = InitVector.ToRotation();
             Projectile.rotation = TargetRotation;
             BeginAngle = Main.rand.Next(-160, -140);
-            if(!ProjType)
-            BeginAngle = Main.rand.Next(-100, -80);
+            if (!ProjType)
+                BeginAngle = Main.rand.Next(-100, -80);
             EndAngle = BeginAngle - Main.rand.Next(60, 80);
             FinalAngleBefore = Main.rand.Next(520, 610);
             FinalAngle = FinalAngleBefore + Main.rand.Next(10, 31);
@@ -87,10 +82,10 @@ namespace HJScarletRework.Projs.Executor
             Lighting.AddLight(mountedPos, ProjType ? Color.GreenYellow.ToVector3() : Color.AliceBlue.ToVector3());
             if (!Helper.IsDone[0])
             {
-                if(Helper.GetAniProgress(0) == 0)
+                if (Helper.GetAniProgress(0) == 0)
                 {
-                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalOpen with { MaxInstances = 0 , Pitch = 0.5f}, Owner.Center);
-                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalOpen with { MaxInstances = 0 , Pitch = 0.5f}, Owner.Center);
+                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalOpen with { MaxInstances = 0, Pitch = 0.5f }, Owner.Center);
+                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalOpen with { MaxInstances = 0, Pitch = 0.5f }, Owner.Center);
                 }
                 Helper.UpdateAniState(0);
                 UpdateBeginAni();
@@ -101,9 +96,9 @@ namespace HJScarletRework.Projs.Executor
                 {
                     SetUpInitParticle();
                     Owner.HJScarlet().monkStaffHeal = true;
-                    SoundEngine.PlaySound(SoundID.DD2_DarkMageHealImpact with { MaxInstances = 0}, Owner.Center);
-                    SoundEngine.PlaySound(SoundID.DD2_DarkMageHealImpact with { MaxInstances = 0}, Owner.Center);
-                    SoundEngine.PlaySound(SoundID.DD2_DarkMageHealImpact with { MaxInstances = 0}, Owner.Center);
+                    SoundEngine.PlaySound(SoundID.DD2_DarkMageHealImpact with { MaxInstances = 0 }, Owner.Center);
+                    SoundEngine.PlaySound(SoundID.DD2_DarkMageHealImpact with { MaxInstances = 0 }, Owner.Center);
+                    SoundEngine.PlaySound(SoundID.DD2_DarkMageHealImpact with { MaxInstances = 0 }, Owner.Center);
                 }
                 Helper.UpdateAniState(1);
                 UpdateMidAni();
@@ -123,47 +118,48 @@ namespace HJScarletRework.Projs.Executor
 
         public void SetUpInitParticle()
         {
-            Vector2 mountedPos = Projectile.Center + Projectile.rotation.ToRotationVector2() * GlowPosOffset  * RotPointMultipler;
-            for (int i = 0; i < 40; i++)
-            {
-                Color starColor = ProjType ? RandLerpColor(Color.Green, Color.DarkGreen) : RandLerpColor(Color.DeepSkyBlue, Color.Aqua);
-                new ShinyCrossStar(mountedPos, RandVelTwoPi(0.8f,9.7f), starColor, 40, 0, 1, 0.75f, false).Spawn();
-            }
+            Vector2 mountedPos = Projectile.Center + Projectile.rotation.ToRotationVector2() * GlowPosOffset * RotPointMultipler;
             for (int i = 0; i < 32; i++)
+            {
+                Color starColor = ProjType ? RandLerpColor(Color.Green, Color.DarkGreen) : RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue);
+                new ShinyCrossStar(mountedPos, RandVelTwoPi(0.8f, 9.7f), starColor, 40, 0, 1, 0.75f, false).Spawn();
+            }
+            for (int i = 0; i < 28; i++)
             {
                 Color starColor = ProjType ? Color.Lime : Color.Aqua;
                 new StarShape(mountedPos.ToRandCirclePosEdge(4f), RandVelTwoPi(1.2f, 9.6f), starColor, 0.84f, 60).Spawn();
             }
-            for (int i = 0; i < 18; i++)
+            for (int i = 0; i < 28; i++)
             {
-                Color starColor = ProjType ? RandLerpColor(Color.LawnGreen, Color.LimeGreen) : RandLerpColor(Color.DeepSkyBlue, Color.Aqua);
-                new SmokeParticle(mountedPos.ToRandCirclePosEdge(20f), RandVelTwoPi(5.2f, 6.4f), starColor, 60, RandRotTwoPi, 1f, 0.37f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
+                Color starColor = ProjType ? RandLerpColor(Color.DarkGreen, Color.LimeGreen) : RandLerpColor(Color.MidnightBlue, Color.RoyalBlue);
+                new SmokeParticle(mountedPos.ToRandCirclePosEdge(0f), RandVelTwoPi(0.2f, 6.4f), starColor, 60, RandRotTwoPi, 1f, 0.42f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
             }
-            if(!ProjType)
+            if (!ProjType)
             {
                 new LightningParticle(mountedPos, Vector2.Zero, Color.DeepSkyBlue, 60, RandRotTwoPi, 0.568f, 2).Spawn();
                 new LightningParticle(mountedPos, Vector2.Zero, Color.SkyBlue, 60, RandRotTwoPi, 0.568f, 2).Spawn();
                 new LightningParticle(mountedPos, Vector2.Zero, Color.RoyalBlue, 60, RandRotTwoPi, 0.568f, 2).Spawn();
+
             }
-            new CrossGlow(mountedPos, ProjType ? Color.DarkGreen : Color.DeepSkyBlue, 40, 1, 0.38f).Spawn();
-            new CrossGlow(mountedPos, ProjType? Color.Green : Color.Aqua, 40, 1, 0.35f).Spawn();
-            new CrossGlow(mountedPos, Color.White, 40, 1, 0.30f).Spawn();
+            new ShinyRing(mountedPos, Vector2.Zero, ProjType ? Color.DarkGreen : Color.DeepSkyBlue, 45, 0.18f, 0, fadeIn: true).Spawn();
+            new ShinyRing(mountedPos, Vector2.Zero, Color.White, 45, 0.18f, 0, opacity: 0.2f, fadeIn: true).Spawn();
+            new KiraStar(mountedPos, Vector2.Zero, ProjType ? Color.DarkGreen : Color.DeepSkyBlue, 45, 0.32f, true, 0.6f).Spawn();
         }
 
         public void UpdateEndAni()
         {
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(2));
-            OpacityGlow = ScaleGlow = Lerp(OpacityGlow,0f, 0.21f);
+            OpacityGlow = ScaleGlow = Lerp(OpacityGlow, 0f, 0.21f);
             OpacityGlow = ScaleGlow = (1 - easedProgress);
             float curRot = Helper.UpdateAngle(FinalAngleBefore, FinalAngle, Owner.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRot) * Matrix.CreateScale(1, 1, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * (1 -easedProgress);
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * (1 - easedProgress);
             HeldPos = InitVector.RotatedBy(curRot).RotatedBy(TargetRotation);
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Projectile.scale = tarPos.Length();
 
         }
-        int healAmt = 0;
+        int healAmt;
         public void UpdateHealParticle()
         {
             Projectile.frameCounter += 1;
@@ -171,7 +167,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 if (Player.team != Owner.team)
                     continue;
-                if (Projectile.frameCounter % 5 == 0)
+                if (Projectile.frameCounter % 6 == 0)
                     Player.Heal(1);
                 Vector2 pos = Player.Center + Vector2.UnitY * (Player.height * 0.5f);
                 if (Main.rand.NextBool())
@@ -189,7 +185,7 @@ namespace HJScarletRework.Projs.Executor
                 }
 
             }
-        }   
+        }
 
         public void UpdateMidAni()
         {
@@ -208,15 +204,15 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateMidParticle()
         {
 
-            Vector2 mountedPos = Projectile.Center + Projectile.rotation.ToRotationVector2() * GlowPosOffset * RotPointMultipler+ RandVelTwoPi(5f, 45);
+            Vector2 mountedPos = Projectile.Center + Projectile.rotation.ToRotationVector2() * GlowPosOffset * RotPointMultipler + RandVelTwoPi(5f, 45);
             Vector2 vel = RandVelTwoPi(1.2f, 1.6f);
             Color starColor = ProjType ? RandLerpColor(Color.DarkGreen, Color.Green) : RandLerpColor(Color.DeepSkyBlue, Color.Aqua);
-            if(Main.rand.NextBool())
-            new ShinyCrossStar(mountedPos, vel, starColor, 40, 0, 1, 0.60f, false).Spawn();
+            if (Main.rand.NextBool())
+                new ShinyCrossStar(mountedPos, vel, starColor, 40, 0, 1, 0.60f, false).Spawn();
             mountedPos = Projectile.Center + Projectile.rotation.ToRotationVector2() * GlowPosOffset * RotPointMultipler + RandVelTwoPi(5f, 45);
             vel = RandVelTwoPi(1.2f, 1.6f);
             starColor = ProjType ? RandLerpColor(Color.Lime, Color.DarkGreen) : RandLerpColor(Color.DeepSkyBlue, Color.Aqua);
-            if(!ProjType)
+            if (!ProjType)
             {
                 if (Main.rand.NextBool())
                 {
@@ -235,7 +231,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateBeginAni()
         {
             float easedProgress = EaseOutExpo(Helper.GetAniProgress(0));
-            OpacityGlow = ScaleGlow = Lerp(OpacityGlow,1.1f,0.2f);
+            OpacityGlow = ScaleGlow = Lerp(OpacityGlow, 1.1f, 0.2f);
             float curRot = Helper.UpdateAngle(BeginAngle, EndAngle, Owner.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRot) * Matrix.CreateScale(1, 1, 1) * easedProgress;
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix);
@@ -252,12 +248,12 @@ namespace HJScarletRework.Projs.Executor
             Vector2 pos = mountedPos + RandVelTwoPi(100f, 190f);
             Vector2 vel = (mountedPos - pos).ToSafeNormalize() * Main.rand.NextFloat(3.2f, 8.4f);
             Color starColor = ProjType ? RandLerpColor(Color.Lime, Color.DarkGreen) : RandLerpColor(Color.DeepSkyBlue, Color.Aqua);
-                new StarShape(pos, vel, starColor, 0.75f, 40).Spawn();
+            new StarShape(pos, vel, starColor, 0.75f, 40).Spawn();
             mountedPos = Projectile.Center + Projectile.rotation.ToRotationVector2() * GlowPosOffset * RotPointMultipler;
             pos = mountedPos + RandVelTwoPi(100f, 190f);
             vel = (mountedPos - pos).ToSafeNormalize() * Main.rand.NextFloat(2.2f, 8.4f);
             starColor = ProjType ? RandLerpColor(Color.Green, Color.DarkGreen) : RandLerpColor(Color.DeepSkyBlue, Color.Aqua);
-                new ShinyCrossStar(pos, vel, starColor, 40, 0, 1, 0.5f, false).Spawn();
+            new ShinyCrossStar(pos, vel, starColor, 40, 0, 1, 0.5f, false).Spawn();
 
         }
 
@@ -275,9 +271,9 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.Center = Owner.Center + HeldPos;
             Owner.itemTime = Owner.itemAnimation = 2;
-            Projectile.direction =  Projectile.spriteDirection = Owner.direction;
-            Owner.ControlPlayerArm(Projectile.rotation,-1);
-            Owner.ControlPlayerArm(FrontArmRot + TwoPi - Pi,1);
+            Projectile.direction = Projectile.spriteDirection = Owner.direction;
+            Owner.ControlPlayerArm(Projectile.rotation, -1);
+            Owner.ControlPlayerArm(FrontArmRot + TwoPi - Pi, 1);
             GlowPosCenter = HeldPos;
         }
 
@@ -291,15 +287,15 @@ namespace HJScarletRework.Projs.Executor
             float drawRotation = Projectile.rotation + (Projectile.spriteDirection == -1 ? PiOver2 + PiOver4 : PiOver4);
 
             SB.Draw(projTex, drawPos, null, Color.White, drawRotation, rotationPoint, Projectile.scale * 1.4f, flipSprite, 0);
-            Vector2 pos = Projectile.Center  + Projectile.rotation.ToRotationVector2() * (GlowPosOffset * RotPointMultipler* Projectile.scale)- Main.screenPosition;
+            Vector2 pos = Projectile.Center + Projectile.rotation.ToRotationVector2() * (GlowPosOffset * RotPointMultipler * Projectile.scale) - Main.screenPosition;
             SB.EnterShaderArea();
             Texture2D kiraStar = HJScarletTexture.Particle_CrossGlow.Value;
             Texture2D ring = HJScarletTexture.Particle_RingHard.Value;
             float opValue = Projectile.Opacity * OpacityGlow;
             float scaleValue = Projectile.scale * ScaleGlow;
             SB.Draw(kiraStar, pos, null, ProjType ? (Color.DarkGreen) : Color.DeepSkyBlue * opValue, 0, kiraStar.ToOrigin(), scaleValue * 0.55f, 0, 0);
-            SB.Draw(kiraStar, pos, null, ProjType ?  Color.Green : Color.SkyBlue* opValue, 0, kiraStar.ToOrigin(), scaleValue * 0.35f, 0, 0);
-            SB.Draw(kiraStar, pos, null, ProjType ? Color.GreenYellow : Color.Aqua* opValue, 0, kiraStar.ToOrigin(), scaleValue * 0.20f, 0, 0);
+            SB.Draw(kiraStar, pos, null, ProjType ? Color.Green : Color.SkyBlue * opValue, 0, kiraStar.ToOrigin(), scaleValue * 0.35f, 0, 0);
+            SB.Draw(kiraStar, pos, null, ProjType ? Color.GreenYellow : Color.Aqua * opValue, 0, kiraStar.ToOrigin(), scaleValue * 0.20f, 0, 0);
             SB.EndShaderArea();
 
 

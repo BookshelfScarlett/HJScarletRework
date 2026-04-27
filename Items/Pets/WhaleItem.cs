@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Pets
         {
             Item.DefaultToVanitypet(ProjectileType<WhaleProj>(), BuffType<WhaleBuff>());
         }
-            
+
         public override void ExSD()
         {
             Item.CloneDefaults(ItemID.ZephyrFish);

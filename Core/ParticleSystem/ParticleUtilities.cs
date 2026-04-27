@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Core.Configs;
+﻿using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.ParticleSystem;
 using Terraria;
 

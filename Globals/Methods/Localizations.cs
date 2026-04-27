@@ -5,7 +5,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 namespace HJScarletRework.Globals.Methods
 {
-    public static partial class HJScarletMethods 
+    public static partial class HJScarletMethods
     {
         public static void ReplaceAllTooltip(this List<TooltipLine> tooltips, string replacedTextPath, Color? textColor = null)
         {

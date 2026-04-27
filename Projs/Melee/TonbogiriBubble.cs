@@ -1,8 +1,8 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -49,9 +49,9 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
-            if(!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame)
             {
-                for (int i =0;i<16;i++)
+                for (int i = 0; i < 16; i++)
                 {
                     new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(1f), RandVelTwoPi(0.18f, 1.2f) + Projectile.velocity.ToSafeNormalize() * 0.72f, RandLerpColor(Color.DarkViolet, Color.Violet), 40, 0.8f).Spawn();
                 }
@@ -98,7 +98,7 @@ namespace HJScarletRework.Projs.Melee
             new ShinyOrbParticle(spawnPos + offset - vel, vel, RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.3f).Spawn();
 
             //用这个Timer发射laser，这里只会一次发射两个
-            if (Projectile.GetTargetSafe(out NPC target, searchDistance:HomingDistance))
+            if (Projectile.GetTargetSafe(out NPC target, searchDistance: HomingDistance))
                 Projectile.HomingTarget(target.Center, -1f, 15f, 30f);
             else
                 Projectile.Kill();
@@ -120,7 +120,7 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreKill(int timeLeft)
         {
             //处死时生成点粒子
-            for (int i = 0;i < 10;i++)
+            for (int i = 0; i < 10; i++)
             {
                 new TurbulenceGlowOrb(Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f), 0.24f, RandLerpColor(Color.DarkViolet, Color.Pink), 40, 0.1f, Main.rand.NextFloat(TwoPi)).Spawn();
             }
@@ -141,7 +141,7 @@ namespace HJScarletRework.Projs.Melee
                 SB.Draw(projTex, Projectile.oldPos[i] + Projectile.PosToCenter(), null, edgeColor, Projectile.oldRot[i], ori, new Vector2(1f * scale) * Projectile.scale, 0, 0);
             }
             //白色高光打底
-            edgeColor = Color. WhiteSmoke.ToAddColor(15) * Projectile.Opacity;
+            edgeColor = Color.WhiteSmoke.ToAddColor(15) * Projectile.Opacity;
             scale = 1f;
             SB.Draw(projTex, projPos, null, Color.WhiteSmoke.ToAddColor(15), Projectile.rotation, ori, new Vector2(1f, scale) * Projectile.scale * 0.45f, 0, 0);
             for (int i = 0; i < length; i++)

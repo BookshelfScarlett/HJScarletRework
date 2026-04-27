@@ -2,9 +2,9 @@
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -109,7 +109,7 @@ namespace HJScarletRework.Projs.Executor
             if (CanSmashDust)
             {
                 CanSmashDust = false;
-                Vector2 velDir = (Owner.Center - Projectile.Center).ToSafeNormalize().RotatedBy(PiOver4 *Main.rand.NextBool().ToDirectionInt());
+                Vector2 velDir = (Owner.Center - Projectile.Center).ToSafeNormalize().RotatedBy(PiOver4 * Main.rand.NextBool().ToDirectionInt());
                 Projectile.velocity = velDir * Main.rand.NextFloat(34, 48);
                 Helper.MaxProgress[0] = 30;
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 10f, 12, Projectile.velocity.ToRotation(), ToRadians(20f));
@@ -151,8 +151,8 @@ namespace HJScarletRework.Projs.Executor
             Vector2 projPos = Projectile.Center + OldVec * 10f;
             if (Projectile.timeLeft % GetSeconds(1) == 0)
             {
-                new ShinyCrossStar(projPos, Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, 1, 2.4f,useLegacy:false).Spawn();
-                SoundEngine.PlaySound(SoundID.Item60 with { MaxInstances = 0}, Projectile.Center);
+                new ShinyCrossStar(projPos, Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, 1, 2.4f, useLegacy: false).Spawn();
+                SoundEngine.PlaySound(SoundID.Item60 with { MaxInstances = 0 }, Projectile.Center);
                 Vector2 oldDir = -OldVec;
                 for (int i = -1; i < 2; i++)
                 {
@@ -269,7 +269,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void DoReturn()
         {
-            if(Timer == 0)
+            if (Timer == 0)
             {
                 Timer = 1;
 
@@ -286,7 +286,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen() || CanSmashDust)
                 return;
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(32), Projectile.velocity.ToRandVelocity(ToRadians(15f), 2.4f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, RandRotTwoPi, 1f, 0.5f, false, 0.2f).Spawn();
+            new ShinyCrossStar(Projectile.Center.ToRandCirclePos(32), Projectile.velocity.ToRandVelocity(ToRadians(15f), 2.4f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, RandRotTwoPi, 1f, 0.5f, false, 0.2f).Spawn();
             if (Main.rand.NextBool())
                 new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(32), Projectile.velocity.ToRandVelocity(ToRadians(15f), 2.4f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, .5f).Spawn();
             if (Projectile.FinalUpdateNextBool())
@@ -317,7 +317,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<DungeonBreakerShockwave>(), Projectile.damage, 1f, Owner.whoAmI);
             OldVec = oldVel.ToSafeNormalize();
             base.OnFirstFrame();
-            
+
             //何意味？
             float rotSe = Projectile.direction > 0 ? 0 : 0;
             CurRotation = oldVel.ToRotation() + rotSe;
@@ -356,7 +356,7 @@ namespace HJScarletRework.Projs.Executor
         #endregion
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(AttackType == State.Shoot)
+            if (AttackType == State.Shoot)
             {
                 SoundEngine.PlaySound(HJScarletSounds.Smash_AirHeavy[0] with { MaxInstances = 1, Pitch = -0.4f }, Projectile.Center);
                 UpdateOnTileParticle(Projectile.velocity);

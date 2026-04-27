@@ -3,9 +3,9 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -126,7 +126,7 @@ namespace HJScarletRework.Projs.Executor
         {
             //允许造成伤害
             //正式执行追踪AI
-            if(TargetNPC.CanBeChasedBy() && TargetNPC != null)
+            if (TargetNPC.CanBeChasedBy() && TargetNPC != null)
                 Projectile.HomingTarget(TargetNPC.Center, -1f, 28f, 20f);
             //我草别直接杀死射弹了
             else
@@ -169,9 +169,9 @@ namespace HJScarletRework.Projs.Executor
         {
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             DrawCoreStar(sb);
-            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture,Color.DarkGoldenrod , 1.26f, 1f);
-            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture,Color.Goldenrod, 0.8f, 1f);
-            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture,Color.White, 0.58f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DarkGoldenrod, 1.26f, 1f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Goldenrod, 0.8f, 1f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.58f);
 
             HJScarletMethods.EndShaderAreaPixel();
         }

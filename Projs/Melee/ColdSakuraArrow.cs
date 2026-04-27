@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -45,7 +45,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.friendly = true;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
-            Projectile.penetrate = 8;
+            Projectile.penetrate = 5;
             Projectile.extraUpdates = 10;
             Projectile.DamageType = DamageClass.MeleeNoSpeed;
             Projectile.timeLeft = 700;
@@ -53,13 +53,17 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool? CanDamage()
         {
-            return Timer >= Projectile.MaxUpdates * 5f;
+            return true;
         }
         public override void AI()
         {
             if (!Projectile.HJScarlet().FirstFrame)
             {
-                 SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeToss[1] with { MaxInstances = 0 }, Projectile.Center);
+                new LightningGlow(Projectile.Center, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.DeepPink, 80, 0.48f).Spawn();
+                new LightningGlow(Projectile.Center, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.HotPink, 80, 0.42f).Spawn();
+                new LightningGlow(Projectile.Center, Projectile.velocity.RotatedBy(PiOver2).ToSafeNormalize() * 0.1f, Color.DeepPink, 80, 0.48f).Spawn();
+                new LightningGlow(Projectile.Center, Projectile.velocity.RotatedBy(PiOver2).ToSafeNormalize() * 0.1f, Color.HotPink, 80, 0.42f).Spawn();
+                SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeToss[1] with { MaxInstances = 0 }, Projectile.Center);
                 SpawnFlower();
             }
             Timer++;
@@ -68,23 +72,22 @@ namespace HJScarletRework.Projs.Melee
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.GetTargetSafe(out NPC target, canPassWall: true))
             {
-                Projectile.HomingTarget(target.Center, -1, 12f, 30f, 4f);
+                Projectile.HomingTarget(target.Center, -1, 12f, 20f);
             }
 
             if (HJScarletMethods.OutOffScreen(Projectile.Center))
                 return;
-            for (int i = 0; i < 2; i++)
-                new StarShape(Projectile.Center - Projectile.velocity / 2 * i, Projectile.velocity.ToSafeNormalize(), RandLerpColor(Color.HotPink, Color.DeepPink), .80f, 40,false).Spawn();
+            new StarShape(Projectile.Center, Projectile.velocity.ToSafeNormalize() * 0.1f, RandLerpColor(Color.HotPink, Color.HotPink), .840f, 35, false).Spawn();
             if (Main.rand.NextBool())
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(5f), Projectile.velocity.ToRandVelocity(ToRadians(15), 1), RandLerpColor(Color.HotPink, Color.DeepPink), 40, RandRotTwoPi, 1f, 0.46f, false, 0.2f).Spawn();
         }
         public void SpawnFlower()
         {
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 21; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(2), DustID.WitherLightning, RandVelTwoPi(2f));
                 d.rotation = RandRotTwoPi;
-                d.velocity += Projectile.velocity.ToRandVelocity(0, 2);
+                d.velocity = Projectile.velocity.ToRandVelocity(0, 4f) + RandVelTwoPi(2f);
                 d.scale = 0.8f;
                 d.noGravity = true;
             }
@@ -93,8 +96,10 @@ namespace HJScarletRework.Projs.Melee
 
         public override bool? CanHitNPC(NPC target)
         {
-
-            return base.CanHitNPC(target);
+            NPC target2 = Main.npc[Projectile.HJScarlet().GlobalTargetIndex];
+            if (target2.IsLegal() && target.Equals(target2))
+                return null;
+            return false;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -102,6 +107,11 @@ namespace HJScarletRework.Projs.Melee
             SpawnFlower();
             if (AttackCounter > 3f)
             {
+                new LightningGlow(Projectile.Center, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.DeepPink, 80, 0.48f).Spawn();
+                new LightningGlow(Projectile.Center, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.HotPink, 80, 0.42f).Spawn();
+                new LightningGlow(Projectile.Center, Projectile.velocity.RotatedBy(PiOver2).ToSafeNormalize() * 0.1f, Color.DeepPink, 80, 0.48f).Spawn();
+                new LightningGlow(Projectile.Center, Projectile.velocity.RotatedBy(PiOver2).ToSafeNormalize() * 0.1f, Color.HotPink, 80, 0.42f).Spawn();
+
                 Projectile.Kill();
                 return;
             }
@@ -111,7 +121,7 @@ namespace HJScarletRework.Projs.Melee
             //因为我们不想让寒霜弹在同一个目标上多次造成伤害
             //Timer *= 0;
             SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeToss[1] with { MaxInstances = 2 }, Projectile.Center);
-            float searchDistance = 600f;
+            float searchDistance = 1000f;
             List<NPC> legalTargetList = [];
             foreach (var tar in Main.ActiveNPCs)
             {
@@ -127,6 +137,12 @@ namespace HJScarletRework.Projs.Melee
             //没有可用单位时立刻处死寒霜弹，不用考虑别的
             if (legalTargetList.Count <= 0)
             {
+                new LightningGlow(Projectile.Center, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.DeepPink, 80, 0.48f).Spawn();
+                new LightningGlow(Projectile.Center, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.HotPink, 80, 0.42f).Spawn();
+                new LightningGlow(Projectile.Center, Projectile.velocity.RotatedBy(PiOver2).ToSafeNormalize() * 0.1f, Color.DeepPink, 80, 0.48f).Spawn();
+                new LightningGlow(Projectile.Center, Projectile.velocity.RotatedBy(PiOver2).ToSafeNormalize() * 0.1f, Color.HotPink, 80, 0.42f).Spawn();
+
+
                 Projectile.Kill();
                 return;
             }

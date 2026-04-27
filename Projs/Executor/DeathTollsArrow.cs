@@ -3,8 +3,8 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -104,13 +104,13 @@ namespace HJScarletRework.Projs.Executor
         {
             if (AttackType != DoType.IsSpawned)
                 return;
-            for(int i = 0;i<8;i++)
+            for (int i = 0; i < 8; i++)
             {
                 new SmokeParticle(Projectile.Center.ToRandCirclePos(2), RandVelTwoPi(1f, 6f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, 1f, 0.16f, Main.rand.NextBool()).SpawnToNonPreMult();
             }
-            for(int i = 0;i<8;i++)
+            for (int i = 0; i < 8; i++)
             {
-                new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(1f,6.5f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.65f).Spawn();
+                new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(1f, 6.5f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.65f).Spawn();
             }
             SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit with { Pitch = -0.5f, MaxInstances = 1 }, Projectile.Center);
             Projectile.netUpdate = true;

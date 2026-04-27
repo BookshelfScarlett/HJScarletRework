@@ -5,14 +5,14 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class TheDefiler: ExecutorWeaponClass
+    public class TheDefiler : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 0.5f;
         public override int ExecutionTime => 15;
         public override void ExSD()
         {
             Item.width = Item.height = 66;
-            Item.damage = 44;
+            Item.damage = 28;
             Item.knockBack = 8f;
             Item.shootSpeed = 16f;
             Item.useStyle = ItemUseStyleID.Swing;

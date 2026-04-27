@@ -2,12 +2,11 @@
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -46,7 +45,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Timer > 10)
             {
-                if (Projectile.GetTargetSafe(out NPC target,searchDistance:1200))
+                if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1200))
                     Projectile.HomingTarget(target.Center, -1f, 18f + (Timer - 30f) / 5f, 15f);
                 else
                     Projectile.velocity.Y += 0.18f;
@@ -137,13 +136,13 @@ namespace HJScarletRework.Projs.Executor
             //绘制残影
             float oriScale = 0.64f;
             float scale = 1f;
-            int length = 4;
+            int length = 3;
             for (int i = 0; i < length; i++)
             {
                 scale *= 0.975f;
                 float rads = (float)i / length;
-                Color edgeColor = Color.Lerp(baseColor, targetColor    , (1 - rads)).ToAddColor(10) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads);
-                Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.50f);
+                Color edgeColor = Color.Lerp(baseColor, targetColor, (1 - rads)).ToAddColor(10) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads);
+                Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.2f);
                 float rot = Lerp(Projectile.oldRot[i], Projectile.oldRot[0], 1f);
                 SB.Draw(projTex, lerpPos + Projectile.PosToCenter(), null, edgeColor, rot, ori, oriScale * scale * Projectile.scale, 0, 0);
             }
@@ -154,7 +153,7 @@ namespace HJScarletRework.Projs.Executor
             SB.EndShaderArea();
 
             SB.Draw(projTex, projPos, null, baseColor.ToAddColor(50), Projectile.rotation, ori, oriScale * Projectile.scale, 0, 0);
-            SB.Draw(projTex, projPos, null, Color.White.ToAddColor(0), Projectile.rotation, ori, oriScale * Projectile.scale * 0.65f, 0, 0);
+            SB.Draw(projTex, projPos, null, Color.White.ToAddColor(0), Projectile.rotation, ori, oriScale * Projectile.scale * 0.85f, 0, 0);
 
             return false;
         }
@@ -190,7 +189,6 @@ namespace HJScarletRework.Projs.Executor
                 trailDrawDates.Add(new(validPosition[j] + Projectile.Size / 2, drawColor, new Vector2(0, 17 * multipleSize * Projectile.scale), rot));
             }
             TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
-
         }
     }
 }

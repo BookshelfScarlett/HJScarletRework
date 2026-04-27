@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -39,13 +39,13 @@ namespace HJScarletRework.Projs.Melee
         public override void ExSD()
         {
             //是的，这个矛的hitbox比你想的要大
-            Projectile.width = Projectile.height = 60;
+            Projectile.width = Projectile.height = 100;
             Projectile.extraUpdates = 2;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-            Projectile.penetrate = 2;
+            Projectile.penetrate = 8;
             Projectile.Opacity = 0;
-            Projectile.scale = 0;
+            Projectile.scale = 1;
             Projectile.localNPCHitCooldown = 30;
             Projectile.usesLocalNPCImmunity = true;
         }
@@ -80,8 +80,12 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (Projectile.numHits > 1)
+                return;
             float searchDistance = 600f;
             List<NPC> legalTargetList = [];
+            if (!legalTargetList.Contains(target))
+                legalTargetList.Add(target);
             foreach (var tar in Main.ActiveNPCs)
             {
                 bool legalTar = tar != target && tar.CanBeChasedBy();
@@ -96,7 +100,7 @@ namespace HJScarletRework.Projs.Melee
             NPC targetThatHit;
             if (legalTargetList.Count <= 0)
             {
-                targetThatHit = target;
+                return;
             }
             else
             {
@@ -106,10 +110,13 @@ namespace HJScarletRework.Projs.Melee
                 int maxIndex = Math.Min(legalTargetList.Count, 2);
                 targetThatHit = legalTargetList[Main.rand.Next(0, maxIndex)];
             }
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<ColdSakuraArrow>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
+            targetThatHit = target;
+
+            Vector2 spawnPos = Projectile.SafeDir().ToRandVelocity(ToRadians(60f), 400f, 420f) + targetThatHit.Center;
+            Vector2 vel = (targetThatHit.Center - spawnPos).ToSafeNormalize() * Projectile.velocity.Length();
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<ColdSakuraArrow>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
             proj.HJScarlet().GlobalTargetIndex = targetThatHit.whoAmI;
-
-
+            ((ColdSakuraArrow)proj.ModProjectile).TargetList.Add(target);
         }
 
         private void InitInFirstFrame()
@@ -144,7 +151,6 @@ namespace HJScarletRework.Projs.Melee
             if (Main.rand.NextBool())
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 4f, RandLerpColor(Color.HotPink, Color.Violet), 40, RandRotTwoPi, 1f, 0.60f, false, 0.2f).Spawn();
             Projectile.Opacity = Lerp(Projectile.Opacity, 1f, 0.2f);
-            Projectile.scale = Lerp(Projectile.scale, 1f, 0.2f);
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer++;
             if (Timer > 45f * Projectile.MaxUpdates)

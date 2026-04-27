@@ -14,10 +14,10 @@ namespace HJScarletRework.Items.Accessories
             Item.width = Item.height = 32;
             Item.SetUpRarityPrice(ItemRarityID.Lime);
             Item.accessory = true;
-            Item.defense = 5;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            player.HJScarlet().critDamageExecutor += 0.15f;
             player.HJScarlet().blackKeyDoT = true;
             player.HJScarlet().blackKeyDefenseBuff = 0.50f;
         }

@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -144,7 +144,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     for (int i = 0; i < 4; i++)
                     {
-                        Vector2 toSafeDir = (target.Center - Owner.Center).ToSafeNormalize().RotatedBy(ToRadians(4f) * (i <2).ToDirectionInt());
+                        Vector2 toSafeDir = (target.Center - Owner.Center).ToSafeNormalize().RotatedBy(ToRadians(4f) * (i < 2).ToDirectionInt());
                         Vector2 spawnPos = Owner.Center - toSafeDir * Main.rand.NextFloat(1800f, 2400f) + Vector2.UnitY * Main.rand.NextFloat(10f, 160f) * Main.rand.NextBool().ToDirectionInt();
                         Vector2 vel = (target.Center - spawnPos).ToSafeNormalize() * Main.rand.NextFloat(22f, 28f);
                         Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<DialecticsSkyFall>(), (int)(Projectile.damage * 0.50f), 12f, Owner.whoAmI);
@@ -230,7 +230,7 @@ namespace HJScarletRework.Projs.Melee
         /// </summary>
         private void DrawParalineWave()
         {
-            
+
             Timer += 1;
             if (HJScarletMethods.OutOffScreen(Projectile.Center))
                 return;
@@ -281,8 +281,8 @@ namespace HJScarletRework.Projs.Melee
                     {
                         Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                         Vector2 pos = drawPos + offset * k * Amp + Projectile.velocity / 5 * i;
-                        new HRShinyOrb(pos, vel2, drawColor, 40,  0.1f).Spawn();
-                        new HRShinyOrb(pos, vel2, Color.White, 40,  0.05f).Spawn();
+                        new HRShinyOrb(pos, vel2, drawColor, 40, 0.1f).Spawn();
+                        new HRShinyOrb(pos, vel2, Color.White, 40, 0.05f).Spawn();
                     }
                 }
             }
@@ -295,8 +295,8 @@ namespace HJScarletRework.Projs.Melee
                     {
                         Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                         Vector2 pos = drawPos + offset * k * j + Projectile.velocity / 5;
-                        new HRShinyOrb(pos, vel2, drawColor, 40,  0.1f).Spawn();
-                        new HRShinyOrb(pos, vel2, Color.White, 40,  0.05f).Spawn();
+                        new HRShinyOrb(pos, vel2, drawColor, 40, 0.1f).Spawn();
+                        new HRShinyOrb(pos, vel2, Color.White, 40, 0.05f).Spawn();
                     }
                 }
             }
@@ -309,8 +309,8 @@ namespace HJScarletRework.Projs.Melee
                     {
                         Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                         Vector2 pos = drawPos + offset * k * (Amp - 10f) + Projectile.velocity / 5 * i;
-                        new HRShinyOrb(pos, vel2, drawColor, 40,  0.1f).Spawn();
-                        new HRShinyOrb(pos, vel2, Color.White, 40,  0.05f).Spawn();
+                        new HRShinyOrb(pos, vel2, drawColor, 40, 0.1f).Spawn();
+                        new HRShinyOrb(pos, vel2, Color.White, 40, 0.05f).Spawn();
 
                     }
                 }
@@ -324,8 +324,8 @@ namespace HJScarletRework.Projs.Melee
                     {
                         Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                         Vector2 pos = drawPos + offset * k * j + Projectile.velocity / 5;
-                        new HRShinyOrb(pos, vel2, drawColor, 40,  0.1f).Spawn();
-                        new HRShinyOrb(pos, vel2, Color.White, 40,  0.05f).Spawn();
+                        new HRShinyOrb(pos, vel2, drawColor, 40, 0.1f).Spawn();
+                        new HRShinyOrb(pos, vel2, Color.White, 40, 0.05f).Spawn();
 
                     }
                 }
@@ -362,8 +362,8 @@ namespace HJScarletRework.Projs.Melee
                 {
                     Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                     Vector2 pos = drawPos + offset * j;
-                    new HRShinyOrb(pos, vel, drawColor, 25,  0.1f).Spawn();
-                    new HRShinyOrb(pos, vel, Color.White, 25,  0.07f).Spawn();
+                    new HRShinyOrb(pos, vel, drawColor, 25, 0.1f).Spawn();
+                    new HRShinyOrb(pos, vel, Color.White, 25, 0.07f).Spawn();
                 }
             }
             //画低电平
@@ -411,7 +411,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Color drawColor = RandLerpColor(Color.MediumBlue, Color.Blue);
                 Vector2 spawnPos = mountedPos + dir.RotatedBy(PiOver2) * MathF.Sin(Timer - i * 0.16f) * (25.0f);
-                new HRShinyOrb(spawnPos - speedOffset * i, dir * 1.2f, drawColor, 25,  0.1f).Spawn();
+                new HRShinyOrb(spawnPos - speedOffset * i, dir * 1.2f, drawColor, 25, 0.1f).Spawn();
                 new HRShinyOrb(spawnPos - speedOffset * i, dir * 1.2f, Color.White, 25, 0.07f).Spawn();
             }
             //第二条line

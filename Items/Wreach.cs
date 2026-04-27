@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
+using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -19,7 +19,7 @@ namespace HJScarletRework.Items
             Item.width = Item.height = 50;
             Item.damage = 20;
             Item.rare = ItemRarityID.Red;
-            Item.shoot = ProjectileType<MonkStaffProj>();
+            Item.shoot = ProjectileType<DeepToneHealOrb>();
             Item.shootSpeed = 6f;
             Item.useTime = Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Swing;
@@ -29,7 +29,7 @@ namespace HJScarletRework.Items
         {
             return true;
             //Vector2 ownerMW = player.LocalMouseWorld();
-                Projectile proj = Projectile.NewProjectileDirect(source, Main.MouseWorld, RandVelTwoPi(2f), ProjectileType<FloatingPlants>(), 0, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, Main.MouseWorld, RandVelTwoPi(2f), ProjectileType<FloatingPlants>(), 0, knockback, player.whoAmI);
             proj.rotation = RandRotTwoPi;
             proj.ai[1] = Main.rand.Next(0, 7);
 

@@ -2,8 +2,8 @@
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -98,7 +98,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 8f, ProjectileType<TheJudgementStarExecution>(), (int)(Projectile.damage * 0.80f), Projectile.knockBack, Projectile.owner);
                 if (TargetNPC.CanBeChasedBy() && TargetNPC != null)
                     ((TheJudgementStarExecution)proj.ModProjectile).TargetNPC = TargetNPC;
-                for (int j = 0; j < 12;j++)
+                for (int j = 0; j < 12; j++)
                 {
                     Vector2 vel = dir * Main.rand.NextFloat(-1f, 6f);
                     Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(3);
@@ -122,8 +122,8 @@ namespace HJScarletRework.Projs.Executor
 
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             //这里的放缩会被lerp进行一次总控。
-            Vector2 dynamicBackgroundScale = Vector2.Lerp(Vector2.Zero, new Vector2(1.0f,1.0f), AniProgress) * Projectile.scale * 2.1f;
-            Vector2 dynamicBloomScale = Vector2.Lerp(Vector2.Zero, new Vector2(0.5f,0.5f), AniProgress) * Projectile.scale * 2.1f;
+            Vector2 dynamicBackgroundScale = Vector2.Lerp(Vector2.Zero, new Vector2(1.0f, 1.0f), AniProgress) * Projectile.scale * 2.1f;
+            Vector2 dynamicBloomScale = Vector2.Lerp(Vector2.Zero, new Vector2(0.5f, 0.5f), AniProgress) * Projectile.scale * 2.1f;
             float ringScale = Lerp(0, 1.28f, AniProgress) * Projectile.scale;
             Texture2D tex = HJScarletTexture.Particle_KiraStar.Value;
             Texture2D ring = HJScarletTexture.Particle_Ring.Value;

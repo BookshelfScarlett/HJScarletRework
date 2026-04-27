@@ -59,7 +59,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     SoundEngine.PlaySound(SoundID.Item103, Projectile.Center);
                     SlotId slotId = SoundEngine.PlaySound(SoundID.Item122, Projectile.Center);
-                    if (SoundEngine.TryGetActiveSound(slotId, out var sound)) 
+                    if (SoundEngine.TryGetActiveSound(slotId, out var sound))
                         sound.Volume /= 2;
                     for (int i = 0; i < 6; i++)
                     {
@@ -71,7 +71,7 @@ namespace HJScarletRework.Projs.Executor
                 if (FirePillerTimer == 30)
                 {
                     SlotId slotId = SoundEngine.PlaySound(SoundID.Item62, Projectile.Center);
-                    if (SoundEngine.TryGetActiveSound(slotId, out var sound)) 
+                    if (SoundEngine.TryGetActiveSound(slotId, out var sound))
                         sound.Volume /= 2;
                 }
                 for (int i = 0; i < 30; i++)
@@ -96,7 +96,7 @@ namespace HJScarletRework.Projs.Executor
                         flame.velocity.X += 0.02f;
                         flame.scale *= 2f;
                     }
-                    else 
+                    else
                         flame.velocity.Y -= Main.rand.NextFloat(5f, 12f);
                 }
             }
@@ -216,7 +216,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 10; i++)
             {
                 Dust burst = Dust.NewDustPerfect(target.Center, GetDust);
-                if (FirePillerTimer < 40) 
+                if (FirePillerTimer < 40)
                     burst.velocity -= Vector2.UnitY * 5f;
             }
         }
@@ -241,7 +241,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 scale = GetScaleFromAI();
             //最底层绘制纯黑射弹模拟黑烟
             DrawSmoke(tex, scale, cutSource, ori);
-            HJScarletMethods.EnterShaderArea(); 
+            HJScarletMethods.EnterShaderArea();
             //实际绘制火柱，套用shader
             DrawPillar(tex, scale, cutSource, ori);
             HJScarletMethods.EndShaderArea();
@@ -277,7 +277,7 @@ namespace HJScarletRework.Projs.Executor
         private void DrawPillar(Texture2D tex, Vector2 scale, Rectangle cutSource, Vector2 ori)
         {
             PickTagColor(out Color baseColor, out Color tarColor);
-            Effect shader = PickShader(baseColor,tarColor);
+            Effect shader = PickShader(baseColor, tarColor);
             shader.CurrentTechnique.Passes[0].Apply();
             Main.graphics.GraphicsDevice.Textures[1] = HJScarletTexture.Noise_Misc2.Value;
             Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
@@ -311,7 +311,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else if (FirePillerTimer < EarlyPhase)
             {
-                scale = Vector2.SmoothStep(early, middle, (FirePillerTimer - InitPhase)/ InitPhase);
+                scale = Vector2.SmoothStep(early, middle, (FirePillerTimer - InitPhase) / InitPhase);
             }
             else if (FirePillerTimer < MiddlePhase)
             {

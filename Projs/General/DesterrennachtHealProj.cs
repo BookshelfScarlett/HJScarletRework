@@ -3,8 +3,8 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -26,11 +26,11 @@ namespace HJScarletRework.Projs.General
             SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit with { MaxInstances = 1, Pitch = 0.8f }, Projectile.Center);
             float generalScale = 0.75f;
             new CrossGlow(Projectile.Center, Color.RoyalBlue, 50, 1f, 0.21f * generalScale).Spawn();
-            new CrossGlow(Projectile.Center, Color.SkyBlue, 50, 1f, 0.15f*generalScale).Spawn();
+            new CrossGlow(Projectile.Center, Color.SkyBlue, 50, 1f, 0.15f * generalScale).Spawn();
             new CrossGlow(Projectile.Center, Color.AliceBlue, 50, 0.5f, 0.10f * generalScale).Spawn();
             new FusableBall(Projectile.Center, Vector2.Zero, Color.Lerp(Color.RoyalBlue, Color.AliceBlue, 0.35f), 55, 1f, Vector2.One * 0.5f * generalScale).SpawnToPriorityNonPreMult();
             for (int i = 0; i < 20; i++)
-                new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(12f * generalScale), 1.82f, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 80, .1f * Main.rand.NextFloat(0.75f,1.2f) * generalScale, RandRotTwoPi).Spawn();
+                new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(12f * generalScale), 1.82f, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 80, .1f * Main.rand.NextFloat(0.75f, 1.2f) * generalScale, RandRotTwoPi).Spawn();
             for (int i = 0; i < 10; i++)
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(10f * generalScale), Projectile.velocity.ToRandVelocity(ToRadians(15f), 2.4f, 8.6f), RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 30, RandRotTwoPi, 1f, 0.65f * generalScale, false).Spawn();
         }
@@ -70,7 +70,7 @@ namespace HJScarletRework.Projs.General
         {
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             //DrawCoreStar(sb);
-            
+
 
             HJScarletMethods.EndShaderAreaPixel();
         }
@@ -82,10 +82,10 @@ namespace HJScarletRework.Projs.General
             {
                 Vector2 starScale = GetScale(i) * Projectile.scale;
                 float colorAlpha = GetAlphaFade(1 - i) * Projectile.Opacity;
-                Color drawColor = Color.Lerp(Color.RoyalBlue * colorAlpha, Color.MidnightBlue* colorAlpha, colorAlpha);
+                Color drawColor = Color.Lerp(Color.RoyalBlue * colorAlpha, Color.MidnightBlue * colorAlpha, colorAlpha);
                 sb.Draw(star, drawPos, null, drawColor, Projectile.rotation, star.Size() / 2, new Vector2(starScale.X, starScale.Y / 3f), SpriteEffects.None, 0);
                 sb.Draw(star, drawPos, null, drawColor, Projectile.rotation + PiOver2, star.Size() / 2, starScale, SpriteEffects.None, 0);
-                sb.Draw(star, drawPos, null, Color.White * colorAlpha, Projectile.rotation, star.Size() / 2,new Vector2(starScale.X, starScale.Y / 3f) * 0.5f, SpriteEffects.None, 0);
+                sb.Draw(star, drawPos, null, Color.White * colorAlpha, Projectile.rotation, star.Size() / 2, new Vector2(starScale.X, starScale.Y / 3f) * 0.5f, SpriteEffects.None, 0);
                 sb.Draw(star, drawPos, null, Color.White * colorAlpha, Projectile.rotation + PiOver2, star.Size() / 2, starScale * 0.5f, SpriteEffects.None, 0);
                 sb.Draw(HJScarletTexture.Texture_BloomShockwave.Value, drawPos, null, drawColor * colorAlpha, 0, HJScarletTexture.Texture_BloomShockwave.Value.ToOrigin(), 0.05f, 0, 0);
             }
@@ -114,12 +114,12 @@ namespace HJScarletRework.Projs.General
                 if (posCount < 3)
                     posCount = 3;
             }
-            
+
             for (int j = 0; j < posCount - 1; j++)
             {
                 float rot = (validPosition[j + 1] - validPosition[j]).ToRotation();
                 float ratio = j / (posCount - 1);
-                Vector2 posOffset = rot.ToRotationVector2().RotatedBy(PiOver2) * (offsetHeight -1f);
+                Vector2 posOffset = rot.ToRotationVector2().RotatedBy(PiOver2) * (offsetHeight - 1f);
                 trailDrawDates.Add(new(validPosition[j] + Projectile.Size / 2 + posOffset, drawColor, new Vector2(0, 9 * multipleSize * Projectile.scale), rot));
             }
             TrailRender.DrawTrail([.. trailDrawDates], drawSetting);

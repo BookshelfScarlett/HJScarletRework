@@ -30,7 +30,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             //实例化toolti并注册名字
             TooltipLine flavorTooltips = new TooltipLine(Mod, "FlavorTooltipsName", value);
             //植入Tooltip
-            tooltips.Insert(flavorTooltipIndex2+1, flavorTooltips);
+            tooltips.Insert(flavorTooltipIndex2 + 1, flavorTooltips);
 
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)

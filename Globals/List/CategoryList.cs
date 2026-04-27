@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Items;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;
 using Terraria;
@@ -10,7 +11,7 @@ namespace HJScarletRework.Globals.List
     public partial class HJScarletList : ModSystem
     {
         public static List<int> ThrownSpearList = [];
-        public static List<int> HJSpearList=[];
+        public static List<int> HJSpearList = [];
         public static List<int> MaleNPC = [];
         public static List<int> FemaleNPC = [];
         public static List<int> LegalFoodList = [];
@@ -156,11 +157,13 @@ namespace HJScarletRework.Globals.List
         {
             for (int i = 0; i < ItemLoader.ItemCount; i++)
             {
-                
+
                 Item item = new Item(i);
-                    bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
-                    if (isFood && !LegalFoodList.Contains(item.type))
-                        LegalFoodList.Add(item.type);
+                bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
+                if (isFood && !LegalFoodList.Contains(item.type))
+                    LegalFoodList.Add(item.type);
+                if (item.type == ItemType<GoldenApple>())
+                    LegalFoodList.Add(item.type);
             }
         }
         public override void Unload()

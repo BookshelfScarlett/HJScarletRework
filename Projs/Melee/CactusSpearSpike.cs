@@ -42,7 +42,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.velocity.X *= 1f;
             if (Projectile.velocity.Y < 30f)
                 Projectile.velocity.Y += 0.18f;
-            
+
         }
         public override bool? CanHitNPC(NPC target)
         {
@@ -51,7 +51,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreKill(int timeLeft)
         {
-           for (int i = 0;i< 8;i++)
+            for (int i = 0; i < 8; i++)
             {
                 Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(2f) + Projectile.velocity.ToRandVelocity(ToRadians(2f), -14f, 14f);
                 Dust d = Dust.NewDustPerfect(spawnPos, DustID.JungleGrass);
@@ -64,7 +64,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawProj(lightColor, rotFix:PiOver2);
+            Projectile.DrawProj(lightColor, rotFix: PiOver2);
             return false;
         }
     }

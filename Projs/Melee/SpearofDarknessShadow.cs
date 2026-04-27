@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -71,8 +71,8 @@ namespace HJScarletRework.Projs.Melee
         private void UpdateHit()
         {
             //固定频率
-            if(Main.rand.NextBool(2))
-                        new StarShape(Projectile.Center.ToRandCirclePosEdge(6f), -Projectile.velocity.ToRandVelocity(ToRadians(1f), 1.2f, 6.7f), RandLerpColor(Color.DarkViolet, Color.Black), 1.12f * Projectile.Opacity, 40,false).SpawnToNonPreMult();
+            if (Main.rand.NextBool(2))
+                new StarShape(Projectile.Center.ToRandCirclePosEdge(6f), -Projectile.velocity.ToRandVelocity(ToRadians(1f), 1.2f, 6.7f), RandLerpColor(Color.DarkViolet, Color.Black), 1.12f * Projectile.Opacity, 40, false).SpawnToNonPreMult();
             Projectile.rotation = Projectile.velocity.ToRotation();
             Projectile.velocity *= 0.94f;
             Projectile.Opacity -= 0.02f;
@@ -119,8 +119,8 @@ namespace HJScarletRework.Projs.Melee
                         new ShinyOrbHard(Projectile.Center.ToRandCirclePosEdge(4f), -Projectile.velocity.ToRandVelocity(ToRadians(15), 1.2f, 7.2f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.8f).SpawnToNonPreMult();
                     }
                 }
-            if(Main.rand.NextBool(2))
-                        new StarShape(Projectile.Center.ToRandCirclePosEdge(4f), -Projectile.velocity.ToRandVelocity(ToRadians(1f), 1.2f, 6.7f), RandLerpColor(Color.DarkViolet, Color.Black), 1.18f, 40,false).SpawnToNonPreMult();
+                if (Main.rand.NextBool(2))
+                    new StarShape(Projectile.Center.ToRandCirclePosEdge(4f), -Projectile.velocity.ToRandVelocity(ToRadians(1f), 1.2f, 6.7f), RandLerpColor(Color.DarkViolet, Color.Black), 1.18f, 40, false).SpawnToNonPreMult();
                 Projectile.HomingTarget(target.Center, 600f, 20f, 20f);
                 if ((Projectile.Center - target.Center).LengthSquared() < 50f * 50f)
                     AlreadyHit = true;

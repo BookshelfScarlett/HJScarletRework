@@ -1,6 +1,6 @@
 ﻿using ContinentOfJourney.Projectiles.Meelee;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.ReVisual.Class;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,7 +20,7 @@ namespace HJScarletRework.ReVisual.Projs
         }
         public override void RevisualUpdate(Projectile proj)
         {
-            
+
             AddOldPosRotList(proj, proj.Center, proj.velocity.ToRotation());
             new SmokeParticle(proj.Center.ToRandCirclePosEdge(5f) - proj.SafeDir() * 40f, RandVelTwoPi(3f), RandLerpColor(Color.Brown, Color.Orange), 40, RandRotTwoPi, 0.75f, Main.rand.NextFloat(0.4f, 0.6f) * 0.32f, Main.rand.NextBool()).SpawnToNonPreMult();
             for (int i = -1; i < 2; i += 2)

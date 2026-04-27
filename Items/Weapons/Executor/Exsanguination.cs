@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.width = 172;
             Item.height = 72;
             Item.damage = 14;
-            Item.useTime =  Item.useAnimation =20;
+            Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 5f;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.rare = RarityType<DisasterRarity>();

@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -53,7 +53,7 @@ namespace HJScarletRework.Projs.Melee
         public List<Player> ValidPlayer = [];
         public override void AI()
         {
-            if(!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame)
             {
                 //随机取0.835的减速到0.902的减速，90-180的生命值
                 RandDecelartion = Main.rand.NextFloat(.785f, .902f);
@@ -65,8 +65,8 @@ namespace HJScarletRework.Projs.Melee
             {
                 //处死成功时候，生成粒子
                 new WildPointerRed(Projectile.Center, Main.rand.Next(30, 60), Projectile.rotation + PiOver4, Projectile.scale, Projectile.Opacity).SpawnToNonPreMult();
-                if(Projectile.Opacity > 0.2f)
-                SoundEngine.PlaySound(HJScarletSounds.Buzz with { Volume = 0.3f, PitchRange = (-0.3f, 0.3f)}, Projectile.Center);
+                if (Projectile.Opacity > 0.2f)
+                    SoundEngine.PlaySound(HJScarletSounds.Buzz with { Volume = 0.3f, PitchRange = (-0.3f, 0.3f) }, Projectile.Center);
                 Projectile.Kill();
                 return;
             }
@@ -149,7 +149,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.rotation = Projectile.rotation.AngleLerp(Projectile.velocity.ToRotation(), 0.3f);
             //追踪敌人
             Projectile.HomingTarget(NeedTarget.Center, 9999f, 20f, 20f, 5f);
-    
+
         }
         public void JustHomeToPlayer()
         {
@@ -172,7 +172,7 @@ namespace HJScarletRework.Projs.Melee
                 foreach (var target in Main.ActivePlayers)
                 {
                     //野指针的攻击目标会选择几乎所有可能可以用的NPC
-                    if(target.dead)
+                    if (target.dead)
                         continue;
                     ValidPlayer.Add(target);
                 }
@@ -200,9 +200,9 @@ namespace HJScarletRework.Projs.Melee
             //记得干掉伤害，追踪玩家的时候是不会有伤害的了
             Projectile.damage *= 0;
             Projectile.HomingTarget(NeedPlayer.Center, 9999f, 20f, 10f, 5f);
-            Projectile.ExpandHitboxBy(36,36);
+            Projectile.ExpandHitboxBy(36, 36);
             //如果接触了，则执行decayAI
-            if((Projectile.Center - NeedPlayer.Center).LengthSquared() < 50f * 50f)
+            if ((Projectile.Center - NeedPlayer.Center).LengthSquared() < 50f * 50f)
             {
                 DisappearCode();
                 return;
@@ -261,7 +261,7 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.DrawGlowEdge(Color.White * Projectile.Opacity, posMove: 1.2f, rotFix: PiOver4);
-            Projectile.DrawProj(Color.White * Projectile.Opacity, drawTime: 1,rotFix: PiOver4);
+            Projectile.DrawProj(Color.White * Projectile.Opacity, drawTime: 1, rotFix: PiOver4);
             return false;
         }
     }

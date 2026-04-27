@@ -120,5 +120,5 @@ namespace HJScarletRework.Core.Packets
                 modPlayer.JustPressedWeaponSKill = weaponSkill;
             }
         }
-   }
+    }
 }

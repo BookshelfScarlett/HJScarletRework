@@ -9,10 +9,11 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class JungleMadnessProj: HJScarletProj
+    public class JungleMadnessProj : HJScarletProj
     {
         public override string Texture => GetInstance<JungleMadness>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;
+        public override Vector2 TileHitbox => new Vector2(13, 13);
         public enum State
         {
             Shoot,
@@ -20,8 +21,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public State AttackType
         {
-            get => (State)Projectile.ai[1]; 
-            set => Projectile.ai[1]=(float)value;
+            get => (State)Projectile.ai[1];
+            set => Projectile.ai[1] = (float)value;
         }
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()
@@ -33,8 +34,8 @@ namespace HJScarletRework.Projs.Executor
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.width = Projectile.height = 32;
-            Projectile.SetupImmnuity(60);
-            Projectile.penetrate = 6;
+            Projectile.SetupImmnuity(-1);
+            Projectile.penetrate = -1;
             Projectile.extraUpdates = 1;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
         }
@@ -45,7 +46,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void UpdateAttackAI()
         {
-            switch(AttackType)
+            switch (AttackType)
             {
                 case State.Shoot:
                     DoShoot();
@@ -60,8 +61,9 @@ namespace HJScarletRework.Projs.Executor
         {
             Timer++;
             Projectile.rotation += 0.2f;
-            if(Projectile.MeetMaxUpdatesFrame(Timer, 8))
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 8))
             {
+                Projectile.ResetLocalNPCHitImmunity();
                 AttackType = State.Return;
                 Projectile.netUpdate = true;
                 Timer = 0;
@@ -75,9 +77,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 18, 20);
             if (Projectile.IntersectOwnerByDistance(40))
             {
-                Projectile.AddExecutionTime(ItemType<JungleMadness>());
-                if (Projectile.HJScarlet().ExecutionStrike)
-                    SpawnFocus();
+                Projectile.ResetLocalNPCHitImmunity();
                 Projectile.Kill();
             }
         }
@@ -111,18 +111,22 @@ namespace HJScarletRework.Projs.Executor
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            
+
             return false;
         }
         public override void OnFirstFrame()
         {
             Projectile.originalDamage = Projectile.damage;
+            if (Projectile.HJScarlet().ExecutionStrike)
+                SpawnFocus();
+
             base.OnFirstFrame();
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
-            SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { MaxInstances = 2, Pitch = 0.3f}, Projectile.Center);
+            Projectile.AddExecutionTimePass(ItemType<JungleMadness>());
+            SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { MaxInstances = 2, Pitch = 0.3f }, Projectile.Center);
             if (Projectile.numHits < 1)
                 SpawnLeafs(target.whoAmI);
         }
@@ -131,7 +135,7 @@ namespace HJScarletRework.Projs.Executor
         {
             for (int i = -1; i < 2; i++)
             {
-                Vector2 dir = Projectile.SafeDir().RotatedBy(ToRadians(8)* i) * 5f;
+                Vector2 dir = Projectile.SafeDir().RotatedBy(ToRadians(8) * i) * 5f;
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir, ProjectileType<JungleMadnessLeafs>(), Projectile.damage, 1f, Owner.whoAmI);
                 ((JungleMadnessLeafs)proj.ModProjectile).AIStatement = JungleMadnessLeafs.LeafState.Normal;
                 proj.HJScarlet().GlobalTargetIndex = targetIndex;

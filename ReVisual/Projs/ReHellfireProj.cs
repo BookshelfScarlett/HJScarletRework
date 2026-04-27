@@ -1,7 +1,7 @@
 ﻿using ContinentOfJourney.Projectiles.Meelee;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.ReVisual.Class;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -38,7 +38,7 @@ namespace HJScarletRework.ReVisual.Projs
         }
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {
-            
+
             bool isEnable = IsMyPlayer(projectile, out ReVisualPlayer player) && player.reVisualHellfire;
             if (!isEnable)
             {

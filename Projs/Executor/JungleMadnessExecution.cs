@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -144,7 +144,7 @@ namespace HJScarletRework.Projs.Executor
             }
             if (Projectile.FinalUpdateNextBool(3))
             {
-                new EmptyRing(Projectile.Center.ToRandCirclePosEdge(16f), RandVelTwoPi(0.4f,1.4f), RandLerpColor(Color.DarkGreen, Color.Green), 40, 0.25f, 1, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
+                new EmptyRing(Projectile.Center.ToRandCirclePosEdge(16f), RandVelTwoPi(0.4f, 1.4f), RandLerpColor(Color.DarkGreen, Color.Green), 40, 0.25f, 1, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
             }
 
 

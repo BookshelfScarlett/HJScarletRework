@@ -9,7 +9,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Ranged
 {
-    public class ClimaticHawstring: HJScarletWeapon
+    public class ClimaticHawstring : HJScarletWeapon
     {
         public override ClassCategory Category => ClassCategory.Ranged;
         public override void ExSD()
@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 5f;
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
-            Item.SetUpNoUseGraphicItem(true,false);
+            Item.SetUpNoUseGraphicItem(true, false);
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.shoot = ProjectileType<ClimaticHawstringProj>();
             Item.shootSpeed = 12f;

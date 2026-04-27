@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -35,7 +35,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.tileCollide = Timer > 50f;
             Timer++;
             DrawParticle();
-            
+
             //处理追踪逻辑，但也不多
             if (DontChaseToTarget)
             {
@@ -59,7 +59,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 starShapePos = basePos + Main.rand.NextVector2CircularEdge(3f, 3f);
                 Color drawColor = RandLerpColor(Color.Red, Color.DarkRed);
-                new StarShape(starShapePos, dir * -2.4f, drawColor, 0.6f, 15,false).SpawnToPriorityNonPreMult();
+                new StarShape(starShapePos, dir * -2.4f, drawColor, 0.6f, 15, false).SpawnToPriorityNonPreMult();
             }
 
             Color Firecolor = RandLerpColor(Color.DarkGray, Color.DarkRed);

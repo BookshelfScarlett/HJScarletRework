@@ -52,7 +52,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                     return false;
                 }
             }
-            else 
+            else
             {
                 Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
                 proj.rotation = velocity.ToRotation();

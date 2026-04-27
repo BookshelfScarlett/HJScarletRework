@@ -76,7 +76,7 @@ namespace HJScarletRework.Core.MetaballSystem
                     continue;
                 if (baseMetaBall.SetPority)
                     continue;
-                
+
                 HJScarletMethods.SwapToTarget(baseMetaBall.AlphaTexture);
 
                 Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null);

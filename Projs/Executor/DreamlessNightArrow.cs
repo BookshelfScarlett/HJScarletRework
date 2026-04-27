@@ -23,6 +23,10 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.ToTrailSetting(6, 2);
         }
+        public override bool? CanDamage()
+        {
+            return Projectile.timeLeft < 80;
+        }
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 20;
@@ -37,7 +41,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             if (Projectile.timeLeft > 80)
-                Projectile.scale = Lerp(Projectile.scale, 0.8f, 0.04f);
+                Projectile.scale = Lerp(Projectile.scale, 0.98f, 0.04f);
             if (Projectile.timeLeft < 20)
                 Projectile.scale = Lerp(Projectile.scale, 0f, 0.04f);
 

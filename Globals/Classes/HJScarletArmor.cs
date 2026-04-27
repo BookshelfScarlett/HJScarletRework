@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using System;
 using Terraria;
 
 namespace HJScarletRework.Globals.Classes

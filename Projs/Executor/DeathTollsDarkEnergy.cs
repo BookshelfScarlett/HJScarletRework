@@ -2,8 +2,8 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace HJScarletRework.Projs.Executor
         }
         private DoType AttackType
         {
-            get =>(DoType)Projectile.ai[2];
+            get => (DoType)Projectile.ai[2];
             set => Projectile.ai[2] = (short)value;
         }
         private enum DoType
@@ -75,17 +75,17 @@ namespace HJScarletRework.Projs.Executor
         private void UpdateParticle()
         {
             if (Main.rand.NextBool(8))
-                new ShinyOrbHard(Projectile.Center.ToRandCirclePos(10f), Projectile.velocity /8f, RandLerpColor(Color.DarkViolet, Color.Black), 40, 0.46f).SpawnToNonPreMult();
+                new ShinyOrbHard(Projectile.Center.ToRandCirclePos(10f), Projectile.velocity / 8f, RandLerpColor(Color.DarkViolet, Color.Black), 40, 0.46f).SpawnToNonPreMult();
         }
 
         private void DoSpawned()
         {
             AttackTimer += 1;
             float progress = AttackTimer / 20f;
-            Projectile.scale = Clamp(Lerp(0f, 1f, progress),0f, 1f);
+            Projectile.scale = Clamp(Lerp(0f, 1f, progress), 0f, 1f);
             Projectile.Opacity = Clamp(Lerp(0f, 1f, progress), 0f, 1f);
             Lighting.AddLight(Projectile.Center, TorchID.White);
-            if(AttackTimer > 20f)
+            if (AttackTimer > 20f)
             {
                 Projectile.scale = 1;
                 Projectile.Opacity = 1;
@@ -98,7 +98,7 @@ namespace HJScarletRework.Projs.Executor
         {
             AttackTimer = AttackTimer + 0.05f * 20;
             Projectile.HomingTarget(Owner.Center, 1800f, 20f + AttackTimer, 20f);
-            if(Projectile.Hitbox.Intersects(Owner.Hitbox))
+            if (Projectile.Hitbox.Intersects(Owner.Hitbox))
             {
                 AttackType = DoType.IsChasingToTarget;
                 AttackTimer = 0f;
@@ -118,11 +118,11 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            
+
             SB.End();
             SB.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             //我踩到地雷了孩子们。
-            DrawTrail(new Color(75,0,130), 10.5f);
+            DrawTrail(new Color(75, 0, 130), 10.5f);
             DrawTrail(Color.Black, 10f);
             DrawTrail(Color.Black, 9.8f);
             DrawTrail(Color.Black, 9.5f);

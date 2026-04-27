@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -32,7 +32,7 @@ namespace HJScarletRework.Globals.Players
                 {
                     Vector2 spawnPos = Player.Center + Vector2.UnitY * (Player.height / 2 + 5) + Vector2.UnitY * Main.rand.NextFloat(-11f, -6f) + Vector2.UnitX * Main.rand.NextFloat(-10f, 11f);
                     Vector2 vel = Vector2.UnitX * Main.rand.NextFloat(-5f, 6f);
-                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40,  .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
+                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
                 }
                 for (int i = 0; i < 20; i++)
                 {
@@ -46,14 +46,14 @@ namespace HJScarletRework.Globals.Players
         }
         public override bool ConsumableDodge(Player.HurtInfo info)
         {
-            if(desterrennacht && desterrannachtImmortalTime > 0)
+            if (desterrennacht && desterrannachtImmortalTime > 0)
             {
                 SoundEngine.PlaySound(HJScarletSounds.Evolution_Thrown with { MaxInstances = 0, Pitch = 0.9f - desterrannachtImmortalTime * 0.1f }, Player.Center);
                 desterrannachtImmortalTime--;
                 Player.GetImmnue(ImmunityCooldownID.General, 60, true);
                 for (int i = 0; i < 24; i++)
                     new TurbulenceGlowOrb(Player.Center.ToRandCirclePos(20f), 1.2f, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 80, 0.1f, RandRotTwoPi).Spawn();
-                for (int i = 0;i<20;i++)
+                for (int i = 0; i < 20; i++)
                 {
                     Vector2 spawnPos = Player.Center + Vector2.UnitY * (Player.height / 2 + 5) + Vector2.UnitX * Main.rand.NextFloat(-5f, 6f);
                     Vector2 vel = Vector2.UnitX * Main.rand.NextFloat(-5f, 6f);
@@ -77,7 +77,6 @@ namespace HJScarletRework.Globals.Players
             {
                 if (modifiers.HitDirection == Player.direction)
                 {
-                    Main.NewText(true);
                     totalProjDamageModify -= 0.35f;
                 }
             }
@@ -92,10 +91,24 @@ namespace HJScarletRework.Globals.Players
             {
                 if (modifiers.HitDirection == Player.direction)
                 {
-                    totalProjDamageModify -= 0.20f * (protectorHerbTimerList[1] > 0).ToDirectionInt();
-                    totalProjDamageModify -= 0.65f * protectorMoonglow.ToDirectionInt();
+                    totalProjDamageModify -= 0.20f * (protectorHerbTimerList[1] > 0).ToInt();
+                    totalProjDamageModify -= 0.65f * protectorMoonglow.ToInt();
                 }
             }
+
+            if (raincoatExecutor && (proj.velocity.Y - Player.velocity.Y) > 0)
+            {
+                for (int i = 0; i < 16; i++)
+                {
+                    Dust d = Dust.NewDustPerfect(proj.Center.ToRandCirclePos(3f), DustID.Water, RandVelTwoPi(1f, 2.1f));
+                }
+
+                totalProjDamageModify *= 0.50f;
+                modifiers.Knockback *= 0;
+            }
+            if (totalProjDamageModify < 0.05f)
+                totalProjDamageModify = 0.1f;
+
             modifiers.FinalDamage *= totalProjDamageModify;
         }
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
@@ -104,11 +117,17 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
         {
+            if (raincoatExecutor && (proj.velocity.Y - Player.velocity.Y) > 0)
+            {
+                Player.buffImmune[BuffID.Poisoned] = true;
+                Player.buffImmune[BuffID.OnFire] = true;
+                Player.buffImmune[BuffID.Frostburn] = true;
+            }
             base.OnHitByProjectile(proj, hurtInfo);
         }
         public override void OnHurt(Player.HurtInfo info)
         {
-            if(PreciousTargetAcc && info.Damage > 5)
+            if (PreciousTargetAcc && info.Damage > 5)
             {
                 PreciousTargetCrtis -= 300;
                 if (PreciousTargetCrtis < PreciousCritsMin)

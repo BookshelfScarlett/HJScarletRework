@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.damage = 164;
             Item.useTime = Item.useAnimation = 35;
             Item.knockBack = 1f;
-            Item.UseSound = HJScarletSounds.TheMars_Toss with { MaxInstances = 0 , Volume = 0.85f};
+            Item.UseSound = HJScarletSounds.TheMars_Toss with { MaxInstances = 0, Volume = 0.85f };
             //投射出去之后会被减速
             Item.shootSpeed = 24f;
             Item.DamageType = DamageClass.MeleeNoSpeed;

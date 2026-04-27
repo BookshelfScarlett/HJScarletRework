@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -72,7 +72,7 @@ namespace HJScarletRework.Projs.Melee
                 new TurbulenceShinyCube(spawnPos, Projectile.velocity / 2, RandLerpColor(Color.White, Color.Green) * Clamp(Projectile.velocity.Length(), 0, 1), 20, Projectile.rotation, 1, 0.28f * Projectile.Opacity, randPosMoveValue: 8).Spawn();
             }
             //如果存在时间超过1秒，进入处死状态
-            if(Timer > 10f * Projectile.MaxUpdates)
+            if (Timer > 10f * Projectile.MaxUpdates)
             {
                 AttackType = Style.Fade;
                 Projectile.netUpdate = true;
@@ -200,7 +200,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Vector2 trailScale = Projectile.scale * new Vector2(0.20f, 1.5f) * 1f * Projectile.Opacity;
             float starDrawTime = 16f;
-            for (float j = -1;j <= 2;j += 2)
+            for (float j = -1; j <= 2; j += 2)
             {
                 for (float i = 0; i < starDrawTime; i++)
                 {
@@ -238,9 +238,9 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 starPos = drawPos + argDir + projDir * 45f;
                 Vector2 scale = Projectile.scale * new Vector2(0.2f, 0.5f) * 0.8f * Projectile.Opacity;
                 SB.Draw(starShape, starPos, null, Color.LawnGreen with { A = 0 }, argDir.ToRotation(), starShape.ToOrigin(), scale, 0, 0);
-                if(i % 4 == 0)
+                if (i % 4 == 0)
                 {
-                    SB.Draw(starShape, starPos, null, Color.White with { A = 0}, argDir.ToRotation() + PiOver2, starShape.Size() / 2, scale, 0, 0);
+                    SB.Draw(starShape, starPos, null, Color.White with { A = 0 }, argDir.ToRotation() + PiOver2, starShape.Size() / 2, scale, 0, 0);
                 }
             }
         }

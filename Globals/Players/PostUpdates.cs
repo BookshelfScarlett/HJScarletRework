@@ -1,9 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
@@ -138,12 +138,19 @@ namespace HJScarletRework.Globals.Players
                 blackKeyTimer--;
             if (floretProtectorTimer > 0)
                 floretProtectorTimer--;
+
             protectorPlantID = Player.HasBuff<HerbBagBuff>() ? protectorPlantID : -1;
             for (int i = 0; i < protectorHerbTimerList.Length; i++)
             {
                 if (protectorHerbTimerList[i] != 0)
                     protectorHerbTimerList[i]--;
             }
+            if (fishDash > 0)
+                fishDash--;
+            if (PlayerFinalSpeedStoredTime > 0)
+                PlayerFinalSpeedStoredTime--;
+            if (PlayerFinalSpeedStoredTime == 0)
+                PlayerLastSpeedStored = 0;
         }
 
 
@@ -172,71 +179,90 @@ namespace HJScarletRework.Globals.Players
             }
             if (resetTerraRecipe)
             {
+                for (int i = 0; i < terraRecipe_CurEat.Count; i++)
+                {
+                    int index = terraRecipe_CurEat[i];
+                    if (HJScarletList.LegalFoodList.Contains(index))
+                        continue;
+                    terraRecipe_CurEat.RemoveAt(i);
+                }
                 for (int i = 0; i < terraRecipe_haventEat.Count; i++)
                 {
                     int index = terraRecipe_haventEat[i];
                     if (HJScarletList.LegalFoodList.Contains(index))
                         continue;
-                    terraRecipe_haventEat.Remove(i);
+                    terraRecipe_haventEat.RemoveAt(i);
+                }
+                for (int i = 0; i < HJScarletList.LegalFoodList.Count; i++)
+                {
+                    int index = HJScarletList.LegalFoodList[i];
+                    if (terraRecipe_haventEat.Contains(index))
+                        continue;
+                    terraRecipe_haventEat.Add(index);
                 }
                 resetTerraRecipe = false;
             }
-            if (CanWeaponSpecialAbility)
+            HandleWeaponAbility();
+        }
+
+        private void HandleWeaponAbility()
+        {
+            if (!CanWeaponSpecialAbility)
+                return;
+            CanWeaponSpecialAbility = false;
+            if (monkExecutor && !Player.HasProj<MonkStaffProj>())
             {
-                CanWeaponSpecialAbility = false;
-                if (monkExecutor && !Player.HasProj<MonkStaffProj>())
+                //玩家拥有任何手持的棍子都会直接处死掉，不要试图打断玩家的治疗
+                foreach (var projID in Main.ActiveProjectiles)
                 {
-                    //玩家拥有任何手持的棍子都会直接处死掉，不要试图打断玩家的治疗
-                    foreach (var projID in Main.ActiveProjectiles)
-                    {
-                        if (projID.owner != Player.whoAmI)
-                            continue;
+                    if (projID.owner != Player.whoAmI)
+                        continue;
 
-                        if (projID.type == ProjectileID.MonkStaffT3 || projID.type == ProjectileID.MonkStaffT3_Alt || projID.type == ProjectileID.MonkStaffT1)
+                    if (projID.type == ProjectileID.MonkStaffT3 || projID.type == ProjectileID.MonkStaffT3_Alt || projID.type == ProjectileID.MonkStaffT1)
+                    {
+                        switch (projID.type)
                         {
-                            switch (projID.type)
-                            {
-                                case ProjectileID.MonkStaffT3:
-                                case ProjectileID.MonkStaffT3_Alt:
-                                    for (int i = 0; i < 66; i++)
-                                    {
-                                        Vector2 pos = Player.Center.ToRandCirclePos(16f);
-                                        Dust d = Dust.NewDustPerfect(pos, DustID.IceTorch);
-                                        d.velocity = -Vector2.UnitY * Main.rand.NextFloat(0.8f, 2.6f);
-                                        d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
-                                    }
-                                    break;
-                                default:
-                                    for (int i = 0; i < 66; i++)
-                                    {
-                                        Vector2 pos = Player.Center.ToRandCirclePos(16f);
-                                        Dust d = Dust.NewDustPerfect(pos, DustID.CursedTorch);
-                                        d.velocity = -Vector2.UnitY * Main.rand.NextFloat(0.8f, 2.6f);
-                                        d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
-                                    }
-                                    break;
+                            case ProjectileID.MonkStaffT3:
+                            case ProjectileID.MonkStaffT3_Alt:
+                                for (int i = 0; i < 66; i++)
+                                {
+                                    Vector2 pos = Player.Center.ToRandCirclePos(16f);
+                                    Dust d = Dust.NewDustPerfect(pos, DustID.IceTorch);
+                                    d.velocity = -Vector2.UnitY * Main.rand.NextFloat(0.8f, 2.6f);
+                                    d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
+                                }
+                                break;
+                            default:
+                                for (int i = 0; i < 66; i++)
+                                {
+                                    Vector2 pos = Player.Center.ToRandCirclePos(16f);
+                                    Dust d = Dust.NewDustPerfect(pos, DustID.CursedTorch);
+                                    d.velocity = -Vector2.UnitY * Main.rand.NextFloat(0.8f, 2.6f);
+                                    d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
+                                }
+                                break;
 
-                            }
-                            projID.Kill();
                         }
+                        projID.Kill();
                     }
+                }
 
 
-                    if (Player.HeldItem.type == ItemID.MonkStaffT1)
-                    {
-                        Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffProj>(), 0, 0, Player.whoAmI);
-                        //标记为1说明是瞌睡章鱼
-                        proj.ai[0] = 1;
-                    }
-                    if (Player.HeldItem.type == ItemID.MonkStaffT3)
-                    {
-                        Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffProj>(), 0, 0, Player.whoAmI);
-                        //标记为1说明是瞌睡章鱼
-                        proj.ai[0] = 0;
-                    }
+                if (Player.HeldItem.type == ItemID.MonkStaffT1)
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffProj>(), 0, 0, Player.whoAmI);
+                    //标记为1说明是瞌睡章鱼
+                    proj.ai[0] = 1;
+                }
+                if (Player.HeldItem.type == ItemID.MonkStaffT3)
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffProj>(), 0, 0, Player.whoAmI);
+                    //标记为1说明是瞌睡章鱼
+                    proj.ai[0] = 0;
                 }
             }
         }
+
         public override void PostUpdateEquips()
         {
             HandleTerraRecipe();
@@ -244,6 +270,87 @@ namespace HJScarletRework.Globals.Players
             UpdateFloretProtectorHerbSpawn();
             UpdateHerbBuff();
             UpdateStardustRune();
+            UpdateArmorAbility();
+            //小鱼冲刺。动量保存冲刺的初步实现
+            if (fishDashStored && fishExecutor)
+            {
+                if (Main.rand.NextBool())
+                    new ShinyRing(Player.ToRandRec(), (-Vector2.UnitY).ToRandVelocity(ToRadians(20f), 0f, .3f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0.012f).Spawn();
+            }
+            if (fishDash > 0)
+            {
+                //在此过程中玩家不会受到击退
+                Player.noKnockback = true;
+                Player.RemoveAllGrapplingHooks();
+                Player.RemoveAllFishingBobbers();
+                FishParticles();
+                //这里基本上用帧来算
+                if (fishDash < 4)
+                {
+                    //这里用一些硬编码的案例来实现一些可能的冲刺效果
+                    float buffer = -10f;
+                    float lerpValue = .35f;
+                    //除非玩家的速度方向与面朝的方向相同，不然我们不会给这个加速
+                    if (Player.direction == Math.Sign(Player.velocity.X))
+                    {
+                        buffer = 10f;
+                        lerpValue = .6f;
+                    }
+                    Vector2 finalMoveSpeed = Player.velocity.ToSafeNormalize() * (PlayerLastSpeedStored + buffer);
+                    //额外的，如果玩家正在向上移动，则根据玩家的速度方向给予一个推开的速度
+                    if (Math.Abs(Player.velocity.Y) - Math.Abs(Player.velocity.X) > 0 && Player.velocity.Y < 0)
+                    {
+                        finalMoveSpeed += Player.direction * Vector2.UnitX * 10f;
+                        lerpValue = .4f;
+                    }
+
+                    Player.velocity = Vector2.Lerp(Player.velocity, finalMoveSpeed, lerpValue);
+                    //需注意的是这里的速度
+                }
+                else
+                {
+                    //查看速度情况。
+                    float speedValue = PlayerLastSpeedStored > 40 ? PlayerLastSpeedStored : 40;
+                    Player.velocity = Vector2.Lerp(Player.velocity, FishDashVector * speedValue, 0.5f);
+                }
+            }
+        }
+
+        public void FishParticles()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Dust d = Dust.NewDustPerfect(Player.ToRandRec(), DustID.GemSapphire);
+                d.velocity = Player.velocity.ToSafeNormalize() * Main.rand.NextFloat(1.2f, 2.4f);
+                d.scale = 1f;
+                d.noGravity = true;
+            }
+            new ShinyRing(Player.ToRandRec(), (-Vector2.UnitY).ToRandVelocity(ToRadians(20f), 0.5f, 1.3f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0.032f).Spawn();
+        }
+
+        //必须得存储玩家当前的速度动量
+        public float CurSpeed = 0;
+        public Vector2 FishDashVector;
+        private void UpdateArmorAbility()
+        {
+            if (!CanArmorAbility)
+                return;
+            CanArmorAbility = false;
+            if (fishExecutor && fishDash == 0 && fishDashStored)
+            {
+                fishDash = 12;
+                fishDashStored = false;
+                //查看动量保存帧，是否在动量保存帧期间准备执行下一个冲刺
+                //如果是，在原来的基础上提供1.10x的速度
+                //这个时期给的非常的紧，没什么容错
+                PlayerLastSpeedStored = Player.velocity.Length();
+                if (PlayerFinalSpeedStoredTime > 0)
+                    PlayerLastSpeedStored *= 1.1f;
+                FishDashVector = Player.ToMouseVector2();
+                PlayerFinalSpeedStoredTime = 4;
+                Player.direction = ((Player.Center.X - Main.MouseWorld.X) < 0).ToDirectionInt();
+                SoundEngine.PlaySound(HJScarletSounds.Blunt_Swing with { Pitch = 0.2f, MaxInstances = 0 }, Player.Center);
+            }
         }
         public void UpdateFloretProtectorHerbSpawn()
         {
@@ -420,9 +527,10 @@ namespace HJScarletRework.Globals.Players
             if (NoSlowFall > 0)
             {
                 Player.slowFall = false;
-                Player.maxFallSpeed = 10000;
+                Player.maxFallSpeed = maxFallspeedModify;
                 Player.GoingDownWithGrapple = true;
             }
+            maxFallspeedModify = 0;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace HJScarletRework.Rarity.RarityShiny
         public static void DrawRarity(DrawableTooltipLine drawableTooltipLine)
         {
             PostDrawRarity(ref RaritySparkles, drawableTooltipLine);
-            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Green, Color.Lime.ToAddColor(), Color.DarkGreen,1.1f);
+            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Green, Color.Lime.ToAddColor(), Color.DarkGreen, 1.1f);
         }
         public static void PostDrawRarity(ref List<RaritySparkle> particleList, DrawableTooltipLine tooltipLine)
         {

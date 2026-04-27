@@ -1,9 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 
 namespace HJScarletRework.Projs.Melee
@@ -29,14 +29,7 @@ namespace HJScarletRework.Projs.Melee
         //但是这里附带了标记功能
         public override void AI()
         {
-            Projectile.ai[1] += 1f;
-            if (Projectile.ai[1] > 180f)
-            {
-                Projectile.ai[1] = 180f;
-            }
-            Projectile.ai[0] += 1f;
-            //获取主人射弹
-            
+
         }
 
         public override bool? CanCutTiles()
@@ -46,10 +39,7 @@ namespace HJScarletRework.Projs.Melee
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            Vector2 vector = Vector2.Normalize(Projectile.velocity.RotatedBy(Math.PI / 2.0));
-            float collisionPoint = 0f;
-            Vector2 vector2 = Projectile.Center + vector.RotatedBy(-Math.PI) * (Projectile.ai[1] / 100f) * 200f;
-            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), vector2, vector2 + vector * (Projectile.ai[1] / 100f) * 400f, 32f, ref collisionPoint);
+            return true;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -78,21 +68,25 @@ namespace HJScarletRework.Projs.Melee
 
         public override bool PreDraw(ref Color lightColor)
         {
-            SB.End();
-            SB.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.AnisotropicClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-            Texture2D value = Request<Texture2D>("ContinentOfJourney/Images/GiantSlash").Value;
-            float num = Clamp(Projectile.ai[0] / 80f, 0f, 1f);
-            if (Projectile.timeLeft < 30)
+            Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 projPos, out Vector2 ori);
+            projTex = HJScarletTexture.Particle_ShinyOrbHard.Value;
+            ori = HJScarletTexture.Particle_ShinyOrbHard.Origin;
+            Color baseColor = Color.DarkOrange;
+            Color targetColor = Color.OrangeRed;
+            //绘制残影
+            float oriScale = 0.70f;
+            float scale = 1f;
+            int length = 10;
+            for (int i = 0; i < length; i++)
             {
-                num = Clamp(Projectile.timeLeft / 30f, 0f, 1f);
+                scale *= 0.925f;
+                float rads = (float)i / length;
+                Color edgeColor = Color.Lerp(baseColor, targetColor, (1 - rads)).ToAddColor(50) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads);
+                Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.20f);
+                float rot = Lerp(Projectile.oldRot[i], Projectile.oldRot[0], 1f);
+                SB.Draw(projTex, lerpPos + Projectile.PosToCenter(), null, edgeColor, rot, ori, oriScale * scale * Projectile.scale, 0, 0);
             }
-
-            SB.Draw(value, Projectile.Center - Main.screenPosition, null, Color.White * 0.66f * num, Projectile.velocity.ToRotation(), new Vector2(value.Width * 3 / 4, value.Height / 2), 1.2f * new Vector2(0.5f, Projectile.ai[1] / 100f), SpriteEffects.None,0);
-            SB.Draw(value, Projectile.Center - Main.screenPosition, null, Color.White * 0.5f * num, Projectile.velocity.ToRotation(), new Vector2(value.Width * 3 / 4, value.Height / 2), new Vector2(0.5f, Projectile.ai[1] / 100f), SpriteEffects.None,0);
-            SB.End();
-            SB.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.AnisotropicClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             return false;
         }
-
     }
 }

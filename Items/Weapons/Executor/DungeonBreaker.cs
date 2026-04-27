@@ -6,7 +6,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class DungeonBreaker: ExecutorWeaponClass
+    public class DungeonBreaker : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 0.5f;
         public override int ExecutionTime => 8;

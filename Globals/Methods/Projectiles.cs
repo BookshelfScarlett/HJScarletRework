@@ -86,14 +86,14 @@ namespace HJScarletRework.Globals.Methods
                     return true;
                 else if (searchSecondTarget)
                 {
-                    target = proj.FindClosestTarget(searchDistance, ignoreTiles:canPassWall);
+                    target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall);
                     if (target != null && target.CanBeChasedBy(proj))
                         return true;
                 }
             }
             else if (searchSecondTarget)
             {
-                target = proj.FindClosestTarget(searchDistance, ignoreTiles: canPassWall);
+                target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall);
                 if (target != null && target.CanBeChasedBy(proj))
                     return true;
             }
@@ -111,21 +111,21 @@ namespace HJScarletRework.Globals.Methods
         public static bool GetTargetSafe(this Projectile proj, out NPC target, bool searchSecondTarget = true, float searchDistance = 600f, bool canPassWall = false)
         {
             target = null;
-            if (proj.HJScarlet().GlobalTargetIndex!= -1)
+            if (proj.HJScarlet().GlobalTargetIndex != -1)
             {
                 target = Main.npc[proj.HJScarlet().GlobalTargetIndex];
                 if (target.CanBeChasedBy() && target != null)
                     return true;
                 else if (searchSecondTarget)
                 {
-                    target = proj.FindClosestTarget(searchDistance, ignoreTiles:canPassWall);
+                    target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall);
                     if (target != null && target.CanBeChasedBy(proj))
                         return true;
                 }
             }
             else if (searchSecondTarget)
             {
-                target = proj.FindClosestTarget(searchDistance, ignoreTiles:canPassWall);
+                target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall);
                 if (target != null && target.CanBeChasedBy(proj))
                     return true;
             }
@@ -144,7 +144,7 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="ignoreTiles">穿墙搜索, 默认为</param>
         /// <param name="arrayFirst">数组优先, 这个将会使射弹优先针对数组内第一个单位,默认为否</param>
         /// <returns>返回一个NPC实例</returns>
-        public static NPC FindClosestTarget(this Projectile p, float maxDist, bool bossFirst = false, bool ignoreTiles = true, bool arrayFirst = false)
+        public static NPC FindClosestTarget(this Vector2 p, float maxDist, bool bossFirst = false, bool ignoreTiles = true, bool arrayFirst = false)
         {
             //bro我真的要遍历整个NPC吗？
             float distStoraged = maxDist;
@@ -156,10 +156,10 @@ namespace HJScarletRework.Globals.Methods
                 float exDist = npc.width + npc.height;
 
                 //单位不可被追踪 或者 超出索敌距离则continue
-                if (Vector2.Distance(p.Center, npc.Center) > distStoraged + exDist)
+                if (Vector2.Distance(p, npc.Center) > distStoraged + exDist)
                     continue;
 
-                if (!npc.active || npc.friendly || npc.lifeMax < 5 || !npc.CanBeChasedBy(p.Center, false))
+                if (!npc.active || npc.friendly || npc.lifeMax < 5 || !npc.CanBeChasedBy(p, false))
                     continue;
 
                 //补: 如果优先搜索Boss单位, 且附近至少有一个。我们直接存储这个Boss单位
@@ -171,8 +171,8 @@ namespace HJScarletRework.Globals.Methods
                 }
 
                 //搜索符合条件的敌人, 准备返回这个NPC实例
-                float curNpcDist = Vector2.Distance(npc.Center, p.Center);
-                if (curNpcDist < distStoraged && (ignoreTiles || Collision.CanHit(p.Center, 1, 1, npc.Center, 1, 1)))
+                float curNpcDist = Vector2.Distance(npc.Center, p);
+                if (curNpcDist < distStoraged && (ignoreTiles || Collision.CanHit(p, 1, 1, npc.Center, 1, 1)))
                 {
                     distStoraged = curNpcDist;
                     acceptableTarget = npc;
@@ -289,7 +289,7 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="drawTime"></param>
         /// <param name="posMove"></param>
         /// <param name="rotFix"></param>
-        public static void DrawGlowEdge(this Projectile proj,Texture2D tex, Color color, int drawTime = 8, float posMove = 2f, float rotFix = 0f, Vector2? drawPosOffset = null)
+        public static void DrawGlowEdge(this Projectile proj, Texture2D tex, Color color, int drawTime = 8, float posMove = 2f, float rotFix = 0f, Vector2? drawPosOffset = null)
         {
             Vector2 offset = drawPosOffset ?? Vector2.Zero;
             //绘制发光边缘
@@ -446,7 +446,7 @@ namespace HJScarletRework.Globals.Methods
                     break;
                 case ImmnuityType.Static:
                     proj.usesIDStaticNPCImmunity = true;
-                    proj.idStaticNPCHitCooldown= hitCooldown;
+                    proj.idStaticNPCHitCooldown = hitCooldown;
                     break;
                 default:
                     break;
@@ -462,7 +462,7 @@ namespace HJScarletRework.Globals.Methods
                     break;
                 case ImmnuityType.Static:
                     proj.usesIDStaticNPCImmunity = true;
-                    proj.idStaticNPCHitCooldown= hitCooldown;
+                    proj.idStaticNPCHitCooldown = hitCooldown;
                     break;
                 default:
                     break;
@@ -472,7 +472,7 @@ namespace HJScarletRework.Globals.Methods
         }
 
         public static bool IsLegal(this NPC target) => target != null && target.CanBeChasedBy();
-        public static void ResetBoomerangReturn(this Projectile proj, int pene =-1)
+        public static void ResetBoomerangReturn(this Projectile proj, int pene = -1)
         {
             proj.tileCollide = false;
             proj.penetrate = pene;
@@ -506,7 +506,7 @@ namespace HJScarletRework.Globals.Methods
             Player owner = Main.player[proj.owner];
             return owner.MountedCenter.X + reverse.ToDirectionInt() * value;
         }
-        public static void AddFrames(this Projectile proj, int frameCounts = 3,int totalFrames = 8)
+        public static void AddFrames(this Projectile proj, int frameCounts = 3, int totalFrames = 8)
         {
             proj.frameCounter += 1;
             if (proj.frameCounter > frameCounts)

@@ -2,8 +2,8 @@
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -15,7 +15,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class BinaryStarsExecution: HJScarletProj
+    public class BinaryStarsExecution : HJScarletProj
     {
         public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<BinaryStarsProj>().Texture;
@@ -90,7 +90,7 @@ namespace HJScarletRework.Projs.Executor
             if (AttackTimer > 10f)
             {
                 AttackTimer = 10f;
-                if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex,searchDistance: 1800f,canPassWall:true))
+                if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, searchDistance: 1800f, canPassWall: true))
                 {
                     Projectile.extraUpdates = 8;
                     Projectile.HomingTarget(target.Center, 1800f, 24f, 18f);
@@ -162,7 +162,7 @@ namespace HJScarletRework.Projs.Executor
                 DrawTrails(HJScarletTexture.Trail_MegaBeam.Texture, Color.Violet);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: -12f);
-                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f,alphaValue: 1f);
+                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f, alphaValue: 1f);
 
                 SB.End();
                 SB.BeginDefault();

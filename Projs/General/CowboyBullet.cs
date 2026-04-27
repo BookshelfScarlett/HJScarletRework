@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -31,8 +31,8 @@ namespace HJScarletRework.Projs.General
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            new ShinyCrossStar(Projectile.Center, Vector2.Zero, RandLerpColor(Color.LightGoldenrodYellow, Color.DarkOrange), 40, 0, 1, 1f,false).Spawn();
-            SoundEngine.PlaySound(SoundID.Dig with {MaxInstances = 0, Pitch = -0.47f}, Projectile.Center); 
+            new ShinyCrossStar(Projectile.Center, Vector2.Zero, RandLerpColor(Color.LightGoldenrodYellow, Color.DarkOrange), 40, 0, 1, 1f, false).Spawn();
+            SoundEngine.PlaySound(SoundID.Dig with { MaxInstances = 0, Pitch = -0.47f }, Projectile.Center);
         }
         public override bool PreDraw(ref Color lightColor)
         {

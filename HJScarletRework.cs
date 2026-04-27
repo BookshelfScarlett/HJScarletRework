@@ -14,10 +14,10 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework
 {
-	// Please read https://github.com/tModLoader/tModLoader/wiki/Basic-tModLoader-Modding-Guide#mod-skeleton-contents for more information about the various files in a mod.
-	public class HJScarletRework : Mod
-	{
-		public static HJScarletRework Instance;
+    // Please read https://github.com/tModLoader/tModLoader/wiki/Basic-tModLoader-Modding-Guide#mod-skeleton-contents for more information about the various files in a mod.
+    public class HJScarletRework : Mod
+    {
+        public static HJScarletRework Instance;
         public static Mod CrossMod_Calamity;
         public static Mod CrossMod_HomewardJourney;
         public static Mod CrossMod_UCA;
@@ -84,7 +84,7 @@ namespace HJScarletRework
                 SmeltList.AddOres(TileType<ContinentOfJourney.Tiles.CubistOre>(), ItemType<CubistBar>());
                 if (CrossMod_Calamity != null)
                 {
-                    
+
                 }
             }
         }

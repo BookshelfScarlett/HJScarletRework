@@ -3,8 +3,8 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -36,7 +36,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.timeLeft = 600;
         }
-        
+
         public override void AI()
         {
             if (Projectile.damage != 0)
@@ -48,15 +48,15 @@ namespace HJScarletRework.Projs.Melee
             {
                 Projectile.Opacity = Lerp(Projectile.Opacity, 0, 0.25f);
                 Projectile.scale = Lerp(Projectile.scale, 0f, 0.2f);
-                if(Projectile.Opacity <= 0.02f && Projectile.timeLeft > 100)
+                if (Projectile.Opacity <= 0.02f && Projectile.timeLeft > 100)
                 {
                     Projectile.timeLeft = 50;
                 }
             }
-                Projectile.rotation = Projectile.velocity.ToRotation();
+            Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.FinalUpdateNextBool(5) && Projectile.damage > 0)
             {
-                float ratio = Main.rand.NextFloat(0.32f, 0.42f) *0.85f;
+                float ratio = Main.rand.NextFloat(0.32f, 0.42f) * 0.85f;
                 Vector2 pos = Projectile.Center.ToRandCirclePos(16);
                 Vector2 vel = Projectile.velocity.ToRandVelocity(0f, 9f, 11.4f);
                 new KiraStar(pos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20, 0, 1, ratio).SpawnToPriorityNonPreMult();
@@ -66,13 +66,13 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(16f);
                 Vector2 vel = Projectile.velocity.ToRandVelocity(0, 9f, 11.4f);
-                new HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20,  0.1f).Spawn();
+                new HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20, 0.1f).Spawn();
                 new HRShinyOrb(pos, vel, Color.White, 20, 0.05f).Spawn();
             }
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            SoundEngine.PlaySound(HJScarletSounds.Dialectics_Hit with { MaxInstances = 1, Pitch = 0.5f, PitchVariance = 0.2f ,Volume = 0.7f}, Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.Dialectics_Hit with { MaxInstances = 1, Pitch = 0.5f, PitchVariance = 0.2f, Volume = 0.7f }, Projectile.Center);
         }
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {
@@ -93,7 +93,7 @@ namespace HJScarletRework.Projs.Melee
         {
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             //DrawCoreStar(sb);
-            for (int i = -1; i < 2; i+=2)
+            for (int i = -1; i < 2; i += 2)
             {
                 DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DarkBlue, 1.26f, 1f, 15f * i);
                 DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.RoyalBlue, 0.8f, 1f, 15f * i);
@@ -142,9 +142,9 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreDraw(ref Color lightColor)
         {
             PixelatedRenderManager.BeginDrawProj = true;
-            if(Projectile.damage>0)
-            Projectile.DrawGlowEdge(Color.White, rotFix: PiOver4);
-            Projectile.DrawProj(Color.White * Projectile.Opacity,4, rotFix: PiOver4);
+            if (Projectile.damage > 0)
+                Projectile.DrawGlowEdge(Color.White, rotFix: PiOver4);
+            Projectile.DrawProj(Color.White * Projectile.Opacity, 4, rotFix: PiOver4);
             return false;
         }
     }

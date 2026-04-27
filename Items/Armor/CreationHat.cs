@@ -59,7 +59,7 @@ namespace HJScarletRework.Items.Armor
             player.GetCritChance<MagicDamageClass>() += ManaCrits;
             player.manaCost -= ManaCost;
             player.HJScarlet().CreationHatSet = true;
-            
+
         }
         public override void AddRecipes()
         {

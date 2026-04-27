@@ -13,7 +13,7 @@ namespace HJScarletRework.Rarity.RarityParticles
         public float BeginScale = 1f;
         public int Rotdir = 1;
 
-        public SakuraPetals(Vector2 position,Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, float speed)
+        public SakuraPetals(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, float speed)
         {
             Position = position;
             Velocity = velocity;
@@ -28,7 +28,7 @@ namespace HJScarletRework.Rarity.RarityParticles
         }
         public override void CustomUpdate()
         {
-            Vector2 idealVelocity = Vector2.UnitY.RotatedBy(Lerp(-0.94f, 0.94f, (float)Math.Sin(Time / 36f + Main.rand.NextFloat(0,10000)) * 0.5f + 0.5f)) * Speed;
+            Vector2 idealVelocity = Vector2.UnitY.RotatedBy(Lerp(-0.94f, 0.94f, (float)Math.Sin(Time / 36f + Main.rand.NextFloat(0, 10000)) * 0.5f + 0.5f)) * Speed;
             float movementInterpolant = Lerp(0.05f, 0.1f, Utils.GetLerpValue(0, Lifetime / 2, Time, true));
             Velocity = Vector2.Lerp(Velocity, idealVelocity, movementInterpolant);
             Velocity = Velocity.SafeNormalize(-Vector2.UnitY) * Speed;

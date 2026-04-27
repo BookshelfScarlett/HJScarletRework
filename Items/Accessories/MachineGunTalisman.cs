@@ -15,12 +15,12 @@ namespace HJScarletRework.Items.Accessories
             Item.width = Item.height = 33;
             Item.SetUpRarityPrice(ItemRarityID.Cyan);
             Item.accessory = true;
+            Item.defense = 10;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.HJScarlet().critDamageExecutor += 0.12f;
             player.HJScarlet().blackKeyHeal = 35;
-            
+
         }
         public override void AddRecipes()
         {

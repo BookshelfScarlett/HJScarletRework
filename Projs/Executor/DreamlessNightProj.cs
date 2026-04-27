@@ -1,10 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Metaballs;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Metaballs;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -137,8 +137,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 20f, 12f);
             if (Projectile.IntersectOwnerByDistance(50))
             {
-                if (!Owner.HasProj<DreamlessNightMinion>())
-                    Projectile.AddExecutionTime(ItemType<DreamlessNight>());
                 Projectile.Kill();
             }
         }
@@ -197,9 +195,12 @@ namespace HJScarletRework.Projs.Executor
                 }
 
             }
+
+            if (!Owner.HasProj<DreamlessNightMinion>(out int projID) && !Projectile.HJScarlet().ExecutionStrike)
+                Projectile.AddExecutionTimePass(ItemType<DreamlessNight>());
             //在命中的时候，我们才生成需要的仆从
             //当然，前提是条件合理
-            if (!Owner.HasProj<DreamlessNightMinion>(out int projID) && Projectile.HJScarlet().ExecutionStrike)
+            if (!Owner.HasProj<DreamlessNightMinion>() && Projectile.HJScarlet().ExecutionStrike)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, projID, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 proj.rotation = Projectile.rotation;
@@ -230,6 +231,8 @@ namespace HJScarletRework.Projs.Executor
                 proj.penetrate = 4;
                 proj.extraUpdates = 1;
                 proj.timeLeft = 80;
+                proj.usesLocalNPCImmunity = false;
+                proj.usesIDStaticNPCImmunity = true;
                 ((DreamlessNightBeam)proj.ModProjectile).BeamState = DreamlessNightBeam.BeamType.SplitBeam;
                 for (int j = 0; j < 3; j++)
                     ShadowNebula.SpawnParticle(target.Center, RandVelTwoPi(0.2f, 1.2f) + spawnPos.ToSafeNormalize() * 1.1f, 0.15f, HJScarletTexture.Texture_WhiteCircle.Value);

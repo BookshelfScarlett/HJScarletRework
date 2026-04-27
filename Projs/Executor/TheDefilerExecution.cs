@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using System;
@@ -13,7 +13,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class TheDefilerExecution: HJScarletProj
+    public class TheDefilerExecution : HJScarletProj
     {
         public override string Texture => GetInstance<TheDefilerProj>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;
@@ -121,7 +121,7 @@ namespace HJScarletRework.Projs.Executor
                 else
                 {
                     Projectile.velocity *= 0.98f;
-                    Projectile.rotation = Math.Abs(Projectile.velocity.X)/3 + Math.Abs(Projectile.velocity.Y)/3;
+                    Projectile.rotation = Math.Abs(Projectile.velocity.X) / 3 + Math.Abs(Projectile.velocity.Y) / 3;
                 }
             }
         }
@@ -201,11 +201,11 @@ namespace HJScarletRework.Projs.Executor
         private void UpdateHitParticle(Vector2 center)
         {
             for (int i = 0; i < 24; i++)
-                new Fire(center.ToRandCirclePos(6f), RandVelTwoPi(1,7f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, RandRotTwoPi, 1f, 0.1f).SpawnToNonPreMult();
+                new Fire(center.ToRandCirclePos(6f), RandVelTwoPi(1, 7f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, RandRotTwoPi, 1f, 0.1f).SpawnToNonPreMult();
             for (int i = 0; i < 24; i++)
                 new ShinyOrbHard(center.ToRandCirclePos(10f), RandVelTwoPi(3, 8f), RandLerpColor(Color.DarkGreen, Color.SeaGreen), 40, Main.rand.NextFloat(0.4f, 0.8f)).SpawnToNonPreMult();
             for (int i = 0; i < 7; i++)
-                new EmptyRing(Projectile.Center.ToRandCirclePos(20f), -RandVelTwoPi(2f, 4f), RandLerpColor(Color.DarkViolet, Color.Purple), 60, 0.25f * Main.rand.NextFloat(0.75f,1.1f), 1f, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
+                new EmptyRing(Projectile.Center.ToRandCirclePos(20f), -RandVelTwoPi(2f, 4f), RandLerpColor(Color.DarkViolet, Color.Purple), 60, 0.25f * Main.rand.NextFloat(0.75f, 1.1f), 1f, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
 
         }
         private void StrikeCurTarget(NPC target)

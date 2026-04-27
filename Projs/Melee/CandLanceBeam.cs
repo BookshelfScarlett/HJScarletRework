@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -178,7 +178,7 @@ namespace HJScarletRework.Projs.Melee
                 return;
             for (int i = 0; i < 15; i++)
             {
-                float rotOffset = (float)i / TwoPi; 
+                float rotOffset = (float)i / TwoPi;
                 new TurbulenceGlowOrb(Projectile.Center + Projectile.SafeDir().RotatedBy(ToRadians(rotOffset)) * 4f, 0.8f, RandLerpColor(Color.LightCyan, Color.LightBlue), 40, 0.1f, Projectile.velocity.ToRandVelocity(ToRadians(10f)).ToRotation()).SpawnToNonPreMult();
             }
         }

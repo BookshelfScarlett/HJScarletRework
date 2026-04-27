@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
@@ -60,6 +61,12 @@ namespace HJScarletRework.Items.Useables
                 for (int i = 0; i < foodList.Count; i++)
                 {
                     //尽管如此，这里仍然需要过一个可能的保护
+                    if (!HJScarletList.LegalFoodList.Contains(foodList[i]))
+                    {
+                        modPlayer.terraRecipe_CurEat.RemoveAt(i);
+                        continue;
+                    }
+
                     string perInstance = $"[i:{foodList[i]}]";
                     //将其放进这个列表里合并起来
                     combineValue += $"{perInstance}";
@@ -83,6 +90,12 @@ namespace HJScarletRework.Items.Useables
                 for (int i = 0; i < notEatenFoodList.Count; i++)
                 {
                     //尽管如此，这里仍然需要过一个可能的保护
+                    if (!HJScarletList.LegalFoodList.Contains(notEatenFoodList[i]))
+                    {
+                        modPlayer.terraRecipe_haventEat.RemoveAt(i);
+                        continue;
+                    }
+                    //第二个问题，这里需要对比一遍与原始的食物清单
                     string perInstance = $"[i:{notEatenFoodList[i]}]";
                     //将其放进这个列表里合并起来
                     combineValue2 += $"{perInstance}";

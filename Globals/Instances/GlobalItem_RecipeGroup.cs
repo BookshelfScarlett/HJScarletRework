@@ -52,7 +52,7 @@ namespace HJScarletRework.Globals.Instances
             AnyEvilHammer = CreateRecipeGroup(nameof(AnyEvilHammer), ItemType<TheDefiler>(), ItemType<FleshGrinder>());
             AnyLifeCrystal = CreateRecipeGroup(nameof(AnyLifeCrystal), ItemID.LifeCrystal, ItemID.HeartLantern);
             AnyGoldCritter = CreateRecipeGroup(nameof(AnyGoldCritter), goldList);
-            AnyGoldBar = CreateRecipeGroup(nameof(AnyGoldBar), ItemID.GoldBar,ItemID.PlatinumBar);
+            AnyGoldBar = CreateRecipeGroup(nameof(AnyGoldBar), ItemID.GoldBar, ItemID.PlatinumBar);
             AnyEvilScale = CreateRecipeGroup(nameof(AnyEvilScale), ItemID.ShadowScale, ItemID.TissueSample);
         }
         public override void Unload()

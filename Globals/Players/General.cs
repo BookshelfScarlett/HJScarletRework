@@ -1,14 +1,14 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Buffs;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.Graphics;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -30,15 +30,19 @@ namespace HJScarletRework.Globals.Players
 
         // 用于向上向下冲刺禁用羽落
         public int NoSlowFall = 0;
+        public float maxFallspeedModify = 0;
         public int ownerMinionHammerCount = 0;
 
         public int climaticHawstringLaserCounter = 0;
         #region 护甲
         public bool shinobiExecutor = false;
-        public bool monkExecutor = false; 
+        public bool monkExecutor = false;
         public bool runeWizardExecutor = false;
         public bool cowboyExecutor = false;
         public bool monkStaffHeal = false;
+        public bool fishExecutor = false;
+        public int fishDash = 0;
+        public bool fishDashStored = false;
         public int cowboyRevolverTimer = 0;
 
         public bool floretProtectorExecutor = false;
@@ -91,7 +95,20 @@ namespace HJScarletRework.Globals.Players
         public bool SquidPet = false;
         public bool WatcherPet = false;
         #endregion
-
+        #region Player Movement
+        /// <summary>
+        /// 在进入保存动量的冲刺之前，玩家当前的速度
+        /// </summary>
+        public float PlayerLastSpeedStored = 0f;
+        /// <summary>
+        /// 玩家是否按下了跳跃键
+        /// </summary>
+        public bool PlayerHasUseJump = false;
+        /// <summary>
+        /// 玩家的动量保存的时间
+        /// </summary>
+        public float PlayerFinalSpeedStoredTime = 0f;
+        #endregion
         #region 处刑攻击
         public bool tacticalExecution = false;
         public int tacticalTime = 0;
@@ -177,7 +194,9 @@ namespace HJScarletRework.Globals.Players
                 DrawLoveRingParticle(drawInfo.Position, drawInfo.drawPlayer);
             }
         }
-
+        public override void DrawPlayer(Camera camera)
+        {
+        }
         public void DrawLoveRingParticle(Vector2 position, Player drawPlayer)
         {
             if (Main.rand.NextBool(12))
@@ -189,6 +208,7 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnEnterWorld()
         {
+            resetTerraRecipe = true;
             for (int i = 0; i < Player.inventory.Length; i++)
             {
                 Item item = Player.inventory[i];
@@ -215,7 +235,6 @@ namespace HJScarletRework.Globals.Players
                     SwitchArmorType2(item, i, true);
                 }
             }
-            resetTerraRecipe = true;
         }
         private void SwitchArmorType2(Item item, int i, bool armorSlot = false)
         {
@@ -243,13 +262,13 @@ namespace HJScarletRework.Globals.Players
                     AlterArmorType2(item.type, i, RaincoatChestplate.Defense, false, armorSlot: armorSlot);
                     break;
                 case ItemID.FishCostumeMask:
-                    AlterArmorType2(item.type, i, FishCostumeHelmet.Defense, false, armorSlot: armorSlot);
+                    AlterArmorType2(item.type, i, FishCostumeHelmet.Defense, false, ItemRarityID.Orange, armorSlot);
                     break;
                 case ItemID.FishCostumeShirt:
-                    AlterArmorType2(item.type, i, FishCostumeChestplate.Defense, false, armorSlot: armorSlot);
+                    AlterArmorType2(item.type, i, FishCostumeChestplate.Defense, false, ItemRarityID.Orange, armorSlot);
                     break;
                 case ItemID.FishCostumeFinskirt:
-                    AlterArmorType2(item.type, i, FishCostumeLegs.Defense, false, armorSlot: armorSlot);
+                    AlterArmorType2(item.type, i, FishCostumeLegs.Defense, false, ItemRarityID.Orange, armorSlot);
                     break;
             }
             if (DownedBossSystem.downedLifeGod)

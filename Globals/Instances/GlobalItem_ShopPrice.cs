@@ -18,7 +18,7 @@ namespace HJScarletRework.Globals.Instances
         public static int RarityPriceLightPurple => Item.buyPrice(0, 36, 0, 0); //淡紫色
         public static int RarityPriceLime => Item.buyPrice(0, 48, 0, 0); //淡绿色
         public static int RarityPriceYellow => Item.buyPrice(0, 60, 0, 0); //黄色
-        public static int RarityPriceCyan =>Item.buyPrice(0, 80, 0, 0); //淡蓝色
+        public static int RarityPriceCyan => Item.buyPrice(0, 80, 0, 0); //淡蓝色
         public static int RarityPriceRed => Item.buyPrice(1, 0, 0, 0); //红色
         public static int RarityPricePurple => Item.buyPrice(1, 20, 0, 0); //紫色
         public static Dictionary<int, int> _RarityMap = new()
@@ -38,7 +38,7 @@ namespace HJScarletRework.Globals.Instances
         };
         public static int ConvertedToValue(int key)
         {
-            if(_RarityMap.TryGetValue(key, out var value)) 
+            if (_RarityMap.TryGetValue(key, out var value))
                 return value;
             return RarityPriceGreen;
         }

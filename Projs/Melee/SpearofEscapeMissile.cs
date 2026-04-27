@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -45,7 +45,7 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            switch(AttackType)
+            switch (AttackType)
             {
                 case Style.Spawn:
                     DoSpawn();
@@ -74,14 +74,14 @@ namespace HJScarletRework.Projs.Melee
         private void DoDirect()
         {
             Timer++;
-            if(Timer > 25f * Projectile.MaxUpdates)
+            if (Timer > 25f * Projectile.MaxUpdates)
             {
                 if (Projectile.GetTargetSafe(out NPC target))
                     Projectile.HomingTarget(target.Center, -1f, 12f, 10f, 20f);
             }
             else
             {
-                Projectile.velocity = Projectile.velocity.RotatedBy(Main.rand.NextFloat(-ToRadians(5f),ToRadians(6f)));
+                Projectile.velocity = Projectile.velocity.RotatedBy(Main.rand.NextFloat(-ToRadians(5f), ToRadians(6f)));
                 Projectile.velocity *= 0.96f;
             }
         }
@@ -124,7 +124,7 @@ namespace HJScarletRework.Projs.Melee
             }
             else
             {
-               //Spawn的时候默认受到重力影响让火箭落下。
+                //Spawn的时候默认受到重力影响让火箭落下。
                 Projectile.velocity *= 0.97f;
                 Projectile.velocity.X *= 1f;
                 if (Projectile.velocity.Y < 30f)
@@ -232,8 +232,8 @@ namespace HJScarletRework.Projs.Melee
             Texture2D missle = Projectile.GetTexture();
             SB.Draw(missle, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation + rotFixer, missle.Size() / 2, Projectile.scale, 0, 0);
             SB.EnterShaderArea();
-            if(AttackType != Style.Direct || (AttackType ==Style.Direct && Timer > 35f * Projectile.MaxUpdates))
-            DrawTrail();
+            if (AttackType != Style.Direct || (AttackType == Style.Direct && Timer > 35f * Projectile.MaxUpdates))
+                DrawTrail();
             SB.EndShaderArea();
             return false;
         }

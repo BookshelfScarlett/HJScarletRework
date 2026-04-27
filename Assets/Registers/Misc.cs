@@ -44,7 +44,7 @@ namespace HJScarletRework.Assets.Registers
             Font_Eras_Bold = Request<DynamicSpriteFont>($"{Path_Fonts}{nameof(Font_Eras_Bold)}");
             Font_MGR = Request<DynamicSpriteFont>($"{Path_Fonts}{nameof(Font_MGR)}");
         }
-        public void UnloadMisc()
+        public static void UnloadMisc()
         {
             Specific_DialectCube = null;
             Specific_DialectBall = null;

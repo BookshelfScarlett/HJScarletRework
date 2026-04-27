@@ -9,7 +9,7 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class LightBiteThrown : ThrownSpearClass
     {
         public override string Texture => GetInstance<LightBite>().Texture;
-        int UseTime =  25;
+        int UseTime = 25;
         public override void ExSD()
         {
             Item.damage = 110;

@@ -60,7 +60,7 @@ namespace HJScarletRework.Core.PixelatedRender
                 BeforeProjTarget = null;
 
                 BeforeDustTarget_Addictive?.Dispose();
-                BeforeDustTarget_Addictive= null;
+                BeforeDustTarget_Addictive = null;
                 BeforePlayerTarget_Addictive?.Dispose();
                 BeforePlayerTarget_Addictive = null;
             });
@@ -194,7 +194,7 @@ namespace HJScarletRework.Core.PixelatedRender
                 Main.spriteBatch.End();
                 BeginDrawBeforePlayers = false;
             }
-            if(BeginDrawBeforePlayers_Addictive)
+            if (BeginDrawBeforePlayers_Addictive)
             {
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
                 Effect effect = HJScarletShader.Pixelation;
@@ -219,7 +219,7 @@ namespace HJScarletRework.Core.PixelatedRender
                 Main.spriteBatch.End();
                 BeginDrawBeforeDusts = false;
             }
-            if(BeginDrawBeforeDusts_Addictive)
+            if (BeginDrawBeforeDusts_Addictive)
             {
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
                 Effect effect = HJScarletShader.Pixelation;

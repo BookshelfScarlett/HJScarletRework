@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class JungleMadness: ExecutorWeaponClass
+    public class JungleMadness : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 1f;
         public override int ExecutionTime => 15;
@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override void ExSD()
         {
             Item.width = Item.height = 66;
-            Item.damage = 44;
+            Item.damage = 24;
             Item.knockBack = 8f;
             Item.noUseGraphic = true;
             Item.noMelee = true;

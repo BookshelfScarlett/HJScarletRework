@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -65,19 +65,19 @@ namespace HJScarletRework.Projs.Executor
             if (Main.rand.NextBool(6))
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePosEdge(40);
-                new HRShinyOrb(pos, RandVelTwoPi(4f,8f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, 0.1f).Spawn();
+                new HRShinyOrb(pos, RandVelTwoPi(4f, 8f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, 0.1f).Spawn();
             }
             if (Main.rand.NextBool(8))
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePosEdge(40);
-                new LightningParticle(pos, Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.Blue), 40, Projectile.velocity.ToRotation() + PiOver2 + Main.rand.NextFloat(-PiOver4,PiOver4), 0.4f).Spawn();
+                new LightningParticle(pos, Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.Blue), 40, Projectile.velocity.ToRotation() + PiOver2 + Main.rand.NextFloat(-PiOver4, PiOver4), 0.4f).Spawn();
             }
 
         }
 
         public void UpdateAttackAI()
         {
-            switch(AttackState)
+            switch (AttackState)
             {
                 case State.Spawn:
                     DoSpawn();
@@ -108,7 +108,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void DoLock()
         {
-            
+
             Projectile.rotation += 0.16f;
             if (Projectile.GetTargetSafe(out NPC target, true, 1800f, true))
             {
@@ -155,7 +155,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-              Vector2 spawnPos = new Vector2(target.Center.X + Main.rand.NextFloat(400f, 900f) * Main.rand.NextBool().ToDirectionInt(), target.Center.Y - Main.rand.NextFloat(1200f, 1600f));
+            Vector2 spawnPos = new Vector2(target.Center.X + Main.rand.NextFloat(400f, 900f) * Main.rand.NextBool().ToDirectionInt(), target.Center.Y - Main.rand.NextFloat(1200f, 1600f));
             Vector2 vel = (target.Center - spawnPos).ToSafeNormalize() * 18f;
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<GrandFinaleLightning>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
 

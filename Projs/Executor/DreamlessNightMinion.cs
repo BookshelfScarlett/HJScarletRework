@@ -2,10 +2,10 @@
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Metaballs;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Metaballs;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -69,7 +69,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateHammerParticle()
         {
-            if(Main.rand.NextBool(8))
+            if (Main.rand.NextBool(8))
             {
                 Rectangle rec = Utils.CenteredRectangle(Projectile.Center, new Vector2(Projectile.width, Projectile.height));
                 Vector2 starPos = Main.rand.NextVector2FromRectangle(rec);
@@ -81,7 +81,7 @@ namespace HJScarletRework.Projs.Executor
             if (Main.rand.NextFloat() < Helper.GetAniProgress(1))
             {
                 if (Main.rand.NextBool(4))
-                    new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(25), -Projectile.SafeDirByRot()* Main.rand.NextFloat(0f, 2.1f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, RandRotTwoPi, 1, 0.5f, false, 0.2f).Spawn();
+                    new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(25), -Projectile.SafeDirByRot() * Main.rand.NextFloat(0f, 2.1f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, RandRotTwoPi, 1, 0.5f, false, 0.2f).Spawn();
                 if (Main.rand.NextBool(4))
                     new SmokeParticle(Projectile.Center.ToRandCirclePos(32), -Projectile.SafeDirByRot() * Main.rand.NextFloat(0f, 2.1f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, 1f, 0.155f, Main.rand.NextBool()).SpawnToNonPreMult();
                 if (Main.rand.NextBool(4))
@@ -142,7 +142,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Projectile.FinalUpdateNextBool())
                 {
                     new SmokeParticle(Projectile.Center.ToRandCirclePos(6), Projectile.velocity / 4, RandLerpColor(Color.Violet, Color.DarkViolet), 80, RandRotTwoPi, 1, 0.24f, Main.rand.NextBool()).SpawnToNonPreMult();
-                        
+
                 }
             }
         }
@@ -171,7 +171,7 @@ namespace HJScarletRework.Projs.Executor
             //递增的值越大，锤子的摆动幅度越大
             //基本的挂机状态，此处使用了正弦曲线来让锤子常规上下偏移
             Vector2 anchorPos = new(anchorPosX, anchorPosY);
-            anchorPos =Owner.MountedCenter - Owner.ToMouseVector2() * xValue;
+            anchorPos = Owner.MountedCenter - Owner.ToMouseVector2() * xValue;
             //实际更新位置
             Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, lerpValue);
             //计算锤子需要的朝向。
@@ -265,7 +265,7 @@ namespace HJScarletRework.Projs.Executor
             Texture2D tex = Projectile.GetTexture();
             for (int i = 0; i < 8; i++)
                 SB.Draw(tex, Projectile.Center - Main.screenPosition + ToRadians(60 * i).ToRotationVector2() * 2f, null, Color.DarkViolet.ToAddColor(), Projectile.rotation + PiOver4, tex.ToOrigin(), Projectile.scale * 1.2f, 0, 0);
-            SB.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.Lerp( Color.White, Color.Black, Helper.GetAniProgress(1)), Projectile.rotation + PiOver4, tex.ToOrigin(), Projectile.scale * 1.2f, 0, 0);
+            SB.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.Lerp(Color.White, Color.Black, Helper.GetAniProgress(1)), Projectile.rotation + PiOver4, tex.ToOrigin(), Projectile.scale * 1.2f, 0, 0);
             return false;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)

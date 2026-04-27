@@ -1,7 +1,7 @@
 ﻿using ContinentOfJourney.Projectiles.Meelee;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.ReVisual.Class;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,7 +17,7 @@ namespace HJScarletRework.ReVisual.Projs
         public float Timer = 0;
         public float ExtraTimer = 0;
         public float SpinDirection = 0;
-        public List<float> RotList2 = []; 
+        public List<float> RotList2 = [];
         public override bool ShouldApplyRevisual(Projectile proj, ReVisualPlayer vp)
         {
             return proj.IsMe() && vp.reVisualMythrilKnife;
@@ -42,7 +42,7 @@ namespace HJScarletRework.ReVisual.Projs
             Timer++;
             if (Timer == 30f)
                 SpinDirection = Math.Sign(proj.velocity.X);
-            
+
             Vector2 speedOffset = proj.velocity / 4;
             Vector2 dir = proj.SafeDir();
             Vector2 mountedPos = proj.Center;
@@ -59,7 +59,7 @@ namespace HJScarletRework.ReVisual.Projs
                         if (Main.rand.NextBool())
                             new TurbulenceGlowOrb(proj.Center.ToRandCirclePos(1.2f * MathF.Sin(ExtraTimer)), 0.5f, RandLerpColor(Color.DeepSkyBlue, Color.SeaGreen), 80, Main.rand.NextFloat(0.1f, 0.14f), RandRotTwoPi).Spawn();
                     }
-                    
+
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace HJScarletRework.ReVisual.Projs
                 if (PosList[i] == Vector2.Zero)
                     continue;
                 float rads = 1f - i / (float)PosList.Count;
-                Color drawColor = (Color.Lerp(Color.DeepSkyBlue, Color.SeaGreen, rads) with { A =0 }) * 0.9f * proj.Opacity * (1 - rads);
+                Color drawColor = (Color.Lerp(Color.DeepSkyBlue, Color.SeaGreen, rads) with { A = 0 }) * 0.9f * proj.Opacity * (1 - rads);
                 if (RotList.Count > 0)
                     SB.Draw(starShape, PosList[i] - Main.screenPosition, null, drawColor, RotList2[i] + PiOver2, starShape.ToOrigin(), scale, 0, 0);
                 scale *= 0.97f;

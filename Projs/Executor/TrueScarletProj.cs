@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
         public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<TrueScarlet>().Texture;
         public enum State
-        { 
+        {
             Shoot,
             Buffer,
             Return
@@ -71,18 +71,18 @@ namespace HJScarletRework.Projs.Executor
             }
             if (Main.rand.NextBool(5))
             {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(30);
-                    float scale = 0.965f * 0.65f;
+                Vector2 pos = Projectile.Center.ToRandCirclePos(30);
+                float scale = 0.965f * 0.65f;
                 float rot = RandRotTwoPi;
                 new ShinyOrbParticle(pos, Projectile.velocity / 7f, Color.DarkRed, 40, scale).SpawnToNonPreMult();
                 new ShinyOrbParticle(pos, Projectile.velocity / 7f, Color.Red, 40, scale).Spawn();
-                new ShinyOrbParticle(pos, Projectile.velocity / 7f, RandLerpColor(Color.Silver, Color.White), 40,  scale * 0.6f).Spawn();
+                new ShinyOrbParticle(pos, Projectile.velocity / 7f, RandLerpColor(Color.Silver, Color.White), 40, scale * 0.6f).Spawn();
             }
         }
 
         public void UpdateAttackAI()
         {
-            switch(AttackState)
+            switch (AttackState)
             {
                 case State.Shoot:
                     DoShoot();

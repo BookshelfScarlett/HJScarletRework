@@ -1,11 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.ID;
 
@@ -34,7 +33,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             IsRevers = Main.rand.NextBool();
-            for (int i =0;i<18;i++)
+            for (int i = 0; i < 18; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(6f), Main.rand.NextBool() ? DustID.GreenTorch : DustID.Terra);
                 d.scale *= 0.86f;
@@ -48,7 +47,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer++;
             UpdateParticle();
-            if(Projectile.MeetMaxUpdatesFrame(Timer, 30))
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 30))
             {
                 if (Projectile.GetTargetSafe(out NPC target, searchDistance: 800, canPassWall: false))
                 {
@@ -70,15 +69,15 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen() || Main.rand.NextBool())
                 return;
-            
+
 
             if (Projectile.velocity.LengthSquared() < Main.rand.NextFloat() * (5f * 5f))
             {
-if (Main.rand.NextBool(4))
-            {
-                Vector2 pos = Projectile.ToRandRec();
-                new ShinyCrossStar(pos, -Vector2.UnitY*Main.rand.NextFloat(0.8f,1.8f), RandLerpColor(Color.DarkGreen, Color.LimeGreen), 40, 0, 1, 0.48f, false).Spawn();
-            }
+                if (Main.rand.NextBool(4))
+                {
+                    Vector2 pos = Projectile.ToRandRec();
+                    new ShinyCrossStar(pos, -Vector2.UnitY * Main.rand.NextFloat(0.8f, 1.8f), RandLerpColor(Color.DarkGreen, Color.LimeGreen), 40, 0, 1, 0.48f, false).Spawn();
+                }
                 return;
             }
             if (Main.rand.NextBool())
@@ -88,7 +87,7 @@ if (Main.rand.NextBool(4))
                 d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(5f), 1.4f, 3.4f);
                 d.noGravity = true;
             }
-            if(Main.rand.NextBool(3))
+            if (Main.rand.NextBool(3))
             {
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f), -Projectile.velocity.ToRandVelocity(ToRadians(5f), 1.4f, 3.4f), RandLerpColor(Color.DarkGreen, Color.LimeGreen), 40, 0, 1, 0.48f, false).Spawn();
             }
@@ -99,9 +98,13 @@ if (Main.rand.NextBool(4))
             Projectile.BounceOnTile(oldVelocity);
             return false;
         }
+        public override void OnKill(int timeLeft)
+        {
+
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            for (int i =0;i<18;i++)
+            for (int i = 0; i < 18; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(6f), Main.rand.NextBool() ? DustID.GreenTorch : DustID.Terra);
                 d.scale *= 0.86f;
@@ -132,7 +135,7 @@ if (Main.rand.NextBool(4))
                 Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.60f) + Projectile.PosToCenter();
                 float rot = Lerp(Projectile.oldRot[i], Projectile.oldRot[0], 1f);
                 SB.Draw(projTex, lerpPos, null, edgeColor, rot, ori, oriScale * scale * Projectile.scale, 0, 0);
-                SB.Draw(projTex, lerpPos, null, Color.White.ToAddColor(20) *Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads) , rot, ori, oriScale * scale * Projectile.scale * 0.65f, 0, 0);
+                SB.Draw(projTex, lerpPos, null, Color.White.ToAddColor(20) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads), rot, ori, oriScale * scale * Projectile.scale * 0.65f, 0, 0);
             }
             SB.Draw(projTex, projPos, null, Color.DarkGreen.ToAddColor(50), Projectile.rotation, ori, oriScale * Projectile.scale * 1f, 0, 0);
             SB.Draw(projTex, projPos, null, Color.White.ToAddColor(0), Projectile.rotation, ori, oriScale * Projectile.scale * 0.85f, 0, 0);

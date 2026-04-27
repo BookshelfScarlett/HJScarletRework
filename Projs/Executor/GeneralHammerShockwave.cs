@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 
@@ -73,12 +73,12 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 60; i++)
             {
                 Vector2 dir = Vector2.UnitX.RotatedBy(ToRadians(360f / 32 * i));
-                new ShinyCrossStar(Projectile.Center + dir * 75f, dir * 1.4f, RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 120, dir.ToRotation(), 1f, 0.8f,false).Spawn();
+                new ShinyCrossStar(Projectile.Center + dir * 75f, dir * 1.4f, RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 120, dir.ToRotation(), 1f, 0.8f, false).Spawn();
             }
             for (int i = 0; i < 40; i++)
             {
                 Vector2 dir = Vector2.UnitX.RotatedBy(ToRadians(360f / 32 * i));
-                new ShinyCrossStar(Projectile.Center + dir * 40f, dir * 1.4f, RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 120, dir.ToRotation(), 1f, 0.8f,false).Spawn();
+                new ShinyCrossStar(Projectile.Center + dir * 40f, dir * 1.4f, RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 120, dir.ToRotation(), 1f, 0.8f, false).Spawn();
             }
         }
         public override void PlayParticleOnProjAI()

@@ -40,7 +40,7 @@ namespace HJScarletRework.Projs.Executor
             get => Projectile.HJScarlet().ExtraAI[1] == 1f;
             set => Projectile.HJScarlet().ExtraAI[1] = value ? 1f : 0f;
         }
-        private bool IsHit = false; 
+        private bool IsHit = false;
         private ref float Progress => ref Projectile.localAI[2];
         private Vector2 InitCenter;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
@@ -87,10 +87,10 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!CanSpawnDust)
                 return;
-            float lengthRatio = Clamp(Vector2.Distance(Projectile.Center, InitCenter) / Vector2.Distance(InitCenter, targetCenter) , 0f, 2f);
-            int d = Main.rand.NextFloat(0f, 2f - lengthRatio) < 0.5f ?  DustID.CorruptSpray: DustID.WitherLightning;
+            float lengthRatio = Clamp(Vector2.Distance(Projectile.Center, InitCenter) / Vector2.Distance(InitCenter, targetCenter), 0f, 2f);
+            int d = Main.rand.NextFloat(0f, 2f - lengthRatio) < 0.5f ? DustID.CorruptSpray : DustID.WitherLightning;
             float dScale = Main.rand.NextFloat(0f, 2f - lengthRatio) < 0.5f ? 0.65f : 0.75f;
-            Dust newDust = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(4, 4), d, (Projectile.velocity * 0.30f).RotatedBy(Main.rand.NextFloat(-PiOver4 / 6, PiOver4 / 6)),0, default, 1);
+            Dust newDust = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(4, 4), d, (Projectile.velocity * 0.30f).RotatedBy(Main.rand.NextFloat(-PiOver4 / 6, PiOver4 / 6)), 0, default, 1);
             newDust.noGravity = true;
             newDust.scale *= dScale;
             newDust.color = Color.Purple;
@@ -102,14 +102,14 @@ namespace HJScarletRework.Projs.Executor
             DrawScale = Clamp(EaseOutCubic(progress), 0f, 1f);
             Projectile.velocity *= 0.89f;
             Progress--;
-            if (progress <- 15f)
+            if (progress < -15f)
                 Projectile.Kill();
         }
 
         private void DoHomingToTarget()
         {
             //重新搜索一次单位
-            if (!Projectile.GetTargetSafe(out NPC target, true, 3600,canPassWall:true))
+            if (!Projectile.GetTargetSafe(out NPC target, true, 3600, canPassWall: true))
             {
                 Projectile.extraUpdates = 2;
                 return;
@@ -143,9 +143,9 @@ namespace HJScarletRework.Projs.Executor
             //PixelatedRenderManager.BeginDrawProj = true;
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-            DrawNebulaTrail(Color.MediumPurple, 14f); 
-            DrawNebulaTrail(Color.LightPink with { A  = 50 }, 12.2f); 
-            DrawNebulaTrail(Color.White with { A = 100 }, 10.8f); 
+            DrawNebulaTrail(Color.MediumPurple, 14f);
+            DrawNebulaTrail(Color.LightPink with { A = 50 }, 12.2f);
+            DrawNebulaTrail(Color.White with { A = 100 }, 10.8f);
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             if (Projectile.oldPos.Length > 12)
@@ -158,14 +158,14 @@ namespace HJScarletRework.Projs.Executor
             }
             SB.End();
             SB.BeginDefault();
-            
+
             return false;
         }
         public void RenderPixelated(SpriteBatch sb)
         {
         }
 
-        public void DrawStar(Vector2 drawPos, float rot,Color starColor)
+        public void DrawStar(Vector2 drawPos, float rot, Color starColor)
         {
             Texture2D sharpTears = HJScarletTexture.Particle_HRStar.Value;
             Vector2 targetSize = 0.36f * Projectile.scale * new Vector2(1.2f, 0.25f) * DrawScale;
@@ -194,13 +194,13 @@ namespace HJScarletRework.Projs.Executor
             //创建顶点列表
             for (int i = 0; i < validPosition.Count; i++)
             {
-                Vector2 oldCenter = validPosition[i] + Projectile.Size / 2  - Main.screenPosition;
+                Vector2 oldCenter = validPosition[i] + Projectile.Size / 2 - Main.screenPosition;
                 float progress = (float)i / (validPosition.Count - 1);
                 Vector2 posOffset = new Vector2(0, height * DrawScale * ((float)(totalpoints - i) / totalpoints)).RotatedBy(validRot[i]);
                 ScarletVertex upClass = new(oldCenter - posOffset, trailColor, new Vector3(progress, 0, 0f));
                 ScarletVertex downClass = new(oldCenter + posOffset, trailColor, new Vector3(progress, 1, 0f));
                 list.Add(upClass);
-                list.Add(downClass);    
+                list.Add(downClass);
             }
             if (list.Count >= 3)
             {

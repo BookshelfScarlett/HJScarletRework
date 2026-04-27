@@ -29,7 +29,7 @@ namespace HJScarletRework.Projs.Pets
         {
             SimplePetAnimation(15f);
             if (Owner.dead)
-                Owner.HJScarlet().WhalePet= false;
+                Owner.HJScarlet().WhalePet = false;
 
             if (Owner.HJScarlet().WhalePet)
                 Projectile.timeLeft = 2;

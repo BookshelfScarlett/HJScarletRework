@@ -5,20 +5,20 @@ namespace HJScarletRework.Assets.Registers
     public partial class HJScarletTexture : ModSystem
     {
         public static Tex2DWithPath Trail_ManaStreak { get; set; }
-        public static Tex2DWithPath Trail_ManaStreakTiny{ get; set; }
+        public static Tex2DWithPath Trail_ManaStreakTiny { get; set; }
         public static Tex2DWithPath Trail_RvSlash { get; set; }
         public static Tex2DWithPath Trail_VShapeWithTail { get; set; }
         public static Tex2DWithPath Trail_ParaLine { get; set; }
         public static Tex2DWithPath Trail_TerraRayFlow { get; set; }
         public static Tex2DWithPath Trail_SquareLine { get; set; }
-        public static Tex2DWithPath Trail_FadedStreak{ get; set; }
+        public static Tex2DWithPath Trail_FadedStreak { get; set; }
         public static Tex2DWithPath Trail_MegaBeam { get; set; }
-        public static Tex2DWithPath Trail_ManaMegaBeam{ get; set; }
-        public static Tex2DWithPath Trail_Lightning0    { get; set; }
-        public static Tex2DWithPath Trail_Lightning1    { get; set; }
-        public static Tex2DWithPath Trail_Lightning2    { get; set; }
-        public static Tex2DWithPath Trail_Lightning3    { get; set; }
-        public static Tex2DWithPath Trail_Lightning4    { get; set; }
+        public static Tex2DWithPath Trail_ManaMegaBeam { get; set; }
+        public static Tex2DWithPath Trail_Lightning0 { get; set; }
+        public static Tex2DWithPath Trail_Lightning1 { get; set; }
+        public static Tex2DWithPath Trail_Lightning2 { get; set; }
+        public static Tex2DWithPath Trail_Lightning3 { get; set; }
+        public static Tex2DWithPath Trail_Lightning4 { get; set; }
         public void LoadTrail()
         {
             Trail_ManaStreak = new Tex2DWithPath($"{Path_General}{nameof(Trail_ManaStreak)}");
@@ -37,7 +37,7 @@ namespace HJScarletRework.Assets.Registers
             Trail_Lightning3 = new Tex2DWithPath($"{Path_General}{nameof(Trail_Lightning3)}");
             Trail_Lightning4 = new Tex2DWithPath($"{Path_General}{nameof(Trail_Lightning4)}");
         }
-        public void UnloadTrail()
+        public static void UnloadTrail()
         {
             Trail_ManaStreak = null;
             Trail_ParaLine = null;
@@ -45,9 +45,9 @@ namespace HJScarletRework.Assets.Registers
             Trail_VShapeWithTail = null;
             Trail_TerraRayFlow = null;
             Trail_SquareLine = null;
-            Trail_ManaStreakTiny= null;
-            Trail_FadedStreak= null;
-            Trail_MegaBeam= null;
+            Trail_ManaStreakTiny = null;
+            Trail_FadedStreak = null;
+            Trail_MegaBeam = null;
             Trail_ManaMegaBeam = null;
             Trail_Lightning0 = null;
             Trail_Lightning1 = null;

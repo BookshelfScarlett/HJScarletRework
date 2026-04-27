@@ -22,20 +22,20 @@ namespace HJScarletRework.Rarity.RarityShiny
         public static void DrawFlavorRarity(DrawableTooltipLine drawableTooltipLine)
         {
             PostDrawFlavorParticle(ref FlavorSparkles, drawableTooltipLine);
-            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Black, Color.Lerp(Color.Crimson,Color.Red, 0.75f));
+            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Black, Color.Lerp(Color.Crimson, Color.Red, 0.75f));
         }
         public static void DrawRarity2(DrawableTooltipLine drawableTooltipLine)
         {
             PostDrawRarity(ref RaritySparkles, drawableTooltipLine);
-            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Crimson, Color.Lerp(Color.Crimson, Color.Red, 0.9f),Color.Black,1f);
+            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Crimson, Color.Lerp(Color.Crimson, Color.Red, 0.9f), Color.Black, 1f);
         }
         public static void DrawFlavorRarity2(DrawableTooltipLine drawableTooltipLine)
         {
-            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Crimson, Color.Lerp(Color.Crimson, Color.Red, 0.9f),Color.Black,0);
+            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Crimson, Color.Lerp(Color.Crimson, Color.Red, 0.9f), Color.Black, 0);
         }
         public static void DrawMisc(DrawableTooltipLine drawableTooltipLine)
         {
-            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Crimson, Color.Lerp(Color.Crimson, Color.Red, 0.9f),Color.Black,0);
+            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Crimson, Color.Lerp(Color.Crimson, Color.Red, 0.9f), Color.Black, 0);
         }
 
         private static void PostDrawFlavorParticle(ref List<RaritySparkle> particleList, DrawableTooltipLine tooltipLine)

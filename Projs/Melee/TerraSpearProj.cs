@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -52,7 +52,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.penetrate = 1;
-            Projectile.extraUpdates =6;
+            Projectile.extraUpdates = 6;
             Projectile.ownerHitCheck = true;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.timeLeft = 150;
@@ -114,8 +114,8 @@ namespace HJScarletRework.Projs.Melee
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (AttackType == State.Skyfallen)
             {
-                
-                if(Projectile.GetTargetSafe(out NPC target, false, canPassWall:true) && Projectile.numHits < 1)
+
+                if (Projectile.GetTargetSafe(out NPC target, false, canPassWall: true) && Projectile.numHits < 1)
                 {
                     Projectile.HomingTarget(target.Center, -1, 22f, 5f, 10f);
                 }
@@ -161,8 +161,8 @@ namespace HJScarletRework.Projs.Melee
         {
             if (ArrowSpawnTime > 5)
                 return;
-                SoundEngine.PlaySound(HJScarletSounds.HymnFireball_Release with { MaxInstances = 0, Volume = 0.6f }, Projectile.Center);
-            for (int i = -1; i < 2; i+=2)
+            SoundEngine.PlaySound(HJScarletSounds.HymnFireball_Release with { MaxInstances = 0, Volume = 0.6f }, Projectile.Center);
+            for (int i = -1; i < 2; i += 2)
             {
                 Vector2 vel = -Projectile.velocity.ToSafeNormalize().RotatedBy(ToRadians(10 * i)) * 40f * Main.rand.NextFloat(0.8f, 1.4f);
                 Vector2 pos = Projectile.Center - Projectile.SafeDir() * 20f;
@@ -170,7 +170,7 @@ namespace HJScarletRework.Projs.Melee
                 ((TerraSpearPortal)proj.ModProjectile).PortalType = TerraSpearPortal.State.InitSpawnState;
             }
             ArrowSpawnTime += 1;
-            
+
         }
 
         private void DisapperAI()
@@ -208,7 +208,7 @@ namespace HJScarletRework.Projs.Melee
             }
             SpawnDirectionParticle();
             SpawnDust(Projectile.Center, Projectile.SafeDir());
-            
+
             if (CurSpawnTime > TotalSpawnTime)
                 return;
             if (Projectile.HJScarlet().GlobalTargetIndex == -1 || Projectile.HJScarlet().GlobalTargetIndex == target.whoAmI)
@@ -218,7 +218,7 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 dir = HJScarletMethods.PredictAimToTarget(spawnProjPos, target.Center, target.velocity, 22f, 0);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnProjPos, dir, Type, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 ((TerraSpearProj)proj.ModProjectile).AttackType = State.Skyfallen;
-                    proj.penetrate = 4;
+                proj.penetrate = 4;
                 proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
                 if (AttackType == State.Skyfallen)
                 {
@@ -231,7 +231,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool? CanHitNPC(NPC target)
         {
-                return null;
+            return null;
         }
         private void SpawnDirectionParticle()
         {
@@ -277,7 +277,7 @@ namespace HJScarletRework.Projs.Melee
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.58f);
             SB.EndShaderArea();
             Vector2 drawOffset = Projectile.SafeDirByRot() * 100f;
-            
+
 
             SB.Draw(projTex, drawPos - drawOffset, null, Color.White * Projectile.Opacity, Projectile.rotation + rotFixer, ori, Projectile.scale, 0, 0);
             return false;
@@ -306,7 +306,7 @@ namespace HJScarletRework.Projs.Melee
                 float rot = (validPosition[j + 1] - validPosition[j]).ToRotation();
                 float ratio = j / (posCount - 1);
                 Vector2 posOffset = rot.ToRotationVector2().RotatedBy(PiOver2) * offsetHeight;
-                trailDrawDates.Add(new(validPosition[j] + Projectile.Size / 2 + posOffset - drawOffset , drawColor, new Vector2(0, 20 * multipleSize * Projectile.scale), rot));
+                trailDrawDates.Add(new(validPosition[j] + Projectile.Size / 2 + posOffset - drawOffset, drawColor, new Vector2(0, 20 * multipleSize * Projectile.scale), rot));
             }
             TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
         }

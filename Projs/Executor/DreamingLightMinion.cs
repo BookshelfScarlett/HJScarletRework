@@ -2,10 +2,10 @@
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Metaballs;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Metaballs;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -117,10 +117,10 @@ namespace HJScarletRework.Projs.Executor
             Item item = GetInstance<DreamingLight>().Item;
             int attackRates = (int)(Owner.ApplyWeaponAttackSpeed(item, item.useTime, 10) * 0.60f);
             float rates = Clamp(Timer / (attackRates / 2f), 0f, 1f);
-                HandleMinionShootAnimation(Vector2.Zero);
+            HandleMinionShootAnimation(Vector2.Zero);
             if (Timer < attackRates)
                 return;
-                ShooDreamLaser();
+            ShooDreamLaser();
             LaserShootTime += 1;
             Timer = 0;
         }
@@ -211,7 +211,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Helper.GetAniProgress(1) != 0f)
                 return;
-            SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with {MaxInstances = 0, Volume = 0.75f }, Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { MaxInstances = 0, Volume = 0.75f }, Projectile.Center);
         }
         public void StrikeInit()
         {

@@ -8,7 +8,7 @@ using Terraria;
 
 namespace HJScarletRework.ReVisual.Projs
 {
-    public class ReLonginusProj: ReVisualProjClass
+    public class ReLonginusProj : ReVisualProjClass
     {
         public override int ApplyProj => ProjectileType<Longinus>();
         public override int TotalListCount => 5;
@@ -46,7 +46,7 @@ namespace HJScarletRework.ReVisual.Projs
             Texture2D starShape = HJScarletTexture.Particle_SharpTear;
             Texture2D tex = proj.GetTexture();
             Vector2 scale = new Vector2(.6f, 1.4f);
-            Vector2 ori = tex.Size()/2 - Vector2.One.RotatedBy(PiOver2) * 24f ;
+            Vector2 ori = tex.Size() / 2 - Vector2.One.RotatedBy(PiOver2) * 24f;
             for (int i = 0; i < PosList.Count; i++)
             {
                 if (PosList[i] == Vector2.Zero)

@@ -23,7 +23,7 @@ namespace HJScarletRework.Core.Primitives.Trail
         public float PrimitivesHeightRot = primitivesHeightRot;
     }
 
-    public struct DrawSetting(Texture2D texture,bool usePosTransformation, bool usePixelTransformation)
+    public struct DrawSetting(Texture2D texture, bool usePosTransformation, bool usePixelTransformation)
     {
         public Texture2D texture = texture;
         public bool usePosTransformation = usePosTransformation;

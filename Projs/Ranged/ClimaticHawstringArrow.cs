@@ -3,8 +3,8 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -68,8 +68,8 @@ namespace HJScarletRework.Projs.Ranged
             {
                 Vector2 starScale = GetScale(i);
                 float colorAlpha = GetAlphaFade(1 - i);
-                SB.Draw(star, Projectile.Center - Main.screenPosition + Projectile.SafeDir() * 10f, null, Color.DarkGoldenrod * colorAlpha, Projectile.rotation+ PiOver4, star.Size() / 2, starScale, SpriteEffects.None, 0);
-                SB.Draw(star, Projectile.Center - Main.screenPosition + Projectile.SafeDir() * 10f, null, Color.DarkGoldenrod* colorAlpha,Projectile.rotation+ PiOver4+ PiOver2, star.Size() / 2, starScale, SpriteEffects.None, 0);
+                SB.Draw(star, Projectile.Center - Main.screenPosition + Projectile.SafeDir() * 10f, null, Color.DarkGoldenrod * colorAlpha, Projectile.rotation + PiOver4, star.Size() / 2, starScale, SpriteEffects.None, 0);
+                SB.Draw(star, Projectile.Center - Main.screenPosition + Projectile.SafeDir() * 10f, null, Color.DarkGoldenrod * colorAlpha, Projectile.rotation + PiOver4 + PiOver2, star.Size() / 2, starScale, SpriteEffects.None, 0);
             }
             SB.EndShaderArea();
             return false;

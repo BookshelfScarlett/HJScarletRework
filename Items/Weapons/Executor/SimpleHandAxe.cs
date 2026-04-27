@@ -16,12 +16,12 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.height = 40;
             Item.SetUpNoUseGraphicItem();
             Item.SetUpRarityPrice(ItemRarityID.Blue);
-            Item.shootSpeed = 16;
+            Item.shootSpeed = 22;
             Item.useTime = Item.useAnimation = 20;
             Item.shoot = ProjectileType<SimpleHandAxeProj>();
             //音效在射弹初始化时进行
             Item.UseSound = null;
-            Item.damage = 20;
+            Item.damage = 13;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 4f;
         }

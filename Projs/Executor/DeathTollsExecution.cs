@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -55,9 +55,9 @@ namespace HJScarletRework.Projs.Executor
         public override void AI()
         {
             Projectile.rotation += 0.15f;
-            if(!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame)
             {
-                for(int i =0;i<60;i++)
+                for (int i = 0; i < 60; i++)
                 {
                     PosList.Add(Vector2.Zero);
                     PosListAlt.Add(Vector2.Zero);
@@ -95,12 +95,12 @@ namespace HJScarletRework.Projs.Executor
             if (Main.rand.NextBool(6))
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(32f), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, RandRotTwoPi, 1, 0.46f, false).Spawn();
             if (Main.rand.NextBool(6))
-                new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(32f), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Violet), 40,  0.46f).Spawn();
+                new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(32f), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, 0.46f).Spawn();
         }
 
         public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
         {
-            
+
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -137,13 +137,13 @@ namespace HJScarletRework.Projs.Executor
         }
 
         private int StartSpinTime => 30 * Projectile.extraUpdates;
-        
+
         private void DoArcRotating()
         {
             DoArcRot();
             //Timer应延后自增避免出现执行问题
             AttackTimer += 1;
-            if(Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true, 1800, true))
+            if (Projectile.GetTargetSafe(out NPC target, Projectile.HJScarlet().GlobalTargetIndex, true, 1800, true))
                 ReleaseDarkEnegry();
             if (RotateTime > 1)
             {
@@ -190,7 +190,7 @@ namespace HJScarletRework.Projs.Executor
             if (_isArcRotating)
             {
                 //首次画圆，执行0~StartSpin，第二次画圆，执行StartSpinTime ~ StartSpinTime * 2
-                float progress = RotateTime == 0 
+                float progress = RotateTime == 0
                     ? (float)AttackTimer / StartSpinTime
                     : (float)(AttackTimer - StartSpinTime) / StartSpinTime;
                 float curRot = _arcStartRotation + TotalArcAngle * progress;
@@ -242,7 +242,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Projectile.owner != Main.myPlayer)
                     return;
                 //鬼魂音效
-                SoundEngine.PlaySound(SoundID.Item103 with { Volume = 0.5f ,MaxInstances = 4, Pitch = 0.7f });
+                SoundEngine.PlaySound(SoundID.Item103 with { Volume = 0.5f, MaxInstances = 4, Pitch = 0.7f });
                 //生成
                 Projectile flares = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ProjectileType<DeathTollsDarkEnergy>(), flareDamage, 1.1f, Owner.whoAmI, 0f, Main.rand.Next(3));
                 flares.extraUpdates = 3;

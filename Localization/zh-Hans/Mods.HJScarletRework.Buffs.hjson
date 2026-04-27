@@ -42,3 +42,8 @@ HerbBagBuff: {
 	// DisplayName: Herb Bag Buff
 	// Description: Mods.HJScarletRework.Buffs.HerbBagBuff.Description
 }
+
+GoldenAppleBuff: {
+	DisplayName: 金苹果
+	Description: 你的牙口居然没事吗？
+}

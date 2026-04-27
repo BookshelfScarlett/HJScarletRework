@@ -18,15 +18,15 @@ namespace HJScarletRework.ReVisual.Class
         [SaveableBool]
         public bool reVisualCobaltKnife = false;
         [SaveableBool]
-        public bool reVisualOrihalcumKnife= false;
+        public bool reVisualOrihalcumKnife = false;
         [SaveableBool]
-        public bool reVisualAdamantiteKnife= false;
+        public bool reVisualAdamantiteKnife = false;
         [SaveableBool]
-        public bool reVisualMythrilKnife= false;
+        public bool reVisualMythrilKnife = false;
         [SaveableBool]
-        public bool reVisualPalladiumKnife= false;
+        public bool reVisualPalladiumKnife = false;
         [SaveableBool]
-        public bool reVisualTitaniumKnife= false;
+        public bool reVisualTitaniumKnife = false;
         [SaveableBool]
         public bool reVisualBloodthirst = false;
         [SaveableBool]

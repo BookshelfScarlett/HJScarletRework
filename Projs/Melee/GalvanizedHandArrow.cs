@@ -24,7 +24,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public Style AttackType
         {
-            get => (Style)Projectile.ai[1]; 
+            get => (Style)Projectile.ai[1];
             set => Projectile.ai[1] = (float)value;
         }
         public override void SetStaticDefaults()
@@ -48,7 +48,7 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            
+
             if (AttackType == Style.Attack)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePosEdge(5f), DustID.UnusedWhiteBluePurple, Projectile.SafeDirByRot() * 3f);
@@ -104,12 +104,12 @@ namespace HJScarletRework.Projs.Melee
         //特效的素材复用。
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawProj(Color.White * Projectile.Opacity,rotFix:PiOver2);
+            Projectile.DrawProj(Color.White * Projectile.Opacity, rotFix: PiOver2);
 
             DrawGlow(Projectile.Center - Main.screenPosition);
             DrawTrail(Color.CornflowerBlue, 18f);
-            DrawTrail(Color.RoyalBlue with { A = 50}, 16.2f);
-            DrawTrail(Color.White with { A = 100}, 12.8f);
+            DrawTrail(Color.RoyalBlue with { A = 50 }, 16.2f);
+            DrawTrail(Color.White with { A = 100 }, 12.8f);
             return false;
         }
         private void DrawGlow(Vector2 drawPos)

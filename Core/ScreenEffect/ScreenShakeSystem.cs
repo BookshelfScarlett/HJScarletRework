@@ -47,7 +47,7 @@ namespace HJScarletRework.Core.ScreenEffect
                 Player player = Main.LocalPlayer;
 
                 float toPlayerLength = (ShakePosition - player.Center).LengthSquared();
-                float ratios = Clamp((toPlayerLength / (ShakeEffectDistance *ShakeEffectDistance)), 0f, 1f);
+                float ratios = Clamp((toPlayerLength / (ShakeEffectDistance * ShakeEffectDistance)), 0f, 1f);
                 Shake *= 1 - ratios;
             }
 

@@ -1,18 +1,13 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleSystem;
-using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -29,7 +24,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ExSD()
         {
             Projectile.extraUpdates = 30;
-            Projectile.SetupImmnuity(-1);
+            Projectile.SetupImmnuity(2);
             Projectile.penetrate = 1;
             Projectile.width = Projectile.height = 30;
             Projectile.timeLeft = 50 * 40;
@@ -39,6 +34,18 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
+            //生成的时候会直接删除磁球
+            if (Owner.HasProj(ProjectileID.Electrosphere))
+            {
+                foreach (var projType in Main.ActiveProjectiles)
+                {
+                    if (projType.owner != Owner.whoAmI)
+                        continue;
+                    if (projType.type == ProjectileID.Electrosphere)
+                        projType.Kill();
+                }
+            }
+
         }
         public override void ProjAI()
         {
@@ -76,7 +83,7 @@ namespace HJScarletRework.Projs.Executor
                 new LightningGlow(spawnPos, dir.RotatedBy(rotvalue), Color.RoyalBlue, 50, scale).Spawn();
             }
             Vector2 pos = spawnPos;
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < 12; j++)
             {
                 Vector2 vel2 = (Projectile.velocity).ToRandVelocity(ToRadians(30f), 1.2f, 8.8f);
                 new SmokeParticle(pos.ToRandCirclePos(10f), RandVelTwoPi(-3.8f, 6.6f) + vel2 - vel2 * Main.rand.NextFloat(0.1f, 1.2f), RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 40, RandRotTwoPi, 1f, 0.45f).SpawnToPriorityNonPreMult();
@@ -98,7 +105,11 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 vel2 = (Projectile.velocity).ToRandVelocity(ToRadians(30f), 1.2f, 9.8f);
                 new ShinyCrossStar(pos2, vel2, RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0, 1, 0.75f, false).Spawn();
             }
-
+            new ShinySquareSplit(pos, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.SkyBlue, 15, 0.4f, Projectile.velocity.ToRotation() + PiOver2, opacity: 0.8f, fadeIn: true).Spawn();
+            new ShinySquareSplit(pos, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.SkyBlue, 15, 0.4f, Projectile.velocity.ToRotation() + PiOver2 + Pi, opacity: 0.8f, fadeIn: true).Spawn();
+            new ShinySquareSplit(pos, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.SkyBlue, 15, 0.4f, Projectile.velocity.ToRotation() + PiOver4 + Pi, opacity: 0.8f, fadeIn: true).Spawn();
+            new ShinySquareSplit(pos, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.SkyBlue, 15, 0.4f, Projectile.velocity.ToRotation() + PiOver4 + PiOver2, opacity: 0.8f, fadeIn: true).Spawn();
+            //new ShinySquareSplit(pos, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.SkyBlue, 15, 0.4f, Projectile.velocity.ToRotation() + PiOver4 + TwoPi,fadeIn:true).Spawn();
             //for (int i = 0; i < 12; i++)
             //{
             //    new SmokeParticle(spawnPos.ToRandCirclePos(6f), RandVelTwoPi(1.2f, 8.4f), RandLerpColor(Color.SkyBlue, Color.CadetBlue), 40, RandRotTwoPi, 1f, 0.43f).SpawnToPriorityNonPreMult();

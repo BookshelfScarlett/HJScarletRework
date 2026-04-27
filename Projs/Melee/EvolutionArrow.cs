@@ -2,8 +2,8 @@
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -79,7 +79,7 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.netUpdate = true;
                 AttackType = Style.Fade;
             }
-            
+
 
         }
         public void SpawnParticle()

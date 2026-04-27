@@ -1,6 +1,6 @@
 ﻿using ContinentOfJourney.Projectiles;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 
@@ -32,10 +32,10 @@ namespace HJScarletRework.Projs.Melee
             for (int i = 0; i < 2; i++)
             {
                 new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(4f) + offset, 0.5f, RandLerpColor(Color.Orange, Color.OrangeRed), 30, Main.rand.NextFloat(0.1f, 0.12f), RandRotTwoPi).Spawn();
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(8f)+offset, -Projectile.velocity / 8f, RandLerpColor(Color.OrangeRed, Color.DarkGray), 30, RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f, 0.16f) * 1.1f).SpawnToPriorityNonPreMult();
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(8f) + offset, -Projectile.velocity / 8f, RandLerpColor(Color.OrangeRed, Color.DarkGray), 30, RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f, 0.16f) * 1.1f).SpawnToPriorityNonPreMult();
             }
             Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(10f), 0.8f, 1.4f);
-            new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f)+ offset, vel, RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.3f, ToRadians(10f)).Spawn();
+            new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f) + offset, vel, RandLerpColor(Color.DarkOrange, Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.3f, ToRadians(10f)).Spawn();
         }
         public override bool PreKill(int timeLeft)
         {
@@ -61,7 +61,7 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreDraw(ref Color lightColor)
         {
             float rotFix = ToRadians(135);
-            Projectile.DrawProj(Color.White, rotFix:rotFix);
+            Projectile.DrawProj(Color.White, rotFix: rotFix);
             return false;
         }
     }

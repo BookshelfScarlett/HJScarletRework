@@ -2,10 +2,10 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.ParticleSystem;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -18,7 +18,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class BinaryStarsPhantom: HJScarletProj
+    public class BinaryStarsPhantom : HJScarletProj
     {
         public override ClassCategory Category => ClassCategory.Executor;
         public HJScarletGlobalProjs ModProj => Projectile.HJScarlet();
@@ -39,7 +39,7 @@ namespace HJScarletRework.Projs.Executor
         public ref float ArcRotation => ref ModProj.ExtraAI[1];
         const int SetUpdate = 3;
         //是否画圆
-        private bool _isArcRotating = false; 
+        private bool _isArcRotating = false;
         //旋转起始角
         private float _arcStartRotation;
         private bool ShouldDrawVertex = true;
@@ -76,7 +76,7 @@ namespace HJScarletRework.Projs.Executor
         public override bool? CanDamage() => AttackTimer > ArcDuration;
         public override void AI()
         {
-            if(AttackTimer == 0f)
+            if (AttackTimer == 0f)
             {
                 IsFlip = TotalArcAngle < 0;
                 SpriteRotation = Projectile.velocity.ToRotation();
@@ -103,7 +103,7 @@ namespace HJScarletRework.Projs.Executor
                 return;
             }
 
-            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true,canPassWall:true))
+            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true, canPassWall: true))
             {
                 Projectile.extraUpdates = 4;
                 Projectile.HomingTarget(target.Center, 1800f, 20f, 20f);
@@ -180,7 +180,7 @@ namespace HJScarletRework.Projs.Executor
                 DrawTrails(HJScarletTexture.Trail_MegaBeam.Texture, Color.Violet);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: -12f);
-                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f,alphaValue: 1f);
+                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f, alphaValue: 1f);
                 SB.End();
                 SB.BeginDefault();
             }
@@ -241,17 +241,17 @@ namespace HJScarletRework.Projs.Executor
                 dust.velocity = velOffset;
                 dust.scale = 1.2f;
             }
-            SoundEngine.PlaySound(BinaryStarsProj.HitSound with {Volume = 0.8f }, Projectile.Center);
-            SoundEngine.PlaySound(SoundID.Item109 with {MaxInstances = 1, Pitch = 0.2f, PitchVariance = 0.1f }, Owner.Center);
+            SoundEngine.PlaySound(BinaryStarsProj.HitSound with { Volume = 0.8f }, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.Item109 with { MaxInstances = 1, Pitch = 0.2f, PitchVariance = 0.1f }, Owner.Center);
             TargetIndex = target.whoAmI;
             if (Projectile.numHits % 2 is 0)
             {
-                int ownedProjCounts = Owner.ownedProjectileCounts[Type]; 
+                int ownedProjCounts = Owner.ownedProjectileCounts[Type];
                 //每轮生成两个，超过3把以上的锤子在场时生成一个
                 int maxCount = ownedProjCounts < 3 ? 2 : 1;
-                SpawnNebulaShot(Owner, Projectile, target, maxCount, damage:(int)(Projectile.damage * 0.1f));
+                SpawnNebulaShot(Owner, Projectile, target, maxCount, damage: (int)(Projectile.damage * 0.1f));
             }
-            
+
         }
 
         public static void SpawnNebulaShot(Player owner, Projectile projectile, NPC target, int maxSpawnCounts = 2, bool canSpawnDust = true, int? damage = null)
@@ -265,7 +265,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 spawnPosBase = (owner.MountedCenter - target.Center).SafeNormalize(Vector2.UnitX);
                 float warpRadians = Main.rand.NextFloat(-PiOver2 * 0.45f, PiOver2 * 0.45f);
                 Vector2 warpOffset = 150f * spawnPosBase.RotatedBy(warpRadians);
-                Vector2 spawnPos =  owner.MountedCenter + warpOffset * Main.rand.Next(6, 9) * 0.25f;
+                Vector2 spawnPos = owner.MountedCenter + warpOffset * Main.rand.Next(6, 9) * 0.25f;
                 //确定初始速度，精准一些。
                 Vector2 velDir = (target.Center - spawnPos).SafeNormalize(Vector2.UnitX);
                 SpawnDust(spawnPos, velDir);
@@ -294,13 +294,13 @@ namespace HJScarletRework.Projs.Executor
                     //而后使用封装的一个自定义方法，为射弹自动分配自己的位置
                     Vector2 edge = spawnPos + GetCertainPointBaseOnVectorCircle(angle, shortAxis, longAxis, baseRot);
                     Color drawColor = Color.Lerp(BinaryStarsProj.TrailColor with { A = 75 }, Color.MediumPurple with { A = 75 }, (totalParticleCounts - j) / (float)totalParticleCounts);
-                    ShinyOrbParticle orbs = new ShinyOrbParticle(edge, dir * 0.2f, drawColor, 30, Main.rand.NextFloat(0.11f, 0.22f), BlendStateID.Alpha);
+                    ShinyOrbParticle orbs = new ShinyOrbParticle(edge, dir * 0.2f, drawColor, 30, Main.rand.NextFloat(0.22f, 0.25f), BlendStateID.Alpha, affactedByGravity: false);
                     orbs.Spawn();
                 }
             }
             //在中心点位额外绘制一个orb
-             new ShinyOrbParticle(spawnPos, dir * 0.2f, Color.Violet, 30, 0.75f, glowCenter:false).Spawn();
-             new ShinyOrbParticle(spawnPos, dir * 0.2f, Color.MediumPurple, 30, 0.45f, glowCenter:false).Spawn();
+            new ShinyOrbParticle(spawnPos, dir * 0.2f, Color.Violet, 30, 0.75f, glowCenter: false).Spawn();
+            new ShinyOrbParticle(spawnPos, dir * 0.2f, Color.MediumPurple, 30, 0.45f, glowCenter: false).Spawn();
         }
         /// <summary>
         /// 基于圆+极坐标的复杂计算来获取需要的位置
@@ -335,6 +335,6 @@ namespace HJScarletRework.Projs.Executor
             proj.localAI[0] = IsFlip.ToDirectionInt();
             return true;
         }
-        
+
     }
 }

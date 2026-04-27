@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Armor.ExecutorAlter
 {
-    public class FloretProtectorHelmetAlter: AlterVanillaArmor
+    public class FloretProtectorHelmetAlter : AlterVanillaArmor
     {
         public override int ApplyArmor => ItemID.FloretProtectorHelmet;
         public static int Defense = 40;
@@ -50,7 +50,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
             player.setBonus += "\n" + value.ToLangValue();
         }
     }
-    public class FlorectProtectorChestplateAlter: AlterVanillaArmor
+    public class FlorectProtectorChestplateAlter : AlterVanillaArmor
     {
         public override int ApplyArmor => ItemID.FloretProtectorChestplate;
         public static int Defense = 60;
@@ -68,7 +68,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
             item.rare = ItemRarityID.Red;
         }
     }
-    public class FlorectProtectorLegsAlter: AlterVanillaArmor
+    public class FlorectProtectorLegsAlter : AlterVanillaArmor
     {
         public override int ApplyArmor => ItemID.FloretProtectorLegs;
         public static int Defense = 30;

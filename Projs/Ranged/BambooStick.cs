@@ -31,7 +31,7 @@ namespace HJScarletRework.Projs.Ranged
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer++;
-            if(Timer >10)
+            if (Timer > 10)
             {
                 if (Projectile.GetTargetSafe(out NPC target, searchDistance: 450))
                     Projectile.HomingTarget(target.Center, -1, 19f, 10f);
@@ -47,7 +47,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            for (int i = 0;i<16;i++)
+            for (int i = 0; i < 16; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(10), DustID.JungleGrass);
                 d.scale *= Main.rand.NextFloat(1.1f, 1.3f);

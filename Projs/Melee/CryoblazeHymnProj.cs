@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -114,13 +114,13 @@ namespace HJScarletRework.Projs.Melee
             {
                 QuickSpawn(true, ProjectileType<CryoblazeHymnFirePortal>(), (int)(Projectile.damage * 0.75f));
                 QuickSpawn(false, ProjectileType<CryoblazeHymnFrostPortal>(), (int)(Projectile.damage * 0.40f));
-                SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1 },Projectile.Center);
+                SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1 }, Projectile.Center);
             }
             for (int i = 0; i < 30; i++)
             {
                 for (int j = 0; j < 2; j++)
                 {
-                    Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(4f) + Projectile.SafeDir() * -60f + Projectile.SafeDir() *i *5f;
+                    Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(4f) + Projectile.SafeDir() * -60f + Projectile.SafeDir() * i * 5f;
                     new TurbulenceShinyOrb(spawnPos, RandZeroToOne, RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), 30, Main.rand.NextFloat(0.24f, 0.36f), RandRotTwoPi).Spawn();
                     new TurbulenceShinyOrb(spawnPos, RandZeroToOne, RandLerpColor(Color.Orange, Color.OrangeRed), 30, Main.rand.NextFloat(0.24f, 0.36f), RandRotTwoPi).Spawn();
                 }
@@ -148,7 +148,7 @@ namespace HJScarletRework.Projs.Melee
                 AttackType = Style.Slowdown;
                 Timer = 0;
                 Projectile.netUpdate = true;
-                
+
             }
         }
         public void DrawSideStreak(Color beginColor, Color targetColor, bool NeedPi, float scaleMult)

@@ -35,7 +35,7 @@ namespace HJScarletRework.ReVisual.Items
     {
         public override int ApplyItem => ItemType<CopperKnife>();
     }
-    public class ReIronKnife:ReOreKnife
+    public class ReIronKnife : ReOreKnife
     {
         public override int ApplyItem => ItemType<IronKnife>();
     }
@@ -54,12 +54,12 @@ namespace HJScarletRework.ReVisual.Items
         public override int ApplyItem => ItemType<SilverKnife>();
 
     }
-    public class ReGoldKnife :ReOreKnife
+    public class ReGoldKnife : ReOreKnife
     {
         public override int ApplyItem => ItemType<GoldKnife>();
 
     }
-    public class RePlatinumKnife :ReOreKnife
+    public class RePlatinumKnife : ReOreKnife
     {
         public override int ApplyItem => ItemType<PlatinumKnife>();
 

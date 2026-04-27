@@ -1,7 +1,8 @@
-﻿using HJScarletRework.Core.Configs;
+﻿using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
@@ -16,6 +17,7 @@ namespace HJScarletRework.Globals.Classes
         public override string Texture => ProjPath + GetType().Name;
         public new string LocalizationCategory => $"Projs.Friendly.{Category}";
         public bool PerformanceMode = HJScarletConfigClient.Instance.PerformanceMode;
+        public virtual Vector2 TileHitbox => Vector2.Zero;
         public override void SetDefaults()
         {
             Projectile.friendly = true;
@@ -28,6 +30,15 @@ namespace HJScarletRework.Globals.Classes
             if (!Projectile.HJScarlet().FirstFrame)
                 OnFirstFrame();
             ProjAI();
+        }
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            if (!TileHitbox.Equals(Vector2.Zero))
+            {
+                width = (int)TileHitbox.X;
+                height = (int)TileHitbox.Y;
+            }
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
         public SpriteBatch SB { get => Main.spriteBatch; }
         public GraphicsDevice GD { get => Main.graphics.GraphicsDevice; }

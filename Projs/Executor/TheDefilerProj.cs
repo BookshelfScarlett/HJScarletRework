@@ -2,10 +2,10 @@
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -17,6 +17,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override string Texture => GetInstance<TheDefiler>().Texture;
         public override ClassCategory Category => ClassCategory.Executor;
+        public override Vector2 TileHitbox => new Vector2(13, 13);
         public enum State
         {
             Shoot,
@@ -36,8 +37,8 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.tileCollide = true;
             Projectile.width = Projectile.height = 32;
-            Projectile.SetupImmnuity(60);
-            Projectile.penetrate = 6;
+            Projectile.SetupImmnuity(-1);
+            Projectile.penetrate = -1;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.extraUpdates = 1;
             Projectile.timeLeft = 600;
@@ -70,9 +71,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 12f, 20f);
             if (!Projectile.Hitbox.Intersects(Owner.Hitbox))
                 return;
-            Projectile.AddExecutionTime(ItemType<TheDefiler>());
-            if (Projectile.HJScarlet().ExecutionStrike)
-                CanFocusStrike();
 
             Projectile.Kill();
         }
@@ -106,6 +104,7 @@ namespace HJScarletRework.Projs.Executor
             Timer++;
             if (Timer > 15 * Projectile.MaxUpdates)
             {
+                Projectile.ResetLocalNPCHitImmunity();
                 Timer = 0;
                 Projectile.netUpdate = true;
                 AttackType = State.Return;
@@ -121,10 +120,13 @@ namespace HJScarletRework.Projs.Executor
             {
                 new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity.ToRandVelocity(ToRadians(10), 1.2f, 1.8f), RandLerpColor(Color.DarkGreen, Color.SeaGreen), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.5f, 1.1f), false).SpawnToNonPreMult();
             }
-            Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(30f), DustID.Corruption);
-            d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(15f), 1.2f, 1.8f);
-            d.scale *= Main.rand.NextFloat(0.9f, 1.1f);
-            d.noGravity = true;
+            if (Projectile.FinalUpdateNextBool())
+            {
+                Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(30f), DustID.Corruption);
+                d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(15f), 1.2f, 1.8f);
+                d.scale *= Main.rand.NextFloat(0.9f, 1.1f);
+                d.noGravity = true;
+            }
 
 
             if (Projectile.numUpdates == 0 && Main.rand.NextBool(5))
@@ -137,6 +139,7 @@ namespace HJScarletRework.Projs.Executor
                 TileCollideParticle(oldVelocity);
                 AttackType = State.Return;
                 Timer *= 0f;
+                Projectile.BounceOnTile(oldVelocity);
                 Projectile.netUpdate = true;
                 Projectile.tileCollide = false;
             }
@@ -166,10 +169,14 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             Projectile.originalDamage = Projectile.damage;
+            if (Projectile.HJScarlet().ExecutionStrike)
+                CanFocusStrike();
+
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
+            Projectile.AddExecutionTimePass(ItemType<TheDefiler>());
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 2, Pitch = -0.2f }, target.Center);
             for (int i = 0; i < 24; i++)
             {

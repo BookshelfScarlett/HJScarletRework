@@ -51,14 +51,14 @@ namespace HJScarletRework.ReVisual.Projs
             SB.Draw(tex, proj.Center - Main.screenPosition, null, Color.White * proj.Opacity, proj.rotation, tex.ToOrigin(), proj.scale, 0, 0);
             if (PosList2.Count < 1 && RotList2.Count < 1)
                 return;
-            DrawGlow(proj,proj.Center - Main.screenPosition);
-            DrawTheTrail(proj,Color.CornflowerBlue, 18f);
-            DrawTheTrail(proj,Color.RoyalBlue with { A = 50}, 16.2f);
-            DrawTheTrail(proj, Color.White with { A = 100}, 12.8f);
+            DrawGlow(proj, proj.Center - Main.screenPosition);
+            DrawTheTrail(proj, Color.CornflowerBlue, 18f);
+            DrawTheTrail(proj, Color.RoyalBlue with { A = 50 }, 16.2f);
+            DrawTheTrail(proj, Color.White with { A = 100 }, 12.8f);
 
 
         }
-        private void DrawGlow(Projectile proj,Vector2 drawPos)
+        private void DrawGlow(Projectile proj, Vector2 drawPos)
         {
             SB.EnterShaderArea();
             Vector2 dir = proj.SafeDirByRot();
@@ -67,7 +67,7 @@ namespace HJScarletRework.ReVisual.Projs
             SB.Draw(lineGlow.Value, drawPos + dir * 10f, null, Color.CornflowerBlue * proj.Opacity, proj.rotation, lineGlow.Origin, glowScale * 0.10f, 0, 0);
             SB.EndShaderArea();
         }
-        public void DrawTheTrail(Projectile proj,Color trailColor, float height)
+        public void DrawTheTrail(Projectile proj, Color trailColor, float height)
         {
             SB.EnterShaderArea();
             float laserLength = 50;

@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -11,7 +11,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class AzureFrostmarkEnergy :HJScarletFriendlyProj
+    public class AzureFrostmarkEnergy : HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Melee;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
@@ -42,7 +42,7 @@ namespace HJScarletRework.Projs.Melee
             //这里的球比起雪球，更接近于霜火球
             //因此，会沿途留下烟火轨迹
             //烟的粒子会靠后一点，并且会先生成让原版的冰粒子正常绘制
-            new SmokeParticle(pos - Projectile.SafeDir() * 15f, vel * 0.5f, RandLerpColor(Color.DeepSkyBlue, Color.White), 20, 0.5f,1f, 0.15f * Main.rand.NextFloat(0.78f,1.11f), Main.rand.NextBool()).SpawnToPriorityNonPreMult();
+            new SmokeParticle(pos - Projectile.SafeDir() * 15f, vel * 0.5f, RandLerpColor(Color.DeepSkyBlue, Color.White), 20, 0.5f, 1f, 0.15f * Main.rand.NextFloat(0.78f, 1.11f), Main.rand.NextBool()).SpawnToPriorityNonPreMult();
             //生成光球类粒子。增效
             new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(8f), Projectile.velocity.ToRandVelocity(ToRadians(10f), -1.2f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20, 0.35f).Spawn();
             Projectile.rotation = Projectile.velocity.ToRotation();
@@ -54,14 +54,14 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile.BounceOnTile(oldVelocity, 1f,0.8f);
+            Projectile.BounceOnTile(oldVelocity, 1f, 0.8f);
             SpawnHitParticle();
             BounceTime++;
             return BounceTime > 2;
         }
         private void SpawnHitParticle()
         {
-            SoundEngine.PlaySound(SoundID.Item48 with { MaxInstances = 1, Volume = 0.754f}, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.Item48 with { MaxInstances = 1, Volume = 0.754f }, Projectile.Center);
             for (int i = 0; i < 10; i++)
                 new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(2f), 0.8f, RandLerpColor(Color.SkyBlue, Color.AliceBlue), 40, Main.rand.NextFloat(0.1f, 0.12f), RandRotTwoPi, true).Spawn();
             for (int i = 0; i < 5; i++)
@@ -91,11 +91,11 @@ namespace HJScarletRework.Projs.Melee
             {
                 scale *= 0.90f;
                 float rads = (float)i / length;
-                Color edgeColor = Color.Lerp(Color.LightSkyBlue, Color.Lerp(Color.LightSkyBlue, Color.Blue, rads * 0.7f), (1- rads)).ToAddColor(10) * Clamp (Projectile.velocity.Length(), 0f,1f) * (1- rads); 
+                Color edgeColor = Color.Lerp(Color.LightSkyBlue, Color.Lerp(Color.LightSkyBlue, Color.Blue, rads * 0.7f), (1 - rads)).ToAddColor(10) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads);
                 SB.Draw(projTex, Projectile.oldPos[i] + Projectile.PosToCenter(), null, edgeColor, Projectile.oldRot[i], ori, oriScale * scale * Projectile.scale, 0, 0);
             }
             SB.Draw(projTex, projPos, null, Color.DeepSkyBlue.ToAddColor(50), Projectile.rotation, ori, oriScale * Projectile.scale, 0, 0);
-            SB.Draw(projTex, projPos, null, Color.White.ToAddColor(0), Projectile.rotation, ori, oriScale* Projectile.scale * 0.65f, 0, 0);
+            SB.Draw(projTex, projPos, null, Color.White.ToAddColor(0), Projectile.rotation, ori, oriScale * Projectile.scale * 0.65f, 0, 0);
             return false;
         }
     }

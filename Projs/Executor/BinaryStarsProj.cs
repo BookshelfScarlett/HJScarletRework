@@ -3,10 +3,10 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,7 +20,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class BinaryStarsProj: ThrownHammerProj, ILocalizedModType
+    public class BinaryStarsProj : ThrownHammerProj, ILocalizedModType
     {
         protected override BoomerangDefault BoomerangStat => new(
             returnTime: 34,
@@ -105,6 +105,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
+                Projectile.AddExecutionTimePass(ItemType<BinaryStars>());
                 if (Projectile.numHits < 5)
                     NormalHit(target);
                 TargetIndex = target.whoAmI;
@@ -185,7 +186,7 @@ namespace HJScarletRework.Projs.Executor
 
                 Vector2 sparkVelocity = splatterDirection.RotatedByRandom(0.7f) * Main.rand.NextFloat(1.4f, 1.8f);
                 sparkVelocity.Y -= 7f;
-                 new StarShape(Projectile.Center, sparkVelocity, sparkColor, sparkScale , sparkLifetime).Spawn();
+                new StarShape(Projectile.Center, sparkVelocity, sparkColor, sparkScale, sparkLifetime).Spawn();
             }
         }
         #region DrawMethod
@@ -220,7 +221,7 @@ namespace HJScarletRework.Projs.Executor
                 DrawTrails(HJScarletTexture.Trail_MegaBeam.Texture, Color.Violet);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: -12f);
-                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f,alphaValue: 1f);
+                DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f, alphaValue: 1f);
                 SB.End();
                 SB.BeginDefault();
             }
@@ -271,7 +272,7 @@ namespace HJScarletRework.Projs.Executor
                 return;
             }
 
-            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true, 4800f,canPassWall:true))
+            if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true, 4800f, canPassWall: true))
             {
                 //以超高的速度冲向你的敌怪
                 Projectile.extraUpdates = 6;
@@ -321,7 +322,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Stealth)
                     InitIfStealth();
             }
-        
+
             AttackTimer += 1;
             if (AttackTimer > BoomerangStat.ReturnTime)
             {
@@ -343,11 +344,10 @@ namespace HJScarletRework.Projs.Executor
                 AttackType = DoType.IsStealth;
                 //重新设定无敌帧
                 Projectile.localNPCHitCooldown = 45;
-                Update = true; 
+                Update = true;
             }
             else
             {
-                Projectile.AddExecutionTime(ItemType<BinaryStars>());
                 Projectile.Kill();
                 Update = true;
             }
@@ -450,7 +450,7 @@ namespace HJScarletRework.Projs.Executor
                 //旋转过度
                 SpriteRotation = Lerp(initDir.ToRotation(), possibleFinalRot, progress);
                 //过渡完成
-                if (_startTransitionProgress >= 1 || Vector2.Distance(Projectile.Center,nextPosition)<8f)
+                if (_startTransitionProgress >= 1 || Vector2.Distance(Projectile.Center, nextPosition) < 8f)
                 {
                     _isMovingStartPoint = false;
                     Projectile.Center = nextPosition;

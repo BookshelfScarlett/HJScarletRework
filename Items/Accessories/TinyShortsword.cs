@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            
+
             player.GetArmorPenetration<ExecutorDamageClass>() += 30;
             player.HJScarlet().blackKeyReduceDefense = 20;
             player.HJScarlet().blackKeyDoT = true;
@@ -29,7 +29,7 @@ namespace HJScarletRework.Items.Accessories
             CreateRecipe().
                 AddIngredient<AxeofPerun>().
                 AddIngredient(ItemID.CrossNecklace).
-                AddIngredient(ItemID.SpectreBar,10).
+                AddIngredient(ItemID.SpectreBar, 10).
                 AddIngredient(ItemID.SoulofMight, 10).
                 AddTile(TileID.TinkerersWorkbench).
                 Register();

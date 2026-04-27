@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Melee
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override ClassCategory Category => ClassCategory.Melee;
-        public float TheScale = 0.8f; 
+        public float TheScale = 0.8f;
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 50;

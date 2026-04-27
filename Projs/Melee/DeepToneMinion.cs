@@ -33,7 +33,7 @@ namespace HJScarletRework.Projs.Melee
             //递增的值越大，锤子的摆动幅度越大
             Osci += 0.025f;
             //基本的挂机状态，此处使用了正弦曲线来让锤子常规上下偏移
-            Vector2 anchorPos = new Vector2(Owner.MountedCenter.X - Owner.direction*50f, Owner.MountedCenter.Y + 60f * (MathF.Sin(Osci) / 9f)); 
+            Vector2 anchorPos = new Vector2(Owner.MountedCenter.X - Owner.direction * 50f, Owner.MountedCenter.Y + 60f * (MathF.Sin(Osci) / 9f));
             //实际更新位置
             Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, 0.15f);
             //计算锤子需要的朝向。
@@ -49,11 +49,11 @@ namespace HJScarletRework.Projs.Melee
         {
             Timer++;
             //5秒一次低吼射弹
-            if(Timer >300)
+            if (Timer > 300)
             {
                 //先固定Timer
                 //如果当前没有这个射弹，我们开始尝试发射这个射弹。嗯。
-                if(!Owner.HasProj<DeepToneShockwave>(out int projID))
+                if (!Owner.HasProj<DeepToneShockwave>(out int projID))
                 {
                     //朝向玩家位置发射。
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Owner.ToMouseVector2() * 12f, projID, Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
@@ -63,16 +63,16 @@ namespace HJScarletRework.Projs.Melee
                 if (Timer < 300 + 160)
                     return;
                 //如果附近没有目标，立刻重置Timer，并返回
-                if(LegalTargetList.Count == 0)
+                if (LegalTargetList.Count == 0)
                 {
                     Timer = 0;
                     return;
                 }
                 //否则。遍历这个表单并查看合格单位
-                for (int i =0;i<LegalTargetList.Count;i++)
+                for (int i = 0; i < LegalTargetList.Count; i++)
                 {
                     NPC target = LegalTargetList[i];
-                    if(target != null && target.active && target.CanBeChasedBy())
+                    if (target != null && target.active && target.CanBeChasedBy())
                     {
                         //触手。
                         SpawnTenctacle_Portal(target);
@@ -82,7 +82,7 @@ namespace HJScarletRework.Projs.Melee
                 LegalTargetList.Clear();
                 Timer = 0;
 
-                
+
             }
         }
         private void SpawnTenctacle_Portal(NPC target)
@@ -118,8 +118,8 @@ namespace HJScarletRework.Projs.Melee
         public override bool ShouldUpdatePosition() => false;
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawGlowEdge(Color.DarkMagenta, 6,rotFix:-PiOver4);
-            Projectile.DrawProj(Color.White, offset: 0.7f,rotFix:-PiOver4);
+            Projectile.DrawGlowEdge(Color.DarkMagenta, 6, rotFix: -PiOver4);
+            Projectile.DrawProj(Color.White, offset: 0.7f, rotFix: -PiOver4);
             return false;
         }
     }

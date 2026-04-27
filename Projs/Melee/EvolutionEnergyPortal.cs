@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -79,7 +79,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 //生成一组圆环圈
                 Vector2 dir = -Vector2.UnitY.RotatedBy(ToRadians(360 / count * i));
-                Vector2 vel =  dir * 1.05f;
+                Vector2 vel = dir * 1.05f;
                 //new ShinyOrbParticle(Projectile.Center + dir * 1.2f, vel, Color.DarkGreen.RandLerpTo(Color.PaleGreen), 40, 0.65f, glowCenter: false).SpawnToPriority();
                 new TurbulenceGlowOrb(Projectile.Center + dir * 1.2f, 1.2f, RandLerpColor(Color.DarkGreen, Color.PaleGreen), 40, 0.12f, dir.ToRotation()).SpawnToPriority();
             }
@@ -96,7 +96,7 @@ namespace HJScarletRework.Projs.Melee
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             //绘制辉光
-            SB.Draw(circle, drawPos, null, Color.LawnGreen, 0, circle.Size() /2, 0.12f * Projectile.scale * Projectile.Opacity, 0, 0);
+            SB.Draw(circle, drawPos, null, Color.LawnGreen, 0, circle.Size() / 2, 0.12f * Projectile.scale * Projectile.Opacity, 0, 0);
             SB.Draw(crossGlow, drawPos, null, Color.Green, Projectile.rotation, crossGlow.Size() / 2, 0.17f * Projectile.scale * Projectile.Opacity, 0, 0);
             SB.Draw(crossGlow, drawPos, null, Color.White, Projectile.rotation, crossGlow.Size() / 2, 0.08f * Projectile.scale * Projectile.Opacity, 0, 0);
             SB.End();

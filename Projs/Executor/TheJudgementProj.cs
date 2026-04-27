@@ -2,9 +2,9 @@
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -44,13 +44,13 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 66;
             Projectile.SetupImmnuity(45);
             Projectile.timeLeft = 300;
-            Projectile.scale =1;
+            Projectile.scale = 1;
             Projectile.ownerHitCheck = true;
         }
 
         public override void OnFirstFrame()
         {
-            Helper.MaxProgress[0] = 30; 
+            Helper.MaxProgress[0] = 30;
         }
         public override void ProjAI()
         {
@@ -97,7 +97,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Timer += 1;
             Projectile.rotation += 0.2f;
-            if(Projectile.MeetMaxUpdatesFrame(Timer, 10))
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 10))
             {
                 Projectile.netUpdate = true;
                 Timer *= 0;
@@ -110,10 +110,8 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation += 0.2f;
             Projectile.tileCollide = false;
             Projectile.HomingTarget(Owner.Center, -1, 20f, 12f);
-            if(Projectile.IntersectOwnerByDistance(60))
+            if (Projectile.IntersectOwnerByDistance(60))
             {
-                if (!Owner.HasProj<TheJudgementMinion>())
-                    Projectile.AddExecutionTime(ItemType<TheJudgement>());
                 if (Projectile.HJScarlet().ExecutionStrike)
                     SpawnExecutionProj();
                 Projectile.Kill();
@@ -164,10 +162,11 @@ namespace HJScarletRework.Projs.Executor
             SoundStyle pickSound2 = Utils.SelectRandom(Main.rand, HJScarletSounds.Smash_AirHeavy);
             SoundEngine.PlaySound(pickSound2 with { Pitch = Main.rand.NextFloat(0.42f, 0.47f), Volume = 0.84f, MaxInstances = 1 }, target.Center);
             bool hasProj = Owner.HasProj<TheJudgementMinion>();
-            Vector2 spawnPos =  target.Center;
+            Vector2 spawnPos = target.Center;
             Vector2 vel = RandVelTwoPi(16f, 19f);
             if (!hasProj)
             {
+                Projectile.AddExecutionTimePass(ItemType<TheJudgement>());
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<TheJudgementStar>(), Projectile.damage, 1f, Owner.whoAmI);
                 ((TheJudgementStar)proj.ModProjectile).TargetNPC = target;
             }
@@ -185,7 +184,7 @@ namespace HJScarletRework.Projs.Executor
 
             for (int i = 0; i < 10; i++)
             {
-                new ShinyCrossStar(target.Center.ToRandCirclePos(16f), RandVelTwoPi(1.3f,5f), RandLerpColor(Color.Goldenrod, Color.Orange), 120, RandRotTwoPi, 1f, 0.48f,false).Spawn();
+                new ShinyCrossStar(target.Center.ToRandCirclePos(16f), RandVelTwoPi(1.3f, 5f), RandLerpColor(Color.Goldenrod, Color.Orange), 120, RandRotTwoPi, 1f, 0.48f, false).Spawn();
             }
         }
     }

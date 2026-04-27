@@ -2,8 +2,8 @@
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -123,11 +123,11 @@ namespace HJScarletRework.Projs.Executor
                 }
                 for (int k = 0; k < 12; k++)
                 {
-                    new KiraStar(Projectile.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.Yellow, Color.DarkOrange),60, 0, 1, 0.28f).Spawn();
+                    new KiraStar(Projectile.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.Yellow, Color.DarkOrange), 60, 0, 1, 0.28f).Spawn();
                 }
             }
             //处死时释放
-                SoundEngine.PlaySound(HJScarletSounds.Misc_AngelBlast with { Pitch =-0.075f}, Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.Misc_AngelBlast with { Pitch = -0.075f }, Projectile.Center);
             for (int i = 0; i < 4; i++)
             {
                 //666我还要存他们的数组信息来着

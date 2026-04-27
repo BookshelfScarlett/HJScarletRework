@@ -74,7 +74,7 @@ namespace HJScarletRework.Projs.Ranged
             }
             //简单查看玩家状态
             //在不满足条件的情况下，无论怎么样我们都强行把飞棍执行一个飞走的动画
-            if(Owner.HeldItem.type != ItemType<ClimaticHawstring>() && !ShouldKillRods)
+            if (Owner.HeldItem.type != ItemType<ClimaticHawstring>() && !ShouldKillRods)
             {
                 if (AttackState != State.AFK)
                     SoundEngine.PlaySound(SoundID.Item44 with { MaxInstances = 1, Pitch = -0.25f }, Owner.Center);
@@ -83,7 +83,7 @@ namespace HJScarletRework.Projs.Ranged
                 AttackState = State.AFK;
             }
             //这里会有一个afk的timer
-            switch(AttackState)
+            switch (AttackState)
             {
                 case State.Idle:
                     DoIdle();
@@ -113,7 +113,7 @@ namespace HJScarletRework.Projs.Ranged
             //这里的悬挂路径用的世界差值
             Osci = 0;
             float mountedX = Owner.MountedCenter.X;
-            float mountedY = Owner.MountedCenter.Y  - 1500f - 30f * Reverse.ToInt();
+            float mountedY = Owner.MountedCenter.Y - 1500f - 30f * Reverse.ToInt();
             Vector2 mountedPos = new Vector2(mountedX, mountedY);
             Projectile.Center = Vector2.Lerp(Projectile.Center, mountedPos, 0.02f);
             Projectile.rotation = Projectile.rotation.AngleLerp((-Vector2.UnitX).ToRotation(), 0.2f);
@@ -134,15 +134,15 @@ namespace HJScarletRework.Projs.Ranged
             Vector2 dir = (Owner.MountedCenter - target.Center).ToSafeNormalize().RotatedBy(ToRadians((30f + (float)Math.Sin(Osci)) * Reverse.ToDirectionInt()));
             Vector2 mountedPos = dir * 150f + target.Center;
             Projectile.Center = Vector2.Lerp(Projectile.Center, mountedPos, 0.2f);
-            Projectile.rotation = Projectile.rotation.AngleLerp((Owner.direction *(Projectile.Center - target.Center)).ToRotation(), 0.2f);
+            Projectile.rotation = Projectile.rotation.AngleLerp((Owner.direction * (Projectile.Center - target.Center)).ToRotation(), 0.2f);
             Helper.UpdateAniState(1);
-            
+
             if (Helper.IsDone[1])
             {
                 Timer++;
                 if (Timer > 10)
                 {
-                    Vector2 vel = -Owner.direction *(Projectile.rotation.ToRotationVector2()).ToRandVelocity(0f, 12f, 16f);
+                    Vector2 vel = -Owner.direction * (Projectile.rotation.ToRotationVector2()).ToRandVelocity(0f, 12f, 16f);
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel, ProjectileType<ClimaticHawstringBeam>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                     proj.rotation = vel.ToRotation();
                     proj.stopsDealingDamageAfterPenetrateHits = true;
@@ -176,7 +176,7 @@ namespace HJScarletRework.Projs.Ranged
             {
                 if (!npc.IsLegal())
                     continue;
-                float curDistance = Vector2.DistanceSquared(npc.Center , Main.MouseWorld);
+                float curDistance = Vector2.DistanceSquared(npc.Center, Main.MouseWorld);
                 if (curDistance < searchDist)
                 {
                     target = npc;

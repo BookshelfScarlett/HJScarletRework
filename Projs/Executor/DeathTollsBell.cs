@@ -76,7 +76,7 @@ namespace HJScarletRework.Projs.Executor
 
 
         public override bool ShouldUpdatePosition() => VelocityIsWorking;
-        public bool GeneralUpdate(float velMult=0.95f, int frames = 10)
+        public bool GeneralUpdate(float velMult = 0.95f, int frames = 10)
         {
             Timer++;
             Projectile.rotation = Projectile.SpeedAffectRotation();
@@ -138,7 +138,7 @@ namespace HJScarletRework.Projs.Executor
         public void DoHanging()
         {
             Osci += ToRadians(5f);
-            if(IsBell)
+            if (IsBell)
             {
                 UpdateNextState(State.Return);
                 return;
@@ -194,11 +194,11 @@ namespace HJScarletRework.Projs.Executor
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.DrawProj(Color.White);
-            return false; 
+            return false;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(BellState == State.Attack)
+            if (BellState == State.Attack)
             {
                 Timer += 1;
                 if (Timer > 8)

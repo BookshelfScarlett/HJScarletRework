@@ -1,7 +1,7 @@
 ﻿using ContinentOfJourney.Projectiles.Meelee;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using HJScarletRework.ReVisual.Class;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -117,7 +117,7 @@ namespace HJScarletRework.ReVisual.Projs
                 Vector2 argDir = projDir.RotatedBy(ToRadians(360f / starDrawTime * i)) * 12f;
                 Vector2 starPos = drawPos + argDir + projDir * 5f;
                 Vector2 scale = proj.scale * new Vector2(0.2f, 0.3f) * 0.8f * proj.Opacity;
-                SB.Draw(starShape, starPos, null, Color.Lerp( Color.Red, Color.White, i / starDrawTime).ToAddColor(150), argDir.ToRotation(), starShape.ToOrigin(), scale, 0, 0);
+                SB.Draw(starShape, starPos, null, Color.Lerp(Color.Red, Color.White, i / starDrawTime).ToAddColor(150), argDir.ToRotation(), starShape.ToOrigin(), scale, 0, 0);
             }
         }
 

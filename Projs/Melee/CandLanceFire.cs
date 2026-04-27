@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -17,7 +16,7 @@ namespace HJScarletRework.Projs.Melee
         public override string Texture => HJScarletItemProj.Proj_CandLanceFire.Path;
         public override ClassCategory Category => ClassCategory.Melee;
         public ref float AttackTimer => ref Projectile.ai[0];
-        
+
         public ref float RandomValue => ref Projectile.ai[2];
         public ref float DrawGlowScale => ref Projectile.localAI[0];
         public float Osci = 0.025f;
@@ -81,32 +80,40 @@ namespace HJScarletRework.Projs.Melee
             //水蜡烛本身也具有范围伤害
         }
         public override bool PreDraw(ref Color lightColor)
-        {   
+        {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             //白描边
-            for (int i = 0; i < 8;i++)
-                SB.Draw(projTex, drawPos + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.White  with { A = 0 } * Projectile.Opacity, Projectile.rotation + RotFix, ori, Projectile.scale * Projectile.Opacity, 0, 0);
-            SB.Draw(projTex, drawPos, null, Color.White * Projectile.Opacity, Projectile.rotation + RotFix, ori, Projectile.scale * Projectile.Opacity, 0, 0);
             //为其绘制一个发光的环。
+            Texture2D ring = HJScarletTexture.Particle_RingShiny.Value;
+            Texture2D star = HJScarletTexture.Particle_KiraStarGlow.Value;
+
             SB.End();
-            SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-            SB.Draw(HJScarletTexture.Texture_BloomShockwave.Value, Projectile.Center - Main.screenPosition, null, Color.DeepSkyBlue * Projectile.Opacity, 0, HJScarletTexture.Texture_BloomShockwave.Origin, 0.13f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
-            SB.Draw(HJScarletTexture.Particle_CrossGlow.Value, Projectile.Center - Main.screenPosition, null, Color.SkyBlue * Projectile.Opacity, 0, HJScarletTexture.Particle_CrossGlow.Origin, 0.20f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
+            SB.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+            SB.Draw(ring, Projectile.Center - Main.screenPosition, null, Color.DeepSkyBlue * Projectile.Opacity, 0, ring.ToOrigin(), 0.13f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
+            SB.Draw(ring, Projectile.Center - Main.screenPosition, null, Color.White * Projectile.Opacity * 0.85f, 0, ring.ToOrigin(), 0.13f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
             SB.End();
             SB.BeginDefault();
+            for (int i = 0; i < 8; i++)
+                SB.Draw(projTex, drawPos + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.White with { A = 0 } * Projectile.Opacity, Projectile.rotation + RotFix, ori, Projectile.scale * Projectile.Opacity, 0, 0);
+            SB.Draw(projTex, drawPos, null, Color.White * Projectile.Opacity, Projectile.rotation + RotFix, ori, Projectile.scale * Projectile.Opacity, 0, 0);
+            SB.End();
+            SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+            SB.Draw(star, Projectile.Center - Main.screenPosition, null, Color.SkyBlue * Projectile.Opacity, 0, star.ToOrigin(), 0.20f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
+            SB.EndShaderArea();
+
+
             return false;
         }
 
         private void IgniteFire()
         {
-            for (int i = 0; i < 3; i++)
-            {
-                Vector2 dir = (Projectile.rotation).ToRotationVector2();
-                Vector2 xOffset = dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-4f, 9f);
-                Vector2 spawnPos = Projectile.Center - dir * 12f * i + dir * 12f - xOffset;
-                Vector2 fireVel = dir * Main.rand.NextFloat(1.2f, 1.7f);
-                new Fire(spawnPos, fireVel, RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), 40, dir.ToRotation(), 0.8f * Projectile.Opacity, Main.rand.NextFloat(0.08f, 0.10f) * Projectile.Opacity).Spawn();
-            }
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    Vector2 dir = (Projectile.rotation).ToRotationVector2();
+            //    Vector2 xOffset = dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-4f, 9f);
+            //    Vector2 spawnPos = Projectile.Center - Vector2.UnitY * 30f;
+            //    new Fire(spawnPos.ToRandCirclePos(6f), Vector2.UnitY * -Main.rand.NextFloat(0.1f,3.4f), RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), 40, dir.ToRotation(), 0.8f * Projectile.Opacity, Main.rand.NextFloat(0.08f, 0.10f) * Projectile.Opacity).Spawn();
+            //}
             //在底下用一圈圆弧粒子将其盘起来
             Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(10f, 10f), DustID.UnusedWhiteBluePurple);
             d.scale *= 1.7f * Projectile.Opacity;

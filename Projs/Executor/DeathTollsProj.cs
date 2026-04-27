@@ -1,7 +1,7 @@
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -111,7 +111,6 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Projectile.Kill();
                     Update = true;
-                    Projectile.AddExecutionTime(ItemType<DeathTolls>());
                 }
                 else
                 {
@@ -128,8 +127,9 @@ namespace HJScarletRework.Projs.Executor
             //普攻
             if (!Stealth)
             {
+                Projectile.AddExecutionTimePass(ItemType<DeathTolls>());
                 //下面这个会扔到一个统一的管理里面。
-            
+
                 if (Projectile.numHits % 2 == 0)
                 {
                     for (int i = 0; i < 16; i++)
@@ -140,9 +140,9 @@ namespace HJScarletRework.Projs.Executor
                         new SmokeParticle(target.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, .81f, 0.21f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
                 }
             }
-                    int counts = 1 + hasMinion.ToInt();
-                    for (int i = 0; i < counts; i++)
-                        NightmareArrowDrop(target, Projectile.damage / 2);
+            int counts = 1 + hasMinion.ToInt();
+            for (int i = 0; i < counts; i++)
+                NightmareArrowDrop(target, Projectile.damage / 2);
 
             if (AttackType != DoType.IsStealth)
                 return;

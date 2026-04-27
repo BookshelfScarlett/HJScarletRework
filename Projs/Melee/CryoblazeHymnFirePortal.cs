@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -35,10 +35,10 @@ namespace HJScarletRework.Projs.Melee
         {
             SoundEngine.PlaySound(HJScarletSounds.HymnFireball_Release with { MaxInstances = 1 }, Projectile.Center);
             if (!HJScarletMethods.OutOffScreen(Projectile.Center))
-                    TheParticleThatCanSpawn();
+                TheParticleThatCanSpawn();
             for (int i = 0; i < 3; i++)
             {
-                
+
                 if (Projectile.GetTargetSafe(out NPC target, true, 800f, true))
                 {
                     Vector2 dir = Projectile.SafeDir().ToRandVelocity(ToRadians(30f));
@@ -93,7 +93,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
-           //产打底的烟雾与辉光粒子
+            //产打底的烟雾与辉光粒子
             if (Projectile.timeLeft < 50)
             {
                 Projectile.Opacity -= .1f;

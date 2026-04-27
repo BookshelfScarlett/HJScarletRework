@@ -195,7 +195,7 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="player"></param>
         /// <param name="amount"></param>
         /// <param name="forcedHeal"></param>
-        public static void HealDirectly(this Player player,int amount,bool forcedHeal =true)
+        public static void HealDirectly(this Player player, int amount, bool forcedHeal = true)
         {
             if (forcedHeal)
             {
@@ -288,7 +288,7 @@ namespace HJScarletRework.Globals.Methods
             item.noMelee = true;
             item.noUseGraphic = true;
             item.channel = channel;
-                item.autoReuse = autoReuse;
+            item.autoReuse = autoReuse;
         }
         public static bool IsLegalFriendlyProj(this Projectile proj, DamageClass damageClass = null)
         {
@@ -298,7 +298,7 @@ namespace HJScarletRework.Globals.Methods
             }
             else
                 return proj.damage > 5 && proj.friendly && !proj.hostile;
-                
+
         }
         public static void SetUpRarityPrice(this Item item, int rarityID)
         {

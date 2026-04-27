@@ -28,6 +28,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Particle_MusicSymbol { get; set; }
         public static Tex2DWithPath Particle_Ring { get; set; }
         public static Tex2DWithPath Particle_RingHard { get; set; }
+        public static Tex2DWithPath Particle_RingShiny { get; set; }
         public static Tex2DWithPath Particle_ScytheBlood { get; set; }
         public static Tex2DWithPath Particle_SmokeAlt { get; set; }
         public static Tex2DWithPath Particle_BoomSparkle { get; set; }
@@ -38,6 +39,8 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Particle_HeartFullFill { get; set; }
         public static Tex2DWithPath Particle_HeartHalfFill { get; set; }
         public static Tex2DWithPath Particle_HeartNoFill { get; set; }
+        public static Tex2DWithPath Particle_Plus { get; set; }
+        public static Tex2DWithPath Particle_ShinySquareSplit { get; set; }
         public static Texture2D Particle_SharpTear => TextureAssets.Extra[ExtrasID.SharpTears].Value;
 
 
@@ -63,6 +66,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_NoahButterfly = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_NoahButterfly)}");
             Particle_Ring = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_Ring)}");
             Particle_RingHard = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_RingHard)}");
+            Particle_RingShiny = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_RingShiny)}");
             Particle_MusicSymbol = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_MusicSymbol)}");
             Particle_ScytheBlood = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_ScytheBlood)}");
             Particle_SmokeAlt = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_SmokeAlt)}");
@@ -74,9 +78,11 @@ namespace HJScarletRework.Assets.Registers
             Particle_HeartFullFill = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_HeartFullFill)}");
             Particle_HeartHalfFill = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_HeartHalfFill)}");
             Particle_HeartNoFill = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_HeartNoFill)}");
+            Particle_Plus = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_Plus)}");
+            Particle_ShinySquareSplit = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_ShinySquareSplit)}");
 
         }
-        public void UnLoadParticle()
+        public static void UnLoadParticle()
         {
             Particle_ShinyOrb = null;
             Particle_HRShinyOrb = null;
@@ -98,6 +104,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_NoahButterfly = null;
             Particle_Ring = null;
             Particle_RingHard = null;
+            Particle_RingShiny = null;
             Particle_MusicSymbol = null;
             Particle_ScytheBlood = null;
             Particle_SmokeAlt = null;
@@ -109,6 +116,8 @@ namespace HJScarletRework.Assets.Registers
             Particle_HeartHalfFill = null;
             Particle_HeartFullFill = null;
             Particle_HeartNoFill = null;
+            Particle_Plus = null;
+            Particle_ShinySquareSplit = null;
         }
     }
 }

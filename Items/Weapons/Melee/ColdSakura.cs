@@ -28,7 +28,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useStyle = ItemUseStyleID.Rapier;
             Item.rare = RarityType<SakuraRarity>();
             Item.shoot = ProjectileType<ColdSakuraProj>();
-            Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { Volume = 0.6f,Pitch = 0.5f, PitchVariance = 0.1f, MaxInstances = 0 };
+            Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { Volume = 0.6f, Pitch = 0.5f, PitchVariance = 0.1f, MaxInstances = 0 };
             Item.shootSpeed = 16f;
         }
         public override void HoldItem(Player player)
@@ -42,9 +42,9 @@ namespace HJScarletRework.Items.Weapons.Melee
             //为适配这一攻击模组，冷樱的hitbox会被有意增大
             Vector2 vel = velocity;
             Vector2 mouseVec = player.ToMouseVector2();
-            Vector2 spawnPos = player.Center - mouseVec.ToRandVelocity(ToRadians(30f), 80f, 86f) - mouseVec * Main.rand.NextFloat(40f,60f);
+            Vector2 spawnPos = player.Center - mouseVec.ToRandVelocity(ToRadians(30f), 80f, 86f) - mouseVec * Main.rand.NextFloat(40f, 60f);
             //这里只会取水平分量的速度
-            Projectile proj = Projectile.NewProjectileDirect(source, spawnPos, vel, Item.shoot, damage, knockback,player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, spawnPos, vel, Item.shoot, damage, knockback, player.whoAmI);
             return false;
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -53,7 +53,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if(line.Name == "ItemName" && line.Mod == "Terraria")
+            if (line.Name == "ItemName" && line.Mod == "Terraria")
             {
                 SakuraRarity.DrawRarity(line);
                 return false;

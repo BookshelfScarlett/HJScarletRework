@@ -1,17 +1,11 @@
-﻿using ContinentOfJourney.Backgrounds;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -76,7 +70,7 @@ namespace HJScarletRework.Projs.Executor
                         if (!CanLock)
                         {
                             InitActiveDashParticle();
-                            
+
                             Projectile.velocity = (target.Center - Projectile.Center).ToSafeNormalize() * 20f;
                             ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30, 40, Projectile.velocity.ToRotation(), ToRadians(10f));
                             SoundEngine.PlaySound(HJScarletSounds.Misc_GunHit with { MaxInstances = 0 }, Projectile.Center);
@@ -216,7 +210,7 @@ namespace HJScarletRework.Projs.Executor
                 float rot = ToRadians(j * rotFactor);
                 Vector2 offset = new Vector2(4.8f, 0).RotatedBy(rot * Main.rand.NextFloat(3.1f, 4.1f));
                 Vector2 velOffset = new Vector2(2.4f, 0).RotatedBy(rot * Main.rand.NextFloat(3.1f, 4.1f));
-                new ShinyOrbParticle(spawnPos + offset, velOffset , RandLerpColor(baseColor, targetColor), 40, 0.8f).Spawn();
+                new ShinyOrbParticle(spawnPos + offset, velOffset, RandLerpColor(baseColor, targetColor), 40, 0.8f).Spawn();
             }
             for (int j = 0; j < 10; j++)
             {
@@ -228,7 +222,7 @@ namespace HJScarletRework.Projs.Executor
             }
             for (int j = 0; j < 10; j++)
             {
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi( 0.8f, 9.4f), RandLerpColor(baseColor, Color.DarkGray), 40, RandRotTwoPi, 1f, 0.28f).SpawnToNonPreMult();
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(0.8f, 9.4f), RandLerpColor(baseColor, Color.DarkGray), 40, RandRotTwoPi, 1f, 0.28f).SpawnToNonPreMult();
             }
         }
 

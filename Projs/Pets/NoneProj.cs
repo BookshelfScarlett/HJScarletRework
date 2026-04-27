@@ -32,7 +32,7 @@ namespace HJScarletRework.Projs.Pets
         public override void AI()
         {
             if (Owner.dead)
-                Owner.HJScarlet().NonePet= false;
+                Owner.HJScarlet().NonePet = false;
 
             if (Owner.HJScarlet().NonePet)
                 Projectile.timeLeft = 2;

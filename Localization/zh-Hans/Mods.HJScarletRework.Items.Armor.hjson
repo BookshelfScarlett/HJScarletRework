@@ -64,9 +64,13 @@ CowboyExecutor: {
 }
 
 RaincoatExecutor: {
-	HelmetTooltip: ""
-	ChestplateTooltip: ""
-	SetBonus: ""
+	HelmetTooltip: 增加5%代行者暴击概率
+	ChestplateTooltip: 增加5%代行者伤害
+	SetBonus:
+		'''
+		正上方来犯的射弹在接触帽子时减少50%伤害
+		该射弹也不会造成击退和较弱的减益
+		'''
 }
 
 FloretProtectorExecutor: {
@@ -117,9 +121,15 @@ FloretProtectorExecutor: {
 }
 
 FishCostumeExecutor: {
-	HelmetTooltip: ""
+	HelmetTooltip: 增加5%代行者伤害
 	ChestplateTooltip: ""
-	SetBonus: ""
+	SetBonus:
+		'''
+		允许在空气中如同在水面一样自由游泳
+		处决攻击命中时存储至多一个小鱼冲刺
+		在需要的时候按下 互动键 即可释放
+		浸入岩浆时会持续损失生命值，无关是否拥有免疫岩浆的道具
+		'''
 }
 
 ShinobiBody: {
@@ -151,12 +161,12 @@ ShinobiLegs: {
 
 MonkBody: {
 	DisplayName: 武僧衣-代行者
-	Tooltip: 增加30%代行者暴击概率
+	Tooltip: 增加15%代行者暴击概率
 }
 
 MonkHead: {
 	DisplayName: 武僧浓眉秃头帽-代行者
-	Tooltip: 增加30%代行者伤害
+	Tooltip: 增加15%代行者伤害
 	SetBonus:
 		'''
 		+2 最大哨兵上限

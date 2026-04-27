@@ -1,8 +1,8 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ScreenEffect;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -40,7 +40,7 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.timeLeft = 50;
             Projectile.rotation = Projectile.velocity.ToRotation();
             //如果启用右键功能，带着玩家飞过去
-            if (SignForRightClick ==1f)
+            if (SignForRightClick == 1f)
             {
                 Owner.Center = Projectile.Center;
                 Owner.velocity = Projectile.velocity;
@@ -51,7 +51,7 @@ namespace HJScarletRework.Projs.Melee
         }
         private void DrawParticles()
         {
-             //速度本身太快了，这里的粒子需要尽可能堆量
+            //速度本身太快了，这里的粒子需要尽可能堆量
             for (int k = 0; k < 3; k++)
             {
                 float GeneralScaleMul = 1.1f * RandZeroToOne;
@@ -114,7 +114,7 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 dir = (Projectile.rotation + rotArgs + Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f))).ToRotationVector2() * Main.rand.NextFloat(10f, 13f);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir, ProjectileType<SpearofEscapeMissile>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 ((SpearofEscapeMissile)proj.ModProjectile).AttackType = SpearofEscapeMissile.Style.Direct;
-                ((SpearofEscapeMissile)proj.ModProjectile).DontUseMouseHoming= true;
+                ((SpearofEscapeMissile)proj.ModProjectile).DontUseMouseHoming = true;
                 proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
             }
         }
@@ -129,7 +129,7 @@ namespace HJScarletRework.Projs.Melee
             DrawTrail(drawPos);
             SB.EndShaderArea();
             //绘制辉光效果
-            Projectile.DrawProj(Color.White,drawTime:1, rotFix: rotFix);
+            Projectile.DrawProj(Color.White, drawTime: 1, rotFix: rotFix);
             return false;
         }
 
@@ -142,7 +142,7 @@ namespace HJScarletRework.Projs.Melee
             //重新设定原点
             Vector2 ori = new Vector2(cutSource.Width / 2, cutSource.Height);
             float basicRot = Projectile.rotation - ToRadians(30) - ToRadians(90);
-            Vector2 basicScale = new Vector2(3.1f, 4f); 
+            Vector2 basicScale = new Vector2(3.1f, 4f);
             Vector2 starPos = drawPos - Projectile.SafeDirByRot() * 60f;
             for (float i = 1; i > 0; i -= 0.1f)
             {
@@ -151,7 +151,7 @@ namespace HJScarletRework.Projs.Melee
                 SB.Draw(sharpTear, starPos, cutSource, smoke, basicRot + ToRadians(60f), ori, starScale, 0, 0);
                 SB.Draw(sharpTear, starPos, cutSource, smoke, basicRot, ori, starScale, 0, 0);
             }
-            
+
         }
 
         private void DrawSmoke(Vector2 drawPos)

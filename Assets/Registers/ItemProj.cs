@@ -43,7 +43,7 @@ namespace HJScarletRework.Assets.Registers
     {
         internal static string ItemPath = "HJScarletRework/Assets/Texture/Items";
         internal static string ProjPath = "HJScarletRework/Assets/Texture/Projs";
-        internal static string Path_Pets= $"HJScarletRework/Assets/Texture/Pets";
+        internal static string Path_Pets = $"HJScarletRework/Assets/Texture/Pets";
         internal static string WeaponPath = $"{ItemPath}/Weapons";
         internal static string AccessoriesPath = $"{ItemPath}/Equips";
         internal static string MaterialsPath = $"{ItemPath}/Materials";
@@ -84,7 +84,7 @@ namespace HJScarletRework.Assets.Registers
             Proj_CandLanceFire = null;
             Proj_Dialectics = null;
 
-            Proj_SpearofEscapeMissile= null;
+            Proj_SpearofEscapeMissile = null;
         }
     }
 }

@@ -2,10 +2,10 @@
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Metaballs;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Metaballs;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -64,7 +64,7 @@ namespace HJScarletRework.Projs.Executor
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             if (BeamState != BeamType.Minion)
-            return base.Colliding(projHitbox, targetHitbox);
+                return base.Colliding(projHitbox, targetHitbox);
             else
             {
                 if (Projectile.Opacity < 0.1f)
@@ -87,12 +87,12 @@ namespace HJScarletRework.Projs.Executor
                 return;
             for (int i = 0; i < 250; i++)
             {
-                Vector2 pos = Projectile.Center.ToRandCirclePos(3f) + Projectile.SafeDirByRot() * 45f  + Projectile.SafeDirByRot() * 6f * i;
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3f) + Projectile.SafeDirByRot() * 45f + Projectile.SafeDirByRot() * 6f * i;
                 if (HJScarletMethods.OutOffScreen(pos))
                     break;
                 if (PerformanceMode && i % 4 == 0)
                     continue;
-                    ShadowNebulaAlt.SpawnSharpTearClean(pos, Projectile.SafeDirByRot().ToRandVelocity(0, 1.2f, 1.6f), 0.921f, 60);
+                ShadowNebulaAlt.SpawnSharpTearClean(pos, Projectile.SafeDirByRot().ToRandVelocity(0, 1.2f, 1.6f), 0.921f, 60);
                 if (Main.rand.NextBool(8))
                 {
                     Vector2 vel = RandVelTwoPi(0.4f, 2.6f);
@@ -117,7 +117,7 @@ namespace HJScarletRework.Projs.Executor
                 new KiraStar(pos, vel, RandLerpColor(Color.White, Color.Pink), 60, 0, 1, 0.18f).SpawnToNonPreMult();
             }
             offset = PerformanceMode ? 80 : 0;
-            for (int i = 0; i < 160- offset; i++)
+            for (int i = 0; i < 160 - offset; i++)
             {
                 float offsetAngle = TwoPi * i / (160f - offset);
                 float unitOffsetX = (float)Math.Pow(Math.Cos(offsetAngle), 5D) * 1.125f;
@@ -230,7 +230,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            if (BeamState != BeamType.Minion )
+            if (BeamState != BeamType.Minion)
                 return false;
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
@@ -257,7 +257,7 @@ namespace HJScarletRework.Projs.Executor
             shader.CurrentTechnique.Passes[0].Apply();
             Vector2 orig = new(0, value.Height() / 2);
             float xScale = BeamLength / value.Width();
-            sb.Draw(value.Value, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, orig, new Vector2(xScale * Clamp(Projectile.scale,0.02f,1f), height * 0.9f), 0, 0);
+            sb.Draw(value.Value, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, orig, new Vector2(xScale * Clamp(Projectile.scale, 0.02f, 1f), height * 0.9f), 0, 0);
         }
 
     }

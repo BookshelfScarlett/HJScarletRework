@@ -43,7 +43,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if(line.Mod == "Terraria" && line.Name =="ItemName")
+            if (line.Mod == "Terraria" && line.Name == "ItemName")
             {
                 DisasterRarity.DrawRarity(line);
                 return false;

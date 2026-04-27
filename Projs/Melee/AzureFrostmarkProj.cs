@@ -1,6 +1,6 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -96,7 +96,7 @@ namespace HJScarletRework.Projs.Melee
                     Projectile.netUpdate = true;
                     return;
                 }
-                SoundEngine.PlaySound(SoundID.Item109 with {Volume = 0.8f, MaxInstances = 1, Pitch = 0.30f + SpawnTime * 0.3f }, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.Item109 with { Volume = 0.8f, MaxInstances = 1, Pitch = 0.30f + SpawnTime * 0.3f }, Projectile.Center);
                 SpawnTime++;
                 SpawnEnergyBall();
             }
@@ -106,8 +106,8 @@ namespace HJScarletRework.Projs.Melee
         {
             SpawnEnergyBall();
             SpawnPreKillParticle();
-            SoundEngine.PlaySound(SoundID.DD2_CrystalCartImpact with { MaxInstances = 1, Pitch = 0.30f}, Projectile.Center);
-                Projectile.Kill();
+            SoundEngine.PlaySound(SoundID.DD2_CrystalCartImpact with { MaxInstances = 1, Pitch = 0.30f }, Projectile.Center);
+            Projectile.Kill();
         }
         private void SpawnEnergyBall()
         {
@@ -145,14 +145,14 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            for (int i = 0; i < 12;i++)
+            for (int i = 0; i < 12; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(6f);
                 Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(20f), 1.2f, 8.9f);
                 new KiraStar(pos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 0, 1, 0.18f).Spawn();
                 new KiraStar(pos, vel, Color.White, 40, 0, 1, 0.10f).Spawn();
             }
-            for (int i = 0; i < 12;i++)
+            for (int i = 0; i < 12; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(6f);
                 Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(20f), 1.2f, 8.9f);
@@ -163,18 +163,19 @@ namespace HJScarletRework.Projs.Melee
         }
         public void SpawnPreKillParticle()
         {
-            for (int i = 0;i<16;i++)
+            for (int i = 0; i < 16; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(4f) + Projectile.SafeDir() * Main.rand.NextFloat(-22f, 12f) + Projectile.SafeDir() * 20f;
                 Vector2 vel = Projectile.SafeDir() * Main.rand.NextFloat(-2f, 2f);
                 new TurbulenceShinyOrb(pos, Main.rand.NextFloat(-2f, 1.5f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, Main.rand.NextFloat(0.65f, 0.85f), RandRotTwoPi).Spawn();
             }
-            for (int i = 0;i<16;i++)
+            for (int i = 0; i < 8; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(4f) + Projectile.SafeDir() * Main.rand.NextFloat(-22f, 12f) + Projectile.SafeDir() * 20f;
-                Vector2 vel = Projectile.SafeDir() * Main.rand.NextFloat(-2f, 2f) + RandVelTwoPi(1f,3f);
-                new KiraStar(pos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 0, 1, 0.18f).Spawn();
-                new KiraStar(pos, vel, Color.White, 40, 0, 1, 0.10f).Spawn();
+                Vector2 vel = Projectile.SafeDir() * Main.rand.NextFloat(-2f, 2f) + RandVelTwoPi(-2f, 3f);
+                new KiraStar(pos, vel, RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0.06f, true).Spawn();
+                //new KiraStar(pos, vel, , 40, 0, 1, 0.18f).Spawn();
+                //new KiraStar(pos, vel, Color.White, 40, 0, 1, 0.10f).Spawn();
             }
         }
         public override bool PreDraw(ref Color lightColor)

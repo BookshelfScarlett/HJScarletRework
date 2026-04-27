@@ -1,10 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Metaballs;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Metaballs;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -43,7 +43,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.width = Projectile.height = 8;
             Projectile.extraUpdates = 3;
-            Projectile.SetupImmnuity(60);
+            Projectile.SetupImmnuity(60, ImmnuityType.Static);
             Projectile.tileCollide = false;
             Projectile.penetrate = 4;
             Projectile.timeLeft = 480;
@@ -127,7 +127,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 starVel = Projectile.velocity.ToRandVelocity(ToRadians(30f), 1.1f, 2.4f);
                 Color starColor = RandLerpColor(Color.DeepPink, Color.Violet);
                 float scale = Main.rand.NextFloat(0.30f, 0.36f);
-                new ShinyCrossStar(starPos, starVel, starColor, lifeTime, RandRotTwoPi, 1f, scale, false,0.1f).Spawn();
+                new ShinyCrossStar(starPos, starVel, starColor, lifeTime, RandRotTwoPi, 1f, scale, false, 0.1f).Spawn();
             }
         }
 
@@ -156,7 +156,7 @@ namespace HJScarletRework.Projs.Executor
             int dCount = PerformanceMode ? 2 : 4;
             for (int i = 0; i < dCount; i++)
             {
-                Vector2 nebulaPos = Projectile.Center.ToRandCirclePos(2) + Projectile.velocity / dCount * i + RandVelTwoPi(1.1f,1.6f);
+                Vector2 nebulaPos = Projectile.Center.ToRandCirclePos(2) + Projectile.velocity / dCount * i + RandVelTwoPi(1.1f, 1.6f);
                 Vector2 nebulaVel = RandVelTwoPi(0, 0.2f) + Projectile.SafeDir();
                 Vector2 nebulaScale = Main.rand.NextFloat(0.136f, 0.148f) * Vector2.One;
                 ShadowNebulaVector2.SpawnParticle(nebulaPos, nebulaVel, nebulaScale, Projectile.velocity.ToRotation(), 100, HJScarletTexture.Texture_WhiteCircle.Value);
@@ -178,7 +178,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 starVel = Projectile.velocity.ToRandVelocity(ToRadians(30f), 1.1f, 2.4f);
                 Color starColor = RandLerpColor(Color.DeepPink, Color.Violet);
                 float scale = Main.rand.NextFloat(0.30f, 0.36f);
-                new ShinyCrossStar(starPos, starVel, starColor, lifeTime, RandRotTwoPi, 1f, scale, false,0.1f).Spawn();
+                new ShinyCrossStar(starPos, starVel, starColor, lifeTime, RandRotTwoPi, 1f, scale, false, 0.1f).Spawn();
             }
 
         }

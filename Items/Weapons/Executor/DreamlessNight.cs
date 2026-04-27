@@ -11,14 +11,14 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class DreamlessNight: ExecutorWeaponClass
+    public class DreamlessNight : ExecutorWeaponClass
     {
-        public override float ExecutionStrikeDamageMult => 0.5f;
+        public override float ExecutionStrikeDamageMult => 0.80f;
         public override int ExecutionTime => 10;
         public override void ExSD()
         {
             Item.width = Item.height = 66;
-            Item.damage = 44;
+            Item.damage = 40;
             Item.knockBack = 8f;
             Item.shootSpeed = 20f;
             Item.useTime = Item.useAnimation = 40;

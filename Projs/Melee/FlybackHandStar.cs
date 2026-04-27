@@ -2,8 +2,8 @@
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -44,7 +44,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Projectile.HomingTarget(target.Center, 600, 21f, 45f, 20);
             }
-            else if(Timer < 30)
+            else if (Timer < 30)
             {
                 new Fire(Projectile.Center + Main.rand.NextVector2Circular(6f, 6f), Projectile.velocity / 3, RandLerpColor(Color.Gold, Color.Yellow), 60, Projectile.rotation, 1f, 0.1f).Spawn();
                 Projectile.velocity *= 0.93f;
@@ -65,12 +65,12 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreKill(int timeLeft)
         {
-            for (int i = 0; i <16;i++)
+            for (int i = 0; i < 16; i++)
             {
                 Dust d = Dust.NewDustDirect(Projectile.Center, 16, 16, DustID.IchorTorch, 0, 0);
                 d.noGravity = true;
             }
-                return base.PreKill(timeLeft);
+            return base.PreKill(timeLeft);
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -86,7 +86,7 @@ namespace HJScarletRework.Projs.Melee
             DrawNebulaTrail(Color.LightYellow with { A = 50 }, 12.2f);
             DrawNebulaTrail(Color.White with { A = 100 }, 10.8f);
             SB.EndShaderArea();
-            
+
             return false;
         }
         public void DrawNebulaTrail(Color trailColor, float height)
@@ -113,7 +113,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 oldCenter = validPosition[i] + Projectile.Size / 2 - Main.screenPosition;
                 float progress = (float)i / (validPosition.Count - 1);
-                Vector2 posOffset = new Vector2(0,  3f * height).RotatedBy(validRot[i]);
+                Vector2 posOffset = new Vector2(0, 3f * height).RotatedBy(validRot[i]);
                 ScarletVertex upClass = new(oldCenter - posOffset, trailColor, new Vector3(progress, 1, 0f));
                 ScarletVertex downClass = new(oldCenter + posOffset, trailColor, new Vector3(progress, 0, 0f));
                 list.Add(upClass);

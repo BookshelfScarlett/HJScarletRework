@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -63,7 +63,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 if (Projectile.Hitbox.Intersects(needPlayer.Hitbox))
                 {
-                    int healAmt =  Main.rand.Next(3, 6);
+                    int healAmt = Main.rand.Next(3, 6);
                     needPlayer.Heal(healAmt);
                     needPlayer.AddBuff(BuffType<HoneyRegenAlt>(), 60);
                     //生成粒子，追加树叶音效
@@ -102,7 +102,7 @@ namespace HJScarletRework.Projs.Melee
             }
             //我要往你身上滴蜡
             //后面再搞一个水滴的粒子在这
-            Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(6f, 6f) + Vector2.UnitY * 10f, Main.rand.NextBool() ? DustID.Honey2: DustID.Honey);
+            Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(6f, 6f) + Vector2.UnitY * 10f, Main.rand.NextBool() ? DustID.Honey2 : DustID.Honey);
             d.velocity = Vector2.UnitY.RotatedBy(Main.rand.NextFloat(PiOver2 / 2) * Main.rand.NextBool().ToDirectionInt()) * -Main.rand.NextFloat(2.4f, 2.8f);
             d.noGravity = false;
         }
@@ -113,7 +113,7 @@ namespace HJScarletRework.Projs.Melee
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Owner.AddBuff(BuffID.Honey, 360);
-            
+
         }
         public override bool PreKill(int timeLeft)
         {
@@ -121,9 +121,9 @@ namespace HJScarletRework.Projs.Melee
             //生成粒子，追加树叶音效
             for (int i = 0; i < 30; i++)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center +  Projectile.rotation.ToRotationVector2().RotatedBy(Main.rand.NextBool().ToDirectionInt() * PiOver2) * Main.rand.NextFloat(-15f, 15f) + Projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(-35f, 30f), Main.rand.NextBool() ? DustID.Honey2: DustID.Honey);
+                Dust d = Dust.NewDustPerfect(Projectile.Center + Projectile.rotation.ToRotationVector2().RotatedBy(Main.rand.NextBool().ToDirectionInt() * PiOver2) * Main.rand.NextFloat(-15f, 15f) + Projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(-35f, 30f), Main.rand.NextBool() ? DustID.Honey2 : DustID.Honey);
                 d.velocity = vel;
-                d.noGravity = AttackType==Style.Attack;
+                d.noGravity = AttackType == Style.Attack;
             }
             SoundEngine.PlaySound(SoundID.Grass, Projectile.Center);
             return true;
@@ -147,7 +147,7 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.DrawGlowEdge(Color.White * 0.5f, rotFix: PiOver4);
-            Projectile.DrawProj(Color.White * lightColor.A, drawTime: 4,rotFix: PiOver4);
+            Projectile.DrawProj(Color.White * lightColor.A, drawTime: 4, rotFix: PiOver4);
             return false;
         }
     }

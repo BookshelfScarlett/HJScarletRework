@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -35,13 +35,13 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             Projectile.velocity *= 1.4f;
-            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Toss with {Variants = [1], MaxInstances = 0, Pitch = -0.412f, Volume = 0.825f, PitchVariance = 0.25f }, Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Toss with { Variants = [1], MaxInstances = 0, Pitch = -0.412f, Volume = 0.825f, PitchVariance = 0.25f }, Projectile.Center);
             base.OnFirstFrame();
         }
         public override void ProjAI()
         {
             Projectile.spriteDirection = Projectile.direction = (Projectile.velocity.X > 0).ToDirectionInt();
-            if(IsHit)
+            if (IsHit)
             {
                 Timer++;
                 if (!CurTarget.IsLegal())
@@ -49,7 +49,7 @@ namespace HJScarletRework.Projs.Executor
                     Projectile.Kill();
                     return;
                 }
-                Projectile.rotation += Projectile.SpeedAffectRotation(12,12) / 4f;
+                Projectile.rotation += Projectile.SpeedAffectRotation(12, 12) / 4f;
                 Projectile.velocity *= 0.87f;
                 if ((Projectile.Center - CurTarget.Center).LengthSquared() < 50f * 50f)
                     Projectile.velocity = Projectile.SafeDir() * 16f;
@@ -58,7 +58,7 @@ namespace HJScarletRework.Projs.Executor
                     if (Timer > 30f)
                     {
                         if (Timer == 31f)
-                            Projectile.velocity = (Projectile.Center - CurTarget.Center).ToSafeNormalize() * (-27f - Projectile.numHits *3f);
+                            Projectile.velocity = (Projectile.Center - CurTarget.Center).ToSafeNormalize() * (-27f - Projectile.numHits * 3f);
                         Projectile.HomingTarget(CurTarget.Center, -1, 28f + Projectile.numHits * 3f, 14f, 15f);
                     }
                 }
@@ -69,7 +69,7 @@ namespace HJScarletRework.Projs.Executor
             }
             if (Projectile.IsOutScreen())
                 return;
-                        if (Main.rand.NextBool(4))
+            if (Main.rand.NextBool(4))
             {
                 Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin);
                 d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f) / 4f;
@@ -81,7 +81,7 @@ namespace HJScarletRework.Projs.Executor
                 d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f) / 4f;
                 d.scale *= 1.1f;
             }
-            if(Main.rand.NextBool(4))
+            if (Main.rand.NextBool(4))
             {
                 new StarShape(Projectile.Center.ToRandCirclePosEdge(8f), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 0.45f, 40).Spawn();
             }
@@ -107,7 +107,7 @@ namespace HJScarletRework.Projs.Executor
                 IsHit = true;
             }
             Timer = 0;
-            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with {Variants = [2], MaxInstances = 0, Pitch = 0.412f + Projectile.numHits * 0.1f, Volume = 0.925f }, Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { Variants = [2], MaxInstances = 0, Pitch = 0.412f + Projectile.numHits * 0.1f, Volume = 0.925f }, Projectile.Center);
             for (int i = 0; i < 12; i++)
             {
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(4f), Projectile.velocity.ToRandVelocity(ToRadians(20f), 2.4f, 14.7f), RandLerpColor(Color.Gold, Color.Silver), 40, RandRotTwoPi, 1, 1, false).Spawn();
@@ -121,7 +121,7 @@ namespace HJScarletRework.Projs.Executor
         {
 
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
-            for(int i =0;i<8;i++)
+            for (int i = 0; i < 8; i++)
             {
                 SB.Draw(projTex, drawPos + ToRadians(60f * i).ToRotationVector2() * 1.2f, null, Color.White.ToAddColor(), Projectile.rotation, ori, Projectile.scale, 0, 0);
             }

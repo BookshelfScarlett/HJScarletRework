@@ -28,7 +28,7 @@ namespace HJScarletRework.Projs.Melee
         {
             if (Main.rand.NextBool())
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(4f) + Projectile.SafeDirByRot() * -40f, Main.rand.NextBool() ? DustID.JunglePlants: DustID.JungleGrass);
+                Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePos(4f) + Projectile.SafeDirByRot() * -40f, Main.rand.NextBool() ? DustID.JunglePlants : DustID.JungleGrass);
                 d.scale *= Main.rand.NextFloat(0.75f, 0.97f);
                 d.velocity = Projectile.SafeDirByRot() * -Main.rand.NextFloat(1.2f, 1.8f);
             }
@@ -71,7 +71,7 @@ namespace HJScarletRework.Projs.Melee
                 d.noGravity = true;
             }
 
-            if(Projectile.numHits < 1)
+            if (Projectile.numHits < 1)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<CactusSpearSpike>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 proj.HJScarlet().GlobalTargetIndex = target.whoAmI;

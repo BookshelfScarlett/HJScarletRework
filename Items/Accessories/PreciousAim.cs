@@ -1,12 +1,12 @@
-﻿using Terraria.ID;
-using Terraria;
-using HJScarletRework.Globals.Methods;
-using System.Collections.Generic;
-using Terraria.ModLoader;
-using ContinentOfJourney.Items.Material;
+﻿using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Tiles;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.Methods;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {

@@ -66,9 +66,9 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen())
                 return;
-                Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.JungleGrass);
-                d.scale = Main.rand.NextFloat(0.8f, 1.15f);
-                d.noGravity = true;
+            Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.JungleGrass);
+            d.scale = Main.rand.NextFloat(0.8f, 1.15f);
+            d.noGravity = true;
 
         }
 

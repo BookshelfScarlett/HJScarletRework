@@ -87,7 +87,7 @@ namespace HJScarletRework.Projs.Executor
             shader.Parameters["LaserTextureSize"].SetValue(warn.Size());
             shader.Parameters["targetSize"].SetValue(new Vector2(120, warn.Height));
             shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -50);
-            shader.Parameters["uColor"].SetValue(drawColor.ToVector4() *opc);
+            shader.Parameters["uColor"].SetValue(drawColor.ToVector4() * opc);
             shader.Parameters["uFadeoutLength"].SetValue(0.4f);
             shader.Parameters["uFadeinLength"].SetValue(0f);
             shader.CurrentTechnique.Passes[0].Apply();
@@ -103,9 +103,9 @@ namespace HJScarletRework.Projs.Executor
             //基础大小设定
             Vector2 baseScale = Projectile.scale * 0.32f * new Vector2(1, opc);
             DrawLaser(warn, drawPos, Color.DarkOrange * opc, baseScale * new Vector2(laserLengthScale, 1.2f));
-            DrawLaser(warn, drawPos, Color.Orange* opc, baseScale * new Vector2(laserLengthScale, 0.8f));
-            DrawLaser(warn, drawPos, Color.LightYellow* opc, baseScale * new Vector2(laserLengthScale, 0.65f));
-            DrawLaser(warn, drawPos, Color.White* opc, baseScale * new Vector2(laserLengthScale, 0.35f));
+            DrawLaser(warn, drawPos, Color.Orange * opc, baseScale * new Vector2(laserLengthScale, 0.8f));
+            DrawLaser(warn, drawPos, Color.LightYellow * opc, baseScale * new Vector2(laserLengthScale, 0.65f));
+            DrawLaser(warn, drawPos, Color.White * opc, baseScale * new Vector2(laserLengthScale, 0.35f));
 
             HJScarletMethods.EndShaderAreaPixel();
         }

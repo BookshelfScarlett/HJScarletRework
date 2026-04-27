@@ -39,7 +39,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
                 AddTile(TileID.Sawmill).
                 DisableDecraft().
                 Register();
-            
+
         }
     }
     public class RaincoatChestplate : AlterVanillaArmor
@@ -54,7 +54,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         }
         public override void ExSD(Item item)
         {
-            item.defense = Defense; 
+            item.defense = Defense;
         }
         public override void AddRecipes()
         {

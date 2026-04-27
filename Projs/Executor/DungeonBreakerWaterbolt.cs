@@ -2,8 +2,8 @@
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -93,7 +93,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 7; i++)
             {
                 Vector2 scale = new Vector2(Lerp(0.35f, 0.25f, i / 7f), Lerp(0.85f, 1.15f, i / 7f)) * 1.05f;
-                sb.Draw(starShape, Projectile.Center - Main.screenPosition - Projectile.SafeDir() * 5.5f * i - Projectile.SafeDir() * 10f, null,Color.White.ToAddColor(100), Projectile.velocity.ToRotation() + PiOver2, starShape.ToOrigin(), scale * 0.5f, 0, 0);
+                sb.Draw(starShape, Projectile.Center - Main.screenPosition - Projectile.SafeDir() * 5.5f * i - Projectile.SafeDir() * 10f, null, Color.White.ToAddColor(100), Projectile.velocity.ToRotation() + PiOver2, starShape.ToOrigin(), scale * 0.5f, 0, 0);
                 sb.Draw(starShape, Projectile.Center - Main.screenPosition - Projectile.SafeDir() * 5.5f * i - Projectile.SafeDir() * 10f, null, Color.Lerp(Color.RoyalBlue, Color.MidnightBlue, i / 7f).ToAddColor(50), Projectile.velocity.ToRotation() + PiOver2, starShape.ToOrigin(), scale, 0, 0);
             }
 

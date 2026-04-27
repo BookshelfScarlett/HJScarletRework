@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class TheJudgement: ExecutorWeaponClass
+    public class TheJudgement : ExecutorWeaponClass
     {
         public override int ExecutionTime => 30;
         public override float ExecutionStrikeDamageMult => 1f;

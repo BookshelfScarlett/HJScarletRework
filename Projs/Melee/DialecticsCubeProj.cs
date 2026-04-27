@@ -9,10 +9,10 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class DialecticsCubeProj :HJScarletFriendlyProj
+    public class DialecticsCubeProj : HJScarletFriendlyProj
     {
         public override ClassCategory Category => ClassCategory.Melee;
-        public override string Texture => HJScarletTexture.Specific_DialectCube.Path;   
+        public override string Texture => HJScarletTexture.Specific_DialectCube.Path;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(4, 2);
@@ -47,7 +47,7 @@ namespace HJScarletRework.Projs.Melee
                 Dust d = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5f, 5f), DustID.BlueTorch);
                 d.noGravity = true;
             }
-            switch(AttackType)
+            switch (AttackType)
             {
                 case Style.Slowdown:
                     DoSlowDown();
@@ -113,7 +113,7 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.Kill();
                 return;
             }
-             
+
             Projectile.HomingTarget(target.Center, 1800, 20f, 30f);
             Projectile.rotation = Projectile.velocity.ToRotation();
         }

@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -37,7 +37,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.Opacity = 0f;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
-            Projectile.noEnchantmentVisuals = true; 
+            Projectile.noEnchantmentVisuals = true;
             Projectile.penetrate = -1;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
         }
@@ -103,13 +103,13 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            
+
             //如果已经生成了超过3个幻影投矛，做掉下方所有的ai
             SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 1, PitchVariance = 0.2f }, Projectile.Center);
             //此处需要做一个额外的处理，如果命中的敌对单位不是我们需要的单位，则不要生成后续的射弹
             //尽管如此，他仍然可以进行多穿
             //在这里直接干掉射弹的伤害
-            Projectile.damage *= 0; 
+            Projectile.damage *= 0;
             //只有在这里正式执行消失逻辑
             Timer = 0;
             AttackType = Style.Fade;
@@ -117,7 +117,7 @@ namespace HJScarletRework.Projs.Melee
                 return;
             //随机取当前射弹结束的位置+
             int damage = Projectile.originalDamage;
-            if(TotalShootTime >= 1)
+            if (TotalShootTime >= 1)
                 damage = (int)(Projectile.originalDamage * (1f - ((TotalShootTime - 1) / (float)MaxHitTime)));
             Vector2 projPos = target.Center + Vector2.UnitY.RotatedByRandom(TwoPi) * Main.rand.Next(150, 200);
             Vector2 vel = (target.Center - projPos).SafeNormalize(Vector2.UnitX) * Main.rand.NextFloat(3f, 6f);
@@ -127,7 +127,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawProj(Color.White* Projectile.Opacity, rotFix:PiOver4);
+            Projectile.DrawProj(Color.White * Projectile.Opacity, rotFix: PiOver4);
             return false;
         }
     }

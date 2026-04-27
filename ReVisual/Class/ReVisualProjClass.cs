@@ -75,7 +75,7 @@ namespace HJScarletRework.ReVisual.Class
         }
         public void AddListOnNeed(Projectile proj)
         {
-            if(!proj.HJScarlet().FirstFrame)
+            if (!proj.HJScarlet().FirstFrame)
             {
                 PosList.Clear();
                 RotList.Clear();
@@ -96,7 +96,7 @@ namespace HJScarletRework.ReVisual.Class
         {
             Vector2 pos = oldPos ?? proj.Center;
             float rot = oldRot ?? proj.rotation;
-            if(!proj.HJScarlet().FirstFrame)
+            if (!proj.HJScarlet().FirstFrame)
             {
                 PosList.Clear();
                 RotList.Clear();

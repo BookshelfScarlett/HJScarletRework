@@ -3,9 +3,9 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -14,9 +14,9 @@ using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class DreamingLightFireball:HJScarletProj, IPixelatedRenderer
+    public class DreamingLightFireball : HJScarletProj, IPixelatedRenderer
     {
-        public override string Texture =>HJScarletTexture.InvisAsset.Path;
+        public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override ClassCategory Category => ClassCategory.Executor;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.AlphaBlend;
@@ -47,7 +47,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
             UpdateParticles();
-            if(Projectile.damage == 0 && Projectile.penetrate == -1)
+            if (Projectile.damage == 0 && Projectile.penetrate == -1)
             {
                 UpdateIsHit();
             }
@@ -92,7 +92,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen() && Main.rand.NextFloat() > Projectile.scale)
                 return;
-            if(Main.rand.NextBool(6))
+            if (Main.rand.NextBool(6))
                 new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(12f), Projectile.velocity / 2f, RandLerpColor(Color.LawnGreen, Color.LimeGreen), 30, 0.54f * Projectile.scale).Spawn();
         }
 
@@ -114,13 +114,13 @@ namespace HJScarletRework.Projs.Executor
             PixelatedRenderManager.BeginDrawProj = true;
             return false;
         }
-        
+
         public void RenderPixelated(SpriteBatch sb)
         {
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             DrawCoreStar(sb);
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DarkSeaGreen, 1.48f);
-                DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.LawnGreen, 1.26f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.LawnGreen, 1.26f);
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Lime, 0.88f);
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.54f);
             HJScarletMethods.EndShaderAreaPixel();
@@ -147,7 +147,7 @@ namespace HJScarletRework.Projs.Executor
             QuickDraw(sb, star, Color.LawnGreen, new Vector2(1.27f, 0.5f), 0.72f, 0f, PiOver2);
             QuickDraw(sb, projTex, Color.White, new Vector2(1.2f, 0.8f), projTexScale);
         }
-        public void QuickDraw(SpriteBatch sb, Texture2D tex, Color color, Vector2 shape, float scaleMul, float posOffset = 0f,float rotFixer = 0f)
+        public void QuickDraw(SpriteBatch sb, Texture2D tex, Color color, Vector2 shape, float scaleMul, float posOffset = 0f, float rotFixer = 0f)
         {
             Vector2 projPos = Projectile.Center - Main.screenPosition;
             sb.Draw(tex, projPos - Projectile.SafeDir() * posOffset, null, color, Projectile.rotation + rotFixer, tex.ToOrigin(), Projectile.scale * shape * scaleMul, 0, 0);

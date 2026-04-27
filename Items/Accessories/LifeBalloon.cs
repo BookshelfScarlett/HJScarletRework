@@ -38,7 +38,7 @@ namespace HJScarletRework.Items.Accessories
         public override float GetDurationMultiplier(Player player)
         {
             // Each successive jump has weaker power
-            return player.HJScarlet().LifeBalloonAccJumps switch 
+            return player.HJScarlet().LifeBalloonAccJumps switch
             {
                 1 => 1.2f,
                 2 => 1.5f,

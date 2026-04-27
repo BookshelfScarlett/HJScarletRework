@@ -66,4 +66,4 @@ namespace HJScarletRework.Projs.Melee
             return false;
         }
     }
-    }
+}

@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useTime = 5;
             Item.useAnimation = 5;
             Item.rare = ItemRarityID.Orange;
-            Item.UseSound = SoundID.Item91 with { Volume = 0.7f, Pitch = 0.4f};
+            Item.UseSound = SoundID.Item91 with { Volume = 0.7f, Pitch = 0.4f };
             Item.shoot = ProjectileType<WildPointerThrownProj>();
             Item.shootSpeed = 16;
             Item.knockBack = 0.1f;

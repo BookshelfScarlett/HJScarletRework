@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class HeartoftheCrystal: HJScarletItemClass
+    public class HeartoftheCrystal : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
         public override void ExSD()

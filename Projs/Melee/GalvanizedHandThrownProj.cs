@@ -2,9 +2,9 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Graphics.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -36,7 +36,7 @@ namespace HJScarletRework.Projs.Melee
         public bool ShouldPull = false;
         public bool BeginPull = false;
         public float DeadTime = 120f;
-        private Vector2 OriginalPos = Vector2.Zero; 
+        private Vector2 OriginalPos = Vector2.Zero;
         /// <summary>
         /// 手持射弹完全接管其行为
         /// </summary>
@@ -173,6 +173,7 @@ namespace HJScarletRework.Projs.Melee
             if (ShouldPull)
             {
                 Owner.HJScarlet().NoSlowFall = 120;
+                Owner.HJScarlet().maxFallspeedModify += 10000;
                 Owner.velocity = dir * 80;
                 Owner.GetImmnue(ImmunityCooldownID.General, 12);
                 if (!BeginPull)
@@ -192,9 +193,10 @@ namespace HJScarletRework.Projs.Melee
             }
             else
             {
-                if(Projectile.timeLeft % GetSeconds(1) == 0)
+                Owner.HJScarlet().maxFallspeedModify += 10000;
+                if (Projectile.timeLeft % GetSeconds(1) == 0)
                 {
-                    Vector2 spawnPos = Owner.Center + (Owner.Center - target.Center).ToSafeNormalize().RotatedByRandom(PiOver4) * (1200f); 
+                    Vector2 spawnPos = Owner.Center + (Owner.Center - target.Center).ToSafeNormalize().RotatedByRandom(PiOver4) * (1200f);
                     Vector2 vel = HJScarletMethods.PredictAimToTarget(spawnPos, target.Center, target.velocity, 28f, 0);
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<GalvanizedHandSideProj>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
                     proj.extraUpdates += 1;
@@ -219,6 +221,7 @@ namespace HJScarletRework.Projs.Melee
                 new ShinyOrbParticle(shapePos.ToRandCirclePos(3.1f), shapeVel * 0.5f, RandLerpColor(Color.CornflowerBlue, Color.RoyalBlue), 40, shapeScale * 1.1f).Spawn();
 
             }
+            Owner.HJScarlet().maxFallspeedModify += 10000;
         }
 
         private void DrawMountedParticle()
