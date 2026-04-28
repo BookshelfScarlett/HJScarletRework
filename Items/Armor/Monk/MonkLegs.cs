@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Armor.Shinobi;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -13,7 +14,7 @@ namespace HJScarletRework.Items.Armor.Monk
     {
         public override void SetStaticDefaults()
         {
-
+            Type.ShimmerEach<ShinobiLegs>();
         }
         public override void ExSD()
         {

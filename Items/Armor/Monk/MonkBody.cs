@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Armor.Shinobi;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,6 +11,10 @@ namespace HJScarletRework.Items.Armor.Monk
     [AutoloadEquip(EquipType.Body)]
     public class MonkBody : HJScarletArmor
     {
+        public override void SetStaticDefaults()
+        {
+            Type.ShimmerEach<ShinobiBody>();
+        }
         public override void ExSD()
         {
             Item.width = Item.height = 40;

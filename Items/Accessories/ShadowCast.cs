@@ -3,15 +3,16 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class ShadowCast : HJScarletItemClass
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override string AssetPath => AssetHandler.Equips;
         public override void ExSD()
         {
-            Item.width = Item.height = 24;
             Item.accessory = true;
             Item.rare = ItemRarityID.Purple;
         }

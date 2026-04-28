@@ -24,5 +24,13 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.useTime = Item.useAnimation = 30;
             Item.SetUpRarityPrice(ItemRarityID.Blue);
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.RichMahoganyHammer).
+                AddIngredient(ItemID.JungleSpores, 15).
+                AddTile(TileID.Anvils).
+                Register();
+        }
     }
 }

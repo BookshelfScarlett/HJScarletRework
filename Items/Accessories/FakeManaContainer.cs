@@ -13,8 +13,6 @@ namespace HJScarletRework.Items.Accessories
         public int GiveMana = 0;
         public override void ExSD()
         {
-            Item.width = 30;
-            Item.height = 30;
             Item.accessory = true;
             Item.SetUpRarityPrice(ItemRarityID.Green);
         }

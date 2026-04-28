@@ -8,7 +8,9 @@ using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
+using Steamworks;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -177,33 +179,10 @@ namespace HJScarletRework.Globals.Players
                     new ShinyCrossStar(pos, -Vector2.UnitY * Main.rand.NextFloat(0.1f, .4f), RandLerpColor(Color.Lime, Color.LimeGreen), 40, 0, 1, 0.4f, false).Spawn();
                 }
             }
-            if (resetTerraRecipe)
-            {
-                for (int i = 0; i < terraRecipe_CurEat.Count; i++)
-                {
-                    int index = terraRecipe_CurEat[i];
-                    if (HJScarletList.LegalFoodList.Contains(index))
-                        continue;
-                    terraRecipe_CurEat.RemoveAt(i);
-                }
-                for (int i = 0; i < terraRecipe_haventEat.Count; i++)
-                {
-                    int index = terraRecipe_haventEat[i];
-                    if (HJScarletList.LegalFoodList.Contains(index))
-                        continue;
-                    terraRecipe_haventEat.RemoveAt(i);
-                }
-                for (int i = 0; i < HJScarletList.LegalFoodList.Count; i++)
-                {
-                    int index = HJScarletList.LegalFoodList[i];
-                    if (terraRecipe_haventEat.Contains(index))
-                        continue;
-                    terraRecipe_haventEat.Add(index);
-                }
-                resetTerraRecipe = false;
-            }
-            HandleWeaponAbility();
+            //进入世界时读取刷新
+                        HandleWeaponAbility();
         }
+
 
         private void HandleWeaponAbility()
         {
@@ -266,6 +245,7 @@ namespace HJScarletRework.Globals.Players
         public override void PostUpdateEquips()
         {
             HandleTerraRecipe();
+            ResetTerraRecipe();
             HandleLoveRing();
             UpdateFloretProtectorHerbSpawn();
             UpdateHerbBuff();
@@ -500,14 +480,29 @@ namespace HJScarletRework.Globals.Players
             //由于需要提供血上限，这里基本上得往reset这里写内容。
             if (!terraRecipe)
                 return;
-            //如果列表什么都没有，我们才注册这个表单
-            if (terraRecipe_haventEat.Count == 0)
-                terraRecipe_haventEat = HJScarletList.LegalFoodList;
-            //满足这个count的时候。我们就准提供一个血上限
-            if (terraRecipe_EatenFoods > 4)
+            //在吃食时，或者进入世界时，都会依据当前的食物表单来查看需要的血上限
+            if (resetEatenFoodCounts)
             {
                 //记得重置
-                terraRecipe_EatenFoods = 0;
+                //遍历这个表单。
+                for(int i = 0; i < terraRecipe_EatenFoodList.Count;i++)
+                {
+                    //每次达到第五个，我们都重置这个计算用的单位
+                    terraRecipe_EatenFoodCounts += 1;
+                    if (terraRecipe_EatenFoodCounts > 4)
+                    {
+                        terraRecipe_EatenFoodCounts = 0;
+                        //lifeMaxMultTime会在这个地方递增
+                        terraRecipe_LifeMaxMultTime += 1;
+                    }
+                }
+                resetEatenFoodCounts = false;
+                
+            }
+            //
+            if(terraRecipe_EatenFoodCounts > 4)
+            {
+                terraRecipe_EatenFoodCounts = 0;
                 terraRecipe_LifeMaxMultTime += 1;
                 SoundEngine.PlaySound(SoundID.ResearchComplete, Player.Center);
                 Player.HealEffect(terraRecipe_LifeMaxIncre);
@@ -519,6 +514,35 @@ namespace HJScarletRework.Globals.Players
             }
             //全局常态提供血上限。
             Player.statLifeMax2 += terraRecipe_LifeMaxMultTime * terraRecipe_LifeMaxIncre;
+        }
+        public void ResetTerraRecipe()
+        {
+            if (resetTerraRecipe)
+            {
+                //byd你tm不是复制而是类似一个引用的用法啊？？
+                terraRecipe_NotEatenFoodList = new List<int>(HJScarletList.LegalFoodList);
+                for(int i =0;i<terraRecipe_EatenFoodList.Count;i++)
+                {
+                    int index = terraRecipe_EatenFoodList[i];
+                    if(!terraRecipe_NotEatenFoodList.Contains(index))
+                    {
+                        terraRecipe_EatenFoodList.RemoveAt(i);
+                    }
+                }
+                for(int i =0;i<terraRecipe_NotEatenFoodList.Count;i++)
+                {
+                    int index = terraRecipe_NotEatenFoodList[i];
+                    if(terraRecipe_EatenFoodList.Contains(index))
+                    {
+                        terraRecipe_NotEatenFoodList.RemoveAt(i);
+                    }
+                }
+                //重新计算一遍当前值。
+                resetEatenFoodCounts= true;
+                        terraRecipe_EatenFoodCounts = 0;
+                terraRecipe_LifeMaxMultTime = 0;
+                resetTerraRecipe = false;
+            }
         }
 
 

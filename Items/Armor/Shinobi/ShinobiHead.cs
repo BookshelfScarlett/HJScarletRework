@@ -12,6 +12,10 @@ namespace HJScarletRework.Items.Armor.Shinobi
     public class ShinobiHead : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Armors;
+        public override void SetStaticDefaults()
+        {
+            
+        }
         public override void ExSD()
         {
             Item.width = Item.height = 40;

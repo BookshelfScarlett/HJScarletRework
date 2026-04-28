@@ -47,3 +47,12 @@ GoldenAppleBuff: {
 	DisplayName: 金苹果
 	Description: 你的牙口居然没事吗？
 }
+
+GoldenAppleBuffEnchanted: {
+	DisplayName: 附魔金苹果
+	Description:
+		'''
+		加速生命再生，强化防御能力
+		...你牙口居然这么好吗？
+		'''
+}

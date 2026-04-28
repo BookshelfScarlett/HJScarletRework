@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -12,7 +12,6 @@ namespace HJScarletRework.Items.Accessories
         public override string AssetPath => AssetHandler.Equips;
         public override void ExSD()
         {
-            Item.width = Item.height = 30;
             Item.accessory = true;
             Item.defense = 5;
             Item.SetUpRarityPrice(ItemRarityID.Cyan);

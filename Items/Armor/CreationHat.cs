@@ -2,7 +2,7 @@
 using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
@@ -29,10 +29,8 @@ namespace HJScarletRework.Items.Armor
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DefenseCount, MaxMana, ManaDamage.ToPercent(), ManaCrits, ManaCost.ToPercent());
         public override void ExSD()
         {
-            Item.width = 38;
-            Item.height = 22;
             Item.defense = 10;
-            Item.rare = ItemRarityID.Purple;
+            Item.SetUpRarityPrice(ItemRarityID.Purple);
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
@@ -66,7 +64,7 @@ namespace HJScarletRework.Items.Armor
             CreateRecipe().
                 AddRecipeGroup(HJScarletRecipeGroup.AnyMagicHat, 1).
                 AddIngredient<CubistBar>(10).
-                AddTile(TileID.LunarCraftingStation).
+                AddTile(FinalAnvilTile).
                 Register();
         }
     }

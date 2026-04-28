@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HJScarletRework.Globals.List;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Terraria.Localization;
 using Terraria.ModLoader;
 namespace HJScarletRework.Globals.Methods
@@ -106,6 +108,24 @@ namespace HJScarletRework.Globals.Methods
                 tooltips.Add(newLine);
             else
                 tooltips.Insert(tooltips.Count, newLine);
+        }
+        public static string SwapTooltipValue()
+        {
+            string keyPath = ($"Mods.HJScarletRework.SwitchWeaponTooltip");
+            return keyPath.ToLangValue();
+        }
+        public static void AddSwapTooltipValueBossCondition(this List<TooltipLine> tooltips, int downedNPCID, Color? color = null)
+        {
+            string listPath = "Mods.HJScarletRework.SwitchWeaponConditionList.";
+            string downedConditionPath = "Mods.HJScarletRework.SwitchWeaponConditionTooltip";
+            string bossValue = string.Empty;
+            if( HJScarletList.DownedBossConditionList.TryGetValue(downedNPCID, out string keyValue))
+                bossValue = keyValue;
+            Color color1 = color ?? Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f);
+            string downedValue = (listPath + bossValue).ToLangValue();
+            string listValue = downedConditionPath.ToLangValue().ToFormatValue(downedValue);
+            tooltips.QuickAddTooltipDirect(listValue, color1, HJScarletRework.Instance,"SwapConditionName");
+
         }
         public static string ToLangValue(this string textPath) => Language.GetTextValue(textPath);
 

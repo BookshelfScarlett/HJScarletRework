@@ -111,7 +111,6 @@ namespace HJScarletRework.Projs.Executor
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-
             return false;
         }
         public override void OnFirstFrame()
@@ -126,6 +125,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
             Projectile.AddExecutionTimePass(ItemType<JungleMadness>());
+            target.AddBuff(BuffID.Poisoned, GetSeconds(1));
             SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { MaxInstances = 2, Pitch = 0.3f }, Projectile.Center);
             if (Projectile.numHits < 1)
                 SpawnLeafs(target.whoAmI);

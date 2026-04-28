@@ -3,7 +3,7 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.Instances.Projs;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.ParticleSystem;
 using Microsoft.Xna.Framework;

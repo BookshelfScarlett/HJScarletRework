@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;

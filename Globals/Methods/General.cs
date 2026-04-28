@@ -1,4 +1,6 @@
 ﻿using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.Instances.Items;
+using HJScarletRework.Globals.Instances.Projs;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
 using System;

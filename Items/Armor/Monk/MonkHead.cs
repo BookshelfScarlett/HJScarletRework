@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Armor.Shinobi;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -12,6 +13,10 @@ namespace HJScarletRework.Items.Armor.Monk
     {
         public override int[] ArmorSlots => [Type, ItemType<MonkBody>(), ItemType<MonkLegs>()];
         public override bool SetUpArmorSet => true;
+        public override void SetStaticDefaults()
+        {
+            Type.ShimmerEach<ShinobiHead>();
+        }
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Yellow);

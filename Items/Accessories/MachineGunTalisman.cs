@@ -12,7 +12,6 @@ namespace HJScarletRework.Items.Accessories
         public override string AssetPath => AssetHandler.Equips;
         public override void ExSD()
         {
-            Item.width = Item.height = 33;
             Item.SetUpRarityPrice(ItemRarityID.Cyan);
             Item.accessory = true;
             Item.defense = 10;

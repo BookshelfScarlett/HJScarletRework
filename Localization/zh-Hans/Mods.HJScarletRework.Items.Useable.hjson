@@ -34,6 +34,17 @@ GoldenApple: {
 	Tooltip:
 		'''
 		所有属性大幅度提升
+		直接减少承受的伤害
+		"仅仅巧合"
+		'''
+}
+
+GoldenAppleEnchanted: {
+	DisplayName: 附魔金苹果
+	Tooltip:
+		'''
+		所有属性大幅度提升
+		直接减少承受的伤害
 		"仅仅巧合"
 		'''
 }

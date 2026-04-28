@@ -34,6 +34,9 @@ namespace HJScarletRework.Globals.Players
         public int ownerMinionHammerCount = 0;
 
         public int climaticHawstringLaserCounter = 0;
+        public bool goldenApple = false;
+        public bool goldenAppleEnchanted = false;
+        public int goldenAppleDamageAbsorb = 0;
         #region 护甲
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;
@@ -130,11 +133,12 @@ namespace HJScarletRework.Globals.Players
         #endregion
         public bool terraRecipe = false;
         public bool resetTerraRecipe = false;
-        public int terraRecipe_EatenFoods = 0;
+        public bool resetEatenFoodCounts = false;
+        public int terraRecipe_EatenFoodCounts = 0;
         public int terraRecipe_LifeMaxMultTime = 0;
-        public int terraRecipe_LifeMaxIncre = 20;
-        public List<int> terraRecipe_CurEat = new List<int>();
-        public List<int> terraRecipe_haventEat = new List<int>();
+        public int terraRecipe_LifeMaxIncre = 10;
+        public List<int> terraRecipe_EatenFoodList = new List<int>();
+        public List<int> terraRecipe_NotEatenFoodList = new List<int>();
         public override void ResetEffects()
         {
             climaticHawstringLaserCounter *= (Player.HeldItem.type == ItemType<ClimaticHawstring>()).ToInt();

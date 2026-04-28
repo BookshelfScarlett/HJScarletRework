@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Globals.Instances;
+﻿using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;

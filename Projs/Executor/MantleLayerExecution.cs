@@ -82,9 +82,9 @@ namespace HJScarletRework.Projs.Executor
         private void DoIdle()
         {
             Projectile.rotation = Projectile.SpeedAffectRotation();
-            Projectile.velocity *= 0.858f;
+            Projectile.velocity *= 0.878f;
             Timer++;
-            if (Projectile.MeetMaxUpdatesFrame(Timer, 15))
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 20))
                 UpdateNextAttack(State.Attack);
         }
 

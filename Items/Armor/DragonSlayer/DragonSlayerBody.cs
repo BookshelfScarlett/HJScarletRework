@@ -17,10 +17,8 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         {
             //EquipLoader.AddEquipTexture(Mod, )
         }
-        public override void SetDefaults()
+        public override void ExSD()
         {
-            Item.width = 26;
-            Item.height = 28;
             Item.defense = 35;
             Item.SetUpRarityPrice(ItemRarityID.Purple);
             Item.rare = RarityType<DisasterRarity>();

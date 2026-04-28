@@ -226,18 +226,12 @@ BlackKey: {
 
 ArcBow: {
 	DisplayName: 拱形弓弩
-	Tooltip:
-		'''
-		自身被伤害时，回复25点生命值
-		'''
+	Tooltip: 自身被伤害时，回复25点生命值
 }
 
 MachineGunTalisman: {
 	DisplayName: 机枪护身符
-	Tooltip:
-		'''
-		自身被伤害时，回复35点生命值
-		'''
+	Tooltip: 自身被伤害时，回复35点生命值
 }
 
 RocketCharm: {

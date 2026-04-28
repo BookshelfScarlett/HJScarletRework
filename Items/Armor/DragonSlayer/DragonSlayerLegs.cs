@@ -13,10 +13,8 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
     public class DragonSlayerLegs : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Armors;
-        public override void SetDefaults()
+        public override void ExSD()
         {
-            Item.width = 26;
-            Item.height = 28;
             Item.defense = 30;
             Item.SetUpRarityPrice(ItemRarityID.Purple);
             Item.rare = RarityType<DisasterRarity>();

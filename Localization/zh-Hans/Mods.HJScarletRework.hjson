@@ -1,7 +1,11 @@
 SwitchWeaponTooltip: 空想归途：手持该物品，按下 互动键 以切换形态
 SwitchWeaponVisual: 空想归途：手持该武器，按下鼠标中键以更改视觉效果
-// SwitchWeaponConditionTooltip: ""
-// SwitchWeaponConditionList.DonwedLifeGods: ""
+SwitchWeaponConditionTooltip: 转化前置条件：击败<{0}>
+
+SwitchWeaponConditionList: {
+	DownedGolem: 石巨人
+	DownedLifeGods: 万籁携生
+}
 
 SwitchWeapon: {
 	Tooltip:

@@ -4,7 +4,7 @@ using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.Instances.Projs;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using HJScarletRework.Items.Weapons.Executor;

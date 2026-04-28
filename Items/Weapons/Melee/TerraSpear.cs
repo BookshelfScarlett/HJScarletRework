@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using Terraria.ID;

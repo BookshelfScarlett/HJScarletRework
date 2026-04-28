@@ -14,16 +14,9 @@ namespace HJScarletRework.Globals.Players
     {
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
-            //确保武器起码有伤害
-            if (PreciousTargetAcc && item.damage > 0)
-            {
-                crit = PreciousTargetCrtis;
-                int limitedCrit = PreciousAimAcc ? 125 : 115;
-                if (PreciousTargetCrtis > limitedCrit)
-                    PreciousTargetCrtis = limitedCrit;
-            }
             if (monkExecutor)
             {
+                crit = Player.GetTotalCritChance<ExecutorDamageClass>() + 4;
                 if (item.type == ItemID.MonkStaffT3)
                 {
                     crit += 30;
@@ -33,6 +26,28 @@ namespace HJScarletRework.Globals.Players
                     crit += 30;
                 }
             }
+
+            //下面这个必须得最后执行
+            if (PreciousTargetAcc && item.damage > 0)
+            {
+                crit = PreciousTargetCrtis;
+                int limitedCrit = PreciousAimAcc ? 125 : 115;
+                if (PreciousTargetCrtis > limitedCrit)
+                    PreciousTargetCrtis = limitedCrit;
+            }
+        }
+        public override void ModifyManaCost(Item item, ref float reduce, ref float mult)
+        {
+            if ((heartoftheCrystal || redDragonKnight) && item.DamageType.CountsAsClass(DamageClass.Magic))
+            {
+                mult = 0;
+            }
+            if (fakeManaStar)
+            {
+                reduce = 1;
+            }
+
+            base.ModifyManaCost(item, ref reduce, ref mult);
         }
         //潜在的问题是，这里实际上有可能因为写法差异导致出现多乘区
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)

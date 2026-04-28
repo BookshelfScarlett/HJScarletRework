@@ -47,3 +47,8 @@ GoldenAppleBuff: {
 	DisplayName: Golden Apple Buff
 	Description: Mods.HJScarletRework.Buffs.GoldenAppleBuff.Description
 }
+
+GoldenAppleBuffEnchanted: {
+	DisplayName: Golden Apple Buff Enchanted
+	Description: Mods.HJScarletRework.Buffs.GoldenAppleBuffEnchanted.Description
+}

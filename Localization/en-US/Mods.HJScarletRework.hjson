@@ -1,7 +1,11 @@
 SwitchWeaponTooltip: Lostbelt Journey: Press Middle Click while holding the weapon to switch
 SwitchWeaponVisual: Lostbelt Journey: Press Middle Click while holding the weapon to change its visual effect
 SwitchWeaponConditionTooltip: ""
-SwitchWeaponConditionList.DonwedLifeGods: ""
+
+SwitchWeaponConditionList: {
+	DownedGolem: ""
+	DownedLifeGods: ""
+}
 
 SwitchWeapon: {
 	Tooltip:

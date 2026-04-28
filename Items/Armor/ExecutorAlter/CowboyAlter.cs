@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -12,21 +12,11 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override int ApplyArmor => ItemID.CowboyHat;
         public override string SetupName => "Cowboy";
         public override ArmorType Category => ArmorType.Helmet;
+        public override bool SetUpArmorSet => true;
+        public override int[] ArmorSlots => [ItemID.CowboyHat,ItemID.CowboyJacket,ItemID.CowboyPants];
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += 0.10f;
-        }
-        public override string IsArmorSet(Item head, Item body, Item legs)
-        {
-            bool correctedArmor = head.type == ItemID.CowboyHat && body.type == ItemID.CowboyJacket && legs.type == ItemID.CowboyPants;
-
-            if (correctedArmor)
-            {
-                bool correctedState = head.HJScarlet().EnableExecutorVersion && body.HJScarlet().EnableExecutorVersion && legs.HJScarlet().EnableExecutorVersion;
-                if (correctedState)
-                    return ArmorSetName;
-            }
-            return base.IsArmorSet(head, body, legs);
         }
         public override void ExSD(Item item)
         {

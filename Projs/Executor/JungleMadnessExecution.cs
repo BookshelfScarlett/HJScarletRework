@@ -166,6 +166,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { MaxInstances = 2, Pitch = 0.3f }, Projectile.Center);
+            target.AddBuff(BuffID.Poisoned, GetSeconds(1));
             if (AttackType == State.Shoot && Helper.IsDone[0])
             {
                 IsHit = true;

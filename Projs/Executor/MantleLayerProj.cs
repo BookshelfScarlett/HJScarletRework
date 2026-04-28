@@ -144,7 +144,8 @@ namespace HJScarletRework.Projs.Executor
         {
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_Hit with { MaxInstances = 0, Pitch = -0.2f }, Projectile.Center);
             Vector2 dir = Projectile.velocity.ToSafeNormalize();
-            Vector2 vel = dir.RotatedBy(Main.rand.NextFloat(ToRadians(30f), ToRadians(60f)) * Main.rand.NextBool().ToDirectionInt()) * Main.rand.NextFloat(22f, 26f);
+            Vector2 dir2 = dir.RotatedBy(Main.rand.NextFloat(ToRadians(45f), ToRadians(60f)) * Main.rand.NextBool().ToDirectionInt());
+            Vector2 vel = dir2  * Main.rand.NextFloat(43f, 46f);
             ScreenShakeSystem.AddScreenShakes(Projectile.Center, 12f, 40, vel.ToRotation(), ToRadians(30f));
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.Center, vel, projID, Projectile.damage, 2f, Owner.whoAmI);
             proj.HJScarlet().ExecutionStrike = true;

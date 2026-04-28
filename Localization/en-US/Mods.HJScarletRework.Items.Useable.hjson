@@ -16,3 +16,8 @@ GoldenApple: {
 	DisplayName: Golden Apple
 	Tooltip: ""
 }
+
+GoldenAppleEnchanted: {
+	DisplayName: Golden Apple Enchanted
+	Tooltip: ""
+}

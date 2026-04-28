@@ -42,7 +42,6 @@ namespace HJScarletRework.Globals.Huds
                 ExecutionTarget2D = new RenderTarget2D(Main.graphics.GraphicsDevice, (int)TargetSize.X, (int)TargetSize.Y);
             });
             On_Main.DrawDust += On_Main_DrawDust;
-            On_Main.CheckMonoliths += RenderTarget;
             LoadInit();
 
         }
@@ -115,7 +114,6 @@ namespace HJScarletRework.Globals.Huds
                 ExecutionTarget2D?.Dispose();
                 ExecutionTarget2D = null;
             });
-            On_Main.CheckMonoliths -= RenderTarget;
             On_Main.DrawDust -= On_Main_DrawDust;
 
         }
@@ -128,10 +126,6 @@ namespace HJScarletRework.Globals.Huds
             GeneralOpactiy = 0;
         }
 
-
-        public static void RenderTarget(On_Main.orig_CheckMonoliths orig)
-        {
-        }
 
         public override void UpdateUI(GameTime gameTime)
         {

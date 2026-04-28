@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.Instances;
+using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
@@ -50,8 +50,8 @@ namespace HJScarletRework.Items.Useables
             if (isPressingLeftAlt)
             {
                 //获取表单与对应的名字。
-                List<int> foodList = modPlayer.terraRecipe_CurEat;
-                List<int> notEatenFoodList = modPlayer.terraRecipe_haventEat;
+                List<int> foodList = modPlayer.terraRecipe_EatenFoodList;
+                List<int> notEatenFoodList = modPlayer.terraRecipe_NotEatenFoodList;
                 //直接遍历一个表单
                 //这里表单是严格11对应的，理论来说不会出现问题，大概
                 string combineValue = null;
@@ -60,12 +60,6 @@ namespace HJScarletRework.Items.Useables
                     combineValue = $"{line}-";
                 for (int i = 0; i < foodList.Count; i++)
                 {
-                    //尽管如此，这里仍然需要过一个可能的保护
-                    if (!HJScarletList.LegalFoodList.Contains(foodList[i]))
-                    {
-                        modPlayer.terraRecipe_CurEat.RemoveAt(i);
-                        continue;
-                    }
 
                     string perInstance = $"[i:{foodList[i]}]";
                     //将其放进这个列表里合并起来
@@ -75,7 +69,7 @@ namespace HJScarletRework.Items.Useables
                     {
                         //过一个判定看这个值是不是超过了列表数
                         //这样就不会新开一个什么都没有的行，因为写法上的问题
-                        if (i + 1 < notEatenFoodList.Count)
+                        if (i + 1 < foodList.Count)
                         {
                             line++;
                             combineValue += $"\n{line}-";
@@ -89,13 +83,7 @@ namespace HJScarletRework.Items.Useables
                     combineValue2 = $"{line}-";
                 for (int i = 0; i < notEatenFoodList.Count; i++)
                 {
-                    //尽管如此，这里仍然需要过一个可能的保护
-                    if (!HJScarletList.LegalFoodList.Contains(notEatenFoodList[i]))
-                    {
-                        modPlayer.terraRecipe_haventEat.RemoveAt(i);
-                        continue;
-                    }
-                    //第二个问题，这里需要对比一遍与原始的食物清单
+                   //第二个问题，这里需要对比一遍与原始的食物清单
                     string perInstance = $"[i:{notEatenFoodList[i]}]";
                     //将其放进这个列表里合并起来
                     combineValue2 += $"{perInstance}";

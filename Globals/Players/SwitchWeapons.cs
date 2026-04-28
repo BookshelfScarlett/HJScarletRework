@@ -4,9 +4,12 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.ExecutorAlter;
+using HJScarletRework.Items.Armor.Monk;
+using HJScarletRework.Items.Armor.Shinobi;
 using HJScarletRework.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -17,7 +20,7 @@ namespace HJScarletRework.Globals.Players
     public partial class HJScarletPlayer : ModPlayer
     {
         //这里是硬打表，而且本质上我们也确实只需要硬打表……
-        private static readonly Dictionary<int, int> WeaponSwapMaps = new Dictionary<int, int>()
+        private static readonly Dictionary<int, int> WeaponSwapMaps = new()
         {
             { ItemType<CandLanceThrown>(), ItemType<Candlance>() },
             { ItemType<DeepToneThrown>(), ItemType<DeepTone>() },
@@ -30,9 +33,19 @@ namespace HJScarletRework.Globals.Players
             { ItemType<TonbogiriThrown>(), ItemType<Tonbogiri>() },
             { ItemType<GalvanizedHandThrown>(), ItemType<GalvanizedHand>() },
             { ItemType<SpearofEscapeThrown>(),  ItemType<SpearOfEscape>() },
-            { ItemType<LightBiteThrown>() , ItemType<LightBite>() }
+            { ItemType<LightBiteThrown>() , ItemType<LightBite>() },
+            {ItemType<MonkHead>(), ItemID.MonkBrows },
+            {ItemType<MonkBody>(), ItemID.MonkShirt},
+            {ItemType<MonkLegs>(), ItemID.MonkPants},
+            {ItemType<ShinobiHead>(), ItemID.MonkAltHead},
+            {ItemType<ShinobiBody>(), ItemID.MonkAltShirt},
+            {ItemType<ShinobiLegs>(), ItemID.MonkAltPants},
         };
-        private static readonly List<int> ArmorMaps = new List<int>()
+        /// <summary>
+        /// 用于外部调用
+        /// </summary>
+        public static readonly HashSet<int> AllWeaponSwapValue = new(WeaponSwapMaps.Values.Concat(WeaponSwapMaps.Keys));
+        public static readonly List<int> ArmorMaps = new List<int>()
         {
             ItemID.RuneHat,
             ItemID.RuneRobe,
@@ -49,7 +62,7 @@ namespace HJScarletRework.Globals.Players
             ItemID.FishCostumeFinskirt
         };
         //一个额外的工具方法，用于反向字典映射
-        private static int GetReverseWeapon(int curType)
+        public static int GetReverseWeapon(int curType)
         {
             foreach (var (key, value) in WeaponSwapMaps)
             {

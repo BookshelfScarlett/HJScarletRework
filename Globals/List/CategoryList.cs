@@ -1,7 +1,9 @@
 ﻿using ContinentOfJourney.Items;
+using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,6 +17,10 @@ namespace HJScarletRework.Globals.List
         public static List<int> MaleNPC = [];
         public static List<int> FemaleNPC = [];
         public static List<int> LegalFoodList = [];
+        /// <summary>
+        /// 主要用于Boss方面
+        /// </summary>
+        public static Dictionary<int, string> DownedBossConditionList = [];
         public override void Load()
         {
             //投矛表单
@@ -152,6 +158,11 @@ namespace HJScarletRework.Globals.List
                 ItemID.Bacon,
                 ItemID.GoldenDelight
             ];
+            DownedBossConditionList = new Dictionary<int, string>()
+            {
+                { NPCID.Golem, "DownedGolem" },
+                { NPCType<TheLifebringerHead>(),"DownedLifeGods"},
+            };
         }
         public override void PostSetupContent()
         {
@@ -162,8 +173,10 @@ namespace HJScarletRework.Globals.List
                 bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
                 if (isFood && !LegalFoodList.Contains(item.type))
                     LegalFoodList.Add(item.type);
-                if (item.type == ItemType<GoldenApple>())
-                    LegalFoodList.Add(item.type);
+                //if (item.type == ItemType<GoldenApple>())
+                //    LegalFoodList.Add(item.type);
+                //if (item.type == ItemType<GoldenAppleEnchanted>())
+                //    LegalFoodList.Add(item.type);
             }
         }
         public override void Unload()
@@ -171,6 +184,7 @@ namespace HJScarletRework.Globals.List
             ThrownSpearList = null;
             HJSpearList = null;
             LegalFoodList = null;
+            DownedBossConditionList = null;
         }
     }
 }

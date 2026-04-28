@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
@@ -73,26 +74,35 @@ namespace HJScarletRework.Globals.Players
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             float totalProjDamageModify = 1f;
+            float sourceDamageModify = 1f;
             if (protectorMoonglow)
             {
                 if (modifiers.HitDirection == Player.direction)
                 {
-                    totalProjDamageModify -= 0.35f;
+                    totalProjDamageModify *= 0.65f;
                 }
             }
+            if(goldenAppleEnchanted)
+            {
+                sourceDamageModify *= 0.80f;
+            }
             modifiers.FinalDamage *= totalProjDamageModify;
+            modifiers.SourceDamage *= sourceDamageModify;
         }
         public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
         {
             base.ModifyHitByProjectile(proj, ref modifiers);
             float totalProjDamageModify = 1f;
+            float sourceDamageModify = 1f;
             //月光花的buff，护花员的。
             if (floretProtectorExecutor)
             {
                 if (modifiers.HitDirection == Player.direction)
                 {
-                    totalProjDamageModify -= 0.20f * (protectorHerbTimerList[1] > 0).ToInt();
-                    totalProjDamageModify -= 0.65f * protectorMoonglow.ToInt();
+                    if ((protectorHerbTimerList[1] > 0))
+                        totalProjDamageModify *= 0.80f;
+                    if (protectorMoonglow)
+                        totalProjDamageModify *= 0.65f;
                 }
             }
 
@@ -106,10 +116,15 @@ namespace HJScarletRework.Globals.Players
                 totalProjDamageModify *= 0.50f;
                 modifiers.Knockback *= 0;
             }
+            if(goldenAppleEnchanted)
+            {
+                sourceDamageModify *= 0.80f;
+            }
             if (totalProjDamageModify < 0.05f)
                 totalProjDamageModify = 0.1f;
 
             modifiers.FinalDamage *= totalProjDamageModify;
+                modifiers.SourceDamage *= sourceDamageModify;
         }
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
@@ -150,6 +165,7 @@ namespace HJScarletRework.Globals.Players
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
+            modifiers.ModifyHurtInfo += Modifiers_ModifyHurtInfo;
             float finalDamageModiflication = 1f;
             if (Player.HasBuff<BlackKeyExecutionBuff>())
             {
@@ -183,6 +199,22 @@ namespace HJScarletRework.Globals.Players
                     Vector2 vel = Vector2.UnitY * Main.rand.NextFloat(-6f, -1f);
                     new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
                 }
+            }
+        }
+        private void Modifiers_ModifyHurtInfo(ref Player.HurtInfo info)
+        {
+            if (info.Cancelled)
+                return;
+            if (goldenAppleDamageAbsorb != 0)
+            {
+                //这个机制类似于灾的护盾，但是更加夸张一些
+                //会把所有的伤害直接舍去对应值，相当于白给了一个永远不受敌方影响的加算防御
+                //这个效果潜在来说会非常非常超模。但是我目前不想改动，为了吸引一批人来玩
+                info.Damage -= goldenAppleDamageAbsorb;
+                string reduceText = (-goldenAppleDamageAbsorb).ToString();
+                Rectangle location = new Rectangle((int)Player.position.X, (int)Player.position.Y - 16, Player.width, Player.height);
+                CombatText.NewText(location, Color.LightGoldenrodYellow, Language.GetTextValue(reduceText));
+                //particle，生成点粒子。
             }
         }
     }

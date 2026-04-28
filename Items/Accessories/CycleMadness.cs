@@ -2,11 +2,13 @@
 using HJScarletRework.Globals.Handlers;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class CycleMadness : HJScarletItemClass
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override string AssetPath => AssetHandler.Equips;
         public override void ExSD()
         {
