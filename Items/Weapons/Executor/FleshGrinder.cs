@@ -7,7 +7,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class FleshGrinder : ExecutorWeaponClass
     {
-        public override float ExecutionStrikeDamageMult => 0.5f;
+        public override float ExecutionStrikeDamageMult => 0.8f;
         public override int ExecutionTime => 20;
         public override void ExSD()
         {

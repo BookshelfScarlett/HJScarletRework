@@ -37,6 +37,7 @@ namespace HJScarletRework.Globals.Players
         public bool goldenApple = false;
         public bool goldenAppleEnchanted = false;
         public int goldenAppleDamageAbsorb = 0;
+        public bool goldenAppleEnchantedFully = false;
         #region 护甲
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;
@@ -63,13 +64,13 @@ namespace HJScarletRework.Globals.Players
         public bool loveRing = false;
         public bool isBeingLove = false;
         public int genderChangeTimer = 0;
-        public bool fakeManaStar = false;
+        public bool artificalManaStar = false;
 
         public bool ShadowCastAcc = false;
         public bool LifeBalloonAcc = false;
         public int LifeBalloonAccJumps;
 
-        public bool stardustRune = false;
+        public bool souloftheTidalMark = false;
         public bool desterrennacht = false;
         public int stardustRuneHitHealTimer = 0;
         public int stardustRuneStaticHealTimer = 0;
@@ -80,9 +81,9 @@ namespace HJScarletRework.Globals.Players
         public bool PreciousAimAcc = false;
         public int PreciousTargetCrtis = 10;
         public int PreciousCritsMin = 0;
-        public int fakeManaContainer = 0;
+        public int manaSavingsJar = 0;
 
-        public bool defenderEmblem = false;
+        public bool vanguardEmblem = false;
         public int defenderEmblemCD = 0;
         public int blackKeyHeal = 0;
         public float blackKeyDefenseBuff = 0;
@@ -115,7 +116,7 @@ namespace HJScarletRework.Globals.Players
         #region 处刑攻击
         public bool tacticalExecution = false;
         public int tacticalTime = 0;
-        public bool executorAscension = false;
+        public bool EeecutorsSwordMarkPlus = false;
         public int tacticalPunishTime = 0;
         public int ExecutionTime = 0;
         public int bonusExecutionReduce = 0;
@@ -139,46 +140,6 @@ namespace HJScarletRework.Globals.Players
         public int terraRecipe_LifeMaxIncre = 10;
         public List<int> terraRecipe_EatenFoodList = new List<int>();
         public List<int> terraRecipe_NotEatenFoodList = new List<int>();
-        public override void ResetEffects()
-        {
-            climaticHawstringLaserCounter *= (Player.HeldItem.type == ItemType<ClimaticHawstring>()).ToInt();
-            CreationHatSet = false;
-            ShadowCastAcc = false;
-            LifeBalloonAcc = false;
-            critDamageAll = 0;
-            critDamageExecutor = 0;
-            bonusExecutionReduce = 0;
-            ResetAcc();
-            ResetPets();
-            ResetArmor();
-        }
-        public override void UpdateDead()
-        {
-            ExecutionTime = 0;
-            flybackhandBuffTime = 0;
-            flybackhandCloclCD = 0;
-            flybackhandBuffTimeCurrent = 0;
-            PreciousTargetCrtis = 10;
-            LifeBalloonAcc = false;
-            galvanizedHandDashCD = 0;
-            climaticHawstringLaserCounter = 0;
-
-            desterrannachtImmortalTime = 0;
-            desterranRespawnChargeTimer = 0;
-            stardustRuneHitHealTimer = 0;
-            defenderEmblemCD = 0;
-            exsanguinationBuffTime = 0;
-            tacticalTime = 0;
-            tacticalPunishTime = 0;
-            blackKeyTimer = 0;
-            ResetAcc();
-            ResetPets();
-            ResetArmor();
-
-            cowboyRevolverTimer = 0;
-            floretProtectorTimer = 0;
-            monkStaffHeal = false;
-        }
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
             if (Player.HasBuff<HoneyRegenAlt>())
@@ -265,16 +226,24 @@ namespace HJScarletRework.Globals.Players
                 case ItemID.RainCoat:
                     AlterArmorType2(item.type, i, RaincoatChestplate.Defense, false, armorSlot: armorSlot);
                     break;
-                case ItemID.FishCostumeMask:
-                    AlterArmorType2(item.type, i, FishCostumeHelmet.Defense, false, ItemRarityID.Orange, armorSlot);
-                    break;
-                case ItemID.FishCostumeShirt:
-                    AlterArmorType2(item.type, i, FishCostumeChestplate.Defense, false, ItemRarityID.Orange, armorSlot);
-                    break;
-                case ItemID.FishCostumeFinskirt:
-                    AlterArmorType2(item.type, i, FishCostumeLegs.Defense, false, ItemRarityID.Orange, armorSlot);
-                    break;
             }
+            if (Condition.DownedBrainOfCthulhu.IsMet() || Condition.DownedEaterOfWorlds.IsMet())
+            {
+                switch (item.type)
+                {
+                    case ItemID.FishCostumeMask:
+                        AlterArmorType(item.type, FishCostumeHelmet.Defense, false, ItemRarityID.Orange);
+                        break;
+                    case ItemID.FishCostumeShirt:
+                        AlterArmorType(item.type, FishCostumeChestplate.Defense, false, ItemRarityID.Orange);
+                        break;
+                    case ItemID.FishCostumeFinskirt:
+                        AlterArmorType(item.type, FishCostumeLegs.Defense, false, ItemRarityID.Orange);
+                        break;
+
+                }
+            }
+
             if (DownedBossSystem.downedLifeGod)
             {
                 switch (item.type)
@@ -291,6 +260,7 @@ namespace HJScarletRework.Globals.Players
                 }
             }
         }
+
         private void AlterArmorType2(int targetArmor, int targetindex, int defense = 0, bool vanity = true, int rarityID = -1, bool armorSlot = false)
         {
             Item targetItem = new Item();

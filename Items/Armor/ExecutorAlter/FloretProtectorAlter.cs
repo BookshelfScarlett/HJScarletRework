@@ -15,6 +15,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override string SetupName => "FloretProtector";
         public override ArmorType Category => ArmorType.Helmet;
         public override bool SetUpArmorSet => true;
+        public override int DownedConditionID => NPCType<TheLifebringerHead>();
         public override int[] ArmorSlots => [ItemID.FloretProtectorHelmet,ItemID.FloretProtectorChestplate,ItemID.FloretProtectorLegs];
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
@@ -44,7 +45,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         }
         public override void ExModifyTooltipsAlter(Item item, List<TooltipLine> tooltips, string path)
         {
-            tooltips.AddSwapTooltipValueBossCondition(NPCType<TheLifebringerHead>());
         }
 
     }
@@ -52,6 +52,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
     {
         public override int ApplyArmor => ItemID.FloretProtectorChestplate;
         public static int Defense = 60;
+        public override int DownedConditionID => NPCType<TheLifebringerHead>();
         public override ArmorType Category => ArmorType.Chestplate;
         public override string SetupName => "FloretProtector";
         public override void ExUpdateEquipAlter(Item item, Player player)
@@ -75,6 +76,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
     {
         public override int ApplyArmor => ItemID.FloretProtectorLegs;
         public static int Defense = 30;
+        public override int DownedConditionID => NPCType<TheLifebringerHead>();
         public override string SetupName => "FloretProtector";
         public override ArmorType Category => ArmorType.Legs;
         public override void ExUpdateEquipAlter(Item item, Player player)

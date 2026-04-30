@@ -27,7 +27,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         public int GetUseTime => Owner.ApplyWeaponAttackSpeed(GetInstance<ClimaticHawstring>().Item, GetInstance<ClimaticHawstring>().Item.useTime, 5);
         public ref float Timer => ref Projectile.ai[0];
-        public bool CanLaser => Owner.HJScarlet().climaticHawstringLaserCounter >= 20;
+        public bool CanLaser => Owner.HJScarlet().climaticHawstringLaserCounter >= 30;
         public override void ExSD()
         {
             Projectile.width = 28;
@@ -64,7 +64,7 @@ namespace HJScarletRework.Projs.Ranged
                 {
                     SoundEngine.PlaySound(SoundID.Item158 with { MaxInstances = 0, Pitch = -0.38f, PitchVariance = 0.1f }, Projectile.Center);
                     Vector2 laserPos = Projectile.SafeDir().RotatedBy(PiOver2) * Main.rand.NextFloat(-15f, 16f);
-                    Projectile proj2 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + laserPos + dir * 17f, dir * 12f, ProjectileType<ClimaticHawstringBeam>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                    Projectile proj2 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + laserPos + dir * 17f, dir * 12f, ProjectileType<ClimaticHawstringBeam>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
                     proj2.rotation = dir.ToRotation();
                     new ShinyCrossStar(Projectile.Center + laserPos + dir * 27f, Vector2.Zero, RandLerpColor(Color.DarkGoldenrod, Color.Goldenrod), 40, 0, 1, 0.80f, false).Spawn();
                     for (int j = 0; j < 8; j++)
@@ -122,7 +122,7 @@ namespace HJScarletRework.Projs.Ranged
             }
             void SpawnProj(int reverse)
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.MountedCenter + Vector2.UnitX * 500f * reverse - Vector2.UnitY * 1000f, Vector2.Zero, ProjectileType<ClimaticHawstringMinion>(), Projectile.damage, 1f, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.MountedCenter + Vector2.UnitX * 500f * reverse - Vector2.UnitY * 1000f, Vector2.Zero, ProjectileType<ClimaticHawstringMinion>(), Projectile.damage / 2, 1f, Owner.whoAmI);
                 proj.rotation = (-Vector2.UnitX).ToRotation();
                 ((ClimaticHawstringMinion)proj.ModProjectile).Reverse = reverse > 0;
             }

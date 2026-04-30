@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Buffs;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -65,9 +66,9 @@ namespace HJScarletRework.Projs.Executor
             //return;
             if (Main.rand.NextBool())
                 return;
-            if (Main.rand.NextBool(10))
+            if (Main.rand.NextBool(15))
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(1), Projectile.velocity * Main.rand.NextFloat(0.78f, 1.1f), RandLerpColor(Color.AliceBlue, Color.RoyalBlue), 40, Projectile.rotation, 1, 0.4f * Main.rand.NextFloat(0.5f, 0.9f)).Spawn();
-            if (Main.rand.NextBool(10))
+            if (Main.rand.NextBool(15))
                 new StarShape(Projectile.Center.ToRandCirclePosEdge(4), Projectile.velocity * Main.rand.NextFromList(0.8f, 1.2f), RandLerpColor(Color.AliceBlue, Color.RoyalBlue), 0.5f * Main.rand.NextFloat(0.5f, 0.9f), 40).Spawn();
         }
 
@@ -75,12 +76,13 @@ namespace HJScarletRework.Projs.Executor
         {
             modifiers.DefenseEffectiveness *= 0;
             bool hasBuff = Owner.HJScarlet().exsanguinationBuffTime != 0;
+            if(!hasBuff)
+            Projectile.AddExecutionTimePass(ItemType<Exsanguination>());
             SoundStyle style = hasBuff ? HJScarletSounds.Light_FleshHit with { MaxInstances = 4, Volume = 0.70f } : HJScarletSounds.Light_ShieldHit with { MaxInstances = 4, Volume = 0.70f };
             SoundEngine.PlaySound(style, Projectile.Center);
         }
         public override void OnKill(int timeLeft)
         {
-            Projectile.AddExecutionTimePass(ItemType<Exsanguination>());
             bool hasBuff = Owner.HJScarlet().exsanguinationBuffTime != 0;
             if (!hasBuff)
             {
@@ -109,7 +111,6 @@ namespace HJScarletRework.Projs.Executor
                 return false;
             //最顶端绘制一个star。
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
-            Texture2D starShape = HJScarletTexture.Particle_SharpTear;
             Texture2D tex = Projectile.GetTexture();
             Vector2 scale = new Vector2(.6f, 3.4f);
             Vector2 ori = tex.Size() / 2;

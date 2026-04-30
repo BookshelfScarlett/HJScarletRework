@@ -20,7 +20,7 @@ HJScarletConfigClient: {
 		Tooltip:
 			'''
 			Allows Lostbelt Journey to override the rarity of certain items in Homeward Journey with special rarities.
-			Currently only applies to items related to deities.
+			Currently only applies to items related to supreme.
 			Disabled by default.
 			'''
 	}
@@ -35,17 +35,30 @@ HJScarletConfigClient: {
 	}
 
 	DrawIcon: {
-		Label: Draw Icon
-		Tooltip: ""
+		Label: Draw Corner Icon
+		Tooltip:
+			'''
+			Draw a cornor icon for all items from Lostbelt Journey
+			Enable by default
+			'''
 	}
 
 	PerformanceMode: {
 		Label: Performance Mode
-		Tooltip: ""
+		Tooltip:
+			'''
+			Reduce some visual effect for certain items
+			Enable it if you suffering from lags, and reported to author
+			Disable by default
+			'''
 	}
 
 	DrawExecutionCounter: {
-		Label: Draw Execution Counter
-		Tooltip: ""
+		Label: Display Execute's Time
+		Tooltip:
+			'''
+			Enables to display execute's times under the player
+			Enable by default
+			'''
 	}
 }

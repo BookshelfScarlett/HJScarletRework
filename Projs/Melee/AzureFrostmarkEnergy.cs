@@ -54,10 +54,14 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile.BounceOnTile(oldVelocity, 1f, 0.8f);
+            Projectile.BounceOnTile(oldVelocity, 1f, 0.95f);
             SpawnHitParticle();
+            if(BounceTime > 3)
+            {
+                Projectile.Kill();
+            }
             BounceTime++;
-            return BounceTime > 2;
+            return false;
         }
         private void SpawnHitParticle()
         {

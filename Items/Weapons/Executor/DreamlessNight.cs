@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class DreamlessNight : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 0.80f;
-        public override int ExecutionTime => 10;
+        public override int ExecutionTime => 12;
         public override void ExSD()
         {
             Item.width = Item.height = 66;
@@ -36,16 +36,16 @@ namespace HJScarletRework.Items.Weapons.Executor
                 NightRarity.DrawRarity(line);
                 return false;
             }
-            if (line.Mod == "Terraria" && line.Name == "CritChance")
-            {
-                NightRarity.DrawMisc(line);
-                return false;
-            }
-            if (line.Mod == "Terraria" && line.Name == "Damage")
-            {
-                NightRarity.DrawMisc(line);
-                return false;
-            }
+            //if (line.Mod == "Terraria" && line.Name == "CritChance")
+            //{
+            //    NightRarity.DrawMisc(line);
+            //    return false;
+            //}
+            //if (line.Mod == "Terraria" && line.Name == "Damage")
+            //{
+            //    NightRarity.DrawMisc(line);
+            //    return false;
+            //}
 
             if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
             {

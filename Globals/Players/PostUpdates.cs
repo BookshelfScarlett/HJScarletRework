@@ -25,8 +25,12 @@ namespace HJScarletRework.Globals.Players
         {
             UpdateTimer();
             UpdateFlybackBuff();
+            if(goldenAppleEnchantedFully)
+            {
+                if (Player.miscCounter % 3 == 0 && Player.statLife < (int)(Player.statLifeMax2 * 0.9f))
+                    Player.Heal(5);
+            }
             critDamageAll = 0;
-
             //星月夜
             //爱心指环
             if (isBeingLove)
@@ -37,7 +41,7 @@ namespace HJScarletRework.Globals.Players
             if (tacticalExecution && tacticalTime > 0)
             {
                 Player.GetDamage<ExecutorDamageClass>() *= 1.1f;
-                if (executorAscension)
+                if (EeecutorsSwordMarkPlus)
                     Player.GetCritChance<ExecutorDamageClass>() += 30;
             }
         }
@@ -153,6 +157,8 @@ namespace HJScarletRework.Globals.Players
                 PlayerFinalSpeedStoredTime--;
             if (PlayerFinalSpeedStoredTime == 0)
                 PlayerLastSpeedStored = 0;
+            if (exsanguinationBuffTime > 0)
+                exsanguinationBuffTime--;
         }
 
 
@@ -180,9 +186,8 @@ namespace HJScarletRework.Globals.Players
                 }
             }
             //进入世界时读取刷新
-                        HandleWeaponAbility();
+            HandleWeaponAbility();
         }
-
 
         private void HandleWeaponAbility()
         {
@@ -373,7 +378,7 @@ namespace HJScarletRework.Globals.Players
         private void UpdateStardustRune()
         {
             //星月夜。和领标之魂
-            if (!stardustRune)
+            if (!souloftheTidalMark)
                 return;
             if (Player.statLife < 100 && desterrennacht)
                 Player.statLife = 100;

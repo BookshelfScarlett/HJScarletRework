@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().heartoftheCrystal = true;
-            player.GetDamage<MagicDamageClass>() *= 5.0f;
+            player.GetDamage<MagicDamageClass>() *= 10.0f;
             player.GetCritChance<MagicDamageClass>() += 50;
         }
         public override void AddRecipes()

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -125,15 +126,22 @@ namespace HJScarletRework.Globals.Players
                 case ItemID.RainCoat:
                     AlterArmorType(item, RaincoatChestplate.Defense, false);
                     break;
-                case ItemID.FishCostumeMask:
-                    AlterArmorType(item, FishCostumeHelmet.Defense, false, ItemRarityID.Orange);
-                    break;
-                case ItemID.FishCostumeShirt:
-                    AlterArmorType(item, FishCostumeChestplate.Defense, false, ItemRarityID.Orange);
-                    break;
-                case ItemID.FishCostumeFinskirt:
-                    AlterArmorType(item, FishCostumeLegs.Defense, false, ItemRarityID.Orange);
-                    break;
+            }
+            if (Condition.DownedBrainOfCthulhu.IsMet() || Condition.DownedEaterOfWorlds.IsMet())
+            {
+                switch (item)
+                {
+                    case ItemID.FishCostumeMask:
+                        AlterArmorType(item, FishCostumeHelmet.Defense, false, ItemRarityID.Orange);
+                        break;
+                    case ItemID.FishCostumeShirt:
+                        AlterArmorType(item, FishCostumeChestplate.Defense, false, ItemRarityID.Orange);
+                        break;
+                    case ItemID.FishCostumeFinskirt:
+                        AlterArmorType(item, FishCostumeLegs.Defense, false, ItemRarityID.Orange);
+                        break;
+
+                }
             }
             if (DownedBossSystem.downedLifeGod)
             {

@@ -15,14 +15,18 @@ namespace HJScarletRework.Globals.Instances.Items
         public static string AnyMagicHat;
         public static string AnyMechBossSoul;
         public static string AnyLunarPickaxe;
-        public static string AnyIceCrate;
-        public static string AnyJungleCrate;
         public static string AnySpearofDarkness;
         public static string AnyEvilHammer;
         public static string AnyLifeCrystal;
         public static string AnyGoldCritter;
         public static string AnyGoldBar;
         public static string AnyEvilScale;
+        #region Crates
+        public static string AnyIceCrate;
+        public static string AnyJungleCrate;
+        public static string AnyDungeonCrate;
+
+        #endregion
         public override void AddRecipeGroups()
         {
             int[] goldList =
@@ -48,6 +52,7 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyLunarPickaxe = CreateRecipeGroup(nameof(AnyLunarPickaxe), ItemID.SolarFlarePickaxe, ItemID.VortexPickaxe, ItemID.NebulaPickaxe, ItemID.StardustPickaxe);
             AnyIceCrate = CreateRecipeGroup(nameof(AnyIceCrate), ItemID.FrozenCrate, ItemID.FrozenCrateHard);
             AnyJungleCrate = CreateRecipeGroup(nameof(AnyJungleCrate), ItemID.JungleFishingCrate, ItemID.JungleFishingCrateHard);
+            AnyDungeonCrate = CreateRecipeGroup(nameof(AnyDungeonCrate), ItemID.DungeonFishingCrate, ItemID.DungeonFishingCrateHard);
             AnySpearofDarkness = CreateRecipeGroup(nameof(AnySpearofDarkness), ItemType<SpearofDarknessThrown>(), ItemType<SpearOfDarkness>());
             AnyEvilHammer = CreateRecipeGroup(nameof(AnyEvilHammer), ItemType<TheDefiler>(), ItemType<FleshGrinder>());
             AnyLifeCrystal = CreateRecipeGroup(nameof(AnyLifeCrystal), ItemID.LifeCrystal, ItemID.HeartLantern);
@@ -62,6 +67,8 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyMechBossSoul = null;
             AnyLunarPickaxe = null;
             AnyIceCrate = null;
+            AnyDungeonCrate = null;
+            AnyJungleCrate = null;
             AnySpearofDarkness = null;
             AnyEvilHammer = null;
             AnyLifeCrystal = null;

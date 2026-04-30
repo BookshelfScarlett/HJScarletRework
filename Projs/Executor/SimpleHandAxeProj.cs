@@ -71,13 +71,13 @@ namespace HJScarletRework.Projs.Executor
             if (Main.rand.NextBool(4))
             {
                 Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin);
-                d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f) / 4f;
+                d.velocity = Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f) / 4f;
             }
             if (Main.rand.NextBool())
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePosEdge(4f), DustID.SilverCoin, -Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f));
+                Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePosEdge(4f), DustID.SilverCoin, Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f));
                 d.noGravity = true;
-                d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f) / 4f;
+                d.velocity = Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f) / 4f;
                 d.scale *= 1.1f;
             }
             if (Main.rand.NextBool(4))

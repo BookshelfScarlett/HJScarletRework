@@ -160,6 +160,7 @@ namespace HJScarletRework.Globals.List
             ];
             DownedBossConditionList = new Dictionary<int, string>()
             {
+                { NPCID.EaterofWorldsHead, "DownedEvilBoss" },
                 { NPCID.Golem, "DownedGolem" },
                 { NPCType<TheLifebringerHead>(),"DownedLifeGods"},
             };

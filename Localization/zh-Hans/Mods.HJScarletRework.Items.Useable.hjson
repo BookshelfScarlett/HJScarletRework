@@ -48,3 +48,13 @@ GoldenAppleEnchanted: {
 		"仅仅巧合"
 		'''
 }
+
+GoldenAppleEnchantedFully: {
+	DisplayName: 原版附魔金苹果
+	Tooltip:
+		'''
+		所有属性大幅提升
+		承受的伤害减少99.9%，且总会高速治疗你自己
+		放在背包里生效
+		'''
+}

@@ -27,7 +27,9 @@ namespace HJScarletRework.Globals.Methods
                 return;
             Player owner = Main.player[proj.owner];
             if (owner.HJScarlet().ExecutionListStored.ContainsKey(itemID))
+            {
                 owner.HJScarlet().ExecutionListStored[itemID] += times;
+            }
         }
 
         public static bool CheckExecution(this Player owner, int itemID, int executionTime)

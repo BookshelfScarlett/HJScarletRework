@@ -1,36 +1,41 @@
-﻿空想归途是一个（暂时）的旅人归途的附属模组，主要为旅人归途模组提供较大拓展性的游戏内容
-并为旅人归途原有的内容做出优化
-目前模组内为所有旅人长矛提供了经过深度打磨的投矛模式，并填充了一些原创投矛来保证完整的游戏流程
-同时也有一些有待进行更多拓展的物品……
-该模组仍然处于开发与打磨状态，包括特效、平衡等地方都需要进行一定程度的改进，感谢理解！
+﻿[h1][b]空想之根已然落下，既定的世界线似乎发生了分歧...[/b][/h1]
+[hr][/hr]
+[b]空想归途（Lostbelt Journey）[/b]是旅人归途的附属模组，并受到游戏命运/冠位指定（Fate/Grand order）的影响，主要为旅人归途提供扩展性的游戏内容
 
+[b]主要内容[/b]
+[list]
+[*]新职业代行者，来自异世的暴力机关。以武器样式的全面和命中叠层的处决攻击作为职业特色
+[*]改造了原版的符文法师套装、鱼套装、牛仔套装、护花使者套装、和尚/渗透忍者套装、雨衣套装作为代行者的护甲，并提供了一套原创盔甲
+[*]为旅人归途的所有长矛提供了经过深度打磨的投矛模式，并拥有一些原创投矛
+[*]重置了旅人归途的部分飞刀特效，类似于VFX+
+[*]新武器与新饰品
+[/list]
 
-模组主要内容（目前）：
--为下方所有武器提供了投矛模式
- 甜蜜一刺、野指针、滴蜡枪、黑暗之矛、蚀光矛、低吼、御手杆、归零针、进化、辩证法、电表镀针、逃逸速度
--为黑暗之矛与辩证法提供了重绘贴图（投矛版本限定）
--在流程内添加了一定数量的原创投矛保证投矛流程全覆盖
--四把制作质量超级高的锤子（也可能非常超模）！
+[b]未来计划[/b]
+[list]
+[*]扩展代行者的职业深度与武器库
+[*]其余职业的武器扩展
+[*]重置旅人归途其他武器的视觉效果
+[*]型月
+[/list]
 
-未来计划：
--旅人归途的投刀类武器重置
--在不修改旅人归途武器攻击模组的情况下，优化武器的特效（类似于VFX+）
--数不清的原创内容扩展
--型月。
+[h1][b]The Root of Illusion has taken hold, and the destined worldline seems to have diverged...[/b][/h1]
+[hr][/hr]
+[b]Lostbelt Journey[/b] is an add-on mod for Homeward Journey, heavily inspired by Fate/Grand Order. It primarily provides expanded content for Homeward Journey
 
-Lostbelt Journey is a (temporary) add-on mod for Homeward Journey, designed to provide expanded gameplay content and offer optimizations for the original features of Homeward Journey.
-The mod currently introduces a polished javelin mechanics for all of Homeward Journey’s spears, along with several original javelins to support a complete gameplay experience.
-It also includes some unique items that are still waiting to be further expanded.
-This mod is still in active development and refinement. Effects, balance, and other aspects will continue to be improved. Thank you for your understanding!
-Current Features:
--All of the weapons below now can be turned into Javelin:
- Sweet Sweet Stab, Wild Pointer, Candlance, Spear of Darkness, Light Bite, Deep Tone, Tonbogiri, Flyback Hand, Evolution, Dialectis, Galvanized Hand, Spear of Escape
--Provided a resprite for Spear of Darkness and Dialectis, javelin mode only
--Added some original javelin to fill up a full playthrough
--Four heavily polished thrown hammer.(might be overpowered too)
+[b]Main Features[/b]
+[list]
+[*]New class: Executor, a violent enforcement agency from another world. Its class identity revolves around versatile weapon types and Execution Strikes triggered by stacking hits.
+[*]Retools vanilla armor sets (Rune Wizard, Fish Costume, Cowboy, Floret Protector, Monk/Shinobi Ninja, Raincoat) as Executor armor, along with a set of original armor.
+[*]Adds deeply polished throwing spear mode to all spears from Homeward Journey, plus some original throwing spears.
+[*]Revamps VFX for certain throwing knives from Homeward Journey, similar to VFX+.
+[*]New weapons and accessories.
+[/list]
 
-Future:
--Reworks for Daggers.
--Improved most of vfx for Homewards Journey, without affacting its function, similar to VFX+
--Countless expansion
--Type-Moon.
+[b]Future Plans[/b]
+[list]
+[*]Expand the Executor's class depth and arsenal.
+[*]Expand weaponry for other classes.
+[*]Revamp visual effects of other weapons in Homeward Journey
+[*]Type-Moon.
+[/list]

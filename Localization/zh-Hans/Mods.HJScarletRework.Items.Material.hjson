@@ -1,9 +1,9 @@
 DisasterBar: {
-	// DisplayName: Disaster Bar
-	// Tooltip: ""
+	DisplayName: 日轮锭
+	Tooltip: 炙热
 }
 
 DisasterEssence: {
-	// DisplayName: Disaster Essence
-	// Tooltip: ""
+	DisplayName: 兽灾精华
+	Tooltip: ""
 }

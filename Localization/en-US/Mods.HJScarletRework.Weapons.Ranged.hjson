@@ -1,9 +1,14 @@
 ClimaticHawstring: {
 	DisplayName: Climatic Hawstring
-	Tooltip: ""
+	Tooltip:
+		'''
+		When landing a certain number of hits on enemies, continuously fire thermal lasers for the next 5 seconds
+		On attack, two small Flying Rod Minions assist in the attack
+		��With the sky��s rod as the bow, and the breath of the climate as the string��
+		'''
 }
 
 BambooRocket: {
 	DisplayName: Bamboo Rocket
-	Tooltip: ""
+	Tooltip: Fires homing bamboo
 }

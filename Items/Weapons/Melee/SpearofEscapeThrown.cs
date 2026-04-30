@@ -38,7 +38,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             }
             else
             {
-                Vector2 ownerToSky = new Vector2(Lerp(player.ToClampMouseVector2().X, player.Center.X, 0.25f), player.Center.Y) + new Vector2(0, -500) - player.Center;
+                Vector2 ownerToSky = new Vector2(Lerp(player.ToClampMouseVector2().X, player.Center.X, 0.45f), player.Center.Y) + new Vector2(0, -500) - player.Center;
                 Vector2 skyDir = (ownerToSky).ToSafeNormalize();
                 Projectile.NewProjectileDirect(source, position, skyDir * Item.shootSpeed, type, damage, knockback, player.whoAmI);
             }

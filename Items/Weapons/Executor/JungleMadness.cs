@@ -29,6 +29,8 @@ namespace HJScarletRework.Items.Weapons.Executor
             CreateRecipe().
                 AddIngredient(ItemID.RichMahoganyHammer).
                 AddIngredient(ItemID.JungleSpores, 15).
+                AddIngredient(ItemID.Stinger, 8).
+                AddIngredient(ItemID.Vine, 4).
                 AddTile(TileID.Anvils).
                 Register();
         }

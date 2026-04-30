@@ -1,89 +1,204 @@
 CreationHat: {
-	DisplayName: ������ʿ֮ñ
-	Tooltip: ��ܾ���ǰ�ķ��۴���Ҳ���������벻����Ч������
-	SetBonus: ""
+	DisplayName: Creation Alchemist's Hat
+	Tooltip: Pairing it with a robe may yield unexpected results…
+	SetBonus:
+		'''
+		+{0} defense and + {1} max mana
+		{2}%, increased magic damage, {4}%  increased magic critical strike chance
+		Reduces mana cost by {3}%, allows all magic attacks to deal critical strike damage
+		Excess critical strike chance is converted to your magic critical strike damage bonus at a 1:2 ratio
+		'''
 }
 
 DragonSlayerBody: {
-	DisplayName: Dragon Slayer Body
-	Tooltip: ""
+	DisplayName: Red Dragon Knight Body Armor
+	Tooltip:
+		'''
+		10% increased damage
+		+8 HP/s life regen speed
+		'''
 }
 
 DragonSlayerHead: {
-	DisplayName: Dragon Slayer Head
-	Tooltip: ""
-	SetBouns: ""
+	DisplayName: Red Dragon Knight Helmet
+	Tooltip:
+		'''
+		15% increased executor damage
+		10% increased executor critcal strike chance
+		'''
+	SetBouns:
+		'''
+		25% increased melee attack speed, 1.10x damage for all consumable ranged weapon
+		Magic weapons no longer cost any mana, reset max minions and sentry slots to 2
+		Converted your max mana to your defense for a certain ratios
+		All weapons that do not deal executor damage only benefit from executor damage bonuses
+		All weapons that do not deal executor damage instead deal executor damage type On Hit, rather than their original damage type
+		'''
 }
 
 DragonSlayerLegs: {
-	DisplayName: Dragon Slayer Legs
-	Tooltip: ""
+	DisplayName: Red Dragon Knight Leggings
+	Tooltip:
+		'''
+		5% increased critcal strike chance
+		20% increased movement speed
+		'''
 }
 
 RuneWizardExecutor: {
-	HelmetTooltip: ""
-	ChestplateTooltip: ""
-	SetBonus: ""
+	HelmetTooltip: 12% increased executor critcal strike chance
+	ChestplateTooltip: 20% increased exectuor damage
+	SetBonus: Spawns rune magic on attacks
 }
 
 CowboyExecutor: {
-	HelmetTooltip: ""
-	ChestplateTooltip: ""
-	LegsTooltip: ""
-	SetBonus: ""
+	HelmetTooltip: 10% increased executor damage
+	ChestplateTooltip: 10% increased executor critcal strike chance
+	LegsTooltip: 15% increased movement speed
+	SetBonus:
+		'''
+		On hit, adds a revolver attack, deals 0.5x damage
+		The revolver has a 1/6 chance to deal 1.5x damage
+		'''
 }
 
 RaincoatExecutor: {
-	HelmetTooltip: ""
-	ChestplateTooltip: ""
-	SetBonus: ""
+	HelmetTooltip: 5% increased executor critcal strike chance
+	ChestplateTooltip: 5% increased executor damage
+	SetBonus:
+		'''
+		Projectiles coming from directly above have their damage reduced by 35% upon touching the hat
+		Such projectiles also don't cause knockback or strong debuffs
+		'''
 }
 
 FloretProtectorExecutor: {
-	HelmetTooltip: ""
-	ChestplateTooltip: ""
-	LegsTooltip: ""
-	SetBonus: ""
-	BuffDetail: ""
+	HelmetTooltip: 30% increased executor damage and critcal strike chance
+	ChestplateTooltip:
+		'''
+		10% increased executor damage
+		Granted immnuity to knockback
+		'''
+	LegsTooltip:
+		'''
+		5% increased executor damage and critcal strike chance
+		20% increased movement speed
+		'''
+	SetBonus:
+		'''
+		+200 max health
+		Always has multiple herbs floating around you from time to time
+		Pick them up when nearby, and gain different effects based on the herb picked up
+		Gain the Forest Herb for 5 seconds on first pickup, subsequent pickups do not refresh this duration
+		Picking up herbs while already having the Forest Herb buff will Heal you for a certain amount
+		Hold Left Alt to view detailed herb effects
+		'''
+	BuffDetail:
+		'''
+		[i:Daybloom]Daybloom:
+		+30 defense, +4 HP/s health regeneration, makes you glow
+		When already under Forest Herb buff: +10 defense, +2 HP/s health regeneration
+		[i:Moonglow]Moonglow:
+		12% increased damage reduction, reduces damage from behind by 65%, lowers enemy aggro
+		When already under Forest Herb buff: 8% increased damage reduction, reduces damage from behind by 25%
+		[i:Deathweed]Deathweed:
+		20% increased executor damage and critical strike chance, greatly increases enemy aggro
+		When already under Forest Herb buff: increases executor damage and critical strike chance by 10%
+		[i:Fireblossom]Fireblossom:
+		35% increased executor damage and critical strike chance while in lava
+		When already under Forest Herb buff: 15% increased executor damage and critical strike chance
+		[i:Waterleaf]Waterleaf:
+		+50 luck, nearly all right-clickable loot bags/crates grant you coins
+		When already under Forest Herb buff: +25 luck
+		[i:Blinkroot]Blinkroot:
+		50% increased mining speed, grants all effects related to mining
+		When already under Forest Herb buff: increases mining speed by 30%
+		[i:Shiverthorn]Shiverthorn:
+		Has a 1/4 chance to deal an extra 1.15x damage on hit
+		When already under Forest Herb buff: has a 1/4 chance to deal an extra 1.10x damage on hit
+		'''
 }
 
 FishCostumeExecutor: {
-	HelmetTooltip: ""
-	ChestplateTooltip: ""
-	SetBonus: ""
+	HelmetTooltip: 5% increased executor damage
+	ChestplateTooltip: Allows you breath in the water
+	LegsTooltip: 10% increased movement speed
+	SetBonus:
+		'''
+		Allows you to swim freely in air as if it were water
+		Stores up to one Small Fish Dash when Execution Strike hits an enemy
+		Press the Interact key to release it when needed
+		Submerging in lava will continuously drain life, regardless of any lava immunity items
+		'''
 }
 
 ShinobiBody: {
-	DisplayName: Shinobi Body
-	Tooltip: ""
+	DisplayName: Shinobi Infiltrator's Torso Executor
+	Tooltip: 30% increased executor critcal strike chance
 }
 
 ShinobiHead: {
-	DisplayName: Shinobi Head
-	Tooltip: ""
-	SetBonus: ""
-	WeaponBuff: ""
+	DisplayName: Shinobi Infiltrator's Helmet Executor
+	Tooltip: 30% increased executor damage
+	SetBonus:
+		'''
+		+4 max sentry
+		Enhances Sleepy Octopus and Sky Dragon's Fury, and greatly improves Lightning Aura's effectiveness
+		Causes Sleepy Octopus, Sky Dragon's Fury, and Lightning Aura to deal only executor damage, benefiting from executor damage bonuses
+		Increases damage of all Lightning Aura canes by 1000%
+		'''
+	WeaponBuff: Enhanced by armor:
 }
 
 ShinobiLegs: {
-	DisplayName: Shinobi Legs
-	Tooltip: ""
+	DisplayName: Shinobi Infiltrator's Pants Executor
+	Tooltip:
+		'''
+		+20 executor armor penetration
+		30% increased movement speed
+		'''
 }
 
 MonkBody: {
-	DisplayName: Monk Body
-	Tooltip: ""
+	DisplayName: Monk's Shirt Executor
+	Tooltip: 15% increased executor critcal strike chance
 }
 
 MonkHead: {
-	DisplayName: Monk Head
-	Tooltip: ""
-	SetBonus: ""
-	SleepyOctBuff: ""
-	DragonFuryBuff: ""
+	DisplayName: Monk's Bushy Brow Bald Cap Executor
+	Tooltip: 15% increased executor damage
+	SetBonus:
+		'''
+		+4 max sentry
+		Enhances Sleepy Octopus and Sky Dragon's Fury, and greatly improves Lightning Aura's effectiveness
+		Causes Sleepy Octopus, Sky Dragon's Fury, and Lightning Aura to deal only executor damage, benefiting from executor damage bonuses
+		Increases damage of all Lightning Aura canes by 200%
+		'''
+	SleepyOctBuff:
+		'''
+		Increases damage by {0}, critical strike chance by {1}
+		Increases weapon size by {2}, significantly raises attack frequency
+		Continuously releases seeking magic orbs while swinging
+		Press the Interact key to swing the weapon and provide Heal to you and your teammates
+		Upon completing the interaction, continuously Heal yourself until near full health
+		Taking damage interrupts all healing effects	
+		'''
+	DragonFuryBuff:
+		'''
+		Increases damage by {0}, critical strike chance by {1}
+		Increases weapon size by {2}, significantly raises attack frequency
+		Calls down lightning on multiple nearby enemies while swinging
+		Press the Interact key to swing the weapon and provide Heal to you and your teammates
+		Upon completing the interaction, continuously Heal yourself until near full health
+		Taking damage interrupts all healing effects
+		'''
 }
 
 MonkLegs: {
-	DisplayName: Monk Legs
-	Tooltip: ""
+	DisplayName: Monk's Pants Executor
+	Tooltip:
+		'''
+		+10 executor armor penetration
+		30% increased movement speed
+		'''
 }

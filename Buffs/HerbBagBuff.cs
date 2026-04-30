@@ -54,6 +54,10 @@ namespace HJScarletRework.Buffs
                     break;
                 case ItemID.Blinkroot:
                     player.pickSpeed -= 0.50f;
+                    player.lavaImmune = true;
+                    player.dangerSense = true;
+                    player.detectCreature = true;
+                    player.findTreasure = true;
                     UpdateBlinkrootParticle(player);
                     break;
                 case ItemID.Shiverthorn:

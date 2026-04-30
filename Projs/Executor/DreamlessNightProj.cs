@@ -46,7 +46,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.penetrate = 10;
             Projectile.width = Projectile.height = 32;
-            Projectile.SetupImmnuity(45);
+            Projectile.SetupImmnuity(-1);
             Projectile.extraUpdates = 2;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
@@ -93,6 +93,7 @@ namespace HJScarletRework.Projs.Executor
             if (!Helper.IsDone[0])
             {
                 Helper.UpdateAniState(0);
+                Projectile.ResetLocalNPCHitImmunity();
                 UpdateAnistateZero();
             }
             else

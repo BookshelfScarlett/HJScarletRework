@@ -14,9 +14,8 @@ namespace HJScarletRework.Items.Useables
     public class CorePickaxe : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Useables;
-        public override void SetDefaults()
+        public override void ExSD()
         {
-            Item.width = Item.height = 48;
             Item.DamageType = DamageClass.Melee;
             Item.useTime = Item.useAnimation = 15;
             Item.scale *= 1.2f;

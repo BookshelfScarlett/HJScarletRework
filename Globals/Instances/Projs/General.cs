@@ -66,7 +66,7 @@ namespace HJScarletRework.Globals.Instances.Projs
                     Vector2 pos = projectile.Center.ToRandCirclePos(1f) + projectile.rotation.ToRotationVector2() * 40f * projectile.scale;
                     if (Collision.SolidCollision(pos, 120, 120))
                         pos = projectile.Center;
-                    Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(4f, 9f), ProjectileType<SleepyBubbles>(), projectile.damage / 2, 3f, Owner.whoAmI);
+                    Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(4f, 9f), ProjectileType<SleepyBubbles>(), projectile.damage / 3, 3f, Owner.whoAmI);
                     SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing with { MaxInstances = 0 }, projectile.Center.ToRandCirclePos(1f));
                 }
             }
@@ -96,7 +96,7 @@ namespace HJScarletRework.Globals.Instances.Projs
                     {
                         return;
                     }
-                    SoundEngine.PlaySound(SoundID.Item43 with { Pitch = 0.4f }, Owner.Center);
+            SoundEngine.PlaySound(HJScarletSounds.Lightning_Strike with {MaxInstances =0,  Pitch = 0.35f, Volume = 0.5f }, projectile.Center);
                     for (int i = 0; i < availableTarget.Count; i++)
                     {
                         NPC target = availableTarget[i];
@@ -104,7 +104,7 @@ namespace HJScarletRework.Globals.Instances.Projs
                         Vector2 vel = (target.Center - pos).ToSafeNormalize() * Main.rand.NextFloat(4f, 9f);
                         if (target.IsLegal())
                         {
-                            Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, vel, ProjectileType<SkyDragonFuryLightning>(), projectile.damage, 3f, Owner.whoAmI);
+                            Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, vel, ProjectileType<SkyDragonFuryLightning>(), projectile.damage/2, 3f, Owner.whoAmI);
                             ((SkyDragonFuryLightning)proj.ModProjectile).CurTarget = target;
                             pos = projectile.Center + (target.Center - Owner.Center).ToSafeNormalize() * 50f * projectile.scale;
                             new CrossGlow(pos, Color.DeepSkyBlue, 30, 1, 0.12f).Spawn();
@@ -190,7 +190,7 @@ namespace HJScarletRework.Globals.Instances.Projs
 
         private void ModifyDefenderEmblemBuff(Player owner, Projectile projectile)
         {
-            bool legal = owner.HJScarlet().defenderEmblem && owner.HJScarlet().defenderEmblemCD == 0;
+            bool legal = owner.HJScarlet().vanguardEmblem && owner.HJScarlet().defenderEmblemCD == 0;
             if (!legal)
                 return;
             bool anohterBool = projectile.IsLegalFriendlyProj(ExecutorDamageClass.Instance) && projectile.HJScarlet().ExecutionStrike;

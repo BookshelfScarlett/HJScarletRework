@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class BinaryStars : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 1.0f;
-        public override int ExecutionTime => 25;
+        public override int ExecutionTime => 30;
         public override void ExSD()
         {
             Item.DamageType = ExecutorDamageClass.Instance;
@@ -51,17 +51,6 @@ namespace HJScarletRework.Items.Weapons.Executor
                 NebulaRarity.DrawRarityReverse(line);
                 return false;
             }
-            if (line.Mod == "Terraria" && line.Name == "CritChance")
-            {
-                NebulaRarity.DrawMisc(line);
-                return false;
-            }
-
-            if (line.Mod == "Terraria" && line.Name == "Damage")
-            {
-                NebulaRarity.DrawMisc(line);
-                return false;
-            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         /// <summary>
@@ -74,7 +63,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             CreateRecipe().
                 AddIngredient<AetherfireSmasher>().
                 AddIngredient<DeathTolls>().
-                AddIngredient<FinalBar>(10).
+                AddIngredient<FinalBar>(5).
                 AddTile<ContinentOfJourney.Tiles.FinalAnvil>().
                 Register();
         }

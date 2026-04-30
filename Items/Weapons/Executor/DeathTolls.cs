@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class DeathTolls : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 1.0f;
-        public override int ExecutionTime => 20;
+        public override int ExecutionTime => 25;
         public override void ExSD()
         {
             Item.SetUpNoUseGraphicItem();
@@ -27,9 +27,9 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.width = 88;
             Item.height = 94;
             Item.damage = 214;
-            Item.useTime = 18;
+            Item.useTime = 21;
             //这里的UseTime是有意改的很慢的
-            Item.useAnimation = 18;
+            Item.useAnimation = 21;
             Item.shootSpeed = 19f;
             Item.rare = RarityType<NightRarity>();
             //这里不会给音效，因为要考虑一些射弹的联动
@@ -44,16 +44,16 @@ namespace HJScarletRework.Items.Weapons.Executor
                 NightRarity.DrawRarity(line);
                 return false;
             }
-            if (line.Mod == "Terraria" && line.Name == "CritChance")
-            {
-                NightRarity.DrawMisc(line);
-                return false;
-            }
-            if (line.Mod == "Terraria" && line.Name == "Damage")
-            {
-                NightRarity.DrawMisc(line);
-                return false;
-            }
+            //if (line.Mod == "Terraria" && line.Name == "CritChance")
+            //{
+            //    NightRarity.DrawMisc(line);
+            //    return false;
+            //}
+            //if (line.Mod == "Terraria" && line.Name == "Damage")
+            //{
+            //    NightRarity.DrawMisc(line);
+            //    return false;
+            //}
 
             if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
             {
@@ -72,22 +72,6 @@ namespace HJScarletRework.Items.Weapons.Executor
             TooltipLine flavorTooltips = new TooltipLine(Mod, "FlavorTooltipsName", value);
             //植入Tooltip
             tooltips.Insert(flavorTooltipIndex + 1, flavorTooltips);
-        }
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
-        {
-            return base.PreDrawInWorld(spriteBatch, lightColor, alphaColor, ref rotation, ref scale, whoAmI);
-        }
-        private static float UpdatePos
-        {
-            get
-            {
-                float value = (float)(Math.Sin(Main.GlobalTimeWrappedHourly * 1f) * 1.2f + 1.4f);
-                return Clamp(value, 1.0f, 2.4f);
-            }
-        }
-        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
-        {
-            return base.PreDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
         }
     }
 }

@@ -29,10 +29,10 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.height = Projectile.width = 8;
             Projectile.penetrate = 1;
-            Projectile.tileCollide = true;
             Projectile.timeLeft = 360;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 30;
+            Projectile.tileCollide = true;
 
         }
         public override void OnFirstFrame()
@@ -43,10 +43,13 @@ namespace HJScarletRework.Projs.Executor
         {
             Timer++;
             Projectile.rotation = Projectile.velocity.ToRotation();
+            SetUpDustType();
             if (Timer > 10)
             {
                 if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1200))
+                {
                     Projectile.HomingTarget(target.Center, -1f, 18f + (Timer - 30f) / 5f, 15f);
+                }
                 else
                     Projectile.velocity.Y += 0.18f;
             }
@@ -55,7 +58,6 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.velocity.Y += 0.22f;
                 Projectile.timeLeft = 120;
             }
-            SetUpDustType();
         }
 
         public void SetUpDustType()

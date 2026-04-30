@@ -255,11 +255,7 @@ GalvanizedHandThrown: {
 
 AzureFrostmark: {
 	DisplayName: 湛蓝霜痕
-	Tooltip:
-		'''
-		掷出一段时间后消失
-		在消失时追加两枚寒霜弹
-		'''
+	Tooltip: 生成寒霜球，在飞行一段距离后消失
 	CalamitySupport: 提升基础的投掷速度
 }
 

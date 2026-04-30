@@ -1,4 +1,4 @@
-displayName = 空想归途 Lostbelt Journey Scarlet
+displayName = 空想归途 Lostbelt Journey
 modReferences = ContinentOfJourney
 author = ScarletShelf
-version = 1.2.1
+version = 1.2.1.3

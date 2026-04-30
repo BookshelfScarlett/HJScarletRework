@@ -41,17 +41,30 @@ HJScarletConfigClient: {
 	}
 
 	DrawIcon: {
-		// Label: Draw Icon
-		// Tooltip: ""
+		Label: 绘制角标
+		Tooltip:
+			'''
+			为模组内所有物品绘制一个角标
+			默认开启
+			'''
 	}
 
 	PerformanceMode: {
-		// Label: Performance Mode
-		// Tooltip: ""
+		Label: 性能模式
+		Tooltip:
+			'''
+			开启后减少模组内一些物品的视觉效果
+			对于低性能的机子应该有用
+			默认关闭
+			'''
 	}
 
 	DrawExecutionCounter: {
-		// Label: Draw Execution Counter
-		// Tooltip: ""
+		Label: 绘制代行者叠层条
+		Tooltip:
+			'''
+			开启后在玩家底下绘制代行者的叠层条
+			默认开启
+			'''
 	}
 }

@@ -3,19 +3,33 @@ StardustBless: {
 	Tooltip: ""
 }
 
-StardustRune: {
-	DisplayName: Stardust Rune
-	Tooltip: ""
+SouloftheTidalMark: {
+	DisplayName: Soul of the Tidal Mark
+	Tooltip:
+		'''
+		Restore 50 health on hit
+		Automatically restore 75 health every few seconds
+		'''
 }
 
 HeartoftheCrystal: {
-	DisplayName: Heartofthe Crystal
-	Tooltip: ""
+	DisplayName: Heart of the Crystal
+	Tooltip:
+		'''
+		All magic weapons no longer consume any mana
+		15% increased magic critcal strike chance
+		Reduces your magic damage multiplicatively by 20%
+		'''
 }
 
 HeartoftheMountain: {
-	DisplayName: Heartofthe Mountain
-	Tooltip: ""
+	DisplayName: Heart of the Mountain
+	Tooltip:
+		'''
+		All magic weapons no longer consume any mana
+		50% increased magic critcal strike chance
+		Multiplies your magic damage by 10.0x
+		'''
 }
 
 PreciousAim: {
@@ -43,22 +57,33 @@ PreciousTarget: {
 		'''
 }
 
-ExecutorAscension: {
-	DisplayName: Rewardof Kingdom
-	Tooltip: ""
+ExecutorsSwordMarkPlus: {
+	DisplayName: Executor's Sword Mark A++
+	Tooltip:
+		'''
+		All Execution Strikes become manually triggered by pressing Intersct Key instead of automatic when conditions are met
+		Manually triggering an Execution Strike grants a 1.1x multiplier to executor damage for a certain period afterwards
+		Also increases executor critical strike chance by 30%
+		Re-triggering Execution Strike during the damage bonus period does not refresh this effect
+		'''
 }
 
-ExecutorSigil: {
-	DisplayName: Rewardof Warrior
-	Tooltip: ""
+ExecutorsSwordMark: {
+	DisplayName: Executor's Sword Mark
+	Tooltip:
+		'''
+		All Execution Strikes become manually triggered by pressing Intersct Key instead of automatic when conditions are met
+		Manually triggering an Execution Strike grants a 1.1x multiplier to executor damage for a certain period afterwards
+		Re-triggering Execution Strike during the damage bonus period does not refresh this effect
+		'''
 }
 
 CrimsonRune: {
 	DisplayName: Crimson Rune
 	Tooltip:
 		'''
-		+1 HP/s life regeneration
-		Increases invincibility frames after being damaged, and reduces healing potion cooldown by 25%
+		Greatly increases health regeneration rate
+		Reduces healing potion cooldown by 25%
 		'''
 }
 
@@ -93,12 +118,24 @@ LifeBalloon: {
 
 Desterrennacht: {
 	DisplayName: Desterrennacht
-	Tooltip: ""
+	Tooltip:
+		'''
+		Restore 50 health on hit
+		Automatically restore 75 health every few seconds
+		Upon taking fatal damage, revive with 50% of your health
+		After a successful revival, gain three chances to dodge all attacks
+		Your health can never drop below 100, but you can still take fatal damage
+		"Relying on the stardust spiral, I place this in your hand"
+		'''
 }
 
-ManaContainer: {
-	DisplayName: Fake Mana Container
-	Tooltip: "{0}"
+ManaSavingsJar: {
+	DisplayName: Mana Savings Jar
+	Tooltip:
+		'''
+		Provides increased mana cap, reduced with each Mana Crystal used
+		Maximum mana cap increase at 150
+		'''
 }
 
 CycleMadness: {
@@ -106,57 +143,99 @@ CycleMadness: {
 	Tooltip: ""
 }
 
-DefenderEmblem: {
-	DisplayName: Defender Emblem
-	Tooltip: ""
+VanguardEmblem: {
+	DisplayName: Vangard Emblem
+	Tooltip:
+		'''
+		Grants immunity to knockbacks
+		On an Execution Strike hit, grants a period of invincibility
+		This effect goes on cooldown after triggering and cannot be triggered multiple times
+		'''
 }
 
 ExecutorEmblem: {
-	DisplayName: Executor Emblem
-	Tooltip: ""
+	DisplayName: Handman's Emblem
+	Tooltip: 15% increased executor damage
 }
 
 LoveRing: {
 	DisplayName: Love Ring
-	Tooltip: ""
+	Tooltip:
+		'''
+		Reduces shop prices by 40%
+		Further reduces shop prices by 5% for opposite-gender NPCs
+		When near an opposite-gender player, increases their attack speed and movement speed by 10%
+		'''
 }
 
 ExecutorBadge: {
-	DisplayName: Executor Badge
-	Tooltip: ""
+	DisplayName: Executor's Badge
+	Tooltip:
+		'''
+		Increases executor damage by 20%
+		Increases executor critical strike chance by 5%
+		'''
 }
 
 AxeofPerun: {
-	DisplayName: Axeof Perun
-	Tooltip: ""
+	DisplayName: Axe of Perun
+	Tooltip:
+		'''
+		+10 executor armor penetraion
+		On Execution Strike, further reduces enemy defense for a short perio
+		'''
 }
 
-BlackKey: {
-	DisplayName: Black Key
-	Tooltip: ""
+ConceptualBlackKey: {
+	DisplayName: Conceptual Black Key
+	Tooltip:
+		'''
+		15% increased executor damage, 20% increased executor critical strike damage
+		+90 executor armor penetration
+		After a successful Execution Strike, reduces enemy defense for a short period
+		After a successful Execution Strike, greatly increases your own damage resistance
+		Taken damage removes this effect
+		Extends invincibility frames after taking damage
+		When you take damage, restore 50 health
+		"Executor, praise the Lord"
+		'''
 }
 
 ArcBow: {
-	DisplayName: Executor Bow
-	Tooltip: ""
+	DisplayName: Arc Bow
+	Tooltip: Restore 25 health while taking damage
 }
 
 MachineGunTalisman: {
-	DisplayName: Executor Gun
-	Tooltip: ""
+	DisplayName: Machine gun Talisman
+	Tooltip: Restore 35 health while taking damage
 }
 
 RocketCharm: {
-	DisplayName: Executor Launcher
-	Tooltip: ""
+	DisplayName: Rocket Charm
+	Tooltip:
+		'''
+		15% increased executor critcal strike damagea
+		After an Execution Strike, briefly increases your executor damage
+		'''
 }
 
-TinyShortsword: {
-	DisplayName: Executor Shortsword
-	Tooltip: ""
+MiniatureBayonet: {
+	DisplayName: Miniature Bayonet
+	Tooltip:
+		'''
+		+30 executor armor penetration
+		On Execution Strike, further reduces enemy defense for a short period
+		Extends invincibility frames after taking damage
+		'''
 }
 
-FakeManaStar: {
-	DisplayName: Fake Mana Star
-	Tooltip: ""
+ArtificalManaStar: {
+	DisplayName: Artifical Mana Star
+	Tooltip:
+		'''
+		Reduces mana cost of magic weapons by 1
+		Automatically uses mana potions when needed
+		Reduces mana potion restoration efficiency by 15%
+		'''
 }

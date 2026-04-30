@@ -1,22 +1,23 @@
-SwitchWeaponTooltip: Lostbelt Journey: Press Middle Click while holding the weapon to switch
-SwitchWeaponVisual: Lostbelt Journey: Press Middle Click while holding the weapon to change its visual effect
-SwitchWeaponConditionTooltip: ""
+SwitchWeaponTooltip: Lostbelt Journey: Press Intersect while holding the weapon to switch
+SwitchWeaponVisual: Lostbelt Journey: Press Intersect while holding the weapon to change its visual effect
+SwitchWeaponConditionTooltip: Switch condition: Defeated<{0}>
 
 SwitchWeaponConditionList: {
-	DownedGolem: ""
-	DownedLifeGods: ""
+	DownedGolem: Golem
+	DownedLifeGods: The Lifebringer
+	DownedEvilBoss: Any Evil Boss
 }
 
 SwitchWeapon: {
 	Tooltip:
 		'''
 		Lostbelt Journey:
-		Press Middle Click while holding the weapon to switch
+		Press Intersect key while holding the weapon to switch
 		'''
 	Visual:
 		'''
 		Lostbelt Journey:
-		Press Middle Click while holding the weapon to change its visual effect
+		Press Intersect key while holding the weapon to change its visual effect
 		'''
 	AllFix: Also can apply to: {0}
 }
@@ -27,21 +28,21 @@ DamageClasses: {
 	ExecutorDamageClass: {
 		ExecutionTime: Strike your enemy for {0} times to Execute. Press Left Alt for details
 		ExecutionDescriptionName: On Execution Strike:
-		DisplayName: Executor Damage Class
+		DisplayName: Executor Damage
 
 		Prefixs: {
 			Alterego.DisplayName: Alterego
 			Digital.DisplayName: Digital
-			Evolution.DisplayName: Evolution
+			Evolutional.DisplayName: Evolution
 			Fake.DisplayName: Fake
 			Foreigner.DisplayName: Foreigner
 			Mysterious.DisplayName: Mysterious
 			Phantasmic.DisplayName: Phantasmic
 			FocusTimeLine: ""
-			ExecutionDamageLine: ""
-			ArmorPenetrationLine: ""
+			ExecutionDamageLine: "{0}% increased execution strike damage"
+			ArmorPenetrationLine: "{0} armor penetration"
 		}
 	}
 }
 
-Keybinds.GeneralActionKeybind.DisplayName: General Action Keybind
+Keybinds.GeneralActionKeybind.DisplayName: Intersct Key

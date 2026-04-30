@@ -47,7 +47,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.ownerHitCheck = true;
-            Projectile.SetupImmnuity(30);
+            Projectile.SetupImmnuity(30,ImmnuityType.Local);
             Projectile.extraUpdates = 2;
             Projectile.scale = 0f;
             Projectile.penetrate = -1;
@@ -111,6 +111,7 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.MeetMaxUpdatesFrame(Timer, 18))
             {
                 Projectile.scale = 1;
+                Projectile.localNPCHitCooldown = 30;
                 StateSwitchTo(IsLegalTarget ? State.Attack : State.Return);
             }
         }

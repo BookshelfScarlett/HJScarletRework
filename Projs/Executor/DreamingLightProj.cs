@@ -40,7 +40,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.penetrate = 10;
             Projectile.width = Projectile.height = 32;
-            Projectile.SetupImmnuity(45);
+            Projectile.SetupImmnuity(-1);
             Projectile.extraUpdates = 3;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
@@ -97,6 +97,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 if (Timer == 0f)
                 {
+                    Projectile.ResetLocalNPCHitImmunity();
                     InitReturn();
                     Timer += 1;
                 }
@@ -120,7 +121,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 20f, 12f);
             if (Projectile.IntersectOwnerByDistance(90))
             {
-
                 Projectile.Kill();
             }
         }

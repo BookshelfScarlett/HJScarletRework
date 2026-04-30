@@ -141,14 +141,13 @@ namespace HJScarletRework.Items.Useables
                 AddRecipeGroup(HJScarletRecipeGroup.AnyGoldCritter).
                 AddIngredient(ItemID.BlackInk).
                 AddTile(TileID.WorkBenches).
-                DisableDecraft().
                 Register();
+
             CreateRecipe().
                 AddIngredient(ItemID.Book).
                 AddIngredient(ItemID.GoldenDelight).
                 AddIngredient(ItemID.BlackInk).
                 AddTile(TileID.WorkBenches).
-                DisableDecraft().
                 Register();
 
         }

@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
         {
             Item.width = 172;
             Item.height = 72;
-            Item.damage = 14;
+            Item.damage = 60;
             Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 5f;
             Item.SetUpRarityPrice(ItemRarityID.LightRed);

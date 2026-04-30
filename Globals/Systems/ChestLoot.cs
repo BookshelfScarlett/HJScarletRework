@@ -165,7 +165,7 @@ namespace HJScarletRework.Globals.Systems
                     ItemID.Compass, 
                     ItemID.DepthMeter,
                     ItemID.MetalDetector,
-                    ItemType<ManaContainer>()
+                    ItemType<ManaSavingsJar>()
                 ];
             int itemsToPlaceInFrozenChestsChoice = 0;
             int itemsPlaced = 0;

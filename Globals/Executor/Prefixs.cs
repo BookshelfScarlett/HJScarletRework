@@ -57,7 +57,7 @@ namespace HJScarletRework.Globals.Executor
         public override int ArmorPenetrationAdd => 10;
         public override int CritAdd => 5;
     }
-    public class Evolution : ExecutorPrefixs
+    public class Evolutional : ExecutorPrefixs
     {
         public override float DamageMult => 1.05f;
         public override float ExecutionDamageMult => 1;
@@ -140,7 +140,7 @@ namespace HJScarletRework.Globals.Executor
                 TooltipLine newLine = new(Mod, ArmorPenetrationNameID, ArmorPenetrationValue.ToFormatValue(realValue))
                 {
                     IsModifier = true,
-                    IsModifierBad = ExecutionDamageMult < 0f
+                    IsModifierBad = ArmorPenetrationAdd< 0f
                 };
                 yield return newLine;
             }

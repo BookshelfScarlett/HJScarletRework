@@ -57,9 +57,8 @@ CowboyExecutor: {
 	LegsTooltip: 增加15%移动速度
 	SetBonus:
 		'''
-		命中时追加一把左轮攻击
-		左轮以1/6的概率造成五倍伤害
-		这一概率在触发处刑攻击时提升至100%
+		命中时追加一把左轮攻击，造成1/2武器伤害
+		左轮以1/6的概率造成150%武器伤害
 		'''
 }
 
@@ -68,7 +67,7 @@ RaincoatExecutor: {
 	ChestplateTooltip: 增加5%代行者伤害
 	SetBonus:
 		'''
-		正上方来犯的射弹在接触帽子时减少50%伤害
+		正上方来犯的射弹在接触帽子时减少35%伤害
 		该射弹也不会造成击退和较弱的减益
 		'''
 }
@@ -122,7 +121,8 @@ FloretProtectorExecutor: {
 
 FishCostumeExecutor: {
 	HelmetTooltip: 增加5%代行者伤害
-	ChestplateTooltip: ""
+	ChestplateTooltip: 允许你水下呼吸
+	LegsTooltip: 增加10%移动速度
 	SetBonus:
 		'''
 		允许在空气中如同在水面一样自由游泳
@@ -134,12 +134,12 @@ FishCostumeExecutor: {
 
 ShinobiBody: {
 	DisplayName: 渗透忍者上衣-代行者
-	Tooltip: 增加40%代行者暴击概率
+	Tooltip: 增加30%代行者暴击概率
 }
 
 ShinobiHead: {
 	DisplayName: 渗透忍者头盔-代行者
-	Tooltip: 增加40%代行者伤害
+	Tooltip: 增加30%代行者伤害
 	SetBonus:
 		'''
 		+4 最大哨兵上限

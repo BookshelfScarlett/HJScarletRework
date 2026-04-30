@@ -8,7 +8,7 @@ Exsanguination: {
 	ExecutionStrike:
 		'''
 		启动后彻底粉碎被命中的敌人的护盾
-		在接下来的一段时间内对该名敌人造成武器面板的20倍伤害
+		在接下来的一段时间内对该名敌人造成武器面板的3倍伤害
 		'''
 }
 
@@ -64,7 +64,7 @@ JungleMadness: {
 
 DreamlessNight: {
 	DisplayName: 无梦之夜
-	Tooltip: 掷出命中时，释放梦境之花
+	Tooltip: 命中时，释放梦境之花
 	ExecutionStrike:
 		'''
 		命中时，返程变为仆从锤

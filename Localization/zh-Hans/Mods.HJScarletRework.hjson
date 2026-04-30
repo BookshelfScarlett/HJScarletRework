@@ -5,6 +5,7 @@ SwitchWeaponConditionTooltip: 转化前置条件：击败<{0}>
 SwitchWeaponConditionList: {
 	DownedGolem: 石巨人
 	DownedLifeGods: 万籁携生
+	DownedEvilBoss: 任意邪恶Boss
 }
 
 SwitchWeapon: {
@@ -32,7 +33,7 @@ DamageClasses: {
 		Prefixs: {
 			Alterego.DisplayName: 他人格
 			Digital.DisplayName: 电子
-			Evolution.DisplayName: 变革
+			Evolutional.DisplayName: 变革
 			Fake.DisplayName: 虚假
 			Foreigner.DisplayName: 降临
 			Mysterious.DisplayName: 神秘

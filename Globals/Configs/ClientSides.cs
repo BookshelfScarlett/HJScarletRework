@@ -21,16 +21,16 @@ namespace HJScarletRework.Globals.Configs
         [BackgroundColor(192, 54, 64, 192)]
         [Range(50, 50000)]
         [Increment(1)]
-        [DefaultValue(15000)]
+        [DefaultValue(10000)]
         public int MaxParticleCounts { get; set; }
         [BackgroundColor(192, 54, 64, 192)]
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool DrawIcon { get; set; }
         [BackgroundColor(192, 54, 64, 192)]
         [DefaultValue(false)]
         public bool PerformanceMode { get; set; }
         [BackgroundColor(192, 54, 64, 192)]
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool DrawExecutionCounter { get; set; }
 
 

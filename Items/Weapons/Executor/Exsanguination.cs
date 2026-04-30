@@ -13,13 +13,13 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Exsanguination : ExecutorWeaponClass
     {
-        public override int ExecutionTime => 2500;
-        public override float ExecutionStrikeDamageMult => 50f;
+        public override int ExecutionTime => 500;
+        public override float ExecutionStrikeDamageMult => 1;
         public override void ExSD()
         {
             Item.width = 172;
             Item.height = 72;
-            Item.damage = 14;
+            Item.damage = 33;
             Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 5f;
             Item.useStyle = ItemUseStyleID.Shoot;
@@ -37,16 +37,19 @@ namespace HJScarletRework.Items.Weapons.Executor
                 DisasterRarity.DrawRarity2(line);
                 return false;
             }
-            if (line.Mod == "Terraria" && line.Name == "Damage")
-            {
-                DisasterRarity.DrawMisc(line);
-                return false;
-            }
+            //if (line.Mod == "Terraria" && line.Name == "Damage")
+            //{
+            //    DisasterRarity.DrawMisc(line);
+            //    return false;
+            //}
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override bool CanUseItem(Player player) => !player.HasProj(Item.shoot);
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            if (!player.HJScarlet().StopExecutionInit)
+                player.HJScarlet().ExecutionListStored.TryAdd(Type, 0);
+
             Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
@@ -56,7 +59,7 @@ namespace HJScarletRework.Items.Weapons.Executor
                 AddIngredient<ClockworkMinigun>().
                 AddIngredient(ItemID.SDMG).
                 AddIngredient(ItemID.FragmentVortex, 30).
-                AddTile(TileID.LunarCraftingStation).
+                AddTile(FinalAnvilTile).
                 Register();
         }
     }

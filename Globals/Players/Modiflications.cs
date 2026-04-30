@@ -42,7 +42,7 @@ namespace HJScarletRework.Globals.Players
             {
                 mult = 0;
             }
-            if (fakeManaStar)
+            if (artificalManaStar)
             {
                 reduce = 1;
             }
@@ -104,7 +104,7 @@ namespace HJScarletRework.Globals.Players
         public override void GetHealMana(Item item, bool quickHeal, ref int healValue)
         {
             float percent = 1f;
-            if (fakeManaStar)
+            if (artificalManaStar)
             {
                 percent -= 0.15f;
             }

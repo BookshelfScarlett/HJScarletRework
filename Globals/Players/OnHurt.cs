@@ -86,6 +86,10 @@ namespace HJScarletRework.Globals.Players
             {
                 sourceDamageModify *= 0.80f;
             }
+            if(goldenAppleEnchantedFully)
+            {
+                sourceDamageModify *= 0.01f;
+            }
             modifiers.FinalDamage *= totalProjDamageModify;
             modifiers.SourceDamage *= sourceDamageModify;
         }
@@ -119,6 +123,10 @@ namespace HJScarletRework.Globals.Players
             if(goldenAppleEnchanted)
             {
                 sourceDamageModify *= 0.80f;
+            }
+            if(goldenAppleEnchantedFully)
+            {
+                sourceDamageModify *= 0.01f;
             }
             if (totalProjDamageModify < 0.05f)
                 totalProjDamageModify = 0.1f;
@@ -213,8 +221,7 @@ namespace HJScarletRework.Globals.Players
                 info.Damage -= goldenAppleDamageAbsorb;
                 string reduceText = (-goldenAppleDamageAbsorb).ToString();
                 Rectangle location = new Rectangle((int)Player.position.X, (int)Player.position.Y - 16, Player.width, Player.height);
-                CombatText.NewText(location, Color.LightGoldenrodYellow, Language.GetTextValue(reduceText));
-                //particle，生成点粒子。
+                //CombatText.NewText(location, Color.Gold, Language.GetTextValue(reduceText));
             }
         }
     }

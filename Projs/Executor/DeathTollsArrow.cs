@@ -81,10 +81,10 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.HomingTarget(CurTarget.Center, -1, 20, 20);
             else
             {
-                if (Projectile.velocity.LengthSquared() < 20f * 20f)
-                    Projectile.velocity *= 1.1f;
-                else
-                    Projectile.velocity *= 0.95f;
+            Projectile.netUpdate = true;
+            AttackTimer = 0f;
+            AttackType = DoType.IsHit;
+
             }
         }
 
@@ -93,22 +93,18 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.IsOutScreen())
                 return;
             float ratios = Projectile.scale;
-            if (Main.rand.NextBool(6))
-                new EmptyRing(Projectile.Center.ToRandCirclePos(4f), Projectile.velocity.ToRandVelocity(ToRadians(5f), 1.2f, 6f) * ratios + Projectile.velocity / 8f, RandLerpColor(Color.DarkViolet, Color.Violet), 40, Main.rand.NextFloat(0.45f, 0.68f) * 0.25f * ratios, 1f, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
-            if (Main.rand.NextBool(6))
-                new KiraStar(Projectile.Center.ToRandCirclePos(5f), Projectile.velocity.ToRandVelocity(ToRadians(5f), 1.2f, 4f) * ratios + Projectile.velocity / 8f, RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0, 1, 0.25f * ratios).SpawnToNonPreMult();
-            if (Main.rand.NextBool(4))
+            if (Main.rand.NextBool(8))
                 new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(4f), Projectile.velocity / 8f * ratios, RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.65f * ratios).Spawn();
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (AttackType != DoType.IsSpawned)
                 return;
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 4; i++)
             {
                 new SmokeParticle(Projectile.Center.ToRandCirclePos(2), RandVelTwoPi(1f, 6f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, 1f, 0.16f, Main.rand.NextBool()).SpawnToNonPreMult();
             }
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 4; i++)
             {
                 new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(1f, 6.5f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.65f).Spawn();
             }
@@ -120,8 +116,8 @@ namespace HJScarletRework.Projs.Executor
         #region AI方法合集
         private void DoHit()
         {
-            Projectile.scale = Lerp(Projectile.scale, 0, 0.21f);
-            Projectile.Opacity = Lerp(Projectile.Opacity, 0, 0.20f);
+            Projectile.scale = Lerp(Projectile.scale, 0, 0.30f);
+            Projectile.Opacity = Lerp(Projectile.Opacity, 0, 0.30f);
             if (Projectile.Opacity <= 0.02f)
                 Projectile.Kill();
         }

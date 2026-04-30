@@ -4,8 +4,8 @@ HoneyRegenAlt: {
 }
 
 BlackKeyExecutionBuff: {
-	DisplayName: �߸��ͽ�
-	Description: ����ǿ�������ٶ�
+	DisplayName: 概念增强
+	Description: 短暂增强你的身体素质
 }
 
 WhaleBuff: {
@@ -39,8 +39,8 @@ PanicBuff: {
 }
 
 HerbBagBuff: {
-	// DisplayName: Herb Bag Buff
-	// Description: Mods.HJScarletRework.Buffs.HerbBagBuff.Description
+	DisplayName: 护林草药
+	Description: 草药的力量似乎注入了你的体内
 }
 
 GoldenAppleBuff: {

@@ -1,11 +1,13 @@
 ﻿using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
     public class AbyssalWorld : ThrownSpearClass
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override bool HasLegendary => false;
         public override bool NotHomewardJourneySpear => true;
         public override void ExSD()

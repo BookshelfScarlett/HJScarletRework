@@ -4,8 +4,8 @@ HoneyRegenAlt: {
 }
 
 BlackKeyExecutionBuff: {
-	DisplayName: Rewardsof Warrior Buff
-	Description: Mods.HJScarletRework.Buffs.BlackKeyExecutionBuff.Description
+	DisplayName: Conceptual Enhancement
+	Description: Briefly enhances your physical attributes
 }
 
 WhaleBuff: {
@@ -39,16 +39,20 @@ PanicBuff: {
 }
 
 HerbBagBuff: {
-	DisplayName: Herb Bag Buff
-	Description: Mods.HJScarletRework.Buffs.HerbBagBuff.Description
+	DisplayName: Forest Herb
+	Description: The power of herbs seems to have been infused into your body.
 }
 
 GoldenAppleBuff: {
-	DisplayName: Golden Apple Buff
-	Description: Mods.HJScarletRework.Buffs.GoldenAppleBuff.Description
+	DisplayName: Golden Apple
+	Description: Your teeth actually survived that?
 }
 
 GoldenAppleBuffEnchanted: {
-	DisplayName: Golden Apple Buff Enchanted
-	Description: Mods.HJScarletRework.Buffs.GoldenAppleBuffEnchanted.Description
+	DisplayName: Enchanted Golden Apple
+	Description:
+		'''
+		Accelerates health regeneration and strengthens defense.
+		...How are your teeth this tough?
+		'''
 }

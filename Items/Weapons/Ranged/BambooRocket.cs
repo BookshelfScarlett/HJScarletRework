@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
+using Microsoft.Xna.Framework;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Ranged
@@ -12,9 +13,10 @@ namespace HJScarletRework.Items.Weapons.Ranged
         public override void ExSD()
         {
             Item.width = Item.height = 30;
-            Item.damage = 15;
+            Item.damage = 26;
             Item.noMelee = true;
             Item.autoReuse = true;
+            Item.UseSound = SoundID.Item51;
             Item.SetUpRarityPrice(ItemRarityID.Green);
             Item.useTime = Item.useAnimation = 30;
             Item.shootSpeed = 14f;
@@ -22,6 +24,10 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 3f;
 
+        }
+        public override Vector2? HoldoutOffset()
+        {
+            return new Vector2(-10f, 0);
         }
         public override void AddRecipes()
         {

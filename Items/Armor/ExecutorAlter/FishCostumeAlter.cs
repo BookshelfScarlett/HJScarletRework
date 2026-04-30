@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Instances.Items;
+﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -11,6 +12,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
     {
         public override int ApplyArmor => ItemID.FishCostumeMask;
         public static int Defense = 6;
+        public override int DownedConditionID => NPCID.EaterofWorldsHead;
         public override string SetupName => "FishCostume";
         public override bool SetUpArmorSet => true;
         public override int[] ArmorSlots => [ItemID.FishCostumeMask, ItemID.FishCostumeShirt, ItemID.FishCostumeFinskirt];
@@ -20,7 +22,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         }
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
-            base.ExUpdateEquipAlter(item, player);
+            player.GetDamage<ExecutorDamageClass>() += 0.05f;
         }
         public override void UpdateArmorSet(Player player, string set)
         {
@@ -93,6 +95,8 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
     public class FishCostumeChestplate : AlterVanillaArmor
     {
         public override int ApplyArmor => ItemID.FishCostumeShirt;
+        public override int DownedConditionID => NPCID.EaterofWorldsHead;
+        public override ArmorType Category => ArmorType.Chestplate;
         public static int Defense = 12;
         public override string SetupName => "FishCostume";
         public override void ExSD(Item item)
@@ -101,7 +105,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         }
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
-            base.ExUpdateEquipAlter(item, player);
+            player.gills = true;
         }
         public override void AddRecipes()
         {
@@ -118,6 +122,8 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
     {
         public override int ApplyArmor => ItemID.FishCostumeFinskirt;
         public static int Defense = 4;
+        public override ArmorType Category => ArmorType.Legs;
+        public override int DownedConditionID => NPCID.EaterofWorldsHead;
         public override string SetupName => "FishCostume";
         public override void ExSD(Item item)
         {
@@ -125,7 +131,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         }
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
-            base.ExUpdateEquipAlter(item, player);
+            player.moveSpeed += 0.10f;
         }
         public override void AddRecipes()
         {

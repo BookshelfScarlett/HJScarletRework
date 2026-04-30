@@ -108,7 +108,7 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="searchSecondTarget"></param>
         /// <param name="searchDistance"></param>
         /// <returns></returns>
-        public static bool GetTargetSafe(this Projectile proj, out NPC target, bool searchSecondTarget = true, float searchDistance = 600f, bool canPassWall = false)
+        public static bool GetTargetSafe(this Projectile proj, out NPC target, bool searchSecondTarget = true, float searchDistance = 600f, bool canPassWall = false, bool hitLine = false)
         {
             target = null;
             if (proj.HJScarlet().GlobalTargetIndex != -1)
@@ -118,14 +118,14 @@ namespace HJScarletRework.Globals.Methods
                     return true;
                 else if (searchSecondTarget)
                 {
-                    target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall);
+                    target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall,hitLine:hitLine);
                     if (target != null && target.CanBeChasedBy(proj))
                         return true;
                 }
             }
             else if (searchSecondTarget)
             {
-                target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall);
+                    target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall,hitLine:hitLine);
                 if (target != null && target.CanBeChasedBy(proj))
                     return true;
             }
@@ -144,7 +144,7 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="ignoreTiles">穿墙搜索, 默认为</param>
         /// <param name="arrayFirst">数组优先, 这个将会使射弹优先针对数组内第一个单位,默认为否</param>
         /// <returns>返回一个NPC实例</returns>
-        public static NPC FindClosestTarget(this Vector2 p, float maxDist, bool bossFirst = false, bool ignoreTiles = true, bool arrayFirst = false)
+        public static NPC FindClosestTarget(this Vector2 p, float maxDist, bool bossFirst = false, bool ignoreTiles = true, bool arrayFirst = false, bool hitLine = false)
         {
             //bro我真的要遍历整个NPC吗？
             float distStoraged = maxDist;
@@ -172,7 +172,17 @@ namespace HJScarletRework.Globals.Methods
 
                 //搜索符合条件的敌人, 准备返回这个NPC实例
                 float curNpcDist = Vector2.Distance(npc.Center, p);
-                if (curNpcDist < distStoraged && (ignoreTiles || Collision.CanHit(p, 1, 1, npc.Center, 1, 1)))
+                bool isCanHit = false;
+                if (hitLine)
+                {
+                    isCanHit = Collision.CanHit(p, 1, 1, npc.Center, npc.width, npc.height);
+                }
+                else
+                {
+                    isCanHit = Collision.CanHit(p, 1, 1, npc.Center, 1, 1);
+                }
+                bool canHitline = hitLine && (Collision.CanHitLine(npc.Center, 1, 1, p, 1, 1));
+                if (curNpcDist < distStoraged && (ignoreTiles || isCanHit))
                 {
                     distStoraged = curNpcDist;
                     acceptableTarget = npc;
@@ -186,7 +196,7 @@ namespace HJScarletRework.Globals.Methods
             //返回这个NPC实例
             return acceptableTarget;
         }
-        public static NPC FindClosestTarget(this Projectile p, float maxDist, Vector2 center, bool bossFirst = false, bool ignoreTiles = true, bool arrayFirst = false)
+        public static NPC FindClosestTarget(this Projectile p, float maxDist, Vector2 center, bool bossFirst = false, bool ignoreTiles = true, bool arrayFirst = false, bool hitLine=false)
         {
             //bro我真的要遍历整个NPC吗？
             float distStoraged = maxDist;
@@ -214,7 +224,8 @@ namespace HJScarletRework.Globals.Methods
 
                 //搜索符合条件的敌人, 准备返回这个NPC实例
                 float curNpcDist = Vector2.Distance(npc.Center, center);
-                if (curNpcDist < distStoraged && (ignoreTiles || Collision.CanHit(center, 1, 1, npc.Center, 1, 1)))
+                bool canHitline = hitLine && Collision.CanHitLine(npc.Center, 1, 1, center, 1, 1);
+                if (curNpcDist < distStoraged && (ignoreTiles || canHitline || Collision.CanHit(center, 1, 1, npc.Center, 1, 1)))
                 {
                     distStoraged = curNpcDist;
                     acceptableTarget = npc;

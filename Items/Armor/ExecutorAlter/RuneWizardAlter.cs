@@ -40,6 +40,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public string ArmorLocalization => Mod.GetLocalizationKey($"Items.Armor.{SetupName}Executor.");
         public virtual bool SetUpArmorSet => false;
         public virtual int[] ArmorSlots => null;
+        public virtual int DownedConditionID => -1;
         public sealed override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             return entity.type == ApplyArmor;
@@ -111,7 +112,10 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
                 TooltipLine tooltipLine = new TooltipLine(Mod, "HJscarletReworkName", path);
                 tooltips.Insert(flavorTooltipIndex + 1, tooltipLine);
                 ExModifyTooltipsAlter(item, tooltips, armorCategory);
-
+            }
+            if(DownedConditionID != -1)
+            {
+                tooltips.AddSwapTooltipValueBossCondition(DownedConditionID);
             }
         }
         public virtual void ExModifyTooltipsAlter(Item item, List<TooltipLine> tooltips, string path)

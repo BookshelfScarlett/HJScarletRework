@@ -28,7 +28,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.penetrate = 1;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
-            Projectile.timeLeft = GetSeconds(10);
+            Projectile.timeLeft = GetSeconds(2);
         }
         public override void OnFirstFrame()
         {
@@ -44,6 +44,11 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
+            if(Projectile.timeLeft < 30)
+            {
+                Projectile.scale = Lerp(Projectile.scale, 0, 0.1f);
+                Projectile.Opacity = Lerp(Projectile.Opacity, 0, 0.1f);
+            }
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer++;
             UpdateParticle();
@@ -100,7 +105,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

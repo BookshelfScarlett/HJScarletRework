@@ -36,11 +36,7 @@ FlybackHandThrown: {
 
 LightBiteThrown: {
 	DisplayName: Light Bite Javelin
-	Tooltip:
-		'''
-		Penetrates up to 10 enemies.
-		Leaves behind weakly homing eclipse stars during flight.
-		'''
+	Tooltip: Leaves behind weakly homing eclipse stars during flight.
 	CalamitySupport: ""
 }
 
@@ -89,8 +85,9 @@ DeepToneThrown: {
 	DisplayName: Deep Tone Javelin
 	Tooltip:
 		'''
-		Penetrates 4 enemies.
-		Spawns tentacles at an extremely high rate on hit.
+		Spawns abyssal energy orbs on hit.
+		On attack, release abyssal devourer that hunts down your enemies.
+		The devourer deals continuous damage On Hit, and occasionally heals you
 		'''
 	CalamitySupport: ""
 }
@@ -122,10 +119,9 @@ TonbogiriThrown: {
 	DisplayName: Tonbogiri Javelin
 	Tooltip:
 		'''
-		Spawns additional poison bubbles on impact.
-		The number of bubbles is boosted by melee attack speed and critical strike chance.
-		Minimum 1 bubble, maximum {1} bubbles.
-		Current: {0} bubbles.
+		Add toxic bubbles along the path
+		Also add more toxic bubbles when it disappears
+		"Looks a bit familiar"
 		'''
 	CalamitySupport: ""
 }
@@ -199,11 +195,7 @@ GalvanizedHandThrown: {
 
 AzureFrostmark: {
 	DisplayName: Azure Frostmark
-	Tooltip:
-		'''
-		Disappears after being thrown for a short time.
-		Fires two additional Frost Bombs upon vanishing.
-		'''
+	Tooltip: Spawns a frost energy, disappears after flying a certain distance.
 	CalamitySupport: ""
 }
 
@@ -238,17 +230,30 @@ EclipseWraith: {
 
 CactusSpear: {
 	DisplayName: Cactus Spear
-	Tooltip: ""
+	Tooltip:
+		'''
+		Spawns an additional cactus thorn backwards on hit
+		"A cactus is meant to be made into a throwing spear!"
+		'''
 }
 
 ColdSakura: {
 	DisplayName: Cold Sakura
-	Tooltip: ""
+	Tooltip:
+		'''
+		Quickly throw a sharp, high-speed sakura lance.
+		On Hit, a sakura arrow gives chase.
+		'''
 }
 
 TerraSpear: {
 	DisplayName: Terra Spear
-	Tooltip: ""
+	Tooltip:
+		'''
+		Leave multiple Terra Portals along the path, which release seeking Terra Arrows after a certain time
+		On a direct hit with the throw, call in a large number of Terra Lances from off-field for support.
+		"It's not called 'Terra Lance' �� don't go messing that up, yeah?"
+		'''
 }
 
 AbyssalWorld: {

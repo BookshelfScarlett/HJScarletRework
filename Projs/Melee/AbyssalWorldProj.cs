@@ -12,6 +12,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class AbyssalWorldProj : HJScarletProj
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ClassCategory Category => ClassCategory.Melee;
         public AnimationStruct Helper = new(3);
         public NPC Target = null;

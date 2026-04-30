@@ -53,29 +53,34 @@ namespace HJScarletRework.Projs.Executor
                 return;
             Projectile.timeLeft = 2;
             ref int buffTimer = ref Owner.HJScarlet().exsanguinationBuffTime;
+            if(buffTimer == 0)
+            {
+                Projectile.HJScarlet().ExecutionStrike = false;
+            }
             Timer++;
             if (Timer % 2f == 0)
                 SoundEngine.PlaySound(HJScarletSounds.Light_Fire with { Volume = 0.45f }, Projectile.Center);
-            if (Timer % 1f == 0)
+            if (Timer % 2f == 0)
             {
                 for (int i = -1; i < 2; i += 2)
                 {
                     Vector2 safedir = Projectile.rotation.ToRotationVector2();
                     Vector2 shootPos = Projectile.Center + safedir * 60f - (safedir.RotatedBy(PiOver2) * 5f * Projectile.direction);
-                    if (Owner.HJScarlet().ExecutionListStored.TryGetValue(ItemType<Exsanguination>(), out int value))
+                    if (Owner.HJScarlet().ExecutionListStored.TryGetValue(ItemType<Exsanguination>(), out int value) && !Projectile.HJScarlet().ExecutionStrike)
                     {
                         if (value > ExecutionTime)
                         {
-                            buffTimer = GetSeconds(30);
-                            Owner.RemoveSlot(ItemType<Exsanguination>());
+                            buffTimer = GetSeconds(5);
+                            Projectile.HJScarlet().ExecutionStrike = true;
+                            Owner.HJScarlet().ExecutionListStored[ItemType<Exsanguination>()] = 0;
                             SoundEngine.PlaySound(HJScarletSounds.Light_CrackedShield with { MaxInstances = 0 }, Owner.Center);
                         }
                     }
                     int damage = Projectile.damage;
                     if (buffTimer != 0)
-                        damage *= 100;
+                        damage *= 3;
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), shootPos - safedir * 40f + safedir.RotatedBy(PiOver2 * i) * 7f * Main.rand.NextFloat(), safedir * 10f, ProjectileType<ExsanguinationBulletProj>(), damage, Projectile.knockBack);
-                    proj.HJScarlet().HasExecutionMechanic = BuffTime == 0;
+                    proj.HJScarlet().HasExecutionMechanic = buffTimer == 0;
                 }
                 for (int i = 0; i < 4; i++)
                 {
@@ -88,8 +93,6 @@ namespace HJScarletRework.Projs.Executor
                     d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
                 }
             }
-            if (buffTimer > 0)
-                buffTimer--;
         }
         public static void RemoveSlot(Player player, int curItemType)
         {
@@ -108,6 +111,7 @@ namespace HJScarletRework.Projs.Executor
             bool ifStillUse = (Owner.channel || Owner.controlUseTile) && !Owner.noItems && !Owner.CCed;
             if (!ifStillUse)
             {
+                //RemoveSlot(Owner, ItemType<Exsanguination>());
                 Projectile.Kill();
                 return true;
             }

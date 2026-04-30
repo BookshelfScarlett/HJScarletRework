@@ -11,7 +11,7 @@ StardustBless: {
 		'''
 }
 
-StardustRune: {
+SouloftheTidalMark: {
 	DisplayName: 澪标之魂
 	Tooltip:
 		'''
@@ -26,7 +26,7 @@ HeartoftheCrystal: {
 		'''
 		所有的魔法武器不再消耗任何魔力
 		增加15%魔法暴击概率
-		使你造成的魔法伤害乘算降低18%
+		使你造成的魔法伤害乘算降低20%
 		'''
 }
 
@@ -36,7 +36,7 @@ HeartoftheMountain: {
 		'''
 		所有的魔法武器不再消耗任何魔力
 		增加50%魔法暴击概率
-		使你造成的魔法伤害5.0x
+		使你造成的魔法伤害10.0x
 		'''
 }
 
@@ -64,22 +64,22 @@ PreciousTarget: {
 		'''
 }
 
-ExecutorAscension: {
+ExecutorsSwordMarkPlus: {
 	DisplayName: 处刑者剑章 A++
 	Tooltip:
 		'''
-		所有的处决攻击在满足条件时变为手动触发而非自动触发
+		处决攻击在满足条件时变为按下 互动键 手动触发
 		手动触发处决攻击后，使你接下来的一定时间内造成的代行者伤害1.1x
 		并且，增加30%代行者伤害的暴击概率
 		在触发伤害加成期间，再次执行处决攻击不会刷新这个效果
 		'''
 }
 
-ExecutorSigil: {
+ExecutorsSwordMark: {
 	DisplayName: 处刑者剑章
 	Tooltip:
 		'''
-		所有的处决攻击在满足条件时变为手动触发而非自动触发
+		处决攻击在满足条件时变为按下 互动键 手动触发
 		手动触发处决攻击后，使你接下来的一定时间内造成的代行者伤害1.1x
 		在触发伤害加成期间，再次执行处决攻击不会刷新这个效果
 		'''
@@ -146,7 +146,7 @@ Desterrennacht: {
 		'''
 }
 
-ManaContainer: {
+ManaSavingsJar: {
 	DisplayName: 魔力储蓄罐
 	Tooltip:
 		'''
@@ -166,7 +166,7 @@ CycleMadness: {
 		'''
 }
 
-DefenderEmblem: {
+VanguardEmblem: {
 	DisplayName: 先锋徽章
 	Tooltip:
 		'''
@@ -197,7 +197,7 @@ ExecutorBadge: {
 		'''
 		代行者伤害提高20%
 		代行者暴击概率提高5%
-		「■会■执行者」
+		"■会■执行者"
 		'''
 }
 
@@ -210,7 +210,7 @@ AxeofPerun: {
 		'''
 }
 
-BlackKey: {
+ConceptualBlackKey: {
 	DisplayName: 概念黑键
 	Tooltip:
 		'''
@@ -243,7 +243,7 @@ RocketCharm: {
 		'''
 }
 
-TinyShortsword: {
+MiniatureBayonet: {
 	DisplayName: 微缩刺刀
 	Tooltip:
 		'''
@@ -253,7 +253,7 @@ TinyShortsword: {
 		'''
 }
 
-FakeManaStar: {
+ArtificalManaStar: {
 	DisplayName: 人工仿造魔力星
 	Tooltip:
 		'''

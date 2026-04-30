@@ -21,13 +21,13 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().desterrennacht = true;
-            player.HJScarlet().stardustRune = true;
+            player.HJScarlet().souloftheTidalMark = true;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient<StardustRune>().
-                AddIngredient<EssenceofMatter>(5).
+                AddIngredient<SouloftheTidalMark>().
+                AddIngredient<EssenceofDeath>(5).
                 AddIngredient(ItemID.FragmentStardust, 10).
                 AddTile<FinalAnvil>().
                 Register();

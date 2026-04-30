@@ -1,5 +1,7 @@
 ﻿using HJScarletRework.Globals.Methods;
+using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Buffs
@@ -17,6 +19,16 @@ namespace HJScarletRework.Buffs
             player.lavaImmune = true;
             player.lifeRegen += 4;
             player.statDefense += 10;
+            if(player.miscCounter % 3 == 0)
+            {
+                Dust d = Dust.NewDustPerfect(player.ToRandRec() + Vector2.UnitY * 10, DustID.GoldCoin);
+                d.velocity = -Vector2.UnitY * 0.5f;
+                d.noGravity = true;
+                d = Dust.NewDustPerfect(player.ToRandRec() + Vector2.UnitY * 10, DustID.HallowedTorch);
+                d.velocity = -Vector2.UnitY * 0.5f;
+                d.noGravity = true;
+            }
+
         }
         public override void Update(NPC npc, ref int buffIndex)
         {

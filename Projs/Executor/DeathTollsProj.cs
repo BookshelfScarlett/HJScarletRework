@@ -133,11 +133,9 @@ namespace HJScarletRework.Projs.Executor
                 if (Projectile.numHits % 2 == 0)
                 {
                     for (int i = 0; i < 16; i++)
-                        new ShinyCrossStar(target.Center.ToRandCirclePos(7f), RandVelTwoPi(0f, 8f), RandLerpColor(Color.Violet, Color.DarkViolet), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.44f, 0.70f), false).Spawn();
-                    for (int i = 0; i < 8; i++)
-                        new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(6f), 1f, RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.45f, RandRotTwoPi).Spawn();
-                    for (int i = 0; i < 18; i++)
-                        new SmokeParticle(target.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, .81f, 0.21f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
+                        new ShinyCrossStar(target.Center.ToRandCirclePos(1.2f), RandVelTwoPi(0f, 8f), RandLerpColor(Color.Violet, Color.DarkViolet), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.44f, 0.70f), false).Spawn();
+                    for (int i = 0; i < 12; i++)
+                        new SmokeParticle(target.Center.ToRandCirclePos(2), RandVelTwoPi(0.1f, 8f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, .81f, 0.41f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
                 }
             }
             int counts = 1 + hasMinion.ToInt();
@@ -187,10 +185,6 @@ namespace HJScarletRework.Projs.Executor
 
             if (Projectile.FinalUpdate())
                 new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(32f), Projectile.velocity.ToRandVelocity(0.1f, 2.4f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, 0.65f).Spawn();
-            if (Projectile.FinalUpdateNextBool(3))
-                new EmptyRing(Projectile.Center.ToRandCirclePos(36), Projectile.SafeDir() * Main.rand.NextFloat(0f, 2.1f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, 0.2f, 1, altRing: Main.rand.NextBool()).SpawnToNonPreMult();
-
-
         }
     }
 }

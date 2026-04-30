@@ -69,7 +69,9 @@ namespace HJScarletRework.Globals.Players
                 if (cowboyExecutor && cowboyRevolverTimer == 0)
                 {
                     cowboyRevolverTimer = Player.ApplyWeaponAttackSpeed(Player.HeldItem, Player.HeldItem.useTime, 5);
-                    int revolverDamage = Player.GetWeaponDamage(Player.HeldItem);
+                    int revolverDamage = Player.GetWeaponDamage(Player.HeldItem) / 2;
+
+                    revolverDamage *= (1 + 3 * (Main.rand.NextBool(6).ToInt())); 
                     Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), target.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(35f), 9f, 11f), ProjectileType<CowboyRevolverProj>(), revolverDamage, 0f, Player.whoAmI);
                     proj.timeLeft = 300;
                     if (target.CanBeChasedBy())
@@ -168,7 +170,7 @@ namespace HJScarletRework.Globals.Players
 
         public void GlobalOnHitNPCWithSomething(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (stardustRune && stardustRuneHitHealTimer == 0)
+            if (souloftheTidalMark && stardustRuneHitHealTimer == 0)
             {
                 for (int i = 0; i < 2; i++)
                 {

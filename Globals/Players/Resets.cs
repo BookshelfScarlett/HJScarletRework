@@ -1,4 +1,6 @@
-﻿using Terraria.ModLoader;
+﻿using HJScarletRework.Items.Weapons.Ranged;
+using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
 {
@@ -10,17 +12,17 @@ namespace HJScarletRework.Globals.Players
             PreciousAimAcc = false;
             PreciousCritsMin = 0;
             desterrennacht = false;
-            fakeManaContainer = 0;
-            defenderEmblem = false;
+            manaSavingsJar = 0;
+            vanguardEmblem = false;
             loveRing = false;
             isBeingLove = false;
             heartoftheCrystal = false;
             tacticalExecution = false;
-            executorAscension = false;
+            EeecutorsSwordMarkPlus = false;
             blackKeyHeal = 0;
             blackKeyDefenseBuff = 0;
             blackKeyDoT = false;
-            fakeManaStar = false;
+            artificalManaStar = false;
         }
         private void ResetArmor()
         {
@@ -46,6 +48,47 @@ namespace HJScarletRework.Globals.Players
             goldenApple = false;
             goldenAppleEnchanted = false;
             goldenAppleDamageAbsorb = 0;
+            goldenAppleEnchantedFully= false;
+        }
+         public override void ResetEffects()
+        {
+            climaticHawstringLaserCounter *= (Player.HeldItem.type == ItemType<ClimaticHawstring>()).ToInt();
+            CreationHatSet = false;
+            ShadowCastAcc = false;
+            LifeBalloonAcc = false;
+            critDamageAll = 0;
+            critDamageExecutor = 0;
+            bonusExecutionReduce = 0;
+            ResetAcc();
+            ResetPets();
+            ResetArmor();
+        }
+        public override void UpdateDead()
+        {
+            ExecutionTime = 0;
+            flybackhandBuffTime = 0;
+            flybackhandCloclCD = 0;
+            flybackhandBuffTimeCurrent = 0;
+            PreciousTargetCrtis = 10;
+            LifeBalloonAcc = false;
+            galvanizedHandDashCD = 0;
+            climaticHawstringLaserCounter = 0;
+
+            desterrannachtImmortalTime = 0;
+            desterranRespawnChargeTimer = 0;
+            stardustRuneHitHealTimer = 0;
+            defenderEmblemCD = 0;
+            exsanguinationBuffTime = 0;
+            tacticalTime = 0;
+            tacticalPunishTime = 0;
+            blackKeyTimer = 0;
+            ResetAcc();
+            ResetPets();
+            ResetArmor();
+
+            cowboyRevolverTimer = 0;
+            floretProtectorTimer = 0;
+            monkStaffHeal = false;
         }
 
 

@@ -22,6 +22,7 @@ namespace HJScarletRework.Projs.Executor
             Shoot,
             Return
         }
+        public NPC CurTarget = null;
         public ref float Timer => ref Projectile.ai[0];
         public State AttackState
         {
@@ -85,19 +86,28 @@ namespace HJScarletRework.Projs.Executor
             //掷出一定时间再去考虑索敌的事情。
             if (Projectile.MeetMaxUpdatesFrame(Timer, 3f + ActiveMiscDashHit.ToInt() * 5f))
             {
-                if (Projectile.GetTargetSafe(out NPC target, true, 1200, canPassWall: true) && Projectile.numHits < 1)
+                if (Projectile.GetTargetSafe(out NPC target, true, 1200,canPassWall:false,hitLine:true) && Projectile.numHits < 1 && CurTarget is null)
                 {
-                    if (!ActiveDash)
-                    {
-                        Projectile.velocity = (target.Center - Projectile.Center).ToSafeNormalize() * 18f;
-                        InitActiveDashParticle();
-                        SoundEngine.PlaySound(SoundID.Item69 with { MaxInstances = 0, Pitch = -0.4f, PitchVariance = 0.1f, Volume = 0.7f }, Projectile.Center);
-                    }
-                    Projectile.rotation = Projectile.velocity.ToRotation();
-                    ActiveDash = true;
-                    Projectile.HomingTarget(target.Center, -1, 18f, 10f, 40f);
+                    CurTarget = target;
                 }
-                if (isHitNPC)
+                
+                if (!isHitNPC)
+                {
+                    if (CurTarget.IsLegal())
+                    {
+                        if (!ActiveDash)
+                        {
+                            Projectile.velocity = (CurTarget.Center - Projectile.Center).ToSafeNormalize() * 18f;
+                            InitActiveDashParticle();
+                            SoundEngine.PlaySound(SoundID.Item69 with { MaxInstances = 0, Pitch = -0.4f, PitchVariance = 0.1f, Volume = 0.7f }, Projectile.Center);
+                        }
+                        Projectile.rotation = Projectile.velocity.ToRotation();
+                        ActiveDash = true;
+                        Projectile.HomingTarget(CurTarget.Center, -1, 18f, 10f, 40f);
+                    }
+                    else CurTarget = null;
+                }
+                else
                 {
                     Projectile.velocity *= 0.94f;
                     float rot = (Projectile.velocity).ToSafeNormalize().ToRotation();
@@ -154,9 +164,12 @@ namespace HJScarletRework.Projs.Executor
 
         public void SpawnFireball()
         {
-            for (int i = 0; i < 2; i++)
+            if (!Collision.SolidCollision(Projectile.Center, Projectile.width, Projectile.height) && Collision.CanHit(Projectile.Center,1,1,Owner.Center,1,1))
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePosEdge(4f), Projectile.velocity.ToRandVelocity(ToRadians(25f), 8f, 12f), ProjectileType<AetherfireSmasherFireball>(), Projectile.damage / 3, 1f, Owner.whoAmI);
+                for (int i = 0; i < 2; i++)
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePosEdge(4f), Projectile.velocity.ToRandVelocity(ToRadians(25f), 8f, 12f), ProjectileType<AetherfireSmasherFireball>(), Projectile.damage / 3, 1f, Owner.whoAmI);
+                }
             }
         }
 

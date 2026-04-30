@@ -68,7 +68,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             new LightningParticle(Projectile.Center, Vector2.Zero, Color.RoyalBlue, 40, RandRotTwoPi, 0.5f * Main.rand.NextFloat(0.75f, 0.95f), 2).Spawn();
-            SoundEngine.PlaySound(SoundID.NPCHit42 with { Pitch = 0.4f }, Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.Lightning_Quick with {MaxInstances = 0,  Pitch = 0.4f }, Projectile.Center);
             Vector2 spawnPos = Projectile.Center + Projectile.SafeDir() * 10f;
             for (int i = 0; i < 2; i++)
             {

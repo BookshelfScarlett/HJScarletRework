@@ -44,7 +44,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Owner.HJScarlet().climaticHawstringLaserCounter < 20 && !ShouldAdd)
+            if (Owner.HJScarlet().climaticHawstringLaserCounter < 30 && !ShouldAdd)
             {
                 Owner.HJScarlet().climaticHawstringLaserCounter++;
                 ShouldAdd = true;

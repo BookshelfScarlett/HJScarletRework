@@ -1,23 +1,60 @@
 CorePickaxe: {
 	DisplayName: Core Pickaxe
-	Tooltip: ""
+	Tooltip:
+		'''
+		A tool hot enough to smelt ores for you��
+		This feature is temporarily disabled in multiplayer mode
+		��Center of the Earth��
+		'''
 }
 
 TerrariaRecipe: {
 	DisplayName: Terraria Recipe
-	Tooltip: ""
-	Eaten: ""
-	NotEaten: ""
+	Tooltip:
+		'''
+		Grants a bonus to maximum health based on the number of different food types consumed
+		Gains 10 max health for every 5 food items consumed
+		Right-click to toggle
+		"This isn't Minecraft."
+		'''
+	Eaten: Eaten: Allows max health bonus
+	NotEaten: '''"Not eaten yet! Want to give it a try?"'''
 	Active: ""
-	FoodList: "{0}{1}{2}{3}"
+	FoodList:
+		'''
+		Eaten ({2})
+		{0}
+		Not eaten ({3})
+		{1}
+		'''
 }
 
 GoldenApple: {
 	DisplayName: Golden Apple
-	Tooltip: ""
+	Tooltip:
+		'''
+		Greatly increases all stats
+		Directly reduces damage taken
+		"Merely a coincidence"
+		'''
 }
 
 GoldenAppleEnchanted: {
-	DisplayName: Golden Apple Enchanted
-	Tooltip: ""
+	DisplayName: Enchanted Golden Apple
+	Tooltip:
+		'''
+		Greatly increases all stats
+		Directly reduces damage taken
+		"Merely a coincidence"
+		'''
+}
+
+GoldenAppleEnchantedFully: {
+	DisplayName: True Enchanted Golden Apple
+	Tooltip:
+		'''
+		Greatly increases all stats
+		Reduced damage taken by 99%，alaways heal you for a high rate
+		Can be active in inventory
+		'''
 }

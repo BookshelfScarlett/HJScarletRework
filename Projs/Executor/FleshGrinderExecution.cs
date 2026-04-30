@@ -48,7 +48,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 66;
             Projectile.SetupImmnuity(30);
             Projectile.penetrate = -1;
-            Projectile.tileCollide = true;
+            Projectile.ownerHitCheck = true;
             Projectile.ignoreWater = true;
             Projectile.noEnchantmentVisuals = true;
         }
@@ -129,7 +129,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.rotation += 0.2f;
             //挂载，如果挂载目标已经不符合挂载条件，跳回Attacking的AI重新搜索目标
-            if (CurHittingTarget.CanBeChasedBy() && CurHittingTarget != null)
+            if (CurHittingTarget.CanBeChasedBy() && CurHittingTarget != null && Collision.CanHit(CurHittingTarget.Center, 1, 1, Projectile.Center, 1, 1))
                 Projectile.HomingTarget(CurHittingTarget.Center, -1, 16f, 20f);
             else
                 AttackType = State.Attacking;

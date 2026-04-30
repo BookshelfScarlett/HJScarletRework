@@ -100,7 +100,9 @@ namespace HJScarletRework.Projs.Melee
             bool isNextHit = Projectile.penetrate == 1 && target == Projectile.ToHJScarletNPC();
             bool isFirstHit = Projectile.penetrate != 1;
             bool canHit = HasPrioityTarget == false || isNextHit || isFirstHit;
-            return canHit;
+            if (canHit)
+                return null;
+            return false;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

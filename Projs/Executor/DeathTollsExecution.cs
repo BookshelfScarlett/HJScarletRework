@@ -93,8 +93,6 @@ namespace HJScarletRework.Projs.Executor
         private void DrawTrailingDust()
         {
             if (Main.rand.NextBool(6))
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(32f), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, RandRotTwoPi, 1, 0.46f, false).Spawn();
-            if (Main.rand.NextBool(6))
                 new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(32f), RandVelTwoPi(1f, 8f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, 0.46f).Spawn();
         }
 
@@ -105,6 +103,15 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            for (int i = 0; i < 4;  i++)
+            {
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(2), RandVelTwoPi(1f, 6f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, 1f, 0.16f, Main.rand.NextBool()).SpawnToNonPreMult();
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                new ShinyOrbParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(1f, 6.5f), RandLerpColor(Color.DarkViolet, Color.Purple), 40, 0.65f).Spawn();
+            }
+
             //非挂载情况返回不执行。
             if (AttackType != DoType.IsHanging)
                 return;

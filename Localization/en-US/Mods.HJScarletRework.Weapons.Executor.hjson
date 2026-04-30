@@ -1,44 +1,89 @@
 Exsanguination: {
 	DisplayName: Exsanguination
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip:
+		'''
+		Fires a stream of bullets at extremely high frequency and ultra-high speed
+		All bullets fired deal true damage
+		'''
+	ExecutionStrike:
+		'''
+		On triggering Execution Strike, completely shatter the shield of the hit enemy
+		For a period of time afterwards, deal 3 times the weapon's damage to that enemy.
+		'''
 }
 
 MantleLayer: {
-	DisplayName: Blazing Striker
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Mantle Layer
+	Tooltip:
+		'''
+		Bounce off the enemy and then perform a heavy strike on hit
+		Does not trigger this effect on return
+		'''
+	ExecutionStrike:
+		'''
+		Mantle Layer will attempt to attach to your enemy, dealing damage over time
+		Attempts to perform two heavier heavy strikes after dealing a fixed number of damage instances
+		'''
 }
 
 DungeonBreaker: {
 	DisplayName: Dungeon Breaker
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip:
+		'''
+		Cause a shockwave that deals area damage on hit
+		Directly destroys dangerous blocks within the Dungeon
+		'''
+	ExecutionStrike:
+		'''
+		Thrown at high speed and allows infinite penetration
+		Smashes into the wall and forcibly knocks back all nearby small enemies upon hitting a wall
+		Continuously release small water bolts backwards that can bounce off walls
+		'''
 }
 
 FleshGrinder: {
 	DisplayName: Flesh Grinder
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Crush the enemy's flesh, causing it to burst open on hit
+	ExecutionStrike:
+		'''
+		Execution Strike will attempt to seek out multiple enemies
+		Each time it finds an available enemy, it will attempt to attack that enemy 5 times
+		Can attack up to 3 enemies
+		'''
 }
 
 JungleMadness: {
 	DisplayName: Jungle Madness
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Spawns briefly flying leaves that ignore walls On Hit
+	ExecutionStrike:
+		'''
+		On return, strike back and attach to the enemy, dealing 12 instances of damage
+		Each time it deals damage, it adds rotating leaves that ignore walls
+		'''
 }
 
 DreamlessNight: {
-	DisplayName: Perfect Night
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltips: ""
+	DisplayName: Dreamless Night
+	Tooltip: Release dreamflower On Hit
+	ExecutionStrike:
+		'''
+		On return, transforms into a Minion
+		Minion mimics your actions, does not disappear after switching weapons, and enhances the normal attacks of Dreamless Night
+		Minion's presence duration is consumed only when attacking, and before it runs out, it will dash toward to your cursor
+		At most one Minion can exist  and while it is present, it does not increase exectuion times 
+		'''
+	FlavorTooltips: -Through that endless, lingering night, I ache for the presence of a dream-
 }
 
 TheDefiler: {
-	DisplayName: The Moss
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: The Defiler
+	Tooltip: nfect the enemy's flesh, causing it to fester on hit
+	ExecutionStrike:
+		'''
+		Execution Strike will attempt to seek out multiple enemies
+		Each time it finds an available enemy, it will attempt to attack that enemy 3 times
+		Can attack up to 6 enemies
+		'''
 }
 
 GrandFinale: {
@@ -49,12 +94,12 @@ GrandFinale: {
 
 AetherfireSmasher: {
 	DisplayName: Aetherfire Smasher
-	Tooltip: Throws a mighty Blazing Hammer that explodes on impact.
+	Tooltip: Throws a mighty Blazing Hammer that explodes on impact
 	ExecutionStrike:
 		'''
-		Hammer strikes back on return, attaches to enemies, and deals continuous damage.
-		While attached, press Right Click to dash the hammer toward your cursor, then strike back at the attached target.
-		Releases a massive fire pillar when the hammer expires.
+		Hammer strikes back on return, attaches to enemies, and deals continuous damage
+		While attached, press Right Click to dash the hammer toward your cursor, then strike back at the attached targe.
+		Releases a massive fire pillar when the hammer expires
 		'''
 
 	Color: {
@@ -97,7 +142,7 @@ DeathTolls: {
 		The Servant Hammer's duration is only consumed while attacking, and it will dash toward the player's cursor before its duration runs out.
 		Only one attached Hammer and one Servant Hammer can exist at the same time.
 		'''
-	FlavorTooltips: " -Meditate in the death, return the falling stars, unleash nightmares to devour-"
+	FlavorTooltips: -Meditate in the death, return the falling stars, unleash nightmares to devour-
 }
 
 TheJudgement: {
@@ -119,15 +164,26 @@ TheJudgement: {
 
 DreamingLight: {
 	DisplayName: Dreaming Light
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltips: ""
+	Tooltip: Summon Dream Hammer On Hit
+	ExecutionStrike:
+		'''
+		On return, transforms into a Minion
+		Minion mimics your actions, does not disappear after switching weapons, and enhances the normal attacks of Dreamless Night
+		Minion's presence duration is consumed only when attacking, and before it runs out, it will dash toward to your cursor
+		At most one Minion can exist  and while it is present, it does not increase exectuion times 
+		'''
+	FlavorTooltips: -Through that boundless, silent night, I wrought the homecoming of a dream-
 }
 
 ThePunishment: {
 	DisplayName: The Punishment
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Launch a seeking punishemnt nova on hit
+	ExecutionStrike:
+		'''
+		Exectuion Strikes will` strike back on return, attach to the enemy, and continuously release punishment nova
+		The attached Hammer consumes its presence duration only when attacking enemies
+		At most one Attached Hammer can exist, and while it is present, it does not increase Execution Times 
+		'''
 }
 
 TrueScarlet: {
@@ -138,7 +194,11 @@ TrueScarlet: {
 }
 
 SimpleHandAxe: {
-	DisplayName: Simple Hand Axe
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Simple Double-bladed Axe
+	Tooltip:
+		'''
+		Can penetrate one enemy
+		"The Beginning of Executor"
+		'''
+	ExecutionStrike: Ignores gravity and chases enemy on hit
 }

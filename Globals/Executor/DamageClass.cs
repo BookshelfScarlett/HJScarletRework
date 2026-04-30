@@ -16,23 +16,12 @@ namespace HJScarletRework.Globals.Executor
         }
         public override StatInheritanceData GetModifierInheritance(DamageClass damageClass)
         {
-            if (damageClass == Ranged)
-                return new StatInheritanceData
-                (
-                    damageInheritance: 1.0f,
-                    critChanceInheritance: 1.0f,
-                    attackSpeedInheritance: 1.0f,
-                    armorPenInheritance: 10.0f,
-                    knockbackInheritance: 0.5f
-                );
-            else if (damageClass == Generic)
+            if (damageClass == Generic)
                 return StatInheritanceData.Full;
             return StatInheritanceData.None;
         }
         public override bool GetEffectInheritance(DamageClass damageClass)
         {
-            if (damageClass == Ranged)
-                return true;
             return false;
         }
         public override bool UseStandardCritCalcs => true;

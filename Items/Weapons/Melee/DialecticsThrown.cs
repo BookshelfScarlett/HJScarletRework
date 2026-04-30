@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public int UsePhase = 0;
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.5f;
+            ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.33f;
         }
         public override void ExSD()
         {
