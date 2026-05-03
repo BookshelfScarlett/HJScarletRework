@@ -91,7 +91,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation += 0.18f;
             if (Projectile.IntersectOwnerByDistance(150))
             {
-                Projectile.AddExecutionTime(ItemType<GrandFinale>());
+                Projectile.AddExecutionTimePostHit(ItemType<GrandFinale>());
                 Projectile.Kill();
             }
         }

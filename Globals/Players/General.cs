@@ -3,6 +3,7 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.ExecutorAlter;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -38,6 +39,7 @@ namespace HJScarletRework.Globals.Players
         public bool goldenAppleEnchanted = false;
         public int goldenAppleDamageAbsorb = 0;
         public bool goldenAppleEnchantedFully = false;
+        public bool givePaper = true;
         #region 护甲
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;
@@ -90,6 +92,7 @@ namespace HJScarletRework.Globals.Players
         public int blackKeyTimer = 0;
         public bool blackKeyDoT = false;
         public int blackKeyReduceDefense = 0;
+        public bool blackKeyDefenseTrigger = false;
         #endregion
 
         #region Pets
@@ -114,6 +117,7 @@ namespace HJScarletRework.Globals.Players
         public float PlayerFinalSpeedStoredTime = 0f;
         #endregion
         #region 处刑攻击
+
         public bool tacticalExecution = false;
         public int tacticalTime = 0;
         public bool EeecutorsSwordMarkPlus = false;
@@ -173,6 +177,11 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnEnterWorld()
         {
+            if(givePaper)
+            {
+                Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<DescriptionPaper>());
+                givePaper = false;
+            }
             resetTerraRecipe = true;
             for (int i = 0; i < Player.inventory.Length; i++)
             {

@@ -14,10 +14,10 @@ namespace HJScarletRework.Buffs
         public override void Update(Player player, ref int buffIndex)
         {
             player.GetDamage<ExecutorDamageClass>() += player.HJScarlet().blackKeyDefenseBuff;
+            player.GetArmorPenetration<ExecutorDamageClass>() += player.HJScarlet().blackKeyReduceDefense;
         }
         public override void Update(NPC npc, ref int buffIndex)
         {
-            npc.defense -= npc.HJScarlet().blackKeyDefensesReduces;
         }
     }
 }

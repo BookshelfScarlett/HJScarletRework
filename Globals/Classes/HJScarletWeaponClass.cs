@@ -11,6 +11,7 @@ namespace HJScarletRework.Globals.Classes
         public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/{GetType().Name}";
         public override void SetDefaults()
         {
+            Item.width = Item.height = 16;
             Item.DamageType = GetDamageClass;
             Item.HJScarlet().CanDrawIcon = true;
             ExSD();

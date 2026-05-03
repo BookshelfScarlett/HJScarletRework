@@ -165,3 +165,8 @@ Ranged: {
 	ClimaticHawstringProj.DisplayName: Climatic Hawstring Proj
 	BambooStick.DisplayName: Bamboo Stick
 }
+
+Magic: {
+	CoronaHeldProj.DisplayName: Corona Held Proj
+	CoronaFireball.DisplayName: Corona Fireball
+}

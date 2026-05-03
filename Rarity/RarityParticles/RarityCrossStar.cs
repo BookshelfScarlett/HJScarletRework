@@ -42,12 +42,7 @@ namespace HJScarletRework.Rarity.RarityParticles
             Tex2DWithPath shinyOrb = HJScarletTexture.Particle_ShinyOrb;
             Vector2 drawPos = drawPosition;
 
-            //Vector2 starScale = new Vector2(1.2f, 0.8f);
             spriteBatch.Draw(star, drawPos, null, DrawColor * Opacity, Rotation, star.Size() / 2, Scale, SpriteEffects.None, 0);
-            //spriteBatch.Draw(star, drawPos, null, DrawColor * Opacity, Rotation + PiOver2, star.Size() / 2, starScale * Scale, SpriteEffects.None, 0);
-            ////防止过曝
-            //spriteBatch.Draw(shinyOrb.Value, drawPos, null, Color.Lerp(Color.White, DrawColor, 0.5f) * 0.95f * Opacity, 0, shinyOrb.Origin, Scale * 0.75f, SpriteEffects.None, 0);
-            //spriteBatch.Draw(HJScarletTexture.Particle_CrossGlow.Value, drawPos, null, DrawColor, Rotation, HJScarletTexture.Particle_CrossGlow.Origin, 0.05f * Scale, 0, 0);
         }
     }
 }

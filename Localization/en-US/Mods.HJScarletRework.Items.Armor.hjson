@@ -30,7 +30,6 @@ DragonSlayerHead: {
 		'''
 		25% increased melee attack speed, 1.10x damage for all consumable ranged weapon
 		Magic weapons no longer cost any mana, reset max minions and sentry slots to 2
-		Converted your max mana to your defense for a certain ratios
 		All weapons that do not deal executor damage only benefit from executor damage bonuses
 		All weapons that do not deal executor damage instead deal executor damage type On Hit, rather than their original damage type
 		'''
@@ -57,8 +56,8 @@ CowboyExecutor: {
 	LegsTooltip: 15% increased movement speed
 	SetBonus:
 		'''
-		On hit, adds a revolver attack, deals 0.5x damage
-		The revolver has a 1/6 chance to deal 1.5x damage
+		On hit, adds a revolver attack, deals 0.25x damage
+		The revolver has a 1/6 chance, or on execution strike, to deal 0.5x damage
 		'''
 }
 
@@ -86,7 +85,7 @@ FloretProtectorExecutor: {
 		'''
 	SetBonus:
 		'''
-		+200 max health
+		+100 max health
 		Always has multiple herbs floating around you from time to time
 		Pick them up when nearby, and gain different effects based on the herb picked up
 		Gain the Forest Herb for 5 seconds on first pickup, subsequent pickups do not refresh this duration
@@ -145,7 +144,7 @@ ShinobiHead: {
 		+4 max sentry
 		Enhances Sleepy Octopus and Sky Dragon's Fury, and greatly improves Lightning Aura's effectiveness
 		Causes Sleepy Octopus, Sky Dragon's Fury, and Lightning Aura to deal only executor damage, benefiting from executor damage bonuses
-		Increases damage of all Lightning Aura canes by 1000%
+		Increases damage of all Lightning Aura canes by 500%
 		'''
 	WeaponBuff: Enhanced by armor:
 }

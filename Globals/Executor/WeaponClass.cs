@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,54 +18,40 @@ namespace HJScarletRework.Globals.Executor
         public override bool RangedPrefix() => false;
         public virtual int ExecutionTime => 10;
         public virtual float ExecutionStrikeDamageMult => 1.0f;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.ExecutorWeaponDictionary.Add(Type, ExecutionTime);
+
+        }
         public override void SetDefaults()
         {
+            Item.width = Item.height = 16;
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.HJScarlet().CanDrawIcon = true;
             ExSD();
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            if (Item.GetGlobalItem<ExecutorGlobalItem>().ExecutionDamageMult != 1 && damage > 0 && player.CheckExecution(Type, ExecutionTime))
+            if (Item.GetGlobalItem<ExecutorGlobalItem>().ExecutionDamageMult != 1 && damage > 0 && player.CheckExecution(Type))
             {
-                damage = (int)(damage * (Item.GetGlobalItem<ExecutorGlobalItem>().ExecutionDamageMult));
+                damage = (int)(damage * ExecutionStrikeDamageMult * (Item.GetGlobalItem<ExecutorGlobalItem>().ExecutionDamageMult));
             }
             base.ModifyShootStats(player, ref position, ref velocity, ref type, ref damage, ref knockback);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             //初始化。
-            if (!player.HJScarlet().StopExecutionInit)
-                player.HJScarlet().ExecutionListStored.TryAdd(Type, 0);
-            bool useExecution = player.CheckExecution(Type, ExecutionTime);
-            player.HJScarlet().StopExecutionInit = useExecution;
-
+            bool useExecution = player.CheckExecution(Type);
             int projID = ExecutionProj != -1 && useExecution ? ExecutionProj : type;
-
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, projID, damage, knockback, player.whoAmI);
-
             proj.HJScarlet().HasExecutionMechanic = true;
+            player.HJScarlet().CanExecution = false;
             if (useExecution)
             {
-                float addMult = 1f;
-                proj.damage = (int)((damage * ExecutionStrikeDamageMult) * addMult);
                 proj.HJScarlet().ExecutionStrike = true;
-                player.HJScarlet().StopExecutionInit = false;
-                RemoveSlot(player, Type);
+                player.RemoveSlot(Type);
             }
             return false;
-        }
-        public static bool CheckExecutionAvailable(Player player, int curItemType, int itemExecutionTime)
-        {
-            if (player.HJScarlet().ExecutionListStored.TryGetValue(curItemType, out int value))
-            {
-                return value >= itemExecutionTime;
-            }
-            return false;
-        }
-        public static void RemoveSlot(Player player, int curItemType)
-        {
-            player.HJScarlet().ExecutionListStored.Remove(curItemType);
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {

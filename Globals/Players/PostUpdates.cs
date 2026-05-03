@@ -25,7 +25,7 @@ namespace HJScarletRework.Globals.Players
         {
             UpdateTimer();
             UpdateFlybackBuff();
-            if(goldenAppleEnchantedFully)
+            if (goldenAppleEnchantedFully)
             {
                 if (Player.miscCounter % 3 == 0 && Player.statLife < (int)(Player.statLifeMax2 * 0.9f))
                     Player.Heal(5);
@@ -45,8 +45,6 @@ namespace HJScarletRework.Globals.Players
                     Player.GetCritChance<ExecutorDamageClass>() += 30;
             }
         }
-
-
         public void UpdateFlybackBuff()
         {
             //归零针buff
@@ -159,13 +157,19 @@ namespace HJScarletRework.Globals.Players
                 PlayerLastSpeedStored = 0;
             if (exsanguinationBuffTime > 0)
                 exsanguinationBuffTime--;
+            if (!Player.HasBuff<BlackKeyExecutionBuff>())
+                blackKeyDefenseTrigger = false;
         }
-
-
         public override void PostUpdate()
         {
             UpdateNetPacket();
             SwitchWeaponSystem();
+            PostUpdateMonkHeal();
+            HandleWeaponAbility();
+        }
+
+        private void PostUpdateMonkHeal()
+        {
             if (monkStaffHeal && Player.statLife < (int)(Player.statLifeMax2 * 0.9f))
             {
                 if (Player.miscCounter % 10 == 0)
@@ -185,8 +189,6 @@ namespace HJScarletRework.Globals.Players
                     new ShinyCrossStar(pos, -Vector2.UnitY * Main.rand.NextFloat(0.1f, .4f), RandLerpColor(Color.Lime, Color.LimeGreen), 40, 0, 1, 0.4f, false).Spawn();
                 }
             }
-            //进入世界时读取刷新
-            HandleWeaponAbility();
         }
 
         private void HandleWeaponAbility()
@@ -196,42 +198,9 @@ namespace HJScarletRework.Globals.Players
             CanWeaponSpecialAbility = false;
             if (monkExecutor && !Player.HasProj<MonkStaffProj>())
             {
+                int[] list = [ProjectileID.MonkStaffT3, ProjectileID.MonkStaffT3_Alt, ProjectileID.MonkStaffT1];
+                Player.KillCertainProj(list);
                 //玩家拥有任何手持的棍子都会直接处死掉，不要试图打断玩家的治疗
-                foreach (var projID in Main.ActiveProjectiles)
-                {
-                    if (projID.owner != Player.whoAmI)
-                        continue;
-
-                    if (projID.type == ProjectileID.MonkStaffT3 || projID.type == ProjectileID.MonkStaffT3_Alt || projID.type == ProjectileID.MonkStaffT1)
-                    {
-                        switch (projID.type)
-                        {
-                            case ProjectileID.MonkStaffT3:
-                            case ProjectileID.MonkStaffT3_Alt:
-                                for (int i = 0; i < 66; i++)
-                                {
-                                    Vector2 pos = Player.Center.ToRandCirclePos(16f);
-                                    Dust d = Dust.NewDustPerfect(pos, DustID.IceTorch);
-                                    d.velocity = -Vector2.UnitY * Main.rand.NextFloat(0.8f, 2.6f);
-                                    d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
-                                }
-                                break;
-                            default:
-                                for (int i = 0; i < 66; i++)
-                                {
-                                    Vector2 pos = Player.Center.ToRandCirclePos(16f);
-                                    Dust d = Dust.NewDustPerfect(pos, DustID.CursedTorch);
-                                    d.velocity = -Vector2.UnitY * Main.rand.NextFloat(0.8f, 2.6f);
-                                    d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
-                                }
-                                break;
-
-                        }
-                        projID.Kill();
-                    }
-                }
-
-
                 if (Player.HeldItem.type == ItemID.MonkStaffT1)
                 {
                     Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffProj>(), 0, 0, Player.whoAmI);
@@ -256,48 +225,67 @@ namespace HJScarletRework.Globals.Players
             UpdateHerbBuff();
             UpdateStardustRune();
             UpdateArmorAbility();
+            UpdateTacticalExecution();
+            UpdateFishDash();
+        }
+
+        private void UpdateFishDash()
+        {
             //小鱼冲刺。动量保存冲刺的初步实现
             if (fishDashStored && fishExecutor)
             {
                 if (Main.rand.NextBool())
                     new ShinyRing(Player.ToRandRec(), (-Vector2.UnitY).ToRandVelocity(ToRadians(20f), 0f, .3f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0.012f).Spawn();
             }
-            if (fishDash > 0)
-            {
-                //在此过程中玩家不会受到击退
-                Player.noKnockback = true;
-                Player.RemoveAllGrapplingHooks();
-                Player.RemoveAllFishingBobbers();
-                FishParticles();
-                //这里基本上用帧来算
-                if (fishDash < 4)
-                {
-                    //这里用一些硬编码的案例来实现一些可能的冲刺效果
-                    float buffer = -10f;
-                    float lerpValue = .35f;
-                    //除非玩家的速度方向与面朝的方向相同，不然我们不会给这个加速
-                    if (Player.direction == Math.Sign(Player.velocity.X))
-                    {
-                        buffer = 10f;
-                        lerpValue = .6f;
-                    }
-                    Vector2 finalMoveSpeed = Player.velocity.ToSafeNormalize() * (PlayerLastSpeedStored + buffer);
-                    //额外的，如果玩家正在向上移动，则根据玩家的速度方向给予一个推开的速度
-                    if (Math.Abs(Player.velocity.Y) - Math.Abs(Player.velocity.X) > 0 && Player.velocity.Y < 0)
-                    {
-                        finalMoveSpeed += Player.direction * Vector2.UnitX * 10f;
-                        lerpValue = .4f;
-                    }
+            if (fishDash <= 0)
+                return;
 
-                    Player.velocity = Vector2.Lerp(Player.velocity, finalMoveSpeed, lerpValue);
-                    //需注意的是这里的速度
-                }
-                else
+            //在此过程中玩家不会受到击退
+            Player.noKnockback = true;
+            Player.RemoveAllGrapplingHooks();
+            Player.RemoveAllFishingBobbers();
+            FishParticles();
+            //这里基本上用帧来算
+            if (fishDash < 4)
+            {
+                //这里用一些硬编码的案例来实现一些可能的冲刺效果
+                float buffer = -10f;
+                float lerpValue = .35f;
+                //除非玩家的速度方向与面朝的方向相同，不然我们不会给这个加速
+                if (Player.direction == Math.Sign(Player.velocity.X))
                 {
-                    //查看速度情况。
-                    float speedValue = PlayerLastSpeedStored > 40 ? PlayerLastSpeedStored : 40;
-                    Player.velocity = Vector2.Lerp(Player.velocity, FishDashVector * speedValue, 0.5f);
+                    buffer = 10f;
+                    lerpValue = .6f;
                 }
+                Vector2 finalMoveSpeed = Player.velocity.ToSafeNormalize() * (PlayerLastSpeedStored + buffer);
+                //额外的，如果玩家正在向上移动，则根据玩家的速度方向给予一个推开的速度
+                if (Math.Abs(Player.velocity.Y) - Math.Abs(Player.velocity.X) > 0 && Player.velocity.Y < 0)
+                {
+                    finalMoveSpeed += Player.direction * Vector2.UnitX * 10f;
+                    lerpValue = .4f;
+                }
+
+                Player.velocity = Vector2.Lerp(Player.velocity, finalMoveSpeed, lerpValue);
+                //需注意的是这里的速度
+            }
+            else
+            {
+                //查看速度情况。
+                float speedValue = PlayerLastSpeedStored > 40 ? PlayerLastSpeedStored : 40;
+                Player.velocity = Vector2.Lerp(Player.velocity, FishDashVector * speedValue, 0.5f);
+            }
+        }
+
+        public void UpdateTacticalExecution()
+        {
+            if (!tacticalExecution)
+                return;
+            if (!Player.CheckExecution(Player.HeldItem.type))
+                return;
+            if (tacticalTime == 0 && tacticalPunishTime == 0)
+            {
+                tacticalTime = GetSeconds(10);
+                tacticalPunishTime = GetSeconds(1);
             }
         }
 
@@ -342,37 +330,35 @@ namespace HJScarletRework.Globals.Players
             if (floretProtectorTimer == 0 && floretProtectorExecutor)
             {
                 if (Main.rand.NextBool())
+                    return;
+                bool collision = false;
+                Vector2 spawnPos = Main.rand.NextVector2FromRectangle(Utils.CenteredRectangle(Player.Center, new Vector2(1300f, 700f)));
+                float recDistanceMult = 1f;
+                while (!collision)
                 {
-                    bool collision = false;
-                    Vector2 spawnPos = Main.rand.NextVector2FromRectangle(Utils.CenteredRectangle(Player.Center, new Vector2(1300f, 700f)));
-                    float recDistanceMult = 1f;
-                    while (!collision)
+                    //添加一个安全性的收缩倍率检查，如果收缩的倍率已经少于0.5f,立刻跳出去避免出现可能的死生成
+                    //也就是说我们会确保其生成一个，但只会进行一定程度的安全检查
+                    if (Collision.SolidCollision(spawnPos, 100, 100) && recDistanceMult > 0.5f)
                     {
-                        //添加一个安全性的收缩倍率检查，如果收缩的倍率已经少于0.5f,立刻跳出去避免出现可能的死生成
-                        //也就是说我们会确保其生成一个，但只会进行一定程度的安全检查
-                        if (Collision.SolidCollision(spawnPos, 100, 100) && recDistanceMult > 0.5f)
-                        {
-                            recDistanceMult -= 0.1f;
-                            //一定程度上收缩倍率以查看是否可能玩家处于一些物块内的情况，如洞穴层
-                            //这里有个问题是，可能不会很完美地检测所有情况，如玩家处于地表站立在地面上时，有草药生成在了地下，则重新取位时可能会因此收缩了一定的距离
-                            //但应该问题不大。
-                            spawnPos = Main.rand.NextVector2FromRectangle(Utils.CenteredRectangle(Player.Center, new Vector2(1300f * recDistanceMult, 700f * recDistanceMult)));
-                        }
-                        else
-                        {
-                            //在最后我们在推开这个草药一定距离。
-                            if ((spawnPos - Player.Center).LengthSquared() < 50f * 50f)
-                                spawnPos += RandVelTwoPi(30f, 70f);
-                            break;
-                        }
+                        recDistanceMult -= 0.1f;
+                        //一定程度上收缩倍率以查看是否可能玩家处于一些物块内的情况，如洞穴层
+                        //这里有个问题是，可能不会很完美地检测所有情况，如玩家处于地表站立在地面上时，有草药生成在了地下，则重新取位时可能会因此收缩了一定的距离
+                        //但应该问题不大。
+                        spawnPos = Main.rand.NextVector2FromRectangle(Utils.CenteredRectangle(Player.Center, new Vector2(1300f * recDistanceMult, 700f * recDistanceMult)));
                     }
-                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), spawnPos, RandVelTwoPi(2f, 6f), ProjectileType<FloatingPlants>(), 0, 0, Player.whoAmI);
-                    proj.rotation = RandRotTwoPi;
-                    proj.ai[1] = Main.rand.Next(0, 7);
+                    else
+                    {
+                        //在最后我们在推开这个草药一定距离。
+                        if ((spawnPos - Player.Center).LengthSquared() < 50f * 50f)
+                            spawnPos += RandVelTwoPi(30f, 70f);
+                        break;
+                    }
                 }
+                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), spawnPos, RandVelTwoPi(2f, 6f), ProjectileType<FloatingPlants>(), 0, 0, Player.whoAmI);
+                proj.rotation = RandRotTwoPi;
+                proj.ai[1] = Main.rand.Next(0, 7);
                 floretProtectorTimer = 40;
             }
-
         }
 
         private void UpdateStardustRune()
@@ -382,35 +368,34 @@ namespace HJScarletRework.Globals.Players
                 return;
             if (Player.statLife < 100 && desterrennacht)
                 Player.statLife = 100;
-            if (stardustRuneStaticHealTimer == 0)
+            if (stardustRuneStaticHealTimer != 0)
+                return;
+            if (Player.statLife < Player.statLifeMax2)
             {
-                if (Player.statLife < Player.statLifeMax2)
-                {
-                    stardustRuneStaticHealTimer = GetSeconds(10);
-                    Player.Heal(Math.Min((Player.statLifeMax2 - Player.statLife - 1), 75));
-                    SoundEngine.PlaySound(HJScarletSounds.Heal_Minor with { Volume = 0.75f }, Player.Center);
-                    //一些粒子
-                    new CrossGlow(Player.Center, Color.RoyalBlue, 40, 1, 0.12f).Spawn();
-                    new CrossGlow(Player.Center, Color.AliceBlue, 40, 1, 0.08f).Spawn();
+                stardustRuneStaticHealTimer = GetSeconds(10);
+                Player.Heal(Math.Min((Player.statLifeMax2 - Player.statLife - 1), 75));
+                SoundEngine.PlaySound(HJScarletSounds.Heal_Minor with { Volume = 0.75f }, Player.Center);
+                //一些粒子
+                new CrossGlow(Player.Center, Color.RoyalBlue, 40, 1, 0.12f).Spawn();
+                new CrossGlow(Player.Center, Color.AliceBlue, 40, 1, 0.08f).Spawn();
 
-                    for (int i = 0; i < 10; i++)
-                    {
-                        new StarShape(Player.ToRandRec() + Vector2.UnitY * 10f, -Vector2.UnitY, Color.RoyalBlue, 0.25f, 40).Spawn();
-                    }
-                    for (int i = 0; i < 8; i++)
-                    {
-                        new KiraStar(Player.ToRandRec() + Vector2.UnitY * 10f, -Vector2.UnitY, Color.RoyalBlue, 40, 0, 1, .024f, useAlt: true).Spawn();
-                    }
-                    for (int i = 0; i < 15; i++)
-                    {
-                        new HRShinyOrb(Player.ToRandRec() + Vector2.UnitY * 10f, -Vector2.UnitY, Color.RoyalBlue, 40, .0824f).Spawn();
-                    }
-                    for (int i = 0; i < 20; i++)
-                    {
-                        Vector2 spawnPos = Player.Center + Vector2.UnitY * (Player.height / 2 + 5) + Vector2.UnitY * Main.rand.NextFloat(-11f, -6f) + Vector2.UnitX * Main.rand.NextFloat(-10f, 11f);
-                        Vector2 vel = Vector2.UnitY * Main.rand.NextFloat(-6f, -1f);
-                        new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
-                    }
+                for (int i = 0; i < 10; i++)
+                {
+                    new StarShape(Player.ToRandRec() + Vector2.UnitY * 10f, -Vector2.UnitY, Color.RoyalBlue, 0.25f, 40).Spawn();
+                }
+                for (int i = 0; i < 8; i++)
+                {
+                    new KiraStar(Player.ToRandRec() + Vector2.UnitY * 10f, -Vector2.UnitY, Color.RoyalBlue, 40, 0, 1, .024f, useAlt: true).Spawn();
+                }
+                for (int i = 0; i < 15; i++)
+                {
+                    new HRShinyOrb(Player.ToRandRec() + Vector2.UnitY * 10f, -Vector2.UnitY, Color.RoyalBlue, 40, .0824f).Spawn();
+                }
+                for (int i = 0; i < 20; i++)
+                {
+                    Vector2 spawnPos = Player.Center + Vector2.UnitY * (Player.height / 2 + 5) + Vector2.UnitY * Main.rand.NextFloat(-11f, -6f) + Vector2.UnitX * Main.rand.NextFloat(-10f, 11f);
+                    Vector2 vel = Vector2.UnitY * Main.rand.NextFloat(-6f, -1f);
+                    new HRShinyOrb(spawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, .1f * Main.rand.NextFloat(0.65f, 0.75f)).Spawn();
                 }
             }
         }
@@ -490,7 +475,7 @@ namespace HJScarletRework.Globals.Players
             {
                 //记得重置
                 //遍历这个表单。
-                for(int i = 0; i < terraRecipe_EatenFoodList.Count;i++)
+                for (int i = 0; i < terraRecipe_EatenFoodList.Count; i++)
                 {
                     //每次达到第五个，我们都重置这个计算用的单位
                     terraRecipe_EatenFoodCounts += 1;
@@ -502,10 +487,9 @@ namespace HJScarletRework.Globals.Players
                     }
                 }
                 resetEatenFoodCounts = false;
-                
+
             }
-            //
-            if(terraRecipe_EatenFoodCounts > 4)
+            if (terraRecipe_EatenFoodCounts > 4)
             {
                 terraRecipe_EatenFoodCounts = 0;
                 terraRecipe_LifeMaxMultTime += 1;
@@ -522,32 +506,31 @@ namespace HJScarletRework.Globals.Players
         }
         public void ResetTerraRecipe()
         {
-            if (resetTerraRecipe)
+            if (!resetTerraRecipe)
+                return;
+            //byd你tm不是复制而是类似一个引用的用法啊？？
+            terraRecipe_NotEatenFoodList = new List<int>(HJScarletList.LegalFoodList);
+            for (int i = 0; i < terraRecipe_EatenFoodList.Count; i++)
             {
-                //byd你tm不是复制而是类似一个引用的用法啊？？
-                terraRecipe_NotEatenFoodList = new List<int>(HJScarletList.LegalFoodList);
-                for(int i =0;i<terraRecipe_EatenFoodList.Count;i++)
+                int index = terraRecipe_EatenFoodList[i];
+                if (!terraRecipe_NotEatenFoodList.Contains(index))
                 {
-                    int index = terraRecipe_EatenFoodList[i];
-                    if(!terraRecipe_NotEatenFoodList.Contains(index))
-                    {
-                        terraRecipe_EatenFoodList.RemoveAt(i);
-                    }
+                    terraRecipe_EatenFoodList.RemoveAt(i);
                 }
-                for(int i =0;i<terraRecipe_NotEatenFoodList.Count;i++)
-                {
-                    int index = terraRecipe_NotEatenFoodList[i];
-                    if(terraRecipe_EatenFoodList.Contains(index))
-                    {
-                        terraRecipe_NotEatenFoodList.RemoveAt(i);
-                    }
-                }
-                //重新计算一遍当前值。
-                resetEatenFoodCounts= true;
-                        terraRecipe_EatenFoodCounts = 0;
-                terraRecipe_LifeMaxMultTime = 0;
-                resetTerraRecipe = false;
             }
+            for (int i = 0; i < terraRecipe_NotEatenFoodList.Count; i++)
+            {
+                int index = terraRecipe_NotEatenFoodList[i];
+                if (terraRecipe_EatenFoodList.Contains(index))
+                {
+                    terraRecipe_NotEatenFoodList.RemoveAt(i);
+                }
+            }
+            //重新计算一遍当前值。
+            resetEatenFoodCounts = true;
+            terraRecipe_EatenFoodCounts = 0;
+            terraRecipe_LifeMaxMultTime = 0;
+            resetTerraRecipe = false;
         }
 
 

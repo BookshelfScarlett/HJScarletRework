@@ -242,7 +242,7 @@ namespace HJScarletRework.Projs.Executor
             target.AddBuff(BuffID.OnFire, 300);
             if (AttackType != State.Hit)
                 Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
-            Projectile.AddExecutionTimePass(ItemType<MantleLayer>());
+            Projectile.AddExecutionTimePreHit(ItemType<MantleLayer>());
 
             switch (AttackType)
             {

@@ -93,13 +93,13 @@ namespace HJScarletRework.Projs.Executor
             if (!Helper.IsDone[0])
             {
                 Helper.UpdateAniState(0);
-                Projectile.ResetLocalNPCHitImmunity();
                 UpdateAnistateZero();
             }
             else
             {
                 if (Timer == 0f)
                 {
+                    Projectile.ResetLocalNPCHitImmunity();
                     InitReturn();
                     PoweredUpHammer();
                     Timer += 1;
@@ -198,7 +198,7 @@ namespace HJScarletRework.Projs.Executor
             }
 
             if (!Owner.HasProj<DreamlessNightMinion>(out int projID) && !Projectile.HJScarlet().ExecutionStrike)
-                Projectile.AddExecutionTimePass(ItemType<DreamlessNight>());
+                Projectile.AddExecutionTimePreHit(ItemType<DreamlessNight>());
             //在命中的时候，我们才生成需要的仆从
             //当然，前提是条件合理
             if (!Owner.HasProj<DreamlessNightMinion>() && Projectile.HJScarlet().ExecutionStrike)

@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Items.Rockets;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
@@ -170,7 +171,7 @@ namespace HJScarletRework.Projs.Executor
                 else
                 {
                     if (!Projectile.HJScarlet().ExecutionStrike)
-                        Projectile.AddExecutionTimePass(ItemType<DreamingLight>());
+                        Projectile.AddExecutionTimePreHit(ItemType<DreamingLight>());
                 }
                 SpawnDreamingStriker();
             }

@@ -82,6 +82,7 @@ namespace HJScarletRework.Projs.General
                 {
                     Projectile.rotation = CurTarget.IsLegal() ? (CurTarget.Center - Projectile.Center).ToRotation() : Projectile.rotation;
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel, ProjectileType<CowboyBullet>(), Projectile.damage, 1f, Owner.whoAmI);
+                    proj.HJScarlet().ExecutionStrike = Projectile.HJScarlet().ExecutionStrike;
                     //生成成功之后，给这个东西一个向后退的速度
                     SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 0, Pitch = 0.2f }, Projectile.Center);
                     Projectile.velocity = -(vel / 3f);
@@ -94,13 +95,9 @@ namespace HJScarletRework.Projs.General
                             new SmokeParticle(Projectile.Center.ToRandCirclePos(), vel.ToRandVelocity(ToRadians(10f), 2f, 6f), RandLerpColor(Color.LightGray, Color.Black), 40, RandRotTwoPi, 1f, 0.12f, true).SpawnToNonPreMult();
                     }
                     for (int i = 0; i < 8; i++)
-                    {
                         new StarShape(Projectile.Center.ToRandCirclePos(), vel.ToRandVelocity(ToRadians(10f), 1.2f, 7f), RandLerpColor(Color.LightGoldenrodYellow, Color.DarkOrange), 0.75f, 40).Spawn();
-                    }
                     for (int i = 0; i < 8; i++)
-                    {
                         new ShinyCrossStar(Projectile.Center.ToRandCirclePos(), vel.ToRandVelocity(ToRadians(10f), 1.2f, 6f), RandLerpColor(Color.LightGoldenrodYellow, Color.DarkOrange), 40, RandZeroToOne, 1f, 0.40f).Spawn();
-                    }
                     IsShoot = true;
                 }
                 else

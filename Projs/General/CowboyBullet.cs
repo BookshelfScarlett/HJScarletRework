@@ -29,6 +29,11 @@ namespace HJScarletRework.Projs.General
             //只需要做这个。
             Projectile.rotation = Projectile.velocity.ToRotation();
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (Projectile.HJScarlet().ExecutionStrike)
+                modifiers.SetCrit();
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             new ShinyCrossStar(Projectile.Center, Vector2.Zero, RandLerpColor(Color.LightGoldenrodYellow, Color.DarkOrange), 40, 0, 1, 1f, false).Spawn();

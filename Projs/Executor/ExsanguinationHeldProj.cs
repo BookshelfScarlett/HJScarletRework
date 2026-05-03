@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
@@ -12,11 +13,12 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class ExsanguinationHeldProj : HJScarletProj
+    public class ExsanguinationHeldProj : ExecutorHeldProj
     {
         public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<Exsanguination>().Texture;
         public int ExecutionTime = GetInstance<Exsanguination>().ExecutionTime;
+        public override int OriginalItemID => ItemType<Exsanguination>();
         public ref float Timer => ref Projectile.ai[0];
         public int BuffTime = 0;
         public override void SetStaticDefaults()
@@ -46,6 +48,11 @@ namespace HJScarletRework.Projs.Executor
             UpdateHeldAnimation();
             Projectile.netUpdate = true;
         }
+        public override void OnExecution()
+        {
+            Owner.HJScarlet().exsanguinationBuffTime = GetSeconds(5);
+            SoundEngine.PlaySound(HJScarletSounds.Light_CrackedShield with { MaxInstances = 0 }, Owner.Center);
+        }
 
         private void UpdateAttack()
         {
@@ -62,20 +69,11 @@ namespace HJScarletRework.Projs.Executor
                 SoundEngine.PlaySound(HJScarletSounds.Light_Fire with { Volume = 0.45f }, Projectile.Center);
             if (Timer % 2f == 0)
             {
+                HandleExecution();
                 for (int i = -1; i < 2; i += 2)
                 {
                     Vector2 safedir = Projectile.rotation.ToRotationVector2();
                     Vector2 shootPos = Projectile.Center + safedir * 60f - (safedir.RotatedBy(PiOver2) * 5f * Projectile.direction);
-                    if (Owner.HJScarlet().ExecutionListStored.TryGetValue(ItemType<Exsanguination>(), out int value) && !Projectile.HJScarlet().ExecutionStrike)
-                    {
-                        if (value > ExecutionTime)
-                        {
-                            buffTimer = GetSeconds(5);
-                            Projectile.HJScarlet().ExecutionStrike = true;
-                            Owner.HJScarlet().ExecutionListStored[ItemType<Exsanguination>()] = 0;
-                            SoundEngine.PlaySound(HJScarletSounds.Light_CrackedShield with { MaxInstances = 0 }, Owner.Center);
-                        }
-                    }
                     int damage = Projectile.damage;
                     if (buffTimer != 0)
                         damage *= 3;
@@ -93,10 +91,6 @@ namespace HJScarletRework.Projs.Executor
                     d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
                 }
             }
-        }
-        public static void RemoveSlot(Player player, int curItemType)
-        {
-            player.HJScarlet().ExecutionListStored.Remove(curItemType);
         }
         private void UpdateHeldAnimation()
         {

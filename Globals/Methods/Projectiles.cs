@@ -529,7 +529,44 @@ namespace HJScarletRework.Globals.Methods
             {
                 proj.frame = 0;
             }
-
+        }
+        public static void KillCertainProj(this Player player, int type, bool extraCondition = true)
+        {
+            foreach (var proj in Main.ActiveProjectiles)
+            {
+                if (proj.type != type)
+                    continue;
+                if (proj.owner != player.whoAmI)
+                    continue;
+                if (!proj.friendly)
+                    continue;
+                if (!extraCondition)
+                    continue;
+                proj.Kill();
+            }
+        }
+        /// <summary>
+        /// 我草这个神人方法
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="type"></param>
+        /// <param name="extraCondition"></param>
+        public static void KillCertainProj(this Player player, int[] type, bool extraCondition = true)
+        {
+            foreach (var proj in Main.ActiveProjectiles)
+            {
+                    if (proj.owner != player.whoAmI)
+                        continue;
+                    if (!proj.friendly)
+                        continue;
+                    if (!extraCondition)
+                        continue;
+                for (int i = 0; i < type.Length; i++)
+                {
+                    if (type[i] == proj.type)
+                        proj.Kill();
+                }
+            }
         }
     }
 }

@@ -110,7 +110,7 @@ Executor: {
 	DreamingLightFireball.DisplayName: 铸梦之光-火球
 	DreamingLightMinion.DisplayName: 铸梦之光-仆从
 	DreamingLightProj.DisplayName: 铸梦之光
-	DreamlessNightArrow.DisplayName: 无梦之夜-箭矢
+	DreamlessNightArrow.DisplayName: 无梦之夜-梦之花瓣
 	DreamlessNightBeam.DisplayName: 无梦之夜-梦境射线
 	DreamlessNightMinion.DisplayName: 无梦之夜-仆从
 	DreamlessNightProj.DisplayName: 无梦之夜
@@ -164,4 +164,9 @@ Ranged: {
 	ClimaticHawstringMinion.DisplayName: 气候钓弦-飞杆鱼仆从
 	ClimaticHawstringProj.DisplayName: 气候钓弦
 	BambooStick.DisplayName: 火箭竹-竹
+}
+
+Magic: {
+	// CoronaHeldProj.DisplayName: Corona Held Proj
+	// CoronaFireball.DisplayName: Corona Fireball
 }

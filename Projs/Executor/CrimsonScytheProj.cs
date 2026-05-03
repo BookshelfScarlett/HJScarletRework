@@ -17,10 +17,10 @@ namespace HJScarletRework.Projs.Executor
 {
     public class CrimsonScytheProj : HJScarletProj, IPixelatedRenderer
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
         public override ClassCategory Category => ClassCategory.Executor;
+        public override bool IsLoadingEnabled(Mod mod) => false;
         /// <summary>
         /// 挥砍的目标位置
         /// </summary>

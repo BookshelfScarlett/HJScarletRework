@@ -191,9 +191,8 @@ ConceptualBlackKey: {
 	Tooltip:
 		'''
 		15% increased executor damage, 20% increased executor critical strike damage
-		+90 executor armor penetration
-		After a successful Execution Strike, reduces enemy defense for a short period
-		After a successful Execution Strike, greatly increases your own damage resistance
+		+60 executor armor penetration
+		After a successful Execution Strike, increase your armor penetration and damage for a while
 		Taken damage removes this effect
 		Extends invincibility frames after taking damage
 		When you take damage, restore 50 health
@@ -225,7 +224,7 @@ MiniatureBayonet: {
 	Tooltip:
 		'''
 		+30 executor armor penetration
-		On Execution Strike, further reduces enemy defense for a short period
+		On Execution Strike, further increases your armor penetration for a short period
 		Extends invincibility frames after taking damage
 		'''
 }

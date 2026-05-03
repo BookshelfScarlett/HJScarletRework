@@ -19,11 +19,11 @@ namespace HJScarletRework.Globals.Players
                 crit = Player.GetTotalCritChance<ExecutorDamageClass>() + 4;
                 if (item.type == ItemID.MonkStaffT3)
                 {
-                    crit += 30;
+                    crit += 15;
                 }
                 if (item.type == ItemID.MonkStaffT1)
                 {
-                    crit += 30;
+                    crit += 15;
                 }
             }
 
@@ -67,14 +67,14 @@ namespace HJScarletRework.Globals.Players
                     damage = StatModifier.Default;
                     float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
                     damage *= (1 + ratios);
-                    damage *= 2;
+                    damage *= 1.5f;
                 }
                 if (item.type == ItemID.MonkStaffT1)
                 {
                     damage = StatModifier.Default;
                     float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
                     damage *= (1 + ratios);
-                    damage *= 1.5f;
+                    damage *= 1.2f;
                 }
             }
             base.ModifyWeaponDamage(item, ref damage);

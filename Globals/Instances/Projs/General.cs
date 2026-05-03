@@ -46,14 +46,13 @@ namespace HJScarletRework.Globals.Instances.Projs
             {
                 Owner.HJScarlet().fishDashStored = true;
             }
-
             if (Owner.HJScarlet().blackKeyDoT && ExecutionStrike && Owner.HJScarlet().blackKeyTimer == 0)
             {
                 //对的没错，这个鬼东西的减防数据存在了玩家类里面。
                 Owner.AddBuff(BuffType<BlackKeyExecutionBuff>(), GetSeconds(5));
-                target.HJScarlet().blackKeyDefensesReduces = Owner.HJScarlet().blackKeyReduceDefense;
-                target.AddBuff(BuffType<BlackKeyExecutionBuff>(), GetSeconds(5));
-                Owner.HJScarlet().blackKeyTimer = GetSeconds(8);
+                Owner.HJScarlet().blackKeyTimer = GetSeconds(10);
+                if (Owner.HJScarlet().blackKeyDefenseBuff != 0)
+                    Owner.HJScarlet().blackKeyDefenseTrigger = true;
             }
         }
         public void SpawnGreenSleepyBubble(Player Owner, Projectile projectile)
@@ -170,7 +169,6 @@ namespace HJScarletRework.Globals.Instances.Projs
             if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT1)
             {
                 projectile.scale *= 1.2f;
-                projectile.localNPCHitCooldown = 5;
                 projectile.usesLocalNPCImmunity = true;
 
             }
@@ -178,12 +176,9 @@ namespace HJScarletRework.Globals.Instances.Projs
             {
 
                 projectile.scale *= 2f;
-                projectile.localNPCHitCooldown = 2;
-                projectile.usesLocalNPCImmunity = true;
             }
             if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT3_Alt)
             {
-                projectile.localNPCHitCooldown = 2;
                 projectile.usesLocalNPCImmunity = true;
             }
         }

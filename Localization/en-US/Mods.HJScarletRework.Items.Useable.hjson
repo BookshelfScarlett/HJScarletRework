@@ -58,3 +58,19 @@ GoldenAppleEnchantedFully: {
 		Can be active in inventory
 		'''
 }
+
+DescriptionPaper: {
+	DisplayName: Description Paper
+	Tooltip:
+		'''
+		This note is just to let you know that the Lostbelt Journey mod has added a new class: the Executor.
+		However, since the mod currently lacks sufficient armor sprites, the mod provides Executor-modified versions of the vanilla armors listed below.
+		[i:RainHat][i:RainCoat]Raincoat Set – crafted with [i:Silk]Silk
+		[i:FishCostumeMask][i:FishCostumeShirt][i:FishCostumeFinskirt]Fish Costume Set – crafted with [i:ShadowScale]Shadow Scale/[i:TissueSample]Tissue Sample and [i:Bass]Bass, or transformed after defeating the evil biome boss
+		[i:CowboyHat][i:CowboyJacket][i:CowboyPants] Cowboy Set – crafted with [i:ShadowScale] Shadow Scale / [i:TissueSample] Tissue Sample and [i:Silk] Silk
+		[i:RuneHat][i:RuneRobe]Rune Wizard Set – crafted with [i:UnicornHorn]Unicorn Horn, [i:PixieDust]Pixie Dust, [i:SoulofLight]Soul of Light, and [i:Robe]Robe
+		[i:FloretProtectorHelmet][i:FloretProtectorChestplate][i:FloretProtectorLegs]Floret Protector Set – can be transformed after defeating The Lifebringer
+		[i:MonkBrows][i:MonkShirt][i:MonkPants]Monk Armor / [i:MonkAltHead][i:MonkAltShirt][i:MonkAltPants]Shinobi Armor – also receive Executor versions
+		All of the reworked vanity sets mentioned above gain brand new effects and set bonuses.
+		'''
+}

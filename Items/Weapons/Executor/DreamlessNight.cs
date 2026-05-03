@@ -18,9 +18,9 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override void ExSD()
         {
             Item.width = Item.height = 66;
-            Item.damage = 40;
+            Item.damage = 42;
             Item.knockBack = 8f;
-            Item.shootSpeed = 20f;
+            Item.shootSpeed = 22f;
             Item.useTime = Item.useAnimation = 40;
             Item.SetUpNoUseGraphicItem();
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
@@ -36,16 +36,6 @@ namespace HJScarletRework.Items.Weapons.Executor
                 NightRarity.DrawRarity(line);
                 return false;
             }
-            //if (line.Mod == "Terraria" && line.Name == "CritChance")
-            //{
-            //    NightRarity.DrawMisc(line);
-            //    return false;
-            //}
-            //if (line.Mod == "Terraria" && line.Name == "Damage")
-            //{
-            //    NightRarity.DrawMisc(line);
-            //    return false;
-            //}
 
             if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
             {

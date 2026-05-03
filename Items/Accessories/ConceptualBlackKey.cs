@@ -11,6 +11,7 @@ namespace HJScarletRework.Items.Accessories
     public class ConceptualBlackKey : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
+
         public override void ExSD()
         {
             Item.width = Item.height = 32;
@@ -21,7 +22,7 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetDamage<ExecutorDamageClass>() += 0.15f;
-            player.GetArmorPenetration<ExecutorDamageClass>() += 90;
+            player.GetArmorPenetration<ExecutorDamageClass>() += 60;
             player.HJScarlet().critDamageExecutor += 0.20f;
             player.HJScarlet().blackKeyHeal = 50;
             player.HJScarlet().blackKeyDoT = true;

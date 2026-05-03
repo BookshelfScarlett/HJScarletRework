@@ -21,6 +21,7 @@ namespace HJScarletRework.Globals.List
         /// 主要用于Boss方面
         /// </summary>
         public static Dictionary<int, string> DownedBossConditionList = [];
+        public static Dictionary<int, int> ExecutorWeaponDictionary = [];
         public override void Load()
         {
             //投矛表单
@@ -174,10 +175,6 @@ namespace HJScarletRework.Globals.List
                 bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
                 if (isFood && !LegalFoodList.Contains(item.type))
                     LegalFoodList.Add(item.type);
-                //if (item.type == ItemType<GoldenApple>())
-                //    LegalFoodList.Add(item.type);
-                //if (item.type == ItemType<GoldenAppleEnchanted>())
-                //    LegalFoodList.Add(item.type);
             }
         }
         public override void Unload()

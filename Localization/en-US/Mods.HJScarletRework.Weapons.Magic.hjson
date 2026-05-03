@@ -7,3 +7,12 @@ ShatterSongs: {
 	DisplayName: Shatter Songs
 	Tooltip: ""
 }
+
+Corona: {
+	DisplayName: Corona
+	Tooltip:
+		'''
+		Emit seeking streaming flames
+		Press right mouse button to lower the crystal ball to the player's height
+		'''
+}

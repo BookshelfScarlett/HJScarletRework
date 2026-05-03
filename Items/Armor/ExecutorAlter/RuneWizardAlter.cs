@@ -161,8 +161,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
                 TooltipLine tooltipLine = new TooltipLine(Mod, "HJscarletReworkName", path);
                 tooltips.Insert(flavorTooltipIndex + 1, tooltipLine);
             }
-
-            base.ModifyTooltips(item, tooltips);
         }
         public override void UpdateEquip(Item item, Player player)
         {

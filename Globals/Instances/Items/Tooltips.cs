@@ -6,8 +6,11 @@ using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
+using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Armor.Monk;
 using HJScarletRework.Items.Armor.Shinobi;
+using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Magic;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using System;
@@ -47,14 +50,14 @@ namespace HJScarletRework.Globals.Instances.Items
                     string path = Mod.GetLocalizationKey($"Items.Armor.{nameof(MonkHead)}.SleepyOctBuff").ToLangValue();
                     string path2 = Mod.GetLocalizationKey($"Items.Armor.{nameof(ShinobiHead)}.WeaponBuff").ToLangValue();
                     tooltips.QuickAddTooltipDirect(path2, Color.Bisque, null, "ShinobiBuffTitle");
-                    tooltips.QuickAddTooltipDirect(path, Color.GreenYellow, null, "ShinobiBuff", "50%", "30%", "20%");
+                    tooltips.QuickAddTooltipDirect(path, Color.GreenYellow, null, "ShinobiBuff", "20%", "15%", "20%");
                 }
                 if (item.type == ItemID.MonkStaffT3)
                 {
                     string path = Mod.GetLocalizationKey($"Items.Armor.{nameof(MonkHead)}.DragonFuryBuff").ToLangValue();
                     string path2 = Mod.GetLocalizationKey($"Items.Armor.{nameof(ShinobiHead)}.WeaponBuff").ToLangValue();
                     tooltips.QuickAddTooltipDirect(path2, Color.Bisque, null, "ShinobiBuffTitle");
-                    tooltips.QuickAddTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", "100%", "30%", "200%");
+                    tooltips.QuickAddTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", "50%", "15%", "200%");
                 }
 
             }
@@ -63,6 +66,17 @@ namespace HJScarletRework.Globals.Instances.Items
 
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
+            if (line.IsItemName())
+            {
+                foreach (var (itemIDs, drawMethods) in _rarityDrawMapScarlet)
+                {
+                    if (itemIDs.Contains(item.type))
+                    {
+                        drawMethods(line);
+                        return false;
+                    }
+                }
+            }
             if (line.IsItemName() && HJScarletConfigClient.Instance.SpecialRarity)
             {
                 foreach (var (itemIDs, drawMethods) in _rarityDrawMap)
@@ -76,6 +90,17 @@ namespace HJScarletRework.Globals.Instances.Items
             }
             return base.PreDrawTooltipLine(item, line, ref yOffset);
         }
+        private static readonly Dictionary<HashSet<int>, Action<DrawableTooltipLine>> _rarityDrawMapScarlet = new()
+        {
+            {
+                new HashSet<int>
+                {
+                    ItemType<Corona>(),
+                    ItemType<AetherfireSmasher>()
+                },
+                SolarRarity.DrawItemName
+            }
+        };
         /// <summary>
         /// 这里每帧都会高频调用，所以该创建哈希表了孩子们。
         /// </summary>

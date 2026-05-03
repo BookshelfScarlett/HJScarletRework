@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Items.Material;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
@@ -46,6 +47,14 @@ namespace HJScarletRework.Items.Weapons.Melee
             //这里只会取水平分量的速度
             Projectile proj = Projectile.NewProjectileDirect(source, spawnPos, vel, Item.shoot, damage, knockback, player.whoAmI);
             return false;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.LunarBar, 15).
+                AddIngredient<EssenceofMatter>(5).
+                AddTile(TileID.LunarCraftingStation).
+                Register();
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {

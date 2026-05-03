@@ -175,10 +175,10 @@ namespace HJScarletRework.Globals.Players
         {
             modifiers.ModifyHurtInfo += Modifiers_ModifyHurtInfo;
             float finalDamageModiflication = 1f;
-            if (Player.HasBuff<BlackKeyExecutionBuff>())
+            if (Player.HasBuff<BlackKeyExecutionBuff>() && blackKeyDefenseTrigger)
             {
                 finalDamageModiflication -= blackKeyDefenseBuff;
-                Player.buffImmune[BuffType<BlackKeyExecutionBuff>()] = true;
+                blackKeyDefenseTrigger = false;
             }
             modifiers.FinalDamage *= finalDamageModiflication;
             if (blackKeyHeal != 0)

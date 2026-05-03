@@ -128,7 +128,7 @@ namespace HJScarletRework.Projs.Melee
             SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit2, Owner.Center);
             //三倍伤害，单次的判定
             //把人飞出去
-            Owner.velocity = Owner.velocity.ToSafeNormalize() * OriginalSpeed * -0.6f;
+            Owner.velocity = Owner.velocity.ToSafeNormalize() * -20;
             Projectile.Kill();
 
         }

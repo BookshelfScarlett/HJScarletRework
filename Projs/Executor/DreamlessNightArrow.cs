@@ -25,7 +25,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool? CanDamage()
         {
-            return Projectile.timeLeft < 80;
+            return Projectile.timeLeft < 60;
         }
         public override void ExSD()
         {

@@ -1,47 +1,51 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 
 namespace HJScarletRework.Rarity.RarityParticles
 {
 
-    public class RarityShinyOrb : RaritySparkle
+    public class RaritySmoke : RaritySparkle
     {
         public int BlendStateType;
         public override int UseBlendStateID => BlendStateType;
-        public bool GlowCenter = true;
-        public float FadeOut;
-        public Color InitColor;
-        public float GlowCenterScale = 0.5f;
-        public RarityShinyOrb(Vector2 position, Vector2 velocity, Color color, int lifeTime, float scale)
+        public bool UseAlt;
+        public bool UseAdd;
+        public RaritySmoke(Vector2 position, Vector2 velocity, Color color, int lifetime, float Rot, float opacity, float scale, bool useAlt = false, bool useAdd = false)
         {
             Position = position;
             Velocity = velocity;
-            DrawColor = InitColor = color;
-            Lifetime = lifeTime;
+            DrawColor = color;
+            Lifetime = lifetime;
             Scale = scale;
-            FadeOut = 1f;
+            Rotation = Rot;
+            Opacity = opacity;
+            UseAlt = useAlt;
+            UseAdd = useAdd;
         }
 
         public override void CustomUpdate()
         {
-            FadeOut -= 0.015f;
-            Scale *= 0.99f;
-            DrawColor = Color.Lerp(InitColor, InitColor * 0.2f, (float)Math.Pow(LifetimeRatio, 30));
-            //减速需要更快。
-            Velocity *= 0.975f;
+            Velocity *= 0.9f;
+            Opacity = Lerp(Opacity, Lerp(Opacity, 0, 0.3f), 0.12f);
             Position += Velocity;
         }
         public override void CustomDraw(SpriteBatch spriteBatch, Vector2 drawPosition)
         {
-            Vector2 scale = new Vector2(1f, 1f) * Scale;
-            Texture2D texture = HJScarletTexture.Particle_ShinyOrb.Value;
-            spriteBatch.Draw(texture, drawPosition, null, DrawColor, Rotation, texture.Size() * 0.5f, scale, 0, 0f);
-            if (GlowCenter)
-                spriteBatch.Draw(texture, drawPosition, null, Color.White * FadeOut, Rotation, texture.Size() * 0.5f, scale * GlowCenterScale, 0, 0f);
+            //float brightness = (float)Math.Pow(Lighting.Brightness((int)(Position.X / 16f), (int)(Position.Y / 16f)), 0.15);
+            Asset<Texture2D> texture = UseAlt ? HJScarletTexture.Particle_SmokeAlt.Texture : HJScarletTexture.Particle_Smoke.Texture;
+
+            Rectangle frame = texture.Frame(4, 4, (int)(LifetimeRatio * 16) % 4, (int)(LifetimeRatio * 4));
+            Vector2 origin = frame.Size() * 0.5f;
+            if (UseAdd)
+                spriteBatch.Draw(texture.Value, drawPosition, frame, DrawColor.ToAddColor() * Opacity, Rotation, origin, Scale, 0, 0f);
+            else
+                spriteBatch.Draw(texture.Value, drawPosition, frame, DrawColor * Opacity, Rotation, origin, Scale, 0, 0f);
         }
     }
 }

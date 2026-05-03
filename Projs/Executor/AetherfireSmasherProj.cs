@@ -235,7 +235,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile.AddExecutionTimePass(ItemType<AetherfireSmasher>());
+            Projectile.AddExecutionTimePreHit(ItemType<AetherfireSmasher>());
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -0.5f, Volume = 0.78f }, Projectile.Center);
             PickTagColor(out Color baseColor, out Color targetColor);
             PickTagDust(out short HigherDust, out short BottemDust);

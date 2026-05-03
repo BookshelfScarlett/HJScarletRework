@@ -60,7 +60,7 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
         /// <summary>
         /// 炼狱复制
         /// </summary>
-        public static void UpdateTooltipParticles(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> sparklesList)
+        public static void UpdateTooltipParticles(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> sparklesList, BlendState blendState = null)
         {
             Vector2 textSize = tooltipLine.Font.MeasureString(tooltipLine.Text);
             //手动在这里更新一下所有的draw

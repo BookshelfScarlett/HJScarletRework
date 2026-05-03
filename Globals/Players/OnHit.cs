@@ -69,11 +69,15 @@ namespace HJScarletRework.Globals.Players
                 if (cowboyExecutor && cowboyRevolverTimer == 0)
                 {
                     cowboyRevolverTimer = Player.ApplyWeaponAttackSpeed(Player.HeldItem, Player.HeldItem.useTime, 5);
-                    int revolverDamage = Player.GetWeaponDamage(Player.HeldItem) / 2;
-
-                    revolverDamage *= (1 + 3 * (Main.rand.NextBool(6).ToInt())); 
+                    int revolverDamage = Player.GetWeaponDamage(Player.HeldItem) / 4;
+                    bool setCrit = false;
+                    if (Player.CheckExecution(Player.HeldItem.type) || Main.rand.NextBool())
+                    {
+                        revolverDamage = (int)(revolverDamage * 0.5f);
+                    }
                     Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), target.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(35f), 9f, 11f), ProjectileType<CowboyRevolverProj>(), revolverDamage, 0f, Player.whoAmI);
                     proj.timeLeft = 300;
+                    proj.HJScarlet().ExecutionStrike = setCrit;
                     if (target.CanBeChasedBy())
                         ((CowboyRevolverProj)proj.ModProjectile).CurTarget = target;
                 }
@@ -123,7 +127,7 @@ namespace HJScarletRework.Globals.Players
                     case ProjectileID.DD2LightningAuraT1:
                     case ProjectileID.DD2LightningAuraT2:
                     case ProjectileID.DD2LightningAuraT3:
-                        modifiers.FinalDamage *= 2f + shinobiExecutor.ToInt() * 8f;
+                        modifiers.FinalDamage *= 2f + shinobiExecutor.ToInt() * 3f;
                         break;
                 }
             }

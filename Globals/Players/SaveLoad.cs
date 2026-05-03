@@ -12,6 +12,7 @@ namespace HJScarletRework.Globals.Players
             tag.Add(nameof(terraRecipe), terraRecipe);
             tag.Add(nameof(terraRecipe_EatenFoodCounts), terraRecipe_EatenFoodCounts);
             tag.Add(nameof(terraRecipe_LifeMaxMultTime), terraRecipe_LifeMaxMultTime);
+            tag.Add(nameof(givePaper), givePaper);
         }
         public override void LoadData(TagCompound tag)
         {
@@ -20,7 +21,7 @@ namespace HJScarletRework.Globals.Players
             terraRecipe = tag.GetBool(nameof(terraRecipe));
             terraRecipe_EatenFoodCounts = tag.GetInt(nameof(terraRecipe_EatenFoodCounts));
             terraRecipe_LifeMaxMultTime = tag.GetInt(nameof(terraRecipe_LifeMaxMultTime));
+            givePaper = tag.GetBool(nameof(givePaper));
         }
-
     }
 }
