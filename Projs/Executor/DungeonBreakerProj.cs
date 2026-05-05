@@ -82,6 +82,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateAttackAI()
         {
+            Projectile.spriteDirection = Projectile.direction = Math.Sign(Projectile.velocity.X);
             switch (AttackType)
             {
                 case State.Shoot:
@@ -94,7 +95,6 @@ namespace HJScarletRework.Projs.Executor
                     DoReturn();
                     break;
             }
-            Projectile.spriteDirection = Projectile.direction = Math.Sign(Projectile.velocity.X);
         }
 
         public void DoShoot()

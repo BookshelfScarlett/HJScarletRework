@@ -77,7 +77,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 18, 20);
             if (Projectile.IntersectOwnerByDistance(40))
             {
-                Projectile.ResetLocalNPCHitImmunity();
                 Projectile.Kill();
             }
         }

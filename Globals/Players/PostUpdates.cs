@@ -196,20 +196,20 @@ namespace HJScarletRework.Globals.Players
             if (!CanWeaponSpecialAbility)
                 return;
             CanWeaponSpecialAbility = false;
-            if (monkExecutor && !Player.HasProj<MonkStaffProj>())
+            if (monkExecutor && !Player.HasProj<MonkStaffSkillProj>())
             {
                 int[] list = [ProjectileID.MonkStaffT3, ProjectileID.MonkStaffT3_Alt, ProjectileID.MonkStaffT1];
                 Player.KillCertainProj(list);
                 //玩家拥有任何手持的棍子都会直接处死掉，不要试图打断玩家的治疗
                 if (Player.HeldItem.type == ItemID.MonkStaffT1)
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffProj>(), 0, 0, Player.whoAmI);
+                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffSkillProj>(), 0, 0, Player.whoAmI);
                     //标记为1说明是瞌睡章鱼
                     proj.ai[0] = 1;
                 }
                 if (Player.HeldItem.type == ItemID.MonkStaffT3)
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffProj>(), 0, 0, Player.whoAmI);
+                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<MonkStaffSkillProj>(), 0, 0, Player.whoAmI);
                     //标记为1说明是瞌睡章鱼
                     proj.ai[0] = 0;
                 }

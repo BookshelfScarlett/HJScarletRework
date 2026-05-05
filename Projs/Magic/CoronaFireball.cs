@@ -131,7 +131,7 @@ namespace HJScarletRework.Projs.Magic
             SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1, Pitch = 0.3f }, Projectile.Center);
             for (int i = 0; i < 9; i++)
             {
-                Vector2 vel = RandVelTwoPi(0.1f,4.2f);
+                Vector2 vel = RandVelTwoPi(0.1f, 4.2f);
                 Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f);
                 new SmokeParticle(spawnpos, vel, RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.50f), Color.Orange), 40, RandRotTwoPi, 1f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
                 if (Main.rand.NextBool())
@@ -153,7 +153,7 @@ namespace HJScarletRework.Projs.Magic
                 new HRShinyOrb(pos, vel, Color.White, 40, 0.12f * 0.5f).Spawn();
             }
 
-            if(BounceTime > 2)
+            if (BounceTime > 2)
             {
                 Projectile.damage = 0;
                 Projectile.penetrate = -1;

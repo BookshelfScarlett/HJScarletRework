@@ -151,10 +151,15 @@ Executor: {
 	AetherfireSmasherProj2.DisplayName: Aetherfire Smasher Proj2
 	AetherfireSmasherFireball2.DisplayName: Aetherfire Smasher Fireball2
 	AetherfireSmasherExecution2.DisplayName: Aetherfire Smasher Execution2
-	MonkStaffProj.DisplayName: Monk Staff Proj
-	SleepyBubbles.DisplayName: Sleepy Bubbles
-	SkyDragonFuryLightning.DisplayName: Sky Dragon Fury Lightning
+	MonkStaffSkillProj.DisplayName: Monk Staff Proj
+	MonkStaffBubble.DisplayName: Sleepy Bubbles
+	MonkStaffLightning.DisplayName: Sky Dragon Fury Lightning
 	// SkyDragonFuryElectricBall.DisplayName: Sky Dragon Fury Electric Ball
+	// AbyssalWorldProj.DisplayName: Abyssal World Proj
+	// DesertDaggerMark.DisplayName: Desert Dagger Mark
+	// SundownerAmmo.DisplayName: Sundowner Ammo
+	// GhostDaggerMark.DisplayName: Ghost Dagger Mark
+	// MoltenDaggerMark.DisplayName: Molten Dagger Mark
 }
 
 Ranged: {
@@ -164,6 +169,7 @@ Ranged: {
 	ClimaticHawstringMinion.DisplayName: 气候钓弦-飞杆鱼仆从
 	ClimaticHawstringProj.DisplayName: 气候钓弦
 	BambooStick.DisplayName: 火箭竹-竹
+	// SundownerHeldProj.DisplayName: Sundowner Held Proj
 }
 
 Magic: {

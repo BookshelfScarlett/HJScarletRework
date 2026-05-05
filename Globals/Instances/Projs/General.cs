@@ -65,7 +65,7 @@ namespace HJScarletRework.Globals.Instances.Projs
                     Vector2 pos = projectile.Center.ToRandCirclePos(1f) + projectile.rotation.ToRotationVector2() * 40f * projectile.scale;
                     if (Collision.SolidCollision(pos, 120, 120))
                         pos = projectile.Center;
-                    Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(4f, 9f), ProjectileType<SleepyBubbles>(), projectile.damage / 3, 3f, Owner.whoAmI);
+                    Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, projectile.rotation.ToRotationVector2() * Main.rand.NextFloat(4f, 9f), ProjectileType<MonkStaffBubble>(), projectile.damage / 3, 3f, Owner.whoAmI);
                     SoundEngine.PlaySound(SoundID.DD2_MonkStaffSwing with { MaxInstances = 0 }, projectile.Center.ToRandCirclePos(1f));
                 }
             }
@@ -103,8 +103,8 @@ namespace HJScarletRework.Globals.Instances.Projs
                         Vector2 vel = (target.Center - pos).ToSafeNormalize() * Main.rand.NextFloat(4f, 9f);
                         if (target.IsLegal())
                         {
-                            Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, vel, ProjectileType<SkyDragonFuryLightning>(), projectile.damage/2, 3f, Owner.whoAmI);
-                            ((SkyDragonFuryLightning)proj.ModProjectile).CurTarget = target;
+                            Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, vel, ProjectileType<MonkStaffLightning>(), projectile.damage/2, 3f, Owner.whoAmI);
+                            ((MonkStaffLightning)proj.ModProjectile).CurTarget = target;
                             pos = projectile.Center + (target.Center - Owner.Center).ToSafeNormalize() * 50f * projectile.scale;
                             new CrossGlow(pos, Color.DeepSkyBlue, 30, 1, 0.12f).Spawn();
                             new CrossGlow(pos, Color.White, 30, 1, 0.08f).Spawn();

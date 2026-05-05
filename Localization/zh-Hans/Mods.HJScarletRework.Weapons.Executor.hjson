@@ -214,3 +214,13 @@ SimpleHandAxe: {
 		'''
 	ExecutionStrike: 无视重力，并在命中时追杀这名敌人
 }
+
+AbyssalWorld: {
+	// DisplayName: Abyssal World
+	// Tooltip: ""
+}
+
+Sundowner: {
+	// DisplayName: Sundowner
+	// Tooltip: ""
+}

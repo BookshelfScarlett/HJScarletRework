@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
+using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
 using HJScarletRework.Projs.Magic;
 using HJScarletRework.Projs.Melee;
@@ -29,17 +30,16 @@ namespace HJScarletRework.Items
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            foreach (var keys in HJScarletList.ExecutorWeaponDictionary.Keys)
-            {
-                player.QuickSpawnItem(source, keys);
-                Main.NewText(HJScarletList.ExecutorWeaponDictionary[keys]);
-            }
-            return true;
+            //foreach (var keys in HJScarletList.ExecutorWeaponDictionary.Keys)
+            //{
+            //    player.QuickSpawnItem(source, keys);
+            //    Main.NewText(HJScarletList.ExecutorWeaponDictionary[keys]);
+            //}
+             Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<MoltenDaggerMark>(), 0, knockback, player.whoAmI);
+             Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<GhostDaggerMark>(), 0, knockback, player.whoAmI);
+             Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<DesertDaggerMark>(), 0, knockback, player.whoAmI);
+            return false;
             //Vector2 ownerMW = player.LocalMouseWorld();
-            Projectile proj = Projectile.NewProjectileDirect(source, Main.MouseWorld, RandVelTwoPi(2f), ProjectileType<FloatingPlants>(), 0, knockback, player.whoAmI);
-            proj.rotation = RandRotTwoPi;
-            proj.ai[1] = Main.rand.Next(0, 7);
-
             //添加需要的攻击单位
             return false;
         }

@@ -205,3 +205,13 @@ SimpleHandAxe: {
 		'''
 	ExecutionStrike: Ignores gravity and chases enemy on hit
 }
+
+AbyssalWorld: {
+	DisplayName: Abyssal World
+	Tooltip: ""
+}
+
+Sundowner: {
+	DisplayName: Sundowner
+	Tooltip: ""
+}

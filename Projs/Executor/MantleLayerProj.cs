@@ -52,7 +52,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool? CanHitNPC(NPC target)
         {
-            bool hit = AttackType == State.ReadyHeavyHit && target.Equals(CurTarget) || AttackType != State.ReadyHeavyHit;
+             bool hit = AttackType == State.ReadyHeavyHit && target.Equals(CurTarget) || (AttackType != State.ReadyHeavyHit);
             if (hit)
                 return null;
             return false;

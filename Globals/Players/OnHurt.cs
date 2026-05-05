@@ -156,7 +156,7 @@ namespace HJScarletRework.Globals.Players
                 if (PreciousTargetCrtis < PreciousCritsMin)
                     PreciousTargetCrtis = PreciousCritsMin;
             }
-            if (Player.HasProj<MonkStaffProj>())
+            if (Player.HasProj<MonkStaffSkillProj>())
             {
                 foreach (var projID in Main.ActiveProjectiles)
                 {
@@ -164,7 +164,7 @@ namespace HJScarletRework.Globals.Players
                         continue;
                     if (projID.DamageType != ExecutorDamageClass.Instance)
                         continue;
-                    if (projID.type != ProjectileType<MonkStaffProj>())
+                    if (projID.type != ProjectileType<MonkStaffSkillProj>())
                         continue;
                     projID.Kill();
                 }

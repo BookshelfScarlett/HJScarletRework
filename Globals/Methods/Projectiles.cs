@@ -289,7 +289,7 @@ namespace HJScarletRework.Globals.Methods
             //绘制发光边缘
             for (int i = 0; i < drawTime; i++)
             {
-                Main.spriteBatch.Draw(proj.GetTexture(), proj.Center - Main.screenPosition + ToRadians(i * 60f).ToRotationVector2() * posMove - offset, null, color with { A = 0 }, proj.rotation + rotFix, proj.GetTexture().Size() / 2, proj.scale, 0, 0f);
+                Main.spriteBatch.Draw(proj.GetTexture(), proj.Center - Main.screenPosition + ToRadians(i * 360f / drawTime).ToRotationVector2() * posMove - offset, null, color with { A = 0 }, proj.rotation + rotFix, proj.GetTexture().Size() / 2, proj.scale, 0, 0f);
             }
         }
         /// <summary>
