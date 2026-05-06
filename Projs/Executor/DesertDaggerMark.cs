@@ -70,6 +70,8 @@ namespace HJScarletRework.Projs.Executor
 
             if (!Projectile.HJScarlet().FirstFrame)
             {
+                if(DaggerPlayer.DaggerDictionary.Count > 2)
+                    DaggerPlayer.DaggerDictionary.Remove(0)
                 if (!DaggerPlayer.DaggerList.Contains(Type))
                 {
                     DaggerPlayer.DaggerList.Add(Type);
@@ -172,6 +174,15 @@ namespace HJScarletRework.Projs.Executor
     {
         public List<int> DaggerList = new();
         public List<int> DaggerIndexList = new();
+        public Dictionary<int, int> DaggerDictionary = new();
+        public override void UpdateDead()
+        {
+            base.UpdateDead();
+        }
+        public override void PostUpdateMiscEffects()
+        {
+            base.PostUpdateMiscEffects();
+        }
     }
     public class DesertDaggerMark : DaggerMarkClass
     {

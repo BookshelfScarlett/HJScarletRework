@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         {
             Item.width = Item.height = 66;
             Item.damage = 28;
-            Item.knockBack = 8f;
+            Item.knockBack = 5f;
             Item.shootSpeed = 16f;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;

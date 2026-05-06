@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class DreamlessNight : ExecutorWeaponClass
     {
-        public override float ExecutionStrikeDamageMult => 0.80f;
+        public override float ExecutionStrikeDamageMult => 1f;
         public override int ExecutionTime => 12;
         public override void ExSD()
         {

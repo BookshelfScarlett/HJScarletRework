@@ -45,6 +45,12 @@ namespace HJScarletRework.Projs.Executor
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.tileCollide = false;
         }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if (CurTarget is not null && target.Equals(CurTarget))
+                return null;
+            return base.CanHitNPC(target);
+        }
         public override void OnFirstFrame()
         {
             Helper.MaxProgress[0] = 38;
