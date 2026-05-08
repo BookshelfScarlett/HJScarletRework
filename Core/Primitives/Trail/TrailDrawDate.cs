@@ -22,11 +22,25 @@ namespace HJScarletRework.Core.Primitives.Trail
         /// </summary>
         public float PrimitivesHeightRot = primitivesHeightRot;
     }
-
-    public struct DrawSetting(Texture2D texture, bool usePosTransformation, bool usePixelTransformation)
+    /// <summary>
+    /// 顶点信息的结构体
+    /// </summary>
+    public struct DrawSetting
     {
-        public Texture2D texture = texture;
-        public bool usePosTransformation = usePosTransformation;
-        public bool usePixelTransformation = usePixelTransformation;
+        public Texture2D Texture;
+        public SamplerState SamplerState;
+        public bool NotSkipMainScreenPosition;
+        public DrawSetting(Texture2D texture, bool notSkipMainScreenPosition = true)
+        {
+            Texture = texture;
+            SamplerState = SamplerState.PointClamp;
+            NotSkipMainScreenPosition = notSkipMainScreenPosition;
+        }
+        public DrawSetting(Texture2D texture, SamplerState samplerState,bool notSkipMainScreenPosition = true)
+        {
+            Texture = texture;
+            SamplerState = samplerState;
+            NotSkipMainScreenPosition = notSkipMainScreenPosition;
+        }
     }
 }

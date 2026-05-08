@@ -96,7 +96,8 @@ namespace HJScarletRework.Globals.Instances.Items
                 new HashSet<int>
                 {
                     ItemType<Corona>(),
-                    ItemType<AetherfireSmasher>()
+                    ItemType<AetherfireSmasher>(),
+                    ItemType<Sundowner>()
                 },
                 SolarRarity.DrawItemName
             }

@@ -56,7 +56,7 @@ namespace HJScarletRework.Globals.Huds
             orig(self);
             if (noPredraw)
                 return;
-            //如果有人想要绘制。
+            //如果有人想要绘制。Projectile.knockBack
             if (!config.DrawExecutionCounter)
                 return;
             //手持情况

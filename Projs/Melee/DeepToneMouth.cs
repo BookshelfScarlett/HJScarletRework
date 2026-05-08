@@ -328,7 +328,7 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.oldPos.Length < 3)
                 return;
             //做掉可能存在的零向量
-            DrawSetting drawSetting = new DrawSetting(useTex.Value, true, false);
+            DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
             List<TrailDrawDate> trailDrawDates = [];
             int posCount = validPosition.Count;
             for (int j = 0; j < posCount - 1; j++)

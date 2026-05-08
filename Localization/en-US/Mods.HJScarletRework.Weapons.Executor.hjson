@@ -214,4 +214,5 @@ AbyssalWorld: {
 Sundowner: {
 	DisplayName: Sundowner
 	Tooltip: ""
+	ExecutionStrike: ""
 }

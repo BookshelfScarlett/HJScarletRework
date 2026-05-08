@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Magic
             Item.useAnimation = Item.useTime = 20;
             Item.rare = ItemRarityID.Purple;
             Item.useStyle = ItemUseStyleID.Guitar;
-            Item.shootSpeed = 12f;
+            Item.shootSpeed = 17f;
             Item.noMelee = true;
         }
         public override void AddRecipes()

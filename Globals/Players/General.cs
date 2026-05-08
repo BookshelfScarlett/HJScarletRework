@@ -12,6 +12,7 @@ using Terraria.DataStructures;
 using Terraria.Graphics;
 using Terraria.ID;
 using Terraria.ModLoader;
+using UtfUnknown.Core.Models.SingleByte.Arabic;
 
 namespace HJScarletRework.Globals.Players
 {
@@ -241,13 +242,13 @@ namespace HJScarletRework.Globals.Players
                 switch (item.type)
                 {
                     case ItemID.FishCostumeMask:
-                        AlterArmorType(item.type, FishCostumeHelmet.Defense, false, ItemRarityID.Orange);
+                        AlterArmorType2(item.type, i,FishCostumeHelmet.Defense, false, ItemRarityID.Orange,armorSlot:armorSlot);
                         break;
                     case ItemID.FishCostumeShirt:
-                        AlterArmorType(item.type, FishCostumeChestplate.Defense, false, ItemRarityID.Orange);
+                        AlterArmorType2(item.type, i,FishCostumeChestplate.Defense, false, ItemRarityID.Orange,armorSlot:armorSlot);
                         break;
                     case ItemID.FishCostumeFinskirt:
-                        AlterArmorType(item.type, FishCostumeLegs.Defense, false, ItemRarityID.Orange);
+                        AlterArmorType2(item.type,i, FishCostumeLegs.Defense, false, ItemRarityID.Orange,armorSlot:armorSlot);
                         break;
 
                 }

@@ -223,7 +223,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> validRot, Projectile.oldPos, Projectile.oldRot);
             GD.Textures[0] = useTex.Value;
             GD.SamplerStates[0] = SamplerState.PointClamp;
-            DrawSetting drawSetting = new DrawSetting(useTex.Value, true, false);
+            DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
             List<TrailDrawDate> trailDrawDates = [];
             int posCount = validPosition.Count;
             for (int j = 0; j < posCount - 1; j++)

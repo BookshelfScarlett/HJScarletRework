@@ -221,6 +221,16 @@ AbyssalWorld: {
 }
 
 Sundowner: {
-	// DisplayName: Sundowner
-	// Tooltip: ""
+	DisplayName: 焚风
+	Tooltip:
+		'''
+		同时发射直线飞行的炮弹与追踪敌人的流火
+		炮弹在命中时会造成一次爆炸
+		"不，你用这个不会变得无敌"
+		'''
+	ExecutionStrike:
+		'''
+		投掷一个信号枪以呼叫空袭
+		你可以按住右键使空袭集中目标
+		'''
 }

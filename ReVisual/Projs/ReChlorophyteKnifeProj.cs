@@ -75,8 +75,6 @@ namespace HJScarletRework.ReVisual.Projs
                 SB.Draw(tex, drawPos + ToRadians(60f * i).ToRotationVector2() * 1.5f, null, Color.White.ToAddColor(), projectile.velocity.ToRotation() + PiOver4, tex.ToOrigin(), projectile.scale, 0, 0);
             }
             SB.Draw(tex, drawPos, null, Color.White, projectile.velocity.ToRotation() + PiOver4, tex.ToOrigin(), projectile.scale, 0, 0);
-
-            ;
             return false;
         }
     }

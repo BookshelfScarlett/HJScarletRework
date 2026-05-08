@@ -10,6 +10,8 @@ namespace HJScarletRework.Core.Primitives.Trail
 
         public static void RenderTrail(TrailDrawDate[] drawDate, DrawSetting drawSetting)
         {
+            if (drawDate.Length < 3)
+                return;
             DrawTrail(drawDate, drawSetting);
         }
 
@@ -21,10 +23,7 @@ namespace HJScarletRework.Core.Primitives.Trail
             {
                 float progress = (float)i / DrawDate.Length;
                 // 绘制位置
-                Vector2 DrawPos = DrawDate[i].PosDate - (drawSetting.usePosTransformation ? Main.screenPosition : Vector2.Zero);
-
-                if (drawSetting.usePixelTransformation)
-                    DrawPos = DrawPos / 2;
+                Vector2 DrawPos = DrawDate[i].PosDate - (drawSetting.NotSkipMainScreenPosition ? Main.screenPosition : Vector2.Zero);
 
                 // 每个片的高度与旋转
                 Vector2 PrimitivesHeight = DrawDate[i].PrimitivesOffset;
@@ -36,7 +35,8 @@ namespace HJScarletRework.Core.Primitives.Trail
             }
             if (Vertexlist.Count >= 3)
             {
-                Main.graphics.GraphicsDevice.Textures[0] = drawSetting.texture;
+                Main.graphics.GraphicsDevice.Textures[0] = drawSetting.Texture;
+                Main.graphics.GraphicsDevice.SamplerStates[0] = drawSetting.SamplerState;
                 Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, Vertexlist.ToArray(), 0, Vertexlist.Count - 2);
             }
         }

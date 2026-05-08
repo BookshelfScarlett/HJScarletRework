@@ -150,10 +150,8 @@ namespace HJScarletRework.Projs.Melee
                 return;
             //做掉可能存在的零向量
             Projectile.ClearInvaidData(out List<Vector2> validPos, out List<float> validRot);
-            GD.Textures[0] = HJScarletTexture.Trail_ManaStreak.Value;
-            GD.SamplerStates[0] = SamplerState.PointClamp;
             Vector2[] ribbonPositions = [.. validPos];
-            DrawSetting drawSetting = new(HJScarletTexture.Trail_ManaStreak.Value, true, false);
+            DrawSetting drawSetting = new(HJScarletTexture.Trail_ManaStreak.Value);
             List<TrailDrawDate> trailDrawDate = [];
             int positionCount = ribbonPositions.Length;
             for (int i = 0; i < positionCount - 1; i++)

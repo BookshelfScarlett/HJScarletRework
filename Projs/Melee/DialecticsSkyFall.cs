@@ -117,7 +117,7 @@ namespace HJScarletRework.Projs.Melee
                 return;
             //做掉可能存在的零向量
             Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> validRot, Projectile.oldPos, Projectile.oldRot);
-            DrawSetting drawSetting = new DrawSetting(useTex.Value, true, false);
+            DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
             List<TrailDrawDate> trailDrawDates = [];
             int posCount = validPosition.Count;
             for (int j = 0; j < posCount - 1; j++)

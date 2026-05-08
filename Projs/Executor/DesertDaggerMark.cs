@@ -70,8 +70,8 @@ namespace HJScarletRework.Projs.Executor
 
             if (!Projectile.HJScarlet().FirstFrame)
             {
-                if(DaggerPlayer.DaggerDictionary.Count > 2)
-                    DaggerPlayer.DaggerDictionary.Remove(0)
+                if (DaggerPlayer.DaggerDictionary.Count > 2)
+                    DaggerPlayer.DaggerDictionary.Remove(0);
                 if (!DaggerPlayer.DaggerList.Contains(Type))
                 {
                     DaggerPlayer.DaggerList.Add(Type);

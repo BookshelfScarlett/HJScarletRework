@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -34,16 +35,21 @@ namespace HJScarletRework.Projs.Magic
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 30;
-            Projectile.penetrate = 1;
             Projectile.SetupImmnuity(60);
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 2;
+            Projectile.penetrate = 2;
             Projectile.timeLeft = GetSeconds(5);
         }
         public override void OnFirstFrame()
         {
+            for (int i = 0; i < Projectile.oldPos.Length; i++)
+            {
+                Projectile.oldPos[i] = Projectile.position;
+                Projectile.oldRot[i] = Projectile.rotation;
+            }
             base.OnFirstFrame();
         }
         public override void ProjAI()
@@ -122,7 +128,7 @@ namespace HJScarletRework.Projs.Magic
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f), RandVelTwoPi(0f, 1.4f), RandLerpColor(Color.Lerp(Color.DarkOrange, Color.Red, 0.64f), Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.43f * Projectile.Opacity, ToRadians(1f)).Spawn();
             }
             SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1, Pitch = 0.3f }, Projectile.Center);
-
+            Projectile.velocity *= 1.5f;
             base.OnHitNPC(target, hit, damageDone);
         }
 
@@ -201,12 +207,14 @@ namespace HJScarletRework.Projs.Magic
             DrawTrails(HJScarletTexture.Trail_ManaStreakTiny.Texture, Color.Red);
             DrawTrails(HJScarletTexture.Trail_ManaStreakTiny.Texture, Color.DarkOrange, 0.75f);
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.OrangeRed, 0.25f);
-
-                        HJScarletMethods.EndShaderAreaPixel();
+            HJScarletMethods.EndShaderAreaPixel();
         }
 
         public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
         {
+            if (!Projectile.HJScarlet().FirstFrame)
+                return;
+
             if (Projectile.oldPos.Length < 3)
                 return;
             Effect shader = HJScarletShader.StandardFlowShader;
@@ -214,7 +222,7 @@ namespace HJScarletRework.Projs.Magic
             shader.Parameters["LaserTextureSize"].SetValue(useTex.Size());
             shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, useTex.Height()));
             shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -24.2f);
-            shader.Parameters["uColor"].SetValue(drawColor.ToVector4() * alphaValue *Clamp(Projectile.velocity.Length(), 0f, 1f));
+            shader.Parameters["uColor"].SetValue(drawColor.ToVector4() *Projectile.Opacity  *  alphaValue *Clamp(Projectile.velocity.Length(), 0f, 1f));
             shader.Parameters["uFadeoutLength"].SetValue(0.8f);
             shader.Parameters["uFadeinLength"].SetValue(0.12f);
             shader.CurrentTechnique.Passes[0].Apply();
@@ -223,14 +231,15 @@ namespace HJScarletRework.Projs.Magic
 
             //做掉可能存在的零向量
             Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> _, Projectile.oldPos, Projectile.oldRot);
-            if (Projectile.oldPos.Length < 3)
-                return;
+            validPosition = Projectile.oldPos.ToList();
             //做掉可能存在的零向量
-            DrawSetting drawSetting = new DrawSetting(useTex.Value, true, false);
+            DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
             List<TrailDrawDate> trailDrawDates = [];
             int posCount = (int)(validPosition.Count * Projectile.Opacity);
             for (int j = 0; j < posCount - 1; j++)
             {
+                if (validPosition[j] == Vector2.Zero)
+                    continue;
                 float rot = (validPosition[j + 1] - validPosition[j]).ToRotation();
                 float ratio = j / (posCount - 1);
                 Vector2 posOffset = rot.ToRotationVector2().RotatedBy(PiOver2) * offsetHeight;

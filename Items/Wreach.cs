@@ -7,6 +7,7 @@ using HJScarletRework.Projs.General;
 using HJScarletRework.Projs.Magic;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
+using rail;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -23,7 +24,7 @@ namespace HJScarletRework.Items
             Item.damage = 20;
             Item.rare = ItemRarityID.Red;
             Item.shoot = ProjectileType<CoronaFireball>();
-            Item.shootSpeed = 6f;
+            Item.shootSpeed = 17f;
             Item.useTime = Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noUseGraphic = true;
@@ -35,13 +36,15 @@ namespace HJScarletRework.Items
             //    player.QuickSpawnItem(source, keys);
             //    Main.NewText(HJScarletList.ExecutorWeaponDictionary[keys]);
             //}
-             Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<MoltenDaggerMark>(), 0, knockback, player.whoAmI);
-             Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<GhostDaggerMark>(), 0, knockback, player.whoAmI);
-             Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<DesertDaggerMark>(), 0, knockback, player.whoAmI);
+            //Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<MoltenDaggerMark>(), 0, knockback, player.whoAmI);
+            //Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<GhostDaggerMark>(), 0, knockback, player.whoAmI);
+            //Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<DesertDaggerMark>(), 0, knockback, player.whoAmI);
+            Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<SundownerFlareGun>(), 0, knockback, player.whoAmI);
             return false;
             //Vector2 ownerMW = player.LocalMouseWorld();
             //添加需要的攻击单位
             return false;
         }
     }
+
 }

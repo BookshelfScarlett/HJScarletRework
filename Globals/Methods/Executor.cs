@@ -20,6 +20,8 @@ namespace HJScarletRework.Globals.Methods
         }
         public static void AddExecutionTimePreHit(this Projectile proj, int itemID, int times = 1)
         {
+            if (!proj.HJScarlet().HasExecutionMechanic)
+                return;
             if (proj.HJScarlet().AddExecutionHit)
                 return;
             proj.AddExecutionTime(itemID, times);

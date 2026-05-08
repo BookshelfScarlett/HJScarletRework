@@ -77,6 +77,7 @@ Typeless: {
 	CowboyRevolverProj.DisplayName: 牛仔护甲核心-枪
 	RuneWizardProj.DisplayName: 符文法师护甲核心-魔法
 	FloatingPlants.DisplayName: 护花员护甲核心-漂浮草药
+	// InvisBoom.DisplayName: Invis Boom
 }
 
 Pets: {
@@ -160,6 +161,10 @@ Executor: {
 	// SundownerAmmo.DisplayName: Sundowner Ammo
 	// GhostDaggerMark.DisplayName: Ghost Dagger Mark
 	// MoltenDaggerMark.DisplayName: Molten Dagger Mark
+	// SundownerFlare.DisplayName: Sundowner Flare
+	// SundownerRocket.DisplayName: Sundowner Rocket
+	// SundownerFlareGun.DisplayName: Sundowner Flare Gun
+	// SundownerFireball.DisplayName: Sundowner Fireball
 }
 
 Ranged: {
