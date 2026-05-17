@@ -6,6 +6,7 @@ SwitchWeaponConditionList: {
 	DownedGolem: 石巨人
 	DownedLifeGods: 万籁携生
 	DownedEvilBoss: 任意邪恶Boss
+	DownedPlantera: 世纪之花
 }
 
 SwitchWeapon: {
@@ -34,15 +35,32 @@ DamageClasses: {
 			Alterego.DisplayName: 他人格
 			Digital.DisplayName: 电子
 			Evolutional.DisplayName: 变革
-			Fake.DisplayName: 虚假
+			Fake.DisplayName: 赝品
 			Foreigner.DisplayName: 降临
 			Mysterious.DisplayName: 神秘
 			Phantasmic.DisplayName: 空想
 			FocusTimeLine: "{0}启动专注攻击次数"
 			ExecutionDamageLine: "{0}%处决攻击伤害"
-			ArmorPenetrationLine: "{0}护甲穿透"
+			ArmorPenetrationLine: "{0}防御"
+			CritDamageLine: "{0}暴击伤害"
 		}
 	}
 }
 
 Keybinds.GeneralActionKeybind.DisplayName: 互动键
+
+Projectiles: {
+	// DragonStaffHeldProj.DisplayName: Dragon Staff Held Proj
+	// DragonStaffHeldProjAlt.DisplayName: Dragon Staff Held Proj Alt
+	// DragonStaffFrieball.DisplayName: Dragon Staff Frieball
+	// DragonSummonHeldProj.DisplayName: Dragon Summon Held Proj
+	// DragonSummonProj.DisplayName: Dragon Summon Proj
+	// DragonSummonFireball.DisplayName: Dragon Summon Fireball
+}
+
+Items: {
+	DragonSummon: {
+		// DisplayName: Dragon Summon
+		// Tooltip: ""
+	}
+}

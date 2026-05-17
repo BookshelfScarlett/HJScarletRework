@@ -50,6 +50,8 @@ namespace HJScarletRework.Assets.Registers
         internal static Tex2DWithPath Wreach { get; private set; }
         internal static Tex2DWithPath Item_SpearofDarknessThrown { get; private set; }
         internal static Tex2DWithPath Item_DialecticsThrown { get; private set; }
+        internal static Tex2DWithPath SpectreStaffBlade { get; private set; }
+        internal static Tex2DWithPath SpectreStaff { get; private set; }
         //这里的写法实际上会吃两份new的内存
         //后续会废弃Tex2D的写法，我们会改用一个工具类去管理而不是new一个出来
 
@@ -64,6 +66,8 @@ namespace HJScarletRework.Assets.Registers
 
             Item_SpearofDarknessThrown = new Tex2DWithPath($"{WeaponPath}/{nameof(SpearofDarknessThrown)}");
             Item_DialecticsThrown = new Tex2DWithPath($"{WeaponPath}/{nameof(DialecticsThrown)}");
+            SpectreStaffBlade = new Tex2DWithPath($"{WeaponPath}/{nameof(SpectreStaffBlade)}");
+            SpectreStaff = new Tex2DWithPath($"{WeaponPath}/{nameof(SpectreStaff)}");
 
             Proj_SpearofDarkness = new Tex2DWithPath($"{ProjPath}/{nameof(Proj_SpearofDarkness)}");
             Proj_CandLanceFire = new Tex2DWithPath($"{ProjPath}/{nameof(Proj_CandLanceFire)}");
@@ -79,6 +83,8 @@ namespace HJScarletRework.Assets.Registers
 
             Item_SpearofDarknessThrown = null;
             Item_DialecticsThrown = null;
+            SpectreStaffBlade = null;
+            SpectreStaff = null;
 
             Proj_SpearofDarkness = null;
             Proj_CandLanceFire = null;

@@ -260,3 +260,8 @@ AbyssalWorld: {
 	DisplayName: Abyssal World
 	Tooltip: ""
 }
+
+DragonSword: {
+	DisplayName: Dragon Sword
+	Tooltip: ""
+}

@@ -12,3 +12,8 @@ BambooRocket: {
 	DisplayName: Bamboo Rocket
 	Tooltip: Fires homing bamboo
 }
+
+TerraFlamethrower: {
+	DisplayName: Terra Flamethrower
+	Tooltip: ""
+}

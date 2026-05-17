@@ -40,9 +40,10 @@ namespace HJScarletRework.Globals.Players
             }
             if (tacticalExecution && tacticalTime > 0)
             {
-                Player.GetDamage<ExecutorDamageClass>() *= 1.1f;
-                if (EeecutorsSwordMarkPlus)
-                    Player.GetCritChance<ExecutorDamageClass>() += 30;
+                if (ExecutorSwordMarkPlus)
+                {
+                    Player.GetDamage<ExecutorDamageClass>() *= 1.05f;
+                }
             }
         }
         public void UpdateFlybackBuff()
@@ -284,7 +285,7 @@ namespace HJScarletRework.Globals.Players
                 return;
             if (tacticalTime == 0 && tacticalPunishTime == 0)
             {
-                tacticalTime = GetSeconds(10);
+                tacticalTime = GetSeconds(5);
                 tacticalPunishTime = GetSeconds(1);
             }
         }

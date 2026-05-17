@@ -159,7 +159,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.scale = tarPos.Length();
 
         }
-        int healAmt;
         public void UpdateHealParticle()
         {
             Projectile.frameCounter += 1;

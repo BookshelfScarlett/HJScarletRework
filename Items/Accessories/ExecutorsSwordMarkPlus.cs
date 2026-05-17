@@ -22,15 +22,16 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().tacticalExecution = true;
-            player.HJScarlet().EeecutorsSwordMarkPlus = true;
+            player.HJScarlet().ExecutorSwordMarkPlus = true;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
                 AddIngredient<ExecutorsSwordMark>().
                 AddIngredient<EssenceofTime>(5).
-                AddIngredient(ItemID.FragmentSolar, 10).
-                AddTile<FinalAnvil>().
+                AddIngredient<EssenceofMatter>(5).
+                AddIngredient<EssenceofLife>(5).
+                AddTile(FinalAnvilTile).
                 Register();
 
         }

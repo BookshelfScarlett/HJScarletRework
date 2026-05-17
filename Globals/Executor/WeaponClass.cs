@@ -49,7 +49,7 @@ namespace HJScarletRework.Globals.Executor
             if (useExecution)
             {
                 proj.HJScarlet().ExecutionStrike = true;
-                player.RemoveSlot(Type);
+                player.RemoveExecutionProgress(Type);
             }
             return false;
         }

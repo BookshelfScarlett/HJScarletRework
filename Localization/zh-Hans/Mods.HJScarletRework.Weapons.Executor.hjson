@@ -218,6 +218,7 @@ SimpleHandAxe: {
 AbyssalWorld: {
 	// DisplayName: Abyssal World
 	// Tooltip: ""
+	// ExecutionStrike: ""
 }
 
 Sundowner: {
@@ -233,4 +234,29 @@ Sundowner: {
 		投掷一个信号枪以呼叫空袭
 		你可以按住右键使空袭集中目标
 		'''
+}
+
+FrostoftheStorm: {
+	DisplayName: 寒霜风暴
+	Tooltip: 挥舞时生成无限穿透的寒风
+	ExecutionStrike:
+		'''
+		将会以快慢的节奏进行连续多下的挥砍
+		挥砍横扫的面积更大，寒风的覆盖范围也更广
+		'''
+}
+
+Fleshtumor: {
+	// DisplayName: Fleshtumor
+	// Tooltip: ""
+}
+
+FrostHammer: {
+	// DisplayName: Frost Hammer
+	// Tooltip: ""
+}
+
+SpectreStaff: {
+	// DisplayName: Spectre Staff
+	// Tooltip: ""
 }

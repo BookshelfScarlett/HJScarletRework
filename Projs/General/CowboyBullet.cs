@@ -13,7 +13,6 @@ namespace HJScarletRework.Projs.General
     public class CowboyBullet : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        int hittime = 0;
         public override void ExSD()
         {
             //碰撞箱是故意放大的

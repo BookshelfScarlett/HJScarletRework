@@ -209,10 +209,32 @@ SimpleHandAxe: {
 AbyssalWorld: {
 	DisplayName: Abyssal World
 	Tooltip: ""
+	ExecutionStrike: ""
 }
 
 Sundowner: {
 	DisplayName: Sundowner
 	Tooltip: ""
 	ExecutionStrike: ""
+}
+
+FrostoftheStorm: {
+	DisplayName: Frostofthe Storm
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+Fleshtumor: {
+	DisplayName: Fleshtumor
+	Tooltip: ""
+}
+
+FrostHammer: {
+	DisplayName: Frost Hammer
+	Tooltip: ""
+}
+
+SpectreStaff: {
+	DisplayName: Spectre Staff
+	Tooltip: ""
 }

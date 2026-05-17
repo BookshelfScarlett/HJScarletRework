@@ -324,3 +324,8 @@ AbyssalWorld: {
 	DisplayName: 时限残片
 	Tooltip: '''"不要被那些乍看之下美妙的东西所迷惑，触手可及不意味着立刻得到。"'''
 }
+
+DragonSword: {
+	// DisplayName: Dragon Sword
+	// Tooltip: ""
+}

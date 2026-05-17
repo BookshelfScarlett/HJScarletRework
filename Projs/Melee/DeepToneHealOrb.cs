@@ -36,8 +36,6 @@ namespace HJScarletRework.Projs.Melee
             Projectile.timeLeft = GetSeconds(3);
         }
         private float SearchDistance = 460f;
-        private int TotalBounceTime = 2;
-        private float KillDistance = 1800f;
         public bool UseHeal = false;
         public override void AI()
         {

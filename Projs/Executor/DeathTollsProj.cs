@@ -127,7 +127,7 @@ namespace HJScarletRework.Projs.Executor
             //普攻
             if (!Stealth)
             {
-                Projectile.AddExecutionTimePreHit(ItemType<DeathTolls>());
+                Projectile.AddExecutionTimeImmediate(ItemType<DeathTolls>());
                 //下面这个会扔到一个统一的管理里面。
 
                 if (Projectile.numHits % 2 == 0)

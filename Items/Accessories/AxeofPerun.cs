@@ -20,16 +20,16 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetArmorPenetration<ExecutorDamageClass>() += 10;
-            player.HJScarlet().blackKeyDoT = true;
-            player.HJScarlet().blackKeyReduceDefense = 5;
+            player.GetCritChance<ExecutorDamageClass>() += 5;
+            player.HJScarlet().critDamageExecutor += 0.10f;
+
 
         }
         public override void AddRecipes()
         {
             CreateRecipe().
                 AddRecipeGroup(HJScarletRecipeGroup.AnyCopperBar, 15).
-                AddIngredient(ItemID.SharkToothNecklace).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyEvilBar, 10).
                 AddTile(TileID.Anvils).
                 Register();
         }

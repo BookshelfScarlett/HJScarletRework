@@ -141,7 +141,7 @@ namespace HJScarletRework.Projs.Executor
         {
             SoundEngine.PlaySound(HJScarletSounds.Hammer_LightHit with { MaxInstances = 0, Pitch = 0.25f, PitchVariance = 0.1f }, Projectile.Center);
             if (!Owner.HasProj<ThePunishmentExecution>())
-                Projectile.AddExecutionTimePreHit(ItemType<ThePunishment>());
+                Projectile.AddExecutionTimeImmediate(ItemType<ThePunishment>());
             for (int i = 0; i < 10; i++)
             {
                 new ShinyCrossStar(target.Center.ToRandCirclePos(16f), RandVelTwoPi(1.3f, 5f), RandLerpColor(Color.Goldenrod, Color.Orange), 120, RandRotTwoPi, 1f, 0.48f, false).Spawn();

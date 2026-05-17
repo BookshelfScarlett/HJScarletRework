@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HJScarletRework.Assets.Registers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
@@ -28,11 +29,17 @@ namespace HJScarletRework.Globals.Methods
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.PointWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
         }
+        public static void EnterShaderArea(this SpriteBatch SB, SpriteSortMode mode, BlendState blendState )
+        {
+            SB.End();
+            SB.Begin(mode, blendState, SamplerState.PointWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+        }
         public static void EnterShaderArea(this SpriteBatch SB, BlendState blendState)
         {
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, blendState, SamplerState.PointWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
         }
+        
 
         public static void EndShaderArea(this SpriteBatch SB)
         {
@@ -93,5 +100,28 @@ namespace HJScarletRework.Globals.Methods
             }
         }
         public static Color ToAddColor(this Color color, byte alphaValue = 0) => color with { A = alphaValue };
+        public static void ApplyAlphaCut(Vector4 UVOffset, Vector2 UV, Vector2 UVMult, Color color)
+        {
+            Effect effect2 = HJScarletShader.AlphaFadeNoiseColor;
+            effect2.Parameters["uFadeoutLeftLength"].SetValue(UVOffset.X);
+            effect2.Parameters["uFadeinRigtLength"].SetValue(UVOffset.Y);
+            effect2.Parameters["uFadeinTopLength"].SetValue(UVOffset.Z);
+            effect2.Parameters["uFadeinBottomLength"].SetValue(UVOffset.W);
+            effect2.Parameters["UVOffset"].SetValue(UV);
+            effect2.Parameters["UVMult"].SetValue(UVMult);
+            effect2.Parameters["OverlayColor"].SetValue(color.ToVector4());
+            effect2.CurrentTechnique.Passes[0].Apply();
+        }
+        public static void ApplyAlphaCut(Vector4 UVOffset, Vector2 UV, Vector2 UVMult)
+        {
+            Effect effect2 = HJScarletShader.AlphaFade;
+            effect2.Parameters["uFadeoutLeftLength"].SetValue(UVOffset.X);
+            effect2.Parameters["uFadeinRigtLength"].SetValue(UVOffset.Y);
+            effect2.Parameters["uFadeinTopLength"].SetValue(UVOffset.Z);
+            effect2.Parameters["uFadeinBottomLength"].SetValue(UVOffset.W);
+            effect2.Parameters["UVOffset"].SetValue(UV);
+            effect2.Parameters["UVMult"].SetValue(UVMult);
+            effect2.CurrentTechnique.Passes[0].Apply();
+        }
     }
 }

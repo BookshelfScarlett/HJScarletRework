@@ -38,12 +38,10 @@ namespace HJScarletRework.Items
             //}
             //Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<MoltenDaggerMark>(), 0, knockback, player.whoAmI);
             //Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<GhostDaggerMark>(), 0, knockback, player.whoAmI);
-            //Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<DesertDaggerMark>(), 0, knockback, player.whoAmI);
-            Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<SundownerFlareGun>(), 0, knockback, player.whoAmI);
+            Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<DesertDaggerMark>(), 0, knockback, player.whoAmI);
             return false;
             //Vector2 ownerMW = player.LocalMouseWorld();
             //添加需要的攻击单位
-            return false;
         }
     }
 

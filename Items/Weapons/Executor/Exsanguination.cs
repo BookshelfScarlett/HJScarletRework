@@ -17,8 +17,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override float ExecutionStrikeDamageMult => 1;
         public override void ExSD()
         {
-            Item.width = 172;
-            Item.height = 72;
             Item.damage = 33;
             Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 5f;
@@ -37,11 +35,6 @@ namespace HJScarletRework.Items.Weapons.Executor
                 DisasterRarity.DrawRarity2(line);
                 return false;
             }
-            //if (line.Mod == "Terraria" && line.Name == "Damage")
-            //{
-            //    DisasterRarity.DrawMisc(line);
-            //    return false;
-            //}
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override bool CanUseItem(Player player) => !player.HasProj(Item.shoot);

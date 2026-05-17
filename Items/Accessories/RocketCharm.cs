@@ -1,4 +1,6 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Items.Material;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
@@ -16,18 +18,17 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.HJScarlet().critDamageExecutor += 0.15f;
+            player.GetArmorPenetration<ExecutorDamageClass>() += 30;
             player.HJScarlet().blackKeyDoT = true;
-            player.HJScarlet().blackKeyDefenseBuff = 0.50f;
+            player.HJScarlet().blackKeyReduceDefense = 20;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.SpectreBar, 10).
-                AddIngredient(ItemID.SoulofNight, 10).
+                AddIngredient<DeepBar>(10).
+                AddIngredient(ItemID.SoulofFright, 10).
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }
-
     }
 }

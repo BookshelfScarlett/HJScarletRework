@@ -66,7 +66,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-                Projectile.AddExecutionTimePreHit(ItemType<Sundowner>());
+                Projectile.AddExecutionTimeImmediate(ItemType<Sundowner>());
         }
         public override void OnKill(int timeLeft)
         {

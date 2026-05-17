@@ -12,3 +12,13 @@ BambooRocket: {
 	DisplayName: 火箭竹
 	Tooltip: 发射会追踪的竹
 }
+
+TerraFlamethrower: {
+	DisplayName: 泰拉喷火器
+	Tooltip:
+		'''
+		攻击一定时间后会将燃素瓶投出，并在命中敌人后造成爆炸
+		爆炸时为敌人施加具有传染性的泰拉燃素效果
+		80%概率不消耗凝胶
+		'''
+}

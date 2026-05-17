@@ -16,3 +16,8 @@ Corona: {
 		按下鼠标右键将水晶球降低至玩家高度
 		'''
 }
+
+DragonStaff: {
+	// DisplayName: Dragon Staff
+	// Tooltip: ""
+}

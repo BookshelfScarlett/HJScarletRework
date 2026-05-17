@@ -77,7 +77,7 @@ namespace HJScarletRework.Projs.Executor
             modifiers.DefenseEffectiveness *= 0;
             bool hasBuff = Owner.HJScarlet().exsanguinationBuffTime != 0;
             if(!hasBuff)
-            Projectile.AddExecutionTimePreHit(ItemType<Exsanguination>());
+            Projectile.AddExecutionTimeImmediate(ItemType<Exsanguination>());
             SoundStyle style = hasBuff ? HJScarletSounds.Light_FleshHit with { MaxInstances = 4, Volume = 0.70f } : HJScarletSounds.Light_ShieldHit with { MaxInstances = 4, Volume = 0.70f };
             SoundEngine.PlaySound(style, Projectile.Center);
         }

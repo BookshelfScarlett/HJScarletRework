@@ -176,7 +176,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
-            Projectile.AddExecutionTimePreHit(ItemType<TheDefiler>());
+            Projectile.AddExecutionTimeImmediate(ItemType<TheDefiler>());
             if(Projectile.numHits > 5)
             {
                 AttackType = State.Return;

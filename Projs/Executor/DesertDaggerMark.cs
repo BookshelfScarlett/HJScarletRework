@@ -156,7 +156,6 @@ namespace HJScarletRework.Projs.Executor
             for(int i =0;i<8;i++)
                 SB.Draw(tex, drawPos + ToRadians(360f / 8 * i).ToRotationVector2() * 2f, null, Color.White.ToAddColor(50), rot, tex.ToOrigin(), Projectile.scale, se, 0);
             SB.Draw(tex, drawPos, null, Color.White, rot, tex.ToOrigin(), Projectile.scale, se, 0);
-            
             ExPostPreDraw();
             return false;
         }
@@ -200,6 +199,16 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ExPostPreDraw()
         {
+            SB.EnterShaderArea();
+            //Texture2D value = HJScarletTexture.Texture_StandardGradient.Value;
+            //Effect ef = HJScarletShader.FogShader;
+            //ef.Parameters["iTime"].SetValue((float)Main.GlobalTimeWrappedHourly);
+            //ef.Parameters["iResolution"].SetValue(new Vector2(value.Width, value.Height));
+            //ef.Parameters["iStrength"].SetValue(.05f);
+            //ef.Parameters["DisplacementMap"].SetValue(HJScarletTexture.Texture_SnowCloud.Value);
+            //ef.CurrentTechnique.Passes[0].Apply();
+            //SB.Draw(value, Projectile.Center - Main.screenPosition, null, Color.White, 0, value.ToOrigin(), 4, 0, 0);
+            SB.EndShaderArea();
         }
     }
     public class GhostDaggerMark : DaggerMarkClass

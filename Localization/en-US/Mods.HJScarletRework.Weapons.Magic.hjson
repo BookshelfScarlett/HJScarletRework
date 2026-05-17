@@ -16,3 +16,8 @@ Corona: {
 		Press right mouse button to lower the crystal ball to the player's height
 		'''
 }
+
+DragonStaff: {
+	DisplayName: Dragon Staff
+	Tooltip: ""
+}

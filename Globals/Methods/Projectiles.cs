@@ -118,14 +118,14 @@ namespace HJScarletRework.Globals.Methods
                     return true;
                 else if (searchSecondTarget)
                 {
-                    target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall,hitLine:hitLine);
+                    target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall, hitLine: hitLine);
                     if (target != null && target.CanBeChasedBy(proj))
                         return true;
                 }
             }
             else if (searchSecondTarget)
             {
-                    target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall,hitLine:hitLine);
+                target = proj.Center.FindClosestTarget(searchDistance, ignoreTiles: canPassWall, hitLine: hitLine);
                 if (target != null && target.CanBeChasedBy(proj))
                     return true;
             }
@@ -196,7 +196,7 @@ namespace HJScarletRework.Globals.Methods
             //返回这个NPC实例
             return acceptableTarget;
         }
-        public static NPC FindClosestTarget(this Projectile p, float maxDist, Vector2 center, bool bossFirst = false, bool ignoreTiles = true, bool arrayFirst = false, bool hitLine=false)
+        public static NPC FindClosestTarget(this Projectile p, float maxDist, Vector2 center, bool bossFirst = false, bool ignoreTiles = true, bool arrayFirst = false, bool hitLine = false)
         {
             //bro我真的要遍历整个NPC吗？
             float distStoraged = maxDist;
@@ -481,6 +481,7 @@ namespace HJScarletRework.Globals.Methods
             proj.penetrate = penetrates;
             proj.stopsDealingDamageAfterPenetrateHits = stopDealingDamage;
         }
+        public static Vector2 GetNormalVector2(this Vector2 beginPos, Vector2 endPos, Vector2? normalvalue = null) => (endPos - beginPos).ToSafeNormalize(normalvalue);
 
         public static bool IsLegal(this NPC target) => target != null && target.CanBeChasedBy();
         public static void ResetBoomerangReturn(this Projectile proj, int pene = -1)
@@ -511,11 +512,6 @@ namespace HJScarletRework.Globals.Methods
                 proj.velocity.X = -oldVelocity.X * xMult;
             if (proj.velocity.Y != oldVelocity.Y)
                 proj.velocity.Y = -oldVelocity.Y * yMult;
-        }
-        public static float MountedOwnerPosX(this Projectile proj, float value, bool reverse = false)
-        {
-            Player owner = Main.player[proj.owner];
-            return owner.MountedCenter.X + reverse.ToDirectionInt() * value;
         }
         public static void AddFrames(this Projectile proj, int frameCounts = 3, int totalFrames = 8)
         {
@@ -555,12 +551,12 @@ namespace HJScarletRework.Globals.Methods
         {
             foreach (var proj in Main.ActiveProjectiles)
             {
-                    if (proj.owner != player.whoAmI)
-                        continue;
-                    if (!proj.friendly)
-                        continue;
-                    if (!extraCondition)
-                        continue;
+                if (proj.owner != player.whoAmI)
+                    continue;
+                if (!proj.friendly)
+                    continue;
+                if (!extraCondition)
+                    continue;
                 for (int i = 0; i < type.Length; i++)
                 {
                     if (type[i] == proj.type)

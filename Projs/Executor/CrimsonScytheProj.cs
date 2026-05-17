@@ -26,7 +26,6 @@ namespace HJScarletRework.Projs.Executor
         /// </summary>
         private float TargetRotation = 0;
         private Vector2 HeldPos;
-        private float SwingRotation;
         private Vector2 InitVector;
         public enum SwingState
         {
@@ -150,7 +149,7 @@ namespace HJScarletRework.Projs.Executor
 
         private void FullCircleAniHandlerBegin()
         {
-            float easedProgress = (ScytheAnimation.GetAniProgress(AniID.Begin));
+            float easedProgress = (ScytheAnimation.GetAniProgress(0));
             float curRotation = ScytheAnimation.UpdateAngle(-105, -115, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult(easedProgress);
@@ -168,7 +167,7 @@ namespace HJScarletRework.Projs.Executor
                 SoundEngine.PlaySound(HJScarletSounds.Hammer_Shoot[2], Owner.Center);
             }
 
-            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.Mid));
+            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(1));
             float curRotation = ScytheAnimation.UpdateAngle(-115, 200, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult2(easedProgress);
@@ -181,7 +180,7 @@ namespace HJScarletRework.Projs.Executor
 
         private void FullCircleAniHandlerEnd()
         {
-            float easedProgress = EaseOutCubic(ScytheAnimation.GetAniProgress(AniID.End));
+            float easedProgress = EaseOutCubic(ScytheAnimation.GetAniProgress(2));
             float curRotation = ScytheAnimation.UpdateAngle(200, 220, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult3(easedProgress);
@@ -219,7 +218,7 @@ namespace HJScarletRework.Projs.Executor
 
         private void RightHalftAniHandlerBegin()
         {
-            float easedProgress = (ScytheAnimation.GetAniProgress(AniID.Begin));
+            float easedProgress = (ScytheAnimation.GetAniProgress(0));
             float curRotation = ScytheAnimation.UpdateAngle(200, 190, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetLerp_Mid(easedProgress, 0);
@@ -233,7 +232,7 @@ namespace HJScarletRework.Projs.Executor
 
         {
 
-            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.Mid));
+            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(1));
             if (!PlaySound && easedProgress > 0.15f)
             {
                 PlaySound = true;
@@ -249,7 +248,7 @@ namespace HJScarletRework.Projs.Executor
         }
         private void RightHalftAniHandlerEnd()
         {
-            float easedProgress = EaseOutCubic(ScytheAnimation.GetAniProgress(AniID.End));
+            float easedProgress = EaseOutCubic(ScytheAnimation.GetAniProgress(2));
             float curRotation = ScytheAnimation.UpdateAngle(800, 820, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetLerp_Mid(easedProgress, 2);
@@ -303,7 +302,7 @@ namespace HJScarletRework.Projs.Executor
         }
         private void LeftHalftAniHandlerBegin()
         {
-            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.Begin));
+            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(0));
             float curRotation = ScytheAnimation.UpdateAngle(-150, -160, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult(easedProgress);
@@ -320,7 +319,7 @@ namespace HJScarletRework.Projs.Executor
                 SoundEngine.PlaySound(HJScarletSounds.Hammer_Shoot[0], Owner.Center);
             }
 
-            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(AniID.Mid));
+            float easedProgress = EaseInCubic(ScytheAnimation.GetAniProgress(1));
 
             float curRotation = ScytheAnimation.UpdateAngle(-160, 140, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
@@ -333,7 +332,7 @@ namespace HJScarletRework.Projs.Executor
 
         private void LeftHalftAniHandlerEnd()
         {
-            float easedProgress = EaseOutCubic(ScytheAnimation.GetAniProgress(AniID.End));
+            float easedProgress = EaseOutCubic(ScytheAnimation.GetAniProgress(2));
             float curRotation = ScytheAnimation.UpdateAngle(140, 150, Projectile.direction, easedProgress);
             Matrix matrix = Matrix.CreateRotationZ(curRotation) * Matrix.CreateScale(1, 1, 1);
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, matrix) * 1.2f * GetScaleMult3(easedProgress);

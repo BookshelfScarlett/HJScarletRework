@@ -63,6 +63,9 @@ Melee: {
 	AbyssalWorldVortex.DisplayName: Abyssal World Vortex
 	DeepToneMouth.DisplayName: Deep Tone Mouth
 	DeepToneHealOrb.DisplayName: Deep Tone Heal Orb
+	DragonSwordHeldProj.DisplayName: Dragon Sword Held Proj
+	DragonSwordSlash.DisplayName: Dragon Sword Slash
+	FrostoftheStormHeldProj.DisplayName: Frostofthe Storm Held Proj
 }
 
 Typeless: {
@@ -78,6 +81,10 @@ Typeless: {
 	RuneWizardProj.DisplayName: Rune Wizard Proj
 	FloatingPlants.DisplayName: Floating Plants
 	InvisBoom.DisplayName: Invis Boom
+	TerraFlamethrowerHeldProj.DisplayName: Terra Flamethrower Held Proj
+	FrostHammerExecution.DisplayName: Frost Hammer Execution
+	FrostHammerProj.DisplayName: Frost Hammer Proj
+	SpectreStaffGhost.DisplayName: Spectre Staff Ghost
 }
 
 Pets: {
@@ -165,6 +172,19 @@ Executor: {
 	SundownerRocket.DisplayName: Sundowner Rocket
 	SundownerFlareGun.DisplayName: Sundowner Flare Gun
 	SundownerFireball.DisplayName: Sundowner Fireball
+	DragonSwordFireball.DisplayName: Dragon Sword Fireball
+	FrostoftheStormSlash.DisplayName: Frostofthe Storm Slash
+	FrostoftheStormExecution.DisplayName: Frostofthe Storm Execution
+	FrostoftheStormHeldProj.DisplayName: Frostofthe Storm Held Proj
+	FrostoftheStormChargeProj.DisplayName: Frostofthe Storm Charge Proj
+	FrostoftheStormSlashGiant.DisplayName: Frostofthe Storm Slash Giant
+	FleshtumorHeldProj.DisplayName: Fleshtumor Held Proj
+	FleshtumorHunger.DisplayName: Fleshtumor Hunger
+	FleshtumorHungerStick.DisplayName: Fleshtumor Hunger Stick
+	FrostHammerIceSpike.DisplayName: Frost Hammer Ice Spike
+	SpectreStaffExecution.DisplayName: Spectre Staff Execution
+	SpectreStaffHeldProj.DisplayName: Spectre Staff Held Proj
+	SpectreStaffJavelin.DisplayName: Spectre Staff Javelin
 }
 
 Ranged: {
@@ -175,6 +195,7 @@ Ranged: {
 	ClimaticHawstringProj.DisplayName: Climatic Hawstring Proj
 	BambooStick.DisplayName: Bamboo Stick
 	SundownerHeldProj.DisplayName: Sundowner Held Proj
+	TerraFlamethrowerTank.DisplayName: Terra Flamethrower Tank
 }
 
 Magic: {

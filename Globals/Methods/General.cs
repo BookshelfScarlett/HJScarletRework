@@ -128,6 +128,24 @@ namespace HJScarletRework.Globals.Methods
                 d.alpha = dAlpha;
             }
         }
+        /// <summary>
+        /// 检测一条线段是否与一个轴对齐矩形（AABB）相交，支持线段宽度。
+        /// 适用于判定激光、射线等与矩形区域的碰撞。
+        /// 注意：目前仅用于“圣神断罪”激光的碰撞检测。
+        /// </summary>
+        /// <param name="start">线段的起始点。</param>
+        /// <param name="end">线段的结束点。</param>
+        /// <param name="rect">要检测碰撞的矩形。</param>
+        /// <param name="lineWidth">线段的虚拟宽度（像素），用于模拟较粗的碰撞范围。默认值4。</param>
+        /// <param name="checkDistance">该参数在当前实现中未使用，保留供将来扩展。默认值8。</param>
+        /// <returns>如果线段（或其加粗范围）与矩形相交，或者线段的端点位于矩形内部，则返回 <c>true</c>；否则返回 <c>false</c>。</returns>
+        /// <remarks>
+        /// 检测逻辑包括：
+        /// <list type="bullet">
+        /// <item><description>起始点或结束点是否在矩形内部；</description></item>
+        /// <item><description>调用 <see cref="Collision.CheckAABBvLineCollision"/> 进行带宽度的线段-矩形相交测试。</description></item>
+        /// </list>
+        /// </remarks>
         public static bool LineThroughRect(Vector2 start, Vector2 end, Rectangle rect, int lineWidth = 4, int checkDistance = 8)
         {
             float point = 0f;
@@ -246,11 +264,20 @@ namespace HJScarletRework.Globals.Methods
         }
         public static bool IsItemName(this DrawableTooltipLine line) => line.Name == "ItemName" && line.Mod == "Terraria";
         /// <summary>
-        /// 控制玩家的臂膀
+        /// 控制玩家的手臂旋转，可选择前臂、后臂或双臂。
         /// </summary>
-        /// <param name="player"></param>
-        /// <param name="armRot"></param>
-        /// <param name="specificArm">指定要玩家哪一条手臂，默认值为0，即双手，低于<0的值，则为背部的手，高于>0的值，则为前部的手</param>
+        /// <param name="player">目标玩家。</param>
+        /// <param name="armRot">手臂的目标旋转角度（世界坐标系下的弧度，通常为武器/物品的方向）。</param>
+        /// <param name="specificArm">
+        /// 指定要控制的手臂：<br/>
+        /// -  <c>0</c>（默认）：同时控制前臂和后臂。<br/>
+        /// -  <c>&gt;0</c>（正数）：仅控制前臂（CompositeArmFront）。<br/>
+        /// -  <c>&lt;0</c>（负数）：仅控制后臂（CompositeArmBack）。
+        /// </param>
+        /// <param name="customArmRot">
+        /// 手臂的本地基础偏移角度（弧度），用于调整手臂默认朝向。实际最终旋转角度 = <paramref name="armRot"/> - <paramref name="customArmRot"/>。<br/>
+        /// 默认值为 <see cref="PiOver2"/>（90°），表示手臂默认指向正右方时，需要减去此偏移以获得正确的贴图旋转。
+        /// </param>
         public static void ControlPlayerArm(this Player player, float armRot, int specificArm = 0, float customArmRot = PiOver2)
         {
             float armType = Math.Sign(specificArm);
@@ -267,6 +294,12 @@ namespace HJScarletRework.Globals.Methods
                     player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, armRot - customArmRot);
                     break;
             }
+        }
+        public static Vector2 GetToMouseVector2(this Player player, Vector2 BeginPos)
+        {
+            Vector2 vector = Main.MouseWorld - BeginPos;
+            vector = vector.SafeNormalize(Vector2.UnitX);
+            return vector;
         }
         public static Tile GetTileCoord(int x, int y)
         {
@@ -301,11 +334,6 @@ namespace HJScarletRework.Globals.Methods
             else
                 return proj.damage > 5 && proj.friendly && !proj.hostile;
 
-        }
-        public static void SetUpRarityPrice(this Item item, int rarityID)
-        {
-            item.rare = rarityID;
-            item.value = HJScarletShopPrice.ConvertedToValue(rarityID);
         }
     }
 }

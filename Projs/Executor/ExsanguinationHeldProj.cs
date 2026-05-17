@@ -105,7 +105,7 @@ namespace HJScarletRework.Projs.Executor
             bool ifStillUse = (Owner.channel || Owner.controlUseTile) && !Owner.noItems && !Owner.CCed;
             if (!ifStillUse)
             {
-                //RemoveSlot(Owner, ItemType<Exsanguination>());
+                //RemoveExecutionProgress(Owner, ItemType<Exsanguination>());
                 Projectile.Kill();
                 return true;
             }

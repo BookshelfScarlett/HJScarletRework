@@ -90,7 +90,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { Variants = [1], MaxInstances = 0, Pitch = 0.412f + Projectile.numHits * 0.1f, Volume = 0.925f }, Projectile.Center);
-            Projectile.AddExecutionTimePreHit(ItemType<SimpleHandAxe>());
+            Projectile.AddExecutionTimeImmediate(ItemType<SimpleHandAxe>());
             for (int i = 0; i < 16; i++)
             {
                 Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin);

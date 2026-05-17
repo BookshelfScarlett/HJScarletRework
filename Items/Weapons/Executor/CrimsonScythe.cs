@@ -21,8 +21,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override void ExSD()
         {
             Item.DamageType = ExecutorDamageClass.Instance;
-            Item.width = 88;
-            Item.height = 82;
             Item.damage = 456;
             Item.useTime = 30;
             Item.useAnimation = 30;

@@ -61,6 +61,13 @@ CowboyExecutor: {
 		'''
 }
 
+MaidExecutor: {
+	HelmetTooltip: ""
+	ChestplateTooltip: ""
+	LegsTooltip: ""
+	SetBonus: ""
+}
+
 RaincoatExecutor: {
 	HelmetTooltip: 5% increased executor critcal strike chance
 	ChestplateTooltip: 5% increased executor damage
@@ -200,4 +207,19 @@ MonkLegs: {
 		+10 executor armor penetration
 		30% increased movement speed
 		'''
+}
+
+DiverBody: {
+	DisplayName: Diver Body
+	Tooltip: ""
+}
+
+DiverHead: {
+	DisplayName: Diver Head
+	Tooltip: ""
+}
+
+DiverLegs: {
+	DisplayName: Diver Legs
+	Tooltip: ""
 }

@@ -47,7 +47,6 @@ namespace HJScarletRework.Globals.Handlers
         public static string GetVanillaAssetPath(VanillaAsset vanillaAsset, int id) => $"Terraria/Images/{vanillaAsset}_{id}";
         public static Texture2D GetVanillaAsset(VanillaAsset vanillaAsset, int id)
         {
-            Texture2D tex = null;
             if (vanillaAsset == VanillaAsset.Item)
             {
                 return TextureAssets.Item[id].Value;

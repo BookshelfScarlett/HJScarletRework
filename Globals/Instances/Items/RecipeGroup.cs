@@ -21,6 +21,7 @@ namespace HJScarletRework.Globals.Instances.Items
         public static string AnyGoldCritter;
         public static string AnyGoldBar;
         public static string AnyEvilScale;
+        public static string AnyEvilBar;
         #region Crates
         public static string AnyIceCrate;
         public static string AnyJungleCrate;
@@ -59,6 +60,7 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyGoldCritter = CreateRecipeGroup(nameof(AnyGoldCritter), goldList);
             AnyGoldBar = CreateRecipeGroup(nameof(AnyGoldBar), ItemID.GoldBar, ItemID.PlatinumBar);
             AnyEvilScale = CreateRecipeGroup(nameof(AnyEvilScale), ItemID.ShadowScale, ItemID.TissueSample);
+            AnyEvilBar = CreateRecipeGroup(nameof(AnyEvilBar), ItemID.DemoniteBar, ItemID.CrimtaneBar);
         }
         public override void Unload()
         {
@@ -75,6 +77,7 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyGoldCritter = null;
             AnyGoldBar = null;
             AnyEvilScale = null;
+            AnyEvilBar = null;
         }
         public static string CreateRecipeGroup(string name, params int[] AllItem)
         {

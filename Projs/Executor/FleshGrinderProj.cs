@@ -179,7 +179,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
-            Projectile.AddExecutionTimePreHit(ItemType<FleshGrinder>());
+            Projectile.AddExecutionTimeImmediate(ItemType<FleshGrinder>());
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 2, Pitch = -0.2f }, target.Center);
             if(Projectile.numHits > 2)
             {

@@ -63,7 +63,7 @@ namespace HJScarletRework.Globals.Players
             }
 
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
-            if (item.DamageType == ExecutorDamageClass.Instance)
+            if (item.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
                 GlobalExecutorOnHit(target, hit, damageDone);
                 if (cowboyExecutor && cowboyRevolverTimer == 0)
@@ -137,6 +137,10 @@ namespace HJScarletRework.Globals.Players
         public void ModifyCritDamage(NPC target, ref NPC.HitModifiers modifiers)
         {
             float totalCritsBonus = 0f;
+            if(tacticalTime > 0 && executorSwordMark && modifiers.DamageType.CountsAsClass<ExecutorDamageClass>())
+            {
+                modifiers.SetCrit();
+            }
             if (CreationHatSet && modifiers.DamageType.CountsAsClass(DamageClass.Magic))
             {
                 //将所有伤害直接设置为暴击类型，这里先过暴击情况
@@ -155,7 +159,7 @@ namespace HJScarletRework.Globals.Players
                 float critBuff = PreciousTargetCrtis / 100f;
                 totalCritsBonus += critBuff;
             }
-            if (modifiers.DamageType == ExecutorDamageClass.Instance)
+            if (modifiers.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
                 totalCritsBonus += critDamageExecutor;
             }

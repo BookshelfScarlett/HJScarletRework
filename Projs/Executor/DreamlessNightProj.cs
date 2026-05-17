@@ -198,7 +198,7 @@ namespace HJScarletRework.Projs.Executor
             }
 
             if (!Owner.HasProj<DreamlessNightMinion>(out int projID) && !Projectile.HJScarlet().ExecutionStrike)
-                Projectile.AddExecutionTimePreHit(ItemType<DreamlessNight>());
+                Projectile.AddExecutionTimeImmediate(ItemType<DreamlessNight>());
             //在命中的时候，我们才生成需要的仆从
             //当然，前提是条件合理
             if (!Owner.HasProj<DreamlessNightMinion>() && Projectile.HJScarlet().ExecutionStrike)

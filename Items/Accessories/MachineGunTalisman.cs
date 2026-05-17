@@ -19,14 +19,15 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().blackKeyHeal = 35;
+            player.HJScarlet().blackKeyDefenseBuff = .25f;
 
         }
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient<DeepBar>(10).
                 AddIngredient<ArcBow>().
-                AddIngredient(ItemID.SoulofMight, 10).
+                AddIngredient(ItemID.SpectreBar, 10).
+                AddIngredient(ItemID.SoulofSight, 10).
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }

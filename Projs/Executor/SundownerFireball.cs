@@ -141,7 +141,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if(!Owner.HasProj<SundownerRocket>())
             SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1, Pitch = 0.3f }, Projectile.Center);
-            Projectile.AddExecutionTimePreHit(ItemType<Sundowner>());
+            Projectile.AddExecutionTimeImmediate(ItemType<Sundowner>());
             base.OnHitNPC(target, hit, damageDone);
         }
 

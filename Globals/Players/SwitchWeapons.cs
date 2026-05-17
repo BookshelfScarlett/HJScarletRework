@@ -60,7 +60,10 @@ namespace HJScarletRework.Globals.Players
             ItemID.RainCoat,
             ItemID.FishCostumeMask,
             ItemID.FishCostumeShirt,
-            ItemID.FishCostumeFinskirt
+            ItemID.FishCostumeFinskirt,
+            ItemID.MaidHead,
+            ItemID.MaidShirt,
+            ItemID.MaidPants
         };
         //一个额外的工具方法，用于反向字典映射
         public static int GetReverseWeapon(int curType)
@@ -155,6 +158,21 @@ namespace HJScarletRework.Globals.Players
                         break;
                     case ItemID.FloretProtectorLegs:
                         AlterArmorType(item, FlorectProtectorLegsAlter.Defense, false, ItemRarityID.Red);
+                        break;
+                }
+            }
+            if(Condition.DownedPlantera.IsMet())
+            {
+                switch(item)
+                {
+                    case ItemID.MaidHead:
+                        AlterArmorType(item, MaidHelmetAlter.Defense, false, ItemRarityID.Yellow);
+                        break;
+                    case ItemID.MaidShirt:
+                        AlterArmorType(item, MaidChestplateAlter.Defense, false, ItemRarityID.Yellow);
+                        break;
+                    case ItemID.MaidPants:
+                        AlterArmorType(item, MaidLegsAlter.Defense, false, ItemRarityID.Yellow);
                         break;
                 }
             }

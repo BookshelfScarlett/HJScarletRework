@@ -94,6 +94,7 @@ namespace HJScarletRework.Globals.Players
         public bool blackKeyDoT = false;
         public int blackKeyReduceDefense = 0;
         public bool blackKeyDefenseTrigger = false;
+        public bool executorSwordMark = false;
         #endregion
 
         #region Pets
@@ -118,10 +119,20 @@ namespace HJScarletRework.Globals.Players
         public float PlayerFinalSpeedStoredTime = 0f;
         #endregion
         #region 处刑攻击
-
+        /// <summary>
+        /// <para>是否允许手动处决模式</para>
+        /// <para>用于标识玩家全局的处决能力类型</para>
+        /// </summary>
         public bool tacticalExecution = false;
+        /// <summary>
+        /// <para>临时手动处决形态切换标志（与 <see cref="tacticalExecution"/> 无关）。</para>
+        /// <para>该字段专门用于处决攻击时动态切换玩家的手持形态（包括手持射弹）。 </para>
+        /// <para>当玩家按下处决键且满足条件时，此字段会被设为 <c>true</c>，并在处决动画结束后需由调用者手动重置为 <c>false</c></para>
+        /// <para>此开关不依赖任何装备，适用于需要临时改变攻击形态的场景（例如使用特殊射弹替换普通投掷物）</para>
+        /// </summary>
+        public bool tacticalExecutionManual = false;
         public int tacticalTime = 0;
-        public bool EeecutorsSwordMarkPlus = false;
+        public bool ExecutorSwordMarkPlus = false;
         public int tacticalPunishTime = 0;
         public int ExecutionTime = 0;
         public int bonusExecutionReduce = 0;
@@ -266,6 +277,21 @@ namespace HJScarletRework.Globals.Players
                         break;
                     case ItemID.FloretProtectorLegs:
                         AlterArmorType2(item.type, i, FlorectProtectorLegsAlter.Defense, false, ItemRarityID.Red, armorSlot);
+                        break;
+                }
+            }
+            if (Condition.DownedPlantera.IsMet())
+            {
+                switch (item.type)
+                {
+                    case ItemID.MaidHead:
+                        AlterArmorType2(item.type, i, MaidHelmetAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
+                        break;
+                    case ItemID.MaidShirt:
+                        AlterArmorType2(item.type, i,MaidChestplateAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
+                        break;
+                    case ItemID.MaidPants:
+                        AlterArmorType2(item.type, i,MaidLegsAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
                         break;
                 }
             }

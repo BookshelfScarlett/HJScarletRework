@@ -174,7 +174,6 @@ namespace HJScarletRework.Projs.Magic
             }
             SoundEngine.PlaySound(HJScarletSounds.Misc_MagicStaffFire with { MaxInstances = 0, Pitch = 0.7f, Volume = 0.30f });
             Vector2 dir2 = (-(Projectile.Center - Main.MouseWorld)).ToSafeNormalize();
-            //Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir2 * Main.rand.NextFloat(8f, 13f), ProjectileType<CoronaFireball>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
             for (int i = 0; i < 7; i++)
             {
                 Vector2 spawnPos = Projectile.Center.ToRandCirclePos(50);

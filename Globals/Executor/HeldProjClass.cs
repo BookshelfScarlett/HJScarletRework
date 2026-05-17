@@ -41,7 +41,7 @@ namespace HJScarletRework.Globals.Executor
             if(Owner.CheckExecution(OriginalItemID) && !Projectile.HJScarlet().ExecutionStrike)
             {
                 Projectile.HJScarlet().ExecutionStrike = true;
-                Owner.RemoveSlot(OriginalItemID);
+                Owner.RemoveExecutionProgress(OriginalItemID);
                 OnExecution();
                 return true;
             }
@@ -53,6 +53,7 @@ namespace HJScarletRework.Globals.Executor
         {
             base.OnKill(timeLeft);
         }
+        public override bool ShouldUpdatePosition() => false;
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
             if (!TileHitbox.Equals(Vector2.Zero))

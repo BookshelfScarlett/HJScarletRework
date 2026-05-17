@@ -15,6 +15,7 @@ namespace HJScarletRework.Assets.Registers
 
         public static Tex2DWithPath Noise_Misc { get; set; }
         public static Tex2DWithPath Noise_Misc2 { get; set; }
+        public static Tex2DWithPath Noise_Aura { get; set; }
 
         public static Tex2DWithPath ColorMap_Aqua { get; set; }
 
@@ -38,6 +39,7 @@ namespace HJScarletRework.Assets.Registers
 
             Noise_Misc = new Tex2DWithPath($"{Path_General}{nameof(Noise_Misc)}");
             Noise_Misc2 = new Tex2DWithPath($"{Path_General}{nameof(Noise_Misc2)}");
+            Noise_Aura = new Tex2DWithPath($"{Path_General}{nameof(Noise_Aura)}");
 
             ColorMap_Aqua = new Tex2DWithPath($"{Path_General}{nameof(ColorMap_Aqua)}");
 
@@ -58,6 +60,7 @@ namespace HJScarletRework.Assets.Registers
 
             Noise_Misc = null;
             Noise_Misc2 = null;
+            Noise_Aura = null;
 
             ColorMap_Aqua = null;
 

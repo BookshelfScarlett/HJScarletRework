@@ -79,7 +79,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.Center, Vector2.Zero, ProjectileType<SundownerFlareGun>(), 0, 0, Owner.whoAmI);
                 proj.originalDamage = Projectile.originalDamage;
-                Owner.RemoveSlot(ItemType<Sundowner>());
+                Owner.RemoveExecutionProgress(ItemType<Sundowner>());
                 
 
                 return true;
@@ -98,7 +98,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 ScreenShakeSystem.AddScreenShakes(firePos, 1f, 10, Projectile.rotation + Pi, 0f);
 
-                SlotId slotId1 =               SoundEngine.PlaySound(HJScarletSounds.Misc_Boom with { Variants = [1], MaxInstances = 0, Pitch = 0.5f,Volume = .35f  }, Projectile.Center);
+                SlotId slotId1 = SoundEngine.PlaySound(HJScarletSounds.Misc_Boom with { Variants = [1], MaxInstances = 0, Pitch = 0.5f, Volume = .35f }, Projectile.Center);
                 if (SoundEngine.TryGetActiveSound(slotId1, out var sound) && !nonStop)
                 {
                     sound.Volume /= 2;
@@ -107,7 +107,7 @@ namespace HJScarletRework.Projs.Executor
 
                 for (int i = -1; i < 2; i += 2)
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos + Projectile.SafeDirByRot() * 30f+ Projectile.SafeDirByRot().RotatedBy(PiOver2) * i * 10f, Projectile.rotation.ToRotationVector2() * 20, ProjectileType<SundownerAmmo>(), Projectile.originalDamage, 0, Owner.whoAmI);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) * i * 10f, Projectile.rotation.ToRotationVector2() * 20, ProjectileType<SundownerAmmo>(), Projectile.originalDamage, 0, Owner.whoAmI);
                     if (nonStop)
                         proj.HJScarlet().HasExecutionMechanic = true;
                     ((SundownerAmmo)proj.ModProjectile).CanPlaySound = i == -1;
@@ -148,11 +148,10 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Vector2 vel = dir.ToRandVelocity(ToRadians(10f), 1.8f, 30.8f);
                     Vector2 offset = dir.ToRandVelocity(ToRadians(0), 7, 11f);
-                    Vector2 posOffset = offset + Main.rand.NextVector2Circular(10f, 5f) + dir *20f;
+                    Vector2 posOffset = offset + Main.rand.NextVector2Circular(10f, 5f) + dir * 20f;
                     new SmokeParticle(firePos.ToRandCirclePos(10f) + posOffset, vel, RandLerpColor(Color.White, Color.Lerp(Color.OrangeRed, Color.Gold, 0.4f)), 40, RandRotTwoPi, 1f, 0.34f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
                 }
             }
-
             Projectile.HJScarlet().ExecutionStrike = false;
         }
         public void ResetAniState()
@@ -160,7 +159,6 @@ namespace HJScarletRework.Projs.Executor
             Helper.IsDone[0] = false;
             Helper.Progress[0] = 0;
         }
-        private bool RecoilTriggered; // 标记本次动画是否已经触发了射击许可
         public void HandleRecoil()
         {
             if (!IsUsing)

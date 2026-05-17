@@ -6,6 +6,7 @@ SwitchWeaponConditionList: {
 	DownedGolem: Golem
 	DownedLifeGods: The Lifebringer
 	DownedEvilBoss: Any Evil Boss
+	DownedPlantera: Plantera
 }
 
 SwitchWeapon: {
@@ -41,8 +42,25 @@ DamageClasses: {
 			FocusTimeLine: ""
 			ExecutionDamageLine: "{0}% increased execution strike damage"
 			ArmorPenetrationLine: "{0} armor penetration"
+			CritDamageLine: "{0} increased critical strike damage"
 		}
 	}
 }
 
 Keybinds.GeneralActionKeybind.DisplayName: Intersct Key
+
+Projectiles: {
+	DragonStaffHeldProj.DisplayName: Dragon Staff Held Proj
+	DragonStaffHeldProjAlt.DisplayName: Dragon Staff Held Proj Alt
+	DragonStaffFrieball.DisplayName: Dragon Staff Frieball
+	DragonSummonHeldProj.DisplayName: Dragon Summon Held Proj
+	DragonSummonProj.DisplayName: Dragon Summon Proj
+	DragonSummonFireball.DisplayName: Dragon Summon Fireball
+}
+
+Items: {
+	DragonSummon: {
+		DisplayName: Dragon Summon
+		Tooltip: ""
+	}
+}

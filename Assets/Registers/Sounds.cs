@@ -1,4 +1,5 @@
 ﻿using Terraria.Audio;
+using XPT.Core.Audio.MP3Sharp.Decoding;
 
 namespace HJScarletRework.Assets.Registers
 {
@@ -64,6 +65,10 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle Sundowner_Fire => new SoundStyle($"{SoundsPath}{nameof(Sundowner_Fire)}");
         public static SoundStyle Smash_AirHeavyAlt => new SoundStyle($"{SoundsPath}{nameof(Smash_AirHeavy)}", numVariants: 2);
         public static SoundStyle Misc_KnifeTossAlt => new SoundStyle($"{SoundsPath}{nameof(Misc_KnifeToss)}", numVariants: 3);
+        public static SoundStyle Misc_AirFlowAlt => new SoundStyle($"{SoundsPath}{nameof(Misc_AirFlowAlt)}", numVariants: 3);
+        public static SoundStyle Misc_AirCharge => new SoundStyle($"{SoundsPath}{nameof(Misc_AirCharge)}");
+        public static SoundStyle Frostwave_Release => new SoundStyle($"{SoundsPath}{nameof(Frostwave_Release)}", numVariants : 3);
+        public static SoundStyle Frostwave_LightRelease => new SoundStyle($"{SoundsPath}{nameof(Frostwave_LightRelease)}");
         public static SoundStyle[] Hammer_Shoot =>
             [
                 Hammer_Shoot1,

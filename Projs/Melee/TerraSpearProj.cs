@@ -270,7 +270,6 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             float rotFixer = PiOver4;
-            //DrawStarShapeTrail();
             SB.EnterShaderArea();
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DarkGreen, 1.26f, 1f);
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.GreenYellow, 0.8f, 1f);

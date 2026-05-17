@@ -6,11 +6,11 @@ using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
-using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Armor.Monk;
 using HJScarletRework.Items.Armor.Shinobi;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Magic;
+using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using System;
@@ -76,6 +76,15 @@ namespace HJScarletRework.Globals.Instances.Items
                         return false;
                     }
                 }
+                foreach (var (itemIDs, drawMethods) in _rarityDrawMapFrost)
+                {
+                    if (itemIDs.Contains(item.type))
+                    {
+                        drawMethods(line);
+                        return false;
+                    }
+                }
+
             }
             if (line.IsItemName() && HJScarletConfigClient.Instance.SpecialRarity)
             {
@@ -102,6 +111,18 @@ namespace HJScarletRework.Globals.Instances.Items
                 SolarRarity.DrawItemName
             }
         };
+        private static readonly Dictionary<HashSet<int>, Action<DrawableTooltipLine>> _rarityDrawMapFrost = new()
+        {
+            {
+                new HashSet<int>
+                {
+                    ItemType<FrostoftheStorm>(),
+                    ItemType<AzureFrostmark>(),
+                },
+                FrostRarity.DrawItemName
+            }
+        };
+
         /// <summary>
         /// 这里每帧都会高频调用，所以该创建哈希表了孩子们。
         /// </summary>

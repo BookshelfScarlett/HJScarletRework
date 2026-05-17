@@ -105,7 +105,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
-                Projectile.AddExecutionTimePreHit(ItemType<BinaryStars>());
+                Projectile.AddExecutionTimeImmediate(ItemType<BinaryStars>());
                 if (Projectile.numHits < 5)
                     NormalHit(target);
                 TargetIndex = target.whoAmI;

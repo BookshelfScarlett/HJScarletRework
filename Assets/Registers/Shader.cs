@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
+using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ModLoader;
 
@@ -16,8 +17,11 @@ namespace HJScarletRework.Assets.Registers
         public static Effect Pixelation;
         public static Effect MetaBallShader;
         public static Effect AlphaFade;
+        public static Effect AlphaFadeNoiseColor;
         public static Effect StandardFlowShader;
         public static Effect LightningShader;
+        public static Effect SlashTrailShader;
+        public static Effect FogShader;
         public override void Load()
         {
             if (Main.dedServ)
@@ -32,8 +36,11 @@ namespace HJScarletRework.Assets.Registers
             Pixelation = LoadShader(nameof(Pixelation));
             MetaBallShader = LoadShader(nameof(MetaBallShader));
             AlphaFade = LoadShader(nameof(AlphaFade));
+            AlphaFadeNoiseColor = LoadShader("AlphaFade_Noise_OColor");
             StandardFlowShader = LoadShader(nameof(StandardFlowShader));
             LightningShader = LoadShader(nameof(LightningShader));
+            SlashTrailShader = LoadShader(nameof(SlashTrailShader));
+            FogShader = LoadShader(nameof(FogShader));
 
             RegisterMiscShader(TerrarRayLaser, "HJScarletReworkTerrarRayLaserPass", nameof(TerrarRayLaser));
             RegisterMiscShader(VolcanoEruptingShader, ToPassName(nameof(VolcanoEruptingShader)), nameof(VolcanoEruptingShader));
@@ -42,6 +49,9 @@ namespace HJScarletRework.Assets.Registers
             RegisterMiscShader(AlphaFade, ToPassName(nameof(AlphaFade)), nameof(AlphaFade));
             RegisterMiscShader(StandardFlowShader, ToPassName(nameof(StandardFlowShader)), nameof(StandardFlowShader));
             RegisterMiscShader(LightningShader, ToPassName(nameof(LightningShader)), nameof(LightningShader));
+            RegisterMiscShader(SlashTrailShader, ToPassName(nameof(SlashTrailShader)), nameof(SlashTrailShader));
+            RegisterMiscShader(AlphaFadeNoiseColor, ToPassName("AlphaFade_Noise_OColor"), "AlphaFade_Noise_OColor");
+            RegisterMiscShader(FogShader, ToPassName(nameof(FogShader)), nameof(FogShader));
         }
         public override void Unload()
         {
@@ -50,8 +60,11 @@ namespace HJScarletRework.Assets.Registers
             Pixelation = null;
             MetaBallShader = null;
             AlphaFade = null;
+            AlphaFadeNoiseColor = null;
             StandardFlowShader = null;
+            SlashTrailShader = null;
             LightningShader = null;
+            FogShader = null;
         }
         public static string ToPassName(string oriShadername) => ShaderPrefix + oriShadername + "Pass";
         public static void RegisterMiscShader(Effect shader, string passName, string registrationName)

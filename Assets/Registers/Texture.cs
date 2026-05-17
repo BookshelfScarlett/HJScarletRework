@@ -20,6 +20,11 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Texture_Swirl5 { get; set; }
         public static Tex2DWithPath Texture_RarityGlow { get; set; }
         public static Tex2DWithPath Texture_StandardGradient { get; set; }
+        public static Tex2DWithPath Texture_SnowCloud { get; set; }
+        public static Tex2DWithPath Texture_SwordSlash { get; set; }
+        public static Tex2DWithPath Texture_SwordSlash1 { get; set; }
+        public static Tex2DWithPath Texture_SwordSlash2 { get; set; }
+        public static Tex2DWithPath Texture_Fog { get; set; }
         public void LoadTexture()
         {
             Texture_BloomRing = new Tex2DWithPath($"{Path_General}{nameof(Texture_BloomRing)}");
@@ -38,6 +43,11 @@ namespace HJScarletRework.Assets.Registers
             Texture_Swirl5 = new Tex2DWithPath($"{Path_General}{nameof(Texture_Swirl5)}");
             Texture_RarityGlow = new Tex2DWithPath($"{Path_General}{nameof(Texture_RarityGlow)}");
             Texture_StandardGradient = new Tex2DWithPath($"{Path_General}{nameof(Texture_StandardGradient)}");
+            Texture_SnowCloud = new Tex2DWithPath($"{Path_General}{nameof(Texture_SnowCloud)}");
+            Texture_SwordSlash= new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash)}");
+            Texture_SwordSlash1= new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash1)}");
+            Texture_SwordSlash2= new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash2)}");
+            Texture_Fog= new Tex2DWithPath($"{Path_General}{nameof(Texture_Fog)}");
 
         }
         public static void UnloadTexture()
@@ -58,6 +68,11 @@ namespace HJScarletRework.Assets.Registers
             Texture_Swirl5 = null;
             Texture_RarityGlow = null;
             Texture_StandardGradient = null;
+            Texture_SnowCloud = null;
+            Texture_SwordSlash = null;
+            Texture_SwordSlash1 = null;
+            Texture_SwordSlash2 = null;
+            Texture_Fog = null;
         }
     }
 }

@@ -9,8 +9,9 @@ namespace HJScarletRework.Globals.Executor
     public class ExecutorGlobalItem : GlobalItem
     {
         public override bool InstancePerEntity => true;
-        public int FocusTimeReduce = 0;
+        public int DefenseBuff = 0;
         public float ExecutionDamageMult = 1;
+        public float CritDamageMult = 0;
         public override int ChoosePrefix(Item item, UnifiedRandom rand)
         {
             return base.ChoosePrefix(item, rand);
@@ -19,75 +20,110 @@ namespace HJScarletRework.Globals.Executor
         {
             ExecutorGlobalItem executorGlobalItem = (ExecutorGlobalItem)base.Clone(from, to);
             executorGlobalItem.ExecutionDamageMult = ExecutionDamageMult;
-            executorGlobalItem.FocusTimeReduce = FocusTimeReduce;
             return executorGlobalItem;
         }
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             return entity.DamageType == ExecutorDamageClass.Instance;
         }
+        public override void HoldItem(Item item, Player player)
+        {
+            player.HJScarlet().critDamageExecutor += CritDamageMult;
+            player.statDefense += DefenseBuff;
+
+        }
         public override void PreReforge(Item item)
         {
-            FocusTimeReduce = 0;
+            DefenseBuff = 0;
             ExecutionDamageMult = 0;
+            CritDamageMult = 0;
         }
-    }
-    public class Fake : ExecutorPrefixs
-    {
-        public override float DamageMult => 0.50f;
-        public override int CritAdd => -15;
-        public override float ExecutionDamageMult => 1f;
-    }
-    public class Digital : ExecutorPrefixs
-    {
-        public override float DamageMult => 1.10f;
-        public override int ArmorPenetrationAdd => 5;
-        public override float ExecutionDamageMult => 1f;
-    }
-    public class Mysterious : ExecutorPrefixs
-    {
-        public override int CritAdd => 10;
-        public override int ArmorPenetrationAdd => 10;
     }
     public class Phantasmic : ExecutorPrefixs
     {
-        public override float DamageMult => 1.10f;
-        public override float ExecutionDamageMult => 1f;
-        public override float UseTimeMult => 0.95f;
-        public override int ArmorPenetrationAdd => 10;
+        public override float DamageMult => 1.12f;
+        public override float CritDamageAdd => .10f;
         public override int CritAdd => 5;
+        public override int DefenseAdded => 0;
+        public override float KnockbackMult => 1.1f;
     }
     public class Evolutional : ExecutorPrefixs
     {
         public override float DamageMult => 1.05f;
-        public override float ExecutionDamageMult => 1;
-        public override float UseTimeMult => 1f;
-        public override int ArmorPenetrationAdd => 5;
-        public override int CritAdd => 3;
+        public override float CritDamageAdd => .05f;
+        public override int CritAdd => 5;
+        public override int DefenseAdded => 0;
+        public override float KnockbackMult => 1.05f;
+    }
+    public class Digital : ExecutorPrefixs
+    {
+        public override float DamageMult => 1.10f;
+        public override float CritDamageAdd => .10f;
+    }
 
+    public class Mysterious : ExecutorPrefixs
+    {
+        public override int CritAdd => 10;
+        public override float CritDamageAdd => .10f;
+        public override float KnockbackMult => .90f;
     }
     public class Foreigner : ExecutorPrefixs
     {
-        public override int ArmorPenetrationAdd => 30;
-        public override int CritAdd => 30;
+        public override int CritAdd => 25;
+        public override float CritDamageAdd => 0.25f;
         public override float ExecutionDamageMult => 1f;
-        public override float UseTimeMult => 1.5f;
+        public override int DefenseAdded => -25;
+        public override float UseTimeMult => 1.7f;
+        public override float KnockbackMult => 1f;
     }
     public class Alterego : ExecutorPrefixs
     {
-        public override int ArmorPenetrationAdd => 15;
+        public override int DefenseAdded => 2;
         public override int CritAdd => -30;
         public override float UseTimeMult => 0.70f;
-        public override float ExecutionDamageMult => 0.50f;
+        public override float ExecutionDamageMult => 0.30f;
+        public override float KnockbackMult => 1f;
     }
+    public class Fake : ExecutorPrefixs
+    {
+        public override float DamageMult => 0.90f;
+        public override int CritAdd => -10;
+        public override float ExecutionDamageMult => 0.90f;
+        public override float KnockbackMult => .90f;
+        public override int DefenseAdded => -10;
+    }
+
     public abstract class ExecutorPrefixs : ModPrefix, ILocalizedModType
     {
         public new string LocalizationCategory => $"DamageClasses.ExecutorDamageClass.Prefixs";
+        /// <summary>
+        /// 伤害加成
+        /// </summary>
         public virtual float DamageMult => 1f;
+        /// <summary>
+        /// 使用时间加成
+        /// </summary>
         public virtual float UseTimeMult => 1f;
+        /// <summary>
+        /// 击退力加成
+        /// </summary>
+        public virtual float KnockbackMult => 1f;
+        /// <summary>
+        /// 暴击加成
+        /// </summary>
         public virtual int CritAdd => 0;
-        public virtual int ArmorPenetrationAdd => 0;
+        /// <summary>
+        /// 防御加成
+        /// </summary>
+        public virtual int DefenseAdded => 0;
+        /// <summary>
+        /// 处决伤害加成
+        /// </summary>
         public virtual float ExecutionDamageMult => 1f;
+        /// <summary>
+        /// 暴击伤害加成
+        /// </summary>
+        public virtual float CritDamageAdd => 0;
         public override PrefixCategory Category => PrefixCategory.AnyWeapon;
         /// <summary>
         /// 使用CountAsClass会导致射手也能roll代行者的词缀
@@ -95,12 +131,13 @@ namespace HJScarletRework.Globals.Executor
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public override bool CanRoll(Item item) => item.DamageType == ExecutorDamageClass.Instance;
+        public override bool CanRoll(Item item) => item.DamageType.CountsAsClass<ExecutorDamageClass>();
         public override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult, ref float scaleMult, ref float shootSpeedMult, ref float manaMult, ref int critBonus)
         {
             damageMult = DamageMult;
             useTimeMult = UseTimeMult;
             critBonus = CritAdd;
+            knockbackMult = KnockbackMult;
         }
         public override void ModifyValue(ref float valueMult)
         {
@@ -110,14 +147,17 @@ namespace HJScarletRework.Globals.Executor
         {
             if (item.DamageType == ExecutorDamageClass.Instance && item.TryGetGlobalItem<ExecutorGlobalItem>(out var result))
             {
-                item.ArmorPenetration += ArmorPenetrationAdd;
+                result.DefenseBuff += DefenseAdded;
                 result.ExecutionDamageMult = ExecutionDamageMult;
+                result.CritDamageMult = CritDamageAdd;
             }
         }
         internal const string FocusDamageNameID = "HJScarletRework:PrefixExecutionDamage";
         internal const string ArmorPenetrationNameID = "HJScarletRework:PrefixArmorPenetration";
+        internal const string CritDamageID = "HJScarletRework:PrefixCritDamage";
         public string ExecutionDamageValue => Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.Prefixs.ExecutionDamageLine").ToLangValue();
         public string ArmorPenetrationValue => Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.Prefixs.ArmorPenetrationLine").ToLangValue();
+        public string CritDamageValue => Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.Prefixs.CritDamageLine").ToLangValue();
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
             if (ExecutionDamageMult != 1f)
@@ -131,16 +171,31 @@ namespace HJScarletRework.Globals.Executor
                 };
                 yield return newLine;
             }
-
-            if (ArmorPenetrationAdd != 0)
+            if (CritDamageAdd != 0f)
             {
-                string insertValue = ArmorPenetrationAdd > 0 ? "+" : string.Empty;
-                string realValue = $"{insertValue}{ArmorPenetrationAdd}";
+                string mult = (CritDamageAdd* 100f).ToString("N0");
+                string insertValue = (CritDamageAdd * 100f) > 0 ? "+" : string.Empty;
+                string realValue = $"{insertValue}{mult}%";
+
+                TooltipLine newLine = new(Mod, CritDamageID, CritDamageValue.ToFormatValue(realValue))
+                {
+                    IsModifier = true,
+                    IsModifierBad = CritDamageAdd < 0f
+                };
+                yield return newLine;
+
+
+            }
+
+            if (DefenseAdded != 0)
+            {
+                string insertValue = DefenseAdded > 0 ? "+" : string.Empty;
+                string realValue = $"{insertValue}{DefenseAdded}";
 
                 TooltipLine newLine = new(Mod, ArmorPenetrationNameID, ArmorPenetrationValue.ToFormatValue(realValue))
                 {
                     IsModifier = true,
-                    IsModifierBad = ArmorPenetrationAdd< 0f
+                    IsModifierBad = DefenseAdded< 0f
                 };
                 yield return newLine;
             }

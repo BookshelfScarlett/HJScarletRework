@@ -163,6 +163,7 @@ namespace HJScarletRework.Globals.List
             {
                 { NPCID.EaterofWorldsHead, "DownedEvilBoss" },
                 { NPCID.Golem, "DownedGolem" },
+                {NPCID.Plantera,"DownedPlantera" },
                 { NPCType<TheLifebringerHead>(),"DownedLifeGods"},
             };
         }

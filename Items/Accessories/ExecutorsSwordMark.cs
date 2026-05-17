@@ -19,6 +19,7 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().tacticalExecution = true;
+            player.HJScarlet().executorSwordMark = true;
         }
         public override void AddRecipes()
         {

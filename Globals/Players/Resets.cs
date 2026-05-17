@@ -18,11 +18,12 @@ namespace HJScarletRework.Globals.Players
             isBeingLove = false;
             heartoftheCrystal = false;
             tacticalExecution = false;
-            EeecutorsSwordMarkPlus = false;
+            ExecutorSwordMarkPlus = false;
             blackKeyHeal = 0;
             blackKeyDefenseBuff = 0;
             blackKeyDoT = false;
             artificalManaStar = false;
+            executorSwordMark = false;
         }
         private void ResetArmor()
         {

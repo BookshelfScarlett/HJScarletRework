@@ -56,3 +56,8 @@ GoldenAppleBuffEnchanted: {
 		...你牙口居然这么好吗？
 		'''
 }
+
+DragonSummonBuff: {
+	// DisplayName: Dragon Summon Buff
+	// Description: Mods.HJScarletRework.Buffs.DragonSummonBuff.Description
+}

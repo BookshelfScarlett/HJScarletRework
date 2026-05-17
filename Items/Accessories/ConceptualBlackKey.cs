@@ -36,7 +36,9 @@ namespace HJScarletRework.Items.Accessories
                 AddIngredient<MiniatureBayonet>().
                 AddIngredient<MachineGunTalisman>().
                 AddIngredient<RocketCharm>().
-                AddIngredient<LivingBar>().
+                AddIngredient<LivingBar>(10).
+                AddIngredient<CubistBar>(10).
+                AddIngredient<EternalBar>(10).
                 AddTile(TileID.TinkerersWorkbench).
                 Register();
         }

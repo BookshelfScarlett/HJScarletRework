@@ -171,7 +171,7 @@ namespace HJScarletRework.Projs.Executor
                 else
                 {
                     if (!Projectile.HJScarlet().ExecutionStrike)
-                        Projectile.AddExecutionTimePreHit(ItemType<DreamingLight>());
+                        Projectile.AddExecutionTimeImmediate(ItemType<DreamingLight>());
                 }
                 SpawnDreamingStriker();
             }

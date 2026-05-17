@@ -62,6 +62,17 @@ CowboyExecutor: {
 		'''
 }
 
+MaidExecutor: {
+	HelmetTooltip:
+		'''
+		增加10%代行者伤害
+		增加5%代行者暴击概率
+		'''
+	ChestplateTooltip: ""
+	LegsTooltip: ""
+	SetBonus: ""
+}
+
 RaincoatExecutor: {
 	HelmetTooltip: 增加5%代行者暴击概率
 	ChestplateTooltip: 增加5%代行者伤害
@@ -199,4 +210,19 @@ MonkLegs: {
 		+10 代行者护甲穿透
 		增加30%移动速度
 		'''
+}
+
+DiverBody: {
+	// DisplayName: Diver Body
+	// Tooltip: ""
+}
+
+DiverHead: {
+	// DisplayName: Diver Head
+	// Tooltip: ""
+}
+
+DiverLegs: {
+	// DisplayName: Diver Legs
+	// Tooltip: ""
 }

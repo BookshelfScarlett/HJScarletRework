@@ -166,7 +166,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 vel = RandVelTwoPi(16f, 19f);
             if (!hasProj)
             {
-                Projectile.AddExecutionTimePreHit(ItemType<TheJudgement>());
+                Projectile.AddExecutionTimeImmediate(ItemType<TheJudgement>());
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<TheJudgementStar>(), Projectile.damage, 1f, Owner.whoAmI);
                 ((TheJudgementStar)proj.ModProjectile).TargetNPC = target;
             }
