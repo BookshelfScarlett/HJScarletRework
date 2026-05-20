@@ -6,6 +6,12 @@ using Terraria.ID;
 
 namespace HJScarletRework.Core.ParticleSystem
 {
+    /// <summary>
+    /// 备忘
+    /// <para>这个粒子系统过于低效率，保留是因为模组内仍然有太多使用这个粒子系统制作的效果</para>
+    /// <para>后续会逐步修改调用为使用内存池管理的系统</para>
+    /// <para>同时有一个新的ECS系统，但是那个相对复杂，因此两者都保留了</para>
+    /// </summary>
     public abstract class BaseParticle
     {
         #region 基础属性
@@ -63,19 +69,19 @@ namespace HJScarletRework.Core.ParticleSystem
                 return this;
             if (UseBlendStateID == BlendStateID.Alpha)
             {
-                if (!Important && BaseParticleManager.ActiveParticlesAlpha.Count > 10000)
+                if (!Important && BaseParticleManager.ActiveParticlesAlpha.Count > ParticleUtilities.MaxParticles)
                     BaseParticleManager.ActiveParticlesAlpha.RemoveAt(0);
                 BaseParticleManager.ActiveParticlesAlpha.Add(this);
             }
             else if (UseBlendStateID == BlendStateID.Additive)
             {
-                if (!Important && BaseParticleManager.ActiveParticlesAdditive.Count > 10000)
+                if (!Important && BaseParticleManager.ActiveParticlesAdditive.Count > ParticleUtilities.MaxParticles)
                     BaseParticleManager.ActiveParticlesAdditive.RemoveAt(0);
                 BaseParticleManager.ActiveParticlesAdditive.Add(this);
             }
             else
             {
-                if (!Important && BaseParticleManager.ActiveParticlesNonPremultiplied.Count > 10000)
+                if (!Important && BaseParticleManager.ActiveParticlesNonPremultiplied.Count > ParticleUtilities.MaxParticles)
                     BaseParticleManager.ActiveParticlesNonPremultiplied.RemoveAt(0);
                 BaseParticleManager.ActiveParticlesNonPremultiplied.Add(this);
             }
@@ -92,19 +98,19 @@ namespace HJScarletRework.Core.ParticleSystem
                 return this;
             if (UseBlendStateID == BlendStateID.Alpha)
             {
-                if (!Important && BaseParticleManager.PriorityActiveParticlesAlpha.Count > 10000)
+                if (!Important && BaseParticleManager.PriorityActiveParticlesAlpha.Count > ParticleUtilities.MaxParticles)
                     BaseParticleManager.PriorityActiveParticlesAlpha.RemoveAt(0);
                 BaseParticleManager.PriorityActiveParticlesAlpha.Add(this);
             }
             else if (UseBlendStateID == BlendStateID.Additive)
             {
-                if (!Important && BaseParticleManager.PriorityActiveParticlesAdditive.Count > 10000)
+                if (!Important && BaseParticleManager.PriorityActiveParticlesAdditive.Count > ParticleUtilities.MaxParticles)
                     BaseParticleManager.PriorityActiveParticlesAdditive.RemoveAt(0);
                 BaseParticleManager.PriorityActiveParticlesAdditive.Add(this);
             }
             else
             {
-                if (!Important && BaseParticleManager.PriorityActiveParticlesNonPremultiplied.Count > 10000)
+                if (!Important && BaseParticleManager.PriorityActiveParticlesNonPremultiplied.Count > ParticleUtilities.MaxParticles)
                     BaseParticleManager.PriorityActiveParticlesNonPremultiplied.RemoveAt(0);
                 BaseParticleManager.PriorityActiveParticlesNonPremultiplied.Add(this);
             }
@@ -117,7 +123,7 @@ namespace HJScarletRework.Core.ParticleSystem
                 return this;
             // 初始化时间
             Time = 0;
-            if (!Important && BaseParticleManager.PriorityActiveParticlesNonPremultiplied.Count > 10000)
+            if (!Important && BaseParticleManager.PriorityActiveParticlesNonPremultiplied.Count > ParticleUtilities.MaxParticles)
                 BaseParticleManager.PriorityActiveParticlesNonPremultiplied.RemoveAt(0);
             BaseParticleManager.PriorityActiveParticlesNonPremultiplied.Add(this);
             OnSpawn();
@@ -129,7 +135,7 @@ namespace HJScarletRework.Core.ParticleSystem
                 return this;
             // 初始化时间
             Time = 0;
-            if (!Important && BaseParticleManager.ActiveParticlesNonPremultiplied.Count > 10000)
+            if (!Important && BaseParticleManager.ActiveParticlesNonPremultiplied.Count > ParticleUtilities.MaxParticles)
                 BaseParticleManager.ActiveParticlesNonPremultiplied.RemoveAt(0);
             BaseParticleManager.ActiveParticlesNonPremultiplied.Add(this);
             OnSpawn();

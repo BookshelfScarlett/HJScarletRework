@@ -108,18 +108,8 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 pos = target.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
                 Vector2 vel = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(0.2f, 17.4f);
                 float scale = Main.rand.NextFloat(0.4f, 0.9f) * .2f;
-                new HRShinyOrb(pos, vel, RandLerpColor(Color.LightBlue, Color.RoyalBlue), 45, scale).Spawn();
-                new HRShinyOrb(pos, vel, Color.White, 45, scale * .75f).Spawn();
                 Dust d = Dust.NewDustPerfect(pos, DustID.WhiteTorch, RandVelTwoPi(0.2f, 3.1f));
                 d.scale *= 1.3f;
-            }
-
-            for (int i = 0; i < 20; i++)
-            {
-                Color Firecolor = RandLerpColor(Color.White, Color.RoyalBlue);
-                Vector2 spawnPos = target.Center + RandVelTwoPi(10f, 30f);
-                Vector2 vel = (target.Center - spawnPos).ToSafeNormalize() * Main.rand.NextFloat(1f, 20f);
-                new SnowCloud(spawnPos, vel, Firecolor, 40, Main.rand.NextFloat(TwoPi), .25f, 0.28f, Main.rand.NextBool()).Spawn();
             }
         }
         public void SetFirstFrame()
@@ -214,7 +204,6 @@ namespace HJScarletRework.Projs.Executor
 
             //连续多次的创建顶点列表可能会遇到性能上的问题
             //这里最好缓存一下。
-            //List<ScarletVertex> VertexList = [];
             _cacheVertex.Clear();
             Vector2 projVel = Projectile.velocity.SafeNormalize(Vector2.UnitX) * (42 + Projectile.ai[2] * 13f);
             for (int i = 0; i < CenterPosList.Count; i++)

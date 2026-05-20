@@ -99,13 +99,11 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Owner.ToMouseVector2().ToRotation();
 
         }
-
         public bool CheckOwnerDead()
         {
             bool ifStillUse = (Owner.channel || Owner.controlUseTile) && !Owner.noItems && !Owner.CCed;
             if (!ifStillUse)
             {
-                //RemoveExecutionProgress(Owner, ItemType<Exsanguination>());
                 Projectile.Kill();
                 return true;
             }

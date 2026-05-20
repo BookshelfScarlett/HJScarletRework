@@ -58,6 +58,8 @@ namespace HJScarletRework.Assets.Registers
         internal static Tex2DWithPath Proj_SpearofDarkness { get; private set; }
         internal static Tex2DWithPath Proj_CandLanceFire { get; private set; }
         internal static Tex2DWithPath Proj_Dialectics { get; private set; }
+        internal static Tex2DWithPath SpectreStaffOrb  { get; private set; }
+        internal    static Tex2DWithPath  SpectreStaffRod { get; private set; }
         public static Texture2D Proj_SpearofEscapeMissile { get; private set; }
 
         public override void Load()
@@ -74,6 +76,9 @@ namespace HJScarletRework.Assets.Registers
             Proj_Dialectics = new Tex2DWithPath($"{ProjPath}/{nameof(Proj_Dialectics)}");
 
             Proj_SpearofEscapeMissile = Request<Texture2D>($"{ProjPath}/{nameof(Proj_SpearofEscapeMissile)}").Value;
+            SpectreStaffOrb = new Tex2DWithPath($"{ProjPath}/{nameof(SpectreStaffRod)}");
+            SpectreStaffRod = new Tex2DWithPath($"{ProjPath}/{nameof(SpectreStaffOrb)}");
+            
 
 
         }
@@ -91,6 +96,8 @@ namespace HJScarletRework.Assets.Registers
             Proj_Dialectics = null;
 
             Proj_SpearofEscapeMissile = null;
+            SpectreStaffOrb = null;
+            SpectreStaffRod = null;
         }
     }
 }

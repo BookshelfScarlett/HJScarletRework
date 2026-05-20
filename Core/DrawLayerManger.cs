@@ -1,4 +1,6 @@
 ﻿using HJScarletRework.Core.MetaballSystem;
+using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Core.ParticleScarlet;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.ParticleSystem;
 using Terraria;
@@ -12,6 +14,8 @@ namespace HJScarletRework.Core
         {
             On_Main.DrawDust += MetaballManager.DrawRenderTarget;
             On_Main.DrawDust += BaseParticleManager.DrawParticles;
+            On_Main.DrawDust += ScarletParticleManager.DrawScarletParticles;
+            On_Main.DrawDust += ECSParticleDataManager.DrawParticle_ECS;
             On_Main.DrawPlayers_BehindNPCs += MetaballManager.DrawRenderTargetPiority;
             On_Main.DrawProjectiles += PixelatedRenderManager.On_Main_DrawProjectiles;
             On_Main.DrawDust += PixelatedRenderManager.DrawTarget_BeforeDust;
@@ -21,7 +25,9 @@ namespace HJScarletRework.Core
         public override void Unload()
         {
             On_Main.DrawDust -= MetaballManager.DrawRenderTarget;
+            On_Main.DrawDust -= ScarletParticleManager.DrawScarletParticles;
             On_Main.DrawDust -= BaseParticleManager.DrawParticles;
+            On_Main.DrawDust -= ECSParticleDataManager.DrawParticle_ECS;
             On_Main.DrawPlayers_BehindNPCs -= MetaballManager.DrawRenderTargetPiority;
             On_Main.DrawProjectiles -= PixelatedRenderManager.On_Main_DrawProjectiles;
             On_Main.DrawDust -= PixelatedRenderManager.DrawTarget_BeforeDust;

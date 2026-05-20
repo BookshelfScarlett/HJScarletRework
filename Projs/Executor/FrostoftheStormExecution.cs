@@ -30,7 +30,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 10;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = -1;
             Projectile.timeLeft = GetSeconds(5);
         }
         public override void OnFirstFrame()
@@ -86,7 +86,7 @@ namespace HJScarletRework.Projs.Executor
                 ((FrostoftheStormChargeProj)proj.ModProjectile).Flip = false;
                 //存储当前挥舞角度
                 ((FrostoftheStormChargeProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
-                ((FrostoftheStormChargeProj)proj.ModProjectile).CurTime += 0;
+                ((FrostoftheStormChargeProj)proj.ModProjectile).CurTime += 1;
                 Projectile.Kill();
             }
         }

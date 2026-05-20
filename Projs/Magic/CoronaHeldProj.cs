@@ -85,7 +85,6 @@ namespace HJScarletRework.Projs.Magic
             if (Timer > 30f)
                 Timer = 30f;
             //锤子应当朝向的位置
-            
             float anchorPosX = Owner.MountedCenter.X;
             float anchorPosY = Owner.MountedCenter.Y - (50f * MathF.Sin(Oscillation) / 9f) - 70f * Projectile.Opacity;
             //递增的值越大，锤子的摆动幅度越大

@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using rail;
 using ReLogic.Graphics;
 using System.Collections.Generic;
 using Terraria;
@@ -48,61 +49,68 @@ namespace HJScarletRework.Globals.Huds
 
         private void On_Main_DrawDust(On_Main.orig_DrawDust orig, Main self)
         {
-            //shorthand
-            Player localPlayer = Main.LocalPlayer;
-            HJScarletConfigClient config = HJScarletConfigClient.Instance;
-            SpriteBatch SB = Main.spriteBatch;
-            bool noPredraw = Main.dedServ || Main.gameMenu;
             orig(self);
-            if (noPredraw)
+            if (Main.dedServ || Main.gameMenu)
                 return;
-            //如果有人想要绘制。Projectile.knockBack
+            HJScarletConfigClient config = HJScarletConfigClient.Instance;
             if (!config.DrawExecutionCounter)
                 return;
-            //手持情况
-            //可见度为零时时停止更新
+            Player localPlayer = Main.LocalPlayer;
             if (GeneralOpacity <= 0f && !localPlayer.HJScarlet().Executor_DrawFadeIn)
                 return;
-            //HJScarletMethods.SwapToTarget(ExecutionTarget2D);
-
-            //下面的底图似乎因为在某些地方没有被end导致无法正常绘制
-            //所以这里直接开了一个空的批次尝试
-            //不使用endd是因为会报错，说没有begin
-            //怎么底图还是没有?
-            //第一步：绘制底图
-            Vector2 pos = new Vector2(Main.screenWidth / 2f, Main.screenHeight / 2f) + new Vector2(0, 50);
+            SpriteBatch SB = Main.spriteBatch;
+            Vector2 pos = LocalPlayer.Center + new Vector2(0, 50) - Main.screenPosition;
             Texture2D t2d = HJScarletTexture.Hud_ExecutorCounter.Value;
+
             SB.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+
             SB.Draw(t2d, pos, null, Color.Red * GeneralOpacity, 0f, t2d.ToOrigin(), 1f, SpriteEffects.None, 0f);
-            //SB.Draw(t2d, pos , null, Color.White* GeneralOpacity, 0f, t2d.ToOrigin(), 1f, SpriteEffects.None, 0f);
-            //字体。
+            DrawNumberWithEffect(SB, pos, CurExecutionCounter, GeneralOpacity);
+
             SB.End();
-            SB.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+
+        }
+        private void DrawNumberWithEffect(SpriteBatch sb, Vector2 basePos, int number, float opa)
+        {
+            string numStr = number.ToString();
+            DynamicSpriteFont font = HJScarletTexture.Font_MGR.Value;
+            Vector2 scale = new Vector2(.6f);
+            float offsetX = GetNumberOffsetX(number);
+            Vector2 size = ChatManager.GetStringSize(font, numStr, scale);
+            Vector2 textPos = basePos - new Vector2(offsetX, 0);
+
+            Color shadowColor1 = Color.Lerp(Color.Red, Color.Black, 0.95f) * (opa * 0.248f);
+
+            Color shadowColor2 = Color.Black * opa;
+            Color mainColor = Color.White * opa;
             for (int i = 0; i < 8; i++)
             {
-                Vector2 offset = ToRadians(60 * i).ToRotationVector2() * 1.2f;
-                DrawNum(pos + offset + Vector2.UnitX.RotatedBy(PiOver4) * 3.5f, Color.Lerp(Color.Red, Color.Black, .95f) * 0.248f);
-                DrawNum(pos + offset, Color.Black);
-            }
-            DrawNum(pos, Color.White);
-            void DrawNum(Vector2 pos, Color color)
-            {
-                DynamicSpriteFont font = HJScarletTexture.Font_MGR.Value;
-                Vector2 scale = new(0.60f);
-                float offsetValue = 7.30f;
-                if (CurExecutionCounter < 10)
-                    offsetValue = 5.00f;
-                if (CurExecutionCounter > 99 && CurExecutionCounter < 1000)
-                    offsetValue = 15.00f;
-                if (CurExecutionCounter > 999 && CurExecutionCounter < 10000)
-                    offsetValue = 21.00f;
+                Vector2 offset = (TwoPi * i / 8f).ToRotationVector2() * 1.2f;
 
-                Vector2 size = ChatManager.GetStringSize(font, CurExecutionCounter.ToString(), Vector2.One * scale);
-                ChatManager.DrawColorCodedString(SB, font, CurExecutionCounter.ToString(), pos - Vector2.UnitX * offsetValue, color * GeneralOpacity, 0, size / 2, Vector2.One * scale);
-            }
-            SB.End();
-            //Main.graphics.GraphicsDevice.SetRenderTargets(null);
+                //第一层阴影
+                Vector2 pos1 = textPos + offset + new Vector2(3.5f, 3.5f);
+                ChatManager.DrawColorCodedString(sb, font, numStr, pos1, shadowColor1, 0f, size * 0.5f, scale);
 
+                //第二层阴影
+                Vector2 pos2 = textPos + offset;
+                ChatManager.DrawColorCodedString(sb, font, numStr, pos2, shadowColor2, 0f, size * 0.5f, scale);
+            }
+
+            //中心白色文字
+            ChatManager.DrawColorCodedString(sb, font, numStr, textPos, mainColor, 0f, size * 0.5f, scale);
+
+        }
+        private float GetNumberOffsetX(int number)
+        {
+            if (number < 10) 
+                return 5f;
+            if (number < 100) 
+                return 7.30f;
+            if (number < 1000) 
+                return 15f;
+            if (number < 10000) 
+                return 21f;
+            return 21f;
         }
 
         public override void Unload()
@@ -134,33 +142,37 @@ namespace HJScarletRework.Globals.Huds
                 return;
             if (!config.DrawExecutionCounter)
                 return;
-
-            if (LocalPlayer.HeldItem.DamageType != ExecutorDamageClass.Instance)
+            Player localPlayer = Main.LocalPlayer;
+            Item heldItem = localPlayer.HeldItem;
+            bool isExectuorWeapon = heldItem.DamageType.CountsAsClass<ExecutorDamageClass>();
+            if (isExectuorWeapon)
             {
-                ModPlayer.Executor_DrawFadeOut = true;
-                ModPlayer.Executor_DrawFadeIn = false;
+                if (!ModPlayer.Executor_DrawFadeIn)
+                {
+                    ModPlayer.Executor_DrawFadeOut = false;
+                    ModPlayer.Executor_DrawFadeIn = true;
+                }
             }
             else
             {
-                ModPlayer.Executor_DrawFadeIn = true;
-                ModPlayer.Executor_DrawFadeOut = false;
+                if (!ModPlayer.Executor_DrawFadeOut)
+                {
+                    ModPlayer.Executor_DrawFadeOut = true;
+                    ModPlayer.Executor_DrawFadeIn = false;
+                }
             }
-            //可见度为0的时候停止下方的更新
-            if (GeneralOpacity <= 0f && !ModPlayer.Executor_DrawFadeIn)
-                return;
-            int heldItem = LocalPlayer.HeldItem.type;
             if (ModPlayer.Executor_DrawFadeOut)
             {
-                GeneralOpacity = Lerp(GeneralOpacity, 0f, 0.12f);
+                GeneralOpacity = Lerp(GeneralOpacity, 0, 0.12f);
                 GeneralOffset = Lerp(GeneralOffset, -5f, 0.2f);
-                if (GeneralOpacity <= 0.02f)
+                if (GeneralOpacity <= .02f)
                 {
                     GeneralOpacity = 0f;
                     GeneralOffset = 0f;
                     ModPlayer.Executor_DrawFadeOut = false;
                 }
             }
-            if (ModPlayer.Executor_DrawFadeIn)
+            else if (ModPlayer.Executor_DrawFadeIn)
             {
                 GeneralOpacity = Lerp(GeneralOpacity, 1f, 0.2f);
                 GeneralOffset = Lerp(GeneralOffset, 0f, 0.2f);
@@ -170,10 +182,13 @@ namespace HJScarletRework.Globals.Huds
                     GeneralOffset = 0f;
                 }
             }
+            //可见度为0的时候停止下方的更新
+            if (GeneralOpacity <= 0f && !ModPlayer.Executor_DrawFadeIn)
+                return;
 
             //发射的一瞬间会从字典移除掉对应的值
             //如果最开始的值就不存在，设置为0
-            if (ModPlayer.ExecutionListStored.TryGetValue(heldItem, out int num))
+            if (ModPlayer.ExecutionListStored.TryGetValue(heldItem.type, out int num))
             {
                 CurExecutionCounter = num;
             }

@@ -185,6 +185,7 @@ Executor: {
 	SpectreStaffExecution.DisplayName: Spectre Staff Execution
 	SpectreStaffHeldProj.DisplayName: Spectre Staff Held Proj
 	SpectreStaffJavelin.DisplayName: Spectre Staff Javelin
+	SpectreStaffGhost.DisplayName: Spectre Staff Ghost
 }
 
 Ranged: {

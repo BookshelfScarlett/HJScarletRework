@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Core.ParticleSystem;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
@@ -61,6 +62,23 @@ namespace HJScarletRework.Globals.ParticleSystem
         {
             // 调用源
             orig(self);
+            void DrawBatch(BlendState blendState, List<BaseParticle> priorityList, List<BaseParticle> normalList)
+            {
+                if (priorityList.Count + normalList.Count == 0)
+                    return;
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, blendState, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+                foreach (var p in priorityList) 
+                    p.Draw(Main.spriteBatch);
+
+                foreach (var p in normalList) 
+                    p.Draw(Main.spriteBatch);
+                Main.spriteBatch.End();
+                
+            }
+            DrawBatch(BlendState.AlphaBlend, PriorityActiveParticlesAlpha, ActiveParticlesAlpha);
+            DrawBatch(BlendState.Additive, PriorityActiveParticlesAdditive, ActiveParticlesAdditive);
+            DrawBatch(BlendState.NonPremultiplied, PriorityActiveParticlesNonPremultiplied, ActiveParticlesNonPremultiplied);
+            /*
             #region 渲染粒子
             #region 渲染优先粒子
             if (PriorityActiveParticlesAlpha.Count != 0)
@@ -121,6 +139,7 @@ namespace HJScarletRework.Globals.ParticleSystem
             }
             #endregion
             #endregion
+            */
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
@@ -7,6 +8,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -32,7 +34,7 @@ namespace HJScarletRework.Projs.Executor
         public float SlashOpacity = 1;
         public bool SpawnProj = false;
         public int CurTime = 0;
-        public int TotalSwingTime = 4;
+        public int TotalSwingTime = 5;
         public List<Vector2> OldAimPos = [];
         public int AttackSpeed => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, Owner.HeldItem.useTime * Projectile.extraUpdates, 5 * Projectile.extraUpdates);
         public override void ExSD()
@@ -62,6 +64,8 @@ namespace HJScarletRework.Projs.Executor
             Helper.MaxProgress[4] = (int)(AttackSpeed * .50f);
             TargetRotation = BeginTargetRotation;
             HeavySwordLength = 140;
+            Projectile.HJScarlet().HasExecutionMechanic = true;
+            Projectile.HJScarlet().ExecutionStrike = true;
         }
         public override void ProjAI()
         {
@@ -90,37 +94,34 @@ namespace HJScarletRework.Projs.Executor
         public bool FinalSwing => CurTime > TotalSwingTime;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if(FinalSwing)
+            {
+                ParticleUtilities.ShowCurrentParticleCounts();
+                Projectile.AddExecutionTimeImmediate(ItemType<FrostoftheStorm>(), 2);
+            }
             if (Projectile.numHits < 1)
             {
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, (-(5 + SlowSwing.ToInt() * 30)) * -Owner.direction, 20, MathHelper.TwoPi, 0.5f, true, 1000);
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, (-(5 + SlowSwing.ToInt() * 50)) * -Owner.direction, 20, TwoPi, 0.5f, true, 1000);
+                if (SlowSwing)
+                    SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 0 });
             }
-            int dustCount = 36;
+            int dustCount = 16;
             for (int i = 0; i < dustCount; ++i)
             {
                 Vector2 dir = Projectile.SafeDirByRot();
                 Vector2 pos = target.Center.ToRandCirclePos(10f) + dir * Main.rand.NextFloat(10f);
                 new ShinyCrossStar(pos, RandVelTwoPi(2f, 9f), RandLerpColor(Color.LightSkyBlue, Color.RoyalBlue), 45, RandRotTwoPi, RandZeroToOne, Projectile.scale, false, 0.5f).Spawn();
             }
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 16; i++)
             {
                 Vector2 pos = target.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
                 Vector2 vel = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(0.2f, 17.4f);
                 float scale = Main.rand.NextFloat(0.4f, 0.9f) * .2f;
-                new HRShinyOrb(pos, vel, RandLerpColor(Color.LightBlue, Color.RoyalBlue), 45, scale).Spawn();
                 new HRShinyOrb(pos, vel, Color.White, 45, scale * .75f).Spawn();
                 Dust d = Dust.NewDustPerfect(pos, DustID.WhiteTorch, RandVelTwoPi(0.2f, 3.1f));
                 d.scale *= 1.3f;
             }
 
-            for (int i = 0; i < 20; i++)
-            {
-                Color Firecolor = RandLerpColor(Color.White, Color.RoyalBlue);
-                Vector2 spawnPos = target.Center + RandVelTwoPi(10f, 30f);
-                Vector2 vel = (target.Center - spawnPos).ToSafeNormalize() * Main.rand.NextFloat(1f, 20f);
-                new SnowCloud(spawnPos, vel, Firecolor, 40, Main.rand.NextFloat(TwoPi), .25f, 0.28f, Main.rand.NextBool()).Spawn();
-            }
-
-            base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnKill(int timeLeft)
@@ -129,7 +130,6 @@ namespace HJScarletRework.Projs.Executor
             {
                 return;
             }
-            Main.NewText(Owner.HJScarlet().critDamageExecutor);
             if (FinalSwing)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostoftheStormHeldProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
@@ -161,7 +161,6 @@ namespace HJScarletRework.Projs.Executor
                 UpdateMidAnimation();
             else if (!Helper.IsDone[2] && SlowSwing)
             {
-                //SlashOpacity = Lerp(SlashOpacity, 0f, 0.1f / Projectile.extraUpdates);
                 UpdateEndAnimation();
             }
             else

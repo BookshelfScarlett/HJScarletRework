@@ -174,8 +174,6 @@ namespace HJScarletRework.Projs.Executor
                     Timer = 1;
             }
         }
-
-
         public void HandleOwnerState()
         {
             Projectile.rotation = Owner.ToMouseVector2().ToRotation();

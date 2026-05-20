@@ -92,24 +92,6 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 pos = target.Center.ToRandCirclePos(10f) + dir * Main.rand.NextFloat(10f);
                 new ShinyCrossStar(pos, RandVelTwoPi(2f, 9f), RandLerpColor(Color.LightSkyBlue, Color.RoyalBlue), 45, RandRotTwoPi, RandZeroToOne, Projectile.scale, false, 0.5f).Spawn();
             }
-            for (int i = 0; i < 30; i++)
-            {
-                Vector2 pos = target.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
-                Vector2 vel = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(0.2f, 17.4f);
-                float scale = Main.rand.NextFloat(0.4f, 0.9f) * .2f;
-                new HRShinyOrb(pos, vel, RandLerpColor(Color.LightBlue, Color.RoyalBlue), 45, scale).Spawn();
-                new HRShinyOrb(pos, vel, Color.White, 45, scale * .75f).Spawn();
-                Dust d = Dust.NewDustPerfect(pos, DustID.WhiteTorch, RandVelTwoPi(0.2f, 3.1f));
-                d.scale *= 1.3f;
-            }
-
-            for (int i = 0; i < 20; i++)
-            {
-                Color Firecolor = RandLerpColor(Color.White, Color.RoyalBlue);
-                Vector2 spawnPos = target.Center + RandVelTwoPi(10f, 30f);
-                Vector2 vel = (target.Center - spawnPos).ToSafeNormalize() * Main.rand.NextFloat(1f, 20f);
-                new SnowCloud(spawnPos, vel, Firecolor, 40, Main.rand.NextFloat(TwoPi), .25f, 0.28f, Main.rand.NextBool()).Spawn();
-            }
 
         }
         public override void OnKill(int timeLeft)
@@ -357,7 +339,6 @@ namespace HJScarletRework.Projs.Executor
             //绘制残影
             for (int i = 0; i < 8; i++)
                 SB.Draw(tex, realDrawPos + ToRadians(360f / 8 * i).ToRotationVector2() * 2f, null, edgeColor.ToAddColor(), drawRot, drawPoint, Projectile.scale, se, 0);
-
             SB.Draw(tex, realDrawPos, null, Color.White, drawRot, drawPoint, Projectile.scale, se, 0);
         }
     }

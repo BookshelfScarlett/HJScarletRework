@@ -6,18 +6,11 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Items.Weapons.Requirement;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
