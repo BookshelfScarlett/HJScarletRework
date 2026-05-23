@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class CrimsonScythe : ExecutorWeaponClass
     {
         public override bool IsLoadingEnabled(Mod mod) => false;
-        public override int ExecutionTime => 30;
+        public override int ExecutionProgress => 30;
         public int CurSwingTime = 0;
         public override void ExSD()
         {

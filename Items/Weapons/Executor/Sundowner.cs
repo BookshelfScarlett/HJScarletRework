@@ -12,7 +12,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Sundowner : ExecutorWeaponClass
     {
-        public override int ExecutionTime =>120;
+        public override int ExecutionProgress =>120;
         public override void ExSD()
         {
             Item.damage = 54;

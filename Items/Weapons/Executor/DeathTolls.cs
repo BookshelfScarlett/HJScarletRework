@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class DeathTolls : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 1.0f;
-        public override int ExecutionTime => 25;
+        public override int ExecutionProgress => 25;
         public override void ExSD()
         {
             Item.SetUpNoUseGraphicItem();

@@ -45,9 +45,10 @@ namespace HJScarletRework.Globals.Players
                 CanSwitchWeaponType = true;
                 anyPiorityTier1Active = true;
             }
-            if (!CanExecution && tacticalExecution)
+            if (tacticalExecutionInputCache == 0 && tacticalExecution)
             {
-                CanExecution = true;
+                //12帧的输入缓冲
+                tacticalExecutionInputCache = 12;
                 anyPiorityTier1Active = true;
             }
             if (!CanWeaponSpecialAbility && (heldItem == ItemID.MonkStaffT1 || heldItem == ItemID.MonkStaffT3))

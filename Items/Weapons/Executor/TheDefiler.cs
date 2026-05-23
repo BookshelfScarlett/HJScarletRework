@@ -8,7 +8,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class TheDefiler : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 0.8f;
-        public override int ExecutionTime => 15;
+        public override int ExecutionProgress => 15;
         public override void ExSD()
         {
             Item.width = Item.height = 66;

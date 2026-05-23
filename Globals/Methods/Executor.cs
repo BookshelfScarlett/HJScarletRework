@@ -107,10 +107,11 @@ namespace HJScarletRework.Globals.Methods
         /// </list>
         /// <para>处决模式分为两种：</para>
         /// <list type="number">
-        /// <item><description><b>手动处决（<see cref="HJScarletPlayer.tacticalExecution"/> = true）</b>：需要额外检查 <see cref="HJScarletPlayer.CanExecution"/> 为 true，且 <see cref="HJScarletKeybinds.GeneralActionKeybind"/> 未按下。该模式下手动触发。</description></item>
+        /// <item><description><b>手动处决（<see cref="HJScarletPlayer.tacticalExecution"/> = true）</b>：需要额外检查 <see cref="HJScarletPlayer.tacticalExecutionInputCache"/> > 0，且 <see cref="HJScarletKeybinds.GeneralActionKeybind"/> 未按下。该模式下手动触发。</description></item>
         /// <item><description><b>普通处决</b>：只要累计命中足够即可自动触发。</description></item>
         /// </list>
         /// <para>注意：<see cref="HJScarletPlayer.ExecutionListStored"/> 中若不存在指定 itemID，会通过 <see cref="Dictionary.TryAdd"/> 添加键并初始化为 0，确保后续查询不报错。</para>
+        /// <para><see cref="HJScarletPlayer.tacticalExecutionInputCache"/> 在经过这个方法后不会立刻重置为0，需要在调用这个方法之后手动重置为0 </para>
         /// </remarks>
         public static bool CheckExecution(this Player owner, int itemID)
         {
@@ -123,7 +124,7 @@ namespace HJScarletRework.Globals.Methods
             int executionTime = HJScarletList.ExecutorWeaponDictionary[itemID];
             if (usPlayer.tacticalExecution)
             {
-                if (!usPlayer.CanExecution)
+                if (usPlayer.tacticalExecutionInputCache == 0)
                     return false;
                 if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
                     return false;

@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class DreamlessNight : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 1f;
-        public override int ExecutionTime => 12;
+        public override int ExecutionProgress => 12;
         public override void ExSD()
         {
             Item.width = Item.height = 66;

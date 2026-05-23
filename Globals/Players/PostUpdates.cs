@@ -8,7 +8,6 @@ using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
-using Steamworks;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -83,6 +82,9 @@ namespace HJScarletRework.Globals.Players
         }
         private void UpdateTimer()
         {
+            if (tacticalExecutionInputCache > 0)
+                tacticalExecutionInputCache--;
+
             if (flybackhandBuffTime > 0)
                 flybackhandBuffTime--;
 

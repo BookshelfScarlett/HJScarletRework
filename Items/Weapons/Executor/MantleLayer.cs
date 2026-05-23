@@ -8,7 +8,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class MantleLayer : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 0.5f;
-        public override int ExecutionTime => 6;
+        public override int ExecutionProgress => 6;
         public override void ExSD()
         {
             Item.width = Item.height = 66;

@@ -8,7 +8,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class SimpleHandAxe : ExecutorWeaponClass
     {
-        public override int ExecutionTime => 10;
+        public override int ExecutionProgress => 10;
         public override int ExecutionProj => ProjectileType<SimpleHandAxeExecution>();
         public override void ExSD()
         {

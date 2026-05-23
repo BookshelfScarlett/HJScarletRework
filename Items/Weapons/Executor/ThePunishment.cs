@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class ThePunishment : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 1f;
-        public override int ExecutionTime => 40;
+        public override int ExecutionProgress => 40;
         public override void ExSD()
         {
             Item.useStyle = ItemUseStyleID.Swing;

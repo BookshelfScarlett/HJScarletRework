@@ -227,14 +227,17 @@ FrostoftheStorm: {
 Fleshtumor: {
 	DisplayName: Fleshtumor
 	Tooltip: ""
+	ExecutionStrike: ""
 }
 
 FrostHammer: {
 	DisplayName: Frost Hammer
 	Tooltip: ""
+	ExecutionStrike: ""
 }
 
-SpectreStaff: {
+DualWraithStaff: {
 	DisplayName: Spectre Staff
 	Tooltip: ""
+	ExecutionStrike: ""
 }

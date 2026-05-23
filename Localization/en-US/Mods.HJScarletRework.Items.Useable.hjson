@@ -74,3 +74,13 @@ DescriptionPaper: {
 		All of the reworked vanity sets mentioned above gain brand new effects and set bonuses.
 		'''
 }
+
+PureCrystal: {
+	DisplayName: Pure Crystal
+	Tooltip: ""
+}
+
+UnregisteredSpiritOrigin: {
+	DisplayName: Unregistered Spirit Origin
+	Tooltip: ""
+}

@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class AetherfireSmasher : ExecutorWeaponClass
     {
-        public override int ExecutionTime => 60;
+        public override int ExecutionProgress => 60;
         public override float ExecutionStrikeDamageMult => 1f;
         public override void ExSD()
         {

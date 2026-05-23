@@ -130,8 +130,6 @@ namespace HJScarletRework.Projs.Melee
                 SB.Draw(tex, trailingDrawPos, null, trailColor, Projectile.oldRot[i] + PiOver4, orig, Projectile.scale * scaleMult, 0, 0);
             }
             SB.Draw(projTex, drawPos - offsetValue, null, Color.White, Projectile.rotation + PiOver4, ori, Projectile.scale, 0, 0);
-
-
             return false;
         }
         public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)

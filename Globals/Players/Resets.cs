@@ -66,7 +66,7 @@ namespace HJScarletRework.Globals.Players
         }
         public override void UpdateDead()
         {
-            ExecutionTime = 0;
+            ExecutionProgress = 0;
             flybackhandBuffTime = 0;
             flybackhandCloclCD = 0;
             flybackhandBuffTimeCurrent = 0;
@@ -82,6 +82,7 @@ namespace HJScarletRework.Globals.Players
             exsanguinationBuffTime = 0;
             tacticalTime = 0;
             tacticalPunishTime = 0;
+            tacticalExecutionInputCache = 0;
             blackKeyTimer = 0;
             ResetAcc();
             ResetPets();

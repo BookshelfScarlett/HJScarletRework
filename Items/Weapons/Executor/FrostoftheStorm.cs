@@ -10,7 +10,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class FrostoftheStorm : ExecutorWeaponClass
     {
-        public override int ExecutionTime => 8;
+        public override int ExecutionProgress => 8;
         public override void ExSD()
         {
             Item.damage = 400;

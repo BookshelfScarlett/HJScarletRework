@@ -42,12 +42,13 @@ namespace HJScarletRework.Globals.ParticleSystem
         /// </summary>
         public override void ClearWorld()
         {
-            ActiveParticlesAlpha.Clear();
-            ActiveParticlesNonPremultiplied.Clear();
-            ActiveParticlesAdditive.Clear();
             PriorityActiveParticlesAlpha.Clear();
             PriorityActiveParticlesNonPremultiplied.Clear();
             PriorityActiveParticlesAdditive.Clear();
+
+            ActiveParticlesAlpha.Clear();
+            ActiveParticlesNonPremultiplied.Clear();
+            ActiveParticlesAdditive.Clear();
         }
 
         // 粒子更新
@@ -62,23 +63,25 @@ namespace HJScarletRework.Globals.ParticleSystem
         {
             // 调用源
             orig(self);
-            void DrawBatch(BlendState blendState, List<BaseParticle> priorityList, List<BaseParticle> normalList)
-            {
-                if (priorityList.Count + normalList.Count == 0)
-                    return;
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, blendState, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-                foreach (var p in priorityList) 
-                    p.Draw(Main.spriteBatch);
+            //void DrawBatch(BlendState blendState, List<BaseParticle> priorityList, List<BaseParticle> normalList)
+            //{
+            //    if (priorityList.Count + normalList.Count == 0)
+            //        return;
+            //    Main.spriteBatch.Begin(SpriteSortMode.Deferred, blendState, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            //    foreach (var p in priorityList) 
+            //        p.Draw(Main.spriteBatch);
+            //    Main.spriteBatch.End();
 
-                foreach (var p in normalList) 
-                    p.Draw(Main.spriteBatch);
-                Main.spriteBatch.End();
+            //    Main.spriteBatch.Begin(SpriteSortMode.Deferred, blendState, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            //    foreach (var p in normalList) 
+            //        p.Draw(Main.spriteBatch);
+            //    Main.spriteBatch.End();
                 
-            }
-            DrawBatch(BlendState.AlphaBlend, PriorityActiveParticlesAlpha, ActiveParticlesAlpha);
-            DrawBatch(BlendState.Additive, PriorityActiveParticlesAdditive, ActiveParticlesAdditive);
-            DrawBatch(BlendState.NonPremultiplied, PriorityActiveParticlesNonPremultiplied, ActiveParticlesNonPremultiplied);
-            /*
+            //}
+            //DrawBatch(BlendState.AlphaBlend, PriorityActiveParticlesAlpha, ActiveParticlesAlpha);
+            //DrawBatch(BlendState.Additive, PriorityActiveParticlesAdditive, ActiveParticlesAdditive);
+            //DrawBatch(BlendState.NonPremultiplied, PriorityActiveParticlesNonPremultiplied, ActiveParticlesNonPremultiplied);
+            ///*
             #region 渲染粒子
             #region 渲染优先粒子
             if (PriorityActiveParticlesAlpha.Count != 0)
@@ -139,7 +142,7 @@ namespace HJScarletRework.Globals.ParticleSystem
             }
             #endregion
             #endregion
-            */
+            //*/
         }
     }
 }

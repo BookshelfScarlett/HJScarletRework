@@ -25,6 +25,11 @@ namespace HJScarletRework.Projs.Executor
         private Vector2 TopRightPoint = new Vector2(50, -100);
         private Vector2 BottomLeftPoint = new Vector2(50, 100);
         private Vector2 BottomRightPoint = new Vector2(-300, 0);
+        //private Vector2 TopLeftPoint = new Vector2(20, -50);
+        //private Vector2 TopRightPoint = new Vector2(20, -50);
+        //private Vector2 BottomLeftPoint = new Vector2(20, 50);
+        //private Vector2 BottomRightPoint = new Vector2(20,50);
+
         public float RandOffset1;
         public float RandOffset2;
         public float RandOffset3;
@@ -132,6 +137,7 @@ namespace HJScarletRework.Projs.Executor
             float maxPoints = 50;
             float xMult = 3.5f;
             float yMult = 2f;
+            //float yMult = 0.5f;
             for (int i = 0; i < maxPoints; i++)
             {
                 float progress = i / maxPoints;

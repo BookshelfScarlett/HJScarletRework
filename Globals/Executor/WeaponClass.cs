@@ -16,11 +16,11 @@ namespace HJScarletRework.Globals.Executor
         public new string LocalizationCategory => $"Weapons.Executor";
         public override bool WeaponPrefix() => true;
         public override bool RangedPrefix() => false;
-        public virtual int ExecutionTime => 10;
+        public virtual int ExecutionProgress => 10;
         public virtual float ExecutionStrikeDamageMult => 1.0f;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ExecutorWeaponDictionary.Add(Type, ExecutionTime);
+            HJScarletList.ExecutorWeaponDictionary.Add(Type, ExecutionProgress);
 
         }
         public override void SetDefaults()
@@ -45,7 +45,7 @@ namespace HJScarletRework.Globals.Executor
             int projID = ExecutionProj != -1 && useExecution ? ExecutionProj : type;
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, projID, damage, knockback, player.whoAmI);
             proj.HJScarlet().HasExecutionMechanic = true;
-            player.HJScarlet().CanExecution = false;
+            player.HJScarlet().tacticalExecutionInputCache = 0;
             if (useExecution)
             {
                 proj.HJScarlet().ExecutionStrike = true;
@@ -58,7 +58,7 @@ namespace HJScarletRework.Globals.Executor
             bool isPressingLeftAlt = Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt);
             int flavorTooltipIndex = tooltips.FindIndex(line => line.Name == "Tooltip0" && line.Mod == "Terraria");
             //通过本地化路径搜索需要的特殊文本
-            string value = Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.ExecutionTime").ToLangValue().ToFormatValue(Math.Max(0, ExecutionTime - Main.LocalPlayer.HJScarlet().bonusExecutionReduce));
+            string value = Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(Math.Max(0, ExecutionProgress - Main.LocalPlayer.HJScarlet().bonusExecutionReduce));
             if (isPressingLeftAlt)
                 value = Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.ExecutionDescriptionName").ToLangValue();
             Color overrideColor = isPressingLeftAlt ? Color.Lerp(Color.Red, Color.White, 0.4f) : Color.GreenYellow;

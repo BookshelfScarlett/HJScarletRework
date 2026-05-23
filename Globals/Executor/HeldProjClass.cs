@@ -38,7 +38,7 @@ namespace HJScarletRework.Globals.Executor
         /// <returns></returns>
         public bool HandleExecution()
         {
-            if(Owner.CheckExecution(OriginalItemID) && !Projectile.HJScarlet().ExecutionStrike)
+            if (Owner.CheckExecution(OriginalItemID) && !Projectile.HJScarlet().ExecutionStrike)
             {
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Owner.RemoveExecutionProgress(OriginalItemID);

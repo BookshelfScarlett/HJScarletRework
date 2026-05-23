@@ -238,3 +238,8 @@ ArtificalManaStar: {
 		Reduces mana potion restoration efficiency by 15%
 		'''
 }
+
+MayaBall: {
+	DisplayName: Maya Ball
+	Tooltip: ""
+}

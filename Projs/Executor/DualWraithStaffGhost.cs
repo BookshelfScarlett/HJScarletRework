@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -17,7 +18,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class SpectreStaffGhost : HJScarletProj, IPixelatedRenderer
+    public class DualWraithStaffGhost : HJScarletProj, IPixelatedRenderer
     {
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
@@ -28,6 +29,10 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(20);
+        }
+        public override bool? CanDamage()
+        {
+            return Projectile.MeetMaxUpdatesFrame(Timer, 5);
         }
         public override void ExSD()
         {
@@ -86,9 +91,20 @@ namespace HJScarletRework.Projs.Executor
                         else Projectile.velocity *= 0.9f;
                     }
                 }
-
+                else
+                {
+                    float sig = Math.Sign(Projectile.ai[1]);
+                    Projectile.velocity = Projectile.velocity.RotatedBy(sig * ToRadians(3f));
+                    if (Projectile.velocity.LengthSquared() > InitSpeed * InitSpeed)
+                        Projectile.velocity *= .9f;
+                    else
+                        Projectile.velocity *= 1.1f;
+                }
             }
-            Vector2 baseSpawnPos = Projectile.Center - Projectile.SafeDir() * 27f;
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            Projectile.AddExecutionTimeImmediate(ItemType<DualWraithStaff>());
         }
 
         public override bool PreDraw(ref Color lightColor)

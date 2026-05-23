@@ -4,7 +4,6 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Useables;
-using HJScarletRework.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -12,7 +11,6 @@ using Terraria.DataStructures;
 using Terraria.Graphics;
 using Terraria.ID;
 using Terraria.ModLoader;
-using UtfUnknown.Core.Models.SingleByte.Arabic;
 
 namespace HJScarletRework.Globals.Players
 {
@@ -131,10 +129,11 @@ namespace HJScarletRework.Globals.Players
         /// <para>此开关不依赖任何装备，适用于需要临时改变攻击形态的场景（例如使用特殊射弹替换普通投掷物）</para>
         /// </summary>
         public bool tacticalExecutionManual = false;
+        public int tacticalExecutionInputCache = 0;
         public int tacticalTime = 0;
         public bool ExecutorSwordMarkPlus = false;
         public int tacticalPunishTime = 0;
-        public int ExecutionTime = 0;
+        public int ExecutionProgress = 0;
         public int bonusExecutionReduce = 0;
         public Dictionary<int, int> ExecutionListStored = new Dictionary<int, int>();
         public bool StopExecutionInit = false;

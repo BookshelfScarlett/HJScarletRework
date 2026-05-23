@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<Exsanguination>().Texture;
-        public int ExecutionTime = GetInstance<Exsanguination>().ExecutionTime;
+        public int ExecutionProgress = GetInstance<Exsanguination>().ExecutionProgress;
         public override int OriginalItemID => ItemType<Exsanguination>();
         public ref float Timer => ref Projectile.ai[0];
         public int BuffTime = 0;

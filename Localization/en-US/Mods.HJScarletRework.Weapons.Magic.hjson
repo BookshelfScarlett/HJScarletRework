@@ -21,3 +21,8 @@ DragonStaff: {
 	DisplayName: Dragon Staff
 	Tooltip: ""
 }
+
+DragonSword: {
+	DisplayName: Dragon Sword
+	Tooltip: ""
+}

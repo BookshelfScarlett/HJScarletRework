@@ -10,7 +10,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class AbyssalWorld : ExecutorWeaponClass
     {
-        public override int ExecutionTime => 40;
+        public override int ExecutionProgress => 40;
         public override void ExSD()
         {
             Item.width = Item.height = 72;

@@ -84,7 +84,7 @@ Typeless: {
 	TerraFlamethrowerHeldProj.DisplayName: Terra Flamethrower Held Proj
 	FrostHammerExecution.DisplayName: Frost Hammer Execution
 	FrostHammerProj.DisplayName: Frost Hammer Proj
-	SpectreStaffGhost.DisplayName: Spectre Staff Ghost
+	DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
 }
 
 Pets: {
@@ -183,9 +183,9 @@ Executor: {
 	FleshtumorHungerStick.DisplayName: Fleshtumor Hunger Stick
 	FrostHammerIceSpike.DisplayName: Frost Hammer Ice Spike
 	SpectreStaffExecution.DisplayName: Spectre Staff Execution
-	SpectreStaffHeldProj.DisplayName: Spectre Staff Held Proj
-	SpectreStaffJavelin.DisplayName: Spectre Staff Javelin
-	SpectreStaffGhost.DisplayName: Spectre Staff Ghost
+	DualWraithStaffHeldProj.DisplayName: Spectre Staff Held Proj
+	DualWraithStaffJavelin.DisplayName: Spectre Staff Javelin
+	DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
 }
 
 Ranged: {

@@ -9,11 +9,11 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class FrostHammer : ExecutorWeaponClass
     {
         public override int ExecutionProj => ProjectileType<FrostHammerExecution>();
-        public override int ExecutionTime => 30;
+        public override int ExecutionProgress => 30;
         public override void ExSD()
         {
             Item.damage = 42;
-            Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { MaxInstances = 0, Pitch = -0.5f };
+            Item.UseSound = HJScarletSounds.HymnFireball_Release with { MaxInstances = 1, Pitch = -0.20f, PitchVariance = 0.15f, Volume = 0.8f };
             Item.SetUpNoUseGraphicItem();
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
             Item.SetUpItemShoot<FrostHammerProj>(18);

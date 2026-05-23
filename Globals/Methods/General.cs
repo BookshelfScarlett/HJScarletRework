@@ -335,5 +335,16 @@ namespace HJScarletRework.Globals.Methods
                 return proj.damage > 5 && proj.friendly && !proj.hostile;
 
         }
+        public static float ClampOscillation(this Projectile proj, float curOscillation, float speedValue)
+        {
+            return ClampOscillation(curOscillation, speedValue, proj.MaxUpdates);
+        }
+        public static float ClampOscillation(float curOscillation, float speedValue, int updates = 1)
+        {
+            float newOsci =curOscillation + ToRadians(speedValue) / updates;
+            if (newOsci >= ToRadians(360f))
+                newOsci = ToRadians(-360f);
+            return newOsci;
+        }
     }
 }

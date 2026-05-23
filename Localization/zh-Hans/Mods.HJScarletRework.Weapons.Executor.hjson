@@ -249,14 +249,27 @@ FrostoftheStorm: {
 Fleshtumor: {
 	// DisplayName: Fleshtumor
 	// Tooltip: ""
+	// ExecutionStrike: ""
 }
 
 FrostHammer: {
 	// DisplayName: Frost Hammer
 	// Tooltip: ""
+	// ExecutionStrike: ""
 }
 
-SpectreStaff: {
-	// DisplayName: Spectre Staff
-	// Tooltip: ""
+DualWraithStaff: {
+	DisplayName: 双魂魔杖
+	Tooltip:
+		'''
+		发射不可穿墙的追踪幽魂
+		处决攻击必须使用 互动键 手动开启
+		“幽魂之咒，一杖双形”
+		'''
+	ExecutionStrike:
+		'''
+		魔杖将会展开刀刃，切换为投矛形态
+		投矛形态下允许穿越墙体，穿透3名敌人，只有首次命中时才会生成追踪的幽魂射弹
+		满足处决攻击发起条件时，可通过再次按下 互动键 以切换回第一形态
+		'''
 }

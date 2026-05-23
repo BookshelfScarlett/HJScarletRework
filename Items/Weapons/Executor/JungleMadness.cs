@@ -8,7 +8,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class JungleMadness : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 1f;
-        public override int ExecutionTime => 15;
+        public override int ExecutionProgress => 15;
         public override int ExecutionProj => base.ExecutionProj;
         public override void ExSD()
         {

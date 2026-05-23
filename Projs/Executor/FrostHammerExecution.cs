@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using Microsoft.Xna.Framework;
 using Terraria;
 
@@ -6,7 +7,8 @@ namespace HJScarletRework.Projs.Executor
 {
     public class FrostHammerExecution : HJScarletProj
     {
-        public override string Texture => GetInstance<FrostHammerProj>().Texture;
+        public override ClassCategory Category => ClassCategory.Executor;
+        public override string Texture => GetVanillaAssetPath(VanillaAsset.Projectile, 917);
         public override Vector2 TileHitbox => new Vector2(16, 16);
         public override void ExSD()
         {

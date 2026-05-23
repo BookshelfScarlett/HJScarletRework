@@ -93,7 +93,7 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.Hitbox.Intersects(Owner.Hitbox))
             {
                 if (Projectile.HJScarlet().AddExecutionHit)
-                    Owner.HJScarlet().ExecutionTime += 1;
+                    Owner.HJScarlet().ExecutionProgress += 1;
                 Projectile.Kill();
             }
         }

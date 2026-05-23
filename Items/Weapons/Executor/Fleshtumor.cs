@@ -10,7 +10,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Fleshtumor : ExecutorWeaponClass
     {
-        public override int ExecutionTime => 10;
+        public override int ExecutionProgress => 10;
         public override void ExSD()
         {
             Item.damage = 66;
