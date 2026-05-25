@@ -20,6 +20,7 @@ namespace HJScarletRework.Globals.List
                 "梦山之主",
                 
                 "巴雷难破长夜",
+                "冰川咲",
                 "银九",
             ];
         public static List<string> DeveloperList =
