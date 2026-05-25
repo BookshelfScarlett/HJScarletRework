@@ -10,8 +10,10 @@ using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
@@ -26,6 +28,8 @@ namespace HJScarletRework.Projs.Executor
         public int RandFrame = 0;
         public override Vector2 TileHitbox => new(3);
         public ref float Timer => ref Projectile.ai[0];
+        public bool ActiveHoming = false;
+        public NPC CurTarget = null;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(16);
@@ -35,12 +39,12 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 16;
             Projectile.SetupImmnuity(-1);
             Projectile.penetrate = 1;
-            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.tileCollide = true;
             Projectile.timeLeft = 120;
             Projectile.Opacity = 0;
             Projectile.extraUpdates = 0;
             Projectile.ignoreWater= true;
+            Projectile.ownerHitCheck = true;
         }
         public override void OnFirstFrame()
         {
@@ -50,11 +54,34 @@ namespace HJScarletRework.Projs.Executor
         {
             Timer++;
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Projectile.AffactedByGrav(yAdd:1.1f);
             Projectile.Opacity = Lerp(0, 1, Timer / Projectile.MaxUpdates * 10);
-            if (Projectile.MeetMaxUpdatesFrame(Timer, 10))
+            if (CurTarget.IsLegal() && Projectile.ai[1] > 0 && Projectile.Opacity > 0.98f && Timer > 12 * Projectile.MaxUpdates)
             {
+                Projectile.extraUpdates = 1;
+                Projectile.timeLeft = GetSeconds(5);
+                float speedValue = Projectile.velocity.Length();
+                float rotation = Projectile.velocity.ToRotation();
+                float angleTo = Projectile.AngleTo(CurTarget.Center);
+                float dist = Projectile.Distance(CurTarget.Center);
+                float r = dist * 0.40f / (float)Math.Abs(Math.Sin(rotation - angleTo));
+                if (Vector2.Dot(Projectile.velocity, Projectile.DirectionTo(CurTarget.Center)) < 0)
+                {
+                    r = Clamp(r, 1, 240);
+                }
+                Projectile.velocity = Projectile.velocity.RotatedBy(-Math.Sign(WrapAngle(rotation - angleTo)) * speedValue / r);
+                if (Projectile.velocity.LengthSquared() < 13f * 13f)
+                    Projectile.velocity *= 1.1f;
+                else
+                    Projectile.velocity *= 0.9f;
+                Projectile.tileCollide = false;
 
+            }
+            else
+            {
+                Projectile.extraUpdates = 0;
+                Projectile.AffactedByGrav(yAdd:1.1f);
+                Projectile.tileCollide = true;
+                ActiveHoming = false;
             }
             if (Projectile.IsOutScreen())
                 return;
@@ -79,11 +106,34 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
+
+            for (int i = 0; i < 8; i++)
+            {
+                Color Firecolor = RandLerpColor(Color.White, Color.RoyalBlue);
+                Vector2 spawnPos = Projectile.Center + RandVelTwoPi(10f, 30f);
+                Vector2 vel = (Projectile.Center - spawnPos).ToSafeNormalize() * Main.rand.NextFloat(1f, 10f);
+                new SnowCloud(spawnPos, vel, Firecolor, 40, Main.rand.NextFloat(TwoPi), .45f, 0.28f * 0.35f, Main.rand.NextBool()).Spawn();
+            }
+            for(int i =0;i<16;i++)
+            {
+                ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
+                {
+                    p.Position = Projectile.Center.ToRandCirclePos(10);
+                    p.Velocity = -Projectile.oldVelocity.ToRandVelocity(0, 0.4f, 10f);
+                    p.Scale = Main.rand.NextFloat(0.9f, 1.1f) * 0.1f;
+                    p.Opacity = 1f;
+                    p.DrawColor = RandLerpColor(Color.AliceBlue, Color.RoyalBlue);
+                    p.Lifetime = 40;
+                    p.GlowCenterMult = 0.5f;
+                });
+            }
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 1 , Volume = 0.25f, PitchVariance = 0.05f, Pitch = -0.3f});
+
             base.OnKill(timeLeft);
         }
         public override bool? CanDamage()
         {
-            return base.CanDamage();
+            return Timer > 10 * Projectile.MaxUpdates;
         }
         public override bool PreDraw(ref Color lightColor)
         {

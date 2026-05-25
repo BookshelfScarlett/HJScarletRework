@@ -297,7 +297,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateAttack()
         {
-            Projectile.Center = Vector2.Lerp(Projectile.Center, Owner.MountedCenter, 0.1f);
+            Projectile.Center = Vector2.Lerp(Projectile.Center, Owner.MountedCenter, 0.81f);
             Projectile.velocity = Owner.ToMouseVector2();
             Projectile.rotation = Projectile.rotation.AngleLerp(Projectile.velocity.ToRotation(), 0.48f / Projectile.MaxUpdates);
             Owner.ControlPlayerArm(Projectile.rotation);

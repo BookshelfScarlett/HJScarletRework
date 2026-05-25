@@ -61,12 +61,6 @@ namespace HJScarletRework.Projs.Executor
                     SlotId slotId = SoundEngine.PlaySound(SoundID.Item122, Projectile.Center);
                     if (SoundEngine.TryGetActiveSound(slotId, out var sound))
                         sound.Volume /= 2;
-                    for (int i = 0; i < 6; i++)
-                    {
-                        Vector2 vel = new Vector2(0f, -Main.rand.NextFloat(14f, 18f)).RotatedBy(Main.rand.NextFloat(-PiOver4 / 3, PiOver4 / 3));
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), new Vector2(Projectile.Center.X, Projectile.Center.Y - Main.rand.NextFloat(160f, 320f)), vel, ProjectileType<AetherfireSmasherFireball>(), Projectile.damage, Projectile.knockBack);
-                        proj.ai[1] = 1999;
-                    }
                 }
                 if (FirePillerTimer == 30)
                 {

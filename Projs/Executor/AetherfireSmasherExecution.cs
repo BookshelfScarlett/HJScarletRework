@@ -282,6 +282,10 @@ namespace HJScarletRework.Projs.Executor
         {
             if (LockTarget is null && target.IsLegal())
                 LockTarget = target;
+            Vector2 vel = RandVelTwoPi(16,18f);
+            Projectile proj2 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel, ProjectileType<AetherfireSmasherFireball>(), Projectile.damage, Projectile.knockBack);
+            proj2.ai[1] = 1999;
+
             PickTagColor(out Color baseColor, out Color targetColor);
             PickTagDust(out short HigherDust, out short BottemDust);
             SoundEngine.PlaySound(SoundID.Item89 with { MaxInstances = 0, Pitch = 0.7f, PitchVariance = 0.1f }, Projectile.Center);
@@ -305,12 +309,17 @@ namespace HJScarletRework.Projs.Executor
                 d.scale = Main.rand.NextFloat(1.4f, 1.8f);
                 d.noGravity = true;
             }
+            if (Projectile.numHits > ((8 * 2) + 6) && Projectile.timeLeft > 2)
+            {
+                Projectile.timeLeft = 2;
+            }
+
             if (Projectile.numHits % 8 == 0)
             {
                 Vector2 center = new Vector2(target.Center.X, target.Center.Y + 30f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), center, Vector2.Zero, ProjectileType<AetherfireSmasherVolcano>(), Projectile.damage * 2, Projectile.knockBack);
-
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), center, Vector2.Zero, ProjectileType<AetherfireSmasherVolcano>(), (int)(Projectile.damage * 1.5f), Projectile.knockBack);
             }
+
         }
         public override bool PreDraw(ref Color lightColor)
         {

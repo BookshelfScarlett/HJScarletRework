@@ -11,7 +11,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override string Texture => GetInstance<DeepTone>().Texture;
         public override void ExSD()
         {
-            Item.damage = 83;
+            Item.damage = 71;
             Item.useTime = Item.useAnimation = 35;
             Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { Pitch = 0.5f, PitchVariance = 0.1f, MaxInstances = 0 };
             Item.knockBack = 12f;

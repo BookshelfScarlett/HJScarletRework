@@ -230,6 +230,12 @@ namespace HJScarletRework.Globals.Players
             UpdateArmorAbility();
             UpdateTacticalExecution();
             UpdateFishDash();
+            UpdateDiverArmorJellyfishSpawn();
+        }
+
+        public void UpdateDiverArmorJellyfishSpawn()
+        {
+
         }
 
         private void UpdateFishDash()

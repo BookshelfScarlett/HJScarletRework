@@ -69,6 +69,10 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle Misc_AirCharge => new SoundStyle($"{SoundsPath}{nameof(Misc_AirCharge)}");
         public static SoundStyle Frostwave_Release => new SoundStyle($"{SoundsPath}{nameof(Frostwave_Release)}", numVariants : 3);
         public static SoundStyle Frostwave_LightRelease => new SoundStyle($"{SoundsPath}{nameof(Frostwave_LightRelease)}");
+        public static SoundStyle Misc_Spell => new SoundStyle($"{SoundsPath}{nameof(Misc_Spell)}");
+        public static SoundStyle Misc_Ding=> new SoundStyle($"{SoundsPath}{nameof(Misc_Ding)}");
+        public static SoundStyle Misc_MayaPumper => new SoundStyle($"{SoundsPath}{nameof(Misc_MayaPumper)}", numVariants :2);
+        public static SoundStyle Frosthammer_SnowCharge=> new SoundStyle($"{SoundsPath}{nameof(Frosthammer_SnowCharge)}");
         public static SoundStyle[] Hammer_Shoot =>
             [
                 Hammer_Shoot1,

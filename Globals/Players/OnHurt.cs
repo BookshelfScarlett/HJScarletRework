@@ -1,10 +1,12 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
+using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -73,6 +75,19 @@ namespace HJScarletRework.Globals.Players
 
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
+            if (mayaPumper)
+            {
+                
+                modifiers.Knockback *= npc.knockBackResist;
+                modifiers.Knockback *= 5f;
+                if (npc.knockBackResist != 0)
+                {
+                    float pitch = Main.rand.NextFromList<float>(0f, 0.3f, -0.3f);
+                    SoundEngine.PlaySound(HJScarletSounds.Misc_MayaPumper with { MaxInstances = 1, Variants = [1], Pitch = pitch });
+                    SpawnPumpperParticle(npc.Center.GetNormalVector2(Player.Center));
+                    ScreenShakeSystem.AddScreenShakes(Player.Center, 15f, 40, Player.velocity.ToRotation());
+                }
+            }
             float totalProjDamageModify = 1f;
             float sourceDamageModify = 1f;
             if (protectorMoonglow)
@@ -93,6 +108,13 @@ namespace HJScarletRework.Globals.Players
             modifiers.FinalDamage *= totalProjDamageModify;
             modifiers.SourceDamage *= sourceDamageModify;
         }
+
+        public void SpawnPumpperParticle(Vector2 vel)
+        {
+            for(int i =0;i<40;i++)
+            new SmokeParticle(Player.Center, vel.ToRandVelocity(ToRadians(30f), 1f, 22f), RandLerpColor(Color.SkyBlue, Color.AliceBlue), 45, RandRotTwoPi, 0.5f, 0.25f, true).Spawn();
+        }
+
         public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
         {
             base.ModifyHitByProjectile(proj, ref modifiers);
@@ -120,11 +142,11 @@ namespace HJScarletRework.Globals.Players
                 totalProjDamageModify *= 0.50f;
                 modifiers.Knockback *= 0;
             }
-            if(goldenAppleEnchanted)
+            if (goldenAppleEnchanted)
             {
                 sourceDamageModify *= 0.80f;
             }
-            if(goldenAppleEnchantedFully)
+            if (goldenAppleEnchantedFully)
             {
                 sourceDamageModify *= 0.01f;
             }
@@ -132,7 +154,7 @@ namespace HJScarletRework.Globals.Players
                 totalProjDamageModify = 0.1f;
 
             modifiers.FinalDamage *= totalProjDamageModify;
-                modifiers.SourceDamage *= sourceDamageModify;
+            modifiers.SourceDamage *= sourceDamageModify;
         }
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {

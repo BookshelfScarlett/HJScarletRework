@@ -253,9 +253,14 @@ Fleshtumor: {
 }
 
 FrostHammer: {
-	// DisplayName: Frost Hammer
-	// Tooltip: ""
-	// ExecutionStrike: ""
+	DisplayName: 冰砾
+	Tooltip: 沿途滞留下坠的冰锥
+	ExecutionStrike:
+		'''
+		掷出一个雪花，追杀你的敌人
+		雪花命中敌人时，接下来释放的冰锥都会集中攻击这个目标
+		你可以对敌人右键从而为雪花重新锁定一个目标
+		'''
 }
 
 DualWraithStaff: {

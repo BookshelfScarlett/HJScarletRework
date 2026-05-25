@@ -37,7 +37,10 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            base.OnFirstFrame();
+        }
+        public override bool? CanDamage()
+        {
+            return Timer > 10;
         }
         public override void ProjAI()
         {

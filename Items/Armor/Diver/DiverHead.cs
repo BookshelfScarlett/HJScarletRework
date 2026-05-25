@@ -54,5 +54,9 @@ namespace HJScarletRework.Items.Armor.Diver
         {
             base.UpdateArmorSetBetter(player, setBonusPath);
         }
+        public override void UpdateEquip(Player player)
+        {
+            base.UpdateEquip(player);
+        }
     }
 }

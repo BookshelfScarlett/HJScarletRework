@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Rarity.RarityShiny
 {
+    //modrarity是个单例我才这么搞。
     public class HallowedRarity : ModRarity
     {
         public static Color RareColor = Color.Gold;

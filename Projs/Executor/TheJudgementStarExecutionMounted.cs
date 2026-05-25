@@ -95,7 +95,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 float totalOffset = i * TwoPi / TotalProjCounts;
                 Vector2 dir = Vector2.UnitX.RotatedBy(beginAngle + totalOffset);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 8f, ProjectileType<TheJudgementStarExecution>(), (int)(Projectile.damage * 0.80f), Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 8f, ProjectileType<TheJudgementStarExecution>(), (int)(Projectile.damage * 0.5f), Projectile.knockBack, Projectile.owner);
                 if (TargetNPC.CanBeChasedBy() && TargetNPC != null)
                     ((TheJudgementStarExecution)proj.ModProjectile).TargetNPC = TargetNPC;
                 for (int j = 0; j < 12; j++)

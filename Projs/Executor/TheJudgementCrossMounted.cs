@@ -132,7 +132,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 //666我还要存他们的数组信息来着
                 float curRadians = ToRadians(ToDegrees(Projectile.rotation) + 90f * i);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, curRadians.ToRotationVector2() * 16f, ProjectileType<TheJudgementCross>(), (int)(Projectile.damage), 0f, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, curRadians.ToRotationVector2() * 16f, ProjectileType<TheJudgementCross>(), (int)(Projectile.damage * 0.75f), 0f, Projectile.owner);
                 proj.ai[1] = 16f;
                 //这里必须得保留，确保初始生成的射线角度是正确的
                 proj.rotation = curRadians;

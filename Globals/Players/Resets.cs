@@ -24,6 +24,9 @@ namespace HJScarletRework.Globals.Players
             blackKeyDoT = false;
             artificalManaStar = false;
             executorSwordMark = false;
+            frostHammerHoming = false;
+            mayaPumper = false;
+            accVanityID = -1;
         }
         private void ResetArmor()
         {
@@ -37,6 +40,7 @@ namespace HJScarletRework.Globals.Players
             redDragonKnight = false;
             protectorShiver = false;
             protectorMoonglow = false;
+            diverArmor = false;
         }
 
         private void ResetPets()

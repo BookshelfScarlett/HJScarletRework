@@ -22,6 +22,7 @@ namespace HJScarletRework.Globals.List
         /// </summary>
         public static Dictionary<int, string> DownedBossConditionList = [];
         public static Dictionary<int, int> ExecutorWeaponDictionary = [];
+        public static Dictionary<int, string> VanityItemDictionary = [];
         public override void Load()
         {
             //投矛表单

@@ -39,19 +39,6 @@ namespace HJScarletRework.Items.Weapons.Executor
             }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
-        {
-            Texture2D tex = TextureAssets.Item[Type].Value;
-            Vector2 position = Item.position - Main.screenPosition + tex.Size() / 2;
-            Rectangle iFrame = tex.Frame();
-            //为锤子添加描边，并时刻更新大小
-            for (int i = 0; i < 16; i++)
-                spriteBatch.Draw(tex, position + ToRadians(i * 60f).ToRotationVector2() * 2.4f, null, Color.White with { A = 0 }, 0f, tex.Size() / 2, scale, 0, 0f);
-            //然后绘制锤子本身。
-            spriteBatch.Draw(tex, position, iFrame, Color.White, 0f, tex.Size() / 2, scale, 0f, 0f);
-            Lighting.AddLight(position, TorchID.UltraBright);
-            return false;
-        }
         public override void AddRecipes()
         {
             if (HJScarletMethods.HasFuckingCalamity)

@@ -167,7 +167,7 @@ namespace HJScarletRework.Projs.Executor
             if (!hasProj)
             {
                 Projectile.AddExecutionTimeImmediate(ItemType<TheJudgement>());
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<TheJudgementStar>(), Projectile.damage, 1f, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<TheJudgementStar>(), Projectile.damage / 2, 1f, Owner.whoAmI);
                 ((TheJudgementStar)proj.ModProjectile).TargetNPC = target;
             }
             else if (Projectile.numHits < 1)
@@ -175,7 +175,7 @@ namespace HJScarletRework.Projs.Executor
                 for (int i = -1; i < 2; i += 2)
                 {
                     Vector2 starPos = Owner.Center + Projectile.SafeDir().RotatedBy(PiOver2) * i * 25f - Owner.ToMouseVector2() * 100f;
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), starPos, Owner.ToMouseVector2().RotatedBy(ToRadians(15f) * i) * 18f, ProjectileType<TheJudgementStar>(), Projectile.damage / 2, 4f, Owner.whoAmI, ai2: i);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), starPos, Owner.ToMouseVector2().RotatedBy(ToRadians(15f) * i) * 18f, ProjectileType<TheJudgementStar>(), Projectile.damage / 4, 4f, Owner.whoAmI, ai2: i);
                     ((TheJudgementStar)proj.ModProjectile).AttackState = TheJudgementStar.State.OnExecution;
                     ((TheJudgementStar)proj.ModProjectile).TargetNPC = target;
                 }

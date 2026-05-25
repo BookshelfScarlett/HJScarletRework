@@ -1,0 +1,9 @@
+HikariItem: {
+	DisplayName: Hikari Item
+	Tooltip: ""
+}
+
+TairitsuItem: {
+	DisplayName: Tairitsu Item
+	Tooltip: ""
+}

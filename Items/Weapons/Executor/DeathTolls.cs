@@ -2,9 +2,6 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -44,16 +41,6 @@ namespace HJScarletRework.Items.Weapons.Executor
                 NightRarity.DrawRarity(line);
                 return false;
             }
-            //if (line.Mod == "Terraria" && line.Name == "CritChance")
-            //{
-            //    NightRarity.DrawMisc(line);
-            //    return false;
-            //}
-            //if (line.Mod == "Terraria" && line.Name == "Damage")
-            //{
-            //    NightRarity.DrawMisc(line);
-            //    return false;
-            //}
 
             if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
             {

@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            base.UpdateAccessory(player, hideVisual);
+            player.HJScarlet().mayaPumper = true;
         }
         public override void AddRecipes()
         {

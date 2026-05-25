@@ -84,3 +84,8 @@ UnregisteredSpiritOrigin: {
 	DisplayName: Unregistered Spirit Origin
 	Tooltip: ""
 }
+
+ArcaeaPack: {
+	DisplayName: Arcaea Pack
+	Tooltip: ""
+}

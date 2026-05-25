@@ -8,7 +8,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class FrostHammer : ExecutorWeaponClass
     {
-        public override int ExecutionProj => ProjectileType<FrostHammerExecution>();
+        public override int ExecutionProj => base.ExecutionProj;
         public override int ExecutionProgress => 30;
         public override void ExSD()
         {

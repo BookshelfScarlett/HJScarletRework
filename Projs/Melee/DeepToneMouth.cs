@@ -11,6 +11,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Melee
 {
@@ -41,6 +42,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ExSD()
         {
+            Projectile.DamageType = DamageClass.Generic;
             Projectile.height = Projectile.width = 16;
             Projectile.extraUpdates = 2;
             Projectile.penetrate = -1;
@@ -242,7 +244,7 @@ namespace HJScarletRework.Projs.Melee
                     Timer = 0;
                     AttackState = State.Lock;
                     StoredPosition = Projectile.Center - target.Center;
-                    Projectile.timeLeft = 400;
+                    Projectile.timeLeft = 360;
                     //不要直接设置到最底层的速度
                     Projectile.velocity *= 0.01f;
                 }
@@ -252,16 +254,19 @@ namespace HJScarletRework.Projs.Melee
             if (AttackState == State.Lock)
             {
                 ScaleUp = true;
-                if (Main.rand.NextBool(7))
+                if (Projectile.numHits % 2 == 0)
                 {
-                    Vector2 vel = Projectile.SafeDir() * 12f;
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, vel, ProjectileType<DeepToneHealOrb>(), 0, 0, Owner.whoAmI);
-                    ((DeepToneHealOrb)proj.ModProjectile).UseHeal = true;
-                    proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
-                    for (int i = 0; i < 16; i++)
+                    if (Main.rand.NextBool(12))
                     {
-                        new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(10f), vel.ToRandVelocity(ToRadians(5f), 0.4f, 3.9f), RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 30, 0, 1, 0.76f * Main.rand.NextFloat(0.5f, 0.8f), false).Spawn();
+                        Vector2 vel = Projectile.SafeDir() * 12f;
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, vel, ProjectileType<DeepToneHealOrb>(), 0, 0, Owner.whoAmI);
+                        ((DeepToneHealOrb)proj.ModProjectile).UseHeal = true;
+                        proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                        for (int i = 0; i < 16; i++)
+                        {
+                            new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(10f), vel.ToRandVelocity(ToRadians(5f), 0.4f, 3.9f), RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 30, 0, 1, 0.76f * Main.rand.NextFloat(0.5f, 0.8f), false).Spawn();
 
+                        }
                     }
                 }
             }

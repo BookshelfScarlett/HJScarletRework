@@ -38,7 +38,7 @@ namespace HJScarletRework.Projs.Executor
         public NPC CurHittingTarget = null;
         public bool IsHitting = false;
         public int TotalHitTime = 3;
-        public int HitTargetCounts = 6;
+        public int HitTargetCounts = 5;
 
         public override void SetStaticDefaults()
         {

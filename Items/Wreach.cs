@@ -7,6 +7,7 @@ using HJScarletRework.Globals.Graphics.ParticleECS;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Projs.Executor;
+using HJScarletRework.Projs.General;
 using HJScarletRework.Projs.Magic;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
@@ -40,7 +41,7 @@ namespace HJScarletRework.Items
             //}
             //Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<MoltenDaggerMark>(), 0, knockback, player.whoAmI);
             //Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<GhostDaggerMark>(), 0, knockback, player.whoAmI);
-            Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<FrostHammerIceSpike>(), 0, knockback, player.whoAmI);
+            Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<DiverJellyFish>(), 0, knockback, player.whoAmI);
         //    Stopwatch.StartNew();
         //    // 在需要测量的代码之前创建并启动 Stopwatch
         //    Stopwatch sw = Stopwatch.StartNew();

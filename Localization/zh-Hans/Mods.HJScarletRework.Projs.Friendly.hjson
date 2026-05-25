@@ -85,6 +85,7 @@ Typeless: {
 	// FrostHammerExecution.DisplayName: Frost Hammer Execution
 	// FrostHammerProj.DisplayName: Frost Hammer Proj
 	// DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
+	// DiverJellyFish.DisplayName: Diver Jelly Fish
 }
 
 Pets: {
@@ -186,6 +187,7 @@ Executor: {
 	// DualWraithStaffHeldProj.DisplayName: Spectre Staff Held Proj
 	// DualWraithStaffJavelin.DisplayName: Spectre Staff Javelin
 	// DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
+	// FrostHammerExecution.DisplayName: Frost Hammer Execution
 }
 
 Ranged: {

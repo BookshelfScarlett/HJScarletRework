@@ -118,6 +118,7 @@ namespace HJScarletRework.Globals.Instances.Items
                 {
                     ItemType<FrostoftheStorm>(),
                     ItemType<AzureFrostmark>(),
+                    ItemType<FrostHammer>()
                 },
                 FrostRarity.DrawItemName
             }

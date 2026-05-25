@@ -39,6 +39,7 @@ namespace HJScarletRework.Globals.Players
         public int goldenAppleDamageAbsorb = 0;
         public bool goldenAppleEnchantedFully = false;
         public bool givePaper = true;
+        public bool frostHammerHoming = false;
         #region 护甲
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;
@@ -58,6 +59,9 @@ namespace HJScarletRework.Globals.Players
         public int[] protectorHerbTimerList = [0, 0, 0, 0, 0, 0, 0];
         public bool protectorShiver = false;
         public bool protectorMoonglow = false;
+        public int accVanityID = -1;
+        public bool arcaeaVanityGive = false;
+        public bool diverArmor = false;
         #endregion
 
         #region Accessories
@@ -93,6 +97,7 @@ namespace HJScarletRework.Globals.Players
         public int blackKeyReduceDefense = 0;
         public bool blackKeyDefenseTrigger = false;
         public bool executorSwordMark = false;
+        public bool mayaPumper = false;
         #endregion
 
         #region Pets
@@ -188,6 +193,15 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnEnterWorld()
         {
+            if(arcaeaVanityGive)
+            {
+                string nameLow = Player.name.ToLower();
+                if (nameLow.Contains('光') || nameLow.Contains("对立") || nameLow.Contains("arcaea") || nameLow.Contains("hikari") || nameLow.Contains("tairitsu"))
+                {
+                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<ArcaeaPack>());
+                    arcaeaVanityGive = true;
+                }
+            }
             if(givePaper)
             {
                 Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<DescriptionPaper>());

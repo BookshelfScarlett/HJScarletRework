@@ -133,6 +133,7 @@ namespace HJScarletRework.Projs.Executor
         {
             //生成需要的挂载弹
             if (AttackTimer == 0)
+                //Projectile.HomingTarget(CurTarget.Center, -1, 20, 20);
             {
                 AttackTimer = 1;
                 CurrentLifeTime = Projectile.timeLeft;

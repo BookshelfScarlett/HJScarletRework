@@ -95,3 +95,12 @@ UnregisteredSpiritOrigin: {
 		“满溢而出的灵基的残渣”
 		'''
 }
+
+ArcaeaPack: {
+	DisplayName: 韵律源点奖励包
+	Tooltip:
+		'''
+		开启后获得[i:HJScarletRework/HikariItem]精致玫瑰和[i:HJScarletRework/TairitsuItem]黑色阳伞
+		光和对立的时装变身道具
+		'''
+}

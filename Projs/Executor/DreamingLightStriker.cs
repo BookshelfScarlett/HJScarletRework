@@ -324,18 +324,20 @@ namespace HJScarletRework.Projs.Executor
         public void SpawnFireball(NPC target)
         {
             if (Owner.HasProj<DreamingLightMinion>())
-                for (int i = 0; i < 6; i++)
+            {
+                for (int i = 0; i < 4; i++)
                 {
                     Vector2 spawnPos = target.Center.ToRandCirclePos(0f);
                     Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(30f), 18f, 24f);
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<DreamlessNightArrow>(), Projectile.damage / 3, 0f, Owner.whoAmI);
                     ((DreamlessNightArrow)proj.ModProjectile).CurSpeed = 0;
                 }
+            }
             for (int i = 0; i < 3; i++)
             {
 
                 Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(30f), 10f, 14f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, vel, ProjectileType<DreamingLightFireball>(), Projectile.damage / 3, Projectile.knockBack, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, vel, ProjectileType<DreamingLightFireball>(), Projectile.damage / 4, Projectile.knockBack, Owner.whoAmI);
                 ((DreamingLightFireball)proj.ModProjectile).TargetNPC = target;
             }
         }

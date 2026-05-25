@@ -24,6 +24,9 @@
 	    <HintPath>..\ModAssemblies\ContinentOfJourney_v0.8.70.70.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Items\Vanity\" />
+	</ItemGroup>
 
 	<!-- References -->
 

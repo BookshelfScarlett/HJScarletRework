@@ -4,6 +4,7 @@ using HJScarletRework.Rarity.RarityParticles;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Rarity.RarityShiny

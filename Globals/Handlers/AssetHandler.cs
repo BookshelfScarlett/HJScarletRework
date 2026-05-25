@@ -9,6 +9,7 @@
         public static readonly string Materials = $"{ItemPath}/{nameof(Materials)}/";
         public static readonly string Useables = $"{ItemPath}/{nameof(Useables)}/";
         public static readonly string Weapons = $"{ItemPath}/{nameof(Weapons)}/";
+        public static readonly string Vanity = $"{ItemPath}/{nameof(Vanity)}/";
         public static string LocalizedHelper(this string assetPath)
         {
             if (assetPath.Equals(Armors))
@@ -21,6 +22,8 @@
                 return "Useable";
             if (assetPath.Equals(Weapons))
                 return nameof(Weapons);
+            if (assetPath.Equals(Vanity))
+                return nameof(Vanity);
             return string.Empty;
         }
     }
