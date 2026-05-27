@@ -235,7 +235,15 @@ namespace HJScarletRework.Globals.Players
 
         public void UpdateDiverArmorJellyfishSpawn()
         {
+            if (!diverArmor)
+                return;
+            if(Player.miscCounter % 15 ==0 && Player.velocity.LengthSquared() > 2f * 2f)
+            {
+                int damage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(150);
+                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Player.velocity.ToSafeNormalize() * -3f, ProjectileType<DiverJellyFish>(), damage, 0f, Player.whoAmI);
+                proj.timeLeft = GetSeconds(10);
 
+            }
         }
 
         private void UpdateFishDash()

@@ -1,9 +1,19 @@
-﻿HikariItem: {
+HikariItem: {
 	DisplayName: 精致玫瑰
-	Tooltip: ""
+	FlavorTooltip: "-Fracture-"
+	Tooltip:
+		'''
+		没有光芒，也_____的
+		死亡世界中心，神的祝福降临与你...
+		'''
 }
 
 TairitsuItem: {
 	DisplayName: 黑色阳伞
-	Tooltip: ""
+	FlavorTooltip: -Grievous Lady-
+	Tooltip:
+		'''
+		____，也没有纷争的
+		死亡世界中心，神的祝福降临与你...
+		'''
 }

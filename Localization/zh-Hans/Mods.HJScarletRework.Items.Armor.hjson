@@ -213,16 +213,34 @@ MonkLegs: {
 }
 
 DiverBody: {
-	// DisplayName: Diver Body
-	// Tooltip: ""
+	DisplayName: 潜航员护胸
+	Tooltip:
+		'''
+		增加15%代行者暴击伤害
+		敌人更有可能攻击你
+		'''
 }
 
 DiverHead: {
-	// DisplayName: Diver Head
-	// Tooltip: ""
+	DisplayName: 潜航员面罩
+	Tooltip:
+		'''
+		增加25%代行者伤害
+		增加25%代行者暴击概率
+		敌人更有可能攻击你
+		'''
+	SetBonus:
+		'''
+		+2 HP/s 生命恢复速度
+		移动时沿轨迹生成在空中滞留的水母
+		'''
 }
 
 DiverLegs: {
-	// DisplayName: Diver Legs
-	// Tooltip: ""
+	DisplayName: 潜航员护腿
+	Tooltip:
+		'''
+		增加25%移动速度
+		敌人更有可能攻击你
+		'''
 }

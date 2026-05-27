@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
@@ -47,16 +48,20 @@ namespace HJScarletRework.Items.Armor.Diver
         public override bool SetUpArmorSet => true;
         public override void ExSD()
         {
-            Item.defense = 5;
+            Item.defense = 50;
             Item.SetUpRarityPrice(ItemRarityID.Cyan);
         }
         public override void UpdateArmorSetBetter(Player player, string setBonusPath)
         {
-            base.UpdateArmorSetBetter(player, setBonusPath);
+            player.setBonus += "\n" + setBonusPath.ToLangValue();
+            player.lifeRegen += 4;
+            player.HJScarlet().diverArmor = true;
         }
         public override void UpdateEquip(Player player)
         {
-            base.UpdateEquip(player);
+            player.GetDamage<ExecutorDamageClass>() += .25f;
+            player.GetCritChance<ExecutorDamageClass>() += 25;
+            player.aggro += 500;
         }
     }
 }

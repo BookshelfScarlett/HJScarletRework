@@ -104,3 +104,8 @@ ArcaeaPack: {
 		光和对立的时装变身道具
 		'''
 }
+
+TendouKei: {
+	// DisplayName: Tendou Kei
+	// Tooltip: ""
+}

@@ -10,12 +10,13 @@ namespace HJScarletRework.Items.Armor.Diver
     {
         public override void ExSD()
         {
-            Item.defense = 5;
+            Item.defense = 45;
             Item.SetUpRarityPrice(ItemRarityID.Cyan);
         }
         public override void UpdateEquip(Player player)
         {
-            base.UpdateEquip(player);
+            player.moveSpeed += .25f;
+            player.aggro += 500;
         }
     }
 }

@@ -1,9 +1,11 @@
 HikariItem: {
 	DisplayName: Hikari Item
+	FlavorTooltip: ""
 	Tooltip: ""
 }
 
 TairitsuItem: {
 	DisplayName: Tairitsu Item
+	FlavorTooltip: ""
 	Tooltip: ""
 }

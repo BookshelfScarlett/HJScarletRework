@@ -217,6 +217,7 @@ DiverBody: {
 DiverHead: {
 	DisplayName: Diver Head
 	Tooltip: ""
+	SetBonus: ""
 }
 
 DiverLegs: {

@@ -24,12 +24,12 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
             Main.spriteBatch.Draw(HJScarletTexture.Texture_RarityGlow.Value, glowPosition, null, glowColor.ToAddColor() * 0.85f, 0f, HJScarletTexture.Texture_RarityGlow.Origin, glowScale, SpriteEffects.None, 0f);
 
             float sine = (float)((1 + Math.Sin(Main.GlobalTimeWrappedHourly * 2.5f)) / 2);
-            float sineOffset = Lerp(0.5f, 1f, sine);
+            float sineOffset = Lerp(0.75f, 1f, sine);
 
             //绘制发光描边，带渐变
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 16; i++)
             {
-                Vector2 afterimageOffset = (TwoPi * i / 12f).ToRotationVector2() * (1.5f * sineOffset);
+                Vector2 afterimageOffset = (TwoPi * i / 16f).ToRotationVector2() * (1.5f * sineOffset);
                 ChatManager.DrawColorCodedString(Main.spriteBatch, tooltipLine.Font, textValue, (textPosition + afterimageOffset).RotatedBy(TwoPi * (i / 12)), edgeColor * 0.9f, tooltipLine.Rotation, tooltipLine.Origin, tooltipLine.BaseScale);
             }
 

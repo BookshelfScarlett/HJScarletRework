@@ -89,3 +89,8 @@ ArcaeaPack: {
 	DisplayName: Arcaea Pack
 	Tooltip: ""
 }
+
+TendouKei: {
+	DisplayName: Tendou Kei
+	Tooltip: ""
+}

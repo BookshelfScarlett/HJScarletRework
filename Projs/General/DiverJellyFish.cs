@@ -27,11 +27,12 @@ namespace HJScarletRework.Projs.General
         {
             Projectile.tileCollide = false;
             Projectile.ownerHitCheck = true;
-            Projectile.timeLeft = GetSeconds(10);
+            Projectile.timeLeft = GetSeconds(15);
             Projectile.extraUpdates = 2;
             Projectile.width = Projectile.height = 100;
             Projectile.SetupImmnuity(20);
             Projectile.penetrate = -1;
+            Projectile.Opacity = 0;
             Projectile.noEnchantmentVisuals = true;
         }
         public override void OnFirstFrame()
@@ -40,7 +41,13 @@ namespace HJScarletRework.Projs.General
         }
         public override void ProjAI()
         {
-            Projectile.velocity *= 0.90f;
+            if (Projectile.timeLeft < 50)
+            {
+                Projectile.Opacity = Lerp(Projectile.Opacity, 0, 0.1f / 4f);
+            }
+            else
+                Projectile.Opacity = Lerp(Projectile.Opacity, 1, 0.1f / 4f);
+                Projectile.velocity *= 0.96f;
             UpdateParticle();
             if (Projectile.FinalUpdate())
             {
@@ -48,25 +55,23 @@ namespace HJScarletRework.Projs.General
                 Projectile.position.Y += osci;
             }
 
-            Projectile.timeLeft = GetSeconds(10);
             Projectile.AddFrames(16 * Projectile.MaxUpdates, 4);
         }
         public void UpdateParticle()
         {
-                switch (TextureType)
-                {
-                    case NPCID.GreenJellyfish:
+            switch (TextureType)
+            {
+                case NPCID.GreenJellyfish:
                     ParticleHandler(Color.LimeGreen, Color.DarkGreen);
-                        break;
-                    case NPCID.PinkJellyfish:
+                    break;
+                case NPCID.PinkJellyfish:
                     ParticleHandler(Color.HotPink, Color.Purple);
-                        break;
-                    case NPCID.BlueJellyfish:
+                    break;
+                case NPCID.BlueJellyfish:
                     ParticleHandler(Color.RoyalBlue, Color.CornflowerBlue);
-                    
-                        break;
+                    break;
 
-                }
+            }
         }
 
         private void GreenParticle()
@@ -80,7 +85,6 @@ namespace HJScarletRework.Projs.General
         {
             if (Projectile.FinalUpdateNextBool(6))
                 new StarShape(Projectile.Center.ToRandCirclePos(30), Vector2.UnitY * Main.rand.NextFloat(1f, 3f) * .2f, RandLerpColor(color1, color2), Projectile.scale * 0.5f, 40, true).Spawn();
-            //new LightningParticle(Projectile.Center.ToRandCirclePos(30), Vector2.Zero, RandLerpColor(color1, color2), 40, PiOver2+ Vector2.UnitY.RotatedByRandom(ToRadians(10f)).ToRotation(), Projectile.scale * 0.30f, 0).Spawn();
             if (Projectile.FinalUpdateNextBool(6))
                 ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
                 {
@@ -111,7 +115,24 @@ namespace HJScarletRework.Projs.General
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            base.OnHitNPC(target, hit, damageDone);
+            switch (TextureType)
+            {
+                case NPCID.GreenJellyfish:
+                    PlayHitParticle(target.Center,Color.LimeGreen, Color.DarkGreen);
+                    break;
+                case NPCID.PinkJellyfish:
+                    PlayHitParticle(target.Center,Color.HotPink, Color.Purple);
+                    break;
+                case NPCID.BlueJellyfish:
+                    PlayHitParticle(target.Center,Color.RoyalBlue, Color.CornflowerBlue);
+                    break;
+
+            }
+
+        }
+        public void PlayHitParticle(Vector2 center,Color color1, Color color2)
+        {
+            new SmokeParticle(center.ToRandCirclePos(4f), RandVelTwoPi(0.1f, 5f), RandLerpColor(color1, color2), 40, RandRotTwoPi, 0.85f, 0.20f,true).Spawn();
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -127,7 +148,7 @@ namespace HJScarletRework.Projs.General
 
         public void DrawJellyfish(Texture2D jellyfish, Rectangle frame, Vector2 ori, Vector2 pos)
         {
-            SB.Draw(jellyfish, pos - Vector2.UnitY * 5f, frame, Color.White, Projectile.rotation, ori, Projectile.scale, 0, 0);
+            SB.Draw(jellyfish, pos - Vector2.UnitY * 5f, frame, Color.White * Projectile.Opacity, Projectile.rotation, ori, Projectile.scale, 0, 0);
         }
         public void DrawColorfulRing(Vector2 pos)
         {
@@ -150,6 +171,8 @@ namespace HJScarletRework.Projs.General
             SB.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             float scale = Projectile.scale * 0.35f;
             scale = Projectile.scale * 0.15f;
+            color1 *= Projectile.Opacity;
+            color2 *= Projectile.Opacity;
             Texture2D ring = HJScarletTexture.Particle_RingShiny.Value;
             SB.Draw(ring, pos, null, color1* 0.45f, Projectile.rotation, ring.ToOrigin(), scale, 0, 0);
             SB.Draw(ring, pos, null, color1*0.45f, Projectile.rotation + PiOver2, ring.ToOrigin(), scale, 0, 0);

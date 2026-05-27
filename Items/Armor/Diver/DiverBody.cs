@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,12 +11,13 @@ namespace HJScarletRework.Items.Armor.Diver
     {
         public override void ExSD()
         {
-            Item.defense = 5;
+            Item.defense = 60;
             Item.SetUpRarityPrice(ItemRarityID.Cyan);
         }
         public override void UpdateEquip(Player player)
         {
-            base.UpdateEquip(player);
+            player.HJScarlet().critDamageExecutor += 0.15f;
+            player.aggro += 500;
         }
     }
 }
