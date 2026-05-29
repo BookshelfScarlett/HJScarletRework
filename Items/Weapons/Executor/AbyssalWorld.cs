@@ -5,11 +5,13 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
     public class AbyssalWorld : ExecutorWeaponClass
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override int ExecutionProgress => 40;
         public override void ExSD()
         {

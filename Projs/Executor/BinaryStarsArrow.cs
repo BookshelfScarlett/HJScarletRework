@@ -102,7 +102,7 @@ namespace HJScarletRework.Projs.Executor
             DrawScale = Clamp(EaseOutCubic(progress), 0f, 1f);
             Projectile.velocity *= 0.89f;
             Progress--;
-            if (progress < -15f)
+            if (Progress < -5f)
                 Projectile.Kill();
         }
 

@@ -17,7 +17,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.damage = 36;
             Item.rare = ItemRarityID.Green;
             Item.useTime = Item.useAnimation = 40;
-            Item.knockBack = 6f;
+            Item.knockBack = 1.6f;
             Item.shootSpeed = 14f;
             Item.shoot = ProjectileType<SweetStabThrownProj>();
             Item.UseSound = SoundID.Grass;
@@ -36,7 +36,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetDefaults()
         {
             Item.DamageType = DamageClass.Melee;
-            Item.knockBack = 12f;
+            Item.knockBack = 8f;
             Item.rare = ItemRarityID.Green;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;

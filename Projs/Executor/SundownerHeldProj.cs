@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items.ThrowerWeapons;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
@@ -126,7 +127,7 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 vel = dir2.ToRandVelocity(ToRadians(10f), 0.8f, 10.8f);
                     Vector2 offset = dir2.ToRandVelocity(ToRadians(0), 6f, 9f);
                     Vector2 posOffset = offset + Main.rand.NextVector2Circular(10f, 5f) + dir2 * 0f;
-                    new ShinyCrossStar(firePos2.ToRandCirclePos(20f) + posOffset, vel, RandLerpColor(Color.OrangeRed, Color.Red), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.5f, 0.8f) * .7f, false, 0.2f).Spawn();
+                    ECSParticle.ShinyCrossStarECS(firePos.ToRandCirclePos(20f) + posOffset, vel, RandLerpColor(Color.OrangeRed, Color.Red), 40, 1f, Main.rand.NextFloat(0.5f, 0.8f) * .7f, .2f);
                 }
                 for (int i = 0; i < 12; i++)
                 {
@@ -142,7 +143,7 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 vel = dir.ToRandVelocity(ToRadians(10f), 1.8f, 20.8f);
                     Vector2 offset = dir.ToRandVelocity(ToRadians(0), 6f, 9f);
                     Vector2 posOffset = offset + Main.rand.NextVector2Circular(10f, 5f) + dir * 20f;
-                    new ShinyCrossStar(firePos.ToRandCirclePos(20f) + posOffset, vel, RandLerpColor(Color.OrangeRed, Color.Orange), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.5f, 0.8f), false, 0.2f).Spawn();
+                    ECSParticle.ShinyCrossStarECS(firePos.ToRandCirclePos(20f) + posOffset, vel, RandLerpColor(Color.OrangeRed, Color.Orange), 40, 1f, Main.rand.NextFloat(0.5f, 0.8f), .2f);
                 }
                 for (int i = 0; i < 16; i++)
                 {

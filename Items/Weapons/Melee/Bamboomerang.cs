@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.damage = 26;
-            Item.knockBack = 12f;
+            Item.knockBack = 3f;
             Item.shoot = ProjectileType<BamboomerangProj>();
             Item.shootSpeed = 16f;
             Item.useStyle = ItemUseStyleID.Swing;

@@ -1,6 +1,8 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
@@ -13,16 +15,27 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class Sundowner : ExecutorWeaponClass
     {
         public override int ExecutionProgress =>120;
+        public override void ExSSD()
+        {
+            HJScarletList.DisasterRarityHashSet.Add(Type);
+        }
         public override void ExSD()
         {
             Item.damage = 54;
             Item.SetUpNoUseGraphicItem(true,false);
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
-            Item.rare = RarityType<SolarRarity>();
             Item.shootSpeed = 16f;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = null;
 
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient<DisasterBar>(10).
+                AddIngredient(ItemID.RocketLauncher).
+                AddTile(TileID.MythrilAnvil).
+                Register();
         }
         public override bool CanUseItem(Player player) => true;
         public override void HoldItem(Player player)

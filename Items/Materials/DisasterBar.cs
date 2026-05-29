@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.List;
 using Terraria;
 using Terraria.ID;
 
@@ -10,7 +11,7 @@ namespace HJScarletRework.Items.Materials
         public override string AssetPath => AssetHandler.Materials;
         public override void SetStaticDefaults()
         {
-            base.SetStaticDefaults();
+            HJScarletList.DisasterRarityHashSet.Add(Type);
         }
         public override void ExSD()
         {
@@ -18,6 +19,7 @@ namespace HJScarletRework.Items.Materials
             Item.height = 34;
             Item.maxStack = 9999;
             Item.rare = ItemRarityID.Red;
+            Item.material = true;
             Item.value = Item.sellPrice(gold: 4, silver: 30);
         }
         public override void AddRecipes()

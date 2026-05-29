@@ -13,7 +13,7 @@ namespace HJScarletRework.Core.ParticleScarlet
         /// <para>通常情况下应该不会超出这个三万上限</para>
         /// 这样主要是为了保证内存连续
         /// </summary>
-        private const int MaxParticleCountsSet = 30000;
+        private const int MaxParticleCountsSet = 30002;
         public static readonly List<ScarletParticle> ParticleAlpha = new(MaxParticleCountsSet);
         public static readonly List<ScarletParticle> ParticleNonPre = new(MaxParticleCountsSet);
         public static readonly List<ScarletParticle> ParticleAdditive = new(MaxParticleCountsSet);

@@ -13,8 +13,8 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void ExSD()
         {
             Item.width = Item.height = 92;
-            Item.damage = 65;
-            Item.knockBack = 8f;
+            Item.damage = 60;
+            Item.knockBack = 6f;
             Item.useTime = Item.useAnimation = 55;
             Item.shootSpeed = 18f;
             Item.rare = ItemRarityID.Yellow;

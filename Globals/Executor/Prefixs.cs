@@ -44,7 +44,6 @@ namespace HJScarletRework.Globals.Executor
         public override float DamageMult => 1.12f;
         public override float CritDamageAdd => .10f;
         public override int CritAdd => 5;
-        public override int DefenseAdded => 0;
         public override float KnockbackMult => 1.1f;
     }
     public class Evolutional : ExecutorPrefixs
@@ -52,7 +51,6 @@ namespace HJScarletRework.Globals.Executor
         public override float DamageMult => 1.05f;
         public override float CritDamageAdd => .05f;
         public override int CritAdd => 5;
-        public override int DefenseAdded => 0;
         public override float KnockbackMult => 1.05f;
     }
     public class Digital : ExecutorPrefixs
@@ -69,19 +67,16 @@ namespace HJScarletRework.Globals.Executor
     }
     public class Foreigner : ExecutorPrefixs
     {
-        public override int CritAdd => 25;
-        public override float CritDamageAdd => 0.25f;
-        public override float ExecutionDamageMult => 1f;
-        public override int DefenseAdded => -25;
-        public override float UseTimeMult => 1.7f;
+        public override int CritAdd => 30;
+        public override float CritDamageAdd => -0.5f;
+        public override float ExecutionDamageMult => .75f;
         public override float KnockbackMult => 1f;
     }
     public class Alterego : ExecutorPrefixs
     {
-        public override int DefenseAdded => 2;
         public override int CritAdd => -30;
-        public override float UseTimeMult => 0.70f;
-        public override float ExecutionDamageMult => 0.30f;
+        public override float CritDamageAdd => .50f;
+        public override float ExecutionDamageMult => 0.25f;
         public override float KnockbackMult => 1f;
     }
     public class Fake : ExecutorPrefixs

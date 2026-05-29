@@ -86,6 +86,8 @@ Typeless: {
 	// FrostHammerProj.DisplayName: Frost Hammer Proj
 	// DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
 	// DiverJellyFish.DisplayName: Diver Jelly Fish
+	// PrunusMumePetal.DisplayName: Prunus Mume Petal
+	// PrunusMumeFlower.DisplayName: Prunus Mume Flower
 }
 
 Pets: {
@@ -188,6 +190,7 @@ Executor: {
 	// DualWraithStaffJavelin.DisplayName: Spectre Staff Javelin
 	// DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
 	// FrostHammerExecution.DisplayName: Frost Hammer Execution
+	// PrunusMumeProj.DisplayName: Prunus Mume Proj
 }
 
 Ranged: {

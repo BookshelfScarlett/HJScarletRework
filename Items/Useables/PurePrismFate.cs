@@ -4,6 +4,7 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.List;
+using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -12,7 +13,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Useables
 {
-    public class PureCrystal : HJScarletItemClass
+    public class PurePrismFate : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Useables;
         public static List<int> _RefusedList =
@@ -47,18 +48,24 @@ namespace HJScarletRework.Items.Useables
                 ItemType<MaliciousPacket>(),
                 ItemType<PurpleFlareGun>()
             ];
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.RareItemRarityDrawDictionary.Add(Type, RareItemRarity.RareType.White);
+        }
 
         public override void ExSD()
         {
             Item.maxStack = 9999;
-            Item.rare = ItemRarityID.Blue;
+            Item.rare = ItemRarityID.Orange;
         }
         public override void HoldItem(Player player)
         {
             Item item = Main.HoverItem;
+            if (player.HeldItem.stack < 3)
+                return;
             //必须得是材料。必须得没有伤害，必须得不是饰品，必须得什么都不会发射，必须得没有任何Buff提供，必须得可叠加（最大叠加数小于零）
-            //必须得不能放置任何东西，这样会顺手干掉复制矿石的可能性
-            bool isMate = item.material && item.damage < 1 && !item.accessory && item.shoot == ProjectileID.None && item.buffType == 0 && item.maxStack > 1 && (item.createTile == -1 && item.createWall == -1);
+            //必须得不能放置任何墙体
+            bool isMate = item.material && item.damage < 1 && !item.accessory && item.shoot == ProjectileID.None && item.buffType == 0 && item.maxStack > 1 && item.createWall == -1;
             if ((isMate && !_RefusedList.Contains(item.type)) || SmeltList.BarType.Contains(item.type))
             {
                 if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
@@ -66,22 +73,24 @@ namespace HJScarletRework.Items.Useables
                     int totalStack = 0;
                     for (int i = 0; i < player.HeldItem.stack; i++)
                     {
-                        if (i == 101)
+                        if (i == 300)
                             break;
-                        totalStack++;
-                        Item targetItem = new Item();
-                        bool favor = player.HeldItem.favorited;
-                        targetItem.SetDefaults(item.type);
-                        targetItem.favorited = favor;
-                        player.QuickSpawnItemDirect(player.GetSource_FromThis(), targetItem);
+                        if (i % 3 == 0)
+                        {
+                            totalStack++;
+                        }
                     }
-                    player.HeldItem.stack -= totalStack;
-                        SoundEngine.PlaySound(SoundID.ResearchComplete, player.Center);
+                    player.HeldItem.stack -= (totalStack * 3);
+                    Item targetItem = new Item();
+                    bool favor = player.HeldItem.favorited;
+                    targetItem.SetDefaults(item.type);
+                    targetItem.favorited = favor;
+                    player.QuickSpawnItemDirect(player.GetSource_FromThis(), targetItem, totalStack);
+                    SoundEngine.PlaySound(SoundID.ResearchComplete, player.Center);
                     for (int i = 0; i < 20; i++)
                         new TurbulenceGlowOrb(player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
                 }
             }
-            base.HoldItem(player);
         }
     }
 }

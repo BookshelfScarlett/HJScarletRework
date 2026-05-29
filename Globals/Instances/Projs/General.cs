@@ -95,7 +95,7 @@ namespace HJScarletRework.Globals.Instances.Projs
                     {
                         return;
                     }
-            SoundEngine.PlaySound(HJScarletSounds.Lightning_Strike with {MaxInstances =0,  Pitch = 0.35f, Volume = 0.5f }, projectile.Center);
+                    SoundEngine.PlaySound(HJScarletSounds.Lightning_Strike with { MaxInstances = 0, Pitch = 0.35f, Volume = 0.5f }, projectile.Center);
                     for (int i = 0; i < availableTarget.Count; i++)
                     {
                         NPC target = availableTarget[i];
@@ -103,7 +103,7 @@ namespace HJScarletRework.Globals.Instances.Projs
                         Vector2 vel = (target.Center - pos).ToSafeNormalize() * Main.rand.NextFloat(4f, 9f);
                         if (target.IsLegal())
                         {
-                            Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, vel, ProjectileType<MonkStaffLightning>(), projectile.damage/2, 3f, Owner.whoAmI);
+                            Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, vel, ProjectileType<MonkStaffLightning>(), projectile.damage / 2, 3f, Owner.whoAmI);
                             ((MonkStaffLightning)proj.ModProjectile).CurTarget = target;
                             pos = projectile.Center + (target.Center - Owner.Center).ToSafeNormalize() * 50f * projectile.scale;
                             new CrossGlow(pos, Color.DeepSkyBlue, 30, 1, 0.12f).Spawn();
@@ -196,9 +196,9 @@ namespace HJScarletRework.Globals.Instances.Projs
         {
             if (DefenderBuff && target.IsLegal())
             {
-                owner.GetImmnue(ImmunityCooldownID.General, 60, true);
+                owner.GetImmnue(ImmunityCooldownID.General, 80, true);
                 SoundEngine.PlaySound(HJScarletSounds.GrabCharge with { MaxInstances = 0 }, owner.Center);
-                owner.HJScarlet().defenderEmblemCD = 90;
+                owner.HJScarlet().defenderEmblemCD = GetSeconds(6);
                 for (int i = 0; i < 30; i++)
                     new TurbulenceShinyOrb(owner.Center.ToRandCirclePos(15f), 2.4f, Color.White, 120, 0.885f, RandRotTwoPi).Spawn();
                 DefenderBuff = false;

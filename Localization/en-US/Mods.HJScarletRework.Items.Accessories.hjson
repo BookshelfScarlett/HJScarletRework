@@ -1,14 +1,9 @@
-StardustBless: {
-	DisplayName: Stardust Bless
-	Tooltip: ""
-}
-
 SouloftheTidalMark: {
 	DisplayName: Soul of the Tidal Mark
 	Tooltip:
 		'''
-		Restore 50 health on hit
-		Automatically restore 75 health every few seconds
+		Restore 20 health on hit
+		Your health can never drop below 5, but you can still take fatal damage
 		'''
 }
 
@@ -62,8 +57,8 @@ ExecutorsSwordMarkPlus: {
 	Tooltip:
 		'''
 		All Execution Strikes become manually triggered by pressing Intersct Key instead of automatic when conditions are met
-		Manually triggering an Execution Strike grants a 1.1x multiplier to executor damage for a certain period afterwards
-		Also increases executor critical strike chance by 30%
+		Manually triggering an Execution Strike, guarranted a critical strike
+		And grants a 1.1x multiplier to executor damage for a certain period afterwards
 		Re-triggering Execution Strike during the damage bonus period does not refresh this effect
 		'''
 }
@@ -73,8 +68,7 @@ ExecutorsSwordMark: {
 	Tooltip:
 		'''
 		All Execution Strikes become manually triggered by pressing Intersct Key instead of automatic when conditions are met
-		Manually triggering an Execution Strike grants a 1.1x multiplier to executor damage for a certain period afterwards
-		Re-triggering Execution Strike during the damage bonus period does not refresh this effect
+		Manually triggering an Execution Strike guarranted a critical strike
 		'''
 }
 
@@ -101,11 +95,6 @@ SacarbWings: {
 		'''
 }
 
-SakurabaEmma: {
-	DisplayName: Sakuraba Emma
-	Tooltip: ""
-}
-
 ShadowCast: {
 	DisplayName: Shadow Cast
 	Tooltip: ""
@@ -120,11 +109,11 @@ Desterrennacht: {
 	DisplayName: Desterrennacht
 	Tooltip:
 		'''
-		Restore 50 health on hit
-		Automatically restore 75 health every few seconds
-		Upon taking fatal damage, revive with 50% of your health
-		After a successful revival, gain three chances to dodge all attacks
-		Your health can never drop below 100, but you can still take fatal damage
+		Restore 20 health on hit
+		Automatically restore 25 health every few seconds
+		Upon taking fatal damage, revive with 15% of your health
+		After a successful revival, gain two chances to dodge all attacks
+		Your health can never drop below 20, but you can still take fatal damage
 		"Relying on the stardust spiral, I place this in your hand"
 		'''
 }
@@ -181,8 +170,8 @@ AxeofPerun: {
 	DisplayName: Axe of Perun
 	Tooltip:
 		'''
-		+10 executor armor penetraion
-		On Execution Strike, further reduces enemy defense for a short perio
+		{0} increased executor critical strike chance 
+		{1} increased executor critical strike damage
 		'''
 }
 
@@ -190,9 +179,11 @@ ConceptualBlackKey: {
 	DisplayName: Conceptual Black Key
 	Tooltip:
 		'''
-		15% increased executor damage, 20% increased executor critical strike damage
-		+60 executor armor penetration
-		After a successful Execution Strike, increase your armor penetration and damage for a while
+		{0} increased executor damage and critical strike chance
+		{1} increased executor critical strike damage
+		+{2} executor armor penetration
+		After a successful Execution Strike, increase your armor penetration for a while
+		After a successful Execution Strike, reduce damage taken significantly
 		Taken damage removes this effect
 		Extends invincibility frames after taking damage
 		When you take damage, restore 50 health
@@ -202,20 +193,34 @@ ConceptualBlackKey: {
 
 ArcBow: {
 	DisplayName: Arc Bow
-	Tooltip: Restore 25 health while taking damage
+	Tooltip:
+		'''
+		Restore {0} health while taking damage
+		Extends invincibility frames after taking damage
+		After a successful Execution Strike, reduce damage taken significantly
+		Taken damage removes this effect
+		'''
 }
 
 MachineGunTalisman: {
-	DisplayName: Machine gun Talisman
-	Tooltip: Restore 35 health while taking damage
+	DisplayName: Machinegun Talisman
+	Tooltip:
+		'''
+		Restore {0} health while taking damage
+		Extends invincibility frames after taking damage
+		After a successful Execution Strike, reduce damage taken significantly
+		Taken damage removes this effect
+
+		'''
 }
 
 RocketCharm: {
 	DisplayName: Rocket Charm
 	Tooltip:
 		'''
-		15% increased executor critcal strike damagea
-		After an Execution Strike, briefly increases your executor damage
+		+{0} executor armor penetration
+		On Execution Strike, further increases your armor penetration for a short period
+
 		'''
 }
 
@@ -223,9 +228,8 @@ MiniatureBayonet: {
 	DisplayName: Miniature Bayonet
 	Tooltip:
 		'''
-		+30 executor armor penetration
-		On Execution Strike, further increases your armor penetration for a short period
-		Extends invincibility frames after taking damage
+		{0} increased executor critical strike chance 
+		{1} increased executor critical strike damage
 		'''
 }
 
@@ -240,6 +244,50 @@ ArtificalManaStar: {
 }
 
 MayaBall: {
-	DisplayName: Maya Ball
+	DisplayName: Blue Pumper
+	Tooltip:
+		'''
+		The knockback you take is multiplied by 5
+		On hit, the knockback force you receive is inversely proportional to the enemy's knockback resistance
+		If the enemy is completely immune to knockback, you will not be affected by knockback either
+		'''
+}
+
+HeartoftheRuinFrost: {
+	DisplayName: Heart of the Ruin Frost Kingdom
+	Tooltip:
+		'''
+		+{0} max health
+		Allow the player to dash into the enemy
+		Grants immunity to Knockback, Lava, Frozen, Chilled and Frostburn
+		Grants ablitiy to breath in the water
+		Grants all the effect from Frozen Shield
+		"The once-prosperous otherworldly kingdom has now crumbled and fallen silent beneath the blizzard."
+		'''
+}
+
+ExecutorsSwordMarkSmall: {
+	DisplayName: Executors Sword Mark Small
+	Tooltip:
+		'''
+		All Execution Strikes become manually triggered by pressing Intersct Key instead of automatic when conditions are met
+		Manually triggering an Execution Strike has a 50% chance to guarranted a critical strike
+		'''
+}
+
+HeartoftheDistantArk: {
+	DisplayName: Heart of the Distant Ark
+	Tooltip:
+		'''
+		+{0} max health
+		Allow the player to dash into the enemy
+		Grants immunity to Knockback and Lava
+		Grants ability to breath in the water
+		"The sunken city... we failed to board that ark in time."
+		'''
+}
+
+PinballPurgatory: {
+	DisplayName: Pinball Purgatory
 	Tooltip: ""
 }

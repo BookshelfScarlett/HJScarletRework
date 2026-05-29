@@ -278,3 +278,22 @@ DualWraithStaff: {
 		满足处决攻击发起条件时，可通过再次按下 互动键 以切换回第一形态
 		'''
 }
+
+PrunusMume: {
+	DisplayName: 红梅
+	Tooltip:
+		'''
+		命中时往上放抛掷一朵红梅花
+		花瓣将会在一定时间后分散开来，且可以在墙体上反弹一次
+		'''
+	ExecutionStrike:
+		'''
+		原地向上抛掷一朵红梅花，这朵红梅花会持续停留在场上一段时间
+		同时，红梅花将会尝试持续不断地释放旋转的花瓣
+		'''
+}
+
+StaffofFrostbite: {
+	// DisplayName: Staffof Frostbite
+	// Tooltip: ""
+}

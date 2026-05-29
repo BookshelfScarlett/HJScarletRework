@@ -1,17 +1,3 @@
-HJScarletConfigServer: {
-	DisplayName: H J Scarlet Config Server
-
-	EnableSameItemShimmer: {
-		Label: Enable Same Item Shimmer
-		Tooltip: ""
-	}
-
-	SpecialRarity: {
-		Label: Special Rarity
-		Tooltip: ""
-	}
-}
-
 HJScarletConfigClient: {
 	DisplayName: Lostbelt Journey Client Config
 
@@ -60,5 +46,10 @@ HJScarletConfigClient: {
 			Enables to display execute's times under the player
 			Enable by default
 			'''
+	}
+
+	ScreenShakeStrength: {
+		Label: Screen Shake Strength
+		Tooltip: ""
 	}
 }

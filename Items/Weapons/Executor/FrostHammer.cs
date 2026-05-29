@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria.ID;
@@ -10,6 +11,11 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public override int ExecutionProj => base.ExecutionProj;
         public override int ExecutionProgress => 30;
+        public override void ExSSD()
+        {
+            Type.ShimmerEach(ItemID.Amarok);
+            HJScarletList.FrostRarityHashSet.Add(Type);
+        }
         public override void ExSD()
         {
             Item.damage = 42;

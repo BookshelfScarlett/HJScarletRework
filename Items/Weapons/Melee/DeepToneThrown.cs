@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.damage = 71;
             Item.useTime = Item.useAnimation = 35;
             Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { Pitch = 0.5f, PitchVariance = 0.1f, MaxInstances = 0 };
-            Item.knockBack = 12f;
+            Item.knockBack = 3f;
             Item.shootSpeed = 14f;
             Item.rare = ItemRarityID.Yellow;
             Item.shoot = ProjectileType<DeepToneThrownProj>();

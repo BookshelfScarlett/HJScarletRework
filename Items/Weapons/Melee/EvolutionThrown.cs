@@ -1,8 +1,11 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
@@ -11,25 +14,19 @@ namespace HJScarletRework.Items.Weapons.Melee
     {
         public override string Texture => GetInstance<Evolution>().Texture;
         public override bool HasLegendary => true;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.MiscRarityDrawDictionary.Add(Type, LivingRarity.DrawRarity);
+        }
         public override void ExSD()
         {
             Item.damage = 345;
             Item.useTime = Item.useAnimation = 28;
-            Item.knockBack = 12f;
             Item.UseSound = HJScarletSounds.Evolution_Thrown with { MaxInstances = 0 };
             Item.shootSpeed = 16;
             Item.shoot = ProjectileType<EvolutionThrownProj>();
-            Item.rare = RarityType<LivingRarity>();
+            Item.SetUpRarityPrice(ItemRarityID.Purple);
         }
         public override Color MainTooltipColor => Color.LightGreen;
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            if (line.Name == "ItemName" && line.Mod == "Terraria")
-            {
-                LivingRarity.DrawRarity(line);
-                return false;
-            }
-            return base.PreDrawTooltipLine(line, ref yOffset);
-        }
     }
 }

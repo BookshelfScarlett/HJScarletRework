@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.damage = 43;
             Item.useTime = Item.useAnimation = 29;
             Item.UseSound = SoundID.Item103;
-            Item.knockBack = 4f;
+            Item.knockBack = 2f;
             Item.shootSpeed = 14f;
             Item.rare = ItemRarityID.Pink;
             Item.shoot = ProjectileType<SpearofDarknessThrownProj>();

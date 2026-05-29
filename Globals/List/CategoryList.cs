@@ -1,9 +1,7 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.NPCs.Boss_TheLifebringer;
-using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -172,7 +170,6 @@ namespace HJScarletRework.Globals.List
         {
             for (int i = 0; i < ItemLoader.ItemCount; i++)
             {
-
                 Item item = new Item(i);
                 bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
                 if (isFood && !LegalFoodList.Contains(item.type))
@@ -181,6 +178,7 @@ namespace HJScarletRework.Globals.List
         }
         public override void Unload()
         {
+            UnloadRarity();
             ThrownSpearList = null;
             HJSpearList = null;
             LegalFoodList = null;

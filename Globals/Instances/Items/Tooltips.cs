@@ -1,16 +1,9 @@
-﻿using ContinentOfJourney.Items;
-using ContinentOfJourney.Items.Armor;
-using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Items.Rockets;
-using HJScarletRework.Globals.Configs;
+﻿using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using HJScarletRework.Items.Armor.Monk;
 using HJScarletRework.Items.Armor.Shinobi;
-using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Items.Weapons.Magic;
-using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using System;
@@ -66,26 +59,6 @@ namespace HJScarletRework.Globals.Instances.Items
 
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.IsItemName())
-            {
-                foreach (var (itemIDs, drawMethods) in _rarityDrawMapScarlet)
-                {
-                    if (itemIDs.Contains(item.type))
-                    {
-                        drawMethods(line);
-                        return false;
-                    }
-                }
-                foreach (var (itemIDs, drawMethods) in _rarityDrawMapFrost)
-                {
-                    if (itemIDs.Contains(item.type))
-                    {
-                        drawMethods(line);
-                        return false;
-                    }
-                }
-
-            }
             if (line.IsItemName() && HJScarletConfigClient.Instance.SpecialRarity)
             {
                 foreach (var (itemIDs, drawMethods) in _rarityDrawMap)
@@ -96,74 +69,64 @@ namespace HJScarletRework.Globals.Instances.Items
                         return false;
                     }
                 }
+                if (HJScarletList.MiscRarityDrawDictionary.TryGetValue(item.type, out Action<DrawableTooltipLine> value))
+                {
+                    value(line);
+                    return false;
+                }
+                if(HJScarletList.RareItemRarityDrawDictionary.TryGetValue(item.type, out RareItemRarity.RareType type))
+                {
+                    RareItemRarity.DrawItemName(line, type);
+                    return false;
+                }
+                if (item.HJScarlet().EnableExecutorVersion)
+                {
+                    if (HJScarletList.ConvertedItemRarityDrawDictionary.TryGetValue(item.type, out Action<DrawableTooltipLine> value2))
+                    {
+                        value2(line);
+                        return false;
+                    }
+                }
             }
             return base.PreDrawTooltipLine(item, line, ref yOffset);
         }
-        private static readonly Dictionary<HashSet<int>, Action<DrawableTooltipLine>> _rarityDrawMapScarlet = new()
-        {
-            {
-                new HashSet<int>
-                {
-                    ItemType<Corona>(),
-                    ItemType<AetherfireSmasher>(),
-                    ItemType<Sundowner>()
-                },
-                SolarRarity.DrawItemName
-            }
-        };
-        private static readonly Dictionary<HashSet<int>, Action<DrawableTooltipLine>> _rarityDrawMapFrost = new()
-        {
-            {
-                new HashSet<int>
-                {
-                    ItemType<FrostoftheStorm>(),
-                    ItemType<AzureFrostmark>(),
-                    ItemType<FrostHammer>()
-                },
-                FrostRarity.DrawItemName
-            }
-        };
 
         /// <summary>
         /// 这里每帧都会高频调用，所以该创建哈希表了孩子们。
         /// </summary>
         private static readonly Dictionary<HashSet<int>, Action<DrawableTooltipLine>> _rarityDrawMap = new()
         {
+            //寒霜武器的稀有度
             {
-                new HashSet<int>
-                {
-                    ItemType<Evolution>(),
-                    ItemType<ForceANature>(),
-                    ItemType<LivingBar>(),
-                    ItemType<PillarStaff>(),
-                    ItemType<ForestHelmet>(),
-                    ItemType<ForestBreastplate>(),
-                    ItemType<ForestLeggings>(),
-                    ItemType<EntropyReduction>(),
-                    ItemType<Virtue>(),
-                    ItemType<Lifesaber>(),
-                    ItemType<HornofHarvest>(),
-                    ItemType<EssenceofLife>(),
-                    ItemType<DoctorExpeller>()
-                },
-                LivingRarity.DrawRarity
+                HJScarletList.FrostRarityHashSet,
+                FrostRarity.DrawItemName
             },
+            //日轮锭的稀有度
             {
-                new HashSet<int>
-                {
-                    ItemType<GalvanizedHand>(),
-                    ItemType<FlybackHand>(),
-                },
-                TimeRarity.DrawRarity
+                HJScarletList.DisasterRarityHashSet,
+                SolarRarity.DrawItemName
             },
+            //梦魇锤系列的稀有度
             {
-                new HashSet<int>
-                {
-                    ItemType<Dialectics>(),
-
-                },
-                MatterRarity.DrawRarity
+                HJScarletList.NightRarityHashSet,
+                NightRarity.DrawRarity
+            },
+            //神圣
+            {
+                HJScarletList.HallowedRarityHashSet,
+                HallowedRarity.DrawRarity
+            },
+            //星云
+            {
+                HJScarletList.NebulaRarityHashSet,
+                NebulaRarity.DrawRarityReverse
+            },
+            //无极绯红
+            {
+                HJScarletList.ScarletRarityHashSet,
+                DisasterRarity.DrawRarity2
             }
+
         };
 
     }

@@ -5,7 +5,6 @@ CandLanceThrown: {
 		Ignit a Soulfire Lantern on hit.
 		The lantern delays, then falls and fires homing soulfire at multiple targets.
 		'''
-	CalamitySupport: ""
 }
 
 DialecticsThrown: {
@@ -18,7 +17,6 @@ DialecticsThrown: {
 		Bipolar square wave makes javelin leaves multiple lingering blocks that home in on your enemy
 		Parallel wave makes javelin stabs into your target, continuously summons additional projectiles.
 		'''
-	CalamitySupport: ""
 }
 
 FlybackHandThrown: {
@@ -30,14 +28,12 @@ FlybackHandThrown: {
 		Upon returning, increase the attack speed and restore 1/2 of the stats the player lost during this process.
 		"Time will mend everything...perhaps."
 		'''
-	CalamitySupport: ""
 	TimeClockOnCDText: "Time Crystal Cooldown: {0} seconds! "
 }
 
 LightBiteThrown: {
 	DisplayName: Light Bite Javelin
 	Tooltip: Leaves behind weakly homing eclipse stars during flight.
-	CalamitySupport: ""
 }
 
 SpearofDarknessThrown: {
@@ -47,7 +43,6 @@ SpearofDarknessThrown: {
 		Can pass through walls.
 		Returns after being thrown for a short time.
 		'''
-	CalamitySupport: ""
 }
 
 SweetStabThrown: {
@@ -57,7 +52,6 @@ SweetStabThrown: {
 		Affected by gravilty and penetrates 3 targets
 		Stab in on hitting wall, heal every player that try to pick up
 		'''
-	CalamitySupport: ""
 }
 
 WildPointerThrown: {
@@ -67,18 +61,11 @@ WildPointerThrown: {
 		Has a chance to home in on all valid targets worldwide.
 		Valid targets include you and your friends.
 		'''
-	CalamitySupport: ""
 }
 
 Wreach: {
 	DisplayName: Wreach
 	Tooltip: Debug item, might have different function base on your current mod
-}
-
-StormSpear: {
-	DisplayName: Storm Spear
-	Tooltip: ""
-	CalamitySupport: ""
 }
 
 DeepToneThrown: {
@@ -89,7 +76,6 @@ DeepToneThrown: {
 		On attack, release abyssal devourer that hunts down your enemies.
 		The devourer deals continuous damage On Hit, and occasionally heals you
 		'''
-	CalamitySupport: ""
 }
 
 EvolutionThrown: {
@@ -101,7 +87,6 @@ EvolutionThrown: {
 		If a marked enemy exists, all portals target it.
 		"They are growing."
 		'''
-	CalamitySupport: ""
 }
 
 SpearofEscapeThrown: {
@@ -112,7 +97,6 @@ SpearofEscapeThrown: {
 		The homing rockets fall downward and prioritize enemies nearest to the cursor.
 		"We will not stay in our dangerous cradle forever!"
 		'''
-	CalamitySupport: ""
 }
 
 TonbogiriThrown: {
@@ -123,7 +107,6 @@ TonbogiriThrown: {
 		Also add more toxic bubbles when it disappears
 		"Looks a bit familiar"
 		'''
-	CalamitySupport: ""
 }
 
 SodomsDisaster: {
@@ -135,11 +118,6 @@ SodomsDisaster: {
 		Calls down celestial fireballs from above to strike all hit enemies.
 		'''
 	FlavorTooltips: -Umbral beast, devour the sun. Fire and curse, second sign of doom-
-	CalamitySupport:
-		'''
-		Increases melee critcal damage by 100% instead of 30%
-		Allows infinitly penetrates
-		'''
 }
 
 Bamboomerang: {
@@ -150,7 +128,6 @@ Bamboomerang: {
 		Up to 3 Boomerang can exist at once.
 		"Who came up with the idea of making a boomerang out of bamboo?"
 		'''
-	CalamitySupport: ""
 }
 
 FierySpear: {
@@ -160,7 +137,6 @@ FierySpear: {
 		Spawns two fireballs home in on your target on hit.
 		Fireballs seek nearby enemies if directly hit the walls. 
 		'''
-	CalamitySupport: ""
 }
 
 BeetleSpear: {
@@ -176,7 +152,6 @@ TheMars: {
 		Upon vanishing, launches Tidal Spears at all marked targets.
 		"The Creation of Alien"
 		'''
-	CalamitySupport: ""
 }
 
 GalvanizedHandThrown: {
@@ -189,14 +164,12 @@ GalvanizedHandThrown: {
 		Press Right Click to dash toward the enemy locked by the main needle, dealing high damage and granting invincibility frames.
 		On successful impact, release multiple Meter Needles to chase foes.
 		'''
-	CalamitySupport: ""
 	TileTextvalue: ""
 }
 
 AzureFrostmark: {
 	DisplayName: Azure Frostmark
 	Tooltip: Spawns a frost energy, disappears after flying a certain distance.
-	CalamitySupport: ""
 }
 
 CryoblazeHymn: {
@@ -209,7 +182,6 @@ CryoblazeHymn: {
 		Fire Bolts are faster and deal more damage, prioritizing enemies directly hit by the spear.
 		"Though vastly different, they sing aloud in the same melody."
 		'''
-	CalamitySupport: ""
 }
 
 EclipseWraith: {
@@ -221,11 +193,6 @@ EclipseWraith: {
 		Calls down celestial fireballs from above to strike all hit enemies.
 		'''
 	FlavorTooltips: -Umbral beast, devour the sun. Fire and curse, second sign of doom-
-	CalamitySupport:
-		'''
-		Increases melee critcal damage by 100% instead of 30%
-		Allows infinitly penetrates
-		'''
 }
 
 CactusSpear: {

@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
@@ -16,6 +17,11 @@ namespace HJScarletRework.Items.Weapons.Melee
         public Projectile CurrentProj = null;
         public override string Texture => GetInstance<GalvanizedHand>().Texture;
         public override bool HasLegendary => true;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.MiscRarityDrawDictionary.Add(Type, TimeRarity.DrawRarity);
+        }
+
         public override void ExSD()
         {
             Item.damage = 512;
@@ -25,16 +31,11 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.shootSpeed = 32;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.shoot = ProjectileType<GalvanizedHandThrownProj>();
-            Item.rare = RarityType<TimeRarity>();
+            Item.SetUpRarityPrice(ItemRarityID.Purple);
         }
         public override Color MainTooltipColor => Color.Yellow;
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Name == "ItemName" && line.Mod == "Terraria")
-            {
-                TimeRarity.DrawRarity(line);
-                return false;
-            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
 

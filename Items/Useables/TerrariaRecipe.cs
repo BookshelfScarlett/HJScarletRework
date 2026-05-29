@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Instances.Items;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;

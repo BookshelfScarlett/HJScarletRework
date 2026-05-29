@@ -1,11 +1,9 @@
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -15,6 +13,11 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public override int ExecutionProgress => 30;
         public override float ExecutionStrikeDamageMult => 1f;
+        public override void ExSSD()
+        {
+            HJScarletList.HallowedRarityHashSet.Add(Type);
+        }
+
         public override void ExSD()
         {
             Item.useStyle = ItemUseStyleID.Swing;
@@ -31,11 +34,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Name == "ItemName" && line.Mod == "Terraria")
-            {
-                HallowedRarity.DrawRarity(line);
-                return false;
-            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override void AddRecipes()

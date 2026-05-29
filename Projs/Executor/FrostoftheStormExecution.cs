@@ -143,7 +143,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 if (Main.rand.NextBool(7))
                 {
-                    Vector2 vel = starShapeDir * Main.rand.NextFloat(12f, 24);
+                    Vector2 vel = starShapeDir * Main.rand.NextFloat(12f, 34);
                     float scale = Main.rand.NextFloat(0.7f, 0.91f) * Projectile.scale * 0.12f;
                     new HRShinyOrb(starShapeSpawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, scale, 0.8f).Spawn();
                     new HRShinyOrb(starShapeSpawnPos, vel, Color.White, 40, scale * 0.5f, 0.8f).Spawn();
@@ -152,7 +152,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     starShapeSpawnPos = posBase + Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(120f, 190f);
                     starShapeDir = (posBase - starShapeSpawnPos).SafeNormalize(Vector2.UnitX);
-                    new ShinyCrossStar(starShapeSpawnPos, starShapeDir * Main.rand.NextFloat(0.8f, 8f), Color.Lerp(Color.RoyalBlue, Color.SkyBlue, Main.rand.NextFloat()), 40, 0, 1, 0.8f * Main.rand.NextFloat(0.8f, 1.1f), false).Spawn();
+                    new ShinyCrossStar(starShapeSpawnPos, starShapeDir * Main.rand.NextFloat(0.8f, 16f), Color.Lerp(Color.RoyalBlue, Color.SkyBlue, Main.rand.NextFloat()), 40, 0, 1, 0.8f * Main.rand.NextFloat(0.8f, 1.1f), false).Spawn();
                 }
                 if (Main.rand.NextBool(3))
                 {

@@ -4,7 +4,7 @@ CorePickaxe: {
 		'''
 		A tool hot enough to smelt ores for you��
 		This feature is temporarily disabled in multiplayer mode
-		��Center of the Earth��
+		Center of the Earth
 		'''
 }
 
@@ -75,22 +75,41 @@ DescriptionPaper: {
 		'''
 }
 
-PureCrystal: {
-	DisplayName: Pure Crystal
-	Tooltip: ""
+PurePrismFate: {
+	DisplayName: Pure Prism
+	Tooltip:
+		'''
+		While holding, press the Interact key on a crafting material in your inventory to duplicate it by consuming Prisms.
+		Up to 100 copies can be duplicated at once, and each duplication consumes 3 Prisms.
+		"A more refined Mana Crystal."
+		'''
 }
 
 UnregisteredSpiritOrigin: {
 	DisplayName: Unregistered Spirit Origin
-	Tooltip: ""
+	Tooltip:
+		'''
+		While held, press the Interact key on a weapon/accessory/armor/treasure bag in your inventory to duplicate it by consuming.
+		The Unregistered Spirit Origin itself cannot be duplicated.
+		"The overflowing remnants of a Spirit Origin."
+		'''
 }
 
 ArcaeaPack: {
-	DisplayName: Arcaea Pack
-	Tooltip: ""
+	DisplayName: Arcaea Bonus Bundle
+	Tooltip:
+		'''
+		Grants [i:HJScarletRework/HikariItem]Exquisite Rose and [i:HJScarletRework/TairitsuItem]Black Parasol on open
+		Hikari and Tairitsu costume transformation item
+		-
+		WITHOUT LIGHT
+		OR CONFLICT
+		DIVINE GRACE FALLS UPON YOU IN A DEAD WORLD
+		-
+		'''
 }
 
-TendouKei: {
-	DisplayName: Tendou Kei
+CursedGoldenKey: {
+	DisplayName: Cursed Golden Key
 	Tooltip: ""
 }

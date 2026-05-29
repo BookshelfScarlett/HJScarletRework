@@ -97,6 +97,7 @@ namespace HJScarletRework.Globals.Players
         public int blackKeyReduceDefense = 0;
         public bool blackKeyDefenseTrigger = false;
         public bool executorSwordMark = false;
+        public int executorSwordMarkLevel = -1;
         public bool mayaPumper = false;
         #endregion
 
@@ -293,21 +294,21 @@ namespace HJScarletRework.Globals.Players
                         break;
                 }
             }
-            if (Condition.DownedPlantera.IsMet())
-            {
-                switch (item.type)
-                {
-                    case ItemID.MaidHead:
-                        AlterArmorType2(item.type, i, MaidHelmetAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
-                        break;
-                    case ItemID.MaidShirt:
-                        AlterArmorType2(item.type, i,MaidChestplateAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
-                        break;
-                    case ItemID.MaidPants:
-                        AlterArmorType2(item.type, i,MaidLegsAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
-                        break;
-                }
-            }
+            //if (Condition.DownedPlantera.IsMet())
+            //{
+            //    switch (item.type)
+            //    {
+            //        case ItemID.MaidHead:
+            //            AlterArmorType2(item.type, i, MaidHelmetAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
+            //            break;
+            //        case ItemID.MaidShirt:
+            //            AlterArmorType2(item.type, i,MaidChestplateAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
+            //            break;
+            //        case ItemID.MaidPants:
+            //            AlterArmorType2(item.type, i,MaidLegsAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
+            //            break;
+            //    }
+            //}
         }
 
         private void AlterArmorType2(int targetArmor, int targetindex, int defense = 0, bool vanity = true, int rarityID = -1, bool armorSlot = false)

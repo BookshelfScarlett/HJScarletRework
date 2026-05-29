@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
@@ -13,15 +14,16 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
     public class DragonSlayerBody : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Armors;
-        public override void Load()
+        public override void SetStaticDefaults()
         {
-            //EquipLoader.AddEquipTexture(Mod, )
+
+            HJScarletList.ScarletRarityHashSet.Add(Type);
         }
+
         public override void ExSD()
         {
             Item.defense = 35;
             Item.SetUpRarityPrice(ItemRarityID.Purple);
-            Item.rare = RarityType<DisasterRarity>();
 
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -31,12 +33,7 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
 
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.IsItemName())
-            {
-                DisasterRarity.DrawRarity2(line);
-                return false;
-            }
-            return true;
+               return true;
         }
 
         public override void UpdateEquip(Player player)

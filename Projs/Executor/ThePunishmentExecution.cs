@@ -144,7 +144,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 vel = RandVelTwoPi(38f, 41f);
             for (int i = -1; i < 2; i += 2)
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel * i, ProjectileType<ThePunishmentStar>(), Projectile.damage, 1f, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel * i, ProjectileType<ThePunishmentStar>(), Projectile.damage / 2, 1f, Owner.whoAmI);
                 ((ThePunishmentStar)proj.ModProjectile).TargetNPC = target;
                 for (int j = 0; j < 16; j++)
                 {

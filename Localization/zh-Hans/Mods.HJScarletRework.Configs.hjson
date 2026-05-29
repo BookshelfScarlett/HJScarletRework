@@ -1,32 +1,12 @@
-HJScarletConfigServer: {
-	DisplayName: 空想之歌：服务器设置
-
-	EnableSameItemShimmer: {
-		Label: 启用同类物品微光转化
-		Tooltip:
-			'''
-			允许空想之歌模组内部分与原模组（旅人归途）相同的物品进行微光转化
-			关闭时，则转为对应的相同的获取方式
-			默认开启
-			'''
-	}
-
-	SpecialRarity: {
-		// Label: Special Rarity
-		// Tooltip: ""
-	}
-}
-
 HJScarletConfigClient: {
 	DisplayName: 空想归途：客户端设置
 
 	SpecialRarity: {
-		Label: 特殊稀有度覆盖旅人物品
+		Label: 特殊稀有度绘制
 		Tooltip:
 			'''
-			允许空想归途对旅人归途内的部分物品覆盖特殊稀有度
-			目前覆盖的都是与神明有关的物品
-			默认关闭
+			允许模组对部分物品绘制特殊的稀有度
+			默认开启
 			'''
 	}
 
@@ -60,11 +40,21 @@ HJScarletConfigClient: {
 	}
 
 	DrawExecutionCounter: {
-		Label: 绘制代行者叠层条
+		Label: 绘制代行者处决进程条
 		Tooltip:
 			'''
-			开启后在玩家底下绘制代行者的叠层条
+			开启后在玩家底下绘制代行者的处决进程条
 			默认开启
+			'''
+	}
+
+	ScreenShakeStrength: {
+		Label: 震屏力度
+		Tooltip:
+			'''
+			允许你调整震屏力度的大小
+			范围为(0 - 10)倍
+			默认为1倍
 			'''
 	}
 }

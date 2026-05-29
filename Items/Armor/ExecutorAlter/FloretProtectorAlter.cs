@@ -1,6 +1,8 @@
 ﻿using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -21,6 +23,10 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         {
             player.GetDamage<ExecutorDamageClass>() += 0.4f;
             player.GetCritChance<ExecutorDamageClass>() += 40f;
+        }
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.ConvertedItemRarityDrawDictionary.Add(ApplyArmor, LivingRarity.DrawRarity);
         }
         public override void ExSD(Item item)
         {
@@ -55,6 +61,11 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override int DownedConditionID => NPCType<TheLifebringerHead>();
         public override ArmorType Category => ArmorType.Chestplate;
         public override string SetupName => "FloretProtector";
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.ConvertedItemRarityDrawDictionary.Add(ApplyArmor, LivingRarity.DrawRarity);
+        }
+
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += 0.10f;
@@ -79,6 +90,11 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override int DownedConditionID => NPCType<TheLifebringerHead>();
         public override string SetupName => "FloretProtector";
         public override ArmorType Category => ArmorType.Legs;
+                public override void SetStaticDefaults()
+        {
+            HJScarletList.ConvertedItemRarityDrawDictionary.Add(ApplyArmor, LivingRarity.DrawRarity);
+        }
+
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += 0.05f;

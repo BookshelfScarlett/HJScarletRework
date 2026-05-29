@@ -17,7 +17,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class DualWraithStaff : ExecutorWeaponClass
     {
         public bool AlterVersion = false;
-        public override int ExecutionProgress => 20;
+        public override int ExecutionProgress => 50;
         public override void ExSD()
         {
             Item.damage = 60;

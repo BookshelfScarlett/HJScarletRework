@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Ranged
 {
     public class TerraFlamethrowerHeldProj : HJScarletProj
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override string Texture => GetInstance<TerraFlamethrower>().Texture + "Alt";
         public override void ExSD()
         {

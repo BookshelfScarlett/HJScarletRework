@@ -13,20 +13,20 @@ namespace HJScarletRework.Items.Accessories
         {
             Item.width = Item.height = 60;
             Item.accessory = true;
-            Item.SetUpRarityPrice(ItemRarityID.Purple);
+            Item.SetUpRarityPrice(ItemRarityID.LightPurple);
 
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().tacticalExecution = true;
-            player.HJScarlet().executorSwordMark = true;
+            player.HJScarlet().executorSwordMarkLevel = 2;
         }
         public override void AddRecipes()
         {
             if (HJScarletMethods.HasFuckingCalamity)
             {
                 CreateRecipe().
-                    AddIngredient<ExecutorEmblem>().
+                    AddIngredient<ExecutorsSwordMarkSmall>().
                     AddIngredient(ItemID.SoulofLight, 5).
                     AddIngredient(ItemID.SoulofNight, 5).
                     AddTile(TileID.Anvils).
@@ -35,13 +35,12 @@ namespace HJScarletRework.Items.Accessories
             else
             {
                 CreateRecipe().
-                    AddIngredient<ExecutorEmblem>().
+                    AddIngredient<ExecutorsSwordMarkSmall>().
                     AddIngredient(ItemID.SoulofLight, 5).
                     AddIngredient(ItemID.SoulofNight, 5).
                     AddTile(TileID.MythrilAnvil).
                     Register();
             }
-
         }
     }
 }

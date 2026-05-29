@@ -7,11 +7,11 @@ using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityParticles;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
 namespace HJScarletRework.Items.Vanity
 {
@@ -24,6 +24,19 @@ namespace HJScarletRework.Items.Vanity
         public override void ExLoad()
         {
             EquipLoader.AddEquipTexture(Mod, $"{VanityPrefix}Hair", EquipType.Back, this);
+        }
+        public override bool ExDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        {
+            if(line.Mod == "Terraria")
+            {
+                if(line.Name == "Tooltip0" || line.Name == "Tooltip1" || line.Name == "Tooltip2" || line.Name=="Tooltip3" || line.Name == "Tooltip4" || line.Name == "Tooltip5")
+                {
+                    VanityEffectClass.DrawMisc(line, VanityData, ParticleColor1, ParticleColor2);
+                    return true;
+                }
+            }
+            return false;
+
         }
         public override void AddRecipes()
         {
@@ -61,7 +74,7 @@ namespace HJScarletRework.Items.Vanity
         }
         public static void DrawMisc(DrawableTooltipLine line, VanityData data, Color particleColor1, Color particleColor2)
         {
-            RarityDrawHelper.DrawCustomTooltipLine(line, data.GlowColor, data.EdgeColor, data.MainColor,0.85f);
+            RarityDrawHelper.DrawCustomTooltipLine(line, data.GlowColor, data.EdgeColor, data.MainColor,0f);
         }
 
         public static void PostDrawRarity(ref List<RaritySparkle> particleList, DrawableTooltipLine tooltipLine, Color c, Color c2, bool slowdown = false)
@@ -101,9 +114,10 @@ namespace HJScarletRework.Items.Vanity
         public override void SetDefaults()
         {
             Item.width = Item.height = 16;
-            Item.rare = RarityType<VanityItemRarity>();
+            Item.rare = RarityType<VanityEffectClass>();
             Item.vanity = true;
             Item.accessory = true;
+            Item.HJScarlet().CanDrawIcon = true;
         }
         public override void Load()
         {
@@ -174,12 +188,18 @@ namespace HJScarletRework.Items.Vanity
                 return false;
 
             }
-            if (((line.Name == "Vanity" || line.Name == "Equipable" || line.Name == "Tooltip0" || line.Name == "Tooltip1") && line.Mod == "Terraria"))
+            if (((line.Name == "Vanity" || line.Name == "Equipable") && line.Mod == "Terraria"))
             {
                 VanityEffectClass.DrawMisc(line, VanityData, ParticleColor1, ParticleColor2);
                 return false;
             }
+            if (ExDrawTooltipLine(line, ref yOffset))
+            {
+                return false;
+            }
             return true;
         }
+
+        public virtual bool ExDrawTooltipLine(DrawableTooltipLine line, ref int yOffset) => false;
     }
 }

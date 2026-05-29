@@ -161,21 +161,21 @@ namespace HJScarletRework.Globals.Players
                         break;
                 }
             }
-            if(Condition.DownedPlantera.IsMet())
-            {
-                switch(item)
-                {
-                    case ItemID.MaidHead:
-                        AlterArmorType(item, MaidHelmetAlter.Defense, false, ItemRarityID.Yellow);
-                        break;
-                    case ItemID.MaidShirt:
-                        AlterArmorType(item, MaidChestplateAlter.Defense, false, ItemRarityID.Yellow);
-                        break;
-                    case ItemID.MaidPants:
-                        AlterArmorType(item, MaidLegsAlter.Defense, false, ItemRarityID.Yellow);
-                        break;
-                }
-            }
+            //if(Condition.DownedPlantera.IsMet())
+            //{
+            //    switch(item)
+            //    {
+            //        case ItemID.MaidHead:
+            //            AlterArmorType(item, MaidHelmetAlter.Defense, false, ItemRarityID.Yellow);
+            //            break;
+            //        case ItemID.MaidShirt:
+            //            AlterArmorType(item, MaidChestplateAlter.Defense, false, ItemRarityID.Yellow);
+            //            break;
+            //        case ItemID.MaidPants:
+            //            AlterArmorType(item, MaidLegsAlter.Defense, false, ItemRarityID.Yellow);
+            //            break;
+            //    }
+            //}
             return true;
         }
         private void AlterArmorType(int targetArmor, int defense = 0, bool vanity = true, int rarityID = -1)

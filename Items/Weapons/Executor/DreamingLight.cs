@@ -1,5 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
@@ -14,6 +16,11 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public override float ExecutionStrikeDamageMult => 1f;
         public override int ExecutionProgress => 15;
+        public override void ExSSD()
+        {
+            HJScarletList.NightRarityHashSet.Add(Type);
+        }
+
         public override void ExSD()
         {
             Item.width = Item.height = 66;
@@ -23,7 +30,6 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.useTime = Item.useAnimation = 40;
             Item.SetUpNoUseGraphicItem();
             Item.SetUpRarityPrice(ItemRarityID.LightPurple);
-            Item.rare = RarityType<NightRarity>();
             Item.shoot = ProjectileType<DreamingLightProj>();
             Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { MaxInstances = 0, Pitch = -0.5f };
             Item.useStyle = ItemUseStyleID.Swing;
@@ -43,11 +49,8 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Name == "ItemName" && line.Mod == "Terraria")
-            {
-                NightRarity.DrawRarity(line);
-                return false;
-            }
+        if(!HJScarletConfigClient.Instance.SpecialRarity)
+            return base.PreDrawTooltipLine(line, ref yOffset);
             if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
             {
                 NightRarity.DrawFlavorRarity(line);

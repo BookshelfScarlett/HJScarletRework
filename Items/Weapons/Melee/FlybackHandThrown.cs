@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
@@ -15,23 +16,22 @@ namespace HJScarletRework.Items.Weapons.Melee
     {
         public override string Texture => GetInstance<FlybackHand>().Texture;
         public override bool HasLegendary => true;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.MiscRarityDrawDictionary.Add(Type, TimeRarity.DrawRarity);
+        }
         public override void ExSD()
         {
             Item.damage = 400;
             Item.useTime = Item.useAnimation = 20;
-            Item.rare = ItemRarityID.Red;
             Item.shoot = ProjectileType<FlybackHandThrownProj>();
+            Item.SetUpRarityPrice(ItemRarityID.Purple);
             Item.UseSound = HJScarletSounds.Misc_KnifeExpired with { MaxInstances = 0, Volume = 1.5f, Pitch = 0.3f, PitchVariance = 0.1f };
             Item.shootSpeed = 26f;
         }
         public override bool AltFunctionUse(Player player) => true;
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Name == "ItemName" && line.Mod == "Terraria")
-            {
-                TimeRarity.DrawRarity(line);
-                return false;
-            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
 

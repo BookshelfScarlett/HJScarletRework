@@ -1,12 +1,10 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Instances.Items;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,6 +14,11 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public override float ExecutionStrikeDamageMult => 1f;
         public override int ExecutionProgress => 40;
+        public override void ExSSD()
+        {
+            HJScarletList.HallowedRarityHashSet.Add(Type);
+        }
+
         public override void ExSD()
         {
             Item.useStyle = ItemUseStyleID.Swing;
@@ -23,7 +26,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shoot = ProjectileType<ThePunishmentProj>();
             Item.knockBack = 8f;
             Item.width = Item.height = 44;
-            Item.damage = 50;
+            Item.damage = 44;
             Item.useTime = 13;
             Item.useAnimation = 13;
             Item.shootSpeed = 18f;
@@ -32,11 +35,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Name == "ItemName" && line.Mod == "Terraria")
-            {
-                HallowedRarity.DrawRarity(line);
-                return false;
-            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override void AddRecipes()

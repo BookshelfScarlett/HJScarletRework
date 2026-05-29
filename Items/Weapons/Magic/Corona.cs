@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Magic;
@@ -17,12 +18,16 @@ namespace HJScarletRework.Items.Weapons.Magic
     public class Corona :HJScarletWeapon
     {
         public override ClassCategory Category => ClassCategory.Magic;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.DisasterRarityHashSet.Add(Type);
+        }
+
         public override void ExSD()
         {
             Item.SetUpNoUseGraphicItem(true, false);
             Item.damage = 42;
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
-            Item.rare = RarityType<SolarRarity>();
             Item.knockBack = 4f;
             Item.UseSound = null;
             Item.useStyle = ItemUseStyleID.Swing;

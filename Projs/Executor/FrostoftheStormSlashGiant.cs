@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
@@ -73,7 +74,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 int index = Main.rand.Next(10, CenterPosList.Count - 10);
                 Vector2 pos = CenterPosList[index] + Projectile.Center - Projectile.SafeDir() * 30f;
-                new SnowCloud(pos, Projectile.velocity * Main.rand.NextFloat(.4f), RandLerpColor(Color.LightSkyBlue, Color.Gray), 45, Main.rand.NextFloat(TwoPi), 0.45f, Main.rand.NextFloat(.9f, 1.3f) * 0.270f, Main.rand.NextBool()).SpawnToPriority();
+                ECSParticle.SnowCloud(pos, Projectile.velocity * Main.rand.NextFloat(.4f), RandLerpColor(Color.LightSkyBlue, Color.Gray), 45, RandRotTwoPi, 0.45f, Main.rand.NextFloat(.9f, 1.3f) * 0.270f);
             }
             for (int i = 0; i < 2; i++)
             {
@@ -81,15 +82,13 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 pos = CenterPosList[index] + Projectile.Center;
                 float scale = Main.rand.NextFloat(.52f, .82f) * .2f;
                 int lifeTime = Main.rand.Next(30, 60);
-                new HRShinyOrb(pos, Projectile.velocity * 0.8f, RandLerpColor(Color.RoyalBlue, Color.LightBlue), lifeTime, scale).Spawn();
-                new HRShinyOrb(pos, Projectile.velocity * 0.8f, Color.White, lifeTime, scale * .65f).Spawn();
+                ECSParticle.HRShinyOrb(pos, Projectile.velocity * .8f, RandLerpColor(Color.RoyalBlue, Color.LightBlue), lifeTime, 1, scale, glowMult: .65f);
             }
             for (int i = 0; i < 3; i++)
             {
                 int index = Main.rand.Next(3, CenterPosList.Count - 3);
                 Vector2 pos = CenterPosList[index] + Projectile.Center;
-                float scale = Main.rand.NextFloat(.4f, .8f) * .51f;
-                new ShinyCrossStar(pos, Projectile.velocity * 0.5f, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, 0, 1, 1.180f, false).Spawn();
+                ECSParticle.ShinyCrossStarECS(pos, Projectile.velocity / 2f, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, 1, 1.180f, 0.2f);
             }
 
         }
@@ -101,7 +100,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 Vector2 dir = Projectile.SafeDirByRot();
                 Vector2 pos = target.Center.ToRandCirclePos(10f) + dir * Main.rand.NextFloat(10f);
-                new ShinyCrossStar(pos, RandVelTwoPi(2f, 9f), RandLerpColor(Color.LightSkyBlue, Color.RoyalBlue), 45, RandRotTwoPi, RandZeroToOne, Projectile.scale, false, 0.5f).Spawn();
+                ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(2f, 9f), RandLerpColor(Color.LightSkyBlue, Color.RoyalBlue), 45, RandZeroToOne, Projectile.scale,.2f);
             }
             for (int i = 0; i < 30; i++)
             {
@@ -183,6 +182,9 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!PostFirstFrame)
                 return false;
+            if (Projectile.IsOutScreen())
+                return false;
+
             for (int i = 0; i < CenterPosList.Count; i++)
             {
                 //Rectangle ProjHitbox = Utils.CenteredRectangle(CenterPosList[i] + Projectile.Center - (Projectile.velocity + Projectile.SafeDir() * 200f), new Vector2(50, 50));

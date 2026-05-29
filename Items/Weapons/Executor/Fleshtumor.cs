@@ -5,11 +5,13 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Fleshtumor : ExecutorWeaponClass
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override int ExecutionProgress => 10;
         public override void ExSD()
         {

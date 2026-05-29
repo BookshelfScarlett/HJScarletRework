@@ -214,14 +214,27 @@ AbyssalWorld: {
 
 Sundowner: {
 	DisplayName: Sundowner
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip:
+		'''
+		Fires both straight-flying projectiles and seeking streaming flames
+		The projectiles cause an explosion On Hit
+		"No, you won't become invincible with this."
+		'''
+	ExecutionStrike:
+		'''
+		Throw a flare gun to call in an airstrike
+		Hold right-click to focus the airstrike on the target
+		'''
 }
 
 FrostoftheStorm: {
-	DisplayName: Frostofthe Storm
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Frost of the Storm
+	Tooltip: On swing, generates piercing cold winds
+	ExecutionStrike:
+		'''
+		Performs a rapid series of slashes with alternating tempo
+		Each slash sweeps a wider area and the cold wind covers a larger range
+		'''
 }
 
 Fleshtumor: {
@@ -231,13 +244,48 @@ Fleshtumor: {
 }
 
 FrostHammer: {
-	DisplayName: Frost Hammer
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Frost Gravel
+	Tooltip: Leaves falling ice cones along the path
+	ExecutionStrike:
+		'''
+		Throw a snowflake that hunts down your enemy
+		When the snowflake hits an enemy, all subsequent ice cones will focus that target
+		You can right-click on an enemy to reassign the snowflake's target
+		'''
 }
 
 DualWraithStaff: {
-	DisplayName: Spectre Staff
+	DisplayName: Dual-Wraith Staff
+	Tooltip:
+		'''
+		Fires seeking wraith that cannot penetrate walls.
+		Execution Strike must be manually triggered with the Interact key.
+		"One staff, two forms of the lingering curse."
+		'''
+	ExecutionStrike:
+		'''
+		The staff unfolds its blade and switches to javelin mode.
+		In javelin mode, it can penetrate walls and pierce up to 3 enemies.
+		Seeking wraith is generated only on the first hit.
+		When Execution Strike available again, press the Interact key to switch back to the first form.
+		'''
+}
+
+PrunusMume: {
+	DisplayName: Prunus Mume
+	Tooltip:
+		'''
+		On Hit, toss a red plum blossom upward
+		The petals scatter after a short delay and can bounce off walls once
+		'''
+	ExecutionStrike:
+		'''
+		Toss a red plum blossom upward, it remains on the field for a short duration
+		Meanwhile, the blossom continuously releases rotating petals
+		'''
+}
+
+StaffofFrostbite: {
+	DisplayName: Staffof Frostbite
 	Tooltip: ""
-	ExecutionStrike: ""
 }

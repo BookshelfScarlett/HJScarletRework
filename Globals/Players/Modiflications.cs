@@ -57,8 +57,11 @@ namespace HJScarletRework.Globals.Players
                 damage = StatModifier.Default;
                 float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
                 damage *= (1f + ratios);
+
                 if (item.consumable && item.DamageType.CountsAsClass<RangedDamageClass>())
                     damage *= 1.10f;
+                if(item.DamageType.CountsAsClass<MagicDamageClass>())
+                    damage *= .80f;
             }
             if (monkExecutor)
             {

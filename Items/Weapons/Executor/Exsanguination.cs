@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
@@ -8,20 +9,23 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-
 namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Exsanguination : ExecutorWeaponClass
     {
-        public override int ExecutionProgress => 500;
-        public override float ExecutionStrikeDamageMult => 1;
+        public override int ExecutionProgress => 500; 
+        public override float ExecutionStrikeDamageMult => 1; 
+        public override void ExSSD()
+        {
+            HJScarletList.ScarletRarityHashSet.Add(Type);
+        }
         public override void ExSD()
         {
             Item.damage = 33;
             Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 5f;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.rare = RarityType<DisasterRarity>();
+            Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.noMelee = true;
             Item.channel = true;
             Item.noUseGraphic = true;
@@ -30,11 +34,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Mod == "Terraria" && line.Name == "ItemName")
-            {
-                DisasterRarity.DrawRarity2(line);
-                return false;
-            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override bool CanUseItem(Player player) => !player.HasProj(Item.shoot);

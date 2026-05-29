@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             Item.damage = 27;
             Item.useTime = Item.useAnimation = 35;
-            Item.knockBack = 8f;
+            Item.knockBack = 3f;
             Item.UseSound = SoundID.Item45 with { MaxInstances = 0 };
             Item.shootSpeed = 11f;
             Item.shoot = ProjectileType<FierySpearProj>();

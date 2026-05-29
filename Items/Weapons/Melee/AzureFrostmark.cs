@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
@@ -8,12 +9,17 @@ namespace HJScarletRework.Items.Weapons.Melee
     public class AzureFrostmark : ThrownSpearClass
     {
         public override bool NotHomewardJourneySpear => true;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.FrostRarityHashSet.Add(Type);
+        }
+
         public override void ExSD()
         {
             Item.damage = 20;
             Item.rare = ItemRarityID.Green;
             Item.useTime = Item.useAnimation = 40;
-            Item.knockBack = 4f;
+            Item.knockBack = 3f;
             Item.shootSpeed = 11f;
             Item.shoot = ProjectileType<AzureFrostmarkProj>();
             Item.UseSound = HJScarletSounds.HymnFireball_Release with { MaxInstances = 1, Pitch = -0.20f, PitchVariance = 0.15f, Volume = 0.8f };

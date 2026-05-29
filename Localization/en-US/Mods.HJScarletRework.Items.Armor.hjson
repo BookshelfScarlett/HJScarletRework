@@ -29,7 +29,7 @@ DragonSlayerHead: {
 	SetBouns:
 		'''
 		25% increased melee attack speed, 1.10x damage for all consumable ranged weapon
-		Magic weapons no longer cost any mana, reset max minions and sentry slots to 2
+		Magic weapons no longer cost any mana with the cost of 20% damage, reset max minions and sentry slots to 1
 		All weapons that do not deal executor damage only benefit from executor damage bonuses
 		All weapons that do not deal executor damage instead deal executor damage type On Hit, rather than their original damage type
 		'''
@@ -211,16 +211,33 @@ MonkLegs: {
 
 DiverBody: {
 	DisplayName: Diver Body
-	Tooltip: ""
+	Tooltip:
+		'''
+		15% increased executor critical strike damage
+		Enemies are more likely to target you
+		'''
 }
 
 DiverHead: {
 	DisplayName: Diver Head
-	Tooltip: ""
-	SetBonus: ""
+	Tooltip:
+		'''
+		25% increased executor damage
+		25% increased executor critical strike chance 
+		Enemies are more likely to target you
+		'''
+	SetBonus:
+		'''
+		+2 HP/s life regen speed
+		Generates jellyfish that linger in the air along your movement trail
+		'''
 }
 
 DiverLegs: {
 	DisplayName: Diver Legs
-	Tooltip: ""
+	Tooltip:
+		'''
+		25% increased movement speed
+		Enemies are more likely to target you
+		'''
 }

@@ -15,6 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useTime = Item.useAnimation = 40;
             Item.shoot = ProjectileType<CactusSpearProj>();
             Item.shootSpeed = 11f;
+            Item.knockBack = 4f;
             Item.rare = ItemRarityID.Green;
             Item.value = 500;
         }

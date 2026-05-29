@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.General
 {
     public class DesterrennachtHealProj : HJScarletHealProj, IPixelatedRenderer
     {
-        public override int HealAmt => 25;
+        public override int HealAmt => 10;
         public override int TrailLength => 24;
         public override int ExtraUpdates => 2;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;

@@ -20,6 +20,8 @@ namespace HJScarletRework.Globals.Players
     public partial class HJScarletPlayer : ModPlayer
     {
         public int CalamityValue = HJScarletMethods.HasFuckingCalamity.ToInt();
+        public float blackKeyExecutorDamageAdd = 0;
+        public int blackKeyExecutorCriticalChanceAdd = 0;
         public override void PostUpdateMiscEffects()
         {
             UpdateTimer();
@@ -39,7 +41,7 @@ namespace HJScarletRework.Globals.Players
             }
             if (tacticalExecution && tacticalTime > 0)
             {
-                if (ExecutorSwordMarkPlus)
+                if (executorSwordMarkLevel > 2)
                 {
                     Player.GetDamage<ExecutorDamageClass>() *= 1.05f;
                 }
@@ -169,6 +171,15 @@ namespace HJScarletRework.Globals.Players
             SwitchWeaponSystem();
             PostUpdateMonkHeal();
             HandleWeaponAbility();
+            if(blackKeyExecutorDamageAdd != 0)
+            {
+                Player.GetDamage<ExecutorDamageClass>() += blackKeyExecutorDamageAdd;
+            }
+            if(blackKeyExecutorCriticalChanceAdd!= 0)
+            {
+                Player.GetCritChance<ExecutorDamageClass>() += blackKeyExecutorCriticalChanceAdd;
+
+            }
         }
 
         private void PostUpdateMonkHeal()
@@ -383,14 +394,17 @@ namespace HJScarletRework.Globals.Players
             //星月夜。和领标之魂
             if (!souloftheTidalMark)
                 return;
-            if (Player.statLife < 100 && desterrennacht)
-                Player.statLife = 100;
+            int minLife = desterrennacht ? 20 : 5; 
+            if (Player.statLife < minLife)
+                Player.statLife = minLife;
+            if (!desterrennacht)
+                return;
             if (stardustRuneStaticHealTimer != 0)
                 return;
             if (Player.statLife < Player.statLifeMax2)
             {
-                stardustRuneStaticHealTimer = GetSeconds(10);
-                Player.Heal(Math.Min((Player.statLifeMax2 - Player.statLife - 1), 75));
+                stardustRuneStaticHealTimer = GetSeconds(20);
+                Player.Heal(Math.Min((Player.statLifeMax2 - Player.statLife - 1), 20));
                 SoundEngine.PlaySound(HJScarletSounds.Heal_Minor with { Volume = 0.75f }, Player.Center);
                 //一些粒子
                 new CrossGlow(Player.Center, Color.RoyalBlue, 40, 1, 0.12f).Spawn();

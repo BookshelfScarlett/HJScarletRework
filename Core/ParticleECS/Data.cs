@@ -15,6 +15,7 @@ namespace HJScarletRework.Core.ParticleECS
         public Vector2 Origin;
         public Color DrawColor;
         public float Rotation;
+        public float Opacity;
         public float Scale = 1f;
         public Vector2 Scale2 = Vector2.One;
         public float aifloat0;

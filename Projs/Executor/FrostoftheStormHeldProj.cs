@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
@@ -83,14 +84,31 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            Projectile.AddExecutionTimeImmediate(ItemType<FrostoftheStorm>());
             if (Projectile.numHits < 1)
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, -5 * -Owner.direction, 20, MathHelper.TwoPi, 0.5f, true, 1000);
+            {
+                Vector2 safeDir = Projectile.rotation.ToRotationVector2();
+                for (int i = 0; i < 16; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                            ECSParticle.SnowCloud(target.Center.ToRandCirclePos(5f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 16f), RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, .5f), Color.RoyalBlue), 40, 0, .35f, .62f * .21f);
+                        new StarShape(target.Center.ToRandCirclePos(3f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(0.1f, 10f), RandLerpColor(Color.SkyBlue, Color.WhiteSmoke), 1.1f, 20).Spawn();
+                    }
+                }
+
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, -5 * -Owner.direction, 20, TwoPi, 0.5f, true, 1000);
+                float starScale = .60f;
+                new KiraStar(target.Center, Vector2.Zero, RandLerpColor(Color.Blue, Color.RoyalBlue), 20, safeDir.ToRotation(), 0.58f, starScale, 0, true, useAlt: true).Spawn();
+                new KiraStar(target.Center, Vector2.Zero, Color.White, 20, safeDir.ToRotation(), 0.58f, starScale * 0.80f, 0, true, useAlt: true).Spawn();
+                SoundEngine.PlaySound(HJScarletSounds.Frostwave_Boom with { MaxInstances = 1, Volume = 0.6f, Pitch = 0.5f });
+            }
             int dustCount = 36;
             for (int i = 0; i < dustCount; ++i)
             {
                 Vector2 dir = Projectile.SafeDirByRot();
                 Vector2 pos = target.Center.ToRandCirclePos(10f) + dir * Main.rand.NextFloat(10f);
-                new ShinyCrossStar(pos, RandVelTwoPi(2f, 9f), RandLerpColor(Color.LightSkyBlue, Color.RoyalBlue), 45, RandRotTwoPi, RandZeroToOne, Projectile.scale, false, 0.5f).Spawn();
+                ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(2f, 9f), RandLerpColor(Color.LightSkyBlue, Color.RoyalBlue), 45, RandZeroToOne, Projectile.scale, 0.2f);
             }
 
         }
@@ -116,12 +134,14 @@ namespace HJScarletRework.Projs.Executor
                     ((FrostoftheStormHeldProj)proj.ModProjectile).Flip = true;
                     //存储当前挥舞角度
                     ((FrostoftheStormHeldProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
+                    proj.HJScarlet().HasExecutionMechanic = true;
                 }
                 else
                 {
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Projectile.type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                     ((FrostoftheStormHeldProj)proj.ModProjectile).Flip = false;
                     ((FrostoftheStormHeldProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
+                    proj.HJScarlet().HasExecutionMechanic = true;
                 }
             }
         }
@@ -191,20 +211,19 @@ namespace HJScarletRework.Projs.Executor
 
                     Vector2 dir = (pos - Projectile.Center).SafeNormalize(Vector2.UnitX);
                     Vector2 vel = Owner.velocity * Main.rand.NextFloat(0.1f, 1.5f) + dir * Main.rand.NextFloat(0.1f, 44f);
-                    new SnowCloud(pos, vel * 0.05f, RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, 0.5f), Color.RoyalBlue), 20, RandRotTwoPi, .150f + 0.050f * i, scale * (0.50f + i * 0.2f), Main.rand.NextBool()).SpawnToPriority();
+                    ECSParticle.SnowCloud(pos, vel * .05f, RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, 0.5f), Color.RoyalBlue), 20, RandRotTwoPi,.150f + 0.050f * i, scale * (0.50f + i * 0.2f));
                 }
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 200, Main.rand.NextFloat(.01f, 1.08f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                     Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy((PiOver2 + ToRadians(10)) * Owner.direction * (Flip.ToDirectionInt())) * Main.rand.NextFloat(12f, 20.5f);
-                    new HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 0.1f * Projectile.scale * Main.rand.NextFloat(0.8f, 1.1f)).Spawn();
-                    new HRShinyOrb(pos, vel, Color.White, 40, 0.051f * Projectile.scale).Spawn();
+                    ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 1f,.1f * Projectile.scale * Main.rand.NextFloat(.8f, 1.1f), glowMult: .51f);
                 }
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 200, Main.rand.NextFloat(.01f, .98f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                     Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy(PiOver2 * Owner.direction * Flip.ToDirectionInt()) * Main.rand.NextFloat(5f, 9f);
-                    new ShinyCrossStar(pos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 30, 0, 0.5f, Main.rand.NextFloat(.7f, 1.01f) * Projectile.scale * .75f, false).Spawn();
+                    ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 30, 1f, Main.rand.NextFloat(.7f, 1.01f) * Projectile.scale * .75f, 0.2f);
                 }
             }
         }

@@ -31,6 +31,7 @@ namespace HJScarletRework.Items.Pets
             BuffAndProj();
             Item.rare = RarityType<RarePets>();
             Item.value = Item.sellPrice(gold: 50);
+            Item.master = true;
             Item.HJScarlet().CanDrawIcon = true;
         }
         public override bool? UseItem(Player player)

@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Instances.Items;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using Microsoft.Xna.Framework;
@@ -14,6 +15,10 @@ namespace HJScarletRework.Items.Useables
     public class CorePickaxe : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Useables;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.DisasterRarityHashSet.Add(Type);
+        }
         public override void ExSD()
         {
             Item.DamageType = DamageClass.Melee;

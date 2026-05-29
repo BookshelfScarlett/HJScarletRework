@@ -24,7 +24,9 @@ namespace HJScarletRework.Globals.Players
             blackKeyDoT = false;
             artificalManaStar = false;
             executorSwordMark = false;
+            executorSwordMarkLevel = -1;
             frostHammerHoming = false;
+            souloftheTidalMark = false;
             mayaPumper = false;
             accVanityID = -1;
         }

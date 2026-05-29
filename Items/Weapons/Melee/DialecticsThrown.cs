@@ -1,4 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
@@ -18,29 +20,22 @@ namespace HJScarletRework.Items.Weapons.Melee
         public int UsePhase = 0;
         public override void SetStaticDefaults()
         {
+            HJScarletList.MiscRarityDrawDictionary.Add(Type, MatterRarity.DrawRarity);
             ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.33f;
         }
         public override void ExSD()
         {
             Item.damage = 140;
-            Item.rare = RarityType<MatterRarity>();
+            Item.SetUpRarityPrice(ItemRarityID.Purple);
             //不需要声音，在shoot里手动控制
             Item.UseSound = null;
             Item.shootSpeed = 17f;
+            Item.knockBack = 8f;
             Item.autoReuse = true;
             Item.useTime = Item.useAnimation = 30;
             Item.shoot = ProjectileType<DialecticsThrownProj>();
         }
         public override Color MainTooltipColor => Color.Lerp(Color.RoyalBlue, Color.AliceBlue, 0.5f);
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            if (line.Name == "ItemName" && line.Mod == "Terraria")
-            {
-                MatterRarity.DrawRarity(line);
-                return false;
-            }
-            return base.PreDrawTooltipLine(line, ref yOffset);
-        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             var curStyle = UsePhase switch

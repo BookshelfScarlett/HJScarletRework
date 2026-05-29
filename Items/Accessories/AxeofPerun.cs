@@ -5,12 +5,17 @@ using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class AxeofPerun : HJScarletItemClass
     {
+        public int Crit = 5;
+        public float CritDamage = .10f;
+
         public override string AssetPath => AssetHandler.Equips;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crit + "%", CritDamage.ToPercent());
         public override void ExSD()
         {
             Item.width = 42;
@@ -20,8 +25,8 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetCritChance<ExecutorDamageClass>() += 5;
-            player.HJScarlet().critDamageExecutor += 0.10f;
+            player.HJScarlet().blackKeyExecutorCriticalChanceAdd = Crit;
+            player.HJScarlet().critDamageExecutor += CritDamage;
 
 
         }
@@ -30,6 +35,7 @@ namespace HJScarletRework.Items.Accessories
             CreateRecipe().
                 AddRecipeGroup(HJScarletRecipeGroup.AnyCopperBar, 15).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyEvilBar, 10).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyEvilScale, 5).
                 AddTile(TileID.Anvils).
                 Register();
         }

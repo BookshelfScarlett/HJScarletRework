@@ -22,7 +22,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             Item.damage = 72;
             Item.useTime = Item.useAnimation = 20;
-            Item.knockBack = 12f;
+            Item.knockBack = 6f;
             Item.shootSpeed = 16;
             Item.rare = ItemRarityID.Cyan;
             //这里的shoot是为了适配weaponoutlite。实际上我们不会直接shoot这个东西

@@ -108,7 +108,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.HitDirectionOverride = (int)(Math.Abs(target.Center.X - Owner.Center.X));
+            modifiers.HitDirectionOverride = (int)(Math.Sign(target.Center.X - Owner.Center.X));
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

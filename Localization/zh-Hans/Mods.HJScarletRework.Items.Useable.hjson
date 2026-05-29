@@ -75,13 +75,12 @@ DescriptionPaper: {
 		'''
 }
 
-PureCrystal: {
+PurePrismFate: {
 	DisplayName: 纯净棱镜
 	Tooltip:
 		'''
 		手持时，对着背包内的合成材料按下互动键，即可消耗棱镜进行复制
-		最大同时复制100份
-		不可复制可放置的物品
+		最大同时复制100份，复制一次需消耗3份棱镜
 		“精炼度更高的玛纳结晶体”
 		'''
 }
@@ -90,7 +89,7 @@ UnregisteredSpiritOrigin: {
 	DisplayName: 无记名灵基
 	Tooltip:
 		'''
-		手持时，对着背包内的武器/饰品/护甲按下 互动键 即可消耗灵基进行复制
+		手持时，对着背包内的武器/饰品/护甲/宝藏袋按下 互动键 即可消耗灵基进行复制
 		不可复制无记名灵基本身
 		“满溢而出的灵基的残渣”
 		'''
@@ -102,10 +101,19 @@ ArcaeaPack: {
 		'''
 		开启后获得[i:HJScarletRework/HikariItem]精致玫瑰和[i:HJScarletRework/TairitsuItem]黑色阳伞
 		光和对立的时装变身道具
+		-
+		没有光芒
+		也没有纷争的
+		死亡世界中心，神的祝福降临与你...
+		-
 		'''
 }
 
-TendouKei: {
-	// DisplayName: Tendou Kei
-	// Tooltip: ""
+CursedGoldenKey: {
+	DisplayName: 诅咒金钥匙
+	Tooltip:
+		'''
+		置于箱子内可将其转化为普通宝箱怪
+		“汇聚了大量灵魂的精华”
+		'''
 }

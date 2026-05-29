@@ -16,14 +16,20 @@ namespace HJScarletRework.Globals.ParticleSystem
 
     public partial class BaseParticleManager : ModSystem
     {
-        // 别在外部可以修改了，至少别人都加了readonly（
-        public static readonly List<BaseParticle> ActiveParticlesAlpha = [];
-        public static readonly List<BaseParticle> ActiveParticlesNonPremultiplied = [];
-        public static readonly List<BaseParticle> ActiveParticlesAdditive = [];
+        /// <summary>
+        /// 给list设定硬性上限，三万
+        /// <para>通常情况下应该不会超出这个三万上限</para>
+        /// 这样主要是为了保证内存连续
+        /// </summary>
+
+        private const int MaxParticleCountsSet = 30002;
+        public static readonly List<BaseParticle> ActiveParticlesAlpha =  new (MaxParticleCountsSet);
+        public static readonly List<BaseParticle> ActiveParticlesNonPremultiplied = new List<BaseParticle>(MaxParticleCountsSet);
+        public static readonly List<BaseParticle> ActiveParticlesAdditive = new (MaxParticleCountsSet);
         // 先绘制先更新的粒子
-        public static readonly List<BaseParticle> PriorityActiveParticlesAlpha = [];
-        public static readonly List<BaseParticle> PriorityActiveParticlesNonPremultiplied = [];
-        public static readonly List<BaseParticle> PriorityActiveParticlesAdditive = [];
+        public static readonly List<BaseParticle> PriorityActiveParticlesAlpha = new List<BaseParticle>(MaxParticleCountsSet);
+        public static readonly List<BaseParticle> PriorityActiveParticlesNonPremultiplied = new List<BaseParticle>(MaxParticleCountsSet);
+        public static readonly List<BaseParticle> PriorityActiveParticlesAdditive = new List<BaseParticle>(MaxParticleCountsSet);
 
         public int TotalDust;
         #region 加载卸载
@@ -63,25 +69,6 @@ namespace HJScarletRework.Globals.ParticleSystem
         {
             // 调用源
             orig(self);
-            //void DrawBatch(BlendState blendState, List<BaseParticle> priorityList, List<BaseParticle> normalList)
-            //{
-            //    if (priorityList.Count + normalList.Count == 0)
-            //        return;
-            //    Main.spriteBatch.Begin(SpriteSortMode.Deferred, blendState, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-            //    foreach (var p in priorityList) 
-            //        p.Draw(Main.spriteBatch);
-            //    Main.spriteBatch.End();
-
-            //    Main.spriteBatch.Begin(SpriteSortMode.Deferred, blendState, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-            //    foreach (var p in normalList) 
-            //        p.Draw(Main.spriteBatch);
-            //    Main.spriteBatch.End();
-                
-            //}
-            //DrawBatch(BlendState.AlphaBlend, PriorityActiveParticlesAlpha, ActiveParticlesAlpha);
-            //DrawBatch(BlendState.Additive, PriorityActiveParticlesAdditive, ActiveParticlesAdditive);
-            //DrawBatch(BlendState.NonPremultiplied, PriorityActiveParticlesNonPremultiplied, ActiveParticlesNonPremultiplied);
-            ///*
             #region 渲染粒子
             #region 渲染优先粒子
             if (PriorityActiveParticlesAlpha.Count != 0)

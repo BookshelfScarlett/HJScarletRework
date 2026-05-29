@@ -1,4 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Melee;
@@ -15,12 +17,16 @@ namespace HJScarletRework.Items.Weapons.Melee
     {
         public override bool NotHomewardJourneySpear => true;
         public override bool HasLegendary => true;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.ScarletRarityHashSet.Add(Type);
+        }
         public override void ExSD()
         {
             Item.width = Item.height = 50;
             Item.damage = 75;
             Item.useTime = Item.useAnimation = 26;
-            Item.rare = RarityType<DisasterRarity>();
+            Item.SetUpRarityPrice(ItemRarityID.Yellow);
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<EclipseWraithProj>();
             Item.noMelee = true;
@@ -37,25 +43,28 @@ namespace HJScarletRework.Items.Weapons.Melee
             //通过本地化路径搜索需要的特殊文本
             string value = this.GetLocalizedValue("FlavorTooltips").ToLangValue();
             //实例化toolti并注册名字
-            TooltipLine flavorTooltips = new TooltipLine(Mod, "FlavorTooltipsName", value);
+            TooltipLine flavorTooltips = new TooltipLine(Mod, "FlavorTooltipsName", value)
+            {
+                OverrideColor = Color.Lerp(Color.Red, Color.Crimson, 0.65f)
+            };
+
             //植入Tooltip
             tooltips.Insert(flavorTooltipIndex + 1, flavorTooltips);
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Mod == "Terraria" && line.Name == "ItemName")
-            {
-                DisasterRarity.DrawRarity(line);
-                return false;
-            }
+        if(!HJScarletConfigClient.Instance.SpecialRarity)
+            return base.PreDrawTooltipLine(line, ref yOffset);
+
             if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
             {
-                DisasterRarity.DrawFlavorRarity(line);
+                DisasterRarity.DrawFlavorRarity2(line);
                 return false;
             }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
-        public override Color MainTooltipColor => Color.IndianRed;
+        public override Color MainTooltipColor => Color.Lerp(Color.Red, Color.Crimson, 0.65f)
+;
         public override void AddRecipes()
         {
             CreateRecipe().

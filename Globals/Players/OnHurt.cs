@@ -28,8 +28,8 @@ namespace HJScarletRework.Globals.Players
             if (desterrennacht && desterranRespawnChargeTimer == 0)
             {
                 desterranRespawnChargeTimer = GetSeconds(90);
-                desterrannachtImmortalTime = 3;
-                Player.statLife = Player.statLifeMax2 / 2;
+                desterrannachtImmortalTime = 2;
+                Player.statLife = (int)(Player.statLifeMax2*.15f);
                 SoundEngine.PlaySound(HJScarletSounds.Evolution_Thrown with { MaxInstances = 0, Pitch = 0.5f }, Player.Center);
                 for (int i = 0; i < 20; i++)
                 {

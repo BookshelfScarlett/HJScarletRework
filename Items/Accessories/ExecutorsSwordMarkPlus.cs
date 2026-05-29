@@ -1,5 +1,4 @@
 ﻿using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Tiles;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -22,7 +21,7 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().tacticalExecution = true;
-            player.HJScarlet().ExecutorSwordMarkPlus = true;
+            player.HJScarlet().executorSwordMarkLevel = 3;
         }
         public override void AddRecipes()
         {

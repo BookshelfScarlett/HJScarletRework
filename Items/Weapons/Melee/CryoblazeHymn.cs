@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             Item.damage = 69;
             Item.useTime = Item.useAnimation = 30;
-            Item.knockBack = 6f;
+            Item.knockBack = 3f;
             Item.UseSound = SoundID.Item45 with { MaxInstances = 0 };
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<CryoblazeHymnProj>();

@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items.Material;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
@@ -19,15 +20,16 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetStaticDefaults()
         {
             ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.33f;
+            HJScarletList.MiscRarityDrawDictionary.Add(Type, SakuraRarity.DrawRarity);
         }
         public override void ExSD()
         {
             Item.damage = 190;
-            Item.knockBack = 12f;
+            Item.knockBack = 2f;
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.useStyle = ItemUseStyleID.Rapier;
-            Item.rare = RarityType<SakuraRarity>();
+            Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.shoot = ProjectileType<ColdSakuraProj>();
             Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { Volume = 0.6f, Pitch = 0.5f, PitchVariance = 0.1f, MaxInstances = 0 };
             Item.shootSpeed = 16f;
@@ -62,11 +64,11 @@ namespace HJScarletRework.Items.Weapons.Melee
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Name == "ItemName" && line.Mod == "Terraria")
-            {
-                SakuraRarity.DrawRarity(line);
-                return false;
-            }
+            //if (line.Name == "ItemName" && line.Mod == "Terraria")
+            //{
+            //    SakuraRarity.DrawRarity(line);
+            //    return false;
+            //}
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
     }

@@ -1,4 +1,5 @@
-﻿using Terraria.GameContent.ItemDropRules;
+﻿using System.Net.Http.Headers;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Methods
@@ -15,5 +16,24 @@ namespace HJScarletRework.Globals.Methods
         {
             item.Add(ItemDropRule.Common(itemID, dropRateInt, minQuantity, maxQuantity));
         }
+        public static void ApplyNoBossBagLoot(ref NPCLoot loot, int itemID,int dropRate, int min =1 , int max =1)
+        {
+            LeadingConditionRule norExepert = new LeadingConditionRule(new Conditions.NotExpert());
+            norExepert.OnSuccess(ItemDropRule.Common(itemID, dropRate, min, max));
+            loot.Add(norExepert);
+        }
+        public static void ApplyMasterLoot(ref NPCLoot loot, int itemID,int dropRate, int min =1 , int max =1)
+        {
+            LeadingConditionRule norExepert = new LeadingConditionRule(new Conditions.IsMasterMode());
+            norExepert.OnSuccess(ItemDropRule.Common(itemID, dropRate, min, max));
+            loot.Add(norExepert);
+        }
+        public static void ApplyMasterLoot(ref ItemLoot loot, int itemID,int dropRate, int min =1 , int max =1)
+        {
+            LeadingConditionRule norExepert = new LeadingConditionRule(new Conditions.IsMasterMode());
+            norExepert.OnSuccess(ItemDropRule.Common(itemID, dropRate, min, max));
+            loot.Add(norExepert);
+        }
     }
+
 }

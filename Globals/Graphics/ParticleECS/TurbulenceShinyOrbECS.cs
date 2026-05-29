@@ -12,7 +12,7 @@ using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.ParticleECS
 {
-    public class HRShinyOrbECS : ECSParticleBehavior
+    public class TurbulenceShinyOrbECS : ECSParticleBehavior
     {
         /// <summary>
         /// AI0是湍流的速度
@@ -27,18 +27,18 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
             float Speed = data.aifloat0;
             if (Speed != 0)
             {
-                Vector2 idealVelocity = -Vector2.UnitY.RotatedBy(MathHelper.Lerp(-MathHelper.TwoPi, MathHelper.TwoPi, (float)Math.Sin(data.Time / 36f + data.aiint0) * 0.5f + 0.5f)) * Speed;
-                float movementInterpolant = MathHelper.Lerp(0.01f, 0.25f, Utils.GetLerpValue(0, data.Lifetime / 2, data.Time, true));
+                Vector2 idealVelocity = -Vector2.UnitY.RotatedBy(Lerp(-TwoPi, TwoPi, (float)Math.Sin(data.Time / 36f + data.aiint0) * 0.5f + 0.5f)) * Speed;
+                float movementInterpolant = Lerp(0.01f, 0.25f, Utils.GetLerpValue(0, data.Lifetime / 2, data.Time, true));
                 data.Velocity = Vector2.Lerp(data.Velocity, idealVelocity, movementInterpolant);
                 data.Velocity = data.Velocity.SafeNormalize(-Vector2.UnitY) * Speed;
             }
             data.Velocity *= 0.9f;
-            data.Scale = MathHelper.Lerp(data.aifloat2, 0, EasingHelper.EaseOutCubic(data.LifetimeRatio));
+            data.Scale = Lerp(data.aifloat2, 0, EasingHelper.EaseOutCubic(data.LifetimeRatio));
         }
         public override void Draw(ref ECSParticleData data)
         {
             Texture2D texture = HJScarletTexture.Particle_HRShinyOrb.Value;
-            Main.spriteBatch.Draw(texture, data.Position - Main.screenPosition, null, data.DrawColor, data.Rotation, texture.Size() / 2, data.Scale, SpriteEffects.None, 0);
+            Main.spriteBatch.Draw(texture, data.Position - Main.screenPosition, null, data.DrawColor * data.Opacity, data.Rotation, texture.Size() / 2, data.Scale, SpriteEffects.None, 0);
         }
     }
 }

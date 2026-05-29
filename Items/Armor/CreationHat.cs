@@ -3,7 +3,9 @@ using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Instances.Items;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -20,6 +22,7 @@ namespace HJScarletRework.Items.Armor
         {
             ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
             ArmorIDs.Head.Sets.IsTallHat[Item.headSlot] = true;
+            HJScarletList.MiscRarityDrawDictionary.Add(Type, MatterRarity.DrawRarity);
         }
         public int DefenseCount = 110;
         public int MaxMana = 40;

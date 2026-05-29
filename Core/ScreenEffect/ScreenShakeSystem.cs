@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HJScarletRework.Globals.Configs;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -51,7 +52,7 @@ namespace HJScarletRework.Core.ScreenEffect
                 Shake *= 1 - ratios;
             }
 
-            Main.screenPosition += Vector2.UnitX.RotatedBy(ShakeDirection).RotatedByRandom(ShakeAngleOffset) * Shake;
+            Main.screenPosition += Vector2.UnitX.RotatedBy(ShakeDirection).RotatedByRandom(ShakeAngleOffset) * Shake * HJScarletConfigClient.Instance.ScreenShakeStrength;
             ShakeTime++;
         }
     }

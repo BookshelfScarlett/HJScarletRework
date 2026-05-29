@@ -226,31 +226,5 @@ namespace HJScarletRework.Core.ParticleScarlet
             OnSpawn();
             return this;
         }
-        /// <summary>
-        ///// 在世界内生成粒子
-        ///// </summary>
-        ///// <returns></returns>
-        //public ScarletParticle SpawnAdditive(bool priority = false)
-        //{
-        //    if (Main.netMode == NetmodeID.Server)
-        //        return this;
-        //    //if (TheBlendState != BlendState.Additive)
-        //    //    return this;
-        //    OnSpawn();
-        //    return this;
-        //}
-        ///// <summary>
-        ///// 在世界内生成粒子
-        ///// </summary>
-        ///// <returns></returns>
-        //public ScarletParticle SpawnNonPre(bool priority = false)
-        //{
-        //    if (Main.netMode == NetmodeID.Server)
-        //        return this;
-        //    //if (TheBlendState != BlendState.NonPremultiplied)
-        //    //    return this;
-        //    OnSpawn();
-        //    return this;
-        //}
     }
 }

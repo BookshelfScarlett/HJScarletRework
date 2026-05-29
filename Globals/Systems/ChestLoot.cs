@@ -1,7 +1,9 @@
 ﻿using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,6 +13,44 @@ namespace HJScarletRework.Globals.Systems
 {
     public partial class HJScarletGeneralSystem : ModSystem
     {
+        public void PlacePurePrism()
+        {
+            // Place some additional items in Frozen Chests:
+            // These are the 3 new items we will place.
+            int[] itemsToPlaceInFrozenChests = [ItemType<PurePrismFate>()];
+            // This variable will help cycle through the items so that different Frozen Chests get different items
+            // Rather than place items in each chest, we'll place up to 6 items (2 of each).
+            // Loop over all the chests
+            bool forceSpawn = false;
+            int chestIndex = 0;
+            if (!forceSpawn)
+            {
+                for (; chestIndex < Main.maxChests; chestIndex++)
+                {
+                    Chest chest = Main.chest[chestIndex];
+                    if (chest == null)
+                    {
+                        continue;
+                    }
+                    Tile chestTile = Main.tile[chest.x, chest.y];
+                    if (chestTile.TileType == TileID.Containers)
+                    {
+                        if (WorldGen.genRand.NextBool(4))
+                            continue;
+                        for (int inventoryIndex = 0; inventoryIndex < Chest.maxItems; inventoryIndex++)
+                        {
+                            if (chest.item[inventoryIndex].type == ItemID.None)
+                            {
+                                chest.item[inventoryIndex].SetDefaults(ItemType<PurePrismFate>());
+                                chest.item[inventoryIndex].stack = Main.rand.Next(5, 14);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public void PlaceDungeonBreaker()
         {
             // Place some additional items in Frozen Chests:
@@ -217,6 +257,7 @@ namespace HJScarletRework.Globals.Systems
             ModifyGoldenChestLoost();
             PlaceIceSpear();
             PlaceDungeonBreaker();
+            PlacePurePrism();
             //PlaceJungleMadness();
         }
         public override void PostUpdateWorld()

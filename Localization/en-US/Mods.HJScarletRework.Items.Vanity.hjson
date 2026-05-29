@@ -1,11 +1,28 @@
 HikariItem: {
-	DisplayName: Hikari Item
-	FlavorTooltip: ""
-	Tooltip: ""
+	DisplayName: Exquisite Rose
+	FlavorTooltip: -Fracture-
+	Tooltip:
+		'''
+		The sky grows brighter and she loses more of herself.
+		With little time for her left, she stares upward as if waiting.
+		Bright, bright, bliss, beauty above: effulgent memory overtakes her.
+		Her mind whites out.
+		And, without meaning, light fades away.
+		Without meaning,time passes.
+		And a girl stares up into an empty sky, her mind ended, and thus her story along with it.
+		'''
 }
 
 TairitsuItem: {
-	DisplayName: Tairitsu Item
-	FlavorTooltip: ""
-	Tooltip: ""
+	DisplayName: Black Parasol
+	FlavorTooltip: -Grievous Lady-
+	Tooltip:
+		'''
+		She was confused because she was hurting. Everything hurt. Her heart was bursting.
+		The cloak of memories that she'd collected turned into a grotesque sphere and surrounded her.The world of white disappeared from her vision.
+		Leaving only horrible things. Heaving, sweating, and trembling, she looked into the glass.
+		Into the -, deeply. And as she came to realize that her heart was breaking.
+		That her sanity was breaking,
+		The memory of the end of the world that she'd seen earlier slowly drifted into view.
+		'''
 }

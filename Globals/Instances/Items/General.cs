@@ -23,6 +23,10 @@ namespace HJScarletRework.Globals.Instances.Items
         /// <summary>
         /// shorthand
         /// </summary>
+        public override void SetStaticDefaults()
+        {
+            HJScarletMethods.ShimmerEach(ItemID.PaladinsHammer, ItemID.PaladinsShield);
+        }
         public Player LocalPlayer => Main.LocalPlayer;
         public override void UpdateInventory(Item item, Player player)
         {

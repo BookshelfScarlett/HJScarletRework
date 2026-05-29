@@ -1,4 +1,7 @@
-﻿using HJScarletRework.Globals.Executor;
+﻿using ContinentOfJourney.Items;
+using ContinentOfJourney.Items.Material;
+using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
@@ -10,16 +13,20 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class FrostoftheStorm : ExecutorWeaponClass
     {
-        public override int ExecutionProgress => 8;
+        public override int ExecutionProgress => 12;
+        public override void ExSSD()
+        {
+            HJScarletList.FrostRarityHashSet.Add(Type);
+        }
         public override void ExSD()
         {
-            Item.damage = 400;
+            Item.damage = 800;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true, true);
             Item.useTime = Item.useAnimation = 35;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = null;
-            Item.knockBack = 4f;
+            Item.knockBack = 2f;
             Item.shoot = ProjectileType<FrostoftheStormHeldProj>();
             Item.shootSpeed = 16;
         }
@@ -31,9 +38,19 @@ namespace HJScarletRework.Items.Weapons.Executor
         {
             Vector2 dir = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitX);
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
+            proj.HJScarlet().HasExecutionMechanic = true;
             ((FrostoftheStormHeldProj)proj.ModProjectile).BeginTargetRotation = dir.ToRotation();
             ((FrostoftheStormHeldProj)proj.ModProjectile).Flip = true;
             return false;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.Frostbrand).
+                AddIngredient<Frostgrief>(5).
+                AddIngredient<FinalBar>(5).
+                AddTile(FinalAnvilTile).
+                Register();
         }
     }
 }

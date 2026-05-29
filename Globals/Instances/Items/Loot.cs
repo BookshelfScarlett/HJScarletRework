@@ -1,11 +1,15 @@
 ﻿using ContinentOfJourney.Items;
+using ContinentOfJourney.Items.Placables.FishingCrate;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Items.Weapons.Ranged;
 using Terraria;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,7 +17,7 @@ namespace HJScarletRework.Globals.Instances.Items
 {
     public partial class HJScarletGlobalItem : GlobalItem
     {
-         public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
+        public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
         {
             switch (item.type)
             {
@@ -32,7 +36,9 @@ namespace HJScarletRework.Globals.Instances.Items
                 case ItemID.WallOfFleshBossBag:
                     itemLoot.AddLoot<ExecutorEmblem>(3);
                     break;
-
+                case ItemID.MoonLordBossBag:
+                    itemLoot.AddLoot<PrunusMume>(3);
+                    break;
             }
             if (item.type == ItemType<WallofShadowTreasureBag>())
             {
@@ -43,11 +49,22 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 itemLoot.AddLoot<ClimaticHawstring>(3);
             }
-            if (Main.masterMode)
+            if (item.type == ItemType<ScarabBeliefTreasureBag>())
             {
-                if (item.type == ItemType<ScarabBeliefTreasureBag>())
-                    itemLoot.AddLoot<SacarbWings>(10);
-                
+                HJScarletMethods.ApplyMasterLoot(ref itemLoot, ItemType<SacarbWings>(), 4);
+            }
+            if(item.type == ItemType<ShadowCrate>() 
+                || item.type == ItemType<ShinyCrate>()
+                || item.type == ItemType<SolarCrate>()
+                || item.type == ItemType<QuakyCrate>()
+                || item.type == ItemType<CountdownCrate>() 
+                || item.type ==ItemType<ForeverCrate>() 
+                || item.type ==ItemType<MembraneCrate>() 
+                || item.type ==ItemType<LivingCrate>() 
+                || item.type ==ItemType<CubeCrate>() 
+                || item.type == ItemType<CubistCrate>())
+            {
+                itemLoot.AddLoot<PurePrismFate>(4, 25, 40);
             }
         }
         public override void AddRecipes()
@@ -94,6 +111,16 @@ namespace HJScarletRework.Globals.Instances.Items
                 AddIngredient(ItemID.SoulofSight, 5).
                 AddTile(TileID.MythrilAnvil).
                 DisableDecraft().
+                Register();
+            Recipe.Create(ItemID.Amarok).
+                AddIngredient(ItemID.HelFire).
+                AddIngredient(ItemID.FrostCore).
+                DisableDecraft().
+                Register();
+            Recipe.Create(ItemID.CobaltShield).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyCobaltBar, 10).
+                DisableDecraft().
+                AddTile(TileID.MythrilAnvil).
                 Register();
 
             if (!ModLoader.TryGetMod("Fargowiltas", out Mod fargoWiltas))

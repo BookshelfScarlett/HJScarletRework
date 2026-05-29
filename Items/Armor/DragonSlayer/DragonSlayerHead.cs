@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
@@ -14,11 +15,15 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
     public class DragonSlayerHead : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Armors;
+        public override void SetStaticDefaults()
+        {
+
+            HJScarletList.ScarletRarityHashSet.Add(Type);
+        }
         public override void ExSD()
         {
             Item.defense = 25;
             Item.SetUpRarityPrice(ItemRarityID.Purple);
-            Item.rare = RarityType<DisasterRarity>();
 
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -32,11 +37,6 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
 
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.IsItemName())
-            {
-                DisasterRarity.DrawRarity2(line);
-                return false;
-            }
             return true;
         }
 
@@ -51,8 +51,8 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
             player.HJScarlet().redDragonKnight = true;
             player.setBonus += "\n" + value;
             player.GetAttackSpeed<MeleeDamageClass>() += 0.25f;
-            player.maxMinions = 3;
-            player.maxTurrets = 3;
+            player.maxMinions = 1;
+            player.maxTurrets = 1;
         }
         public override void AddRecipes()
         {

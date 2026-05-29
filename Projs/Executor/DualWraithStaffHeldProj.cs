@@ -83,7 +83,6 @@ namespace HJScarletRework.Projs.Executor
                     UpdateHeldState();
             }
         }
-        Vector2 Ori;
         public void UpdateExecutionStrikeAni()
         {
             if (Timer == 0)

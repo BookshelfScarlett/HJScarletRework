@@ -4,12 +4,17 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class MiniatureBayonet : HJScarletItemClass
     {
+        public int Crit = 10;
+        public float CritDamage = .15f;
+
         public override string AssetPath => AssetHandler.Equips;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crit + "%", CritDamage.ToPercent());
         public override void ExSD()
         {
             Item.width = Item.height = 33;
@@ -18,7 +23,7 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetCritChance<ExecutorDamageClass>() += 10;
+            player.HJScarlet().blackKeyExecutorCriticalChanceAdd = Crit;
             player.HJScarlet().critDamageExecutor += 0.15f;
         }
         public override void AddRecipes()

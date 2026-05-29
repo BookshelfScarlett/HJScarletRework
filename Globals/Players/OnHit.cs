@@ -137,9 +137,14 @@ namespace HJScarletRework.Globals.Players
         public void ModifyCritDamage(NPC target, ref NPC.HitModifiers modifiers)
         {
             float totalCritsBonus = 0f;
-            if(tacticalTime > 0 && executorSwordMark && modifiers.DamageType.CountsAsClass<ExecutorDamageClass>())
+            if(tacticalTime > 0 && executorSwordMarkLevel > 1  && modifiers.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
                 modifiers.SetCrit();
+            }
+            if(tacticalTime > 0 && executorSwordMarkLevel == 1  && modifiers.DamageType.CountsAsClass<ExecutorDamageClass>())
+            {
+                if (Main.rand.NextBool(2))
+                    modifiers.SetCrit();
             }
             if (CreationHatSet && modifiers.DamageType.CountsAsClass(DamageClass.Magic))
             {

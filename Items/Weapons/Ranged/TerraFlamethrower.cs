@@ -6,11 +6,13 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Ranged
 {
     public class TerraFlamethrower : HJScarletWeapon
     {
+        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ClassCategory Category => ClassCategory.Ranged;
         public override void ExSD()
         {

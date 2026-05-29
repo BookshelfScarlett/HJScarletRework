@@ -20,9 +20,15 @@ namespace HJScarletRework.Globals.Executor
         public virtual float ExecutionStrikeDamageMult => 1.0f;
         public override void SetStaticDefaults()
         {
+            ExSSD();
             HJScarletList.ExecutorWeaponDictionary.Add(Type, ExecutionProgress);
 
         }
+
+        public virtual void ExSSD()
+        {
+        }
+
         public override void SetDefaults()
         {
             Item.width = Item.height = 16;

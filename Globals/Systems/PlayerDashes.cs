@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 /// <summary>
@@ -11,11 +12,23 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Systems
 {
+    public static class PlayerDashMethod
+    {
+        public static void ApplyDash(this Player player ,int dashID)
+        {
+            player.GetModPlayer<ScarletDashPlayer>().CurDashID = dashID;
+        }
+    }
     public struct DashDamageInfo(int damage, float knockBack, DamageClass dc)
     {
         public int Damage = damage;
         public float KnockBack = knockBack;
         public DamageClass damageClass = dc;
+    }
+    public enum DashEnum
+    {
+        Bonk,
+        Slam
     }
 
     public class ScarletDashPlayer : ModPlayer
@@ -66,22 +79,26 @@ namespace HJScarletRework.Globals.Systems
                 }
                 if (DashTime > 0)
                 {
-                    if (!ActiveDash.UseCustomDashSpeed)
+                    if (!(ActiveDash.DashOnHitType == DashEnum.Bonk && ActiveDash.BonkHit))
                     {
-                        float PlayerXVel = BeginDirection * Vector2.UnitX.X * ActiveDash.DashSpeed(Player);
-                        if (MathF.Abs(Player.velocity.X) < MathF.Abs(PlayerXVel))
-                            Player.velocity.X = MathHelper.Lerp(PlayerXVel * ActiveDash.DashEndSpeedMult(Player), PlayerXVel, ActiveDash.DashAmount(Player, DashTime, ActiveDash.DashTime(Player)));
+                        if (!ActiveDash.UseCustomDashSpeed)
+                        {
+                            float PlayerXVel = BeginDirection * Vector2.UnitX.X * ActiveDash.DashSpeed(Player);
+                            if (MathF.Abs(Player.velocity.X) < MathF.Abs(PlayerXVel))
+                                Player.velocity.X = Lerp(PlayerXVel * ActiveDash.DashEndSpeedMult(Player), PlayerXVel, ActiveDash.DashAmount(Player, DashTime, ActiveDash.DashTime(Player)));
+                        }
+                        else
+                            ActiveDash.ModifyDashSpeed(Player);
+                        ActiveDash.UpdateDash(Player);
+                        BeginDash = true;
+                        CheckNPCHit(ActiveDash);
                     }
-                    else
-                        ActiveDash.ModifyDashSpeed(Player);
-                    ActiveDash.UpdateDash(Player);
-                    BeginDash = true;
-                    CheckNPCHit(ActiveDash);
                 }
                 if (BeginDash && DashTime == 0)
                 {
                     ActiveDash.OnDashEnd(Player);
                     DashDelay = ActiveDash.DashDelay(Player);
+                    ActiveDash.BonkHit = false;
                     BeginDash = false;
                     OverideCurDashID = -1;
                 }
@@ -167,6 +184,8 @@ namespace HJScarletRework.Globals.Systems
                         NPCImmuneTime[n.whoAmI] = ActiveDash.DashHitCoolDown(Player);
                         int npcPostDamageHP = n.life;
                         ActiveDash.OnHitNPC(Player, n, npcPreDamageHP - npcPostDamageHP);
+                        if (ActiveDash.DashOnHitType == DashEnum.Bonk)
+                            ActiveDash.BonkHit = true;
                     }
                 }
             }
@@ -183,6 +202,15 @@ namespace HJScarletRework.Globals.Systems
         /// 这个冲刺的来源
         /// </summary>
         public IEntitySource Source;
+        /// <summary>
+        /// 冲刺撞击时的类型，是否为克盾的弹起或者日曜的盾冲就用的这个
+        /// 默认盾冲模式
+        /// </summary>
+        public virtual DashEnum DashOnHitType => DashEnum.Slam;
+        /// <summary>
+        /// 仅仅用于是否进行了bonkHit的标记
+        /// </summary>
+        public bool BonkHit = false;
         /// <summary>
         /// 如果你需要点什么允许冲刺的条件的话，复写这个。
         /// </summary>

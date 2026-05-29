@@ -1,12 +1,10 @@
 using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,16 +14,19 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public override float ExecutionStrikeDamageMult => 1.0f;
         public override int ExecutionProgress => 30;
+        public override void ExSSD()
+        {
+            HJScarletList.NebulaRarityHashSet.Add(Type);
+        }
         public override void ExSD()
         {
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = Item.height = 86;
-            Item.damage = 328;
+            Item.damage = 300;
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.shootSpeed = 20f;
             Item.SetUpRarityPrice(ItemRarityID.Red);
-            Item.rare = RarityType<NebulaRarity>();
             Item.SetUpNoUseGraphicItem();
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
@@ -34,11 +35,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Mod == "Terraria" && line.Name == "ItemName")
-            {
-                NebulaRarity.DrawRarityReverse(line);
-                return false;
-            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         /// <summary>

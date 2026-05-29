@@ -14,24 +14,27 @@ namespace HJScarletRework.Globals.Configs
         }
         public override ConfigScope Mode => ConfigScope.ClientSide;
         public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref NetworkText message) => false;
-        [BackgroundColor(192, 54, 64, 192)]
+        [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(false)]
-        [ReloadRequired]
         public bool SpecialRarity { get; set; }
-        [BackgroundColor(192, 54, 64, 192)]
-        [Range(50, 50000)]
+        [BackgroundColor(211, 211, 211, 192)]
+        [Range(50, 30000)]
         [Increment(1)]
         [DefaultValue(10000)]
         public int MaxParticleCounts { get; set; }
-        [BackgroundColor(192, 54, 64, 192)]
+        [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(true)]
         public bool DrawIcon { get; set; }
-        [BackgroundColor(192, 54, 64, 192)]
+        [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(false)]
         public bool PerformanceMode { get; set; }
-        [BackgroundColor(192, 54, 64, 192)]
+        [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(true)]
         public bool DrawExecutionCounter { get; set; }
+        [BackgroundColor(211, 211, 211, 192)]
+        [Range(0, 10f)]
+        [DefaultValue(1f)]
+        public float ScreenShakeStrength { get; set; }
 
 
     }

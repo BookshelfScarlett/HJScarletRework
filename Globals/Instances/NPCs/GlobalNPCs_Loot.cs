@@ -1,14 +1,25 @@
-﻿using ContinentOfJourney.NPCs.Boss_MarquisMoonsquid;
+﻿using ContinentOfJourney.Items;
+using ContinentOfJourney.NPCs;
+using ContinentOfJourney.NPCs.Boss_MarquisMoonsquid;
+using ContinentOfJourney.NPCs.Boss_PriestessRod;
 using ContinentOfJourney.NPCs.Boss_ScarabBelief;
 using ContinentOfJourney.NPCs.Boss_TheOverwatcher;
 using ContinentOfJourney.NPCs.Boss_WallofShadow;
 using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Pets;
+using HJScarletRework.Items.Useables;
+using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
+using HJScarletRework.Items.Weapons.Ranged;
+using Microsoft.CodeAnalysis.Operations;
+using System.Security.AccessControl;
 using Terraria;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -24,25 +35,67 @@ namespace HJScarletRework.Globals.Instances
                     npcLoot.AddLootSimple(ItemType<TheMars>(), 4);
                     break;
             }
-            if (!Main.masterMode)
+            switch (npc.type)
             {
-                switch (npc.type)
-                {
-                    case NPCID.WallofFlesh:
-                        npcLoot.AddLootSimple(ItemType<ExecutorEmblem>(), 3);
-                        break;
-                }
+                case NPCID.Golem:
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<DisasterEssence>(), 1, 10, 20);
+                    break;
+                case NPCID.WallofFlesh:
+                    npcLoot.Add(ItemDropRule.ByCondition(new ScarletWearingFullCowboy(), ItemType<ExecutorEmblem>()));
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<ExecutorEmblem>(), 4);
+                    break;
+                case NPCID.BigMimicCorruption:
+                case NPCID.BigMimicCrimson:
+                case NPCID.BigMimicHallow:
+                case NPCID.BigMimicJungle:
+                    npcLoot.AddLootSimple(ItemType<PurePrismFate>(), 1, 20, 40);
+                    break;
+                case NPCID.Mimic:
+                case NPCID.IceMimic:
+                    npcLoot.AddLootSimple(ItemType<PurePrismFate>(), 1, 10, 30);
+                    break;
+
+                case NPCID.MoonLordCore:
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<PrunusMume>(), 4);
+                    break;
+            }
+            if(npc.boss && npc.type != NPCID.KingSlime)
+            {
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<UnregisteredSpiritOrigin>(), 5);
             }
             if (npc.type == NPCType<WorldsEndEverlastingFallingWhale>())
-                npcLoot.AddLootSimple(ItemType<WhaleItem>(), 4);
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<WhaleItem>(), 4);
             if (npc.type == NPCType<TheOverwatcher>())
-                npcLoot.AddLootSimple(ItemType<WatcherItem>(), 4);
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<WatcherItem>(), 4);
             if (npc.type == NPCType<WallofShadow>())
-                npcLoot.AddLootSimple(ItemType<ShadowItem>(), 4);
+            {
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<ShadowItem>(), 4);
+                HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<DeathTolls>(), 4);
+                HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<ExecutorBadge>(), 4);
+            }
             if (npc.type == NPCType<MarquisMoonsquid>())
-                npcLoot.AddLootSimple(ItemType<SquidItem>(), 4);
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<SquidItem>(), 4);
             if (npc.type == NPCType<ScarabBelief>())
-                npcLoot.AddLootSimple(ItemType<NoneItem>(), 4);
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<NoneItem>(), 4);
+            if (npc.type == NPCType<DesertMimic>() || npc.type == NPCType<PolarMimic>() || npc.type == NPCType<TempleMimic>())
+            {
+                npcLoot.AddLootSimple(ItemType<PurePrismFate>(), 1, 30, 50);
+            }
+            if(npc.type == NPCType<PriestessRod>())
+            {
+                HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<ClimaticHawstring>(), 4);
+            }
+        }
+        public override void ModifyGlobalLoot(GlobalLoot globalLoot)
+        {
+            LeadingConditionRule leadingConditionRule2 = new(Condition.InSnow.ToDropCondition(ShowItemDropInUI.Always));
+            leadingConditionRule2.OnSuccess(ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemType<FrostHammer>(), 250));
+            globalLoot.Add(leadingConditionRule2);
+
+            LeadingConditionRule leadingConditionRule = new(Condition.InUnderworld.ToDropCondition(ShowItemDropInUI.Always));
+            IItemDropRuleCondition rule = (Condition.DownedGolem.ToDropCondition(ShowItemDropInUI.Always));
+            leadingConditionRule.OnSuccess(ItemDropRule.ByCondition(rule, ItemType<DisasterEssence>(), 6));
+            globalLoot.Add(leadingConditionRule);
         }
         public override bool? CanGoToStatue(NPC npc, bool toKingStatue)
         {
