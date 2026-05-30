@@ -27,16 +27,6 @@ namespace HJScarletRework.Globals.Players
 
                 if (Player.ZoneBeach && DownedBossSystem.downedBarrier)
                     HandleDiverArmor(poolSizeAmt, power, ref itemDrop, ref sonar);
-                if (Player.ZoneSnow)
-                {
-                    itemDrop = ItemType<DiverBody>();
-                    sonar.Color = Color.Red;
-                }
-                if (Player.ZoneDesert)
-                {
-                    itemDrop = ItemType<DiverLegs>();
-                    sonar.Color = Color.Red;
-                }
             }
         }
         public void HandleDiverArmor(int poolSizeAmt, int power, ref int itemDrop, ref AdvancedPopupRequest sonar)
