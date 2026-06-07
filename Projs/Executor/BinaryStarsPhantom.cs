@@ -1,4 +1,5 @@
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -294,13 +295,11 @@ namespace HJScarletRework.Projs.Executor
                     //而后使用封装的一个自定义方法，为射弹自动分配自己的位置
                     Vector2 edge = spawnPos + GetCertainPointBaseOnVectorCircle(angle, shortAxis, longAxis, baseRot);
                     Color drawColor = Color.Lerp(BinaryStarsProj.TrailColor with { A = 75 }, Color.MediumPurple with { A = 75 }, (totalParticleCounts - j) / (float)totalParticleCounts);
-                    ShinyOrbParticle orbs = new ShinyOrbParticle(edge, dir * 0.2f, drawColor, 30, Main.rand.NextFloat(0.22f, 0.25f), BlendStateID.Alpha, affactedByGravity: false);
-                    orbs.Spawn();
+                    ECSParticle.HRShinyOrb(edge, dir * .2f, drawColor, 30, 1f, Main.rand.NextFloat(.22f, .25f) * .35f, .3f, BlendState.Additive);
                 }
             }
-            //在中心点位额外绘制一个orb
-            new ShinyOrbParticle(spawnPos, dir * 0.2f, Color.Violet, 30, 0.75f, glowCenter: false).Spawn();
-            new ShinyOrbParticle(spawnPos, dir * 0.2f, Color.MediumPurple, 30, 0.45f, glowCenter: false).Spawn();
+            ECSParticle.HRShinyOrb(spawnPos, dir * .2f, Color.Violet, 30, 1, .75f * .1f, 0f);
+            ECSParticle.HRShinyOrb(spawnPos, dir * .2f, Color.MediumPurple, 30, 1, .45f * .1f, 0f);
         }
         /// <summary>
         /// 基于圆+极坐标的复杂计算来获取需要的位置

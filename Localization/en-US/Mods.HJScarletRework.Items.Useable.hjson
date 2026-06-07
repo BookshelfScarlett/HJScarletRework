@@ -111,5 +111,5 @@ ArcaeaPack: {
 
 CursedGoldenKey: {
 	DisplayName: Cursed Golden Key
-	Tooltip: ""
+	Tooltip: Put into an empty chest to summon Mimic
 }

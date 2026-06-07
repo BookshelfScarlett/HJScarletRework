@@ -5,12 +5,6 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
-using Mono.Cecil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -126,7 +120,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.netUpdate = true;
                 Timer = 0;
                 Projectile.BounceOnTile(oldVelocity);
-            SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { MaxInstances = 2, Pitch = 0.3f }, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { MaxInstances = 2, Pitch = 0.3f }, Projectile.Center);
                 SpawnPetalFlower(Projectile.Center);
             }
             return false;

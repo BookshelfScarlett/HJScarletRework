@@ -12,6 +12,7 @@ namespace HJScarletRework.Items.Materials
         public override void SetStaticDefaults()
         {
             HJScarletList.DisasterRarityHashSet.Add(Type);
+            ItemID.Sets.ItemNoGravity[Type] = true;
         }
         public override void ExSD()
         {

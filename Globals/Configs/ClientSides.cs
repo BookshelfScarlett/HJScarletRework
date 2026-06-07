@@ -15,7 +15,7 @@ namespace HJScarletRework.Globals.Configs
         public override ConfigScope Mode => ConfigScope.ClientSide;
         public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref NetworkText message) => false;
         [BackgroundColor(211, 211, 211, 192)]
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool SpecialRarity { get; set; }
         [BackgroundColor(211, 211, 211, 192)]
         [Range(50, 30000)]
@@ -31,6 +31,10 @@ namespace HJScarletRework.Globals.Configs
         [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(true)]
         public bool DrawExecutionCounter { get; set; }
+        [BackgroundColor(211, 211, 211, 192)]
+        [DefaultValue(true)]
+        public bool SimpleImmersiveInventory { get; set; }
+
         [BackgroundColor(211, 211, 211, 192)]
         [Range(0, 10f)]
         [DefaultValue(1f)]

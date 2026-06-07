@@ -6,11 +6,6 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -50,7 +45,8 @@ namespace HJScarletRework.Projs.Executor
             DrawParticle();
             if (Projectile.HJScarlet().ExecutionStrike)
             {
-                Projectile.rotation += .02f; 
+                Projectile.rotation += .02f;
+                Projectile.Center = Vector2.Lerp(Projectile.Center, Owner.MountedCenter - Vector2.UnitY * 130f, 0.2f);
                 if (Projectile.MeetMaxUpdatesFrame(Timer, 60))
                 {
                     Timer = 0;
@@ -97,6 +93,10 @@ namespace HJScarletRework.Projs.Executor
             return false;
         }
 
+        public override bool ShouldUpdatePosition()
+        {
+            return !Projectile.HJScarlet().ExecutionStrike;
+        }
         public void DrawParticle()
         {
             if(Projectile.HJScarlet().ExecutionStrike)

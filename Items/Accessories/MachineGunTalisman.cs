@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Accessories
         {
             Item.SetUpRarityPrice(ItemRarityID.Cyan);
             Item.accessory = true;
-            Item.defense = 5;
+            Item.defense = 2;
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(HealAmt);
         public override void UpdateAccessory(Player player, bool hideVisual)

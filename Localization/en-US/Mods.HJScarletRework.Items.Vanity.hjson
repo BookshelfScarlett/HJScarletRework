@@ -26,3 +26,18 @@ TairitsuItem: {
 		The memory of the end of the world that she'd seen earlier slowly drifted into view.
 		'''
 }
+
+CantoneseGirlItem: {
+	DisplayName: Cantonese Girl Item
+	Tooltip: ""
+}
+
+LeafMaidItem: {
+	DisplayName: Leaf Maid Item
+	Tooltip: ""
+}
+
+RedDragonItem: {
+	DisplayName: Red Dragon Item
+	Tooltip: ""
+}

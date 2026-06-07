@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Vanity
+namespace HJScarletRework.Items.Vanity.Arceca
 {
     public class HikariItem : AccVanityItem
     {

@@ -2,12 +2,11 @@ HJScarletConfigClient: {
 	DisplayName: Lostbelt Journey Client Config
 
 	SpecialRarity: {
-		Label: Special Rarity Overrides Orignal Mod
+		Label: Special Rarity
 		Tooltip:
 			'''
-			Allows Lostbelt Journey to override the rarity of certain items in Homeward Journey with special rarities.
-			Currently only applies to items related to supreme.
-			Disabled by default.
+			Allow the mod to draw special rarity for certain items
+			Disabled by default
 			'''
 	}
 
@@ -51,5 +50,15 @@ HJScarletConfigClient: {
 	ScreenShakeStrength: {
 		Label: Screen Shake Strength
 		Tooltip: ""
+	}
+
+	SimpleImmersiveInventory: {
+		Label: Simple Immersive Inventory
+		Tooltip:
+			'''
+			Adds a simplified version of an effect similar to the Minecraft mod "Immersive Inventory"
+			Applies to all items, automatically disabled if the mod "Immersive Inventory" is enabled, overriding this setting
+			Enabled by default
+			'''
 	}
 }

@@ -2,8 +2,10 @@
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
@@ -164,6 +166,12 @@ namespace HJScarletRework.Globals.Players
                 exsanguinationBuffTime--;
             if (!Player.HasBuff<BlackKeyExecutionBuff>())
                 blackKeyDefenseTrigger = false;
+            if(!Player.HasBuff<CrimsonCharmBuff>())
+            {
+                crimsonCharmStopReduce = false;
+                if (Player.miscCounter % 10 == 0 && crimsonCharmReduceTime > 0)
+                    crimsonCharmReduceTime--;
+            }
         }
         public override void PostUpdate()
         {
@@ -171,17 +179,121 @@ namespace HJScarletRework.Globals.Players
             SwitchWeaponSystem();
             PostUpdateMonkHeal();
             HandleWeaponAbility();
-            if(blackKeyExecutorDamageAdd != 0)
+            HandleUseableItem();
+            if (blackKeyExecutorDamageAdd != 0)
             {
                 Player.GetDamage<ExecutorDamageClass>() += blackKeyExecutorDamageAdd;
             }
-            if(blackKeyExecutorCriticalChanceAdd!= 0)
+            if (blackKeyExecutorCriticalChanceAdd != 0)
             {
                 Player.GetCritChance<ExecutorDamageClass>() += blackKeyExecutorCriticalChanceAdd;
 
             }
         }
+        public float holdingUseableTimer = 0;
+        public void HandleUseableItem()
+        {
+            Item itemOnMouse = Player.HeldItem;
+            Item itemOnHover = Main.HoverItem;
 
+            if (!itemOnMouse.IsLegal())
+                return;
+            if (!itemOnHover.IsLegal())
+                return;
+            if(itemOnMouse.type == ItemType<UnregisteredSpiritOrigin>())
+            {
+                //必须得有伤害，必须得是武器
+                bool isWeapon = itemOnHover.damage > 0 && itemOnHover.pick == 0 && itemOnHover.axe == 0 && itemOnHover.hammer == 0 && !itemOnHover.IsACoin && itemOnHover.ammo == AmmoID.None;
+                //必须得有宝藏袋一名
+
+                bool isTreasureBag = ItemID.Sets.BossBag[itemOnHover.type];
+                //bool isWeapon = item.damage > 0 && item.pick == 0 && item.axe == 0 && item.hammer == 0 && !item.IsACoin && item.ammo == AmmoID.None;
+                bool isAccessory = (itemOnHover.accessory || itemOnHover.defense > 0) && itemOnHover.pick == 0 && itemOnHover.axe == 0 && itemOnHover.hammer == 0 && !itemOnHover.IsACoin && itemOnHover.ammo == AmmoID.None && !itemOnHover.vanity;
+
+                if (isWeapon || isAccessory || isTreasureBag)
+                {
+                    if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
+                    {
+                        if (Main.mouseItem.IsLegal())
+                            Main.mouseItem.stack -= 1;
+                        else
+                            Player.HeldItem.stack -= 1;
+                            Item targetItem = new Item();
+                        bool favor = Player.HeldItem.favorited;
+                        targetItem.SetDefaults(itemOnHover.type);
+                        targetItem.favorited = favor;
+                        targetItem.stack = 1;
+                        Player.QuickSpawnItemDirect(Player.GetSource_FromThis(), targetItem,1);
+                        SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with {Pitch = .2f}, Player.Center);
+                        for (int i = 0; i < 20; i++)
+                            new TurbulenceGlowOrb(Player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
+                    }
+                }
+            }
+            if (itemOnMouse.type == ItemType<PurePrismFate>())
+            {
+                //必须得是材料。必须得没有伤害，必须得不是饰品，必须得什么都不会发射，必须得没有任何Buff提供，必须得可叠加（最大叠加数小于零）
+                //必须得不能放置任何墙体
+                bool isMate = itemOnHover.material && itemOnHover.damage < 1 && !itemOnHover.accessory && itemOnHover.shoot == ProjectileID.None && itemOnHover.buffType == 0 && itemOnHover.maxStack > 1 && itemOnHover.createWall == -1;
+                bool whiteList = SmeltList.BarType.Contains(itemOnHover.type)
+                              || SmeltList.OreType.Contains(itemOnHover.type)
+                              || HJScarletList.BarsHashSet.Contains(itemOnHover.type)
+                              || HJScarletList.OresHashSet.Contains(itemOnHover.type);
+
+                bool blackList = PurePrismFate._RefusedList.Contains(itemOnHover.type)
+                               || ItemID.Sets.Torches[itemOnHover.type]
+                               || ItemID.Sets.IsFishingCrate[itemOnHover.type]
+                               || ItemID.Sets.IsFishingCrateHardmode[itemOnHover.type]
+                               || ItemID.Sets.Glowsticks[itemOnHover.type];
+
+                bool blackList2 = false;
+                if (itemOnHover.createTile != -1)
+                {
+                    int tileID = itemOnHover.createTile;
+                    blackList2 = TileID.Sets.BasicChest[tileID] || TileID.Sets.BasicDresser[tileID] || TileID.Sets.IsAContainer[tileID];
+                }
+                bool legalTarget = (isMate || whiteList) && !blackList && !blackList2;
+                if (!legalTarget)
+                    return;
+                if(!HJScarletKeybinds.GeneralActionKeybind.Current)
+                    holdingUseableTimer = 0;
+
+                if(HJScarletKeybinds.GeneralActionKeybind.Current && holdingUseableTimer < 40)
+                {
+                    holdingUseableTimer++;
+                }
+                bool passTheContorlBarrier = HJScarletKeybinds.GeneralActionKeybind.JustPressed || (holdingUseableTimer > 10 && Player.miscCounter % 10 == 0);
+                if (passTheContorlBarrier)
+                {
+                    int stack = Main.mouseItem.IsLegal() ? Main.mouseItem.stack : Player.HeldItem.stack;
+                    if (stack < 3)
+                        return;
+                    int totalStack = 0;
+                    for (int i = 1; i <= stack; i++)
+                    {
+                        if (i > 300)
+                            break;
+                        if (i % 3 == 0)
+                        {
+                            totalStack++;
+                        }
+                    }
+                    if (Main.mouseItem.IsLegal())
+
+                        Main.mouseItem.stack -= (totalStack * 3);
+                    else
+                        Player.HeldItem.stack -= (totalStack * 3);
+                        Item targetItem = new Item();
+                    bool favor = Player.HeldItem.favorited;
+                    targetItem.SetDefaults(itemOnHover.type);
+                    targetItem.favorited = favor;
+                    Player.QuickSpawnItemDirect(Player.GetSource_FromThis(), targetItem, totalStack);
+                    SoundEngine.PlaySound(HJScarletSounds.Misc_Ding, Player.Center);
+                    for (int i = 0; i < 20; i++)
+                        new TurbulenceGlowOrb(Player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
+                }
+            }
+        }
         private void PostUpdateMonkHeal()
         {
             if (monkStaffHeal && Player.statLife < (int)(Player.statLifeMax2 * 0.9f))

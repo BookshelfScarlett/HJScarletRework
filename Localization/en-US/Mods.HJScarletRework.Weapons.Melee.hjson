@@ -2,8 +2,8 @@ CandLanceThrown: {
 	DisplayName: Candlance Javelin
 	Tooltip:
 		'''
-		Ignit a Soulfire Lantern on hit.
-		The lantern delays, then falls and fires homing soulfire at multiple targets.
+		Ignit a Soulfire Lantern on hit
+		The lantern delays, then falls and fires homing soulfire at multiple targets
 		'''
 }
 
@@ -11,11 +11,11 @@ DialecticsThrown: {
 	DisplayName: Dialectics Javelin
 	Tooltip:
 		'''
-		When thrown, alternates between sine wave, square wave, bipolar square wave, and parallel wave patterns.
-		Sine wave makes javelin penetrates for 6 times, and its damage increases with each penetration.
+		When thrown, alternates between sine wave, square wave, bipolar square wave, and parallel wave patterns
+		Sine wave makes javelin penetrates for 6 times, and its damage increases with each penetration
 		Square wave makes javelin deals 3x damage, marks your target
 		Bipolar square wave makes javelin leaves multiple lingering blocks that home in on your enemy
-		Parallel wave makes javelin stabs into your target, continuously summons additional projectiles.
+		Parallel wave makes javelin stabs into your target, continuously summons additional projectiles
 		'''
 }
 
@@ -23,9 +23,9 @@ FlybackHandThrown: {
 	DisplayName: Flybackhand Javelin
 	Tooltip:
 		'''
-		Grant different buffs based on the in-game time on hit.
-		Right-click to throw a Time Crystal. After a short time, press right-click again to teleport back to the crystal's position.
-		Upon returning, increase the attack speed and restore 1/2 of the stats the player lost during this process.
+		Grant different buffs based on the in-game time on hit
+		Right-click to throw a Time Crystal. After a short time, press right-click again to teleport back to the crystal's position
+		Upon returning, increase the attack speed and restore 1/2 of the stats the player lost during this process
 		"Time will mend everything...perhaps."
 		'''
 	TimeClockOnCDText: "Time Crystal Cooldown: {0} seconds! "
@@ -33,15 +33,15 @@ FlybackHandThrown: {
 
 LightBiteThrown: {
 	DisplayName: Light Bite Javelin
-	Tooltip: Leaves behind weakly homing eclipse stars during flight.
+	Tooltip: Leaves behind weakly homing eclipse stars during flight
 }
 
 SpearofDarknessThrown: {
 	DisplayName: Spear of Darkness Javelin
 	Tooltip:
 		'''
-		Can pass through walls.
-		Returns after being thrown for a short time.
+		Can pass through walls
+		Returns after being thrown for a short time
 		'''
 }
 
@@ -58,8 +58,8 @@ WildPointerThrown: {
 	DisplayName: Wild Pointer Javelin
 	Tooltip:
 		'''
-		Has a chance to home in on all valid targets worldwide.
-		Valid targets include you and your friends.
+		Has a chance to home in on all valid targets worldwide
+		Valid targets include you and your friends
 		'''
 }
 
@@ -72,8 +72,8 @@ DeepToneThrown: {
 	DisplayName: Deep Tone Javelin
 	Tooltip:
 		'''
-		Spawns abyssal energy orbs on hit.
-		On attack, release abyssal devourer that hunts down your enemies.
+		Spawns abyssal energy orbs on hit
+		On attack, release abyssal devourer that hunts down your enemies
 		The devourer deals continuous damage On Hit, and occasionally heals you
 		'''
 }
@@ -82,9 +82,9 @@ EvolutionThrown: {
 	DisplayName: Evolution Javelin
 	Tooltip:
 		'''
-		Leaves portals during flight and marks the first enemy hit.
-		Portals seek the nearest enemy, fire homing energy bolts, then vanish.
-		If a marked enemy exists, all portals target it.
+		Leaves portals during flight and marks the first enemy hit
+		Portals seek the nearest enemy, fire homing energy bolts, then vanish
+		If a marked enemy exists, all portals target it
 		"They are growing."
 		'''
 }
@@ -93,8 +93,8 @@ SpearofEscapeThrown: {
 	DisplayName: Spear of Escape Javelin
 	Tooltip:
 		'''
-		Ignites the rocket, which explodes in mid-air and splits into multiple homing rockets.
-		The homing rockets fall downward and prioritize enemies nearest to the cursor.
+		Ignites the rocket, which explodes in mid-air and splits into multiple homing rockets
+		The homing rockets fall downward and prioritize enemies nearest to the cursor
 		"We will not stay in our dangerous cradle forever!"
 		'''
 }
@@ -114,8 +114,8 @@ SodomsDisaster: {
 	Tooltip:
 		'''
 		Increases melee critical damage by 30% while being held
-		Penetrates multiple enemies and explodes on all hit targets.
-		Calls down celestial fireballs from above to strike all hit enemies.
+		Penetrates multiple enemies and explodes on all hit targets
+		Calls down celestial fireballs from above to strike all hit enemies
 		'''
 	FlavorTooltips: -Umbral beast, devour the sun. Fire and curse, second sign of doom-
 }
@@ -124,8 +124,8 @@ Bamboomerang: {
 	DisplayName: Bamboomerang
 	Tooltip:
 		'''
-		Attempts to attack the next enemy on hit.
-		Up to 3 Boomerang can exist at once.
+		Attempts to attack the next enemy on hit
+		Up to 3 Boomerang can exist at once
 		"Who came up with the idea of making a boomerang out of bamboo?"
 		'''
 }
@@ -134,8 +134,8 @@ FierySpear: {
 	DisplayName: Fiery Spear
 	Tooltip:
 		'''
-		Spawns two fireballs home in on your target on hit.
-		Fireballs seek nearby enemies if directly hit the walls. 
+		Spawns two fireballs home in on your target on hit
+		Fireballs seek nearby enemies if directly hit the walls.
 		'''
 }
 
@@ -148,8 +148,8 @@ TheMars: {
 	DisplayName: The Mars
 	Tooltip:
 		'''
-		Marks up to 3 nearby hostile units along its path.
-		Upon vanishing, launches Tidal Spears at all marked targets.
+		Marks up to 3 nearby hostile units along its path
+		Upon vanishing, launches Tidal Spears at all marked targets
 		"The Creation of Alien"
 		'''
 }
@@ -158,11 +158,11 @@ GalvanizedHandThrown: {
 	DisplayName: Galvanized Hand Javelin
 	Tooltip:
 		'''
-		Summon high-speed Galvanized Hand from above.
-		The main speaar impales the enemy, dealing continuous damage.
-		After the main spear hits, all follow-up attacks become precise spears that aim directly at the locked target without homing.
-		Press Right Click to dash toward the enemy locked by the main needle, dealing high damage and granting invincibility frames.
-		On successful impact, release multiple Meter Needles to chase foes.
+		Summon high-speed Galvanized Hand from above
+		The main speaar impales the enemy, dealing continuous damage
+		After the main spear hits, all follow-up attacks become precise spears that aim directly at the locked target without homing
+		Press Right Click to dash toward the enemy locked by the main needle, dealing high damage and granting invincibility frames
+		On successful impact, release multiple Meter Needles to chase foes
 		'''
 	TileTextvalue: ""
 }
@@ -176,10 +176,10 @@ CryoblazeHymn: {
 	DisplayName: Cryoblaze Hymn
 	Tooltip:
 		'''
-		Vanishes after a short time once thrown or hitting an enemy.
-		Upon vanishing, creates alternating Frost and Fire Portals that fire Frost Bolts and Fire Bolts.
-		Frost Bolts are slower and target two separate enemies.
-		Fire Bolts are faster and deal more damage, prioritizing enemies directly hit by the spear.
+		Vanishes after a short time once thrown or hitting an enemy
+		Upon vanishing, creates alternating Frost and Fire Portals that fire Frost Bolts and Fire Bolts
+		Frost Bolts are slower and target two separate enemies
+		Fire Bolts are faster and deal more damage, prioritizing enemies directly hit by the spear
 		"Though vastly different, they sing aloud in the same melody."
 		'''
 }
@@ -189,8 +189,8 @@ EclipseWraith: {
 	Tooltip:
 		'''
 		Increases melee critical damage by 30% while being held
-		Penetrates multiple enemies and explodes on all hit targets.
-		Calls down celestial fireballs from above to strike all hit enemies.
+		Penetrates multiple enemies and explodes on all hit targets
+		Calls down celestial fireballs from above to strike all hit enemies
 		'''
 	FlavorTooltips: -Umbral beast, devour the sun. Fire and curse, second sign of doom-
 }
@@ -208,8 +208,8 @@ ColdSakura: {
 	DisplayName: Cold Sakura
 	Tooltip:
 		'''
-		Quickly throw a sharp, high-speed sakura lance.
-		On Hit, a sakura arrow gives chase.
+		Quickly throw a sharp, high-speed sakura lance
+		On Hit, a sakura arrow gives chase
 		'''
 }
 
@@ -219,7 +219,7 @@ TerraSpear: {
 		'''
 		Leave multiple Terra Portals along the path, which release seeking Terra Arrows after a certain time
 		On a direct hit with the throw, call in a large number of Terra Lances from off-field for support.
-		"It's not called 'Terra Lance' �� don't go messing that up, yeah?"
+		"It's not called 'Terra Lance', don't go messing that up, yeah?"
 		'''
 }
 

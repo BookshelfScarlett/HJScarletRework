@@ -35,9 +35,7 @@ namespace HJScarletRework.Items.Armor
             Item.defense = 10;
             Item.SetUpRarityPrice(ItemRarityID.Purple);
         }
-        public override bool IsArmorSet(Item head, Item body, Item legs)
-        {
-            List<int> robes =
+        private List<int> Robes = 
             [
                 ItemID.AmethystRobe,
                 ItemID.TopazRobe,
@@ -48,7 +46,9 @@ namespace HJScarletRework.Items.Armor
                 ItemID.DiamondRobe,
                 ItemType<OnyxRobe>()
             ];
-            return robes.Contains(body.type);
+        public override bool IsArmorSet(Item head, Item body, Item legs)
+        {
+            return Robes.Contains(body.type);
         }
         public override void UpdateArmorSet(Player player)
         {
@@ -61,6 +61,23 @@ namespace HJScarletRework.Items.Armor
             player.manaCost -= ManaCost;
             player.HJScarlet().CreationHatSet = true;
 
+        }
+        public override void HoldItem(Player player)
+        {
+
+            player.HJScarlet().drawUseableItemIcon = Type;
+            for (int i = 0; i < player.inventory.Length; i++)
+            {
+                Item item = player.inventory[i];
+                if (item.IsAir || item is null)
+                    continue;
+                if (Robes.Contains(item.type))
+                {
+                    item.HJScarlet().purePrismLegalTarget = true;
+                }
+            }
+
+            
         }
         public override void AddRecipes()
         {

@@ -5,9 +5,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players.VanitySets;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityParticles;
-using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -15,40 +13,6 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Vanity
 {
-    public class TairitsuItem : AccVanityItem
-    {
-        public override VanityData VanityData => new VanityData(Color.RoyalBlue, Color.Lerp(Color.White, Color.DeepSkyBlue, 0.65f), Color.Black);
-        public override Color ParticleColor1 => Color.DeepSkyBlue;
-        public override Color ParticleColor2 => Color.Black;
-        public override string VanityName => "Tairitsu";
-        public override void ExLoad()
-        {
-            EquipLoader.AddEquipTexture(Mod, $"{VanityPrefix}Hair", EquipType.Back, this);
-        }
-        public override bool ExDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            if(line.Mod == "Terraria")
-            {
-                if(line.Name == "Tooltip0" || line.Name == "Tooltip1" || line.Name == "Tooltip2" || line.Name=="Tooltip3" || line.Name == "Tooltip4" || line.Name == "Tooltip5")
-                {
-                    VanityEffectClass.DrawMisc(line, VanityData, ParticleColor1, ParticleColor2);
-                    return true;
-                }
-            }
-            return false;
-
-        }
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddIngredient(ItemID.Umbrella).
-                AddIngredient(ItemID.UlyssesButterfly).
-                DisableDecraft().
-                AddTile(TileID.Loom).
-                Register();
-        }
-    }
-
     public struct VanityData(Color glowColor, Color edgeColor, Color mainColor, float glowMult = 1)
     {
         public Color GlowColor = glowColor;
@@ -60,7 +24,7 @@ namespace HJScarletRework.Items.Vanity
     {
         public override Color RarityColor => Color.Red;
         public static List<RaritySparkle> RaritySparkles = [];
-        public static List<RaritySparkle> FlavorSparkles= [];
+        public static List<RaritySparkle> FlavorSparkles = [];
         public static void DrawItemName(DrawableTooltipLine line, VanityData data, Color particleColor1, Color particleColor2)
         {
             PostDrawRarity(ref RaritySparkles, line, particleColor1, particleColor2);
@@ -68,13 +32,13 @@ namespace HJScarletRework.Items.Vanity
         }
         public static void DrawFlavorTooltipName(DrawableTooltipLine line, VanityData data, Color particleColor1, Color particleColor2)
         {
-            PostDrawRarity(ref FlavorSparkles, line, particleColor1, particleColor2,true);
+            PostDrawRarity(ref FlavorSparkles, line, particleColor1, particleColor2, true);
             RarityDrawHelper.DrawCustomTooltipLine(line, data.GlowColor, data.EdgeColor, data.MainColor, data.GlowMult);
 
         }
         public static void DrawMisc(DrawableTooltipLine line, VanityData data, Color particleColor1, Color particleColor2)
         {
-            RarityDrawHelper.DrawCustomTooltipLine(line, data.GlowColor, data.EdgeColor, data.MainColor,0f);
+            RarityDrawHelper.DrawCustomTooltipLine(line, data.GlowColor, data.EdgeColor, data.MainColor, 0f);
         }
 
         public static void PostDrawRarity(ref List<RaritySparkle> particleList, DrawableTooltipLine tooltipLine, Color c, Color c2, bool slowdown = false)

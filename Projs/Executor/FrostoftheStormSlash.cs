@@ -4,7 +4,6 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
@@ -45,7 +44,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 30;
+            Projectile.localNPCHitCooldown = 5;
             Projectile.timeLeft = 120;
             Projectile.noEnchantmentVisuals = true;
             Projectile.extraUpdates = 1;
@@ -99,29 +98,22 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            int dustCount = 16;
             Projectile.AddExecutionTimeImmediate(ItemType<FrostoftheStorm>());
-            for (int i = 0; i < dustCount; ++i)
-            {
-                Vector2 dir = Projectile.SafeDirByRot();
-                Vector2 pos = target.Center.ToRandCirclePos(10f)+ dir * Main.rand.NextFloat(10f);
-                    ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(2f,9f), RandLerpColor(Color.RoyalBlue, Color.LightSkyBlue), 40, RandZeroToOne, Projectile.scale, 0.2f);
-            }
+            if (!target.CanBeChasedBy() || HJScarletMethods.OutOffScreen(target.Center))
+                return;
             for (int i = 0; i < 30; i++)
             {
                 Vector2 pos = target.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
                 Vector2 vel = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(0.2f, 17.4f);
                 float scale = Main.rand.NextFloat(0.4f, 0.9f) * .2f;
                 ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 45, 1, scale, glowMult: .75f);
-                Dust d = Dust.NewDustPerfect(pos, DustID.WhiteTorch, RandVelTwoPi(0.2f, 3.1f));
-                d.scale *= 1.3f;
             }
 
             for (int i = 0; i < 20; i++)
             {
                 Color Firecolor = RandLerpColor(Color.White, Color.RoyalBlue);
                 Vector2 spawnPos = target.Center + RandVelTwoPi(10f, 30f);
-                Vector2 vel = (target.Center - spawnPos).ToSafeNormalize()*Main.rand.NextFloat(1f, 20f);
+                Vector2 vel = (target.Center - spawnPos).ToSafeNormalize() * Main.rand.NextFloat(1f, 20f);
                 ECSParticle.SnowCloud(spawnPos, vel, Firecolor, 40, RandRotTwoPi, 0.25f, .28f);
             }
         }

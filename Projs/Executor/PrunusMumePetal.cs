@@ -211,7 +211,7 @@ namespace HJScarletRework.Projs.Executor
             }
             SB.EnterShaderArea();
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DarkRed, 1f);
-            DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.Red, .95f, 1f);
+            //DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.Red, .95f, 1f);
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.White, 0.85f, offsetHeight: 0f);
             SB.EndShaderArea();
             SB.Draw(tex, drawPos, null, Color.White, rot, ori, Projectile.scale, 0, 0);

@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -79,7 +80,8 @@ namespace HJScarletRework.Projs.Melee
             {
                 Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(4f);
                 Vector2 vel = -Projectile.velocity.ToRandVelocity(ToRadians(5f), 1.0f, 16.4f);
-                new StarShape(spawnPos, vel, RandLerpColor(Color.Lime, Color.Green), 0.75f, 80).Spawn();
+                ECSParticle.StarShape(spawnPos, vel, RandLerpColor(Color.Lime, Color.Green), 80, 1f, .70f);
+                //new StarShape(spawnPos, vel, RandLerpColor(Color.Lime, Color.Green), 0.75f, 80).Spawn();
             }
         }
         public void InitPosList()
@@ -147,12 +149,8 @@ namespace HJScarletRework.Projs.Melee
 
             if (Main.rand.NextBool())
             {
-                Vector2 spawnPos = Projectile.Center.ToRandCirclePos(10f) - Projectile.SafeDir() * 20f;
-                new ShinyOrbParticle(spawnPos, Projectile.velocity / 4f, RandLerpColor(Color.Lime, Color.LightGreen), 130, 0.846f).Spawn();
-            }
-            if (Main.rand.NextBool())
-            {
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(5f) - Projectile.SafeDir() * 20f, Projectile.velocity / 4f, RandLerpColor(Color.Green, Color.Lime), 60, Projectile.rotation, 1f, 0.54f, 0.2f).Spawn();
+                Vector2 spawnPos = Projectile.Center.ToRandCirclePos(60f) - Projectile.SafeDir() * 20f;
+                ECSParticle.HRShinyOrb(spawnPos, Projectile.velocity / 3f, RandLerpColor(Color.Lime, Color.LightGreen), 50, 1f, .846f * .12f,0.5f);
             }
 
         }
@@ -188,7 +186,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     Vector2 vel = -Projectile.velocity.ToSafeNormalize().RotatedBy(ToRadians(10 * i)) * 15f;
                     Vector2 pos = Projectile.Center - Projectile.SafeDir() * 40f;
-                    new StarShape(pos + vel.ToSafeNormalize() * j * 6f, vel, RandLerpColor(Color.Green, Color.LimeGreen), 1 * Projectile.Opacity, 30).Spawn();
+                    ECSParticle.StarShape(pos + vel.ToSafeNormalize() * j * 6f, vel, RandLerpColor(Color.Green, Color.LimeGreen), 30, 1f, 1 * Projectile.Opacity,glowMult:.5f);
                 }
             }
         }
@@ -251,7 +249,7 @@ namespace HJScarletRework.Projs.Melee
             float numberOfDusts = 36f;
             for (int i = 0; i < numberOfDusts; i++)
             {
-                new ShinyOrbParticle(spawnPos.ToRandCirclePos(16f), RandVelTwoPi(6f), RandLerpColor(Color.DarkGreen, Color.LimeGreen), 40, 0.8f).Spawn();
+                ECSParticle.HRShinyOrb(spawnPos.ToRandCirclePos(16f), RandVelTwoPi(6f), RandLerpColor(Color.DarkGreen, Color.LimeGreen), 40, 1f, .8f * .105f,.5f);
             }
             for (int i = 0; i < 30; i++)
             {
@@ -297,17 +295,27 @@ namespace HJScarletRework.Projs.Melee
             //做掉可能存在的零向量
             Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> validRot, Projectile.oldPos, Projectile.oldRot);
             DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
-            Vector2 drawOffset = Projectile.SafeDirByRot() * 50f;
+            Vector2 drawOffset = Projectile.SafeDirByRot() * 30f;
             List<TrailDrawDate> trailDrawDates = [];
             int posCount = validPosition.Count;
             for (int j = 0; j < posCount - 1; j++)
             {
-                float rot = (validPosition[j + 1] - validPosition[j]).ToRotation();
-                float ratio = j / (posCount - 1);
-                Vector2 posOffset = rot.ToRotationVector2().RotatedBy(PiOver2) * offsetHeight;
-                trailDrawDates.Add(new(validPosition[j] + Projectile.Size / 2 + posOffset - drawOffset, drawColor, new Vector2(0, 20 * multipleSize * Projectile.scale), rot));
+                if (Projectile.oldPos[j] != Vector2.Zero)
+                {
+                    Vector2 drawPos = Projectile.oldPos[j] + new Vector2(Projectile.width / 2, Projectile.height / 2);
+                Vector2 posOffset = Projectile.oldRot[j].ToRotationVector2().RotatedBy(PiOver2) * offsetHeight;
+                    trailDrawDates.Add(new(drawPos + posOffset - drawOffset, drawColor, new Vector2(0, 20 * multipleSize * Projectile.scale), Projectile.oldRot[j]));
+                }
             }
-            TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
+            TrailRender.RenderTrail([.. trailDrawDates], drawSetting);
+            //for (int j = 0; j < posCount - 1; j++)
+            //{
+            //    float rot = (validPosition[j + 1] - validPosition[j]).ToRotation();
+            //    float ratio = j / (posCount - 1);
+            //    Vector2 posOffset = rot.ToRotationVector2().RotatedBy(PiOver2) * offsetHeight;
+            //    trailDrawDates.Add(new(validPosition[j] + Projectile.Size / 2 + posOffset - drawOffset, drawColor, new Vector2(0, 20 * multipleSize * Projectile.scale), rot));
+            //}
+            //TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
         }
         public void DrawStarShapeTrail()
         {

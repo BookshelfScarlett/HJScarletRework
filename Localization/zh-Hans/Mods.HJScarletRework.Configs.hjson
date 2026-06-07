@@ -57,4 +57,14 @@ HJScarletConfigClient: {
 			默认为1倍
 			'''
 	}
+
+	SimpleImmersiveInventory: {
+		Label: 简易沉浸背包效果
+		Tooltip:
+			'''
+			本模组添加了一个类似于Minecraft模组“沉浸背包“的效果的简化版本
+			适用于所有物品，当你开启模组“Immersive Inventory“时会自动禁用本模组的沉浸背包效果，无视这条设置
+			默认开启
+			'''
+	}
 }

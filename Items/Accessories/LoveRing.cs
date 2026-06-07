@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Accessories
         public override void ExSD()
         {
             Item.accessory = true;
-            Item.defense = 5;
+            Item.defense = 4;
             Item.SetUpRarityPrice(ItemRarityID.Cyan);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)

@@ -27,13 +27,7 @@ namespace HJScarletRework.Items
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            //foreach (var keys in HJScarletList.ExecutorWeaponDictionary.Keys)
-            //{
-            //    player.QuickSpawnItem(source, keys);
-            //    Main.NewText(HJScarletList.ExecutorWeaponDictionary[keys]);
-            //}
-            //Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, ProjectileType<MoltenDaggerMark>(), 0, knockback, player.whoAmI);
-            //Projectile proj = Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.UnitY * -10f, ProjectileType<PrunusMumeFlower>(), 0, knockback, player.whoAmI);
+            //Projectile.NewProjectileDirect(source, Main.MouseWorld, -Vector2.UnitY, ProjectileType<SlimeGodShieldSunProj>(), 0, knockback, player.whoAmI);
             //proj.rotation = RandRotTwoPi;
             //proj.HJScarlet().ExecutionStrike = true;
             Stopwatch.StartNew();

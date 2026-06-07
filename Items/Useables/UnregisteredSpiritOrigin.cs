@@ -1,11 +1,8 @@
 ﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.List;
-using Microsoft.Xna.Framework;
+using HJScarletRework.Globals.Methods;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Useables
@@ -25,29 +22,19 @@ namespace HJScarletRework.Items.Useables
         }
         public override void HoldItem(Player player)
         {
-            if (player.HeldItem.type == Type && Main.playerInventory)
+            player.HJScarlet().drawUseableItemIcon = Type;
+            for (int i = 0; i < player.inventory.Length; i++)
             {
-                Item item = Main.HoverItem;
-                //必须得有伤害，必须得是武器
-                bool isWeapon = item.damage > 0 && item.pick == 0 && item.axe == 0 && item.hammer == 0;
-                //必须得有宝藏袋一名
+                Item item = player.inventory[i];
+                if (item.IsAir || item is null)
+                    continue;
+                bool isWeapon = item.damage > 0 && item.pick == 0 && item.axe == 0 && item.hammer == 0 && !item.IsACoin && item.ammo == AmmoID.None;
+                bool isAccessory = (item.accessory || item.defense > 0) && item.pick == 0 && item.axe == 0 && item.hammer == 0 && !item.IsACoin && item.ammo == AmmoID.None && !item.vanity;
                 bool isTreasureBag = ItemID.Sets.BossBag[item.type];
-                if (isWeapon || isTreasureBag)
+                if (isWeapon || isAccessory || isTreasureBag)
                 {
-                    if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
-                    {
-                        Item targetItem = new Item();
-                        bool favor = player.HeldItem.favorited;
-                        targetItem.SetDefaults(item.type);
-                        targetItem.favorited = favor;
-                        targetItem.stack = 1;
-                        player.inventory[player.selectedItem] = targetItem;
-                        SoundEngine.PlaySound(SoundID.ResearchComplete, player.Center);
-                        for (int i = 0; i < 20; i++)
-                            new TurbulenceGlowOrb(player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
-                    }
+                    item.HJScarlet().purePrismLegalTarget = true;
                 }
-
             }
         }
     }

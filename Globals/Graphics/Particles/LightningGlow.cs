@@ -35,13 +35,7 @@ namespace HJScarletRework.Globals.Graphics.Particles
         {
             Vector2 drawPos = Position - Main.screenPosition;
             Texture2D tex = HJScarletTexture.Particle_SharpTear;
-            //Vector2 drawScale = new Vector2(1.0f, 1.8f);
             Vector2 drawScale = new Vector2(0.5f, 3.5f);
-            //for (int i = 0; i < 6; i++)
-            //{
-            //    Vector2 offsetVec = Velocity.ToSafeNormalize() * i * 1.4f + Velocity.ToSafeNormalize().RotatedBy(PiOver2) * Offset;
-            //    spriteBatch.Draw(tex, drawPos + offsetVec, null, DrawColor, Velocity.ToRotation() + PiOver2, tex.ToOrigin(), Scale * drawScale, 0, 0);
-            //}
             for (int i = 0; i < 6; i++)
             {
                 Vector2 offsetVec = Velocity.ToSafeNormalize() * i * 1.4f;

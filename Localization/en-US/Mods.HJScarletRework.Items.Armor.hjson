@@ -241,3 +241,19 @@ DiverLegs: {
 		Enemies are more likely to target you
 		'''
 }
+
+ReaperBody: {
+	DisplayName: Reaper Body
+	Tooltip: ""
+}
+
+ReaperHead: {
+	DisplayName: Reaper Head
+	Tooltip: ""
+	SetBouns: ""
+}
+
+ReaperLegs: {
+	DisplayName: Reaper Legs
+	Tooltip: ""
+}

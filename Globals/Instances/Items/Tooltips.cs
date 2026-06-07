@@ -125,8 +125,11 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 HJScarletList.ScarletRarityHashSet,
                 DisasterRarity.DrawRarity2
+            },
+            {
+                HJScarletList.SunlightRarityHashSet, 
+                SunlightRarity.DrawItemName
             }
-
         };
 
     }

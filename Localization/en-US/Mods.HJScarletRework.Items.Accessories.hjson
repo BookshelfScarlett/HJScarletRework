@@ -291,3 +291,21 @@ PinballPurgatory: {
 	DisplayName: Pinball Purgatory
 	Tooltip: ""
 }
+
+SlimeGodShield: {
+	DisplayName: Slime God Shield
+	Tooltip: ""
+}
+
+CrimsonCharm: {
+	DisplayName: Greedy Mask
+	Tooltip:
+		'''
+		Grants immunity to Potion Sickness
+		{3} increased the power of healing potion
+		Everytime use a healing potion, you gain Over Saturation for {1} seconds
+		Using a healing potion again while under Over Saturation redues the healing amonut by {0}, down to a minimum of {2}
+		Greatly increases health regen speed
+		"Unimagined madness just to stay alive"
+		'''
+}

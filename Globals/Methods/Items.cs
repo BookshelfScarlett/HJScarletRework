@@ -29,6 +29,10 @@ namespace HJScarletRework.Globals.Methods
             item.shootSpeed = itemShootSpeed;
             item.knockBack = knocback;
         }
+        public static bool IsLegal(this Item item)
+        {
+            return !item.IsAir && item is not null;
+        }
 
     }
 }

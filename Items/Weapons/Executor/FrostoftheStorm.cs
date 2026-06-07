@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override void ExSD()
         {
-            Item.damage = 800;
+            Item.damage = 1600;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true, true);
             Item.useTime = Item.useAnimation = 35;
@@ -47,7 +47,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         {
             CreateRecipe().
                 AddIngredient(ItemID.Frostbrand).
-                AddIngredient<Frostgrief>(5).
+                AddIngredient<Frostgrief>().
                 AddIngredient<FinalBar>(5).
                 AddTile(FinalAnvilTile).
                 Register();

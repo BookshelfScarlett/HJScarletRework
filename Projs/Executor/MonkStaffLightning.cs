@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -59,7 +60,7 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.numUpdates % 3 == 0)
             {
                 new LightningParticle(Projectile.Center.ToRandCirclePos(3f), Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.DodgerBlue), Main.rand.Next(25, 45), Projectile.rotation + PiOver2, Main.rand.NextFloat(0.3f, 0.44f) * 1.7f, 0).Spawn();
-                new LightningGlow(Projectile.Center, Projectile.SafeDir(), Color.RoyalBlue, 30, 0.95f).Spawn();
+                ECSParticle.LightntingGlow(Projectile.Center, Projectile.SafeDir(), Color.RoyalBlue, 30, 1f, 1.35f);
             }
             if (Main.rand.NextBool(20))
             {
@@ -92,7 +93,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 Vector2 vel2 = (Projectile.velocity).ToRandVelocity(ToRadians(30f), 1.2f, 9.8f);
                 Vector2 pos2 = pos.ToRandCirclePos(12f) + vel2 * 0.32f;
-                new StarShape(pos2, vel2, RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 0.8f, 40).Spawn();
+                ECSParticle.StarShape(pos2, vel2, RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 40, 1, .8f);
             }
             for (int j = 0; j < 6; j++)
             {
@@ -109,11 +110,6 @@ namespace HJScarletRework.Projs.Executor
             new ShinySquareSplit(pos, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.SkyBlue, 15, 0.4f, Projectile.velocity.ToRotation() + PiOver2 + Pi, opacity: 0.8f, fadeIn: true).Spawn();
             new ShinySquareSplit(pos, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.SkyBlue, 15, 0.4f, Projectile.velocity.ToRotation() + PiOver4 + Pi, opacity: 0.8f, fadeIn: true).Spawn();
             new ShinySquareSplit(pos, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.SkyBlue, 15, 0.4f, Projectile.velocity.ToRotation() + PiOver4 + PiOver2, opacity: 0.8f, fadeIn: true).Spawn();
-            //new ShinySquareSplit(pos, Projectile.velocity.ToSafeNormalize() * 0.1f, Color.SkyBlue, 15, 0.4f, Projectile.velocity.ToRotation() + PiOver4 + TwoPi,fadeIn:true).Spawn();
-            //for (int i = 0; i < 12; i++)
-            //{
-            //    new SmokeParticle(spawnPos.ToRandCirclePos(6f), RandVelTwoPi(1.2f, 8.4f), RandLerpColor(Color.SkyBlue, Color.CadetBlue), 40, RandRotTwoPi, 1f, 0.43f).SpawnToPriorityNonPreMult();
-            //}
         }
         public override bool PreDraw(ref Color lightColor)
         {

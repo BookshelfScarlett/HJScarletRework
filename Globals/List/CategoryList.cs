@@ -15,6 +15,10 @@ namespace HJScarletRework.Globals.List
         public static List<int> MaleNPC = [];
         public static List<int> FemaleNPC = [];
         public static List<int> LegalFoodList = [];
+
+        public static HashSet<int> OresHashSet = [];
+        public static HashSet<int> BarsHashSet = [];
+
         /// <summary>
         /// 主要用于Boss方面
         /// </summary>
@@ -162,7 +166,7 @@ namespace HJScarletRework.Globals.List
             {
                 { NPCID.EaterofWorldsHead, "DownedEvilBoss" },
                 { NPCID.Golem, "DownedGolem" },
-                {NPCID.Plantera,"DownedPlantera" },
+                { NPCID.Plantera,"DownedPlantera" },
                 { NPCType<TheLifebringerHead>(),"DownedLifeGods"},
             };
         }
@@ -174,6 +178,13 @@ namespace HJScarletRework.Globals.List
                 bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
                 if (isFood && !LegalFoodList.Contains(item.type))
                     LegalFoodList.Add(item.type);
+                string name = item.GetType().Name.ToLower();
+                bool isOre = name.Contains("ore") && item.createTile != -1;
+                bool isBar = name.Contains("bar") && item.createTile != -1;
+                if(isOre && !OresHashSet.Contains(item.type))
+                    OresHashSet.Add(item.type);
+                if (isBar && !BarsHashSet.Contains(item.type))
+                    BarsHashSet.Add(item.type);
             }
         }
         public override void Unload()
@@ -183,6 +194,11 @@ namespace HJScarletRework.Globals.List
             HJSpearList = null;
             LegalFoodList = null;
             DownedBossConditionList = null;
+
+            OresHashSet.Clear();
+            BarsHashSet.Clear();
+            OresHashSet = null;
+            BarsHashSet = null;
         }
     }
 }

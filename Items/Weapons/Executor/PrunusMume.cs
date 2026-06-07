@@ -12,7 +12,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override int ExecutionProgress => 32;
         public override void ExSD()
         {
-            Item.damage = 210;
+            Item.damage = 275;
             Item.knockBack = 1.5f;
             Item.noUseGraphic = true;
             Item.noMelee = true;

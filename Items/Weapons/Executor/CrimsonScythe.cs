@@ -15,7 +15,11 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class CrimsonScythe : ExecutorWeaponClass
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         public override int ExecutionProgress => 30;
         public int CurSwingTime = 0;
         public override void ExSD()
@@ -28,6 +32,8 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.channel = true;
+            Item.HJScarlet().CanDrawIcon = false;
+            Item.HJScarlet().CanDrawGhost = true;
             Item.rare = RarityType<DisasterRarity>();
             Item.shoot = ProjectileType<CrimsonScytheProj>();
             Item.shootSpeed = 10;

@@ -8,13 +8,8 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent.Biomes.CaveHouse;
-using Terraria.ID;
-using Terraria.ModLoader.UI.ModBrowser;
 
 namespace HJScarletRework.Projs.Executor
 {

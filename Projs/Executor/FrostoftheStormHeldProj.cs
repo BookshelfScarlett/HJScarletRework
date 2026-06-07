@@ -47,6 +47,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.extraUpdates = 10;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.SetupImmnuity(-1);
+            Projectile.penetrate = -1;
             Projectile.timeLeft = GetSeconds(5);
         }
         public override void OnFirstFrame()
@@ -87,29 +88,25 @@ namespace HJScarletRework.Projs.Executor
             Projectile.AddExecutionTimeImmediate(ItemType<FrostoftheStorm>());
             if (Projectile.numHits < 1)
             {
+
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, -5 * -Owner.direction, 20, TwoPi, 0.5f, true, 1000);
+                SoundEngine.PlaySound(HJScarletSounds.Frostwave_Boom with { MaxInstances = 1, Volume = 0.6f, Pitch = 0.5f });
+            }
+            if (!target.CanBeChasedBy() || HJScarletMethods.OutOffScreen(target.Center))
+                return;
+
                 Vector2 safeDir = Projectile.rotation.ToRotationVector2();
                 for (int i = 0; i < 16; i++)
                 {
                     for (int j = 0; j < 4; j++)
                     {
-                            ECSParticle.SnowCloud(target.Center.ToRandCirclePos(5f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 16f), RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, .5f), Color.RoyalBlue), 40, 0, .35f, .62f * .21f);
-                        new StarShape(target.Center.ToRandCirclePos(3f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(0.1f, 10f), RandLerpColor(Color.SkyBlue, Color.WhiteSmoke), 1.1f, 20).Spawn();
+                        ECSParticle.SnowCloud(target.Center.ToRandCirclePos(5f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 16f), RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, .5f), Color.RoyalBlue), 40, 0, .35f, .62f * .21f);
+                        ECSParticle.StarShape(target.Center.ToRandCirclePos(3f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 10f), RandLerpColor(Color.SkyBlue, Color.WhiteSmoke), 20, 1f, 1.1f);
                     }
                 }
-
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, -5 * -Owner.direction, 20, TwoPi, 0.5f, true, 1000);
                 float starScale = .60f;
                 new KiraStar(target.Center, Vector2.Zero, RandLerpColor(Color.Blue, Color.RoyalBlue), 20, safeDir.ToRotation(), 0.58f, starScale, 0, true, useAlt: true).Spawn();
                 new KiraStar(target.Center, Vector2.Zero, Color.White, 20, safeDir.ToRotation(), 0.58f, starScale * 0.80f, 0, true, useAlt: true).Spawn();
-                SoundEngine.PlaySound(HJScarletSounds.Frostwave_Boom with { MaxInstances = 1, Volume = 0.6f, Pitch = 0.5f });
-            }
-            int dustCount = 36;
-            for (int i = 0; i < dustCount; ++i)
-            {
-                Vector2 dir = Projectile.SafeDirByRot();
-                Vector2 pos = target.Center.ToRandCirclePos(10f) + dir * Main.rand.NextFloat(10f);
-                ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(2f, 9f), RandLerpColor(Color.LightSkyBlue, Color.RoyalBlue), 45, RandZeroToOne, Projectile.scale, 0.2f);
-            }
 
         }
         public override void OnKill(int timeLeft)
@@ -195,7 +192,6 @@ namespace HJScarletRework.Projs.Executor
                 TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .5f);
             else
             {
-
                 //下面基本上是粒子生成了。
                 float slashTrailRotation = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
                 Matrix tFormSlash = Matrix.CreateRotationZ(slashTrailRotation) * Matrix.CreateScale(1.2f, Height, 1f);
@@ -275,6 +271,10 @@ namespace HJScarletRework.Projs.Executor
             DrawSword();
             return false;
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.SourceDamage *= 1.2f;
+        }
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
@@ -328,9 +328,9 @@ namespace HJScarletRework.Projs.Executor
                 _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor * SlashOpacity, new Vector3(progress, 0, 0)));
                 _vertexCache.Add(new ScarletVertex(DrawPos_Source, drawcolor * SlashOpacity, new Vector3(progress, 1, 0)));
             }
-            Main.graphics.GraphicsDevice.Textures[0] = texture;
-            Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
-            Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, _vertexCache.ToArray(), 0, _vertexCache.Count - 2);
+            GD.Textures[0] = texture;
+            GD.SamplerStates[0] = SamplerState.PointWrap;
+            GD.DrawUserPrimitives(PrimitiveType.TriangleStrip, _vertexCache.ToArray(), 0, _vertexCache.Count - 2);
         }
         public void DrawSword()
         {

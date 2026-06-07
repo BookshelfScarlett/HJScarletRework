@@ -258,16 +258,16 @@ DualWraithStaff: {
 	DisplayName: Dual-Wraith Staff
 	Tooltip:
 		'''
-		Fires seeking wraith that cannot penetrate walls.
-		Execution Strike must be manually triggered with the Interact key.
+		Fires seeking wraith that cannot penetrate walls
+		Execution Strike must be manually triggered with the Interact key
 		"One staff, two forms of the lingering curse."
 		'''
 	ExecutionStrike:
 		'''
-		The staff unfolds its blade and switches to javelin mode.
-		In javelin mode, it can penetrate walls and pierce up to 3 enemies.
-		Seeking wraith is generated only on the first hit.
-		When Execution Strike available again, press the Interact key to switch back to the first form.
+		The staff unfolds its blade and switches to javelin mode
+		In javelin mode, it can penetrate walls and pierce up to 3 enemies
+		Seeking wraith is generated only on the first hit
+		When Execution Strike available again, press the Interact key to switch back to the first form
 		'''
 }
 

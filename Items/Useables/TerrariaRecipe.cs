@@ -107,6 +107,7 @@ namespace HJScarletRework.Items.Useables
         {
             //与沉浸背包的使用存在bug，在启用沉浸背包时不要给这个贴图转向
             bool hasImmersiveInventory = ModLoader.HasMod("ImmersiveInventory");
+            
             if (Main.LocalPlayer.HJScarlet().terraRecipe && !hasImmersiveInventory)
             {
                 spriteBatch.Draw(TextureAssets.Item[Type].Value, position, frame, drawColor, PiOver2, origin, scale, 0, 0);

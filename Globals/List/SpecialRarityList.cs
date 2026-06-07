@@ -13,6 +13,7 @@ namespace HJScarletRework.Globals.List
         public static HashSet<int> NightRarityHashSet = new HashSet<int>();
         public static HashSet<int> HallowedRarityHashSet = new HashSet<int>();
         public static HashSet<int> ScarletRarityHashSet= new HashSet<int>();
+        public static HashSet<int> SunlightRarityHashSet = new HashSet<int>();
         public static Dictionary<int, Action<DrawableTooltipLine>> MiscRarityDrawDictionary = new();
         public static Dictionary<int, Action<DrawableTooltipLine>> ConvertedItemRarityDrawDictionary = new();
         public static Dictionary<int, RareItemRarity.RareType> RareItemRarityDrawDictionary= [];
@@ -27,12 +28,14 @@ namespace HJScarletRework.Globals.List
             NightRarityHashSet.Clear();
             HallowedRarityHashSet.Clear();
             ScarletRarityHashSet.Clear();
+            SunlightRarityHashSet.Clear();
             FrostRarityHashSet = null;
             DisasterRarityHashSet = null;
             NebulaRarityHashSet = null;
             NightRarityHashSet = null;
             HallowedRarityHashSet= null;
             ScarletRarityHashSet = null;
+            SunlightRarityHashSet = null;
 
         }
     }

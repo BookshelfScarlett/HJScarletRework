@@ -101,55 +101,51 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
-
                 Projectile.AddExecutionTimeImmediate(ItemType<FrostoftheStorm>());
             }
             if (Projectile.numHits < 1)
             {
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, (-(5 + SlowSwing.ToInt() * 80)) * -Owner.direction, 20, TwoPi, 0.5f, true, 1000);
-                if (SlowSwing)
-                {
-                    Vector2 safeDir = Projectile.rotation.ToRotationVector2();
-                    for (int i = 0; i < 32; i++)
-                    {
-                        for (int j = 0; j < 4; j++)
-                        {
-                            ECSParticle.SnowCloud(target.Center.ToRandCirclePos(5f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 16f), RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, .5f), Color.RoyalBlue), 40, 0, .35f, .62f * .21f);
-                            new StarShape(target.Center.ToRandCirclePos(3f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(0.1f, 12f), RandLerpColor(Color.SkyBlue, Color.WhiteSmoke), 1.1f * 1.1f, 20).Spawn();
-                        }
-                    }
-                    new KiraStar(target.Center, Vector2.Zero, RandLerpColor(Color.Blue, Color.RoyalBlue), 20, safeDir.ToRotation(), 0.58f, 0.8f * 1.1f, 0, true, useAlt: true).Spawn();
-                    new KiraStar(target.Center, Vector2.Zero, Color.White, 20, safeDir.ToRotation(), 0.58f, 0.68f * 1.1f, 0, true, useAlt: true).Spawn();
-                    float ringScale = 0.35f * 1.1f;
-                    new ShinyRing(target.Center, Vector2.Zero, Color.Lerp(Color.RoyalBlue, Color.WhiteSmoke, 0.5f), 20, ringScale, 0, 0, 0.85f, true).SpawnToPriorityNonPreMult();
-                    new ShinyRing(target.Center, Vector2.Zero, Color.WhiteSmoke, 20, ringScale, Pi + PiOver4, 0, 0.65f, true).Spawn();
-                    SoundEngine.PlaySound(HJScarletSounds.Frostwave_Boom with { MaxInstances = 0 });
-                }
-                else
-                {
-                    Vector2 safeDir = Projectile.rotation.ToRotationVector2();
-                    for (int i = 0; i < 16; i++)
-                    {
-                        for (int j = 0; j < 4; j++)
-                        {
-                            ECSParticle.SnowCloud(target.Center.ToRandCirclePos(5f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 16f), RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, .5f), Color.RoyalBlue), 40, 0, .35f, .62f * .21f);
-                            new StarShape(target.Center.ToRandCirclePos(3f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(0.1f, 10f), RandLerpColor(Color.SkyBlue, Color.WhiteSmoke), 1.1f, 20).Spawn();
-                        }
-                    }
-
-                    float starScale = .60f;
-                    new KiraStar(target.Center, Vector2.Zero, RandLerpColor(Color.Blue, Color.RoyalBlue), 20, safeDir.ToRotation(), 0.58f, starScale, 0, true, useAlt: true).Spawn();
-                    new KiraStar(target.Center, Vector2.Zero, Color.White, 20, safeDir.ToRotation(), 0.58f, starScale * 0.80f, 0, true, useAlt: true).Spawn();
+                if (!SlowSwing)
                     SoundEngine.PlaySound(HJScarletSounds.Frostwave_Boom with { MaxInstances = 1, Volume = 0.6f, Pitch = -0.5f + 0.05f * CurTime });
-
-                }
+                else
+                    SoundEngine.PlaySound(HJScarletSounds.Frostwave_Boom with { MaxInstances = 0 });
             }
-            int dustCount = 16;
-            for (int i = 0; i < dustCount; ++i)
+            if (!target.CanBeChasedBy() || HJScarletMethods.OutOffScreen(target.Center))
+                return;
+            if (SlowSwing)
             {
-                Vector2 dir = Projectile.SafeDirByRot();
-                Vector2 pos = target.Center.ToRandCirclePos(10f) + dir * Main.rand.NextFloat(10f);
-                ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(2f, 9f), RandLerpColor(Color.LightSkyBlue, Color.RoyalBlue), 45, RandZeroToOne, Projectile.scale, 0.2f);
+                Vector2 safeDir = Projectile.rotation.ToRotationVector2();
+                for (int i = 0; i < 32; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        ECSParticle.SnowCloud(target.Center.ToRandCirclePos(5f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 16f), RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, .5f), Color.RoyalBlue), 40, 0, .35f, .62f * .21f);
+                        ECSParticle.StarShape(target.Center.ToRandCirclePos(3f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 10f), RandLerpColor(Color.SkyBlue, Color.WhiteSmoke), 20, 1f, 1.1f);
+                    }
+                }
+                new KiraStar(target.Center, Vector2.Zero, RandLerpColor(Color.Blue, Color.RoyalBlue), 20, safeDir.ToRotation(), 0.58f, 0.8f * 1.1f, 0, true, useAlt: true).Spawn();
+                new KiraStar(target.Center, Vector2.Zero, Color.White, 20, safeDir.ToRotation(), 0.58f, 0.68f * 1.1f, 0, true, useAlt: true).Spawn();
+                float ringScale = 0.35f * 1.1f;
+                new ShinyRing(target.Center, Vector2.Zero, Color.Lerp(Color.RoyalBlue, Color.WhiteSmoke, 0.5f), 20, ringScale, 0, 0, 0.85f, true).SpawnToPriorityNonPreMult();
+                new ShinyRing(target.Center, Vector2.Zero, Color.WhiteSmoke, 20, ringScale, Pi + PiOver4, 0, 0.65f, true).Spawn();
+            }
+            else
+            {
+                Vector2 safeDir = Projectile.rotation.ToRotationVector2();
+                for (int i = 0; i < 16; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        ECSParticle.SnowCloud(target.Center.ToRandCirclePos(5f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 16f), RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, .5f), Color.RoyalBlue), 40, 0, .35f, .62f * .21f);
+                        ECSParticle.StarShape(target.Center.ToRandCirclePos(3f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 10f), RandLerpColor(Color.SkyBlue, Color.WhiteSmoke), 20, 1f, 1.1f);
+                    }
+                }
+
+                float starScale = .60f;
+                new KiraStar(target.Center, Vector2.Zero, RandLerpColor(Color.Blue, Color.RoyalBlue), 20, safeDir.ToRotation(), 0.58f, starScale, 0, true, useAlt: true).Spawn();
+                new KiraStar(target.Center, Vector2.Zero, Color.White, 20, safeDir.ToRotation(), 0.58f, starScale * 0.80f, 0, true, useAlt: true).Spawn();
+
             }
             for (int i = 0; i < 16; i++)
             {
@@ -164,15 +160,12 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnKill(int timeLeft)
         {
-            if (!Main.mouseLeft)
-            {
-                return;
-            }
             if (FinalSwing)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostoftheStormHeldProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 ((FrostoftheStormHeldProj)proj.ModProjectile).Flip = !Flip;
                 ((FrostoftheStormHeldProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
+                proj.HJScarlet().HasExecutionMechanic = true;
             }
             else
             {
@@ -180,6 +173,7 @@ namespace HJScarletRework.Projs.Executor
                 ((FrostoftheStormChargeProj)proj.ModProjectile).Flip = !Flip;
                 ((FrostoftheStormChargeProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
                 ((FrostoftheStormChargeProj)proj.ModProjectile).CurTime = CurTime += 1;
+                proj.HJScarlet().HasExecutionMechanic = true;
             }
         }
 
@@ -187,6 +181,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.velocity = TargetRotation.ToRotationVector2();
             Owner.ChangeDir(Projectile.direction);
+            Owner.itemTime = Owner.itemAnimation = 2;
             Owner.ControlPlayerArm(Projectile.rotation);
         }
 
@@ -251,6 +246,11 @@ namespace HJScarletRework.Projs.Executor
             //将其投影到矩阵上，并进行形变
             float xScale = SlowSwing ? 1.54f : 1.2f;
             float height = SlowSwing ? Height * 1.2f : 1f;
+            //if (HJScarletMethods.HasFuckingCalamity)
+            //{
+            //    xScale *= 1.14f;
+            //    height *= 1.14f;
+            //}
             Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(xScale, height, 1f);
             //而后再转化为射弹的目标指向，这个tarPos同时拥有指向和武器模长的信息。而不是一个单位向量
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.2f;
@@ -267,8 +267,14 @@ namespace HJScarletRework.Projs.Executor
                 float slashTrailRotation = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
                 Matrix tFormSlash = Matrix.CreateRotationZ(slashTrailRotation) * Matrix.CreateScale(xScale, height, 1f);
                 float xScale2 = SlowSwing ? 1.7f : 1.7f;
+                float lenght = 200f;
+                //if(HJScarletMethods.HasFuckingCalamity)
+                //{
+                //    xScale2 *= 1.14f;
+                //    lenght *= 1.14f;
+                //}
                 Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * xScale2;
-                Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 200f;
+                Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * lenght;
                 OldAimPos.Add(slashPosFinal);
                 for (int i = 1; i <= 2; i++)
                 {
@@ -367,6 +373,18 @@ namespace HJScarletRework.Projs.Executor
             PixelatedRenderManager.BeginDrawProj = true;
             DrawSword();
             return false;
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (FinalSwing)
+            {
+                modifiers.FinalDamage *= 1.3f;
+                modifiers.SetCrit();
+            }
+            else
+            {
+                modifiers.SourceDamage *= 1.2f;
+            }
         }
         public void RenderPixelated(SpriteBatch spriteBatch)
         {

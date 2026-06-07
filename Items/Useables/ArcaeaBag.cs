@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Vanity;
+using HJScarletRework.Items.Vanity.Arceca;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;

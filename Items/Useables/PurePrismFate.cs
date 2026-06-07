@@ -4,6 +4,7 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -60,37 +61,45 @@ namespace HJScarletRework.Items.Useables
         }
         public override void HoldItem(Player player)
         {
-            Item item = Main.HoverItem;
-            if (player.HeldItem.stack < 3)
-                return;
-            //必须得是材料。必须得没有伤害，必须得不是饰品，必须得什么都不会发射，必须得没有任何Buff提供，必须得可叠加（最大叠加数小于零）
-            //必须得不能放置任何墙体
-            bool isMate = item.material && item.damage < 1 && !item.accessory && item.shoot == ProjectileID.None && item.buffType == 0 && item.maxStack > 1 && item.createWall == -1;
-            if ((isMate && !_RefusedList.Contains(item.type)) || SmeltList.BarType.Contains(item.type))
+            player.HJScarlet().drawUseableItemIcon = Type;
+            for (int i = 0; i < player.inventory.Length; i++)
             {
-                if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
+                Item item = player.inventory[i];
+                if (item.IsAir || item is null)
+                    continue;
+                //必须得是材料，必须得没有伤害
+                //必须得不是饰品，必须得什么都不会发射
+                //必须得没有Buff，必须堆叠数>1
+                //必须不会制作任何墙体
+                bool isMate2 = item.material && item.damage < 1 && !item.accessory && item.shoot == ProjectileID.None && item.buffType == 0 && item.maxStack > 1 && item.createWall == -1;
+                //为所有带有“Ore”或者“Bar”的物品添加白名单
+                bool whiteList2 = SmeltList.BarType.Contains(item.type)
+                              || SmeltList.OreType.Contains(item.type)
+                              || HJScarletList.BarsHashSet.Contains(item.type)
+                              || HJScarletList.OresHashSet.Contains(item.type);
+                //拒绝手动打表的物品，并排除掉所有“火把”，“钓鱼匣“和”荧光棒
+                bool blackList2 = _RefusedList.Contains(item.type)
+                              || ItemID.Sets.Torches[item.type]
+                              || ItemID.Sets.IsFishingCrate[item.type]
+                              || ItemID.Sets.IsFishingCrateHardmode[item.type]
+                              || ItemID.Sets.Glowsticks[item.type];
+                            
+                
+                bool blackList = false;
+                //过滤所有容器
+                if (item.createTile != -1)
                 {
-                    int totalStack = 0;
-                    for (int i = 0; i < player.HeldItem.stack; i++)
-                    {
-                        if (i == 300)
-                            break;
-                        if (i % 3 == 0)
-                        {
-                            totalStack++;
-                        }
-                    }
-                    player.HeldItem.stack -= (totalStack * 3);
-                    Item targetItem = new Item();
-                    bool favor = player.HeldItem.favorited;
-                    targetItem.SetDefaults(item.type);
-                    targetItem.favorited = favor;
-                    player.QuickSpawnItemDirect(player.GetSource_FromThis(), targetItem, totalStack);
-                    SoundEngine.PlaySound(SoundID.ResearchComplete, player.Center);
-                    for (int i = 0; i < 20; i++)
-                        new TurbulenceGlowOrb(player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
+                    int tileID = item.createTile;
+                    blackList = TileID.Sets.BasicChest[tileID] || TileID.Sets.BasicDresser[tileID] || TileID.Sets.IsAContainer[tileID];
                 }
+
+                bool legalTarget2 = (isMate2 || whiteList2) && !blackList2 && !blackList;
+                if (!legalTarget2)
+                    continue;
+
+                item.HJScarlet().purePrismLegalTarget = true;
             }
+            return;
         }
     }
 }

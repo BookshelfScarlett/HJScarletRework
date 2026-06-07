@@ -40,7 +40,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = -1;
+            Projectile.localNPCHitCooldown = 5;
             Projectile.timeLeft = 120;
             Projectile.noEnchantmentVisuals = true;
             Projectile.extraUpdates = 2;
@@ -48,16 +48,13 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            //if (targetHitbox.Intersects(projHitbox))
+            for (int i = 0; i < CenterPosList.Count; i++)
             {
-                for (int i = 0; i < CenterPosList.Count; i++)
-                {
-                    Rectangle ProjHitbox = Utils.CenteredRectangle(CenterPosList[i] + Projectile.Center - (Projectile.velocity + Projectile.SafeDir() * 200f), new Vector2(50, 50));
+                Rectangle ProjHitbox = Utils.CenteredRectangle(CenterPosList[i] + Projectile.Center - (Projectile.velocity + Projectile.SafeDir() * 200f), new Vector2(50, 50));
 
-                    if (targetHitbox.Intersects(ProjHitbox))
-                    {
-                        return true;
-                    }
+                if (targetHitbox.Intersects(ProjHitbox))
+                {
+                    return true;
                 }
             }
             return false;
@@ -94,21 +91,23 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            int dustCount = 16;
-            //Projectile.AddExecutionTimeDelayed(ItemType<FrostoftheStorm>());
-            for (int i = 0; i < dustCount; ++i)
-            {
-                Vector2 dir = Projectile.SafeDirByRot();
-                Vector2 pos = target.Center.ToRandCirclePos(10f) + dir * Main.rand.NextFloat(10f);
-                ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(2f, 9f), RandLerpColor(Color.LightSkyBlue, Color.RoyalBlue), 45, RandZeroToOne, Projectile.scale,.2f);
-            }
+            if (!target.CanBeChasedBy() || HJScarletMethods.OutOffScreen(target.Center))
+                return;
             for (int i = 0; i < 30; i++)
             {
                 Vector2 pos = target.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
                 Vector2 vel = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(0.2f, 17.4f);
                 float scale = Main.rand.NextFloat(0.4f, 0.9f) * .2f;
-                Dust d = Dust.NewDustPerfect(pos, DustID.WhiteTorch, RandVelTwoPi(0.2f, 3.1f));
-                d.scale *= 1.3f;
+                ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 45, 1, scale, glowMult: .75f);
+                
+            }
+
+            for (int i = 0; i < 20; i++)
+            {
+                Color Firecolor = RandLerpColor(Color.White, Color.RoyalBlue);
+                Vector2 spawnPos = target.Center + RandVelTwoPi(10f, 30f);
+                Vector2 vel = (target.Center - spawnPos).ToSafeNormalize() * Main.rand.NextFloat(1f, 20f);
+                ECSParticle.SnowCloud(spawnPos, vel, Firecolor, 40, RandRotTwoPi, 0.25f, .28f);
             }
         }
         public void SetFirstFrame()
@@ -123,11 +122,24 @@ namespace HJScarletRework.Projs.Executor
             float maxPoints = 50;
             float xMult = 5f;
             float yMult = 3.5f;
+            //if (HJScarletMethods.HasFuckingCalamity)
+            //{
+            //    xMult *= 1.4f;
+            //    yMult *= 1.4f;
+            //}
+
+
             if (Projectile.ai[2] > 0)
             {
-            maxPoints = 70;
+                maxPoints = 70;
                 xMult = 7.5f;
                 yMult = 4.5f;
+                //if (HJScarletMethods.HasFuckingCalamity)
+                //{
+                //    xMult *= 1.2f;
+                //    yMult *= 1.2f;
+                //}
+
             }
             for (int i = 0; i < maxPoints; i++)
             {
@@ -196,9 +208,7 @@ namespace HJScarletRework.Projs.Executor
                 //Utils.DrawLine(Main.spriteBatch, new Vector2(topLeft.X, bottomRight.Y), topLeft, Color.Black);
             }
             PixelatedRenderManager.BeginDrawProj = true;
-            
-
-                return false;
+            return false;
         }
         private List<ScarletVertex> _cacheVertex = new List<ScarletVertex>();
         public void DrawBaseWave(Texture2D tex, Color color, float v)

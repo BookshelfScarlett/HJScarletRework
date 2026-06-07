@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -52,6 +53,8 @@ namespace HJScarletRework.Projs.Executor
                     new TrailGlowBall(Projectile.Center + offset, fireVelocity * 4.5f, Color.White, 70, 0.1f * 0.5f, true).Spawn();
                 }
                 Vector2 VecOffset = Projectile.velocity / 4f;
+                //ECSParticle.LightntingGlow(Projectile.Center, fireVelocity * .5f, Color.DarkViolet, 50, 1f, .90f);
+                //ECSParticle.LightntingGlow(Projectile.Center, fireVelocity * .5f, Color.Violet, 50, 1f, .9f);
                 new LightningGlow(Projectile.Center, fireVelocity * 0.5f, Color.DarkViolet, 50, 0.70f).Spawn();
                 new LightningGlow(Projectile.Center, fireVelocity * 0.5f, Color.Violet, 50, 0.70f).Spawn();
             }

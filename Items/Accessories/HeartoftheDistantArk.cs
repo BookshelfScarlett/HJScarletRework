@@ -7,11 +7,6 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players.Dashes;
 using HJScarletRework.Globals.Systems;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -31,7 +26,7 @@ namespace HJScarletRework.Items.Accessories
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
             Item.accessory = true;
             Item.expert = true;
-            Item.defense = 5;
+            Item.defense = 3;
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(LifeMax2);
         public override void UpdateAccessory(Player player, bool hideVisual)

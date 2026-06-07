@@ -61,3 +61,8 @@ DragonSummonBuff: {
 	// DisplayName: Dragon Summon Buff
 	// Description: Mods.HJScarletRework.Buffs.DragonSummonBuff.Description
 }
+
+CrimsonCharmBuff: {
+	DisplayName: 治疗过饱和
+	Description: 治疗效率大幅度削减……或许你应该停一下？
+}

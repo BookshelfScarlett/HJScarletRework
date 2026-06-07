@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void ExSD()
         {
-            Item.defense = 5;
+            Item.defense = 2;
             Item.accessory = true;
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
         }
@@ -28,7 +28,6 @@ namespace HJScarletRework.Items.Accessories
         {
             CreateRecipe().
                 AddIngredient(ItemID.CharmofMyths).
-                AddIngredient(ItemID.CrossNecklace).
                 AddIngredient(ItemID.SoulofFright, 5).
                 AddIngredient(ItemID.SoulofSight, 5).
                 AddIngredient(ItemID.SoulofMight, 5).

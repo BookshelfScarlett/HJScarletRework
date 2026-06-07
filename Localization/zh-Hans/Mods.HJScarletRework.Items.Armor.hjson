@@ -1,6 +1,10 @@
 CreationHat: {
 	DisplayName: 化方术士之帽
-	Tooltip: 与很久以前的法袍搭配也许会有意想不到的效果……
+	Tooltip:
+		'''
+		与很久以前的法袍搭配也许会有意想不到的效果……
+		或许你应该手持一下看看？
+		'''
 	SetBonus:
 		'''
 		增加{0}防御力，{1}最大魔力上限
@@ -243,4 +247,24 @@ DiverLegs: {
 		增加25%移动速度
 		敌人更有可能攻击你
 		'''
+}
+
+ReaperBody: {
+	DisplayName: 前台死神长裙
+	Tooltip: ""
+}
+
+ReaperHead: {
+	DisplayName: 前台死神发箍
+	Tooltip:
+		'''
+		增加30%代行者暴击伤害
+		获得狩猎药水的效果
+		'''
+	SetBouns: ""
+}
+
+ReaperLegs: {
+	DisplayName: 前台死神下着
+	Tooltip: ""
 }

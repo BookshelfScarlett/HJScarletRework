@@ -1,4 +1,7 @@
-﻿using HJScarletRework.Globals.Keybinds;
+﻿using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Keybinds;
+using HJScarletRework.Items.Accessories;
+using System;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -15,6 +18,7 @@ namespace HJScarletRework.Globals.Players
         public bool CanArmorAbility = false;
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
+            HandleCrimsonCharmTrigger(triggersSet);
             if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
             {
                 bool tier1 = PiorityTier1();
@@ -27,6 +31,27 @@ namespace HJScarletRework.Globals.Players
                     return;
             }
         }
+
+        public void HandleCrimsonCharmTrigger(TriggersSet triggersSet)
+        {
+            bool pass = crimsonCharm || Player.HasBuff<CrimsonCharmBuff>();
+            if (!pass)
+                return;
+            if (PlayerInput.Triggers.JustPressed.QuickHeal && Player.statLife != Player.statLifeMax2)
+            {
+                Main.NewText(crimsonCharmReduceTime);
+                if (!Player.HasBuff<CrimsonCharmBuff>())
+                {
+                    Player.AddBuff(BuffType<CrimsonCharmBuff>(), CrimsonCharm.OverSatuTime * 60);
+                }
+                else
+                {
+                    if (!crimsonCharmStopReduce)
+                        crimsonCharmReduceTime += 1;
+                }
+            }
+        }
+
         /// <summary>
         /// 第一批优先度梯队：物品切换，代行者手动触发的处刑攻击
         /// </summary>

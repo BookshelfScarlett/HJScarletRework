@@ -17,7 +17,6 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         public override string AssetPath => AssetHandler.Armors;
         public override void SetStaticDefaults()
         {
-
             HJScarletList.ScarletRarityHashSet.Add(Type);
         }
         public override void ExSD()

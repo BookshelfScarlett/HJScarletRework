@@ -40,6 +40,7 @@ namespace HJScarletRework.Globals.Players
         public bool goldenAppleEnchantedFully = false;
         public bool givePaper = true;
         public bool frostHammerHoming = false;
+        public int drawUseableItemIcon = -1;
         #region 护甲
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;
@@ -99,6 +100,10 @@ namespace HJScarletRework.Globals.Players
         public bool executorSwordMark = false;
         public int executorSwordMarkLevel = -1;
         public bool mayaPumper = false;
+        public bool crimsonCharm = false;
+        public int crimsonCharmReduceTime = 0;
+        public bool crimsonCharmStopReduce = false;
+        public float healingPotionMult = 1f;
         #endregion
 
         #region Pets

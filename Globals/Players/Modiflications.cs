@@ -1,7 +1,10 @@
-﻿using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Accessories;
 using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -60,7 +63,7 @@ namespace HJScarletRework.Globals.Players
 
                 if (item.consumable && item.DamageType.CountsAsClass<RangedDamageClass>())
                     damage *= 1.10f;
-                if(item.DamageType.CountsAsClass<MagicDamageClass>())
+                if (item.DamageType.CountsAsClass<MagicDamageClass>())
                     damage *= .80f;
             }
             if (monkExecutor)
@@ -102,8 +105,35 @@ namespace HJScarletRework.Globals.Players
         }
         public override void GetHealLife(Item item, bool quickHeal, ref int healValue)
         {
-            base.GetHealLife(item, quickHeal, ref healValue);
+            healValue = (int)(healValue * healingPotionMult);
+            HandleCrimsonCharmEffect(item, quickHeal, ref healValue);
         }
+
+        public void HandleCrimsonCharmEffect(Item item, bool quickHeal, ref int healValue)
+        {
+            bool isOverSatu = Player.HasBuff(BuffType<CrimsonCharmBuff>());
+            bool pass = quickHeal || crimsonCharm || isOverSatu;
+            if (!pass)
+                return;
+            if (isOverSatu)
+            {
+                int healAmt = (int)(item.healLife * healingPotionMult);
+                CalOverHeal(healAmt, ref healValue);
+            }
+        }
+        public void CalOverHeal(int healAmt, ref int healValue)
+        {
+            int shouldHeal = healAmt;
+            shouldHeal -= CrimsonCharm.MinusHeal * (1 + crimsonCharmReduceTime);
+            if (shouldHeal <= 0f)
+            {
+                healValue = 1;
+                crimsonCharmStopReduce = true;
+                return;
+            }
+            healValue = shouldHeal;
+        }
+
         public override void GetHealMana(Item item, bool quickHeal, ref int healValue)
         {
             float percent = 1f;
@@ -116,6 +146,5 @@ namespace HJScarletRework.Globals.Players
                 healValue = (int)(healValue * percent);
             }
         }
-
     }
 }

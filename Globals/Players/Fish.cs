@@ -56,7 +56,6 @@ namespace HJScarletRework.Globals.Players
                 }
             }
             chanceToCatchDiverArmor /= increaseChanceTime;
-            Main.NewText(chanceToCatchDiverArmor);
             if (Main.rand.NextBool(chanceToCatchDiverArmor))
             {
                 if (list.Count != 0)

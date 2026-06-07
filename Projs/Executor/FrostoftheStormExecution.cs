@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -27,7 +28,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 30;
             Projectile.SetupImmnuity(60);
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
-            Projectile.tileCollide = true;
+            Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 10;
             Projectile.penetrate = -1;
@@ -38,6 +39,10 @@ namespace HJScarletRework.Projs.Executor
             Helper.MaxProgress[0] = (int)(AttackSpeed * 0.25f);
             Helper.MaxProgress[1] = (int)(AttackSpeed);
             Helper.MaxProgress[2] = (int)(AttackSpeed);
+        }
+        public override bool? CanDamage()
+        {
+            return false;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
@@ -109,7 +114,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 initPos = crystalDir * Projectile.scale * (50f) + Projectile.Center;
                 for (int i = 0; i < 30; i++)
                 {
-                    new SnowCloud(initPos, crystalDir * Main.rand.NextFloat(20f, 64f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20, 0, 0.32f, Projectile.scale * Main.rand.NextFloat(0.8f, 1.1f) * 0.3f).Spawn();
+                    ECSParticle.SnowCloud(initPos, crystalDir * Main.rand.NextFloat(20f, 64f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20, 0, .32f, Projectile.scale * Main.rand.NextFloat(.8f, 1.1f) * .3f);
                 }
             }
             Helper.UpdateAniState(1);
@@ -120,7 +125,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 initPos = crystalDir * Projectile.scale * (50f) + Projectile.Center;
                 for (int i = 0; i < 30; i++)
                 {
-                    new SnowCloud(initPos, crystalDir * Main.rand.NextFloat(20f, 60f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20, 0, 0.32f, Projectile.scale * Main.rand.NextFloat(0.8f, 1.1f) * 0.3f).Spawn();
+                    ECSParticle.SnowCloud(initPos, crystalDir * Main.rand.NextFloat(20f, 60f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), 20, 0, .32f, Projectile.scale * Main.rand.NextFloat(.8f, 1.1f) * .3f);
                 }
 
                 HalfWay = true;
@@ -134,7 +139,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Vector2 crystalPos = crystalDir * Projectile.scale * (Main.rand.NextFloat(0f, 100f)) + Projectile.Center;
             if (Main.rand.NextBool(8))
-                new SnowCloud(crystalPos.ToRandCirclePos(30), crystalDir * Main.rand.NextFloat(10f, 40f), RandLerpColor(Color.WhiteSmoke, Color.RoyalBlue), 40, RandRotTwoPi, 0.35f, Main.rand.NextFloat(0.7f, 1.1f) * .35f).Spawn();
+                ECSParticle.SnowCloud(crystalPos.ToRandCirclePos(30), crystalDir * Main.rand.NextFloat(10f, 40f), RandLerpColor(Color.WhiteSmoke, Color.RoyalBlue), 40, RandRotTwoPi, .35f, Main.rand.NextFloat(.7f, 1.1f) * .35f);
             crystalPos = crystalDir * Projectile.scale * (50f) + Projectile.Center;
             Vector2 posBase = crystalPos;
             Vector2 starShapeSpawnPos = posBase + Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(120f, 190f);
@@ -145,24 +150,26 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Vector2 vel = starShapeDir * Main.rand.NextFloat(12f, 34);
                     float scale = Main.rand.NextFloat(0.7f, 0.91f) * Projectile.scale * 0.12f;
-                    new HRShinyOrb(starShapeSpawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, scale, 0.8f).Spawn();
-                    new HRShinyOrb(starShapeSpawnPos, vel, Color.White, 40, scale * 0.5f, 0.8f).Spawn();
+                    ECSParticle.HRShinyOrb(starShapeSpawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, .8f, scale, .5f);
                 }
                 if (Main.rand.NextBool(5))
                 {
                     starShapeSpawnPos = posBase + Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(120f, 190f);
                     starShapeDir = (posBase - starShapeSpawnPos).SafeNormalize(Vector2.UnitX);
-                    new ShinyCrossStar(starShapeSpawnPos, starShapeDir * Main.rand.NextFloat(0.8f, 16f), Color.Lerp(Color.RoyalBlue, Color.SkyBlue, Main.rand.NextFloat()), 40, 0, 1, 0.8f * Main.rand.NextFloat(0.8f, 1.1f), false).Spawn();
+                    Vector2 vel = starShapeDir * Main.rand.NextFloat(0.8f, 16f);
+                    ECSParticle.ShinyCrossStarECS(starShapeSpawnPos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 1f, .8f * Main.rand.NextFloat(.8f, 1.1f), .2f);
                 }
                 if (Main.rand.NextBool(3))
                 {
                     starShapeSpawnPos = posBase + Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(100f, 160f);
                     starShapeDir = (posBase - starShapeSpawnPos).SafeNormalize(Vector2.UnitX);
-                    new SnowCloud(starShapeSpawnPos, starShapeDir * Main.rand.NextFloat(2f, 12f), RandLerpColor(RandLerpColor(Color.RoyalBlue, Color.SkyBlue), Color.White), 45, RandRotTwoPi, 0.35f, Main.rand.NextFloat(0.4f, 0.7f) * 0.2f, true).SpawnToPriority();
+                    Vector2 vel = starShapeDir * Main.rand.NextFloat(2f, 12f);
+                    Color color = RandLerpColor(RandLerpColor(Color.RoyalBlue, Color.SkyBlue), Color.White);
+                    ECSParticle.SnowCloud(starShapeSpawnPos, vel, color, 45, RandRotTwoPi, .35f, Main.rand.NextFloat(.4f, .7f) * .2f);
                 }
             }
-        }
 
+        }
 
         public void UpdateBeginAnimation()
         {

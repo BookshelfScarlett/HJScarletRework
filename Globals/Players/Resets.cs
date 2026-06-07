@@ -1,4 +1,6 @@
 ﻿using HJScarletRework.Items.Weapons.Ranged;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -28,6 +30,7 @@ namespace HJScarletRework.Globals.Players
             frostHammerHoming = false;
             souloftheTidalMark = false;
             mayaPumper = false;
+            crimsonCharm = false;
             accVanityID = -1;
         }
         private void ResetArmor()
@@ -66,10 +69,12 @@ namespace HJScarletRework.Globals.Players
             critDamageAll = 0;
             critDamageExecutor = 0;
             bonusExecutionReduce = 0;
+            healingPotionMult = 1;
+            //drawUseableItemIcon = -1;
             ResetAcc();
             ResetPets();
             ResetArmor();
-        }
+          }
         public override void UpdateDead()
         {
             ExecutionProgress = 0;
@@ -93,6 +98,8 @@ namespace HJScarletRework.Globals.Players
             ResetAcc();
             ResetPets();
             ResetArmor();
+            crimsonCharmReduceTime = 0;
+            crimsonCharmStopReduce = false;
 
             cowboyRevolverTimer = 0;
             floretProtectorTimer = 0;

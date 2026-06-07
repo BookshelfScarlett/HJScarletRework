@@ -5,6 +5,7 @@ namespace HJScarletRework.Assets.Registers
     public partial class HJScarletTexture : ModSystem
     {
         public static Tex2DWithPath ScarletGhost { get; set; }
+        public static Tex2DWithPath LostbeltJourneyIcon { get; set; }
         public static Tex2DWithPath InvisAsset { get; private set; }
         private string TexPath => "HJScarletRework/Assets/Texture";
         private string Path_Particle => $"{TexPath}/Particles/";
@@ -17,6 +18,7 @@ namespace HJScarletRework.Assets.Registers
         {
             InvisAsset = new Tex2DWithPath(InvisAssetPath);
             ScarletGhost = new Tex2DWithPath($"{TexPath}/{nameof(ScarletGhost)}");
+            LostbeltJourneyIcon = new Tex2DWithPath("HJScarletRework/icon_small");
             LoadParticle();
             LoadTrail();
             LoadTexture();
@@ -27,6 +29,7 @@ namespace HJScarletRework.Assets.Registers
         {
             InvisAsset = null;
             ScarletGhost = null;
+            LostbeltJourneyIcon = null;
             UnLoadParticle();
             UnloadTrail();
             UnloadTexture();
