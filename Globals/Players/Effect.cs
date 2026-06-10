@@ -4,6 +4,6 @@ namespace HJScarletRework.Globals.Players
 {
     public partial class HJScarletPlayer : ModPlayer
     {
-       
+
     }
 }

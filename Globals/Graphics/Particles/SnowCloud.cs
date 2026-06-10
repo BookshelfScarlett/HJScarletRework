@@ -36,7 +36,7 @@ namespace HJScarletRework.Globals.Graphics.Particles
         // 这里采样没有问题，他贴图就是这样
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Asset<Texture2D> texture = HJScarletTexture.Texture_SnowCloud.Texture; 
+            Asset<Texture2D> texture = HJScarletTexture.Texture_SnowCloud.Texture;
             spriteBatch.Draw(texture.Value, Position - Main.screenPosition, null, DrawColor * Opacity, Rotation, texture.Value.ToOrigin(), Scale, 0, 0f);
         }
     }

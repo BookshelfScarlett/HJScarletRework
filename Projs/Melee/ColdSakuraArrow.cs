@@ -78,7 +78,7 @@ namespace HJScarletRework.Projs.Melee
 
             if (HJScarletMethods.OutOffScreen(Projectile.Center))
                 return;
-            ECSParticle.StarShape(Projectile.Center, Projectile.velocity.ToSafeNormalize() * .1f, Color.HotPink, 35, 1f, .840f,glowMult:0f);
+            ECSParticle.StarShape(Projectile.Center, Projectile.velocity.ToSafeNormalize() * .1f, Color.HotPink, 35, 1f, .840f, glowMult: 0f);
             //new StarShape(Projectile.Center, Projectile.velocity.ToSafeNormalize() * 0.1f, RandLerpColor(Color.HotPink, Color.HotPink), .840f, 35, false).Spawn();
             if (Main.rand.NextBool())
             {

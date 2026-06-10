@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Armor.Shinobi
         public override string AssetPath => AssetHandler.Armors;
         public override void SetStaticDefaults()
         {
-            
+
         }
         public override void ExSD()
         {

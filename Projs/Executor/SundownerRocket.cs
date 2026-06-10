@@ -11,7 +11,6 @@ using ReLogic.Content;
 using ReLogic.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -68,7 +67,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
-                if (CurTarget.IsLegal() &&ShouldHome )
+                if (CurTarget.IsLegal() && ShouldHome)
                 {
                     Projectile.timeLeft = GetSeconds(5);
                     float speedValue = Projectile.velocity.Length();
@@ -103,20 +102,20 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen())
                 return;
-            if (Projectile.numUpdates < Main.rand.Next(-1,3))
+            if (Projectile.numUpdates < Main.rand.Next(-1, 3))
                 return;
             int[] dTypes = [DustID.Torch, DustID.OrangeTorch, DustID.InfernoFork];
             Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePosEdge(6), dTypes[Main.rand.Next(3)]);
             d.scale *= 1.19f;
             d.velocity = Projectile.velocity;
             d.noGravity = true;
-                
+
             if (Main.rand.NextBool(4))
             {
                 float GeneralScaleMul = 1.1f * RandZeroToOne;
                 int GetLifeTime() => Main.rand.Next(8, 16);
-                Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f) + Projectile.SafeDir()* Main.rand.NextFloat(10f);
-                new SmokeParticle(pos, Projectile.SafeDir().ToRandVelocity(ToRadians(10f), 0.8f, Projectile.velocity.Length()), RandLerpColor(Color.White, Color.OrangeRed), 40, Projectile.rotation +Main.rand.NextFloat(-PiOver2,PiOver2), Main.rand.NextFloat(.4f, .51f) * .33f, 0.30f, true).SpawnToPriorityNonPreMult();
+                Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f) + Projectile.SafeDir() * Main.rand.NextFloat(10f);
+                new SmokeParticle(pos, Projectile.SafeDir().ToRandVelocity(ToRadians(10f), 0.8f, Projectile.velocity.Length()), RandLerpColor(Color.White, Color.OrangeRed), 40, Projectile.rotation + Main.rand.NextFloat(-PiOver2, PiOver2), Main.rand.NextFloat(.4f, .51f) * .33f, 0.30f, true).SpawnToPriorityNonPreMult();
                 //烟雾除了需要更多，也要更黑。
                 for (int i = 0; i <= 1; i++)
                 {
@@ -135,8 +134,8 @@ namespace HJScarletRework.Projs.Executor
 
             if (Projectile.ai[0] == 1)
             {
-                SlotId slotId1 = SoundEngine.PlaySound(HJScarletSounds.Misc_Boom with { Variants = [2],MaxInstances = 0, Pitch = .20f, Volume = .35f }, Projectile.Center);
-                
+                SlotId slotId1 = SoundEngine.PlaySound(HJScarletSounds.Misc_Boom with { Variants = [2], MaxInstances = 0, Pitch = .20f, Volume = .35f }, Projectile.Center);
+
             }
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), Projectile.damage / 2, 0, Owner.whoAmI);
             proj.DamageType = ExecutorDamageClass.Instance;
@@ -145,7 +144,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 Vector2 dir = Projectile.SafeDirByRot();
                 Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f) + dir * Main.rand.NextFloat(10f);
-                new ShinyCrossStar(pos, RandVelTwoPi(2f, 6f), RandLerpColor(Color.Red, Color.OrangeRed), 45, RandRotTwoPi, RandZeroToOne, Projectile.scale, false,0.5f).Spawn();
+                new ShinyCrossStar(pos, RandVelTwoPi(2f, 6f), RandLerpColor(Color.Red, Color.OrangeRed), 45, RandRotTwoPi, RandZeroToOne, Projectile.scale, false, 0.5f).Spawn();
             }
             for (int i = 0; i < 16; i++)
             {
@@ -188,7 +187,7 @@ namespace HJScarletRework.Projs.Executor
                 SB.Draw(projTex, lerpPos + Projectile.PosToCenter(), null, edgeColor * 0.25f, rot, ori, oriScale * scale * Projectile.Opacity * 0.75f, 0, 0);
             }
 
-            Projectile.DrawProj(Color.White,drawTime:1, useOldPos: true, rotFix: PiOver2);
+            Projectile.DrawProj(Color.White, drawTime: 1, useOldPos: true, rotFix: PiOver2);
 
             return false;
         }
@@ -200,7 +199,7 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.oldPos.Length < 3)
                 return;
             //做掉可能存在的零向量
-            DrawSetting drawSetting = new(useTex.Value,SamplerState.LinearClamp);
+            DrawSetting drawSetting = new(useTex.Value, SamplerState.LinearClamp);
             List<TrailDrawDate> trailDrawDates = [];
             int posCount = (int)(Projectile.oldPos.Length * Projectile.Opacity);
             for (int j = 0; j < posCount - 1; j++)

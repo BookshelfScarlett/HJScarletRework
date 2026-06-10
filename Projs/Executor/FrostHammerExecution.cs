@@ -44,12 +44,12 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             Helper.MaxProgress[0] = 15 * Projectile.MaxUpdates;
-                    SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { MaxInstances = 0 });
-                        for (int i = 0; i < 32; i++)
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { MaxInstances = 0 });
+            for (int i = 0; i < 32; i++)
             {
                 Color Firecolor = RandLerpColor(Color.White, Color.RoyalBlue);
                 Vector2 spawnPos = Projectile.Center.ToRandCirclePos(16);
-                Vector2 vel = Projectile.velocity.ToRandVelocity(0,4f,10f);
+                Vector2 vel = Projectile.velocity.ToRandVelocity(0, 4f, 10f);
                 new SnowCloud(spawnPos, vel, Firecolor, 40, Main.rand.NextFloat(TwoPi), .45f, 0.28f * 0.35f, Main.rand.NextBool()).Spawn();
             }
             for (int i = 0; i < 32; i++)
@@ -82,7 +82,7 @@ namespace HJScarletRework.Projs.Executor
             }
             if (Projectile.IsOutScreen() || Main.rand.NextBool())
                 return;
-            
+
             if (Main.rand.NextBool(4))
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(30), Vector2.UnitY * Main.rand.NextFloat(1.8f, 5.4f), RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 0, 1, 0.68f * Main.rand.NextFloat(0.8f, 1.1f)).Spawn();
             if (!Attacking)
@@ -99,10 +99,10 @@ namespace HJScarletRework.Projs.Executor
                         p.GlowCenterMult = 0.75f;
                     });
                 }
-        if (Main.rand.NextBool(8))
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(10), Projectile.velocity / 8f, RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue), 40, RandRotTwoPi, 0.75f, Projectile.scale * Main.rand.NextFloat(0.7f, 1.21f) * 0.25f, Main.rand.NextBool()).Spawn();
-            if (Main.rand.NextBool(5))
-                new SnowCloud(Projectile.Center.ToRandCirclePos(10), Projectile.velocity / 8f, RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue), 40, RandRotTwoPi, 0.56f, Projectile.scale * Main.rand.NextFloat(0.7f, 1.21f) * 0.07f, true).SpawnToPriority();
+                if (Main.rand.NextBool(8))
+                    new SmokeParticle(Projectile.Center.ToRandCirclePos(10), Projectile.velocity / 8f, RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue), 40, RandRotTwoPi, 0.75f, Projectile.scale * Main.rand.NextFloat(0.7f, 1.21f) * 0.25f, Main.rand.NextBool()).Spawn();
+                if (Main.rand.NextBool(5))
+                    new SnowCloud(Projectile.Center.ToRandCirclePos(10), Projectile.velocity / 8f, RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue), 40, RandRotTwoPi, 0.56f, Projectile.scale * Main.rand.NextFloat(0.7f, 1.21f) * 0.07f, true).SpawnToPriority();
             }
 
             Attacking = false;
@@ -138,10 +138,10 @@ namespace HJScarletRework.Projs.Executor
             if (SearchCooldown > 0)
                 SearchCooldown--;
         }
-        
+
         public void ChaseEnemy()
         {
-            if(Main.mouseRight && Main.mouseRightRelease && SearchCooldown == 0)
+            if (Main.mouseRight && Main.mouseRightRelease && SearchCooldown == 0)
             {
                 NPC target = Main.MouseWorld.FindClosestTarget(200, ignoreTiles: false);
                 if (target.IsLegal())
@@ -162,7 +162,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.rotation += 0.05f / Projectile.MaxUpdates;
                 if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1000))
                 {
-                    SoundEngine.PlaySound(HJScarletSounds.Frostwave_LightRelease with { MaxInstances = 0 ,Pitch = -.5f});
+                    SoundEngine.PlaySound(HJScarletSounds.Frostwave_LightRelease with { MaxInstances = 0, Pitch = -.5f });
                     CurTarget = target;
                     Vector2 chargeVel = Projectile.Center.GetNormalVector2(target.Center) * 23f;
                     Projectile.velocity = chargeVel;
@@ -184,7 +184,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 30; i++)
             {
                 Vector2 pos = target.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
-                Vector2 vel = RandVelTwoPi(1.2f,3.6f);
+                Vector2 vel = RandVelTwoPi(1.2f, 3.6f);
                 float scale = Main.rand.NextFloat(0.4f, 0.9f) * .12f;
                 ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
                 {
@@ -214,7 +214,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 Color Firecolor = RandLerpColor(Color.White, Color.RoyalBlue);
                 Vector2 spawnPos = Projectile.Center.ToRandCirclePos(16);
-                Vector2 vel = Projectile.velocity.ToRandVelocity(0,-14f,10f);
+                Vector2 vel = Projectile.velocity.ToRandVelocity(0, -14f, 10f);
                 new SnowCloud(spawnPos, vel, Firecolor, 40, Main.rand.NextFloat(TwoPi), .45f, 0.28f * 0.35f, Main.rand.NextBool()).Spawn();
             }
             for (int i = 0; i < 32; i++)
@@ -237,7 +237,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Oscillation = Projectile.ClampOscillation(Oscillation, 1.5f);
             //锤子应当朝向的位置
-            Vector2 mountedDirection = Vector2.UnitX.RotatedBy(Oscillation); 
+            Vector2 mountedDirection = Vector2.UnitX.RotatedBy(Oscillation);
             //递增的值越大，锤子的摆动幅度越大
             //基本的挂机状态，此处使用了正弦曲线来让锤子常规上下偏移
             Vector2 anchorPos = Owner.Center + mountedDirection * 120;
@@ -267,7 +267,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 10; i++)
             {
                 Vector2 pos = target.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
-                Vector2 vel = RandVelTwoPi(1.2f,3.6f);
+                Vector2 vel = RandVelTwoPi(1.2f, 3.6f);
                 float scale = Main.rand.NextFloat(0.4f, 0.9f) * .12f;
                 ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
                 {

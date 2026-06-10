@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Useables
+namespace HJScarletRework.Items.Accessories
 {
     public class ArcaeaPack : HJScarletItemClass
     {
@@ -23,12 +23,12 @@ namespace HJScarletRework.Items.Useables
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if(line.IsItemName())
+            if (line.IsItemName())
             {
-                VanityEffectClass.DrawItemName(line,new VanityData(Color.Gold, Color.Lerp(Color.Gold, Color.White, 0.5f), Color.Black),Color.Gold,Color.Black);
+                VanityEffectClass.DrawItemName(line, new VanityData(Color.Gold, Color.Lerp(Color.Gold, Color.White, 0.5f), Color.Black), Color.Gold, Color.Black);
                 return false;
             }
-            if(line.Mod == "Terraria")
+            if (line.Mod == "Terraria")
             {
                 if (line.Name == "Tooltip3")
                 {
@@ -41,16 +41,16 @@ namespace HJScarletRework.Items.Useables
                     return false;
                 }
 
-                if(line.Name == "Tooltip4")
+                if (line.Name == "Tooltip4")
                 {
                     VanityData vanityData =
                          new VanityData(Color.RoyalBlue, Color.Lerp(Color.White, Color.DeepSkyBlue, 0.65f), Color.Black);
-                    
+
                     VanityEffectClass.DrawMisc(line, vanityData, Color.DeepSkyBlue, Color.Black);
                     return false;
 
                 }
-                if(line.Name == "Tooltip5")
+                if (line.Name == "Tooltip5")
                 {
                     VanityData vanityData = new VanityData(
                         Color.Gold, Color.Lerp(Color.Gold, Color.White, .5f), Color.Black);

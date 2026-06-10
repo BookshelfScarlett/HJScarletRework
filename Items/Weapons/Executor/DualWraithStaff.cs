@@ -4,7 +4,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using rail;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
@@ -34,7 +33,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool CanShoot(Player player)
         {
-             return (!player.HasProj<DualWraithStaffHeldProj>() || AlterVersion);
+            return (!player.HasProj<DualWraithStaffHeldProj>() || AlterVersion);
         }
         public override bool CanUseItem(Player player)
         {
@@ -56,10 +55,10 @@ namespace HJScarletRework.Items.Weapons.Executor
             player.CheckExecution(Type);
             SoundEngine.PlaySound(HJScarletSounds.Atom_StrikeAlt with { MaxInstances = 0, Variants = [2], Pitch = -0.31f, PitchVariance = 0.1f, Volume = 0.68f });
             int projID = ProjectileType<DualWraithStaffJavelin>();
-            Projectile proj = Projectile.NewProjectileDirect(source, position + player.ToMouseVector2() *-1200f, velocity, projID, damage, knockback, player.whoAmI);
-            Vector2 pos2 = player.MountedCenter - player.ToMouseVector2().RotatedBy(PiOver2 * player.direction)* Main.rand.NextFloat(1200f, 1400f) + Vector2.UnitX * Main.rand.NextFloat(-100f, 101f);
+            Projectile proj = Projectile.NewProjectileDirect(source, position + player.ToMouseVector2() * -1200f, velocity, projID, damage, knockback, player.whoAmI);
+            Vector2 pos2 = player.MountedCenter - player.ToMouseVector2().RotatedBy(PiOver2 * player.direction) * Main.rand.NextFloat(1200f, 1400f) + Vector2.UnitX * Main.rand.NextFloat(-100f, 101f);
             Vector2 dir = pos2.GetNormalVector2(player.LocalMouseWorld());
-                Projectile proj2 = Projectile.NewProjectileDirect(source, pos2, dir*Item.shootSpeed, projID, damage, knockback, player.whoAmI);
+            Projectile proj2 = Projectile.NewProjectileDirect(source, pos2, dir * Item.shootSpeed, projID, damage, knockback, player.whoAmI);
 
             proj.HJScarlet().HasExecutionMechanic = true;
             proj2.HJScarlet().HasExecutionMechanic = true;
@@ -81,7 +80,7 @@ namespace HJScarletRework.Items.Weapons.Executor
                 proj.originalDamage = projDamage;
                 proj.netUpdate = true;
             }
-            if(AlterVersion&& player.whoAmI == Main.myPlayer && !player.HasProj<DualWraithStaffHeldProj>() && player.HeldItem.type == Type && player.CheckExecution(Type))
+            if (AlterVersion && player.whoAmI == Main.myPlayer && !player.HasProj<DualWraithStaffHeldProj>() && player.HeldItem.type == Type && player.CheckExecution(Type))
             {
                 AlterVersion = false;
                 player.RemoveExecutionProgress(Type);

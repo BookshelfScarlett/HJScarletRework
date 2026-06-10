@@ -1,5 +1,4 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

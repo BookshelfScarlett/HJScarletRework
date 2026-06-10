@@ -4,14 +4,11 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -99,7 +96,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 vel = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(0.2f, 17.4f);
                 float scale = Main.rand.NextFloat(0.4f, 0.9f) * .2f;
                 ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 45, 1, scale, glowMult: .75f);
-                
+
             }
 
             for (int i = 0; i < 20; i++)

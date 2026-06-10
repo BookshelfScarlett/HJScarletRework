@@ -341,7 +341,7 @@ namespace HJScarletRework.Globals.Methods
         }
         public static float ClampOscillation(float curOscillation, float speedValue, int updates = 1)
         {
-            float newOsci =curOscillation + ToRadians(speedValue) / updates;
+            float newOsci = curOscillation + ToRadians(speedValue) / updates;
             if (newOsci >= ToRadians(360f))
                 newOsci = ToRadians(-360f);
             return newOsci;

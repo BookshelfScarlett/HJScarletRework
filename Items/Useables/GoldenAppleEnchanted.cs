@@ -7,7 +7,7 @@ using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 
-namespace HJScarletRework.Items.Useables
+namespace HJScarletRework.Items.Accessories
 {
     public class GoldenAppleEnchanted : HJScarletItemClass
     {
@@ -17,7 +17,7 @@ namespace HJScarletRework.Items.Useables
             HJScarletList.LegalFoodList.Add(Type);
         }
         public override void ExSD()
-        { 
+        {
             Item.DefaultToFood(16, 16, BuffType<GoldenAppleBuffEnchanted>(), GetSeconds(60) * 60);
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.value = Item.sellPrice(platinum: 3);

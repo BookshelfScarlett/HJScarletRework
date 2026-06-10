@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -88,12 +87,12 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.HRShinyOrb(pos, Projectile.velocity * .8f, RandLerpColor(Color.RoyalBlue, Color.LightBlue), lifeTime, 1, scale, glowMult: .65f);
             }
 
-                       for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 int index = Main.rand.Next(3, CenterPosList.Count - 3);
                 Vector2 pos = CenterPosList[index] + Projectile.Center;
                 float scale = Main.rand.NextFloat(.4f, .8f) * .51f;
-                    ECSParticle.ShinyCrossStarECS(pos, Projectile.velocity / 2f, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, 1, 1.180f, 0.2f);
+                ECSParticle.ShinyCrossStarECS(pos, Projectile.velocity / 2f, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, 1, 1.180f, 0.2f);
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -148,14 +147,14 @@ namespace HJScarletRework.Projs.Executor
             e.Parameters["uFadeinRigtLength"].SetValue(0.1f);
             e.Parameters["uFadeinTopLength"].SetValue(0);
             e.Parameters["uFadeinBottomLength"].SetValue(0.4f);
-            e.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));   
+            e.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             e.CurrentTechnique.Passes[0].Apply();
             Color setColor = Color.Lerp(Color.RoyalBlue, Color.WhiteSmoke, 0.7f);
-            DrawBaseWave(tex, Color.LightSkyBlue* 0.30f, 18f);
-            DrawBaseWave(tex, Color.SkyBlue* 0.40f, 15f);
+            DrawBaseWave(tex, Color.LightSkyBlue * 0.30f, 18f);
+            DrawBaseWave(tex, Color.SkyBlue * 0.40f, 15f);
             DrawBaseWave(tex, Color.DarkBlue * .50f, 12f);
-            DrawBaseWave(tex, Color.RoyalBlue* .50f, 6f);
-            DrawBaseWave(tex, setColor* .90f, 1.5f);
+            DrawBaseWave(tex, Color.RoyalBlue * .50f, 6f);
+            DrawBaseWave(tex, setColor * .90f, 1.5f);
             Texture2D texture2 = HJScarletTexture.Noise_Aura.Value;
             Vector4 vector4 = new(0.2f, 0.2f, 0.05f, 0.6f);
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.79f + RandOffset1), new Vector2(5f, 0.07f), Color.LightSkyBlue);
@@ -163,7 +162,7 @@ namespace HJScarletRework.Projs.Executor
 
             texture2 = HJScarletTexture.Noise_Misc.Value;
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.15f + RandOffset2), new Vector2(5f, 0.1f), Color.LightBlue);
-            DrawBaseWave(texture2, Color.LightBlue* 0.82f, 10f);
+            DrawBaseWave(texture2, Color.LightBlue * 0.82f, 10f);
 
             texture2 = HJScarletTexture.Noise_Aura.Value;
             setColor = Color.Lerp(Color.LightSkyBlue, Color.WhiteSmoke, 0.70f);

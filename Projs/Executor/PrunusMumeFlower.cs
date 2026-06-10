@@ -52,7 +52,7 @@ namespace HJScarletRework.Projs.Executor
                     Timer = 0;
                     if (!Projectile.IsMe())
                         return;
-                    SoundEngine.PlaySound(SoundID.Item109 with { MaxInstances = 0, Pitch = 0.2f, PitchVariance = 0.1f});
+                    SoundEngine.PlaySound(SoundID.Item109 with { MaxInstances = 0, Pitch = 0.2f, PitchVariance = 0.1f });
                     for (int i = 0; i < 8; i++)
                     {
                         float rad = ToRadians(360f / 8 * i) + Projectile.rotation;
@@ -61,7 +61,7 @@ namespace HJScarletRework.Projs.Executor
                         ((PrunusMumePetal)proj.ModProjectile).AttackStyle = PrunusMumePetal.Style.ExecutionStrike;
                         proj.extraUpdates = 2;
                         proj.timeLeft = 180;
-                        proj.ai[2] = Reverse.ToDirectionInt(); 
+                        proj.ai[2] = Reverse.ToDirectionInt();
                     }
                     Reverse = !Reverse;
                 }
@@ -74,7 +74,7 @@ namespace HJScarletRework.Projs.Executor
                     Timer = 0f;
                     if (Projectile.IsMe())
                     {
-                        SoundEngine.PlaySound(HJScarletSounds.Blunt_Swing with {Variants = [1], MaxInstances = 0 , Pitch = 0.3f, PitchVariance = .1f, Volume = 0.5f});
+                        SoundEngine.PlaySound(HJScarletSounds.Blunt_Swing with { Variants = [1], MaxInstances = 0, Pitch = 0.3f, PitchVariance = .1f, Volume = 0.5f });
                         for (int i = 0; i < 5; i++)
                         {
                             float rad = ToRadians(360f / 5 * i) + Projectile.rotation;
@@ -99,7 +99,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void DrawParticle()
         {
-            if(Projectile.HJScarlet().ExecutionStrike)
+            if (Projectile.HJScarlet().ExecutionStrike)
             {
                 if (Main.rand.NextBool(4))
                 {

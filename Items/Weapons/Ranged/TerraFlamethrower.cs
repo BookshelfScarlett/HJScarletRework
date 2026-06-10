@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Items.Flamethrowers;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
@@ -6,20 +7,18 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Ranged
 {
     public class TerraFlamethrower : HJScarletWeapon
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
         public override ClassCategory Category => ClassCategory.Ranged;
         public override void ExSD()
         {
             Item.width = 172;
             Item.height = 72;
             Item.damage = 60;
-            Item.useTime = Item.useAnimation = 20;
+            Item.useTime = Item.useAnimation = 6;
             Item.knockBack = 5f;
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
             Item.SetUpNoUseGraphicItem(true, false);
@@ -35,6 +34,14 @@ namespace HJScarletRework.Items.Weapons.Ranged
         {
             Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI, ai0: 9);
             return false;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient<FT7SporeGun>().
+                AddIngredient(ItemID.BrokenHeroSword).
+                AddTile(TileID.MythrilAnvil).
+                Register();
         }
     }
 }

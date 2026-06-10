@@ -194,34 +194,34 @@ namespace HJScarletRework.Core.ParticleScarlet
                     }
                     ScarletParticleManager.ParticleAdditive.Add(this);
                 }
-                
+
             }
             if (TheBlendState == BlendState.NonPremultiplied)
+            {
+                if (priority)
                 {
-                    if (priority)
+                    if (!Important && ScarletParticleManager.ParticleNonPrePriority.Count > ParticleUtilities.MaxParticles)
                     {
-                        if (!Important && ScarletParticleManager.ParticleNonPrePriority.Count > ParticleUtilities.MaxParticles)
-                        {
-                            var old = ScarletParticleManager.ParticleNonPrePriority[0];
-                            old.ReturnToPool();
+                        var old = ScarletParticleManager.ParticleNonPrePriority[0];
+                        old.ReturnToPool();
 
-                            ScarletParticleManager.ParticleNonPrePriority.RemoveAt(0);
-                        }
-                        ScarletParticleManager.ParticleNonPrePriority.Add(this);
+                        ScarletParticleManager.ParticleNonPrePriority.RemoveAt(0);
                     }
-                    else
-                    {
-                        if (!Important && ScarletParticleManager.ParticleNonPre.Count > ParticleUtilities.MaxParticles)
-                        {
-                            var old = ScarletParticleManager.ParticleNonPre[0];
-                            old.ReturnToPool();
-
-                            ScarletParticleManager.ParticleNonPre.RemoveAt(0);
-                        }
-                        ScarletParticleManager.ParticleNonPre.Add(this);
-                    }
-
+                    ScarletParticleManager.ParticleNonPrePriority.Add(this);
                 }
+                else
+                {
+                    if (!Important && ScarletParticleManager.ParticleNonPre.Count > ParticleUtilities.MaxParticles)
+                    {
+                        var old = ScarletParticleManager.ParticleNonPre[0];
+                        old.ReturnToPool();
+
+                        ScarletParticleManager.ParticleNonPre.RemoveAt(0);
+                    }
+                    ScarletParticleManager.ParticleNonPre.Add(this);
+                }
+
+            }
 
             OnSpawn();
             return this;

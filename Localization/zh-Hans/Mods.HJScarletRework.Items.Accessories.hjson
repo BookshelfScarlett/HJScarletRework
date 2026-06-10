@@ -327,3 +327,13 @@ CrimsonCharm: {
 		“难以想象为了活下去竟如此疯狂”
 		'''
 }
+
+BitingClaw: {
+	DisplayName: 咬合蟹爪
+	Tooltip:
+		'''
+		佩戴后，添加由空想归途模组提供的特殊渔获
+		目前仅提供了潜航员盔甲[i:HJScarletRework/DiverHead][i:HJScarletRework/DiverBody][i:HJScarletRework/DiverLegs]
+		击败暗影墙后于海洋环境获取
+		'''
+}

@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Core.ParticleSystem;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
@@ -23,9 +22,9 @@ namespace HJScarletRework.Globals.ParticleSystem
         /// </summary>
 
         private const int MaxParticleCountsSet = 30002;
-        public static readonly List<BaseParticle> ActiveParticlesAlpha =  new (MaxParticleCountsSet);
+        public static readonly List<BaseParticle> ActiveParticlesAlpha = new(MaxParticleCountsSet);
         public static readonly List<BaseParticle> ActiveParticlesNonPremultiplied = new List<BaseParticle>(MaxParticleCountsSet);
-        public static readonly List<BaseParticle> ActiveParticlesAdditive = new (MaxParticleCountsSet);
+        public static readonly List<BaseParticle> ActiveParticlesAdditive = new(MaxParticleCountsSet);
         // 先绘制先更新的粒子
         public static readonly List<BaseParticle> PriorityActiveParticlesAlpha = new List<BaseParticle>(MaxParticleCountsSet);
         public static readonly List<BaseParticle> PriorityActiveParticlesNonPremultiplied = new List<BaseParticle>(MaxParticleCountsSet);

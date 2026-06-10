@@ -113,7 +113,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
                 tooltips.Insert(flavorTooltipIndex + 1, tooltipLine);
                 ExModifyTooltipsAlter(item, tooltips, armorCategory);
             }
-            if(DownedConditionID != -1)
+            if (DownedConditionID != -1)
             {
                 tooltips.AddSwapTooltipValueBossCondition(DownedConditionID);
             }

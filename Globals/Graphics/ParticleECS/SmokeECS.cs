@@ -7,7 +7,7 @@ using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.ParticleECS
 {
-    public class SmokeParticleECS: ECSParticleBehavior
+    public class SmokeParticleECS : ECSParticleBehavior
     {
 
         public override void Update(ref ECSParticleData particleDate)

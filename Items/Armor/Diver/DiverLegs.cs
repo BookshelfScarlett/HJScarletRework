@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace HJScarletRework.Items.Armor.Diver
 {
     [AutoloadEquip(EquipType.Legs)]
-    public class DiverLegs:HJScarletArmor
+    public class DiverLegs : HJScarletArmor
     {
         public override void ExSD()
         {

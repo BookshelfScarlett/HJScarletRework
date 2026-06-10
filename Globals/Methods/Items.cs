@@ -23,7 +23,7 @@ namespace HJScarletRework.Globals.Methods
             item.shootSpeed = itemShootSpeed;
             item.knockBack = knocback;
         }
-        public static void SetUpItemShoot<T>(this Item item, float itemShootSpeed, float knocback = 3f) where T :ModProjectile
+        public static void SetUpItemShoot<T>(this Item item, float itemShootSpeed, float knocback = 3f) where T : ModProjectile
         {
             item.shoot = ProjectileType<T>();
             item.shootSpeed = itemShootSpeed;

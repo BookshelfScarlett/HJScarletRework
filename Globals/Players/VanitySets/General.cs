@@ -3,15 +3,10 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Useables;
+using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Vanity.Arceca;
 using Microsoft.Xna.Framework;
-using Steamworks;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -61,11 +56,11 @@ namespace HJScarletRework.Globals.Players.VanitySets
         public void UpdateVanityParticle()
         {
             bool isMoving = (Math.Abs(Player.velocity.X) + Math.Abs(Player.velocity.Y)) > 5;
-            if(accVanityID == ItemType<TairitsuItem>())
+            if (accVanityID == ItemType<TairitsuItem>())
             {
                 DrawTairitsuItemParticle(isMoving);
             }
-            if(accVanityID == ItemType<HikariItem>())
+            if (accVanityID == ItemType<HikariItem>())
             {
                 DrawHikariItemParticle(isMoving);
             }
@@ -78,8 +73,8 @@ namespace HJScarletRework.Globals.Players.VanitySets
                 if (Main.rand.NextBool(8))
                 {
                     Vector2 posBase = Player.ToRandRec() - Player.velocity.ToSafeNormalize() * Main.rand.NextFloat(0.8f, 1.3f);
-                            new CrossGlow(posBase, RandLerpColor(Color.White, Color.IndianRed), 30, 1, 0.1f).Spawn();
-                            new NoahButterfly(posBase, -Vector2.UnitY.RotatedByRandom(PiOver4), RandLerpColor(Color.IndianRed, Color.HotPink), Main.rand.Next(45, 85), 0.8f, 0.35f * Main.rand.NextFloat(0.5f, 0.7f), 1f, drawGlowingOrbParticle: true).Spawn();
+                    new CrossGlow(posBase, RandLerpColor(Color.White, Color.IndianRed), 30, 1, 0.1f).Spawn();
+                    new NoahButterfly(posBase, -Vector2.UnitY.RotatedByRandom(PiOver4), RandLerpColor(Color.IndianRed, Color.HotPink), Main.rand.Next(45, 85), 0.8f, 0.35f * Main.rand.NextFloat(0.5f, 0.7f), 1f, drawGlowingOrbParticle: true).Spawn();
                 }
                 if (Main.rand.NextBool(3))
                 {

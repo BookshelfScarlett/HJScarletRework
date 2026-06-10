@@ -1,12 +1,11 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using HJScarletRework.Rarity.RarityShiny;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class PrunusMume: ExecutorWeaponClass
+    public class PrunusMume : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 1f;
         public override int ExecutionProgress => 32;

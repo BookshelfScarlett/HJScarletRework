@@ -3,7 +3,6 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -13,8 +12,8 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Exsanguination : ExecutorWeaponClass
     {
-        public override int ExecutionProgress => 500; 
-        public override float ExecutionStrikeDamageMult => 1; 
+        public override int ExecutionProgress => 500;
+        public override float ExecutionStrikeDamageMult => 1;
         public override void ExSSD()
         {
             HJScarletList.ScarletRarityHashSet.Add(Type);

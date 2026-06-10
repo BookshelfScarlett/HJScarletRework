@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.NPCs;
-using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
 using Microsoft.Xna.Framework;
@@ -8,12 +7,12 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Useables
+namespace HJScarletRework.Items.Accessories
 {
     public class CursedGoldenKey : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Useables;
-        public override string Texture => GetVanillaAssetPath(VanillaAsset.Item,ItemID.GoldenKey);
+        public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.GoldenKey);
         public override void ExSD()
         {
             Item.rare = ItemRarityID.LightPurple;

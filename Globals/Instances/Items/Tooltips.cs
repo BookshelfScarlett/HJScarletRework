@@ -74,7 +74,7 @@ namespace HJScarletRework.Globals.Instances.Items
                     value(line);
                     return false;
                 }
-                if(HJScarletList.RareItemRarityDrawDictionary.TryGetValue(item.type, out RareItemRarity.RareType type))
+                if (HJScarletList.RareItemRarityDrawDictionary.TryGetValue(item.type, out RareItemRarity.RareType type))
                 {
                     RareItemRarity.DrawItemName(line, type);
                     return false;
@@ -127,7 +127,7 @@ namespace HJScarletRework.Globals.Instances.Items
                 DisasterRarity.DrawRarity2
             },
             {
-                HJScarletList.SunlightRarityHashSet, 
+                HJScarletList.SunlightRarityHashSet,
                 SunlightRarity.DrawItemName
             }
         };

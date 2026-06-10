@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class SundownerFlareGun : HJScarletProj
     {
-        public override string Texture => GetVanillaAssetPath(VanillaAsset.Item,ItemID.FlareGun);
+        public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.FlareGun);
         public override ClassCategory Category => ClassCategory.Executor;
         public ref float Timer => ref Projectile.ai[0];
         public AnimationStruct Helper = new(3);
@@ -69,7 +69,7 @@ namespace HJScarletRework.Projs.Executor
                     }
                     for (int i = 0; i < 20; i++)
                     {
-                        new StarShape(Projectile.Center, dir.ToRandVelocity(ToRadians(15f), -.2f, 15f), RandLerpColor(Color.OrangeRed, Color.Orange), Main.rand.NextFloat(.3f,.6f), 40).Spawn();
+                        new StarShape(Projectile.Center, dir.ToRandVelocity(ToRadians(15f), -.2f, 15f), RandLerpColor(Color.OrangeRed, Color.Orange), Main.rand.NextFloat(.3f, .6f), 40).Spawn();
                     }
                 }
                 mountedPos.Y += (float)Math.Sin(Osci / 10f) * 15f;
@@ -78,7 +78,7 @@ namespace HJScarletRework.Projs.Executor
             }
             if (Timer < 20f)
             {
-                Projectile.rotation = Projectile.rotation.AngleLerp((Main.MouseWorld- Projectile.Center).ToRotation(), 0.1f);
+                Projectile.rotation = Projectile.rotation.AngleLerp((Main.MouseWorld - Projectile.Center).ToRotation(), 0.1f);
                 Projectile.rotation += Main.rand.NextFloat(ToRadians(5f), ToRadians(5f)) * Main.rand.NextBool().ToDirectionInt();
                 Timer++;
                 return;
@@ -86,8 +86,8 @@ namespace HJScarletRework.Projs.Executor
 
             if (!Helper.IsDone[0])
             {
-                if(Helper.GetAniProgress(0) == 0)
-                    SoundEngine.PlaySound(HJScarletSounds.Air_HeavyFlow with {Pitch = .7f,Variants = [2], PitchVariance = 0.1f,MaxInstances = 0 });
+                if (Helper.GetAniProgress(0) == 0)
+                    SoundEngine.PlaySound(HJScarletSounds.Air_HeavyFlow with { Pitch = .7f, Variants = [2], PitchVariance = 0.1f, MaxInstances = 0 });
                 Projectile.rotation += 1.492f * -Projectile.spriteDirection;
                 PlayRotationParticle();
                 Helper.UpdateAniState(0);
@@ -97,12 +97,12 @@ namespace HJScarletRework.Projs.Executor
                 if (Helper.GetAniProgress(1) == 0)
                 {
                     BeginPosition = Main.MouseWorld;
-                    ShootSkyPosition = new Vector2(Lerp(Owner.ToClampMouseVector2().X, Owner.Center.X, 0.30f) , Main.screenPosition.Y - 200f);
+                    ShootSkyPosition = new Vector2(Lerp(Owner.ToClampMouseVector2().X, Owner.Center.X, 0.30f), Main.screenPosition.Y - 200f);
                 }
                 Helper.UpdateAniState(1);
-                float pro = EaseOutBack( Helper.GetAniProgress(1));
+                float pro = EaseOutBack(Helper.GetAniProgress(1));
                 Vector2 skyPos = Vector2.Lerp(BeginPosition, ShootSkyPosition, pro);
-                Projectile.rotation = Projectile.rotation.AngleLerp((skyPos- Projectile.Center).ToRotation(), pro);
+                Projectile.rotation = Projectile.rotation.AngleLerp((skyPos - Projectile.Center).ToRotation(), pro);
                 Projectile.rotation += Main.rand.NextFloat(ToRadians(10f), ToRadians(10f)) * Main.rand.NextBool().ToDirectionInt();
 
             }
@@ -111,7 +111,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Helper.GetAniProgress(2) == 0)
                 {
                     Projectile.velocity = Projectile.rotation.ToRotationVector2() * -50f;
-                    SoundEngine.PlaySound(HJScarletSounds.Misc_Boom with { Variants = [2],MaxInstances = 0, Pitch = 0.8f});
+                    SoundEngine.PlaySound(HJScarletSounds.Misc_Boom with { Variants = [2], MaxInstances = 0, Pitch = 0.8f });
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.SafeDirByRot() * 16f, ProjectileType<SundownerFlare>(), 0, 0, Owner.whoAmI);
                     proj.originalDamage = Projectile.originalDamage;
 
@@ -130,7 +130,7 @@ namespace HJScarletRework.Projs.Executor
                     Projectile.velocity.Y += .30f;
                 }
 
-                Helper.UpdateAniState(2,10);
+                Helper.UpdateAniState(2, 10);
             }
             else
             {
@@ -176,16 +176,16 @@ namespace HJScarletRework.Projs.Executor
         {
             Texture2D tex = Projectile.GetTexture();
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
-            float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi: 0);
+            float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
             Vector2 rotationPoint = tex.Size() * 0.5f;
             SpriteEffects flipSprite = Projectile.spriteDirection * Owner.gravDir == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             if (!Helper.IsDone[1] && Helper.IsDone[0])
             {
-                for(int i = 0;i<8;i++)
-                SB.Draw(tex, drawPos + ToRadians(i * 360f / 8f).ToRotationVector2() * 2, null, Color.White.ToAddColor(), drawRot, rotationPoint, Projectile.scale * 1f, flipSprite, default);
+                for (int i = 0; i < 8; i++)
+                    SB.Draw(tex, drawPos + ToRadians(i * 360f / 8f).ToRotationVector2() * 2, null, Color.White.ToAddColor(), drawRot, rotationPoint, Projectile.scale * 1f, flipSprite, default);
             }
-                SB.Draw(tex, drawPos, null, Color.Lerp(Color.Transparent, Color.White, Projectile.Opacity), drawRot, rotationPoint, Projectile.scale * 1f, flipSprite, default);
-            if (!Helper.IsDone[0] && Helper.GetAniProgress(0)>0)
+            SB.Draw(tex, drawPos, null, Color.Lerp(Color.Transparent, Color.White, Projectile.Opacity), drawRot, rotationPoint, Projectile.scale * 1f, flipSprite, default);
+            if (!Helper.IsDone[0] && Helper.GetAniProgress(0) > 0)
             {
                 Texture2D ring = HJScarletTexture.Particle_RingShiny.Value;
                 Vector2 ori = ring.ToOrigin();

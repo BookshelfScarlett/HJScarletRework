@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Items.Accessories;
-using System;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;

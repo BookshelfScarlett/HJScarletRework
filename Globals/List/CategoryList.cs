@@ -181,7 +181,7 @@ namespace HJScarletRework.Globals.List
                 string name = item.GetType().Name.ToLower();
                 bool isOre = name.Contains("ore") && item.createTile != -1;
                 bool isBar = name.Contains("bar") && item.createTile != -1;
-                if(isOre && !OresHashSet.Contains(item.type))
+                if (isOre && !OresHashSet.Contains(item.type))
                     OresHashSet.Add(item.type);
                 if (isBar && !BarsHashSet.Contains(item.type))
                     BarsHashSet.Add(item.type);

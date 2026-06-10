@@ -6,7 +6,6 @@ using HJScarletRework.Projs.Melee;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {

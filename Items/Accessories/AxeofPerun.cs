@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;

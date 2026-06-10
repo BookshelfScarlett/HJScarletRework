@@ -14,25 +14,25 @@ namespace HJScarletRework.Core.ParticleECS
         public static int HRShinyOrb(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float scale, float glowMult = 0.1f, BlendState blendstate = null)
         {
             BlendState bs = blendstate ?? BlendState.Additive;
-            return ECSMethod.NewParticle(GetInstance<HRShinyOrbECS>().Type, timeLeft, pos, vel, color, opacity, scale: scale, blendstate: bs,ai0:glowMult);
+            return ECSMethod.NewParticle(GetInstance<HRShinyOrbECS>().Type, timeLeft, pos, vel, color, opacity, scale: scale, blendstate: bs, ai0: glowMult);
 
         }
-        public static int SnowCloud(Vector2 pos, Vector2 vel, Color color, int timeLeft, float rotation,float opacity, float scale, BlendState blendstate = null)
+        public static int SnowCloud(Vector2 pos, Vector2 vel, Color color, int timeLeft, float rotation, float opacity, float scale, BlendState blendstate = null)
         {
             BlendState bs = blendstate ?? BlendState.Additive;
-            return ECSMethod.NewParticle(GetInstance<SnowCloudECS>().Type, timeLeft, pos, vel, color, opacity,rotation:rotation, scale: scale, blendstate: bs);
+            return ECSMethod.NewParticle(GetInstance<SnowCloudECS>().Type, timeLeft, pos, vel, color, opacity, rotation: rotation, scale: scale, blendstate: bs);
         }
         public static int LightntingGlow(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float scale, int drawTime = 6, BlendState blendstate = null)
         {
             BlendState bs = blendstate ?? BlendState.Additive;
-            return ECSMethod.NewParticle(GetInstance<LightningGlowECS>().Type, timeLeft, pos, vel, color, opacity,0, scale: scale, blendstate: bs,ai0:drawTime);
+            return ECSMethod.NewParticle(GetInstance<LightningGlowECS>().Type, timeLeft, pos, vel, color, opacity, 0, scale: scale, blendstate: bs, ai0: drawTime);
 
         }
         /// <summary>
         /// ECS的StarShape粒子，默认以velocity的角度
         /// </summary>
 
-        public static int StarShape(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float scale, float glowMult = 0.5f, BlendState blendstate= null)
+        public static int StarShape(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float scale, float glowMult = 0.5f, BlendState blendstate = null)
         {
             BlendState bs = blendstate ?? BlendState.Additive;
             return ECSMethod.NewParticle(GetInstance<StarShapeECS>().Type, timeLeft, pos, vel, color, opacity, 0, scale: scale, blendstate: bs, ai0: glowMult);
@@ -45,11 +45,11 @@ namespace HJScarletRework.Core.ParticleECS
             BlendState bs = blendstate ?? BlendState.Additive;
             return ECSMethod.NewParticle(GetInstance<StarShapeECS>().Type, timeLeft, pos, vel, color, opacity, rotation, scale: scale, blendstate: bs, ai0: glowMult, ai1: 9);
         }
-        public static int SmokeParticle(Vector2 pos, Vector2 vel, Color color, int timeLeft, float rot, float opacity, float scale, bool alt = false,BlendState blendstate= null)
+        public static int SmokeParticle(Vector2 pos, Vector2 vel, Color color, int timeLeft, float rot, float opacity, float scale, bool alt = false, BlendState blendstate = null)
         {
             BlendState bs = blendstate ?? BlendState.NonPremultiplied;
             float Ai0 = alt ? 1 : 0;
-            return ECSMethod.NewParticle(GetInstance<SmokeParticleECS>().Type, timeLeft, pos, vel, color, opacity, rot,scale, blendstate: bs, ai0: Ai0);
+            return ECSMethod.NewParticle(GetInstance<SmokeParticleECS>().Type, timeLeft, pos, vel, color, opacity, rot, scale, blendstate: bs, ai0: Ai0);
         }
     }
 }

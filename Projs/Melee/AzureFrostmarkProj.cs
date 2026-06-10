@@ -117,14 +117,14 @@ namespace HJScarletRework.Projs.Melee
             Vector2 projDir = Projectile.SafeDirByRot();
             Vector2 spawnPos = Projectile.Center;
             //这里主要是为了对准矛上的柄。不过如果射弹本身就处于物块检测内，那就没法子了
-                
+
             Vector2 posOffset = projDir * 20f;
             if (Collision.SolidCollision(spawnPos, Projectile.width, Projectile.height))
                 posOffset = Vector2.Zero;
-                Vector2 dir = Vector2.UnitY + Projectile.velocity.ToSafeNormalize() * (0.5f);
-                    Projectile ball = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posOffset + spawnPos, dir * -Main.rand.NextFloat(4f, 7.2f) + Projectile.SafeDir() * - 3f, ProjectileType<AzureFrostmarkEnergy>(), Projectile.damage / 2, Projectile.knockBack);
-                // Vector2 dir2 = Vector2.UnitY + Projectile.velocity.ToSafeNormalize() * (0.5f);
-                //Projectile ball2 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posOffset + spawnPos, dir2 * -Main.rand.NextFloat(4f, 7.2f), ProjectileType<AzureFrostmarkEnergy>(), Projectile.damage / 2, Projectile.knockBack);
+            Vector2 dir = Vector2.UnitY + Projectile.velocity.ToSafeNormalize() * (0.5f);
+            Projectile ball = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posOffset + spawnPos, dir * -Main.rand.NextFloat(4f, 7.2f) + Projectile.SafeDir() * -3f, ProjectileType<AzureFrostmarkEnergy>(), Projectile.damage / 2, Projectile.knockBack);
+            // Vector2 dir2 = Vector2.UnitY + Projectile.velocity.ToSafeNormalize() * (0.5f);
+            //Projectile ball2 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posOffset + spawnPos, dir2 * -Main.rand.NextFloat(4f, 7.2f), ProjectileType<AzureFrostmarkEnergy>(), Projectile.damage / 2, Projectile.knockBack);
 
             //天王老子来了我都要用自己的粒子
             //不服憋着
@@ -145,14 +145,14 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if(AttackType == Style.Shoot)
+            if (AttackType == Style.Shoot)
             {
                 AttackType = Style.SpinAndFade;
                 Projectile.velocity = oldVelocity;
                 Projectile.tileCollide = false;
             }
-            
-            for(int i =SpawnTime;i<2;i++)
+
+            for (int i = SpawnTime; i < 2; i++)
             {
                 SpawnEnergyBall();
             }

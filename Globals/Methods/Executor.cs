@@ -119,7 +119,8 @@ namespace HJScarletRework.Globals.Methods
             HJScarletPlayer usPlayer = owner.HJScarlet();
             //检查玩家手持的武器
             Item item = owner.HeldItem;
-            if (!item.DamageType.CountsAsClass<ExecutorDamageClass>())
+            bool hasReforged = ModLoader.HasMod("ExpandedReforge");
+            if (!item.DamageType.CountsAsClass<ExecutorDamageClass>() && !hasReforged)
                 return false;
             int executionTime = HJScarletList.ExecutorWeaponDictionary[itemID];
             if (usPlayer.tacticalExecution)

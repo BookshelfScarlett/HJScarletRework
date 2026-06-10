@@ -44,10 +44,10 @@ namespace HJScarletRework.Assets.Registers
             Texture_RarityGlow = new Tex2DWithPath($"{Path_General}{nameof(Texture_RarityGlow)}");
             Texture_StandardGradient = new Tex2DWithPath($"{Path_General}{nameof(Texture_StandardGradient)}");
             Texture_SnowCloud = new Tex2DWithPath($"{Path_General}{nameof(Texture_SnowCloud)}");
-            Texture_SwordSlash= new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash)}");
-            Texture_SwordSlash1= new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash1)}");
-            Texture_SwordSlash2= new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash2)}");
-            Texture_Fog= new Tex2DWithPath($"{Path_General}{nameof(Texture_Fog)}");
+            Texture_SwordSlash = new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash)}");
+            Texture_SwordSlash1 = new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash1)}");
+            Texture_SwordSlash2 = new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash2)}");
+            Texture_Fog = new Tex2DWithPath($"{Path_General}{nameof(Texture_Fog)}");
 
         }
         public static void UnloadTexture()

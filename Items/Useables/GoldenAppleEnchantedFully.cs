@@ -6,9 +6,9 @@ using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 
-namespace HJScarletRework.Items.Useables
+namespace HJScarletRework.Items.Accessories
 {
-    public class GoldenAppleEnchantedFully :HJScarletItemClass
+    public class GoldenAppleEnchantedFully : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Useables;
         public override string Texture => GetInstance<GoldenAppleEnchanted>().Texture;

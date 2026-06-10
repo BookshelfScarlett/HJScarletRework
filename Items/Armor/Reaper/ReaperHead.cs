@@ -21,7 +21,7 @@ namespace HJScarletRework.Items.Armor.Reaper
             HJScarletList.ScarletRarityHashSet.Add(Type);
         }
 
-        public override int[] ArmorSlots => [Type,ItemType<ReaperBody>(),ItemType<ReaperLegs>()];
+        public override int[] ArmorSlots => [Type, ItemType<ReaperBody>(), ItemType<ReaperLegs>()];
         public override bool SetUpArmorSet => true;
         public override void ExSD()
         {

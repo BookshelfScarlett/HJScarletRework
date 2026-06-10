@@ -6,7 +6,7 @@ using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 
-namespace HJScarletRework.Items.Useables
+namespace HJScarletRework.Items.Accessories
 {
     public class GoldenApple : HJScarletItemClass
     {

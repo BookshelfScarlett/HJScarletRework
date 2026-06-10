@@ -14,7 +14,6 @@ using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Magic
 {
@@ -54,20 +53,20 @@ namespace HJScarletRework.Projs.Magic
         }
         public override void ProjAI()
         {
-            Lighting.AddLight(Projectile.Center,TorchID.Orange);
-            if (Projectile.GetTargetSafe(out NPC target, searchDistance:1200f) && CurTarget is null)
+            Lighting.AddLight(Projectile.Center, TorchID.Orange);
+            if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1200f) && CurTarget is null)
             {
                 CurTarget = target;
             }
             CurTarget = CurTarget.IsLegal() ? CurTarget : null;
 
             Projectile.rotation = Projectile.velocity.ToRotation();
-            
-            if(Projectile.penetrate == -1 && Projectile.damage == 0)
+
+            if (Projectile.penetrate == -1 && Projectile.damage == 0)
             {
                 Projectile.velocity *= 0.06f;
                 Projectile.Opacity -= 0.1f;
-                if(Projectile.Opacity<= 0.03f)
+                if (Projectile.Opacity <= 0.03f)
                 {
                     Projectile.Kill();
                     return;
@@ -79,7 +78,7 @@ namespace HJScarletRework.Projs.Magic
                 Timer++;
                 if (Timer < 15f)
                     return;
-                if(CurTarget.IsLegal())
+                if (CurTarget.IsLegal())
                 {
                     Projectile.timeLeft = GetSeconds(5);
                     float speedValue = Projectile.velocity.Length();
@@ -106,11 +105,11 @@ namespace HJScarletRework.Projs.Magic
             }
             if (Projectile.IsOutScreen() && Projectile.Opacity < Main.rand.NextFloat())
                 return;
-                if (Main.rand.NextBool(5))
-                    new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f), Projectile.velocity/8f, RandLerpColor(Color.Lerp(Color.DarkOrange, Color.Red, 0.64f), Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.53f * Projectile.Opacity,false, ToRadians(1f)).Spawn();
-           
-               if (Main.rand.NextBool(7))
-                    new SmokeParticle(Projectile.Center.ToRandCirclePos(8f), Projectile.velocity / 8f, RandLerpColor(Color.DarkOrange, Color.OrangeRed), 20, RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f, 0.16f) * 0.86f * Projectile.Opacity,true).SpawnToPriority();
+            if (Main.rand.NextBool(5))
+                new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f), Projectile.velocity / 8f, RandLerpColor(Color.Lerp(Color.DarkOrange, Color.Red, 0.64f), Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.53f * Projectile.Opacity, false, ToRadians(1f)).Spawn();
+
+            if (Main.rand.NextBool(7))
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(8f), Projectile.velocity / 8f, RandLerpColor(Color.DarkOrange, Color.OrangeRed), 20, RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f, 0.16f) * 0.86f * Projectile.Opacity, true).SpawnToPriority();
 
         }
         public override void OnKill(int timeLeft)
@@ -164,7 +163,7 @@ namespace HJScarletRework.Projs.Magic
                 Projectile.damage = 0;
                 Projectile.penetrate = -1;
 
-            }    
+            }
             Projectile.BounceOnTile(oldVelocity);
             BounceTime++;
             return false;
@@ -192,7 +191,7 @@ namespace HJScarletRework.Projs.Magic
                 edgeColor = Color.Lerp(Color.Orange, Color.White, (1 - rads)).ToAddColor(10) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads) * Projectile.Opacity;
                 SB.Draw(projTex, lerpPos + Projectile.PosToCenter(), null, edgeColor * 0.25f, rot, ori, oriScale * scale * Projectile.Opacity * 0.75f, 0, 0);
             }
-            SB.Draw(projTex, projPos, null, Color.DarkOrange.ToAddColor(75) * Projectile.Opacity, Projectile.rotation, ori, oriScale , 0, 0);
+            SB.Draw(projTex, projPos, null, Color.DarkOrange.ToAddColor(75) * Projectile.Opacity, Projectile.rotation, ori, oriScale, 0, 0);
             SB.Draw(projTex, projPos, null, Color.White.ToAddColor(0) * Projectile.Opacity, Projectile.rotation, ori, oriScale * 0.75f, 0, 0);
 
             return false;
@@ -222,7 +221,7 @@ namespace HJScarletRework.Projs.Magic
             shader.Parameters["LaserTextureSize"].SetValue(useTex.Size());
             shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, useTex.Height()));
             shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -24.2f);
-            shader.Parameters["uColor"].SetValue(drawColor.ToVector4() *Projectile.Opacity  *  alphaValue *Clamp(Projectile.velocity.Length(), 0f, 1f));
+            shader.Parameters["uColor"].SetValue(drawColor.ToVector4() * Projectile.Opacity * alphaValue * Clamp(Projectile.velocity.Length(), 0f, 1f));
             shader.Parameters["uFadeoutLength"].SetValue(0.8f);
             shader.Parameters["uFadeinLength"].SetValue(0.12f);
             shader.CurrentTechnique.Passes[0].Apply();

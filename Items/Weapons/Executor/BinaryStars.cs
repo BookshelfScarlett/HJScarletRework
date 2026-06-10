@@ -3,7 +3,6 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using HJScarletRework.Rarity.RarityShiny;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

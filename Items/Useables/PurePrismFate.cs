@@ -1,18 +1,14 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Rarity.RarityShiny;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 
-namespace HJScarletRework.Items.Useables
+namespace HJScarletRework.Items.Accessories
 {
     public class PurePrismFate : HJScarletItemClass
     {
@@ -83,8 +79,8 @@ namespace HJScarletRework.Items.Useables
                               || ItemID.Sets.IsFishingCrate[item.type]
                               || ItemID.Sets.IsFishingCrateHardmode[item.type]
                               || ItemID.Sets.Glowsticks[item.type];
-                            
-                
+
+
                 bool blackList = false;
                 //过滤所有容器
                 if (item.createTile != -1)

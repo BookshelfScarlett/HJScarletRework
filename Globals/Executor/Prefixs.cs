@@ -168,7 +168,7 @@ namespace HJScarletRework.Globals.Executor
             }
             if (CritDamageAdd != 0f)
             {
-                string mult = (CritDamageAdd* 100f).ToString("N0");
+                string mult = (CritDamageAdd * 100f).ToString("N0");
                 string insertValue = (CritDamageAdd * 100f) > 0 ? "+" : string.Empty;
                 string realValue = $"{insertValue}{mult}%";
 
@@ -190,7 +190,7 @@ namespace HJScarletRework.Globals.Executor
                 TooltipLine newLine = new(Mod, ArmorPenetrationNameID, ArmorPenetrationValue.ToFormatValue(realValue))
                 {
                     IsModifier = true,
-                    IsModifierBad = DefenseAdded< 0f
+                    IsModifierBad = DefenseAdded < 0f
                 };
                 yield return newLine;
             }

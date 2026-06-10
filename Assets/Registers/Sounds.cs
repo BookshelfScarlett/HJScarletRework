@@ -1,5 +1,4 @@
 ﻿using Terraria.Audio;
-using XPT.Core.Audio.MP3Sharp.Decoding;
 
 namespace HJScarletRework.Assets.Registers
 {
@@ -55,25 +54,25 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle GalvanizedHand_Charge => new($"{SoundsPath}{nameof(GalvanizedHand_Charge)}", numVariants: 2);
         public static SoundStyle SpearofEscape_Toss => new($"{SoundsPath}{nameof(SpearofEscape_Toss)}", numVariants: 3);
         public static SoundStyle SpearofEscape_Boom => new($"{SoundsPath}{nameof(SpearofEscape_Boom)}");
-        public static SoundStyle Lightning_Quick=> new SoundStyle($"{SoundsPath}{nameof(Lightning_Quick)}");
-        public static SoundStyle Lightning_QuickHeavy=> new SoundStyle($"{SoundsPath}{nameof(Lightning_QuickHeavy)}");
-        public static SoundStyle Lightning_Strike=> new SoundStyle($"{SoundsPath}{nameof(Lightning_Strike)}");
+        public static SoundStyle Lightning_Quick => new SoundStyle($"{SoundsPath}{nameof(Lightning_Quick)}");
+        public static SoundStyle Lightning_QuickHeavy => new SoundStyle($"{SoundsPath}{nameof(Lightning_QuickHeavy)}");
+        public static SoundStyle Lightning_Strike => new SoundStyle($"{SoundsPath}{nameof(Lightning_Strike)}");
         public static SoundStyle Misc_Flow => new SoundStyle($"{SoundsPath}{nameof(Misc_Flow)}", numVariants: 2);
         public static SoundStyle Misc_Boom => new SoundStyle($"{SoundsPath}{nameof(Misc_Boom)}", numVariants: 5);
-        public static SoundStyle Tank_Fire => new SoundStyle($"{SoundsPath}{nameof(Tank_Fire)}", numVariants:2);
+        public static SoundStyle Tank_Fire => new SoundStyle($"{SoundsPath}{nameof(Tank_Fire)}", numVariants: 2);
         public static SoundStyle Sundowner_Boom => new SoundStyle($"{SoundsPath}{nameof(Sundowner_Boom)}");
         public static SoundStyle Sundowner_Fire => new SoundStyle($"{SoundsPath}{nameof(Sundowner_Fire)}");
         public static SoundStyle Smash_AirHeavyAlt => new SoundStyle($"{SoundsPath}{nameof(Smash_AirHeavy)}", numVariants: 2);
         public static SoundStyle Misc_KnifeTossAlt => new SoundStyle($"{SoundsPath}{nameof(Misc_KnifeToss)}", numVariants: 3);
         public static SoundStyle Misc_AirFlowAlt => new SoundStyle($"{SoundsPath}{nameof(Misc_AirFlowAlt)}", numVariants: 3);
         public static SoundStyle Misc_AirCharge => new SoundStyle($"{SoundsPath}{nameof(Misc_AirCharge)}");
-        public static SoundStyle Frostwave_Release => new SoundStyle($"{SoundsPath}{nameof(Frostwave_Release)}", numVariants : 3);
+        public static SoundStyle Frostwave_Release => new SoundStyle($"{SoundsPath}{nameof(Frostwave_Release)}", numVariants: 3);
         public static SoundStyle Frostwave_LightRelease => new SoundStyle($"{SoundsPath}{nameof(Frostwave_LightRelease)}");
         public static SoundStyle Misc_Spell => new SoundStyle($"{SoundsPath}{nameof(Misc_Spell)}");
-        public static SoundStyle Misc_Ding=> new SoundStyle($"{SoundsPath}{nameof(Misc_Ding)}");
-        public static SoundStyle Misc_MayaPumper => new SoundStyle($"{SoundsPath}{nameof(Misc_MayaPumper)}", numVariants :2);
-        public static SoundStyle Frosthammer_SnowCharge=> new SoundStyle($"{SoundsPath}{nameof(Frosthammer_SnowCharge)}");
-        public static SoundStyle Frostwave_Boom=> new SoundStyle($"{SoundsPath}{nameof(Frostwave_Boom)}");
+        public static SoundStyle Misc_Ding => new SoundStyle($"{SoundsPath}{nameof(Misc_Ding)}");
+        public static SoundStyle Misc_MayaPumper => new SoundStyle($"{SoundsPath}{nameof(Misc_MayaPumper)}", numVariants: 2);
+        public static SoundStyle Frosthammer_SnowCharge => new SoundStyle($"{SoundsPath}{nameof(Frosthammer_SnowCharge)}");
+        public static SoundStyle Frostwave_Boom => new SoundStyle($"{SoundsPath}{nameof(Frostwave_Boom)}");
         public static SoundStyle[] Hammer_Shoot =>
             [
                 Hammer_Shoot1,

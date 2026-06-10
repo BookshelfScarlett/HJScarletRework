@@ -55,7 +55,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Lighting.AddLight(Projectile.Center, TorchID.Jungle);
-            switch(AttackState)
+            switch (AttackState)
             {
                 case State.Shoot:
                     DoShoot();
@@ -74,8 +74,8 @@ namespace HJScarletRework.Projs.Executor
             Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.JunglePlants);
             d.velocity = Projectile.velocity / 8f;
             d.noGravity = true;
-            if(Main.rand.NextBool(4))
-            new SnowCloud(Projectile.Center.ToRandCirclePos(60), Projectile.velocity / 8f, RandLerpColor(Color.Green, Color.IndianRed), 40, 0, 0.5f, Main.rand.NextFloat(0.1f, 0.3f) * .8f).Spawn();
+            if (Main.rand.NextBool(4))
+                new SnowCloud(Projectile.Center.ToRandCirclePos(60), Projectile.velocity / 8f, RandLerpColor(Color.Green, Color.IndianRed), 40, 0, 0.5f, Main.rand.NextFloat(0.1f, 0.3f) * .8f).Spawn();
 
         }
 
@@ -101,12 +101,12 @@ namespace HJScarletRework.Projs.Executor
         public void SpawnPetalFlower(Vector2 center)
         {
             int length = 16;
-            for(int i =0;i<16;i++)
+            for (int i = 0; i < 16; i++)
             {
                 float rad = Projectile.rotation + ToRadians(360f / length * i);
-                new SmokeParticle(center.ToRandCirclePos(5f), rad.ToRotationVector2() * 10f * Main.rand.NextFloat(), RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 40, RandRotTwoPi, 1, 0.49f,true).SpawnToPriority();
+                new SmokeParticle(center.ToRandCirclePos(5f), rad.ToRotationVector2() * 10f * Main.rand.NextFloat(), RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 40, RandRotTwoPi, 1, 0.49f, true).SpawnToPriority();
             }
-            for(int i =0;i<30;i++)
+            for (int i = 0; i < 30; i++)
             {
                 new TurbulenceGlowOrb(center.ToRandCirclePos(60f), 2.2f, RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 120, .21f, RandRotTwoPi).Spawn();
                 new TurbulenceGlowOrb(center.ToRandCirclePos(60f), 2.2f, RandLerpColor(Color.HotPink, Color.IndianRed), 120, .2f, RandRotTwoPi).Spawn();
@@ -130,7 +130,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 18f, 20f);
             Projectile.rotation += .12f;
             Projectile.tileCollide = false;
-            if(Projectile.IntersectOwnerByDistance())
+            if (Projectile.IntersectOwnerByDistance())
             {
                 Projectile.Kill();
             }

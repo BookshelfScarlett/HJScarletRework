@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items.Rockets;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;

@@ -170,13 +170,13 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 dVel = vel * Main.rand.NextFloat(4.4f, 8.8f);
                 new SmokeParticle(pos, dVel, RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 1f, 0.20f * Main.rand.NextFloat(0.50f, 1.1f), RandBoolen()).SpawnToNonPreMult();
             }
-                for (int i = 0; i < 8; i++)
-                {
+            for (int i = 0; i < 8; i++)
+            {
 
-                    Vector2 pos = Main.rand.NextVector2FromRectangle(Utils.CenteredRectangle(Projectile.Center, new Vector2(32, 32)));
-                    Vector2 dVel = vel * Main.rand.NextFloat(4.4f, 4.8f);
-                    new ShinyOrbHard(pos, dVel, RandLerpColor(Color.DarkRed, Color.Crimson), 40, Main.rand.NextFloat(0.4f, 0.8f)).SpawnToNonPreMult();
-                }
+                Vector2 pos = Main.rand.NextVector2FromRectangle(Utils.CenteredRectangle(Projectile.Center, new Vector2(32, 32)));
+                Vector2 dVel = vel * Main.rand.NextFloat(4.4f, 4.8f);
+                new ShinyOrbHard(pos, dVel, RandLerpColor(Color.DarkRed, Color.Crimson), 40, Main.rand.NextFloat(0.4f, 0.8f)).SpawnToNonPreMult();
+            }
 
         }
 

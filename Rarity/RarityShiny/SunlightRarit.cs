@@ -2,11 +2,7 @@
 using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityParticles;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -21,7 +17,7 @@ namespace HJScarletRework.Rarity.RarityShiny
         public static void DrawItemName(DrawableTooltipLine line)
         {
             PostDrawRarity(ref RaritySparkles, line);
-            RarityDrawHelper.DrawCustomTooltipLine(line, Color.DarkOrange, Color.Lerp(Color.White, Color.OrangeRed, 0.165f), Color.Lerp(Color.OrangeRed,Color.White,.14f), 1);
+            RarityDrawHelper.DrawCustomTooltipLine(line, Color.DarkOrange, Color.Lerp(Color.White, Color.OrangeRed, 0.165f), Color.Lerp(Color.OrangeRed, Color.White, .14f), 1);
 
         }
         public static void DrawFlavorTooltip(DrawableTooltipLine line)
@@ -62,7 +58,7 @@ namespace HJScarletRework.Rarity.RarityShiny
                 particleList.Add(rarityShinyOrb);
             }
             if (Main.rand.NextBool(10))
-            { 
+            {
                 float scale = Main.rand.NextFloat(0.30f * 0.5f, 0.30f) * 1.2f;
                 int lifetime = 160;
                 Vector2 position = GetParticlePosition(tooltipLine);

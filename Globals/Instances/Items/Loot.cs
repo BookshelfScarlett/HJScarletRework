@@ -1,15 +1,12 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Placables.FishingCrate;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
-using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Items.Weapons.Ranged;
 using Terraria;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -53,15 +50,15 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 HJScarletMethods.ApplyMasterLoot(ref itemLoot, ItemType<SacarbWings>(), 4);
             }
-            if(item.type == ItemType<ShadowCrate>() 
+            if (item.type == ItemType<ShadowCrate>()
                 || item.type == ItemType<ShinyCrate>()
                 || item.type == ItemType<SolarCrate>()
                 || item.type == ItemType<QuakyCrate>()
-                || item.type == ItemType<CountdownCrate>() 
-                || item.type ==ItemType<ForeverCrate>() 
-                || item.type ==ItemType<MembraneCrate>() 
-                || item.type ==ItemType<LivingCrate>() 
-                || item.type ==ItemType<CubeCrate>() 
+                || item.type == ItemType<CountdownCrate>()
+                || item.type == ItemType<ForeverCrate>()
+                || item.type == ItemType<MembraneCrate>()
+                || item.type == ItemType<LivingCrate>()
+                || item.type == ItemType<CubeCrate>()
                 || item.type == ItemType<CubistCrate>())
             {
                 itemLoot.AddLoot<PurePrismFate>(4, 25, 40);

@@ -1,8 +1,11 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Magic;
+using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
+using rail;
 using System.Diagnostics;
 using Terraria;
 using Terraria.DataStructures;
@@ -27,7 +30,8 @@ namespace HJScarletRework.Items
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            //Projectile.NewProjectileDirect(source, Main.MouseWorld, -Vector2.UnitY, ProjectileType<SlimeGodShieldSunProj>(), 0, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<TerraFlamethrowerTank>(), 0, knockback, player.whoAmI);
+            ((TerraFlamethrowerTank)proj.ModProjectile).BeginTargetRotation = player.ToMouseVector2().ToRotation();
             //proj.rotation = RandRotTwoPi;
             //proj.HJScarlet().ExecutionStrike = true;
             Stopwatch.StartNew();

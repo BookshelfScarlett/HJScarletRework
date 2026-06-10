@@ -36,7 +36,7 @@ namespace HJScarletRework.Core.Primitives.Trail
             SamplerState = SamplerState.PointClamp;
             NotSkipMainScreenPosition = notSkipMainScreenPosition;
         }
-        public DrawSetting(Texture2D texture, SamplerState samplerState,bool notSkipMainScreenPosition = true)
+        public DrawSetting(Texture2D texture, SamplerState samplerState, bool notSkipMainScreenPosition = true)
         {
             Texture = texture;
             SamplerState = samplerState;

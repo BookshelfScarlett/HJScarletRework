@@ -1,11 +1,11 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using rail;
 using ReLogic.Graphics;
 using System.Collections.Generic;
 using Terraria;
@@ -102,13 +102,13 @@ namespace HJScarletRework.Globals.Huds
         }
         private float GetNumberOffsetX(int number)
         {
-            if (number < 10) 
+            if (number < 10)
                 return 5f;
-            if (number < 100) 
+            if (number < 100)
                 return 7.30f;
-            if (number < 1000) 
+            if (number < 1000)
                 return 15f;
-            if (number < 10000) 
+            if (number < 10000)
                 return 21f;
             return 21f;
         }
@@ -144,7 +144,9 @@ namespace HJScarletRework.Globals.Huds
                 return;
             Player localPlayer = Main.LocalPlayer;
             Item heldItem = localPlayer.HeldItem;
+            bool hasReforged = ModLoader.HasMod("ExpandedReforge");
             bool isExectuorWeapon = heldItem.DamageType.CountsAsClass<ExecutorDamageClass>();
+            isExectuorWeapon = HJScarletList.ExecutorWeaponDictionary.ContainsKey(heldItem.type);
             if (isExectuorWeapon)
             {
                 if (!ModPlayer.Executor_DrawFadeIn)

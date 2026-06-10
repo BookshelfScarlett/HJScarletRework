@@ -13,7 +13,7 @@ namespace HJScarletRework.Globals.Graphics.ParticleScarlet
         public float GlowCenterMult = 0;
         public override void PostReset()
         {
-            GlowCenterMult = 0; 
+            GlowCenterMult = 0;
         }
         public override void Update()
         {
@@ -27,7 +27,7 @@ namespace HJScarletRework.Globals.Graphics.ParticleScarlet
             Texture2D texture = HJScarletTexture.Particle_HRShinyOrb.Value;
             spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor * Opacity, 0, texture.Size() / 2, Scale, SpriteEffects.None, 0);
             if (GlowCenterMult > 0)
-                spriteBatch.Draw(texture, Position - Main.screenPosition, null, Color.White* Opacity, 0, texture.Size() / 2, Scale * GlowCenterMult, SpriteEffects.None, 0);
+                spriteBatch.Draw(texture, Position - Main.screenPosition, null, Color.White * Opacity, 0, texture.Size() / 2, Scale * GlowCenterMult, SpriteEffects.None, 0);
 
         }
 

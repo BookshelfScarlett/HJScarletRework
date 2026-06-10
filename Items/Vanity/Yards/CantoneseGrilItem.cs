@@ -1,9 +1,4 @@
-﻿using HJScarletRework.Globals.Instances.Items;
-using Microsoft.Xna.Framework;
-using Terraria.ID;
-using Terraria.ModLoader;
-
-namespace HJScarletRework.Items.Vanity.Yards
+﻿namespace HJScarletRework.Items.Vanity.Yards
 {
     //public class CantoneseGirlItem : AccVanityItem
     //{

@@ -1,12 +1,7 @@
 ﻿using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityParticles;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 

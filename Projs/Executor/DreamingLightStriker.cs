@@ -47,7 +47,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.ownerHitCheck = true;
-            Projectile.SetupImmnuity(30,ImmnuityType.Local);
+            Projectile.SetupImmnuity(30, ImmnuityType.Local);
             Projectile.extraUpdates = 2;
             Projectile.scale = 0f;
             Projectile.penetrate = -1;

@@ -2,16 +2,11 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.ParticleECS
 {
-    public class HRShinyOrbECS :ECSParticleBehavior
+    public class HRShinyOrbECS : ECSParticleBehavior
     {
         public override void OnSpawn(ref ECSParticleData data)
         {

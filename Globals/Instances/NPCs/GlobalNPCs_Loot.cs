@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items;
-using ContinentOfJourney.NPCs;
+﻿using ContinentOfJourney.NPCs;
 using ContinentOfJourney.NPCs.Boss_MarquisMoonsquid;
 using ContinentOfJourney.NPCs.Boss_PriestessRod;
 using ContinentOfJourney.NPCs.Boss_ScarabBelief;
@@ -12,12 +11,9 @@ using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Pets;
-using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Items.Weapons.Ranged;
-using Microsoft.CodeAnalysis.Operations;
-using System.Security.AccessControl;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -59,7 +55,7 @@ namespace HJScarletRework.Globals.Instances
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<PrunusMume>(), 4);
                     break;
             }
-            if(npc.boss && npc.type != NPCID.KingSlime)
+            if (npc.boss && npc.type != NPCID.KingSlime)
             {
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<UnregisteredSpiritOrigin>(), 5);
             }
@@ -81,7 +77,7 @@ namespace HJScarletRework.Globals.Instances
             {
                 npcLoot.AddLootSimple(ItemType<PurePrismFate>(), 1, 30, 50);
             }
-            if(npc.type == NPCType<PriestessRod>())
+            if (npc.type == NPCType<PriestessRod>())
             {
                 HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<ClimaticHawstring>(), 4);
             }

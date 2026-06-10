@@ -1,6 +1,4 @@
 ﻿using HJScarletRework.Items.Weapons.Ranged;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -31,6 +29,7 @@ namespace HJScarletRework.Globals.Players
             souloftheTidalMark = false;
             mayaPumper = false;
             crimsonCharm = false;
+            bitingClaw = false;
             accVanityID = -1;
         }
         private void ResetArmor()
@@ -58,9 +57,9 @@ namespace HJScarletRework.Globals.Players
             goldenApple = false;
             goldenAppleEnchanted = false;
             goldenAppleDamageAbsorb = 0;
-            goldenAppleEnchantedFully= false;
+            goldenAppleEnchantedFully = false;
         }
-         public override void ResetEffects()
+        public override void ResetEffects()
         {
             climaticHawstringLaserCounter *= (Player.HeldItem.type == ItemType<ClimaticHawstring>()).ToInt();
             CreationHatSet = false;
@@ -74,7 +73,7 @@ namespace HJScarletRework.Globals.Players
             ResetAcc();
             ResetPets();
             ResetArmor();
-          }
+        }
         public override void UpdateDead()
         {
             ExecutionProgress = 0;

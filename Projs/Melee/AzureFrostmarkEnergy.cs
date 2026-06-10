@@ -56,7 +56,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.BounceOnTile(oldVelocity, 1f, 0.95f);
             SpawnHitParticle();
-            if(BounceTime > 3)
+            if (BounceTime > 3)
             {
                 Projectile.Kill();
             }

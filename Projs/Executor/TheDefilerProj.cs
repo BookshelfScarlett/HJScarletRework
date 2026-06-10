@@ -177,7 +177,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
             Projectile.AddExecutionTimeImmediate(ItemType<TheDefiler>());
-            if(Projectile.numHits > 4)
+            if (Projectile.numHits > 4)
             {
                 AttackType = State.Return;
                 Timer = 0;

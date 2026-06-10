@@ -1,7 +1,5 @@
 ﻿using ReLogic.Threading;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
-using System.Threading.Tasks;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Core.ParticleScarlet

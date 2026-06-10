@@ -66,7 +66,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-                Projectile.AddExecutionTimeImmediate(ItemType<Sundowner>());
+            Projectile.AddExecutionTimeImmediate(ItemType<Sundowner>());
         }
         public override void OnKill(int timeLeft)
         {
@@ -96,7 +96,7 @@ namespace HJScarletRework.Projs.Executor
             }
             if (CanPlaySound)
             {
-            bool nonStop = !Owner.HasProj<SundownerFlare>() && !Owner.HasProj<SundownerFlareGun>() && !Projectile.HJScarlet().ExecutionStrike;
+                bool nonStop = !Owner.HasProj<SundownerFlare>() && !Owner.HasProj<SundownerFlareGun>() && !Projectile.HJScarlet().ExecutionStrike;
                 if (!nonStop)
                 {
                     SlotId slotId1 = SoundEngine.PlaySound(HJScarletSounds.Sundowner_Fire with { MaxInstances = 0, Pitch = 0.05f, PitchVariance = 0.1f, Volume = 0.27f }, Projectile.Center);
@@ -104,7 +104,7 @@ namespace HJScarletRework.Projs.Executor
                         sound.Volume /= 3;
                 }
             }
-                //SoundEngine.PlaySound(HJScarletSounds.Misc_Boom with { Variants = [1], MaxInstances = 0, Pitch = 0.5f,Volume = .35f  }, Projectile.Center);
+            //SoundEngine.PlaySound(HJScarletSounds.Misc_Boom with { Variants = [1], MaxInstances = 0, Pitch = 0.5f,Volume = .35f  }, Projectile.Center);
 
             base.OnKill(timeLeft);
         }
@@ -122,7 +122,7 @@ namespace HJScarletRework.Projs.Executor
                 Color edgeColor = Color.Lerp(Color.DarkOrange, Color.OrangeRed, (1 - rads)).ToAddColor(40) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads) * Projectile.Opacity;
                 Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.0f);
                 float rot = Projectile.oldRot[i];
-                SB.Draw(projTex, lerpPos +Projectile.SafeDir() * 5f+ Projectile.PosToCenter(), null, edgeColor, rot, ori, oriScale * scale * Projectile.Opacity, 0, 0);
+                SB.Draw(projTex, lerpPos + Projectile.SafeDir() * 5f + Projectile.PosToCenter(), null, edgeColor, rot, ori, oriScale * scale * Projectile.Opacity, 0, 0);
             }
 
             Projectile.DrawProj(Color.White * Projectile.Opacity, 1);
@@ -149,7 +149,7 @@ namespace HJScarletRework.Projs.Executor
             shader.Parameters["LaserTextureSize"].SetValue(useTex.Size());
             shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, useTex.Height()));
             shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -44.2f);
-            shader.Parameters["uColor"].SetValue(drawColor.ToVector4() * alphaValue *Clamp(Projectile.velocity.Length() * Projectile.Opacity, 0f, 1f));
+            shader.Parameters["uColor"].SetValue(drawColor.ToVector4() * alphaValue * Clamp(Projectile.velocity.Length() * Projectile.Opacity, 0f, 1f));
             shader.Parameters["uFadeoutLength"].SetValue(0.74f);
             shader.Parameters["uFadeinLength"].SetValue(0.1f);
             shader.CurrentTechnique.Passes[0].Apply();
@@ -168,7 +168,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 float rot = (validPosition[j + 1] - validPosition[j]).ToRotation();
                 Vector2 posOffset = rot.ToRotationVector2().RotatedBy(PiOver2) * offsetHeight;
-                trailDrawDates.Add(new(validPosition[j] + Projectile.SafeDir() * 5f+ Projectile.Size / 2, drawColor, new Vector2(0, 20 * multipleSize * Projectile.scale), rot));
+                trailDrawDates.Add(new(validPosition[j] + Projectile.SafeDir() * 5f + Projectile.Size / 2, drawColor, new Vector2(0, 20 * multipleSize * Projectile.scale), rot));
             }
             TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
         }

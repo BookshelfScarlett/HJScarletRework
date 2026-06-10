@@ -3,7 +3,7 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria.ID;
 
-namespace HJScarletRework.Items.Useables
+namespace HJScarletRework.Items.Accessories
 {
     public class DescriptionPaper : HJScarletItemClass
     {

@@ -5,7 +5,7 @@ using Terraria.Localization;
 
 namespace HJScarletRework.Globals.Systems
 {
-     public class HJScarletSnowCondition : IItemDropRuleCondition
+    public class HJScarletSnowCondition : IItemDropRuleCondition
     {
         private static LocalizedText Description;
 
@@ -52,7 +52,7 @@ namespace HJScarletRework.Globals.Systems
         public bool CanShowItemDropInUI() => true;
         public string GetConditionDescription() => null;
     }
-        public class HJScarletUnderworldCondition : IItemDropRuleCondition
+    public class HJScarletUnderworldCondition : IItemDropRuleCondition
     {
         private static LocalizedText Description;
 

@@ -47,7 +47,7 @@ namespace HJScarletRework.Projs.General
             }
             else
                 Projectile.Opacity = Lerp(Projectile.Opacity, 1, 0.1f / 4f);
-                Projectile.velocity *= 0.96f;
+            Projectile.velocity *= 0.96f;
             UpdateParticle();
             if (Projectile.FinalUpdate())
             {
@@ -99,8 +99,8 @@ namespace HJScarletRework.Projs.General
         }
         private void BlueParticle()
         {
-            if(Projectile.FinalUpdateNextBool(6))
-            new LightningParticle(Projectile.Center.ToRandCirclePos(30), Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.CornflowerBlue), 40, PiOver2+ Vector2.UnitY.RotatedByRandom(ToRadians(10f)).ToRotation(), Projectile.scale * 0.30f, 0).Spawn();
+            if (Projectile.FinalUpdateNextBool(6))
+                new LightningParticle(Projectile.Center.ToRandCirclePos(30), Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.CornflowerBlue), 40, PiOver2 + Vector2.UnitY.RotatedByRandom(ToRadians(10f)).ToRotation(), Projectile.scale * 0.30f, 0).Spawn();
             if (Projectile.FinalUpdateNextBool(6))
                 ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
                 {
@@ -118,21 +118,21 @@ namespace HJScarletRework.Projs.General
             switch (TextureType)
             {
                 case NPCID.GreenJellyfish:
-                    PlayHitParticle(target.Center,Color.LimeGreen, Color.DarkGreen);
+                    PlayHitParticle(target.Center, Color.LimeGreen, Color.DarkGreen);
                     break;
                 case NPCID.PinkJellyfish:
-                    PlayHitParticle(target.Center,Color.HotPink, Color.Purple);
+                    PlayHitParticle(target.Center, Color.HotPink, Color.Purple);
                     break;
                 case NPCID.BlueJellyfish:
-                    PlayHitParticle(target.Center,Color.RoyalBlue, Color.CornflowerBlue);
+                    PlayHitParticle(target.Center, Color.RoyalBlue, Color.CornflowerBlue);
                     break;
 
             }
 
         }
-        public void PlayHitParticle(Vector2 center,Color color1, Color color2)
+        public void PlayHitParticle(Vector2 center, Color color1, Color color2)
         {
-            new SmokeParticle(center.ToRandCirclePos(4f), RandVelTwoPi(0.1f, 5f), RandLerpColor(color1, color2), 40, RandRotTwoPi, 0.85f, 0.20f,true).Spawn();
+            new SmokeParticle(center.ToRandCirclePos(4f), RandVelTwoPi(0.1f, 5f), RandLerpColor(color1, color2), 40, RandRotTwoPi, 0.85f, 0.20f, true).Spawn();
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -174,13 +174,13 @@ namespace HJScarletRework.Projs.General
             color1 *= Projectile.Opacity;
             color2 *= Projectile.Opacity;
             Texture2D ring = HJScarletTexture.Particle_RingShiny.Value;
-            SB.Draw(ring, pos, null, color1* 0.45f, Projectile.rotation, ring.ToOrigin(), scale, 0, 0);
-            SB.Draw(ring, pos, null, color1*0.45f, Projectile.rotation + PiOver2, ring.ToOrigin(), scale, 0, 0);
-            SB.Draw(ring, pos, null, color2*.45f, Projectile.rotation + Pi, ring.ToOrigin(), scale, 0, 0);
-            SB.Draw(ring, pos, null, color2*.45f, Projectile.rotation - PiOver2, ring.ToOrigin(), scale, 0, 0);
+            SB.Draw(ring, pos, null, color1 * 0.45f, Projectile.rotation, ring.ToOrigin(), scale, 0, 0);
+            SB.Draw(ring, pos, null, color1 * 0.45f, Projectile.rotation + PiOver2, ring.ToOrigin(), scale, 0, 0);
+            SB.Draw(ring, pos, null, color2 * .45f, Projectile.rotation + Pi, ring.ToOrigin(), scale, 0, 0);
+            SB.Draw(ring, pos, null, color2 * .45f, Projectile.rotation - PiOver2, ring.ToOrigin(), scale, 0, 0);
             ring = HJScarletTexture.Texture_BloomRing.Value;
             scale = Projectile.scale * 0.41f;
-            SB.Draw(ring, pos, null, color2*.25f, Projectile.rotation - PiOver2, ring.ToOrigin(), scale, 0, 0);
+            SB.Draw(ring, pos, null, color2 * .25f, Projectile.rotation - PiOver2, ring.ToOrigin(), scale, 0, 0);
             SB.EndShaderArea();
 
         }

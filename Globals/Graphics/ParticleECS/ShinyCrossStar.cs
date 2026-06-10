@@ -3,10 +3,6 @@ using HJScarletRework.Core.ParticleECS;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.ParticleECS
@@ -32,8 +28,8 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
             {
                 Vector2 starScale = GetScale(i);
                 float colorAlpha = GetAlphaFade(1 - i);
-                Main.spriteBatch.Draw(star, pos, null, data.DrawColor * data.Opacity* colorAlpha, 0, star.Size() / 2, starScale * data.Scale, SpriteEffects.None, 0);
-                Main.spriteBatch.Draw(star, pos, null, data.DrawColor * data.Opacity* colorAlpha, 0+ PiOver2, star.Size() / 2, starScale * data.Scale, SpriteEffects.None, 0);
+                Main.spriteBatch.Draw(star, pos, null, data.DrawColor * data.Opacity * colorAlpha, 0, star.Size() / 2, starScale * data.Scale, SpriteEffects.None, 0);
+                Main.spriteBatch.Draw(star, pos, null, data.DrawColor * data.Opacity * colorAlpha, 0 + PiOver2, star.Size() / 2, starScale * data.Scale, SpriteEffects.None, 0);
                 //Main.spriteBatch.Draw(star, pos, null, Color.White * data.Opacity, 0 + PiOver2, star.Size() / 2, starScale * data.Scale * 0.5f, SpriteEffects.None, 0);
             }
 

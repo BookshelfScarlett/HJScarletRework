@@ -113,3 +113,8 @@ CursedGoldenKey: {
 	DisplayName: Cursed Golden Key
 	Tooltip: Put into an empty chest to summon Mimic
 }
+
+ProvidenceHolyWater: {
+	DisplayName: Providence Holy Water
+	Tooltip: ""
+}

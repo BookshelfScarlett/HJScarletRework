@@ -1,11 +1,9 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Items.Armor.Diver;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
@@ -19,6 +17,8 @@ namespace HJScarletRework.Globals.Players
             int questFish = attempt.questFish;
             int poolSize = attempt.waterTilesCount;
             bool water = !attempt.inHoney && !attempt.inLava;
+            if (!bitingClaw)
+                return;
             if (water)
             {
                 int poolSizeAmt = poolSize / 10;

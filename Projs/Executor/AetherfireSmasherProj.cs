@@ -86,11 +86,11 @@ namespace HJScarletRework.Projs.Executor
             //掷出一定时间再去考虑索敌的事情。
             if (Projectile.MeetMaxUpdatesFrame(Timer, 3f + ActiveMiscDashHit.ToInt() * 5f))
             {
-                if (Projectile.GetTargetSafe(out NPC target, true, 1200,canPassWall:false,hitLine:true) && Projectile.numHits < 1 && CurTarget is null)
+                if (Projectile.GetTargetSafe(out NPC target, true, 1200, canPassWall: false, hitLine: true) && Projectile.numHits < 1 && CurTarget is null)
                 {
                     CurTarget = target;
                 }
-                
+
                 if (!isHitNPC)
                 {
                     if (CurTarget.IsLegal())
@@ -164,7 +164,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void SpawnFireball()
         {
-            if (!Collision.SolidCollision(Projectile.Center, Projectile.width, Projectile.height) && Collision.CanHit(Projectile.Center,1,1,Owner.Center,1,1))
+            if (!Collision.SolidCollision(Projectile.Center, Projectile.width, Projectile.height) && Collision.CanHit(Projectile.Center, 1, 1, Owner.Center, 1, 1))
             {
                 for (int i = 0; i < 2; i++)
                 {

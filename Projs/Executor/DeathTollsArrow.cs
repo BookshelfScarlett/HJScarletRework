@@ -81,9 +81,9 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.HomingTarget(CurTarget.Center, -1, 20, 20);
             else
             {
-            Projectile.netUpdate = true;
-            AttackTimer = 0f;
-            AttackType = DoType.IsHit;
+                Projectile.netUpdate = true;
+                AttackTimer = 0f;
+                AttackType = DoType.IsHit;
 
             }
         }

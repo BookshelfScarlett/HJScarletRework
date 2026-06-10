@@ -17,9 +17,9 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
         }
         public override void Draw(ref ECSParticleData data)
         {
-            Asset<Texture2D> texture = HJScarletTexture.Texture_SnowCloud.Texture; 
+            Asset<Texture2D> texture = HJScarletTexture.Texture_SnowCloud.Texture;
             Main.spriteBatch.Draw(texture.Value, data.Position - Main.screenPosition, null, data.DrawColor * data.Opacity, data.Rotation, texture.Size() / 2, data.Scale, SpriteEffects.None, 0);
-   
+
         }
     }
 }

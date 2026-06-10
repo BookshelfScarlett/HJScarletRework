@@ -35,7 +35,7 @@ namespace HJScarletRework.Items.Armor
             Item.defense = 10;
             Item.SetUpRarityPrice(ItemRarityID.Purple);
         }
-        private List<int> Robes = 
+        private List<int> Robes =
             [
                 ItemID.AmethystRobe,
                 ItemID.TopazRobe,
@@ -77,7 +77,7 @@ namespace HJScarletRework.Items.Armor
                 }
             }
 
-            
+
         }
         public override void AddRecipes()
         {

@@ -19,7 +19,7 @@ namespace HJScarletRework.Buffs
             player.lavaImmune = true;
             player.lifeRegen += 4;
             player.statDefense += 10;
-            if(player.miscCounter % 3 == 0)
+            if (player.miscCounter % 3 == 0)
             {
                 Dust d = Dust.NewDustPerfect(player.ToRandRec() + Vector2.UnitY * 10, DustID.GoldCoin);
                 d.velocity = -Vector2.UnitY * 0.5f;

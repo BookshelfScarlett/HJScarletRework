@@ -1,5 +1,4 @@
-﻿using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -18,7 +17,7 @@ namespace HJScarletRework.Buffs
             player.HJScarlet().goldenAppleDamageAbsorb = 20;
             player.lifeRegen += 2;
             player.statDefense += 8;
-            if(player.miscCounter % 3 == 0)
+            if (player.miscCounter % 3 == 0)
             {
                 Dust d = Dust.NewDustPerfect(player.ToRandRec() + Vector2.UnitY * 10, DustID.GoldCoin);
                 d.velocity = -Vector2.UnitY * 0.5f;

@@ -43,7 +43,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.timeLeft = 120;
             Projectile.Opacity = 0;
             Projectile.extraUpdates = 0;
-            Projectile.ignoreWater= true;
+            Projectile.ignoreWater = true;
             Projectile.ownerHitCheck = true;
         }
         public override void OnFirstFrame()
@@ -79,7 +79,7 @@ namespace HJScarletRework.Projs.Executor
             else
             {
                 Projectile.extraUpdates = 0;
-                Projectile.AffactedByGrav(yAdd:1.1f);
+                Projectile.AffactedByGrav(yAdd: 1.1f);
                 Projectile.tileCollide = true;
                 ActiveHoming = false;
             }
@@ -114,7 +114,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 vel = (Projectile.Center - spawnPos).ToSafeNormalize() * Main.rand.NextFloat(1f, 10f);
                 new SnowCloud(spawnPos, vel, Firecolor, 40, Main.rand.NextFloat(TwoPi), .45f, 0.28f * 0.35f, Main.rand.NextBool()).Spawn();
             }
-            for(int i =0;i<16;i++)
+            for (int i = 0; i < 16; i++)
             {
                 ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
                 {
@@ -127,7 +127,7 @@ namespace HJScarletRework.Projs.Executor
                     p.GlowCenterMult = 0.5f;
                 });
             }
-            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 1 , Volume = 0.25f, PitchVariance = 0.05f, Pitch = -0.3f});
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 1, Volume = 0.25f, PitchVariance = 0.05f, Pitch = -0.3f });
 
             base.OnKill(timeLeft);
         }
@@ -141,7 +141,7 @@ namespace HJScarletRework.Projs.Executor
                 return false;
             PixelatedRenderManager.BeginDrawProj = true;
             Texture2D tex = Projectile.GetTexture();
-            tex = GetVanillaAsset(VanillaAsset.Projectile,520);
+            tex = GetVanillaAsset(VanillaAsset.Projectile, 520);
             Rectangle frame = tex.Frame(1, 6, 0, RandFrame);
             Vector2 ori = frame.Size() / 2;
             ori = tex.Size() / 2;
@@ -161,9 +161,9 @@ namespace HJScarletRework.Projs.Executor
             }
 
             Vector2 pos = Projectile.Center - Main.screenPosition;
-            for(int i =0;i<8;i++)
-            SB.Draw(tex, pos + ToRadians(60f * i).ToRotationVector2(), null, Color.White.ToAddColor(0),  Projectile.rotation + PiOver2, ori ,oriScale,0, 0);
-            SB.Draw(tex, pos, null, Color.White,  Projectile.rotation + PiOver2, ori ,oriScale,0, 0);
+            for (int i = 0; i < 8; i++)
+                SB.Draw(tex, pos + ToRadians(60f * i).ToRotationVector2(), null, Color.White.ToAddColor(0), Projectile.rotation + PiOver2, ori, oriScale, 0, 0);
+            SB.Draw(tex, pos, null, Color.White, Projectile.rotation + PiOver2, ori, oriScale, 0, 0);
 
             return false;
         }

@@ -44,7 +44,7 @@ namespace HJScarletRework.Items.Armor.Diver
     [AutoloadEquip(EquipType.Head)]
     public class DiverHead : HJScarletArmor
     {
-        public override int[] ArmorSlots => [Type,ItemType<DiverBody>(),ItemType<DiverLegs>()];
+        public override int[] ArmorSlots => [Type, ItemType<DiverBody>(), ItemType<DiverLegs>()];
         public override bool SetUpArmorSet => true;
         public override void ExSD()
         {

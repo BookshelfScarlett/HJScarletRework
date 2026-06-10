@@ -5,7 +5,6 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Magic;
-using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -15,7 +14,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Magic
 {
-    public class Corona :HJScarletWeapon
+    public class Corona : HJScarletWeapon
     {
         public override ClassCategory Category => ClassCategory.Magic;
         public override void SetStaticDefaults()
@@ -44,7 +43,7 @@ namespace HJScarletRework.Items.Weapons.Magic
                 return;
             for (int i = 0; i < 16; i++)
             {
-                new ShinyCrossStar(player.Center.ToRandCirclePos(8f), -Vector2.UnitY.ToRandVelocity(ToRadians(25f), 4.8f, 14f), RandLerpColor(Color.OrangeRed, Color.Orange), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.5f, 0.8f), false,0.2f).Spawn();
+                new ShinyCrossStar(player.Center.ToRandCirclePos(8f), -Vector2.UnitY.ToRandVelocity(ToRadians(25f), 4.8f, 14f), RandLerpColor(Color.OrangeRed, Color.Orange), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.5f, 0.8f), false, 0.2f).Spawn();
             }
             for (int i = 0; i < 20; i++)
             {
@@ -52,7 +51,7 @@ namespace HJScarletRework.Items.Weapons.Magic
             }
             SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 1, Pitch = -0.25f }, player.Center);
             int projDamage = (int)player.GetTotalDamage<MagicDamageClass>().ApplyTo(Item.damage);
-            Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, Item.shoot,0, Item.knockBack, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, Item.shoot, 0, Item.knockBack, player.whoAmI);
             proj.originalDamage = projDamage;
             proj.netUpdate = true;
         }

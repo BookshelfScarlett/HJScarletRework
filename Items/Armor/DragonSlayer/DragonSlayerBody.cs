@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -33,7 +32,7 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
 
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-               return true;
+            return true;
         }
 
         public override void UpdateEquip(Player player)

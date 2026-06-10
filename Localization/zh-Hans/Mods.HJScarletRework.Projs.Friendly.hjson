@@ -203,6 +203,7 @@ Ranged: {
 	BambooStick.DisplayName: 火箭竹-竹
 	// SundownerHeldProj.DisplayName: Sundowner Held Proj
 	// TerraFlamethrowerTank.DisplayName: Terra Flamethrower Tank
+	// TerraFlamethrowerFlame.DisplayName: Terra Flamethrower Flame
 }
 
 Magic: {

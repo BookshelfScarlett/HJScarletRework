@@ -11,7 +11,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Useables
+namespace HJScarletRework.Items.Accessories
 {
     public class TerrariaRecipe : HJScarletItemClass
     {
@@ -82,7 +82,7 @@ namespace HJScarletRework.Items.Useables
                     combineValue2 = $"{line}-";
                 for (int i = 0; i < notEatenFoodList.Count; i++)
                 {
-                   //第二个问题，这里需要对比一遍与原始的食物清单
+                    //第二个问题，这里需要对比一遍与原始的食物清单
                     string perInstance = $"[i:{notEatenFoodList[i]}]";
                     //将其放进这个列表里合并起来
                     combineValue2 += $"{perInstance}";
@@ -107,7 +107,7 @@ namespace HJScarletRework.Items.Useables
         {
             //与沉浸背包的使用存在bug，在启用沉浸背包时不要给这个贴图转向
             bool hasImmersiveInventory = ModLoader.HasMod("ImmersiveInventory");
-            
+
             if (Main.LocalPlayer.HJScarlet().terraRecipe && !hasImmersiveInventory)
             {
                 spriteBatch.Draw(TextureAssets.Item[Type].Value, position, frame, drawColor, PiOver2, origin, scale, 0, 0);

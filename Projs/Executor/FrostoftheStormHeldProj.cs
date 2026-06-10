@@ -14,7 +14,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -95,18 +94,18 @@ namespace HJScarletRework.Projs.Executor
             if (!target.CanBeChasedBy() || HJScarletMethods.OutOffScreen(target.Center))
                 return;
 
-                Vector2 safeDir = Projectile.rotation.ToRotationVector2();
-                for (int i = 0; i < 16; i++)
+            Vector2 safeDir = Projectile.rotation.ToRotationVector2();
+            for (int i = 0; i < 16; i++)
+            {
+                for (int j = 0; j < 4; j++)
                 {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        ECSParticle.SnowCloud(target.Center.ToRandCirclePos(5f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 16f), RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, .5f), Color.RoyalBlue), 40, 0, .35f, .62f * .21f);
-                        ECSParticle.StarShape(target.Center.ToRandCirclePos(3f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 10f), RandLerpColor(Color.SkyBlue, Color.WhiteSmoke), 20, 1f, 1.1f);
-                    }
+                    ECSParticle.SnowCloud(target.Center.ToRandCirclePos(5f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 16f), RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, .5f), Color.RoyalBlue), 40, 0, .35f, .62f * .21f);
+                    ECSParticle.StarShape(target.Center.ToRandCirclePos(3f), safeDir.RotatedBy(PiOver2 * j) * Main.rand.NextFloat(.1f, 10f), RandLerpColor(Color.SkyBlue, Color.WhiteSmoke), 20, 1f, 1.1f);
                 }
-                float starScale = .60f;
-                new KiraStar(target.Center, Vector2.Zero, RandLerpColor(Color.Blue, Color.RoyalBlue), 20, safeDir.ToRotation(), 0.58f, starScale, 0, true, useAlt: true).Spawn();
-                new KiraStar(target.Center, Vector2.Zero, Color.White, 20, safeDir.ToRotation(), 0.58f, starScale * 0.80f, 0, true, useAlt: true).Spawn();
+            }
+            float starScale = .60f;
+            new KiraStar(target.Center, Vector2.Zero, RandLerpColor(Color.Blue, Color.RoyalBlue), 20, safeDir.ToRotation(), 0.58f, starScale, 0, true, useAlt: true).Spawn();
+            new KiraStar(target.Center, Vector2.Zero, Color.White, 20, safeDir.ToRotation(), 0.58f, starScale * 0.80f, 0, true, useAlt: true).Spawn();
 
         }
         public override void OnKill(int timeLeft)
@@ -207,13 +206,13 @@ namespace HJScarletRework.Projs.Executor
 
                     Vector2 dir = (pos - Projectile.Center).SafeNormalize(Vector2.UnitX);
                     Vector2 vel = Owner.velocity * Main.rand.NextFloat(0.1f, 1.5f) + dir * Main.rand.NextFloat(0.1f, 44f);
-                    ECSParticle.SnowCloud(pos, vel * .05f, RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, 0.5f), Color.RoyalBlue), 20, RandRotTwoPi,.150f + 0.050f * i, scale * (0.50f + i * 0.2f));
+                    ECSParticle.SnowCloud(pos, vel * .05f, RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, 0.5f), Color.RoyalBlue), 20, RandRotTwoPi, .150f + 0.050f * i, scale * (0.50f + i * 0.2f));
                 }
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 200, Main.rand.NextFloat(.01f, 1.08f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                     Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy((PiOver2 + ToRadians(10)) * Owner.direction * (Flip.ToDirectionInt())) * Main.rand.NextFloat(12f, 20.5f);
-                    ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 1f,.1f * Projectile.scale * Main.rand.NextFloat(.8f, 1.1f), glowMult: .51f);
+                    ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 1f, .1f * Projectile.scale * Main.rand.NextFloat(.8f, 1.1f), glowMult: .51f);
                 }
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 200, Main.rand.NextFloat(.01f, .98f));

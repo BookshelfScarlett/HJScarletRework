@@ -16,9 +16,9 @@ namespace HJScarletRework.Items.Vanity.Arceca
         }
         public override bool ExDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if(line.Mod == "Terraria")
+            if (line.Mod == "Terraria")
             {
-                if(line.Name == "Tooltip0" || line.Name == "Tooltip1" || line.Name == "Tooltip2" || line.Name=="Tooltip3" || line.Name == "Tooltip4" || line.Name == "Tooltip5")
+                if (line.Name == "Tooltip0" || line.Name == "Tooltip1" || line.Name == "Tooltip2" || line.Name == "Tooltip3" || line.Name == "Tooltip4" || line.Name == "Tooltip5")
                 {
                     VanityEffectClass.DrawMisc(line, VanityData, ParticleColor1, ParticleColor2);
                     return true;
@@ -38,5 +38,5 @@ namespace HJScarletRework.Items.Vanity.Arceca
         }
     }
 
-    
+
 }

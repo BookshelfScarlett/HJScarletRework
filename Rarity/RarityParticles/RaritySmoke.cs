@@ -8,7 +8,7 @@ using Terraria;
 namespace HJScarletRework.Rarity.RarityParticles
 {
 
-    public class RarityShinyOrb: RaritySparkle
+    public class RarityShinyOrb : RaritySparkle
     {
         public int BlendStateType;
         public override int UseBlendStateID => BlendStateType;

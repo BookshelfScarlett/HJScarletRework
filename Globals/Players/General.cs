@@ -2,8 +2,8 @@
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.ExecutorAlter;
-using HJScarletRework.Items.Useables;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -104,6 +104,8 @@ namespace HJScarletRework.Globals.Players
         public int crimsonCharmReduceTime = 0;
         public bool crimsonCharmStopReduce = false;
         public float healingPotionMult = 1f;
+        public bool bitingClaw = false;
+        public int providenceHolyWaterHealMana = 0;
         #endregion
 
         #region Pets
@@ -199,7 +201,7 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnEnterWorld()
         {
-            if(arcaeaVanityGive)
+            if (arcaeaVanityGive)
             {
                 string nameLow = Player.name.ToLower();
                 if (nameLow.Contains('光') || nameLow.Contains("对立") || nameLow.Contains("arcaea") || nameLow.Contains("hikari") || nameLow.Contains("tairitsu"))
@@ -208,7 +210,7 @@ namespace HJScarletRework.Globals.Players
                     arcaeaVanityGive = true;
                 }
             }
-            if(givePaper)
+            if (givePaper)
             {
                 Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<DescriptionPaper>());
                 givePaper = false;
@@ -272,13 +274,13 @@ namespace HJScarletRework.Globals.Players
                 switch (item.type)
                 {
                     case ItemID.FishCostumeMask:
-                        AlterArmorType2(item.type, i,FishCostumeHelmet.Defense, false, ItemRarityID.Orange,armorSlot:armorSlot);
+                        AlterArmorType2(item.type, i, FishCostumeHelmet.Defense, false, ItemRarityID.Orange, armorSlot: armorSlot);
                         break;
                     case ItemID.FishCostumeShirt:
-                        AlterArmorType2(item.type, i,FishCostumeChestplate.Defense, false, ItemRarityID.Orange,armorSlot:armorSlot);
+                        AlterArmorType2(item.type, i, FishCostumeChestplate.Defense, false, ItemRarityID.Orange, armorSlot: armorSlot);
                         break;
                     case ItemID.FishCostumeFinskirt:
-                        AlterArmorType2(item.type,i, FishCostumeLegs.Defense, false, ItemRarityID.Orange,armorSlot:armorSlot);
+                        AlterArmorType2(item.type, i, FishCostumeLegs.Defense, false, ItemRarityID.Orange, armorSlot: armorSlot);
                         break;
 
                 }

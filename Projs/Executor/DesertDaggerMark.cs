@@ -8,10 +8,6 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -33,7 +29,7 @@ namespace HJScarletRework.Projs.Executor
     /// <summary>
     /// 代办：应该会改成ModType，for sake of crossover content
     /// </summary>
-    public abstract class DaggerMarkClass : ModProjectile,  ILocalizedModType, IPixelatedRenderer
+    public abstract class DaggerMarkClass : ModProjectile, ILocalizedModType, IPixelatedRenderer
     {
         public Player Owner => Main.player[Projectile.owner];
         public DaggerMarkPlayer DaggerPlayer => Owner.GetModPlayer<DaggerMarkPlayer>();
@@ -103,7 +99,7 @@ namespace HJScarletRework.Projs.Executor
 
         public virtual void FirstFrame()
         {
-            
+
         }
         public sealed override void OnKill(int timeLeft)
         {
@@ -153,7 +149,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             SpriteEffects se = Owner.direction > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             float rot = Owner.direction > 0 ? Projectile.rotation + PiOver4 : Projectile.rotation - PiOver4;
-            for(int i =0;i<8;i++)
+            for (int i = 0; i < 8; i++)
                 SB.Draw(tex, drawPos + ToRadians(360f / 8 * i).ToRotationVector2() * 2f, null, Color.White.ToAddColor(50), rot, tex.ToOrigin(), Projectile.scale, se, 0);
             SB.Draw(tex, drawPos, null, Color.White, rot, tex.ToOrigin(), Projectile.scale, se, 0);
             ExPostPreDraw();

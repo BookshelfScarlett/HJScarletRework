@@ -44,7 +44,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
-            if(Projectile.timeLeft < 30)
+            if (Projectile.timeLeft < 30)
             {
                 Projectile.scale = Lerp(Projectile.scale, 0, 0.1f);
                 Projectile.Opacity = Lerp(Projectile.Opacity, 0, 0.1f);

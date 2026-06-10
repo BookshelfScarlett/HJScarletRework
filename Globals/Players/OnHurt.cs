@@ -6,12 +6,10 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
@@ -29,7 +27,7 @@ namespace HJScarletRework.Globals.Players
             {
                 desterranRespawnChargeTimer = GetSeconds(90);
                 desterrannachtImmortalTime = 2;
-                Player.statLife = (int)(Player.statLifeMax2*.15f);
+                Player.statLife = (int)(Player.statLifeMax2 * .15f);
                 SoundEngine.PlaySound(HJScarletSounds.Evolution_Thrown with { MaxInstances = 0, Pitch = 0.5f }, Player.Center);
                 for (int i = 0; i < 20; i++)
                 {
@@ -77,7 +75,7 @@ namespace HJScarletRework.Globals.Players
         {
             if (mayaPumper)
             {
-                
+
                 modifiers.Knockback *= npc.knockBackResist;
                 modifiers.Knockback *= 5f;
                 if (npc.knockBackResist != 0)
@@ -97,11 +95,11 @@ namespace HJScarletRework.Globals.Players
                     totalProjDamageModify *= 0.65f;
                 }
             }
-            if(goldenAppleEnchanted)
+            if (goldenAppleEnchanted)
             {
                 sourceDamageModify *= 0.80f;
             }
-            if(goldenAppleEnchantedFully)
+            if (goldenAppleEnchantedFully)
             {
                 sourceDamageModify *= 0.01f;
             }
@@ -111,8 +109,8 @@ namespace HJScarletRework.Globals.Players
 
         public void SpawnPumpperParticle(Vector2 vel)
         {
-            for(int i =0;i<40;i++)
-            new SmokeParticle(Player.Center, vel.ToRandVelocity(ToRadians(30f), 1f, 22f), RandLerpColor(Color.SkyBlue, Color.AliceBlue), 45, RandRotTwoPi, 0.5f, 0.25f, true).Spawn();
+            for (int i = 0; i < 40; i++)
+                new SmokeParticle(Player.Center, vel.ToRandVelocity(ToRadians(30f), 1f, 22f), RandLerpColor(Color.SkyBlue, Color.AliceBlue), 45, RandRotTwoPi, 0.5f, 0.25f, true).Spawn();
         }
 
         public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)

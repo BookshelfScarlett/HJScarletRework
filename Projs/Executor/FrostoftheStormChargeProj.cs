@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
-using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
@@ -285,13 +284,13 @@ namespace HJScarletRework.Projs.Executor
 
                     Vector2 dir = (pos - Projectile.Center).SafeNormalize(Vector2.UnitX);
                     Vector2 vel = Owner.velocity * Main.rand.NextFloat(0.1f, 1.5f) + dir * Main.rand.NextFloat(0.1f, 44f);
-                    ECSParticle.SnowCloud(pos, vel * .05f, RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, 0.5f), Color.RoyalBlue), 20, RandRotTwoPi,.150f + 0.050f * i, scale * (0.50f + i * 0.2f));
+                    ECSParticle.SnowCloud(pos, vel * .05f, RandLerpColor(Color.Lerp(Color.SkyBlue, Color.WhiteSmoke, 0.5f), Color.RoyalBlue), 20, RandRotTwoPi, .150f + 0.050f * i, scale * (0.50f + i * 0.2f));
                 }
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + slashTargetPos.RotatedBy(TargetRotation) * 200, Main.rand.NextFloat(.01f, 1.08f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                     Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy((PiOver2 + ToRadians(10)) * Owner.direction * (Flip.ToDirectionInt())) * Main.rand.NextFloat(12f, 20.5f);
-                    ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 1f,.1f * Projectile.scale * Main.rand.NextFloat(.8f, 1.1f), glowMult: .51f);
+                    ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 40, 1f, .1f * Projectile.scale * Main.rand.NextFloat(.8f, 1.1f), glowMult: .51f);
                 }
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + slashTargetPos.RotatedBy(TargetRotation) * 200, Main.rand.NextFloat(.01f, .98f));
@@ -429,8 +428,8 @@ namespace HJScarletRework.Projs.Executor
             if (OldAimPos.Count < 3)
                 return;
             List<ScarletVertex> Vertexlist = new List<ScarletVertex>();
-                if (SlowSwing)
-                    mult *= 0.92f;
+            if (SlowSwing)
+                mult *= 0.92f;
             for (int i = 0; i < OldAimPos.Count; i++)
             {
                 float progress = (float)i / OldAimPos.Count;

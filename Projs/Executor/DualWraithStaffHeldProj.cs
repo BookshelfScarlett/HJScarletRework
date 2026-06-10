@@ -11,7 +11,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -71,7 +70,7 @@ namespace HJScarletRework.Projs.Executor
                     Timer = 0;
                     OnExecutionNow = true;
                 }
-                if(OnExecutionNow)
+                if (OnExecutionNow)
                 {
                     UpdateExecutionStrikeAni();
                     return;
@@ -146,7 +145,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Main.rand.NextBool(8))
                     new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePos(100f), 3.2f, Color.WhiteSmoke, 100, 0.2f, RandRotTwoPi).Spawn();
             }
-            
+
             if (Main.rand.NextFloat() < executeProgress && Main.rand.NextBool(8))
             {
 
@@ -197,20 +196,20 @@ namespace HJScarletRework.Projs.Executor
                 SoundEngine.PlaySound(HJScarletSounds.Air_HeavyFlow with { MaxInstances = 0 });
                 for (int i = 0; i < 30; i++)
                 {
-                    new SmokeParticle(Projectile.Center + Vector2.UnitY * Main.rand.NextFloat(-280f, 11f), Vector2.UnitY.ToRandVelocity(ToRadians(10f),1f, 12f), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.50f * Main.rand.NextFloat(0.5f, 1f), Main.rand.NextFloat(0.9f, 1.1f) * 0.6f * Projectile.scale, Main.rand.NextBool()).SpawnToPriority();
+                    new SmokeParticle(Projectile.Center + Vector2.UnitY * Main.rand.NextFloat(-280f, 11f), Vector2.UnitY.ToRandVelocity(ToRadians(10f), 1f, 12f), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.50f * Main.rand.NextFloat(0.5f, 1f), Main.rand.NextFloat(0.9f, 1.1f) * 0.6f * Projectile.scale, Main.rand.NextBool()).SpawnToPriority();
                 }
             }
             Timer++;
             float progress = Clamp(Timer / maxAFKTime, 0f, 1f);
             float eased = EaseInBack(progress);
-            Projectile.velocity = Vector2.Lerp(-Vector2.UnitY * 12f, (-Vector2.UnitY* .02f), eased);
+            Projectile.velocity = Vector2.Lerp(-Vector2.UnitY * 12f, (-Vector2.UnitY * .02f), eased);
             Projectile.rotation = Projectile.velocity.ToRotation();
             {
                 Vector2 spawnPos = Projectile.Center + RandVelTwoPi(1f, 68f);
                 Vector2 dir = Projectile.Center.GetNormalVector2(spawnPos);
                 float scale = Projectile.scale * 0.6f;
                 new SmokeParticle(spawnPos, dir * Main.rand.NextFloat(1f, 1.3f), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.30f * Main.rand.NextFloat(0.5f, 1f), Main.rand.NextFloat(0.9f, 1.1f) * scale, Main.rand.NextBool()).SpawnToPriority();
-                if(Main.rand.NextBool(8))
+                if (Main.rand.NextBool(8))
                     new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePos(100f), 3.2f, Color.WhiteSmoke, 100, 0.2f, RandRotTwoPi).Spawn();
             }
             Projectile.Opacity = Lerp(Projectile.Opacity, 0f, progress);
@@ -278,7 +277,7 @@ namespace HJScarletRework.Projs.Executor
             Oscillation += ToRadians(3f) / Projectile.MaxUpdates;
             if (Oscillation > ToRadians(360f))
                 Oscillation = ToRadians(-360f);
-            
+
             //锤子应当朝向的位置
             float anchorPosX = Owner.MountedCenter.X - Owner.direction * 80f;
             float anchorPosY = Owner.MountedCenter.Y - (50f * MathF.Sin(Oscillation) / 9f) + 30f;
@@ -287,10 +286,10 @@ namespace HJScarletRework.Projs.Executor
             Vector2 anchorPos = new Vector2(anchorPosX, anchorPosY);
             //实际更新位置
             float scaleValue = Lerp(0.05f, 0f, Helper.GetAniProgress(1));
-            float lerpValue = (0.15f +scaleValue) / Projectile.MaxUpdates;
+            float lerpValue = (0.15f + scaleValue) / Projectile.MaxUpdates;
             Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, lerpValue);
             float angleToWhat = (-Vector2.UnitY).ToRotation();
-            Projectile.rotation = Projectile.rotation.AngleLerp(angleToWhat, 0.48f/ Projectile.MaxUpdates);
+            Projectile.rotation = Projectile.rotation.AngleLerp(angleToWhat, 0.48f / Projectile.MaxUpdates);
 
         }
 
@@ -318,7 +317,7 @@ namespace HJScarletRework.Projs.Executor
                 proj.extraUpdates = 2;
                 proj.HJScarlet().HasExecutionMechanic = true;
                 for (int j = 0; j < 6; j++)
-                    new SmokeParticle(spawnPos, proj.velocity.ToRandVelocity(ToRadians(30f), 1f, 12f), RandLerpColor(Color.WhiteSmoke, Color.SkyBlue), 40, RandRotTwoPi, 0.8f, 0.3f,true).Spawn();
+                    new SmokeParticle(spawnPos, proj.velocity.ToRandVelocity(ToRadians(30f), 1f, 12f), RandLerpColor(Color.WhiteSmoke, Color.SkyBlue), 40, RandRotTwoPi, 0.8f, 0.3f, true).Spawn();
             }
         }
 
@@ -336,11 +335,11 @@ namespace HJScarletRework.Projs.Executor
             //第二种：处于第二动画继进程，不要执行处死
             //只有两动画完成结束时，判断玩家手持情况，我们再执行afk动画
             bool doAFK = Helper.IsDone[0] && Helper.IsDone[1] && (ifDead || ((DualWraithStaff)Owner.HeldItem.ModItem).AlterVersion) && !IsAFK;
-            if(doAFK)
+            if (doAFK)
             {
                 //Timer会立刻被重置，这里的Timer已经没用了。只用于一个计时
                 Timer = 0;
-                IsAFK=true;
+                IsAFK = true;
             }
             return false;
         }
@@ -359,11 +358,11 @@ namespace HJScarletRework.Projs.Executor
         public override bool PreDraw(ref Color lightColor)
         {
             //基础的一些数据
-            Texture2D tex =Projectile.GetTexture(); 
+            Texture2D tex = Projectile.GetTexture();
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             float drawRot = Projectile.rotation + ToRadians(60);
             Vector2 drawPoint = new Vector2(0, tex.Height);
-            SpriteEffects se =  SpriteEffects.None;
+            SpriteEffects se = SpriteEffects.None;
             Vector2 realDrawPos = drawPos + Vector2.UnitX.RotatedBy(Projectile.rotation) * -12;
             Vector2 orbDrawPos = OrbPosition - Main.screenPosition;
             //绘制残影

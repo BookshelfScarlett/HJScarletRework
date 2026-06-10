@@ -1,23 +1,17 @@
-﻿using ContinentOfJourney.Items.ThrowerWeapons;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
-using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Projs.Magic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Utilities;
-using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -45,7 +39,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
-              if (Projectile.Opacity < 0.98f)
+            if (Projectile.Opacity < 0.98f)
                 Projectile.Opacity = Lerp(Projectile.Opacity, 1, 0.15f);
             else
                 Projectile.Opacity = 1;
@@ -81,7 +75,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.Center, Vector2.Zero, ProjectileType<SundownerFlareGun>(), 0, 0, Owner.whoAmI);
                 proj.originalDamage = Projectile.originalDamage;
                 Owner.RemoveExecutionProgress(ItemType<Sundowner>());
-                
+
 
                 return true;
             }
@@ -184,16 +178,16 @@ namespace HJScarletRework.Projs.Executor
             Owner.ControlPlayerArm(Projectile.rotation);
             if (!JustSpawned)
             {
-                Projectile.Center = Vector2.Lerp( Projectile.Center, Owner.MountedCenter, 0.2f) ;
+                Projectile.Center = Vector2.Lerp(Projectile.Center, Owner.MountedCenter, 0.2f);
                 if ((Projectile.Center - Owner.MountedCenter).LengthSquared() < 5f)
                     JustSpawned = true;
             }
             else
             {
-                Projectile.Center = Owner.MountedCenter ;
+                Projectile.Center = Owner.MountedCenter;
 
             }
-                Owner.heldProj = Projectile.whoAmI;
+            Owner.heldProj = Projectile.whoAmI;
         }
 
         public Vector2 DrawOffset = Vector2.Zero;
@@ -202,7 +196,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Vector2 offset = new(0 * Owner.direction, -10f);
             Texture2D tex = Projectile.GetTexture();
-            Vector2 drawPos = Projectile.Center - Main.screenPosition+DrawOffset;
+            Vector2 drawPos = Projectile.Center - Main.screenPosition + DrawOffset;
             float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
             Vector2 rotationPoint = tex.Size() * 0.5f;
             SpriteEffects flipSprite = Projectile.spriteDirection * Owner.gravDir == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;

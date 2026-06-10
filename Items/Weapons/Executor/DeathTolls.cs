@@ -42,8 +42,8 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-        if(!HJScarletConfigClient.Instance.SpecialRarity)
-            return base.PreDrawTooltipLine(line, ref yOffset);
+            if (!HJScarletConfigClient.Instance.SpecialRarity)
+                return base.PreDrawTooltipLine(line, ref yOffset);
 
             if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
             {

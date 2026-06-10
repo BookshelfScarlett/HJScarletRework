@@ -11,7 +11,6 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -80,7 +79,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Main.rand.NextBool(6))
                     new ShinyCrossStar(Projectile.Center.ToRandCirclePos(10), Projectile.velocity / 4f, RandLerpColor(Color.LightSkyBlue, Color.SkyBlue), 40, 0, 1 * Projectile.Opacity, 0.8f * Projectile.Opacity, false).Spawn();
                 Timer++;
-                if(Projectile.MeetMaxUpdatesFrame(Timer, 5))
+                if (Projectile.MeetMaxUpdatesFrame(Timer, 5))
                 {
                     if (CurTarget.IsLegal())
                         Projectile.HomingTarget(CurTarget.Center, -1, InitSpeed, 20f, 5f);
@@ -115,9 +114,9 @@ namespace HJScarletRework.Projs.Executor
             Rectangle src = sp.Frame(1, 3, 0, 1);
             float scale = Lerp(0.91f, 0.98f, (float)(Math.Abs(Math.Sin(Main.GlobalTimeWrappedHourly)))) * Projectile.scale * .85f * Projectile.Opacity;
 
-            for(int i =0;i<16;i++)
-            SB.Draw(sp, drawPos + ToRadians(360f / 16 * i).ToRotationVector2() * 2, src, Color.White.ToAddColor(), Projectile.rotation - PiOver2, src.Size()/2, scale, 0, 0);
-            SB.Draw(sp, drawPos, src, Color.White, Projectile.rotation - PiOver2, src.Size()/2, scale, 0, 0);
+            for (int i = 0; i < 16; i++)
+                SB.Draw(sp, drawPos + ToRadians(360f / 16 * i).ToRotationVector2() * 2, src, Color.White.ToAddColor(), Projectile.rotation - PiOver2, src.Size() / 2, scale, 0, 0);
+            SB.Draw(sp, drawPos, src, Color.White, Projectile.rotation - PiOver2, src.Size() / 2, scale, 0, 0);
             return false;
         }
 
@@ -131,20 +130,20 @@ namespace HJScarletRework.Projs.Executor
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             Texture2D orb = HJScarletTexture.Texture_Spirite.Value;
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
-            float scale = Projectile.scale * 0.40f * Lerp(1f, 1.12f, (float)(Math.Abs(Math.Sin( Main.GlobalTimeWrappedHourly)))) * Projectile.Opacity;
+            float scale = Projectile.scale * 0.40f * Lerp(1f, 1.12f, (float)(Math.Abs(Math.Sin(Main.GlobalTimeWrappedHourly)))) * Projectile.Opacity;
             Vector2 newVec = new(1);
             float rot = Main.GlobalTimeWrappedHourly * 1.2f + Projectile.rotation;
-            SB.Draw(orb, drawPos, null, Color.DeepSkyBlue* 1f, rot, orb.ToOrigin(), scale * newVec, 0, 0);
+            SB.Draw(orb, drawPos, null, Color.DeepSkyBlue * 1f, rot, orb.ToOrigin(), scale * newVec, 0, 0);
             orb = HJScarletTexture.Particle_HRShinyOrb.Value;
-            SB.Draw(orb, drawPos, null, Color.White* 1f, rot, orb.ToOrigin(), scale * newVec * 0.85f, 0, 0);
+            SB.Draw(orb, drawPos, null, Color.White * 1f, rot, orb.ToOrigin(), scale * newVec * 0.85f, 0, 0);
 
             DrawTrail(HJScarletTexture.Trail_ManaStreak.Texture, 1f, Color.DeepSkyBlue * 0.65f);
-            DrawTrail(HJScarletTexture.Trail_Lightning0.Texture, 0.8f, Color.LightSkyBlue *0.95f);
+            DrawTrail(HJScarletTexture.Trail_Lightning0.Texture, 0.8f, Color.LightSkyBlue * 0.95f);
             DrawTrail(HJScarletTexture.Trail_Lightning0.Texture, .5f, Color.White * 0.85f);
             HJScarletMethods.EndShaderAreaPixel();
-            
+
         }
-       
+
         public void DrawTrail(Asset<Texture2D> trail, float multValue, Color color)
         {
             Effect shader = HJScarletShader.StandardFlowShader;
@@ -152,7 +151,7 @@ namespace HJScarletRework.Projs.Executor
             shader.Parameters["LaserTextureSize"].SetValue(trail.Size());
             shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, trail.Height()));
             shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -18.2f);
-            shader.Parameters["uColor"].SetValue(color.ToVector4() * Projectile.Opacity  * Clamp(Projectile.velocity.Length(), 0f, 1f));
+            shader.Parameters["uColor"].SetValue(color.ToVector4() * Projectile.Opacity * Clamp(Projectile.velocity.Length(), 0f, 1f));
             shader.Parameters["uFadeoutLength"].SetValue(0.8f);
             shader.Parameters["uFadeinLength"].SetValue(0.15f);
             shader.CurrentTechnique.Passes[0].Apply();
@@ -164,9 +163,9 @@ namespace HJScarletRework.Projs.Executor
                     continue;
                 Vector2 listPos = Projectile.oldPos[i] + Projectile.Size / 2 + Projectile.SafeDir() * 10f;
                 float ratios = i / (float)Projectile.oldPos.Length;
-                date.Add(new(listPos, Color.White, new(0, 30 * multValue * Clamp((1-ratios), 0.32f, 1f)), Projectile.oldRot[i]));
+                date.Add(new(listPos, Color.White, new(0, 30 * multValue * Clamp((1 - ratios), 0.32f, 1f)), Projectile.oldRot[i]));
             }
             TrailRender.DrawTrail(date.ToArray(), sets);
         }
-            }
+    }
 }

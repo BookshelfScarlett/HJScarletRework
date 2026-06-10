@@ -9,15 +9,10 @@ using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -57,29 +52,29 @@ namespace HJScarletRework.Projs.Executor
         {
             OriginalSpeed = Projectile.velocity.LengthSquared();
             OriginalPosition = Projectile.Center;
-            if(AttackStyle == Style.ExecutionStrike)
+            if (AttackStyle == Style.ExecutionStrike)
             {
                 Projectile.penetrate = 3;
                 Projectile.stopsDealingDamageAfterPenetrateHits = true;
             }
             else
             {
-            for (int i = 0; i < 3; i++)
-            {
-                Vector2 vel = RandVelTwoPi(0.1f, 4.2f);
-                Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f);
-                new SmokeParticle(spawnpos, vel, RandLerpColor(Color.Lerp(Color.HotPink, Color.IndianRed,.50f), Color.LightPink), 40, RandRotTwoPi, .61f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
-                if (Main.rand.NextBool())
+                for (int i = 0; i < 3; i++)
                 {
-                    vel = Projectile.velocity.ToSafeNormalize() * Main.rand.NextFloat(-9f, 3f);
-                    new SmokeParticle(spawnpos, vel, RandLerpColor(Color.Lerp(Color.IndianRed, Color.LightPink, 0.75f), Color.HotPink), 40, RandRotTwoPi, .61f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
+                    Vector2 vel = RandVelTwoPi(0.1f, 4.2f);
+                    Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f);
+                    new SmokeParticle(spawnpos, vel, RandLerpColor(Color.Lerp(Color.HotPink, Color.IndianRed, .50f), Color.LightPink), 40, RandRotTwoPi, .61f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
+                    if (Main.rand.NextBool())
+                    {
+                        vel = Projectile.velocity.ToSafeNormalize() * Main.rand.NextFloat(-9f, 3f);
+                        new SmokeParticle(spawnpos, vel, RandLerpColor(Color.Lerp(Color.IndianRed, Color.LightPink, 0.75f), Color.HotPink), 40, RandRotTwoPi, .61f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
+                    }
                 }
-            }
-            for (int j = 0; j < 12; j++)
-            {
-                Vector2 dir = Projectile.SafeDir();
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(20f) + dir * Main.rand.NextFloat(0f, 6f), dir * 12f * Main.rand.NextFloat(), RandLerpColor(Color.IndianRed, Color.HotPink), 50, RandRotTwoPi, 1, 0.7f, false).Spawn();
-            }
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 dir = Projectile.SafeDir();
+                    new ShinyCrossStar(Projectile.Center.ToRandCirclePos(20f) + dir * Main.rand.NextFloat(0f, 6f), dir * 12f * Main.rand.NextFloat(), RandLerpColor(Color.IndianRed, Color.HotPink), 50, RandRotTwoPi, 1, 0.7f, false).Spawn();
+                }
 
             }
 
@@ -108,7 +103,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if(Direction > 0)
+            if (Direction > 0)
             {
                 return true;
             }
@@ -118,7 +113,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 Vector2 vel = RandVelTwoPi(0.1f, 4.2f);
                 Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f);
-                new SmokeParticle(spawnpos, vel, RandLerpColor(Color.Lerp(Color.HotPink, Color.IndianRed,.50f), Color.LightPink), 40, RandRotTwoPi, 1f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
+                new SmokeParticle(spawnpos, vel, RandLerpColor(Color.Lerp(Color.HotPink, Color.IndianRed, .50f), Color.LightPink), 40, RandRotTwoPi, 1f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
                 if (Main.rand.NextBool())
                 {
                     vel = Projectile.velocity.ToSafeNormalize() * Main.rand.NextFloat(-9f, 3f);

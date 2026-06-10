@@ -1,7 +1,4 @@
-﻿using ContinentOfJourney.Buffs;
-using ContinentOfJourney.Items.Accessories.Bookmarks;
-using ContinentOfJourney.Items.Accessories.Bookmarks.SpellProj;
-using ContinentOfJourney.Items.Material;
+﻿using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Tiles;
 using HJScarletRework.Core;
 using HJScarletRework.Globals.Classes;
@@ -44,7 +41,7 @@ namespace HJScarletRework.Items.Accessories
             player.buffImmune[BuffID.Chilled] = true;
             player.buffImmune[BuffID.Frozen] = true;
             player.resistCold = true;
-            if(Collision.DrownCollision(player.position, player.width, player.height,player.gravDir))
+            if (Collision.DrownCollision(player.position, player.width, player.height, player.gravDir))
             {
                 player.breath = 100;
             }

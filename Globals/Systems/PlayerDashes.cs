@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 /// <summary>
@@ -14,7 +13,7 @@ namespace HJScarletRework.Globals.Systems
 {
     public static class PlayerDashMethod
     {
-        public static void ApplyDash(this Player player ,int dashID)
+        public static void ApplyDash(this Player player, int dashID)
         {
             player.GetModPlayer<ScarletDashPlayer>().CurDashID = dashID;
         }

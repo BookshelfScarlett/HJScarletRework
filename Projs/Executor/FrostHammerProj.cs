@@ -22,7 +22,7 @@ namespace HJScarletRework.Projs.Executor
             Shoot,
             Return
         }
-        public AnimationStruct Helper = new (3);
+        public AnimationStruct Helper = new(3);
         public ref float Timer => ref Projectile.ai[0];
         public State AttackState
         {
@@ -65,17 +65,17 @@ namespace HJScarletRework.Projs.Executor
         public void HandleAttackAI()
         {
             Projectile.frameCounter++;
-            if (Projectile.frameCounter > Main.rand.Next(6,9) * Projectile.MaxUpdates)
+            if (Projectile.frameCounter > Main.rand.Next(6, 9) * Projectile.MaxUpdates)
             {
                 Projectile.frameCounter = 0;
-                for(int i =0;i<8;i++)
-                new SmokeParticle(Projectile.Center.ToRandCirclePosEdge(6f), Vector2.UnitY.ToRandVelocity(ToRadians(10f), 0.1f, 12f), RandLerpColor(Color.White, Color.SkyBlue), 40, RandRotTwoPi, 0.8f, 0.26f, true).Spawn();
+                for (int i = 0; i < 8; i++)
+                    new SmokeParticle(Projectile.Center.ToRandCirclePosEdge(6f), Vector2.UnitY.ToRandVelocity(ToRadians(10f), 0.1f, 12f), RandLerpColor(Color.White, Color.SkyBlue), 40, RandRotTwoPi, 0.8f, 0.26f, true).Spawn();
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitY * Main.rand.NextFloat(2f, 6f), ProjectileType<FrostHammerIceSpike>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 if (Owner.HasProj<FrostHammerExecution>() && !Projectile.TooAwayFromOwner(1300))
                     proj.ai[1] = 1;
             }
 
-            switch(AttackState)
+            switch (AttackState)
             {
                 case State.Shoot:
                     DoShoot();
@@ -99,7 +99,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.ResetBoomerangReturn();
             Projectile.HomingTarget(Owner.MountedCenter, -1, 20f, 20f);
             Projectile.rotation += 0.2f;
-            if(Projectile.IntersectOwnerByDistance(100))
+            if (Projectile.IntersectOwnerByDistance(100))
             {
                 Projectile.Kill();
             }
@@ -109,7 +109,7 @@ namespace HJScarletRework.Projs.Executor
             switch (toState)
             {
                 case State.Shoot:
-                    
+
                     break;
                 case State.Return:
                     Timer = 0;
@@ -125,15 +125,15 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen())
                 return;
-            if(Main.rand.NextBool(10))
-                new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity / 8f, RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue), 40, RandRotTwoPi, 0.75f, Projectile.scale * Main.rand.NextFloat(0.7f, 1.21f) * 0.38f,Main.rand.NextBool()).Spawn();
-            if(Main.rand.NextBool(8))
-                new SnowCloud(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity / 8f, RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue), 40, RandRotTwoPi, 0.56f, Projectile.scale * Main.rand.NextFloat(0.7f, 1.21f) * 0.09f,true).SpawnToPriority();
+            if (Main.rand.NextBool(10))
+                new SmokeParticle(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity / 8f, RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue), 40, RandRotTwoPi, 0.75f, Projectile.scale * Main.rand.NextFloat(0.7f, 1.21f) * 0.38f, Main.rand.NextBool()).Spawn();
             if (Main.rand.NextBool(8))
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(30), Vector2.UnitY * Main.rand.NextFloat(1.8f, 5.4f), RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 0, 1, 0.68f * Main.rand.NextFloat(0.8f,1.1f)).Spawn();
+                new SnowCloud(Projectile.Center.ToRandCirclePos(30), -Projectile.velocity / 8f, RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue), 40, RandRotTwoPi, 0.56f, Projectile.scale * Main.rand.NextFloat(0.7f, 1.21f) * 0.09f, true).SpawnToPriority();
+            if (Main.rand.NextBool(8))
+                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(30), Vector2.UnitY * Main.rand.NextFloat(1.8f, 5.4f), RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 0, 1, 0.68f * Main.rand.NextFloat(0.8f, 1.1f)).Spawn();
             if (Main.rand.NextBool(12))
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(30), Vector2.UnitY * Main.rand.NextFloat(1.8f, 5.4f), RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 0, 1, 0.68f * Main.rand.NextFloat(0.8f,1.1f)).Spawn();
-            if(Main.rand.NextBool(8))
+                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(30), Vector2.UnitY * Main.rand.NextFloat(1.8f, 5.4f), RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 0, 1, 0.68f * Main.rand.NextFloat(0.8f, 1.1f)).Spawn();
+            if (Main.rand.NextBool(8))
             {
                 ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
                 {
@@ -149,18 +149,18 @@ namespace HJScarletRework.Projs.Executor
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             SwitchAttackState(State.Return);
-            for(int i =0;i<2;i++)
+            for (int i = 0; i < 2; i++)
             {
-                 for(int j =0;j<8;j++)
-                new SmokeParticle(Projectile.Center.ToRandCirclePosEdge(6f), Vector2.UnitY.ToRandVelocity(ToRadians(10f), 0.1f, 12f), RandLerpColor(Color.White, Color.SkyBlue), 40, RandRotTwoPi, 0.8f, 0.26f, true).Spawn();
+                for (int j = 0; j < 8; j++)
+                    new SmokeParticle(Projectile.Center.ToRandCirclePosEdge(6f), Vector2.UnitY.ToRandVelocity(ToRadians(10f), 0.1f, 12f), RandLerpColor(Color.White, Color.SkyBlue), 40, RandRotTwoPi, 0.8f, 0.26f, true).Spawn();
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, -Projectile.oldVelocity.ToRandVelocity(ToRadians(5f), 8) * (i + 1) - Vector2.UnitY * 15f, ProjectileType<FrostHammerIceSpike>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 if (Owner.HasProj<FrostHammerExecution>() && !Projectile.TooAwayFromOwner(1300))
                     proj.ai[1] = 1;
 
 
             }
-            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit  with { Variants =[1],MaxInstances = 1, Pitch = -0.5f, Volume = 0.5f });
-            int dustCount =5;
+            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { Variants = [1], MaxInstances = 1, Pitch = -0.5f, Volume = 0.5f });
+            int dustCount = 5;
             for (int i = 0; i < dustCount; ++i)
             {
                 Vector2 dir = Projectile.SafeDirByRot();
@@ -198,11 +198,11 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<FrostHammer>());
-            if(Projectile.numHits % 3 == 0)
-            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit  with { Variants =[1],MaxInstances = 1, Pitch = -0.5f, Volume = 0.5f });
-            if(Projectile.numHits == 2)
+            if (Projectile.numHits % 3 == 0)
+                SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { Variants = [1], MaxInstances = 1, Pitch = -0.5f, Volume = 0.5f });
+            if (Projectile.numHits == 2)
                 SwitchAttackState(State.Return);
-            int dustCount =5;
+            int dustCount = 5;
             for (int i = 0; i < dustCount; ++i)
             {
                 Vector2 dir = Projectile.SafeDirByRot();

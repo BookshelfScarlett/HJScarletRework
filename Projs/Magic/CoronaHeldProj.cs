@@ -11,7 +11,6 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Magic
 {
@@ -92,7 +91,7 @@ namespace HJScarletRework.Projs.Magic
             Vector2 anchorPos = new Vector2(anchorPosX, anchorPosY);
             //实际更新位置
             float lerpValue = 0.15f + (Timer < 30f).ToInt() * 0.2f;
-            if(Owner.controlUseTile)
+            if (Owner.controlUseTile)
             {
                 anchorPos = Owner.Center;
                 lerpValue = .15f;
@@ -133,7 +132,7 @@ namespace HJScarletRework.Projs.Magic
             }
             else
             {
-                if(ShouldPlaySound)
+                if (ShouldPlaySound)
                 {
                     SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 1, Pitch = 0.35f }, Owner.Center);
                     ShouldPlaySound = false;
@@ -149,9 +148,9 @@ namespace HJScarletRework.Projs.Magic
                 return;
             if (UseTime < attackSpeed)
                 return;
-            if (!Owner.CheckMana(Owner.HeldItem, (int)(Owner.HeldItem.mana * Owner.manaCost),true,false))
+            if (!Owner.CheckMana(Owner.HeldItem, (int)(Owner.HeldItem.mana * Owner.manaCost), true, false))
                 return;
-            
+
             Vector2 vel = Vector2.UnitX;
             for (int i = -1; i < 2; i += 2)
             {

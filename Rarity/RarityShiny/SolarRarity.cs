@@ -1,13 +1,8 @@
-﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Methods;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityParticles;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -57,9 +52,9 @@ namespace HJScarletRework.Rarity.RarityShiny
             {
                 float scale = Main.rand.NextFloat(0.30f * 0.5f, 0.30f) * 1.2f;
                 int lifetime = 160;
-                Vector2 position = GetParticlePosition(tooltipLine); 
+                Vector2 position = GetParticlePosition(tooltipLine);
                 Vector2 velocity = -Vector2.UnitY * Main.rand.NextFloat(0.25f, 0.55f);
-                RaritySmoke rarityShinyOrb = new RaritySmoke(position, velocity, RandLerpColor(Color.DarkOrange, Color.OrangeRed), lifetime, RandRotTwoPi, 1, scale * 0.28f, true,true);
+                RaritySmoke rarityShinyOrb = new RaritySmoke(position, velocity, RandLerpColor(Color.DarkOrange, Color.OrangeRed), lifetime, RandRotTwoPi, 1, scale * 0.28f, true, true);
                 particleList.Add(rarityShinyOrb);
             }
             //最后更新他。

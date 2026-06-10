@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;

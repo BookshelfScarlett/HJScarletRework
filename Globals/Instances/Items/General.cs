@@ -1,9 +1,7 @@
-﻿using ContinentOfJourney.Items.ThrowerWeapons;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Useables;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -50,12 +48,12 @@ namespace HJScarletRework.Globals.Instances.Items
             bool hasImmersiveInventory = ModLoader.HasMod("ImmersiveInventory");
             bool isHovering = MouseHoveringAnySlot(position, scale);
             float maxScale = isHovering ? 1.35f : 1f;
-            if(isHovering)
+            if (isHovering)
 
-            //开启沉浸背包mod下会禁用这一条的更改
-            if (hasImmersiveInventory)
-                simpleImmersiveBackpackValue = 1f;
-                simpleImmersiveBackpackValue = Lerp(simpleImmersiveBackpackValue, maxScale, 0.15f);
+                //开启沉浸背包mod下会禁用这一条的更改
+                if (hasImmersiveInventory)
+                    simpleImmersiveBackpackValue = 1f;
+            simpleImmersiveBackpackValue = Lerp(simpleImmersiveBackpackValue, maxScale, 0.15f);
             //这个用于控模组图标的放缩
             simpleImmersiveBackpackValueAlt = Lerp(simpleImmersiveBackpackValueAlt, maxScale, 0.15f);
         }
@@ -131,7 +129,7 @@ namespace HJScarletRework.Globals.Instances.Items
         public override void PostDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
             DrawSpecialIconDisplay(item, spriteBatch, position);
-            if(HJScarletConfigClient.Instance.DrawIcon && CanDrawGhost && (purePrismAnimationCounter) <= .98f)
+            if (HJScarletConfigClient.Instance.DrawIcon && CanDrawGhost && (purePrismAnimationCounter) <= .98f)
             {
                 Vector2 iconPosition = position + new Vector2(10f * Main.inventoryScale, 10f * Main.inventoryScale);
                 float iconScale = 0.31f * simpleImmersiveBackpackValueAlt;
@@ -140,19 +138,17 @@ namespace HJScarletRework.Globals.Instances.Items
                 Texture2D tex = HJScarletTexture.ScarletGhost.Value;
                 for (int i = 0; i < 6; i++)
                     spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, rect, Color.White.ToAddColor() * (1f - purePrismAnimationCounter), 0f, recorigin, iconScale, SpriteEffects.None, 0f);
-                spriteBatch.Draw(tex, iconPosition, rect, Color.White * (1f -purePrismAnimationCounter), 0f, recorigin, iconScale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(tex, iconPosition, rect, Color.White * (1f - purePrismAnimationCounter), 0f, recorigin, iconScale, SpriteEffects.None, 0f);
 
             }
             if (HJScarletConfigClient.Instance.DrawIcon && CanDrawIcon && (purePrismAnimationCounter) <= 0.98f)
             {
                 Vector2 iconPosition = position + new Vector2(15f * Main.inventoryScale, 12f * Main.inventoryScale);
                 float iconScale = 0.34f * simpleImmersiveBackpackValueAlt;
-                //Rectangle rect = new(0, GhostFrame * 44, 46, 42);
-                //Vector2 recorigin = new(23, 21);
                 Texture2D tex = HJScarletTexture.LostbeltJourneyIcon.Value;
                 for (int i = 0; i < 6; i++)
-                    spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.White.ToAddColor() * (1f - purePrismAnimationCounter), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
-                spriteBatch.Draw(tex, iconPosition, null, Color.White * (1f -purePrismAnimationCounter), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.Black * (1f - purePrismAnimationCounter), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(tex, iconPosition, null, Color.White * (1f - purePrismAnimationCounter), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
             }
         }
         public void DrawSpecialIconDisplay(Item item, SpriteBatch spriteBatch, Vector2 position)
@@ -218,5 +214,5 @@ namespace HJScarletRework.Globals.Instances.Items
         {
             return base.IsArmorSet(head, body, legs);
         }
-           }
+    }
 }

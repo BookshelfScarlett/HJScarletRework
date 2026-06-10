@@ -75,7 +75,7 @@ namespace HJScarletRework.Assets.Registers
 
             Proj_SpearofEscapeMissile = Request<Texture2D>($"{ProjPath}/{nameof(Proj_SpearofEscapeMissile)}").Value;
 
-            
+
 
 
         }

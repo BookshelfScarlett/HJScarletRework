@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Buffs;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -76,8 +75,8 @@ namespace HJScarletRework.Projs.Executor
         {
             modifiers.DefenseEffectiveness *= 0;
             bool hasBuff = Owner.HJScarlet().exsanguinationBuffTime != 0;
-            if(!hasBuff)
-            Projectile.AddExecutionTimeImmediate(ItemType<Exsanguination>());
+            if (!hasBuff)
+                Projectile.AddExecutionTimeImmediate(ItemType<Exsanguination>());
             SoundStyle style = hasBuff ? HJScarletSounds.Light_FleshHit with { MaxInstances = 4, Volume = 0.70f } : HJScarletSounds.Light_ShieldHit with { MaxInstances = 4, Volume = 0.70f };
             SoundEngine.PlaySound(style, Projectile.Center);
         }

@@ -64,7 +64,7 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyEvilScale = CreateRecipeGroup(nameof(AnyEvilScale), ItemID.ShadowScale, ItemID.TissueSample);
             AnyEvilBar = CreateRecipeGroup(nameof(AnyEvilBar), ItemID.DemoniteBar, ItemID.CrimtaneBar);
             AnyCobaltBar = CreateRecipeGroup(nameof(AnyCobaltBar), ItemID.CobaltBar, ItemID.PalladiumBar);
-            AnyGoldSword= CreateRecipeGroup(nameof(AnyGoldSword), ItemID.GoldBroadsword, ItemID.PlatinumBroadsword);
+            AnyGoldSword = CreateRecipeGroup(nameof(AnyGoldSword), ItemID.GoldBroadsword, ItemID.PlatinumBroadsword);
         }
         public override void Unload()
         {
@@ -82,7 +82,7 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyGoldBar = null;
             AnyEvilScale = null;
             AnyEvilBar = null;
-            AnyCobaltBar= null;
+            AnyCobaltBar = null;
             AnyGoldSword = null;
         }
         public static string CreateRecipeGroup(string name, params int[] AllItem)

@@ -103,7 +103,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.rotation += 0.2f;
             Timer++;
-            if (Projectile.MeetMaxUpdatesFrame(Timer,12f))
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 12f))
             {
                 Timer = 0;
                 Projectile.netUpdate = true;
@@ -181,7 +181,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HJScarlet().GlobalTargetIndex = target.whoAmI;
             Projectile.AddExecutionTimeImmediate(ItemType<FleshGrinder>());
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 2, Pitch = -0.2f }, target.Center);
-            if(Projectile.numHits > 2)
+            if (Projectile.numHits > 2)
             {
                 Projectile.ResetLocalNPCHitImmunity();
                 Projectile.netUpdate = true;

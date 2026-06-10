@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
@@ -60,7 +59,7 @@ namespace HJScarletRework.Projs.Executor
                 return;
             Projectile.timeLeft = 2;
             ref int buffTimer = ref Owner.HJScarlet().exsanguinationBuffTime;
-            if(buffTimer == 0)
+            if (buffTimer == 0)
             {
                 Projectile.HJScarlet().ExecutionStrike = false;
             }
@@ -97,7 +96,6 @@ namespace HJScarletRework.Projs.Executor
             //震动这把枪。
             Projectile.position += Main.rand.NextVector2Circular(1.3f, 1.3f);
             Projectile.rotation = Owner.ToMouseVector2().ToRotation();
-
         }
         public bool CheckOwnerDead()
         {

@@ -33,7 +33,7 @@ namespace HJScarletRework.Rarity.RarityShiny
                 int lifetime = 160;
                 Vector2 position = GetParticlePosition(tooltipLine);
                 Vector2 velocity = -Vector2.UnitY * Main.rand.NextFloat(0.25f, 0.55f);
-                RaritySnowCloud rarityShinyOrb = new (position, velocity, RandLerpColor(Color.RoyalBlue, Color.WhiteSmoke), lifetime, RandRotTwoPi, 1, scale * 0.128f, true, true);
+                RaritySnowCloud rarityShinyOrb = new(position, velocity, RandLerpColor(Color.RoyalBlue, Color.WhiteSmoke), lifetime, RandRotTwoPi, 1, scale * 0.128f, true, true);
                 particleList.Add(rarityShinyOrb);
             }
             //最后更新他。

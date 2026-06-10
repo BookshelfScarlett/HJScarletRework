@@ -12,7 +12,7 @@ namespace HJScarletRework.Items.Accessories
     public class RocketCharm : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
-        public int AP = 30; 
+        public int AP = 30;
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Lime);

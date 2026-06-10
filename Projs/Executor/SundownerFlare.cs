@@ -1,20 +1,13 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -89,7 +82,7 @@ namespace HJScarletRework.Projs.Executor
             }
             Projectile.Center = Owner.Center;
             //开始准备召唤需要的火力空袭
-            if(Projectile.timeLeft % 2 == 0)
+            if (Projectile.timeLeft % 2 == 0)
             {
                 Vector2 spawnPos = Main.MouseWorld - Vector2.UnitY * 1200f + Vector2.UnitX * Main.rand.NextFloat(20f, 100f) * Main.rand.NextBool().ToDirectionInt();
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, Vector2.UnitY * 30f, ProjectileType<SundownerRocket>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
@@ -98,7 +91,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     SoundEngine.PlaySound(SoundID.Item45 with { Pitch = 0, MaxInstances = 0 }, Owner.Center);
                 }
-                if(Projectile.timeLeft % 6 == 0)
+                if (Projectile.timeLeft % 6 == 0)
                 {
                     proj.ai[0] = 1;
 

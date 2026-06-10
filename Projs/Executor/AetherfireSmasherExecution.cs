@@ -282,7 +282,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (LockTarget is null && target.IsLegal())
                 LockTarget = target;
-            Vector2 vel = RandVelTwoPi(16,18f);
+            Vector2 vel = RandVelTwoPi(16, 18f);
             Projectile proj2 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel, ProjectileType<AetherfireSmasherFireball>(), Projectile.damage, Projectile.knockBack);
             proj2.ai[1] = 1999;
 

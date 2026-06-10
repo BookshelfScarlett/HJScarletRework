@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Accessories
         {
             base.SetStaticDefaults();
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MinusHeal,OverSatuTime,MininumHeal,MaxHealPower.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MinusHeal, OverSatuTime, MininumHeal, MaxHealPower.ToPercent());
         public override void ExSD()
         {
             Item.defense = 4;

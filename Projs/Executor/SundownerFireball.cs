@@ -11,11 +11,9 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -134,21 +132,21 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.damage = 0;
                 Projectile.penetrate = -1;
 
-            }    
+            }
 
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(!Owner.HasProj<SundownerRocket>())
-            SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1, Pitch = 0.3f }, Projectile.Center);
+            if (!Owner.HasProj<SundownerRocket>())
+                SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1, Pitch = 0.3f }, Projectile.Center);
             Projectile.AddExecutionTimeImmediate(ItemType<Sundowner>());
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if(!Owner.HasProj<SundownerRocket>())
-            SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1, Pitch = 0.3f }, Projectile.Center);
+            if (!Owner.HasProj<SundownerRocket>())
+                SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1, Pitch = 0.3f }, Projectile.Center);
             for (int i = 0; i < 9; i++)
             {
                 Vector2 vel = RandVelTwoPi(0.1f, 4.2f);
@@ -170,7 +168,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.damage = 0;
                 Projectile.penetrate = -1;
 
-            }    
+            }
             Projectile.BounceOnTile(oldVelocity);
             BounceTime++;
             return false;
@@ -198,7 +196,7 @@ namespace HJScarletRework.Projs.Executor
                 edgeColor = Color.Lerp(Color.Orange, Color.White, 1 - rads).ToAddColor(10) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads) * Projectile.Opacity;
                 SB.Draw(projTex, lerpPos + Projectile.PosToCenter(), null, edgeColor * 0.25f, rot, ori, oriScale * scale * Projectile.Opacity * 0.75f, 0, 0);
             }
-            SB.Draw(projTex, projPos, null, Color.DarkOrange.ToAddColor(75) * Projectile.Opacity, Projectile.rotation, ori, oriScale , 0, 0);
+            SB.Draw(projTex, projPos, null, Color.DarkOrange.ToAddColor(75) * Projectile.Opacity, Projectile.rotation, ori, oriScale, 0, 0);
             SB.Draw(projTex, projPos, null, Color.White.ToAddColor(0) * Projectile.Opacity, Projectile.rotation, ori, oriScale * 0.75f, 0, 0);
 
             return false;

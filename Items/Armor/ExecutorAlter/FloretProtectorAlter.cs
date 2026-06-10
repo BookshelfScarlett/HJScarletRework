@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override ArmorType Category => ArmorType.Helmet;
         public override bool SetUpArmorSet => true;
         public override int DownedConditionID => NPCType<TheLifebringerHead>();
-        public override int[] ArmorSlots => [ItemID.FloretProtectorHelmet,ItemID.FloretProtectorChestplate,ItemID.FloretProtectorLegs];
+        public override int[] ArmorSlots => [ItemID.FloretProtectorHelmet, ItemID.FloretProtectorChestplate, ItemID.FloretProtectorLegs];
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += 0.4f;
@@ -90,7 +90,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override int DownedConditionID => NPCType<TheLifebringerHead>();
         public override string SetupName => "FloretProtector";
         public override ArmorType Category => ArmorType.Legs;
-                public override void SetStaticDefaults()
+        public override void SetStaticDefaults()
         {
             HJScarletList.ConvertedItemRarityDrawDictionary.Add(ApplyArmor, LivingRarity.DrawRarity);
         }

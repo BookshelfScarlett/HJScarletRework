@@ -40,7 +40,7 @@ namespace HJScarletRework.Projs.General
             Timer++;
             float ratios = Clamp(Timer / (Projectile.MaxUpdates * 30f), 0f, 1f);
             Projectile.velocity = Vector2.Lerp(Projectile.SafeDir() * 5f, Projectile.SafeDir() * .0f, ratios);
-            Projectile.rotation += Lerp(.4f,.01f,ratios);
+            Projectile.rotation += Lerp(.4f, .01f, ratios);
             if (ratios == 1f)
             {
                 Timer2++;
@@ -64,16 +64,16 @@ namespace HJScarletRework.Projs.General
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
-            SB.Draw(HJScarletTexture.Texture_WhiteCube.Value, Owner.Center, null, Color.DarkOrange* .13f,0, HJScarletTexture.Texture_WhiteCube.Origin,new Vector2(30000f,30000f), 0, 0);
-            DrawBeam(Color.DarkOrange,.95f);
-            DrawBeam(Color.OrangeRed,.75f);
-            DrawBeam(Color.White,.65f);
+            SB.Draw(HJScarletTexture.Texture_WhiteCube.Value, Owner.Center, null, Color.DarkOrange * .13f, 0, HJScarletTexture.Texture_WhiteCube.Origin, new Vector2(30000f, 30000f), 0, 0);
+            DrawBeam(Color.DarkOrange, .95f);
+            DrawBeam(Color.OrangeRed, .75f);
+            DrawBeam(Color.White, .65f);
             SB.Draw(projTex, drawPos, null, Color.White, Projectile.rotation, ori, Projectile.scale, 0, 0);
             return false;
         }
         public void DrawBeam(Color color, float heightMult)
         {
-                float ratios2 = Clamp(Timer2 / (Projectile.MaxUpdates * 10f), 0f, 1f);
+            float ratios2 = Clamp(Timer2 / (Projectile.MaxUpdates * 10f), 0f, 1f);
             SB.EnterShaderArea();
             Asset<Texture2D> value = HJScarletTexture.Trail_ManaStreak.Texture;
             Effect shader = HJScarletShader.StandardFlowShader;
@@ -86,7 +86,7 @@ namespace HJScarletRework.Projs.General
             shader.CurrentTechnique.Passes[0].Apply();
             // 设定内端宽度（可固定很小）和外端宽度（随时间增大）
             float innerWidth = 5f;
-            float outerWidth = Lerp(value.Height() *0.1f, value.Height() * 0.5f, ratios2); // 从细到粗
+            float outerWidth = Lerp(value.Height() * 0.1f, value.Height() * 0.5f, ratios2); // 从细到粗
             float length = 2200f; // 固定长度，不向外移动
 
             Vector4 vector4 = new(.1f, .1f, 0.05f, 0.6f);

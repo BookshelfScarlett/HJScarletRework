@@ -1,9 +1,7 @@
 ﻿using HJScarletRework.Items.Accessories;
-using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -202,7 +200,7 @@ namespace HJScarletRework.Globals.Systems
             int[] itemsToPlaceInFrozenChests =
                 [
                     ItemID.ManaCrystal,
-                    ItemID.Compass, 
+                    ItemID.Compass,
                     ItemID.DepthMeter,
                     ItemID.MetalDetector,
                     ItemType<ManaSavingsJar>()

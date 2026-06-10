@@ -103,7 +103,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            for (int i = 0; i < 4;  i++)
+            for (int i = 0; i < 4; i++)
             {
                 new SmokeParticle(Projectile.Center.ToRandCirclePos(2), RandVelTwoPi(1f, 6f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, 1f, 0.16f, Main.rand.NextBool()).SpawnToNonPreMult();
             }
