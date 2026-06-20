@@ -28,7 +28,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
         }
         public override bool CanUseItem(Player player)
         {
-            return !player.HasProj(Item.shoot);
+            return !player.HasProj(Item.shoot) && player.HJScarlet().heldProjReUseTime == 0;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

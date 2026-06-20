@@ -170,6 +170,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, fireVel, ProjectileType<FrostoftheStormSlash>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 proj.HJScarlet().HasExecutionMechanic = true;
             }
+            float heldscale = HJScarletMethods.HasFuckingCalamity ?  Owner.HeldItem.scale : 1f; 
             //这里挥砍动画一定程度上使用了矩阵变化。
             Helper.UpdateAniState(0);
             float easedProgress = EaseInBack(Helper.GetAniProgress(0));
@@ -181,7 +182,7 @@ namespace HJScarletRework.Projs.Executor
             //将其投影到矩阵上，并进行形变
             Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(1.2f, Height, 1f);
             //而后再转化为射弹的目标指向，这个tarPos同时拥有指向和武器模长的信息。而不是一个单位向量
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.2f * heldscale;
             //这样，Scale就是tarPos的向量模长
             Projectile.scale = tarPos.Length();
             //武器的角度为（起始角度 + 目标角度）的值
@@ -195,7 +196,7 @@ namespace HJScarletRework.Projs.Executor
                 float slashTrailRotation = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
                 Matrix tFormSlash = Matrix.CreateRotationZ(slashTrailRotation) * Matrix.CreateScale(1.2f, Height, 1f);
                 Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * 1.2f;
-                Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 200f;
+                Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 200f * heldscale;
                 OldAimPos.Add(slashPosFinal);
                 for (int i = 1; i <= 2; i++)
                 {
@@ -225,12 +226,13 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateMidAnimation()
         {
             Helper.UpdateAniState(1);
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f; 
             float easedProgress = EaseOutBack(Helper.GetAniProgress(1));
             float beginAngle = 135 * Flip.ToDirectionInt();
             float endAngle = 150 * Flip.ToDirectionInt();
             float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
             Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(1.2f, Height, 1f);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.2f * heldscale;
             Projectile.scale = tarPos.Length();
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             SlashOpacity = Lerp(SlashOpacity, 0f, 0.03f / Projectile.extraUpdates);

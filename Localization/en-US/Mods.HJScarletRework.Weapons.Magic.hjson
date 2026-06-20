@@ -26,3 +26,8 @@ DragonSword: {
 	DisplayName: Dragon Sword
 	Tooltip: ""
 }
+
+DragonSniper: {
+	DisplayName: Dragon Sniper
+	Tooltip: ""
+}

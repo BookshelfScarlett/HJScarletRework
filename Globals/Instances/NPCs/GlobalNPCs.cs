@@ -1,4 +1,10 @@
-﻿using Terraria;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.Ranged;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Steamworks;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Instances
@@ -11,8 +17,23 @@ namespace HJScarletRework.Globals.Instances
         public int Dialectics_Timer = 0;
         public int Dialectics_HitTime = 0;
         public int blackKeyDefensesReduces = 0;
+        public bool terraFlamethrowerDebuff = false;
+        public int terraFlamethrowerDropDamage = 0;
+        public float miscCounter = 0;
+        public override void ResetEffects(NPC npc)
+        {
+            terraFlamethrowerDebuff = false; 
+            terraFlamethrowerDropDamage = 0;
+        }
         public override void PostAI(NPC npc)
         {
+            if(terraFlamethrowerDebuff)
+            {
+                if (miscCounter % 10 == 0 && npc.damage != 0)
+                {
+                }
+            }
+
             if (Dialectics_HitTime > 5)
                 Dialectics_HitTime = 5;
 
@@ -24,6 +45,25 @@ namespace HJScarletRework.Globals.Instances
                 Dialectics_Mark = false;
                 Dialectics_HitTime = 0;
             }
+            miscCounter++;
+            if (miscCounter > 300)
+                miscCounter = 0;
+        }
+        public override void DrawEffects(NPC npc, ref Color drawColor)
+        {
+            base.DrawEffects(npc, ref drawColor);
+        }
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if(terraFlamethrowerDebuff)
+            {
+                spriteBatch.EnterShaderArea();
+                Texture2D ring = HJScarletTexture.Particle_RingShiny.Value;
+                spriteBatch.Draw(ring, npc.Center - screenPos, null, Color.LimeGreen.ToAddColor(), 0, ring.ToOrigin(), 0.5f, 0, 0);
+                spriteBatch.EndShaderArea();
+                
+            }
+            base.PostDraw(npc, spriteBatch, screenPos, drawColor);
         }
     }
 }

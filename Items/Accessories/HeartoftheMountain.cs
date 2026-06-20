@@ -22,6 +22,7 @@ namespace HJScarletRework.Items.Accessories
             player.HJScarlet().heartoftheCrystal = true;
             player.GetDamage<MagicDamageClass>() *= 10.0f;
             player.GetCritChance<MagicDamageClass>() += 50;
+            player.GetAttackSpeed<MagicDamageClass>() += .50f;
         }
         public override void AddRecipes()
         {

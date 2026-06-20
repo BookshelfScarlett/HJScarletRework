@@ -187,7 +187,6 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.Center = Owner.MountedCenter;
 
             }
-            Owner.heldProj = Projectile.whoAmI;
         }
 
         public Vector2 DrawOffset = Vector2.Zero;

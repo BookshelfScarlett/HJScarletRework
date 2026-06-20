@@ -43,7 +43,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.width = Projectile.height = 8;
             Projectile.extraUpdates = 3;
-            Projectile.SetupImmnuity(60, ImmnuityType.Static);
+            Projectile.SetupImmnuity(30, ImmnuityType.Static);
             Projectile.tileCollide = false;
             Projectile.penetrate = 4;
             Projectile.timeLeft = 480;

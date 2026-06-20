@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.List;
 using HJScarletRework.Items.Vanity.Arceca;
+using HJScarletRework.Items.Vanity.Misc;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -53,6 +54,10 @@ namespace HJScarletRework.Globals.Players.VanitySets
                 }
             }
         }
+    }
+    public class LacrimosaPlayer: MenuVanityPlayer
+    {
+        public override int VanityItemType => ItemType<LacrimosaItem>();
     }
     public class TairitsuPlayer : MenuVanityPlayer
     {

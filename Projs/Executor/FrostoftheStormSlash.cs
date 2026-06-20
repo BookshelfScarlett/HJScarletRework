@@ -120,14 +120,15 @@ namespace HJScarletRework.Projs.Executor
         {
             if (PostFirstFrame)
                 return;
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f; 
             PostFirstFrame = true;
             RandOffset1 = Main.rand.NextFloat(0, 10);
             RandOffset2 = Main.rand.NextFloat(0, 10);
             RandOffset3 = Main.rand.NextFloat(0, 10);
             RandOffset4 = Main.rand.NextFloat(0, 10);
-            float maxPoints = 50;
-            float xMult = 3.5f;
-            float yMult = 2f;
+            float maxPoints = 50 * heldscale;
+            float xMult = 3.5f * heldscale;
+            float yMult = 2f * heldscale;
             //float yMult = 0.5f;
             for (int i = 0; i < maxPoints; i++)
             {
@@ -194,11 +195,12 @@ namespace HJScarletRework.Projs.Executor
 
             List<ScarletVertex> VertexList = [];
             Vector2 projVel = Projectile.velocity.SafeNormalize(Vector2.UnitX) * 42;
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f; 
             for (int i = 0; i < CenterPosList.Count; i++)
             {
                 float progress = (float)i / CenterPosList.Count;
                 Vector2 posHead = CenterPosList[i] + Projectile.Center - Main.screenPosition;
-                Vector2 posSrc = CenterPosList[i] + Projectile.Center - Main.screenPosition - projVel * v * Projectile.Opacity;
+                Vector2 posSrc = CenterPosList[i] + Projectile.Center - Main.screenPosition - projVel * v * Projectile.Opacity * heldscale;
                 VertexList.Add(new ScarletVertex(posHead, color, new Vector3(progress, 0, 0)));
                 VertexList.Add(new ScarletVertex(posSrc, color, new Vector3(progress, 1, 0)));
             }

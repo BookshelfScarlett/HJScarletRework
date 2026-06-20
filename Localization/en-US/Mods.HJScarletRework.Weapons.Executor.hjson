@@ -289,3 +289,18 @@ StaffofFrostbite: {
 	DisplayName: Staffof Frostbite
 	Tooltip: ""
 }
+
+Frostlight: {
+	DisplayName: Frostlight
+	Tooltip: ""
+}
+
+PureYinyo: {
+	DisplayName: Pure Yinyo
+	Tooltip: ""
+	ExecutionStrike:
+		'''
+		Toss a hammer upward
+		Meanwhile, the blossom continuously releases rotating petals
+		'''
+}

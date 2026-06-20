@@ -101,7 +101,8 @@ namespace HJScarletRework.Projs.Executor
             if (isPressingLeftClick)
             {
                 Helper.UpdateAniState(0);
-                ShooDreamLaser();
+                if (Projectile.IsMe())
+                    ShooDreamLaser();
             }
 
         }

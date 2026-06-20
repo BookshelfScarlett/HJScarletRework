@@ -66,6 +66,8 @@ Melee: {
 	DragonSwordHeldProj.DisplayName: Dragon Sword Held Proj
 	DragonSwordSlash.DisplayName: Dragon Sword Slash
 	FrostoftheStormHeldProj.DisplayName: Frostofthe Storm Held Proj
+	EnchantedSwordfishJavelin.DisplayName: Enchanted Swordfish Javelin
+	EnchantedSwordfishProj.DisplayName: Enchanted Swordfish Proj
 }
 
 Typeless: {
@@ -89,6 +91,8 @@ Typeless: {
 	PrunusMumePetal.DisplayName: Prunus Mume Petal
 	PrunusMumeFlower.DisplayName: Prunus Mume Flower
 	SlimeGodShieldSunProj.DisplayName: Slime God Shield Sun Proj
+	PureYinyoShard.DisplayName: Pure Yinyo Shard
+	PureYinyoExecution.DisplayName: Pure Yinyo Execution
 }
 
 Pets: {
@@ -192,6 +196,15 @@ Executor: {
 	DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
 	FrostHammerExecution.DisplayName: Frost Hammer Execution
 	PrunusMumeProj.DisplayName: Prunus Mume Proj
+	FrostlightHeldProj.DisplayName: Frostlight Held Proj
+	PureYinyoProj.DisplayName: Pure Yinyo Proj
+	PureYinyoBlack.DisplayName: Pure Yinyo Black
+	PureYinyoJade.DisplayName: Pure Yinyo Jade
+	PureYinyoWhite.DisplayName: Pure Yinyo White
+	FrostlightFlamethrower.DisplayName: Frostlight Flamethrower
+	FrostlightFlamethrowerFlame.DisplayName: Frostlight Flamethrower Flame
+	FrostlightFrostball.DisplayName: Frostlight Frostball
+	FrostlightHeldProjAlt.DisplayName: Frostlight Held Proj Alt
 }
 
 Ranged: {
@@ -204,6 +217,7 @@ Ranged: {
 	SundownerHeldProj.DisplayName: Sundowner Held Proj
 	TerraFlamethrowerTank.DisplayName: Terra Flamethrower Tank
 	TerraFlamethrowerFlame.DisplayName: Terra Flamethrower Flame
+	TerraFlamethrowerDrop.DisplayName: Terra Flamethrower Drop
 }
 
 Magic: {

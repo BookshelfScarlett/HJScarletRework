@@ -59,23 +59,22 @@ namespace HJScarletRework.Core.ParticleScarlet
         {
             // 调用源
             orig(self);
-            void DrawBatch(BlendState blendState, List<ScarletParticle> priorityList, List<ScarletParticle> normalList)
-            {
-                if (priorityList.Count + normalList.Count == 0)
-                    return;
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, blendState, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-                foreach (var p in priorityList)
-                    p.Draw(Main.spriteBatch);
+            //void DrawBatch(BlendState blendState, List<ScarletParticle> priorityList, List<ScarletParticle> normalList)
+            //{
+            //    if (priorityList.Count + normalList.Count == 0)
+            //        return;
+            //    Main.spriteBatch.Begin(SpriteSortMode.Deferred, blendState, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            //    foreach (var p in priorityList)
+            //        p.Draw(Main.spriteBatch);
 
-                foreach (var p in normalList)
-                    p.Draw(Main.spriteBatch);
-                Main.spriteBatch.End();
+            //    foreach (var p in normalList)
+            //        p.Draw(Main.spriteBatch);
+            //    Main.spriteBatch.End();
 
-            }
-            DrawBatch(BlendState.AlphaBlend, ParticleAlphaPriority, ParticleAlpha);
-            DrawBatch(BlendState.Additive, ParticleAddPriority, ParticleAdditive);
-            DrawBatch(BlendState.NonPremultiplied, ParticleNonPrePriority, ParticleNonPre);
-            /*
+            //}
+            //DrawBatch(BlendState.AlphaBlend, ParticleAlphaPriority, ParticleAlpha);
+            //DrawBatch(BlendState.Additive, ParticleAddPriority, ParticleAdditive);
+            //DrawBatch(BlendState.NonPremultiplied, ParticleNonPrePriority, ParticleNonPre);
             #region 渲染粒子
             #region 渲染优先粒子
             if (ParticleAlphaPriority.Count != 0)
@@ -136,7 +135,6 @@ namespace HJScarletRework.Core.ParticleScarlet
             }
             #endregion
             #endregion
-            */
         }
     }
 }

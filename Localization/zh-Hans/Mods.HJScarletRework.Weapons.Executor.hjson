@@ -297,3 +297,23 @@ StaffofFrostbite: {
 	// DisplayName: Staffof Frostbite
 	// Tooltip: ""
 }
+
+Frostlight: {
+	// DisplayName: Frostlight
+	// Tooltip: ""
+}
+
+PureYinyo: {
+	DisplayName: 至纯阴阳
+	Tooltip:
+		'''
+		交替投掷阴阳双锤
+		太阴之锤命中时同时造成咒火与灵液，并迸发黑暗碎块
+		太阳之锤沿途生成轨迹飘忽不定的光明碎块
+		'''
+	ExecutionStrike:
+		'''
+		至纯阴阳掷出后锁定距离玩家指针的敌人进行攻击
+		攻击结束时，将会从敌人身上弹开，并迸发大量的碎块
+		'''
+}

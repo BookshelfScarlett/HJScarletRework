@@ -58,7 +58,6 @@ namespace HJScarletRework.Projs.Melee
             Vector2 speedOffset = Projectile.velocity / 4;
             Vector2 dir = Projectile.SafeDir();
             Vector2 mountedPos = Projectile.Center + dir * 60f;
-            //总体在底下绘制一些别的粒子，这里用的是树叶
             ExtraTimer += 0.42f;
             Vector2 of = Projectile.SafeDir() * 80f;
             for (int i = 0; i < 4; i++)

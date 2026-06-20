@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Ranged;
 using Microsoft.Xna.Framework;
@@ -8,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Ranged
 {
@@ -25,9 +27,25 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override bool ShouldUpdatePosition() => false;
         public override bool? CanDamage() => false;
+        public bool JustPressRight = false;
         public override void OnFirstFrame()
         {
-            base.OnFirstFrame();
+            Vector2 dir = Owner.ToMouseVector2();
+            for (int i = 0; i < 16; i++)
+            {
+                Vector2 vel = -dir.ToRandVelocity(ToRadians(4f), -8.8f, 10.8f) + Owner.velocity;
+                Vector2 offset = dir.ToRandVelocity(ToRadians(0), 6f, 9f) * Main.rand.NextBool().ToDirectionInt();
+                Vector2 posOffset = offset + Owner.velocity + Main.rand.NextVector2Circular(10f, 5f);
+                new ShinyCrossStar(Owner.Center.ToRandCirclePos(20f) + posOffset - Vector2.UnitY * 12f, vel, RandLerpColor(Color.DarkGreen, Color.Green), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.5f, 0.8f), false, 0.2f).Spawn();
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Vector2 vel = -dir.ToRandVelocity(ToRadians(4f), -10.8f, 10.8f) + Owner.velocity;
+                Vector2 offset = dir.ToRandVelocity(ToRadians(0), 7, 11f) * Main.rand.NextBool().ToDirectionInt();
+                Vector2 posOffset = offset + Owner.velocity + Main.rand.NextVector2Circular(10f, 5f);
+                new SmokeParticle(Owner.Center.ToRandCirclePos(20f) + posOffset - Vector2.UnitY * 12f, vel, RandLerpColor(Color.DarkGreen, Color.Gray), 40, RandRotTwoPi, 1f, 0.34f, Main.rand.NextBool()).SpawnToPriority();
+            }
+            SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 1, Pitch = -0.25f }, Owner.Center);
         }
         public override void ProjAI()
         {
@@ -35,6 +53,33 @@ namespace HJScarletRework.Projs.Ranged
                 return;
             UpdatePlayerState();
             UpdateHeldAnimation();
+            if(Owner.controlUseTile && !JustPressRight)
+            {
+                JustPressRight = true;
+            }
+            if (JustPressRight)
+            {
+                Owner.HJScarlet().heldProjReUseTime = 40;
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<TerraFlamethrowerTank>(), Projectile.damage, 5f, Owner.whoAmI);
+                Vector2 dir = Owner.ToMouseVector2();
+                for (int i = 0; i < 16; i++)
+                {
+                    Vector2 vel = -dir.ToRandVelocity(ToRadians(4f), -8.8f, 10.8f) + Owner.velocity;
+                    Vector2 offset = dir.ToRandVelocity(ToRadians(0), 6f, 9f) * Main.rand.NextBool().ToDirectionInt();
+                    Vector2 posOffset = offset + Owner.velocity + Main.rand.NextVector2Circular(10f, 5f);
+                    new ShinyCrossStar(Owner.Center.ToRandCirclePos(20f) + posOffset - Vector2.UnitY * 12f, vel, RandLerpColor(Color.DarkGreen, Color.Green), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.5f, 0.8f), false, 0.2f).Spawn();
+                }
+                for (int i = 0; i < 20; i++)
+                {
+                    Vector2 vel = -dir.ToRandVelocity(ToRadians(4f), -10.8f, 10.8f) + Owner.velocity;
+                    Vector2 offset = dir.ToRandVelocity(ToRadians(0), 7, 11f) * Main.rand.NextBool().ToDirectionInt();
+                    Vector2 posOffset = offset + Owner.velocity + Main.rand.NextVector2Circular(10f, 5f);
+                    new SmokeParticle(Owner.Center.ToRandCirclePos(20f) + posOffset - Vector2.UnitY * 12f, vel, RandLerpColor(Color.DarkGreen, Color.Gray), 40, RandRotTwoPi, 1f, 0.34f, Main.rand.NextBool()).SpawnToPriority();
+                }
+                SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeTossAlt with { Variants = [1], MaxInstances = 1, Pitch = -0.25f }, Owner.Center);
+                Projectile.Kill();
+                return;
+            }
             UpdateAttack();
             Projectile.netUpdate = true;
 
@@ -79,9 +124,9 @@ namespace HJScarletRework.Projs.Ranged
 
         public bool CheckOwnerDead()
         {
-            bool ifStillUse = (Owner.channel || Owner.controlUseTile) && !Owner.noItems && !Owner.CCed;
+            bool ifStillUse = (Owner.channel) && !Owner.noItems && !Owner.CCed;
             if (!ifStillUse)
-            {
+            {            
                 Projectile.Kill();
                 return true;
             }

@@ -66,3 +66,8 @@ CrimsonCharmBuff: {
 	DisplayName: Over Saturation
 	Description: Healing effect is heavily reduced, maybe you should take a break?
 }
+
+TerraFlamethrowerBuff: {
+	DisplayName: Terra Flamethrower Buff
+	Description: Mods.HJScarletRework.Buffs.TerraFlamethrowerBuff.Description
+}

@@ -165,7 +165,6 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 vel = -Projectile.velocity.ToSafeNormalize().RotatedBy(ToRadians(10 * i)) * 40f * Main.rand.NextFloat(0.8f, 1.4f);
                 Vector2 pos = Projectile.Center - Projectile.SafeDir() * 20f;
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, ProjectileType<TerraSpearPortal>(), Projectile.originalDamage / 2, 1, Owner.whoAmI);
-                ((TerraSpearPortal)proj.ModProjectile).PortalType = TerraSpearPortal.State.InitSpawnState;
             }
             ArrowSpawnTime += 1;
 

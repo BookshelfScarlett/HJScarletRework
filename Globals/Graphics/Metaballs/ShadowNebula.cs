@@ -83,7 +83,7 @@ namespace HJScarletRework.Globals.Graphics.Metaballs
                 ParticleList[i].Update();
             ParticleList.RemoveAll(particleList =>
             {
-                return particleList.Scale < 0.01f;
+                return particleList.Scale < 0.011f;
             });
         }
         public override void PrepareRenderTarget()

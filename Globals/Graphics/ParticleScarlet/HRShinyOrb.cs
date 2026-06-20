@@ -17,7 +17,6 @@ namespace HJScarletRework.Globals.Graphics.ParticleScarlet
         }
         public override void Update()
         {
-
             Velocity *= 0.94f;
             Scale = Lerp(Scale, 0, EaseInCubic(LifetimeRatio));
             Velocity = Velocity.RotatedBy(Main.rand.NextFloat(-.03f, 0.03f));
@@ -28,8 +27,6 @@ namespace HJScarletRework.Globals.Graphics.ParticleScarlet
             spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor * Opacity, 0, texture.Size() / 2, Scale, SpriteEffects.None, 0);
             if (GlowCenterMult > 0)
                 spriteBatch.Draw(texture, Position - Main.screenPosition, null, Color.White * Opacity, 0, texture.Size() / 2, Scale * GlowCenterMult, SpriteEffects.None, 0);
-
         }
-
     }
 }

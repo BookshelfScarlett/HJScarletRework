@@ -129,11 +129,12 @@ namespace HJScarletRework.Projs.Executor
 
                 HalfWay = true;
             }
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f; 
             float beginAngle = 175;
             float endAngle = 185;
             float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
             Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(1.2f, Height, 1f);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.2f * heldscale;
             Projectile.scale = tarPos.Length();
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Vector2 crystalPos = crystalDir * Projectile.scale * (Main.rand.NextFloat(0f, 100f)) + Projectile.Center;
@@ -179,11 +180,13 @@ namespace HJScarletRework.Projs.Executor
             float endAngle = 175f;
             float beginAngle = 150f;
             //更新当前的转角
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f; 
             float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
             //将其投影到矩阵上，并进行形变
             Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(1.2f, Height, 1f);
             //而后再转化为射弹的目标指向，这个tarPos同时拥有指向和武器模长的信息。而不是一个单位向量
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.2f;
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.2f * heldscale;
+            //Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.2f;
             //这样，Scale就是tarPos的向量模长
             Projectile.scale = tarPos.Length();
             //武器的角度为（起始角度 + 目标角度）的值

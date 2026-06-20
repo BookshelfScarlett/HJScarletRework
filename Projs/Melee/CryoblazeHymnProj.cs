@@ -151,6 +151,33 @@ namespace HJScarletRework.Projs.Melee
 
             }
         }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            DrawSideStreak(Color.DeepSkyBlue, Color.SkyBlue, false, 0.91f * GeneralProgress);
+            DrawSideStreak(Color.Orange, Color.OrangeRed, true, 1.12f * GeneralProgress);
+            DrawProj();
+            return false;
+        }
+        public void DrawProj()
+        {
+            Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
+            float RotFix = ToRadians(63.5f);
+
+            for (int i = 0; i < 8; i++)
+                SB.Draw(projTex, drawPos + ToRadians(60f * i).ToRotationVector2() * 1.5f, null, Color.White.ToAddColor(100) * (1 - GeneralProgress), Projectile.rotation + RotFix, ori, 1f, 0, 0);
+            for (int i = 0; i < 6; i++)
+            {
+                if (Projectile.oldPos[i] == Vector2.Zero)
+                    continue;
+                float faded = 1 - i / (float)6;
+                //平方放缩
+                faded = MathF.Pow(faded, 2);
+                Color trailColor = Color.WhiteSmoke * faded * 0.8f;
+                SB.Draw(projTex, Projectile.oldPos[i] + Projectile.PosToCenter(), null, trailColor * GeneralProgress, Projectile.rotation + RotFix, ori, 1f, 0, 0);
+            }
+            SB.Draw(projTex, drawPos, null, Color.WhiteSmoke * GeneralProgress, Projectile.rotation + RotFix, ori, 1f, 0, 0);
+
+        }
         public void DrawSideStreak(Color beginColor, Color targetColor, bool NeedPi, float scaleMult)
         {
             int length = 15;
@@ -174,28 +201,7 @@ namespace HJScarletRework.Projs.Melee
                 SB.Draw(sharpTear, realPos, cutSource, drawColor * Clamp(Projectile.velocity.Length(), 0, 1), rot, SharpOri, scale, 0, 0);
                 SB.Draw(sharpTear, realPos, cutSource, Color.White.ToAddColor() * Clamp(Projectile.velocity.Length(), 0, 1), rot, SharpOri, scale * 0.4f, 0, 0);
             }
+        }
 
-        }
-        public override bool PreDraw(ref Color lightColor)
-        {
-            Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
-            float RotFix = ToRadians(63.5f);
-            DrawSideStreak(Color.DeepSkyBlue, Color.SkyBlue, false, 0.91f * GeneralProgress);
-            DrawSideStreak(Color.Orange, Color.OrangeRed, true, 1.12f * GeneralProgress);
-            for (int i = 0; i < 8; i++)
-                SB.Draw(projTex, drawPos + ToRadians(60f * i).ToRotationVector2() * 1.5f, null, Color.White.ToAddColor(100) * (1 - GeneralProgress), Projectile.rotation + RotFix, ori, 1f, 0, 0);
-            for (int i = 0; i < 6; i++)
-            {
-                if (Projectile.oldPos[i] == Vector2.Zero)
-                    continue;
-                float faded = 1 - i / (float)6;
-                //平方放缩
-                faded = MathF.Pow(faded, 2);
-                Color trailColor = Color.WhiteSmoke * faded * 0.8f;
-                SB.Draw(projTex, Projectile.oldPos[i] + Projectile.PosToCenter(), null, trailColor * GeneralProgress, Projectile.rotation + RotFix, ori, 1f, 0, 0);
-            }
-            SB.Draw(projTex, drawPos, null, Color.WhiteSmoke * GeneralProgress, Projectile.rotation + RotFix, ori, 1f, 0, 0);
-            return false;
-        }
     }
 }

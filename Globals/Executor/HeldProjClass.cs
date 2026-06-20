@@ -20,6 +20,7 @@ namespace HJScarletRework.Globals.Executor
         public virtual Vector2 TileHitbox => Vector2.Zero;
         public override void SetDefaults()
         {
+            Projectile.width = Projectile.height = 2;
             Projectile.friendly = true;
             Projectile.DamageType = ExecutorDamageClass.Instance;
             ExSD();

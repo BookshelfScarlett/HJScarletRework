@@ -29,15 +29,24 @@ TairitsuItem: {
 
 CantoneseGirlItem: {
 	// DisplayName: Cantonese Girl Item
+	// FlavorTooltip: ""
 	// Tooltip: ""
 }
 
 LeafMaidItem: {
 	// DisplayName: Leaf Maid Item
+	// FlavorTooltip: ""
 	// Tooltip: ""
 }
 
 RedDragonItem: {
 	// DisplayName: Red Dragon Item
+	// FlavorTooltip: ""
 	// Tooltip: ""
+}
+
+LacrimosaItem: {
+	DisplayName: 番茄百分百果冻盒
+	FlavorTooltip: 「-Tomato 100%-」
+	Tooltip: ""
 }

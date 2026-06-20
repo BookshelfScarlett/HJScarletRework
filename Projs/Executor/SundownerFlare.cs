@@ -39,9 +39,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.timeLeft = GetSeconds(10);
             Projectile.extraUpdates = 3;
         }
-        public override void OnFirstFrame()
-        {
-        }
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();

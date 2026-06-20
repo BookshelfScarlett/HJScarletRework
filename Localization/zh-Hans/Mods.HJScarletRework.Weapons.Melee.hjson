@@ -239,3 +239,17 @@ DragonSword: {
 	// DisplayName: Dragon Sword
 	// Tooltip: ""
 }
+
+EnchantedSwordfish: {
+	DisplayName: 附魔剑鱼
+	Tooltip: 他的眼睛怎么散发着诡异的红光？
+}
+
+EthrealSwordfish: {
+	DisplayName: 永恒剑鱼
+	Tooltip:
+		'''
+		时间到了，除非打破规则，不然这是一场永恒的宿命……
+		什么你已经获得了？那算了。
+		'''
+}

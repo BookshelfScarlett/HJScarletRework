@@ -94,6 +94,7 @@ namespace HJScarletRework.Globals.Players
             tacticalPunishTime = 0;
             tacticalExecutionInputCache = 0;
             blackKeyTimer = 0;
+            heldProjReUseTime = 0;
             ResetAcc();
             ResetPets();
             ResetArmor();

@@ -232,3 +232,13 @@ DragonSword: {
 	DisplayName: Dragon Sword
 	Tooltip: ""
 }
+
+EnchantedSwordfish: {
+	DisplayName: Enchanted Swordfish
+	Tooltip: ""
+}
+
+EthrealSwordfish: {
+	DisplayName: Ethreal Swordfish
+	Tooltip: ""
+}

@@ -150,6 +150,8 @@ namespace HJScarletRework.Globals.Players
                 blackKeyTimer--;
             if (floretProtectorTimer > 0)
                 floretProtectorTimer--;
+            if (heldProjReUseTime > 0)
+                heldProjReUseTime--;
 
             protectorPlantID = Player.HasBuff<HerbBagBuff>() ? protectorPlantID : -1;
             for (int i = 0; i < protectorHerbTimerList.Length; i++)

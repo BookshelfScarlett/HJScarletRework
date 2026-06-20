@@ -64,6 +64,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void HandleAttackAI()
         {
+            //图本身没有帧数，这个只是作为一个计时器用的
             Projectile.frameCounter++;
             if (Projectile.frameCounter > Main.rand.Next(6, 9) * Projectile.MaxUpdates)
             {

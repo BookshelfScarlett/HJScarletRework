@@ -42,7 +42,6 @@ namespace HJScarletRework.Projs.Melee
         public override void AI()
         {
             Lighting.AddLight(Projectile.Center, TorchID.Orange);
-            //如果开了灾厄，则加强索敌距离，生存时间和提供1eu
             Projectile.rotation = Projectile.velocity.ToRotation();
 
             Timer++;

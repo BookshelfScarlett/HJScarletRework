@@ -197,7 +197,6 @@ namespace HJScarletRework.Projs.Executor
             shader.CurrentTechnique.Passes[0].Apply();
             GD.Textures[1] = HJScarletTexture.Texture_Spirite.Value;
             GD.SamplerStates[1] = SamplerState.PointWrap;
-
             DrawSetting drawSetting = new(useTex.Value);
             List<TrailDrawDate> trailDrawDates = [];
             int posCount = (int)(Projectile.oldPos.Length * Projectile.Opacity * 0.70f);

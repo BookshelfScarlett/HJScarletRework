@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -85,7 +86,7 @@ namespace HJScarletRework.Projs.Ranged
                 float brigherScale = particleScale * .90f;
                 if (Main.rand.NextBool(3))
                     brigherScale *= Main.rand.NextFloat(1.1f, 1.3f);
-                new SmokeParticle(Projectile.Center, brighterVel, brightColor, 12, RandRotTwoPi, opacity * .80f, brigherScale * .95f, false).Spawn();
+                new SmokeParticle(Projectile.Center, brighterVel, brightColor, 12, RandRotTwoPi, opacity * .75f, brigherScale * .95f, false).Spawn();
                 new SmokeParticle(Projectile.Center, darkerVel, fireColor, 12, RandRotTwoPi, opacity, particleScale * 1.1f, true).SpawnToPriorityNonPreMult();
             }
 
@@ -97,6 +98,13 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (target.HasBuff<TerraFlamethrowerBuff>())
+            {
+                int dmg = (int)(target.damage);
+                Vector2 pos = target.ToRandRec();
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, Vector2.UnitY * 1.2f, ProjectileType<TerraFlamethrowerDrop>(), dmg, 1f, Owner.whoAmI);
+                ((TerraFlamethrowerDrop)proj.ModProjectile).OriginalTarget = target;
+            }
             base.OnHitNPC(target, hit, damageDone);
         }
         public override bool PreDraw(ref Color lightColor)

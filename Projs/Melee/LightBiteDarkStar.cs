@@ -61,10 +61,6 @@ namespace HJScarletRework.Projs.Melee
                 d.scale *= Main.rand.NextFloat(0.6f, 1f) * RandScale;
             }
         }
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            return base.OnTileCollide(oldVelocity);
-        }
         public override bool? CanDamage()
         {
             return Projectile.timeLeft < 40;
@@ -109,6 +105,7 @@ namespace HJScarletRework.Projs.Melee
             }
             return base.PreKill(timeLeft);
         }
+        /*
         public void SpawnFlowerParticles()
         {
             //花蕊的半径。
@@ -186,19 +183,12 @@ namespace HJScarletRework.Projs.Melee
                 }
             }
         }
+        */
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Ichor, GetSeconds(5));
-            base.OnHitNPC(target, hit, damageDone);
         }
         public override bool PreDraw(ref Color lightColor)
-        {
-            DrawProjItself();
-            SB.EnterShaderArea();
-            SB.EndShaderArea();
-            return false;
-        }
-        public void DrawProjItself()
         {
             Texture2D projTex = Projectile.GetTexture();
             //取用的那张图无所谓，因为画出来的时候是纯色
@@ -210,6 +200,7 @@ namespace HJScarletRework.Projs.Melee
                 SB.Draw(projTex, Projectile.Center - Main.screenPosition + ToRadians(60f * i).ToRotationVector2() * 2.3f, frames, Color.Gold.ToAddColor(50), Projectile.rotation + RandRot, origin, Projectile.scale, 0, 0);
             }
             SB.Draw(projTex, Projectile.Center - Main.screenPosition, frames, Color.Black, Projectile.rotation + RandRot, origin, Projectile.scale, 0, 0);
+            return false;
         }
     }
 }

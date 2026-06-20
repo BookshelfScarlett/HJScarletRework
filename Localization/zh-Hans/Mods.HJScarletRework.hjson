@@ -56,6 +56,10 @@ Projectiles: {
 	// DragonSummonHeldProj.DisplayName: Dragon Summon Held Proj
 	// DragonSummonProj.DisplayName: Dragon Summon Proj
 	// DragonSummonFireball.DisplayName: Dragon Summon Fireball
+	// DragonSniperBoom.DisplayName: Dragon Sniper Boom
+	// DragonSniperHeldProj.DisplayName: Dragon Sniper Held Proj
+	// DragonSniperNuke.DisplayName: Dragon Sniper Nuke
+	// DragonSniperVictim.DisplayName: Dragon Sniper Victim
 }
 
 Items: {

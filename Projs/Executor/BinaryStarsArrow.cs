@@ -13,11 +13,8 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class BinaryStarsArrow : HJScarletProj, IPixelatedRenderer
-    {
+    public class BinaryStarsArrow : HJScarletProj    {
         public override ClassCategory Category => ClassCategory.Executor;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
-        public BlendState BlendState => BlendState.AlphaBlend;
 
         private enum DoType
         {
@@ -106,6 +103,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.Kill();
         }
 
+            //PixelatedRenderManager.BeginDrawProj = true;
         private void DoHomingToTarget()
         {
             //重新搜索一次单位
@@ -139,15 +137,11 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
-
-            //PixelatedRenderManager.BeginDrawProj = true;
-            SB.End();
-            SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+            SB.EnterShaderArea();
             DrawNebulaTrail(Color.MediumPurple, 14f);
             DrawNebulaTrail(Color.LightPink with { A = 50 }, 12.2f);
             DrawNebulaTrail(Color.White with { A = 100 }, 10.8f);
-            SB.End();
-            SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
+            SB.EnterShaderArea();
             if (Projectile.oldPos.Length > 12)
             {
                 for (int k = 0; k < 12; k += 3)
@@ -156,13 +150,9 @@ namespace HJScarletRework.Projs.Executor
                     DrawStar(Projectile.oldPos[k] + Projectile.Size / 2 - Main.screenPosition, dir.ToRotation(), Color.Lerp(BinaryStarsProj.TrailColor, Color.Purple, (float)k / 16));
                 }
             }
-            SB.End();
-            SB.BeginDefault();
+            SB.EndShaderArea();
 
             return false;
-        }
-        public void RenderPixelated(SpriteBatch sb)
-        {
         }
 
         public void DrawStar(Vector2 drawPos, float rot, Color starColor)
@@ -183,29 +173,17 @@ namespace HJScarletRework.Projs.Executor
             shader.Parameters["uFadeoutLength"].SetValue(0.1f);
             shader.Parameters["uFadeinLength"].SetValue(0.05f);
             shader.CurrentTechnique.Passes[0].Apply();
-
-            //做掉可能存在的零向量
-            Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> validRot, Projectile.oldPos, Projectile.oldRot);
-            GD.Textures[0] = HJScarletTexture.Trail_ManaStreak.Value;
-            GD.SamplerStates[0] = SamplerState.PointClamp;
-            //直接获取需要的贝塞尔曲线。
-            List<ScarletVertex> list = [];
-            int totalpoints = validPosition.Count;
-            //创建顶点列表
-            for (int i = 0; i < validPosition.Count; i++)
+            DrawSetting sets = new(HJScarletTexture.Trail_ManaStreak.Value);
+            List<TrailDrawDate> date = [];
+            for (int i = 0; i < Projectile.oldPos.Length; i++)
             {
-                Vector2 oldCenter = validPosition[i] + Projectile.Size / 2 - Main.screenPosition;
-                float progress = (float)i / (validPosition.Count - 1);
-                Vector2 posOffset = new Vector2(0, height * DrawScale * ((float)(totalpoints - i) / totalpoints)).RotatedBy(validRot[i]);
-                ScarletVertex upClass = new(oldCenter - posOffset, trailColor, new Vector3(progress, 0, 0f));
-                ScarletVertex downClass = new(oldCenter + posOffset, trailColor, new Vector3(progress, 1, 0f));
-                list.Add(upClass);
-                list.Add(downClass);
+                if (Projectile.oldPos[i] == Vector2.Zero)
+                    continue;
+                Vector2 listPos = Projectile.oldPos[i] + Projectile.Size / 2 + Projectile.SafeDir() * 10f;
+                float ratios = i / (float)Projectile.oldPos.Length;
+                date.Add(new(listPos, Color.White, new(0, height *DrawScale * Clamp((1 - ratios), 0, 1f)), Projectile.oldRot[i]));
             }
-            if (list.Count >= 3)
-            {
-                GD.DrawUserPrimitives(PrimitiveType.TriangleStrip, list.ToArray(), 0, list.Count - 2);
-            }
+            TrailRender.DrawTrail(date.ToArray(), sets);
         }
     }
 }

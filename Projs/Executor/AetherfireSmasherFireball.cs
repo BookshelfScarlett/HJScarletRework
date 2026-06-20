@@ -180,8 +180,6 @@ namespace HJScarletRework.Projs.Executor
 
             //做掉可能存在的零向量
             Projectile.ClearInvaidData(out List<Vector2> validPosition, out List<float> _, Projectile.oldPos, Projectile.oldRot);
-            if (Projectile.oldPos.Length < 3)
-                return;
             //做掉可能存在的零向量
             DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
             List<TrailDrawDate> trailDrawDates = [];
