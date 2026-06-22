@@ -18,6 +18,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Frostlight : ExecutorWeaponClass
     {
+        public override WeaponCategory WeaponCategory => WeaponCategory.Caster;
         public override void ExSSD()
         {
             HJScarletList.FrostRarityHashSet.Add(Type);

@@ -13,6 +13,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public override bool IsLoadingEnabled(Mod mod) => false;
         public override int ExecutionProgress => 10;
+        public override WeaponCategory WeaponCategory => WeaponCategory.Caster;
         public override void ExSD()
         {
             Item.damage = 66;

@@ -17,6 +17,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public bool AlterVersion = false;
         public override int ExecutionProgress => 50;
+        public override WeaponCategory WeaponCategory => WeaponCategory.Caster;
         public override void ExSD()
         {
             Item.damage = 60;

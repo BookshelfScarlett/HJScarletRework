@@ -1,15 +1,9 @@
-﻿using ContinentOfJourney.Dusts;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -21,6 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public int AlterType = -1;
         public override int ExecutionProgress => 12;
         public override int ExecutionProj => ProjectileType<PureYinyoExecution>();
+        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
         public override void ExSSD()
         {
             HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.White);

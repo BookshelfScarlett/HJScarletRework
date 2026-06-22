@@ -11,7 +11,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class TheJudgement : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 30;
-        public override float ExecutionStrikeDamageMult => 1f;
+        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
         public override void ExSSD()
         {
             HJScarletList.HallowedRarityHashSet.Add(Type);

@@ -14,6 +14,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class FrostoftheStorm : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 12;
+        public override WeaponCategory WeaponCategory => WeaponCategory.ColdSteel;
         public override void ExSSD()
         {
             HJScarletList.FrostRarityHashSet.Add(Type);

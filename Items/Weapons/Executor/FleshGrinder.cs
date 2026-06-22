@@ -9,6 +9,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public override float ExecutionStrikeDamageMult => 0.8f;
         public override int ExecutionProgress => 18;
+        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
         public override void ExSD()
         {
             Item.width = Item.height = 66;

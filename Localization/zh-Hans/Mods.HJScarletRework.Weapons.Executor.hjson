@@ -299,8 +299,17 @@ StaffofFrostbite: {
 }
 
 Frostlight: {
-	// DisplayName: Frostlight
-	// Tooltip: ""
+	DisplayName: 寒霜火炬
+	Tooltip:
+		'''
+		快速发射迅捷追随鼠标位置的寒霜流火
+		处决攻击必须使用 互动键 手动开启
+		'''
+	ExecutionStrike:
+		'''
+		旋转火炬指向前方，以喷火器的形式倾泻寒霜之火
+		满足处决攻击发起条件时，可通过再次按下 互动键 以切换回第一形态
+		'''
 }
 
 PureYinyo: {

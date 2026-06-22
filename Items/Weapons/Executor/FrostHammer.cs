@@ -9,8 +9,8 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class FrostHammer : ExecutorWeaponClass
     {
-        public override int ExecutionProj => base.ExecutionProj;
         public override int ExecutionProgress => 30;
+        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
         public override void ExSSD()
         {
             Type.ShimmerEach(ItemID.Amarok);

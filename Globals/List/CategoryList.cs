@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.NPCs.Boss_TheLifebringer;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;
 using Terraria;
@@ -25,6 +26,7 @@ namespace HJScarletRework.Globals.List
         public static Dictionary<int, string> DownedBossConditionList = [];
         public static Dictionary<int, int> ExecutorWeaponDictionary = [];
         public static Dictionary<int, string> VanityItemDictionary = [];
+        public static Dictionary<int, WeaponCategory> ExecutorWeaponTypeDictionary= [];
         public override void Load()
         {
             //投矛表单

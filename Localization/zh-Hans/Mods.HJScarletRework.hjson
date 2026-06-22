@@ -31,6 +31,14 @@ DamageClasses: {
 		ExecutionDescriptionName: 处决执行时：
 		DisplayName: 代行者伤害
 
+		WeaponType: {
+			Throw: "-投掷品-"
+			ColdSteel: "-冷兵器-"
+			Firearm: "-热武器-"
+			Caster: "-魔术载体-"
+			Misc: "-特殊-"
+		}
+
 		Prefixs: {
 			Alterego.DisplayName: 他人格
 			Digital.DisplayName: 电子

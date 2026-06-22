@@ -17,6 +17,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public override float ExecutionStrikeDamageMult => 1f;
         public override int ExecutionProgress => 12;
+        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
         public override void ExSSD()
         {
             HJScarletList.NightRarityHashSet.Add(Type);

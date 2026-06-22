@@ -179,7 +179,7 @@ namespace HJScarletRework.Globals.Methods
                 }
                 else
                 {
-                    isCanHit = Collision.CanHit(p, 1, 1, npc.Center, 1, 1);
+                    isCanHit = Collision.CanHit(p, 1, 1, npc.Center, npc.width, npc.height);
                 }
                 bool canHitline = hitLine && (Collision.CanHitLine(npc.Center, 1, 1, p, 1, 1));
                 if (curNpcDist < distStoraged && (ignoreTiles || isCanHit))

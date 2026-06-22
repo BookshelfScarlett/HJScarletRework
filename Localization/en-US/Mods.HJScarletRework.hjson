@@ -31,6 +31,14 @@ DamageClasses: {
 		ExecutionDescriptionName: On Execution Strike:
 		DisplayName: Executor Damage
 
+		WeaponType: {
+			Throw: ""
+			ColdSteel: ""
+			Firearm: ""
+			Caster: ""
+			Misc: ""
+		}
+
 		Prefixs: {
 			Alterego.DisplayName: Alterego
 			Digital.DisplayName: Digital

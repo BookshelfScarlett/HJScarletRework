@@ -11,7 +11,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class ThePunishment : ExecutorWeaponClass
     {
-        public override float ExecutionStrikeDamageMult => 1f;
+        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
         public override int ExecutionProgress => 40;
         public override void ExSSD()
         {
