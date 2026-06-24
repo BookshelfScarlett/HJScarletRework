@@ -305,3 +305,9 @@ PureYinyo: {
 		Meanwhile, the blossom continuously releases rotating petals
 		'''
 }
+
+LavaFlow: {
+	DisplayName: Lava Flow
+	Tooltip: ""
+	ExecutionStrike: ""
+}

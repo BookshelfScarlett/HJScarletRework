@@ -75,8 +75,6 @@ namespace HJScarletRework.Projs.Executor
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.Center, Vector2.Zero, ProjectileType<SundownerFlareGun>(), 0, 0, Owner.whoAmI);
                 proj.originalDamage = Projectile.originalDamage;
                 Owner.RemoveExecutionProgress(ItemType<Sundowner>());
-
-
                 return true;
             }
             Owner.HJScarlet().CanExecution = false;

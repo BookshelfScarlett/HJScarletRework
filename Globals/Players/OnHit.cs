@@ -38,9 +38,13 @@ namespace HJScarletRework.Globals.Players
 
             }
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
-            if (proj.DamageType == ExecutorDamageClass.Instance)
+            if (proj.DamageType.CountsAsClass< ExecutorDamageClass>())
             {
                 GlobalExecutorOnHit(target, hit, damageDone);
+                if(cycleMadness)
+                {
+                }
+
                 if (cowboyExecutor && cowboyRevolverTimer == 0)
                 {
                     cowboyRevolverTimer = Player.ApplyWeaponAttackSpeed(Player.HeldItem, (int)(Player.HeldItem.useTime * 0.5f), 5);

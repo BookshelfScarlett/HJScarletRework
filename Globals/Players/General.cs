@@ -64,6 +64,7 @@ namespace HJScarletRework.Globals.Players
         public int accVanityID = -1;
         public bool arcaeaVanityGive = false;
         public bool diverArmor = false;
+        public bool maidReaperArmor = false;
         #endregion
 
         #region Accessories
@@ -107,6 +108,9 @@ namespace HJScarletRework.Globals.Players
         public float healingPotionMult = 1f;
         public bool bitingClaw = false;
         public int providenceHolyWaterHealMana = 0;
+        public bool cycleMadness = false;
+        public float cycleMadenssTimer = 0;
+        public float cycleMadenessCrit = 0;
         #endregion
 
         #region Pets
@@ -151,6 +155,8 @@ namespace HJScarletRework.Globals.Players
         public int bonusExecutionReduce = 0;
         public Dictionary<int, int> ExecutionListStored = new Dictionary<int, int>();
         public bool StopExecutionInit = false;
+        public bool hasSendExecutionTint = false;
+        public int lastHeldItemIndex = -1;
 
         //用于hud绘制的计时器
         public int Executor_AFKTimer = 0;

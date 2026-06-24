@@ -80,10 +80,22 @@ namespace HJScarletRework.Globals.Methods
                 if (curExeTime == HJScarletList.ExecutorWeaponDictionary[itemID] - 1)
                     SoundEngine.PlaySound(SoundID.Item35 with { MaxInstances = 0 }, owner.Center);
                 if (curExeTime >= HJScarletList.ExecutorWeaponDictionary[itemID])
+                {
+                    if (!owner.HJScarlet().hasSendExecutionTint)
+                    {
+                        SoundEngine.PlaySound(SoundID.Item35 with { MaxInstances = 0 }, owner.Center);
+                        owner.HJScarlet().hasSendExecutionTint = true;
+                    }
                     return;
+                }
             }
             if (owner.HJScarlet().ExecutionListStored.ContainsKey(itemID))
+            {
                 owner.HJScarlet().ExecutionListStored[itemID] += times;
+                if (owner.HJScarlet().ExecutionListStored[itemID] > HJScarletList.ExecutorWeaponDictionary[itemID])
+                    owner.HJScarlet().ExecutionListStored[itemID] = HJScarletList.ExecutorWeaponDictionary[itemID];
+                owner.HJScarlet().hasSendExecutionTint = false;
+            }
         }
         public static void InsertExecutorTooltips(this List<TooltipLine> tooltips)
         {

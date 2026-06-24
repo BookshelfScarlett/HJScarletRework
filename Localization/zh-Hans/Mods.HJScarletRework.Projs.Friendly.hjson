@@ -205,6 +205,9 @@ Executor: {
 	// FrostlightFlamethrowerFlame.DisplayName: Frostlight Flamethrower Flame
 	// FrostlightFrostball.DisplayName: Frostlight Frostball
 	// FrostlightHeldProjAlt.DisplayName: Frostlight Held Proj Alt
+	// LavaFlowBoom.DisplayName: Lava Flow Boom
+	// LavaFlowExecution.DisplayName: Lava Flow Execution
+	// LavaFlowProj.DisplayName: Lava Flow Proj
 }
 
 Ranged: {

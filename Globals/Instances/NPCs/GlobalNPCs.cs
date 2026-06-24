@@ -1,9 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Steamworks;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -19,9 +18,12 @@ namespace HJScarletRework.Globals.Instances
         public int blackKeyDefensesReduces = 0;
         public bool terraFlamethrowerDebuff = false;
         public int terraFlamethrowerDropDamage = 0;
+        public List<int> StabList = [];
+        public bool isBeingStabByLavaFlow = false;
         public float miscCounter = 0;
         public override void ResetEffects(NPC npc)
         {
+            isBeingStabByLavaFlow = false;
             terraFlamethrowerDebuff = false; 
             terraFlamethrowerDropDamage = 0;
         }

@@ -118,3 +118,8 @@ ProvidenceHolyWater: {
 	DisplayName: Providence Holy Water
 	Tooltip: ""
 }
+
+MadnessCritStar: {
+	DisplayName: Madness Crit Star
+	Tooltip: ""
+}

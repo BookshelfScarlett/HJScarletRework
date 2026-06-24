@@ -314,3 +314,13 @@ BitingClaw: {
 	DisplayName: Biting Claw
 	Tooltip: ""
 }
+
+PassionfruitJar: {
+	DisplayName: Passionfruit Jar
+	Tooltip: ""
+}
+
+SpaceHorror: {
+	DisplayName: Space Horror
+	Tooltip: ""
+}

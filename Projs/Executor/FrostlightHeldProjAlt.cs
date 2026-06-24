@@ -21,6 +21,7 @@ namespace HJScarletRework.Projs.Executor
         public ref float Timer => ref Projectile.ai[0];
         public ref float ShootTimer => ref Projectile.ai[1];
         public ref float HeldAnimationHelper => ref Projectile.ai[2];
+        public ref bool IsAlterModeNow => ref GetInstance<Frostlight>().AlterMode;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(24);
@@ -38,9 +39,24 @@ namespace HJScarletRework.Projs.Executor
         {
             base.OnFirstFrame();
         }
+        public bool RightClicker = false;
         public override void ProjAI()
         {
             Projectile.velocity = Projectile.rotation.ToRotationVector2();
+            if (Owner.CheckExecution(OriginalItemID) && !Projectile.HJScarlet().ExecutionStrike)
+            {
+                Projectile.HJScarlet().ExecutionStrike = true;
+                Owner.RemoveExecutionProgress(OriginalItemID);
+                Timer = 0;
+                RightClicker = true;
+                ((Frostlight)Owner.HeldItem.ModItem).AlterMode = true;
+            }
+            if (RightClicker)
+            {
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostlightFlamethrower>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                ((FrostlightFlamethrower)proj.ModProjectile).BeginTargetRotation = Projectile.rotation;
+                Projectile.Kill();
+            }
             HandleProjAttack();
             HandleParticle();
             HandlePlayerState();
@@ -48,38 +64,42 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-                Vector2 dir = Projectile.SafeDirByRot();
-            for(int i =0;i<60;i++)
+            //处死时的粒子
+            //需注意的是处决姿态下，粒子不会播报
+            if (Projectile.HJScarlet().ExecutionStrike)
+                return;
+            Vector2 dir = Projectile.SafeDirByRot();
+            for (int i = 0; i < 60; i++)
             {
-                Vector2 pos =  dir * Main.rand.NextFloat(-50, 50) + Projectile.Center;
-                Vector2 vel = dir.ToRandVelocity(ToRadians(5f),.5f,2.5f);
+                Vector2 pos = dir * Main.rand.NextFloat(-50, 50) + Projectile.Center;
+                Vector2 vel = dir.ToRandVelocity(ToRadians(5f), .5f, 2.5f);
                 ECSParticle.ShinyCrossStarECS(pos.ToRandCirclePosEdge(16), vel, RandLerpColor(Color.SkyBlue, Color.LightBlue), Main.rand.Next(30, 45), 1, Projectile.scale * Main.rand.NextFloat(.7f, .98f) * .8f, .2f);
             }
-            for(int i =0;i<60;i++)
+            for (int i = 0; i < 60; i++)
             {
-                Vector2 pos =  dir * Main.rand.NextFloat(-50, 70) + Projectile.Center;
-                Vector2 vel = dir.ToRandVelocity(ToRadians(5f),.5f,2.5f);
-                ECSParticle.SnowCloud(pos.ToRandCirclePosEdge(18), vel, RandLerpColor(Color.SkyBlue, Color.LightBlue), Main.rand.Next(30, 45), 1, Projectile.scale * Main.rand.NextFloat(.7f, .98f) * .58f, .08f * Main.rand.NextFloat(0.4f,0.8f));
+                Vector2 pos = dir * Main.rand.NextFloat(-50, 70) + Projectile.Center;
+                Vector2 vel = dir.ToRandVelocity(ToRadians(5f), .5f, 2.5f);
+                ECSParticle.SnowCloud(pos.ToRandCirclePosEdge(18), vel, RandLerpColor(Color.SkyBlue, Color.LightBlue), Main.rand.Next(30, 45), 1, Projectile.scale * Main.rand.NextFloat(.7f, .98f) * .58f, .08f * Main.rand.NextFloat(0.4f, 0.8f));
             }
-            for(int i =0;i<60;i++)
+            for (int i = 0; i < 60; i++)
             {
-                Vector2 pos =  Main.MouseWorld.ToRandCirclePos(100);
-                Vector2 vel = -Vector2.UnitY.ToRandVelocity(ToRadians(5f),.5f,2.5f);
+                Vector2 pos = Main.MouseWorld.ToRandCirclePos(100);
+                Vector2 vel = -Vector2.UnitY.ToRandVelocity(ToRadians(5f), .5f, 2.5f);
                 ECSParticle.ShinyCrossStarECS(pos.ToRandCirclePosEdge(16), vel, RandLerpColor(Color.SkyBlue, Color.LightBlue), Main.rand.Next(30, 45), 1, Projectile.scale * Main.rand.NextFloat(.7f, .98f) * .8f, .2f);
             }
-            for(int i =0;i<60;i++)
+            for (int i = 0; i < 60; i++)
             {
-                Vector2 pos =  Main.MouseWorld.ToRandCirclePos(100);
-                Vector2 vel = -Vector2.UnitY.ToRandVelocity(ToRadians(5f),.5f,2.5f);
+                Vector2 pos = Main.MouseWorld.ToRandCirclePos(100);
+                Vector2 vel = -Vector2.UnitY.ToRandVelocity(ToRadians(5f), .5f, 2.5f);
 
-                ECSParticle.SnowCloud(pos.ToRandCirclePosEdge(18), vel, RandLerpColor(Color.SkyBlue, Color.LightBlue), Main.rand.Next(30, 45), 1, Projectile.scale * Main.rand.NextFloat(.7f, .98f) * .58f, .08f * Main.rand.NextFloat(0.4f,0.8f));
+                ECSParticle.SnowCloud(pos.ToRandCirclePosEdge(18), vel, RandLerpColor(Color.SkyBlue, Color.LightBlue), Main.rand.Next(30, 45), 1, Projectile.scale * Main.rand.NextFloat(.7f, .98f) * .58f, .08f * Main.rand.NextFloat(0.4f, 0.8f));
             }
-
             SoundEngine.PlaySound(HJScarletSounds.Frostwave_LightRelease with { MaxInstances = 0, Pitch = .36f });
         }
         public void HandleProjStatement()
         {
             Timer++;
+            //实际发射火球的AI
             if (Timer > (AttackSpeed / 10))
             {
                 Vector2 dir = Projectile.rotation.ToRotationVector2();
@@ -91,6 +111,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posBase, dir*Main.rand.NextFloat(15f,18f), ProjectileType<FrostlightFrostball>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
                 proj.ai[1] = Main.rand.Next(50, 300);
                 proj.ai[2] = Main.rand.NextFloat(4.5f, 7.5f);
+                proj.HJScarlet().HasExecutionMechanic = true;
                 if (target.IsLegal())
                     ((FrostlightFrostball)proj.ModProjectile).CurTarget = target;
                 Timer = 0;
@@ -175,6 +196,9 @@ namespace HJScarletRework.Projs.Executor
 
         public override bool PreDraw(ref Color lightColor)
         {
+            if (Owner.HasProj<FrostlightFlamethrower>())
+                return false;
+
             Texture2D tex = Projectile.GetTexture();
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             float rotation = Projectile.rotation + PiOver4 + (Projectile.spriteDirection == -1 ? PiOver2 : 0);
@@ -186,13 +210,6 @@ namespace HJScarletRework.Projs.Executor
             SB.Draw(tex, realDrawPos, null, Color.White, rotation, origin, Projectile.scale, se, 0);
  
             SB.EnterShaderArea();
-            if(Main.myPlayer == Projectile.owner)
-            {
-                Texture2D ring = HJScarletTexture.Particle_RingShiny.Value;
-                SB.Draw(ring, Main.MouseWorld - Main.screenPosition, null, Color.LightSkyBlue*RingValue * .5f, 0, ring.ToOrigin(), .67f * EdgeValue, 0, 0);
-                SB.Draw(ring, Main.MouseWorld - Main.screenPosition, null, Color.LightBlue*RingValue * .5f, Pi, ring.ToOrigin(), .67f * EdgeValue, 0, 0);
-                SB.Draw(ring, Main.MouseWorld - Main.screenPosition, null, Color.WhiteSmoke*RingValue * .35f, Pi, ring.ToOrigin(), .67f * EdgeValue, 0, 0);
-            }
 
             Vector2 dir = Projectile.rotation.ToRotationVector2();
             Texture2D star = HJScarletTexture.Particle_CrossGlow.Value;

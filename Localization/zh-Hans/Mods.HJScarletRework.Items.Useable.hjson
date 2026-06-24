@@ -128,3 +128,8 @@ ProvidenceHolyWater: {
 		"不属于此世的超常之水，能够以零损耗率传导巨量的魔力。"
 		'''
 }
+
+MadnessCritStar: {
+	// DisplayName: Madness Crit Star
+	// Tooltip: ""
+}

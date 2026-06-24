@@ -10,11 +10,6 @@ namespace HJScarletRework.Items.Armor.Reaper
     [AutoloadEquip(EquipType.Legs)]
     public class ReaperLegs : HJScarletArmor
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
-
         public override void SetStaticDefaults()
         {
             HJScarletList.ScarletRarityHashSet.Add(Type);

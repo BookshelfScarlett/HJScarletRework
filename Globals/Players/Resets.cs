@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Items.Weapons.Ranged;
+﻿using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Ranged;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -30,6 +31,7 @@ namespace HJScarletRework.Globals.Players
             mayaPumper = false;
             crimsonCharm = false;
             bitingClaw = false;
+            cycleMadness = false;
             accVanityID = -1;
         }
         private void ResetArmor()
@@ -45,6 +47,7 @@ namespace HJScarletRework.Globals.Players
             protectorShiver = false;
             protectorMoonglow = false;
             diverArmor = false;
+            maidReaperArmor = false;
         }
 
         private void ResetPets()
@@ -73,6 +76,7 @@ namespace HJScarletRework.Globals.Players
             ResetAcc();
             ResetPets();
             ResetArmor();
+            
         }
         public override void UpdateDead()
         {
@@ -100,7 +104,8 @@ namespace HJScarletRework.Globals.Players
             ResetArmor();
             crimsonCharmReduceTime = 0;
             crimsonCharmStopReduce = false;
-
+            cycleMadenessCrit = 0;
+            cycleMadenssTimer = 0;
             cowboyRevolverTimer = 0;
             floretProtectorTimer = 0;
             monkStaffHeal = false;

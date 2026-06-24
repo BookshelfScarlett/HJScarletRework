@@ -110,7 +110,6 @@ namespace HJScarletRework.Projs.Melee
         {
             Texture2D star = TextureAssets.Extra[ExtrasID.SharpTears].Value;
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
-            DrawSideStreak(star, PosOffsetFix);
             Texture2D tex = Projectile.GetTexture();
             Vector2 orig = tex.Size() / 2;
             Vector2 offsetValue = PosOffsetFix;
@@ -131,13 +130,6 @@ namespace HJScarletRework.Projs.Melee
             }
             SB.Draw(projTex, drawPos - offsetValue, null, Color.White, Projectile.rotation + PiOver4, ori, Projectile.scale, 0, 0);
             return false;
-        }
-        public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
-        {
-
-        }
-        public void DrawSideStreak(Texture2D star, Vector2 drawPos)
-        {
         }
     }
 }

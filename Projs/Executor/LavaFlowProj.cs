@@ -1,0 +1,158 @@
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Executor;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
+using Terraria.ID;
+
+namespace HJScarletRework.Projs.Executor
+{
+    public class LavaFlowProj : HJScarletProj
+    {
+        public override ClassCategory Category => ClassCategory.Executor;
+        public Vector2 StoredPosition = Vector2.Zero;
+        public NPC StabTarget = null;
+        public Vector2 PosOffsetFix => Projectile.SafeDir() * 60f;
+        public override void SetStaticDefaults()
+        {
+            Projectile.ToTrailSetting(10);
+        }
+        public override void ExSD()
+        {
+            Projectile.width = Projectile.height = 16;
+            Projectile.noEnchantmentVisuals = true;
+            Projectile.ignoreWater = true;
+            Projectile.penetrate = 1;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 30;
+            Projectile.extraUpdates = 1;
+            Projectile.timeLeft = GetSeconds(5);
+
+
+        }
+        public override void ProjAI()
+        {
+            Projectile.rotation = Projectile.velocity.ToRotation();
+            if (Projectile.IsOutScreen())
+                return;
+            Vector2 offset = Projectile.SafeDir() * 15f;
+            if (Main.rand.NextBool())
+                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePosEdge(4) - offset, Projectile.velocity / 8f, RandLerpColor(Color.OrangeRed, Color.Orange), Main.rand.Next(30, 45), 1f, Main.rand.NextFloat(.7f, .9f) * Projectile.scale * .46f, .12f);
+            if (Main.rand.NextBool())
+                ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePosEdge(6) - offset, Projectile.velocity / 8f, RandLerpColor(Color.OrangeRed, Color.DarkOrange), Main.rand.Next(30, 45), 1f, Main.rand.NextFloat(.7f, .9f) * Projectile.scale * .1f, .60f);
+            if (Main.rand.NextBool())
+                ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePosEdge(6) - offset, Projectile.velocity / 8f, RandLerpColor(RandLerpColor(Color.OrangeRed, Color.Orange), Color.LightYellow), Main.rand.Next(60, 75), RandRotTwoPi, 1f, Main.rand.NextFloat(.7f, .9f) * Projectile.scale * .25f, true, BlendState.Additive);
+            //for(int i = -1;i<2;i+=2)
+            //                ECSParticle.HRShinyOrb(Projectile.Center + Projectile.SafeDir().RotatedBy(PiOver2 * i) * 2f, Projectile.SafeDir().RotatedBy(PiOver2 * i) * 1.8f, RandLerpColor(Color.OrangeRed, Color.DarkOrange), Main.rand.Next(30, 45), 1f, Main.rand.NextFloat(.7f, .9f) * Projectile.scale * .1f, .60f);
+        }
+        public bool SetSpecial = false;
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            //Main.NewText(target.HJScarlet().isBeingStabByLavaFlow);
+            if (target.HJScarlet().isBeingStabByLavaFlow)
+                SetSpecial = true;
+            Projectile.ExpandHitboxBy(3f);
+            Projectile.Damage();
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            return base.OnTileCollide(oldVelocity);
+        }
+        public override void OnKill(int timeLeft)
+        {
+            Projectile.AddExecutionTimeDelayed(ItemType<LavaFlow>());
+            //什么叫你写了这么多就为了处理这个特效爆炸？
+            for (int i = 0; i < 45; i++)
+            {
+                Vector2 vel = (TwoPi / 45f * i).ToRotationVector2() * 8f * Main.rand.NextFloat(0f, 1f);
+
+                Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f) + vel.ToSafeNormalize() * Main.rand.NextFloat() * 2f;
+                Color color = RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.50f), Color.Orange);
+                float scale = 0.40f * Main.rand.NextFloat(0.55f, 1.1f);
+                ECSParticle.SmokeParticle(spawnpos, vel, color, Main.rand.Next(10, 41), RandRotTwoPi, Main.rand.NextFloat(.75f, 1f), scale, true, BlendState.Additive);
+                spawnpos = Projectile.Center.ToRandCirclePos(6f) - Projectile.SafeDirByRot() * 10f;
+                vel = -Projectile.SafeDirByRot() * Main.rand.NextFloat(0.1f, 12f);
+                color = RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.55f), Color.OrangeRed);
+                scale = .35f * Main.rand.NextFloat(.65f, 1.1f);
+                ECSParticle.SmokeParticle(spawnpos, vel, color, Main.rand.Next(10, 41), RandRotTwoPi, Main.rand.NextFloat(.75f, 1f), scale, true, BlendState.Additive);
+            }
+            for (int j = 0; j < 30; j++)
+            {
+                Vector2 dir = -Projectile.SafeDirByRot();
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3f) + dir * Main.rand.NextFloat(0f, 3f);
+                ECSParticle.ShinyCrossStarECS(pos, dir.ToRandVelocity(ToRadians(20f), 0f, 11f), RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(15, 50), 1f, 1f * Main.rand.NextFloat(.7f, .9f), .2f);
+                //ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(20f), 0f, 11f), RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(35, 50), RandRotTwoPi, .51f, .51f * Main.rand.NextFloat(.7f, .9f), true, BlendState.Additive);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
+                Vector2 vel = RandVelTwoPi(.1f, 4.9f);
+                ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .99f * Main.rand.NextFloat(.6f, 1f), .2f);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
+                Vector2 vel = RandVelTwoPi(.1f, 4.9f);
+                ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .15f * Main.rand.NextFloat(.6f, 1f), .5f);
+            }
+            if (SetSpecial)
+            {
+                for (int i = 0; i < 26; i++)
+                {
+                    Vector2 pos = Projectile.Center.ToRandCirclePosEdge(16);
+                    ECSParticle.StarShape(pos, Projectile.Center.GetNormalVector2(pos) * Main.rand.NextFloat(0.3f, 1f) * 10f, RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(0, 55), 1, 0.8f * Main.rand.NextFloat(.7f, 1.1f), .89f, BlendState.Additive);
+                }
+                for (int i = 0; i < 2; i++)
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, -Vector2.UnitY.ToRandVelocity(ToRadians(10f), 9f, 13f), ProjectileType<LavaFlowBoom>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+
+                }
+                SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);
+            }
+            new CrossGlow(Projectile.Center, Color.OrangeRed, 40, .75f, .25f).Spawn();
+            new CrossGlow(Projectile.Center, Color.Orange, 40, .75f, .23f).Spawn();
+            new CrossGlow(Projectile.Center, Color.White, 40, .75f, .20f).Spawn();
+            if (!SetSpecial)
+                SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { MaxInstances = 0, Pitch = .35f }, Projectile.Center);
+
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Texture2D star = TextureAssets.Extra[ExtrasID.SharpTears].Value;
+            Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
+            Texture2D tex = Projectile.GetTexture();
+            Vector2 orig = tex.Size() / 2;
+            Vector2 offsetValue = PosOffsetFix;
+            int drawLength = Projectile.oldPos.Length;
+            for (int i = drawLength - 3; i >= 0; i--)
+            {
+                if (Projectile.oldPos[i] == Vector2.Zero)
+                    continue;
+                Vector2 trailingDrawPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.05f) + Projectile.PosToCenter() - offsetValue;
+                float faded = 1 - i / (float)drawLength;
+                //平方放缩
+                faded = MathF.Pow(faded, 2);
+                Color trailColor = Color.Lerp(Color.OrangeRed, Color.Lerp(Color.Orange, Color.White, 0.9f), faded) * 0.70f;
+                float opa = Lerp(0.85f, 1f, faded);
+                trailColor = trailColor.ToAddColor((byte)(Lerp(0, 0, faded)));
+                float scaleMult = Lerp(0.5f, .95f, faded);
+                SB.Draw(tex, trailingDrawPos, null, trailColor, Projectile.oldRot[i] + PiOver4, orig, Projectile.scale * scaleMult, 0, 0);
+                SB.Draw(tex, trailingDrawPos, null, trailColor, Projectile.oldRot[i] + PiOver4, orig, Projectile.scale * scaleMult, 0, 0);
+            }
+            for (int i = 0; i < 8; i++)
+                SB.Draw(projTex, drawPos + (TwoPi / 8 * i).ToRotationVector2() * 1.2f - offsetValue, null, Color.White.ToAddColor(), Projectile.rotation + PiOver4, ori, Projectile.scale, 0, 0);
+            SB.Draw(projTex, drawPos - offsetValue, null, Color.White, Projectile.rotation + PiOver4, ori, Projectile.scale, 0, 0);
+            return false;
+        }
+
+    }
+}

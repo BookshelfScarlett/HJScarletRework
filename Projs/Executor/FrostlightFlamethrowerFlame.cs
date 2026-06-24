@@ -1,19 +1,13 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs.Ranged;
+using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -63,7 +57,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 vel = offsetvec * OriginalSpeed * Lerp(.15f, .20f, lifeTimeRatios) * 1f + Projectile.SafeDir() * (Lerp(1f, 10f, lifeTimeRatios));
                 Vector2 spawnPos = Projectile.Center + offsetvec * Main.rand.NextFloat(lifeTimeRatios * 100);
                 spawnPos -= Projectile.SafeDir() * lifeTimeRatios * 100f;
-                ECSParticle.ShinyCrossStarECS(spawnPos, vel, RandLerpColor(RandLerpColor(Color.DarkGreen, Color.Green), Color.LightGreen), 40, 1, .8f, 0.2f);
+                ECSParticle.ShinyCrossStarECS(spawnPos, vel, RandLerpColor(RandLerpColor(Color.RoyalBlue, Color.LightBlue), Color.SkyBlue), 40, 1, .8f, 0.2f);
             }
         }
         private void DrawShinyFire()
@@ -73,10 +67,11 @@ namespace HJScarletRework.Projs.Executor
             particleScale *= (1f + lifetimeInterpolant * Main.rand.NextFloat(0.3f, .5f));
             float opacity = Utils.GetLerpValue(0.9f, 0.57f, lifetimeInterpolant, true);
             float fadeToBlack = Utils.GetLerpValue(0.67f, 0.89f, lifetimeInterpolant, true);
-            Color fireColor = Color.Lerp(Color.ForestGreen, Color.GreenYellow, Main.rand.NextFloat(0.2f, 0.8f));
-            fireColor = Color.Lerp(fireColor, Color.MediumSpringGreen, fadeToBlack);
-            Color brightColor = RandLerpColor(RandLerpColor(Color.GreenYellow, Color.LimeGreen), Color.WhiteSmoke);
-            brightColor = Color.Lerp(brightColor, Color.LightGreen, fadeToBlack);
+            Color fireColor = Color.Lerp(Color.RoyalBlue, Color.SkyBlue, Main.rand.NextFloat(0.2f, 0.8f));
+            fireColor = Color.Lerp(fireColor, Color.LightBlue, fadeToBlack);
+            Color brightColor = RandLerpColor(RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), Color.WhiteSmoke);
+            brightColor = Color.Lerp(brightColor, Color.LightSkyBlue, fadeToBlack);
+
             for (int i = 0; i < 2; i++)
             {
                 Vector2 vel = Projectile.velocity * .1f * i + Projectile.velocity.ToSafeNormalize() * lifetimeInterpolant * Main.rand.NextFloat(.5f, 4f);
@@ -102,6 +97,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            Projectile.AddExecutionTimeImmediate(ItemType<Frostlight>(), Main.rand.Next(2,5));
         }
         public override bool PreDraw(ref Color lightColor)
         {

@@ -250,7 +250,7 @@ ReaperBody: {
 ReaperHead: {
 	DisplayName: Reaper Head
 	Tooltip: ""
-	SetBouns: ""
+	SetBonus: ""
 }
 
 ReaperLegs: {

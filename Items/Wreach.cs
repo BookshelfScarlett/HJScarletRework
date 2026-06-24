@@ -32,9 +32,7 @@ namespace HJScarletRework.Items
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<FrostlightFrostball>(), 123, knockback, player.whoAmI);
-            proj.ai[1] = Main.rand.Next(50, 300);
-            proj.ai[2] = Main.rand.NextFloat(4.5f, 7.5f);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<LavaFlowExecution>(), 123, knockback, player.whoAmI);
             //((TerraFlamethrowerTank)proj.ModProjectile).BeginTargetRotation = player.ToMouseVector2().ToRotation();
             //proj.rotation = RandRotTwoPi;
             //proj.HJScarlet().ExecutionStrike = true;

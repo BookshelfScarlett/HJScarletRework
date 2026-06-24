@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
+using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -36,13 +37,13 @@ namespace HJScarletRework.Projs.Executor
             Helper.MaxProgress[0] = (int)(AttackSpeed * 1f);
             Helper.MaxProgress[1] = (int)(AttackSpeed * 1.2f);
             Helper.MaxProgress[2] = (int)(AttackSpeed * 0.3f);
-                SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 0, Pitch = .82f });
-                SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { MaxInstances = 0, Pitch = .82f });
+            SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 0, Pitch = .82f });
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { MaxInstances = 0, Pitch = .82f });
             TargetRotation = BeginTargetRotation;
         }
         public override void ProjAI()
         {
-            Projectile.velocity = Projectile.SafeDir();
+            //Projectile.velocity = Projectile.SafeDir();
             HandleHeldProjState();
             HandleAttackAnimation();
             HandlePlayerState();
@@ -91,6 +92,7 @@ namespace HJScarletRework.Projs.Executor
             //这里挥砍动画一定程度上使用了矩阵变化。
             if (Helper.GetAniProgress(1) == 0)
             {
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 8f, 30, Projectile.rotation);
                 SoundEngine.PlaySound(HJScarletSounds.Frostwave_LightRelease with { MaxInstances = 1, Pitch = -.2f });
                 Vector2 dir2 = Projectile.rotation.ToRotationVector2();
                 Vector2 posBase = Projectile.Center + dir2 * 65f * Projectile.scale;
@@ -158,10 +160,6 @@ namespace HJScarletRework.Projs.Executor
                     ECSParticle.SmokeParticle(posBase, -Vector2.UnitY * Main.rand.NextFloat(0.4f, 24f), fireColor, Main.rand.Next(35, 40), RandRotTwoPi, 0.47f, Main.rand.NextFloat(.9f, 1.1f) * .45f, Main.rand.NextBool(), BlendState.Additive);
                 }
 
-                //Vector2 posBase = Projectile.Center + dir * 65f * Projectile.scale;
-                //posBase += dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-15f, 16f);
-                //Color color = RandLerpColor(RandLerpColor(Color.RoyalBlue, Color.LightBlue), Color.WhiteSmoke);
-                //ECSParticle.SnowCloud(posBase, -Vector2.UnitY * Main.rand.NextFloat(.4f, 34f), color, Main.rand.Next(35, 50), RandRotTwoPi, 0.5f, Main.rand.NextFloat(.8f, 1.1f) * .15f);
             }
             if (Main.rand.NextBool(4))
             {
@@ -180,8 +178,6 @@ namespace HJScarletRework.Projs.Executor
                 //这样，我们就能确保火星永远向外展开
                 ECSParticle.ShinyCrossStarECS(setPos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), Main.rand.Next(30, 60), 1f, Main.rand.NextFloat(.8f, 1.1f) * .48f, .2f);
             }
-            //HandleMidParticle();
-            //HandlePlayerHealing();
         }
 
         public void UpdateBeginAnimation()
@@ -239,15 +235,7 @@ namespace HJScarletRework.Projs.Executor
                     ECSParticle.SmokeParticle(posBase, -Vector2.UnitY * Main.rand.NextFloat(0.4f, 24f), fireColor, Main.rand.Next(35, 50), RandRotTwoPi, 0.57f, Main.rand.NextFloat(.9f, 1.1f) * .45f, Main.rand.NextBool(), BlendState.Additive);
                 }
 
-                //starShapeSpawnPos = Projectile.Center + dir * 65f * Projectile.scale;
-                //starShapeSpawnPos += dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-15f, 16f);
-                //Color color = RandLerpColor(RandLerpColor(Color.RoyalBlue, Color.LightBlue), Color.WhiteSmoke);
-                //ECSParticle.SnowCloud(starShapeSpawnPos, -Vector2.UnitY * Main.rand.NextFloat(.4f, 34f), color, Main.rand.Next(35, 50), RandRotTwoPi, 0.35f, Main.rand.NextFloat(.8f, 1.1f) * .15f);
-                //starShapeSpawnPos = posBase + Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(100f, 160f);
-                //starShapeDir = (posBase - starShapeSpawnPos).SafeNormalize(Vector2.UnitX);
-                //ECSParticle.SmokeParticle(starShapeSpawnPos, starShapeDir * Main.rand.NextFloat(2f, 16f), RandLerpColor(RandLerpColor(Color.SkyBlue, Color.LightBlue), Color.WhiteSmoke), Main.rand.Next(35, 40), RandRotTwoPi, 1f, Main.rand.NextFloat(.4f, .7f) * .75f, Main.rand.NextBool(), BlendState.Additive);
             }
-            //更新动画进程，封装的方法
         }
 
         public void HandlePlayerState()

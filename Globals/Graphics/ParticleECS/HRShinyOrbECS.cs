@@ -14,7 +14,7 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
         }
         public override void Update(ref ECSParticleData data)
         {
-            data.Velocity *= .94f;
+            data.Velocity *= .92f;
             data.Scale = Lerp(data.Scale, 0, EaseInCubic(data.LifetimeRatio));
         }
         public override void Draw(ref ECSParticleData data)

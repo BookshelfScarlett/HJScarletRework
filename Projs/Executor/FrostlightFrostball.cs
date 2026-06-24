@@ -1,10 +1,12 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
+using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -104,10 +106,14 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            Projectile.AddExecutionTimeImmediate(ItemType<Frostlight>());
+
             base.OnHitNPC(target, hit, damageDone);
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            if (Owner.HasProj<FrostlightFlamethrower>())
+                return false;
             Texture2D projTex = HJScarletTexture.Particle_ShinyOrbHard.Value;
             Vector2 ori = projTex.Size() / 2;
             Vector2 drawPos = Projectile.Center - Main.screenPosition;

@@ -136,10 +136,10 @@ CycleMadness: {
 	DisplayName: 轮回疯狂
 	Tooltip:
 		'''
-		佩戴后，允许你获得10次承受致死伤害时再起的机会
-		每一次成功再起时，你的最大生命上限都会被降低50，下限为50点
-		你的每一次再起都会为自己提供额外的5%伤害与5%暴击概率
-		使你受到额外的20%乘算伤害
+		将代行者的暴击概率重设定为0%
+		造成代行者伤害时，总会以一定的概率掉落[i:HJScarletRework/MadnessCritStar]暴击之星
+		拾取一枚暴击之星会增加5%的暴击概率，最大增加至200%
+		该暴击概率加成在每次拾取时都会刷新持续时间
 		'''
 }
 
@@ -336,4 +336,18 @@ BitingClaw: {
 		目前仅提供了潜航员盔甲[i:HJScarletRework/DiverHead][i:HJScarletRework/DiverBody][i:HJScarletRework/DiverLegs]
 		击败暗影墙后于海洋环境获取
 		'''
+}
+
+PassionfruitJar: {
+	DisplayName: 百香果酱瓶
+	Tooltip:
+		'''
+		佩戴后，在游戏结束之时会播报特殊音乐
+		在时装栏内可生效
+		'''
+}
+
+SpaceHorror: {
+	DisplayName: 宇宙恐慌
+	Tooltip: ""
 }

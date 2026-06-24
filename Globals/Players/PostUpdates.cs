@@ -49,6 +49,7 @@ namespace HJScarletRework.Globals.Players
                     Player.GetDamage<ExecutorDamageClass>() *= 1.05f;
                 }
             }
+
         }
         public void UpdateFlybackBuff()
         {
@@ -174,6 +175,11 @@ namespace HJScarletRework.Globals.Players
                 crimsonCharmStopReduce = false;
                 if (Player.miscCounter % 10 == 0 && crimsonCharmReduceTime > 0)
                     crimsonCharmReduceTime--;
+            }
+            if (Player.HeldItem.type != lastHeldItemIndex)
+            {
+                lastHeldItemIndex = Player.HeldItem.type;
+                hasSendExecutionTint = false;
             }
         }
         public override void PostUpdate()

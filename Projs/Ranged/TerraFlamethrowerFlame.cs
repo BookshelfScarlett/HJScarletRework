@@ -73,6 +73,7 @@ namespace HJScarletRework.Projs.Ranged
             fireColor = Color.Lerp(fireColor, Color.MediumSpringGreen, fadeToBlack);
             Color brightColor = RandLerpColor(RandLerpColor(Color.GreenYellow, Color.LimeGreen), Color.WhiteSmoke);
             brightColor = Color.Lerp(brightColor, Color.LightGreen, fadeToBlack);
+
             for (int i = 0; i < 2; i++)
             {
                 Vector2 vel = Projectile.velocity * .1f * i + Projectile.velocity.ToSafeNormalize() * lifetimeInterpolant * Main.rand.NextFloat(.5f, 4f);

@@ -4,11 +4,10 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class CycleMadness : HJScarletItemClass
+    public class SpaceHorror : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
@@ -25,5 +24,6 @@ namespace HJScarletRework.Items.Accessories
         {
             player.HJScarlet().cycleMadness = true;
         }
+
     }
 }

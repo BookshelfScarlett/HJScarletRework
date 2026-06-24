@@ -1,29 +1,31 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class CycleMadness : HJScarletItemClass
+    public class PassionfruitJar : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
-        public override void SetStaticDefaults()
-        {
-            HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.White);
-        }
         public override void ExSD()
         {
-            Item.width = Item.height = 60;
-            Item.rare = ItemRarityID.Purple;
+            Item.SetUpRarityPrice(ItemRarityID.LightPurple);
             Item.accessory = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.HJScarlet().cycleMadness = true;
+            base.UpdateAccessory(player, hideVisual);
+        }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
         }
     }
 }
