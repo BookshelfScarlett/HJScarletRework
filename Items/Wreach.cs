@@ -1,17 +1,16 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Requirement;
-using HJScarletRework.Projs.Executor;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Projs.Magic;
-using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
-using rail;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items
 {
@@ -32,13 +31,41 @@ namespace HJScarletRework.Items
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<LavaFlowExecution>(), 123, knockback, player.whoAmI);
+            Stopwatch.StartNew();
+            Stopwatch sw = Stopwatch.StartNew();
+            foreach(var proj2 in Main.ActiveProjectiles)
+            {
+                if (Main.myPlayer != player.whoAmI)
+                    continue;
+                if (!proj2.minion)
+                    continue;
+                if (proj2.owner != player.whoAmI)
+                    continue;
+                //proj2.Kill();
+                proj2.active = false;
+            }
+            float curSlots = player.maxMinions - player.slotsMinions;
+            List<Item> hasList = [];
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Spell);
+            while (curSlots >= 1)
+            {
+                int itemID = Main.rand.NextFromCollection(HJScarletList.SummonWeaponList);
+                Item item = ContentSamples.ItemsByType[itemID];
+
+                Projectile proj = ContentSamples.ProjectilesByType[item.shoot];
+
+                if (curSlots >= proj.minionSlots && !hasList.Contains(item))
+                {
+                    ItemLoader.Shoot(item, player, source, position, velocity, proj.type, item.damage, knockback);
+                    curSlots -= proj.minionSlots;
+                    hasList.Add(item);
+                }
+            }
+            //Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<LavaFlowExecution>(), 123, knockback, player.whoAmI);
             //((TerraFlamethrowerTank)proj.ModProjectile).BeginTargetRotation = player.ToMouseVector2().ToRotation();
             //proj.rotation = RandRotTwoPi;
             //proj.HJScarlet().ExecutionStrike = true;
-            Stopwatch.StartNew();
             // 在需要测量的代码之前创建并启动 Stopwatch
-            Stopwatch sw = Stopwatch.StartNew();
             // 这里放置你要测量延迟的代码
             //for (int i = 0; i < 3000; i++)
             //{
@@ -46,12 +73,12 @@ namespace HJScarletRework.Items
             //}
 
             // 停止计时
-            sw.Stop();
 
-            //// 输出经过的时间（毫秒）
-            //Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");
-            //// 更高精度输出
-            //Main.NewText($"精确耗时: {sw.Elapsed.TotalMilliseconds:F4} ms");
+            sw.Stop();
+            // 输出经过的时间（毫秒）
+            Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");
+            // 更高精度输出
+            Main.NewText($"精确耗时: {sw.Elapsed.TotalMilliseconds:F4} ms");
             return false;
             //Vector2 ownerMW = player.LocalMouseWorld();
             //添加需要的攻击单位

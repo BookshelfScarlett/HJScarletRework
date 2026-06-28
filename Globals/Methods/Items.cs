@@ -33,6 +33,5 @@ namespace HJScarletRework.Globals.Methods
         {
             return !item.IsAir && item is not null;
         }
-
     }
 }

@@ -14,7 +14,6 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public int AlterType = -1;
         public override int ExecutionProgress => 12;
-        public override int ExecutionProj => ProjectileType<PureYinyoExecution>();
         public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
         public override void ExSSD()
         {
@@ -30,6 +29,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shootSpeed = 19f;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shoot = ProjectileType<PureYinyoBlack>();
+            Item.HJScarlet().ExecutionProj = ProjectileType<PureYinyoExecution>();
             Item.UseSound = HJScarletSounds.Blunt_Swing;
 
         }
@@ -37,7 +37,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         {
             //初始化。
             bool useExecution = player.CheckExecution(Type);
-            int projID = ExecutionProj != -1 && useExecution ? ExecutionProj : AlterType != 0 ? ProjectileType<PureYinyoWhite>() : type;
+            int projID = Item.HJScarlet().ExecutionProj!= -1 && useExecution ? Item.HJScarlet().ExecutionProj : AlterType != 0 ? ProjectileType<PureYinyoWhite>() : type;
             if (useExecution)
             {
                 Projectile proj = Projectile.NewProjectileDirect(source, position, -Vector2.UnitY * 32f, projID, damage, knockback, player.whoAmI);

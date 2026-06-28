@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public bool AlterMode = false;
         public override WeaponCategory WeaponCategory => WeaponCategory.Caster;
-        public override int ExecutionProgress => 300;
+        public override int ExecutionProgress => 200;
         public override void ExSSD()
         {
             HJScarletList.FrostRarityHashSet.Add(Type);
@@ -35,7 +35,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool CanUseItem(Player player)
         {
-            return (!player.HasProj(Item.shoot) && !player.HasProj<FrostlightHeldProjAlt>() && !player.HasProj<FrostlightFlamethrower>());
+            return !player.HasProj(Item.shoot) && !player.HasProj<FrostlightHeldProjAlt>() && !player.HasProj<FrostlightFlamethrower>();
         }
         public override void HoldItem(Player player)
         {
@@ -47,6 +47,8 @@ namespace HJScarletRework.Items.Weapons.Executor
             {
                 Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<FrostlightFlamethrower>(), damage, knockback, player.whoAmI);
                 proj.originalDamage = damage;
+                ((FrostlightFlamethrower)proj.ModProjectile).ShouldUseEdgeMeltShader = true;
+                ((FrostlightFlamethrower)proj.ModProjectile).BeginPos= Main.MouseWorld.GetNormalVector2(player.Center) * 60 + player.Center;
             }
             else
             {

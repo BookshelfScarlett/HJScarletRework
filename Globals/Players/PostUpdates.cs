@@ -168,6 +168,9 @@ namespace HJScarletRework.Globals.Players
                 PlayerLastSpeedStored = 0;
             if (exsanguinationBuffTime > 0)
                 exsanguinationBuffTime--;
+            if (hasSendExecutionTintTimer > 0)
+                hasSendExecutionTintTimer--;
+
             if (!Player.HasBuff<BlackKeyExecutionBuff>())
                 blackKeyDefenseTrigger = false;
             if (!Player.HasBuff<CrimsonCharmBuff>())
@@ -377,9 +380,41 @@ namespace HJScarletRework.Globals.Players
             UpdateArmorAbility();
             UpdateTacticalExecution();
             UpdateFishDash();
+            UpdatePowerLily();
             UpdateDiverArmorJellyfishSpawn();
         }
+        public void UpdatePowerLily()
+        {
+            if (!powerLily)
+                return;
+            //我这个写法好像容易死档……
+            if (powerLilyTimer == 0)
+            {
+                int curSlots = Player.maxMinions;
+                List<Vector2> dic = [];
+                while (curSlots > 0)
+                {
+                    int projID = Main.rand.Next(0, ItemLoader.ItemCount);
+                    Item itemType = ContentSamples.ItemsByType[projID];
+                    if (!itemType.DamageType.CountsAsClass<SummonDamageClass>() || itemType.damage == 0)
+                        continue;
 
+                    Projectile proj = ContentSamples.ProjectilesByType[itemType.shoot];
+                    if (!proj.minion || proj.sentry)
+                        continue;
+                    if (curSlots < proj.minionSlots)
+                        continue;
+                    curSlots -= (int)proj.minionSlots;
+                    dic.Add(new((int)proj.type, (int)itemType.damage));
+                }
+                for (int i = 0; i < dic.Count; i++)
+                {
+                    int dmg = (int)Player.GetTotalDamage<SummonDamageClass>().ApplyTo(dic[i].Y);
+                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Player.velocity, (int)dic[i].X, dmg, 1, Player.whoAmI);
+                }
+                powerLilyTimer = GetSeconds(30);
+            }
+        }
         public void UpdateDiverArmorJellyfishSpawn()
         {
             if (!diverArmor)

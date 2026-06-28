@@ -137,43 +137,6 @@ namespace HJScarletRework.Projs.Executor
                 AttackState = State.Stab;
                 SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);
                 SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);
-
-                //什么叫你写了这么多就为了处理这个特效爆炸？
-                for (int i = 0; i < 45; i++)
-                {
-                    Vector2 vel = (TwoPi / 45f * i).ToRotationVector2() * 10f * Main.rand.NextFloat(0f, 1f);
-                    Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f) + vel.ToSafeNormalize() * Main.rand.NextFloat() * 2f;
-                    Color color = RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.50f), Color.Orange);
-                    float scale = 0.40f * Main.rand.NextFloat(0.55f, 1.1f);
-                    ECSParticle.SmokeParticle(spawnpos, vel, color, Main.rand.Next(10, 41), RandRotTwoPi, Main.rand.NextFloat(.75f, 1f), scale, true, BlendState.Additive);
-
-                    vel = RandVelTwoPi(.4f, 9.5f);
-                    color = RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.55f), Color.OrangeRed);
-                    scale = .35f * Main.rand.NextFloat(.65f, 1.1f);
-                    ECSParticle.SmokeParticle(spawnpos, vel, color, Main.rand.Next(10, 41), RandRotTwoPi, Main.rand.NextFloat(.75f, 1f), scale, true, BlendState.Additive);
-                }
-                for (int j = 0; j < 30; j++)
-                {
-                    Vector2 dir = -Projectile.SafeDirByRot();
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3f) + dir * Main.rand.NextFloat(0f, 3f);
-                    ECSParticle.ShinyCrossStarECS(pos, dir.ToRandVelocity(ToRadians(20f), 0f, 11f), RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(15, 50), 1f, 1f * Main.rand.NextFloat(.7f, .9f), .2f);
-                    //ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(20f), 0f, 11f), RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(35, 50), RandRotTwoPi, .51f, .51f * Main.rand.NextFloat(.7f, .9f), true, BlendState.Additive);
-                }
-                for (int i = 0; i < 20; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
-                    Vector2 vel = RandVelTwoPi(.1f, 4.9f);
-                    ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .99f * Main.rand.NextFloat(.6f, 1f), .2f);
-                }
-                for (int i = 0; i < 20; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
-                    Vector2 vel = RandVelTwoPi(.1f, 4.9f);
-                    ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .15f * Main.rand.NextFloat(.6f, 1f), .5f);
-                }
-                new CrossGlow(Projectile.Center, Color.OrangeRed, 40, .75f, .25f).Spawn();
-                new CrossGlow(Projectile.Center, Color.Orange, 40, .75f, .23f).Spawn();
-                new CrossGlow(Projectile.Center, Color.White, 40, .75f, .20f).Spawn();
                 return;
             }
             if (target.HJScarlet().isBeingStabByLavaFlow && AttackState == State.Attack)

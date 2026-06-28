@@ -9,6 +9,12 @@ SwitchWeaponConditionList: {
 	DownedPlantera: Plantera
 }
 
+ItemBelongTo: {
+	Donator: ""
+	Developer: ""
+	Supporter: ""
+}
+
 SwitchWeapon: {
 	Tooltip:
 		'''
@@ -36,6 +42,7 @@ DamageClasses: {
 			ColdSteel: ""
 			Firearm: ""
 			Caster: ""
+			Minion:""
 			Misc: ""
 		}
 

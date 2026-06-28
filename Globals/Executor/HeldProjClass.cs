@@ -18,6 +18,8 @@ namespace HJScarletRework.Globals.Executor
         public new string LocalizationCategory => $"Projs.Friendly.{Category}";
         public bool PerformanceMode = HJScarletConfigClient.Instance.PerformanceMode;
         public virtual Vector2 TileHitbox => Vector2.Zero;
+        public virtual int MinAttackRates => 2;
+        public int AttackSpeed => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, Owner.HeldItem.useTime * Projectile.MaxUpdates, MinAttackRates);
         public override void SetDefaults()
         {
             Projectile.width = Projectile.height = 2;

@@ -80,11 +80,6 @@ CrimsonRune: {
 		'''
 }
 
-CreationHat: {
-	// DisplayName: Creation Hat
-	// Tooltip: ""
-}
-
 SacarbWings: {
 	DisplayName: 圣甲虫之翼
 	Tooltip:
@@ -350,4 +345,15 @@ PassionfruitJar: {
 SpaceHorror: {
 	DisplayName: 宇宙恐慌
 	Tooltip: ""
+}
+
+PowerLily: {
+	DisplayName: 能量百合
+	Tooltip:
+		'''
+		佩戴时清除玩家已有的召唤物
+		生成随机召唤物，取生成时的召唤物中最低的伤害作为基础，受召唤伤害加成
+		每次随机生成后都会持续30秒，持续时间结束后会清除召唤物，重新进行生成
+		可召唤的数量受玩家可召唤仆从数量影响
+		'''
 }

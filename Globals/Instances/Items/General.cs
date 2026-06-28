@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
@@ -22,13 +23,14 @@ namespace HJScarletRework.Globals.Instances.Items
         private int GhostFrame = 0;
         public bool EnableExecutorVersion = false;
         public bool CanDrawGhost = false;
+        public int ExecutionProj = -1;
         //控制purePrism的运动
         public float purePrismAnimationCounter = 0;
         public bool purePrismLerpIn = false;
         public bool purePrismLerpOut = false;
         public bool purePrismLegalTarget = false;
         public bool isShivering = false;
-
+        public ItemBelong ItemBelongTo = ItemBelong.None;
         public float simpleImmersiveBackpackValue = 1f;
         public float simpleImmersiveBackpackValueAlt = 1f;
         /// <summary>

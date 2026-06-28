@@ -1,13 +1,10 @@
-﻿using ContinentOfJourney.Projectiles;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
-using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
-using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -21,13 +18,15 @@ namespace HJScarletRework.Projs.Executor
     {
         public override int OriginalItemID => ItemType<Frostlight>();
         public override string Texture => GetInstance<FrostlightHeldProj>().Texture;
-        public int AttackSpeed => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, Owner.HeldItem.useTime *Projectile.MaxUpdates, 20 * Projectile.MaxUpdates);
+        public override int MinAttackRates => 20;
         public ref float Timer => ref Projectile.ai[0];
         public ref float ShootTimer => ref Projectile.ai[1];
         public ref float HeldAnimationHelper => ref Projectile.ai[2];
         public float BeginTargetRotation = 0;
         public float TargetRotation = 0;
+        public bool ShouldUseEdgeMeltShader = false;
         public AnimationStruct Helper = new(3);
+        public Vector2 BeginPos = Vector2.Zero;
         public List<Vector2> OldAimPos = [];
         public override bool? CanDamage() => false;
         public override bool ShouldUpdatePosition() => false;
@@ -44,11 +43,11 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            Helper.MaxProgress[0] = (int)(AttackSpeed * 0.5f);
+            Helper.MaxProgress[0] = (int)(AttackSpeed * 0.35f);
             Helper.MaxProgress[1] = (int)(AttackSpeed * 1.2f);
             Helper.MaxProgress[2] = (int)(AttackSpeed * 0.3f);
             SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 0, Pitch = .82f });
-            SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { MaxInstances = 0, Pitch = .82f });
+            SoundEngine.PlaySound(HJScarletSounds.Frostwave_Release with { MaxInstances = 0, Pitch = .82f });
             TargetRotation = BeginTargetRotation;
         }
         public override void ProjAI()
@@ -68,6 +67,7 @@ namespace HJScarletRework.Projs.Executor
                 proj.originalDamage = Projectile.damage;
                 ((FrostlightHeldProj)proj.ModProjectile).BeginTargetRotation = skyDir.ToRotation();
                 ((FrostlightHeldProj)proj.ModProjectile).Flip = 1;
+                ((FrostlightHeldProj)proj.ModProjectile).CanHeal = true;
                 ((Frostlight)Owner.HeldItem.ModItem).AlterMode = false;
                 Projectile.Kill();
             }
@@ -75,7 +75,8 @@ namespace HJScarletRework.Projs.Executor
 
         public void HandleHeldProjState()
         {
-            Projectile.Center = Owner.MountedCenter;
+            if (Helper.IsDone[0])
+                Projectile.Center = Owner.MountedCenter;
             Projectile.position.Y += Owner.gfxOffY;
             bool ifStillUse = (Owner.controlUseItem) && !Owner.noItems && !Owner.CCed;
             if (!ifStillUse || Owner.dead)
@@ -88,17 +89,27 @@ namespace HJScarletRework.Projs.Executor
 
         public void HandleAttackAnimation()
         {
-            //if (!Helper.IsDone[0])
             UpdateBeginAnimation();
             if (!Helper.IsDone[0])
             {
                 Helper.UpdateAniState(0);
+                if (ShouldUseEdgeMeltShader)
+                    Projectile.Center = Vector2.Lerp(BeginPos, Owner.MountedCenter, EaseOutExpo(Helper.GetAniProgress(0)));
+                if (Main.rand.NextBool() && Helper.GetAniProgress(0) < Main.rand.NextFloat())
+                {
+                    Vector2 pos = Projectile.SafeDirByRot() * Main.rand.NextFloat(-40f * Projectile.scale, 40f * Projectile.scale) + Projectile.Center + Projectile.SafeDirByRot() * 34f;
+                    Vector2 vel = Projectile.SafeDirByRot() * Main.rand.NextFloat(-1, 1) * 2f;
+                    ECSParticle.SmokeParticle(pos, vel, RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 30, RandRotTwoPi, 1 * Helper.GetAniProgress(0) * Main.rand.NextFloat(), 0.6f, true, BlendState.Additive);
+                    if (Main.rand.NextBool())
+                        ECSParticle.ShinyCrossStarECS(pos + RandVelTwoPi(3), vel, RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 30, 1, Main.rand.NextFloat(.6f, .7f) * .4f * (1 - Helper.GetAniProgress(0)), 0.2f);
+                }
             }
             else
             {
+                Rotations = Lerp(Rotations, 1.01f, 0.12f / Projectile.MaxUpdates);
+                HandleParticle();
                 Vector2 fireSpawnPosition = Projectile.Center + Projectile.rotation.ToRotationVector2().SafeNormalize(Vector2.UnitY) * 85;
                 Vector2 fireShootVelocity = Projectile.rotation.ToRotationVector2() * Owner.HeldItem.shootSpeed * .5f;
-                //DrawGlowingFireParticle(fireSpawnPosition);
                 if (Projectile.MeetMaxUpdatesFrame(ShootTimer, 13) || ShootTimer == 0)
                 {
                     SoundEngine.PlaySound(HJScarletSounds.HymnFireball_Release with { MaxInstances = 0, Pitch = -.35f, PitchVariance = .1f });
@@ -133,59 +144,73 @@ namespace HJScarletRework.Projs.Executor
             Projectile.scale = tarPos.Length();
             //武器的角度为（起始角度 + 目标角度）的值
             Projectile.rotation = tarPos.ToRotation();
-            //最后，粒子效果
-            HandleParticle();
+            //更新位置。
         }
         public void HandleParticle()
         {
             Vector2 dir = Projectile.rotation.ToRotationVector2();
             if (Main.rand.NextBool(6))
             {
-                Vector2 posBase = Projectile.Center + dir * 65f * Projectile.scale + dir.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0f, 2.4f);
-                posBase += Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2) * Main.rand.NextFloat(-35f, 37f) + dir * Main.rand.NextFloat(-30f, 30f);
+                Vector2 posBase = Projectile.Center + dir * 65f * Projectile.scale + dir.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0f, 2.4f) * Rotations;
+                posBase += Projectile.SafeDirByRot().RotatedBy(PiOver2) * Main.rand.NextFloat(-35f, 37f) * Rotations + dir * Main.rand.NextFloat(-30f, 30f) * Rotations;
                 if (Main.rand.NextBool(3))
                 {
                     Color fireColor = Color.Lerp(Color.Lerp(Color.RoyalBlue, Color.LightBlue, Main.rand.NextFloat()), Color.WhiteSmoke, Main.rand.NextFloat());
-                    new Fire(posBase, -Vector2.UnitY * Main.rand.NextFloat(0.4f, 24f), fireColor, Main.rand.Next(35, 50), RandRotTwoPi, 0.57f, Main.rand.NextFloat(.9f, 1.1f) * .25f).SpawnToPriority();
+                    new Fire(posBase, -Vector2.UnitY * Main.rand.NextFloat(0.4f, 24f) * Rotations, fireColor, Main.rand.Next(35, 50), RandRotTwoPi, 0.57f, Main.rand.NextFloat(.9f, 1.1f) * .25f).SpawnToPriority();
                 }
                 else
                 {
                     Color fireColor = Color.Lerp(Color.Lerp(Color.RoyalBlue, Color.LightBlue, Main.rand.NextFloat()), Color.WhiteSmoke, Main.rand.NextFloat());
-                    ECSParticle.SmokeParticle(posBase, -Vector2.UnitY * Main.rand.NextFloat(0.4f, 24f), fireColor, Main.rand.Next(35, 50), RandRotTwoPi, 0.57f, Main.rand.NextFloat(.9f, 1.1f) * .45f, Main.rand.NextBool(), BlendState.Additive);
+                    ECSParticle.SmokeParticle(posBase, -Vector2.UnitY * Main.rand.NextFloat(0.4f, 24f) * Rotations, fireColor, Main.rand.Next(35, 50), RandRotTwoPi, 0.57f, Main.rand.NextFloat(.9f, 1.1f) * .45f, Main.rand.NextBool(), BlendState.Additive);
                 }
-            }
-            if (Main.rand.NextBool(6))
-            {
-                Vector2 posBase = Projectile.Center + dir * 65f * Projectile.scale + dir.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0f, 2.4f);
-                posBase += Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2) * Main.rand.NextFloat(-35f, 37f) + dir * Main.rand.NextFloat(-60f, 60f);
             }
             if (Main.rand.NextBool(4))
             {
-                Vector2 posBase = Projectile.Center + dir * 65f * Projectile.scale + dir.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0f, 2.4f);
-                Vector2 setPos = posBase + Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2) * Main.rand.NextFloat(-20f, 21f) + dir * Main.rand.NextFloat(-60f, 60f);
+                Vector2 posBase = Projectile.Center + dir * 65f * Projectile.scale + dir.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0f, 2.4f * Rotations);
+                Vector2 setPos = posBase + Projectile.SafeDirByRot().RotatedBy(PiOver2) * Main.rand.NextFloat(-20f, 21f) * Rotations + dir * Main.rand.NextFloat(-60f, 60f) * Rotations;
                 Vector2 vel = -Vector2.UnitY.RotatedByRandom(ToRadians(15)) * Main.rand.NextFloat(4f, 12f);
                 float offsetX = setPos.X - posBase.X;
-
                 bool needMirror = (offsetX > 0 && vel.X < 0) || (offsetX < 0 && vel.X > 0);
                 if (needMirror)
                     setPos.X = posBase.X - offsetX;
-                ECSParticle.ShinyCrossStarECS(setPos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), Main.rand.Next(30, 50), 1, Main.rand.NextFloat(.8f, 1.1f) * .38f, .2f);
+                ECSParticle.ShinyCrossStarECS(setPos, vel * Rotations, RandLerpColor(Color.RoyalBlue, Color.LightBlue), Main.rand.Next(30, 50), 1, Main.rand.NextFloat(.8f, 1.1f) * .38f, .2f);
             }
         }
 
         public void HandlePlayerState()
         {
-            if (Helper.IsDone[0])
-            //Projectile.velocity = TargetRotation.ToRotationVector2();
             Owner.ChangeDir(Projectile.direction);
             Owner.heldProj = Projectile.whoAmI;
             Owner.itemTime = Owner.itemAnimation = 2;
             Owner.ControlPlayerArm(Projectile.rotation);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public void DrawEdgeShaderProj()
         {
-            if (Projectile.HJScarlet().ExecutionStrike)
-                return false;
+            SB.End();
+            SB.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
+            //一堆数据
+            Texture2D tex = Projectile.GetTexture();
+            Vector2 drawPos = Projectile.Center - Main.screenPosition;
+            float rotation = Projectile.rotation + PiOver4 + (Projectile.spriteDirection == -1 ? PiOver2 : 0);
+            Vector2 origin = new Vector2(Projectile.spriteDirection == -1 ? tex.Width : 0, tex.Height);
+            Vector2 realDrawPos = drawPos + Vector2.UnitX.RotatedBy(Projectile.rotation) * -25f + Vector2.UnitX.RotatedBy(Projectile.rotation).RotatedBy(PiOver2) * 0;
+            SpriteEffects se = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            GD.Textures[0] = tex;
+            GD.SamplerStates[0] = SamplerState.PointClamp;
+            GD.Textures[1] = HJScarletTexture.Noise_Misc.Value;
+            GD.SamplerStates[1] = SamplerState.PointClamp;
+            //应用这个shader，我们正式开始画这把“喷火器”
+            Effect shader = HJScarletShader.EdgeMeltsShader;
+            shader.Parameters["progress"].SetValue((1 - EaseOutCubic(Helper.GetAniProgress(0))));
+            shader.Parameters["InPutTextureSize"].SetValue(tex.Size());
+            shader.Parameters["EdgeColor"].SetValue(Color.LightSkyBlue.ToVector4());
+            shader.Parameters["EdgeWidth"].SetValue(.01f);
+            shader.CurrentTechnique.Passes[0].Apply();
+            SB.Draw(tex, realDrawPos, null, Color.White, rotation, origin, Projectile.scale, se, 0);
+
+        }
+        public void DrawNonEdgeShaderProj()
+        {
             Texture2D tex = Projectile.GetTexture();
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             float rotation = Projectile.rotation + PiOver4 + (Projectile.spriteDirection == -1 ? PiOver2 : 0);
@@ -194,41 +219,30 @@ namespace HJScarletRework.Projs.Executor
             SpriteEffects se = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             SB.Draw(tex, realDrawPos, null, Color.White, rotation, origin, Projectile.scale, se, 0);
 
-            SB.EnterShaderArea();
+        }
 
+        public override bool PreDraw(ref Color lightColor)
+        {
+            if (Projectile.HJScarlet().ExecutionStrike)
+                return false;
+            if (ShouldUseEdgeMeltShader)
+                DrawEdgeShaderProj();
+            else
+                DrawNonEdgeShaderProj();
+            SB.EnterShaderArea();
             Texture2D star = HJScarletTexture.Particle_CrossGlow.Value;
             Vector2 dir = Projectile.rotation.ToRotationVector2();
-            float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
-            Vector2 pos = drawPos + dir * 60f * Projectile.scale;
+            float easedProgress = Rotations;
+            Vector2 pos = Projectile.Center - Main.screenPosition + dir * 60f * Projectile.scale;
             float scale = Projectile.scale * .285f * easedProgress;
             SB.Draw(star, pos, null, Color.RoyalBlue * .9f * easedProgress, 0, star.ToOrigin(), scale * 0.95f, 0, 0);
             SB.Draw(star, pos, null, Color.SkyBlue * .9f * easedProgress, 0, star.ToOrigin(), scale * .90f, 0, 0);
             SB.Draw(star, pos, null, Color.LightBlue * .85f * easedProgress, 0, star.ToOrigin(), scale * 0.85f, 0, 0);
 
-
             //出于我不清楚的原因，这里得重置两次批次，才能确保正常
             SB.EndShaderArea();
             SB.EndShaderArea();
             return false;
-        }
-        private List<ScarletVertex> _vertexCache = new List<ScarletVertex>(); // 类级别缓存
-        public void DrawSlash(Texture2D texture, Color drawcolor, float mult = 0.8f)
-        {
-            if (OldAimPos.Count < 3)
-                return;
-            _vertexCache.Clear();
-            List<ScarletVertex> Vertexlist = new List<ScarletVertex>();
-            for (int i = 0; i < OldAimPos.Count; i++)
-            {
-                float progress = (float)i / OldAimPos.Count;
-                Vector2 DrawPos_Head = OldAimPos[i] + Projectile.Center - Main.screenPosition;
-                Vector2 DrawPos_Source = OldAimPos[i] * mult + Projectile.Center - Main.screenPosition;
-                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor, new Vector3(progress, 0, 0)));
-                _vertexCache.Add(new ScarletVertex(DrawPos_Source, drawcolor, new Vector3(progress, 1, 0)));
-            }
-            GD.Textures[0] = texture;
-            GD.SamplerStates[0] = SamplerState.PointWrap;
-            GD.DrawUserPrimitives(PrimitiveType.TriangleStrip, _vertexCache.ToArray(), 0, _vertexCache.Count - 2);
         }
     }
 }

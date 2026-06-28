@@ -77,13 +77,12 @@ namespace HJScarletRework.Globals.Methods
             Player owner = Main.player[proj.owner];
             if (owner.HJScarlet().ExecutionListStored.TryGetValue(itemID, out int curExeTime) && owner.HJScarlet().tacticalExecution)
             {
-                if (curExeTime == HJScarletList.ExecutorWeaponDictionary[itemID] - 1)
-                    SoundEngine.PlaySound(SoundID.Item35 with { MaxInstances = 0 }, owner.Center);
                 if (curExeTime >= HJScarletList.ExecutorWeaponDictionary[itemID])
                 {
-                    if (!owner.HJScarlet().hasSendExecutionTint)
+                    if (!owner.HJScarlet().hasSendExecutionTint && owner.HJScarlet().hasSendExecutionTintTimer == 0)
                     {
                         SoundEngine.PlaySound(SoundID.Item35 with { MaxInstances = 0 }, owner.Center);
+                        owner.HJScarlet().hasSendExecutionTintTimer = 5;
                         owner.HJScarlet().hasSendExecutionTint = true;
                     }
                     return;

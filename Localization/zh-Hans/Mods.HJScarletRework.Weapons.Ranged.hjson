@@ -24,3 +24,8 @@ TerraFlamethrower: {
 		80%概率不消耗凝胶
 		'''
 }
+
+BlazingSun: {
+	// DisplayName: Blazing Sun
+	// Tooltip: ""
+}

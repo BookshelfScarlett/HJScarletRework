@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
@@ -18,6 +19,24 @@ namespace HJScarletRework.Globals.Instances.Items
     {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
+            if(ItemBelongTo != ItemBelong.None)
+            {
+                string keyPath = Mod.GetLocalizationKey($"ItemBelongTo.{ItemBelongTo}");
+                Color color = Color.White;
+                switch (ItemBelongTo)
+                {
+                    case ItemBelong.Developer:
+                        color = Color.Red;
+                        break;
+                    case ItemBelong.Supporter:
+                        color = Color.Yellow;
+                        break;
+                    case ItemBelong.Donator:
+                        color = Color.HotPink;
+                        break;
+                }
+                tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), color);
+            }
             if (HJScarletPlayer.AllWeaponSwapValue.Contains(item.type))
             {
                 string keyPath = Mod.GetLocalizationKey($"SwitchWeaponTooltip");

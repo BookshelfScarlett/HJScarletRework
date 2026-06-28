@@ -9,7 +9,6 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class SimpleHandAxe : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 10;
-        public override int ExecutionProj => ProjectileType<SimpleHandAxeExecution>();
         public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
         public override void ExSD()
         {
@@ -20,6 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shootSpeed = 22;
             Item.useTime = Item.useAnimation = 20;
             Item.shoot = ProjectileType<SimpleHandAxeProj>();
+            Item.HJScarlet().ExecutionProj = ProjectileType<SimpleHandAxeExecution>();
             //音效在射弹初始化时进行
             Item.UseSound = null;
             Item.damage = 13;

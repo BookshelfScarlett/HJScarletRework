@@ -111,6 +111,8 @@ namespace HJScarletRework.Globals.Players
         public bool cycleMadness = false;
         public float cycleMadenssTimer = 0;
         public float cycleMadenessCrit = 0;
+        public bool powerLily = false;
+        public int powerLilyTimer = 0;
         #endregion
 
         #region Pets
@@ -156,6 +158,7 @@ namespace HJScarletRework.Globals.Players
         public Dictionary<int, int> ExecutionListStored = new Dictionary<int, int>();
         public bool StopExecutionInit = false;
         public bool hasSendExecutionTint = false;
+        public int hasSendExecutionTintTimer = 0;
         public int lastHeldItemIndex = -1;
 
         //用于hud绘制的计时器

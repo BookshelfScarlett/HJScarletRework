@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.Melee;
 using Terraria.ID;
@@ -22,6 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shootSpeed = 13f;
             Item.shoot = ProjectileType<LavaFlowProj>();
             Item.rare = ItemRarityID.Orange;
+            Item.HJScarlet().ExecutionProj = ProjectileType<LavaFlowExecution>();
         }
         public override void AddRecipes()
         {

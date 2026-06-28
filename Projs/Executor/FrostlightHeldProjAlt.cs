@@ -155,11 +155,6 @@ namespace HJScarletRework.Projs.Executor
                     ECSParticle.SmokeParticle(posBase, -Vector2.UnitY * Main.rand.NextFloat(0.4f, 24f), fireColor, Main.rand.Next(35, 50), RandRotTwoPi, 0.57f, Main.rand.NextFloat(.9f, 1.1f) * .45f, Main.rand.NextBool(), BlendState.Additive);
                 }
             }
-            if (Main.rand.NextBool(6))
-            {
-                Vector2 posBase = Projectile.Center + dir * 65f * Projectile.scale + dir.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0f, 2.4f);
-                posBase += Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2) * Main.rand.NextFloat(-35f, 37f) + dir * Main.rand.NextFloat(-60f, 60f);
-            }
             if (Main.rand.NextBool(4))
             {
                 Vector2 posBase = Projectile.Center + dir * 65f * Projectile.scale + dir.RotatedByRandom(TwoPi) * Main.rand.NextFloat(0f, 2.4f);
@@ -214,7 +209,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 dir = Projectile.rotation.ToRotationVector2();
             Texture2D star = HJScarletTexture.Particle_CrossGlow.Value;
             Vector2 pos = drawPos + dir * 60f * Projectile.scale;
-            float scale = Projectile.scale * .285f;
+            float scale = Projectile.scale * .285f * Clamp( Math.Abs(Math.Sign(Main.timeForVisualEffects)),0.2f,1f) * 1.1f;
             SB.Draw(star, pos, null, Color.RoyalBlue * .9f, 0, star.ToOrigin(), scale * 0.95f, 0, 0);
             SB.Draw(star, pos, null, Color.SkyBlue* .9f, 0, star.ToOrigin(), scale * .90f, 0, 0);
             SB.Draw(star, pos, null, Color.LightBlue * .85f, 0, star.ToOrigin(), scale * 0.85f, 0, 0);

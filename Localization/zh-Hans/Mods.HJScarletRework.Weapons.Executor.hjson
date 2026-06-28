@@ -104,16 +104,6 @@ AetherfireSmasher: {
 		直接掷出一个重击锤，在一定时间后冲向距离最近的敌人
 		重击锤会持续挂载在敌人身上并持续释放火柱
 		'''
-
-	Color: {
-		Red: 绯红
-		Blue: 皇家蓝
-		Gold: 金
-		Purple: 暗紫
-		Green: 绿
-		IcyBlue: 冰蓝
-		Sakura: 樱粉
-	}
 }
 
 BinaryStars: {
@@ -247,9 +237,13 @@ FrostoftheStorm: {
 }
 
 Fleshtumor: {
-	// DisplayName: Fleshtumor
-	// Tooltip: ""
-	// ExecutionStrike: ""
+	DisplayName: 肉瘤
+	Tooltip:
+		'''
+		快速释放饿鬼进行攻击
+		处决攻击必须使用 互动键 手动开启
+		'''
+	ExecutionStrike: ""
 }
 
 FrostHammer: {
@@ -339,4 +333,9 @@ LavaFlow: {
 		命中时扎在敌人身上造成持续伤害
 		后续进行追击时，都会从敌人身上向上抛射火球
 		'''
+}
+
+PestilenceFlower: {
+	// DisplayName: Pestilence Flower
+	// Tooltip: ""
 }

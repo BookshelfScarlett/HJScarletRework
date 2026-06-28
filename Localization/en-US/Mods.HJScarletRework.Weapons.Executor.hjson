@@ -104,16 +104,6 @@ AetherfireSmasher: {
 		Directly throw a heavy hammer. After a certain time, it dashes toward the nearest enemy
 		The heavy hammer continuously attaches to the enemy and continuously releases pillars of fire
 		'''
-
-	Color: {
-		Red: Pure Red
-		Blue: Royal Blue
-		Gold: Gold
-		Purple: Dark Purle
-		Green: Green
-		IcyBlue: Icy Blue
-		Sakura: Light Pink
-	}
 }
 
 BinaryStars: {
@@ -310,4 +300,9 @@ LavaFlow: {
 	DisplayName: Lava Flow
 	Tooltip: ""
 	ExecutionStrike: ""
+}
+
+PestilenceFlower: {
+	DisplayName: Pestilence Flower
+	Tooltip: ""
 }

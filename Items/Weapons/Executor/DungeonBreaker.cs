@@ -11,7 +11,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override float ExecutionStrikeDamageMult => 0.5f;
         public override int ExecutionProgress => 8;
         public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
-        public override int ExecutionProj => ProjectileType<DungeonBreakerExecution>();
         public override void ExSD()
         {
             Item.width = Item.height = 66;
@@ -24,6 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shoot = ProjectileType<DungeonBreakerProj>();
             Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem();
+            Item.HJScarlet().ExecutionProj = ProjectileType<DungeonBreakerProj>();
         }
     }
 }

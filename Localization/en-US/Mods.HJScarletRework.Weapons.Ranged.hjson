@@ -17,3 +17,8 @@ TerraFlamethrower: {
 	DisplayName: Terra Flamethrower
 	Tooltip: ""
 }
+
+BlazingSun: {
+	DisplayName: Blazing Sun
+	Tooltip: ""
+}

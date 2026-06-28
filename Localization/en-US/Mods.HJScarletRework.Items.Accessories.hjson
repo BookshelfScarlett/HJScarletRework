@@ -81,11 +81,6 @@ CrimsonRune: {
 		'''
 }
 
-CreationHat: {
-	DisplayName: Creation Hat
-	Tooltip: ""
-}
-
 SacarbWings: {
 	DisplayName: Wings of Sacarb
 	Tooltip:
@@ -322,5 +317,10 @@ PassionfruitJar: {
 
 SpaceHorror: {
 	DisplayName: Space Horror
+	Tooltip: ""
+}
+
+PowerLily: {
+	DisplayName: Power Lily
 	Tooltip: ""
 }

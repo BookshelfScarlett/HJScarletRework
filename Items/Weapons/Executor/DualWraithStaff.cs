@@ -30,7 +30,9 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.autoReuse = true;
             Item.noMelee = true;
             Item.noUseGraphic = true;
-            Item.shoot = ProjectileID.PurificationPowder;
+            Item.shoot = ProjectileType<DualWraithStaffHeldProj>();
+            Item.HJScarlet().ExecutionProj = ProjectileType<DualWraithStaffJavelin>();
+
         }
         public override bool CanShoot(Player player)
         {
@@ -55,11 +57,10 @@ namespace HJScarletRework.Items.Weapons.Executor
             //这里只是为了初始化
             player.CheckExecution(Type);
             SoundEngine.PlaySound(HJScarletSounds.Atom_StrikeAlt with { MaxInstances = 0, Variants = [2], Pitch = -0.31f, PitchVariance = 0.1f, Volume = 0.68f });
-            int projID = ProjectileType<DualWraithStaffJavelin>();
-            Projectile proj = Projectile.NewProjectileDirect(source, position + player.ToMouseVector2() * -1200f, velocity, projID, damage, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position + player.ToMouseVector2() * -1200f, velocity, Item.HJScarlet().ExecutionProj, damage, knockback, player.whoAmI);
             Vector2 pos2 = player.MountedCenter - player.ToMouseVector2().RotatedBy(PiOver2 * player.direction) * Main.rand.NextFloat(1200f, 1400f) + Vector2.UnitX * Main.rand.NextFloat(-100f, 101f);
             Vector2 dir = pos2.GetNormalVector2(player.LocalMouseWorld());
-            Projectile proj2 = Projectile.NewProjectileDirect(source, pos2, dir * Item.shootSpeed, projID, damage, knockback, player.whoAmI);
+            Projectile proj2 = Projectile.NewProjectileDirect(source, pos2, dir * Item.shootSpeed, Item.HJScarlet().ExecutionProj, damage, knockback, player.whoAmI);
 
             proj.HJScarlet().HasExecutionMechanic = true;
             proj2.HJScarlet().HasExecutionMechanic = true;
@@ -71,17 +72,17 @@ namespace HJScarletRework.Items.Weapons.Executor
             usPlayer.tacticalExecution = true;
             Asset<Texture2D> tex = !AlterVersion ? HJScarletItemProj.DualWraithStaff.Texture : HJScarletItemProj.DualWraithStaffBlade.Texture;
             TextureAssets.Item[Type] = tex;
-            if (!AlterVersion && player.whoAmI == Main.myPlayer && !player.HasProj<DualWraithStaffHeldProj>() && !Main.playerInventory)
+            if (!AlterVersion && player.whoAmI == Main.myPlayer && !player.HasProj(Item.shoot) && !Main.playerInventory)
             {
                 player.CheckExecution(Type);
                 float anchorPosX = player.MountedCenter.X - player.direction * 80f;
                 Vector2 spawnPos = new Vector2(anchorPosX, player.MountedCenter.Y - 250f);
                 int projDamage = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);
-                Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), spawnPos, Vector2.Zero, ProjectileType<DualWraithStaffHeldProj>(), projDamage, Item.knockBack, player.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), spawnPos, Vector2.Zero, Item.shoot, projDamage, Item.knockBack, player.whoAmI);
                 proj.originalDamage = projDamage;
                 proj.netUpdate = true;
             }
-            if (AlterVersion && player.whoAmI == Main.myPlayer && !player.HasProj<DualWraithStaffHeldProj>() && player.HeldItem.type == Type && player.CheckExecution(Type))
+            if (AlterVersion && player.whoAmI == Main.myPlayer && !player.HasProj(Item.shoot) && player.HeldItem.type == Type && player.CheckExecution(Type))
             {
                 AlterVersion = false;
                 player.RemoveExecutionProgress(Type);

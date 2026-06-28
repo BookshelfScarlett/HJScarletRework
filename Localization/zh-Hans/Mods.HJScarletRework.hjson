@@ -9,6 +9,12 @@ SwitchWeaponConditionList: {
 	DownedPlantera: 世纪之花
 }
 
+ItemBelongTo: {
+	Donator: -捐赠物品-
+	Developer: -开发者物品-
+	Supporter: ""
+}
+
 SwitchWeapon: {
 	Tooltip:
 		'''

@@ -21,6 +21,7 @@ namespace HJScarletRework.Assets.Registers
         public static Effect LightningShader;
         public static Effect SlashTrailShader;
         public static Effect FogShader;
+        public static Effect EdgeMeltsShader;
         public override void Load()
         {
             if (Main.dedServ)
@@ -40,6 +41,7 @@ namespace HJScarletRework.Assets.Registers
             LightningShader = LoadShader(nameof(LightningShader));
             SlashTrailShader = LoadShader(nameof(SlashTrailShader));
             FogShader = LoadShader(nameof(FogShader));
+            EdgeMeltsShader = LoadShader(nameof(EdgeMeltsShader));
 
             RegisterMiscShader(TerrarRayLaser, "HJScarletReworkTerrarRayLaserPass", nameof(TerrarRayLaser));
             RegisterMiscShader(VolcanoEruptingShader, ToPassName(nameof(VolcanoEruptingShader)), nameof(VolcanoEruptingShader));
@@ -51,6 +53,7 @@ namespace HJScarletRework.Assets.Registers
             RegisterMiscShader(SlashTrailShader, ToPassName(nameof(SlashTrailShader)), nameof(SlashTrailShader));
             RegisterMiscShader(AlphaFadeNoiseColor, ToPassName("AlphaFade_Noise_OColor"), "AlphaFade_Noise_OColor");
             RegisterMiscShader(FogShader, ToPassName(nameof(FogShader)), nameof(FogShader));
+            RegisterMiscShader(EdgeMeltsShader, ToPassName(nameof(EdgeMeltsShader)), nameof(EdgeMeltsShader));
         }
         public override void Unload()
         {
@@ -64,6 +67,7 @@ namespace HJScarletRework.Assets.Registers
             SlashTrailShader = null;
             LightningShader = null;
             FogShader = null;
+            EdgeMeltsShader = null;
         }
         public static string ToPassName(string oriShadername) => ShaderPrefix + oriShadername + "Pass";
         public static void RegisterMiscShader(Effect shader, string passName, string registrationName)

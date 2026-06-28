@@ -60,7 +60,7 @@ namespace HJScarletRework.Globals.Executor
         {
             //初始化。
             bool useExecution = player.CheckExecution(Type);
-            int projID = ExecutionProj != -1 && useExecution ? ExecutionProj : type;
+            int projID = Item.HJScarlet().ExecutionProj != -1 && useExecution ? Item.HJScarlet().ExecutionProj : type;
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, projID, damage, knockback, player.whoAmI);
             proj.HJScarlet().HasExecutionMechanic = true;
             player.HJScarlet().tacticalExecutionInputCache = 0;

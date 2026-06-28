@@ -22,6 +22,7 @@ namespace HJScarletRework.Projs.Executor
         public float BeginTargetRotation = 0;
         public float TargetRotation = 0;
         public int Flip = 1;
+        public bool CanHeal = false;
         public AnimationStruct Helper = new AnimationStruct(3);
         public override int OriginalItemID => ItemType<Frostlight>();
         public int AttackSpeed => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, Owner.HeldItem.useTime * Projectile.MaxUpdates, 5 * Projectile.MaxUpdates);
@@ -77,6 +78,8 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
+                if(CanHeal)
+                    CombatText.NewText(Utils.CenteredRectangle(Vector2.UnitY  * -80f + Owner.Center, new(Owner.width, Owner.height)), Color.SkyBlue, $"治疗总量：{HealAmt}");
                 if (!Owner.HasProj<FrostlightHeldProjAlt>(out int projID) && Main.mouseLeft)
                 {
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, projID, Projectile.damage, Projectile.knockBack, Projectile.owner);
@@ -86,7 +89,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.Kill();
             }
         }
-
+        public int HealAmt = 0;
         public void UpdateMidAnimatio()
         {
             //这里挥砍动画一定程度上使用了矩阵变化。
@@ -118,7 +121,6 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 nextPos = posBase + RandVelTwoPi(10f, 30f);
                     new StarShape(nextPos, (nextPos - posBase).ToRandVelocity(ToRadians(10f), 8f, 18f), RandLerpColor(Color.RoyalBlue, Color.LightBlue), Main.rand.NextFloat(0.95f, 1.27f) * 1.01f, 45, true).Spawn();
                 }
-                //HandleMidParticleInit();
             }
             float easedProgress = EaseOutBack(Helper.GetAniProgress(1));
             //末尾角度，也是下一个动画进程的起始角度
@@ -177,6 +179,20 @@ namespace HJScarletRework.Projs.Executor
                 }
                 //这样，我们就能确保火星永远向外展开
                 ECSParticle.ShinyCrossStarECS(setPos, vel, RandLerpColor(Color.RoyalBlue, Color.LightBlue), Main.rand.Next(30, 60), 1f, Main.rand.NextFloat(.8f, 1.1f) * .48f, .2f);
+            }
+            if (CanHeal)
+            {
+                if (Owner.miscCounter % 2 == 0)
+                {
+                    if(Main.rand.NextBool(6))
+                    ECSParticle.StarShape(Main.rand.NextVector2FromRectangle(Owner.Hitbox), Vector2.UnitY * -1.2f * Main.rand.NextFloat(.7f, 1.1f), RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), Main.rand.Next(30, 50), 1f, Main.rand.NextFloat(0.3f, 0.6f) * Projectile.scale,glowMult:.85f);
+                    //我只需要输出一个治疗总量
+                    int heal = Main.rand.Next(1, 3);
+                    Owner.statLife += heal;
+                    if (Owner.statLife > Owner.statLifeMax2)
+                        Owner.statLife = Owner.statLifeMax2;
+                    HealAmt += heal;
+                }
             }
         }
 

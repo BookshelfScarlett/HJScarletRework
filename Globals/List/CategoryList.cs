@@ -2,6 +2,7 @@
 using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Items.Weapons.Melee;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -16,6 +17,7 @@ namespace HJScarletRework.Globals.List
         public static List<int> MaleNPC = [];
         public static List<int> FemaleNPC = [];
         public static List<int> LegalFoodList = [];
+        public static List<int> SummonWeaponList = [];
 
         public static HashSet<int> OresHashSet = [];
         public static HashSet<int> BarsHashSet = [];
@@ -177,6 +179,7 @@ namespace HJScarletRework.Globals.List
             for (int i = 0; i < ItemLoader.ItemCount; i++)
             {
                 Item item = new Item(i);
+                //处理食物的
                 bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
                 if (isFood && !LegalFoodList.Contains(item.type))
                     LegalFoodList.Add(item.type);
@@ -187,6 +190,12 @@ namespace HJScarletRework.Globals.List
                     OresHashSet.Add(item.type);
                 if (isBar && !BarsHashSet.Contains(item.type))
                     BarsHashSet.Add(item.type);
+
+                //处理召唤武器。
+                bool isSummonWeapon = item.damage > 0 && item.DamageType.CountsAsClass<SummonDamageClass>() && item.shoot != 0;
+                Projectile proj = ContentSamples.ProjectilesByType[item.shoot];
+                if (isSummonWeapon && proj.minion && !proj.sentry && proj.minionSlots > 0)
+                    SummonWeaponList.Add(item.type);
             }
         }
         public override void Unload()
