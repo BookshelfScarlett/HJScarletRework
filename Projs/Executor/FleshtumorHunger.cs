@@ -47,6 +47,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
+
             return false;
         }
     }

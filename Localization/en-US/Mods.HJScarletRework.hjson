@@ -42,7 +42,7 @@ DamageClasses: {
 			ColdSteel: ""
 			Firearm: ""
 			Caster: ""
-			Minion:""
+			Minion: ""
 			Misc: ""
 		}
 

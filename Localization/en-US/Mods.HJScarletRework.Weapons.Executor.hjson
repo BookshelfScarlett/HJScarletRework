@@ -305,4 +305,29 @@ LavaFlow: {
 PestilenceFlower: {
 	DisplayName: Pestilence Flower
 	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+StarofHope: {
+	DisplayName: Starof Hope
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+BoneSlap: {
+	DisplayName: Bone Slap
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+StreamingProtocol: {
+	DisplayName: Streaming Protocol
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+AngryBomb: {
+	DisplayName: Angry Bomb
+	Tooltip: ""
+	ExecutionStrike: ""
 }

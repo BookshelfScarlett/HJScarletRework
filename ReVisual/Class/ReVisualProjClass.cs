@@ -26,7 +26,7 @@ namespace HJScarletRework.ReVisual.Class
         {
             return entity.type == ApplyProj;
         }
-        public sealed override void AI(Projectile projectile)
+        public override void AI(Projectile projectile)
         {
             IsMyPlayer(projectile, out ReVisualPlayer vp);
             if (ShouldApplyRevisual(projectile, vp))

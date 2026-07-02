@@ -68,6 +68,9 @@ Melee: {
 	// FrostoftheStormHeldProj.DisplayName: Frostofthe Storm Held Proj
 	// EnchantedSwordfishJavelin.DisplayName: Enchanted Swordfish Javelin
 	// EnchantedSwordfishProj.DisplayName: Enchanted Swordfish Proj
+	// SamsaraofDawnlightBolt.DisplayName: Samsaraof Dawnlight Bolt
+	// SamsaraofDawnlightMoon.DisplayName: Samsaraof Dawnlight Moon
+	// SamsaraofDawnlightSun.DisplayName: Samsaraof Dawnlight Sun
 }
 
 Typeless: {
@@ -94,6 +97,8 @@ Typeless: {
 	// PureYinyoShard.DisplayName: Pure Yinyo Shard
 	// PureYinyoExecution.DisplayName: Pure Yinyo Execution
 	// PowerLilyProj.DisplayName: Power Lily Proj
+	// AngryBombExecution.DisplayName: Angry Bomb Execution
+	// SamsaraofDawnlightProj.DisplayName: Samsaraof Dawnlight Proj
 }
 
 Pets: {
@@ -209,6 +214,11 @@ Executor: {
 	// LavaFlowBoom.DisplayName: Lava Flow Boom
 	// LavaFlowExecution.DisplayName: Lava Flow Execution
 	// LavaFlowProj.DisplayName: Lava Flow Proj
+	// StarofHopeProj.DisplayName: Starof Hope Proj
+	// StarofHopeProj2.DisplayName: Starof Hope Proj2
+	// StarofHopeStar.DisplayName: Starof Hope Star
+	// AngryBombProj.DisplayName: Angry Bomb Proj
+	// AngryBombExecution.DisplayName: Angry Bomb Execution
 }
 
 Ranged: {

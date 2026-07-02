@@ -7,7 +7,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Accessories
+namespace HJScarletRework.Items.Useables
 {
     public class SuicideKnife : HJScarletItemClass
     {

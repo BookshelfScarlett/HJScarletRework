@@ -113,7 +113,6 @@ namespace HJScarletRework.Projs.Executor
                 for (int i = 0; i < 2; i++)
                 {
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, -Vector2.UnitY.ToRandVelocity(ToRadians(10f), 9f, 13f), ProjectileType<LavaFlowBoom>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-
                 }
                 SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);
                 SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);

@@ -123,3 +123,8 @@ MadnessCritStar: {
 	DisplayName: Madness Crit Star
 	Tooltip: ""
 }
+
+BiomeKeyString: {
+	DisplayName: Biome Key String
+	Tooltip: ""
+}

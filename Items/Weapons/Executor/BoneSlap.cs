@@ -1,11 +1,16 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class StarofHope : ExecutorWeaponClass
+    public class BoneSlap : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 20;
         public override WeaponCategory WeaponCategory => WeaponCategory.Minion;

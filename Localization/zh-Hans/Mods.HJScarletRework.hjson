@@ -42,6 +42,7 @@ DamageClasses: {
 			ColdSteel: -冷兵器-
 			Firearm: -热武器-
 			Caster: -魔术载体-
+			Minion: -辅助道具-
 			Misc: -特殊-
 		}
 

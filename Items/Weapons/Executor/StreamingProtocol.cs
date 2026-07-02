@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class StarofHope : ExecutorWeaponClass
+    public class StreamingProtocol : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 20;
         public override WeaponCategory WeaponCategory => WeaponCategory.Minion;

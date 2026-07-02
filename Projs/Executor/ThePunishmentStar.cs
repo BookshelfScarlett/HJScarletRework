@@ -168,7 +168,6 @@ namespace HJScarletRework.Projs.Executor
             HJScarletShader.TerrarRayLaser.Parameters["uFadeoutLength"].SetValue(0.8f);
             HJScarletShader.TerrarRayLaser.Parameters["uFadeinLength"].SetValue(0.1f);
             HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();
-            HJScarletShader.TerrarRayLaser.CurrentTechnique.Passes[0].Apply();
             if (Projectile.oldPos.Length < 3)
                 return;
             //做掉可能存在的零向量

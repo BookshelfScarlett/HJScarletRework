@@ -242,3 +242,8 @@ EthrealSwordfish: {
 	DisplayName: Ethreal Swordfish
 	Tooltip: ""
 }
+
+SamsaraofDawnlightAlter: {
+	DisplayName: Samsaraof Dawnlight Alter
+	Tooltip: ""
+}

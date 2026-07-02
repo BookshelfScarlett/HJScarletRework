@@ -133,3 +133,8 @@ MadnessCritStar: {
 	// DisplayName: Madness Crit Star
 	// Tooltip: ""
 }
+
+BiomeKeyString: {
+	DisplayName: 宝藏钥匙串
+	Tooltip: 置于一个空箱子内，使该箱子充盈地牢的宝藏
+}

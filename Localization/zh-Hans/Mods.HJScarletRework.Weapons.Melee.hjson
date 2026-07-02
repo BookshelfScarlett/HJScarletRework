@@ -253,3 +253,8 @@ EthrealSwordfish: {
 		什么你已经获得了？那算了。
 		'''
 }
+
+SamsaraofDawnlightAlter: {
+	// DisplayName: Samsaraof Dawnlight Alter
+	// Tooltip: ""
+}
