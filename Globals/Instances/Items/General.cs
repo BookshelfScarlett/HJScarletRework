@@ -33,6 +33,7 @@ namespace HJScarletRework.Globals.Instances.Items
         public ItemBelong ItemBelongTo = ItemBelong.None;
         public float simpleImmersiveBackpackValue = 1f;
         public float simpleImmersiveBackpackValueAlt = 1f;
+        public bool DrawFloatingTextBox = false;
         /// <summary>
         /// shorthand
         /// </summary>

@@ -109,6 +109,8 @@ namespace HJScarletRework.Globals.Players
             cowboyRevolverTimer = 0;
             floretProtectorTimer = 0;
             monkStaffHeal = false;
+            containedBlastBoomCount = 0;
+            containedBlastBuffTime=0;
         }
 
 

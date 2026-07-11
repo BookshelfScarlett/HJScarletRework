@@ -21,6 +21,7 @@ namespace HJScarletRework.Globals.List
 
         public static HashSet<int> OresHashSet = [];
         public static HashSet<int> BarsHashSet = [];
+        public static HashSet<int> ExecutorWhip = [];
 
         /// <summary>
         /// 主要用于Boss方面

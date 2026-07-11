@@ -1,9 +1,10 @@
-﻿using HJScarletRework.Globals.List;
+﻿using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Globals.Methods.Textbox;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
@@ -50,6 +51,7 @@ namespace HJScarletRework.Globals.Executor
         }
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
+
             if (Item.GetGlobalItem<ExecutorGlobalItem>().ExecutionDamageMult != 1 && damage > 0 && player.CheckExecution(Type))
             {
                 damage = (int)(damage * ExecutionStrikeDamageMult * (Item.GetGlobalItem<ExecutorGlobalItem>().ExecutionDamageMult));
@@ -71,36 +73,81 @@ namespace HJScarletRework.Globals.Executor
             }
             return false;
         }
+        public int FirstLineY = -1;
+        public IReadOnlyList<TooltipLine> CacheTooltipList = null;
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
+            bool traditionalMode = HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase;
             bool isPressingLeftAlt = Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt);
-            int flavorTooltipIndex = tooltips.FindIndex(line => line.Name == "Tooltip0" && line.Mod == "Terraria");
-            //通过本地化路径搜索需要的特殊文本
-            string value = Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(Math.Max(0, ExecutionProgress - Main.LocalPlayer.HJScarlet().bonusExecutionReduce));
-            if (isPressingLeftAlt)
-                value = Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.ExecutionDescriptionName").ToLangValue();
-            Color overrideColor = isPressingLeftAlt ? Color.Lerp(Color.Red, Color.White, 0.4f) : Color.GreenYellow;
-            //实例化toolti并注册名字
-            TooltipLine flavorTooltips = new(Mod, "ExecutionTooltipName", value)
+            int requirements = Math.Max(0, ExecutionProgress - Main.LocalPlayer.HJScarlet().bonusExecutionReduce);
+            string progressText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(requirements);
+            string executionText = (traditionalMode && isPressingLeftAlt) ? Mod.GetLocalizationKey("ExecutorDamaegeClass.ExecutionDescriptionName").ToLangValue() : progressText;
+            Color executionColor = (traditionalMode && isPressingLeftAlt) ? Color.Lerp(Color.Red, Color.White, .4f) : Color.GreenYellow;
+
+            int executionProgressIndex = tooltips.FindIndex(line => line.Name == "Tooltip0" && line.Mod == "Terraria");
+            if (traditionalMode)
             {
-                OverrideColor = overrideColor
-            };
-            //植入Tooltip
-            tooltips.Insert(flavorTooltipIndex, flavorTooltips);
-            if (isPressingLeftAlt)
-                tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"));
-            string value2 = Mod.GetLocalizationKey($"DamageClasses.ExecutorDamageClass.WeaponType.{WeaponCategory}").ToLangValue();
-            int executionTooltipNameLine = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework");
-            TooltipLine cate = new(Mod, "ExecutorWeaponTypeName", value2)
+                var executionLine = new TooltipLine(Mod, "ExecutionTooltipName", executionText)
+                {
+                    OverrideColor = executionColor
+                };
+                tooltips.Insert(executionProgressIndex, executionLine);
+                if (traditionalMode && isPressingLeftAlt)
+                    tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"));
+            }
+
+            string categoryText = Mod.GetLocalizationKey($"ExecutorDamageClass.WeaponType.{WeaponCategory}").ToLangValue();
+            int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework");
+            if (!traditionalMode)
+                executionLineIndex = executionProgressIndex - 1;
+            var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", categoryText)
             {
-                OverrideColor =Color.LightGoldenrodYellow, 
+                OverrideColor = Color.LightGoldenrodYellow
             };
-            tooltips.Insert(executionTooltipNameLine, cate);
+            tooltips.Insert(executionLineIndex + 1, categoryLine);
+            CacheTooltipList = tooltips;
             ExModifyTooltips(tooltips);
         }
         public virtual void ExModifyTooltips(List<TooltipLine> tooltips)
         {
 
+        }
+        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        {
+
+            if (HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase)
+                return base.PreDrawTooltipLine(line, ref yOffset);
+            else
+            {
+                //记录起始点坐标。
+                //通常情况下，物品不可能没有名字，而物品名称通常都在第一行，所以可以用这个来记录第一行的坐标
+                if (line.IsItemName())
+                {
+                    TextboxManager.FirstLineY = line.Y;
+                }
+                string detailText = this.GetLocalizationKey("ExecutionStrike").ToLangValue();
+                int requirements = Math.Max(0, ExecutionProgress - Main.LocalPlayer.HJScarlet().bonusExecutionReduce);
+                int curRequirement = Main.LocalPlayer.HJScarlet().ExecutionListStored.TryGetValue(Type, out int value) ? value : 0;
+                string numberText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgressRevampedMode").ToLangValue().ToFormatValue(curRequirement, requirements);
+                detailText += "\n" + "\n" + numberText;
+                //一堆设置，巴拉巴拉。
+                TextboxSettings sets = new TextboxSettings()
+                {
+                    TitleText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionDescriptionName").ToLangValue(),
+                    TitleTextColor = Color.Lerp(Color.Crimson, Color.WhiteSmoke, 1f) with { A = 255 },
+                    TitleEdgeColor = Color.DarkRed,
+                    HasTitle = true,
+                    BackgroundColor = Color.Lerp(Color.WhiteSmoke, Color.Black, .9f) * .60f,
+                    BackgroundEdgeColor = Color.Lerp(Color.Black, Color.Red, 0.40f) * .98f,
+                    MainText = detailText,
+                    TextColor = Color.White,
+                    TextEdgeColor = Color.Black,
+                    TitleTextSize = 1.15f
+                };
+                //最后传值。
+                TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
+                return true;
+            }
         }
         public virtual void ExSD() { }
     }

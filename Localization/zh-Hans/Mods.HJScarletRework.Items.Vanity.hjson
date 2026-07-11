@@ -1,7 +1,8 @@
 HikariItem: {
 	DisplayName: 精致玫瑰
 	FlavorTooltip: 「-Fracture-」
-	Tooltip:
+	Tooltip: ""
+	DetailTooltip:
 		'''
 		天空变得越来越明亮，少女的心智也不断流逝。
 		在这仅剩的时间里，她仰望上方，好像等待着什么。
@@ -16,7 +17,8 @@ HikariItem: {
 TairitsuItem: {
 	DisplayName: 黑色阳伞
 	FlavorTooltip: 「-Grievous Lady-」
-	Tooltip:
+	Tooltip: ""
+	DetailTooltip:
 		'''
 		她心中困惑的来源是她所承受的伤痛。她的一切都承受着伤痛。她的心脏仿佛随时会炸裂开来。
 		她所收集的回忆形成的披风化作一团古怪的球体，包覆着她。洁白的世界消失于她的视野，

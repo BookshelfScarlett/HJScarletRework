@@ -30,38 +30,6 @@ SwitchWeapon: {
 }
 
 CrossModSupport.Calamity: 灾厄联动适配
-
-DamageClasses: {
-	ExecutorDamageClass: {
-		ExecutionProgress: 命中{0}次以发起处决，按住左Alt查看
-		ExecutionDescriptionName: 处决执行时：
-		DisplayName: 代行者伤害
-
-		WeaponType: {
-			Throw: -投掷品-
-			ColdSteel: -冷兵器-
-			Firearm: -热武器-
-			Caster: -魔术载体-
-			Minion: -辅助道具-
-			Misc: -特殊-
-		}
-
-		Prefixs: {
-			Alterego.DisplayName: 他人格
-			Digital.DisplayName: 电子
-			Evolutional.DisplayName: 变革
-			Fake.DisplayName: 赝品
-			Foreigner.DisplayName: 降临
-			Mysterious.DisplayName: 神秘
-			Phantasmic.DisplayName: 空想
-			FocusTimeLine: "{0}启动专注攻击次数"
-			ExecutionDamageLine: "{0}%处决攻击伤害"
-			ArmorPenetrationLine: "{0}防御"
-			CritDamageLine: "{0}暴击伤害"
-		}
-	}
-}
-
 Keybinds.GeneralActionKeybind.DisplayName: 互动键
 
 Projectiles: {
@@ -83,3 +51,31 @@ Items: {
 		// Tooltip: ""
 	}
 }
+
+ExecutorDamageClass: {
+	ExecutionProgress: 命中{0}次以发起处决，按住左Alt查看
+	ExecutionDescriptionName: 处决执行时
+	ExecutionProgressRevampedMode: 处决进程：{0} / {1}
+	DisplayName: 代行者伤害
+
+	WeaponType: {
+		Throw: -投掷品-
+		ColdSteel: -冷兵器-
+		Firearm: -热武器-
+		Caster: -魔术载体-
+		Minion: -辅助道具-
+		Misc: -特殊-
+	}
+
+	Prefixs: {
+		Alterego.DisplayName: 他人格
+		Digital.DisplayName: 电子
+		Evolutional.DisplayName: 变革
+		Fake.DisplayName: 赝品
+		Foreigner.DisplayName: 降临
+		Mysterious.DisplayName: 神秘
+		Phantasmic.DisplayName: 空想
+	}
+}
+
+DamageClasses.ExecutorDamageClass.DisplayName: 代行者伤害

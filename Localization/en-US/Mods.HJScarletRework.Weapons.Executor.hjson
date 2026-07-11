@@ -331,3 +331,15 @@ AngryBomb: {
 	Tooltip: ""
 	ExecutionStrike: ""
 }
+
+TearEye: {
+	DisplayName: Tear Eye
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+ContainedBlast: {
+	DisplayName: Contained Blast
+	Tooltip: ""
+	ExecutionStrike: ""
+}

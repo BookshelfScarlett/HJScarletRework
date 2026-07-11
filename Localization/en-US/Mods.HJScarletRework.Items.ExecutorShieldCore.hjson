@@ -1,0 +1,50 @@
+GenericData: {
+	LevelName: �ȼ�{0}
+	ActiveDescription: ""
+
+	Types: {
+		Assault: ""
+		Defender: ""
+		Misc: ""
+	}
+}
+
+RedDragonCard: {
+	DisplayName: Red Dragon Card
+	Tooltip: ""
+	CardLevel1: ""
+	CardLevel2: ""
+	CardLevel3: ""
+}
+
+ShieldCoreDiver: {
+	DisplayName: Shield Core Diver
+	Tooltip: ""
+	CoreLevel1: ""
+	CoreLevel2: ""
+	CoreLevel3: ""
+}
+
+ShieldCoreHerb: {
+	DisplayName: Shield Core Herb
+	Tooltip: ""
+	CoreLevel1: ""
+	CoreLevel2: ""
+	CoreLevel3: ""
+}
+
+ShieldCoreRedDragon: {
+	DisplayName: Shield Core Red Dragon
+	Tooltip: ""
+	CoreLevel1: ""
+	CoreLevel2: ""
+	CoreLevel3: ""
+}
+
+ShieldCoreWizard: {
+	DisplayName: Shield Core Wizard
+	Tooltip: ""
+	CoreLevel1: ""
+	CoreLevel2: ""
+	CoreLevel3: ""
+}

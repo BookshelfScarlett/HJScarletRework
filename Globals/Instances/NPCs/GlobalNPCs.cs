@@ -20,12 +20,17 @@ namespace HJScarletRework.Globals.Instances
         public int terraFlamethrowerDropDamage = 0;
         public List<int> StabList = [];
         public bool isBeingStabByLavaFlow = false;
+        public bool isBeingStabByContainedBlast = false;
+        public int isBeingStabByContainedStick = 0;
         public float miscCounter = 0;
         public override void ResetEffects(NPC npc)
         {
             isBeingStabByLavaFlow = false;
-            terraFlamethrowerDebuff = false; 
+            isBeingStabByContainedBlast = false;
+            terraFlamethrowerDebuff = false;
             terraFlamethrowerDropDamage = 0;
+            if (isBeingStabByContainedStick > 0)
+                isBeingStabByContainedStick--;
         }
         public override void PostAI(NPC npc)
         {

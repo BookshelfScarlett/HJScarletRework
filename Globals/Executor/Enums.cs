@@ -15,4 +15,10 @@ namespace HJScarletRework.Globals.Executor
         Minion,
         Misc
     }
+    public enum ShieldCoreType
+    {
+        Assault,
+        Defender,
+        Misc
+    }
 }

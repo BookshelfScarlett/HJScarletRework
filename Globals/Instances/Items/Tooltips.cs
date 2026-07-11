@@ -17,9 +17,10 @@ namespace HJScarletRework.Globals.Instances.Items
 {
     public partial class HJScarletGlobalItem : GlobalItem
     {
+        public IReadOnlyList<TooltipLine> CacheTooltipLine;
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if(ItemBelongTo != ItemBelong.None)
+            if (ItemBelongTo != ItemBelong.None)
             {
                 string keyPath = Mod.GetLocalizationKey($"ItemBelongTo.{ItemBelongTo}");
                 Color color = Color.White;
@@ -75,7 +76,6 @@ namespace HJScarletRework.Globals.Instances.Items
             }
             base.ModifyTooltips(item, tooltips);
         }
-
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
             if (line.IsItemName() && HJScarletConfigClient.Instance.SpecialRarity)
@@ -109,7 +109,9 @@ namespace HJScarletRework.Globals.Instances.Items
             }
             return base.PreDrawTooltipLine(item, line, ref yOffset);
         }
-
+        public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
+        {
+        }
         /// <summary>
         /// 这里每帧都会高频调用，所以该创建哈希表了孩子们。
         /// </summary>

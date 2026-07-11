@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Graphics.ParticleECS;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria;
 
 namespace HJScarletRework.Core.ParticleECS
 {
@@ -15,8 +16,16 @@ namespace HJScarletRework.Core.ParticleECS
         {
             BlendState bs = blendstate ?? BlendState.Additive;
             return ECSMethod.NewParticle(GetInstance<HRShinyOrbECS>().Type, timeLeft, pos, vel, color, opacity, scale: scale, blendstate: bs, ai0: glowMult);
-
         }
+        /// <summary>
+        /// 弹壳。这个没处理碰撞
+        /// </summary>
+        public static int BulletShellECS(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float scale, bool fullBright = false, BlendState blendstate = null)
+        {
+            BlendState bs = blendstate ?? BlendState.NonPremultiplied;
+            return ECSMethod.NewParticle(GetInstance<BulletShellECS>().Type, timeLeft, pos, vel, color, opacity,rotation:RandRotTwoPi, scale: scale, blendstate: bs, ai0:fullBright.ToInt());
+        }
+
         public static int SnowCloud(Vector2 pos, Vector2 vel, Color color, int timeLeft, float rotation, float opacity, float scale, BlendState blendstate = null)
         {
             BlendState bs = blendstate ?? BlendState.Additive;

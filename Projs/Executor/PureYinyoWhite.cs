@@ -117,7 +117,29 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            return base.OnTileCollide(oldVelocity);
+            if (AttackState == State.HomingBack)
+                return false;
+            for (int i = 0; i < 32; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3);
+                Vector2 dir = Projectile.Center.GetNormalVector2(pos);
+                Vector2 vel = dir * Main.rand.NextFloat(0.3f, 9f);
+                int lifeTime = Main.rand.Next(30, 70);
+                float rot = RandRotTwoPi;
+                new SmokeParticle(pos, vel, Color.Black, lifeTime, rot, .48f, 0.35f, true).SpawnToPriorityNonPreMult();
+                new SmokeParticle(pos, vel, RandLerpColor(Color.White, Color.Lerp(Color.White, Color.LightGray, .019f)), lifeTime, rot, 1f, 0.3f, true).Spawn();
+            }
+            for (int i = 0; i < 32; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(16);
+                Vector2 dir = Projectile.Center.GetNormalVector2(pos);
+                Vector2 vel = dir * Main.rand.NextFloat(0.3f, 7f);
+                ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Silver, Color.WhiteSmoke), Main.rand.Next(30, 70), 1, Main.rand.NextFloat(.7f, 1.1f) * .64f, .15f);
+            }
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0,Pitch = -.7f , Volume = .4f},Projectile.Center);
+            Projectile.velocity = -Projectile.oldVelocity;
+                AttackState = State.HomingBack;
+            return false;
         }
         public override bool? CanHitNPC(NPC target)
         {

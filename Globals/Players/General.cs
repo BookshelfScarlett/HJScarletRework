@@ -42,6 +42,8 @@ namespace HJScarletRework.Globals.Players
         public bool frostHammerHoming = false;
         public int drawUseableItemIcon = -1;
         public float heldProjReUseTime = 0;
+        public int containedBlastBuffTime = 0;
+        public int containedBlastBoomCount = 0;
         #region 护甲
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;

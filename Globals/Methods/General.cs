@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Instances.Projs;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -345,6 +346,14 @@ namespace HJScarletRework.Globals.Methods
             if (newOsci >= ToRadians(360f))
                 newOsci = ToRadians(-360f);
             return newOsci;
+        }
+        public static void GetRangedWeaponHeldProjData(this Projectile proj, out Texture2D tex, out Vector2 drawPos, out Vector2 rotPoint, out float drawRot, out SpriteEffects se)
+        {
+            tex = proj.GetTexture();
+            drawPos = proj.Center - Main.screenPosition;
+            drawRot = proj.rotation + proj.spriteDirection == -1 ? Pi : 0;
+            rotPoint = tex.Size() / 2;
+            se = proj.spriteDirection * Main.player[proj.owner].gravDir == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
         }
     }
 }

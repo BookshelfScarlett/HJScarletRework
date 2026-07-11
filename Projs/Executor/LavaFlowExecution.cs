@@ -69,7 +69,6 @@ namespace HJScarletRework.Projs.Executor
             if (StabTarget.IsLegal())
             {
                 StabTarget.HJScarlet().isBeingStabByLavaFlow = true;
-                //不舍去这个size/2会导致中心点不在贴图上，很奇怪
                 Projectile.Center = StabTarget.Center + StoredPosition;
                 Vector2 dir = -Projectile.SafeDirByRot();
                 Vector2 offset = Projectile.SafeDirByRot() * 35f * Projectile.scale;

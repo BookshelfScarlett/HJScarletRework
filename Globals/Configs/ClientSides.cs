@@ -39,6 +39,10 @@ namespace HJScarletRework.Globals.Configs
         [Range(0, 10f)]
         [DefaultValue(1f)]
         public float ScreenShakeStrength { get; set; }
+        [BackgroundColor(211, 211, 211, 192)]
+        [DefaultValue(false)]
+        public bool TraditionalExecutionTooltipShowcase { get; set; }
+
 
 
     }

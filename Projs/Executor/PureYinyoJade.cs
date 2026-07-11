@@ -2,11 +2,13 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 
@@ -85,6 +87,28 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.ShinyCrossStarECS(Projectile.ToRandRec(), Vector2.UnitY * Main.rand.NextFloat(0.3f, 1.3f) * -1, RandLerpColor(Color.WhiteSmoke, Color.White), Main.rand.Next(30, 70), 1, .5f * Main.rand.NextFloat(.7f, 1.1f), 0.2f);
             if (Main.rand.NextBool(8))
                 ECSParticle.SnowCloud(Projectile.ToRandRec(), Vector2.UnitY * Main.rand.NextFloat(0.3f, 1.3f) * -1, RandLerpColor(Color.WhiteSmoke, Color.White), Main.rand.Next(30, 70), 1, .15f * Main.rand.NextFloat(.7f, 1.1f), 0.2f);
+        }
+        public override void OnKill(int timeLeft)
+        {
+            if (!BlackShard)
+            {
+                for (int i = 0; i < 8; i++)
+                    ECSParticle.ShinyCrossStarECS(Projectile.ToRandRec(), Vector2.UnitY * Main.rand.NextFloat(0.7f, 3.3f) * -1, RandLerpColor(Color.WhiteSmoke, Color.White), Main.rand.Next(30, 70), 1, .7f * Main.rand.NextFloat(.7f, 1.1f), 0.2f);
+                for (int i = 0; i < 6; i++)
+                    new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(1.6f), Main.rand.NextFloat(1.4f, 2.6f) * .37f, RandLerpColor(Color.WhiteSmoke, Color.White), 100, 0.1f * Main.rand.NextFloat(.7f, 1.1f), RandRotTwoPi).Spawn();
+                for (int i = 0; i < 4; i++)
+                    new SnowCloud(Projectile.Center.ToRandCirclePos(3f), Vector2.Zero, Color.WhiteSmoke, Main.rand.Next(30, 40), RandRotTwoPi, 0.45f, .081f * Main.rand.NextFloat(.7f, 1.1f)).SpawnToPriority();
+                SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = .7f, Volume = .3f }, Projectile.Center);
+            }
+            else
+            {
+                for (int i = 0; i < 8; i++)
+                    ECSParticle.ShinyCrossStarECS(Projectile.ToRandRec(), Vector2.UnitY * Main.rand.NextFloat(0.7f, 3.3f) * -1, RandLerpColor(Color.Black, Color.Black), Main.rand.Next(30, 70), 1, .7f * Main.rand.NextFloat(.7f, 1.1f), 0.2f,BlendState.NonPremultiplied);
+                for (int i = 0; i < 6; i++)
+                    new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(1.6f), Main.rand.NextFloat(1.4f, 2.6f) * .37f, RandLerpColor(Color.Black, Color.Lerp(Color.Black,Color.White,.3f)), 100, 0.1f * Main.rand.NextFloat(.7f, 1.1f), RandRotTwoPi).SpawnToNonPreMult();
+                SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = .9f, Volume = .3f }, Projectile.Center);
+            }
+
         }
 
         public void DoSlowdown()

@@ -26,6 +26,5 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
             if (glowMultValue > 0)
                 Main.spriteBatch.Draw(orb, data.Position - Main.screenPosition, null, Microsoft.Xna.Framework.Color.White * data.Opacity, 0, orb.ToOrigin(), data.Scale * glowMultValue, 0, 0);
         }
-
     }
 }

@@ -131,7 +131,31 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            return base.OnTileCollide(oldVelocity);
+            if (AttackState == State.Back)
+                return false;
+                AttackState = State.Back;
+            for (int i = 0; i < 32; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3);
+                Vector2 dir = Projectile.Center.GetNormalVector2(pos);
+                Vector2 vel = dir * Main.rand.NextFloat(0.3f, 7f);
+                int lifeTime = Main.rand.Next(30, 70);
+                float rot = RandRotTwoPi;
+                new SmokeParticle(pos, vel, Color.WhiteSmoke, lifeTime, rot, .8f, 0.35f, true).SpawnToPriorityNonPreMult();
+                new SmokeParticle(pos, vel, RandLerpColor(Color.Black, Color.Lerp(Color.Black, Color.DarkViolet, .10f)), lifeTime, rot, 1f, 0.3f, true).SpawnToPriorityNonPreMult();
+            }
+            for (int i = 0; i < 32; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(16);
+                Vector2 dir = Projectile.Center.GetNormalVector2(pos);
+                Vector2 vel = dir * Main.rand.NextFloat(0.3f, 7f);
+                ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Silver, Color.WhiteSmoke), Main.rand.Next(30, 70), 1, Main.rand.NextFloat(.7f, 1.1f) * .4f, .15f);
+            }
+            new CrossGlow(Projectile.Center, Color.WhiteSmoke, 40, 1, .24f).Spawn();
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0,Pitch = -.8f ,Volume = .4f},Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 0,Pitch = -.8f, Volume = .4f },Projectile.Center);
+            Projectile.velocity = -Projectile.oldVelocity;
+            return false;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

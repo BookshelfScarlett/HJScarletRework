@@ -1,7 +1,8 @@
 HikariItem: {
 	DisplayName: Exquisite Rose
 	FlavorTooltip: -Fracture-
-	Tooltip:
+	Tooltip: ""
+	DetailTooltip:
 		'''
 		The sky grows brighter and she loses more of herself.
 		With little time for her left, she stares upward as if waiting.
@@ -16,10 +17,12 @@ HikariItem: {
 TairitsuItem: {
 	DisplayName: Black Parasol
 	FlavorTooltip: -Grievous Lady-
-	Tooltip:
+	Tooltip: ""
+	DetailTooltip:
 		'''
 		She was confused because she was hurting. Everything hurt. Her heart was bursting.
-		The cloak of memories that she'd collected turned into a grotesque sphere and surrounded her.The world of white disappeared from her vision.
+		The cloak of memories that she'd collected turned into a grotesque sphere and surrounded her.
+		The world of white disappeared from her vision.
 		Leaving only horrible things. Heaving, sweating, and trembling, she looked into the glass.
 		Into the -, deeply. And as she came to realize that her heart was breaking.
 		That her sanity was breaking,

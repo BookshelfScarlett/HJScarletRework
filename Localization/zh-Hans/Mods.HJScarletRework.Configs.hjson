@@ -67,4 +67,9 @@ HJScarletConfigClient: {
 			默认开启
 			'''
 	}
+
+	TraditionalExecutionTooltipShowcase: {
+		// Label: Traditional Execution Tooltip Showcase
+		// Tooltip: ""
+	}
 }

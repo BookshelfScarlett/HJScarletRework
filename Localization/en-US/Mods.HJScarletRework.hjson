@@ -30,38 +30,6 @@ SwitchWeapon: {
 }
 
 CrossModSupport.Calamity: ""
-
-DamageClasses: {
-	ExecutorDamageClass: {
-		ExecutionProgress: Strike your enemy for {0} times to Execute. Press Left Alt for details
-		ExecutionDescriptionName: On Execution Strike:
-		DisplayName: Executor Damage
-
-		WeaponType: {
-			Throw: ""
-			ColdSteel: ""
-			Firearm: ""
-			Caster: ""
-			Minion: ""
-			Misc: ""
-		}
-
-		Prefixs: {
-			Alterego.DisplayName: Alterego
-			Digital.DisplayName: Digital
-			Evolutional.DisplayName: Evolution
-			Fake.DisplayName: Fake
-			Foreigner.DisplayName: Foreigner
-			Mysterious.DisplayName: Mysterious
-			Phantasmic.DisplayName: Phantasmic
-			FocusTimeLine: ""
-			ExecutionDamageLine: "{0}% increased execution strike damage"
-			ArmorPenetrationLine: "{0} armor penetration"
-			CritDamageLine: "{0} increased critical strike damage"
-		}
-	}
-}
-
 Keybinds.GeneralActionKeybind.DisplayName: Intersct Key
 
 Projectiles: {
@@ -83,3 +51,31 @@ Items: {
 		Tooltip: ""
 	}
 }
+
+ExecutorDamageClass: {
+	ExecutionProgress: Strike your enemy for {0} times to Execute. Press Left Alt for details
+	ExecutionDescriptionName: Execution Strike
+	ExecutionProgressRevampedMode: Execution Progress: {0} / {1}
+	DisplayName: Executor Damage
+
+	WeaponType: {
+		Throw: -Thrownable-
+		ColdSteel: -Cold Steel-
+		Firearm: -Firearm-
+		Caster: -Cast-
+		Minion: -Assist-
+		Misc: -Misc-
+	}
+
+	Prefixs: {
+		Alterego.DisplayName: Alterego
+		Digital.DisplayName: Digital
+		Evolutional.DisplayName: Evolutional
+		Fake.DisplayName: Fake
+		Foreigner.DisplayName: Foreigner
+		Mysterious.DisplayName: Mysterious
+		Phantasmic.DisplayName: Phantasmic
+	}
+}
+
+DamageClasses.ExecutorDamageClass.DisplayName: Executor Damage Class

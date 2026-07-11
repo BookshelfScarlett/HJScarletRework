@@ -128,3 +128,9 @@ BiomeKeyString: {
 	DisplayName: Biome Key String
 	Tooltip: ""
 }
+
+FruitofEternity: {
+	DisplayName: Fruitof Eternity
+	Tooltip: ""
+	DetailTooltip: ""
+}

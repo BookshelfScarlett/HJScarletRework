@@ -71,3 +71,23 @@ TerraFlamethrowerBuff: {
 	DisplayName: Terra Flamethrower Buff
 	Description: Mods.HJScarletRework.Buffs.TerraFlamethrowerBuff.Description
 }
+
+BoneSlapBuff: {
+	DisplayName: Bone Slap Buff
+	Description: Mods.HJScarletRework.Buffs.BoneSlapBuff.Description
+}
+
+StarofHopeBuff: {
+	DisplayName: Starof Hope Buff
+	Description: Mods.HJScarletRework.Buffs.StarofHopeBuff.Description
+}
+
+StreamingProtocalBuff: {
+	DisplayName: Streaming Protocal Buff
+	Description: Mods.HJScarletRework.Buffs.StreamingProtocalBuff.Description
+}
+
+TearEyeBuff: {
+	DisplayName: Tear Eye Buff
+	Description: Mods.HJScarletRework.Buffs.TearEyeBuff.Description
+}

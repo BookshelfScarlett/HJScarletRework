@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Classes

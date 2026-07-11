@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
@@ -66,6 +65,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.spriteDirection = (Projectile.velocity.X > 0).ToDirectionInt();
             Projectile.rotation = Projectile.velocity.ToRotation();
+            UnstableExplosion();
             if (Projectile.HJScarlet().ExecutionStrike)
                 Projectile.position += Main.rand.NextVector2Circular(4f, 4f);
             //掷出时的减速
@@ -162,7 +162,7 @@ namespace HJScarletRework.Projs.Executor
             BombRotation += Lerp(0.15f, 0.01f, progress);
             ChargingParticle();
             PosLerp = Helper.GetAniProgress(1);
-            if (Projectile.GetTargetSafe(out NPC target))
+            if (Projectile.GetTargetSafe(out NPC target, true, 3600))
                 Target = target;
 
         }
@@ -175,7 +175,14 @@ namespace HJScarletRework.Projs.Executor
                 d.scale = Main.rand.NextFloat(0.9f, 1.1f);
                 d.noGravity = true;
             }
-
+        }
+        public void UnstableExplosion()
+        {
+            if (Projectile.FinalUpdateNextBool(70) && !Projectile.HJScarlet().ExecutionStrike)
+            {
+                Projectile.AddExecutionTimeImmediate(ItemType<AngryBomb>());
+                Projectile.Kill();
+            }
         }
 
         public void UpdateSlowdownAI(float progress)
@@ -199,7 +206,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool? CanDamage()
         {
-            return Helper.IsDone[0] && Helper.IsDone[1];
+            return (Helper.IsDone[0] || !Projectile.HJScarlet().ExecutionStrike);
         }
         public override bool PreKill(int timeLeft)
         {

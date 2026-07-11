@@ -99,6 +99,9 @@ Typeless: {
 	PowerLilyProj.DisplayName: Power Lily Proj
 	AngryBombExecution.DisplayName: Angry Bomb Execution
 	SamsaraofDawnlightProj.DisplayName: Samsaraof Dawnlight Proj
+	BoneSlapBone.DisplayName: Bone Slap Bone
+	ContainedBlastShockBullet.DisplayName: Contained Blast Shock Bullet
+	ContainedBlastStickBullet.DisplayName: Contained Blast Stick Bullet
 }
 
 Pets: {
@@ -219,6 +222,15 @@ Executor: {
 	StarofHopeStar.DisplayName: Starof Hope Star
 	AngryBombProj.DisplayName: Angry Bomb Proj
 	AngryBombExecution.DisplayName: Angry Bomb Execution
+	BoneSlapProj.DisplayName: Bone Slap Proj
+	TearEyeProj.DisplayName: Tear Eye Proj
+	PestilenceFlowerBomb.DisplayName: Pestilence Flower Bomb
+	PestilenceFlowerHeldProj.DisplayName: Pestilence Flower Held Proj
+	PestilenceFlowerHunger.DisplayName: Pestilence Flower Hunger
+	ContainedBlastHeldProj.DisplayName: Contained Blast Held Proj
+	ContainedBlastBoom.DisplayName: Contained Blast Boom
+	ContainedBlastShockBullet.DisplayName: Contained Blast Shock Bullet
+	ContainedBlastStickBullet.DisplayName: Contained Blast Stick Bullet
 }
 
 Ranged: {

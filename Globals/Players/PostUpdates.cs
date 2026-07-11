@@ -179,6 +179,10 @@ namespace HJScarletRework.Globals.Players
                 if (Player.miscCounter % 10 == 0 && crimsonCharmReduceTime > 0)
                     crimsonCharmReduceTime--;
             }
+            if (containedBlastBuffTime > 0)
+                containedBlastBuffTime--;
+            if (containedBlastBuffTime == 0)
+                containedBlastBoomCount = 0;
             if (Player.HeldItem.type != lastHeldItemIndex)
             {
                 lastHeldItemIndex = Player.HeldItem.type;

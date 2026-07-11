@@ -90,7 +90,7 @@ namespace HJScarletRework.Globals.Executor
 
     public abstract class ExecutorPrefixs : ModPrefix, ILocalizedModType
     {
-        public new string LocalizationCategory => $"DamageClasses.ExecutorDamageClass.Prefixs";
+        public new string LocalizationCategory => $"ExecutorDamageClass.Prefixs";
         /// <summary>
         /// 伤害加成
         /// </summary>
