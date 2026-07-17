@@ -1,5 +1,4 @@
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -13,7 +12,8 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class BinaryStarsArrow : HJScarletProj    {
+    public class BinaryStarsArrow : HJScarletProj
+    {
         public override ClassCategory Category => ClassCategory.Executor;
 
         private enum DoType
@@ -103,7 +103,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.Kill();
         }
 
-            //PixelatedRenderManager.BeginDrawProj = true;
+        //PixelatedRenderManager.BeginDrawProj = true;
         private void DoHomingToTarget()
         {
             //重新搜索一次单位
@@ -181,7 +181,7 @@ namespace HJScarletRework.Projs.Executor
                     continue;
                 Vector2 listPos = Projectile.oldPos[i] + Projectile.Size / 2 + Projectile.SafeDir() * 10f;
                 float ratios = i / (float)Projectile.oldPos.Length;
-                date.Add(new(listPos, Color.White, new(0, height *DrawScale * Clamp((1 - ratios), 0, 1f)), Projectile.oldRot[i]));
+                date.Add(new(listPos, Color.White, new(0, height * DrawScale * Clamp((1 - ratios), 0, 1f)), Projectile.oldRot[i]));
             }
             TrailRender.DrawTrail(date.ToArray(), sets);
         }

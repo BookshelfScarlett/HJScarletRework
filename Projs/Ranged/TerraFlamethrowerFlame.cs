@@ -90,7 +90,6 @@ namespace HJScarletRework.Projs.Ranged
                 new SmokeParticle(Projectile.Center, brighterVel, brightColor, 12, RandRotTwoPi, opacity * .75f, brigherScale * .95f, false).Spawn();
                 new SmokeParticle(Projectile.Center, darkerVel, fireColor, 12, RandRotTwoPi, opacity, particleScale * 1.1f, true).SpawnToPriorityNonPreMult();
             }
-
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)

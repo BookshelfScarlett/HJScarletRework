@@ -46,8 +46,9 @@ namespace HJScarletRework.Items.Weapons.Executor
         {
             CreateRecipe().
                 AddIngredient<AetherfireSmasher>().
-                AddIngredient<DeathTolls>().
-                AddIngredient<FinalBar>(5).
+                AddIngredient<EssenceofTime>(5).
+                AddIngredient<EssenceofLife>(5).
+                AddIngredient<EssenceofMatter>(5).
                 AddTile<ContinentOfJourney.Tiles.FinalAnvil>().
                 Register();
         }

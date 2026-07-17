@@ -50,7 +50,7 @@ namespace HJScarletRework.Items.Useables
 
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if(line.IsItemName())
+            if (line.IsItemName())
             {
                 TextboxManager.FirstLineY = line.Y;
             }
@@ -60,7 +60,7 @@ namespace HJScarletRework.Items.Useables
                 HasTitle = false,
                 BackgroundColor = Color.White * .24f,
                 TextColor = Color.White,
-                TextEdgeColor = Color.Lerp(Color.HotPink,Color.Black,.74f),
+                TextEdgeColor = Color.Lerp(Color.HotPink, Color.Black, .74f),
                 MainText = text
             };
             TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);

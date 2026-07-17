@@ -1,10 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
-using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
@@ -94,7 +92,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
-                Projectile.HomingTarget(Main.MouseWorld, -1f, speedValue, 15f * SeedValue, MaxAngleChange *SeedValue);
+                Projectile.HomingTarget(Main.MouseWorld, -1f, speedValue, 15f * SeedValue, MaxAngleChange * SeedValue);
                 CurTarget = null;
             }
 
@@ -155,9 +153,9 @@ namespace HJScarletRework.Projs.Executor
             effect.Parameters["uFadeinBottomLength"].SetValue(0.11f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-                      DrawSetting set = new DrawSetting(texture, true);
+            DrawSetting set = new DrawSetting(texture, true);
             List<TrailDrawDate> date = [];
-            for(int i =0;i<Projectile.oldPos.Length;i++)
+            for (int i = 0; i < Projectile.oldPos.Length; i++)
             {
                 if (Projectile.oldPos[i] == Vector2.Zero)
                     continue;
@@ -183,7 +181,7 @@ namespace HJScarletRework.Projs.Executor
             shader.CurrentTechnique.Passes[0].Apply();
             DrawSetting set = new DrawSetting(tex.Value, true);
             List<TrailDrawDate> date = [];
-            for(int i =0;i<Projectile.oldPos.Length;i++)
+            for (int i = 0; i < Projectile.oldPos.Length; i++)
             {
                 if (Projectile.oldPos[i] == Vector2.Zero)
                     continue;

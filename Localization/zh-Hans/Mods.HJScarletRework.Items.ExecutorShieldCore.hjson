@@ -1,10 +1,11 @@
 GenericData: {
 	LevelName: 等级{0}
-	ActiveDescription:"可用于激活代行者的护甲核心，提供特殊效果"
+	ActiveDescription: 可用于激活代行者的护甲核心，提供特殊效果
+
 	Types: {
-		Assault: "进攻类"
-		Defender: "防御类"
-		Misc: "其他类"
+		Assault: 进攻类
+		Defender: 防御类
+		Misc: 其他类
 	}
 }
 
@@ -32,7 +33,7 @@ RedDragonCard: {
 
 ShieldCoreDiver: {
 	DisplayName: 潜航员护甲核心
-	Tooltip:""
+	Tooltip: ""
 	CoreLevel1:
 		'''
 		沿途滞留粉色水母，接触粉色水母时为你提供生命恢复
@@ -61,7 +62,7 @@ ShieldCoreHerb: {
 
 ShieldCoreRedDragon: {
 	DisplayName: 红龙骑士护甲核心
-	Tooltip:""
+	Tooltip: ""
 	CoreLevel1:
 		'''
 		将近战武器与远程武器受到代行者伤害加成，而非原本的伤害加成
@@ -84,13 +85,7 @@ ShieldCoreRedDragon: {
 ShieldCoreWizard: {
 	DisplayName: 符文法师护甲核心
 	Tooltip: ""
-	CoreLevel1: "攻击时追加三道追踪的符文魔法"
-	CoreLevel2:
-		'''
-		每道符文魔法的伤害倍率从33%提升至50%
-		'''
-	CoreLevel3:
-		'''
-		每道符文魔法的伤害倍率从50%提升至100%
-		'''
+	CoreLevel1: 攻击时追加三道追踪的符文魔法
+	CoreLevel2: 每道符文魔法的伤害倍率从33%提升至50%
+	CoreLevel3: 每道符文魔法的伤害倍率从50%提升至100%
 }

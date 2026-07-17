@@ -141,34 +141,34 @@ namespace HJScarletRework.Items.Useables
                     c.item[otherTreasureChoice].SetDefaults(RangedWeapons[Main.rand.Next(0, RangedWeapons.Count)]);
                     continue;
                 }
-                if(otherTreasureChoice == 7)
+                if (otherTreasureChoice == 7)
                 {
-                    int id = MagicWeapon[Main.rand.Next(0,MagicWeapon.Count)];
+                    int id = MagicWeapon[Main.rand.Next(0, MagicWeapon.Count)];
                     c.item[otherTreasureChoice].SetDefaults(id);
                     continue;
                 }
-                if(otherTreasureChoice == 8)
+                if (otherTreasureChoice == 8)
                 {
                     c.item[otherTreasureChoice].SetDefaults(ItemID.MaceWhip);
                     continue;
                 }
-                if(otherTreasureChoice == 9 || otherTreasureChoice == 10 || otherTreasureChoice == 11)
+                if (otherTreasureChoice == 9 || otherTreasureChoice == 10 || otherTreasureChoice == 11)
                 {
-                    int id = RandomTreasure[Main.rand.Next(0,RandomTreasure.Count)];
+                    int id = RandomTreasure[Main.rand.Next(0, RandomTreasure.Count)];
                     c.item[otherTreasureChoice].SetDefaults(id);
                     continue;
                 }
-                if(otherTreasureChoice == 12)
+                if (otherTreasureChoice == 12)
                 {
-                    int id = RandomMat[Main.rand.Next(0,RandomMat.Count)];
+                    int id = RandomMat[Main.rand.Next(0, RandomMat.Count)];
                     c.item[otherTreasureChoice] = new Item(id, Main.rand.Next(49, 100));
                 }
-             }
-               for (int j = 0; j < 22; j++)
-                {
-                    new TurbulenceGlowOrb(Player.ToRandRec(),1.4f,Color.WhiteSmoke,120,0.14f,RandRotTwoPi).Spawn();
-                }
-                SoundEngine.PlaySound(HJScarletSounds.Misc_Spell);
+            }
+            for (int j = 0; j < 22; j++)
+            {
+                new TurbulenceGlowOrb(Player.ToRandRec(), 1.4f, Color.WhiteSmoke, 120, 0.14f, RandRotTwoPi).Spawn();
+            }
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Spell);
 
         }
     }

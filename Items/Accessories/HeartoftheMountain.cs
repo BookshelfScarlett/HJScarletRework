@@ -23,6 +23,7 @@ namespace HJScarletRework.Items.Accessories
             player.GetDamage<MagicDamageClass>() *= 10.0f;
             player.GetCritChance<MagicDamageClass>() += 50;
             player.GetAttackSpeed<MagicDamageClass>() += .50f;
+            player.statManaMax2 += 300;
         }
         public override void AddRecipes()
         {

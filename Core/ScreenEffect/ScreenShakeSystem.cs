@@ -1,12 +1,13 @@
 ﻿using HJScarletRework.Globals.Configs;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Core.ScreenEffect
 {
-    public class ScreenShakeInfo(Vector2 ShakePosition, float ShakeStrength, int ShakeTime, float ShakeDirection, float ShakeAngleOffset, bool useDiatanceFade, int ShakeEffectDistance)
+    public class ScreenShakeInfo(Vector2 ShakePosition, float ShakeStrength, int ShakeTime, float ShakeDirection, float ShakeAngleOffset, bool useDiatanceFade, int ShakeEffectDistance, Func<float, float> easingFunc = null)
     {
         /// <summary>
         /// 是否使用震动衰减
@@ -39,9 +40,10 @@ namespace HJScarletRework.Core.ScreenEffect
         /// 基础的位置
         /// </summary>
         public Vector2 ShakePosition = ShakePosition;
+        public Func<float, float> EasingFunc = easingFunc ?? EaseOutCubic;
         public void Update()
         {
-            float Shake = Lerp(ShakeStrength, 0, EaseOutCubic(ShakeTime / (float)ShakeLifeTime));
+            float Shake = Lerp(ShakeStrength, 0, EasingFunc(ShakeTime / (float)ShakeLifeTime));
             if (UseDiatanceFade)
             {
                 // 计算与本地玩家的距离
@@ -70,9 +72,9 @@ namespace HJScarletRework.Core.ScreenEffect
             }
             ScreenShakes.RemoveAll(s => s.ShakeTime >= s.ShakeLifeTime);
         }
-        public static void AddScreenShakes(Vector2 shakePosition, float shakeStrength, int shakeLifeTime, float shakeDirection, float randomAngleoffset = TwoPi, bool useDistanceFade = true, int ShakeEffectDistance = 1000)
+        public static void AddScreenShakes(Vector2 shakePosition, float shakeStrength, int shakeLifeTime, float shakeDirection, float randomAngleoffset = TwoPi, bool useDistanceFade = true, int ShakeEffectDistance = 1000, Func<float, float> easingFunc = null)
         {
-            ScreenShakeInfo screenShakeInfo = new ScreenShakeInfo(shakePosition, shakeStrength, shakeLifeTime, shakeDirection, randomAngleoffset, useDistanceFade, ShakeEffectDistance);
+            ScreenShakeInfo screenShakeInfo = new ScreenShakeInfo(shakePosition, shakeStrength, shakeLifeTime, shakeDirection, randomAngleoffset, useDistanceFade, ShakeEffectDistance, easingFunc);
             ScreenShakes.Add(screenShakeInfo);
         }
     }

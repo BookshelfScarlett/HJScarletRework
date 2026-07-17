@@ -53,7 +53,7 @@ namespace HJScarletRework.Projs.Ranged
                 return;
             UpdatePlayerState();
             UpdateHeldAnimation();
-            if(Owner.controlUseTile && !JustPressRight)
+            if (Owner.controlUseTile && !JustPressRight)
             {
                 JustPressRight = true;
             }
@@ -126,7 +126,7 @@ namespace HJScarletRework.Projs.Ranged
         {
             bool ifStillUse = (Owner.channel) && !Owner.noItems && !Owner.CCed;
             if (!ifStillUse)
-            {            
+            {
                 Projectile.Kill();
                 return true;
             }

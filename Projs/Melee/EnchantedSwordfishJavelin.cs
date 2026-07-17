@@ -3,11 +3,9 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
 using Terraria;
 
 namespace HJScarletRework.Projs.Melee
@@ -56,7 +54,7 @@ namespace HJScarletRework.Projs.Melee
 
         public void HandleProjAI()
         {
-            switch(AttackState)
+            switch (AttackState)
             {
                 case State.Slow:
                     DoSlow();
@@ -70,11 +68,11 @@ namespace HJScarletRework.Projs.Melee
         public void DoSlow()
         {
             float maxTime = 40f;
-            TimerRatios = Clamp(Timer / maxTime,0f,1f);
+            TimerRatios = Clamp(Timer / maxTime, 0f, 1f);
             Projectile.rotation = Projectile.velocity.ToRotation();
             Projectile.velocity = Vector2.Lerp(Projectile.SafeDir() * OriginalSpeed, Projectile.SafeDir() * 0.1f, TimerRatios);
             Timer++;
-            if(TimerRatios == 1f)
+            if (TimerRatios == 1f)
             {
                 AttackState = State.Laser;
                 Projectile.netUpdate = true;
@@ -119,9 +117,9 @@ namespace HJScarletRework.Projs.Melee
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
-                 
+
             SB.Draw(projTex, drawPos, null, Color.White, Projectile.rotation + PiOver4, ori, Projectile.scale, 0, 0);
-                SB.EnterShaderArea();
+            SB.EnterShaderArea();
             Texture2D crossGlow = HJScarletTexture.Particle_CrossGlow.Value;
             float crossRotation = Lerp(0, ToRadians(45), TimerRatios);
             float glowScale = Projectile.scale * .27f;
@@ -131,13 +129,13 @@ namespace HJScarletRework.Projs.Melee
             SB.Draw(crossGlow, drawPos - EyeOffset, null, Color.White, glowRot, crossGlow.ToOrigin(), glowScale * .90f, 0, 0);
             //if (LaserScaleX > .02f)
             //{
-            
+
             //    DrawBeam(Color.DarkRed, 0.550f);
             //    DrawBeam(Color.Red, 0.5f);
             //    DrawBeam(Color.IndianRed, 0.45f);
             //    DrawBeam(Color.White, 0.40f);
             //}
-                SB.EndShaderArea();
+            SB.EndShaderArea();
             return false;
         }
         public void DrawBeam(Color color, float height)
@@ -153,8 +151,8 @@ namespace HJScarletRework.Projs.Melee
             shader.Parameters["uFadeinLength"].SetValue(0.0f);
             shader.CurrentTechnique.Passes[0].Apply();
             Vector2 orig = new(0, value.Height() / 2);
-            float xScale = (int)(BeamLength * LaserScaleX)/ value.Width();
-            SB.Draw(value.Value, Projectile.Center - Main.screenPosition  - EyeOffset, null, Color.White, Projectile.rotation, orig, new Vector2( xScale* Clamp(Projectile.scale, 0.02f, 1f), height * Projectile.scale * 0.20f * LaserScaleX), 0, 0);
+            float xScale = (int)(BeamLength * LaserScaleX) / value.Width();
+            SB.Draw(value.Value, Projectile.Center - Main.screenPosition - EyeOffset, null, Color.White, Projectile.rotation, orig, new Vector2(xScale * Clamp(Projectile.scale, 0.02f, 1f), height * Projectile.scale * 0.20f * LaserScaleX), 0, 0);
         }
 
     }

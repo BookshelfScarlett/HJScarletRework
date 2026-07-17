@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
@@ -148,7 +147,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
 
             //内矩形
             int bw = 2;
-            Vector2 recPos = drawPos + offset - new Vector2(8);
+            Vector2 recPos = drawPos + offset - new Vector2(8) - new Vector2(2,0);
             //绘制背景，这个背景是一个超级巨大的方块，由于已经超出屏幕，可以直接使用rec的形式随意切割来实现我们需要的效果。
             sb.Draw(background, recPos + new Vector2(bw), floatingInnerRec, color, 0, Vector2.Zero, 1, 0, 0);
             //处理描边
@@ -186,7 +185,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
 
             //内矩形
             int bw = 2;
-            Vector2 recPos = drawPos + offset - new Vector2(8);
+            Vector2 recPos = drawPos + offset - new Vector2(8) - new Vector2(2,0);
             //绘制背景，这个背景是一个超级巨大的方块，由于已经超出屏幕，可以直接使用rec的形式随意切割来实现我们需要的效果。
             sb.Draw(background, recPos + new Vector2(bw), floatingInnerRec, color, 0, Vector2.Zero, 1, 0, 0);
             if (!edgeColor.HasValue)

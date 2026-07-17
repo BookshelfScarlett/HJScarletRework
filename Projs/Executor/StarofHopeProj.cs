@@ -21,14 +21,14 @@ namespace HJScarletRework.Projs.Executor
     {
         public override int OriginalWhip => ItemType<StarofHope>();
         public override (Texture2D LineTexture, Color LineColor, int LineEndCut, bool FullBright) LineSetting => (
-            TextureAssets.FishingLine.Value,Color.SkyBlue,HeadPosOffsetFactor,false);
+            TextureAssets.FishingLine.Value, Color.SkyBlue, HeadPosOffsetFactor, false);
         public override int HeadPosOffsetFactor => 2;
         public bool HasFireStar = false;
         public override void OnWhipActualSwinging(float swingProgress)
         {
-            if(Projectile.IsMe() && !HasFireStar)
+            if (Projectile.IsMe() && !HasFireStar)
             {
-                SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = 0.4f, Volume = 0.6f});
+                SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = 0.4f, Volume = 0.6f });
                 for (int i = 0; i < 1; i++)
                 {
                     Vector2 pos = Owner.Center - Vector2.UnitY * Main.rand.NextFloat(600, 700) + Main.rand.NextFloat(80, 120) * i * Vector2.UnitX * Main.rand.NextBool().ToDirectionInt() - ((Main.MouseWorld.X - Owner.Center.X) > 0).ToDirectionInt() * Vector2.UnitX * 100;
@@ -75,7 +75,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 diff = list[i + 1] - element;
                 float rotation = diff.ToRotation() - PiOver2;
                 //鞭末端才会无视亮度
-                Color color = isHead ? Color.White : Lighting.GetColor(pos.ToTileCoordinates(),Color.White);
+                Color color = isHead ? Color.White : Lighting.GetColor(pos.ToTileCoordinates(), Color.White);
                 //鞭末端是一个星星，这里会让其全局自转起来
                 rotation += isHead ? (float)Main.timeForVisualEffects * .051f : 0;
                 //不是把手，我们才描边
@@ -99,7 +99,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void DrawMiscOnHead(Vector2 vector2, SpriteEffects flip)
         {
-                
+
         }
         public override void ExOnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -163,7 +163,7 @@ namespace HJScarletRework.Projs.Executor
             {
 
                 List<Vector2> points = Projectile.WhipPointsForCollision;
-                                points.Clear();
+                points.Clear();
                 Projectile.FillWhipControlPoints(Projectile, points);
                 HeadPositionList.Add(points[points.Count - 2]);
 
@@ -310,8 +310,8 @@ namespace HJScarletRework.Projs.Executor
                 float rotation = diff.ToRotation() - PiOver2; // This projectile's sprite faces down, so PiOver2 is used to correct rotation.
                 Color color = Color.White;
 
-                
-                rotation += i == list.Count - 2 ? (float)Main.timeForVisualEffects * .1f  : 0;
+
+                rotation += i == list.Count - 2 ? (float)Main.timeForVisualEffects * .1f : 0;
                 //if (i == list.Count - 2)
                 {
                     for (int j = 0; j < 16; j++)
@@ -348,7 +348,7 @@ namespace HJScarletRework.Projs.Executor
             shader.CurrentTechnique.Passes[0].Apply();
             DrawSetting sets = new(HJScarletTexture.Trail_ManaStreak.Value);
             List<TrailDrawDate> date = [];
-            for (int i = 0; i < HeadPositionList.Count - 1 ; i++)
+            for (int i = 0; i < HeadPositionList.Count - 1; i++)
             {
                 if (HeadPositionList[i] == Vector2.Zero)
                     continue;

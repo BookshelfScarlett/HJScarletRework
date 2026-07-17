@@ -55,7 +55,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
             }
         }
     }
-    public class LacrimosaPlayer: MenuVanityPlayer
+    public class LacrimosaPlayer : MenuVanityPlayer
     {
         public override int VanityItemType => ItemType<LacrimosaItem>();
     }

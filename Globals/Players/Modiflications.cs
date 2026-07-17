@@ -37,7 +37,7 @@ namespace HJScarletRework.Globals.Players
                 if (PreciousTargetCrtis > limitedCrit)
                     PreciousTargetCrtis = limitedCrit;
             }
-            if(cycleMadness && item.damage > 0 && item.DamageType.CountsAsClass<ExecutorDamageClass>())
+            if (cycleMadness && item.damage > 0 && item.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
                 crit = cycleMadenessCrit;
                 if (cycleMadenessCrit > 200)

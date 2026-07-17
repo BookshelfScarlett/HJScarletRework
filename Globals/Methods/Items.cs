@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Instances.Items;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Methods
@@ -32,6 +33,14 @@ namespace HJScarletRework.Globals.Methods
         public static bool IsLegal(this Item item)
         {
             return !item.IsAir && item is not null;
+        }
+        public static bool IsTool(this Item item)
+        {
+            return item.IsLegal() && (item.pick > 0 || item.axe > 0 || item.hammer > 0);
+        }
+        public static bool IsWeapon(this Item item)
+        {
+            return !item.IsTool() && (item.damage > 0 || item.type == ItemID.CoinGun);
         }
     }
 }

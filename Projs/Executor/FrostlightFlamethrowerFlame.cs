@@ -97,7 +97,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile.AddExecutionTimeImmediate(ItemType<Frostlight>(), Main.rand.Next(2,5));
+            Projectile.AddExecutionTimeImmediate(ItemType<Frostlight>(), Main.rand.Next(2, 5));
         }
         public override bool PreDraw(ref Color lightColor)
         {

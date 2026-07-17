@@ -123,5 +123,27 @@ namespace HJScarletRework.Globals.Methods
             effect2.Parameters["UVMult"].SetValue(UVMult);
             effect2.CurrentTechnique.Passes[0].Apply();
         }
+        /// <summary>
+        /// 记得重置默认批次
+        /// </summary>
+        /// <param name="tex"></param>
+        /// <param name="edgeColor"></param>
+        /// <param name="progress"></param>
+        /// <param name="edgeWidth"></param>
+        public static void ApplyMeltShader(this Texture2D tex, Color edgeColor, float progress, float edgeWidth = .01f)
+        {
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
+            Main.graphics.GraphicsDevice.Textures[0] = tex;
+            Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
+            Main.graphics.GraphicsDevice.Textures[1] = HJScarletTexture.Noise_Misc.Value;
+            Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointClamp;
+            Effect shader = HJScarletShader.EdgeMeltsShader;
+            shader.Parameters["progress"].SetValue(progress);
+            shader.Parameters["InPutTextureSize"].SetValue(tex.Size());
+            shader.Parameters["EdgeColor"].SetValue(edgeColor.ToVector4());
+            shader.Parameters["EdgeWidth"].SetValue(edgeWidth);
+            shader.CurrentTechnique.Passes[0].Apply();
+        }
     }
 }

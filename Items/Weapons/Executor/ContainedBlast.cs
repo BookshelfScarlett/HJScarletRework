@@ -3,7 +3,6 @@ using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Rockets;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
@@ -15,7 +14,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class ContainedBlast :ExecutorWeaponClass
+    public class ContainedBlast : ExecutorWeaponClass
     {
         public override WeaponCategory WeaponCategory => WeaponCategory.Firearm;
         public override int ExecutionProgress => 180;

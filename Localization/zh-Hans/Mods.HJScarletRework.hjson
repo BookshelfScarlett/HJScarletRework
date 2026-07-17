@@ -43,11 +43,19 @@ Projectiles: {
 	// DragonSniperHeldProj.DisplayName: Dragon Sniper Held Proj
 	// DragonSniperNuke.DisplayName: Dragon Sniper Nuke
 	// DragonSniperVictim.DisplayName: Dragon Sniper Victim
+	// DragonMinionFlame.DisplayName: Dragon Minion Flame
+	// DragonMinionProj.DisplayName: Dragon Minion Proj
+	// DragonminionFireball.DisplayName: Dragonminion Fireball
 }
 
 Items: {
 	DragonSummon: {
 		// DisplayName: Dragon Summon
+		// Tooltip: ""
+	}
+
+	DragonMinion: {
+		// DisplayName: Dragon Minion
 		// Tooltip: ""
 	}
 }

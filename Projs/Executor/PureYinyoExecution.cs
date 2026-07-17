@@ -7,12 +7,8 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Operations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Xml.Schema;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -130,7 +126,7 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.MeetMaxUpdatesFrame(Timer, 25))
             {
                 SoundEngine.PlaySound(HJScarletSounds.Frosthammer_SnowCharge with { MaxInstances = 0, Pitch = -.4f });
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30, 30, Projectile.velocity.ToRotation());
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 100, 120, Projectile.velocity.ToRotation(), 0, easingFunc: EaseOutExpo);
                 for (int i = 0; i < 40; i++)
                 {
                     Vector2 rot = Vector2.UnitX.RotatedBy(TwoPi * i / 40f);
@@ -327,7 +323,7 @@ namespace HJScarletRework.Projs.Executor
                 SwitchNextState(State.BreakIntoShard);
                 Projectile.velocity = (-Vector2.UnitY) * Main.rand.NextFloat(43f, 48f);
                 Projectile.rotation = Projectile.velocity.ToRotation();
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 20, 100, Projectile.rotation, 0.1f);
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30, 120, Projectile.rotation, 0, easingFunc: EaseOutExpo);
                 SoundEngine.PlaySound(HJScarletSounds.TheMars_Toss with { MaxInstances = 0, Pitch = -.4f, Volume = .85f });
                 SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { MaxInstances = 0, Pitch = -.70f, Volume = .65f });
                 for (int i = 0; i < 32; i++)

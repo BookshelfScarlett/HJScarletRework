@@ -9,10 +9,8 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Ranged
 {
@@ -224,8 +222,8 @@ namespace HJScarletRework.Projs.Ranged
             }
             for (int i = 0; i < 80; i++)
             {
-                if(i%2==0)
-                ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePos(3f), RandVelTwoPi(1f, 24f), RandLerpColor(Color.GreenYellow, Color.DarkGreen), 30, 1f, Main.rand.NextFloat(.7f, 1.3f) * .1f, 0.45f);
+                if (i % 2 == 0)
+                    ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePos(3f), RandVelTwoPi(1f, 24f), RandLerpColor(Color.GreenYellow, Color.DarkGreen), 30, 1f, Main.rand.NextFloat(.7f, 1.3f) * .1f, 0.45f);
                 ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(5f), RandVelTwoPi(2f, 21f), RandLerpColor(Color.LightGreen, Color.DarkGreen), 45, 1f, Main.rand.NextFloat(.75f, 1.3f) * 1.1f, 0.13f);
             }
             for (int i = 0; i < 70; i++)
@@ -235,7 +233,7 @@ namespace HJScarletRework.Projs.Ranged
             }
             float squareSplitScale = .80f;
             new ShinySquareSplit(Projectile.Center, Vector2.Zero, Color.Green, 20, squareSplitScale, rot: Projectile.rotation + PiOver4, fadeIn: true).Spawn();
-            new ShinySquareSplit(Projectile.Center, Vector2.Zero, Color.White, 20, squareSplitScale, rot: Projectile.rotation + PiOver4+Pi, opacity: 0.85f, fadeIn: true).Spawn();
+            new ShinySquareSplit(Projectile.Center, Vector2.Zero, Color.White, 20, squareSplitScale, rot: Projectile.rotation + PiOver4 + Pi, opacity: 0.85f, fadeIn: true).Spawn();
             float starScale = 1.60f * .4f;
             new KiraStar(Projectile.Center, Vector2.Zero, RandLerpColor(Color.Green, Color.ForestGreen), 20, safeDir.ToRotation() + PiOver4, 0.78f, starScale * .95F, 0, true, useAlt: true).Spawn();
             new KiraStar(Projectile.Center, Vector2.Zero, Color.White, 20, safeDir.ToRotation() + PiOver4, 0.78f, starScale * 0.90f, 0, true, useAlt: true).Spawn();

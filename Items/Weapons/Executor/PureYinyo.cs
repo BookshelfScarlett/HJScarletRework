@@ -37,7 +37,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         {
             //初始化。
             bool useExecution = player.CheckExecution(Type);
-            int projID = Item.HJScarlet().ExecutionProj!= -1 && useExecution ? Item.HJScarlet().ExecutionProj : AlterType != 0 ? ProjectileType<PureYinyoWhite>() : type;
+            int projID = Item.HJScarlet().ExecutionProj != -1 && useExecution ? Item.HJScarlet().ExecutionProj : AlterType != 0 ? ProjectileType<PureYinyoWhite>() : type;
             if (useExecution)
             {
                 Projectile proj = Projectile.NewProjectileDirect(source, position, -Vector2.UnitY * 32f, projID, damage, knockback, player.whoAmI);

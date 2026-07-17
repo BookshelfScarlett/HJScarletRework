@@ -102,6 +102,7 @@ Typeless: {
 	// BoneSlapBone.DisplayName: Bone Slap Bone
 	// ContainedBlastShockBullet.DisplayName: Contained Blast Shock Bullet
 	// ContainedBlastStickBullet.DisplayName: Contained Blast Stick Bullet
+	// GaiaStrikerSmasher.DisplayName: Gaia Striker Smasher
 }
 
 Pets: {
@@ -231,6 +232,16 @@ Executor: {
 	// ContainedBlastBoom.DisplayName: Contained Blast Boom
 	// ContainedBlastShockBullet.DisplayName: Contained Blast Shock Bullet
 	// ContainedBlastStickBullet.DisplayName: Contained Blast Stick Bullet
+	// EndlessWarExecution.DisplayName: Endless War Execution
+	// EndlessWarLightening.DisplayName: Endless War Lightening
+	// EndlessWarProj.DisplayName: Endless War Proj
+	// GaiaHammerProj.DisplayName: Gaia Hammer Proj
+	// GaiaHammerBloodyBullet.DisplayName: Gaia Hammer Bloody Bullet
+	// GaiaStrikerBloodyBullet.DisplayName: Gaia Striker Bloody Bullet
+	// GaiaStrikerHeldProj.DisplayName: Gaia Striker Held Proj
+	// GaiaStrikerProj.DisplayName: Gaia Striker Proj
+	// GaiaStrikerBeam.DisplayName: Gaia Striker Beam
+	// GaiaStrikerMountedProj.DisplayName: Gaia Striker Mounted Proj
 }
 
 Ranged: {

@@ -61,11 +61,11 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<ContainedBlast>());
-            if(Projectile.numHits > 0 && Projectile.ai[0] > 0)
+            if (Projectile.numHits > 0 && Projectile.ai[0] > 0)
             {
                 Projectile.AddExecutionTimeDelayed(ItemType<ContainedBlast>());
             }
-            SoundEngine.PlaySound(SoundID.DD2_GoblinBomb with { MaxInstances = 1, Pitch = 0.1f}, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.DD2_GoblinBomb with { MaxInstances = 1, Pitch = 0.1f }, Projectile.Center);
             Vector2 dir = Projectile.SafeDir();
             for (int i = 0; i < 16; i++)
             {

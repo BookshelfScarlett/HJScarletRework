@@ -23,7 +23,7 @@ namespace HJScarletRework.Core.ParticleECS
         public static int BulletShellECS(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float scale, bool fullBright = false, BlendState blendstate = null)
         {
             BlendState bs = blendstate ?? BlendState.NonPremultiplied;
-            return ECSMethod.NewParticle(GetInstance<BulletShellECS>().Type, timeLeft, pos, vel, color, opacity,rotation:RandRotTwoPi, scale: scale, blendstate: bs, ai0:fullBright.ToInt());
+            return ECSMethod.NewParticle(GetInstance<BulletShellECS>().Type, timeLeft, pos, vel, color, opacity, rotation: RandRotTwoPi, scale: scale, blendstate: bs, ai0: fullBright.ToInt());
         }
 
         public static int SnowCloud(Vector2 pos, Vector2 vel, Color color, int timeLeft, float rotation, float opacity, float scale, BlendState blendstate = null)
@@ -59,6 +59,11 @@ namespace HJScarletRework.Core.ParticleECS
             BlendState bs = blendstate ?? BlendState.NonPremultiplied;
             float Ai0 = alt ? 1 : 0;
             return ECSMethod.NewParticle(GetInstance<SmokeParticleECS>().Type, timeLeft, pos, vel, color, opacity, rot, scale, blendstate: bs, ai0: Ai0);
+        }
+        public static int BloodDrop(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float scale, int edgeMultTime = 0, bool fullBright = false, BlendState blendstate = null)
+        {
+            BlendState bs = blendstate ?? BlendState.NonPremultiplied;
+            return ECSMethod.NewParticle(GetInstance<BloodDrop>().Type, timeLeft, pos, vel, color, opacity, 0, scale, bs, fullBright.ToInt(), edgeMultTime);
         }
     }
 }

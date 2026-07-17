@@ -34,7 +34,7 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void PostAI(NPC npc)
         {
-            if(terraFlamethrowerDebuff)
+            if (terraFlamethrowerDebuff)
             {
                 if (miscCounter % 10 == 0 && npc.damage != 0)
                 {
@@ -62,13 +62,13 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if(terraFlamethrowerDebuff)
+            if (terraFlamethrowerDebuff)
             {
                 spriteBatch.EnterShaderArea();
                 Texture2D ring = HJScarletTexture.Particle_RingShiny.Value;
                 spriteBatch.Draw(ring, npc.Center - screenPos, null, Color.LimeGreen.ToAddColor(), 0, ring.ToOrigin(), 0.5f, 0, 0);
                 spriteBatch.EndShaderArea();
-                
+
             }
             base.PostDraw(npc, spriteBatch, screenPos, drawColor);
         }

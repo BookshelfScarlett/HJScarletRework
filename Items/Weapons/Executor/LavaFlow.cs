@@ -1,12 +1,11 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using HJScarletRework.Projs.Melee;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class LavaFlow: ExecutorWeaponClass
+    public class LavaFlow : ExecutorWeaponClass
     {
         public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
         public override int ExecutionProj => ProjectileType<LavaFlowExecution>();

@@ -137,7 +137,7 @@ namespace HJScarletRework.Projs.Executor
                 //    yMult *= 1.2f;
                 //}
             }
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f; 
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
             xMult *= heldscale;
             yMult *= heldscale;
             for (int i = 0; i < maxPoints; i++)
@@ -216,7 +216,7 @@ namespace HJScarletRework.Projs.Executor
             //连续多次的创建顶点列表可能会遇到性能上的问题
             //这里最好缓存一下。
             _cacheVertex.Clear();
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f; 
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
             Vector2 projVel = Projectile.velocity.SafeNormalize(Vector2.UnitX) * (42 + Projectile.ai[2] * 13f);
             for (int i = 0; i < CenterPosList.Count; i++)
             {

@@ -94,7 +94,7 @@ namespace HJScarletRework.Projs.Executor
 
             if (Main.rand.NextBool(22))
             {
-                new PetalNoCollision(Projectile.Center.ToRandCirclePosEdge(6), Projectile.velocity / 8f, RandLerpColor(Color.LimeGreen, Color.LightGreen), 45, RandRotTwoPi, 1, 0.10f, 0.4f,true).Spawn();
+                new PetalNoCollision(Projectile.Center.ToRandCirclePosEdge(6), Projectile.velocity / 8f, RandLerpColor(Color.LimeGreen, Color.LightGreen), 45, RandRotTwoPi, 1, 0.10f, 0.4f, true).Spawn();
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -147,12 +147,12 @@ namespace HJScarletRework.Projs.Executor
                 SB.Draw(tex, pos + (TwoPi / 16f * i).ToRotationVector2() * 1.5f * DrawScale, frame, Color.DarkGreen.ToAddColor() * scaleLerp, Projectile.rotation, frameOri, Projectile.scale * DrawScale, SpriteEffects.FlipHorizontally, 0);
             }
             SB.Draw(tex, pos, frame, Color.White * scaleLerp, Projectile.rotation, frameOri, Projectile.scale, SpriteEffects.FlipHorizontally, 0);
-            SB.EnterShaderArea(SpriteSortMode.Immediate,BlendState.NonPremultiplied);
-            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.DarkGreen,32);
+            SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.DarkGreen, 32);
             SB.EnterShaderArea();
-            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.Green,30);
-            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.Lime,28);
-            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.White,27);
+            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.Green, 30);
+            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.Lime, 28);
+            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.White, 27);
             SB.EndShaderArea();
             return false;
         }

@@ -7,7 +7,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.ComponentModel.Design.Serialization;
 using Terraria;
 using Terraria.Audio;
 
@@ -113,7 +112,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Projectile.ai[0]!=0)
+            if (Projectile.ai[0] != 0)
             {
                 Projectile.AddExecutionTimeImmediate(ItemType<ContainedBlast>(), 5);
             }

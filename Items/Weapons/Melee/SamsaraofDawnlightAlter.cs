@@ -1,13 +1,7 @@
-﻿using ContinentOfJourney.Backgrounds;
-using ContinentOfJourney.Items;
+﻿using ContinentOfJourney.Items;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Projs.Melee;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {

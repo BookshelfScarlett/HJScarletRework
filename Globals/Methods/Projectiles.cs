@@ -564,5 +564,50 @@ namespace HJScarletRework.Globals.Methods
                 }
             }
         }
+        public static void MinionAntiClump(this Projectile proj, float pushForce = 0.05f)
+        {
+            for (int k = 0; k < Main.maxProjectiles; k++)
+            {
+                Projectile otherProj = Main.projectile[k];
+                // Short circuits to make the loop as fast as possible
+                if (!otherProj.active || otherProj.owner != proj.owner || !otherProj.minion || k == proj.whoAmI)
+                    continue;
+
+                // If the other Projectile is indeed the same owned by the same player and they're too close, nudge them away.
+                bool sameProjType = otherProj.type == proj.type;
+                float taxicabDist = Math.Abs(proj.position.X - otherProj.position.X) + Math.Abs(proj.position.Y - otherProj.position.Y);
+                if (sameProjType && taxicabDist < proj.width)
+                {
+                    if (proj.position.X < otherProj.position.X)
+                        proj.velocity.X -= pushForce;
+                    else
+                        proj.velocity.X += pushForce;
+
+                    if (proj.position.Y < otherProj.position.Y)
+                        proj.velocity.Y -= pushForce;
+                    else
+                        proj.velocity.Y += pushForce;
+                }
+            }
+        }
+        public static void MinionAntiClump(this Projectile proj, Vector2 pushDir, float pushForce = 0.05f, float randomAngleRange = .05f)
+        {
+            for (int k = 0; k < Main.maxProjectiles; k++)
+            {
+                Projectile otherProj = Main.projectile[k];
+                // Short circuits to make the loop as fast as possible
+                if (!otherProj.active || otherProj.owner != proj.owner || !otherProj.minion || k == proj.whoAmI)
+                    continue;
+
+                // If the other Projectile is indeed the same owned by the same player and they're too close, nudge them away.
+                bool sameProjType = otherProj.type == proj.type;
+                float taxicabDist = Math.Abs(proj.position.X - otherProj.position.X) + Math.Abs(proj.position.Y - otherProj.position.Y);
+                if (sameProjType && taxicabDist < proj.width)
+                {
+                    proj.velocity += pushDir * pushForce;
+                }
+            }
+        }
+
     }
 }

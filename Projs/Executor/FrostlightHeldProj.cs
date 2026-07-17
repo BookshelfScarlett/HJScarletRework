@@ -78,8 +78,8 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
-                if(CanHeal)
-                    CombatText.NewText(Utils.CenteredRectangle(Vector2.UnitY  * -80f + Owner.Center, new(Owner.width, Owner.height)), Color.SkyBlue, $"治疗总量：{HealAmt}");
+                if (CanHeal)
+                    CombatText.NewText(Utils.CenteredRectangle(Vector2.UnitY * -80f + Owner.Center, new(Owner.width, Owner.height)), Color.SkyBlue, $"治疗总量：{HealAmt}");
                 if (!Owner.HasProj<FrostlightHeldProjAlt>(out int projID) && Main.mouseLeft)
                 {
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, projID, Projectile.damage, Projectile.knockBack, Projectile.owner);
@@ -103,7 +103,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Color color = RandLerpColor(RandLerpColor(Color.RoyalBlue, Color.LightBlue), Color.WhiteSmoke);
                     Vector2 smokeVel = RandVelTwoPi(1.4f, 34f);
-                    ECSParticle.SmokeParticle(posBase, smokeVel, color, Main.rand.Next(25, 30), RandRotTwoPi, .70f, Main.rand.NextFloat(.9f, 1.1f) * .35f, true,BlendState.Additive);
+                    ECSParticle.SmokeParticle(posBase, smokeVel, color, Main.rand.Next(25, 30), RandRotTwoPi, .70f, Main.rand.NextFloat(.9f, 1.1f) * .35f, true, BlendState.Additive);
                 }
                 for (int i = 0; i < 20; i++)
                 {
@@ -184,8 +184,8 @@ namespace HJScarletRework.Projs.Executor
             {
                 if (Owner.miscCounter % 2 == 0)
                 {
-                    if(Main.rand.NextBool(6))
-                    ECSParticle.StarShape(Main.rand.NextVector2FromRectangle(Owner.Hitbox), Vector2.UnitY * -1.2f * Main.rand.NextFloat(.7f, 1.1f), RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), Main.rand.Next(30, 50), 1f, Main.rand.NextFloat(0.3f, 0.6f) * Projectile.scale,glowMult:.85f);
+                    if (Main.rand.NextBool(6))
+                        ECSParticle.StarShape(Main.rand.NextVector2FromRectangle(Owner.Hitbox), Vector2.UnitY * -1.2f * Main.rand.NextFloat(.7f, 1.1f), RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), Main.rand.Next(30, 50), 1f, Main.rand.NextFloat(0.3f, 0.6f) * Projectile.scale, glowMult: .85f);
                     //我只需要输出一个治疗总量
                     int heal = Main.rand.Next(1, 3);
                     Owner.statLife += heal;
@@ -198,7 +198,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateBeginAnimation()
         {
-            if(Helper.OnAnimationBegin(0))
+            if (Helper.OnAnimationBegin(0))
             {
             }
             //这里挥砍动画一定程度上使用了矩阵变化。
@@ -324,7 +324,7 @@ namespace HJScarletRework.Projs.Executor
             float scale = Projectile.scale * .285f * easedProgress;
             SB.Draw(star, pos, null, Color.RoyalBlue * .9f * easedProgress, 0, star.ToOrigin(), scale * 0.95f, 0, 0);
             SB.Draw(star, pos, null, Color.SkyBlue * .9f * easedProgress, 0, star.ToOrigin(), scale * .90f, 0, 0);
-            SB.Draw(star, pos, null, Color.LightBlue * .85f *easedProgress, 0, star.ToOrigin(), scale * 0.85f, 0, 0);
+            SB.Draw(star, pos, null, Color.LightBlue * .85f * easedProgress, 0, star.ToOrigin(), scale * 0.85f, 0, 0);
 
 
             //出于我不清楚的原因，这里得重置两次批次，才能确保正常
@@ -344,7 +344,7 @@ namespace HJScarletRework.Projs.Executor
                 float progress = (float)i / OldAimPos.Count;
                 Vector2 DrawPos_Head = OldAimPos[i] + Projectile.Center - Main.screenPosition;
                 Vector2 DrawPos_Source = OldAimPos[i] * mult + Projectile.Center - Main.screenPosition;
-                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor , new Vector3(progress, 0, 0)));
+                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor, new Vector3(progress, 0, 0)));
                 _vertexCache.Add(new ScarletVertex(DrawPos_Source, drawcolor, new Vector3(progress, 1, 0)));
             }
             GD.Textures[0] = texture;

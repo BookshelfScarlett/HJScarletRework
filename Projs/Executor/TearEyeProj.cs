@@ -2,11 +2,7 @@
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 
@@ -16,10 +12,10 @@ namespace HJScarletRework.Projs.Executor
     {
         public override int OriginalWhip => ItemType<TearEye>();
         public override (Texture2D LineTexture, Color LineColor, int LineEndCut, bool FullBright) LineSetting => (
-            TextureAssets.FishingLine.Value,Color.SkyBlue,HeadPosOffsetFactor,false);
+            TextureAssets.FishingLine.Value, Color.SkyBlue, HeadPosOffsetFactor, false);
         public override (int SegmentCount, float RangeFactor, int ExtraUpdates, int SpriteFrames) WhipDefaults => (
-            12, 0.40f, 1, 4); 
-        public override (int ExecutorProgressAdd, float PenetrateDamageRedcution) WhipHitDefaults => (1,0.15f);
+            12, 0.40f, 1, 4);
+        public override (int ExecutorProgressAdd, float PenetrateDamageRedcution) WhipHitDefaults => (1, 0.15f);
 
         public override int HeadPosOffsetFactor => base.HeadPosOffsetFactor;
         public override void ExSD()
@@ -33,12 +29,12 @@ namespace HJScarletRework.Projs.Executor
         public override void DrawWhipInPreDraw(List<Vector2> list, Texture2D texture, Rectangle frame, Vector2 origin, SpriteEffects flip)
         {
             Vector2 pos = list[0];
-            for(int i =0;i<list.Count-1;i++)
+            for (int i = 0; i < list.Count - 1; i++)
             {
                 Vector2 ori = origin;
                 int frameHeight = frame.Height + 4;
                 float scale = 1f;
-                    ori.Y -= 6f;
+                ori.Y -= 6f;
                 if (i == 0)
                 {
                     frame.Y = 0;
@@ -59,7 +55,7 @@ namespace HJScarletRework.Projs.Executor
                         frame.Height = 60 - 38;
                     }
                 }
-                if(i == list.Count - 2)
+                if (i == list.Count - 2)
                 {
                     frame.Y = 94;
                     frame.Height = 126 - 94;

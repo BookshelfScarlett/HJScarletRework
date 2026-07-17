@@ -8,7 +8,6 @@ using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Utilities;
-using System;
 using Terraria;
 using Terraria.Audio;
 
@@ -58,8 +57,8 @@ namespace HJScarletRework.Projs.Executor
         public void HandleMiscLerp()
         {
             if (IsUsing)
-            { 
-                Projectile.position += Main.rand.NextVector2Circular(1,1);
+            {
+                Projectile.position += Main.rand.NextVector2Circular(1, 1);
                 Timer++;
                 OnFireTimer++;
                 if (OnFireTimer > 60 * Projectile.MaxUpdates)
@@ -90,15 +89,15 @@ namespace HJScarletRework.Projs.Executor
             float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
             Vector2 firePos = Projectile.Center + offset2.RotatedBy(drawRot) + Projectile.SafeDirByRot() * 8f;
             HandleExecution();
-            int attackSpeedHand = Owner.HJScarlet().containedBlastBuffTime > 0 ? ((AttackSpeed /2)) <= 5 ? 5 : AttackSpeed / 2  : AttackSpeed;
+            int attackSpeedHand = Owner.HJScarlet().containedBlastBuffTime > 0 ? ((AttackSpeed / 2)) <= 5 ? 5 : AttackSpeed / 2 : AttackSpeed;
             if (Timer > attackSpeedHand && IsUsing && Timer != 0 && Projectile.IsMe())
             {
                 Timer = 0;
                 ScreenShakeSystem.AddScreenShakes(firePos, 1f, 10, RandRotTwoPi, 6.2f);
                 SlotId slotId1 = SoundEngine.PlaySound(HJScarletSounds.Misc_Boom with { Variants = [1], MaxInstances = 0, Pitch = 0.75f, Volume = .35f }, Projectile.Center);
-                if(SoundEngine.TryGetActiveSound(slotId1, out ActiveSound sound) && Owner.HJScarlet().containedBlastBuffTime > 0)
+                if (SoundEngine.TryGetActiveSound(slotId1, out ActiveSound sound) && Owner.HJScarlet().containedBlastBuffTime > 0)
                 {
-                    sound.Volume /= 2; 
+                    sound.Volume /= 2;
                 }
                 Vector2 dir = Projectile.rotation.ToRotationVector2();
                 float rnd = Owner.HJScarlet().containedBlastBuffTime > 0 ? Main.rand.NextFloat(.95f, 1.2f) * 1f : 1f;

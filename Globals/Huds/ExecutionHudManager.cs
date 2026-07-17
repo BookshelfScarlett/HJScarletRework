@@ -7,6 +7,7 @@ using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -22,6 +23,7 @@ namespace HJScarletRework.Globals.Huds
         public static float GeneralOffset = 0;
         public static bool DrawFadeOut;
         public static bool DrawFadeIn;
+        public static int StopCounter = 0;
         /// <summary>
         /// Shorthand.
         /// </summary>
@@ -133,8 +135,13 @@ namespace HJScarletRework.Globals.Huds
         {
             GeneralOpactiy = 0;
         }
-
-
+        private int StopTimer = 0;
+        private DateTime FreezeTimer;
+        public bool StopNow = false;
+        public override void ModifyTimeRate(ref double timeRate, ref double tileUpdateRate, ref double eventUpdateRate)
+        {
+            base.ModifyTimeRate(ref timeRate, ref tileUpdateRate, ref eventUpdateRate);
+        }
         public override void UpdateUI(GameTime gameTime)
         {
             HJScarletConfigClient config = HJScarletConfigClient.Instance;

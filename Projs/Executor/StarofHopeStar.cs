@@ -3,7 +3,6 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +10,6 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
@@ -42,7 +40,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            if(Projectile.penetrate == -1 && Projectile.damage == 0)
+            if (Projectile.penetrate == -1 && Projectile.damage == 0)
             {
                 Projectile.Opacity = Lerp(Projectile.Opacity, 0, 0.2f);
                 if (Projectile.Opacity <= 0.1f)
@@ -81,7 +79,7 @@ namespace HJScarletRework.Projs.Executor
                 randY *= speed;
                 Vector2 vel = new Vector2(randX, randY) * Main.rand.NextFloat(0.1f, 1.3f) * .6f;
                 Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
-                ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), 30, 1f, 0.1f * 0.45f * Main.rand.NextFloat(0.9f,1.1f), 0.75f);
+                ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), 30, 1f, 0.1f * 0.45f * Main.rand.NextFloat(0.9f, 1.1f), 0.75f);
             }
             //SoundEngine.PlaySound(HJScarletSounds.Frosthammer_SnowCharge with { Pitch = .9f, Volume = .5f });
             Projectile.velocity *= 0.01f;
@@ -94,7 +92,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 pos = Projectile.Center - Main.screenPosition;
             for (int i = 0; i < 16; i++)
                 SB.Draw(projTex, pos + (TwoPi / 16f * i).ToRotationVector2() * 2, frame, Color.White.ToAddColor() * Projectile.Opacity, Projectile.rotation - PiOver2, ori, Projectile.scale, 0, 0);
-            SB.Draw(projTex, pos, frame, Color.White *Projectile.Opacity, Projectile.rotation - PiOver2, ori, Projectile.scale, 0, 0);
+            SB.Draw(projTex, pos, frame, Color.White * Projectile.Opacity, Projectile.rotation - PiOver2, ori, Projectile.scale, 0, 0);
             float oriScale = 1f;
             float scale = 1f;
             int length = 7;
@@ -108,8 +106,8 @@ namespace HJScarletRework.Projs.Executor
                 scale *= 0.985f;
             }
 
-            
-            SB.EnterShaderArea(SpriteSortMode.Immediate,BlendState.NonPremultiplied);
+
+            SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
             DrawNebulaTrail(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DarkGoldenrod, 15f);
             SB.EnterShaderArea();
             DrawNebulaTrail(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.Gold, 10.2f);
@@ -118,7 +116,7 @@ namespace HJScarletRework.Projs.Executor
 
             return false;
         }
-        public void DrawNebulaTrail(Asset<Texture2D> tex,Color trailColor, float height)
+        public void DrawNebulaTrail(Asset<Texture2D> tex, Color trailColor, float height)
         {
             float laserLength = 150;
             Effect shader = HJScarletShader.TerrarRayLaser;

@@ -2,13 +2,7 @@
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.ReVisual.Projs
 {
@@ -41,7 +35,7 @@ namespace HJScarletRework.ReVisual.Projs
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {
             IsMyPlayer(projectile, out ReVisualPlayer vp);
-            if(ShouldApplyRevisual(projectile,vp))
+            if (ShouldApplyRevisual(projectile, vp))
             {
                 ApplyThisDraw(projectile, ref lightColor);
                 return false;

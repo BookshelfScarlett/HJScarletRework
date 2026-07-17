@@ -22,6 +22,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Metaball_ShadowNebula { get; set; }
         public static Tex2DWithPath Metaball_FlickerWater { get; set; }
         public static Tex2DWithPath Metaball_ShinyStardust { get; set; }
+        public static Tex2DWithPath Metaball_Bloody { get; set; }
         public static Asset<DynamicSpriteFont> Font_Eras_Bold { get; set; }
         public static Asset<DynamicSpriteFont> Font_MGR { get; set; }
 
@@ -36,6 +37,7 @@ namespace HJScarletRework.Assets.Registers
             Metaball_ShadowNebula = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_ShadowNebula)}");
             Metaball_FlickerWater = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_FlickerWater)}");
             Metaball_ShinyStardust = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_ShinyStardust)}");
+            Metaball_Bloody = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_Bloody)}");
 
             Noise_Misc = new Tex2DWithPath($"{Path_General}{nameof(Noise_Misc)}");
             Noise_Misc2 = new Tex2DWithPath($"{Path_General}{nameof(Noise_Misc2)}");
@@ -57,6 +59,7 @@ namespace HJScarletRework.Assets.Registers
             Metaball_ShadowNebula = null;
             Metaball_FlickerWater = null;
             Metaball_ShinyStardust = null;
+            Metaball_Bloody = null;
 
             Noise_Misc = null;
             Noise_Misc2 = null;

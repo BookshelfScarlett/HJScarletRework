@@ -28,7 +28,7 @@ namespace HJScarletRework.Globals.Executor
         /// 第一个空位记录鞭子的段数，第二个空位记录绳子的长度系数，第三个空位记录额外更新
         /// </summary>
         public virtual (int SegmentCount, float RangeFactor, int ExtraUpdates, int SpriteFrames) WhipDefaults => (12, 0.6f, 0, 3);
-        public virtual (int ExecutorProgressAdd, float PenetrateDamageRedcution) WhipHitDefaults => (1,0.35f);
+        public virtual (int ExecutorProgressAdd, float PenetrateDamageRedcution) WhipHitDefaults => (1, 0.35f);
         /// <summary>
         /// 获取鞭头（尖端）在鞭子顶点列表中的索引值。
         /// <para>该值表示从鞭子根部（索引0）到鞭头所在的顶点索引偏移量。</para>

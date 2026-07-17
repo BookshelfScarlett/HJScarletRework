@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Useables
         }
         public override bool OnPickup(Player player)
         {
-            if(player.HJScarlet().cycleMadness)
+            if (player.HJScarlet().cycleMadness)
             {
                 Item.active = false;
             }

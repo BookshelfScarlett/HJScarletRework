@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Ranged;
+using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -73,10 +74,12 @@ namespace HJScarletRework.Globals.Players
             bonusExecutionReduce = 0;
             healingPotionMult = 1;
             //drawUseableItemIcon = -1;
+            if (!Player.HasProj<GaiaStrikerHeldProj>())
+                holdingGaiaStaff = false;
             ResetAcc();
             ResetPets();
             ResetArmor();
-            
+
         }
         public override void UpdateDead()
         {
@@ -99,6 +102,7 @@ namespace HJScarletRework.Globals.Players
             tacticalExecutionInputCache = 0;
             blackKeyTimer = 0;
             heldProjReUseTime = 0;
+            holdingGaiaStaff = false;
             ResetAcc();
             ResetPets();
             ResetArmor();
@@ -110,7 +114,7 @@ namespace HJScarletRework.Globals.Players
             floretProtectorTimer = 0;
             monkStaffHeal = false;
             containedBlastBoomCount = 0;
-            containedBlastBuffTime=0;
+            containedBlastBuffTime = 0;
         }
 
 

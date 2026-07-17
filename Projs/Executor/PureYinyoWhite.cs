@@ -136,9 +136,9 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 vel = dir * Main.rand.NextFloat(0.3f, 7f);
                 ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Silver, Color.WhiteSmoke), Main.rand.Next(30, 70), 1, Main.rand.NextFloat(.7f, 1.1f) * .64f, .15f);
             }
-            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0,Pitch = -.7f , Volume = .4f},Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = -.7f, Volume = .4f }, Projectile.Center);
             Projectile.velocity = -Projectile.oldVelocity;
-                AttackState = State.HomingBack;
+            AttackState = State.HomingBack;
             return false;
         }
         public override bool? CanHitNPC(NPC target)
@@ -165,7 +165,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 vel = dir * Main.rand.NextFloat(0.3f, 7f);
                 ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Silver, Color.WhiteSmoke), Main.rand.Next(30, 70), 1, Main.rand.NextFloat(.7f, 1.1f) * .64f, .15f);
             }
-            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0,Pitch = -.7f });
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = -.7f });
         }
         public override void OnKill(int timeLeft)
         {

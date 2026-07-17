@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Projectiles.Meelee;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -8,7 +7,6 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -94,9 +92,9 @@ namespace HJScarletRework.Projs.Melee
             TrailRender.DrawTrail(date.ToArray(), sets);
         }
 
-         public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
-            if (AttackState  == State.TurnintoSignarity)
+            if (AttackState == State.TurnintoSignarity)
             {
                 PixelatedRenderManager.BeginDrawProj = false;
                 DrawSignarity();
@@ -154,8 +152,8 @@ namespace HJScarletRework.Projs.Melee
                 return;
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             ApplyTrailAlt(HJScarletTexture.Trail_ManaStreakTiny.Value, Color.DarkGray);
-            ApplyTrailAlt(HJScarletTexture.Trail_FadedStreak.Value, Color.Gray,10);
-            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.WhiteSmoke,28);
+            ApplyTrailAlt(HJScarletTexture.Trail_FadedStreak.Value, Color.Gray, 10);
+            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.WhiteSmoke, 28);
             HJScarletMethods.EndShaderAreaPixel();
         }
         private int ai2
@@ -186,7 +184,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void AI()
         {
-            switch(AttackState)
+            switch (AttackState)
             {
                 case State.Shoot:
                     DoShoot();
@@ -232,12 +230,12 @@ namespace HJScarletRework.Projs.Melee
             {
                 for (int i = 0; i < 30; i++)
                 {
-                    new TurbulenceGlowOrb(Projectile.ToRandRec(), Main.rand.NextFloat(0.9f,1.1f)*7.1f, RandLerpColor(Color.White, Color.Silver), 120, Projectile.scale * Main.rand.NextFloat(0.9f, 1.1f) * 0.32f, RandRotTwoPi).Spawn();
-                   }
+                    new TurbulenceGlowOrb(Projectile.ToRandRec(), Main.rand.NextFloat(0.9f, 1.1f) * 7.1f, RandLerpColor(Color.White, Color.Silver), 120, Projectile.scale * Main.rand.NextFloat(0.9f, 1.1f) * 0.32f, RandRotTwoPi).Spawn();
+                }
             }
             if (Projectile.ai[1] % 20 == 0)
             {
-                    new TurbulenceGlowOrb(Projectile.ToRandRec(), 7f, RandLerpColor(Color.White, Color.Silver), 120, Projectile.scale * Main.rand.NextFloat(0.9f, 1.1f) * 0.52f, RandRotTwoPi).Spawn();
+                new TurbulenceGlowOrb(Projectile.ToRandRec(), 7f, RandLerpColor(Color.White, Color.Silver), 120, Projectile.scale * Main.rand.NextFloat(0.9f, 1.1f) * 0.52f, RandRotTwoPi).Spawn();
                 if (Main.myPlayer == Projectile.owner)
                 {
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(),
@@ -251,14 +249,14 @@ namespace HJScarletRework.Projs.Melee
             {
                 for (int i = 0; i < 40; i++)
                 {
-                    
+
                     Vector2 speed = (TwoPi / 40f * i).ToRotationVector2() * Main.rand.NextFloat(2, 12);
                     Vector2 pos = Projectile.Center - new Vector2(3, 3);
-                    for(int j =0;j< 3;j++)
+                    for (int j = 0; j < 3; j++)
                     {
-                        ECSParticle.ShinyCrossStarECS(pos.ToRandCirclePos(3), speed.ToSafeNormalize() * Main.rand.NextFloat(0.8f, 13f), RandLerpColor(Color.WhiteSmoke, Color.Silver), Main.rand.Next(35, 45), 1, Main.rand.NextFloat(0.8f,1.2f)*0.60f, 0.2f);
+                        ECSParticle.ShinyCrossStarECS(pos.ToRandCirclePos(3), speed.ToSafeNormalize() * Main.rand.NextFloat(0.8f, 13f), RandLerpColor(Color.WhiteSmoke, Color.Silver), Main.rand.Next(35, 45), 1, Main.rand.NextFloat(0.8f, 1.2f) * 0.60f, 0.2f);
                     }
-                    ECSParticle.LightntingGlow(pos, speed, RandLerpColor(Color.WhiteSmoke, Color.Silver), 40, 1, 0.45f*Main.rand.NextFloat(0.9f,1.1f), 6);
+                    ECSParticle.LightntingGlow(pos, speed, RandLerpColor(Color.WhiteSmoke, Color.Silver), 40, 1, 0.45f * Main.rand.NextFloat(0.9f, 1.1f), 6);
                 }
                 SoundEngine.PlaySound(HJScarletSounds.Frosthammer_SnowCharge with { MaxInstances = 0, Pitch = 0.5f });
                 SoundEngine.PlaySound(HJScarletSounds.Hammer_ShootAlt with { MaxInstances = 0, Pitch = 0.5f });
@@ -362,21 +360,21 @@ namespace HJScarletRework.Projs.Melee
         {
 
             Projectile.scale = (Projectile.ai[1] < 10) ? Projectile.ai[1] * 0.1f : 1;
-            Vector2 drawOrigin = Vector2.Zero ;
+            Vector2 drawOrigin = Vector2.Zero;
             Color color = new Color(255, 255, 255, 0) * 0.5f;
 
             Color color1;
             Color color2;
             for (int k = Projectile.oldPos.Length - 1; k > 0; k--)
             {
-                Vector2 drawPos = Vector2.Lerp(Projectile.oldPos[k], Projectile.oldPos[0],0.2f) - Main.screenPosition + Projectile.Size / 2;
+                Vector2 drawPos = Vector2.Lerp(Projectile.oldPos[k], Projectile.oldPos[0], 0.2f) - Main.screenPosition + Projectile.Size / 2;
                 color1 = color * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
                 color2 = new Color(255, 255, 255, 0) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
                 for (int i = 0; i < 2; i++)
                 {
                     SB.Draw(HJScarletTexture.Particle_SharpTear, drawPos - Projectile.SafeDir() * i * 10, null,
                         color1 * .5f, Projectile.oldRot[k] + (float)Math.PI / 2, new Vector2(36, 36), Projectile.scale * 0.5f, SpriteEffects.None, 0);
-                    SB.Draw(HJScarletTexture.Particle_SharpTear,drawPos - Projectile.SafeDir() * i * 10, null,
+                    SB.Draw(HJScarletTexture.Particle_SharpTear, drawPos - Projectile.SafeDir() * i * 10, null,
                         color2 * .5f, Projectile.oldRot[k] + (float)Math.PI / 2, new Vector2(36, 36), Projectile.scale * 0.3f, SpriteEffects.None, 0);
                 }
             }
@@ -440,7 +438,7 @@ namespace HJScarletRework.Projs.Melee
     }
     public class SamsaraofDawnlightSun : SamsaraofDawnlightMoon
     {
-        public override Color trailColor => new Color(255,165,84,0);
+        public override Color trailColor => new Color(255, 165, 84, 0);
         public override bool AlterType => true;
     }
     public class SamsaraofDawnlightMoon : HJScarletProj
@@ -489,11 +487,11 @@ namespace HJScarletRework.Projs.Melee
             //SB.Draw(Request<Texture2D>("ContinentOfJourney/Images/SunlightDisciple_2").Value, pos, null, trailColor * 0.66f, 0f, new Vector2(40, 40), 2f, SpriteEffects.None, 0);
 
             SB.EnterShaderArea();
-                        Texture2D tex = HJScarletTexture.Particle_CrossGlow.Value;
-            SB.Draw(tex, pos + Projectile.SafeDir() * 10f, null, trailColor with { A = 255}, 0, tex.ToOrigin(), Projectile.scale * 0.35f, 0, 0);
-            SB.Draw(tex, pos + Projectile.SafeDir() * 10f, null, trailColor with { A = 255}, Pi, tex.ToOrigin(), Projectile.scale * 0.35f, 0, 0);
-                        tex = HJScarletTexture.Particle_KiraStarGlow.Value;
-            for (int i = -1; i < 2; i+=2)
+            Texture2D tex = HJScarletTexture.Particle_CrossGlow.Value;
+            SB.Draw(tex, pos + Projectile.SafeDir() * 10f, null, trailColor with { A = 255 }, 0, tex.ToOrigin(), Projectile.scale * 0.35f, 0, 0);
+            SB.Draw(tex, pos + Projectile.SafeDir() * 10f, null, trailColor with { A = 255 }, Pi, tex.ToOrigin(), Projectile.scale * 0.35f, 0, 0);
+            tex = HJScarletTexture.Particle_KiraStarGlow.Value;
+            for (int i = -1; i < 2; i += 2)
             {
                 Vector2 offset = Projectile.SafeDir().RotatedBy(PiOver2) * i * 15 + Projectile.SafeDir() * 10f;
                 SB.Draw(tex, pos + offset, null, trailColor with { A = 255 } * 1f, Projectile.rotation + PiOver2, tex.ToOrigin(), Projectile.scale * 0.14f * lerpValue, 0, 0);
@@ -504,9 +502,9 @@ namespace HJScarletRework.Projs.Melee
                 ApplyTrailAlt(HJScarletTexture.Trail_FadedStreak.Value, Color.Lerp(trailColor, Color.Gray, .23f) with { A = 200 }, 12, 15f * i);
                 ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.Lerp(trailColor, Color.WhiteSmoke, .23f) with { A = 200 }, 28, 15f * i);
             }
-                ApplyTrailAlt(HJScarletTexture.Trail_ManaStreakTiny.Value, Color.Lerp(trailColor, Color.DarkGray, 0.23f) with { A = 80 }, 56);
-                ApplyTrailAlt(HJScarletTexture.Trail_FadedStreak.Value, Color.Lerp(trailColor, Color.Gray, .23f) with { A = 80 }, 40);
-                ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.Lerp(trailColor, Color.WhiteSmoke, .23f) with { A = 80 }, 76);
+            ApplyTrailAlt(HJScarletTexture.Trail_ManaStreakTiny.Value, Color.Lerp(trailColor, Color.DarkGray, 0.23f) with { A = 80 }, 56);
+            ApplyTrailAlt(HJScarletTexture.Trail_FadedStreak.Value, Color.Lerp(trailColor, Color.Gray, .23f) with { A = 80 }, 40);
+            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.Lerp(trailColor, Color.WhiteSmoke, .23f) with { A = 80 }, 76);
 
             SB.EndShaderArea();
             for (int i = 0; i < 16; i++)
@@ -558,7 +556,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public ref float Timer => ref Projectile.ai[0];
         public override void AI()
-        { 
+        {
             Timer++;
             if (Timer < 177)
                 Projectile.velocity = Projectile.velocity.RotatedBy(Math.PI / 120);
@@ -582,12 +580,12 @@ namespace HJScarletRework.Projs.Melee
                     Projectile.velocity = Vector2.Normalize(Projectile.velocity) * 12f;
             }
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Color color = AlterType ? RandLerpColor(Color.Lerp(Color.Orange,Color.White,0.5f), Color.Lerp(Color.OrangeRed,Color.White,0.5f)) : RandLerpColor(Color.Lerp( Color.Violet, Color.White, 0.5f), Color.Lerp(Color.Purple,Color.White,0.5f));
+            Color color = AlterType ? RandLerpColor(Color.Lerp(Color.Orange, Color.White, 0.5f), Color.Lerp(Color.OrangeRed, Color.White, 0.5f)) : RandLerpColor(Color.Lerp(Color.Violet, Color.White, 0.5f), Color.Lerp(Color.Purple, Color.White, 0.5f));
             if (Main.rand.NextBool(4))
-            ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(40), Projectile.velocity / 8f, color, 40, 1, 0.25f);
-            color = AlterType ? RandLerpColor(Color.Lerp(Color.Orange,Color.White,0.5f), Color.Lerp(Color.OrangeRed,Color.White,0.5f)) : RandLerpColor(Color.Lerp( Color.Violet, Color.White, 0.5f), Color.Lerp(Color.Purple,Color.White,0.5f));
+                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(40), Projectile.velocity / 8f, color, 40, 1, 0.25f);
+            color = AlterType ? RandLerpColor(Color.Lerp(Color.Orange, Color.White, 0.5f), Color.Lerp(Color.OrangeRed, Color.White, 0.5f)) : RandLerpColor(Color.Lerp(Color.Violet, Color.White, 0.5f), Color.Lerp(Color.Purple, Color.White, 0.5f));
             if (Main.rand.NextBool(4))
-            ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(40), Projectile.velocity / 8f, color, 40, 1, 0.55f,0.2f);
+                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(40), Projectile.velocity / 8f, color, 40, 1, 0.55f, 0.2f);
         }
     }
 }

@@ -47,7 +47,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.Opacity = Lerp(Projectile.Opacity, 1.01f, 0.1f);
-            switch(AttackState)
+            switch (AttackState)
             {
                 case State.Shoot:
                     DoShoot();
@@ -56,7 +56,7 @@ namespace HJScarletRework.Projs.Executor
                     DoStick();
                     break;
             }
-            
+
         }
 
         private void DoShoot()
@@ -101,7 +101,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.velocity *= 0f;
                 MountedPos = Projectile.Center - target.Center;
                 AttackState = State.Stick;
-                Projectile.timeLeft = GetSeconds(30)*Projectile.MaxUpdates;
+                Projectile.timeLeft = GetSeconds(30) * Projectile.MaxUpdates;
                 return;
             }
             else
@@ -122,7 +122,7 @@ namespace HJScarletRework.Projs.Executor
             int length = Projectile.oldPos.Length / 2;
             Texture2D sharpTear = HJScarletTexture.Particle_SharpTear;
             int particleSharpTearLength = 6;
-            for (int i = particleSharpTearLength- 1; i >= 0; i--)
+            for (int i = particleSharpTearLength - 1; i >= 0; i--)
             {
                 float ratios = i / (float)length;
                 Vector2 lerpPos = Projectile.Center - Projectile.SafeDir() * (i) * 10f;
@@ -135,7 +135,7 @@ namespace HJScarletRework.Projs.Executor
             float xLerp = Lerp(0.75f, 1f, MountedLerp);
             float yLerp = Lerp(1.2f, 1f, MountedLerp);
             float scaleLerp = Lerp(0.65f, 0.95f, MountedLerp);
-            Vector2 projScale = Projectile.scale * new Vector2(xLerp,yLerp) * scaleLerp;
+            Vector2 projScale = Projectile.scale * new Vector2(xLerp, yLerp) * scaleLerp;
 
             for (int i = length - 1; i >= 0; i--)
             {

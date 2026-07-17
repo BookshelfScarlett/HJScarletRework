@@ -45,7 +45,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, Item.shoot, projDamage, Item.knockBack, player.whoAmI);
             proj.originalDamage = projDamage;
             proj.netUpdate = true;
-            SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeExpired with { Pitch = -0.2f,MaxInstances = 0}, proj.Center);
+            SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeExpired with { Pitch = -0.2f, MaxInstances = 0 }, proj.Center);
 
         }
 

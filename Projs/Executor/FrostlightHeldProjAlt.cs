@@ -9,7 +9,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -107,8 +106,8 @@ namespace HJScarletRework.Projs.Executor
                 SoundEngine.PlaySound(HJScarletSounds.Misc_AirFlowAlt with { MaxInstances = 1, Pitch = -0.7f, PitchVariance = .12f, Volume = 0.3f });
                 NPC target = HJScarletMethods.FindClosestTarget(Main.MouseWorld, 240);
                 bool reverse = Main.rand.NextBool();
-                dir = dir.RotatedBy(PiOver2 * reverse.ToDirectionInt()).RotatedBy(Main.rand.NextFloat(ToRadians(-10f), ToRadians(60f))*-reverse.ToDirectionInt());
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posBase, dir*Main.rand.NextFloat(15f,18f), ProjectileType<FrostlightFrostball>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
+                dir = dir.RotatedBy(PiOver2 * reverse.ToDirectionInt()).RotatedBy(Main.rand.NextFloat(ToRadians(-10f), ToRadians(60f)) * -reverse.ToDirectionInt());
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posBase, dir * Main.rand.NextFloat(15f, 18f), ProjectileType<FrostlightFrostball>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
                 proj.ai[1] = Main.rand.Next(50, 300);
                 proj.ai[2] = Main.rand.NextFloat(4.5f, 7.5f);
                 proj.HJScarlet().HasExecutionMechanic = true;
@@ -117,7 +116,7 @@ namespace HJScarletRework.Projs.Executor
                 Timer = 0;
             }
             NPC target2 = Main.MouseWorld.FindClosestTarget(240);
-            RingValue = target2.IsLegal() ? Lerp(RingValue, 1f, 0.02f) : Lerp(RingValue,0.35f,.02f);
+            RingValue = target2.IsLegal() ? Lerp(RingValue, 1f, 0.02f) : Lerp(RingValue, 0.35f, .02f);
         }
 
         public void HandlePlayerState()
@@ -181,7 +180,7 @@ namespace HJScarletRework.Projs.Executor
             float value = WrapAngle(targetRotaiton - currentRotation);
             Projectile.rotation = currentRotation + value;
             EdgeValue = Lerp(EdgeValue, 1f, 0.01f);
-            if(Projectile.FinalUpdate())
+            if (Projectile.FinalUpdate())
             {
                 HeldAnimationHelper += .01f;
                 if (HeldAnimationHelper >= .05f)
@@ -200,18 +199,18 @@ namespace HJScarletRework.Projs.Executor
             Vector2 origin = new Vector2(Projectile.spriteDirection == -1 ? tex.Width : 0, tex.Height);
             Vector2 realDrawPos = drawPos + Vector2.UnitX.RotatedBy(Projectile.rotation) * -25f + Vector2.UnitX.RotatedBy(Projectile.rotation).RotatedBy(PiOver2) * 0;
             SpriteEffects se = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            for(int i =0;i<12;i++)
-            SB.Draw(tex, realDrawPos + (TwoPi / 12f * i).ToRotationVector2() * 1.2f, null, Color.White.ToAddColor() * EdgeValue, rotation, origin, Projectile.scale, se, 0);
+            for (int i = 0; i < 12; i++)
+                SB.Draw(tex, realDrawPos + (TwoPi / 12f * i).ToRotationVector2() * 1.2f, null, Color.White.ToAddColor() * EdgeValue, rotation, origin, Projectile.scale, se, 0);
             SB.Draw(tex, realDrawPos, null, Color.White, rotation, origin, Projectile.scale, se, 0);
- 
+
             SB.EnterShaderArea();
 
             Vector2 dir = Projectile.rotation.ToRotationVector2();
             Texture2D star = HJScarletTexture.Particle_CrossGlow.Value;
             Vector2 pos = drawPos + dir * 60f * Projectile.scale;
-            float scale = Projectile.scale * .285f * Clamp( Math.Abs(Math.Sign(Main.timeForVisualEffects)),0.2f,1f) * 1.1f;
+            float scale = Projectile.scale * .285f * Clamp(Math.Abs(Math.Sign(Main.timeForVisualEffects)), 0.2f, 1f) * 1.1f;
             SB.Draw(star, pos, null, Color.RoyalBlue * .9f, 0, star.ToOrigin(), scale * 0.95f, 0, 0);
-            SB.Draw(star, pos, null, Color.SkyBlue* .9f, 0, star.ToOrigin(), scale * .90f, 0, 0);
+            SB.Draw(star, pos, null, Color.SkyBlue * .9f, 0, star.ToOrigin(), scale * .90f, 0, 0);
             SB.Draw(star, pos, null, Color.LightBlue * .85f, 0, star.ToOrigin(), scale * 0.85f, 0, 0);
             star = HJScarletTexture.Particle_RingShiny.Value;
             SB.Draw(star, pos, null, Color.LightBlue * .35f, 0, star.ToOrigin(), scale * 0.35f, 0, 0);

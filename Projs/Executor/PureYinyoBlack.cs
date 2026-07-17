@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items.GemOriented.Onyx;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -9,12 +8,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using Terraria;
 using Terraria.Audio;
 
@@ -111,7 +104,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Helper.IsDone[0])
             {
-                
+
             }
             else
             {
@@ -133,7 +126,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (AttackState == State.Back)
                 return false;
-                AttackState = State.Back;
+            AttackState = State.Back;
             for (int i = 0; i < 32; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(3);
@@ -152,8 +145,8 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Silver, Color.WhiteSmoke), Main.rand.Next(30, 70), 1, Main.rand.NextFloat(.7f, 1.1f) * .4f, .15f);
             }
             new CrossGlow(Projectile.Center, Color.WhiteSmoke, 40, 1, .24f).Spawn();
-            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0,Pitch = -.8f ,Volume = .4f},Projectile.Center);
-            SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 0,Pitch = -.8f, Volume = .4f },Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = -.8f, Volume = .4f }, Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 0, Pitch = -.8f, Volume = .4f }, Projectile.Center);
             Projectile.velocity = -Projectile.oldVelocity;
             return false;
         }
@@ -186,8 +179,8 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Silver, Color.WhiteSmoke), Main.rand.Next(30, 70), 1, Main.rand.NextFloat(.7f, 1.1f) * .4f, .15f);
             }
             new CrossGlow(target.Center, Color.WhiteSmoke, 40, 1, .24f).Spawn();
-            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0,Pitch = -.8f });
-            SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 0,Pitch = -.8f });
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = -.8f });
+            SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 0, Pitch = -.8f });
         }
         public override void OnKill(int timeLeft)
         {
@@ -201,7 +194,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             for (int i = 0; i < 16; i++)
             {
-                SB.Draw(tex, drawPos + ToRadians(360f / 16 * i).ToRotationVector2() * 2f, frame, Color.White.ToAddColor(), Projectile.rotation+ PiOver4, origin, Projectile.scale, 0, 0);
+                SB.Draw(tex, drawPos + ToRadians(360f / 16 * i).ToRotationVector2() * 2f, frame, Color.White.ToAddColor(), Projectile.rotation + PiOver4, origin, Projectile.scale, 0, 0);
             }
             Color drawColor = AttackState == State.Back ? Color.White : Color.Lerp(Color.White, Color.Black, Helper.GetAniProgress(0));
             SB.Draw(tex, drawPos, frame, drawColor, Projectile.rotation + PiOver4, origin, Projectile.scale, 0, 0);

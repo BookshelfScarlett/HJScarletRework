@@ -48,7 +48,7 @@ namespace HJScarletRework.Items.Weapons.Executor
                 Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<FrostlightFlamethrower>(), damage, knockback, player.whoAmI);
                 proj.originalDamage = damage;
                 ((FrostlightFlamethrower)proj.ModProjectile).ShouldUseEdgeMeltShader = true;
-                ((FrostlightFlamethrower)proj.ModProjectile).BeginPos= Main.MouseWorld.GetNormalVector2(player.Center) * 60 + player.Center;
+                ((FrostlightFlamethrower)proj.ModProjectile).BeginPos = Main.MouseWorld.GetNormalVector2(player.Center) * 60 + player.Center;
             }
             else
             {

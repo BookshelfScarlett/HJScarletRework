@@ -91,3 +91,8 @@ TearEyeBuff: {
 	// DisplayName: Tear Eye Buff
 	// Description: Mods.HJScarletRework.Buffs.TearEyeBuff.Description
 }
+
+DragonMinionBuff: {
+	// DisplayName: Dragon Minion Buff
+	// Description: Mods.HJScarletRework.Buffs.DragonMinionBuff.Description
+}

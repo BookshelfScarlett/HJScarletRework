@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.NPCs;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
@@ -8,7 +7,6 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -49,7 +47,7 @@ namespace HJScarletRework.Projs.Executor
             Timer++;
             if (Projectile.MeetMaxUpdatesFrame(Timer, 9))
             {
-                if(Projectile.penetrate ==-1 && Projectile.damage == 0)
+                if (Projectile.penetrate == -1 && Projectile.damage == 0)
                 {
                     Projectile.Opacity = Lerp(Projectile.scale, 0f, 0.05f);
                     if (Projectile.Opacity <= 0.02f)
@@ -71,7 +69,7 @@ namespace HJScarletRework.Projs.Executor
                     DrawScale = EaseOutBack(lerpValue);
                 }
             }
-                DrawDust();
+            DrawDust();
         }
 
         public void DrawDust()

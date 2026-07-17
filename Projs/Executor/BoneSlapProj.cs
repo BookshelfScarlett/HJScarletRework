@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items;
-using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,10 +12,10 @@ namespace HJScarletRework.Projs.Executor
     {
         public override int OriginalWhip => ItemType<BoneSlap>();
         public override (Texture2D LineTexture, Color LineColor, int LineEndCut, bool FullBright) LineSetting => (
-            TextureAssets.FishingLine.Value,Color.SkyBlue,HeadPosOffsetFactor,false);
+            TextureAssets.FishingLine.Value, Color.SkyBlue, HeadPosOffsetFactor, false);
         public override (int SegmentCount, float RangeFactor, int ExtraUpdates, int SpriteFrames) WhipDefaults => (
-            10, 0.2f, 1, 4); 
-        public override (int ExecutorProgressAdd, float PenetrateDamageRedcution) WhipHitDefaults => (1,0.15f);
+            10, 0.2f, 1, 4);
+        public override (int ExecutorProgressAdd, float PenetrateDamageRedcution) WhipHitDefaults => (1, 0.15f);
         public override int HeadPosOffsetFactor => base.HeadPosOffsetFactor;
         public override void ExSD()
         {

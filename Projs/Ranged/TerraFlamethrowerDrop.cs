@@ -35,9 +35,9 @@ namespace HJScarletRework.Projs.Ranged
         {
             if (Projectile.velocity.Y < 7f)
                 Projectile.velocity.Y += .05f;
-            ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(5), -Projectile.velocity / 8f, RandLerpColor(Color.DarkGreen, Color.LimeGreen), 16, RandRotTwoPi, .85f, 0.135f * Main.rand.NextFloat(.8f,1.0f), true,BlendState.Additive);
+            ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(5), -Projectile.velocity / 8f, RandLerpColor(Color.DarkGreen, Color.LimeGreen), 16, RandRotTwoPi, .85f, 0.135f * Main.rand.NextFloat(.8f, 1.0f), true, BlendState.Additive);
             if (Main.rand.NextBool(3))
-                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(5), -Projectile.velocity / 8f, RandLerpColor(Color.LimeGreen, Color.LightGreen), 16, 1f, .40f * Main.rand.NextFloat(0.8f,1.1f));
+                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(5), -Projectile.velocity / 8f, RandLerpColor(Color.LimeGreen, Color.LightGreen), 16, 1f, .40f * Main.rand.NextFloat(0.8f, 1.1f));
         }
         public override bool? CanHitNPC(NPC target)
         {

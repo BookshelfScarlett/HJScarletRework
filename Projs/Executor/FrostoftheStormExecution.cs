@@ -129,7 +129,7 @@ namespace HJScarletRework.Projs.Executor
 
                 HalfWay = true;
             }
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f; 
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
             float beginAngle = 175;
             float endAngle = 185;
             float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
@@ -180,7 +180,7 @@ namespace HJScarletRework.Projs.Executor
             float endAngle = 175f;
             float beginAngle = 150f;
             //更新当前的转角
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f; 
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
             float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
             //将其投影到矩阵上，并进行形变
             Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(1.2f, Height, 1f);

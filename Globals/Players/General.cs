@@ -44,6 +44,7 @@ namespace HJScarletRework.Globals.Players
         public float heldProjReUseTime = 0;
         public int containedBlastBuffTime = 0;
         public int containedBlastBoomCount = 0;
+        public bool holdingGaiaStaff = false;
         #region 护甲
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;

@@ -38,10 +38,10 @@ namespace HJScarletRework.Globals.Players
 
             }
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
-            if (proj.DamageType.CountsAsClass< ExecutorDamageClass>())
+            if (proj.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
                 GlobalExecutorOnHit(target, hit, damageDone);
-                if(cycleMadness)
+                if (cycleMadness)
                 {
                 }
 

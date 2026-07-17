@@ -5,7 +5,6 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -13,7 +12,7 @@ using static HJScarletRework.Rarity.RarityShiny.RareItemRarity;
 
 namespace HJScarletRework.Items.ExecutorCards
 {
-    public class ShieldCoreRedDragon: ExecutorShieldCore
+    public class ShieldCoreRedDragon : ExecutorShieldCore
     {
         public override RareType RareType => RareType.Gold;
     }
@@ -116,7 +115,7 @@ namespace HJScarletRework.Items.ExecutorCards
                 };
                 setsList.Add(sets);
             }
-                TextboxMethods.DrawMultipleTextboxes(line, CacheTooltipList, setsList, 30);
+            TextboxMethods.DrawMultipleTextboxes(line, CacheTooltipList, setsList, 30);
             return true;
         }
     }

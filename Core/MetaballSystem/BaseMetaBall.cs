@@ -11,7 +11,7 @@ namespace HJScarletRework.Core.MetaballSystem
     {
         public int Type = 0;
         public virtual bool SetPority => false;
-        public int MetaballTimer;
+        public virtual int MetaballTimer => 1;
         // 这个元球对应的渲染目标
         public RenderTarget2D AlphaTexture;
         // 这个元球对应的背景
@@ -75,7 +75,7 @@ namespace HJScarletRework.Core.MetaballSystem
             shader.Parameters["renderTargetSize"].SetValue(AlphaTexture.Size());
             shader.Parameters["bakcGroundSize"].SetValue(BackgroundTexture.Size());
             shader.Parameters["edgeColor"].SetValue(EdgeColor.ToVector4());
-            shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly);
+            shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * MetaballTimer);
             shader.CurrentTechnique.Passes[0].Apply();
         }
     }

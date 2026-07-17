@@ -343,3 +343,17 @@ ContainedBlast: {
 	Tooltip: ""
 	ExecutionStrike: ""
 }
+
+EndlessWar: {
+	DisplayName: Endless War
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltips: ""
+}
+
+GaiaStriker: {
+	DisplayName: Gaia Striker
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltips: ""
+}

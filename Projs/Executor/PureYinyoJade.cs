@@ -73,7 +73,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void DoBlackShard()
         {
-                DoBlackShardParticle();
+            DoBlackShardParticle();
             if (Projectile.GetTargetSafe(out NPC target))
             {
                 Projectile.HomingTarget(target.Center, -1, 12, 10);
@@ -103,9 +103,9 @@ namespace HJScarletRework.Projs.Executor
             else
             {
                 for (int i = 0; i < 8; i++)
-                    ECSParticle.ShinyCrossStarECS(Projectile.ToRandRec(), Vector2.UnitY * Main.rand.NextFloat(0.7f, 3.3f) * -1, RandLerpColor(Color.Black, Color.Black), Main.rand.Next(30, 70), 1, .7f * Main.rand.NextFloat(.7f, 1.1f), 0.2f,BlendState.NonPremultiplied);
+                    ECSParticle.ShinyCrossStarECS(Projectile.ToRandRec(), Vector2.UnitY * Main.rand.NextFloat(0.7f, 3.3f) * -1, RandLerpColor(Color.Black, Color.Black), Main.rand.Next(30, 70), 1, .7f * Main.rand.NextFloat(.7f, 1.1f), 0.2f, BlendState.NonPremultiplied);
                 for (int i = 0; i < 6; i++)
-                    new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(1.6f), Main.rand.NextFloat(1.4f, 2.6f) * .37f, RandLerpColor(Color.Black, Color.Lerp(Color.Black,Color.White,.3f)), 100, 0.1f * Main.rand.NextFloat(.7f, 1.1f), RandRotTwoPi).SpawnToNonPreMult();
+                    new TurbulenceGlowOrb(Projectile.Center.ToRandCirclePosEdge(1.6f), Main.rand.NextFloat(1.4f, 2.6f) * .37f, RandLerpColor(Color.Black, Color.Lerp(Color.Black, Color.White, .3f)), 100, 0.1f * Main.rand.NextFloat(.7f, 1.1f), RandRotTwoPi).SpawnToNonPreMult();
                 SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = .9f, Volume = .3f }, Projectile.Center);
             }
 

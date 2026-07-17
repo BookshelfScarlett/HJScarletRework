@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.SetUpRarityPrice(ItemRarityID.Blue);
             Item.knockBack = 2f;
             Item.shoot = ProjectileType<AngryBombProj>();
-            Item.UseSound = HJScarletSounds.Misc_KnifeTossAlt with { Pitch= 0.5f, Variants = [3] , Volume = 0.75f};
+            Item.UseSound = HJScarletSounds.Misc_KnifeTossAlt with { Pitch = 0.5f, Variants = [3], Volume = 0.75f };
             Item.SetUpNoUseGraphicItem();
             Item.HJScarlet().ExecutionProj = ProjectileType<AngryBombExecution>();
         }

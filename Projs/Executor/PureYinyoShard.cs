@@ -117,7 +117,7 @@ namespace HJScarletRework.Projs.Executor
             if (Main.rand.NextBool(12))
             {
                 Vector2 pos = Projectile.ToRandRec();
-                Vector2 vel = -Vector2.UnitY * Main.rand.NextFloat(1.1f,3.2f);
+                Vector2 vel = -Vector2.UnitY * Main.rand.NextFloat(1.1f, 3.2f);
                 int lifeTime = Main.rand.Next(30, 70);
                 float scale = Projectile.scale * Main.rand.NextFloat(0.75f, 1.1f) * .08f;
                 ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.Black, Color.Lerp(Color.Black, Color.WhiteSmoke, .12f)), lifeTime, 1, scale, .5f, BlendState.NonPremultiplied);
@@ -207,7 +207,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.velocity *= .9f;
             //转角根据进程来逐渐变慢
             Projectile.rotation += Lerp(.15f, .01f, ratios);
-            if(Main.rand.NextBool(8))
+            if (Main.rand.NextBool(8))
                 ECSParticle.ShinyCrossStarECS(Projectile.ToRandRec(), Vector2.UnitY * Main.rand.NextFloat(0.3f, 1.3f) * -1, RandLerpColor(Color.WhiteSmoke, Color.White), Main.rand.Next(30, 70), 1, .5f * Main.rand.NextFloat(.7f, 1.1f), 0.2f);
             if (Projectile.MeetMaxUpdatesFrame(Timer, maxtime))
             {
@@ -250,7 +250,7 @@ namespace HJScarletRework.Projs.Executor
                     SB.Draw(shard, drawPos + ToRadians(360f / 16 * i).ToRotationVector2() * 1.25f * lerpValue, null, Color.Black * .85f, Projectile.rotation + Projectile.localAI[0], origin, Projectile.scale, 0, 0);
                 }
             }
-                SB.Draw(shard, drawPos, null, Color.White, Projectile.rotation + Projectile.localAI[0], origin, Projectile.scale, 0, 0);
+            SB.Draw(shard, drawPos, null, Color.White, Projectile.rotation + Projectile.localAI[0], origin, Projectile.scale, 0, 0);
             return false;
         }
     }

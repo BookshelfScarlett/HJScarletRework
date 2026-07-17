@@ -25,6 +25,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Texture_SwordSlash1 { get; set; }
         public static Tex2DWithPath Texture_SwordSlash2 { get; set; }
         public static Tex2DWithPath Texture_Fog { get; set; }
+        public static Tex2DWithPath Texture_BloodStain { get; set; }
         public void LoadTexture()
         {
             Texture_BloomRing = new Tex2DWithPath($"{Path_General}{nameof(Texture_BloomRing)}");
@@ -48,6 +49,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_SwordSlash1 = new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash1)}");
             Texture_SwordSlash2 = new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash2)}");
             Texture_Fog = new Tex2DWithPath($"{Path_General}{nameof(Texture_Fog)}");
+            Texture_BloodStain = new Tex2DWithPath($"{Path_General}{nameof(Texture_BloodStain)}");
 
         }
         public static void UnloadTexture()
@@ -73,6 +75,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_SwordSlash1 = null;
             Texture_SwordSlash2 = null;
             Texture_Fog = null;
+            Texture_BloodStain = null;
         }
     }
 }

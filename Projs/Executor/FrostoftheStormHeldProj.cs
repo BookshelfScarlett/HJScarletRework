@@ -170,7 +170,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, fireVel, ProjectileType<FrostoftheStormSlash>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 proj.HJScarlet().HasExecutionMechanic = true;
             }
-            float heldscale = HJScarletMethods.HasFuckingCalamity ?  Owner.HeldItem.scale : 1f; 
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
             //这里挥砍动画一定程度上使用了矩阵变化。
             Helper.UpdateAniState(0);
             float easedProgress = EaseInBack(Helper.GetAniProgress(0));
@@ -226,7 +226,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateMidAnimation()
         {
             Helper.UpdateAniState(1);
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f; 
+            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
             float easedProgress = EaseOutBack(Helper.GetAniProgress(1));
             float beginAngle = 135 * Flip.ToDirectionInt();
             float endAngle = 150 * Flip.ToDirectionInt();

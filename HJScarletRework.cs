@@ -27,7 +27,7 @@ namespace HJScarletRework
             Instance = this;
             ModLoader.TryGetMod(HJScarletMethods.CalamityMod, out CrossMod_Calamity);
             ModLoader.TryGetMod(HJScarletMethods.HomewardJourney, out CrossMod_HomewardJourney);
-            ModLoader.TryGetMod(HJScarletMethods.HomewardJourney, out CrossMod_UCA);
+            ModLoader.TryGetMod("UCA", out CrossMod_UCA);
             ModLoader.TryGetMod("Sounds_SakurabaEma", out CrossMod_FuckEmma);
         }
         public override void Unload()

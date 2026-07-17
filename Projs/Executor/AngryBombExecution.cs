@@ -75,9 +75,9 @@ namespace HJScarletRework.Projs.Executor
                 if (Helper.GetAniProgress(1) > 0.15f)
                 {
                     if (Timer < 1)
-                        SoundEngine.PlaySound(SoundID.DD2_BetsyScream with { MaxInstances = 0, Pitch = 0.12f },Projectile.Center);
+                        SoundEngine.PlaySound(SoundID.DD2_BetsyScream with { MaxInstances = 0, Pitch = 0.12f }, Projectile.Center);
                     Vector2 pos = Projectile.Center.ToRandCirclePos(16f);
-                    ECSParticle.SmokeParticle(pos +Vector2.UnitY * 5f, (-Vector2.UnitY).ToRandVelocity(ToRadians(0f), 0f, 12.2f), RandLerpColor(RandLerpColor(Color.OrangeRed, Color.Orange), Color.LightYellow), Main.rand.Next(16, 32), RandRotTwoPi, 0.75f, Main.rand.NextFloat(.7f, .9f) * Projectile.scale * .18f, Main.rand.NextBool(), BlendState.Additive);
+                    ECSParticle.SmokeParticle(pos + Vector2.UnitY * 5f, (-Vector2.UnitY).ToRandVelocity(ToRadians(0f), 0f, 12.2f), RandLerpColor(RandLerpColor(Color.OrangeRed, Color.Orange), Color.LightYellow), Main.rand.Next(16, 32), RandRotTwoPi, 0.75f, Main.rand.NextFloat(.7f, .9f) * Projectile.scale * .18f, Main.rand.NextBool(), BlendState.Additive);
                     Timer += 2;
                 }
             }
@@ -96,7 +96,7 @@ namespace HJScarletRework.Projs.Executor
                 }
                 else
                 {
-                        Projectile.Kill();
+                    Projectile.Kill();
                 }
             }
         }
@@ -137,13 +137,13 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen())
                 return;
-                Vector2 pos = Projectile.Center.ToRandCirclePos(4) + (Projectile.rotation + BombRotation).ToRotationVector2().RotatedBy(-PiOver2) * 12f * Projectile.scale;
+            Vector2 pos = Projectile.Center.ToRandCirclePos(4) + (Projectile.rotation + BombRotation).ToRotationVector2().RotatedBy(-PiOver2) * 12f * Projectile.scale;
             Dust d = Dust.NewDustPerfect(pos, DustID.Torch);
             d.velocity = Projectile.SafeDirByRot().ToRandVelocity(ToRadians(5f), 0.8f, 1.2f);
             d.scale = Main.rand.NextFloat(0.9f, 1.1f);
             d.noGravity = true;
-            if(Main.rand.NextBool(4))
-                    ECSParticle.SmokeParticle(pos, Projectile.SafeDirByRot().ToRandVelocity(ToRadians(7f), 0.8f, 8.2f), RandLerpColor(RandLerpColor(Color.OrangeRed, Color.Orange), Color.LightYellow), Main.rand.Next(60, 75), RandRotTwoPi, 1f, Main.rand.NextFloat(.7f, .9f) * Projectile.scale * .11f, true, BlendState.Additive);
+            if (Main.rand.NextBool(4))
+                ECSParticle.SmokeParticle(pos, Projectile.SafeDirByRot().ToRandVelocity(ToRadians(7f), 0.8f, 8.2f), RandLerpColor(RandLerpColor(Color.OrangeRed, Color.Orange), Color.LightYellow), Main.rand.Next(60, 75), RandRotTwoPi, 1f, Main.rand.NextFloat(.7f, .9f) * Projectile.scale * .11f, true, BlendState.Additive);
             if (Projectile.numUpdates % 2 == 0)
             {
                 if (Main.rand.NextBool(3))
@@ -175,7 +175,7 @@ namespace HJScarletRework.Projs.Executor
                 d.velocity = Projectile.SafeDirByRot().ToRandVelocity(ToRadians(7f), 0.8f, 1.4f);
                 d.scale = Main.rand.NextFloat(0.9f, 1.1f);
                 d.noGravity = true;
-                    //ECSParticle.SmokeParticle(pos, Projectile.SafeDirByRot().ToRandVelocity(ToRadians(7f), 0.8f, 8.2f), RandLerpColor(RandLerpColor(Color.OrangeRed, Color.Orange), Color.LightYellow), Main.rand.Next(60, 75), RandRotTwoPi, 1f, Main.rand.NextFloat(.7f, .9f) * Projectile.scale * .11f, true, BlendState.Additive);
+                //ECSParticle.SmokeParticle(pos, Projectile.SafeDirByRot().ToRandVelocity(ToRadians(7f), 0.8f, 8.2f), RandLerpColor(RandLerpColor(Color.OrangeRed, Color.Orange), Color.LightYellow), Main.rand.Next(60, 75), RandRotTwoPi, 1f, Main.rand.NextFloat(.7f, .9f) * Projectile.scale * .11f, true, BlendState.Additive);
             }
         }
 

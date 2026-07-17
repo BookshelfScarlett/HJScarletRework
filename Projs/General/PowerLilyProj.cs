@@ -2,17 +2,12 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HJScarletRework.Projs.General
 {
     public class PowerLilyProj : HJScarletProj
     {
-        public override ClassCategory Category =>  ClassCategory.Typeless;
+        public override ClassCategory Category => ClassCategory.Typeless;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override void ExSD()
         {
