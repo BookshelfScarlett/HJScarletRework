@@ -37,7 +37,6 @@ namespace HJScarletRework.Projs.Executor
         public float SlashOpacity = 1;
         public bool SpawnProj = false;
         public List<Vector2> OldAimPos = [];
-        public int AttackSpeed => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, Owner.HeldItem.useTime * Projectile.extraUpdates, 5 * Projectile.extraUpdates);
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 2;

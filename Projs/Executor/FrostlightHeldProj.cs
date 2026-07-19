@@ -25,7 +25,6 @@ namespace HJScarletRework.Projs.Executor
         public bool CanHeal = false;
         public AnimationStruct Helper = new AnimationStruct(3);
         public override int OriginalItemID => ItemType<Frostlight>();
-        public int AttackSpeed => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, Owner.HeldItem.useTime * Projectile.MaxUpdates, 5 * Projectile.MaxUpdates);
         public List<Vector2> OldAimPos = [];
         public override bool? CanDamage() => false;
         public override bool ShouldUpdatePosition() => false;

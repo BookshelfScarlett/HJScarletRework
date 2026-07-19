@@ -150,9 +150,9 @@ namespace HJScarletRework.Globals.Executor
         internal const string FocusDamageNameID = "HJScarletRework:PrefixExecutionDamage";
         internal const string ArmorPenetrationNameID = "HJScarletRework:PrefixArmorPenetration";
         internal const string CritDamageID = "HJScarletRework:PrefixCritDamage";
-        public string ExecutionDamageValue => Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.Prefixs.ExecutionDamageLine").ToLangValue();
-        public string ArmorPenetrationValue => Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.Prefixs.ArmorPenetrationLine").ToLangValue();
-        public string CritDamageValue => Mod.GetLocalizationKey("DamageClasses.ExecutorDamageClass.Prefixs.CritDamageLine").ToLangValue();
+        public string ExecutionDamageValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.ExecutionDamageLine").ToLangValue();
+        public string ArmorPenetrationValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.ArmorPenetrationLine").ToLangValue();
+        public string CritDamageValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.CritDamageLine").ToLangValue();
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
             if (ExecutionDamageMult != 1f)

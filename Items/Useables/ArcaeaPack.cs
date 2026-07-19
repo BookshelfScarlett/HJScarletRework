@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Accessories
+namespace HJScarletRework.Items.Useables
 {
     public class ArcaeaPack : HJScarletItemClass
     {

@@ -20,6 +20,7 @@ namespace HJScarletRework.Globals.Instances
         public int terraFlamethrowerDropDamage = 0;
         public List<int> StabList = [];
         public bool isBeingStabByLavaFlow = false;
+        public int isBeingStabByLavaFlowExecution = 0;
         public bool isBeingStabByContainedBlast = false;
         public int isBeingStabByContainedStick = 0;
         public float miscCounter = 0;
@@ -31,6 +32,8 @@ namespace HJScarletRework.Globals.Instances
             terraFlamethrowerDropDamage = 0;
             if (isBeingStabByContainedStick > 0)
                 isBeingStabByContainedStick--;
+            if (isBeingStabByContainedStick > 0)
+                isBeingStabByLavaFlowExecution--;
         }
         public override void PostAI(NPC npc)
         {

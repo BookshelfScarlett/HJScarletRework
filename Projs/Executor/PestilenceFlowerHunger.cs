@@ -132,7 +132,6 @@ namespace HJScarletRework.Projs.Executor
             Vector2 pos = Projectile.Center - Main.screenPosition;
             float scaleLerp = Utils.GetLerpValue(0, 6f * Projectile.MaxUpdates, Timer, true);
             //绘制残影
-            float scale = 1f;
             int length = Projectile.oldPos.Length;
             //for (int i = 0; i < length; i++)
             //{

@@ -14,6 +14,10 @@ namespace HJScarletRework.Globals.Instances.Items
 {
     public partial class HJScarletGlobalItem : GlobalItem
     {
+        public override bool OnPickup(Item item, Player player)
+        {
+            return base.OnPickup(item, player);
+        }
         public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
         {
             switch (item.type)

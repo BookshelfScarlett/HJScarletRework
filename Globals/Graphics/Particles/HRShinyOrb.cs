@@ -10,7 +10,6 @@ namespace HJScarletRework.Globals.Graphics.Particles
     public class HRShinyOrb : BaseParticle
     {
         public bool UseRot = false;
-        private float GlowCenterMult;
         public override int UseBlendStateID => BlendStateID.Additive;
         public HRShinyOrb(Vector2 position, Vector2 velocity, Color color, int lifetime, float scale, float opacity = 1f)
         {
@@ -21,16 +20,6 @@ namespace HJScarletRework.Globals.Graphics.Particles
             Opacity = opacity;
             Scale = scale;
         }
-        public HRShinyOrb(Vector2 position, Vector2 velocity, Color color, int lifetime, float scale, bool hasGlowCenter, float opacity = 1f)
-        {
-            Position = position;
-            Velocity = velocity;
-            DrawColor = color;
-            Lifetime = lifetime;
-            Opacity = opacity;
-            Scale = scale;
-        }
-
 
         public override void OnSpawn()
         {
@@ -53,8 +42,6 @@ namespace HJScarletRework.Globals.Graphics.Particles
         {
             Texture2D texture = HJScarletTexture.Particle_HRShinyOrb.Value;
             spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor * Opacity, 0, texture.Size() / 2, Scale, SpriteEffects.None, 0);
-            if (GlowCenterMult > 0)
-                spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor * Opacity, 0, texture.Size() / 2, Scale * GlowCenterMult, SpriteEffects.None, 0);
         }
     }
 }

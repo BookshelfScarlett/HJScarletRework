@@ -4,6 +4,7 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.ExecutorAlter;
+using HJScarletRework.Items.Useables;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -45,6 +46,7 @@ namespace HJScarletRework.Globals.Players
         public int containedBlastBuffTime = 0;
         public int containedBlastBoomCount = 0;
         public bool holdingGaiaStaff = false;
+        public bool firstTimeCraftGaia=false;
         #region 护甲
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;

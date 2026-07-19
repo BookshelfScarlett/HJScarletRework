@@ -36,7 +36,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 30;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-            Projectile.penetrate = 4;
+            Projectile.penetrate = 8;
             Projectile.noEnchantmentVisuals = true;
         }
         public override void OnFirstFrame()
@@ -50,9 +50,8 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.IsOutScreen())
                 return;
             Vector2 projPos = Projectile.Center - DrawOffset;
-            if (Main.rand.NextBool(2))
-                new SnowCloud(projPos.ToRandCirclePos(25), Projectile.velocity / 3f, RandLerpColor(Color.SkyBlue, Color.WhiteSmoke), 40, RandRotTwoPi, 0.6f, 0.1f * Main.rand.NextFloat(0.75f, 1.01f)).Spawn();
             if (Main.rand.NextBool(4))
+            {
                 if (Main.rand.NextBool())
                 {
                     ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
@@ -68,19 +67,26 @@ namespace HJScarletRework.Projs.Executor
                 }
                 else
                     new ShinyCrossStar(projPos.ToRandCirclePos(25), Projectile.velocity / 3f, RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), Main.rand.NextFromList(40, 70), 0, 1, Main.rand.NextFloat(0.75f, 1.01f) * 0.73f).Spawn();
+            }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile.AddExecutionTimeImmediate(ItemType<DualWraithStaff>());
+            Projectile.AddExecutionTimeImmediate(ItemType<DualWraithStaff>(), Main.rand.Next(1, 3));
             if (Projectile.numHits < 1)
-                SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { MaxInstances = 1, Variants = [1], Volume = 0.8f, Pitch = -0.5f });
-            float randRod = Projectile.SafeDir().ToRandVelocity(ToRadians(10f), 1).ToRotation();
-            for (int i = 0; i < 3; i++)
             {
-                Vector2 dir = Projectile.SafeDir().RotatedBy(ToRadians(120) * i + randRod);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir * 16f, ProjectileType<DualWraithStaffGhost>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
-                proj.HJScarlet().HasExecutionMechanic = false;
-                proj.ai[1] = Main.rand.NextBool().ToDirectionInt();
+                if (Projectile.ai[1] == 0)
+                    SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { MaxInstances = 1, Variants = [1], Volume = 0.8f, Pitch = -0.5f }, Projectile.Center);
+            }
+            float randRod = Projectile.SafeDir().ToRandVelocity(ToRadians(10f), 1).ToRotation();
+            if (Projectile.ai[1] == 0)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Vector2 dir = Projectile.SafeDir().RotatedBy(ToRadians(120) * i + randRod);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir * 16f, ProjectileType<DualWraithStaffGhost>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
+                    proj.HJScarlet().HasExecutionMechanic = false;
+                    proj.ai[1] = Main.rand.NextBool().ToDirectionInt();
+                }
             }
             for (int i = 0; i < 24; i++)
             {

@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class PrunusMumeFlower : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Typeless;
+        public override ClassCategory Category => ClassCategory.Executor;
         public ref float OriginalRotation => ref Projectile.localAI[0];
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()

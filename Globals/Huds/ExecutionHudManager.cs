@@ -135,8 +135,6 @@ namespace HJScarletRework.Globals.Huds
         {
             GeneralOpactiy = 0;
         }
-        private int StopTimer = 0;
-        private DateTime FreezeTimer;
         public bool StopNow = false;
         public override void ModifyTimeRate(ref double timeRate, ref double tileUpdateRate, ref double eventUpdateRate)
         {

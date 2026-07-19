@@ -134,3 +134,13 @@ FruitofEternity: {
 	Tooltip: ""
 	DetailTooltip: ""
 }
+
+GaiaStrikerLootBox: {
+	DisplayName: Gaia Striker Loot Box
+	Tooltip: ""
+}
+
+YogsothothsYardPack: {
+	DisplayName: Yogsothoths Yard Pack
+	Tooltip: ""
+}

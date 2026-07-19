@@ -154,3 +154,31 @@ FruitofEternity: {
 		但这也意味着成为众神永远的奴仆。
 		'''
 }
+
+GaiaStrikerLootBox: {
+	DisplayName: 盖亚宝箱
+	Tooltip:
+		'''
+		使用后为你提供[i:HJScarletRework/GaiaStriker][c/FE0000:盖亚重锤]
+		请在空旷场地内使用
+		'''
+}
+
+YogsothothsYardPack: {
+	DisplayName: 犹格索托斯的庭院奖励包
+	Tooltip:
+		'''
+		开启后立刻获得下列物品：
+		[i:HJScarletRework/CrimsonScythe][c/DC143C:猩红重镰]
+		[i:HJScarletRework/ReaperHead][c/DC143C:前台死神发箍]
+		[i:HJScarletRework/ReaperBody][c/DC143C:前台死神上衣]
+		[i:HJScarletRework/ReaperLegs][c/DC143C:前台死神下裙]
+		[i:HJScarletRework/LeafMaidItem][c/00BFFF:人偶水晶]
+		[i:HJScarletRework/RedDragonItem][c/F08080:红龙长角]
+		[i:HJScarletRework/CantoneseGirlItem][c/2E8B57:斩灵刀鞘]
+		包括特莉波卡系列物品，小叶子、耶芙娜和霞露零的时装变身道具
+		-
+		“另，员工可攻略。”
+		-
+		'''
+}

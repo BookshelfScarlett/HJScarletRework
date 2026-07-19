@@ -1,263 +1,224 @@
+Executor: {
+	// DragonSwordFireball.DisplayName: Dragon Sword Fireball
+	AetherfireSmasherExecution.DisplayName: ÌìÑ×ÆÆ|´¦¾ö
+	AetherfireSmasherFireball.DisplayName: ÌìÑ×ÆÆ|»ğÇò
+	AetherfireSmasherProj.DisplayName: ÌìÑ×ÆÆ
+	AetherfireSmasherVolcano.DisplayName: ÌìÑ×ÆÆ|»ğÉ½
+	AngryBombExecution.DisplayName: ·ßÅ­Õ¨µ¯|´¦¾ö
+	AngryBombProj.DisplayName: ·ßÅ­Õ¨µ¯
+	BinaryStarsArrow.DisplayName: Ë«×ÓĞÇ|ĞÇÔÆÉäÏß
+	BinaryStarsExecution.DisplayName: Ë«×ÓĞÇ|´¦¾ö
+	BinaryStarsPhantom.DisplayName: Ë«×ÓĞÇ|´¦¾ö
+	BinaryStarsPhantomClone.DisplayName: Ë«×ÓĞÇ|´¦¾ö
+	BinaryStarsProj.DisplayName: Ë«×ÓĞÇ
+	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
+	BoneSlapProj.DisplayName: ¹ÇÕÆ
+	ContainedBlastBoom.DisplayName: ¶ôÖÆ±¬Õ¨|Õ³µ¯±¬Õ¨
+	ContainedBlastHeldProj.DisplayName: ¶ôÖÆ±¬Õ¨
+	ContainedBlastShockBullet.DisplayName: ¶ôÖÆ±¬Õ¨|³å»÷µ¯
+	ContainedBlastStickBullet.DisplayName: ¶ôÖÆ±¬Õ¨|Õ³µ¯
+	DeathTollsArrow.DisplayName: ËÀÍöÉ¥ÖÓ|ÃÎ÷ÊÖ®¼ı
+	DeathTollsDarkEnergy.DisplayName: ËÀÍöÉ¥ÖÓ|°µÓ°Ä§ÄÜ
+	DeathTollsExecution.DisplayName: ËÀÍöÉ¥ÖÓ|×·¼Ó´¦¾ö
+	DeathTollsMinion.DisplayName: ËÀÍöÉ¥ÖÓ|ÆÍ´Ó
+	DeathTollsStreak.DisplayName: ËÀÍöÉ¥ÖÓ|ÆÍ´ÓÉäÏß
+	DeathTollsProj.DisplayName: ËÀÍöÉ¥ÖÓ
+	DesertDaggerMark.DisplayName: Desert Dagger Mark
+	DreamingLightBeam.DisplayName: ÖıÃÎÖ®¹â|ÉäÏß
+	DreamingLightFireball.DisplayName: ÖıÃÎÖ®¹â|×çÖä»ğÇò
+	DreamingLightMinion.DisplayName: ÖıÃÎÖ®¹â|ÆÍ´Ó
+	DreamingLightProj.DisplayName: ÖıÃÎÖ®¹â
+	DreamingLightStriker.DisplayName: ÖıÃÎÖ®¹â|ÃÎ¾³Ö®´¸
+	DreamlessNightArrow.DisplayName: ÎŞÃÎÖ®Ò¹|ÃÎ¾³Ö®ĞÇ
+	DreamlessNightBeam.DisplayName: ÎŞÃÎÖ®Ò¹|ÉäÏß
+	DreamlessNightMinion.DisplayName: ÎŞÃÎÖ®Ò¹|ÆÍ´Ó
+	DreamlessNightProj.DisplayName: ÎŞÃÎÖ®Ò¹
+	DualWraithStaffGhost.DisplayName: Ë«»êÄ§ÕÈ|¹í»ê
+	DualWraithStaffHeldProj.DisplayName: Ë«»êÄ§ÕÈ
+	DualWraithStaffJavelin.DisplayName: Ë«»êÄ§ÕÈ|Í¶Ã¬
+	DungeonBreakerExecution.DisplayName: µØÀÎÆÆ»µÕß|´¦¾ö
+	DungeonBreakerProj.DisplayName: µØÀÎÆÆ»µÕß
+	DungeonBreakerShockwave.DisplayName: µØÀÎÆÆ»µÕß|³å»÷
+	DungeonBreakerWaterbolt.DisplayName: µØÀÎÆÆ»µÕß|Ë®¼ı
+	EndlessWarExecution.DisplayName: ÎŞ¾¡Õ½Õù|¿ñ·ç¹ı¾³
+	EndlessWarLightening.DisplayName: ÎŞ¾¡Õ½Õù|µçÉÁÀ×Ãù
+	EndlessWarProj.DisplayName: ÎŞ¾¡Õ½Õù
+	ExsanguinationBulletProj.DisplayName: ·ÅÑªÁÆ·¨|ÇáĞÍµ¯Ò©
+	ExsanguinationHeldProj.DisplayName: ·ÅÑªÁÆ·¨
+	FleshGrinderExecution.DisplayName: ÄëÈâ»ú|´¦¾ö
+	FleshGrinderProj.DisplayName: ÄëÈâ»ú
+	FleshtumorHeldProj.DisplayName: ÈâÁö
+	FleshtumorHunger.DisplayName: ÈâÁö|¶ö¹í
+	FleshtumorHungerStick.DisplayName: Fleshtumor Hunger Stick
+	FrostHammerExecution.DisplayName: ±ùÀù|Ñ©»¨
+	FrostHammerIceSpike.DisplayName: ±ùÀù|±ù×¶
+	FrostHammerProj.DisplayName: ±ùÀù
+	FrostlightFlamethrower.DisplayName: º®Ëª»ğ¾æ|Åç»ğÆ÷
+	FrostlightFlamethrowerFlame.DisplayName: º®Ëª»ğ¾æ|»ğÑæ
+	FrostlightFrostball.DisplayName: º®Ëª»ğ¾æ|º®Ëª»ğÇò
+	FrostlightHeldProj.DisplayName: º®Ëª»ğ¾æ
+	FrostlightHeldProjAlt.DisplayName: º®Ëª»ğ¾æ
+	FrostoftheStormChargeProj.DisplayName: º®Ëª·ç±©|¿ìËÙÁ¬¿³
+	FrostoftheStormExecution.DisplayName: º®Ëª·ç±©|Ì§ÊÖÇ°Ò¡
+	FrostoftheStormHeldProj.DisplayName: º®Ëª·ç±©
+	FrostoftheStormSlash.DisplayName: º®Ëª·ç±©|µ¶¹â
+	FrostoftheStormSlashGiant.DisplayName: º®Ëª·ç±©|´óĞÍµ¶¹â
+	GaiaStrikerBeam.DisplayName: ¸ÇÑÇÖØ´¸|ÉäÏß
+	GaiaStrikerBloodyBullet.DisplayName: ¸ÇÑÇÖØ´¸|ÑªĞÈ·Éµ¯ 
+	GaiaStrikerBolt.DisplayName: ¸ÇÑÇÖØ´¸|Î¢ĞÍÑªµ¯
+	GaiaStrikerHeldProj.DisplayName: ¸ÇÑÇÖØ´¸|ÉäÏßĞÎÌ¬
+	GaiaStrikerMountedProj.DisplayName: ¸ÇÑÇÖØ´¸|×Ô¶¯ĞÎÌ¬
+	GaiaStrikerProj.DisplayName: ¸ÇÑÇÖØ´¸
+	GhostDaggerMark.DisplayName: Ghost Dagger Mark
+	JungleMadnessExecution.DisplayName: ´ÔÁÖ¿ñÅ­|´¦¾ö
+	JungleMadnessLeafs.DisplayName: ´ÔÁÖ¿ñÅ­|Ê÷Ò¶
+	JungleMadnessProj.DisplayName: ´ÔÁÖ¿ñÅ­
+	LavaFlowBoom.DisplayName: ÈÛÑÒÁ÷|±¬Õ¨
+	LavaFlowExecution.DisplayName: ÈÛÑÒÁ÷|´¦¾ö
+	LavaFlowProj.DisplayName: ÈÛÑÒÁ÷
+	MantleLayerExecution.DisplayName: µØá£|´¦¾ö
+	MantleLayerProj.DisplayName: µØá£
+	MoltenDaggerMark.DisplayName: Molten Dagger Mark
+	MonkStaffBubble.DisplayName: î§Ë¯ÕÂÓã|´úĞĞÕßÅİÅİ
+	MonkStaffLightning.DisplayName: ÌìÁúÖ®Å­|´úĞĞÕßÉÁµç
+	MonkStaffSkillProj.DisplayName: µØÀÎÊØÎÀÕß|³äÄÜÖÎÁÆ
+	PestilenceFlowerBomb.DisplayName: ¶ñÒÛÖ®»¨|Æ®Òİ»¨°ú
+	PestilenceFlowerHeldProj.DisplayName: ¶ñÒÛÖ®»¨
+	PestilenceFlowerHunger.DisplayName: ¶ñÒÛÖ®»¨|´¥ÊÖ
+	PrunusMumeFlower.DisplayName: ºìÃ·|»¨
+	PrunusMumePetal.DisplayName: ºìÃ·|»¨°ê
+	PrunusMumeProj.DisplayName: ºìÃ·
+	PureYinyoBlack.DisplayName: ÖÁ´¿ÒõÑô|Ì«ÒõÖ®´¸
+	PureYinyoExecution.DisplayName: ÖÁ´¿ÒõÑô|´¦¾ö
+	PureYinyoJade.DisplayName: ÖÁ´¿ÒõÑô|´¦¾öÓñ
+	PureYinyoShard.DisplayName: ÖÁ´¿ÒõÑô|ÆÕÍ¨ËéÆ¬
+	PureYinyoWhite.DisplayName: ÖÁ´¿ÒõÑô|Ì«ÑôÖ®´¸
+	SimpleHandAxeExecution.DisplayName: ¼òÒ×Ë«ÈĞ¸«|´¦¾ö
+	SimpleHandAxeProj.DisplayName: ½¨ÒéË«ÈĞ¸«
+	StarofHopeProj.DisplayName: Starof Hope Proj
+	StarofHopeProj2.DisplayName: Starof Hope Proj2
+	StarofHopeStar.DisplayName: Starof Hope Star
+	SundownerAmmo.DisplayName: Sundowner Ammo
+	SundownerFireball.DisplayName: Sundowner Fireball
+	SundownerFlare.DisplayName: Sundowner Flare
+	SundownerFlareGun.DisplayName: Sundowner Flare Gun
+	SundownerHeldProj.DisplayName: Sundowner Held Proj
+	SundownerRocket.DisplayName: Sundowner Rocket
+	TearEyeProj.DisplayName: Tear Eye Proj
+	TheDefilerExecution.DisplayName: The Defiler Execution
+	TheDefilerProj.DisplayName: The Defiler Proj
+	TheJudgementCross.DisplayName: The Judgement Cross
+	TheJudgementCrossMounted.DisplayName: The Judgement Cross Mounted
+	TheJudgementMinion.DisplayName: The Judgement Minion
+	TheJudgementProj.DisplayName: The Judgement Proj
+	TheJudgementStar.DisplayName: The Judgement Star
+	TheJudgementStarExecution.DisplayName: The Judgement Star Execution
+	TheJudgementStarExecutionMounted.DisplayName: The Judgement Star Execution Mounted
+	ThePunishmentExecution.DisplayName: The Punishment Execution
+	ThePunishmentProj.DisplayName: The Punishment Proj
+	ThePunishmentStar.DisplayName: The Punishment Star
+}
+
 Melee: {
-	AzureFrostmarkEnergy.DisplayName: æ¹›è“éœœç—•-å¯’éœœçƒ
-	AzureFrostmarkProj.DisplayName: æ¹›è“éœœç—•
-	BamboomerangProj.DisplayName: å›æ—‹ç«¹
-	CandLanceBeam.DisplayName: æ»´èœ¡æª-é­‚ç«
-	CandLanceFire.DisplayName: æ»´èœ¡æª-é­‚ç«ç¯
-	CandLanceThrownProj.DisplayName: æ»´èœ¡æª-æŠ•æ·
-	CryoblazeHymnFireball.DisplayName: å†°ç«é¢‚æ­Œ-ç«ç„°å¼¹
-	CryoblazeHymnFirePortal.DisplayName: å†°ç«é¢‚æ­Œ-ç«ç„°ä¼ é€é—¨
-	CryoblazeHymnFrostEnergy.DisplayName: å†°ç«é¢‚æ­Œ-å¯’éœœå¼¹
-	CryoblazeHymnFrostPortal.DisplayName: å†°ç«é¢‚æ­Œ-å¯’éœœä¼ é€é—¨
-	CryoblazeHymnProj.DisplayName: å†°ç«é¢‚æ­Œ
-	DeepToneMinion.DisplayName: Deep Tone Minion
-	DeepToneShockwave.DisplayName: Deep Tone Shockwave
-	DeepToneTenctacle.DisplayName: ä½å¼-æŠ•æ·-è§¦æ‰‹
-	DeepToneThrownProj.DisplayName: ä½å¼-æŠ•æ·
-	DialecticsCubeProj.DisplayName: è¾©è¯æ³•-æŠ•æ·-æ–¹å—é›¶ä»¶
-	DialecticsSkyFall.DisplayName: è¾©è¯æ³•-æŠ•æ·-å”¯ç‰©å°„å¼¹
-	DialecticsSpiningBlock.DisplayName: è¾©è¯æ³•-æŠ•æ·-æ ‡è®°
-	DialecticsThrownProj.DisplayName: è¾©è¯æ³•-æŠ•æ·
-	EclipseWraithBoom.DisplayName: èš€æ—¥å…½å½±-çˆ†ç‚¸
-	EclipseWraithFireball.DisplayName: èš€æ—¥å…½å½±-å¤©ç¾ç«çƒ
-	EclipseWraithProj.DisplayName: èš€æ—¥å…½å½±
-	EvolutionArrow.DisplayName: è¿›åŒ–-æŠ•æ·-è¿½è¸ªèƒ½é‡ç®­çŸ¢
-	EvolutionThrownProj.DisplayName: è¿›åŒ–-æŠ•æ·
-	FierySpearFireball.DisplayName: ç‚½ç„°å·¨çŸ›-ç«çƒ
-	FierySpearProj.DisplayName: ç‚½ç„°å·¨çŸ›
-	FlybackHandClockMounted.DisplayName: å½’é›¶é’ˆ-æŠ•æ·-æ—¶é’Ÿæ°´æ™¶
-	FlybackHandEdgeProj.DisplayName: å½’é›¶é’ˆ-æŠ•æ·-æ²»ç–—ç 
-	FlybackHandStar.DisplayName: å½’é›¶é’ˆ-æŠ•æ·-æ—¶é—´ä¹‹æ˜Ÿ
-	FlybackHandThrownProj.DisplayName: å½’é›¶é’ˆ-æŠ•æ·
-	GalvanizedHandArrow.DisplayName: ç”µè¡¨é•€é’ˆ-æŠ•æ·-æŒ‡é’ˆ
-	GalvanizedHandArrowMounted.DisplayName: ç”µè¡¨é•€é’ˆ-æŠ•æ·-æŒ‡é’ˆæŒ‚è½½
-	GalvanizedHandSideProj.DisplayName: ç”µè¡¨é•€é’ˆ-æŠ•æ·-å¹»å½±é•€é’ˆ
-	GalvanizedHandThrownProj.DisplayName: ç”µè¡¨é•€é’ˆ-æŠ•æ·
-	LightBiteArrow.DisplayName: ç¥ç§˜é€šç”¨å°çˆ†ç‚¸
-	LightBiteDarkStar.DisplayName: èš€å…‰çŸ›-æŠ•æ·-é»‘èš€ä¹‹æ˜Ÿ
-	LightBiteThrownProj.DisplayName: èš€å…‰çŸ›
-	SpearofDarknessShadow.DisplayName: é»‘æš—é•¿çŸ›-æŠ•æ·-æš—å½±æ …æ 
-	SpearofDarknessThrownProj.DisplayName: é»‘æš—é•¿çŸ›-æŠ•æ·
-	SpearofEscapeBoom.DisplayName: é€ƒé€¸é€Ÿåº¦-æŠ•æ·-çˆ†ç‚¸
-	SpearofEscapeMissile.DisplayName: é€ƒé€¸é€Ÿåº¦-æŠ•æ·-åˆ†è£‚å¯¼å¼¹
-	SpearofEscapeRider.DisplayName: é€ƒé€¸é€Ÿåº¦-æŠ•æ·
-	SpearofEscapeThrownProj.DisplayName: Spearof Escape Thrown Proj
-	SweetStabThrownProj.DisplayName: ç”œèœœä¸€åˆº-æŠ•æ·
-	TheMarsMark.DisplayName: ç›å°”æ–¯-æ ‡è®°
-	TheMarsPhantom.DisplayName: ç›å°”æ–¯-æ½®æ±ä¹‹çŸ›
-	TheMarsProj.DisplayName: ç›å°”æ–¯
-	TonbogiriBubble.DisplayName: å¾¡æ‰‹æ†-æŠ•æ·-æ¯’æ³¡
-	TonbogiriThrownProj.DisplayName: å¾¡æ‰‹æ†-æŠ•æ·
-	WildPointerThrownProj.DisplayName: é‡æŒ‡é’ˆ-æŠ•æ·
-	BinaryStarsExecution.DisplayName: åŒå­æ˜Ÿ-å¤©é™é”¤
-	CactusSpearProj.DisplayName: ä»™äººæŒæŠ•çŸ›
-	CactusSpearSpike.DisplayName: ä»™äººæŒæŠ•çŸ›-å°–åˆº
-	ColdSakuraProj.DisplayName: å†·æ¨±
-	ColdSakuraArrow.DisplayName: å†·æ¨±-ç®­çŸ¢
-	TerraSpearArrow.DisplayName: æ³°æ‹‰æŠ•æª-ç®­çŸ¢
-	TerraSpearPortal.DisplayName: æ³°æ‹‰æŠ•æª-ä¼ é€é—¨
-	TerraSpearProj.DisplayName: æ³°æ‹‰æŠ•æª
-	TerraSpearSideProj.DisplayName: æ³°æ‹‰æŠ•æª
-	TerraSpearLaser.DisplayName: Terra Spear Laser
-	AbyssalWorldProj.DisplayName: Abyssal World Proj
-	AbyssalWorldVortex.DisplayName: Abyssal World Vortex
-	// DeepToneMouth.DisplayName: Deep Tone Mouth
-	// DeepToneHealOrb.DisplayName: Deep Tone Heal Orb
 	// DragonSwordHeldProj.DisplayName: Dragon Sword Held Proj
 	// DragonSwordSlash.DisplayName: Dragon Sword Slash
-	// FrostoftheStormHeldProj.DisplayName: Frostofthe Storm Held Proj
+	// AzureFrostmarkEnergy.DisplayName: Azure Frostmark Energy
+	// AzureFrostmarkProj.DisplayName: Azure Frostmark Proj
+	// BamboomerangProj.DisplayName: Bamboomerang Proj
+	// CactusSpearProj.DisplayName: Cactus Spear Proj
+	// CactusSpearSpike.DisplayName: Cactus Spear Spike
+	// CandLanceBeam.DisplayName: Cand Lance Beam
+	// CandLanceFire.DisplayName: Cand Lance Fire
+	// CandLanceThrownProj.DisplayName: Cand Lance Thrown Proj
+	// ColdSakuraArrow.DisplayName: Cold Sakura Arrow
+	// ColdSakuraProj.DisplayName: Cold Sakura Proj
+	// CryoblazeHymnFireball.DisplayName: Cryoblaze Hymn Fireball
+	// CryoblazeHymnFirePortal.DisplayName: Cryoblaze Hymn Fire Portal
+	// CryoblazeHymnFrostEnergy.DisplayName: Cryoblaze Hymn Frost Energy
+	// CryoblazeHymnFrostPortal.DisplayName: Cryoblaze Hymn Frost Portal
+	// CryoblazeHymnProj.DisplayName: Cryoblaze Hymn Proj
+	// DeepToneHealOrb.DisplayName: Deep Tone Heal Orb
+	// DeepToneMouth.DisplayName: Deep Tone Mouth
+	// DeepToneThrownProj.DisplayName: Deep Tone Thrown Proj
+	// DialecticsCubeProj.DisplayName: Dialectics Cube Proj
+	// DialecticsSkyFall.DisplayName: Dialectics Sky Fall
+	// DialecticsSpiningBlock.DisplayName: Dialectics Spining Block
+	// DialecticsThrownProj.DisplayName: Dialectics Thrown Proj
+	// EclipseWraithBoom.DisplayName: Eclipse Wraith Boom
+	// EclipseWraithFireball.DisplayName: Eclipse Wraith Fireball
+	// EclipseWraithProj.DisplayName: Eclipse Wraith Proj
 	// EnchantedSwordfishJavelin.DisplayName: Enchanted Swordfish Javelin
 	// EnchantedSwordfishProj.DisplayName: Enchanted Swordfish Proj
+	// EvolutionArrow.DisplayName: Evolution Arrow
+	// EvolutionThrownProj.DisplayName: Evolution Thrown Proj
+	// FierySpearFireball.DisplayName: Fiery Spear Fireball
+	// FierySpearProj.DisplayName: Fiery Spear Proj
+	// FlybackHandClockMounted.DisplayName: Flyback Hand Clock Mounted
+	// FlybackHandEdgeProj.DisplayName: Flyback Hand Edge Proj
+	// FlybackHandStar.DisplayName: Flyback Hand Star
+	// FlybackHandThrownProj.DisplayName: Flyback Hand Thrown Proj
+	// GalvanizedHandArrow.DisplayName: Galvanized Hand Arrow
+	// GalvanizedHandSideProj.DisplayName: Galvanized Hand Side Proj
+	// GalvanizedHandThrownProj.DisplayName: Galvanized Hand Thrown Proj
+	// LightBiteDarkStar.DisplayName: Light Bite Dark Star
+	// LightBiteThrownProj.DisplayName: Light Bite Thrown Proj
 	// SamsaraofDawnlightBolt.DisplayName: Samsaraof Dawnlight Bolt
 	// SamsaraofDawnlightMoon.DisplayName: Samsaraof Dawnlight Moon
 	// SamsaraofDawnlightSun.DisplayName: Samsaraof Dawnlight Sun
+	// SpearofDarknessShadow.DisplayName: Spearof Darkness Shadow
+	// SpearofDarknessThrownProj.DisplayName: Spearof Darkness Thrown Proj
+	// SpearofEscapeBoom.DisplayName: Spearof Escape Boom
+	// SpearofEscapeMissile.DisplayName: Spearof Escape Missile
+	// SpearofEscapeRider.DisplayName: Spearof Escape Rider
+	// SweetStabThrownProj.DisplayName: Sweet Stab Thrown Proj
+	// TerraSpearArrow.DisplayName: Terra Spear Arrow
+	// TerraSpearPortal.DisplayName: Terra Spear Portal
+	// TerraSpearProj.DisplayName: Terra Spear Proj
+	// TheMarsMark.DisplayName: The Mars Mark
+	// TheMarsPhantom.DisplayName: The Mars Phantom
+	// TheMarsProj.DisplayName: The Mars Proj
+	// TonbogiriBubble.DisplayName: Tonbogiri Bubble
+	// TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
+	// WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
 }
 
 Typeless: {
-	EvolutionEnergyPortal.DisplayName: è¿›åŒ–-æŠ•æ·-èƒ½é‡ä¼ é€é—¨
-	RegenOrbsPink.DisplayName: Regen Orbs Pink
-	DreamingLightBeam.DisplayName: Dreaming Light Beam
-	JudgementStarAlt.DisplayName: TheJudgement Star Alt
-	TheJudgementStar.DisplayName: TheJudgement Star Normal
-	DeathTollsProj.DisplayName: Death Tolls Proj
-	DesterrennachtHealProj.DisplayName: æ˜Ÿæœˆå¤œ-æ²»ç–—å¼¹å¹•
-	CowboyBullet.DisplayName: ç‰›ä»”æŠ¤ç”²æ ¸å¿ƒ-å­å¼¹
-	CowboyRevolverProj.DisplayName: ç‰›ä»”æŠ¤ç”²æ ¸å¿ƒ-æª
-	RuneWizardProj.DisplayName: ç¬¦æ–‡æ³•å¸ˆæŠ¤ç”²æ ¸å¿ƒ-é­”æ³•
-	FloatingPlants.DisplayName: æŠ¤èŠ±å‘˜æŠ¤ç”²æ ¸å¿ƒ-æ¼‚æµ®è‰è¯
-	// InvisBoom.DisplayName: Invis Boom
-	// TerraFlamethrowerHeldProj.DisplayName: Terra Flamethrower Held Proj
-	// FrostHammerExecution.DisplayName: Frost Hammer Execution
-	// FrostHammerProj.DisplayName: Frost Hammer Proj
-	// DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
-	// DiverJellyFish.DisplayName: Diver Jelly Fish
-	// PrunusMumePetal.DisplayName: Prunus Mume Petal
-	// PrunusMumeFlower.DisplayName: Prunus Mume Flower
-	// SlimeGodShieldSunProj.DisplayName: Slime God Shield Sun Proj
-	// PureYinyoShard.DisplayName: Pure Yinyo Shard
-	// PureYinyoExecution.DisplayName: Pure Yinyo Execution
-	// PowerLilyProj.DisplayName: Power Lily Proj
-	// AngryBombExecution.DisplayName: Angry Bomb Execution
-	// SamsaraofDawnlightProj.DisplayName: Samsaraof Dawnlight Proj
 	// BoneSlapBone.DisplayName: Bone Slap Bone
-	// ContainedBlastShockBullet.DisplayName: Contained Blast Shock Bullet
-	// ContainedBlastStickBullet.DisplayName: Contained Blast Stick Bullet
-	// GaiaStrikerSmasher.DisplayName: Gaia Striker Smasher
-}
-
-Pets: {
-	NoneProj.DisplayName: _
-	ShadowProj.DisplayName: æš—å½±å¢™å® ç‰©
-	SquidProj.DisplayName: é±¿é±¼å® ç‰©
-	WatcherProj.DisplayName: é’Ÿè¡¨å® ç‰©
-	WhaleProj.DisplayName: é²¸é±¼å® ç‰©
-}
-
-Executor: {
-	AetherfireSmasherExecution.DisplayName: å¤©ç‚ç ´-å¤„å†³
-	AetherfireSmasherFireball.DisplayName: å¤©ç‚ç ´-ç«çƒ
-	AetherfireSmasherProj.DisplayName: å¤©ç‚ç ´
-	AetherfireSmasherVolcano.DisplayName: å¤©ç‚ç ´-ç«æŸ±
-	BinaryStarsArrow.DisplayName: åŒå­æ˜Ÿ-æ˜Ÿäº‘ç®­çŸ¢
-	BinaryStarsExecution.DisplayName: åŒå­æ˜Ÿ-å¤„å†³
-	BinaryStarsPhantom.DisplayName: åŒå­æ˜Ÿ-å¹»å½±
-	BinaryStarsPhantomClone.DisplayName: åŒå­æ˜Ÿ-å¹»å½±
-	BinaryStarsProj.DisplayName: åŒå­æ˜Ÿ
-	MantleLayerExecution.DisplayName: åœ°å¹”-å¤„å†³
-	MantleLayerProj.DisplayName: åœ°å¹”
-	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
-	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
-	DeathTollsArrow.DisplayName: æ­»äº¡ä¸§é’Ÿ-æ¢¦é­‡ç®­çŸ¢
-	DeathTollsDarkEnergy.DisplayName: æ­»äº¡ä¸§é’Ÿ-æš—å½±èƒ½é‡
-	DeathTollsExecution.DisplayName: æ­»äº¡ä¸§é’Ÿ-å¤„å†³
-	DeathTollsMinion.DisplayName: æ­»äº¡ä¸§é’Ÿ-ä»†ä»
-	DeathTollsProj.DisplayName: æ­»äº¡ä¸§é’Ÿ
-	DeathTollsStreak.DisplayName: æ­»äº¡ä¸§é’Ÿ-ä»†ä»å°„çº¿
-	DreamingLightFireball.DisplayName: é“¸æ¢¦ä¹‹å…‰-ç«çƒ
-	DreamingLightMinion.DisplayName: é“¸æ¢¦ä¹‹å…‰-ä»†ä»
-	DreamingLightProj.DisplayName: é“¸æ¢¦ä¹‹å…‰
-	DreamlessNightArrow.DisplayName: æ— æ¢¦ä¹‹å¤œ-æ¢¦ä¹‹èŠ±ç“£
-	DreamlessNightBeam.DisplayName: æ— æ¢¦ä¹‹å¤œ-æ¢¦å¢ƒå°„çº¿
-	DreamlessNightMinion.DisplayName: æ— æ¢¦ä¹‹å¤œ-ä»†ä»
-	DreamlessNightProj.DisplayName: æ— æ¢¦ä¹‹å¤œ
-	DungeonBreakerExecution.DisplayName: åœ°ç‰¢ç ´åè€…-å¤„å†³
-	DungeonBreakerProj.DisplayName: åœ°ç‰¢ç ´åè€…
-	DungeonBreakerShockwave.DisplayName: åœ°ç‰¢ç ´åè€…-å†²å‡»æ³¢
-	DungeonBreakerWaterbolt.DisplayName: åœ°ç‰¢ç ´åè€…-æ°´çŸ¢
-	ExsanguinationBulletProj.DisplayName: æ”¾è¡€ç–—æ³•-å­å¼¹
-	ExsanguinationHeldProj.DisplayName: æ”¾è¡€ç–—æ³•
-	FleshGrinderExecution.DisplayName: ç¢¾è‚‰æœº-å¤„å†³
-	FleshGrinderProj.DisplayName: ç¢¾è‚‰æœº
-	TheJudgementCross.DisplayName: åœ£ç¥æ–­ç½ª-åå­—å°„çº¿
-	TheJudgementCrossMounted.DisplayName: åœ£ç¥æ–­ç½ª-åå­—å°„çº¿
-	TheJudgementMinion.DisplayName: åœ£ç¥æ–­ç½ª-ä»†ä»
-	TheJudgementProj.DisplayName: åœ£ç¥æ–­ç½ª
-	TheJudgementStarExecution.DisplayName: åœ£ç¥æ–­ç½ª-æ–°æ˜Ÿ
-	TheJudgementStarExecutionMounted.DisplayName: åœ£ç¥æ–­ç½ª-æ–°æ˜Ÿ
-	TheJudgementStar.DisplayName: åœ£ç¥æ–­ç½ª-æ–°æ˜Ÿ
-	JungleMadnessExecution.DisplayName: ä¸›æ—ç‹‚æ€’-å¤„å†³
-	JungleMadnessLeafs.DisplayName: ä¸›æ—ç‹‚æ€’-æ ‘å¶
-	JungleMadnessProj.DisplayName: ä¸›æ—ç‹‚æ€’
-	TheDefilerExecution.DisplayName: ç·æ±¡è€…-å¤„å†³
-	TheDefilerProj.DisplayName: ç·æ±¡è€…
-	ThePunishmentExecution.DisplayName: ç¥ä»£è£å†³-ä»†ä»
-	ThePunishmentProj.DisplayName: ç¥ä»£è£å†³
-	ThePunishmentStar.DisplayName: ç¥ä»£è£å†³-æ–°æ˜Ÿ
-	DreamingLightStriker.DisplayName: é“¸æ¢¦ä¹‹å…‰-æ¢¦å¢ƒä¹‹é”¤
-	DreamingLightBeam.DisplayName: é“¸æ¢¦ä¹‹å…‰-æ¢¦å¢ƒå°„çº¿
-	DeathTollsBell.DisplayName: Death Tolls Bell
-	CrimsonScytheProj.DisplayName: Crimson Scythe Proj
-	TrueScarletProj.DisplayName: True Scarlet Proj
-	GrandFinaleLightning.DisplayName: Grand Finale Lighting
-	GrandFinaleProj.DisplayName: Grand Finale Proj
-	GrandFinaleExecution.DisplayName: Grand Finale Execution
-	GrandFinaleStriker.DisplayName: Grand Finale Striker
-	SimpleHandAxeExecution.DisplayName: ç®€æ˜“åŒåˆƒæ–§-å¤„å†³
-	SimpleHandAxeProj.DisplayName: ç®€æ˜“åŒåˆƒæ–§-å¤„å†³
-	AetherfireSmasherProj2.DisplayName: Aetherfire Smasher Proj2
-	AetherfireSmasherFireball2.DisplayName: Aetherfire Smasher Fireball2
-	AetherfireSmasherExecution2.DisplayName: Aetherfire Smasher Execution2
-	MonkStaffSkillProj.DisplayName: Monk Staff Proj
-	MonkStaffBubble.DisplayName: Sleepy Bubbles
-	MonkStaffLightning.DisplayName: Sky Dragon Fury Lightning
-	// SkyDragonFuryElectricBall.DisplayName: Sky Dragon Fury Electric Ball
-	// AbyssalWorldProj.DisplayName: Abyssal World Proj
-	// DesertDaggerMark.DisplayName: Desert Dagger Mark
-	// SundownerAmmo.DisplayName: Sundowner Ammo
-	// GhostDaggerMark.DisplayName: Ghost Dagger Mark
-	// MoltenDaggerMark.DisplayName: Molten Dagger Mark
-	// SundownerFlare.DisplayName: Sundowner Flare
-	// SundownerRocket.DisplayName: Sundowner Rocket
-	// SundownerFlareGun.DisplayName: Sundowner Flare Gun
-	// SundownerFireball.DisplayName: Sundowner Fireball
-	// DragonSwordFireball.DisplayName: Dragon Sword Fireball
-	// FrostoftheStormSlash.DisplayName: Frostofthe Storm Slash
-	// FrostoftheStormExecution.DisplayName: Frostofthe Storm Execution
-	// FrostoftheStormHeldProj.DisplayName: Frostofthe Storm Held Proj
-	// FrostoftheStormChargeProj.DisplayName: Frostofthe Storm Charge Proj
-	// FrostoftheStormSlashGiant.DisplayName: Frostofthe Storm Slash Giant
-	// FleshtumorHeldProj.DisplayName: Fleshtumor Held Proj
-	// FleshtumorHunger.DisplayName: Fleshtumor Hunger
-	// FleshtumorHungerStick.DisplayName: Fleshtumor Hunger Stick
-	// FrostHammerIceSpike.DisplayName: Frost Hammer Ice Spike
-	// SpectreStaffExecution.DisplayName: Spectre Staff Execution
-	// DualWraithStaffHeldProj.DisplayName: Spectre Staff Held Proj
-	// DualWraithStaffJavelin.DisplayName: Spectre Staff Javelin
-	// DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
-	// FrostHammerExecution.DisplayName: Frost Hammer Execution
-	// PrunusMumeProj.DisplayName: Prunus Mume Proj
-	// FrostlightHeldProj.DisplayName: Frostlight Held Proj
-	// PureYinyoProj.DisplayName: Pure Yinyo Proj
-	// PureYinyoBlack.DisplayName: Pure Yinyo Black
-	// PureYinyoJade.DisplayName: Pure Yinyo Jade
-	// PureYinyoWhite.DisplayName: Pure Yinyo White
-	// FrostlightFlamethrower.DisplayName: Frostlight Flamethrower
-	// FrostlightFlamethrowerFlame.DisplayName: Frostlight Flamethrower Flame
-	// FrostlightFrostball.DisplayName: Frostlight Frostball
-	// FrostlightHeldProjAlt.DisplayName: Frostlight Held Proj Alt
-	// LavaFlowBoom.DisplayName: Lava Flow Boom
-	// LavaFlowExecution.DisplayName: Lava Flow Execution
-	// LavaFlowProj.DisplayName: Lava Flow Proj
-	// StarofHopeProj.DisplayName: Starof Hope Proj
-	// StarofHopeProj2.DisplayName: Starof Hope Proj2
-	// StarofHopeStar.DisplayName: Starof Hope Star
-	// AngryBombProj.DisplayName: Angry Bomb Proj
-	// AngryBombExecution.DisplayName: Angry Bomb Execution
-	// BoneSlapProj.DisplayName: Bone Slap Proj
-	// TearEyeProj.DisplayName: Tear Eye Proj
-	// PestilenceFlowerBomb.DisplayName: Pestilence Flower Bomb
-	// PestilenceFlowerHeldProj.DisplayName: Pestilence Flower Held Proj
-	// PestilenceFlowerHunger.DisplayName: Pestilence Flower Hunger
-	// ContainedBlastHeldProj.DisplayName: Contained Blast Held Proj
-	// ContainedBlastBoom.DisplayName: Contained Blast Boom
-	// ContainedBlastShockBullet.DisplayName: Contained Blast Shock Bullet
-	// ContainedBlastStickBullet.DisplayName: Contained Blast Stick Bullet
-	// EndlessWarExecution.DisplayName: Endless War Execution
-	// EndlessWarLightening.DisplayName: Endless War Lightening
-	// EndlessWarProj.DisplayName: Endless War Proj
-	// GaiaHammerProj.DisplayName: Gaia Hammer Proj
-	// GaiaHammerBloodyBullet.DisplayName: Gaia Hammer Bloody Bullet
-	// GaiaStrikerBloodyBullet.DisplayName: Gaia Striker Bloody Bullet
-	// GaiaStrikerHeldProj.DisplayName: Gaia Striker Held Proj
-	// GaiaStrikerProj.DisplayName: Gaia Striker Proj
-	// GaiaStrikerBeam.DisplayName: Gaia Striker Beam
-	// GaiaStrikerMountedProj.DisplayName: Gaia Striker Mounted Proj
-}
-
-Ranged: {
-	ClimaticHawstringArrow.DisplayName: æ°”å€™é’“å¼¦-ç®­çŸ¢
-	ClimaticHawstringBeam.DisplayName: æ°”å€™é’“å¼¦-çƒ­èƒ½æ¿€å…‰
-	ClimaticHawstringLaser.DisplayName: æ°”å€™é’“å¼¦-çƒ­èƒ½æ¿€å…‰
-	ClimaticHawstringMinion.DisplayName: æ°”å€™é’“å¼¦-é£æ†é±¼ä»†ä»
-	ClimaticHawstringProj.DisplayName: æ°”å€™é’“å¼¦
-	BambooStick.DisplayName: ç«ç®­ç«¹-ç«¹
-	// SundownerHeldProj.DisplayName: Sundowner Held Proj
-	// TerraFlamethrowerTank.DisplayName: Terra Flamethrower Tank
-	// TerraFlamethrowerFlame.DisplayName: Terra Flamethrower Flame
-	// TerraFlamethrowerDrop.DisplayName: Terra Flamethrower Drop
+	// CowboyBullet.DisplayName: Cowboy Bullet
+	// CowboyRevolverProj.DisplayName: Cowboy Revolver Proj
+	// DesterrennachtHealProj.DisplayName: Desterrennacht Heal Proj
+	// DiverJellyFish.DisplayName: Diver Jelly Fish
+	// FloatingPlants.DisplayName: Floating Plants
+	// GaiaStrikerLootProj.DisplayName: Gaia Striker Loot Proj
+	// PowerLilyProj.DisplayName: Power Lily Proj
+	// RuneWizardProj.DisplayName: Rune Wizard Proj
+	// InvisBoom.DisplayName: Invis Boom
+	// EvolutionEnergyPortal.DisplayName: Evolution Energy Portal
+	// SamsaraofDawnlightProj.DisplayName: Samsaraof Dawnlight Proj
+	// TerraFlamethrowerHeldProj.DisplayName: Terra Flamethrower Held Proj
+	// RegenOrbsPink.DisplayName: Regen Orbs Pink
 }
 
 Magic: {
-	// CoronaHeldProj.DisplayName: Corona Held Proj
 	// CoronaFireball.DisplayName: Corona Fireball
+	// CoronaHeldProj.DisplayName: Corona Held Proj
+}
+
+Pets: {
+	// NoneProj.DisplayName: None Proj
+	// ShadowProj.DisplayName: Shadow Proj
+	// SquidProj.DisplayName: Squid Proj
+	// WatcherProj.DisplayName: Watcher Proj
+	// WhaleProj.DisplayName: Whale Proj
+}
+
+Ranged: {
+	// BambooStick.DisplayName: Bamboo Stick
+	// ClimaticHawstringArrow.DisplayName: Climatic Hawstring Arrow
+	// ClimaticHawstringBeam.DisplayName: Climatic Hawstring Beam
+	// ClimaticHawstringMinion.DisplayName: Climatic Hawstring Minion
+	// ClimaticHawstringProj.DisplayName: Climatic Hawstring Proj
+	// TerraFlamethrowerDrop.DisplayName: Terra Flamethrower Drop
+	// TerraFlamethrowerFlame.DisplayName: Terra Flamethrower Flame
+	// TerraFlamethrowerTank.DisplayName: Terra Flamethrower Tank
 }

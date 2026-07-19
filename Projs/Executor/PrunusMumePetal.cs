@@ -18,7 +18,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class PrunusMumePetal : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Typeless;
+        public override ClassCategory Category => ClassCategory.Executor;
         public enum Style
         {
             NormalStrike,
@@ -241,7 +241,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Vector2 vec = Projectile.oldRot[j].ToRotationVector2().RotatedBy(PiOver2);
                     Vector2 drawPos = Projectile.oldPos[j] + new Vector2(Projectile.width / 2, Projectile.height / 2) + vec * -1.2f;
-                    trailDrawDates.Add(new(drawPos, drawColor, new Vector2(0, 22 * multipleSize * Projectile.scale), Projectile.oldRot[j]));
+                    trailDrawDates.Add(new(drawPos, drawColor, new Vector2(0, 22 *multipleSize * Projectile.scale), Projectile.oldRot[j]));
                 }
             }
             TrailRender.RenderTrail([.. trailDrawDates], drawSetting);

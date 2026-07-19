@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
@@ -33,6 +34,7 @@ namespace HJScarletRework.Projs.Executor
             set => Projectile.ai[1] = (float)value;
         }
         public override string Texture => HJScarletTexture.InvisAsset.Path;
+        public override ClassCategory Category => ClassCategory.Executor;
         public NPC CurTarget = null;
         public override void SetStaticDefaults()
         {

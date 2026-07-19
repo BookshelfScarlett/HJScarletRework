@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleScarlet;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -18,12 +19,13 @@ namespace HJScarletRework.Projs.Executor
     {
         public override int OriginalItemID => ItemType<DualWraithStaff>();
         public override string Texture => HJScarletItemProj.DualWraithStaff.Path;
-        public int AttackSpeed => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, Owner.HeldItem.useTime * Projectile.MaxUpdates, 5 * Projectile.MaxUpdates);
+        public override int MinAttackRates => 5;
         public AnimationStruct Helper = new(3);
         public ref float Timer => ref Projectile.ai[0];
         public bool IsAFK = false;
         public bool OnExecutionNow = false;
         public Vector2 OrbPosition = Vector2.Zero;
+        public ref float AFKTimer => ref Projectile.ai[1];
         public override void ExSD()
         {
             Projectile.SetUpHeldProj(5);
@@ -76,7 +78,7 @@ namespace HJScarletRework.Projs.Executor
                     return;
                 }
 
-                if (Owner.channel)
+                if (Owner.channel && Owner.HeldItem.type == OriginalItemID)
                     UpdateAttack();
                 else
                     UpdateHeldState();
@@ -84,6 +86,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void UpdateExecutionStrikeAni()
         {
+            Owner.itemAnimation = Owner.itemTime = 2;
             if (Timer == 0)
             {
 
@@ -128,6 +131,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
+                //这个只用于初始化。
                 if (Projectile.velocity.LengthSquared() < 4f)
                 {
                     SoundEngine.PlaySound(HJScarletSounds.Air_HeavyFlow with { MaxInstances = 0, Pitch = 0.4f });
@@ -136,6 +140,20 @@ namespace HJScarletRework.Projs.Executor
                         new SmokeParticle(Projectile.Center + Vector2.UnitY * Main.rand.NextFloat(-280f, 11f), Vector2.UnitY.ToRandVelocity(ToRadians(10f), 1f, 12f), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.50f * Main.rand.NextFloat(0.5f, 1f), Main.rand.NextFloat(0.9f, 1.1f) * 0.6f * Projectile.scale, Main.rand.NextBool()).SpawnToPriority();
                     }
                 }
+                //飞越，在这个过程中不断生成小鬼魂
+                if (executeProgress < (.5f + .25f) && Main.rand.NextBool())
+                {
+                    int revers = Main.rand.NextBool().ToDirectionInt();
+                    Vector2 vel = Vector2.UnitX.RotatedBy(PiOver4 * revers) * Main.rand.NextFloat(14, 17.5f) * revers;
+                    Vector2 pos = Projectile.Center.ToRandCirclePos(4) + revers * Vector2.UnitX * Main.rand.NextFloat(5, 10);
+                    Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, ProjectileType<DualWraithStaffGhost>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                    for (int j = 0; j < 12; j++)
+                        new SmokeParticle(pos.ToRandCirclePos(3), vel * Main.rand.NextFloat(0f, 1.3f), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.30f * Main.rand.NextFloat(0.5f, 1f), Main.rand.NextFloat(0.9f, 1.1f) * .6f, Main.rand.NextBool()).SpawnToPriority();
+                    for (int j = 0; j < 8; j++)
+
+                        new SmokeParticle(pos.ToRandCirclePos(3), vel.ToRandVelocity(ToRadians(5f), 1f, 29f), RandLerpColor(Color.WhiteSmoke, Color.SkyBlue), 40, RandRotTwoPi, 0.68f, 0.20f, true).Spawn();
+                }
+                //正常AI
                 Projectile.velocity = -Vector2.UnitY * 24f;
                 Projectile.rotation = Projectile.velocity.ToRotation();
                 Vector2 spawnPos = Projectile.Center + RandVelTwoPi(1f, 68f);
@@ -148,7 +166,6 @@ namespace HJScarletRework.Projs.Executor
 
             if (Main.rand.NextFloat() < executeProgress && Main.rand.NextBool(8))
             {
-
                 Vector2 pos = Projectile.Center.ToRandCirclePos(5f) + Projectile.SafeDirByRot() * Main.rand.NextFloat(-10f, 80f) + Projectile.SafeDirByRot().RotatedBy(PiOver2) * Main.rand.NextFloat(-20f, 21f);
                 Vector2 dirMulter = Projectile.SafeDirByRot() * executeProgress;
                 new SmokeParticle(pos, dirMulter * Main.rand.NextFloat(0.8f, 3.2f), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.80f, 0.24f, Main.rand.NextBool()).Spawn();
@@ -311,11 +328,13 @@ namespace HJScarletRework.Projs.Executor
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, Projectile.velocity.ToRandVelocity(ToRadians(0f), 12f, 18f), ProjectileType<DualWraithStaffGhost>(), Projectile.damage, 2f, Owner.whoAmI);
             proj.extraUpdates = 2;
             proj.HJScarlet().HasExecutionMechanic = true;
+            proj.ai[2] = 1;
             for (int i = 0; i < 2; i++)
             {
                 proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, Projectile.velocity.ToRandVelocity(ToRadians(10f), 12f, 18f), ProjectileType<DualWraithStaffGhost>(), Projectile.damage, 2f, Owner.whoAmI);
                 proj.extraUpdates = 2;
                 proj.HJScarlet().HasExecutionMechanic = true;
+                proj.ai[2] = 1;
                 for (int j = 0; j < 6; j++)
                     new SmokeParticle(spawnPos, proj.velocity.ToRandVelocity(ToRadians(30f), 1f, 12f), RandLerpColor(Color.WhiteSmoke, Color.SkyBlue), 40, RandRotTwoPi, 0.8f, 0.3f, true).Spawn();
             }
@@ -325,7 +344,8 @@ namespace HJScarletRework.Projs.Executor
         {
             //分三种情况
             //第一种：如果处于第一动画进程，也就是仍然在中央位置，满足处死条件的情况下立刻处死
-            bool ifDead = Owner.dead || Owner.HeldItem.type != OriginalItemID;
+            bool correctedItem = Owner.HeldItem.type == OriginalItemID;
+            bool ifDead = Owner.dead || !correctedItem;
             bool directyDead = !Helper.IsDone[0] && ifDead;
             if (directyDead)
             {
@@ -334,11 +354,23 @@ namespace HJScarletRework.Projs.Executor
             }
             //第二种：处于第二动画继进程，不要执行处死
             //只有两动画完成结束时，判断玩家手持情况，我们再执行afk动画
-            bool doAFK = Helper.IsDone[0] && Helper.IsDone[1] && (ifDead || ((DualWraithStaff)Owner.HeldItem.ModItem).AlterVersion) && !IsAFK;
+            bool checkAlterVersion = false;
+            if(correctedItem)
+                checkAlterVersion= ((DualWraithStaff)Owner.HeldItem.ModItem).AlterVersion;
+            bool doAFK = Helper.IsDone[0] && Helper.IsDone[1] && (!correctedItem) && !IsAFK;
             if (doAFK)
             {
                 //Timer会立刻被重置，这里的Timer已经没用了。只用于一个计时
-                Timer = 0;
+                if (Projectile.FinalUpdate())
+                    AFKTimer++;
+            }
+            else
+            {
+                if (AFKTimer > 0)
+                    AFKTimer--;
+            }
+            if (Projectile.MeetMaxUpdatesFrame(AFKTimer, 75) || (Owner.dead || checkAlterVersion))
+            {
                 IsAFK = true;
             }
             return false;

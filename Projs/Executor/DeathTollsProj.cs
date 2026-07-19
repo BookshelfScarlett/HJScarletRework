@@ -1,4 +1,6 @@
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
@@ -8,8 +10,9 @@ using Terraria.Audio;
 using Terraria.ID;
 namespace HJScarletRework.Projs.Executor
 {
-    public class DeathTollsProj : ThrownHammerProj
+    public class DeathTollsProj : HJScarletProj
     {
+        public override ClassCategory Category => ClassCategory.Executor;
         internal ref bool Update => ref Projectile.netUpdate;
         //攻击枚举
         private enum DoType
@@ -23,13 +26,12 @@ namespace HJScarletRework.Projs.Executor
             get => (DoType)Projectile.ai[0];
             set => Projectile.ai[0] = (float)value;
         }
-        protected override BoomerangDefault BoomerangStat => new(
-            //不准修改这个returnTime低于35
-            returnTime: 35,
-            returnSpeed: 26f,
-            acceleration: 1.5f,
-            killDistance: 1800
-        );
+        public ref float AttackTimer => ref Projectile.ai[1];
+        public int TargetIndex
+        {
+            get => (int)Projectile.ai[2];
+            set => Projectile.ai[2] = value;
+        }
         public override string Texture => GetInstance<DeathTolls>().Texture;
         public override void SetStaticDefaults()
         {
@@ -40,9 +42,11 @@ namespace HJScarletRework.Projs.Executor
         {
             //夜明后的锤子应该上4eu了
             Projectile.height = Projectile.width = 66;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
             Projectile.timeLeft = 300;
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 30;
+            Projectile.SetupImmnuity(30);
+            Projectile.penetrate = -1;
             Projectile.extraUpdates = 3;
         }
         public override void AI()
@@ -103,11 +107,11 @@ namespace HJScarletRework.Projs.Executor
         //返程AI
         private void DoReturning()
         {
-            Projectile.HomingTarget(Owner.Center, 1800f, BoomerangStat.ReturnSpeed, 20f);
+            Projectile.HomingTarget(Owner.Center, 1800f, 26, 20f);
             if (Projectile.Hitbox.Intersects(Owner.Hitbox))
             {
                 //当前有任何挂载锤，所有的攻击都会直接在返回后杀掉弹幕
-                if (!Stealth)
+                if (!Projectile.HJScarlet().ExecutionStrike)
                 {
                     Projectile.Kill();
                     Update = true;
@@ -125,7 +129,7 @@ namespace HJScarletRework.Projs.Executor
             SoundEngine.PlaySound(SoundID.Item88, Projectile.Center);
             bool hasMinion = Owner.HasProj<DeathTollsMinion>(out int minionID);
             //普攻
-            if (!Stealth)
+            if (!Projectile.HJScarlet().ExecutionStrike)
             {
                 Projectile.AddExecutionTimeImmediate(ItemType<DeathTolls>());
                 //下面这个会扔到一个统一的管理里面。

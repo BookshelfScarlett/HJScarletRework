@@ -1,41 +1,12 @@
-﻿using Terraria;
+﻿using HJScarletRework.Globals.Methods;
+using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Systems
 {
-    public class HJScarletSnowCondition : IItemDropRuleCondition
-    {
-        private static LocalizedText Description;
-
-        public HJScarletSnowCondition()
-        {
-            Description ??= Language.GetOrRegister("Mods.HJScarletRework.Conditions.Drop.SnowBiome");
-        }
-
-        public bool CanDrop(DropAttemptInfo info)
-        {
-            NPC npc = info.npc;
-            return Main.hardMode
-                && !NPCID.Sets.CannotDropSouls[npc.type]
-                && !npc.boss
-                && !npc.friendly
-                && npc.lifeMax > 1
-                && npc.value >= 1f
-                && info.player.ZoneSnow;
-        }
-
-        public bool CanShowItemDropInUI()
-        {
-            return true;
-        }
-
-        public string GetConditionDescription()
-        {
-            return Description.Value;
-        }
-    }
 
     public class ScarletWearingFullCowboy : IItemDropRuleCondition
     {
@@ -52,36 +23,11 @@ namespace HJScarletRework.Globals.Systems
         public bool CanShowItemDropInUI() => true;
         public string GetConditionDescription() => null;
     }
-    public class HJScarletUnderworldCondition : IItemDropRuleCondition
+    public static class HJScarletCraftingConditions
     {
-        private static LocalizedText Description;
-
-        public HJScarletUnderworldCondition()
-        {
-            Description ??= Language.GetOrRegister("Mods.HJScarletRework.Conditions.Drop.UnderworldBiome");
-        }
-
-        public bool CanDrop(DropAttemptInfo info)
-        {
-            NPC npc = info.npc;
-            return Main.hardMode
-                && !NPCID.Sets.CannotDropSouls[npc.type]
-                && !npc.boss
-                && !npc.friendly
-                && npc.lifeMax > 1
-                && npc.value >= 1f
-                && info.player.ZoneUnderworldHeight;
-        }
-
-        public bool CanShowItemDropInUI()
-        {
-            return true;
-        }
-
-        public string GetConditionDescription()
-        {
-            return Description.Value;
-        }
+        public static Condition FirstTimeGaiaStriker = new Condition("Mods.HJScarletRework.Weapons.Executor.GaiaStriker.Conditions.FirstTime",
+            () => (!Main.LocalPlayer.HJScarlet().firstTimeCraftGaia && !Main.dedServ));
+        public static Condition AnyAfterCrafting = new Condition("Mods.HJScarletRework.Weapons.Executor.GaiaStriker.Conditions.SecondTime",
+            () => (Main.LocalPlayer.HJScarlet().firstTimeCraftGaia || Main.dedServ));
     }
-
 }

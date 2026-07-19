@@ -84,6 +84,7 @@ namespace HJScarletRework.Items.Vanity
             Item.vanity = true;
             Item.accessory = true;
             Item.HJScarlet().CanDrawIcon = true;
+            ExSD();
         }
         public override void Load()
         {

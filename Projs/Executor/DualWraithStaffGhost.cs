@@ -31,7 +31,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool? CanDamage()
         {
-            return Projectile.MeetMaxUpdatesFrame(Timer, 5);
+            return (Projectile.MeetMaxUpdatesFrame(Timer, 5) || Projectile.ai[2] == 1f);
         }
         public override void ExSD()
         {

@@ -6,6 +6,9 @@ using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.ParticleScarlet
 {
+    /// <summary>
+    /// 代办：该系统准备废弃
+    /// </summary>
     public class HRShinyOrbAlt : ScarletParticle
     {
         public override string Texture => HJScarletTexture.Particle_HRShinyOrb.Path;

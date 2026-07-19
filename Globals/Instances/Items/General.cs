@@ -3,9 +3,11 @@ using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Globalization;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -40,6 +42,31 @@ namespace HJScarletRework.Globals.Instances.Items
         public override void SetStaticDefaults()
         {
             HJScarletMethods.ShimmerEach(ItemID.PaladinsHammer, ItemID.PaladinsShield);
+            UCACrossMod();
+        }
+
+        public void UCACrossMod()
+        {
+            if (HJScarletRework.CrossMod_UCA is null)
+                return;
+            int carnage = HJScarletRework.CrossMod_UCA.Find<ModItem>("CarnageRay").Type;
+            HJScarletList.ScarletRarityHashSet.Add(carnage);
+            int night = HJScarletRework.CrossMod_UCA.Find<ModItem>("NightsRayAlt").Type;
+            int shadow = HJScarletRework.CrossMod_UCA.Find<ModItem>("ShadowBoltStaffAlt").Type;
+            HJScarletList.NightRarityHashSet.Add(night);
+            HJScarletList.NightRarityHashSet.Add(shadow);
+            int vivid = HJScarletRework.CrossMod_UCA.Find<ModItem>("VividClarityAlt").Type;
+            int element = HJScarletRework.CrossMod_UCA.Find<ModItem>("ElementRayAlt").Type;
+            int sword = HJScarletRework.CrossMod_UCA.Find<ModItem>("StormRulerAlt").Type;
+            HJScarletList.RareItemRarityDrawDictionary.Add(vivid, RareItemRarity.RareType.White);
+            HJScarletList.RareItemRarityDrawDictionary.Add(element, RareItemRarity.RareType.White);
+            HJScarletList.RareItemRarityDrawDictionary.Add(sword, RareItemRarity.RareType.White);
+            int terra = HJScarletRework.CrossMod_UCA.Find<ModItem>("TerraRay").Type;
+            HJScarletList.MiscRarityDrawDictionary.Add(terra, LivingRarity.DrawRarity);
+            int plasma = HJScarletRework.CrossMod_UCA.Find<ModItem>("PlasmaRodAlt").Type;
+            int soul = HJScarletRework.CrossMod_UCA.Find<ModItem>("SoulPiercerAlt").Type;
+            HJScarletList.NebulaRarityHashSet.Add(plasma);
+            HJScarletList.NebulaRarityHashSet.Add(soul);
         }
         public void HandleLerpValue(Item item, Vector2 position, float scale)
         {
@@ -134,7 +161,7 @@ namespace HJScarletRework.Globals.Instances.Items
             DrawSpecialIconDisplay(item, spriteBatch, position);
             if (HJScarletConfigClient.Instance.DrawIcon && CanDrawGhost && (purePrismAnimationCounter) <= .98f)
             {
-                Vector2 iconPosition = position + new Vector2(10f * Main.inventoryScale, 10f * Main.inventoryScale);
+                Vector2 iconPosition = position + new Vector2(15f * Main.inventoryScale, 15f * Main.inventoryScale);
                 float iconScale = 0.31f * simpleImmersiveBackpackValueAlt;
                 Rectangle rect = new(0, GhostFrame * 44, 46, 42);
                 Vector2 recorigin = new(23, 21);
@@ -148,9 +175,9 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 Vector2 iconPosition = position + new Vector2(15f * Main.inventoryScale, 12f * Main.inventoryScale);
                 float iconScale = 0.34f * simpleImmersiveBackpackValueAlt;
-                Texture2D tex = HJScarletTexture.LostbeltJourneyIcon.Value;
+                Texture2D tex = HJScarletTexture.LostbeltJourneyIconLegacy.Value;
                 for (int i = 0; i < 6; i++)
-                    spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.Black * (1f - purePrismAnimationCounter), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.White.ToAddColor() * (1f - purePrismAnimationCounter), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
                 spriteBatch.Draw(tex, iconPosition, null, Color.White * (1f - purePrismAnimationCounter), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
             }
         }

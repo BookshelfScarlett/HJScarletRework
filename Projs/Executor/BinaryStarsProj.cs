@@ -20,19 +20,20 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class BinaryStarsProj : ThrownHammerProj, ILocalizedModType
+    public class BinaryStarsProj :HJScarletProj 
     {
-        protected override BoomerangDefault BoomerangStat => new(
-            returnTime: 34,
-            returnSpeed: 28f,
-            acceleration: 0.4f,
-            killDistance: 1800
-        );
+        public override ClassCategory Category => ClassCategory.Executor;
         private enum DoType
         {
             IsShooted,
             IsReturning,
             IsStealth
+        }
+        public ref float AttackTimer => ref Projectile.ai[1];
+        public int TargetIndex
+        {
+            get => (int)Projectile.ai[2];
+            set => Projectile.ai[2] = (int)value;
         }
         private DoType AttackType
         {
@@ -44,10 +45,10 @@ namespace HJScarletRework.Projs.Executor
         public ref bool Update => ref Projectile.netUpdate;
         public bool CanDrawTrail
         {
-            get => ModProj.ExtraAI[0] == 1f;
-            set => ModProj.ExtraAI[0] = value ? 1f : 0f;
+            get => Projectile.HJScarlet().ExtraAI[0] == 1f;
+            set => Projectile.HJScarlet().ExtraAI[0] = value ? 1f : 0f;
         }
-        public ref float SpriteRotation => ref ModProj.ExtraAI[1];
+        public ref float SpriteRotation => ref Projectile.HJScarlet().ExtraAI[1];
         public override string Texture => GetInstance<BinaryStars>().Texture;
         public override void SetStaticDefaults()
         {
@@ -59,8 +60,11 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.width = 86;
             Projectile.height = 72;
+            Projectile.SetupImmnuity(60);
+            Projectile.penetrate = -1;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
             Projectile.usesLocalNPCImmunity = true;
-            //4eu, 12 => 3
             Projectile.localNPCHitCooldown = 60;
             Projectile.extraUpdates = 4;
         }
@@ -84,7 +88,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreKill(int timeLeft)
         {
-            if (AttackType is DoType.IsStealth && _drawArcTime > 0 && Stealth)
+            if (AttackType is DoType.IsStealth && _drawArcTime > 0 && Projectile.HJScarlet().ExecutionStrike)
             {
                 SoundStyle select = Utils.SelectRandom(Main.rand, HJScarletSounds.Smash_AirHeavy);
                 SoundEngine.PlaySound(select, Projectile.Center);
@@ -94,7 +98,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Stealth)
+            if (Projectile.HJScarlet().ExecutionStrike)
             {
                 DrawHitSpark(target, hit.Damage);
                 if (_drawArcTime > 0)
@@ -135,7 +139,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void NormalHit(NPC target)
         {
-            ModProj.IsHitOnEnablFocusMechanicProj = true;
+            Projectile.HJScarlet().IsHitOnEnablFocusMechanicProj = true;
             int dustSets = Main.rand.Next(5, 8);
             int dustRadius = 6;
             Vector2 corner = new(target.Center.X - dustRadius, target.Center.Y - dustRadius);
@@ -213,7 +217,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.DrawGlowEdge(Color.White, rotFix: -PiOver4);
             Projectile.DrawProj(Color.White, rotFix: -PiOver4);
-            if (!HJScarletMethods.OutOffScreen(Projectile.Center) && Stealth)
+            if (!HJScarletMethods.OutOffScreen(Projectile.Center) && Projectile.HJScarlet().ExecutionStrike)
             {
                 SB.End();
                 SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
@@ -259,12 +263,12 @@ namespace HJScarletRework.Projs.Executor
             if (_lastAnchorPosition == Vector2.Zero)
                 _lastAnchorPosition = Owner.Center;
 
-            if (CanDrawTrail && !Stealth && AttackTimer < 10f)
+            if (CanDrawTrail && !Projectile.HJScarlet().ExecutionStrike && AttackTimer < 10f)
             {
                 AttackTimer += 1;
                 return;
             }
-            else if (_drawArcTime < 1 && Stealth)
+            else if (_drawArcTime < 1 && Projectile.HJScarlet().ExecutionStrike)
             {
                 //小于特定次数前ban掉下方所有AI
                 //并且额外生成的锤子别直接去画圆弧，而是冲过去
@@ -284,7 +288,7 @@ namespace HJScarletRework.Projs.Executor
         private void DoGeneric()
         {
             //潜伏射弹允许绘制轨迹
-            if (Stealth)
+            if (Projectile.HJScarlet().ExecutionStrike)
             {
                 Projectile.rotation = Projectile.velocity.ToRotation();
                 return;
@@ -319,26 +323,26 @@ namespace HJScarletRework.Projs.Executor
             if (AttackTimer == 0)
             {
                 SpriteRotation = Projectile.velocity.ToRotation();
-                if (Stealth)
+                if (Projectile.HJScarlet().ExecutionStrike)
                     InitIfStealth();
             }
 
             AttackTimer += 1;
-            if (AttackTimer > BoomerangStat.ReturnTime)
+            if (AttackTimer > 34)
             {
                 AttackTimer = 0;
                 AttackType = DoType.IsReturning;
-                if (Stealth)
+                if (Projectile.HJScarlet().ExecutionStrike)
                     SpawnSkyFallHammer();
                 Update = true;
             }
         }
         private void DoReturning()
         {
-            Projectile.HomingTarget(Owner.Center, BoomerangStat.KillDistance, BoomerangStat.ReturnSpeed, 10);
+            Projectile.HomingTarget(Owner.Center, 1800, 28f, 10);
             if (!Projectile.Hitbox.Intersects(Owner.Hitbox))
                 return;
-            if (Stealth)
+            if (Projectile.HJScarlet().ExecutionStrike)
             {
                 //否则，其他情况下都会执行这个潜伏ai
                 AttackType = DoType.IsStealth;
@@ -500,57 +504,5 @@ namespace HJScarletRework.Projs.Executor
         }
         #endregion
 
-    }
-    /// <summary>
-    /// 基础回旋镖的相关数据
-    /// </summary>
-    /// <param name="returnTime">返程时间m/param>
-    /// <param name="returnSpeed">返程基础速度</param>
-    /// <param name="acceleration">返程加速度</param>
-    /// <param name="killDistance">超出距离处死</param>
-    public struct BoomerangDefault(int returnTime, float returnSpeed, float acceleration, int killDistance)
-    {
-        public int ReturnTime = returnTime;
-        public float Acceleration = acceleration;
-        public float ReturnSpeed = returnSpeed;
-        public int KillDistance = killDistance;
-    }
-    public abstract class ThrownHammerProj : HJScarletProj
-    {
-        public override ClassCategory Category => ClassCategory.Executor;
-        public HJScarletPlayer ModPlayer => Owner.HJScarlet();
-        public HJScarletGlobalProjs ModProj => Projectile.HJScarlet();
-        public bool Stealth => ModProj.ExecutionStrike;
-        public int AttackTimer
-        {
-            get => (int)Projectile.ai[1];
-            set => Projectile.ai[1] = value;
-        }
-        public int TargetIndex
-        {
-            get => (int)Projectile.ai[2];
-            set => Projectile.ai[2] = value;
-        }
-        /// <summary>
-        /// 基础射弹数据
-        /// </summary>
-        /// <summary>
-        /// 基础回旋镖类模组数据。
-        /// returnTime：返程时间
-        /// returnSpeed：返程基础速度
-        /// acceleration：返程加速度
-        /// killDistance：处死距离
-        /// </summary>
-        protected abstract BoomerangDefault BoomerangStat { get; }
-        public override void SetDefaults()
-        {
-            Projectile.penetrate = -1;
-            Projectile.ignoreWater = true;
-            Projectile.friendly = true;
-            Projectile.tileCollide = false;
-            Projectile.extraUpdates = 3;
-            Projectile.DamageType = DamageClass.Ranged;
-            ExSD();
-        }
     }
 }

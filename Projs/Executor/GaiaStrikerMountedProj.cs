@@ -43,7 +43,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.width = Projectile.height = 66;
             Projectile.extraUpdates = 0;
-            Projectile.timeLeft = GetSeconds(60);
+            Projectile.timeLeft = GetSeconds(60) * 2;
             Projectile.netImportant = true;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
@@ -55,6 +55,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
+            StoredLifeTime = Projectile.timeLeft;
             Helper.MaxProgress[0] = 30 * Projectile.MaxUpdates;
             Helper.MaxProgress[1] = 25 * Projectile.MaxUpdates;
             Helper.MaxProgress[2] = 30 * Projectile.MaxUpdates;
@@ -63,14 +64,96 @@ namespace HJScarletRework.Projs.Executor
         }
         public bool JustPressedFunction = false;
         public bool PlaySound = false;
-        public int TotalStrikeTime = 30;
+        public int TotalStrikeTime = 20;
         public float Oscillation = 0;
         public float RandRot = 0;
         public bool HeavyStrikeReset = false;
         public NPC CurTarget = null;
         public bool ShouldCreate = true;
+        public int StoredLifeTime = 0;
+        public float RightClickHoldingTime = 0;
         public override void ProjAI()
         {
+            if (Projectile.timeLeft < 20)
+            {
+                //爆开
+                for (int i = 0; i < 36; i++)
+                {
+                    Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
+                    Vector2 vel = RandVelTwoPi(0.9f, 6.4f);
+                    BloodyMetaball.SpawnParticle(pos, vel, 0.35f, RandRotTwoPi, true);
+                }
+                for (int i = 0; i < 36; i++)
+                {
+                    Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
+                    Vector2 vel = RandVelTwoPi(0.9f, 9.4f);
+                    BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.75f, vel.ToRotation(), false);
+                    BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.15f, RandRotTwoPi, true);
+                }
+                for (int i = 0; i < GaiaStriker.BloodBulletCount; i++)
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(6), RandVelTwoPi(6f, 10f), ProjectileType<GaiaStrikerBloodyBullet>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                    proj.ai[2] = 4;
+                    proj.HJScarlet().HasExecutionMechanic = false;
+                }
+                ECSParticle.CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f, .4f, BlendState.Additive);
+                ECSParticle.CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.30f, .4f, BlendState.Additive);
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 60, 80, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
+                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 0, Pitch = -0.4f, Volume = .477f }, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Gaia_Toss with { MaxInstances = 0, Pitch = -0.64f, Volume = .577f }, Projectile.Center);
+                Projectile.Kill();
+                return;
+            }
+            if (Owner.controlUseTile && Owner.HeldItem.type == ItemType<GaiaStriker>())
+            {
+                Projectile.timeLeft = StoredLifeTime;
+                if (Projectile.FinalUpdate() || Projectile.extraUpdates == 0)
+                    RightClickHoldingTime++;
+                if (RightClickHoldingTime % 20 == 0 && RightClickHoldingTime !=0)
+                {
+                    SoundEngine.PlaySound(HJScarletSounds.Gaia_Charge with { MaxInstances = 1, Pitch = 0.1f * RightClickHoldingTime / 20, Volume = .67f }, Projectile.Center);
+                    for (int i = 0; i < 36; i++)
+                        ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(0), RandVelTwoPi(.7f, 21f), RandLerpColor(Color.Red, Color.DarkRed), 40, 1, 0.25f, Main.rand.NextFloat(0.9f, 1.1f) * 0.40f, Main.rand.NextBool(), BlendState.NonPremultiplied);
+                    for (int i = 0; i < 18; i++)
+                        ECSParticle.BloodDrop(Projectile.Center.ToRandCirclePosEdge(10, 50), -Vector2.UnitY.RotateRandom(PiOver4) * Main.rand.NextFloat(4f, 18f), RandLerpColor(Color.DarkRed, Color.Black), 60, 1, 0.10f * Main.rand.NextFloat(.9f, 1.2f), 1, true, BlendState.AlphaBlend);
+                }
+            }
+            else
+            {
+                if (RightClickHoldingTime > 0)
+                    RightClickHoldingTime--;
+            }
+            if (RightClickHoldingTime > GetSeconds(1))
+            {
+                //爆开
+                for (int i = 0; i < 36; i++)
+                {
+                    Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
+                    Vector2 vel = RandVelTwoPi(0.9f, 6.4f);
+                    BloodyMetaball.SpawnParticle(pos, vel, 0.35f, RandRotTwoPi, true);
+                }
+                for (int i = 0; i < 36; i++)
+                {
+                    Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
+                    Vector2 vel = RandVelTwoPi(0.9f, 9.4f);
+                    BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.75f, vel.ToRotation(), false);
+                    BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.15f, RandRotTwoPi, true);
+                }
+                for (int i = 0; i < GaiaStriker.BloodBulletCount; i++)
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(6), RandVelTwoPi(6f, 10f), ProjectileType<GaiaStrikerBloodyBullet>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                    proj.ai[2] = 3;
+                }
+                ECSParticle.CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f, .4f, BlendState.Additive);
+                ECSParticle.CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.30f, .4f, BlendState.Additive);
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 60, 80, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
+                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 0, Pitch = -0.4f, Volume = .477f }, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Gaia_Toss with { MaxInstances = 0, Pitch = -0.64f, Volume = .577f }, Projectile.Center);
+                Projectile.AddExecutionTimeDirectly(ItemType<GaiaStriker>(), 6);
+                Projectile.Kill();
+                return;
+            }
+
             switch (AttackState)
             {
                 case State.JustBegin:
@@ -89,9 +172,9 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Helper.IsDone[0])
             {
-                if (Helper.OnAnimationBegin(2))
+                if (Helper.OnAnimationBegin(0))
                     DoOnAnimationBeginState2();
-                Helper.UpdateAniState(2);
+                Helper.UpdateAniState(0);
             }
             else if (!Helper.IsDone[1])
             {
@@ -144,17 +227,17 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!JustPressedFunction && Owner.HeldItem.type == ItemType<GaiaStriker>() && HJScarletKeybinds.GeneralActionKeybind.JustPressed)
             {
-                RefreshProjStatement(Type);
+                RefreshProjStatement(ProjectileType<GaiaStrikerHeldProj>());
                 return;
             }
 
-            if (Helper.Progress[4] > 0)
-                Helper.Progress[4] -= 2;
+            if (Helper.Progress[2] > 0)
+                Helper.Progress[2] -= 2;
             if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1300, canPassWall: true))
             {
                 Projectile.extraUpdates = 2;
                 Projectile.scale = Lerp(Projectile.scale, .95f, 0.02f);
-                Projectile.rotation += .2f * (Projectile.velocity.X > 0).ToDirectionInt();
+                Projectile.rotation += .2f;
                 Projectile.HomingTarget(target.Center, -1, 16f, 5f);
                 if (Main.rand.NextBool(3))
                 {
@@ -168,7 +251,7 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 vel = Projectile.Center.GetNormalVector2(pos) * Main.rand.NextFloat() * 7f;
                     new Fire(pos, vel, RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 1f, 0.2f * Main.rand.NextFloat(.92f, 1.1f)).SpawnToNonPreMult();
                 }
-
+                StoredLifeTime = Projectile.timeLeft;
                 CurTarget = target;
             }
             else
@@ -185,7 +268,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!JustPressedFunction && Owner.HeldItem.type == ItemType<GaiaStriker>() && HJScarletKeybinds.GeneralActionKeybind.JustPressed)
             {
-                RefreshProjStatement(Type);
+                RefreshProjStatement(ProjectileType<GaiaStrikerHeldProj>());
                 return;
             }
 
@@ -205,6 +288,8 @@ namespace HJScarletRework.Projs.Executor
             }
             if (CurTarget.IsLegal())
             {
+                //重击的情况下存续时间要一直存储
+                Projectile.timeLeft = StoredLifeTime;
                 UpdateStrikeIfTargetIsLegal();
             }
             else
@@ -242,7 +327,8 @@ namespace HJScarletRework.Projs.Executor
             {
                 Projectile.extraUpdates = 2;
                 StrikeTime = 0;
-                HeavyStrikeReset = false;
+                AttackState = State.Attack;
+                Projectile.netUpdate = true;
             }
 
         }
@@ -253,11 +339,13 @@ namespace HJScarletRework.Projs.Executor
         {
             //重击过程中如果不存在射弹，立刻处死出去
             //这里是要做一个处理，但是再做处理太麻烦了，处死原地生成一个新的射弹更容易
+
             if (Projectile.IsMe())
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, projID, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 proj.originalDamage = Projectile.originalDamage;
-                proj.timeLeft = Projectile.timeLeft;
+                //传值应当传storedtimeleft
+                proj.timeLeft = StoredLifeTime;
             }
             Projectile.Kill();
         }
@@ -324,6 +412,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateIdleState()
         {
             //锤子应当朝向的位置
+            Projectile.timeLeft = StoredLifeTime;
             Projectile.velocity *= .01f;
             Oscillation += ToRadians(2.5f);
             float anchorPosX = Owner.MountedCenter.X - Owner.direction * (130f);
@@ -347,7 +436,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override bool? CanDamage()
         {
-            return AttackState == State.Attack || (AttackState == State.HeavyStrike || Helper.IsDone[2]);
+            return AttackState == State.Attack || (AttackState == State.HeavyStrike && Helper.IsDone[2]);
         }
         public override bool ShouldUpdatePosition()
         {
@@ -355,6 +444,16 @@ namespace HJScarletRework.Projs.Executor
         }
         #endregion
         #region 攻击命中管理
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            //下落的重击造成暴击和双倍伤害
+            if (AttackState == State.HeavyStrike)
+            {
+                modifiers.SetCrit();
+                modifiers.SourceDamage *= 2;
+            }
+            base.ModifyHitNPC(target, ref modifiers);
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (AttackState == State.Attack)
@@ -364,15 +463,16 @@ namespace HJScarletRework.Projs.Executor
                     ResetHeavyStrikeStatement();
 
                     Projectile.velocity = -Vector2.UnitY * 34f + target.velocity.ToSafeNormalize() * Clamp(target.velocity.Length(), 0f, 17f);
-                    SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center);
+                    SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Volume = .9f}, Projectile.Center);
                     ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 40, Projectile.velocity.ToRotation(), ToRadians(30f));
                     //下面这些是动画进程必要的初始化。
+                    CurTarget = target;
                     DoHeavyStrikeParticle(target.Center);
                     AttackState = State.HeavyStrike;
                 }
                 else
                 {
-                    SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -.54f, Volume = .44f }, Projectile.Center);
+                    SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -.54f,  PitchVariance = .1f,Volume = .34f }, Projectile.Center);
                     StrikeTime += 1;
                     for (int i = 0; i < 7; i++)
                     {
@@ -396,11 +496,11 @@ namespace HJScarletRework.Projs.Executor
             }
             else if (AttackState == State.HeavyStrike)
             {
-                if (StrikeTime == 0 && Helper.IsDone[3])
+                if (StrikeTime == 0 && Helper.IsDone[2])
                 {
                     DoHeavyStrikeParticle(target.Center);
                     Projectile.velocity = Vector2.UnitY * 28f + target.velocity.ToSafeNormalize() * Clamp(target.velocity.Length(), 0f, 17f);
-                    SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Pitch = .3f }, Projectile.Center);
+                    SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Pitch = .3f,Volume = .9f }, Projectile.Center);
                     ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 40, Projectile.velocity.ToRotation(), ToRadians(30f));
                     StrikeTime = 1;
                 }

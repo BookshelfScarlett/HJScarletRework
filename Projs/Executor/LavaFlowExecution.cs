@@ -67,7 +67,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (StabTarget.IsLegal())
             {
-                StabTarget.HJScarlet().isBeingStabByLavaFlow = true;
+                StabTarget.HJScarlet().isBeingStabByLavaFlowExecution = 5;
                 Projectile.Center = StabTarget.Center + StoredPosition;
                 Vector2 dir = -Projectile.SafeDirByRot();
                 Vector2 offset = Projectile.SafeDirByRot() * 35f * Projectile.scale;
@@ -123,7 +123,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (target.IsLegal() && AttackState == State.Attack && !target.HJScarlet().isBeingStabByLavaFlow)
+            if (target.IsLegal() && AttackState == State.Attack && target.HJScarlet().isBeingStabByLavaFlowExecution == 0)
             {
                 StabTarget = target;
                 Projectile.rotation = Projectile.SafeDir().ToRotation();
@@ -137,7 +137,7 @@ namespace HJScarletRework.Projs.Executor
                 SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);
                 return;
             }
-            if (target.HJScarlet().isBeingStabByLavaFlow && AttackState == State.Attack)
+            if (target.HJScarlet().isBeingStabByLavaFlowExecution > 0 && AttackState == State.Attack)
             {
                 Fireball = true;
                 Projectile.timeLeft = 2;

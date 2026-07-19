@@ -27,10 +27,10 @@ namespace HJScarletRework.Globals.Graphics.Metaballs
                     Scale *= 0.96f;
             }
         }
-        public override int MetaballTimer => 4;
-        public override Color EdgeColor => Color.Lerp(Color.Red,Color.DarkRed,.74f) with { A = 255};
+        public override int MetaballTimer => 64;
+        public override Color EdgeColor => Color.Lerp(Color.Red,Color.DarkRed,.54f) with { A = 255};
         public static List<BloodMetaballParticle> Particles = [];
-        public override Texture2D BackgroundTexture => HJScarletTexture.Metaball_Bloody.Value;
+        public override Texture2D BackgroundTexture => HJScarletTexture.Noise_Aura.Value;
         public static void SpawnParticle(Vector2 position, Vector2 velocity, float size, float rot, bool UseBall = false) => Particles.Add(new(position, velocity, size, rot, UseBall));
         public override bool Active()
         {
@@ -66,7 +66,7 @@ namespace HJScarletRework.Globals.Graphics.Metaballs
                 {
                     if (Particles[i].UseBall)
                     {
-                        Main.spriteBatch.Draw(HJScarletTexture.Texture_WhiteCircle.Value, Particles[i].Center - Main.screenPosition, null, Color.White, Particles[i].Rot, HJScarletTexture.Texture_BloodStain.Size / 2, Particles[i].Scale, SpriteEffects.None, 0f);
+                        Main.spriteBatch.Draw(HJScarletTexture.Texture_WhiteCircle.Value, Particles[i].Center - Main.screenPosition, null, Color.White, Particles[i].Rot, HJScarletTexture.Texture_WhiteCircle.Size / 2, Particles[i].Scale, SpriteEffects.None, 0f);
                         continue;
                     }
 

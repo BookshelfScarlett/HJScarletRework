@@ -356,4 +356,16 @@ GaiaStriker: {
 	Tooltip: ""
 	ExecutionStrike: ""
 	FlavorTooltips: ""
+
+	Conditions: {
+		FirstTime: Mods.HJScarletRework.Weapons.Executor.GaiaStriker.Conditions.FirstTime
+		SecondTime: Mods.HJScarletRework.Weapons.Executor.GaiaStriker.Conditions.SecondTime
+	}
+}
+
+SplendidofTerra: {
+	DisplayName: Splendidof Terra
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltips: ""
 }

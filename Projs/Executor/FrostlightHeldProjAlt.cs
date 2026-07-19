@@ -16,7 +16,6 @@ namespace HJScarletRework.Projs.Executor
     {
         public override int OriginalItemID => ItemType<Frostlight>();
         public override string Texture => GetInstance<FrostlightHeldProj>().Texture;
-        public int AttackSpeed => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, Owner.HeldItem.useTime * Projectile.MaxUpdates, 20 * Projectile.MaxUpdates);
         public ref float Timer => ref Projectile.ai[0];
         public ref float ShootTimer => ref Projectile.ai[1];
         public ref float HeldAnimationHelper => ref Projectile.ai[2];

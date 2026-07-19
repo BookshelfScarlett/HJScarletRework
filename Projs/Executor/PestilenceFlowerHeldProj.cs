@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
+using Humanizer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -58,6 +59,7 @@ namespace HJScarletRework.Projs.Executor
             Owner.ChangeDir(Projectile.direction);
             Owner.itemTime = Owner.itemAnimation = 2;
             Owner.ControlPlayerArm(Projectile.rotation, 2);
+            bool reverse = (!Helper.IsDone[0] && Owner.HeldItem.type != OriginalItemID) || Owner.controlUseTile;
         }
 
         private void HoldIdleState()
@@ -72,7 +74,8 @@ namespace HJScarletRework.Projs.Executor
             Vector2 tarPos = Owner.MountedCenter + Owner.Center.GetNormalVector2(Main.MouseWorld).ToSafeNormalize() * 60;
             if (reverse)
                 tarPos = Owner.MountedCenter + Owner.Center.GetNormalVector2(Main.MouseWorld).ToSafeNormalize() * 0;
-            Projectile.Center = Vector2.Lerp(Projectile.Center, tarPos, .05f);
+            float lerpValue = reverse ? 0.10f : .05f;
+            Projectile.Center = Vector2.Lerp(Projectile.Center, tarPos, lerpValue);
             Projectile.position.Y += (float)(Math.Sin(Main.GlobalTimeWrappedHourly * 1.1f) * 0.5f);
             Projectile.spriteDirection = Projectile.direction = ((Owner.LocalMouseWorld().X - Projectile.Center.X) > 0).ToDirectionInt();
         }

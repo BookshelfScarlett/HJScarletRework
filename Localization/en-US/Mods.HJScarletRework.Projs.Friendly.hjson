@@ -1,18 +1,145 @@
+Executor: {
+	DragonSwordFireball.DisplayName: Dragon Sword Fireball
+	AetherfireSmasherExecution.DisplayName: Aetherfire Smasher Execution
+	AetherfireSmasherFireball.DisplayName: Aetherfire Smasher Fireball
+	AetherfireSmasherProj.DisplayName: Aetherfire Smasher Proj
+	AetherfireSmasherVolcano.DisplayName: Aetherfire Smasher Volcano
+	AngryBombExecution.DisplayName: Angry Bomb Execution
+	AngryBombProj.DisplayName: Angry Bomb Proj
+	BinaryStarsArrow.DisplayName: Binary Stars Arrow
+	BinaryStarsExecution.DisplayName: Binary Stars Execution
+	BinaryStarsPhantom.DisplayName: Binary Stars Phantom
+	BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
+	BinaryStarsProj.DisplayName: Binary Stars Proj
+	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
+	BoneSlapProj.DisplayName: Bone Slap Proj
+	ContainedBlastBoom.DisplayName: Contained Blast Boom
+	ContainedBlastHeldProj.DisplayName: Contained Blast Held Proj
+	ContainedBlastShockBullet.DisplayName: Contained Blast Shock Bullet
+	ContainedBlastStickBullet.DisplayName: Contained Blast Stick Bullet
+	DeathTollsArrow.DisplayName: Death Tolls Arrow
+	DeathTollsDarkEnergy.DisplayName: Death Tolls Dark Energy
+	DeathTollsExecution.DisplayName: Death Tolls Execution
+	DeathTollsMinion.DisplayName: Death Tolls Minion
+	DeathTollsStreak.DisplayName: Death Tolls Streak
+	DeathTollsProj.DisplayName: Death Tolls Proj
+	DesertDaggerMark.DisplayName: Desert Dagger Mark
+	DreamingLightBeam.DisplayName: Dreaming Light Beam
+	DreamingLightFireball.DisplayName: Dreaming Light Fireball
+	DreamingLightMinion.DisplayName: Dreaming Light Minion
+	DreamingLightProj.DisplayName: Dreaming Light Proj
+	DreamingLightStriker.DisplayName: Dreaming Light Striker
+	DreamlessNightArrow.DisplayName: Dreamless Night Arrow
+	DreamlessNightBeam.DisplayName: Dreamless Night Beam
+	DreamlessNightMinion.DisplayName: Dreamless Night Minion
+	DreamlessNightProj.DisplayName: Dreamless Night Proj
+	DualWraithStaffGhost.DisplayName: Dual Wraith Staff Ghost
+	DualWraithStaffHeldProj.DisplayName: Dual Wraith Staff Held Proj
+	DualWraithStaffJavelin.DisplayName: Dual Wraith Staff Javelin
+	DungeonBreakerExecution.DisplayName: Dungeon Breaker Execution
+	DungeonBreakerProj.DisplayName: Dungeon Breaker Proj
+	DungeonBreakerShockwave.DisplayName: Dungeon Breaker Shockwave
+	DungeonBreakerWaterbolt.DisplayName: Dungeon Breaker Waterbolt
+	EndlessWarExecution.DisplayName: Endless War Execution
+	EndlessWarLightening.DisplayName: Endless War Lightening
+	EndlessWarProj.DisplayName: Endless War Proj
+	ExsanguinationBulletProj.DisplayName: Exsanguination Bullet Proj
+	ExsanguinationHeldProj.DisplayName: Exsanguination Held Proj
+	FleshGrinderExecution.DisplayName: Flesh Grinder Execution
+	FleshGrinderProj.DisplayName: Flesh Grinder Proj
+	FleshtumorHeldProj.DisplayName: Fleshtumor Held Proj
+	FleshtumorHunger.DisplayName: Fleshtumor Hunger
+	FleshtumorHungerStick.DisplayName: Fleshtumor Hunger Stick
+	FrostHammerExecution.DisplayName: Frost Hammer Execution
+	FrostHammerIceSpike.DisplayName: Frost Hammer Ice Spike
+	FrostHammerProj.DisplayName: Frost Hammer Proj
+	FrostlightFlamethrower.DisplayName: Frostlight Flamethrower
+	FrostlightFlamethrowerFlame.DisplayName: Frostlight Flamethrower Flame
+	FrostlightFrostball.DisplayName: Frostlight Frostball
+	FrostlightHeldProj.DisplayName: Frostlight Held Proj
+	FrostlightHeldProjAlt.DisplayName: Frostlight Held Proj Alt
+	FrostoftheStormChargeProj.DisplayName: Frostofthe Storm Charge Proj
+	FrostoftheStormExecution.DisplayName: Frostofthe Storm Execution
+	FrostoftheStormHeldProj.DisplayName: Frostofthe Storm Held Proj
+	FrostoftheStormSlash.DisplayName: Frostofthe Storm Slash
+	FrostoftheStormSlashGiant.DisplayName: Frostofthe Storm Slash Giant
+	GaiaStrikerBeam.DisplayName: Gaia Striker Beam
+	GaiaStrikerBloodyBullet.DisplayName: Gaia Striker Bloody Bullet
+	GaiaStrikerBolt.DisplayName: Gaia Striker Bolt
+	GaiaStrikerHeldProj.DisplayName: Gaia Striker Held Proj
+	GaiaStrikerMountedProj.DisplayName: Gaia Striker Mounted Proj
+	GaiaStrikerProj.DisplayName: Gaia Striker Proj
+	GhostDaggerMark.DisplayName: Ghost Dagger Mark
+	JungleMadnessExecution.DisplayName: Jungle Madness Execution
+	JungleMadnessLeafs.DisplayName: Jungle Madness Leafs
+	JungleMadnessProj.DisplayName: Jungle Madness Proj
+	LavaFlowBoom.DisplayName: Lava Flow Boom
+	LavaFlowExecution.DisplayName: Lava Flow Execution
+	LavaFlowProj.DisplayName: Lava Flow Proj
+	MantleLayerExecution.DisplayName: Mantle Layer Execution
+	MantleLayerProj.DisplayName: Mantle Layer Proj
+	MoltenDaggerMark.DisplayName: Molten Dagger Mark
+	MonkStaffBubble.DisplayName: Monk Staff Bubble
+	MonkStaffLightning.DisplayName: Monk Staff Lightning
+	MonkStaffSkillProj.DisplayName: Monk Staff Skill Proj
+	PestilenceFlowerBomb.DisplayName: Pestilence Flower Bomb
+	PestilenceFlowerHeldProj.DisplayName: Pestilence Flower Held Proj
+	PestilenceFlowerHunger.DisplayName: Pestilence Flower Hunger
+	PrunusMumeFlower.DisplayName: Prunus Mume Flower
+	PrunusMumePetal.DisplayName: Prunus Mume Petal
+	PrunusMumeProj.DisplayName: Prunus Mume Proj
+	PureYinyoBlack.DisplayName: Pure Yinyo Black
+	PureYinyoExecution.DisplayName: Pure Yinyo Execution
+	PureYinyoJade.DisplayName: Pure Yinyo Jade
+	PureYinyoShard.DisplayName: Pure Yinyo Shard
+	PureYinyoWhite.DisplayName: Pure Yinyo White
+	SimpleHandAxeExecution.DisplayName: Simple Hand Axe Execution
+	SimpleHandAxeProj.DisplayName: Simple Hand Axe Proj
+	StarofHopeProj.DisplayName: Starof Hope Proj
+	StarofHopeProj2.DisplayName: Starof Hope Proj2
+	StarofHopeStar.DisplayName: Starof Hope Star
+	SundownerAmmo.DisplayName: Sundowner Ammo
+	SundownerFireball.DisplayName: Sundowner Fireball
+	SundownerFlare.DisplayName: Sundowner Flare
+	SundownerFlareGun.DisplayName: Sundowner Flare Gun
+	SundownerHeldProj.DisplayName: Sundowner Held Proj
+	SundownerRocket.DisplayName: Sundowner Rocket
+	TearEyeProj.DisplayName: Tear Eye Proj
+	TheDefilerExecution.DisplayName: The Defiler Execution
+	TheDefilerProj.DisplayName: The Defiler Proj
+	TheJudgementCross.DisplayName: The Judgement Cross
+	TheJudgementCrossMounted.DisplayName: The Judgement Cross Mounted
+	TheJudgementMinion.DisplayName: The Judgement Minion
+	TheJudgementProj.DisplayName: The Judgement Proj
+	TheJudgementStar.DisplayName: The Judgement Star
+	TheJudgementStarExecution.DisplayName: The Judgement Star Execution
+	TheJudgementStarExecutionMounted.DisplayName: The Judgement Star Execution Mounted
+	ThePunishmentExecution.DisplayName: The Punishment Execution
+	ThePunishmentProj.DisplayName: The Punishment Proj
+	ThePunishmentStar.DisplayName: The Punishment Star
+}
+
 Melee: {
+	DragonSwordHeldProj.DisplayName: Dragon Sword Held Proj
+	DragonSwordSlash.DisplayName: Dragon Sword Slash
 	AzureFrostmarkEnergy.DisplayName: Azure Frostmark Energy
 	AzureFrostmarkProj.DisplayName: Azure Frostmark Proj
 	BamboomerangProj.DisplayName: Bamboomerang Proj
+	CactusSpearProj.DisplayName: Cactus Spear Proj
+	CactusSpearSpike.DisplayName: Cactus Spear Spike
 	CandLanceBeam.DisplayName: Cand Lance Beam
 	CandLanceFire.DisplayName: Cand Lance Fire
 	CandLanceThrownProj.DisplayName: Cand Lance Thrown Proj
+	ColdSakuraArrow.DisplayName: Cold Sakura Arrow
+	ColdSakuraProj.DisplayName: Cold Sakura Proj
 	CryoblazeHymnFireball.DisplayName: Cryoblaze Hymn Fireball
 	CryoblazeHymnFirePortal.DisplayName: Cryoblaze Hymn Fire Portal
 	CryoblazeHymnFrostEnergy.DisplayName: Cryoblaze Hymn Frost Energy
 	CryoblazeHymnFrostPortal.DisplayName: Cryoblaze Hymn Frost Portal
 	CryoblazeHymnProj.DisplayName: Cryoblaze Hymn Proj
-	DeepToneMinion.DisplayName: Deep Tone Minion
-	DeepToneShockwave.DisplayName: Deep Tone Shockwave
-	DeepToneTenctacle.DisplayName: Deep Tone Tenctacle
+	DeathTollsProj.DisplayName: Death Tolls Proj
+	DeepToneHealOrb.DisplayName: Deep Tone Heal Orb
+	DeepToneMouth.DisplayName: Deep Tone Mouth
 	DeepToneThrownProj.DisplayName: Deep Tone Thrown Proj
 	DialecticsCubeProj.DisplayName: Dialectics Cube Proj
 	DialecticsSkyFall.DisplayName: Dialectics Sky Fall
@@ -21,6 +148,8 @@ Melee: {
 	EclipseWraithBoom.DisplayName: Eclipse Wraith Boom
 	EclipseWraithFireball.DisplayName: Eclipse Wraith Fireball
 	EclipseWraithProj.DisplayName: Eclipse Wraith Proj
+	EnchantedSwordfishJavelin.DisplayName: Enchanted Swordfish Javelin
+	EnchantedSwordfishProj.DisplayName: Enchanted Swordfish Proj
 	EvolutionArrow.DisplayName: Evolution Arrow
 	EvolutionThrownProj.DisplayName: Evolution Thrown Proj
 	FierySpearFireball.DisplayName: Fiery Spear Fireball
@@ -30,79 +159,50 @@ Melee: {
 	FlybackHandStar.DisplayName: Flyback Hand Star
 	FlybackHandThrownProj.DisplayName: Flyback Hand Thrown Proj
 	GalvanizedHandArrow.DisplayName: Galvanized Hand Arrow
-	GalvanizedHandArrowMounted.DisplayName: Galvanized Hand Arrow Mounted
 	GalvanizedHandSideProj.DisplayName: Galvanized Hand Side Proj
 	GalvanizedHandThrownProj.DisplayName: Galvanized Hand Thrown Proj
-	LightBiteArrow.DisplayName: Light Bite Arrow
 	LightBiteDarkStar.DisplayName: Light Bite Dark Star
 	LightBiteThrownProj.DisplayName: Light Bite Thrown Proj
+	SamsaraofDawnlightBolt.DisplayName: Samsaraof Dawnlight Bolt
+	SamsaraofDawnlightMoon.DisplayName: Samsaraof Dawnlight Moon
+	SamsaraofDawnlightSun.DisplayName: Samsaraof Dawnlight Sun
 	SpearofDarknessShadow.DisplayName: Spearof Darkness Shadow
 	SpearofDarknessThrownProj.DisplayName: Spearof Darkness Thrown Proj
 	SpearofEscapeBoom.DisplayName: Spearof Escape Boom
 	SpearofEscapeMissile.DisplayName: Spearof Escape Missile
 	SpearofEscapeRider.DisplayName: Spearof Escape Rider
-	SpearofEscapeThrownProj.DisplayName: Spearof Escape Thrown Proj
 	SweetStabThrownProj.DisplayName: Sweet Stab Thrown Proj
+	TerraSpearArrow.DisplayName: Terra Spear Arrow
+	TerraSpearPortal.DisplayName: Terra Spear Portal
+	TerraSpearProj.DisplayName: Terra Spear Proj
 	TheMarsMark.DisplayName: The Mars Mark
 	TheMarsPhantom.DisplayName: The Mars Phantom
 	TheMarsProj.DisplayName: The Mars Proj
 	TonbogiriBubble.DisplayName: Tonbogiri Bubble
 	TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
 	WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
-	BinaryStarsExecution.DisplayName: Binary Stars Held Clone
-	CactusSpearProj.DisplayName: Cactus Spear Proj
-	CactusSpearSpike.DisplayName: Cactus Spear Spike
-	ColdSakuraProj.DisplayName: Cold Sakura Proj
-	ColdSakuraArrow.DisplayName: Cold Sakura Arrow
-	TerraSpearArrow.DisplayName: Terra Spear Arrow
-	TerraSpearPortal.DisplayName: Terra Spear Portal
-	TerraSpearProj.DisplayName: Terra Spear Proj
-	TerraSpearSideProj.DisplayName: Terra Spear Side Proj
-	TerraSpearLaser.DisplayName: Terra Spear Laser
-	AbyssalWorldProj.DisplayName: Abyssal World Proj
-	AbyssalWorldVortex.DisplayName: Abyssal World Vortex
-	DeepToneMouth.DisplayName: Deep Tone Mouth
-	DeepToneHealOrb.DisplayName: Deep Tone Heal Orb
-	DragonSwordHeldProj.DisplayName: Dragon Sword Held Proj
-	DragonSwordSlash.DisplayName: Dragon Sword Slash
-	FrostoftheStormHeldProj.DisplayName: Frostofthe Storm Held Proj
-	EnchantedSwordfishJavelin.DisplayName: Enchanted Swordfish Javelin
-	EnchantedSwordfishProj.DisplayName: Enchanted Swordfish Proj
-	SamsaraofDawnlightBolt.DisplayName: Samsaraof Dawnlight Bolt
-	SamsaraofDawnlightMoon.DisplayName: Samsaraof Dawnlight Moon
-	SamsaraofDawnlightSun.DisplayName: Samsaraof Dawnlight Sun
 }
 
 Typeless: {
-	EvolutionEnergyPortal.DisplayName: Evolution Energy Portal
-	RegenOrbsPink.DisplayName: Regen Orbs Pink
-	DreamingLightBeam.DisplayName: Dreaming Light Beam
-	JudgementStarAlt.DisplayName: TheJudgement Star Alt
-	TheJudgementStar.DisplayName: TheJudgement Star Normal
-	DeathTollsProj.DisplayName: Death Tolls Proj
-	DesterrennachtHealProj.DisplayName: Desterrennacht Heal Proj
+	BoneSlapBone.DisplayName: Bone Slap Bone
 	CowboyBullet.DisplayName: Cowboy Bullet
 	CowboyRevolverProj.DisplayName: Cowboy Revolver Proj
-	RuneWizardProj.DisplayName: Rune Wizard Proj
-	FloatingPlants.DisplayName: Floating Plants
-	InvisBoom.DisplayName: Invis Boom
-	TerraFlamethrowerHeldProj.DisplayName: Terra Flamethrower Held Proj
-	FrostHammerExecution.DisplayName: Frost Hammer Execution
-	FrostHammerProj.DisplayName: Frost Hammer Proj
-	DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
+	DesterrennachtHealProj.DisplayName: Desterrennacht Heal Proj
 	DiverJellyFish.DisplayName: Diver Jelly Fish
-	PrunusMumePetal.DisplayName: Prunus Mume Petal
-	PrunusMumeFlower.DisplayName: Prunus Mume Flower
-	SlimeGodShieldSunProj.DisplayName: Slime God Shield Sun Proj
-	PureYinyoShard.DisplayName: Pure Yinyo Shard
-	PureYinyoExecution.DisplayName: Pure Yinyo Execution
+	FloatingPlants.DisplayName: Floating Plants
+	GaiaStrikerLootProj.DisplayName: Gaia Striker Loot Proj
 	PowerLilyProj.DisplayName: Power Lily Proj
-	AngryBombExecution.DisplayName: Angry Bomb Execution
+	RuneWizardProj.DisplayName: Rune Wizard Proj
+	InvisBoom.DisplayName: Invis Boom
+	EvolutionEnergyPortal.DisplayName: Evolution Energy Portal
 	SamsaraofDawnlightProj.DisplayName: Samsaraof Dawnlight Proj
-	BoneSlapBone.DisplayName: Bone Slap Bone
-	ContainedBlastShockBullet.DisplayName: Contained Blast Shock Bullet
-	ContainedBlastStickBullet.DisplayName: Contained Blast Stick Bullet
-	GaiaStrikerSmasher.DisplayName: Gaia Striker Smasher
+	TerraFlamethrowerHeldProj.DisplayName: Terra Flamethrower Held Proj
+	RegenOrbsPink.DisplayName: Regen Orbs Pink
+}
+
+Magic: {
+	CoronaFireball.DisplayName: Corona Fireball
+	CoronaHeldProj.DisplayName: Corona Held Proj
 }
 
 Pets: {
@@ -113,151 +213,13 @@ Pets: {
 	WhaleProj.DisplayName: Whale Proj
 }
 
-Executor: {
-	AetherfireSmasherExecution.DisplayName: Aetherfire Smasher Execution
-	AetherfireSmasherFireball.DisplayName: Aetherfire Smasher Fireball
-	AetherfireSmasherProj.DisplayName: Aetherfire Smasher Proj
-	AetherfireSmasherVolcano.DisplayName: Aetherfire Smasher Volcano
-	BinaryStarsArrow.DisplayName: Binary Stars Arrow
-	BinaryStarsExecution.DisplayName: Binary Stars Execution
-	BinaryStarsPhantom.DisplayName: Binary Stars Phantom
-	BinaryStarsPhantomClone.DisplayName: Binary Stars Phantom Clone
-	BinaryStarsProj.DisplayName: Binary Stars Proj
-	MantleLayerExecution.DisplayName: Blazing Striker Execution
-	MantleLayerProj.DisplayName: Blazing Striker Proj
-	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
-	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
-	DeathTollsArrow.DisplayName: Death Tolls Arrow
-	DeathTollsDarkEnergy.DisplayName: Death Tolls Dark Energy
-	DeathTollsExecution.DisplayName: Death Tolls Execution
-	DeathTollsMinion.DisplayName: Death Tolls Minion
-	DeathTollsProj.DisplayName: Death Tolls Proj
-	DeathTollsStreak.DisplayName: Death Tolls Streak
-	DreamingLightFireball.DisplayName: Dreaming Light Fireball
-	DreamingLightMinion.DisplayName: Dreaming Light Minion
-	DreamingLightProj.DisplayName: Dreaming Light Proj
-	DreamlessNightArrow.DisplayName: Dreamless Night Arrow
-	DreamlessNightBeam.DisplayName: Dreamless Night Beam
-	DreamlessNightMinion.DisplayName: Dreamless Night Minion
-	DreamlessNightProj.DisplayName: Dreamless Night Proj
-	DungeonBreakerExecution.DisplayName: Dungeon Breaker Execution
-	DungeonBreakerProj.DisplayName: Dungeon Breaker Proj
-	DungeonBreakerShockwave.DisplayName: Dungeon Breaker Shockwave
-	DungeonBreakerWaterbolt.DisplayName: Dungeon Breaker Waterbolt
-	ExsanguinationBulletProj.DisplayName: Exsanguination Bullet Proj
-	ExsanguinationHeldProj.DisplayName: Exsanguination Held Proj
-	FleshGrinderExecution.DisplayName: Flesh Grinder Execution
-	FleshGrinderProj.DisplayName: Flesh Grinder Proj
-	TheJudgementCross.DisplayName: TheJudgement Holy Cross
-	TheJudgementCrossMounted.DisplayName: TheJudgement Holy Cross Mounted
-	TheJudgementMinion.DisplayName: TheJudgement Minion
-	TheJudgementProj.DisplayName: TheJudgement Proj
-	TheJudgementStarExecution.DisplayName: TheJudgement Star Execution
-	TheJudgementStarExecutionMounted.DisplayName: TheJudgement Star Execution Mounted
-	TheJudgementStar.DisplayName: TheJudgement Star Normal
-	JungleMadnessExecution.DisplayName: Jungle Madness Execution
-	JungleMadnessLeafs.DisplayName: Jungle Madness Leafs
-	JungleMadnessProj.DisplayName: Jungle Madness Proj
-	TheDefilerExecution.DisplayName: The Defiler Execution
-	TheDefilerProj.DisplayName: The Defiler Proj
-	ThePunishmentExecution.DisplayName: The Punishment Execution
-	ThePunishmentProj.DisplayName: The Punishment Proj
-	ThePunishmentStar.DisplayName: The Punishment Star
-	DreamingLightStriker.DisplayName: Dreaming Light Striker
-	DreamingLightBeam.DisplayName: Dreaming Light Beam
-	DeathTollsBell.DisplayName: Death Tolls Bell
-	CrimsonScytheProj.DisplayName: Crimson Scythe Proj
-	TrueScarletProj.DisplayName: True Scarlet Proj
-	GrandFinaleLightning.DisplayName: Grand Finale Lighting
-	GrandFinaleProj.DisplayName: Grand Finale Proj
-	GrandFinaleExecution.DisplayName: Grand Finale Execution
-	GrandFinaleStriker.DisplayName: Grand Finale Striker
-	SimpleHandAxeExecution.DisplayName: Simple Hand Axe Execution
-	SimpleHandAxeProj.DisplayName: Simple Hand Axe Proj
-	AetherfireSmasherProj2.DisplayName: Aetherfire Smasher Proj2
-	AetherfireSmasherFireball2.DisplayName: Aetherfire Smasher Fireball2
-	AetherfireSmasherExecution2.DisplayName: Aetherfire Smasher Execution2
-	MonkStaffSkillProj.DisplayName: Monk Staff Proj
-	MonkStaffBubble.DisplayName: Sleepy Bubbles
-	MonkStaffLightning.DisplayName: Sky Dragon Fury Lightning
-	SkyDragonFuryElectricBall.DisplayName: Sky Dragon Fury Electric Ball
-	AbyssalWorldProj.DisplayName: Abyssal World Proj
-	DesertDaggerMark.DisplayName: Desert Dagger Mark
-	SundownerAmmo.DisplayName: Sundowner Ammo
-	GhostDaggerMark.DisplayName: Ghost Dagger Mark
-	MoltenDaggerMark.DisplayName: Molten Dagger Mark
-	SundownerFlare.DisplayName: Sundowner Flare
-	SundownerRocket.DisplayName: Sundowner Rocket
-	SundownerFlareGun.DisplayName: Sundowner Flare Gun
-	SundownerFireball.DisplayName: Sundowner Fireball
-	DragonSwordFireball.DisplayName: Dragon Sword Fireball
-	FrostoftheStormSlash.DisplayName: Frostofthe Storm Slash
-	FrostoftheStormExecution.DisplayName: Frostofthe Storm Execution
-	FrostoftheStormHeldProj.DisplayName: Frostofthe Storm Held Proj
-	FrostoftheStormChargeProj.DisplayName: Frostofthe Storm Charge Proj
-	FrostoftheStormSlashGiant.DisplayName: Frostofthe Storm Slash Giant
-	FleshtumorHeldProj.DisplayName: Fleshtumor Held Proj
-	FleshtumorHunger.DisplayName: Fleshtumor Hunger
-	FleshtumorHungerStick.DisplayName: Fleshtumor Hunger Stick
-	FrostHammerIceSpike.DisplayName: Frost Hammer Ice Spike
-	SpectreStaffExecution.DisplayName: Spectre Staff Execution
-	DualWraithStaffHeldProj.DisplayName: Spectre Staff Held Proj
-	DualWraithStaffJavelin.DisplayName: Spectre Staff Javelin
-	DualWraithStaffGhost.DisplayName: Spectre Staff Ghost
-	FrostHammerExecution.DisplayName: Frost Hammer Execution
-	PrunusMumeProj.DisplayName: Prunus Mume Proj
-	FrostlightHeldProj.DisplayName: Frostlight Held Proj
-	PureYinyoProj.DisplayName: Pure Yinyo Proj
-	PureYinyoBlack.DisplayName: Pure Yinyo Black
-	PureYinyoJade.DisplayName: Pure Yinyo Jade
-	PureYinyoWhite.DisplayName: Pure Yinyo White
-	FrostlightFlamethrower.DisplayName: Frostlight Flamethrower
-	FrostlightFlamethrowerFlame.DisplayName: Frostlight Flamethrower Flame
-	FrostlightFrostball.DisplayName: Frostlight Frostball
-	FrostlightHeldProjAlt.DisplayName: Frostlight Held Proj Alt
-	LavaFlowBoom.DisplayName: Lava Flow Boom
-	LavaFlowExecution.DisplayName: Lava Flow Execution
-	LavaFlowProj.DisplayName: Lava Flow Proj
-	StarofHopeProj.DisplayName: Starof Hope Proj
-	StarofHopeProj2.DisplayName: Starof Hope Proj2
-	StarofHopeStar.DisplayName: Starof Hope Star
-	AngryBombProj.DisplayName: Angry Bomb Proj
-	AngryBombExecution.DisplayName: Angry Bomb Execution
-	BoneSlapProj.DisplayName: Bone Slap Proj
-	TearEyeProj.DisplayName: Tear Eye Proj
-	PestilenceFlowerBomb.DisplayName: Pestilence Flower Bomb
-	PestilenceFlowerHeldProj.DisplayName: Pestilence Flower Held Proj
-	PestilenceFlowerHunger.DisplayName: Pestilence Flower Hunger
-	ContainedBlastHeldProj.DisplayName: Contained Blast Held Proj
-	ContainedBlastBoom.DisplayName: Contained Blast Boom
-	ContainedBlastShockBullet.DisplayName: Contained Blast Shock Bullet
-	ContainedBlastStickBullet.DisplayName: Contained Blast Stick Bullet
-	EndlessWarExecution.DisplayName: Endless War Execution
-	EndlessWarLightening.DisplayName: Endless War Lightening
-	EndlessWarProj.DisplayName: Endless War Proj
-	GaiaHammerProj.DisplayName: Gaia Hammer Proj
-	GaiaHammerBloodyBullet.DisplayName: Gaia Hammer Bloody Bullet
-	GaiaStrikerBloodyBullet.DisplayName: Gaia Striker Bloody Bullet
-	GaiaStrikerHeldProj.DisplayName: Gaia Striker Held Proj
-	GaiaStrikerProj.DisplayName: Gaia Striker Proj
-	GaiaStrikerBeam.DisplayName: Gaia Striker Beam
-	GaiaStrikerMountedProj.DisplayName: Gaia Striker Mounted Proj
-}
-
 Ranged: {
+	BambooStick.DisplayName: Bamboo Stick
 	ClimaticHawstringArrow.DisplayName: Climatic Hawstring Arrow
 	ClimaticHawstringBeam.DisplayName: Climatic Hawstring Beam
-	ClimaticHawstringLaser.DisplayName: Climatic Hawstring Laser
 	ClimaticHawstringMinion.DisplayName: Climatic Hawstring Minion
 	ClimaticHawstringProj.DisplayName: Climatic Hawstring Proj
-	BambooStick.DisplayName: Bamboo Stick
-	SundownerHeldProj.DisplayName: Sundowner Held Proj
-	TerraFlamethrowerTank.DisplayName: Terra Flamethrower Tank
-	TerraFlamethrowerFlame.DisplayName: Terra Flamethrower Flame
 	TerraFlamethrowerDrop.DisplayName: Terra Flamethrower Drop
-}
-
-Magic: {
-	CoronaHeldProj.DisplayName: Corona Held Proj
-	CoronaFireball.DisplayName: Corona Fireball
+	TerraFlamethrowerFlame.DisplayName: Terra Flamethrower Flame
+	TerraFlamethrowerTank.DisplayName: Terra Flamethrower Tank
 }

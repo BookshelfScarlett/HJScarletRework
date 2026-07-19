@@ -76,6 +76,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
+                //即将结束的时候这里会堆叠更多，更多的粒子。
                 if (Main.rand.NextBool(3))
                 {
                     Vector2 pos = Projectile.Center.ToRandCirclePosEdge(30);
@@ -179,16 +180,17 @@ namespace HJScarletRework.Projs.Executor
                     if (i != healType && i != healType2)
                         proj.HJScarlet().HasExecutionMechanic = true;
                 }
-                if (Projectile.HJScarlet().ExecutionStrike)
+                if (Projectile.HJScarlet().ExecutionStrike && !Owner.HasProj<GaiaStrikerHeldProj>() && !Owner.HasProj<GaiaStrikerMountedProj>())
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(6), Vector2.Zero, ProjectileType<GaiaStrikerHeldProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(6), Vector2.Zero, ProjectileType<GaiaStrikerMountedProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     proj.rotation = Projectile.rotation;
-                    ((GaiaStrikerHeldProj)proj.ModProjectile).PumpoutBullet = false;
+                    //No.
+                    ((GaiaStrikerMountedProj)proj.ModProjectile).ShouldCreate = false;
                 }
                 new CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f).Spawn();
                 new CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.28f).Spawn();
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 12, 20, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
-                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 0, Pitch = -0.4f,PitchVariance = 0.1f, Volume = .77f }, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 0, Pitch = 0.4f,PitchVariance = 0.1f, Volume = .57f }, Projectile.Center);
                 Projectile.Kill();
             }
         }

@@ -355,5 +355,29 @@ namespace HJScarletRework.Globals.Methods
             rotPoint = tex.Size() / 2;
             se = proj.spriteDirection * Main.player[proj.owner].gravDir == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
         }
+        /// <summary>
+        /// 复制原版的治疗封装
+        /// 重载了一个颜色输出方案，用于特殊用途
+        /// </summary>
+        /// <param name="Owner"></param>
+        /// <param name="healAmt"></param>
+        /// <param name="color"></param>
+        /// <param name="onlyEffet"></param>
+        /// <param name="broadcast"></param>
+        public static void ScarletHeal(this Player Owner, int healAmt, Color? color = null, bool onlyEffet = false, bool broadcast = true)
+        {
+            if (!onlyEffet)
+            {
+                Owner.statLife += healAmt;
+                if (Owner.statLife > Owner.statLifeMax2)
+                    Owner.statLife = Owner.statLifeMax2;
+            }
+
+            Color c = color ?? CombatText.HealLife;
+            CombatText.NewText(new Rectangle((int)Owner.position.X, (int)Owner.position.Y, Owner.width, Owner.height), c, healAmt);
+            if (broadcast && Main.netMode == NetmodeID.MultiplayerClient && Owner.whoAmI == Main.myPlayer)
+                NetMessage.SendData(MessageID.PlayerHeal, -1, -1, null, Owner.whoAmI, healAmt);
+
+        }
     }
 }

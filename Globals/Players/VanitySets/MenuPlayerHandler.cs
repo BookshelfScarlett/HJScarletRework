@@ -1,6 +1,8 @@
 ﻿using HJScarletRework.Globals.List;
 using HJScarletRework.Items.Vanity.Arceca;
 using HJScarletRework.Items.Vanity.Misc;
+using HJScarletRework.Items.Vanity.Yards;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -67,16 +69,16 @@ namespace HJScarletRework.Globals.Players.VanitySets
     {
         public override int VanityItemType => ItemType<HikariItem>();
     }
-    //public class CantonesePlayer : MenuVanityPlayer
-    //{
-    //    public override int VanityItemType => ItemType<CantoneseGirlItem>();
-    //}
-    //public class LeafMaidPlayer : MenuVanityPlayer
-    //{
-    //    public override int VanityItemType => ItemType<LeafMaidItem>();
-    //}
-    //public class RedDragonPlayer : MenuVanityPlayer
-    //{
-    //    public override int VanityItemType => ItemType<RedDragonItem>();
-    //}
+    public class CantonesePlayer : MenuVanityPlayer
+    {
+        public override int VanityItemType => ItemType<CantoneseGirlItem>();
+    }
+    public class LeafMaidPlayer : MenuVanityPlayer
+    {
+        public override int VanityItemType => ItemType<LeafMaidItem>();
+    }
+    public class RedDragonPlayer : MenuVanityPlayer
+    {
+        public override int VanityItemType => ItemType<RedDragonItem>();
+    }
 }

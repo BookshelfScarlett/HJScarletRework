@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class PureYinyoExecution : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Typeless;
+        public override ClassCategory Category => ClassCategory.Executor;
         public override string Texture => GetInstance<PureYinyo>().Texture;
         public NPC CurTarget = null;
         public enum State

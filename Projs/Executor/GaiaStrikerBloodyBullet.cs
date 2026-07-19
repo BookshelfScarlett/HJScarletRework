@@ -6,6 +6,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -39,6 +40,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.SetupImmnuity(-1);
             Projectile.timeLeft = 300;
         }
+        private Color GaiaStrikerBulletDataColor => Color.Lerp(Color.Red, Color.White, .21f) with { A = 255 };
         Vector2 RandVectorX = Vector2.Zero;
         public override void OnFirstFrame()
         {
@@ -96,12 +98,29 @@ namespace HJScarletRework.Projs.Executor
                     Projectile.HomingTarget(Owner.Center, -1, Lerp(6, 9, ratios), st, angle);
                     if (Projectile.Hitbox.Intersects(Owner.Hitbox))
                     {
-                        if (Projectile.ai[2] == 1)
+                        switch (Projectile.ai[2])
                         {
-                                Owner.Heal(1);
+                            //盖亚重锤普攻爆开时的治疗
+                            case 0f:
+                                Owner.ScarletHeal(GaiaStriker.BloodBulletHealNormal * 2, GaiaStrikerBulletDataColor);
+                                break;
+                            //盖亚重锤处决爆开时的治疗
+                            case 1f:
+                                Owner.ScarletHeal(GaiaStriker.BloodBulletHealNormal, GaiaStrikerBulletDataColor);
+                                break;
+                            //盖亚宝箱爆开时的治疗
+                            case 2f:
+                                Owner.ScarletHeal(Main.rand.Next(GaiaStriker.BloodBulletHealLootChest - 10, GaiaStriker.BloodBulletHealLootChest + 12), GaiaStrikerBulletDataColor);
+                                break;
+                            //盖亚重锤的仆从在提前爆裂时提供的治疗
+                            case 3f:
+                                Owner.ScarletHeal(Main.rand.Next(GaiaStriker.BloodBulletHealMinionDeadEarly - 3, GaiaStriker.BloodBulletHealMinionDeadEarly + 2), GaiaStrikerBulletDataColor);
+                                break;
+                            //盖亚重锤的仆从在自然爆裂时提供的治疗
+                            case 4f:
+                                Owner.ScarletHeal(Main.rand.Next(GaiaStriker.BloodBulletHealMinionDead - 3, GaiaStriker.BloodBulletHealMinionDead + 2), GaiaStrikerBulletDataColor);
+                                break;
                         }
-                        else
-                            Owner.Heal(2);
                         Projectile.Kill();
                     }
                 }
@@ -119,8 +138,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile.AddExecutionTimeImmediate(ItemType<GaiaStriker>());
-            base.OnHitNPC(target, hit, damageDone);
+            if (!Owner.HasProj<GaiaStrikerHeldProj>() && !Owner.HasProj<GaiaStrikerMountedProj>())
+                Projectile.AddExecutionTimeImmediate(ItemType<GaiaStriker>());
         }
     }
 }

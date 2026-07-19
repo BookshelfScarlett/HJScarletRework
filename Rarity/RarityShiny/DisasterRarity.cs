@@ -62,7 +62,6 @@ namespace HJScarletRework.Rarity.RarityShiny
             }
             //最后更新他。
             RarityDrawHelper.UpdateTooltipParticles(tooltipLine, ref particleList);
-
         }
 
 

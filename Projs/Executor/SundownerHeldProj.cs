@@ -18,7 +18,7 @@ namespace HJScarletRework.Projs.Executor
     public class SundownerHeldProj : HJScarletProj
     {
         public override string Texture => GetInstance<Sundowner>().Texture;
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override ClassCategory Category => ClassCategory.Executor;
         public ref float Timer => ref Projectile.ai[0];
         public AnimationStruct Helper = new(2);
         public bool CanShoot = false;

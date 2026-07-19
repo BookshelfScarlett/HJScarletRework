@@ -5,7 +5,7 @@ namespace HJScarletRework.Core.ParticleECS
 {
     public static class ECSMethod
     {
-        public static int NewParticle(int Type, int timeLeft, Vector2 position, Vector2 velocity, Color drawColor, float opacity = 1, float rotation = 0, float scale = 0, BlendState blendstate = null, float ai0 = 0, float ai1 = 0, float ai2 = 0)
+        public static int NewParticle(int Type, int timeLeft, Vector2 position, Vector2 velocity, Color drawColor, float opacity = 1, float rotation = 0, float scale = 0, BlendState blendstate = null, float ai0 = 0, float ai1 = 0, float ai2 = 0, bool aibool0 = false, bool aibool1 = false, bool aibool2 = false, int aiint0 = 0, int aiint1 = 0, int aiint2 = 0)
         {
             ECSParticleBehavior p = ECSParticleDataManager.PAICollection[Type];
             BlendState curState = blendstate is null ? BlendState.AlphaBlend : blendstate;
@@ -14,7 +14,7 @@ namespace HJScarletRework.Core.ParticleECS
                 if (ECSParticleDataManager.activePoint_alpha < ECSParticleDataManager.MaxParticle)
                 {
                     ref ECSParticleData particleDate = ref ECSParticleDataManager.particleData_alpha[ECSParticleDataManager.activePoint_alpha];
-                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, opacity, rotation, scale, ai0, ai1, ai2);
+                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, opacity, rotation, scale, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
                     ECSParticleDataManager.activePoint_alpha++;
                     p.OnSpawn(ref particleDate);
                     return ECSParticleDataManager.activePoint_alpha - 1;
@@ -25,7 +25,7 @@ namespace HJScarletRework.Core.ParticleECS
                 if (ECSParticleDataManager.activePoint_add < ECSParticleDataManager.MaxParticle)
                 {
                     ref ECSParticleData particleDate = ref ECSParticleDataManager.particleData_add[ECSParticleDataManager.activePoint_add];
-                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, opacity, rotation, scale, ai0, ai1, ai2);
+                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, opacity, rotation, scale, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
                     ECSParticleDataManager.activePoint_add++;
                     p.OnSpawn(ref particleDate);
                     return ECSParticleDataManager.activePoint_add - 1;
@@ -36,7 +36,7 @@ namespace HJScarletRework.Core.ParticleECS
                 if (ECSParticleDataManager.activePoint_Nonmult < ECSParticleDataManager.MaxParticle)
                 {
                     ref ECSParticleData particleDate = ref ECSParticleDataManager.particleData_nopremult[ECSParticleDataManager.activePoint_Nonmult];
-                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, opacity, rotation, scale, ai0, ai1, ai2);
+                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, opacity, rotation, scale, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
                     ECSParticleDataManager.activePoint_Nonmult++;
                     p.OnSpawn(ref particleDate);
                     return ECSParticleDataManager.activePoint_Nonmult - 1;
@@ -44,7 +44,7 @@ namespace HJScarletRework.Core.ParticleECS
             }
             return -1;
         }
-        public static void ReSetParticleInfo(ref ECSParticleData particleDate, int Type, int timeLeft, Vector2 position, Vector2 velocity, Color drawColor, float opacity = 1f, float rotation = 0, float scale = 0, float ai0 = 0, float ai1 = 0, float ai2 = 0)
+        public static void ReSetParticleInfo(ref ECSParticleData particleDate, int Type, int timeLeft, Vector2 position, Vector2 velocity, Color drawColor, float opacity = 1f, float rotation = 0, float scale = 0, float ai0 = 0, float ai1 = 0, float ai2 = 0, bool aibool0 = false, bool aibool1 = false, bool aibool2 = false, int aiint0 = 0, int aiint1 = 0, int aiint2 = 0)
         {
             particleDate = ECSParticleDataManager.TempleParticle;
 
@@ -60,12 +60,12 @@ namespace HJScarletRework.Core.ParticleECS
             particleDate.aifloat0 = ai0;
             particleDate.aifloat1 = ai1;
             particleDate.aifloat2 = ai2;
-            particleDate.aibool0 = false;
-            particleDate.aibool2 = false;
-            particleDate.aibool2 = false;
-            particleDate.aiint0 = 0;
-            particleDate.aiint1 = 0;
-            particleDate.aiint2 = 0;
+            particleDate.aibool0 = aibool0;
+            particleDate.aibool1 = aibool1;
+            particleDate.aibool2 = aibool2;
+            particleDate.aiint0 = aiint0;
+            particleDate.aiint1 = aiint1;
+            particleDate.aiint2 = aiint2;
             particleDate.Opacity = opacity;
         }
     }

@@ -56,8 +56,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //Main.NewText(target.HJScarlet().isBeingStabByLavaFlow);
-            if (target.HJScarlet().isBeingStabByLavaFlow)
-                SetSpecial = true;
+            SetSpecial = target.HJScarlet().isBeingStabByLavaFlowExecution > 0;
             Projectile.ExpandHitboxBy(3f);
             Projectile.Damage();
         }

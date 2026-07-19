@@ -23,7 +23,7 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
             float Speed = data.aifloat0;
             if (Speed != 0)
             {
-                Vector2 idealVelocity = -Vector2.UnitY.RotatedBy(Lerp(-TwoPi, TwoPi, (float)Math.Sin(data.Time / 36f + data.aiint0) * 0.5f + 0.5f)) * Speed;
+                Vector2 idealVelocity = -Vector2.UnitY.RotatedBy(Lerp(-data.Rotation, data.Rotation, (float)Math.Sin(data.Time / 36f + data.aiint0) * 0.5f + 0.5f)) * Speed;
                 float movementInterpolant = Lerp(0.01f, 0.25f, Utils.GetLerpValue(0, data.Lifetime / 2, data.Time, true));
                 data.Velocity = Vector2.Lerp(data.Velocity, idealVelocity, movementInterpolant);
                 data.Velocity = data.Velocity.SafeNormalize(-Vector2.UnitY) * Speed;
@@ -35,6 +35,8 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
         {
             Texture2D texture = HJScarletTexture.Particle_HRShinyOrb.Value;
             Main.spriteBatch.Draw(texture, data.Position - Main.screenPosition, null, data.DrawColor * data.Opacity, data.Rotation, texture.Size() / 2, data.Scale, SpriteEffects.None, 0);
+            if (data.aifloat1 > 0)
+                Main.spriteBatch.Draw(texture, data.Position - Main.screenPosition, null, data.DrawColor * data.Opacity, data.Rotation, texture.Size() / 2, data.Scale * data.aifloat1, SpriteEffects.None, 0);
         }
     }
 }

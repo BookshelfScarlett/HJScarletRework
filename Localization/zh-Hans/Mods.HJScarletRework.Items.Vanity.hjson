@@ -33,21 +33,21 @@ TairitsuItem: {
 }
 
 CantoneseGirlItem: {
-	// DisplayName: Cantonese Girl Item
-	// FlavorTooltip: ""
-	// Tooltip: ""
+	DisplayName: 斩灵刀鞘
+	FlavorTooltip: ""
+	Tooltip: ""
 }
 
 LeafMaidItem: {
-	// DisplayName: Leaf Maid Item
-	// FlavorTooltip: ""
-	// Tooltip: ""
+	DisplayName: 人偶水晶
+	FlavorTooltip: ""
+	Tooltip: ""
 }
 
 RedDragonItem: {
-	// DisplayName: Red Dragon Item
-	// FlavorTooltip: ""
-	// Tooltip: ""
+	DisplayName: 红龙长角
+	FlavorTooltip: ""
+	Tooltip: ""
 }
 
 LacrimosaItem: {

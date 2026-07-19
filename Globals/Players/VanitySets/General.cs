@@ -3,10 +3,11 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Vanity.Arceca;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -15,8 +16,29 @@ namespace HJScarletRework.Globals.Players.VanitySets
 {
     public partial class ScarletVanityPlayer : ModPlayer
     {
+        public List<string> YardName =
+        [
+            "特莉波卡",
+            "tlipoca",
+            "耶芙娜",
+            "yavanna",
+            "小叶子",
+            "littleleaf",
+            "little leaf",
+            "霞露零",
+        ];
+        public List<string> ArcaceName =
+        [
+            "光",
+            "hikari",
+            "对立",
+            "tairitsu",
+            "arcaea",
+        ];
+
         public int accVanityID = -1;
         public bool arcaceVanity = false;
+        public bool yardVanity = false;
         public override void ResetEffects()
         {
             accVanityID = -1;
@@ -25,21 +47,28 @@ namespace HJScarletRework.Globals.Players.VanitySets
         {
             tag.Add(nameof(accVanityID), accVanityID);
             tag.Add(nameof(arcaceVanity), arcaceVanity);
+            tag.Add(nameof(yardVanity), yardVanity);
         }
         public override void LoadData(TagCompound tag)
         {
             accVanityID = tag.GetInt(nameof(accVanityID));
             arcaceVanity = tag.GetBool(nameof(arcaceVanity));
+            arcaceVanity = tag.GetBool(nameof(yardVanity));
         }
         public override void OnEnterWorld()
         {
             if (arcaceVanity)
             {
                 string nameLow = Player.name.ToLower();
-                if (nameLow.Contains('光') || nameLow.Contains("对立") || nameLow.Contains("arcaea") || nameLow.Contains("hikari") || nameLow.Contains("tairitsu"))
+                if (ArcaceName.Contains(nameLow))
                 {
                     Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<ArcaeaPack>());
                     arcaceVanity = true;
+                }
+                if(YardName.Contains(nameLow))
+                {
+                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<YogsothothsYardPack>());
+                    yardVanity = true;
                 }
             }
         }
@@ -97,18 +126,15 @@ namespace HJScarletRework.Globals.Players.VanitySets
 
                 if (Player.miscCounter % 120 == 0)
                 {
+                    for (int i = 0; i < 2; i++)
                     {
-                        for (int i = 0; i < 2; i++)
-                        {
-                            Vector2 posBase = Player.Center + Vector2.UnitY * Player.height * Main.rand.NextFloat(.2f, .6f);
-                            posBase.X += Main.rand.NextFloat(-1, 1f) * 10f;
-                            new CrossGlow(posBase, RandLerpColor(Color.White, Color.IndianRed), 30, 1, 0.1f).Spawn();
-                            new NoahButterfly(posBase, -Vector2.UnitY.RotatedByRandom(PiOver4), RandLerpColor(Color.IndianRed, Color.HotPink), Main.rand.Next(45, 85), 0.8f, 0.35f * Main.rand.NextFloat(0.5f, 0.7f), 1f, drawGlowingOrbParticle: true).Spawn();
-                        }
+                        Vector2 posBase = Player.Center + Vector2.UnitY * Player.height * Main.rand.NextFloat(.2f, .6f);
+                        posBase.X += Main.rand.NextFloat(-1, 1f) * 10f;
+                        new CrossGlow(posBase, RandLerpColor(Color.White, Color.IndianRed), 30, 1, 0.1f).Spawn();
+                        new NoahButterfly(posBase, -Vector2.UnitY.RotatedByRandom(PiOver4), RandLerpColor(Color.IndianRed, Color.HotPink), Main.rand.Next(45, 85), 0.8f, 0.35f * Main.rand.NextFloat(0.5f, 0.7f), 1f, drawGlowingOrbParticle: true).Spawn();
                     }
                 }
             }
-
         }
 
         public void DrawTairitsuItemParticle(bool isMoving)
