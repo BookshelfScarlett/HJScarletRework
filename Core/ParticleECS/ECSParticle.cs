@@ -84,7 +84,7 @@ namespace HJScarletRework.Core.ParticleECS
         public static int TurbulenceShinyOrb(Vector2 pos, float speed, Color color, int lifeTime, float opacity, float scale, float direction = TwoPi, float glowMult = 0, BlendState blendState = null)
         {
             BlendState bs = blendState ?? BlendState.Additive;
-            return ECSMethod.NewParticle(GetInstance<TurbulenceShinyOrbECS>().Type, lifeTime, pos, Vector2.UnitX, color, opacity, direction, scale, bs, speed, glowMult);
+            return ECSMethod.NewParticle(GetInstance<TurbulenceShinyOrbECS>().Type, lifeTime, pos, RandDirTwoPi, color, opacity, direction, scale, bs, speed, glowMult);
         }
         /// <summary>
         /// <paramref name="fadinTime"/> 为这个十字辉光的淡入时间（归一化比率），如果设置为0则无淡入

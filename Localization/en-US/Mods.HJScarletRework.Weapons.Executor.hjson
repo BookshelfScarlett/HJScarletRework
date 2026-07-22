@@ -353,9 +353,20 @@ EndlessWar: {
 
 GaiaStriker: {
 	DisplayName: Gaia Striker
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltips: ""
+	Tooltip: Burst into crisom bolt after a while
+	ExecutionStrike:
+		'''
+		Gaia Striker transform into a special minion
+		While minion hammer present, press the Intersect Key to switch between Staff Mode and Minion Mode
+		Minion Mode will automatically attacks nearby target
+		Staff Mdoe releases a crisom ray
+		Normal attack is replaced to enhance the ray's capabilities while holding Gaia Striker
+		In Staff Mode, Each attack made while holding the Gaia Striker restores a small amount of duration to the minion
+		When the duration expires, Gaia Striker bursts, healing you
+		You may also hold the right mouse button for a moment to prematurely burst the minion
+		Granting additional healing and refunding Execution Progress
+		'''
+	FlavorTooltips: -The Fiercest Face of Mother Earth-
 
 	Conditions: {
 		FirstTime: Mods.HJScarletRework.Weapons.Executor.GaiaStriker.Conditions.FirstTime
@@ -368,4 +379,14 @@ SplendidofTerra: {
 	Tooltip: ""
 	ExecutionStrike: ""
 	FlavorTooltips: ""
+}
+
+ASMD: {
+	DisplayName: A S M D
+	Tooltip: ""
+}
+
+SickleAndTorch: {
+	DisplayName: Sickle And Torch
+	Tooltip: ""
 }

@@ -1,7 +1,4 @@
-﻿using ContinentOfJourney.Items;
-using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Items.Rockets;
-using HJScarletRework.Core.ParticleECS;
+﻿using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
@@ -9,31 +6,33 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor
 {
-    public class ContainedBlast : ExecutorWeaponClass
+    public class ASMD : ExecutorWeaponClass
     {
         public override WeaponCategory WeaponCategory => WeaponCategory.Firearm;
-        public override int ExecutionProgress => 180;
+        public override int ExecutionProgress => 30;
         public override void ExSD()
         {
-            Item.damage = 54;
-            Item.SetUpNoUseGraphicItem(true, false);
+            Item.damage = 1200;
+            Item.useTime = Item.useAnimation = 40;
             Item.SetUpRarityPrice(ItemRarityID.Red);
-            Item.useTime = Item.useAnimation = 9;
-            Item.shootSpeed = 16f;
-            Item.shoot = ProjectileType<ContainedBlastHeldProj>();
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.UseSound = null;
+            Item.SetUpNoUseGraphicItem(true);
+            Item.shoot = ProjectileType<ASMDHeldProj>();
+            Item.shootSpeed = 18f;
+
         }
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) => false;
+        public override bool CanShoot(Player player)
+        {
+            return false;
+        }
         public override void HoldItem(Player player)
         {
             player.HJScarlet().tacticalExecution = true;
-            if (player.HasProj<ContainedBlastHeldProj>(out int projID))
+            if (player.HasProj<ASMDHeldProj>(out int projID))
                 return;
             Vector2 dir = player.ToMouseVector2();
             for (int i = 0; i < 32; i++)
@@ -55,16 +54,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             proj.originalDamage = projDamage;
             proj.HJScarlet().HasExecutionMechanic = true;
             proj.netUpdate = true;
-        }
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddIngredient<ClockworkMinigun>().
-                AddIngredient<TheBlackBox>().
-                AddIngredient(ItemID.IllegalGunParts, 10).
-                AddIngredient<FinalBar>(10).
-                AddTile(FinalAnvilTile).
-                Register();
+
         }
     }
 }

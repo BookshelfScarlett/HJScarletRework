@@ -143,7 +143,7 @@ namespace HJScarletRework.Projs.Executor
                 Timer++;
             if (Timer % (15) == 0)
             {
-                SoundEngine.PlaySound(HJScarletSounds.Gaia_Charge with { MaxInstances = 1, Pitch = 0.1f * Timer / 15f, Volume = .67f }, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Gaia_Charge with { MaxInstances = 1, Pitch = 0.125f * Timer / 15f, Volume = .37f }, Projectile.Center);
                 for (int i = 0; i < 36; i++)
                     ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(0), RandVelTwoPi(.7f, 21f), RandLerpColor(Color.Red, Color.DarkRed), 40, 1, 0.25f, Main.rand.NextFloat(0.9f, 1.1f) * 0.40f, Main.rand.NextBool(), BlendState.NonPremultiplied);
             }
@@ -190,7 +190,7 @@ namespace HJScarletRework.Projs.Executor
                 new CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f).Spawn();
                 new CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.28f).Spawn();
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 12, 20, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
-                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 0, Pitch = 0.4f,PitchVariance = 0.1f, Volume = .57f }, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 1, Pitch = 0.4f,PitchVariance = 0.1f, Volume = .37f }, Projectile.Center);
                 Projectile.Kill();
             }
         }

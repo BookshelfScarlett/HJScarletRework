@@ -117,6 +117,13 @@ Executor: {
 	ThePunishmentExecution.DisplayName: The Punishment Execution
 	ThePunishmentProj.DisplayName: The Punishment Proj
 	ThePunishmentStar.DisplayName: The Punishment Star
+	ASMDBullet.DisplayName: A S M D Bullet
+	ASMDExecutionBullet.DisplayName: A S M D Execution Bullet
+	ASMDHeldProj.DisplayName: A S M D Held Proj
+	ASMDIceBlock.DisplayName: A S M D Ice Block
+	SickleAndTorchFireball.DisplayName: Sickle And Torch Fireball
+	SickleAndTorchSickle.DisplayName: Sickle And Torch Sickle
+	SickleAndTorchTorch.DisplayName: Sickle And Torch Torch
 }
 
 Melee: {
@@ -181,6 +188,8 @@ Melee: {
 	TonbogiriBubble.DisplayName: Tonbogiri Bubble
 	TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
 	WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
+	FlowerofDanceProj.DisplayName: Flowerof Dance Proj
+	FlowerofDanceFlower.DisplayName: Flowerof Dance Flower
 }
 
 Typeless: {
@@ -198,6 +207,7 @@ Typeless: {
 	SamsaraofDawnlightProj.DisplayName: Samsaraof Dawnlight Proj
 	TerraFlamethrowerHeldProj.DisplayName: Terra Flamethrower Held Proj
 	RegenOrbsPink.DisplayName: Regen Orbs Pink
+	FlowerofDancePetal.DisplayName: Flowerof Dance Petal
 }
 
 Magic: {

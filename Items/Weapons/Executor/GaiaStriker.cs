@@ -54,8 +54,8 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shootSpeed = 22;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
-            Item.UseSound = HJScarletSounds.Gaia_Toss with { MaxInstances = 0, Pitch = -.36f, PitchVariance = .1f, Volume = .45f, Variants = [2] };
-            Item.useTime = Item.useAnimation = 52;
+            Item.UseSound = HJScarletSounds.Gaia_Toss with { MaxInstances = 0, Pitch = -.36f, PitchVariance = .1f, Volume = .30f, Variants = [2] };
+            Item.useTime = Item.useAnimation = 62;
             Item.shoot = ProjectileType<GaiaStrikerProj>();
         }
         public override bool CanShoot(Player player)

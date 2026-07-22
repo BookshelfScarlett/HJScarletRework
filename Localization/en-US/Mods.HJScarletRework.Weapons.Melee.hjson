@@ -247,3 +247,8 @@ SamsaraofDawnlightAlter: {
 	DisplayName: Samsaraof Dawnlight Alter
 	Tooltip: ""
 }
+
+FlowerofDance: {
+	DisplayName: Flowerof Dance
+	Tooltip: ""
+}

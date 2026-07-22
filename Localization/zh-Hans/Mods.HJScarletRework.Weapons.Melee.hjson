@@ -258,3 +258,12 @@ SamsaraofDawnlightAlter: {
 	// DisplayName: Samsaraof Dawnlight Alter
 	// Tooltip: ""
 }
+
+FlowerofDance: {
+	DisplayName: 花之舞
+	Tooltip:
+		'''
+		掷出四把投刀，一定时间后追踪附近的敌人
+		在命中时生成一朵小花，并在投刀命中时让小花发射追踪的花瓣
+		'''
+}

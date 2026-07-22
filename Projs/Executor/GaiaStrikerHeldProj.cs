@@ -281,7 +281,7 @@ namespace HJScarletRework.Projs.Executor
             DoStaffModeIdle();
             //发射射线的起始位置实际上靠前，为了确保锤子的角度正确，需要重新设定一下点位
             Vector2 firePos = Projectile.Center + Projectile.rotation.ToRotationVector2() * Projectile.scale * 60f;
-            float tarRot = firePos.GetNormalVector2(Main.MouseWorld).ToRotation();
+            float tarRot = Projectile.Center.GetNormalVector2(Main.MouseWorld).ToRotation();
             Projectile.rotation = Projectile.rotation.AngleLerp(tarRot, AngleLerpValue);
             Projectile.spriteDirection = Projectile.direction = (Owner.LocalMouseWorld().X > Owner.Center.X).ToDirectionInt();
             Owner.ChangeDir(Projectile.direction);
@@ -289,7 +289,7 @@ namespace HJScarletRework.Projs.Executor
             if (Owner.HeldItem.type == ItemType<GaiaStriker>())
             {
                 Owner.itemTime = Owner.itemAnimation = 2;
-                Owner.ControlPlayerArm(Projectile.rotation, 1);
+                Owner.ControlPlayerArm(Projectile.rotation, -1);
             }
             //递增计时器
             Timer++;

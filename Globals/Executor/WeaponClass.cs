@@ -138,7 +138,7 @@ namespace HJScarletRework.Globals.Executor
                     TitleEdgeColor = Color.DarkRed,
                     HasTitle = true,
                     BackgroundColor = Color.Lerp(Color.WhiteSmoke, Color.Black, .9f) * .60f,
-                    BackgroundEdgeColor = Color.Lerp(Color.Black, Color.Red, 0.40f) * .98f,
+                    BackgroundEdgeColor = Color.Lerp(Color.White, Color.Red, 0.0f) * .78f,
                     MainText = detailText,
                     TextColor = Color.White,
                     TextEdgeColor = Color.Black,

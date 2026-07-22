@@ -472,7 +472,7 @@ namespace HJScarletRework.Projs.Executor
                 }
                 else
                 {
-                    SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -.54f,  PitchVariance = .1f,Volume = .34f }, Projectile.Center);
+                    SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -.54f,  PitchVariance = .1f,Volume = .19f }, Projectile.Center);
                     StrikeTime += 1;
                     for (int i = 0; i < 7; i++)
                     {

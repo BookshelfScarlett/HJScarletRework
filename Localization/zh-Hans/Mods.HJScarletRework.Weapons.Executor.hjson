@@ -490,3 +490,13 @@ SplendidofTerra: {
 		'''
 	FlavorTooltips: 「-本属于泛人类史的存在-」
 }
+
+ASMD: {
+	DisplayName: A.S.M.D
+	Tooltip: ""
+}
+
+SickleAndTorch: {
+	// DisplayName: Sickle And Torch
+	// Tooltip: ""
+}

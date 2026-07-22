@@ -54,4 +54,10 @@ LacrimosaItem: {
 	DisplayName: 番茄百分百果冻盒
 	FlavorTooltip: 「-Tomato 100%-」
 	Tooltip: ""
+	DetailTooltip:
+		'''
+		"对，对对……就是这个，安魂曲老师，说词啊！"
+		"……"
+		"番茄百分百，美味百分百！"
+		'''
 }

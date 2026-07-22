@@ -158,7 +158,7 @@ namespace HJScarletRework.Items
             //        hasList.Add(item);
             //    }
             //}
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 9f, ProjectileType<GaiaStrikerMountedProj>(), 1, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 9f, ProjectileType<ASMDBullet>(), 1, knockback, player.whoAmI);
             sw.Stop();
             // 输出经过的时间（毫秒）
             Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

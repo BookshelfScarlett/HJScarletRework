@@ -184,8 +184,6 @@ namespace HJScarletRework.Projs.Executor
             //ori = new Vector2(tex.Width * 0.95f, tex.Height * 0.05f);
             SpriteEffects se = Projectile.velocity.X > 0 ? SpriteEffects.FlipVertically : 0;
             //for (int i = 0; i < 5; i++)
-            //{
-
             float rot = Projectile.rotation + PiOver2 + ToRadians(360f / 5);
             float rotOffset = PiOver2 + Pi - ToRadians(30);
             rot = Projectile.rotation + rotOffset;
@@ -206,7 +204,6 @@ namespace HJScarletRework.Projs.Executor
             }
             SB.EnterShaderArea();
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DarkRed, 1f);
-            //DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.Red, .95f, 1f);
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.White, 0.85f, offsetHeight: 0f);
             SB.EndShaderArea();
             SB.Draw(tex, drawPos, null, Color.White, rot, ori, Projectile.scale, 0, 0);

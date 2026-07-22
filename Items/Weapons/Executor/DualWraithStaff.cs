@@ -44,18 +44,6 @@ namespace HJScarletRework.Items.Weapons.Executor
                 return (Item.useTime / (float)32);
             return base.UseSpeedMultiplier(player);
         }
-        public override bool CanUseItem(Player player)
-        {
-            //if (AlterVersion)
-            //{
-            //    Item.useTime = Item.useAnimation = 32;
-            //}
-            //else
-            //{
-            //    Item.useTime = Item.useAnimation = 40;
-            //}
-            return true;
-        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (!AlterVersion)

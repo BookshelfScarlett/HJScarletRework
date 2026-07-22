@@ -36,7 +36,7 @@ namespace HJScarletRework.Globals.Instances.Items
                         color = Color.HotPink;
                         break;
                 }
-                tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), color);
+                tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), color, LineName: item.HJScarlet().ItemBelongTo + "Name");
             }
             if (HJScarletPlayer.AllWeaponSwapValue.Contains(item.type))
             {
@@ -78,6 +78,15 @@ namespace HJScarletRework.Globals.Instances.Items
         }
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
+            if(HJScarletConfigClient.Instance.SpecialRarity)
+            {
+                if(line.Name == (item.HJScarlet().ItemBelongTo + "Name") && line.Mod == Mod.Name)
+                {
+                    RareItemRarity.DrawFlavorTooltipName(line, RareItemRarity.RareType.Donator);
+                    return false;
+                }
+
+            }
             if (line.IsItemName() && HJScarletConfigClient.Instance.SpecialRarity)
             {
                 foreach (var (itemIDs, drawMethods) in _rarityDrawMap)
