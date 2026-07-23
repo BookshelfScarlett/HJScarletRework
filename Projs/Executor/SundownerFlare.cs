@@ -79,21 +79,19 @@ namespace HJScarletRework.Projs.Executor
             }
             Projectile.Center = Owner.Center;
             //开始准备召唤需要的火力空袭
-            if (Projectile.timeLeft % 2 == 0)
+            if (Projectile.timeLeft % 3 == 0)
             {
                 Vector2 spawnPos = Main.MouseWorld - Vector2.UnitY * 1200f + Vector2.UnitX * Main.rand.NextFloat(20f, 100f) * Main.rand.NextBool().ToDirectionInt();
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, Vector2.UnitY * 30f, ProjectileType<SundownerRocket>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
                 ((SundownerRocket)proj.ModProjectile).ShouldHome = Owner.controlUseTile;
-                if (Projectile.timeLeft % 8 == 0)
+                if (Projectile.timeLeft % 9 == 0)
                 {
                     SoundEngine.PlaySound(SoundID.Item45 with { Pitch = 0, MaxInstances = 0 }, Owner.Center);
                 }
                 if (Projectile.timeLeft % 6 == 0)
                 {
                     proj.ai[0] = 1;
-
                 }
-
             }
         }
 

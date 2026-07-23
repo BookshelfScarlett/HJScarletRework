@@ -384,9 +384,11 @@ SplendidofTerra: {
 ASMD: {
 	DisplayName: A S M D
 	Tooltip: ""
+	ExecutionStrike: ""
 }
 
 SickleAndTorch: {
 	DisplayName: Sickle And Torch
 	Tooltip: ""
+	ExecutionStrike: ""
 }

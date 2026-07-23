@@ -124,6 +124,7 @@ Executor: {
 	// SickleAndTorchFireball.DisplayName: Sickle And Torch Fireball
 	// SickleAndTorchSickle.DisplayName: Sickle And Torch Sickle
 	// SickleAndTorchTorch.DisplayName: Sickle And Torch Torch
+	// ASMDBoom.DisplayName: A S M D Boom
 }
 
 Melee: {
@@ -208,6 +209,7 @@ Typeless: {
 	// TerraFlamethrowerHeldProj.DisplayName: Terra Flamethrower Held Proj
 	// RegenOrbsPink.DisplayName: Regen Orbs Pink
 	// FlowerofDancePetal.DisplayName: Flowerof Dance Petal
+	// CycleMadnessStar.DisplayName: Cycle Madness Star
 }
 
 Magic: {

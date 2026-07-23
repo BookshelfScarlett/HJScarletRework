@@ -1,4 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -8,16 +10,15 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameContent;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class ASMDBullet : HJScarletProj
+    public class ASMDBullet : HJScarletProj 
     {
         public override ClassCategory Category => ClassCategory.Executor;
         public override void SetStaticDefaults()
         {
-            Projectile.ToTrailSetting(20);
+            Projectile.ToTrailSetting(30);
         }
         public override void ExSD()
         {
@@ -36,11 +37,22 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
+            if (Projectile.IsOutScreen())
+                return;
+            if(Main.rand.NextBool(6))
+            ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(8), Projectile.velocity / 8f, RandLerpColor(Color.CornflowerBlue, Color.White), 60, 1, Projectile.scale * Main.rand.NextFloat(.9f, 1.1f) * .40f, 6);
+            if (Main.rand.NextBool(3))
+                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(8), Projectile.SafeDir(), RandLerpColor(Color.SkyBlue, Color.CornflowerBlue), 40, 1, Main.rand.NextFloat(.9f, 1.1f) * .5f, 0.2f);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            base.OnHitNPC(target, hit, damageDone);
+            Projectile.velocity *= .01f;
         }
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            overWiresUI.Add(index);
+        }
+
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
@@ -57,13 +69,12 @@ namespace HJScarletRework.Projs.Executor
                 float oldrot = Projectile.oldRot[i] + rotFixer;
                 float ratios = i / (float)length;
                 Color c = Color.Lerp(Color.MediumAquamarine, Color.Transparent, ratios);
-                float colorLerp = Lerp(15, 255, ratios);
                 float opac = Lerp(.65f, 0.45f, ratios) * Clamp(Projectile.velocity.Length(), 0, 1);
                 float oldScale = Lerp(Projectile.scale* .55f, Projectile.scale* .10f, ratios);
                 c *= opac;
                 for (int j = 0; j < 4; j++)
                 {
-                    SB.Draw(projTex, oldPos + (TwoPi / 4f * j).ToRotationVector2() * 2, null, c.ToAddColor(), rot, ori, oldScale, 0, 0);
+                    SB.Draw(projTex, oldPos + (TwoPi / 4f * j).ToRotationVector2() * 2, null, c.ToAddColor(), oldrot, ori, oldScale, 0, 0);
                 }
                 SB.Draw(projTex, oldPos, null, c, rot, ori, oldScale, 0, 0);
             }

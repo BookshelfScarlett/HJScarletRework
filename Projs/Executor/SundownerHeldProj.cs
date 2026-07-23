@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Backgrounds;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
@@ -80,6 +81,7 @@ namespace HJScarletRework.Projs.Executor
             Owner.HJScarlet().CanExecution = false;
             return false;
         }
+       public int Reverse = 1;
         public void HandleAttack()
         {
             Vector2 offset2 = new(0 * Owner.direction, -10f);
@@ -97,21 +99,22 @@ namespace HJScarletRework.Projs.Executor
                     sound.Volume /= 2;
                     sound.Pitch = 0.2f;
                 }
-
-                for (int i = -1; i < 2; i += 2)
+                    for (int i = -1; i < 2; i += 2)
+                    {
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) *  i* 10f, Projectile.rotation.ToRotationVector2() * 20, ProjectileType<SundownerAmmo>(), Projectile.originalDamage, 0, Owner.whoAmI);
+                        if (nonStop)
+                            proj.HJScarlet().HasExecutionMechanic = true;
+                        ((SundownerAmmo)proj.ModProjectile).CanPlaySound = i == -1;
+                    }
+                if (Reverse == 1)
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) * i * 10f, Projectile.rotation.ToRotationVector2() * 20, ProjectileType<SundownerAmmo>(), Projectile.originalDamage, 0, Owner.whoAmI);
-                    if (nonStop)
-                        proj.HJScarlet().HasExecutionMechanic = true;
-                    ((SundownerAmmo)proj.ModProjectile).CanPlaySound = i == -1;
+                    for (int i = -1; i < 2; i += 2)
+                    {
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) * i * -10f, Projectile.rotation.ToRotationVector2() * 10, ProjectileType<SundownerFireball>(), (int)(Projectile.originalDamage * .5f), 0, Owner.whoAmI);
+                        proj.extraUpdates += 1;
+                    }
                 }
-                for (int i = -1; i < 2; i += 2)
-                {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) * i * 10f, Projectile.rotation.ToRotationVector2() * 10, ProjectileType<SundownerFireball>(), Projectile.originalDamage, 0, Owner.whoAmI);
-                    if (i == -1 && !Owner.HasProj<SundownerFlare>() && !Owner.HasProj<SundownerFlareGun>() && !Projectile.HJScarlet().ExecutionStrike)
-                        proj.HJScarlet().HasExecutionMechanic = true;
-                    proj.extraUpdates += 1;
-                }
+                Reverse *= -1;
                 Vector2 firePos2 = firePos - Projectile.SafeDirByRot() * 30f;
                 Vector2 dir2 = Projectile.SafeDirByRot() * -1;
                 for (int i = 0; i < 8; i++)
@@ -160,6 +163,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
+                Owner.itemTime = Owner.itemAnimation = 2;
                 Projectile.position += Main.rand.NextVector2Circular(1.3f, 1.3f);
                 Projectile.position += -Projectile.SafeDirByRot() * Main.rand.NextFloat(5f, 10f);
                 Timer++;

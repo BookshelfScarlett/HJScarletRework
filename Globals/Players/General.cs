@@ -154,14 +154,30 @@ namespace HJScarletRework.Globals.Players
         /// <para>此开关不依赖任何装备，适用于需要临时改变攻击形态的场景（例如使用特殊射弹替换普通投掷物）</para>
         /// </summary>
         public bool tacticalExecutionManual = false;
+        /// <summary>
+        /// 手动处决模式的预输入帧
+        /// </summary>
         public int tacticalExecutionInputCache = 0;
+        /// <summary>
+        /// 触发处决时这里的值会设置为true，以在某些地方提供加成效果
+        /// </summary>
+        public int executionUpdatesFrame = 0;
+        #region 下版本废弃
         public int tacticalTime = 0;
-        public bool ExecutorSwordMarkPlus = false;
-        public int tacticalPunishTime = 0;
-        public int ExecutionProgress = 0;
-        public int bonusExecutionReduce = 0;
-        public Dictionary<int, int> ExecutionListStored = new Dictionary<int, int>();
         public bool StopExecutionInit = false;
+        public int tacticalPunishTime = 0;
+        /// <summary>
+        /// 旧版处决进程，准备废弃，因为已经使用了一个字典去管理
+        /// </summary>
+        public int ExecutionProgress = 0;
+        /// <summary>
+        /// 处决次数进程要求的减少量，以废弃，与最终设计版本冲突
+        /// </summary>
+        public int bonusExecutionReduce = 0;
+        #endregion
+        public bool ExecutorSwordMarkPlus = false;
+        
+        public Dictionary<int, int> ExecutionListStored = new Dictionary<int, int>();
         public bool hasSendExecutionTint = false;
         public int hasSendExecutionTintTimer = 0;
         public int lastHeldItemIndex = -1;

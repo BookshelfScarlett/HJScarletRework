@@ -115,6 +115,7 @@ namespace HJScarletRework.Globals.Players
             monkStaffHeal = false;
             containedBlastBoomCount = 0;
             containedBlastBuffTime = 0;
+            executionUpdatesFrame = 0;
         }
 
 

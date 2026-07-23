@@ -26,6 +26,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
             Item.shootSpeed = 16f;
             Item.useStyle = ItemUseStyleID.Shoot;
+            Item.knockBack = 2;
             Item.UseSound = null;
 
         }
@@ -36,6 +37,10 @@ namespace HJScarletRework.Items.Weapons.Executor
                 AddIngredient(ItemID.RocketLauncher).
                 AddTile(TileID.MythrilAnvil).
                 Register();
+        }
+        public override bool CanShoot(Player player)
+        {
+            return false;
         }
         public override bool CanUseItem(Player player) => true;
         public override void HoldItem(Player player)

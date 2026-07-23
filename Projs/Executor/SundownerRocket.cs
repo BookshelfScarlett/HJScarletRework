@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -41,6 +42,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
+            if (ShouldHome)
+                Projectile.damage /= 2;
         }
         public override void ProjAI()
         {
@@ -104,8 +107,8 @@ namespace HJScarletRework.Projs.Executor
                 return;
             if (Projectile.numUpdates < Main.rand.Next(-1, 3))
                 return;
-            int[] dTypes = [DustID.Torch, DustID.OrangeTorch, DustID.InfernoFork];
-            Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePosEdge(6), dTypes[Main.rand.Next(3)]);
+            int[] dTypes = [DustID.Torch, DustID.OrangeTorch];
+            Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePosEdge(6), dTypes[Main.rand.Next(2)]);
             d.scale *= 1.19f;
             d.velocity = Projectile.velocity;
             d.noGravity = true;
@@ -115,11 +118,11 @@ namespace HJScarletRework.Projs.Executor
                 float GeneralScaleMul = 1.1f * RandZeroToOne;
                 int GetLifeTime() => Main.rand.Next(8, 16);
                 Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f) + Projectile.SafeDir() * Main.rand.NextFloat(10f);
-                new SmokeParticle(pos, Projectile.SafeDir().ToRandVelocity(ToRadians(10f), 0.8f, Projectile.velocity.Length()), RandLerpColor(Color.White, Color.OrangeRed), 40, Projectile.rotation + Main.rand.NextFloat(-PiOver2, PiOver2), Main.rand.NextFloat(.4f, .51f) * .33f, 0.30f, true).SpawnToPriorityNonPreMult();
+                ECSParticle.SmokeParticle(pos, Projectile.SafeDir().ToRandVelocity(ToRadians(10f), 0.8f, Projectile.velocity.Length()), RandLerpColor(Color.White, Color.OrangeRed), 40, Projectile.rotation + Main.rand.NextFloat(-PiOver2, PiOver2), Main.rand.NextFloat(.4f, .51f) * .33f, 0.30f, true,BlendState.NonPremultiplied);
                 //烟雾除了需要更多，也要更黑。
                 for (int i = 0; i <= 1; i++)
                 {
-                    new SmokeParticle(Projectile.Center.ToRandCirclePos(8f) + Projectile.SafeDirByRot() * i * 10f, -Projectile.velocity / 8f, RandLerpColor(Color.OrangeRed, Color.Black), GetLifeTime(), RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f, 0.16f) * 1.1f * GeneralScaleMul).SpawnToPriority();
+                    ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(8f) + Projectile.SafeDirByRot() * i * 10f, -Projectile.velocity / 8f, RandLerpColor(Color.OrangeRed, Color.Black), GetLifeTime(), RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f, 0.16f) * 1.1f * GeneralScaleMul,blendstate:BlendState.Additive);
                 }
                 Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(10f), 0.8f, 1.4f);
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f), vel, RandLerpColor(Color.DarkOrange, Color.OrangeRed), GetLifeTime(), RandRotTwoPi, 1f, 0.3f * GeneralScaleMul, ToRadians(10f)).Spawn();
@@ -137,8 +140,6 @@ namespace HJScarletRework.Projs.Executor
                 SlotId slotId1 = SoundEngine.PlaySound(HJScarletSounds.Misc_Boom with { Variants = [2], MaxInstances = 0, Pitch = .20f, Volume = .35f }, Projectile.Center);
 
             }
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), Projectile.damage / 2, 0, Owner.whoAmI);
-            proj.DamageType = ExecutorDamageClass.Instance;
             int dustCount = 10;
             for (int i = 0; i < dustCount; ++i)
             {

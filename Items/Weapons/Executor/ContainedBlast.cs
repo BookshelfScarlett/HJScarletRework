@@ -27,6 +27,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<ContainedBlastHeldProj>();
             Item.useStyle = ItemUseStyleID.Shoot;
+            Item.HJScarlet().ForceTacticalExecution = true;
             Item.UseSound = null;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) => false;

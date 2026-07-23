@@ -64,6 +64,7 @@ ExecutorDamageClass: {
 	ExecutionProgress: Strike your enemy for {0} times to Execute. Press Left Alt for details
 	ExecutionDescriptionName: Execution Strike
 	ExecutionProgressRevampedMode: Execution Progress: {0} / {1}
+	ForceTacticalExecution: ""
 	DisplayName: Executor Damage
 
 	WeaponType: {

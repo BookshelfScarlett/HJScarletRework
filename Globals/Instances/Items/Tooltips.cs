@@ -72,7 +72,24 @@ namespace HJScarletRework.Globals.Instances.Items
                     tooltips.QuickAddTooltipDirect(path2, Color.Bisque, null, "ShinobiBuffTitle");
                     tooltips.QuickAddTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", "50%", "15%", "200%");
                 }
-
+            }
+            if (item.HJScarlet().ForceTacticalExecution && HJScarletList.ExecutorWeaponDictionary.ContainsKey(item.type))
+            {
+                int index = 0;
+                for (int i = 0; i < tooltips.Count; i++)
+                {
+                    if (tooltips[i].Name == "ExecutorWeaponTypeName" && tooltips[i].Mod == Mod.Name)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                string path = Mod.GetLocalizationKey($"ExecutorDamageClass.ForceTacticalExecution").ToLangValue();
+                TooltipLine line = new TooltipLine(Mod, "ForceTacticalExecutionLine", path)
+                {
+                    OverrideColor = Color.Pink
+                };
+                tooltips.Insert(index + 1, line);
             }
             base.ModifyTooltips(item, tooltips);
         }

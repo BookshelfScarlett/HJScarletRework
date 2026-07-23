@@ -26,6 +26,8 @@ namespace HJScarletRework.Globals.Instances.Items
         public bool EnableExecutorVersion = false;
         public bool CanDrawGhost = false;
         public int ExecutionProj = -1;
+        public bool ForceTacticalExecution = false;
+        public bool ApplyTacticalExecution = false;
         //控制purePrism的运动
         public float purePrismAnimationCounter = 0;
         public bool purePrismLerpIn = false;
@@ -215,6 +217,15 @@ namespace HJScarletRework.Globals.Instances.Items
         public override void HoldItem(Item item, Player player)
         {
             var usPlayer = player.HJScarlet();
+            bool casterWeapon = false;
+            if(HJScarletList.ExecutorWeaponTypeDictionary.TryGetValue(item.type, out Executor.WeaponCategory value) )
+            {
+                casterWeapon = value == Executor.WeaponCategory.Caster;
+            }
+            if (ForceTacticalExecution || casterWeapon)
+            {
+                usPlayer.tacticalExecution = true;
+            }
             if (EnableCritDamage)
             {
                 usPlayer.critDamageAll += CritsDamageBonus;

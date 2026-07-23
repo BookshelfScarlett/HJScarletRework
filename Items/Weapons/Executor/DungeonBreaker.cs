@@ -23,7 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.shoot = ProjectileType<DungeonBreakerProj>();
             Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem();
-            Item.HJScarlet().ExecutionProj = ProjectileType<DungeonBreakerProj>();
+            Item.HJScarlet().ExecutionProj = ProjectileType<DungeonBreakerExecution>();
         }
     }
 }

@@ -241,7 +241,6 @@ Fleshtumor: {
 	Tooltip:
 		'''
 		快速释放饿鬼进行攻击
-		处决攻击必须使用 互动键 手动开启
 		'''
 	ExecutionStrike:
 		'''
@@ -267,7 +266,6 @@ DualWraithStaff: {
 	Tooltip:
 		'''
 		发射不可穿墙的追踪幽魂
-		处决攻击必须使用 互动键 手动开启
 		“幽魂之咒，一杖双形”
 		'''
 	ExecutionStrike:
@@ -302,7 +300,6 @@ Frostlight: {
 	Tooltip:
 		'''
 		快速发射迅捷追随鼠标位置的寒霜流火
-		处决攻击必须使用 互动键 手动开启
 		'''
 	ExecutionStrike:
 		'''
@@ -345,7 +342,6 @@ PestilenceFlower: {
 	Tooltip:
 		'''
 		快速释放世纪之花触手进行攻击
-		处决攻击必须使用 互动键 手动开启
 		'''
 	ExecutionStrike:
 		'''
@@ -432,7 +428,6 @@ ContainedBlast: {
 		冲击弹会穿透多个敌人，粘弹会粘附在敌人上
 		每个敌人最多粘附一枚粘弹
 		“盖上盖子”
-		处决攻击必须使用 互动键 手动开启
 		'''
 	ExecutionStrike:
 		'''
@@ -493,10 +488,12 @@ SplendidofTerra: {
 
 ASMD: {
 	DisplayName: A.S.M.D
-	Tooltip: ""
+	Tooltip: 发射一枚命中时造成爆炸的炮弹
+	// ExecutionStrike: ""
 }
 
 SickleAndTorch: {
-	// DisplayName: Sickle And Torch
-	// Tooltip: ""
+	DisplayName: 刀耕火种
+	Tooltip: 第三下攻击时投掷火把
+	// ExecutionStrike: ""
 }

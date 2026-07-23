@@ -2,11 +2,6 @@
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
@@ -24,7 +19,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
-            base.ProjAI();
+            Projectile.rotation += 0.2f * Projectile.spriteDirection;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -36,7 +31,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            return base.PreDraw(ref lightColor);
+            return false;
         }
     }
 }
