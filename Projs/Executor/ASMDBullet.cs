@@ -10,8 +10,6 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -39,7 +37,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if(!IsHitWall)
+            if (!IsHitWall)
             {
                 IsHitWall = true;
                 Projectile.tileCollide = false;
@@ -49,9 +47,9 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            if(IsHitWall)
+            if (IsHitWall)
             {
-                if(Projectile.Opacity == 1)
+                if (Projectile.Opacity == 1)
                 {
                     BoomParticle();
                 }
@@ -70,12 +68,12 @@ namespace HJScarletRework.Projs.Executor
         public void BoomParticle()
         {
             ScarletSound(HJScarletSounds.Frostwave_Boom, Projectile.Center, 0.30f, 1, 0.75f);
-            ScarletSound(HJScarletSounds.Frosthammer_SnowCharge , Projectile.Center, 0.30f, 1, -0.75f);
+            ScarletSound(HJScarletSounds.Frosthammer_SnowCharge, Projectile.Center, 0.30f, 1, -0.75f);
             for (int i = 0; i < 8; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(15);
                 Vector2 vel = Projectile.Center.GetNormalVector2(pos) * Main.rand.NextFloat(1.2f, 12f);
-                ECSParticle.LightntingGlow(pos, vel, RandLerpColor(Color.White, Color.SkyBlue), Main.rand.Next(40, 70), 1f, Main.rand.NextFloat(.75f, 1.1f) * .75f, Main.rand.Next(2,5));
+                ECSParticle.LightntingGlow(pos, vel, RandLerpColor(Color.White, Color.SkyBlue), Main.rand.Next(40, 70), 1f, Main.rand.NextFloat(.75f, 1.1f) * .75f, Main.rand.Next(2, 5));
             }
             for (int i = 0; i < 36; i++)
             {
@@ -94,7 +92,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 18; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(60);
-                ECSParticle.TurbulenceShinyOrb(pos, 6.4f, RandLerpColor(Color.White, Color.RoyalBlue), 60, 1, .17f * Main.rand.NextFloat(.85f, 1.1f),glowMult:0.5f);
+                ECSParticle.TurbulenceShinyOrb(pos, 6.4f, RandLerpColor(Color.White, Color.RoyalBlue), 60, 1, .17f * Main.rand.NextFloat(.85f, 1.1f), glowMult: 0.5f);
             }
             for (int i = 0; i < 44; i++)
             {

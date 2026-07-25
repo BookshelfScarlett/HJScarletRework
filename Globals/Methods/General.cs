@@ -4,8 +4,6 @@ using HJScarletRework.Globals.Instances.Projs;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using rail;
-using ReLogic.Utilities;
 using System;
 using Terraria;
 using Terraria.ID;

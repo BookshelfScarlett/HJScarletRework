@@ -2,15 +2,12 @@
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Rockets;
 using ContinentOfJourney.Items.ThrowerWeapons;
-using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor

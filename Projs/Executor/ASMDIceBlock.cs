@@ -7,7 +7,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using rail;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -61,7 +60,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             BlockType = Main.rand.Next(0, 6);
-            Projectile.localAI[1] = Main.rand.NextFloat(0.3f,1);
+            Projectile.localAI[1] = Main.rand.NextFloat(0.3f, 1);
         }
         public override void ProjAI()
         {
@@ -87,8 +86,8 @@ namespace HJScarletRework.Projs.Executor
             float progress = Utils.GetLerpValue(0, maxTime, Timer, true);
             Timer++;
             Projectile.rotation += Lerp(ToRadians(10f), ToRadians(0.5f), EaseOutBack(progress));
-            if(Main.rand.NextBool(4))
-            ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(22, 2), Projectile.SafeDir(), RandLerpColor(Color.DodgerBlue, Color.White), 45, 1, 0.55f * Main.rand.NextFloat(.85f, 1.15f), 0.2f);
+            if (Main.rand.NextBool(4))
+                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(22, 2), Projectile.SafeDir(), RandLerpColor(Color.DodgerBlue, Color.White), 45, 1, 0.55f * Main.rand.NextFloat(.85f, 1.15f), 0.2f);
             if (progress >= 1f)
             {
                 AttackState = State.Idle;
@@ -146,8 +145,8 @@ namespace HJScarletRework.Projs.Executor
                     float pro = EaseOutBack(lerpValue);
                     Projectile.velocity = -Projectile.Center.GetNormalVector2(CurTarget.Center) * 3.5f * pro;
                 }
-                if(Main.rand.NextBool(4))
-                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(22, 2), Projectile.SafeDir(), RandLerpColor(Color.DodgerBlue, Color.White), 45, 1, 0.55f * Main.rand.NextFloat(.85f, 1.15f), 0.2f);
+                if (Main.rand.NextBool(4))
+                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(22, 2), Projectile.SafeDir(), RandLerpColor(Color.DodgerBlue, Color.White), 45, 1, 0.55f * Main.rand.NextFloat(.85f, 1.15f), 0.2f);
             }
         }
         public override bool ShouldUpdatePosition()
@@ -243,11 +242,11 @@ namespace HJScarletRework.Projs.Executor
                 float progress = Utils.GetLerpValue(0, maxTime, Timer, true);
 
             }
-                for (int i = 0; i < 16; i++)
-                {
-                    SB.Draw(tex, pos + (TwoPi / 16f * i).ToRotationVector2() * 2, rec, Color.White.ToAddColor(), Projectile.rotation, rec.Size() / 2, scale2, 0, 0);
+            for (int i = 0; i < 16; i++)
+            {
+                SB.Draw(tex, pos + (TwoPi / 16f * i).ToRotationVector2() * 2, rec, Color.White.ToAddColor(), Projectile.rotation, rec.Size() / 2, scale2, 0, 0);
 
-                }
+            }
 
             SB.Draw(tex, pos, rec, Color.White, Projectile.rotation, rec.Size() / 2, scale2, 0, 0);
         }

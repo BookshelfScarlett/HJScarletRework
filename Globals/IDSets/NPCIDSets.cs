@@ -3,11 +3,6 @@ using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using ContinentOfJourney.NPCs.Boss_TheMaterealizer;
 using ContinentOfJourney.NPCs.Boss_TheSon;
 using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -26,14 +21,14 @@ namespace HJScarletRework.Globals.IDSets
             NPCID.NebulaBeast, NPCID.NebulaBrain, NPCID.NebulaHeadcrab, NPCID.NebulaSoldier,
             NPCID.VortexHornet, NPCID.VortexHornetQueen, NPCID.VortexLarva, NPCID.VortexRifleman, NPCID.VortexSoldier,
             NPCID.SolarCorite, NPCID.SolarCrawltipedeBody, NPCID.SolarCrawltipedeHead, NPCID.SolarCrawltipedeTail, NPCID.SolarDrakomire, NPCID.SolarSroller, NPCID.SolarDrakomireRider, NPCID.SolarFlare, NPCID.SolarGoop, NPCID.SolarSolenian, NPCID.SolarSpearman,
-            NPCID.StardustCellBig,NPCID.StardustCellSmall,NPCID.StardustJellyfishSmall,NPCID.StardustJellyfishBig,NPCID.StardustSoldier,NPCID.StardustSpiderBig,NPCID.StardustSpiderSmall,NPCID.StardustWormBody,NPCID.StardustWormHead,NPCID.StardustWormTail);
+            NPCID.StardustCellBig, NPCID.StardustCellSmall, NPCID.StardustJellyfishSmall, NPCID.StardustJellyfishBig, NPCID.StardustSoldier, NPCID.StardustSpiderBig, NPCID.StardustSpiderSmall, NPCID.StardustWormBody, NPCID.StardustWormHead, NPCID.StardustWormTail);
         /// <summary>
         /// 如果为<see langword="true"/>，则该NPC会被视为具备神性。主要用于神明类的单位。
         /// <br>默认集合里，包括了旅人归途中所有的至尊与其下的门徒们</br>
         /// </summary>
         public static bool[] DivineNPC = NPCID.Sets.Factory.CreateBoolSet(
             NPCType<TheMaterealizer>(), NPCType<TheMaterealizer_Minion>(),
-            NPCType<TheLifebringerHead>(),NPCType<TheLifebringer_Minion>(),
+            NPCType<TheLifebringerHead>(), NPCType<TheLifebringer_Minion>(),
             NPCType<SlimeGod>(),
             NPCType<WorldsEndEverlastingFallingWhale>(),
             NPCType<TheSon>());

@@ -10,11 +10,9 @@ using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -252,7 +250,7 @@ namespace HJScarletRework.Projs.Executor
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.CornflowerBlue, 1.25f, .95f, 1.5f);
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.315f, .695f, 1.25f);
             SB.EndShaderArea();
-            if(AttackState == State.Stick)
+            if (AttackState == State.Stick)
             {
                 drawPos += Main.rand.NextVector2Circular(3, 3);
             }
@@ -266,7 +264,7 @@ namespace HJScarletRework.Projs.Executor
 
             if (Projectile.oldPos.Length < 3)
                 return;
-                float rad = 1;
+            float rad = 1;
             if (Projectile.timeLeft < 50)
                 rad = Projectile.timeLeft / 50f * Projectile.Opacity * Clamp(Projectile.velocity.Length(), 0, 1);
             int posCount = (int)((Projectile.oldPos.Length) * rad);
@@ -283,7 +281,7 @@ namespace HJScarletRework.Projs.Executor
 
             DrawSetting drawSetting = new(useTex.Value);
             List<TrailDrawDate> trailDrawDates = [];
-            
+
 
             for (int j = 0; j < posCount; j++)
             {

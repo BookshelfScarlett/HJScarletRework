@@ -35,7 +35,7 @@ namespace HJScarletRework.Globals.Players
             UpdateTimer();
         }
 
-        
+
 
         public override void PostUpdateEquips()
         {
@@ -59,11 +59,11 @@ namespace HJScarletRework.Globals.Players
             if (powerLilyTimer > 0)
                 return;
             //入场清除周围的召唤物
-            foreach(var proj in Main.ActiveProjectiles)
+            foreach (var proj in Main.ActiveProjectiles)
             {
                 if (Main.myPlayer != Player.whoAmI)
                     continue;
-                if(proj.owner != Player.whoAmI)
+                if (proj.owner != Player.whoAmI)
                     continue;
                 if (!proj.minion)
                     continue;
@@ -74,9 +74,9 @@ namespace HJScarletRework.Globals.Players
             List<Item> hasList = [];
             int applyDmg = -1;
             ScarletSound(HJScarletSounds.Misc_Spell, Player.Center, 0.85f, 1, 0.4f, 0.1f);
-            while(curSlots>=1)
+            while (curSlots >= 1)
             {
-                int itemID=Main.rand.NextFromCollection(HJScarletList.SummonWeaponList);
+                int itemID = Main.rand.NextFromCollection(HJScarletList.SummonWeaponList);
                 Item item = ContentSamples.ItemsByType[itemID];
                 if (applyDmg == -1)
                     applyDmg = item.damage;
@@ -508,7 +508,7 @@ namespace HJScarletRework.Globals.Players
 
         public void UpdatePowerLily()
         {
-                   }
+        }
         public void UpdateDiverArmorJellyfishSpawn()
         {
             if (!diverArmor)

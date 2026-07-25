@@ -6,10 +6,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Reflection.Metadata;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
@@ -102,23 +99,23 @@ namespace HJScarletRework.Projs.Executor
                 int timeLeft = Main.rand.Next(30, 45);
                 ECSParticle.LightntingGlow(pos2, vel, RandLerpColor(Color.CornflowerBlue, Color.White), timeLeft, 1, scale);
             }
-            if(Projectile.HJScarlet().ExecutionStrike)
+            if (Projectile.HJScarlet().ExecutionStrike)
             {
-            for (int i = 0; i < 24; i++)
-            {
-                bool alt = Main.rand.NextBool();
-                BlendState bs = alt ? BlendState.Additive : BlendState.AlphaBlend;
-                ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(15), 0.4f, 21.4f), RandLerpColor(Color.CornflowerBlue, Color.White), Main.rand.Next(45, 65), RandRotTwoPi, 1, 0.33f * Main.rand.NextFloat(.95f, 1.25f), alt, bs);
+                for (int i = 0; i < 24; i++)
+                {
+                    bool alt = Main.rand.NextBool();
+                    BlendState bs = alt ? BlendState.Additive : BlendState.AlphaBlend;
+                    ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(15), 0.4f, 21.4f), RandLerpColor(Color.CornflowerBlue, Color.White), Main.rand.Next(45, 65), RandRotTwoPi, 1, 0.33f * Main.rand.NextFloat(.95f, 1.25f), alt, bs);
+                }
+
+                for (int i = 0; i < 8; i++)
+                {
+                    Vector2 vel = dir.ToRandVelocity(ToRadians(15f), 1).ToSafeNormalize();
+                    ECSParticle.HighResolutionThunder(pos + vel.ToSafeNormalize() * 35, vel * .1f, RandLerpColor(Color.DodgerBlue, Color.White), 40, 1, vel.ToRotation(), Projectile.scale * .263f, 1);
+                }
+
             }
 
-            for (int i = 0; i < 8; i++)
-            {
-                Vector2 vel = dir.ToRandVelocity(ToRadians(15f), 1).ToSafeNormalize();
-                ECSParticle.HighResolutionThunder(pos + vel.ToSafeNormalize() * 35, vel * .1f, RandLerpColor(Color.DodgerBlue, Color.White), 40, 1, vel.ToRotation(), Projectile.scale * .263f, 1);
-            }
-
-            }
-            
             RecoilTimer = AttackSpeed;
             Timer = 0;
             Projectile.HJScarlet().ExecutionStrike = false;

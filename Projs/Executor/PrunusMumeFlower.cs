@@ -3,7 +3,6 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ParticleScarlet;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;

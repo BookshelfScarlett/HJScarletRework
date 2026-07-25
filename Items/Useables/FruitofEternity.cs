@@ -27,7 +27,7 @@ namespace HJScarletRework.Items.Useables
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Red);
-            Item.value = Item.buyPrice(gold:5,silver: 30);
+            Item.value = Item.buyPrice(gold: 5, silver: 30);
             Item.consumable = true;
         }
         public IReadOnlyList<TooltipLine> CacheTooltipList = null;

@@ -1,11 +1,7 @@
 ﻿using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityParticles;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -40,7 +36,7 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
         public static void DrawItemName(DrawableTooltipLine line, ref List<RaritySparkle> raritySparklesList)
         {
             //最后更新他。
-            RarityDrawHelper.DrawCustomTooltipLine(line, Color.Brown, new Color(139,69,19), Color.White, 1);
+            RarityDrawHelper.DrawCustomTooltipLine(line, Color.Brown, new Color(139, 69, 19), Color.White, 1);
         }
 
     }

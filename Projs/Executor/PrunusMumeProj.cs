@@ -2,7 +2,6 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
@@ -105,7 +104,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 16; i++)
             {
                 float rad = Projectile.rotation + ToRadians(360f / length * i);
-                ECSParticle.SmokeParticle(center.ToRandCirclePos(5f),rad.ToRotationVector2() * 10f * Main.rand.NextFloat(), RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 40, RandRotTwoPi, 1, 0.49f, true);
+                ECSParticle.SmokeParticle(center.ToRandCirclePos(5f), rad.ToRotationVector2() * 10f * Main.rand.NextFloat(), RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 40, RandRotTwoPi, 1, 0.49f, true);
             }
             for (int i = 0; i < 30; i++)
             {

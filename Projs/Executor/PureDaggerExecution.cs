@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Executor
         public override string Texture => GetInstance<PureDagger>().Texture;
         public override void SetStaticDefaults()
         {
-            
+
         }
         public override void ExSD()
         {
