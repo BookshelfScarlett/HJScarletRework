@@ -42,6 +42,11 @@ namespace HJScarletRework.Globals.Configs
         [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(false)]
         public bool TraditionalExecutionTooltipShowcase { get; set; }
+        [BackgroundColor(211, 211, 211, 192)]
+        [Range(0f, 1f)]
+        [DefaultValue(1f)]
+        public float ModSFXVolume { get; set; }
+
 
 
 

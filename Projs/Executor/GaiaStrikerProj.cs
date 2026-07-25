@@ -168,7 +168,7 @@ namespace HJScarletRework.Projs.Executor
                 int healType2 = Main.rand.Next(0, bloodBulletCount);
                 if (healType == healType2)
                 {
-                    if (healType2 != (bloodBulletCount -1))
+                    if (healType2 != (bloodBulletCount - 1))
                         healType2 += 1;
                     else
                         healType2 -= 1;
@@ -190,7 +190,7 @@ namespace HJScarletRework.Projs.Executor
                 new CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f).Spawn();
                 new CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.28f).Spawn();
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 12, 20, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
-                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 1, Pitch = 0.4f,PitchVariance = 0.1f, Volume = .37f }, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 1, Pitch = 0.4f, PitchVariance = 0.1f, Volume = .37f }, Projectile.Center);
                 Projectile.Kill();
             }
         }

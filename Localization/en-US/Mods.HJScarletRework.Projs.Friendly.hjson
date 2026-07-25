@@ -125,6 +125,8 @@ Executor: {
 	SickleAndTorchSickle.DisplayName: Sickle And Torch Sickle
 	SickleAndTorchTorch.DisplayName: Sickle And Torch Torch
 	ASMDBoom.DisplayName: A S M D Boom
+	AbyssalWorldProj.DisplayName: Abyssal World Proj
+	PureDaggerProj.DisplayName: Pure Dagger Proj
 }
 
 Melee: {

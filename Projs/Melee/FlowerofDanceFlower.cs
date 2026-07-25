@@ -10,7 +10,7 @@ using Terraria.Audio;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class FlowerofDanceFlower: HJScarletProj
+    public class FlowerofDanceFlower : HJScarletProj
     {
         public override ClassCategory Category => ClassCategory.Melee;
         public ref float OriginalRotation => ref Projectile.localAI[0];
@@ -40,8 +40,8 @@ namespace HJScarletRework.Projs.Melee
             Projectile.velocity *= 0.96f;
             Timer++;
             DrawParticle();
-            Projectile.rotation += Lerp(0.3f, 0.01f, Clamp(Timer / 60f,0,1));
-            if (Timer >= 65f )
+            Projectile.rotation += Lerp(0.3f, 0.01f, Clamp(Timer / 60f, 0, 1));
+            if (Timer >= 65f)
             {
                 if (Projectile.ai[1] == 1)
                 {
@@ -81,7 +81,7 @@ namespace HJScarletRework.Projs.Melee
         {
             if (Projectile.velocity.Length() > Main.rand.NextFloat())
             {
-                if(Main.rand.NextBool(9))
+                if (Main.rand.NextBool(9))
                 {
                     ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(18f), Projectile.velocity.ToSafeNormalize() * Main.rand.NextFloat(0.1f, 1.5f), RandLerpColor(Color.SkyBlue, Color.Aquamarine), 40, 1, Projectile.scale * Main.rand.NextFloat(0.85f, 1.15f) * 0.2f, 0.2f, BlendState.Additive);
                 }
@@ -94,7 +94,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     ECSParticle.SnowCloud(Projectile.Center.ToRandCirclePos(15f), Projectile.SafeDir() * Main.rand.NextFloat(0.1f, 1.5f), RandLerpColor(Color.SkyBlue, Color.Aquamarine), 40, 0, 0.73f, 0.1f * 0.25f, BlendState.Additive);
                 }
-                if(Main.rand.NextBool(9))
+                if (Main.rand.NextBool(9))
                 {
                     ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(18f), -Vector2.UnitY * Main.rand.NextFloat(0.1f, 1.5f), RandLerpColor(Color.SkyBlue, Color.Aquamarine), 40, 1, Projectile.scale * Main.rand.NextFloat(0.85f, 1.15f) * 0.2f, 0.2f, BlendState.Additive);
                 }

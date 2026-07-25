@@ -1,21 +1,24 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
-using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class ASMDBullet : HJScarletProj 
+    public class ASMDBullet : HJScarletProj
     {
         public override ClassCategory Category => ClassCategory.Executor;
+        public bool IsHitWall = false;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(30);
@@ -34,23 +37,97 @@ namespace HJScarletRework.Projs.Executor
         {
             base.OnFirstFrame();
         }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            if(!IsHitWall)
+            {
+                IsHitWall = true;
+                Projectile.tileCollide = false;
+            }
+            return false;
+        }
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
+            if(IsHitWall)
+            {
+                if(Projectile.Opacity == 1)
+                {
+                    BoomParticle();
+                }
+                Projectile.Opacity = Lerp(Projectile.Opacity, 0f, 0.2f);
+                Projectile.velocity *= .001f;
+                if (Projectile.Opacity <= .20f)
+                    Projectile.Kill();
+            }
             if (Projectile.IsOutScreen())
                 return;
-            if(Main.rand.NextBool(6))
-            ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(8), Projectile.velocity / 8f, RandLerpColor(Color.CornflowerBlue, Color.White), 60, 1, Projectile.scale * Main.rand.NextFloat(.9f, 1.1f) * .40f, 6);
             if (Main.rand.NextBool(3))
-                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(8), Projectile.SafeDir(), RandLerpColor(Color.SkyBlue, Color.CornflowerBlue), 40, 1, Main.rand.NextFloat(.9f, 1.1f) * .5f, 0.2f);
+                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(8), Projectile.velocity / 8f, RandLerpColor(Color.CornflowerBlue, Color.White), 60, 1, Projectile.scale * Main.rand.NextFloat(.9f, 1.1f) * .40f, 6);
+            if (Main.rand.NextBool())
+                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(8), Projectile.velocity / 8f, RandLerpColor(Color.SkyBlue, Color.CornflowerBlue), 40, 1, Main.rand.NextFloat(.9f, 1.1f) * .5f, 0.2f);
+        }
+        public void BoomParticle()
+        {
+            ScarletSound(HJScarletSounds.Frostwave_Boom, Projectile.Center, 0.30f, 1, 0.75f);
+            ScarletSound(HJScarletSounds.Frosthammer_SnowCharge , Projectile.Center, 0.30f, 1, -0.75f);
+            for (int i = 0; i < 8; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(15);
+                Vector2 vel = Projectile.Center.GetNormalVector2(pos) * Main.rand.NextFloat(1.2f, 12f);
+                ECSParticle.LightntingGlow(pos, vel, RandLerpColor(Color.White, Color.SkyBlue), Main.rand.Next(40, 70), 1f, Main.rand.NextFloat(.75f, 1.1f) * .75f, Main.rand.Next(2,5));
+            }
+            for (int i = 0; i < 36; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3);
+                Vector2 vel = Projectile.Center.GetNormalVector2(pos) * Main.rand.NextFloat(4.2f, 14.8f);
+                bool value = Main.rand.NextBool();
+                BlendState bs = value ? BlendState.Additive : BlendState.AlphaBlend;
+                ECSParticle.SmokeParticle(pos, vel, RandLerpColor(Color.SkyBlue, Color.White), Main.rand.Next(35, 55), RandRotTwoPi, .95f, 0.40f * Main.rand.NextFloat(.7f, 1.1f), value, bs);
+            }
+            for (int i = 0; i < 24; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(10);
+                Vector2 vel = Projectile.Center.GetNormalVector2(pos) * Main.rand.NextFloat(.42f, 14.8f);
+                ECSParticle.SnowCloud(pos, vel, RandLerpColor(Color.White, Color.SkyBlue), Main.rand.Next(35, 55), RandRotTwoPi, .81f, 0.154f * Main.rand.NextFloat(.7f, 1.1f), BlendState.Additive);
+            }
+            for (int i = 0; i < 18; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(60);
+                ECSParticle.TurbulenceShinyOrb(pos, 6.4f, RandLerpColor(Color.White, Color.RoyalBlue), 60, 1, .17f * Main.rand.NextFloat(.85f, 1.1f),glowMult:0.5f);
+            }
+            for (int i = 0; i < 44; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(10);
+                Vector2 vel = Projectile.Center.GetNormalVector2(pos) * Main.rand.NextFloat(1.2f, 9.8f);
+                ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.White, Color.RoyalBlue), 35, 1f, 0.95f * Main.rand.NextFloat(.75f, 1.15f), 0.2f);
+            }
+            ECSParticle.CrossGlow(Projectile.Center, Color.RoyalBlue, 30, .81f, .48f);
+            ECSParticle.CrossGlow(Projectile.Center, Color.White, 30, .81f, .45f);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.velocity *= .01f;
+            IsHitWall = true;
+            Projectile.AddExecutionTimeImmediate(ItemType<ASMD>());
+            foreach (var activeProj in Main.ActiveProjectiles)
+            {
+                if (activeProj.type != ProjectileType<ASMDIceBlock>())
+                    continue;
+                if (activeProj.owner != Projectile.owner)
+                    continue;
+                bool state = ((ASMDIceBlock)activeProj.ModProjectile).AttackState == ASMDIceBlock.State.Idle;
+                if (!state)
+                    continue;
+                if (target.IsLegal())
+                    ((ASMDIceBlock)activeProj.ModProjectile).CurTarget = target;
+                break;
+            }
         }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        public override void OnKill(int timeLeft)
         {
-            overWiresUI.Add(index);
+            //Projectile.ExpandHitboxBy(3f);
+            //Projectile.Damage();
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -62,7 +139,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 SB.Draw(projTex, drawPos + (TwoPi / 16f * i).ToRotationVector2() * 2f, null, Color.RoyalBlue.ToAddColor(), rot, ori, Projectile.scale, 0, 0);
             }
-            int length = Projectile.oldPos.Length;
+            int length = (int)(Projectile.oldPos.Length * Projectile.Opacity);
             for (int i = length - 1; i > 0; i--)
             {
                 Vector2 oldPos = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2;
@@ -70,7 +147,7 @@ namespace HJScarletRework.Projs.Executor
                 float ratios = i / (float)length;
                 Color c = Color.Lerp(Color.MediumAquamarine, Color.Transparent, ratios);
                 float opac = Lerp(.65f, 0.45f, ratios) * Clamp(Projectile.velocity.Length(), 0, 1);
-                float oldScale = Lerp(Projectile.scale* .55f, Projectile.scale* .10f, ratios);
+                float oldScale = Lerp(Projectile.scale * .55f, Projectile.scale * .10f, ratios);
                 c *= opac;
                 for (int j = 0; j < 4; j++)
                 {
@@ -82,8 +159,8 @@ namespace HJScarletRework.Projs.Executor
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Blue, 0.3265f, 0.95f);
             SB.EnterShaderArea();
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.RoyalBlue, 1.5f, 0.95f);
-            DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.CornflowerBlue, 1.25f, .95f,1.5f);
-            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White , 0.315f,.695f,1.25f);
+            DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.CornflowerBlue, 1.25f, .95f, 1.5f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.315f, .695f, 1.25f);
             SB.EndShaderArea();
             SB.Draw(projTex, drawPos, null, Color.White, rot, ori, Projectile.scale, 0, 0);
             return false;

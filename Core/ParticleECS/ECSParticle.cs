@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Core.ParticleECS
 {
@@ -134,6 +133,15 @@ namespace HJScarletRework.Core.ParticleECS
             BlendState bs = blendState ?? BlendState.Additive;
             float aifloat2 = alterTexture.ToInt();
             return ECSMethod.NewParticle(GetInstance<LiliesPetal>().Type, timeLeft, pos, vel, color, opacity, rotation, scale, bs, ai0: floatSpeed, ai1: scale, ai2: aifloat2, aibool1: noCollision, aibool2: fullBright, aiint2: glowMult);
+        }
+        /// <summary>
+        /// <para><paramref name="thunderType"/>闪电种类，1：无帧图，2：有帧图 3：四散类</para> 
+        /// </summary>
+        /// <returns></returns>
+        public static int HighResolutionThunder(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float rotation, float scale, int thunderType = 1, BlendState blendState = null)
+        {
+            BlendState bs = blendState ?? BlendState.Additive;
+            return ECSMethod.NewParticle(GetInstance<HighResolutionThunder>().Type, timeLeft, pos, vel, color, opacity, rotation, scale, bs, aiint0: thunderType);
         }
     }
 }

@@ -50,7 +50,7 @@ namespace HJScarletRework.Items.Weapons.Executor
                 return false;
             //这里只是为了初始化
             player.CheckExecution(Type);
-            SoundEngine.PlaySound(HJScarletSounds.Atom_StrikeAlt with { MaxInstances = 0, Variants = [2], Pitch = -0.31f, PitchVariance = 0.1f, Volume = 0.68f },player.Center);
+            SoundEngine.PlaySound(HJScarletSounds.Atom_StrikeAlt with { MaxInstances = 0, Variants = [2], Pitch = -0.31f, PitchVariance = 0.1f, Volume = 0.68f }, player.Center);
             Vector2 pos1 = position + player.ToMouseVector2() * -1200f;
             Vector2 dir1 = pos1.GetNormalVector2(Main.MouseWorld);
             Projectile proj = Projectile.NewProjectileDirect(source, pos1, dir1 * velocity.Length(), Item.HJScarlet().ExecutionProj, damage, knockback, player.whoAmI);
@@ -80,7 +80,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             }
             if (AlterVersion && player.whoAmI == Main.myPlayer && !player.HasProj(Item.shoot) && player.HeldItem.type == Type && player.CheckExecution(Type))
             {
-                    SoundEngine.PlaySound(HJScarletSounds.Atom_StrikeAlt with { MaxInstances = 0, Variants = [2], Pitch = -0.31f, PitchVariance = 0.1f, Volume = 0.68f }, player.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Atom_StrikeAlt with { MaxInstances = 0, Variants = [2], Pitch = -0.31f, PitchVariance = 0.1f, Volume = 0.68f }, player.Center);
                 for (int i = 0; i < 8; i++)
                 {
                     Vector2 pos1 = player.MountedCenter + player.ToMouseVector2().RotateRandom(ToRadians(75)).ToSafeNormalize() * -1200f * Main.rand.NextFloat(.75f, 1.2f);
@@ -92,7 +92,7 @@ namespace HJScarletRework.Items.Weapons.Executor
                     int dmg = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);
                     Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), pos1, dir1 * 18f, Item.HJScarlet().ExecutionProj, dmg, Item.knockBack, player.whoAmI);
                     proj.ai[1] = 1;
-                    
+
                 }
                 AlterVersion = false;
                 player.RemoveExecutionProgress(Type);

@@ -62,9 +62,6 @@ namespace HJScarletRework.Projs.Executor
                 new LightningParticle(Projectile.Center.ToRandCirclePos(3f), Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.DodgerBlue), Main.rand.Next(25, 45), Projectile.rotation + PiOver2, Main.rand.NextFloat(0.3f, 0.44f) * 1.7f, 0).Spawn();
                 ECSParticle.LightntingGlow(Projectile.Center, Projectile.SafeDir(), Color.RoyalBlue, 30, 1f, 1.35f);
             }
-            if (Main.rand.NextBool(20))
-            {
-            }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

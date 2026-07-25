@@ -4,6 +4,8 @@ using HJScarletRework.Globals.Instances.Projs;
 using HJScarletRework.Globals.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using rail;
+using ReLogic.Utilities;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -377,7 +379,6 @@ namespace HJScarletRework.Globals.Methods
             CombatText.NewText(new Rectangle((int)Owner.position.X, (int)Owner.position.Y, Owner.width, Owner.height), c, healAmt);
             if (broadcast && Main.netMode == NetmodeID.MultiplayerClient && Owner.whoAmI == Main.myPlayer)
                 NetMessage.SendData(MessageID.PlayerHeal, -1, -1, null, Owner.whoAmI, healAmt);
-
         }
     }
 }

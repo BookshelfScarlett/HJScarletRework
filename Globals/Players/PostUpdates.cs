@@ -91,6 +91,12 @@ namespace HJScarletRework.Globals.Players
             if (tacticalExecutionInputCache > 0)
                 tacticalExecutionInputCache--;
 
+
+            if (cycleMadenssTimer > 0)
+                cycleMadenssTimer--;
+            if (cycleMadenssTimer == 0)
+                cycleMadenessCrit = 0;
+
             if (flybackhandBuffTime > 0)
                 flybackhandBuffTime--;
 

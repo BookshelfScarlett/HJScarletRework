@@ -109,7 +109,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.timeLeft = StoredLifeTime;
                 if (Projectile.FinalUpdate() || Projectile.extraUpdates == 0)
                     RightClickHoldingTime++;
-                if (RightClickHoldingTime % 20 == 0 && RightClickHoldingTime !=0)
+                if (RightClickHoldingTime % 20 == 0 && RightClickHoldingTime != 0)
                 {
                     SoundEngine.PlaySound(HJScarletSounds.Gaia_Charge with { MaxInstances = 1, Pitch = 0.1f * RightClickHoldingTime / 20, Volume = .67f }, Projectile.Center);
                     for (int i = 0; i < 36; i++)
@@ -463,7 +463,7 @@ namespace HJScarletRework.Projs.Executor
                     ResetHeavyStrikeStatement();
 
                     Projectile.velocity = -Vector2.UnitY * 34f + target.velocity.ToSafeNormalize() * Clamp(target.velocity.Length(), 0f, 17f);
-                    SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Volume = .9f}, Projectile.Center);
+                    SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Volume = .9f }, Projectile.Center);
                     ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 40, Projectile.velocity.ToRotation(), ToRadians(30f));
                     //下面这些是动画进程必要的初始化。
                     CurTarget = target;
@@ -472,7 +472,7 @@ namespace HJScarletRework.Projs.Executor
                 }
                 else
                 {
-                    SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -.54f,  PitchVariance = .1f,Volume = .19f }, Projectile.Center);
+                    SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -.54f, PitchVariance = .1f, Volume = .19f }, Projectile.Center);
                     StrikeTime += 1;
                     for (int i = 0; i < 7; i++)
                     {
@@ -500,7 +500,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     DoHeavyStrikeParticle(target.Center);
                     Projectile.velocity = Vector2.UnitY * 28f + target.velocity.ToSafeNormalize() * Clamp(target.velocity.Length(), 0f, 17f);
-                    SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Pitch = .3f,Volume = .9f }, Projectile.Center);
+                    SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Pitch = .3f, Volume = .9f }, Projectile.Center);
                     ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 40, Projectile.velocity.ToRotation(), ToRadians(30f));
                     StrikeTime = 1;
                 }

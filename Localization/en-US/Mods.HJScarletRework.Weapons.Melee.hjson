@@ -249,6 +249,10 @@ SamsaraofDawnlightAlter: {
 }
 
 FlowerofDance: {
-	DisplayName: Flowerof Dance
-	Tooltip: ""
+	DisplayName: Flower of Dance
+	Tooltip:
+		'''
+		Throw four dagger sthat home in after a delay and spawn a flower on hit.
+		Any additional dagger hit will make the flower fires seeking petals
+		'''
 }

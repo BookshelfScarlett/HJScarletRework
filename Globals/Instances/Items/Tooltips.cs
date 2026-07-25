@@ -95,9 +95,9 @@ namespace HJScarletRework.Globals.Instances.Items
         }
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
-            if(HJScarletConfigClient.Instance.SpecialRarity)
+            if (HJScarletConfigClient.Instance.SpecialRarity)
             {
-                if(line.Name == (item.HJScarlet().ItemBelongTo + "Name") && line.Mod == Mod.Name)
+                if (line.Name == (item.HJScarlet().ItemBelongTo + "Name") && line.Mod == Mod.Name)
                 {
                     RareItemRarity.DrawFlavorTooltipName(line, RareItemRarity.RareType.Donator);
                     return false;

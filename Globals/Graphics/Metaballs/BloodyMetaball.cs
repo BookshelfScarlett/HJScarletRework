@@ -28,7 +28,7 @@ namespace HJScarletRework.Globals.Graphics.Metaballs
             }
         }
         public override int MetaballTimer => 64;
-        public override Color EdgeColor => Color.Lerp(Color.Red,Color.DarkRed,.54f) with { A = 255};
+        public override Color EdgeColor => Color.Lerp(Color.Red, Color.DarkRed, .54f) with { A = 255 };
         public static List<BloodMetaballParticle> Particles = [];
         public override Texture2D BackgroundTexture => HJScarletTexture.Noise_Aura.Value;
         public static void SpawnParticle(Vector2 position, Vector2 velocity, float size, float rot, bool UseBall = false) => Particles.Add(new(position, velocity, size, rot, UseBall));

@@ -15,7 +15,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.General
 {
@@ -48,7 +47,7 @@ namespace HJScarletRework.Projs.General
         }
         public override void OnFirstFrame()
         {
-            SoundEngine.PlaySound(HJScarletSounds.Gaia_Charge with { MaxInstances = 1, Pitch = .5f}, Projectile.Center);
+            SoundEngine.PlaySound(HJScarletSounds.Gaia_Charge with { MaxInstances = 1, Pitch = .5f }, Projectile.Center);
             Helper.MaxProgress[0] = 30 * Projectile.MaxUpdates;
             Helper.MaxProgress[1] = 25 * Projectile.MaxUpdates;
         }
@@ -58,8 +57,8 @@ namespace HJScarletRework.Projs.General
             {
                 if (Helper.OnAnimationBegin(0))
                     DoOnAnimationBeginState2();
-            UpdateFadingParticle();
-                if(Projectile.IsMe())
+                UpdateFadingParticle();
+                if (Projectile.IsMe())
                 {
                     Main.mouseItem = new Item();
                     Owner.inventory[58] = new Item();
@@ -77,7 +76,7 @@ namespace HJScarletRework.Projs.General
             else
             {
                 Timer++;
-                Projectile.position += Main.rand.NextVector2Circular(5,5);
+                Projectile.position += Main.rand.NextVector2Circular(5, 5);
                 if (Timer > Projectile.MaxUpdates * 30)
                 {
                     Projectile.netUpdate = true;
@@ -103,7 +102,7 @@ namespace HJScarletRework.Projs.General
             Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, 0.10f);
             //计算锤子需要的朝向。
             //这里会依据玩家是否按下左键来使朝向取反，即按住左键的时候，锤头朝向指针，其他情况下，锤柄朝向玩家
-                //angleToWhat = ToRadians(-90f);
+            //angleToWhat = ToRadians(-90f);
             float angleToWhat = ToRadians(-90);
             //if (Owner.direction < 0)
             Projectile.spriteDirection = Owner.direction;
@@ -114,13 +113,13 @@ namespace HJScarletRework.Projs.General
 
         public void UpdateFadingParticle()
         {
-             float mult = 1;
+            float mult = 1;
             if (Main.rand.NextBool(4))
             {
                 for (int i = 0; i < 2; i++)
                 {
                     Vector2 dir = -Vector2.UnitY;
-                    BloodyMetaball.SpawnParticle(Projectile.Center.ToRandCirclePos(40,5), dir * Main.rand.NextFloat(-12f, 13f), 0.8f, Projectile.rotation, false);
+                    BloodyMetaball.SpawnParticle(Projectile.Center.ToRandCirclePos(40, 5), dir * Main.rand.NextFloat(-12f, 13f), 0.8f, Projectile.rotation, false);
                 }
             }
             if (Main.rand.NextBool())
@@ -128,7 +127,7 @@ namespace HJScarletRework.Projs.General
                 for (int i = 0; i < 4; i++)
                 {
                     Vector2 dir = -Vector2.UnitY;
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(30,10) - dir* -5f * mult * Owner.direction;
+                    Vector2 pos = Projectile.Center.ToRandCirclePos(30, 10) - dir * -5f * mult * Owner.direction;
                     ECSParticle.SmokeParticle(pos, dir * Main.rand.NextFloat(-16f, 17f), RandLerpColor(Color.Red, Color.Black), Main.rand.Next(30, 48), RandRotTwoPi, 0.78f, Main.rand.NextFloat(.75f, 1.1f) * .3f * Projectile.scale, Main.rand.NextBool(), BlendState.NonPremultiplied);
                 }
             }
@@ -199,7 +198,7 @@ namespace HJScarletRework.Projs.General
                 return false;
             Texture2D tex = Projectile.GetTexture();
             Vector2 ori = tex.ToOrigin();
-            float rotFixer =  0;
+            float rotFixer = 0;
             SpriteEffects se = SpriteEffects.None;
             Vector2 posBase = Projectile.Center - Main.screenPosition;
             ApplyHammerTrail(tex, rotFixer, ori, se);
@@ -241,14 +240,14 @@ namespace HJScarletRework.Projs.General
                     SB.Draw(tex, posBase + (TwoPi / 16f * i).ToRotationVector2() * 2f, null, edgeBoxColor * EaseInBack(easedProgress), -0 + rotFixer, ori, Projectile.scale, se, 0);
             }
             for (int i = 0; i < 16; i++)
-                SB.Draw(tex, posBase + (TwoPi / 16f * i).ToRotationVector2() * 2f, null, edgeBoxColor* EaseInBack(easedProgress), -0 + rotFixer, ori, Projectile.scale, se, 0);
+                SB.Draw(tex, posBase + (TwoPi / 16f * i).ToRotationVector2() * 2f, null, edgeBoxColor * EaseInBack(easedProgress), -0 + rotFixer, ori, Projectile.scale, se, 0);
             tex.ApplyMeltShader(Color.Red, 1 - EaseOutCubic(easedProgress));
 
-            Color mainColor = Color.Lerp(Color.White, Color.DarkRed, 0.14f) with { A = 255};
-            Color targetColor = Color.DarkRed with { A= 255};
+            Color mainColor = Color.Lerp(Color.White, Color.DarkRed, 0.14f) with { A = 255 };
+            Color targetColor = Color.DarkRed with { A = 255 };
             Color boxColor = (finalClearUp) ? Color.Lerp(mainColor, targetColor, EaseOutBack(finalClearUpRatios)) : mainColor;
-            if(finalClearUp)
-            SB.Draw(tex, posBase + posOffset, null, boxColor, -0 + rotFixer, ori, Projectile.scale, se, 0);
+            if (finalClearUp)
+                SB.Draw(tex, posBase + posOffset, null, boxColor, -0 + rotFixer, ori, Projectile.scale, se, 0);
             SB.Draw(tex, posBase, null, boxColor, -0 + rotFixer, ori, Projectile.scale, se, 0);
             SB.EndShaderArea();
         }

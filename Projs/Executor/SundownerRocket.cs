@@ -3,7 +3,6 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
@@ -118,11 +117,11 @@ namespace HJScarletRework.Projs.Executor
                 float GeneralScaleMul = 1.1f * RandZeroToOne;
                 int GetLifeTime() => Main.rand.Next(8, 16);
                 Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f) + Projectile.SafeDir() * Main.rand.NextFloat(10f);
-                ECSParticle.SmokeParticle(pos, Projectile.SafeDir().ToRandVelocity(ToRadians(10f), 0.8f, Projectile.velocity.Length()), RandLerpColor(Color.White, Color.OrangeRed), 40, Projectile.rotation + Main.rand.NextFloat(-PiOver2, PiOver2), Main.rand.NextFloat(.4f, .51f) * .33f, 0.30f, true,BlendState.NonPremultiplied);
+                ECSParticle.SmokeParticle(pos, Projectile.SafeDir().ToRandVelocity(ToRadians(10f), 0.8f, Projectile.velocity.Length()), RandLerpColor(Color.White, Color.OrangeRed), 40, Projectile.rotation + Main.rand.NextFloat(-PiOver2, PiOver2), Main.rand.NextFloat(.4f, .51f) * .33f, 0.30f, true, BlendState.NonPremultiplied);
                 //烟雾除了需要更多，也要更黑。
                 for (int i = 0; i <= 1; i++)
                 {
-                    ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(8f) + Projectile.SafeDirByRot() * i * 10f, -Projectile.velocity / 8f, RandLerpColor(Color.OrangeRed, Color.Black), GetLifeTime(), RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f, 0.16f) * 1.1f * GeneralScaleMul,blendstate:BlendState.Additive);
+                    ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(8f) + Projectile.SafeDirByRot() * i * 10f, -Projectile.velocity / 8f, RandLerpColor(Color.OrangeRed, Color.Black), GetLifeTime(), RandRotTwoPi, 1f, Main.rand.NextFloat(0.12f, 0.16f) * 1.1f * GeneralScaleMul, blendstate: BlendState.Additive);
                 }
                 Vector2 vel = Projectile.velocity.ToRandVelocity(ToRadians(10f), 0.8f, 1.4f);
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f), vel, RandLerpColor(Color.DarkOrange, Color.OrangeRed), GetLifeTime(), RandRotTwoPi, 1f, 0.3f * GeneralScaleMul, ToRadians(10f)).Spawn();

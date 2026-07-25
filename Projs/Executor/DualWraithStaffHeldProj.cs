@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleScarlet;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -355,8 +354,8 @@ namespace HJScarletRework.Projs.Executor
             //第二种：处于第二动画继进程，不要执行处死
             //只有两动画完成结束时，判断玩家手持情况，我们再执行afk动画
             bool checkAlterVersion = false;
-            if(correctedItem)
-                checkAlterVersion= ((DualWraithStaff)Owner.HeldItem.ModItem).AlterVersion;
+            if (correctedItem)
+                checkAlterVersion = ((DualWraithStaff)Owner.HeldItem.ModItem).AlterVersion;
             bool doAFK = Helper.IsDone[0] && Helper.IsDone[1] && (!correctedItem) && !IsAFK;
             if (doAFK)
             {

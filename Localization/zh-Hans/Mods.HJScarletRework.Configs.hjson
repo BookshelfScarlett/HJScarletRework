@@ -69,7 +69,20 @@ HJScarletConfigClient: {
 	}
 
 	TraditionalExecutionTooltipShowcase: {
-		// Label: Traditional Execution Tooltip Showcase
-		// Tooltip: ""
+		Label: 旧版代行者处决攻击文本描述展示
+		Tooltip:
+			'''
+			将代行者武器的处决攻击文本改为旧版方案，即按住左Alt查看详情的版本
+			默认关闭
+			'''
+	}
+
+	ModSFXVolume: {
+		Label: 模组音效的音量调整
+		Tooltip:
+			'''
+			如果你觉得模组内武器有点太吵，可以不影响游戏本体的情况下单独调整该选项以降低音量
+			默认为1，即100%音量
+			'''
 	}
 }

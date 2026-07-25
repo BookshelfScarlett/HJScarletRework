@@ -66,4 +66,9 @@ HJScarletConfigClient: {
 		Label: Traditional Execution Tooltip Showcase
 		Tooltip: ""
 	}
+
+	ModSFXVolume: {
+		Label: Mod S F X Volume
+		Tooltip: ""
+	}
 }

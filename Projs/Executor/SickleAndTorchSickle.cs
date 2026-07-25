@@ -2,11 +2,6 @@
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HJScarletRework.Projs.Executor
 {

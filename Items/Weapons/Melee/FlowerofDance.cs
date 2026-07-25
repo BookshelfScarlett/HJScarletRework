@@ -36,7 +36,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             for (int i = -2; i < 2; i++)
             {
 
-                float baseRad = ToRadians(15f *i);
+                float baseRad = ToRadians(15f * i);
                 Vector2 这个刀就不能再小点吗 = velocity.RotatedBy(Main.rand.NextFloat(ToRadians(-1f), ToRadians(1f)) + baseRad).ToSafeNormalize();
                 Vector2 vel = 这个刀就不能再小点吗 * Main.rand.NextFloat(19f, 22f);
                 Projectile proj = Projectile.NewProjectileDirect(source, position, vel, type, damage, knockback, player.whoAmI);

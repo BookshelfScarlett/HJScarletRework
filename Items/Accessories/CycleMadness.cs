@@ -10,6 +10,9 @@ namespace HJScarletRework.Items.Accessories
     public class CycleMadness : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
+        public static int CritsAdd = 5;
+        public static int CritsPerSecond = 5;
+        public static int MaxCrits = 200;
         public override void SetStaticDefaults()
         {
             HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.White);

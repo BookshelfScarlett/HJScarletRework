@@ -1,11 +1,8 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Tiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HJScarletRework.Globals.List;
+using HJScarletRework.Rarity.RarityShiny;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,6 +12,30 @@ namespace HJScarletRework.Globals.CrossMod
     public class UCACrossModSupport : GlobalItem
     {
         public override bool InstancePerEntity => true;
+        public override void SetStaticDefaults()
+        {
+            if (HJScarletRework.CrossMod_UCA is null)
+                return;
+            int carnage = HJScarletRework.CrossMod_UCA.Find<ModItem>("CarnageRay").Type;
+            HJScarletList.ScarletRarityHashSet.Add(carnage);
+            int night = HJScarletRework.CrossMod_UCA.Find<ModItem>("NightsRayAlt").Type;
+            int shadow = HJScarletRework.CrossMod_UCA.Find<ModItem>("ShadowBoltStaffAlt").Type;
+            HJScarletList.NightRarityHashSet.Add(night);
+            HJScarletList.NightRarityHashSet.Add(shadow);
+            int vivid = HJScarletRework.CrossMod_UCA.Find<ModItem>("VividClarityAlt").Type;
+            int element = HJScarletRework.CrossMod_UCA.Find<ModItem>("ElementRayAlt").Type;
+            int sword = HJScarletRework.CrossMod_UCA.Find<ModItem>("StormRulerAlt").Type;
+            HJScarletList.RareItemRarityDrawDictionary.Add(vivid, RareItemRarity.RareType.White);
+            HJScarletList.RareItemRarityDrawDictionary.Add(element, RareItemRarity.RareType.White);
+            HJScarletList.RareItemRarityDrawDictionary.Add(sword, RareItemRarity.RareType.White);
+            int terra = HJScarletRework.CrossMod_UCA.Find<ModItem>("TerraRay").Type;
+            HJScarletList.MiscRarityDrawDictionary.Add(terra, LivingRarity.DrawRarity);
+            int plasma = HJScarletRework.CrossMod_UCA.Find<ModItem>("PlasmaRodAlt").Type;
+            int soul = HJScarletRework.CrossMod_UCA.Find<ModItem>("SoulPiercerAlt").Type;
+            HJScarletList.NebulaRarityHashSet.Add(plasma);
+            HJScarletList.NebulaRarityHashSet.Add(soul);
+
+        }
     }
     public class UCACrossModSupportSystem : ModSystem
     {
@@ -59,14 +80,14 @@ namespace HJScarletRework.Globals.CrossMod
                     recipe.DisableRecipe();
                 }
                 //灵魂穿透者：合成站为生命喷泉，加入生命物质
-                if(recipe.HasResult(soulPiercer)&&recipe.HasTile(TileID.LunarCraftingStation))
+                if (recipe.HasResult(soulPiercer) && recipe.HasTile(TileID.LunarCraftingStation))
                 {
                     recipe.RemoveTile(TileID.LunarCraftingStation);
                     recipe.AddIngredient<EssenceofLife>(10);
                     recipe.AddTile<FountainofLife>();
                 }
                 //风暴管束者：毙掉原本的合成，加入三矿锭和毁灭者刃
-                if(recipe.HasResult(stormBlade)&&recipe.HasTile(TileID.LunarCraftingStation))
+                if (recipe.HasResult(stormBlade) && recipe.HasTile(TileID.LunarCraftingStation))
                 {
                     recipe.RemoveTile(TileID.LunarCraftingStation);
                     recipe.RemoveIngredient(ItemID.FragmentVortex);

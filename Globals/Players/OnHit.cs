@@ -4,7 +4,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
 using System;
-using System.ComponentModel;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -200,9 +199,9 @@ namespace HJScarletRework.Globals.Players
             }
             if (PreciousTargetAcc && hit.Crit)
                 PreciousTargetCrtis += 5;
-            if(Main.rand.NextBool(3))
+            if (Main.rand.NextBool(3))
             {
-                for(int i =0;i<2;i++)
+                for (int i = 0; i < 2; i++)
                 {
 
                 }

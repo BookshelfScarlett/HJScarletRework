@@ -1,35 +1,30 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class EndlessWarProj : HJScarletProj
+    public class PureDaggerProj : HJScarletProj
     {
         public override ClassCategory Category => ClassCategory.Executor;
+        public override string Texture => GetInstance<PureDagger>().Texture;
         public override void SetStaticDefaults()
         {
-            Projectile.ToTrailSetting(5);
+            Projectile.ToTrailSetting(8);
         }
         public override void ExSD()
         {
-            Projectile.width = Projectile.height = 128;
-            Projectile.extraUpdates = 4;
-            Projectile.SetupImmnuity(60);
-            Projectile.penetrate = -1;
-            Projectile.noEnchantmentVisuals = true;
-            Projectile.ignoreWater = true;
-            Projectile.tileCollide = false;
-        }
-        public override void OnFirstFrame()
-        {
-            base.OnFirstFrame();
+            Projectile.width = Projectile.height = 30;
+            Projectile.extraUpdates = 2;
+            Projectile.SetupImmnuity(-1);
+            Projectile.penetrate = 3;
         }
         public override void ProjAI()
         {
-            Projectile.rotation = Projectile.velocity.ToRotation();
+            base.ProjAI();
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -37,7 +32,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            return false;
+            return base.PreDraw(ref lightColor);
         }
     }
 }

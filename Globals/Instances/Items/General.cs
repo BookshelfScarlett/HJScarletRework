@@ -3,11 +3,9 @@ using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Globalization;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -44,32 +42,8 @@ namespace HJScarletRework.Globals.Instances.Items
         public override void SetStaticDefaults()
         {
             HJScarletMethods.ShimmerEach(ItemID.PaladinsHammer, ItemID.PaladinsShield);
-            UCACrossMod();
         }
 
-        public void UCACrossMod()
-        {
-            if (HJScarletRework.CrossMod_UCA is null)
-                return;
-            int carnage = HJScarletRework.CrossMod_UCA.Find<ModItem>("CarnageRay").Type;
-            HJScarletList.ScarletRarityHashSet.Add(carnage);
-            int night = HJScarletRework.CrossMod_UCA.Find<ModItem>("NightsRayAlt").Type;
-            int shadow = HJScarletRework.CrossMod_UCA.Find<ModItem>("ShadowBoltStaffAlt").Type;
-            HJScarletList.NightRarityHashSet.Add(night);
-            HJScarletList.NightRarityHashSet.Add(shadow);
-            int vivid = HJScarletRework.CrossMod_UCA.Find<ModItem>("VividClarityAlt").Type;
-            int element = HJScarletRework.CrossMod_UCA.Find<ModItem>("ElementRayAlt").Type;
-            int sword = HJScarletRework.CrossMod_UCA.Find<ModItem>("StormRulerAlt").Type;
-            HJScarletList.RareItemRarityDrawDictionary.Add(vivid, RareItemRarity.RareType.White);
-            HJScarletList.RareItemRarityDrawDictionary.Add(element, RareItemRarity.RareType.White);
-            HJScarletList.RareItemRarityDrawDictionary.Add(sword, RareItemRarity.RareType.White);
-            int terra = HJScarletRework.CrossMod_UCA.Find<ModItem>("TerraRay").Type;
-            HJScarletList.MiscRarityDrawDictionary.Add(terra, LivingRarity.DrawRarity);
-            int plasma = HJScarletRework.CrossMod_UCA.Find<ModItem>("PlasmaRodAlt").Type;
-            int soul = HJScarletRework.CrossMod_UCA.Find<ModItem>("SoulPiercerAlt").Type;
-            HJScarletList.NebulaRarityHashSet.Add(plasma);
-            HJScarletList.NebulaRarityHashSet.Add(soul);
-        }
         public void HandleLerpValue(Item item, Vector2 position, float scale)
         {
             if (!HJScarletConfigClient.Instance.SimpleImmersiveInventory)
@@ -80,11 +54,9 @@ namespace HJScarletRework.Globals.Instances.Items
             bool hasImmersiveInventory = ModLoader.HasMod("ImmersiveInventory");
             bool isHovering = MouseHoveringAnySlot(position, scale);
             float maxScale = isHovering ? 1.35f : 1f;
-            if (isHovering)
-
-                //开启沉浸背包mod下会禁用这一条的更改
-                if (hasImmersiveInventory)
-                    simpleImmersiveBackpackValue = 1f;
+            //开启沉浸背包mod下会禁用这一条的更改
+            if (isHovering && hasImmersiveInventory)
+                simpleImmersiveBackpackValue = 1f;
             simpleImmersiveBackpackValue = Lerp(simpleImmersiveBackpackValue, maxScale, 0.15f);
             //这个用于控模组图标的放缩
             simpleImmersiveBackpackValueAlt = Lerp(simpleImmersiveBackpackValueAlt, maxScale, 0.15f);
@@ -218,7 +190,7 @@ namespace HJScarletRework.Globals.Instances.Items
         {
             var usPlayer = player.HJScarlet();
             bool casterWeapon = false;
-            if(HJScarletList.ExecutorWeaponTypeDictionary.TryGetValue(item.type, out Executor.WeaponCategory value) )
+            if (HJScarletList.ExecutorWeaponTypeDictionary.TryGetValue(item.type, out Executor.WeaponCategory value))
             {
                 casterWeapon = value == Executor.WeaponCategory.Caster;
             }

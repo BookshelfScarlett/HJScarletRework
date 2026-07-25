@@ -65,7 +65,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
                     Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<ArcaeaPack>());
                     arcaceVanity = true;
                 }
-                if(YardName.Contains(nameLow))
+                if (YardName.Contains(nameLow))
                 {
                     Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<YogsothothsYardPack>());
                     yardVanity = true;

@@ -50,6 +50,13 @@ namespace HJScarletRework.Globals.Executor
             Owner.HJScarlet().CanExecution = false;
             return false;
         }
+        public void CanExecutionStrike()
+        {
+            if (Owner.CheckExecution(OriginalItemID) && !Projectile.HJScarlet().ExecutionStrike)
+            {
+                Projectile.HJScarlet().ExecutionStrike = true;
+            }
+        }
         public virtual void OnExecution() { }
         public override void OnKill(int timeLeft)
         {

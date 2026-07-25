@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityParticles;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;

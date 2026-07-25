@@ -392,3 +392,8 @@ SickleAndTorch: {
 	Tooltip: ""
 	ExecutionStrike: ""
 }
+
+PureDagger: {
+	DisplayName: Pure Dagger
+	Tooltip: ""
+}

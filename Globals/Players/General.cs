@@ -46,7 +46,7 @@ namespace HJScarletRework.Globals.Players
         public int containedBlastBuffTime = 0;
         public int containedBlastBoomCount = 0;
         public bool holdingGaiaStaff = false;
-        public bool firstTimeCraftGaia=false;
+        public bool firstTimeCraftGaia = false;
         #region 护甲
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;
@@ -176,7 +176,7 @@ namespace HJScarletRework.Globals.Players
         public int bonusExecutionReduce = 0;
         #endregion
         public bool ExecutorSwordMarkPlus = false;
-        
+
         public Dictionary<int, int> ExecutionListStored = new Dictionary<int, int>();
         public bool hasSendExecutionTint = false;
         public int hasSendExecutionTintTimer = 0;

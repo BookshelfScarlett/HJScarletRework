@@ -10,7 +10,7 @@ SwitchWeaponConditionList: {
 }
 
 ItemBelongTo: {
-	Donator: ""
+	Donator: -Donator Item-
 	Developer: ""
 	Supporter: ""
 }

@@ -238,10 +238,7 @@ FrostoftheStorm: {
 
 Fleshtumor: {
 	DisplayName: 肉瘤
-	Tooltip:
-		'''
-		快速释放饿鬼进行攻击
-		'''
+	Tooltip: 快速释放饿鬼进行攻击
 	ExecutionStrike:
 		'''
 		向前爆出五只相连的饿鬼
@@ -297,10 +294,7 @@ StaffofFrostbite: {
 
 Frostlight: {
 	DisplayName: 寒霜火炬
-	Tooltip:
-		'''
-		快速发射迅捷追随鼠标位置的寒霜流火
-		'''
+	Tooltip: 快速发射迅捷追随鼠标位置的寒霜流火
 	ExecutionStrike:
 		'''
 		旋转火炬指向前方，以喷火器的形式倾泻寒霜之火
@@ -339,10 +333,7 @@ LavaFlow: {
 
 PestilenceFlower: {
 	DisplayName: 恶役之花
-	Tooltip:
-		'''
-		快速释放世纪之花触手进行攻击
-		'''
+	Tooltip: 快速释放世纪之花触手进行攻击
 	ExecutionStrike:
 		'''
 		向前爆出五只相连的世纪之花触手
@@ -488,12 +479,26 @@ SplendidofTerra: {
 
 ASMD: {
 	DisplayName: A.S.M.D
-	Tooltip: 发射一枚命中时造成爆炸的炮弹
-	// ExecutionStrike: ""
+	Tooltip: 发射一枚命中时造成爆炸的电磁霜炎炮弹
+	ExecutionStrike:
+		'''
+		植入受害者体内，造成多段爆炸伤害
+		最后一发爆炸将从其体内迸裂出多个冰块，滞留在场上一段时间
+		接下来的炮弹命中时，都会使一枚冰块追击该名敌人，并为您提供叠加处决进程
+		'''
 }
 
 SickleAndTorch: {
 	DisplayName: 刀耕火种
 	Tooltip: 第三下攻击时投掷火把
-	// ExecutionStrike: ""
+	ExecutionStrike:
+		'''
+		镰刀攻击的击退力更强，并无视防御
+		火把直接命中时迸发受重力影响的火球
+		'''
+}
+
+PureDagger: {
+	// DisplayName: Pure Dagger
+	// Tooltip: ""
 }

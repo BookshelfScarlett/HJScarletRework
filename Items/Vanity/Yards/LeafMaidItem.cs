@@ -11,7 +11,7 @@ namespace HJScarletRework.Items.Vanity.Yards
         public override VanityData VanityData => new VanityData(
             Color.Lerp(Color.White, Color.SkyBlue, 0.35f),
             Color.Lerp(Color.White, Color.White, 0.95f),
-            Color.Lerp(Color.RoyalBlue,Color.SkyBlue,0.65f));
+            Color.Lerp(Color.RoyalBlue, Color.SkyBlue, 0.65f));
         public override Color ParticleColor1 => Color.SkyBlue;
         public override Color ParticleColor2 => Color.White;
         public override bool HasFlavorTooltip => false;

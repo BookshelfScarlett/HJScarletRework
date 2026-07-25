@@ -79,7 +79,10 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle Gaia_Explosion => new SoundStyle($"{SoundsPath}{nameof(Gaia_Explosion)}");
         public static SoundStyle Gaia_HammerCharge => new SoundStyle($"{SoundsPath}{nameof(Gaia_HammerCharge)}");
         public static SoundStyle Gaia_Staff => new SoundStyle($"{SoundsPath}{nameof(Gaia_Staff)}");
-
+        public static SoundStyle ASMD_Fire => new SoundStyle($"{SoundsPath}{nameof(ASMD_Fire)}");
+        public static SoundStyle ASMD_IceBlockSplit => new SoundStyle($"{SoundsPath}{nameof(ASMD_IceBlockSplit)}");
+        public static SoundStyle ASMD_ExecutionFire => new SoundStyle($"{SoundsPath}{nameof(ASMD_ExecutionFire)}");
+        public static SoundStyle Misc_ManaClearUee => new SoundStyle($"{SoundsPath}{nameof(Misc_ManaClearUee)}");
         public static SoundStyle[] Hammer_Shoot =>
             [
                 Hammer_Shoot1,

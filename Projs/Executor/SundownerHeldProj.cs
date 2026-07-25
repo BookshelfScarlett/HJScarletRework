@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Backgrounds;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
@@ -81,7 +80,7 @@ namespace HJScarletRework.Projs.Executor
             Owner.HJScarlet().CanExecution = false;
             return false;
         }
-       public int Reverse = 1;
+        public int Reverse = 1;
         public void HandleAttack()
         {
             Vector2 offset2 = new(0 * Owner.direction, -10f);
@@ -99,13 +98,13 @@ namespace HJScarletRework.Projs.Executor
                     sound.Volume /= 2;
                     sound.Pitch = 0.2f;
                 }
-                    for (int i = -1; i < 2; i += 2)
-                    {
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) *  i* 10f, Projectile.rotation.ToRotationVector2() * 20, ProjectileType<SundownerAmmo>(), Projectile.originalDamage, 0, Owner.whoAmI);
-                        if (nonStop)
-                            proj.HJScarlet().HasExecutionMechanic = true;
-                        ((SundownerAmmo)proj.ModProjectile).CanPlaySound = i == -1;
-                    }
+                for (int i = -1; i < 2; i += 2)
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) * i * 10f, Projectile.rotation.ToRotationVector2() * 20, ProjectileType<SundownerAmmo>(), Projectile.originalDamage, 0, Owner.whoAmI);
+                    if (nonStop)
+                        proj.HJScarlet().HasExecutionMechanic = true;
+                    ((SundownerAmmo)proj.ModProjectile).CanPlaySound = i == -1;
+                }
                 if (Reverse == 1)
                 {
                     for (int i = -1; i < 2; i += 2)

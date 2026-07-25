@@ -1,7 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Methods.Textbox

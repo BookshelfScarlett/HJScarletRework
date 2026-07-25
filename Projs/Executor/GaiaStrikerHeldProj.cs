@@ -11,7 +11,6 @@ using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Data;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ModLoader;
@@ -94,8 +93,8 @@ namespace HJScarletRework.Projs.Executor
             if (Owner.controlUseTile && Owner.HeldItem.type == ItemType<GaiaStriker>())
             {
                 Projectile.timeLeft = StoredLifeTime;
-                    RightClickHoldingTime++;
-                if (RightClickHoldingTime % 20 == 0 && RightClickHoldingTime !=0)
+                RightClickHoldingTime++;
+                if (RightClickHoldingTime % 20 == 0 && RightClickHoldingTime != 0)
                 {
                     SoundEngine.PlaySound(HJScarletSounds.Gaia_Charge with { MaxInstances = 1, Pitch = 0.1f * RightClickHoldingTime / 20, Volume = .67f }, Projectile.Center);
                     for (int i = 0; i < 36; i++)
@@ -314,12 +313,15 @@ namespace HJScarletRework.Projs.Executor
             float anchorPosX = Owner.MountedCenter.X - Owner.direction * 0;
             float anchorPosY = Owner.MountedCenter.Y - (30f * MathF.Sin(Oscillation) / 9f);
             //uca联动，手持屠杀时调整位置
-            if(HJScarletRework.CrossMod_UCA.TryFind<ModItem>("CarnageRay", out ModItem value))
+            if (HJScarletRework.CrossMod_UCA is not null)
             {
-                if (Owner.HeldItem.type == value.Type)
+                if (HJScarletRework.CrossMod_UCA.TryFind<ModItem>("CarnageRay", out ModItem value))
                 {
-                    anchorPosY -= 100f;
-                    anchorPosX += 0f * Owner.direction;
+                    if (Owner.HeldItem.type == value.Type)
+                    {
+                        anchorPosY -= 100f;
+                        anchorPosX += 0f * Owner.direction;
+                    }
                 }
             }
             //递增的值越大，锤子的摆动幅度越大

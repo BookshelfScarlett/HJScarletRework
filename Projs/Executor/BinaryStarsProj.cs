@@ -4,9 +4,7 @@ using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.Instances.Projs;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Players;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,11 +14,10 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class BinaryStarsProj :HJScarletProj 
+    public class BinaryStarsProj : HJScarletProj
     {
         public override ClassCategory Category => ClassCategory.Executor;
         private enum DoType

@@ -17,10 +17,10 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.useTime = Item.useAnimation = 45;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.SetUpRarityPrice(ItemRarityID.Blue);
+            Item.SetUpNoUseGraphicItem();
             Item.knockBack = 2f;
             Item.shoot = ProjectileType<AngryBombProj>();
             Item.UseSound = HJScarletSounds.Misc_KnifeTossAlt with { Pitch = 0.5f, Variants = [3], Volume = 0.75f };
-            Item.SetUpNoUseGraphicItem();
             Item.HJScarlet().ExecutionProj = ProjectileType<AngryBombExecution>();
         }
     }

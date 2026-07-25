@@ -3,8 +3,6 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs.Executor;
-using Microsoft.Build.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -56,13 +54,13 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ProjAI()
         {
-            if(Projectile.damage == 0 && Projectile.penetrate == -1)
+            if (Projectile.damage == 0 && Projectile.penetrate == -1)
             {
                 if (Projectile.timeLeft > 51)
                     Projectile.timeLeft = 51;
                 Projectile.velocity *= 0.55f;
                 Projectile.Opacity = Lerp(Projectile.Opacity, 0, 0.21f);
-                    return;
+                return;
             }
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer++;
@@ -149,8 +147,8 @@ namespace HJScarletRework.Projs.Melee
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.Aquamarine, 1f);
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.White, 0.85f, offsetHeight: 0f);
             SB.EndShaderArea();
-            for(int i =0;i<8;i++)
-            SB.Draw(tex, drawPos +(TwoPi / 8f * i).ToRotationVector2() * 1.5f, null, Color.White with { A = 0 } * Projectile.Opacity, rot, ori, Projectile.scale, 0, 0);
+            for (int i = 0; i < 8; i++)
+                SB.Draw(tex, drawPos + (TwoPi / 8f * i).ToRotationVector2() * 1.5f, null, Color.White with { A = 0 } * Projectile.Opacity, rot, ori, Projectile.scale, 0, 0);
             SB.Draw(tex, drawPos, null, Color.LightSkyBlue with { A = 255 } * Projectile.Opacity, rot, ori, Projectile.scale, 0, 0);
             return false;
         }

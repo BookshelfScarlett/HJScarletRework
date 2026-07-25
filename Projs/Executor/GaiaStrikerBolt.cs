@@ -6,7 +6,6 @@ using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Steamworks;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -86,7 +85,7 @@ namespace HJScarletRework.Projs.Executor
         public void DoShoot()
         {
             Timer++;
-            if(Projectile.MeetMaxUpdatesFrame(Timer,2))
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 2))
             {
                 AttackState = State.Homing;
                 Timer = 0;
@@ -138,24 +137,27 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 spawnVec = Projectile.velocity.RotateRandom(0.3f) * Main.rand.NextFloat(0.1f, 1.6f);
                 BloodyMetaball.SpawnParticle(Projectile.Center, spawnVec, Main.rand.NextFloat(0.15f, 0.3f), spawnVec.ToRotation(), false);
             }
-            if (Projectile.ai[2]==1)
+            if (Projectile.ai[2] == 1)
             {
                 Vector2 vel = Projectile.SafeDir().RotatedByRandom(ToRadians(60)) * Main.rand.NextFloat(3f, 6f);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center.ToRandCirclePos(6), vel, ProjectileType<GaiaStrikerBloodyBullet>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 proj.ai[2] = 1;
                 proj.HJScarlet().HasExecutionMechanic = true;
             }
-            if (HJScarletRework.CrossMod_UCA.TryFind("CarnageRay", out ModItem value))
+            if (HJScarletRework.CrossMod_UCA is not null)
             {
-                if (Owner.HeldItem.type == value.Type)
+                if (HJScarletRework.CrossMod_UCA.TryFind("CarnageRay", out ModItem value))
                 {
-                    if (Owner.statMana < Owner.statManaMax2 * 0.95f)
-                        Owner.statMana += 10;
+                    if (Owner.HeldItem.type == value.Type)
+                    {
+                        if (Owner.statMana < Owner.statManaMax2 * 0.95f)
+                            Owner.statMana += 10;
+                    }
                 }
             }
 
         }
-            
+
         public override bool PreDraw(ref Color lightColor)
         {
             return false;

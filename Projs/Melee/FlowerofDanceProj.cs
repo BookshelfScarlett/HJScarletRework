@@ -7,9 +7,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using rail;
 using ReLogic.Content;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -28,7 +26,7 @@ namespace HJScarletRework.Projs.Melee
         public Vector2 DrawOffset = Vector2.Zero;
         public ref float Timer => ref Projectile.ai[0];
         public enum State
-        { 
+        {
             Shoot,
             AngleTo,
             Homing
@@ -96,7 +94,7 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.rotation = Projectile.velocity.ToRotation();
 
             }
-                Projectile.velocity *= 0.95f;
+            Projectile.velocity *= 0.95f;
             Timer++;
             if (ratios >= .99f)
             {
@@ -111,11 +109,11 @@ namespace HJScarletRework.Projs.Melee
             if (Main.rand.NextBool(3))
                 return;
             if (Main.rand.NextBool(9))
-                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(10f), Projectile.velocity / 4f, RandLerpColor(Color.Aquamarine, Color.SkyBlue), 40, 1f, 0.48f * (1- ratios));
+                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(10f), Projectile.velocity / 4f, RandLerpColor(Color.Aquamarine, Color.SkyBlue), 40, 1f, 0.48f * (1 - ratios));
             if (Main.rand.NextBool(10))
                 ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePosEdge(10f), Projectile.velocity / 4f, RandLerpColor(Color.Aquamarine, Color.SkyBlue), 40, 1f, 0.48f);
             if (Main.rand.NextBool(21))
-                ECSParticle.LiliesPetal(Projectile.Center.ToRandCirclePos(6),-Vector2.UnitY.RotateRandom(PiOver4) * 10f,RandLerpColor(Color.SkyBlue,Color.Aquamarine),50,1,RandRotTwoPi,0.125f*Main.rand.NextFloat(.85f,1.1f),1.92f,true,fullBright:true,blendState:BlendState.AlphaBlend);
+                ECSParticle.LiliesPetal(Projectile.Center.ToRandCirclePos(6), -Vector2.UnitY.RotateRandom(PiOver4) * 10f, RandLerpColor(Color.SkyBlue, Color.Aquamarine), 50, 1, RandRotTwoPi, 0.125f * Main.rand.NextFloat(.85f, 1.1f), 1.92f, true, fullBright: true, blendState: BlendState.AlphaBlend);
         }
         public void DoAngleTo()
         {
@@ -127,7 +125,7 @@ namespace HJScarletRework.Projs.Melee
                     //for (int i = 0; i < 22; i++)
                 }
                 Vector2 vec = Projectile.Center.GetNormalVector2(CurTarget.Center);
-                if(Main.rand.NextBool(20))
+                if (Main.rand.NextBool(20))
                     ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(16, 32), Main.rand.NextFloat(1.2f, 3.4f), RandLerpColor(Color.SkyBlue, Color.Aquamarine), 45, 1f, Main.rand.NextFloat(.85f, 1.15f) * 0.181f, glowMult: 0.45f);
                 Timer++;
                 float ratios = Timer / (Projectile.MaxUpdates * 15);
@@ -138,7 +136,7 @@ namespace HJScarletRework.Projs.Melee
                 }
                 else
                     Projectile.scale = Lerp(1f, 1.21f, EaseInOutQuad(ratios / 0.5f));
-                    Projectile.HomingTarget(CurTarget.Center, -1, Lerp(1f, 16f, ratios), Lerp(0f, 25f, ratios), Lerp(0f, 5f, ratios));
+                Projectile.HomingTarget(CurTarget.Center, -1, Lerp(1f, 16f, ratios), Lerp(0f, 25f, ratios), Lerp(0f, 5f, ratios));
                 if (ratios > .99f)
                 {
                     Projectile.netUpdate = true;
@@ -212,7 +210,7 @@ namespace HJScarletRework.Projs.Melee
                     proj.timeLeft = 500;
                 }
             }
-            if(AttackState == State.Shoot)
+            if (AttackState == State.Shoot)
             {
                 for (int i = 0; i < 16; i++)
                 {
@@ -236,7 +234,7 @@ namespace HJScarletRework.Projs.Melee
             float scale = Projectile.scale * 0.45f;
             float rotFixer = PiOver4;
             float timeLeftProgress = Clamp(Projectile.timeLeft / 50f, 0, 1);
-            int length = (int)((Projectile.oldPos.Length - 4) *(timeLeftProgress));
+            int length = (int)((Projectile.oldPos.Length - 4) * (timeLeftProgress));
             Texture2D star = TextureAssets.Extra[ExtrasID.SharpTears].Value;
             float rad = Clamp(Timer / (Projectile.MaxUpdates * 25), 0f, 0.25f) / 0.25f;
 
@@ -258,7 +256,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     SB.Draw(tex, pos + (TwoPi / 16f * i).ToRotationVector2() * 2 * rad * EaseInBack(timeLeftProgress), null, Color.White.ToAddColor() * EaseInBack(timeLeftProgress), Projectile.rotation + rotFixer, ori, scale, 0, 0);
                 }
-            tex.ApplyMeltShader(Color.White,   1- EaseInOutExpo(timeLeftProgress));
+            tex.ApplyMeltShader(Color.White, 1 - EaseInOutExpo(timeLeftProgress));
             SB.Draw(tex, pos, null, Color.White * rad * timeLeftProgress, Projectile.rotation + rotFixer, ori, scale, 0, 0);
             SB.EndShaderArea();
             return false;
@@ -292,7 +290,7 @@ namespace HJScarletRework.Projs.Melee
             //边框
         }
 
-        public void DrawDaggerTrail(int length, float rotFixer, float scale,Texture2D tex, Vector2 ori)
+        public void DrawDaggerTrail(int length, float rotFixer, float scale, Texture2D tex, Vector2 ori)
         {
             for (int i = length - 1; i >= 0; i--)
             {
