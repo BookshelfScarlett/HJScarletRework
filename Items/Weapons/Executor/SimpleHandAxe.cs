@@ -9,7 +9,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class SimpleHandAxe : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 10;
-        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSD()
         {
             Item.width = 40;

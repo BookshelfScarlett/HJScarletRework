@@ -22,7 +22,7 @@ namespace HJScarletRework.Projs.Executor
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public NPC CurTarget = null;
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()

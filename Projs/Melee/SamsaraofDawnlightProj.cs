@@ -266,7 +266,7 @@ namespace HJScarletRework.Projs.Melee
     }
     public class SamsaraofDawnlightBolt : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
@@ -443,7 +443,7 @@ namespace HJScarletRework.Projs.Melee
     }
     public class SamsaraofDawnlightMoon : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 24;

@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class TheJudgementProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<TheJudgement>().Texture;
         public override void SetStaticDefaults()
         {

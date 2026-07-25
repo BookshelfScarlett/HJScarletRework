@@ -23,7 +23,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public Vector2 DrawOffset => Projectile.SafeDir() * 80f;
         public override void SetStaticDefaults()
         {

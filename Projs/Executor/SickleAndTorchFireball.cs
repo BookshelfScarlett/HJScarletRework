@@ -9,7 +9,7 @@ namespace HJScarletRework.Projs.Executor
     public class SickleAndTorchFireball : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(8);

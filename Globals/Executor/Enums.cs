@@ -1,6 +1,6 @@
 ﻿namespace HJScarletRework.Globals.Executor
 {
-    public enum WeaponCategory
+    public enum ExecutorWeaponType
     {
         Throw,
         ColdSteel,

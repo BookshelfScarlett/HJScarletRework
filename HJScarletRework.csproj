@@ -23,6 +23,9 @@
 	  <Reference Include="ContinentOfJourney">
 	    <HintPath>..\ModAssemblies\ContinentOfJourney_v0.8.70.70.dll</HintPath>
 	  </Reference>
+	  <Reference Include="ContinentOfJourney">
+	    <HintPath>..\ModAssemblies\ContinentOfJourney_v0.8.70.88.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 	<!-- References -->

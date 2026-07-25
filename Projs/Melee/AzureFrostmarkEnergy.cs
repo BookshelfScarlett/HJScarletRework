@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class AzureFrostmarkEnergy : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public ref float Timer => ref Projectile.ai[0];
         public int BounceTime

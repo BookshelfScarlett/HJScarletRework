@@ -2,6 +2,7 @@
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
@@ -10,6 +11,7 @@ using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
+using HJScarletRework.Rarity.RarityDrawHandler;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -27,66 +29,72 @@ namespace HJScarletRework.Globals.Players
         public int blackKeyExecutorCriticalChanceAdd = 0;
         public override void PostUpdateMiscEffects()
         {
-            UpdateTimer();
             UpdateFlybackBuff();
-            if (goldenAppleEnchantedFully)
-            {
-                if (Player.miscCounter % 3 == 0 && Player.statLife < (int)(Player.statLifeMax2 * 0.9f))
-                    Player.Heal(5);
-            }
-            critDamageAll = 0;
-            //星月夜
-            //爱心指环
-            if (isBeingLove)
-            {
-                Player.moveSpeed += 0.10f;
-                Player.GetAttackSpeed<GenericDamageClass>() += 0.10f;
-            }
-            if (tacticalExecution && tacticalTime > 0)
-            {
-                if (executorSwordMarkLevel > 2)
-                {
-                    Player.GetDamage<ExecutorDamageClass>() *= 1.05f;
-                }
-            }
+            UpdateMisc();
+            UpdateRandomMinionSpawn();
+            UpdateTimer();
+        }
 
-        }
-        public void UpdateFlybackBuff()
+        
+
+        public override void PostUpdateEquips()
         {
-            //归零针buff
-            bool hasBuff = (flybackInGameTimeBuff > 0) && (Player.HeldItem.type == ItemType<FlybackHandThrown>());
-            if (!hasBuff)
-                return;
-            //白天上午与夜间前半夜：给予15%近战伤害加成/15防御力加成
-            if (HJScarletMethods.TerrariaCurrentHour <= 6)
-            {
-                if (Main.dayTime)
-                {
-                    Player.GetDamage<MeleeDamageClass>() += 0.15f + 0.15f * CalamityValue;
-                    Player.GetCritChance<MeleeDamageClass>() += 15f * CalamityValue;
-                }
-                else
-                {
-                    Player.statDefense += 15 + 35 * CalamityValue;
-                    Player.lifeRegen += 5 * CalamityValue;
-                }
-            }
-            //白天下午与夜间后半夜：给予15近战速度加成/15%伤害减免
-            else
-            {
-                if (Main.dayTime)
-                {
-                    Player.GetAttackSpeed<MeleeDamageClass>() += 0.15f + 0.15f * CalamityValue;
-                    Player.GetCritChance<MeleeDamageClass>() += 15f * CalamityValue;
-                }
-                else
-                {
-                    Player.endurance += 0.15f + 0.35f * CalamityValue;
-                    Player.lifeRegen += 5 * CalamityValue;
-                }
-            }
+            HandleTerraRecipe();
+            ResetTerraRecipe();
+            HandleLoveRing();
+            UpdateFloretProtectorHerbSpawn();
+            UpdateHerbBuff();
+            UpdateStardustRune();
+            UpdateArmorAbility();
+            UpdateTacticalExecution();
+            UpdateFishDash();
+            UpdatePowerLily();
+            UpdateDiverArmorJellyfishSpawn();
         }
-        private void UpdateTimer()
+        #region PostUpdateMiscEffects的方法
+        public void UpdateRandomMinionSpawn()
+        {
+            if (powerLily)
+                return;
+            if (powerLilyTimer > 0)
+                return;
+            //入场清除周围的召唤物
+            foreach(var proj in Main.ActiveProjectiles)
+            {
+                if (Main.myPlayer != Player.whoAmI)
+                    continue;
+                if(proj.owner != Player.whoAmI)
+                    continue;
+                if (!proj.minion)
+                    continue;
+                proj.Kill();
+                proj.active = false;
+            }
+            float curSlots = Player.maxMinions - Player.slotsMinions;
+            List<Item> hasList = [];
+            int applyDmg = -1;
+            ScarletSound(HJScarletSounds.Misc_Spell, Player.Center, 0.85f, 1, 0.4f, 0.1f);
+            while(curSlots>=1)
+            {
+                int itemID=Main.rand.NextFromCollection(HJScarletList.SummonWeaponList);
+                Item item = ContentSamples.ItemsByType[itemID];
+                if (applyDmg == -1)
+                    applyDmg = item.damage;
+                else
+                {
+                    applyDmg = Math.Min(applyDmg, item.damage);
+                }
+                Projectile proj = ContentSamples.ProjectilesByType[item.shoot];
+                if (curSlots >= proj.minionSlots && !hasList.Contains(item))
+                {
+                    int dmg = (int)Player.GetTotalDamage<SummonDamageClass>().ApplyTo(applyDmg);
+                    //ItemLoader.Shoot(item, Player,Player.GetSource_ItemUse_WithPotentialAmmo(item,AmmoID.None), Player.MountedCenter, RandDirTwoPi, proj.type, applyDmg, item.knockBack);
+                }
+
+            }
+            powerLilyTimer = GetSeconds(30);
+        }
+        public void UpdateTimer()
         {
             if (tacticalExecutionInputCache > 0)
                 tacticalExecutionInputCache--;
@@ -195,6 +203,88 @@ namespace HJScarletRework.Globals.Players
                 hasSendExecutionTint = false;
             }
         }
+        public void UpdateFlybackBuff()
+        {
+            //归零针buff
+            bool hasBuff = (flybackInGameTimeBuff > 0) && (Player.HeldItem.type == ItemType<FlybackHandThrown>());
+            if (!hasBuff)
+                return;
+            //白天上午与夜间前半夜：给予15%近战伤害加成/15防御力加成
+            if (HJScarletMethods.TerrariaCurrentHour <= 6)
+            {
+                if (Main.dayTime)
+                {
+                    Player.GetDamage<MeleeDamageClass>() += 0.15f + 0.15f * CalamityValue;
+                    Player.GetCritChance<MeleeDamageClass>() += 15f * CalamityValue;
+                }
+                else
+                {
+                    Player.statDefense += 15 + 35 * CalamityValue;
+                    Player.lifeRegen += 5 * CalamityValue;
+                }
+            }
+            //白天下午与夜间后半夜：给予15近战速度加成/15%伤害减免
+            else
+            {
+                if (Main.dayTime)
+                {
+                    Player.GetAttackSpeed<MeleeDamageClass>() += 0.15f + 0.15f * CalamityValue;
+                    Player.GetCritChance<MeleeDamageClass>() += 15f * CalamityValue;
+                }
+                else
+                {
+                    Player.endurance += 0.15f + 0.35f * CalamityValue;
+                    Player.lifeRegen += 5 * CalamityValue;
+                }
+            }
+        }
+
+
+        public void UpdateMisc()
+        {
+            if (goldenAppleEnchantedFully)
+            {
+                if (Player.miscCounter % 3 == 0 && Player.statLife < (int)(Player.statLifeMax2 * 0.9f))
+                    Player.Heal(5);
+            }
+            critDamageAll = 0;
+            //爱心指环
+            if (isBeingLove)
+            {
+                Player.moveSpeed += 0.10f;
+                Player.GetAttackSpeed<GenericDamageClass>() += 0.10f;
+            }
+            if (tacticalExecution && tacticalTime > 0)
+            {
+                if (executorSwordMarkLevel > 2)
+                {
+                    Player.GetDamage<ExecutorDamageClass>() *= 1.05f;
+                }
+            }
+            //悠久果实
+            if (fruitofEthernity)
+            {
+                foreach (var activeNPC in Main.ActiveNPCs)
+                {
+                    if (NPC.AnyNPCs(activeNPC.type) && !activeNPC.friendly && activeNPC.lifeMax > 5 && activeNPC.IsLegal() && ScarletNPCIDSets.DivineNPC[activeNPC.type])
+                    {
+                        //世界范围内存在神明类单位，降低70%伤害
+                        Player.GetDamage<GenericDamageClass>() *= FruitofEternity.DamageReduceMultiplier;
+                    }
+                }
+                //这个方法是直接给玩家的防御力加成，也就是增加50%防御力
+                Player.statDefense += Player.DefenseMultiplier(FruitofEternity.DefenseMultipler);
+            }
+
+        }
+        #endregion
+        public override void UpdateLifeRegen()
+        {
+            if (fruitofEthernity)
+            {
+                Player.lifeRegen += FruitofEternity.LifeRegenSpeed;
+            }
+        }
         public override void PostUpdate()
         {
             UpdateNetPacket();
@@ -213,6 +303,7 @@ namespace HJScarletRework.Globals.Players
             }
         }
         public float holdingUseableTimer = 0;
+        #region 手持物品管理
         public void HandleUseableItem()
         {
             Item itemMouse = Player.HeldItem;
@@ -224,113 +315,133 @@ namespace HJScarletRework.Globals.Players
                 return;
             if (itemMouse.type == ItemType<ProvidenceHolyWater>())
             {
-                bool isManaPotion = itemHover.damage < 1 && itemHover.pick == 0 && itemHover.axe == 0 && itemHover.hammer == 0 && itemHover.healMana > 0;
-                if (isManaPotion)
-                {
-                    if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
-                    {
-                        providenceHolyWaterHealMana = itemHover.healMana;
-                        SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { Pitch = .2f }, Player.Center);
-                        for (int i = 0; i < 20; i++)
-                            new TurbulenceGlowOrb(Main.MouseWorld.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
-
-                    }
-                }
+                ProvidenceHolyWaterHandler(itemHover);
             }
             if (itemMouse.type == ItemType<UnregisteredSpiritOrigin>())
             {
-                //必须得有伤害，必须得是武器
-                bool isWeapon = itemHover.damage > 0 && itemHover.pick == 0 && itemHover.axe == 0 && itemHover.hammer == 0 && !itemHover.IsACoin && itemHover.ammo == AmmoID.None;
-                //必须得有宝藏袋一名
-
-                bool isTreasureBag = ItemID.Sets.BossBag[itemHover.type];
-                //bool isWeapon = item.damage > 0 && item.pick == 0 && item.axe == 0 && item.hammer == 0 && !item.IsACoin && item.ammo == AmmoID.None;
-                bool isAccessory = (itemHover.accessory || itemHover.defense > 0) && itemHover.pick == 0 && itemHover.axe == 0 && itemHover.hammer == 0 && !itemHover.IsACoin && itemHover.ammo == AmmoID.None && !itemHover.vanity;
-
-                if (isWeapon || isAccessory || isTreasureBag)
-                {
-                    if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
-                    {
-                        if (Main.mouseItem.IsLegal())
-                            Main.mouseItem.stack -= 1;
-                        else
-                            Player.HeldItem.stack -= 1;
-                        Item targetItem = new Item();
-                        bool favor = Player.HeldItem.favorited;
-                        targetItem.SetDefaults(itemHover.type);
-                        targetItem.favorited = favor;
-                        targetItem.stack = 1;
-                        Player.QuickSpawnItemDirect(Player.GetSource_FromThis(), targetItem, 1);
-                        SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { Pitch = .2f }, Player.Center);
-                        for (int i = 0; i < 20; i++)
-                            new TurbulenceGlowOrb(Player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
-                    }
-                }
+                UnRegisteredSpiritOriginHandler(itemHover);
             }
             if (itemMouse.type == ItemType<PurePrismFate>())
             {
-                //必须得是材料。必须得没有伤害，必须得不是饰品，必须得什么都不会发射，必须得没有任何Buff提供，必须得可叠加（最大叠加数小于零）
-                //必须得不能放置任何墙体
-                bool isMate = itemHover.material && itemHover.damage < 1 && !itemHover.accessory && itemHover.shoot == ProjectileID.None && itemHover.buffType == 0 && itemHover.maxStack > 1 && itemHover.createWall == -1;
-                bool whiteList = SmeltList.BarType.Contains(itemHover.type)
-                              || SmeltList.OreType.Contains(itemHover.type)
-                              || HJScarletList.BarsHashSet.Contains(itemHover.type)
-                              || HJScarletList.OresHashSet.Contains(itemHover.type);
-
-                bool blackList = PurePrismFate._RefusedList.Contains(itemHover.type)
-                               || ItemID.Sets.Torches[itemHover.type]
-                               || ItemID.Sets.IsFishingCrate[itemHover.type]
-                               || ItemID.Sets.IsFishingCrateHardmode[itemHover.type]
-                               || ItemID.Sets.Glowsticks[itemHover.type];
-
-                bool blackList2 = false;
-                if (itemHover.createTile != -1)
+                PurePrismFateHandler(itemHover);
+            }
+        }
+        /// <summary>
+        /// 天命圣水的使用逻辑。必须得是魔法药水，且鼠标悬停的物品必须是魔法药水
+        /// </summary>
+        public void ProvidenceHolyWaterHandler(Item itemHover)
+        {
+            bool isManaPotion = itemHover.damage < 1 && itemHover.pick == 0 && itemHover.axe == 0 && itemHover.hammer == 0 && itemHover.healMana > 0;
+            if (isManaPotion)
+            {
+                if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
                 {
-                    int tileID = itemHover.createTile;
-                    blackList2 = TileID.Sets.BasicChest[tileID] || TileID.Sets.BasicDresser[tileID] || TileID.Sets.IsAContainer[tileID];
+                    providenceHolyWaterHealMana = itemHover.healMana;
+                    SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { Pitch = .2f }, Player.Center);
+                    for (int i = 0; i < 20; i++)
+                        new TurbulenceGlowOrb(Main.MouseWorld.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
+
                 }
-                bool legalTarget = (isMate || whiteList) && !blackList && !blackList2;
-                if (!legalTarget)
-                    return;
-                if (!HJScarletKeybinds.GeneralActionKeybind.Current)
-                    holdingUseableTimer = 0;
-
-                if (HJScarletKeybinds.GeneralActionKeybind.Current && holdingUseableTimer < 40)
+            }
+        }
+        /// <summary>
+        /// 无记名灵基的使用逻辑。必须得是武器，或者饰品，或者宝藏袋
+        /// </summary>
+        public void UnRegisteredSpiritOriginHandler(Item itemHover)
+        {
+            //必须得有伤害，必须得是武器
+            bool isWeapon = itemHover.damage > 0 && itemHover.pick == 0 && itemHover.axe == 0 && itemHover.hammer == 0 && !itemHover.IsACoin && itemHover.ammo == AmmoID.None;
+            //必须得有宝藏袋一名
+            bool isTreasureBag = ItemID.Sets.BossBag[itemHover.type];
+            bool isAccessory = (itemHover.accessory || itemHover.defense > 0) && itemHover.pick == 0 && itemHover.axe == 0 && itemHover.hammer == 0 && !itemHover.IsACoin && itemHover.ammo == AmmoID.None && !itemHover.vanity;
+            if (isWeapon || isAccessory || isTreasureBag)
+            {
+                if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
                 {
-                    holdingUseableTimer++;
-                }
-                bool passTheContorlBarrier = HJScarletKeybinds.GeneralActionKeybind.JustPressed || (holdingUseableTimer > 10 && Player.miscCounter % 10 == 0);
-                if (passTheContorlBarrier)
-                {
-                    int stack = Main.mouseItem.IsLegal() ? Main.mouseItem.stack : Player.HeldItem.stack;
-                    if (stack < 3)
-                        return;
-                    int totalStack = 0;
-                    for (int i = 1; i <= stack; i++)
-                    {
-                        if (i > 300)
-                            break;
-                        if (i % 3 == 0)
-                        {
-                            totalStack++;
-                        }
-                    }
                     if (Main.mouseItem.IsLegal())
-
-                        Main.mouseItem.stack -= (totalStack * 3);
+                        Main.mouseItem.stack -= 1;
                     else
-                        Player.HeldItem.stack -= (totalStack * 3);
+                        Player.HeldItem.stack -= 1;
                     Item targetItem = new Item();
                     bool favor = Player.HeldItem.favorited;
                     targetItem.SetDefaults(itemHover.type);
                     targetItem.favorited = favor;
-                    Player.QuickSpawnItemDirect(Player.GetSource_FromThis(), targetItem, totalStack);
-                    SoundEngine.PlaySound(HJScarletSounds.Misc_Ding, Player.Center);
+                    targetItem.stack = 1;
+                    Player.QuickSpawnItemDirect(Player.GetSource_FromThis(), targetItem, 1);
+                    SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { Pitch = .2f }, Player.Center);
                     for (int i = 0; i < 20; i++)
                         new TurbulenceGlowOrb(Player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
                 }
             }
+
         }
+        /// <summary>
+        /// 纯净棱镜的使用逻辑。必须得是材料，或者是矿石，或者是锭
+        /// </summary>
+        public void PurePrismFateHandler(Item itemHover)
+        {
+            //必须得是材料。必须得没有伤害，必须得不是饰品，必须得什么都不会发射，必须得没有任何Buff提供，必须得可叠加（最大叠加数小于零）
+            //必须得不能放置任何墙体
+            bool isMate = itemHover.material && itemHover.damage < 1 && !itemHover.accessory && itemHover.shoot == ProjectileID.None && itemHover.buffType == 0 && itemHover.maxStack > 1 && itemHover.createWall == -1;
+            bool whiteList = SmeltList.BarType.Contains(itemHover.type)
+                          || SmeltList.OreType.Contains(itemHover.type)
+                          || HJScarletList.BarsHashSet.Contains(itemHover.type)
+                          || HJScarletList.OresHashSet.Contains(itemHover.type);
+
+            bool blackList = PurePrismFate._RefusedList.Contains(itemHover.type)
+                           || ItemID.Sets.Torches[itemHover.type]
+                           || ItemID.Sets.IsFishingCrate[itemHover.type]
+                           || ItemID.Sets.IsFishingCrateHardmode[itemHover.type]
+                           || ItemID.Sets.Glowsticks[itemHover.type];
+
+            bool blackList2 = false;
+            if (itemHover.createTile != -1)
+            {
+                int tileID = itemHover.createTile;
+                blackList2 = TileID.Sets.BasicChest[tileID] || TileID.Sets.BasicDresser[tileID] || TileID.Sets.IsAContainer[tileID];
+            }
+            bool legalTarget = (isMate || whiteList) && !blackList && !blackList2;
+            if (!legalTarget)
+                return;
+            if (!HJScarletKeybinds.GeneralActionKeybind.Current)
+                holdingUseableTimer = 0;
+
+            if (HJScarletKeybinds.GeneralActionKeybind.Current && holdingUseableTimer < 40)
+            {
+                holdingUseableTimer++;
+            }
+            bool passTheContorlBarrier = HJScarletKeybinds.GeneralActionKeybind.JustPressed || (holdingUseableTimer > 10 && Player.miscCounter % 10 == 0);
+            if (passTheContorlBarrier)
+            {
+                int stack = Main.mouseItem.IsLegal() ? Main.mouseItem.stack : Player.HeldItem.stack;
+                if (stack < 3)
+                    return;
+                int totalStack = 0;
+                for (int i = 1; i <= stack; i++)
+                {
+                    if (i > 300)
+                        break;
+                    if (i % 3 == 0)
+                    {
+                        totalStack++;
+                    }
+                }
+                if (Main.mouseItem.IsLegal())
+
+                    Main.mouseItem.stack -= (totalStack * 3);
+                else
+                    Player.HeldItem.stack -= (totalStack * 3);
+                Item targetItem = new Item();
+                bool favor = Player.HeldItem.favorited;
+                targetItem.SetDefaults(itemHover.type);
+                targetItem.favorited = favor;
+                Player.QuickSpawnItemDirect(Player.GetSource_FromThis(), targetItem, totalStack);
+                SoundEngine.PlaySound(HJScarletSounds.Misc_Ding, Player.Center);
+                for (int i = 0; i < 20; i++)
+                    new TurbulenceGlowOrb(Player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
+            }
+        }
+        #endregion
         private void PostUpdateMonkHeal()
         {
             if (monkStaffHeal && Player.statLife < (int)(Player.statLifeMax2 * 0.9f))
@@ -353,7 +464,23 @@ namespace HJScarletRework.Globals.Players
                 }
             }
         }
-
+        public int HoverItemIndex = -1;
+        public override bool HoverSlot(Item[] inventory, int context, int slot)
+        {
+            Item item = inventory[slot];
+            if (item.IsLegal())
+            {
+                if (HJScarletList.ShinyRarityItemDictionary.ContainsKey(item.type))
+                {
+                    if (item.type != HoverItemIndex)
+                    {
+                        RarityDrawHelper.CleanUpSparkles();
+                        HoverItemIndex = item.type;
+                    }
+                }
+            }
+            return base.HoverSlot(inventory, context, slot);
+        }
         private void HandleWeaponAbility()
         {
             if (!CanWeaponSpecialAbility)
@@ -379,52 +506,9 @@ namespace HJScarletRework.Globals.Players
             }
         }
 
-        public override void PostUpdateEquips()
-        {
-            HandleTerraRecipe();
-            ResetTerraRecipe();
-            HandleLoveRing();
-            UpdateFloretProtectorHerbSpawn();
-            UpdateHerbBuff();
-            UpdateStardustRune();
-            UpdateArmorAbility();
-            UpdateTacticalExecution();
-            UpdateFishDash();
-            UpdatePowerLily();
-            UpdateDiverArmorJellyfishSpawn();
-        }
         public void UpdatePowerLily()
         {
-            if (!powerLily)
-                return;
-            //我这个写法好像容易死档……
-            if (powerLilyTimer == 0)
-            {
-                int curSlots = Player.maxMinions;
-                List<Vector2> dic = [];
-                while (curSlots > 0)
-                {
-                    int projID = Main.rand.Next(0, ItemLoader.ItemCount);
-                    Item itemType = ContentSamples.ItemsByType[projID];
-                    if (!itemType.DamageType.CountsAsClass<SummonDamageClass>() || itemType.damage == 0)
-                        continue;
-
-                    Projectile proj = ContentSamples.ProjectilesByType[itemType.shoot];
-                    if (!proj.minion || proj.sentry)
-                        continue;
-                    if (curSlots < proj.minionSlots)
-                        continue;
-                    curSlots -= (int)proj.minionSlots;
-                    dic.Add(new((int)proj.type, (int)itemType.damage));
-                }
-                for (int i = 0; i < dic.Count; i++)
-                {
-                    int dmg = (int)Player.GetTotalDamage<SummonDamageClass>().ApplyTo(dic[i].Y);
-                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Player.velocity, (int)dic[i].X, dmg, 1, Player.whoAmI);
-                }
-                powerLilyTimer = GetSeconds(30);
-            }
-        }
+                   }
         public void UpdateDiverArmorJellyfishSpawn()
         {
             if (!diverArmor)

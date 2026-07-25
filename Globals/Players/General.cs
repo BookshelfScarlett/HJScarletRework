@@ -119,7 +119,7 @@ namespace HJScarletRework.Globals.Players
         public bool powerLily = false;
         public int powerLilyTimer = 0;
         #endregion
-
+        public bool fruitofEthernity = false;
         #region Pets
         public bool WhalePet = false;
         public bool NonePet = false;

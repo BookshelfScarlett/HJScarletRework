@@ -6,6 +6,8 @@ using HJScarletRework.Globals.Methods.Textbox;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Useables
@@ -13,36 +15,22 @@ namespace HJScarletRework.Items.Useables
     public class FruitofEternity : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Useables;
+        public static float DamageReduceMultiplier = 0.5f;
+        public static float DefenseMultipler = 1.5f;
+        public static int TeleportChance = 5;
+        public static int LifeRegenSpeed = 4;
         public override void SetStaticDefaults()
         {
             HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.Gold);
         }
-        public override void UpdateInfoAccessory(Player player)
-        {
-            if (Main.HoverItem.IsAir || Main.HoverItem is null)
-            {
-                LerpValue = 0;
-                EdegValue = 0;
-            }
-
-            if (Main.HoverItem.type == Type)
-            {
-                LerpValue = Lerp(LerpValue, 1.0f, 0.21f);
-                if (LerpValue > 0.98f)
-                {
-                    EdegValue = Lerp(EdegValue, 1f, 0.21f);
-                    LerpValue = 1f;
-                }
-            }
-        }
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs((DefenseMultipler - 1).ToPercent(), LifeRegenSpeed / 2, DamageReduceMultiplier.ToPercent(), TeleportChance);
         public override void ExSD()
         {
-            Item.accessory = true;
+            Item.SetUpRarityPrice(ItemRarityID.Red);
+            Item.value = Item.buyPrice(gold:5,silver: 30);
+            Item.consumable = true;
         }
-        public float FirstLineY = -1;
         public IReadOnlyList<TooltipLine> CacheTooltipList = null;
-        public float LerpValue = 0;
-        public float EdegValue = 0;
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             CacheTooltipList = tooltips;

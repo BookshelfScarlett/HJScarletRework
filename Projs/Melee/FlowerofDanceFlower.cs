@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class FlowerofDanceFlower : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public ref float OriginalRotation => ref Projectile.localAI[0];
         public ref float Timer => ref Projectile.ai[0];
         public NPC CurTarget = null;

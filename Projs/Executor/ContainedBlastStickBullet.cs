@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class ContainedBlastStickBullet : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting();

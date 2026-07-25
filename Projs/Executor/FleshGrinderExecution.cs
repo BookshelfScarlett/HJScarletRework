@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
     public class FleshGrinderExecution : HJScarletProj
     {
         public override string Texture => GetInstance<FleshGrinderProj>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum State
         {
             Attacking,

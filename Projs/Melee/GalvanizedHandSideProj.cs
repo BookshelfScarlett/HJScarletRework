@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class GalvanizedHandSideProj : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => GetInstance<GalvanizedHandThrownProj>().Texture;
         public bool IsAlreadyHitToTarget
         {

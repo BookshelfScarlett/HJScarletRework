@@ -20,7 +20,7 @@ namespace HJScarletRework.Projs.Executor
     public class SundownerRocket : HJScarletProj
     {
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Projectile, ProjectileID.MiniNukeRocketII);
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public List<NPC> TargetList = [];
         public NPC CurTarget = null;
         public bool ShouldHome = false;

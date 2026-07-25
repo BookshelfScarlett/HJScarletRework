@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class FleshtumorHunger : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => $"Terraria/Images/NPC_{NPCID.TheHungryII}";
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()

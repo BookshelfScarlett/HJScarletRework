@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class ThePunishmentStar : HJScarletProj, IPixelatedRenderer
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.AlphaBlend;

@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Melee
     public class TheMarsPhantom : HJScarletFriendlyProj
     {
         public override string Texture => ProjPath + GetType().Name;
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public ref float Timer => ref Projectile.ai[0];
         public NPC CurrentTargetHit = null;
         public enum Style

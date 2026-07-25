@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Ranged
     public class TerraFlamethrowerFlame : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override Vector2 TileHitbox => base.TileHitbox;
         public ref float Timer => ref Projectile.ai[0];
         public int LifeTime = 100;

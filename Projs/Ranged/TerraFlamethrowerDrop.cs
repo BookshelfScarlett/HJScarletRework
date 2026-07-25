@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Ranged
     public class TerraFlamethrowerDrop : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public NPC OriginalTarget = null;
         public override void SetStaticDefaults()
         {

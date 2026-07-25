@@ -11,7 +11,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class DialecticsCubeProj : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => HJScarletTexture.Specific_DialectCube.Path;
         public override void SetStaticDefaults()
         {

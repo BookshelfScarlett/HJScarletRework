@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.AlphaBlend;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public int BouceTime = 0;
         public int TotalBounceTime = 10;

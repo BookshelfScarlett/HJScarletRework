@@ -10,7 +10,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DeathTollsStreak : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public int HitCount = 0;
         public bool FirstFrameInit = false;

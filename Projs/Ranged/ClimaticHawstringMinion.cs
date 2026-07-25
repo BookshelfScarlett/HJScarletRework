@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class ClimaticHawstringMinion : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public ref float Timer => ref Projectile.ai[0];
         public float Osci = 0;

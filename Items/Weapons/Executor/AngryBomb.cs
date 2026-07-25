@@ -9,7 +9,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class AngryBomb : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 15;
-        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSD()
         {
             Item.damage = 16;

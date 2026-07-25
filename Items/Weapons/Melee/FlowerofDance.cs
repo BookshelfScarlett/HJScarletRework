@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Melee
 {
     public class FlowerofDance : HJScarletWeapon
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults()
         {
             HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.Donator);
@@ -28,7 +28,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.SetUpNoUseGraphicItem();
             Item.shootSpeed = 16;
             Item.UseSound = HJScarletSounds.Misc_KnifeTossAlt with { Pitch = 0.5f, Variants = [2] };
-            Item.HJScarlet().ItemBelongTo = ItemBelong.Donator;
+            Item.HJScarlet().ItemBelongTo = EnumItemOwner.Donator;
             Item.shoot = ProjectileType<FlowerofDanceProj>();
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

@@ -12,7 +12,6 @@ namespace HJScarletRework.Items.Accessories
     public class CursedGoldenKey : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Useables;
-        public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.GoldenKey);
         public override void ExSD()
         {
             Item.rare = ItemRarityID.LightPurple;

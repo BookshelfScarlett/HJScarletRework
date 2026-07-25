@@ -7,7 +7,7 @@ namespace HJScarletRework.Projs.General
 {
     public class PowerLilyProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Typeless;
+        public override EnumDamageClass Category => EnumDamageClass.Typeless;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override void ExSD()
         {

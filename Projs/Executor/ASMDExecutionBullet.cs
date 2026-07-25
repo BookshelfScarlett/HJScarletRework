@@ -21,7 +21,7 @@ namespace HJScarletRework.Projs.Executor
     public class ASMDExecutionBullet : HJScarletProj
     {
         public override string Texture => GetInstance<ASMDBullet>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum State
         {
             Shoot,

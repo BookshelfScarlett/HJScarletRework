@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class PestilenceFlowerHunger : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => $"Terraria/Images/NPC_{NPCID.PlanterasTentacle}";
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()

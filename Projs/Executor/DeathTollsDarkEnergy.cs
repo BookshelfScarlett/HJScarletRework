@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DeathTollsDarkEnergy : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         //完全重做这个玩意的AI
         private ref float AttackTimer => ref Projectile.ai[0];

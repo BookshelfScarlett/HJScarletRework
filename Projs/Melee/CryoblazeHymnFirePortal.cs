@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Melee
     public class CryoblazeHymnFirePortal : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public bool UseFireColor = false;
         public override void ExSD()
         {

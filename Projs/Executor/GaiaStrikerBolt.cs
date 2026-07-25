@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
     public class GaiaStrikerBolt : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public ref float Timer => ref Projectile.ai[0];
         public NPC CurTarget = null;
         public enum State

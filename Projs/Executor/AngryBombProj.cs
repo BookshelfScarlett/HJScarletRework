@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class AngryBombProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public AnimationStruct Helper = new(3);
         public NPC Target = null;
         public ref float BombRotation => ref Projectile.localAI[0];
@@ -105,7 +105,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.velocity = Projectile.Center.GetNormalVector2(Target.Center) * (6.7f + Projectile.HJScarlet().ExecutionStrike.ToInt() * 1.1f);
             Timer = -1;
-            SoundEngine.PlaySound(HJScarletSounds.Blunt_Swing with { MaxInstances = 0, Pitch = 0.5f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.Blunt_Swing, Projectile.Center, 1, 0, .5f);
             if (Projectile.HJScarlet().ExecutionStrike)
             {
                 for (int i = 0; i < 34; i++)

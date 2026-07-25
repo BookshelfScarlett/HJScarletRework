@@ -12,7 +12,7 @@ namespace HJScarletRework.Globals.Classes
     public abstract class HJScarletProj : ModProjectile, ILocalizedModType
     {
         public Player Owner => Main.player[Projectile.owner];
-        public virtual ClassCategory Category => ClassCategory.Typeless;
+        public virtual EnumDamageClass Category => EnumDamageClass.Typeless;
         public static string ProjPath => $"HJScarletRework/Assets/Texture/Projs/";
         public override string Texture => ProjPath + GetType().Name;
         public new string LocalizationCategory => $"Projs.Friendly.{Category}";
@@ -51,11 +51,11 @@ namespace HJScarletRework.Globals.Classes
             {
                 return Category switch
                 {
-                    ClassCategory.Melee => DamageClass.Melee,
-                    ClassCategory.Ranged => DamageClass.Ranged,
-                    ClassCategory.Magic => DamageClass.Magic,
-                    ClassCategory.Summon => DamageClass.Summon,
-                    ClassCategory.Executor => ExecutorDamageClass.Instance,
+                    EnumDamageClass.Melee => DamageClass.Melee,
+                    EnumDamageClass.Ranged => DamageClass.Ranged,
+                    EnumDamageClass.Magic => DamageClass.Magic,
+                    EnumDamageClass.Summon => DamageClass.Summon,
+                    EnumDamageClass.Executor => ExecutorDamageClass.Instance,
                     _ => DamageClass.Generic,
                 };
             }
@@ -64,7 +64,7 @@ namespace HJScarletRework.Globals.Classes
     public abstract class HJScarletFriendlyProj : ModProjectile, ILocalizedModType
     {
         public Player Owner => Main.player[Projectile.owner];
-        public virtual ClassCategory Category { get; }
+        public virtual EnumDamageClass Category { get; }
         public new string LocalizationCategory => $"Projs.Friendly.{Category}";
         public static string ProjPath => $"HJScarletRework/Assets/Texture/Projs/Proj_";
         public override void SetDefaults()
@@ -87,11 +87,11 @@ namespace HJScarletRework.Globals.Classes
             {
                 return Category switch
                 {
-                    ClassCategory.Melee => DamageClass.Melee,
-                    ClassCategory.Ranged => DamageClass.Ranged,
-                    ClassCategory.Magic => DamageClass.Magic,
-                    ClassCategory.Summon => DamageClass.Summon,
-                    ClassCategory.Executor => ExecutorDamageClass.Instance,
+                    EnumDamageClass.Melee => DamageClass.Melee,
+                    EnumDamageClass.Ranged => DamageClass.Ranged,
+                    EnumDamageClass.Magic => DamageClass.Magic,
+                    EnumDamageClass.Summon => DamageClass.Summon,
+                    EnumDamageClass.Executor => ExecutorDamageClass.Instance,
                     _ => DamageClass.Generic,
                 };
             }

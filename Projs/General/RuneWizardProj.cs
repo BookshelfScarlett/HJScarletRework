@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.General
     public class RuneWizardProj : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Typeless;
+        public override EnumDamageClass Category => EnumDamageClass.Typeless;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(10);

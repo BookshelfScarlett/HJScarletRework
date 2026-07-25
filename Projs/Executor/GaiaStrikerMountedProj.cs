@@ -19,7 +19,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class GaiaStrikerMountedProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<GaiaStrikerProj>().Texture;
         public AnimationStruct Helper = new AnimationStruct(4);
         public enum State

@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ParticleScarlet;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -14,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class PrunusMumeFlower : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public ref float OriginalRotation => ref Projectile.localAI[0];
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()
@@ -38,6 +39,50 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.timeLeft = GetSeconds(31);
             OriginalRotation = Projectile.rotation;
         }
+        public void ExecutionFlowerAI()
+        {
+            Projectile.rotation += .02f;
+            Projectile.Center = Vector2.Lerp(Projectile.Center, Owner.MountedCenter - Vector2.UnitY * 130f, 0.2f);
+            if (Projectile.MeetMaxUpdatesFrame(Timer, 60))
+            {
+                Timer = 0;
+                if (!Projectile.IsMe())
+                    return;
+                SoundEngine.PlaySound(SoundID.Item109 with { MaxInstances = 0, Pitch = 0.2f, PitchVariance = 0.1f });
+                for (int i = 0; i < 8; i++)
+                {
+                    float rad = ToRadians(360f / 8 * i) + Projectile.rotation;
+                    float speed = i % 2 == 0 ? 1.5f : 3f;
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, rad.ToRotationVector2() * speed * 2f, ProjectileType<PrunusMumePetal>(), Projectile.damage, 1f, Owner.whoAmI);
+                    ((PrunusMumePetal)proj.ModProjectile).AttackStyle = PrunusMumePetal.Style.ExecutionStrike;
+                    proj.extraUpdates = 2;
+                    proj.timeLeft = 180;
+                    proj.ai[2] = Reverse.ToDirectionInt();
+                }
+                Reverse = !Reverse;
+            }
+        }
+        public void NormalAttackAI()
+        {
+            Projectile.rotation = Projectile.SpeedAffectRotation(1, 1) + OriginalRotation;
+            if (Timer < 60f)
+                return;
+            Timer = 0f;
+            if (Projectile.IsMe())
+            {
+                SoundEngine.PlaySound(HJScarletSounds.Blunt_Swing with { Variants = [1], MaxInstances = 0, Pitch = 0.3f, PitchVariance = .1f, Volume = 0.5f });
+                for (int i = 0; i < 5; i++)
+                {
+                    float rad = ToRadians(360f / 5 * i) + Projectile.rotation;
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, rad.ToRotationVector2() * 3f, ProjectileType<PrunusMumePetal>(), Projectile.damage, 1f, Owner.whoAmI);
+                    ((PrunusMumePetal)proj.ModProjectile).AttackStyle = PrunusMumePetal.Style.NormalStrike;
+                    proj.extraUpdates = 1;
+                    proj.timeLeft = 100;
+                }
+                Projectile.Kill();
+            }
+        }
+
         public override void ProjAI()
         {
             Projectile.velocity *= 0.95f;
@@ -45,47 +90,11 @@ namespace HJScarletRework.Projs.Executor
             DrawParticle();
             if (Projectile.HJScarlet().ExecutionStrike)
             {
-                Projectile.rotation += .02f;
-                Projectile.Center = Vector2.Lerp(Projectile.Center, Owner.MountedCenter - Vector2.UnitY * 130f, 0.2f);
-                if (Projectile.MeetMaxUpdatesFrame(Timer, 60))
-                {
-                    Timer = 0;
-                    if (!Projectile.IsMe())
-                        return;
-                    SoundEngine.PlaySound(SoundID.Item109 with { MaxInstances = 0, Pitch = 0.2f, PitchVariance = 0.1f });
-                    for (int i = 0; i < 8; i++)
-                    {
-                        float rad = ToRadians(360f / 8 * i) + Projectile.rotation;
-                        float speed = i % 2 == 0 ? 1.5f : 3f;
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, rad.ToRotationVector2() * speed * 2f, ProjectileType<PrunusMumePetal>(), Projectile.damage, 1f, Owner.whoAmI);
-                        ((PrunusMumePetal)proj.ModProjectile).AttackStyle = PrunusMumePetal.Style.ExecutionStrike;
-                        proj.extraUpdates = 2;
-                        proj.timeLeft = 180;
-                        proj.ai[2] = Reverse.ToDirectionInt();
-                    }
-                    Reverse = !Reverse;
-                }
+                ExecutionFlowerAI();
             }
             else
             {
-                Projectile.rotation = Projectile.SpeedAffectRotation(1, 1) + OriginalRotation;
-                if (Timer >= 60f)
-                {
-                    Timer = 0f;
-                    if (Projectile.IsMe())
-                    {
-                        SoundEngine.PlaySound(HJScarletSounds.Blunt_Swing with { Variants = [1], MaxInstances = 0, Pitch = 0.3f, PitchVariance = .1f, Volume = 0.5f });
-                        for (int i = 0; i < 5; i++)
-                        {
-                            float rad = ToRadians(360f / 5 * i) + Projectile.rotation;
-                            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, rad.ToRotationVector2() * 3f, ProjectileType<PrunusMumePetal>(), Projectile.damage, 1f, Owner.whoAmI);
-                            ((PrunusMumePetal)proj.ModProjectile).AttackStyle = PrunusMumePetal.Style.NormalStrike;
-                            proj.extraUpdates = 1;
-                            proj.timeLeft = 100;
-                        }
-                        Projectile.Kill();
-                    }
-                }
+                NormalAttackAI();
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -103,7 +112,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 if (Main.rand.NextBool(4))
                 {
-                    new SnowCloud(Projectile.Center.ToRandCirclePos(30f), Vector2.UnitY * -Main.rand.NextFloat(0.1f, 1.5f), RandLerpColor(Color.IndianRed, Color.HotPink), 40, 0, 0.73f, 0.1f * 0.5f, true).Spawn();
+                    ECSParticle.SnowCloud(Projectile.Center.ToRandCirclePos(30f), Vector2.UnitY * -Main.rand.NextFloat(0.1f, 1.5f), RandLerpColor(Color.IndianRed, Color.HotPink), 40, 0, 0.73f, 0.1f * 0.5f);
                 }
                 if (Main.rand.NextBool(8))
                 {
@@ -125,14 +134,14 @@ namespace HJScarletRework.Projs.Executor
             {
                 if (Main.rand.NextBool())
                 {
-                    new SnowCloud(Projectile.Center.ToRandCirclePos(15f), Projectile.velocity / 4f, RandLerpColor(Color.IndianRed, Color.HotPink), 40, 0, 0.73f, 0.1f * 0.5f, true).Spawn();
+                    ECSParticle.SnowCloud(Projectile.Center.ToRandCirclePos(15f), Projectile.velocity / 4f, RandLerpColor(Color.IndianRed, Color.HotPink), 40, 0, 0.73f, 0.1f * 0.5f);
                 }
             }
             else
             {
                 if (Main.rand.NextBool(4))
                 {
-                    new SnowCloud(Projectile.Center.ToRandCirclePos(15f), Projectile.SafeDir() * Main.rand.NextFloat(0.1f, 1.5f), RandLerpColor(Color.IndianRed, Color.HotPink), 40, 0, 0.73f, 0.1f * 0.5f, true).Spawn();
+                    ECSParticle.SnowCloud(Projectile.Center.ToRandCirclePos(15f), Projectile.SafeDir() * Main.rand.NextFloat(0.1f, 1.5f), RandLerpColor(Color.IndianRed, Color.HotPink), 40, 0, 0.73f, 0.1f * 0.5f);
                 }
                 if (Main.rand.NextBool(8))
                 {
@@ -150,11 +159,6 @@ namespace HJScarletRework.Projs.Executor
 
             }
 
-        }
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            base.OnHitNPC(target, hit, damageDone);
         }
         public override bool? CanDamage()
         {

@@ -19,7 +19,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class GaiaStrikerHeldProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum State
         {
             JustBegin,

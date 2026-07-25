@@ -17,12 +17,13 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class ASMD : ExecutorWeaponClass
     {
-        public override WeaponCategory WeaponCategory => WeaponCategory.Firearm;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override int ExecutionProgress => 24;
         public static int ExecutionIceBlockCount = 7;
         public override void ExSSD()
         {
             HJScarletList.FrostRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
         }
         public override void ExSD()
         {
@@ -45,7 +46,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         {
             if (player.HasProj<ASMDHeldProj>(out int projID))
                 return;
-            Vector2 dir = player.ToMouseVector2();
             int projDamage = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);
             Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, projID, 0, Item.knockBack, player.whoAmI);
             proj.originalDamage = projDamage;

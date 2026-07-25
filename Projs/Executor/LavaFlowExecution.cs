@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class LavaFlowExecution : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<LavaFlowProj>().Texture;
         public Vector2 PosOffsetFix => Projectile.SafeDirByRot() * 20f;
         public enum State

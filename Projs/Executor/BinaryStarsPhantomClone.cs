@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class BinaryStarsPhantomClone : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         //攻击枚举
         private enum AttackStyle
         {

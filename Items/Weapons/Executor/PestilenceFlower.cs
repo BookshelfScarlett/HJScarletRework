@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class PestilenceFlower : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 10;
-        public override WeaponCategory WeaponCategory => WeaponCategory.Caster;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Caster;
         public override void ExSD()
         {
             Item.damage = 66;

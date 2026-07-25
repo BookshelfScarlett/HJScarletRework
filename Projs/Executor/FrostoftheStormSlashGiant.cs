@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class FrostoftheStormSlashGiant : HJScarletProj, IPixelatedRenderer
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
         public override string Texture => HJScarletTexture.InvisAsset.Path;

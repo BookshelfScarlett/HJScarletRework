@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
     public class ThePunishmentExecution : HJScarletProj
     {
         public override string Texture => GetInstance<ThePunishmentProj>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public NPC TargetNPC = null;
         public AnimationStruct Helper = new(3);
         public float Oscillation = 0;

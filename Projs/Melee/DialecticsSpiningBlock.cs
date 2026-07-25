@@ -11,7 +11,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class DialecticsSpiningBlock : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => HJScarletTexture.Specific_AimLabBox.Path;
         public ref float Timer => ref Projectile.ai[0];
         public bool ShouldDisapper = false;

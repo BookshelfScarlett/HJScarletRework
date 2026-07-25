@@ -8,7 +8,7 @@ namespace HJScarletRework.Items.Weapons.Magic
     public class BambooSong : HJScarletWeapon
     {
         public override bool IsLoadingEnabled(Mod mod) => false;
-        public override ClassCategory Category => ClassCategory.Magic;
+        public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override void ExSD()
         {
             Item.height = Item.width = 50;

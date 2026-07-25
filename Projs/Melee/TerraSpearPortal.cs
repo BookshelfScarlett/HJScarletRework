@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public bool IsShooted = false;
         public ref float Timer => ref Projectile.ai[0];
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
 
         public override void ExSD()
         {

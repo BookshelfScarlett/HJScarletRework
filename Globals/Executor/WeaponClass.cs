@@ -25,7 +25,7 @@ namespace HJScarletRework.Globals.Executor
         /// 代行者的武器类型
         /// 划分为五种：投掷品、不脱手冷兵器、热武器、魔术载体和仆从
         /// </summary>
-        public virtual WeaponCategory WeaponCategory => WeaponCategory.Misc;
+        public virtual ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Misc;
         public override bool WeaponPrefix() => true;
         public override bool RangedPrefix() => false;
         public virtual int ExecutionProgress => 10;
@@ -33,8 +33,8 @@ namespace HJScarletRework.Globals.Executor
         public override void SetStaticDefaults()
         {
             ExSSD();
-            HJScarletList.ExecutorWeaponDictionary.Add(Type, ExecutionProgress);
-            HJScarletList.ExecutorWeaponTypeDictionary.Add(Type, WeaponCategory);
+            HJScarletList.IsExecutorWeaponDictionaty.Add(Type, ExecutionProgress);
+            HJScarletList.ExecutorWeaponTypeDictionary.Add(Type, ExecutorWeaponType);
 
         }
 
@@ -96,7 +96,7 @@ namespace HJScarletRework.Globals.Executor
                     tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"));
             }
 
-            string categoryText = Mod.GetLocalizationKey($"ExecutorDamageClass.WeaponType.{WeaponCategory}").ToLangValue();
+            string categoryText = Mod.GetLocalizationKey($"ExecutorDamageClass.WeaponType.{ExecutorWeaponType}").ToLangValue();
             int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework");
             if (!traditionalMode)
                 executionLineIndex = executionProgressIndex - 1;

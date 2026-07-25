@@ -9,7 +9,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
 {
     public class BambooRocket : HJScarletWeapon
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override void ExSD()
         {
             Item.width = Item.height = 30;

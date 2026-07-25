@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
     public class FrostlightFlamethrowerFlame : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override Vector2 TileHitbox => base.TileHitbox;
         public ref float Timer => ref Projectile.ai[0];
         public int LifeTime = 100;

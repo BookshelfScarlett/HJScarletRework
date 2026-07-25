@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class DialecticsSkyFall : HJScarletFriendlyProj, IPixelatedRenderer
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => GetInstance<Materialism>().Texture;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;

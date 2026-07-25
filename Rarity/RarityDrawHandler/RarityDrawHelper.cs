@@ -1,5 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Rarity.RarityShinyMethod;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -74,6 +76,123 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
             //而后，绘制所有的粒子
             foreach (RaritySparkle sparkle in sparklesList)
                 sparkle.CustomDraw(Main.spriteBatch, new Vector2(tooltipLine.X, tooltipLine.Y) + textSize * 0.5f + sparkle.Position);
+        }
+        public static Vector2 GetParticlePosition(DrawableTooltipLine line)
+        {
+            Vector2 textSize = line.Font.MeasureString(line.Text);
+            return Main.rand.NextVector2FromRectangle(new(-(int)(textSize.X * 0.5f), -(int)(textSize.Y * 0.5f), (int)textSize.X, (int)(textSize.Y * 0.35f)));
+        }
+        public static List<RaritySparkle> RaritySparklesList = [];
+        public static List<RaritySparkle> FlavorSparklesList = [];
+        public static void CleanUpSparkles()
+        {
+            RaritySparklesList.Clear();
+            FlavorSparklesList.Clear();
+        }
+        public static void UpdateFlavorNameDraw(DrawableTooltipLine tooltipLine, ShinyRarityType type)
+        {
+            switch (type)
+            {
+                case ShinyRarityType.Frost:
+                    FrostRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.Sakura:
+                    SakuraRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.FateCopper:
+                    FateCopperRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.FateGolden:
+                    FateGoldenRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.FateWhite:
+                    FateWhiteRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.Donator:
+                    DonatorRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.Nebula:
+                    NebulaRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.ForeverNight:
+                    ForeverNightRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.ScarletRed:
+                    ScarletRedRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.Life:
+                    LifeRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.Matter:
+                    MatterRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.Eternity:
+                    EternityRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.RarePets:
+                    RarePetsRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+                case ShinyRarityType.Hallowed:
+                    HallowedRarity.DrawItemName(tooltipLine, ref FlavorSparklesList);
+                    break;
+            }
+            if (FlavorSparklesList.Count > 0)
+            {
+                UpdateTooltipParticles(tooltipLine, ref FlavorSparklesList);
+            }
+        }
+
+        public static void UpdateItemNameDraw(DrawableTooltipLine tooltipLine, ShinyRarityType type)
+        {
+            switch (type)
+            {
+                case ShinyRarityType.Frost:
+                    FrostRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.Sakura:
+                    SakuraRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.FateCopper:
+                    FateCopperRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.FateGolden:
+                    FateGoldenRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.FateWhite:
+                    FateWhiteRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.Donator:
+                    DonatorRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.Nebula:
+                    NebulaRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.ForeverNight:
+                    ForeverNightRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.ScarletRed:
+                    ScarletRedRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.Life:
+                    LifeRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.Matter:
+                    MatterRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.Eternity:
+                    EternityRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.RarePets:
+                    RarePetsRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.Hallowed:
+                    HallowedRarity.DrawItemName(tooltipLine, ref RaritySparklesList);
+                    break;
+            }
+            if (RaritySparklesList.Count > 0)
+            {
+                UpdateTooltipParticles(tooltipLine, ref RaritySparklesList);
+            }
         }
     }
 }

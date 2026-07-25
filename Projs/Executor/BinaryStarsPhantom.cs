@@ -19,7 +19,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class BinaryStarsPhantom : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public HJScarletGlobalProjs ModProj => Projectile.HJScarlet();
         public override string Texture => GetInstance<BinaryStarsProj>().Texture;
         public int TargetIndex

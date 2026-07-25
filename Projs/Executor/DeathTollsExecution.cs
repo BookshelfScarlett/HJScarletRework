@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DeathTollsExecution : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         private enum DoType
         {
             IsArcRotating,

@@ -7,7 +7,7 @@ namespace HJScarletRework.Items.Weapons.Melee
 {
     public class SamsaraofDawnlightAlter : HJScarletWeapon
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void ExSD()
         {
             Item.CloneDefaults(ItemType<SamsaraOfDawnlight>());

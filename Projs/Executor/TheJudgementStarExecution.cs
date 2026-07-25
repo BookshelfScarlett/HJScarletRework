@@ -21,7 +21,7 @@ namespace HJScarletRework.Projs.Executor
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.AlphaBlend;
 
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(22, 2);

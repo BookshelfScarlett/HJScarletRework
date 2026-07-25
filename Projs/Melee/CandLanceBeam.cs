@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class CandLanceBeam : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public List<NPC> TargetThatAlreadyHit = [];
         public int TargetHitTime

@@ -150,7 +150,7 @@ namespace HJScarletRework.Globals.Huds
             Item heldItem = localPlayer.HeldItem;
             bool hasReforged = ModLoader.HasMod("ExpandedReforge");
             bool isExectuorWeapon = heldItem.DamageType.CountsAsClass<ExecutorDamageClass>();
-            isExectuorWeapon = HJScarletList.ExecutorWeaponDictionary.ContainsKey(heldItem.type);
+            isExectuorWeapon = HJScarletList.IsExecutorWeaponDictionaty.ContainsKey(heldItem.type);
             if (isExectuorWeapon)
             {
                 if (!ModPlayer.Executor_DrawFadeIn)

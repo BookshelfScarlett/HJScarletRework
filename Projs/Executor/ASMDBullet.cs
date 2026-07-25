@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class ASMDBullet : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public bool IsHitWall = false;
         public override void SetStaticDefaults()
         {

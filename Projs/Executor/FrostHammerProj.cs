@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class FrostHammerProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<FrostHammer>().Texture;
         public override Vector2 TileHitbox => new Vector2(16, 16);
         public enum State

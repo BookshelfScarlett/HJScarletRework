@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class LavaFlowProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public Vector2 StoredPosition = Vector2.Zero;
         public NPC StabTarget = null;
         public Vector2 PosOffsetFix => Projectile.SafeDir() * 60f;

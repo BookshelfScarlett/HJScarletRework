@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Melee
     public class EnchantedSwordfishJavelin : HJScarletProj
     {
         public override string Texture => GetInstance<EnchantedSwordfishProj>().Texture;
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public enum State
         {
             Slow,

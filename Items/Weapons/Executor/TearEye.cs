@@ -8,7 +8,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class TearEye : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 20;
-        public override WeaponCategory WeaponCategory => WeaponCategory.Minion;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Minion;
         public override void ExSD()
         {
             Item.SetUpNoUseGraphicItem(true);

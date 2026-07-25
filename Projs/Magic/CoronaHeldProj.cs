@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Magic
     public class CoronaHeldProj : HJScarletProj
     {
         public override string Texture => GetInstance<Corona>().Texture;
-        public override ClassCategory Category => ClassCategory.Magic;
+        public override EnumDamageClass Category => EnumDamageClass.Magic;
         public int UseTime = -1;
         public bool ShouldPlaySound = false;
         public bool IsUsing => (Owner.channel) && !Owner.noItems && !Owner.CCed;

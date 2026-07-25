@@ -18,7 +18,7 @@ namespace HJScarletRework.Projs.Executor
     public class ASMDIceBlock : HJScarletProj, IPixelatedRenderer
     {
         #region 基础
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
 

@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
     public class TerraSpearArrow : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults() => Projectile.ToTrailSetting(30, 2);
         public ref float Timer => ref Projectile.ai[0];
         public Style AttackType

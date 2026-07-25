@@ -8,7 +8,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class TheDefiler : ExecutorWeaponClass
     {
         public override float ExecutionStrikeDamageMult => 0.8f;
-        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override int ExecutionProgress => 16;
         public override void ExSD()
         {

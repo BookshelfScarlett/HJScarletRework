@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class FlowerofDanceProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => GetInstance<FlowerofDance>().Texture;
         public override void SetStaticDefaults()
         {

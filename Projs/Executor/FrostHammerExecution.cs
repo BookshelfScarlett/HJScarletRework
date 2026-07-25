@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class FrostHammerExecution : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Projectile, 917);
         public override Vector2 TileHitbox => new Vector2(16, 16);
         public NPC CurTarget = null;

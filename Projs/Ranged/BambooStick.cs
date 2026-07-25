@@ -9,7 +9,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class BambooStick : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()
         {

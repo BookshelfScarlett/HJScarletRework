@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class PureYinyoWhite : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => ProjPath + "PureYinyoProj";
         public enum State
         {

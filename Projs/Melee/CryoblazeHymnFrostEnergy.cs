@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Melee
     public class CryoblazeHymnFrostEnergy : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public ref float Timer => ref Projectile.ai[0];
         public enum Style
         {

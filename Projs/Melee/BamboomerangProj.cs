@@ -11,7 +11,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class BamboomerangProj : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => GetInstance<Bamboomerang>().Texture;
         public override void SetStaticDefaults() => Projectile.ToTrailSetting(4, 2);
         public enum Style

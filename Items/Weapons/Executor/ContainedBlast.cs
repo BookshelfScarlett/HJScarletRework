@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class ContainedBlast : ExecutorWeaponClass
     {
-        public override WeaponCategory WeaponCategory => WeaponCategory.Firearm;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override int ExecutionProgress => 180;
         public override void ExSD()
         {

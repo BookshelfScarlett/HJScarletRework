@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.AlphaBlend;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         private ref float MountedX => ref Projectile.localAI[0];
         private ref float MountedY => ref Projectile.localAI[1];
         public ref float AttackTimer => ref Projectile.HJScarlet().ExtraAI[1];

@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class EclipseWraithProj : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => ProjPath + nameof(EclipseWraith);
         public override void SetStaticDefaults() => Projectile.ToTrailSetting(16, 2);
         public ref float Timer => ref Projectile.ai[1];

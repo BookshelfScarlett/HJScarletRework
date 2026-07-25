@@ -1,6 +1,6 @@
 ﻿namespace HJScarletRework.Globals.Enums
 {
-    public enum ItemBelong
+    public enum EnumItemOwner
     {
         None,
         Developer,

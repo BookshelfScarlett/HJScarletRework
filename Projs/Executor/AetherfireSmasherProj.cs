@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class AetherfireSmasherProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<AetherfireSmasher>().Texture;
         public enum State
         {

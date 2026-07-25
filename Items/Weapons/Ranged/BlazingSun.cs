@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
@@ -11,7 +12,11 @@ namespace HJScarletRework.Items.Weapons.Ranged
 {
     public class BlazingSun : HJScarletWeapon
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.DisasterRarityHashSet.Add(Type);
+        }
         public override void ExSD()
         {
             Item.damage = 60;

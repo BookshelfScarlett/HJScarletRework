@@ -8,7 +8,7 @@ namespace HJScarletRework.Projs.Executor
     public class ASMDBoom : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override void ExSD()
         {
             base.ExSD();

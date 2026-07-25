@@ -8,7 +8,7 @@ namespace HJScarletRework.Items.Weapons.Melee
 {
     public class Bamboomerang : HJScarletWeapon
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void ExSD()
         {
             Item.width = Item.height = 46;

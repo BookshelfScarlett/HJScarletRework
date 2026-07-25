@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
     public class TheDefilerProj : HJScarletProj
     {
         public override string Texture => GetInstance<TheDefiler>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override Vector2 TileHitbox => new Vector2(13, 13);
         public enum State
         {

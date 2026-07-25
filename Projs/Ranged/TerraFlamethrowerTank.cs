@@ -30,7 +30,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         public float TargetRotation = 0;
         public float BeginTargetRotation = 0;
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting();

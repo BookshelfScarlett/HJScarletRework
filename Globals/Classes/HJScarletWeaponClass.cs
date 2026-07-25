@@ -7,7 +7,7 @@ namespace HJScarletRework.Globals.Classes
 {
     public abstract class HJScarletWeapon : ModItem, ILocalizedModType
     {
-        public virtual ClassCategory Category { get; }
+        public virtual EnumDamageClass Category { get; }
         public new string LocalizationCategory => $"Weapons.{Category}";
         public override string Texture => $"HJScarletRework/Assets/Texture/Items/Weapons/{GetType().Name}";
         public override void SetDefaults()
@@ -24,10 +24,10 @@ namespace HJScarletRework.Globals.Classes
             {
                 return Category switch
                 {
-                    ClassCategory.Melee => DamageClass.Melee,
-                    ClassCategory.Ranged => DamageClass.Ranged,
-                    ClassCategory.Magic => DamageClass.Magic,
-                    ClassCategory.Summon => DamageClass.Summon,
+                    EnumDamageClass.Melee => DamageClass.Melee,
+                    EnumDamageClass.Ranged => DamageClass.Ranged,
+                    EnumDamageClass.Magic => DamageClass.Magic,
+                    EnumDamageClass.Summon => DamageClass.Summon,
                     _ => DamageClass.Generic,
                 };
             }

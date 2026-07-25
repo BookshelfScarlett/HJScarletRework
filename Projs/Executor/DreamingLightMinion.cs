@@ -18,7 +18,7 @@ namespace HJScarletRework.Projs.Executor
     public class DreamingLightMinion : HJScarletProj
     {
         public override string Texture => GetInstance<DreamingLightProj>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum State
         {
             Idle,

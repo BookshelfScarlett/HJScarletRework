@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DeathTollsProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         internal ref bool Update => ref Projectile.netUpdate;
         //攻击枚举
         private enum DoType

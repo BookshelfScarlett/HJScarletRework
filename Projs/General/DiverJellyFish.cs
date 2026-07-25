@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.General
 {
     public class DiverJellyFish : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Typeless;
+        public override EnumDamageClass Category => EnumDamageClass.Typeless;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public int TextureType = 0;
         public override void SetStaticDefaults()

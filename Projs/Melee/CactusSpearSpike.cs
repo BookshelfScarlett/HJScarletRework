@@ -9,7 +9,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class CactusSpearSpike : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Projectile, ProjectileID.PineNeedleFriendly);
         public override void SetStaticDefaults()
         {

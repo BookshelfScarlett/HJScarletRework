@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
     public class DreamingLightProj : HJScarletProj
     {
         public override string Texture => GetInstance<DreamingLight>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(7, 2);

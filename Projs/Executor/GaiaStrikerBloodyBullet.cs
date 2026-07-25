@@ -11,7 +11,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class GaiaStrikerBloodyBullet : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public ref float Timer => ref Projectile.ai[0];
         public enum State

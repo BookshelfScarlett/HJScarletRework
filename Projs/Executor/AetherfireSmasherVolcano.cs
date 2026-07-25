@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class AetherfireSmasherVolcano : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         //写在全局里防止局部多次调用。
         private int InitPhase = 10;
         private int EarlyPhase = 20;

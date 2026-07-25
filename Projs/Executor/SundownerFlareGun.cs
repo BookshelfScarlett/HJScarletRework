@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
     public class SundownerFlareGun : HJScarletProj
     {
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.FlareGun);
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public ref float Timer => ref Projectile.ai[0];
         public AnimationStruct Helper = new(3);
         public override void SetStaticDefaults()

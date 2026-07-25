@@ -18,7 +18,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public BlendState BlendState => BlendState.AlphaBlend;
         public AnimationStruct Helper = new(3);
         public NPC TargetNPC = null;

@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class GaiaStriker : ExecutorWeaponClass
     {
-        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         /// <summary>
         /// 调整这个以修改普通攻击血弹的爆裂次数
         /// 需注意的是血弹总会有两枚用于治疗玩家

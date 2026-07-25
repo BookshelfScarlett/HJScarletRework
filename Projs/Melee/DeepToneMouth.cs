@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class DeepToneMouth : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public enum State
         {
             Shoot,

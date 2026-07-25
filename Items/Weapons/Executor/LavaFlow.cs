@@ -7,7 +7,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class LavaFlow : ExecutorWeaponClass
     {
-        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override int ExecutionProj => ProjectileType<LavaFlowExecution>();
         public override int ExecutionProgress => 8;
         public override void ExSD()

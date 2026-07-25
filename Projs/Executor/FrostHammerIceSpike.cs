@@ -24,7 +24,7 @@ namespace HJScarletRework.Projs.Executor
         public BlendState BlendState => BlendState.Additive;
 
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Projectile, ProjectileID.NorthPoleSnowflake);
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public int RandFrame = 0;
         public override Vector2 TileHitbox => new(3);
         public ref float Timer => ref Projectile.ai[0];

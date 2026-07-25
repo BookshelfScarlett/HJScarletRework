@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
     public class DreamlessNightBeam : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum BeamType
         {
             SplitBeam,

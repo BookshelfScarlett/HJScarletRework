@@ -20,7 +20,7 @@ namespace HJScarletRework.Projs.General
 {
     public class GaiaStrikerLootProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Typeless;
+        public override EnumDamageClass Category => EnumDamageClass.Typeless;
         public override string Texture => GetInstance<GaiaStrikerLootBox>().Texture;
         public AnimationStruct Helper = new AnimationStruct(3);
         public bool PlaySound = false;

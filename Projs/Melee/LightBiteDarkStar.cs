@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class LightBiteDarkStar : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => $"Terraria/Images/Item_{ItemID.FallenStar}";
         public override void SetStaticDefaults()
         {

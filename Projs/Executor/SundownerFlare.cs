@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class SundownerFlare : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum State
         {
             Shoot,

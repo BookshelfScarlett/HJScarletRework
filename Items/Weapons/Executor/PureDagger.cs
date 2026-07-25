@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -10,10 +11,11 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class PureDagger : ExecutorWeaponClass
     {
-        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSSD()
         {
             HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.White);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
         }
         public override void ExSD()
         {
@@ -21,6 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.useTime = Item.useAnimation = 12;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shootSpeed = 16f;
+            Item.shoot = ProjectileType<PureDaggerProj>();
             Item.SetUpRarityPrice(ItemRarityID.Green);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

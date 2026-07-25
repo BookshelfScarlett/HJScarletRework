@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Rarity.RarityShiny;
+﻿using HJScarletRework.Globals.Enums;
+using HJScarletRework.Rarity.RarityShiny;
 using System;
 using System.Collections.Generic;
 using Terraria.ModLoader;
@@ -17,6 +18,10 @@ namespace HJScarletRework.Globals.List
         public static Dictionary<int, Action<DrawableTooltipLine>> MiscRarityDrawDictionary = new();
         public static Dictionary<int, Action<DrawableTooltipLine>> ConvertedItemRarityDrawDictionary = new();
         public static Dictionary<int, RareItemRarity.RareType> RareItemRarityDrawDictionary = [];
+        /// <summary>
+        /// 主要用于存储并引用特殊稀有度绘制
+        /// </summary>
+        public static Dictionary<int, ShinyRarityType> ShinyRarityItemDictionary = [];
         public void LoadRarity()
         {
         }

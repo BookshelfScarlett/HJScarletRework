@@ -32,7 +32,7 @@ namespace HJScarletRework.Globals.Instances.Items
         public bool purePrismLerpOut = false;
         public bool purePrismLegalTarget = false;
         public bool isShivering = false;
-        public ItemBelong ItemBelongTo = ItemBelong.None;
+        public EnumItemOwner ItemBelongTo = EnumItemOwner.None;
         public float simpleImmersiveBackpackValue = 1f;
         public float simpleImmersiveBackpackValueAlt = 1f;
         public bool DrawFloatingTextBox = false;
@@ -190,9 +190,9 @@ namespace HJScarletRework.Globals.Instances.Items
         {
             var usPlayer = player.HJScarlet();
             bool casterWeapon = false;
-            if (HJScarletList.ExecutorWeaponTypeDictionary.TryGetValue(item.type, out Executor.WeaponCategory value))
+            if (HJScarletList.ExecutorWeaponTypeDictionary.TryGetValue(item.type, out Executor.ExecutorWeaponType value))
             {
-                casterWeapon = value == Executor.WeaponCategory.Caster;
+                casterWeapon = value == Executor.ExecutorWeaponType.Caster;
             }
             if (ForceTacticalExecution || casterWeapon)
             {

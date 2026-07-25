@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Melee
     public class GalvanizedHandArrow : HJScarletFriendlyProj
     {
         public override string Texture => GetInstance<AcceleratingArrow>().Texture;
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public ref float Timer => ref Projectile.ai[0];
         public enum Style
         {

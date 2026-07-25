@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class JungleMadnessExecution : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<JungleMadnessProj>().Texture;
         public override void SetStaticDefaults()
         {

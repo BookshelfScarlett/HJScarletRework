@@ -7,7 +7,7 @@ namespace HJScarletRework.Globals.Classes
 {
     public abstract class HJScarletHealProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Typeless;
+        public override EnumDamageClass Category => EnumDamageClass.Typeless;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public virtual int TrailLength => 20;
         public virtual int ExtraUpdates => 1;

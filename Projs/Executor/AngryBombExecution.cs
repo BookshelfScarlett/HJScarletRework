@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
     public class AngryBombExecution : HJScarletProj
     {
         public override string Texture => GetInstance<AngryBombProj>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public AnimationStruct Helper = new(3);
         public NPC Target = null;
         public ref float BombRotation => ref Projectile.localAI[0];

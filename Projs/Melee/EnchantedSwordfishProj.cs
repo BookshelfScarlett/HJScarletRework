@@ -7,7 +7,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class EnchantedSwordfishProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

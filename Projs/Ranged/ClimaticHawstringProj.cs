@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class ClimaticHawstringProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override string Texture => GetInstance<ClimaticHawstring>().Texture;
         public AnimationStruct Helper = new(2);
 

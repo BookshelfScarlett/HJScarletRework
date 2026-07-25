@@ -1,6 +1,6 @@
 ﻿namespace HJScarletRework.Globals.Enums
 {
-    public enum ClassCategory
+    public enum EnumDamageClass
     {
         Melee,
         Ranged,

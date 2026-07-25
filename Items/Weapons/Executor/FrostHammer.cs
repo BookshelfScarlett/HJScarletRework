@@ -10,11 +10,12 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class FrostHammer : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 30;
-        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSSD()
         {
             Type.ShimmerEach(ItemID.Amarok);
             HJScarletList.FrostRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
         }
         public override void ExSD()
         {

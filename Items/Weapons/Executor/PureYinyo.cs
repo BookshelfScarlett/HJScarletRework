@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public int AlterType = -1;
         public override int ExecutionProgress => 12;
-        public override WeaponCategory WeaponCategory => WeaponCategory.Throw;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSSD()
         {
             HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.White);

@@ -19,7 +19,7 @@ namespace HJScarletRework.Projs.Magic
 {
     public class CoronaFireball : HJScarletProj, IPixelatedRenderer
     {
-        public override ClassCategory Category => ClassCategory.Magic;
+        public override EnumDamageClass Category => EnumDamageClass.Magic;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
 

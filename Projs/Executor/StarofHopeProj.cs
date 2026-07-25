@@ -109,7 +109,7 @@ namespace HJScarletRework.Projs.Executor
     public class StarofHopeProj2 : HJScarletProj
     {
         public override string Texture => GetInstance<StarofHopeProj>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public ref float Timer => ref Projectile.ai[0];
         public List<Vector2> HeadPositionList = [];
         public override void ExSD()

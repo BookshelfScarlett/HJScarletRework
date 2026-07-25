@@ -9,7 +9,7 @@ namespace HJScarletRework.Projs.Executor
     internal class EndlessWarExecution : HJScarletProj
     {
         public override string Texture => GetInstance<EndlessWarProj>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting();

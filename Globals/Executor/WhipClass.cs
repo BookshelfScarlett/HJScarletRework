@@ -13,7 +13,7 @@ namespace HJScarletRework.Globals.Executor
 {
     public abstract class ExecutorWhipProj : HJScarletProj
     {
-        public sealed override ClassCategory Category => ClassCategory.Executor;
+        public sealed override EnumDamageClass Category => EnumDamageClass.Executor;
         /// <summary>
         /// 这个射弹归属的物品，用于命中计时。
         /// </summary>

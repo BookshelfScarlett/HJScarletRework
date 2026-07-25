@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -14,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
     public class PrunusMumeProj : HJScarletProj
     {
         public override string Texture => GetInstance<PrunusMume>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum State
         {
             Shoot,
@@ -75,7 +76,7 @@ namespace HJScarletRework.Projs.Executor
             d.velocity = Projectile.velocity / 8f;
             d.noGravity = true;
             if (Main.rand.NextBool(4))
-                new SnowCloud(Projectile.Center.ToRandCirclePos(60), Projectile.velocity / 8f, RandLerpColor(Color.Green, Color.IndianRed), 40, 0, 0.5f, Main.rand.NextFloat(0.1f, 0.3f) * .8f).Spawn();
+                ECSParticle.SnowCloud(Projectile.Center.ToRandCirclePos(60), Projectile.velocity / 8f, RandLerpColor(Color.Green, Color.IndianRed), 40, 0, 0.5f, Main.rand.NextFloat(0.1f, 0.3f) * .8f);
 
         }
 
@@ -104,12 +105,12 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 16; i++)
             {
                 float rad = Projectile.rotation + ToRadians(360f / length * i);
-                new SmokeParticle(center.ToRandCirclePos(5f), rad.ToRotationVector2() * 10f * Main.rand.NextFloat(), RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 40, RandRotTwoPi, 1, 0.49f, true).SpawnToPriority();
+                ECSParticle.SmokeParticle(center.ToRandCirclePos(5f),rad.ToRotationVector2() * 10f * Main.rand.NextFloat(), RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 40, RandRotTwoPi, 1, 0.49f, true);
             }
             for (int i = 0; i < 30; i++)
             {
-                new TurbulenceGlowOrb(center.ToRandCirclePos(60f), 2.2f, RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 120, .21f, RandRotTwoPi).Spawn();
-                new TurbulenceGlowOrb(center.ToRandCirclePos(60f), 2.2f, RandLerpColor(Color.HotPink, Color.IndianRed), 120, .2f, RandRotTwoPi).Spawn();
+                ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePos(60), 2.2f, RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 120, .21f, RandRotTwoPi);
+                ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePos(60), 2.2f, RandLerpColor(Color.HotPink, Color.IndianRed), 120, .21f, RandRotTwoPi);
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)

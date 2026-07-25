@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
     public class CandLanceFire : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletItemProj.Proj_CandLanceFire.Path;
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public ref float AttackTimer => ref Projectile.ai[0];
 
         public ref float RandomValue => ref Projectile.ai[2];

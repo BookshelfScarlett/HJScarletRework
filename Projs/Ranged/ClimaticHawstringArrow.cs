@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class ClimaticHawstringArrow : HJScarletProj, IPixelatedRenderer
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public Vector2 DrawOffset => Projectile.SafeDirByRot() * -10f;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforePlayer;
         public BlendState BlendState => BlendState.Additive;

@@ -34,7 +34,7 @@ namespace HJScarletRework.Projs.Executor
             set => Projectile.ai[1] = (float)value;
         }
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public NPC CurTarget = null;
         public override void SetStaticDefaults()
         {

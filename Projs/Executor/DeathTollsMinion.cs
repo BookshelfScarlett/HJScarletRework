@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DeathTollsMinion : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<DeathTollsProj>().Texture;
         private ref float Timer => ref Projectile.ai[1];
         private ref float ShootTimer => ref Projectile.ai[2];

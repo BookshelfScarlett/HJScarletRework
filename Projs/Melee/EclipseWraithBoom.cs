@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Melee
     public class EclipseWraithBoom : HJScarletFriendlyProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public float TheScale = 0.8f;
         public override void ExSD()
         {

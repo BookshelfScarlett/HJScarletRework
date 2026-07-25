@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
     public class MonkStaffSkillProj : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         private float TargetRotation = 0;
         private Vector2 HeldPos;
         private Vector2 InitVector;

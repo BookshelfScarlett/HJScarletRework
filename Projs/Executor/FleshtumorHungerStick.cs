@@ -9,7 +9,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class FleshtumorHungerStick : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => $"Terraria/Images/NPC_{NPCID.TheHungry}";
         public override void SetStaticDefaults()
         {

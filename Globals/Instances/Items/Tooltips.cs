@@ -20,19 +20,19 @@ namespace HJScarletRework.Globals.Instances.Items
         public IReadOnlyList<TooltipLine> CacheTooltipLine;
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (ItemBelongTo != ItemBelong.None)
+            if (ItemBelongTo != EnumItemOwner.None)
             {
                 string keyPath = Mod.GetLocalizationKey($"ItemBelongTo.{ItemBelongTo}");
                 Color color = Color.White;
                 switch (ItemBelongTo)
                 {
-                    case ItemBelong.Developer:
+                    case EnumItemOwner.Developer:
                         color = Color.Red;
                         break;
-                    case ItemBelong.Supporter:
+                    case EnumItemOwner.Supporter:
                         color = Color.Yellow;
                         break;
-                    case ItemBelong.Donator:
+                    case EnumItemOwner.Donator:
                         color = Color.HotPink;
                         break;
                 }
@@ -73,7 +73,7 @@ namespace HJScarletRework.Globals.Instances.Items
                     tooltips.QuickAddTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", "50%", "15%", "200%");
                 }
             }
-            if (item.HJScarlet().ForceTacticalExecution && HJScarletList.ExecutorWeaponDictionary.ContainsKey(item.type))
+            if (item.HJScarlet().ForceTacticalExecution && HJScarletList.IsExecutorWeaponDictionaty.ContainsKey(item.type))
             {
                 int index = 0;
                 for (int i = 0; i < tooltips.Count; i++)

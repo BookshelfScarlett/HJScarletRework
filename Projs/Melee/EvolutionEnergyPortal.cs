@@ -11,7 +11,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class EvolutionEnergyPortal : HJScarletFriendlyProj
     {
-        public override ClassCategory Category => ClassCategory.Typeless;
+        public override EnumDamageClass Category => EnumDamageClass.Typeless;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public bool SpawnEvolutionArrow = false;
         public bool StopSpawnArrow = false;

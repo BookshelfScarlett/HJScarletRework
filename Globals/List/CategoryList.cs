@@ -26,9 +26,9 @@ namespace HJScarletRework.Globals.List
         /// 主要用于Boss方面
         /// </summary>
         public static Dictionary<int, string> DownedBossConditionList = [];
-        public static Dictionary<int, int> ExecutorWeaponDictionary = [];
+        public static Dictionary<int, int> IsExecutorWeaponDictionaty = [];
         public static Dictionary<int, string> VanityItemDictionary = [];
-        public static Dictionary<int, WeaponCategory> ExecutorWeaponTypeDictionary = [];
+        public static Dictionary<int, ExecutorWeaponType> ExecutorWeaponTypeDictionary = [];
         public override void Load()
         {
             //投矛表单

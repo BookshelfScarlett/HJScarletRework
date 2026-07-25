@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Magic
 {
     public class Corona : HJScarletWeapon
     {
-        public override ClassCategory Category => ClassCategory.Magic;
+        public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override void SetStaticDefaults()
         {
             HJScarletList.DisasterRarityHashSet.Add(Type);

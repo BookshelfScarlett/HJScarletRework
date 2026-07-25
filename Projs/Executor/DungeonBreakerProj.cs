@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DungeonBreakerProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<DungeonBreaker>().Texture;
         public AnimationStruct Helper = new AnimationStruct(3);
         public override Vector2 TileHitbox => new Vector2(13, 13);

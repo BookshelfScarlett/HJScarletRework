@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
     public class AetherfireSmasherExecution : HJScarletProj
     {
         public override string Texture => GetInstance<AetherfireSmasherProj>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public ref float Timer => ref Projectile.ai[0];
         public NPC LockTarget = null;
         public bool CanLock = false;

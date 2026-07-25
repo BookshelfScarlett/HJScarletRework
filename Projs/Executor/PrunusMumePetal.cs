@@ -18,7 +18,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class PrunusMumePetal : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum Style
         {
             NormalStrike,

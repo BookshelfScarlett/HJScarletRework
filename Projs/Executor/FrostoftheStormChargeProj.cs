@@ -21,7 +21,7 @@ namespace HJScarletRework.Projs.Executor
     public class FrostoftheStormChargeProj : HJScarletProj, IPixelatedRenderer
     {
         public override string Texture => GetInstance<FrostoftheStormHeldProj>().Texture;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
         public AnimationStruct Helper = new(5);

@@ -3,7 +3,9 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -156,10 +158,45 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
-            base.OnHitByNPC(npc, hurtInfo);
+            if (ScarletNPCIDSets.DivineNPC[npc.type] && fruitofEthernity && NPC.AnyNPCs(npc.type))
+            {
+                //悠久果实效果下的玩家受到NPC攻击时，重置玩家的移动状态
+                Player.velocity *= 0;
+                Player.mount.Dismount(Player);
+                Player.RemoveAllGrapplingHooks();
+                //1/5的概率令玩家随机传送
+                if (Main.rand.NextBool(FruitofEternity.TeleportChance))
+                {
+                    Player.UnityTeleport(Player.Center.ToRandCirclePos(150));
+                }
+            }
         }
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
         {
+            if (fruitofEthernity)
+            {
+                bool hasAnyDivineNPC = false;
+                foreach (var npc in Main.ActiveNPCs)
+                {
+                    if (npc.IsLegal() && ScarletNPCIDSets.DivineNPC[npc.type])
+                    {
+                        hasAnyDivineNPC = true;
+                        break;
+                    }
+                }
+                if (hasAnyDivineNPC)
+                {
+                    //悠久果实效果下的玩家受到NPC攻击时，重置玩家的移动状态
+                    Player.velocity *= 0;
+                    Player.mount.Dismount(Player);
+                    Player.RemoveAllGrapplingHooks();
+                    //1/5的概率令玩家随机传送
+                    if (Main.rand.NextBool(FruitofEternity.TeleportChance))
+                    {
+                        Player.UnityTeleport(Player.Center.ToRandCirclePos(150));
+                    }
+                }
+            }
             if (raincoatExecutor && (proj.velocity.Y - Player.velocity.Y) > 0)
             {
                 Player.buffImmune[BuffID.Poisoned] = true;

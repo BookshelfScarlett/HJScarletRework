@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Melee
     public class TonbogiriBubble : HJScarletFriendlyProj
     {
         public override string Texture => GetInstance<VenomBubble>().Texture;
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(8, 2);

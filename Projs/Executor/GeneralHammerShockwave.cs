@@ -11,7 +11,7 @@ namespace HJScarletRework.Projs.Executor
     public abstract class ExecutorHammerShockwave : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public virtual int Hitbox => 100;
         public virtual int ImmunityTime => 30;
         public virtual int TotalHitTime => -1;

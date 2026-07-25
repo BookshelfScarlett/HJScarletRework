@@ -26,7 +26,7 @@ namespace HJScarletRework.Projs.Executor
         public override string Texture => GetInstance<FrostoftheStorm>().Texture;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public AnimationStruct Helper = new(3);
         public float BeginTargetRotation = 0;
         public float TargetRotation = 0;

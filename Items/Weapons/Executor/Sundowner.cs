@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     public class Sundowner : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 120;
-        public override WeaponCategory WeaponCategory => WeaponCategory.Firearm;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
             HJScarletList.DisasterRarityHashSet.Add(Type);

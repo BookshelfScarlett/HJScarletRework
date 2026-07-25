@@ -50,7 +50,10 @@ namespace HJScarletRework.Globals.Players
             diverArmor = false;
             maidReaperArmor = false;
         }
-
+        private void ResetBuff()
+        {
+            fruitofEthernity = false;
+        }
         private void ResetPets()
         {
             WhalePet = false;
@@ -79,6 +82,7 @@ namespace HJScarletRework.Globals.Players
             ResetAcc();
             ResetPets();
             ResetArmor();
+            ResetBuff();
 
         }
         public override void UpdateDead()
@@ -106,6 +110,7 @@ namespace HJScarletRework.Globals.Players
             ResetAcc();
             ResetPets();
             ResetArmor();
+            ResetBuff();
             crimsonCharmReduceTime = 0;
             crimsonCharmStopReduce = false;
             cycleMadenessCrit = 0;

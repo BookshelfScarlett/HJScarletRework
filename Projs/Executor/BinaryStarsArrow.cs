@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class BinaryStarsArrow : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
 
         private enum DoType
         {

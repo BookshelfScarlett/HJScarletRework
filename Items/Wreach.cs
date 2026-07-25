@@ -22,7 +22,7 @@ namespace HJScarletRework.Items
 {
     public class Wreach : HJScarletWeapon
     {
-        public override ClassCategory Category => ClassCategory.Melee;
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override string Texture => HJScarletItemProj.Wreach.Path;
         public override void ExSD()
         {

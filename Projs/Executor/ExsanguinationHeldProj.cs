@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class ExsanguinationHeldProj : ExecutorHeldProj
     {
-        public override ClassCategory Category => ClassCategory.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<Exsanguination>().Texture;
         public int ExecutionProgress = GetInstance<Exsanguination>().ExecutionProgress;
         public override int OriginalItemID => ItemType<Exsanguination>();

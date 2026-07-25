@@ -11,7 +11,7 @@ namespace HJScarletRework.Globals.Executor
     public abstract class ExecutorHeldProj : ModProjectile, ILocalizedModType
     {
         public Player Owner => Main.player[Projectile.owner];
-        public virtual ClassCategory Category => ClassCategory.Executor;
+        public virtual EnumDamageClass Category => EnumDamageClass.Executor;
         public virtual int OriginalItemID => -1;
         public static string ProjPath => $"HJScarletRework/Assets/Texture/Projs/";
         public override string Texture => ProjPath + GetType().Name;

@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.General
 {
     public class CowboyRevolverProj : HJScarletProj
     {
-        public override ClassCategory Category => ClassCategory.Typeless;
+        public override EnumDamageClass Category => EnumDamageClass.Typeless;
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.Revolver);
         public NPC CurTarget = null;
         public AnimationStruct Helper = new(2);

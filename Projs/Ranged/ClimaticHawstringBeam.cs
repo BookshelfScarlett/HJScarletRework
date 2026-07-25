@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class ClimaticHawstringBeam : HJScarletProj, IPixelatedRenderer
     {
-        public override ClassCategory Category => ClassCategory.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.AlphaBlend;
