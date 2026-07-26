@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults()
         {
-            HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.Donator);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Donator);
         }
         public override void ExSD()
         {

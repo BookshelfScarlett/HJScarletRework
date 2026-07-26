@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Vanity;
 using HJScarletRework.Items.Vanity.Arceca;
@@ -15,6 +16,7 @@ namespace HJScarletRework.Items.Useables
         public override void SetStaticDefaults()
         {
             ItemID.Sets.OpenableBag[Type] = true;
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateGolden);
         }
         public override void ExSD()
         {
@@ -23,11 +25,6 @@ namespace HJScarletRework.Items.Useables
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.IsItemName())
-            {
-                VanityEffectClass.DrawItemName(line, new VanityData(Color.Gold, Color.Lerp(Color.Gold, Color.White, 0.5f), Color.Black), Color.Gold, Color.Black);
-                return false;
-            }
             if (line.Mod == "Terraria")
             {
                 if (line.Name == "Tooltip3")

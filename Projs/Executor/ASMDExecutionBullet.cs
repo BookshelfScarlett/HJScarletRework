@@ -38,6 +38,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ExSD()
         {
+            Projectile.width = Projectile.height = 16;
             Projectile.extraUpdates = 5;
             Projectile.SetupImmnuity(-1);
             Projectile.penetrate = -1;

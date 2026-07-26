@@ -80,7 +80,6 @@ namespace HJScarletRework.Projs.Executor
 
         public void DoShoot()
         {
-            //是的没错，这里的速度实际上是一个Timer精确控制的
             float maxTime = 45 * Projectile.MaxUpdates;
             Projectile.velocity *= .96f;
             float progress = Utils.GetLerpValue(0, maxTime, Timer, true);
@@ -165,6 +164,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {
+            //1.4.5更新之后射弹的绘制顺序将会修改一下
+            //这里是因为我像素化渲染的系统问题，绘制的图层是在proj上方的，然后我自己也没时间改（
             overWiresUI.Add(index);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

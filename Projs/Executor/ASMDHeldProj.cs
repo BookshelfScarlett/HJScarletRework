@@ -18,13 +18,17 @@ namespace HJScarletRework.Projs.Executor
         public override int MinAttackRates => 5;
         public ref float Timer => ref Projectile.ai[0];
         public ref float RecoilTimer => ref Projectile.ai[1];
+        public float RecoilPower = 0;
         public override void ExSD()
         {
             Projectile.SetUpHeldProj(5);
         }
         public override void OnFirstFrame()
         {
+            //首次生成的时候Timer也就是开火的计时器会自动设置为少8帧数
+            //最主要的原因是防止切武器卡手
             Timer = (AttackSpeed - 8);
+            RecoilPower = 19.5f;
         }
         public bool IsUsing => (Owner.channel) && !Owner.noItems && !Owner.CCed;
         public override void ProjAI()
@@ -36,6 +40,8 @@ namespace HJScarletRework.Projs.Executor
             }
             HandleOwnerState();
             HandleAttack();
+            UpdateTimer();
+            Projectile.HJScarlet().ExecutionStrike = false;
         }
 
         public void HandleAttack()
@@ -55,28 +61,35 @@ namespace HJScarletRework.Projs.Executor
             if (Timer < AttackSpeed)
                 Timer++;
         }
-
         public void DoAttack()
         {
             Owner.itemAnimation = Owner.itemTime = 2;
             Timer++;
-            if (Timer < AttackSpeed)
+            int attackSpeed = AttackSpeed;
+            if (Owner.HJScarlet().ASMDBuffTime > 0)
+                attackSpeed /= 3;
+            if (Timer < attackSpeed)
                 return;
             HandleExecution();
             Vector2 offset = new Vector2(90, -10 * Projectile.direction).RotatedBy(Projectile.rotation);
             Vector2 pos = Projectile.Center + offset;
             Vector2 dir = Projectile.SafeDirByRot();
+            int type = ProjectileType<ASMDBullet>();
+            if(Projectile.HJScarlet().ExecutionStrike)
+            {
+                type = ProjectileType<ASMDExecutionBullet>();
+                Owner.HJScarlet().ASMDBuffTime = GetSeconds(3);
+            }
 
-            int type = Projectile.HJScarlet().ExecutionStrike ? ProjectileType<ASMDExecutionBullet>() : ProjectileType<ASMDBullet>();
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
             proj.HJScarlet().HasExecutionMechanic = true;
-            ScarletSound(SoundID.DD2_KoboldExplosion, Projectile.Center, 0.35f, 0, 0.6f, 0.1f);
             if (Projectile.HJScarlet().ExecutionStrike)
-                ScarletSound(HJScarletSounds.ASMD_ExecutionFire, Projectile.Center, 0.15f, 0, -.4f, 0.1f);
+                ScarletSound(HJScarletSounds.ASMD_ExecutionFire, Projectile.Center, 0.20f, 0, -.4f, 0.1f);
             else
-                ScarletSound(HJScarletSounds.ASMD_Fire, Projectile.Center, 0.15f, 0, -.4f, 0.1f);
+                ScarletSound(HJScarletSounds.ASMD_Fire, Projectile.Center, 0.20f, 0, -.4f, 0.1f);
+            
             //震屏，粒子特效
-            ScreenShakeSystem.AddScreenShakes(pos, 32, 60, -Projectile.rotation, 0, true, easingFunc: EaseOutExpo);
+            ScreenShakeSystem.AddScreenShakes(pos, 32 + Projectile.HJScarlet().ExecutionStrike.ToInt() * 12, 60, -Projectile.rotation, 0, true, easingFunc: EaseOutExpo);
             for (int i = 0; i < 8; i++)
             {
                 Vector2 vel = dir.ToRandVelocity(ToRadians(15f), 1).ToSafeNormalize();
@@ -116,9 +129,8 @@ namespace HJScarletRework.Projs.Executor
 
             }
 
-            RecoilTimer = AttackSpeed;
+            RecoilTimer = attackSpeed;
             Timer = 0;
-            Projectile.HJScarlet().ExecutionStrike = false;
         }
         public bool HandleDeadOrAlive()
         {
@@ -130,7 +142,6 @@ namespace HJScarletRework.Projs.Executor
             return false;
         }
 
-
         public void HandleOwnerState()
         {
             Projectile.rotation = Owner.ToMouseVector2().ToRotation();
@@ -140,12 +151,11 @@ namespace HJScarletRework.Projs.Executor
             Owner.ControlPlayerArm(Projectile.rotation);
             Projectile.Center = Owner.MountedCenter;
             Projectile.position.Y += Owner.gfxOffY;
+
             //处理后坐力动画
-            if (RecoilTimer > 0)
-                RecoilTimer--;
             float progress = Utils.GetLerpValue(0, AttackSpeed, RecoilTimer, true);
             float pullBack;
-            float pullBackpower = 19.5f;
+            float pullBackpower = RecoilPower;
             float rot = (Projectile.Center - Main.MouseWorld).ToRotation() * Owner.gravDir;
             if (progress >= 0.5f)
             {
@@ -158,6 +168,21 @@ namespace HJScarletRework.Projs.Executor
                 pullBack = Lerp(0, pullBackpower, (EaseOutCubic(pro)));
             }
             Projectile.Center += Main.rand.NextVector2Circular(1.3f * progress, 1.3f * progress) + rot.ToRotationVector2() * pullBack;
+        }
+        public void UpdateTimer()
+        {
+
+            //计时器的重置
+            if (RecoilTimer > 0)
+                RecoilTimer--;
+    
+            if (Owner.HJScarlet().ASMDBuffTime > 0 && Projectile.FinalUpdate())
+            {
+                Owner.HJScarlet().ASMDBuffTime--;
+                if (Owner.HJScarlet().ASMDBuffTime == 0)
+                    Timer = (AttackSpeed / 3 * 2);
+            }
+
         }
 
         public override bool PreDraw(ref Color lightColor)

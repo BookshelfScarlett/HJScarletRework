@@ -10,14 +10,12 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
 {
     public static class ForeverNightRarity
     {
-        public static void DrawItemName(DrawableTooltipLine drawableTooltipLine, ref List<RaritySparkle> particleList)
+        public static void DrawItemName(DrawableTooltipLine drawableTooltipLine)
         {
-            PostDrawRarity(ref particleList, drawableTooltipLine);
             RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.DarkViolet, Color.DarkViolet, Color.Black, 1.1f);
         }
-        public static void DrawFlavorRarity(DrawableTooltipLine drawableTooltipLine, ref List<RaritySparkle> particleList)
+        public static void DrawFlavorNameRarity(DrawableTooltipLine drawableTooltipLine)
         {
-            PostDrawFlavorParticle(ref particleList, drawableTooltipLine);
             RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.DarkViolet, Color.Black);
         }
         public static void DrawMisc(DrawableTooltipLine drawableTooltipLine)
@@ -25,7 +23,7 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
             RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.DarkViolet, Color.Black);
         }
 
-        private static void PostDrawFlavorParticle(ref List<RaritySparkle> particleList, DrawableTooltipLine tooltipLine)
+        public static void DrawFlavorNameParticle(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> particleList)
         {
             //在这里手动创建新的粒子，然后我们再将其添加进需要的表单内
             Vector2 textSize = tooltipLine.Font.MeasureString(tooltipLine.Text);
@@ -46,7 +44,7 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
             //最后更新他。
 
         }
-        public static void PostDrawRarity(ref List<RaritySparkle> particleList, DrawableTooltipLine tooltipLine)
+        public static void DrawItemNameParticle(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> particleList)
         {
             //在这里手动创建新的粒子，然后我们再将其添加进需要的表单内
             Vector2 textSize = tooltipLine.Font.MeasureString(tooltipLine.Text);

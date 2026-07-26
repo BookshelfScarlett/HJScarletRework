@@ -17,7 +17,7 @@ namespace HJScarletRework.Items.Useables
         public override void SetStaticDefaults()
         {
             ItemID.Sets.OpenableBag[Type] = true;
-            HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.White);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
         }
         public override void ExSD()
         {

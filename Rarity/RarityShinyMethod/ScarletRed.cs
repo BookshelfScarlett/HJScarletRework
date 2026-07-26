@@ -10,16 +10,15 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
 {
     public static class ScarletRedRarity
     {
-        public static void DrawItemName(DrawableTooltipLine drawableTooltipLine, ref List<RaritySparkle> particleList)
+        public static void DrawItemName(DrawableTooltipLine line)
         {
-            PostDrawRarity(ref particleList, drawableTooltipLine);
-            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Crimson, Color.Lerp(Color.Crimson, Color.Red, 0.9f), Color.Black, 1f);
+            RarityDrawHelper.DrawCustomTooltipLine(line, Color.Crimson, Color.Lerp(Color.Crimson, Color.Red, 0.9f), Color.Black, 1f);
         }
-        public static void DrawFlavorRarity2(DrawableTooltipLine drawableTooltipLine)
+        public static void DrawFlavorNameRarity(DrawableTooltipLine drawableTooltipLine)
         {
             RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Crimson, Color.Lerp(Color.Crimson, Color.Red, 0.9f), Color.Black, 0);
         }
-        public static void PostDrawRarity(ref List<RaritySparkle> particleList, DrawableTooltipLine tooltipLine)
+        public static void DrawItemNameParticle(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> particleList)
         {
             //在这里手动创建新的粒子，然后我们再将其添加进需要的表单内
             Vector2 textSize = tooltipLine.Font.MeasureString(tooltipLine.Text);

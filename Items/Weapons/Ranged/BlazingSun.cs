@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
         public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override void SetStaticDefaults()
         {
-            HJScarletList.DisasterRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Solar);
         }
         public override void ExSD()
         {

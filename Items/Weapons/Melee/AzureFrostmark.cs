@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
@@ -11,7 +12,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool NotHomewardJourneySpear => true;
         public override void SetStaticDefaults()
         {
-            HJScarletList.FrostRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Frost);
         }
 
         public override void ExSD()

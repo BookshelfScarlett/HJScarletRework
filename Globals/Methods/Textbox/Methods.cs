@@ -105,6 +105,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
                 float mainTextDrawY = TextboxManager.FirstLineY + extraYOffset;
 
                 float lerpValue = TextboxManager.LerpValue;
+                float edgeValue = TextboxManager.EdgeValue;
                 //这个用于把textbox漂浮。
                 Vector2 posOffset = Vector2.Lerp(Vector2.UnitY * -50f, Vector2.Zero, lerpValue) + Vector2.UnitY * (float)Math.Sin(Main.timeForVisualEffects / 60f) * 10f;
                 //边界检查1
@@ -124,7 +125,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
                 }
                 Vector2 mainTextPos = new Vector2(mainTextDrawX, mainTextDrawY);
                 SpriteBatch sb = Main.spriteBatch;
-                DrawTextboxBackground(mainTextPos.X, mainTextPos.Y, mainTextSize.X, mainTextSize.Y, 8, mainTextPos, textboxSettings.BackgroundColor * lerpValue, posOffset);
+                DrawTextboxBackground(mainTextPos.X, mainTextPos.Y, mainTextSize.X, mainTextSize.Y, 8, mainTextPos, textboxSettings.BackgroundColor * lerpValue, posOffset,textboxSettings.BackgroundEdgeColor * lerpValue);
                 //最后，我们再画需要的文本内容。
                 for (int i = 0; i < 16; i++)
                     ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + posOffset, textboxSettings.TextEdgeColor * lerpValue, 0, Vector2.Zero, scale);

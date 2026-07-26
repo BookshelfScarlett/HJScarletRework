@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Buffs.Pets;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Pets;
 using HJScarletRework.Rarity.RarityShiny;
@@ -25,6 +26,10 @@ namespace HJScarletRework.Items.Pets
         public new string LocalizationCategory => "Items.Pet";
         public override string Texture => $"HJScarletRework/Assets/Texture/Pets/Pet_{GetType().Name}";
         //封住这个sd避免误重写
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.RarePets);
+        }
         public sealed override void SetDefaults()
         {
             ExSD();

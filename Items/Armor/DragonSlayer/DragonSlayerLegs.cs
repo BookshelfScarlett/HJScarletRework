@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         public override string AssetPath => AssetHandler.Armors;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ScarletRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
         public override void ExSD()
         {

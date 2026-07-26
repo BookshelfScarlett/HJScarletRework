@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.List;
@@ -14,7 +15,7 @@ namespace HJScarletRework.Items.ExecutorCards
 {
     public class ShieldCoreRedDragon : ExecutorShieldCore
     {
-        public override RareType RareType => RareType.Gold;
+        public override ShinyRarityType RareType => ShinyRarityType.FateGolden;
     }
     public abstract class ExecutorShieldCore : HJScarletItemClass, ILocalizedModType
     {
@@ -22,10 +23,10 @@ namespace HJScarletRework.Items.ExecutorCards
         public override string Texture => $"HJScarletRework/Assets/Texture/Items/ExecutorShieldCore/{GetType().Name}";
         public virtual ShieldCoreType CoreType => ShieldCoreType.Assault;
         public new string LocalizationCategory => "Items.ExecutorShieldCore";
-        public virtual RareType RareType => RareType.Copper;
+        public virtual ShinyRarityType RareType => ShinyRarityType.FateWhite;
         public override void SetStaticDefaults()
         {
-            HJScarletList.RareItemRarityDrawDictionary.Add(Type, RareType);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, RareType);
         }
         public override void SetDefaults()
         {

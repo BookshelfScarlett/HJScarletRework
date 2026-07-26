@@ -14,7 +14,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSSD()
         {
-            HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.White);
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
         }
         public override void ExSD()

@@ -47,7 +47,7 @@ namespace HJScarletRework.Items.Accessories
             ];
         public override void SetStaticDefaults()
         {
-            HJScarletList.RareItemRarityDrawDictionary.Add(Type, RareItemRarity.RareType.White);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
         }
 
         public override void ExSD()

@@ -22,7 +22,7 @@ namespace HJScarletRework.Items.Armor
         {
             ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
             ArmorIDs.Head.Sets.IsTallHat[Item.headSlot] = true;
-            HJScarletList.MiscRarityDrawDictionary.Add(Type, MatterRarity.DrawRarity);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Matter);
         }
         public int DefenseCount = 110;
         public int MaxMana = 40;

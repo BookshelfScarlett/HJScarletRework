@@ -1,6 +1,7 @@
 ﻿using ContinentOfJourney.Items.Flamethrowers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
@@ -13,6 +14,10 @@ namespace HJScarletRework.Items.Weapons.Ranged
     public class TerraFlamethrower : HJScarletWeapon
     {
         public override EnumDamageClass Category => EnumDamageClass.Ranged;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Life);
+        }
         public override void ExSD()
         {
             Item.width = 172;

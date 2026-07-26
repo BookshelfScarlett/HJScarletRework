@@ -25,7 +25,7 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
             {
                 //归一化
                 float progress = data.LifetimeRatio / fadeInTime;
-                data.Scale = Lerp(0f, beginScale, EasingHelper.EaseOutCubic(progress));
+                data.Scale = Lerp(0f, beginScale, EaseOutCubic(progress));
             }
             else
             {

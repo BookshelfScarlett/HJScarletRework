@@ -21,7 +21,7 @@ namespace HJScarletRework.Items.Useables
         public static int LifeRegenSpeed = 4;
         public override void SetStaticDefaults()
         {
-            HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.Gold);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateGolden);
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs((DefenseMultipler - 1).ToPercent(), LifeRegenSpeed / 2, DamageReduceMultiplier.ToPercent(), TeleportChance);
         public override void ExSD()

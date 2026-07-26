@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetStaticDefaults()
         {
             ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.33f;
-            HJScarletList.MiscRarityDrawDictionary.Add(Type, SakuraRarity.DrawRarity);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Sakura);
         }
         public override void ExSD()
         {

@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Accessories
         public int LifeMax2 = 50;
         public override void SetStaticDefaults()
         {
-            HJScarletList.FrostRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
         }
         public override void ExSD()
         {

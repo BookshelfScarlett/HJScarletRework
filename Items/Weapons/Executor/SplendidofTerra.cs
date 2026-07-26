@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override int ExecutionProgress => 18 * (GaiaStriker.BloodBulletCount - 2);
         public override void ExSSD()
         {
-            HJScarletList.MiscRarityDrawDictionary.Add(Type, LivingRarity.DrawRarity);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Life);
             Type.ShimmerEach<GaiaStriker>();
         }
         public override void ExSD()

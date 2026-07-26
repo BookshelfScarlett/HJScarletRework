@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using HJScarletRework.Items.Armor.Monk;
 using HJScarletRework.Items.Armor.Shinobi;
+using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using System;
@@ -106,78 +107,35 @@ namespace HJScarletRework.Globals.Instances.Items
             }
             if (line.IsItemName() && HJScarletConfigClient.Instance.SpecialRarity)
             {
-                foreach (var (itemIDs, drawMethods) in _rarityDrawMap)
+                if (HJScarletList.ShinyRarityItemDictionary.TryGetValue(item.type, out ShinyRarityType value))
                 {
-                    if (itemIDs.Contains(item.type))
-                    {
-                        drawMethods(line);
-                        return false;
-                    }
-                }
-                if (HJScarletList.MiscRarityDrawDictionary.TryGetValue(item.type, out Action<DrawableTooltipLine> value))
-                {
-                    value(line);
+                    RarityDrawHelper.UpdateItemNameParticle(line, value);
+                    RarityDrawHelper.UpdateItemNameDraw(line, value);
                     return false;
                 }
-                if (HJScarletList.RareItemRarityDrawDictionary.TryGetValue(item.type, out RareItemRarity.RareType type))
-                {
-                    RareItemRarity.DrawItemName(line, type);
-                    return false;
-                }
-                if (item.HJScarlet().EnableExecutorVersion)
-                {
-                    if (HJScarletList.ConvertedItemRarityDrawDictionary.TryGetValue(item.type, out Action<DrawableTooltipLine> value2))
-                    {
-                        value2(line);
-                        return false;
-                    }
-                }
+                //foreach (var (itemIDs, drawMethods) in _rarityDrawMap)
+                //{
+                //    if (itemIDs.Contains(item.type))
+                //    {
+                //        drawMethods(line);
+                //        return false;
+                //    }
+                //}
+                //if (HJScarletList.MiscRarityDrawDictionary.TryGetValue(item.type, out Action<DrawableTooltipLine> value))
+                //{
+                //    value(line);
+                //    return false;
+                //}
+                //if (HJScarletList.RareItemRarityDrawDictionary.TryGetValue(item.type, out RareItemRarity.RareType type))
+                //{
+                //    RareItemRarity.DrawItemName(line, type);
+                //    return false;
+                //}
             }
             return base.PreDrawTooltipLine(item, line, ref yOffset);
         }
         public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
         {
         }
-        /// <summary>
-        /// 这里每帧都会高频调用，所以该创建哈希表了孩子们。
-        /// </summary>
-        private static readonly Dictionary<HashSet<int>, Action<DrawableTooltipLine>> _rarityDrawMap = new()
-        {
-            //寒霜武器的稀有度
-            {
-                HJScarletList.FrostRarityHashSet,
-                FrostRarity.DrawItemName
-            },
-            //日轮锭的稀有度
-            {
-                HJScarletList.DisasterRarityHashSet,
-                SolarRarity.DrawItemName
-            },
-            //梦魇锤系列的稀有度
-            {
-                HJScarletList.NightRarityHashSet,
-                NightRarity.DrawRarity
-            },
-            //神圣
-            {
-                HJScarletList.HallowedRarityHashSet,
-                HallowedRarity.DrawRarity
-            },
-            //星云
-            {
-                HJScarletList.NebulaRarityHashSet,
-                NebulaRarity.DrawRarityReverse
-            },
-            //无极绯红
-            {
-                HJScarletList.ScarletRarityHashSet,
-                DisasterRarity.DrawRarity2
-            },
-            {
-                HJScarletList.SunlightRarityHashSet,
-                SunlightRarity.DrawItemName
-            }
-        };
-
     }
 }

@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Armor.Reaper
     {
         public override void SetStaticDefaults()
         {
-            HJScarletList.ScarletRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
 
         public override int[] ArmorSlots => [Type, ItemType<ReaperBody>(), ItemType<ReaperLegs>()];

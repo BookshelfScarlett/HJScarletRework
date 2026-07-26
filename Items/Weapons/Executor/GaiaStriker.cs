@@ -42,7 +42,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public static int BloodBulletHealMinionDeadEarly = 10;
         public override void ExSSD()
         {
-            HJScarletList.ScarletRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
         public override void ExSD()
         {

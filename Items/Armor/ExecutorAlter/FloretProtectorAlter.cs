@@ -26,7 +26,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         }
         public override void SetStaticDefaults()
         {
-            HJScarletList.ConvertedItemRarityDrawDictionary.Add(ApplyArmor, LivingRarity.DrawRarity);
         }
         public override void ExSD(Item item)
         {
@@ -63,7 +62,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override string SetupName => "FloretProtector";
         public override void SetStaticDefaults()
         {
-            HJScarletList.ConvertedItemRarityDrawDictionary.Add(ApplyArmor, LivingRarity.DrawRarity);
         }
 
         public override void ExUpdateEquipAlter(Item item, Player player)
@@ -92,7 +90,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override ArmorType Category => ArmorType.Legs;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ConvertedItemRarityDrawDictionary.Add(ApplyArmor, LivingRarity.DrawRarity);
         }
 
         public override void ExUpdateEquipAlter(Item item, Player player)

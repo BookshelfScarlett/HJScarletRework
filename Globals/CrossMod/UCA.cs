@@ -17,23 +17,23 @@ namespace HJScarletRework.Globals.CrossMod
             if (HJScarletRework.CrossMod_UCA is null)
                 return;
             int carnage = HJScarletRework.CrossMod_UCA.Find<ModItem>("CarnageRay").Type;
-            HJScarletList.ScarletRarityHashSet.Add(carnage);
+            HJScarletList.ShinyRarityItemDictionary.Add(carnage, Enums.ShinyRarityType.ScarletRed);
             int night = HJScarletRework.CrossMod_UCA.Find<ModItem>("NightsRayAlt").Type;
             int shadow = HJScarletRework.CrossMod_UCA.Find<ModItem>("ShadowBoltStaffAlt").Type;
-            HJScarletList.NightRarityHashSet.Add(night);
-            HJScarletList.NightRarityHashSet.Add(shadow);
+            HJScarletList.ShinyRarityItemDictionary.Add(night, Enums.ShinyRarityType.ForeverNight);
+            HJScarletList.ShinyRarityItemDictionary.Add(shadow, Enums.ShinyRarityType.ForeverNight);
             int vivid = HJScarletRework.CrossMod_UCA.Find<ModItem>("VividClarityAlt").Type;
             int element = HJScarletRework.CrossMod_UCA.Find<ModItem>("ElementRayAlt").Type;
             int sword = HJScarletRework.CrossMod_UCA.Find<ModItem>("StormRulerAlt").Type;
-            HJScarletList.RareItemRarityDrawDictionary.Add(vivid, RareItemRarity.RareType.White);
-            HJScarletList.RareItemRarityDrawDictionary.Add(element, RareItemRarity.RareType.White);
-            HJScarletList.RareItemRarityDrawDictionary.Add(sword, RareItemRarity.RareType.White);
+            HJScarletList.ShinyRarityItemDictionary.Add(vivid, Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(element, Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(sword, Enums.ShinyRarityType.FateWhite);
             int terra = HJScarletRework.CrossMod_UCA.Find<ModItem>("TerraRay").Type;
-            HJScarletList.MiscRarityDrawDictionary.Add(terra, LivingRarity.DrawRarity);
+            HJScarletList.ShinyRarityItemDictionary.Add(terra, Enums.ShinyRarityType.Life);
             int plasma = HJScarletRework.CrossMod_UCA.Find<ModItem>("PlasmaRodAlt").Type;
             int soul = HJScarletRework.CrossMod_UCA.Find<ModItem>("SoulPiercerAlt").Type;
-            HJScarletList.NebulaRarityHashSet.Add(plasma);
-            HJScarletList.NebulaRarityHashSet.Add(soul);
+            HJScarletList.ShinyRarityItemDictionary.Add(plasma, Enums.ShinyRarityType.Nebula);
+            HJScarletList.ShinyRarityItemDictionary.Add(soul, Enums.ShinyRarityType.Nebula);
 
         }
     }

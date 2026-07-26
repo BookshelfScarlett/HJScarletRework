@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Instances.Items;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Projs.Melee;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
@@ -10,6 +11,10 @@ namespace HJScarletRework.Items.Weapons.Melee
     {
         public override bool NotHomewardJourneySpear => true;
         public override bool HasLegendary => false;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Life);
+        }
         public override void ExSD()
         {
             Item.width = Item.height = 92;

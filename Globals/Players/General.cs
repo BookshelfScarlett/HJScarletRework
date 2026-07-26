@@ -33,6 +33,7 @@ namespace HJScarletRework.Globals.Players
         public int NoSlowFall = 0;
         public float maxFallspeedModify = 0;
         public int ownerMinionHammerCount = 0;
+        public int ASMDBuffTime = 0;
 
         public int climaticHawstringLaserCounter = 0;
         public bool goldenApple = false;

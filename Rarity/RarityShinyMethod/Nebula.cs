@@ -10,13 +10,11 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
 {
     public static class NebulaRarity
     {
-        public static void DrawItemName(DrawableTooltipLine drawableTooltipLine, ref List<RaritySparkle> raritySparklesList)
+        public static void DrawItemName(DrawableTooltipLine drawableTooltipLine)
         {
-
             RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Pink, Color.Lerp(Color.MediumPurple, Color.HotPink, 0.2f), Color.White, 1);
-            PostDrawRarity(ref raritySparklesList, drawableTooltipLine);
         }
-        public static void PostDrawRarity(ref List<RaritySparkle> particleList, DrawableTooltipLine tooltipLine)
+        public static void DrawItemNameParticle(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> particleList)
         {
             //在这里手动创建新的粒子，然后我们再将其添加进需要的表单内
             Vector2 textSize = tooltipLine.Font.MeasureString(tooltipLine.Text);
@@ -32,7 +30,6 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
                 particleList.Add(rarityShinyOrb);
             }
             //最后更新他。
-            RarityDrawHelper.UpdateTooltipParticles(tooltipLine, ref particleList);
         }
 
     }

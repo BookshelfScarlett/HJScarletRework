@@ -11,7 +11,7 @@ namespace HJScarletRework.Items.Materials
         public override string AssetPath => AssetHandler.Materials;
         public override void SetStaticDefaults()
         {
-            HJScarletList.DisasterRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Solar);
         }
         public override void ExSD()
         {

@@ -17,7 +17,7 @@ namespace HJScarletRework.Items.Useables
         public override string AssetPath => AssetHandler.Useables;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ScarletRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
 
         public override void ExSD()

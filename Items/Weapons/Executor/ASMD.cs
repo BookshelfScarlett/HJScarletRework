@@ -5,6 +5,7 @@ using ContinentOfJourney.Items.ThrowerWeapons;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -19,7 +20,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         public static int ExecutionIceBlockCount = 7;
         public override void ExSSD()
         {
-            HJScarletList.FrostRarityHashSet.Add(Type);
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
         }
         public override void ExSD()
@@ -55,7 +55,7 @@ namespace HJScarletRework.Items.Weapons.Executor
                 AddIngredient<FortSniper>().
                 AddIngredient<Duality>().
                 AddIngredient<ItemFrozenArtifact>(100).
-                AddIngredient<FinalBar>(5).
+                AddIngredient<CrownofSilveryLight>(15).
                 AddTile(FinalAnvilTile).
                 Register();
         }

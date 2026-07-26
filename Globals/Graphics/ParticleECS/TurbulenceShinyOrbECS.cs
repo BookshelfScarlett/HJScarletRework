@@ -28,7 +28,7 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
                 data.Velocity = data.Velocity.SafeNormalize(-Vector2.UnitY) * Speed;
             }
             data.Velocity *= 0.9f;
-            data.Scale = Lerp(data.aifloat2, 0, EasingHelper.EaseOutCubic(data.LifetimeRatio));
+            data.Scale = Lerp(data.aifloat2, 0, EaseOutCubic(data.LifetimeRatio));
         }
         public override void Draw(ref ECSParticleData data)
         {

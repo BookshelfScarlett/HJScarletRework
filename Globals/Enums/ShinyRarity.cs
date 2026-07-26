@@ -15,6 +15,7 @@
         Matter,
         ScarletRed,
         SunGod,
+        Solar,
         RarePets,
         Hallowed
     }

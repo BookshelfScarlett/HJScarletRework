@@ -14,7 +14,6 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override void ExSSD()
         {
             Type.ShimmerEach(ItemID.Amarok);
-            HJScarletList.FrostRarityHashSet.Add(Type);
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
         }
         public override void ExSD()

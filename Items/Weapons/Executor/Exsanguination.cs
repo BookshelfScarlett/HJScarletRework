@@ -17,7 +17,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
-            HJScarletList.ScarletRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
         public override void ExSD()
         {

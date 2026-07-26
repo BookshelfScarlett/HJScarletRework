@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Accessories
         public int LifeMax2 = 20;
         public override void SetStaticDefaults()
         {
-            HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.Copper);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateCopper);
         }
         public override void ExSD()
         {

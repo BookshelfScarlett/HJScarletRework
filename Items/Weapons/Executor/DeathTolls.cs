@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSSD()
         {
-            HJScarletList.NightRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ForeverNight);
         }
         public override void ExSD()
         {

@@ -10,12 +10,11 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
 {
     public static class HallowedRarity
     {
-        public static void DrawItemName(DrawableTooltipLine drawableTooltipLine, ref List<RaritySparkle> raritySparklesList)
+        public static void DrawItemName(DrawableTooltipLine line)
         {
-            PostDrawRarity(ref raritySparklesList, drawableTooltipLine);
-            RarityDrawHelper.DrawCustomTooltipLine(drawableTooltipLine, Color.Yellow, Color.Lerp(Color.DarkGoldenrod, Color.Yellow, 0.1f), Color.White, 0.45f);
+            RarityDrawHelper.DrawCustomTooltipLine(line, Color.Yellow, Color.Lerp(Color.DarkGoldenrod, Color.Yellow, 0.1f), Color.White, 0.45f);
         }
-        public static void PostDrawRarity(ref List<RaritySparkle> particleList, DrawableTooltipLine tooltipLine)
+        public static void DrawItemNameParticle(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> particleList)
         {
             //在这里手动创建新的粒子，然后我们再将其添加进需要的表单内
             Vector2 textSize = tooltipLine.Font.MeasureString(tooltipLine.Text);

@@ -12,7 +12,7 @@ namespace HJScarletRework.Items.Accessories
         public override string AssetPath => AssetHandler.Useables;
         public override void SetStaticDefaults()
         {
-            HJScarletList.RareItemRarityDrawDictionary.Add(Type, Rarity.RarityShiny.RareItemRarity.RareType.White);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
         }
         public override void ExSD()
         {

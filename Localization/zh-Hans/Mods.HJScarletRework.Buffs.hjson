@@ -96,3 +96,8 @@ DragonMinionBuff: {
 	// DisplayName: Dragon Minion Buff
 	// Description: Mods.HJScarletRework.Buffs.DragonMinionBuff.Description
 }
+
+FruitofEternityBuff: {
+	// DisplayName: Fruitof Eternity Buff
+	// Description: Mods.HJScarletRework.Buffs.FruitofEternityBuff.Description
+}

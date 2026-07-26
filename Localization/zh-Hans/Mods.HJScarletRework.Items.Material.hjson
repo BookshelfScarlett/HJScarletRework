@@ -7,3 +7,17 @@ DisasterEssence: {
 	DisplayName: 兽灾精华
 	Tooltip: ""
 }
+
+CrownofSilveryLight: {
+	DisplayName: 光银之冠
+	Tooltip:
+		'''
+		从神圣之地上的敌人中获得的资源
+		或许是一些异闻的先兆
+		'''
+	FlavorTooltip:
+		'''
+		如月光般凝聚光辉的冠冕。
+		被赐予向诸神献身之人。
+		'''
+}

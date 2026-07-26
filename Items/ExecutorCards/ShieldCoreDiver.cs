@@ -1,9 +1,10 @@
-﻿using static HJScarletRework.Rarity.RarityShiny.RareItemRarity;
+﻿using HJScarletRework.Globals.Enums;
+using static HJScarletRework.Rarity.RarityShiny.RareItemRarity;
 
 namespace HJScarletRework.Items.ExecutorCards
 {
     public class ShieldCoreDiver : ExecutorShieldCore
     {
-        public override RareType RareType => RareType.Gold;
+        public override ShinyRarityType RareType => ShinyRarityType.FateGolden;
     }
 }

@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Magic
         public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override void SetStaticDefaults()
         {
-            HJScarletList.DisasterRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Solar);
         }
 
         public override void ExSD()

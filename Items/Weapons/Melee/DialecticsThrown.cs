@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
-using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -19,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public int UsePhase = 0;
         public override void SetStaticDefaults()
         {
-            HJScarletList.MiscRarityDrawDictionary.Add(Type, MatterRarity.DrawRarity);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Matter);
             ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.33f;
         }
         public override void ExSD()

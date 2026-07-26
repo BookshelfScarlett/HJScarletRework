@@ -22,7 +22,7 @@ namespace HJScarletRework.Items.Accessories
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {
-            HJScarletList.SunlightRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Solar);
         }
         public override void ExSD()
         {

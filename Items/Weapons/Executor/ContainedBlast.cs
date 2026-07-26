@@ -4,6 +4,7 @@ using ContinentOfJourney.Items.Rockets;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -63,7 +64,7 @@ namespace HJScarletRework.Items.Weapons.Executor
                 AddIngredient<ClockworkMinigun>().
                 AddIngredient<TheBlackBox>().
                 AddIngredient(ItemID.IllegalGunParts, 10).
-                AddIngredient<FinalBar>(10).
+                AddIngredient<CrownofSilveryLight>(15).
                 AddTile(FinalAnvilTile).
                 Register();
         }

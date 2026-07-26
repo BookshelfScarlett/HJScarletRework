@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool HasLegendary => true;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ScarletRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
         public override void ExSD()
         {

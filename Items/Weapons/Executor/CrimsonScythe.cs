@@ -12,7 +12,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override int ExecutionProgress => 80;
         public override void ExSSD()
         {
-            HJScarletList.ScarletRarityHashSet.Add(Type);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
         public override void ExSD()
         {

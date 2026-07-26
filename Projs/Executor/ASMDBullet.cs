@@ -23,6 +23,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ExSD()
         {
+            Projectile.height = Projectile.width = 16;
             Projectile.extraUpdates = 5;
             Projectile.SetupImmnuity(-1);
             Projectile.penetrate = 1;
@@ -47,6 +48,9 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
+            //这里的处理是因为，现在使用的轨迹非常长，如果直接处死的话会让轨迹瞬间消失
+            //因此这里会用非常快的lerp来减少这个方面的违和感
+            //后续会考虑将轨迹绘制外置
             if (IsHitWall)
             {
                 if (Projectile.Opacity == 1)
@@ -121,11 +125,6 @@ namespace HJScarletRework.Projs.Executor
                     ((ASMDIceBlock)activeProj.ModProjectile).CurTarget = target;
                 break;
             }
-        }
-        public override void OnKill(int timeLeft)
-        {
-            //Projectile.ExpandHitboxBy(3f);
-            //Projectile.Damage();
         }
 
         public override bool PreDraw(ref Color lightColor)

@@ -54,7 +54,7 @@ namespace HJScarletRework.Globals.Players
         #region PostUpdateMiscEffects的方法
         public void UpdateRandomMinionSpawn()
         {
-            if (powerLily)
+            if (!powerLily)
                 return;
             if (powerLilyTimer > 0)
                 return;
@@ -88,6 +88,7 @@ namespace HJScarletRework.Globals.Players
                 if (curSlots >= proj.minionSlots && !hasList.Contains(item))
                 {
                     int dmg = (int)Player.GetTotalDamage<SummonDamageClass>().ApplyTo(applyDmg);
+                    break;
                     //ItemLoader.Shoot(item, Player,Player.GetSource_ItemUse_WithPotentialAmmo(item,AmmoID.None), Player.MountedCenter, RandDirTwoPi, proj.type, applyDmg, item.knockBack);
                 }
 

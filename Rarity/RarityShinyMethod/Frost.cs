@@ -9,7 +9,12 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
 {
     public static class FrostRarity
     {
-        public static void DrawItemName(DrawableTooltipLine line, ref List<RaritySparkle> raritySparklesList)
+        public static void DrawItemName(DrawableTooltipLine line)
+        {
+            //最后更新他。
+            RarityDrawHelper.DrawCustomTooltipLine(line, Color.RoyalBlue, Color.Lerp(Color.White, Color.RoyalBlue, 0.65f), Color.White, 1);
+        }
+        public static void DrawItemNameParticle(DrawableTooltipLine line, ref  List<RaritySparkle> raritySparklesList)
         {
             if (Main.rand.NextBool(10))
             {
@@ -20,8 +25,6 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
                 RaritySnowCloud rarityShinyOrb = new(position, velocity, RandLerpColor(Color.RoyalBlue, Color.WhiteSmoke), lifetime, RandRotTwoPi, 1, scale * 0.128f, true, true);
                 raritySparklesList.Add(rarityShinyOrb);
             }
-            //最后更新他。
-            RarityDrawHelper.DrawCustomTooltipLine(line, Color.RoyalBlue, Color.Lerp(Color.White, Color.RoyalBlue, 0.65f), Color.White, 1);
         }
         public static void DrawFlavorTooltip(DrawableTooltipLine line, ref List<RaritySparkle> flavorSparklesList)
         {
