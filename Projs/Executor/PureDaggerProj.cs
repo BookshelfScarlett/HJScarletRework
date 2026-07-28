@@ -10,10 +10,8 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -102,7 +100,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else if (!Helper.IsDone[2] && !Main.mouseLeft)
             {
-                if(Main.mouseLeft)
+                if (Main.mouseLeft)
                 {
                     Projectile.Kill();
                 }
@@ -198,7 +196,7 @@ namespace HJScarletRework.Projs.Executor
             modifiers.Knockback *= 1.72f;
             if (!Projectile.IsMe())
                 return;
-            foreach(var p in Main.ActiveProjectiles)
+            foreach (var p in Main.ActiveProjectiles)
             {
                 if (p.owner != Projectile.owner)
                     continue;
@@ -206,11 +204,11 @@ namespace HJScarletRework.Projs.Executor
                     continue;
                 if (((PureDaggerStar)p.ModProjectile).AttackState != PureDaggerStar.State.Shoot)
                     continue;
-                if (p.ai[0] > (p.MaxUpdates * 119f ))
+                if (p.ai[0] > (p.MaxUpdates * 119f))
                 {
                     ((PureDaggerStar)p.ModProjectile).AttackState = PureDaggerStar.State.Homing;
-                    if(target.IsLegal())
-                    ((PureDaggerStar)p.ModProjectile).CurTarget = target;
+                    if (target.IsLegal())
+                        ((PureDaggerStar)p.ModProjectile).CurTarget = target;
                 }
             }
 
@@ -297,7 +295,7 @@ namespace HJScarletRework.Projs.Executor
             PixelatedRenderManager.BeginDrawProj = true;
             float progress = (1 - Helper.GetAniProgress(1));
             float easePro = Helper.GetAniProgress(2);
-            Color c = Color.Lerp(Color.White,Color.White with { A = 30 }, easePro);
+            Color c = Color.Lerp(Color.White, Color.White with { A = 30 }, easePro);
             for (int i = 0; i < 16; i++)
                 SB.Draw(tex, drawPosition + (TwoPi / 16f * i).ToRotationVector2() * 1.5f * EaseInCubic(progress) * (1 - easePro), null, c.ToAddColor(), drawRotation, rotationPoint, Projectile.scale, flipSprite, 0);
             SB.Draw(tex, drawPosition, null, c, drawRotation, rotationPoint, Projectile.scale, flipSprite, 0);
@@ -315,7 +313,7 @@ namespace HJScarletRework.Projs.Executor
                 float progress = (float)i / OldAimPos.Count;
                 Vector2 DrawPos_Head = OldAimPos[i] + Projectile.Center - Main.screenPosition;
                 Vector2 DrawPos_Source = OldAimPos[i] * mult + Projectile.Center - Main.screenPosition;
-                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor , new Vector3(progress, 0, 0)));
+                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor, new Vector3(progress, 0, 0)));
                 _vertexCache.Add(new ScarletVertex(DrawPos_Source, drawcolor, new Vector3(progress, 1, 0)));
             }
             GD.Textures[0] = texture;

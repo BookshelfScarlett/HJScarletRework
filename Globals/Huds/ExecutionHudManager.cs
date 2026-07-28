@@ -9,7 +9,6 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.UI.Chat;
@@ -18,7 +17,6 @@ namespace HJScarletRework.Globals.Huds
 {
     public class ExecutionHudManager : ModSystem
     {
-        public static RenderTarget2D ExecutionTarget2D;
         public static float GeneralOpactiy = 0;
         public static float GeneralOffset = 0;
         public static bool DrawFadeOut;
@@ -40,10 +38,6 @@ namespace HJScarletRework.Globals.Huds
         {
             if (Main.dedServ)
                 return;
-            Main.QueueMainThreadAction(() =>
-            {
-                ExecutionTarget2D = new RenderTarget2D(Main.graphics.GraphicsDevice, (int)TargetSize.X, (int)TargetSize.Y);
-            });
             On_Main.DrawDust += On_Main_DrawDust;
             LoadInit();
 
@@ -86,7 +80,7 @@ namespace HJScarletRework.Globals.Huds
             SB.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             //Texture2D t2d2 = TextureAssets.MagicPixel.Value;
             //SB.Draw(t2d2, pos, null, Color.Black* .4f* GeneralOpacity, 0f, t2d2.ToOrigin(), new Vector2(161.5f * .95f,.040f), SpriteEffects.None, 0f);
-            SB.Draw(t2d, pos, null, Color.Red* GeneralOpacity, 0f, t2d.ToOrigin(), 1.2f, SpriteEffects.None, 0f);
+            SB.Draw(t2d, pos, null, Color.Red * GeneralOpacity, 0f, t2d.ToOrigin(), 1.2f, SpriteEffects.None, 0f);
             DrawNumberWithEffect(SB, pos, CurExecutionCounter, GeneralOpacity);
 
             SB.End();
@@ -139,11 +133,6 @@ namespace HJScarletRework.Globals.Huds
         {
             if (Main.dedServ)
                 return;
-            Main.QueueMainThreadAction(() =>
-            {
-                ExecutionTarget2D?.Dispose();
-                ExecutionTarget2D = null;
-            });
             On_Main.DrawDust -= On_Main_DrawDust;
 
         }
@@ -235,7 +224,7 @@ namespace HJScarletRework.Globals.Huds
             {
                 layers.Insert(mouseIndex, new LegacyGameInterfaceLayer("HJScarlet: ExecutorBar", delegate ()
                 {
-                    Main.spriteBatch.Draw(ExecutionTarget2D, new Vector2(Main.screenWidth / 2, Main.screenHeight / 2), null, Color.White, 0, ExecutionTarget2D.Size() / 2, 1f, 0, 0f);
+                    //Main.spriteBatch.Draw(ExecutionTarget2D, new Vector2(Main.screenWidth / 2, Main.screenHeight / 2), null, Color.White, 0, ExecutionTarget2D.Size() / 2, 1f, 0, 0f);
                     return true;
                 }, InterfaceScaleType.UI));
             }

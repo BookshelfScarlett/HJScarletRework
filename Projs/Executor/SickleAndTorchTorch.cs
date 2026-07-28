@@ -38,9 +38,9 @@ namespace HJScarletRework.Projs.Executor
             }
             if (Projectile.IsOutScreen())
                 return;
-                Vector2 pos = Projectile.Center + Vector2.UnitX.RotatedBy(Projectile.rotation) * 15f * Projectile.scale;
-                Vector2 vel = -Vector2.UnitY * Main.rand.NextFloat(0.7f, 1.2f) * 10f;
-                ECSParticle.SmokeParticle(pos.ToRandCirclePos(16), vel, RandLerpColor(Color.DarkGray, Color.WhiteSmoke), 16, RandRotTwoPi, 1, 0.215f * Main.rand.NextFloat(0.75f, 1.15f) * Projectile.scale, false, BlendState.NonPremultiplied);
+            Vector2 pos = Projectile.Center + Vector2.UnitX.RotatedBy(Projectile.rotation) * 15f * Projectile.scale;
+            Vector2 vel = -Vector2.UnitY * Main.rand.NextFloat(0.7f, 1.2f) * 10f;
+            ECSParticle.SmokeParticle(pos.ToRandCirclePos(16), vel, RandLerpColor(Color.DarkGray, Color.WhiteSmoke), 16, RandRotTwoPi, 1, 0.215f * Main.rand.NextFloat(0.75f, 1.15f) * Projectile.scale, false, BlendState.NonPremultiplied);
             Vector2 pos2 = Projectile.Center + Vector2.UnitX.RotatedBy(Projectile.rotation) * 15f * Projectile.scale;
             Vector2 vel2 = -Vector2.UnitY * Main.rand.NextFloat(0.7f, 1.2f) * 4f;
             Dust d = Dust.NewDustPerfect(pos2.ToRandCirclePos(8), DustID.Torch);

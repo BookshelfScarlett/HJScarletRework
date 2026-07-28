@@ -1,5 +1,4 @@
 ﻿using ContinentOfJourney.Items;
-using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;

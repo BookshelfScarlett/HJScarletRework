@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Projectiles;
+using HJScarletRework.Projs.Executor;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -7,7 +8,11 @@ namespace HJScarletRework.Globals.IDSets
     [ReinitializeDuringResizeArrays]
     public static class ScarletProjIDSets
     {
-
+        /// <summary>
+        /// 如果为<see langword="true"/>，标记该射弹为代行者的鞭子。
+        /// <br>代行者的鞭子会有联动作用</br>
+        /// </summary>
+        public static bool[] IsExecutorWhipProj = ProjectileID.Sets.Factory.CreateBoolSet(ProjectileType<StarofHopeProj>(), ProjectileType<TearEyeProj>());
         /// <summary>
         /// 如果为<see langword="true"/>，则该射弹会被视为具备神性。主要用于神明类的单位。
         /// <br>由于泰拉瑞亚的特殊性质，如果需要在攻击上做操作，也需要管理对应的射弹</br>

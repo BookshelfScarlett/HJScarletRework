@@ -1,9 +1,6 @@
 ﻿using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
 using Microsoft.Xna.Framework;
-using rail;
-using System;
-using System.Collections.Generic;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,7 +11,7 @@ namespace HJScarletRework.Globals.Players
     {
         public int defenseBuffTimer = 0;
         public int defenseBuff = 0;
-               public void ResetTimer()
+        public void ResetTimer()
         {
             climaticHawstringLaserCounter = 0;
             desterrannachtImmortalTime = 0;
@@ -145,7 +142,7 @@ namespace HJScarletRework.Globals.Players
                 Player.noKnockback = true;
                 antiKnockbackTime--;
             }
-            if(defenseBuffTimer>0)
+            if (defenseBuffTimer > 0)
             {
                 Player.statDefense += defenseBuff;
                 defenseBuffTimer--;

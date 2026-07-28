@@ -67,6 +67,10 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 itemLoot.AddLoot<PurePrismFate>(4, 25, 40);
             }
+            if(item.type == ItemType<GoblinChariotTreasureBag>())
+            {
+                itemLoot.AddLoot<AngryBomb>(4);
+            }
         }
         public override void AddRecipes()
         {
@@ -113,13 +117,22 @@ namespace HJScarletRework.Globals.Instances.Items
                 AddTile(TileID.MythrilAnvil).
                 DisableDecraft().
                 Register();
+
             Recipe.Create(ItemID.Amarok).
                 AddIngredient(ItemID.HelFire).
                 AddIngredient(ItemID.FrostCore).
                 DisableDecraft().
                 Register();
+
             Recipe.Create(ItemID.CobaltShield).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyCobaltBar, 10).
+                DisableDecraft().
+                AddTile(TileID.MythrilAnvil).
+                Register();
+
+            Recipe.Create(ItemID.CrossNecklace).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyGoldBar, 16).
+                AddIngredient(ItemID.BrokenBatWing).
                 DisableDecraft().
                 AddTile(TileID.MythrilAnvil).
                 Register();

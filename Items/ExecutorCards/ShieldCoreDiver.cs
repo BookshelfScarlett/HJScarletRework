@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Globals.Enums;
-using static HJScarletRework.Rarity.RarityShiny.RareItemRarity;
 
 namespace HJScarletRework.Items.ExecutorCards
 {

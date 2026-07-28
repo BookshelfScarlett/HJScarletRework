@@ -1,5 +1,4 @@
 ﻿using ContinentOfJourney.Items;
-using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Rockets;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Executor;

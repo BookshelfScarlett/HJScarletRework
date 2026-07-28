@@ -1,9 +1,7 @@
-﻿using ContinentOfJourney.Items.Material;
-using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
-using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;

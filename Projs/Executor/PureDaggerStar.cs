@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -58,7 +57,7 @@ namespace HJScarletRework.Projs.Executor
             if (AttackState == State.Shoot)
             {
                 float maxTime = Projectile.MaxUpdates * 120;
-                float pro = Utils.GetLerpValue(0, maxTime, Timer,true);
+                float pro = Utils.GetLerpValue(0, maxTime, Timer, true);
                 Timer++;
                 Projectile.velocity *= .951f;
                 float rotValue = ToRadians(2f) * Projectile.localAI[1];
@@ -69,17 +68,17 @@ namespace HJScarletRework.Projs.Executor
                 }
                 else
                 {
-                    if (Main.rand.NextBool(6) &&Main.rand.NextFloat() > pro)
+                    if (Main.rand.NextBool(6) && Main.rand.NextFloat() > pro)
                         ECSParticle.TurbulenceShinyOrb(Projectile.Center, 0.7f, Color.White, 40, 1, 0.124f * Projectile.scale);
                 }
-                    if (Main.rand.NextBool(6) &&Main.rand.NextFloat() < pro)
-                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(6), -Vector2.UnitY * Main.rand.NextFloat() * 4f, Color.White, 40, 1, 0.30f,0.2f);
+                if (Main.rand.NextBool(6) && Main.rand.NextFloat() < pro)
+                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(6), -Vector2.UnitY * Main.rand.NextFloat() * 4f, Color.White, 40, 1, 0.30f, 0.2f);
 
             }
             else if (AttackState == State.Homing)
             {
-                if(Main.rand.NextBool(9))
-                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(6), -Vector2.UnitY * Main.rand.NextFloat() * 4f, Color.White, 40, 1, 0.30f,0.2f);
+                if (Main.rand.NextBool(9))
+                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(6), -Vector2.UnitY * Main.rand.NextFloat() * 4f, Color.White, 40, 1, 0.30f, 0.2f);
                 if (CurTarget.IsLegal())
                 {
                     float maxTime = Projectile.MaxUpdates * 30;
@@ -87,7 +86,7 @@ namespace HJScarletRework.Projs.Executor
                     Timer++;
                     float speed = Lerp(0, 12, pro);
                     float angle = Lerp(0, 45, pro);
-                    Projectile.HomingTarget(CurTarget.Center, -1, speed, 10,angle);
+                    Projectile.HomingTarget(CurTarget.Center, -1, speed, 10, angle);
                 }
                 else
                 {
@@ -100,12 +99,12 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.scale = Lerp(Projectile.scale, 0, .12f);
                 if (Projectile.scale <= .02f)
                 {
-                    for(int i =0;i<16;i++)
-                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(6), -Vector2.UnitY * Main.rand.NextFloat() * 4f, Color.White, 40, 1, 0.30f,0.2f);
+                    for (int i = 0; i < 16; i++)
+                        ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(6), -Vector2.UnitY * Main.rand.NextFloat() * 4f, Color.White, 40, 1, 0.30f, 0.2f);
                     Projectile.Kill();
                 }
             }
-            
+
         }
         public override bool? CanDamage()
         {
@@ -126,7 +125,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(AttackState == State.Homing)
+            if (AttackState == State.Homing)
             {
                 AttackState = State.Hit;
                 Projectile.timeLeft = 150;
@@ -142,7 +141,7 @@ namespace HJScarletRework.Projs.Executor
             HJScarletMethods.EndShaderAreaPixel();
 
         }
-         public void DrawCoreStar(SpriteBatch sb)
+        public void DrawCoreStar(SpriteBatch sb)
         {
             Texture2D star = HJScarletTexture.Particle_SharpTear;
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
@@ -150,11 +149,11 @@ namespace HJScarletRework.Projs.Executor
             {
                 Vector2 starScale = GetScale(i) * Projectile.scale;
                 float colorAlpha = GetAlphaFade(1 - i);
-                Color drawColor = Color.Lerp(Color.DarkGray* colorAlpha, Color.White* colorAlpha, colorAlpha);
+                Color drawColor = Color.Lerp(Color.DarkGray * colorAlpha, Color.White * colorAlpha, colorAlpha);
                 sb.Draw(star, drawPos, null, drawColor, Projectile.rotation, star.Size() / 2, starScale, SpriteEffects.None, 0);
                 sb.Draw(star, drawPos, null, drawColor, Projectile.rotation + PiOver2, star.Size() / 2, starScale, SpriteEffects.None, 0);
-                sb.Draw(star, drawPos, null, Color.White* colorAlpha, Projectile.rotation, star.Size() / 2, starScale * 0.5f, SpriteEffects.None, 0);
-                sb.Draw(star, drawPos, null, Color.White* colorAlpha, Projectile.rotation + PiOver2, star.Size() / 2, starScale * 0.5f, SpriteEffects.None, 0);
+                sb.Draw(star, drawPos, null, Color.White * colorAlpha, Projectile.rotation, star.Size() / 2, starScale * 0.5f, SpriteEffects.None, 0);
+                sb.Draw(star, drawPos, null, Color.White * colorAlpha, Projectile.rotation + PiOver2, star.Size() / 2, starScale * 0.5f, SpriteEffects.None, 0);
             }
         }
         public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
@@ -172,7 +171,7 @@ namespace HJScarletRework.Projs.Executor
             //做掉可能存在的零向量
             DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
             List<TrailDrawDate> trailDrawDates = [];
-            int posCount = (int)(Projectile.oldPos.Length * Clamp(Projectile.velocity.Length(),0,1));
+            int posCount = (int)(Projectile.oldPos.Length * Clamp(Projectile.velocity.Length(), 0, 1));
             for (int j = 0; j < posCount - 1; j++)
             {
                 if (Projectile.oldPos[j] == Vector2.Zero)

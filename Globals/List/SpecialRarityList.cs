@@ -1,6 +1,4 @@
 ﻿using HJScarletRework.Globals.Enums;
-using HJScarletRework.Rarity.RarityShiny;
-using System;
 using System.Collections.Generic;
 using Terraria.ModLoader;
 

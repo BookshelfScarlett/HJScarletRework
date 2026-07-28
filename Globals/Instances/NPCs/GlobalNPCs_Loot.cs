@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.NPCs;
+using ContinentOfJourney.NPCs.Boss_GoblinChariot;
 using ContinentOfJourney.NPCs.Boss_MarquisMoonsquid;
 using ContinentOfJourney.NPCs.Boss_PriestessRod;
 using ContinentOfJourney.NPCs.Boss_ScarabBelief;
@@ -82,6 +83,10 @@ namespace HJScarletRework.Globals.Instances
             if (npc.type == NPCType<PriestessRod>())
             {
                 HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<ClimaticHawstring>(), 4);
+            }
+            if (npc.type == NPCType<GoblinChariot>())
+            {
+                HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<AngryBomb>(), 4);
             }
         }
         public override void ModifyGlobalLoot(GlobalLoot globalLoot)

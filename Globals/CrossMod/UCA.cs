@@ -2,7 +2,6 @@
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Tiles;
 using HJScarletRework.Globals.List;
-using HJScarletRework.Rarity.RarityShiny;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

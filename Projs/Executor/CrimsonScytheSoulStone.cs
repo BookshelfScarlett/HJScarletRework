@@ -6,11 +6,6 @@ using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
@@ -42,7 +37,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 16;
             Projectile.extraUpdates = 2;
             Projectile.tileCollide = false;
-            Projectile.ignoreWater= true;
+            Projectile.ignoreWater = true;
             Projectile.penetrate = 1;
             Projectile.SetupImmnuity(-1);
             Projectile.stopsDealingDamageAfterPenetrateHits = true;

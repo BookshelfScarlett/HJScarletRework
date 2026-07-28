@@ -9,10 +9,7 @@ using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Formats.Tar;
 using Terraria;
-using Terraria.Audio;
-using Terraria.GameContent;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
@@ -45,7 +42,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
 
         }
-        
+
         public override void OnKill(int timeLeft)
         {
         }
@@ -58,7 +55,7 @@ namespace HJScarletRework.Projs.Executor
             BeginTargetRotation = Owner.Center.ToMouseVector2().ToRotation();
             TargetRotation = BeginTargetRotation;
             SickleLength = 60;
-            
+
         }
         public override void ProjAI()
         {
@@ -129,7 +126,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             if (easedProgress < .01f)
                 TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .5f);
-            else if(!IsBehind)
+            else if (!IsBehind)
             {
                 //下面基本上是粒子生成了。
                 float slashTrailRotation = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
@@ -211,17 +208,17 @@ namespace HJScarletRework.Projs.Executor
             Projectile.GetProjDrawInfo_Melee(out Texture2D tex, out Vector2 drawPosition, out float drawRotation, out Vector2 rotationPoint, out SpriteEffects flipSprite);
             float lerp = IsBehind ? 1f : 0.75f;
             Color c = IsBehind ? Color.Lerp(Color.White, Color.Black, 0.705f) with { A = 255 } : Color.White;
-            if(Projectile.HJScarlet().ExecutionStrike && !IsBehind)
-                for(int i =0;i<16;i++)
-            SB.Draw(tex, drawPosition + (TwoPi / 16f * i).ToRotationVector2() * 1.5f, null, c.ToAddColor(), drawRotation, rotationPoint, Projectile.scale * lerp, flipSprite, 0);
+            if (Projectile.HJScarlet().ExecutionStrike && !IsBehind)
+                for (int i = 0; i < 16; i++)
+                    SB.Draw(tex, drawPosition + (TwoPi / 16f * i).ToRotationVector2() * 1.5f, null, c.ToAddColor(), drawRotation, rotationPoint, Projectile.scale * lerp, flipSprite, 0);
             SB.Draw(tex, drawPosition, null, c, drawRotation, rotationPoint, Projectile.scale * lerp, flipSprite, 0);
             if (IsBehind)
                 return false;
             SB.EnterShaderArea();
-            Vector2 topPos = drawPosition +  (Vector2.UnitX).RotatedBy(Projectile.rotation) * 35f * Projectile.scale;
+            Vector2 topPos = drawPosition + (Vector2.UnitX).RotatedBy(Projectile.rotation) * 35f * Projectile.scale;
             Texture2D glow = HJScarletTexture.Particle_CrossGlow.Value;
             float scale = Projectile.scale * .072f * (1 - EaseOutExpo(Helper.GetAniProgress(1)));
-            SB.Draw(glow, topPos, null, Color.White, 0, glow.Size() / 2,scale, 0, 0);
+            SB.Draw(glow, topPos, null, Color.White, 0, glow.Size() / 2, scale, 0, 0);
             Effect effect2 = HJScarletShader.AlphaFadeNoiseColor;
             effect2.Parameters["uFadeoutLeftLength"].SetValue(0.2f);
             effect2.Parameters["uFadeinRigtLength"].SetValue(0.2f);
@@ -230,7 +227,7 @@ namespace HJScarletRework.Projs.Executor
             effect2.Parameters["OverlayColor"].SetValue(Color.White.ToVector4());
             effect2.CurrentTechnique.Passes[0].Apply();
             Texture2D texture2 = HJScarletTexture.Noise_Misc.Value;
-            DrawSlash(texture2, Color.Silver* .85f, 0.90f);
+            DrawSlash(texture2, Color.Silver * .85f, 0.90f);
             texture2 = HJScarletTexture.Noise_Aura.Value;
             DrawSlash(texture2, Color.White * .90f, 0.85f);
 
@@ -240,8 +237,8 @@ namespace HJScarletRework.Projs.Executor
             effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.DarkGray* 0.90f, 0.95f);
-            DrawSlash(texture, Color.White* 0.40f, 0.80f);
+            DrawSlash(texture, Color.DarkGray * 0.90f, 0.95f);
+            DrawSlash(texture, Color.White * 0.40f, 0.80f);
 
             SB.EndShaderArea();
             return false;
@@ -258,7 +255,7 @@ namespace HJScarletRework.Projs.Executor
                 float progress = (float)i / OldAimPos.Count;
                 Vector2 DrawPos_Head = OldAimPos[i] + Projectile.Center - Main.screenPosition;
                 Vector2 DrawPos_Source = OldAimPos[i] * mult + Projectile.Center - Main.screenPosition;
-                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor , new Vector3(progress, 0, 0)));
+                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor, new Vector3(progress, 0, 0)));
                 _vertexCache.Add(new ScarletVertex(DrawPos_Source, drawcolor, new Vector3(progress, 1, 0)));
             }
             GD.Textures[0] = texture;

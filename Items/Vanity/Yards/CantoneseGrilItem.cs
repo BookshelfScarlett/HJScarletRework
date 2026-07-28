@@ -16,10 +16,6 @@ namespace HJScarletRework.Items.Vanity.Yards
         public override Color ParticleColor1 => Color.Green;
         public override Color ParticleColor2 => Color.White;
         public override bool HasFlavorTooltip => false;
-        public override bool ExDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            return false;
-        }
         public override void ExSD()
         {
             Item.HJScarlet().CanDrawIcon = false;

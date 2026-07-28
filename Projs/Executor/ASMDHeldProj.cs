@@ -7,7 +7,6 @@ using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -75,7 +74,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 pos = Projectile.Center + offset;
             Vector2 dir = Projectile.SafeDirByRot();
             int type = ProjectileType<ASMDBullet>();
-            if(Projectile.HJScarlet().ExecutionStrike)
+            if (Projectile.HJScarlet().ExecutionStrike)
             {
                 type = ProjectileType<ASMDExecutionBullet>();
                 Owner.HJScarlet().ASMDBuffTime = GetSeconds(3);
@@ -87,7 +86,7 @@ namespace HJScarletRework.Projs.Executor
                 ScarletSound(HJScarletSounds.ASMD_ExecutionFire, Projectile.Center, 0.20f, 0, -.4f, 0.1f);
             else
                 ScarletSound(HJScarletSounds.ASMD_Fire, Projectile.Center, 0.20f, 0, -.4f, 0.1f);
-            
+
             //震屏，粒子特效
             ScreenShakeSystem.AddScreenShakes(pos, 32 + Projectile.HJScarlet().ExecutionStrike.ToInt() * 12, 60, -Projectile.rotation, 0, true, easingFunc: EaseOutExpo);
             for (int i = 0; i < 8; i++)
@@ -175,7 +174,7 @@ namespace HJScarletRework.Projs.Executor
             //计时器的重置
             if (RecoilTimer > 0)
                 RecoilTimer--;
-    
+
             if (Owner.HJScarlet().ASMDBuffTime > 0 && Projectile.FinalUpdate())
             {
                 Owner.HJScarlet().ASMDBuffTime--;

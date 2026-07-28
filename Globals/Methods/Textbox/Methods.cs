@@ -125,7 +125,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
                 }
                 Vector2 mainTextPos = new Vector2(mainTextDrawX, mainTextDrawY);
                 SpriteBatch sb = Main.spriteBatch;
-                DrawTextboxBackground(mainTextPos.X, mainTextPos.Y, mainTextSize.X, mainTextSize.Y, 8, mainTextPos, textboxSettings.BackgroundColor * lerpValue, posOffset,textboxSettings.BackgroundEdgeColor * lerpValue);
+                DrawTextboxBackground(mainTextPos.X, mainTextPos.Y, mainTextSize.X, mainTextSize.Y, 8, mainTextPos, textboxSettings.BackgroundColor * lerpValue, posOffset, textboxSettings.BackgroundEdgeColor * lerpValue);
                 //最后，我们再画需要的文本内容。
                 for (int i = 0; i < 16; i++)
                     ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + posOffset, textboxSettings.TextEdgeColor * lerpValue, 0, Vector2.Zero, scale);

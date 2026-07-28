@@ -141,30 +141,6 @@ namespace HJScarletRework.Items.Vanity
         }
         public float FirstLineY = -1;
         public IReadOnlyList<TooltipLine> CacheTooltipList = null;
-        public float LerpValue = 0;
-        public float EdegValue = 0;
-        public override void UpdateInfoAccessory(Player player)
-        {
-            if (HasFlavorTooltip)
-            {
-                if (Main.HoverItem.IsAir || Main.HoverItem is null)
-                {
-                    LerpValue = 0;
-                    EdegValue = 0;
-                }
-
-                if (Main.HoverItem.type == Type)
-                {
-                    LerpValue = Lerp(LerpValue, 1.0f, 0.21f);
-                    if (LerpValue > 0.98f)
-                    {
-                        EdegValue = Lerp(EdegValue, 1f, 0.21f);
-                        LerpValue = 1f;
-                    }
-                }
-            }
-            base.UpdateInfoAccessory(player);
-        }
         public override void UpdateVanity(Player player)
         {
             player.GetModPlayer<ScarletVanityPlayer>().accVanityID = Type;
@@ -173,9 +149,6 @@ namespace HJScarletRework.Items.Vanity
         {
             if (line.IsItemName())
             {
-                //记录起始点坐标。
-                //通常情况下，物品不可能没有名字，而物品名称通常都在第一行，所以可以用这个来记录第一行的坐标
-
                 TextboxManager.FirstLineY = line.Y;
                 VanityEffectClass.DrawItemName(line, VanityData, ParticleColor1, ParticleColor2);
                 return false;
@@ -186,11 +159,18 @@ namespace HJScarletRework.Items.Vanity
                 return false;
 
             }
-            if (((line.Name == "Vanity" || line.Name == "Equipable") && line.Mod == "Terraria"))
+            if ((line.Name == "Vanity" || line.Name == "Equipable") && line.Mod == "Terraria")
             {
                 VanityEffectClass.DrawMisc(line, VanityData, ParticleColor1, ParticleColor2);
                 return false;
             }
+            return true;
+        }
+        public override void PostDrawTooltipLine(DrawableTooltipLine line)
+        {
+            //通常情况下，物品不可能没有名字，而物品名称通常都在第一行，所以可以用这个来记录第一行的坐标
+            if (line.IsItemName())
+                TextboxManager.FirstLineY = line.Y;
             if (HasFlavorTooltip)
             {
                 TextboxSettings sets = new TextboxSettings()
@@ -203,9 +183,6 @@ namespace HJScarletRework.Items.Vanity
                 };
                 TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
             }
-            return true;
         }
-
-        public virtual bool ExDrawTooltipLine(DrawableTooltipLine line, ref int yOffset) => false;
     }
 }

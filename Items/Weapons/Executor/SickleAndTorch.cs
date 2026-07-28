@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
-using System.Threading;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -71,7 +70,7 @@ namespace HJScarletRework.Items.Weapons.Executor
                 proj.HJScarlet().ExecutionStrike = exe;
                 proj.ai[1] = Flip.ToDirectionInt() * player.direction;
                 Time = 0;
-                if(exe)
+                if (exe)
                 {
                     proj.extraUpdates += 1;
                     player.RemoveExecutionProgress(Type);

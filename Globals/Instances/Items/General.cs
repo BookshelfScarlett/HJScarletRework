@@ -64,7 +64,6 @@ namespace HJScarletRework.Globals.Instances.Items
         public Player LocalPlayer => Main.LocalPlayer;
         public override void UpdateInventory(Item item, Player player)
         {
-            //暂时禁用，即将实装特莉波卡系列物品时回归
             if (HJScarletConfigClient.Instance.DrawIcon && CanDrawGhost)
             {
                 //在UpdateInventory内更新帧图的绘制，因为tooltip的draw实际上只会执行一次
@@ -157,7 +156,7 @@ namespace HJScarletRework.Globals.Instances.Items
         }
         public void DrawSpecialIconDisplay(Item item, SpriteBatch spriteBatch, Vector2 position)
         {
-            if ((purePrismAnimationCounter) <= 0.02f)
+            if (purePrismAnimationCounter <= 0.02f)
                 return;
             //缩写。
             float time = (float)Main.timeForVisualEffects;

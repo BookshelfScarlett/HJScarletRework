@@ -1,8 +1,6 @@
 ﻿using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;

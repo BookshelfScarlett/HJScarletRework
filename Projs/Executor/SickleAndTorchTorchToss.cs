@@ -8,7 +8,6 @@ using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Terraria;
 using Terraria.ID;
 
@@ -47,8 +46,8 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             ScarletSound(HJScarletSounds.Misc_KnifeTossAlt, Projectile.Center, 0.5f, 1, 0.4f, 0.1f, 2);
-            ScarletSound(SoundID.DD2_BetsyFireballShot, Projectile.Center, 0.95f, 1, 0.25f); 
-            ScarletSound(SoundID.Item64 , Projectile.Center, 0.95f, 1, 0.55f); 
+            ScarletSound(SoundID.DD2_BetsyFireballShot, Projectile.Center, 0.95f, 1, 0.25f);
+            ScarletSound(SoundID.Item64, Projectile.Center, 0.95f, 1, 0.55f);
 
             Projectile.originalDamage = Projectile.damage;
             Helper.MaxProgress[0] = (int)(AttackSpeed * .35f);
@@ -102,8 +101,8 @@ namespace HJScarletRework.Projs.Executor
             else if (!Helper.IsDone[1])
             {
                 UpdateEndAnimation();
-            if (OldAimPos.Count > 0)
-                OldAimPos.RemoveAt(0);
+                if (OldAimPos.Count > 0)
+                    OldAimPos.RemoveAt(0);
 
 
             }
@@ -132,14 +131,14 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * 1.12f;
                 Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 21;
                 OldAimPos.Add(slashPosFinal);
-                if(Main.rand.NextBool(8))
+                if (Main.rand.NextBool(8))
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 22, Main.rand.NextFloat(.51f, 1.08f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize();
                     Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy((PiOver2 + ToRadians(10))) * Owner.direction * (Flip.ToDirectionInt()) * Main.rand.NextFloat(1.5f, 1.9f);
                     ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.OrangeRed, Color.Orange), 40, 1f, .07f * Projectile.scale * Main.rand.NextFloat(.8f, 1.1f), glowMult: .51f);
                 }
-                if(Main.rand.NextBool(8))
+                if (Main.rand.NextBool(8))
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 22, Main.rand.NextFloat(.51f, 1.08f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize();
@@ -185,9 +184,9 @@ namespace HJScarletRework.Projs.Executor
             effect2.Parameters["OverlayColor"].SetValue(Color.White.ToVector4());
             effect2.CurrentTechnique.Passes[0].Apply();
             Texture2D texture2 = HJScarletTexture.Noise_Misc.Value;
-            DrawSlash(texture2, Color.OrangeRed* .85f, 0.90f);
+            DrawSlash(texture2, Color.OrangeRed * .85f, 0.90f);
             texture2 = HJScarletTexture.Noise_Aura.Value;
-            DrawSlash(texture2, Color.Orange* .90f, 0.70f);
+            DrawSlash(texture2, Color.Orange * .90f, 0.70f);
 
             Texture2D texture = HJScarletTexture.Texture_SwordSlash.Value;
             Effect effect = HJScarletShader.AlphaFade;
@@ -195,8 +194,8 @@ namespace HJScarletRework.Projs.Executor
             effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.OrangeRed* 0.90f, 0.95f);
-            DrawSlash(texture, Color.White* 0.30f, 0.70f);
+            DrawSlash(texture, Color.OrangeRed * 0.90f, 0.95f);
+            DrawSlash(texture, Color.White * 0.30f, 0.70f);
 
             SB.EndShaderArea();
 
@@ -214,7 +213,7 @@ namespace HJScarletRework.Projs.Executor
                 float progress = (float)i / OldAimPos.Count;
                 Vector2 DrawPos_Head = OldAimPos[i] + Projectile.Center - Main.screenPosition;
                 Vector2 DrawPos_Source = OldAimPos[i] * mult + Projectile.Center - Main.screenPosition;
-                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor , new Vector3(progress, 0, 0)));
+                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor, new Vector3(progress, 0, 0)));
                 _vertexCache.Add(new ScarletVertex(DrawPos_Source, drawcolor, new Vector3(progress, 1, 0)));
             }
             GD.Textures[0] = texture;

@@ -3,7 +3,6 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
-using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
@@ -167,11 +166,11 @@ namespace HJScarletRework.Projs.Executor
             ECSParticle.LightntingGlow(target.Center, (Projectile.rotation + PiOver2 + PiOver4).ToRotationVector2() * .1f, Color.White, 40, 1, .8f);
             for (int i = 0; i < 10; i++)
             {
-                ECSParticle.ShinyCrossStarECS(target.Center, RandVelTwoPi(1.2f,6.6f), Color.White, 45, 1, 0.64f);
+                ECSParticle.ShinyCrossStarECS(target.Center, RandVelTwoPi(1.2f, 6.6f), Color.White, 45, 1, 0.64f);
             }
             ScarletSound(HJScarletSounds.Misc_SwordHit, target.Center, 0.7f, 1, -0.14f, 0.1f);
             modifiers.Knockback *= 1.72f;
-            if(Projectile.IsMe() && Projectile.numHits <1)
+            if (Projectile.IsMe() && Projectile.numHits < 1)
             {
                 Vector2 dir = Owner.Center.GetNormalVector2(target.Center);
                 Projectile p = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir.ToRandVelocity(ToRadians(30), 14f, 18f), ProjectileType<PureDaggerStar>(), Projectile.originalDamage / 3, Projectile.knockBack, Owner.whoAmI);
@@ -201,7 +200,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Owner.HJScarlet().defenseBuff = PureDagger.DefenseAdd +2;
+            Owner.HJScarlet().defenseBuff = PureDagger.DefenseAdd + 2;
             Owner.HJScarlet().defenseBuffTimer = GetSeconds(1);
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -221,24 +220,24 @@ namespace HJScarletRework.Projs.Executor
         }
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
-        
+
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
             if (easedProgress < .01f)
                 return;
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;
-            Vector2 topPos = drawPosition +  (Vector2.UnitX).RotatedBy(Projectile.rotation) * 80f * Projectile.scale;
+            Vector2 topPos = drawPosition + (Vector2.UnitX).RotatedBy(Projectile.rotation) * 80f * Projectile.scale;
             Texture2D glow = HJScarletTexture.Particle_KiraStarGlow.Value;
             float scale = Projectile.scale * .12f * (1 - EaseOutExpo(Helper.GetAniProgress(1)));
-            SB.Draw(glow, topPos, null, Color.White, PiOver4, glow.Size() / 2,scale, 0, 0);
+            SB.Draw(glow, topPos, null, Color.White, PiOver4, glow.Size() / 2, scale, 0, 0);
             Texture2D texture = HJScarletTexture.Texture_StandardGradient.Value;
             Effect effect = HJScarletShader.AlphaFade;
             effect.Parameters["uFadeoutLeftLength"].SetValue(0.31f);
             effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.DarkGray* 0.90f, 0.95f);
-            DrawSlash(texture, Color.White* 0.60f, 0.55f);
+            DrawSlash(texture, Color.DarkGray * 0.90f, 0.95f);
+            DrawSlash(texture, Color.White * 0.60f, 0.55f);
 
             Effect effect2 = HJScarletShader.AlphaFadeNoiseColor;
             effect2.Parameters["uFadeoutLeftLength"].SetValue(0.42f);
@@ -248,7 +247,7 @@ namespace HJScarletRework.Projs.Executor
             effect2.Parameters["OverlayColor"].SetValue(Color.White.ToVector4());
             effect2.CurrentTechnique.Passes[0].Apply();
             Texture2D texture2 = HJScarletTexture.Noise_Misc.Value;
-            DrawSlash(texture2, Color.Silver* .95f, 0.90f);
+            DrawSlash(texture2, Color.Silver * .95f, 0.90f);
             texture2 = HJScarletTexture.Noise_Aura.Value;
             DrawSlash(texture2, Color.White * .80f, 0.55f);
 
@@ -258,8 +257,8 @@ namespace HJScarletRework.Projs.Executor
             effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.DarkGray* 0.95f, 0.95f);
-            DrawSlash(texture, Color.White* 0.60f, 0.50f);
+            DrawSlash(texture, Color.DarkGray * 0.95f, 0.95f);
+            DrawSlash(texture, Color.White * 0.60f, 0.50f);
 
             HJScarletMethods.EndShaderAreaPixel();
 
@@ -289,7 +288,7 @@ namespace HJScarletRework.Projs.Executor
                 float progress = (float)i / OldAimPos.Count;
                 Vector2 DrawPos_Head = OldAimPos[i] + Projectile.Center - Main.screenPosition;
                 Vector2 DrawPos_Source = OldAimPos[i] * mult + Projectile.Center - Main.screenPosition;
-                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor , new Vector3(progress, 0, 0)));
+                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor, new Vector3(progress, 0, 0)));
                 _vertexCache.Add(new ScarletVertex(DrawPos_Source, drawcolor, new Vector3(progress, 1, 0)));
             }
             GD.Textures[0] = texture;

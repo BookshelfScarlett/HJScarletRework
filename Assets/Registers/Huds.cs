@@ -25,7 +25,7 @@ namespace HJScarletRework.Assets.Registers
             Hud_ExecutorFirearm = Request<Texture2D>($"{Path_Huds}{nameof(Hud_ExecutorFirearm)}");
             Hud_ExecutorCaster = Request<Texture2D>($"{Path_Huds}{nameof(Hud_ExecutorCaster)}");
             Hud_ExecutorColdSteel = Request<Texture2D>($"{Path_Huds}{nameof(Hud_ExecutorColdSteel)}");
-            Hud_ExecutorThrown= Request<Texture2D>($"{Path_Huds}{nameof(Hud_ExecutorThrown)}");
+            Hud_ExecutorThrown = Request<Texture2D>($"{Path_Huds}{nameof(Hud_ExecutorThrown)}");
         }
         public static void UnloadHud()
         {
