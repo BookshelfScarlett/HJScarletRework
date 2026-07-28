@@ -29,7 +29,9 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddRecipeGroup(HJScarletRecipeGroup.AnyGoldBar, 10).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyGoldBar, 5).
+                AddIngredient(ItemID.Diamond, 2).
+                AddIngredient(ItemID.FallenStar, 1).
                 AddTile(TileID.Anvils).
                 Register();
         }

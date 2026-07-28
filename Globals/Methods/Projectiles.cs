@@ -608,6 +608,17 @@ namespace HJScarletRework.Globals.Methods
                 }
             }
         }
+        /// <summary>
+        /// 用于手持弹幕，获取斜45°近战武器的挥舞
+        /// </summary>
+        public static void GetProjDrawInfo_Melee(this Projectile proj, out Texture2D texture, out Vector2 drawPosition, out float drawRotation, out Vector2 rotationPoint, out SpriteEffects flipSprite)
+        {
+            texture = TextureAssets.Projectile[proj.type].Value;
+            drawPosition = proj.Center - Main.screenPosition;
+            drawRotation = proj.rotation + (proj.spriteDirection == -1 ? PiOver2 + PiOver4 : PiOver4);
+            rotationPoint = proj.spriteDirection == -1 ? new Vector2(texture.Width, texture.Height) : new Vector2(0, texture.Height);
+            flipSprite = proj.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+        }
 
     }
 }

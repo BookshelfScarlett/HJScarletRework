@@ -27,6 +27,14 @@ namespace HJScarletRework.Globals.Methods
             norExepert.OnSuccess(ItemDropRule.Common(itemID, dropRate, min, max));
             loot.Add(norExepert);
         }
+        public static void ApplyForTheWorthyMasterLoot(ref NPCLoot loot, int itemID, int FTWDropRate, int noneFTWDropRate, int min = 1, int max = 1)
+        {
+            LeadingConditionRule norExepert = new LeadingConditionRule(new Conditions.ForTheWorthyIsUp());
+            norExepert.OnFailedConditions(ItemDropRule.Common(itemID, noneFTWDropRate, min, max));
+            norExepert.OnSuccess(ItemDropRule.Common(itemID, FTWDropRate, min, max));
+            loot.Add(norExepert);
+        }
+
         public static void ApplyMasterLoot(ref ItemLoot loot, int itemID, int dropRate, int min = 1, int max = 1)
         {
             LeadingConditionRule norExepert = new LeadingConditionRule(new Conditions.IsMasterMode());

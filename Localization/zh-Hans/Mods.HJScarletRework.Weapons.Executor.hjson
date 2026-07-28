@@ -493,12 +493,17 @@ SickleAndTorch: {
 	Tooltip: 第三下攻击时投掷火把
 	ExecutionStrike:
 		'''
-		镰刀攻击的击退力更强，并无视防御
+		镰刀攻击的击退力更强，并在命中时增强火焰的烧伤力
 		火把直接命中时迸发受重力影响的火球
 		'''
 }
 
 PureDagger: {
-	// DisplayName: Pure Dagger
-	// Tooltip: ""
+	DisplayName: 洁净白刃
+	Tooltip: 刀刃命中时使你[i:CobaltShield]免疫击退
+	ExecutionStrike:
+		'''
+		加快劈砍速度，劈砍命中时会追加纯净白星
+		同时，增加6点防御力
+		'''
 }

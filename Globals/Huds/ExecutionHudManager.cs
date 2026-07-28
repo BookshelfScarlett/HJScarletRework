@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.UI.Chat;
@@ -61,11 +62,31 @@ namespace HJScarletRework.Globals.Huds
                 return;
             SpriteBatch SB = Main.spriteBatch;
             Vector2 pos = LocalPlayer.Center + new Vector2(0, 50) - Main.screenPosition;
+            pos.Y += LocalPlayer.gfxOffY;
             Texture2D t2d = HJScarletTexture.Hud_ExecutorCounter.Value;
+            //if(HJScarletList.ExecutorWeaponTypeDictionary.TryGetValue(localPlayer.HeldItem.type, out ExecutorWeaponType value));
+            //{
+            //    switch (value)
+            //    {
+            //        case ExecutorWeaponType.Throw:
+            //            t2d = HJScarletTexture.Hud_ExecutorThrown.Value; break;
+            //        case ExecutorWeaponType.ColdSteel:
+            //            t2d = HJScarletTexture.Hud_ExecutorColdSteel.Value; break;
+            //        case ExecutorWeaponType.Firearm:
+            //            t2d = HJScarletTexture.Hud_ExecutorFirearm.Value; break;
+            //        case ExecutorWeaponType.Caster:
+            //            t2d = HJScarletTexture.Hud_ExecutorCaster.Value; break;
+            //        case ExecutorWeaponType.Minion:
+            //            t2d = HJScarletTexture.Hud_ExecutorAssist.Value; break;
+            //        case ExecutorWeaponType.Misc:
+            //            t2d = HJScarletTexture.Hud_ExecutorAssist.Value; break;
+            //    }
+            //}
 
             SB.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-
-            SB.Draw(t2d, pos, null, Color.Red * GeneralOpacity, 0f, t2d.ToOrigin(), 1f, SpriteEffects.None, 0f);
+            //Texture2D t2d2 = TextureAssets.MagicPixel.Value;
+            //SB.Draw(t2d2, pos, null, Color.Black* .4f* GeneralOpacity, 0f, t2d2.ToOrigin(), new Vector2(161.5f * .95f,.040f), SpriteEffects.None, 0f);
+            SB.Draw(t2d, pos, null, Color.Red* GeneralOpacity, 0f, t2d.ToOrigin(), 1.2f, SpriteEffects.None, 0f);
             DrawNumberWithEffect(SB, pos, CurExecutionCounter, GeneralOpacity);
 
             SB.End();

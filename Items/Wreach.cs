@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.Magic;
@@ -158,7 +159,11 @@ namespace HJScarletRework.Items
             //        hasList.Add(item);
             //    }
             //}
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 9f, ProjectileType<ASMDExecutionBullet>(), 1, knockback, player.whoAmI);
+            //Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 9f, ProjectileType<ASMDExecutionBullet>(), 1, knockback, player.whoAmI);
+            for(int i =0;i<HJScarletList.IsExecutorWeaponDictionaty.Count;i++)
+            {
+                //int type = HJScarletList.IsExecutorWeaponDictionaty.;
+            }
             sw.Stop();
             // 输出经过的时间（毫秒）
             Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

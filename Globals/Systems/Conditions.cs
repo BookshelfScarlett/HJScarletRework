@@ -6,7 +6,6 @@ using Terraria.Localization;
 
 namespace HJScarletRework.Globals.Systems
 {
-
     public class ScarletWearingFullCowboy : IItemDropRuleCondition
     {
         private static LocalizedText Description;

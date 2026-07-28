@@ -50,7 +50,9 @@ namespace HJScarletRework.Globals.Instances
                 case NPCID.IceMimic:
                     npcLoot.AddLootSimple(ItemType<PurePrismFate>(), 1, 10, 30);
                     break;
-
+                case NPCID.SkeletronHead:
+                    HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<PureDagger>(), 2);
+                    break;
                 case NPCID.MoonLordCore:
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<PrunusMume>(), 4);
                     break;

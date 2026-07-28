@@ -58,8 +58,8 @@ namespace HJScarletRework.Items.Materials
             Main.GetItemDrawFrame(Type, out Texture2D itemTexture, out Rectangle itemFrame);
             Vector2 drawOrigin = itemFrame.Size() / 2;
             Vector2 drawPosition = Item.Bottom - Main.screenPosition - new Vector2(0, drawOrigin.Y);
-            for(int i =0;i<16;i++)
-            spriteBatch.Draw(itemTexture, drawPosition + (TwoPi / 16f * i).ToRotationVector2() * 1.2f, itemFrame, Color.White.ToAddColor(), rotation, drawOrigin, scale, SpriteEffects.None, 0);
+            for (int i = 0; i < 16; i++)
+                spriteBatch.Draw(itemTexture, drawPosition + (TwoPi / 16f * i).ToRotationVector2() * 1.2f, itemFrame, Color.White.ToAddColor(), rotation, drawOrigin, scale, SpriteEffects.None, 0);
             spriteBatch.Draw(itemTexture, drawPosition, itemFrame, Color.White, rotation, drawOrigin, scale, SpriteEffects.None, 0);
             return false;
         }

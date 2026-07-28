@@ -33,7 +33,6 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
                 particleList.Add(rarityShinyOrb2);
                 particleList.Add(rarityShinyOrb);
             }
-            //最后更新他。
         }
     }
 }

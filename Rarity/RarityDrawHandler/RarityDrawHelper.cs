@@ -118,7 +118,7 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
                     ForeverNightRarity.DrawItemName(tooltipLine);
                     break;
                 case ShinyRarityType.ScarletRed:
-                    ScarletRedRarity.DrawItemName(tooltipLine);
+                    ScarletRedRarity.DrawFlavorNameRarity(tooltipLine);
                     break;
                 case ShinyRarityType.Solar:
                     SolarRarity.DrawItemName(tooltipLine);

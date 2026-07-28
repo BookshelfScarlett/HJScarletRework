@@ -152,7 +152,9 @@ namespace HJScarletRework.Globals.Methods
             else
             {
                 if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
+                {
                     return value >= executionTime;
+                }
                 else
                     return false;
             }

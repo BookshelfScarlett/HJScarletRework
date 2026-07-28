@@ -8,7 +8,6 @@ using HJScarletRework.Items.Armor.Shinobi;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityShiny;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -113,24 +112,15 @@ namespace HJScarletRework.Globals.Instances.Items
                     RarityDrawHelper.UpdateItemNameDraw(line, value);
                     return false;
                 }
-                //foreach (var (itemIDs, drawMethods) in _rarityDrawMap)
-                //{
-                //    if (itemIDs.Contains(item.type))
-                //    {
-                //        drawMethods(line);
-                //        return false;
-                //    }
-                //}
-                //if (HJScarletList.MiscRarityDrawDictionary.TryGetValue(item.type, out Action<DrawableTooltipLine> value))
-                //{
-                //    value(line);
-                //    return false;
-                //}
-                //if (HJScarletList.RareItemRarityDrawDictionary.TryGetValue(item.type, out RareItemRarity.RareType type))
-                //{
-                //    RareItemRarity.DrawItemName(line, type);
-                //    return false;
-                //}
+            }
+            if (line.Mod == Mod.Name && line.Name == "FlavorTooltipsName" && HJScarletConfigClient.Instance.SpecialRarity)
+            {
+                if (HJScarletList.ShinyRarityItemDictionary.TryGetValue(item.type, out ShinyRarityType value))
+                {
+                    RarityDrawHelper.UpdateFlavorNameDraw(line, value);
+                    return false;
+                }
+
             }
             return base.PreDrawTooltipLine(item, line, ref yOffset);
         }

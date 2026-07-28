@@ -93,34 +93,15 @@ namespace HJScarletRework.Globals.Players
             flybackhandBuffTimeCurrent = 0;
             PreciousTargetCrtis = 10;
             LifeBalloonAcc = false;
-            galvanizedHandDashCD = 0;
-            climaticHawstringLaserCounter = 0;
-
-            desterrannachtImmortalTime = 0;
-            desterranRespawnChargeTimer = 0;
-            stardustRuneHitHealTimer = 0;
-            defenderEmblemCD = 0;
-            exsanguinationBuffTime = 0;
-            tacticalTime = 0;
-            tacticalPunishTime = 0;
-            tacticalExecutionInputCache = 0;
-            blackKeyTimer = 0;
-            heldProjReUseTime = 0;
+            monkStaffHeal = false;
             holdingGaiaStaff = false;
+            galvanizedHandDashCD = 0;
+            crimsonCharmStopReduce = false;
             ResetAcc();
             ResetPets();
             ResetArmor();
             ResetBuff();
-            crimsonCharmReduceTime = 0;
-            crimsonCharmStopReduce = false;
-            cycleMadenessCrit = 0;
-            cycleMadenssTimer = 0;
-            cowboyRevolverTimer = 0;
-            floretProtectorTimer = 0;
-            monkStaffHeal = false;
-            containedBlastBoomCount = 0;
-            containedBlastBuffTime = 0;
-            executionUpdatesFrame = 0;
+
         }
 
 

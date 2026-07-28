@@ -48,6 +48,7 @@ namespace HJScarletRework.Globals.Players
         public int containedBlastBoomCount = 0;
         public bool holdingGaiaStaff = false;
         public bool firstTimeCraftGaia = false;
+        public int antiKnockbackTime = 0;
         #region 护甲
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;

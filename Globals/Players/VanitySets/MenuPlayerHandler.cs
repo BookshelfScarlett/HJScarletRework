@@ -3,6 +3,7 @@ using HJScarletRework.Items.Vanity.Arceca;
 using HJScarletRework.Items.Vanity.Misc;
 using HJScarletRework.Items.Vanity.Yards;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 

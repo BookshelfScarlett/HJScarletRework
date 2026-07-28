@@ -128,6 +128,9 @@ Executor: {
 	AbyssalWorldProj.DisplayName: Abyssal World Proj
 	PureDaggerProj.DisplayName: Pure Dagger Proj
 	PureDaggerExecution.DisplayName: Pure Dagger Execution
+	SickleAndTorchTorchToss.DisplayName: Sickle And Torch Torch Toss
+	PureDaggerStar.DisplayName: Pure Dagger Star
+	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
 }
 
 Melee: {

@@ -178,7 +178,6 @@ namespace HJScarletRework.Projs.Executor
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DarkGoldenrod, 1.26f, 1f);
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.Goldenrod, 0.8f, 1f);
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.58f);
-
             HJScarletMethods.EndShaderAreaPixel();
         }
         public void DrawCoreStar(SpriteBatch sb)
