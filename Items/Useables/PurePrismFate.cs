@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 
-namespace HJScarletRework.Items.Accessories
+namespace HJScarletRework.Items.Useables
 {
     public class PurePrismFate : HJScarletItemClass
     {

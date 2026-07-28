@@ -2,7 +2,6 @@
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Useables;
 using Microsoft.Xna.Framework;

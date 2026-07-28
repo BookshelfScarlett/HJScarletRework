@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;

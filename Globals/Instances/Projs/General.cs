@@ -95,7 +95,7 @@ namespace HJScarletRework.Globals.Instances.Projs
                     {
                         return;
                     }
-                    SoundEngine.PlaySound(HJScarletSounds.Lightning_Strike with { MaxInstances = 0, Pitch = 0.35f, Volume = 0.5f }, projectile.Center);
+                    ScarletSound(HJScarletSounds.Lightning_Strike, projectile.Center, 0.4f, 1, 0.35f);
                     for (int i = 0; i < availableTarget.Count; i++)
                     {
                         NPC target = availableTarget[i];

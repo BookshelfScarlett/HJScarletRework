@@ -169,7 +169,9 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="itemType">要移除的武器（或能力）对应的物品 ID。</param>
         public static void RemoveExecutionProgress(this Player player, int itemType)
         {
-            player.HJScarlet().ExecutionListStored.Remove(itemType);
+            if (player.HJScarlet().ExecutionListStored.ContainsKey(itemType))
+                player.HJScarlet().ExecutionListStored[itemType] = 0;
+            //player.HJScarlet().ExecutionListStored.Remove(itemType);
         }
         /// <summary>
         /// <para>移除玩家处决位（自动使用玩家手持物品作为键）。</para>
@@ -179,7 +181,9 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="player">目标玩家。</param>
         public static void RemoveExecutionProgress(this Player player)
         {
-            player.HJScarlet().ExecutionListStored.Remove(player.HeldItem.type);
+            if (player.HJScarlet().ExecutionListStored.ContainsKey(player.HeldItem.type))
+                player.HJScarlet().ExecutionListStored[player.HeldItem.type] = 0;
+
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
+using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
@@ -362,19 +363,70 @@ namespace HJScarletRework.Globals.Players
         public int HoverItemIndex = -1;
         public override bool HoverSlot(Item[] inventory, int context, int slot)
         {
-            Item item = inventory[slot];
-            if (item.IsLegal())
+            ClearUpParticle(ref inventory, context,slot);
+            HoverSwitchWeapon(ref inventory, context, slot);
+            return false;
+        }
+
+        public void HoverSwitchWeapon(ref Item[] inventory, int context, int slot)
+        {
+            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && swapTimer==0)
             {
-                if (HJScarletList.ShinyRarityItemDictionary.ContainsKey(item.type))
+                swapTimer = 10;
+                if (!inventory[slot].IsLegal())
+                    return;
+                Item item = inventory[slot];
+                if (WeaponSwapMaps.TryGetValue(item.type, out int value))
                 {
-                    if (item.type != HoverItemIndex)
-                    {
-                        RarityDrawHelper.CleanUpSparkles();
-                        HoverItemIndex = item.type;
-                    }
+                    DoSwapWeapon(ref inventory, item, slot, value, false);
+                    return;
+                }
+                int reverseWeapon = GetReverseWeapon(item.type);
+                if (reverseWeapon != -1)
+                {
+                    Main.NewText(1);
+                    DoSwapWeapon(ref inventory, item, slot, reverseWeapon, true);
+                    return;
                 }
             }
-            return base.HoverSlot(inventory, context, slot);
+        }
+        private void DoSwapWeapon(ref Item[] inventory, Item originalItem, int slot,int targetItemID, bool altPrefix)
+        {
+            Item targetItem = new Item();
+            int prefix = originalItem.prefix;
+            bool favor = originalItem.favorited;
+            if (altPrefix)
+            {
+                if (prefix == PrefixID.Demonic || prefix == PrefixID.Godly)
+                    prefix = PrefixID.Legendary;
+            }
+            else if (prefix == PrefixID.Legendary || prefix == PrefixID.Godly)
+                prefix = PrefixID.Godly;
+            targetItem.SetDefaults(targetItemID);
+            if (!targetItem.CanApplyPrefix(PrefixID.Legendary) && prefix == PrefixID.Legendary)
+                prefix = PrefixID.Godly;
+            targetItem.Prefix(prefix);
+            targetItem.favorited = favor;
+            inventory[slot] = targetItem;
+            ScarletSound(SoundID.ResearchComplete, Player.Center);
+            for (int i = 0; i < 20; i++)
+                ECSParticle.TurbulenceShinyOrb(Player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 1, 0.1f, RandRotTwoPi);
+
+        }
+
+        public void ClearUpParticle(ref Item[] inventory, int context, int slot)
+        {
+            if (!HJScarletConfigClient.Instance.SpecialRarity)
+                return;
+            Item item = inventory[slot];
+            if (!item.IsLegal())
+                return;
+            if (!HJScarletList.ShinyRarityItemDictionary.ContainsKey(item.type))
+                return;
+            if (item.type == HoverItemIndex)
+                return;
+            RarityDrawHelper.CleanUpSparkles();
+            HoverItemIndex = item.type;
         }
         private void HandleWeaponAbility()
         {

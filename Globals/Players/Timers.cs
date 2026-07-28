@@ -11,6 +11,7 @@ namespace HJScarletRework.Globals.Players
     {
         public int defenseBuffTimer = 0;
         public int defenseBuff = 0;
+        public int swapTimer = 0;
         public void ResetTimer()
         {
             climaticHawstringLaserCounter = 0;
@@ -35,9 +36,12 @@ namespace HJScarletRework.Globals.Players
             executionUpdatesFrame = 0;
             defenseBuffTimer = 0;
             defenseBuff = 0;
+            swapTimer = 0;
         }
         public void UpdateTimer()
         {
+            if (swapTimer > 0)
+                swapTimer--;
             if (tacticalExecutionInputCache > 0)
                 tacticalExecutionInputCache--;
 

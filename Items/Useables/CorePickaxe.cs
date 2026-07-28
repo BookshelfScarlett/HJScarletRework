@@ -10,7 +10,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Accessories
+namespace HJScarletRework.Items.Useables
 {
     public class CorePickaxe : HJScarletItemClass
     {
@@ -27,7 +27,7 @@ namespace HJScarletRework.Items.Accessories
             Item.UseSound = SoundID.Item1;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.autoReuse = true;
-            Item.axe = HJScarletMethods.SetAxePower(200);
+            Item.axe = 200.SetAxePower();
             Item.rare = ItemRarityID.Red;
             Item.useTurn = true;
             Item.knockBack = 12f;

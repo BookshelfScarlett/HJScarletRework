@@ -7,7 +7,7 @@ using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 
-namespace HJScarletRework.Items.Accessories
+namespace HJScarletRework.Items.Useables
 {
     public class GoldenAppleEnchanted : HJScarletItemClass
     {

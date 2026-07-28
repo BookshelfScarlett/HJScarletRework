@@ -53,7 +53,6 @@ namespace HJScarletRework.Items.Weapons.Executor
                 else
                     AlterType = -1;
             }
-            player.HJScarlet().tacticalExecutionInputCache = 0;
             return false;
         }
         public override void AddRecipes()

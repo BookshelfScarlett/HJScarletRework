@@ -128,7 +128,7 @@ namespace HJScarletRework.Projs.Executor
                 //下面基本上是粒子生成了。
                 float slashTrailRotation = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
                 Matrix tFormSlash = Matrix.CreateRotationZ(slashTrailRotation) * Matrix.CreateScale(1.4f, Height, 1f);
-                Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * 1.12f;
+                Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * 1.12f * heldScale;
                 Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 21;
                 OldAimPos.Add(slashPosFinal);
                 if (Main.rand.NextBool(8))
