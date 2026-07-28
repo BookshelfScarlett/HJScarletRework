@@ -10,7 +10,7 @@ namespace HJScarletRework.Core.Primitives.Trail
 
         public static void RenderTrail(TrailDrawDate[] drawDate, DrawSetting drawSetting)
         {
-            if (drawDate.Length < 3)
+            if (drawDate.Length < 2)
                 return;
             DrawTrail(drawDate, drawSetting);
         }

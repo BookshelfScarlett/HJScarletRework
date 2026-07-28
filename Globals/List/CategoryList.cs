@@ -192,7 +192,7 @@ namespace HJScarletRework.Globals.List
                     BarsHashSet.Add(item.type);
 
                 //处理召唤武器。
-                bool isSummonWeapon = item.damage > 0 && item.DamageType.CountsAsClass<SummonDamageClass>() && item.shoot != 0;
+                bool isSummonWeapon = item.damage > 0 && item.DamageType.CountsAsClass<SummonDamageClass>() && item.shoot != ProjectileID.None;
                 Projectile proj = ContentSamples.ProjectilesByType[item.shoot];
                 if (isSummonWeapon && proj.minion && !proj.sentry && proj.minionSlots > 0)
                     SummonWeaponList.Add(item.type);

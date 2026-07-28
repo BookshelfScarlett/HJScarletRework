@@ -131,6 +131,7 @@ Executor: {
 	SickleAndTorchTorchToss.DisplayName: Sickle And Torch Torch Toss
 	PureDaggerStar.DisplayName: Pure Dagger Star
 	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
+	CrimsonScytheSoulStone.DisplayName: Crimson Scythe Soul Stone
 }
 
 Melee: {
