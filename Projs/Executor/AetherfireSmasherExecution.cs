@@ -62,15 +62,14 @@ namespace HJScarletRework.Projs.Executor
             else
             {
                 Projectile.rotation = Projectile.velocity.ToRotation();
-                bool hasTarget = Projectile.GetTargetSafe(out NPC target, true, 1200f, true);
                 if (Projectile.MeetMaxUpdatesFrame(Timer, 15))
                 {
+                    bool hasTarget = Projectile.GetTargetSafe(out NPC target, true, 1200f, true);
                     if (hasTarget)
                     {
                         if (!CanLock)
                         {
                             InitActiveDashParticle();
-
                             Projectile.velocity = (target.Center - Projectile.Center).ToSafeNormalize() * 20f;
                             ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30, 40, Projectile.velocity.ToRotation(), ToRadians(10f));
                             SoundEngine.PlaySound(HJScarletSounds.Misc_GunHit with { MaxInstances = 0 }, Projectile.Center);
@@ -316,8 +315,8 @@ namespace HJScarletRework.Projs.Executor
 
             if (Projectile.numHits % 8 == 0)
             {
-                Vector2 center = new Vector2(target.Center.X, target.Center.Y + 30f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), center, Vector2.Zero, ProjectileType<AetherfireSmasherVolcano>(), (int)(Projectile.damage * 1.5f), Projectile.knockBack);
+                Vector2 center = new(target.Center.X, target.Center.Y + 30f);
+                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), center, Vector2.Zero, ProjectileType<AetherfireSmasherVolcano>(), (int)(Projectile.damage * 1.10f), Projectile.knockBack);
             }
 
         }

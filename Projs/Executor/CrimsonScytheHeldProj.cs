@@ -105,37 +105,23 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!ThirdSwing)
             {
-                if (!Helper.IsDone[0])
-                {
-                    UpdateBeginAnimation();
-
-                }
-                else if (!Helper.IsDone[1])
-                {
-                    UpdateEndAnimation();
-                    if (OldAimPos.Count > 0)
-                        OldAimPos.RemoveAt(0);
-                }
-                else if (!Helper.IsDone[2] && !Main.mouseLeft)
-                {
-                    if (Main.mouseLeft || Owner.HeldItem.type != OriginalItemID)
-                    {
-                        Projectile.Kill();
-                    }
-                    UpdateFinalAnimation();
-                }
-                else
-                    Projectile.Kill();
+                UpdateHalfCircleSwingAnimation();
             }
             else
             {
+                UpdateFullCircleSwingAnimation();
+            }
+        }
+        #region 全向的第三挥砍
+        public void UpdateFullCircleSwingAnimation()
+        {
                 if (!Helper.IsDone[0])
                 {
-                    UpdateBeginAnimationThirdSwing();
+                    UpdtaeFullCircleBegin();
                 }
                 else if (!Helper.IsDone[1])
                 {
-                    UpdateEndAnimationThirdSwing();
+                    UpdtaeFullCircleEnd();
                     if (OldAimPos.Count > 0)
                         OldAimPos.RemoveAt(0);
                 }
@@ -144,26 +130,9 @@ namespace HJScarletRework.Projs.Executor
                     SwingTime = -1;
                     Projectile.Kill();
                 }
-            }
-        }
-
-        public void UpdateFinalAnimation()
-        {
-            Helper.UpdateAniState(2);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
-            float easedProgress = EaseInCubic(Helper.GetAniProgress(2));
-            float beginAngle = 195f * Flip.ToDirectionInt();
-            float endAngle = 185f * Flip.ToDirectionInt();
-            float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
-            Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(Width, Height, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.5f * heldScale;
-            Projectile.scale = tarPos.Length();
-            Projectile.rotation = tarPos.ToRotation() + TargetRotation;
-            TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .015f);
 
         }
-        #region 全向的第三挥砍
-        public void UpdateEndAnimationThirdSwing()
+        public void UpdtaeFullCircleEnd()
         {
             Helper.UpdateAniState(1);
             float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
@@ -178,7 +147,7 @@ namespace HJScarletRework.Projs.Executor
             TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .05f);
         }
 
-        public void UpdateBeginAnimationThirdSwing()
+        public void UpdtaeFullCircleBegin()
         {
             float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
             Helper.UpdateAniState(0);
@@ -223,6 +192,31 @@ namespace HJScarletRework.Projs.Executor
         }
         #endregion
         #region 起手两挥砍
+        public void UpdateHalfCircleSwingAnimation()
+        {
+                            if (!Helper.IsDone[0])
+                {
+                    UpdateBeginAnimation();
+
+                }
+                else if (!Helper.IsDone[1])
+                {
+                    UpdateEndAnimation();
+                    if (OldAimPos.Count > 0)
+                        OldAimPos.RemoveAt(0);
+                }
+                else if (!Helper.IsDone[2] && !Main.mouseLeft)
+                {
+                    if (Main.mouseLeft || Owner.HeldItem.type != OriginalItemID)
+                    {
+                        Projectile.Kill();
+                    }
+                    UpdateFinalAnimation();
+                }
+                else
+                    Projectile.Kill();
+
+        }
         public void UpdateBeginAnimation()
         {
             float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
@@ -279,7 +273,26 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .05f);
         }
+        /// <summary>
+        /// 收尾动画，在开始收尾的时候这里就不会占用玩家的itemTime了
+        /// <br>在这个动画下按下左键会强制进行下一次的攻击</br>
+        /// </summary>
+        public void UpdateFinalAnimation()
+        {
+            Helper.UpdateAniState(2);
+            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float easedProgress = EaseInCubic(Helper.GetAniProgress(2));
+            float beginAngle = 195f * Flip.ToDirectionInt();
+            float endAngle = 185f * Flip.ToDirectionInt();
+            float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
+            Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(Width, Height, 1);
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.5f * heldScale;
+            Projectile.scale = tarPos.Length();
+            Projectile.rotation = tarPos.ToRotation() + TargetRotation;
+            TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .015f);
+        }
         #endregion
+
         public override void OnKill(int timeLeft)
         {
             if (Main.mouseLeft)

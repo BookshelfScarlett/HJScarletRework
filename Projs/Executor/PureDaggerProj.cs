@@ -232,13 +232,13 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
-                ScarletSound(HJScarletSounds.Misc_ManaClearUse, Owner.Center, 0.55f,1,-0.4f,0.2f);
-                for(int i =0;i<26;i++)
+                ScarletSound(HJScarletSounds.Misc_ManaClearUse, Owner.Center, 0.55f, 1, -0.4f, 0.2f);
+                for (int i = 0; i < 26; i++)
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + Projectile.rotation.ToRotationVector2() * 85f, Main.rand.NextFloat(.1f, .98f));
                     ECSParticle.TurbulenceShinyOrb(pos, 1.2f, Color.White, 60, 1, 0.12f);
                 }
-                for(int i =0;i<26;i++)
+                for (int i = 0; i < 26; i++)
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + Projectile.rotation.ToRotationVector2() * 85f, Main.rand.NextFloat(.1f, .98f));
                     ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(0.7f, 1.2f), Color.White, 60, 1, 0.5f);
@@ -268,42 +268,26 @@ namespace HJScarletRework.Projs.Executor
         {
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;
-            Vector2 topPos = drawPosition +  (Vector2.UnitX).RotatedBy(Projectile.rotation) * 80f * Projectile.scale;
+            Vector2 topPos = drawPosition + (Vector2.UnitX).RotatedBy(Projectile.rotation) * 80f * Projectile.scale;
             Texture2D glow = HJScarletTexture.Particle_KiraStarGlow.Value;
             float scale = Projectile.scale * .12f * (1 - EaseOutExpo(Helper.GetAniProgress(1)));
-            SB.Draw(glow, topPos, null, Color.White, PiOver4, glow.Size() / 2,scale, 0, 0);
+            SB.Draw(glow, topPos, null, Color.White, PiOver4, glow.Size() / 2, scale, 0, 0);
             Texture2D texture = HJScarletTexture.Texture_StandardGradient.Value;
-            Effect effect = HJScarletShader.AlphaFade;
-            effect.Parameters["uFadeoutLeftLength"].SetValue(0.31f);
-            effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
-            effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
-            effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.DarkGray* 0.90f, 0.95f);
-            DrawSlash(texture, Color.White* 0.60f, 0.55f);
+            HJScarletMethods.ApplyAlphaCut(new Vector4(0.31f, 0.1f, 0, 0), Vector2.Zero, Vector2.One);
+            DrawSlash(texture, Color.DarkGray * 0.90f, 0.95f);
+            DrawSlash(texture, Color.White * 0.60f, 0.55f);
 
-            Effect effect2 = HJScarletShader.AlphaFadeNoiseColor;
-            effect2.Parameters["uFadeoutLeftLength"].SetValue(0.42f);
-            effect2.Parameters["uFadeinRigtLength"].SetValue(0.2f);
-            effect2.Parameters["UVOffset"].SetValue(new Vector2(-Main.GlobalTimeWrappedHourly * .935f, 0));
-            effect2.Parameters["UVMult"].SetValue(new Vector2(2f, 2f));
-            effect2.Parameters["OverlayColor"].SetValue(Color.White.ToVector4());
-            effect2.CurrentTechnique.Passes[0].Apply();
+            HJScarletMethods.ApplyAlphaCut(new Vector4(0.42f, 0.2f, 0, 0), new Vector2(-Main.GlobalTimeWrappedHourly * .935f, 0), new Vector2(2f), Color.White);
             Texture2D texture2 = HJScarletTexture.Noise_Misc.Value;
-            DrawSlash(texture2, Color.Silver* .95f, 0.90f);
+            DrawSlash(texture2, Color.Silver * .95f, 0.90f);
             texture2 = HJScarletTexture.Noise_Aura.Value;
             DrawSlash(texture2, Color.White * .80f, 0.55f);
 
             texture = HJScarletTexture.Texture_SwordSlash.Value;
-            effect = HJScarletShader.AlphaFade;
-            effect.Parameters["uFadeoutLeftLength"].SetValue(0.41f);
-            effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
-            effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
-            effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.DarkGray* 0.95f, 0.95f);
-            DrawSlash(texture, Color.White* 0.60f, 0.50f);
-
+            HJScarletMethods.ApplyAlphaCut(new Vector4(0.41f, 0.1f, 0, 0), Vector2.Zero, Vector2.One);
+            DrawSlash(texture, Color.DarkGray * 0.95f, 0.95f);
+            DrawSlash(texture, Color.White * 0.60f, 0.50f);
             HJScarletMethods.EndShaderAreaPixel();
-
         }
         public override bool PreDraw(ref Color lightColor)
         {

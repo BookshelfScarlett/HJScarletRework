@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -73,9 +74,11 @@ namespace HJScarletRework.Globals.Players
             float curSlots = Player.maxMinions - Player.slotsMinions;
             List<Item> hasList = [];
             int applyDmg = -1;
-            ScarletSound(HJScarletSounds.Misc_Spell, Player.Center, 0.85f, 1, 0.4f, 0.1f);
+
+            ScarletSound(HJScarletSounds.Misc_ManaClearUse, Player.Center, 0.85f, 1, 0.4f, 0.1f);
             while (curSlots >= 1)
             {
+                //武器列表
                 int itemID = Main.rand.NextFromCollection(HJScarletList.SummonWeaponList);
                 Item item = ContentSamples.ItemsByType[itemID];
                 if (applyDmg == -1)
@@ -88,14 +91,14 @@ namespace HJScarletRework.Globals.Players
                 if (curSlots >= proj.minionSlots && !hasList.Contains(item))
                 {
                     int dmg = (int)Player.GetTotalDamage<SummonDamageClass>().ApplyTo(applyDmg);
-                    break;
-                    //ItemLoader.Shoot(item, Player,Player.GetSource_ItemUse_WithPotentialAmmo(item,AmmoID.None), Player.MountedCenter, RandDirTwoPi, proj.type, applyDmg, item.knockBack);
+                    var src = new EntitySource_ItemUse_WithAmmo(Player, item, AmmoID.None);
+                    ItemLoader.Shoot(item, Player, src, Player.MountedCenter, RandDirTwoPi, proj.type, dmg, item.knockBack);
+                    hasList.Add(item);
                 }
-
             }
             powerLilyTimer = GetSeconds(30);
         }
-               public void UpdateFlybackBuff()
+        public void UpdateFlybackBuff()
         {
             //归零针buff
             bool hasBuff = (flybackInGameTimeBuff > 0) && (Player.HeldItem.type == ItemType<FlybackHandThrown>());
@@ -734,3 +737,4 @@ namespace HJScarletRework.Globals.Players
         }
     }
 }
+

@@ -22,8 +22,6 @@ namespace HJScarletRework.Projs.Executor
         public int BuffTime = 0;
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.NeedsUUID[Projectile.type] = true;
-            ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[Projectile.type] = true;
         }
         public override void ExSD()
         {
@@ -115,6 +113,7 @@ namespace HJScarletRework.Projs.Executor
             Owner.itemAnimation = Owner.itemTime = 2;
             Owner.ControlPlayerArm(Projectile.rotation);
             Projectile.Center = Owner.MountedCenter;
+            Projectile.position.Y += Owner.gfxOffY;
         }
         public override bool PreDraw(ref Color lightColor)
         {

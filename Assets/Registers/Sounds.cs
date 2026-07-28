@@ -84,7 +84,7 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle ASMD_ExecutionFire => new SoundStyle($"{SoundsPath}{nameof(ASMD_ExecutionFire)}");
         public static SoundStyle Misc_ManaClearUse => new SoundStyle($"{SoundsPath}{nameof(Misc_ManaClearUse)}");
         public static SoundStyle Tlipoca_SoulAbsorb => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_SoulAbsorb)}");
-        public static SoundStyle Tlipoca_SoulBonk => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_SoulBonk)}", numVariants: 2);
+        public static SoundStyle Tlipoca_StoneBonk => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_StoneBonk)}", numVariants: 2);
         public static SoundStyle Tlipoca_Swing => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_Swing)}", numVariants: 2);
         public static SoundStyle Tlipoca_StoneShatter => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_StoneShatter)}");
         public static SoundStyle Moonlight_Ding => new SoundStyle($"{SoundsPath}{nameof(Moonlight_Ding)}");
