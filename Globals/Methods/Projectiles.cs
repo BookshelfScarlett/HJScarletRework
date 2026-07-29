@@ -526,7 +526,7 @@ namespace HJScarletRework.Globals.Methods
                 proj.frame = 0;
             }
         }
-        public static void KillCertainProj(this Player player, int type, bool extraCondition = true)
+        public static void KillCertainProj(this Player player, int type, bool extraCondition = true, bool force = false)
         {
             foreach (var proj in Main.ActiveProjectiles)
             {
@@ -538,7 +538,10 @@ namespace HJScarletRework.Globals.Methods
                     continue;
                 if (!extraCondition)
                     continue;
-                proj.Kill();
+                if (force)
+                    proj.active = false;
+                else
+                    proj.Kill();
             }
         }
         /// <summary>
@@ -564,16 +567,14 @@ namespace HJScarletRework.Globals.Methods
                 }
             }
         }
-        public static void MinionAntiClump(this Projectile proj, float pushForce = 0.05f)
+        public static bool MinionAntiClump(this Projectile proj, float pushForce = 0.05f)
         {
             for (int k = 0; k < Main.maxProjectiles; k++)
             {
                 Projectile otherProj = Main.projectile[k];
-                // Short circuits to make the loop as fast as possible
-                if (!otherProj.active || otherProj.owner != proj.owner || !otherProj.minion || k == proj.whoAmI)
+                if (!otherProj.active || otherProj.owner != proj.owner || k == proj.whoAmI)
                     continue;
 
-                // If the other Projectile is indeed the same owned by the same player and they're too close, nudge them away.
                 bool sameProjType = otherProj.type == proj.type;
                 float taxicabDist = Math.Abs(proj.position.X - otherProj.position.X) + Math.Abs(proj.position.Y - otherProj.position.Y);
                 if (sameProjType && taxicabDist < proj.width)
@@ -587,8 +588,10 @@ namespace HJScarletRework.Globals.Methods
                         proj.velocity.Y -= pushForce;
                     else
                         proj.velocity.Y += pushForce;
+                    return true;
                 }
             }
+            return false;
         }
         public static void MinionAntiClump(this Projectile proj, Vector2 pushDir, float pushForce = 0.05f, float randomAngleRange = .05f)
         {

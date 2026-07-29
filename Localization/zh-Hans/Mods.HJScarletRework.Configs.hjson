@@ -85,4 +85,9 @@ HJScarletConfigClient: {
 			默认为1，即100%音量
 			'''
 	}
+
+	ScreenDarkStrength: {
+		// Label: Screen Dark Strength
+		// Tooltip: ""
+	}
 }

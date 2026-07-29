@@ -1,6 +1,8 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs;
 using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
 using System;
@@ -180,11 +182,50 @@ namespace HJScarletRework.Globals.Players
         {
             return (Player.GetTotalCritChance<Type>() + 4f - 100f);
         }
+        public void MaidReapoerHealDamage(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+
+        }
+        public int CurHit = 0;
         public void GlobalExecutorOnHit(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (!isExecutionStrikeTriggered)
+                return;
+            bool isTriggered = false;
+            if (HJScarletList.IsExecutorWeaponDictionaty.ContainsKey(Player.HeldItem.type) && maidReaperArmor && CurHit < 1)
+            {
+                bool value = ExecutionListStored.TryGetValue(Player.HeldItem.type, out int curProgress);
+                if (!value)
+                    return;
+                bool listMaxTime = HJScarletList.IsExecutorWeaponDictionaty.TryGetValue(Player.HeldItem.type, out int maxTime);
+                if (!listMaxTime)
+                    return;
+                //获得这个比率。
+                //目前最大的处决次数武器为300轮的放血疗法
+                float curProgressRatios = Utils.GetLerpValue(6, 300, maxTime, true);
+                //获得敌对单位当前的生命值，与
+                float stealRatio = 0.03f * curProgressRatios;
+                int stealAmount = (int)(target.life * stealRatio);
+                //治疗量不要超过玩家上限
+                if (stealAmount > Player.statLifeMax2)
+                    stealAmount = Player.statLifeMax2;
+                if (stealAmount > 0)
+                {
+                    Player.ScarletHeal(stealAmount);
+                    float lerpSteal = Utils.GetLerpValue(5, target.life, stealAmount, true);
+                    Projectile.NewProjectileDirect(Player.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<InvisBoom>(), (int)(target.life * lerpSteal), 0, Player.whoAmI);
+                }
+                isTriggered = true;
+            }
+            CurHit += 1;
+            if (isTriggered)
+            {
+                isExecutionStrikeTriggered = false;
+            }
+            if (tacticalExecutionInputCache == 0)
+                CurHit = 0;
+
         }
-
-
         public void GlobalOnHitNPCWithSomething(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (souloftheTidalMark && stardustRuneHitHealTimer == 0)
@@ -206,6 +247,7 @@ namespace HJScarletRework.Globals.Players
 
                 }
             }
+
         }
     }
 }

@@ -4,3 +4,5 @@ Drop: {
 	UnderworldBiome: Mods.HJScarletRework.Conditions.Drop.UnderworldBiome
 	FullCowboy: Mods.HJScarletRework.Conditions.Drop.FullCowboy
 }
+
+Crafting.IsDownSlimeGodAndInEclipse: Mods.HJScarletRework.Conditions.Crafting.IsDownSlimeGodAndInEclipse

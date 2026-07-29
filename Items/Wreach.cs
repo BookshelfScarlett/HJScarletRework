@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.Magic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -158,7 +159,7 @@ namespace HJScarletRework.Items
             //        hasList.Add(item);
             //    }
             //}
-            //Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 9f, ProjectileType<ASMDExecutionBullet>(), 1, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 19f, ProjectileType<CrimsonScytheHealingSoul>(), 1, knockback, player.whoAmI);
             for (int i = 0; i < HJScarletList.IsExecutorWeaponDictionaty.Count; i++)
             {
                 //int type = HJScarletList.IsExecutorWeaponDictionaty.;

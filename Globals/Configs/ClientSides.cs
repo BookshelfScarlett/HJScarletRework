@@ -17,20 +17,25 @@ namespace HJScarletRework.Globals.Configs
         [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(true)]
         public bool SpecialRarity { get; set; }
+
         [BackgroundColor(211, 211, 211, 192)]
         [Range(50, 30000)]
         [Increment(1)]
         [DefaultValue(10000)]
         public int MaxParticleCounts { get; set; }
+
         [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(true)]
         public bool DrawIcon { get; set; }
+
         [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(false)]
         public bool PerformanceMode { get; set; }
+
         [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(true)]
         public bool DrawExecutionCounter { get; set; }
+
         [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(true)]
         public bool SimpleImmersiveInventory { get; set; }
@@ -39,16 +44,19 @@ namespace HJScarletRework.Globals.Configs
         [Range(0, 10f)]
         [DefaultValue(1f)]
         public float ScreenShakeStrength { get; set; }
+
+        [BackgroundColor(211, 211, 211, 192)]
+        [Range(0f, 1f)]
+        [DefaultValue(1f)]
+        public float ScreenDarkStrength { get; set; }
+
         [BackgroundColor(211, 211, 211, 192)]
         [DefaultValue(false)]
         public bool TraditionalExecutionTooltipShowcase { get; set; }
+
         [BackgroundColor(211, 211, 211, 192)]
         [Range(0f, 1f)]
         [DefaultValue(1f)]
         public float ModSFXVolume { get; set; }
-
-
-
-
     }
 }

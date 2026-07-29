@@ -120,25 +120,25 @@ namespace HJScarletRework.Projs.Executor
             }
             else
                 if (Main.mouseLeft)
+            {
+                //挥舞结束的时候处死并立刻生成新的射弹。这样我们不用重置大部分的动画进程，实现起来稍微方便点
+                if (!Flip)
                 {
-                    //挥舞结束的时候处死并立刻生成新的射弹。这样我们不用重置大部分的动画进程，实现起来稍微方便点
-                    if (!Flip)
-                    {
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Projectile.type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
-                        //改向
-                        ((FrostoftheStormHeldProj)proj.ModProjectile).Flip = true;
-                        //存储当前挥舞角度
-                        ((FrostoftheStormHeldProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
-                        proj.HJScarlet().HasExecutionMechanic = true;
-                    }
-                    else
-                    {
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Projectile.type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
-                        ((FrostoftheStormHeldProj)proj.ModProjectile).Flip = false;
-                        ((FrostoftheStormHeldProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
-                        proj.HJScarlet().HasExecutionMechanic = true;
-                    }
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Projectile.type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                    //改向
+                    ((FrostoftheStormHeldProj)proj.ModProjectile).Flip = true;
+                    //存储当前挥舞角度
+                    ((FrostoftheStormHeldProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
+                    proj.HJScarlet().HasExecutionMechanic = true;
                 }
+                else
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Projectile.type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                    ((FrostoftheStormHeldProj)proj.ModProjectile).Flip = false;
+                    ((FrostoftheStormHeldProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
+                    proj.HJScarlet().HasExecutionMechanic = true;
+                }
+            }
         }
 
         public void HandlePlayerState()

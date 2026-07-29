@@ -1,6 +1,8 @@
 ﻿using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Keybinds;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Weapons.Executor;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -72,10 +74,10 @@ namespace HJScarletRework.Globals.Players
             if (tacticalExecutionInputCache == 0 && tacticalExecution)
             {
                 //12帧的输入缓冲
-                tacticalExecutionInputCache = 12;
+                tacticalExecutionInputCache = 60;
                 anyPiorityTier1Active = true;
             }
-            if (!CanWeaponSpecialAbility && (heldItem == ItemID.MonkStaffT1 || heldItem == ItemID.MonkStaffT3))
+            if (!CanWeaponSpecialAbility && (heldItem == ItemID.MonkStaffT1 || heldItem == ItemID.MonkStaffT3 || Player.IsHolding<CrimsonScythe>()))
             {
                 CanWeaponSpecialAbility = true;
                 anyPiorityTier1Active = true;

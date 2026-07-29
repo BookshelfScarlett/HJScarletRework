@@ -68,7 +68,7 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 itemLoot.AddLoot<PurePrismFate>(4, 25, 40);
             }
-            if(item.type == ItemType<GoblinChariotTreasureBag>())
+            if (item.type == ItemType<GoblinChariotTreasureBag>())
             {
                 itemLoot.AddLoot<AngryBomb>(4);
             }

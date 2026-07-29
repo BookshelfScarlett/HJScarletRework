@@ -53,6 +53,7 @@ namespace HJScarletRework.Globals.Players
         private void ResetBuff()
         {
             fruitofEthernity = false;
+            infiniteFlightTime = false;
         }
         private void ResetPets()
         {
@@ -97,6 +98,8 @@ namespace HJScarletRework.Globals.Players
             holdingGaiaStaff = false;
             galvanizedHandDashCD = 0;
             crimsonCharmStopReduce = false;
+            crimsonScytheAttackCounter = 0;
+            isExecutionStrikeTriggered = false;
             ResetAcc();
             ResetPets();
             ResetArmor();

@@ -7,7 +7,6 @@ using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
@@ -66,7 +65,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             new LightningParticle(Projectile.Center, Vector2.Zero, Color.RoyalBlue, 40, RandRotTwoPi, 0.5f * Main.rand.NextFloat(0.75f, 0.95f), 2).Spawn();
-            ScarletSound(HJScarletSounds.Lightning_Quick, Projectile.Center,0.75f,1,0.4f);
+            ScarletSound(HJScarletSounds.Lightning_Quick, Projectile.Center, 0.75f, 1, 0.4f);
             Vector2 spawnPos = Projectile.Center + Projectile.SafeDir() * 10f;
             for (int i = 0; i < 2; i++)
             {

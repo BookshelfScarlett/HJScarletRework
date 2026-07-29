@@ -33,7 +33,6 @@ namespace HJScarletRework.Globals.Players
             floretProtectorTimer = 0;
             containedBlastBoomCount = 0;
             containedBlastBuffTime = 0;
-            executionUpdatesFrame = 0;
             defenseBuffTimer = 0;
             defenseBuff = 0;
             swapTimer = 0;
@@ -156,6 +155,8 @@ namespace HJScarletRework.Globals.Players
                 lastHeldItemIndex = Player.HeldItem.type;
                 hasSendExecutionTint = false;
             }
+            if (crimsonScytheDefense > 0 && crimsonScytheAttackCounter < 1)
+                crimsonScytheDefense -= 1;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using ContinentOfJourney;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -23,9 +24,12 @@ namespace HJScarletRework.Globals.Systems
     }
     public static class HJScarletCraftingConditions
     {
+        public static string ConditionString => "Mods.HJScarletRework.Conditions.Crafting";
         public static Condition FirstTimeGaiaStriker = new Condition("Mods.HJScarletRework.Weapons.Executor.GaiaStriker.Conditions.FirstTime",
             () => (!Main.LocalPlayer.HJScarlet().firstTimeCraftGaia && !Main.dedServ));
         public static Condition AnyAfterCrafting = new Condition("Mods.HJScarletRework.Weapons.Executor.GaiaStriker.Conditions.SecondTime",
             () => (Main.LocalPlayer.HJScarlet().firstTimeCraftGaia || Main.dedServ));
+        public static Condition IsDownSlimeGodAndInEclipse = new Condition($"{ConditionString}.{nameof(IsDownSlimeGodAndInEclipse)}",
+            () => DownedBossSystem.downedSunGod && Main.eclipse);
     }
 }

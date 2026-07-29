@@ -12,9 +12,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Threading;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
@@ -53,6 +51,7 @@ namespace HJScarletRework.Projs.Executor
             ThirdSwing = SwingTime > 2;
             if (ThirdSwing)
             {
+                Projectile.SetupImmnuity(45);
                 ScarletSound(HJScarletSounds.Tlipoca_Swing, Projectile.Center, 0.75f, 1, 0.14f, 0.1f, 1);
                 Helper.MaxProgress[0] = (int)(AttackSpeed * .65f);
                 Helper.MaxProgress[1] = (int)(AttackSpeed * .3f);
@@ -76,6 +75,12 @@ namespace HJScarletRework.Projs.Executor
             UpdatePlayerState();
             if (OldAimPos.Count > 5 * Projectile.MaxUpdates)
                 OldAimPos.RemoveAt(0);
+        }
+        public override void OnExecution()
+        {
+            Owner.HJScarlet().crimsonScytheAttackCounter = 20;
+            ScarletSound(HJScarletSounds.Misc_ManaClearUse, Owner.Center, 0.55f, 1, -0.84f, 0.2f);
+            Projectile.HJScarlet().ExecutionStrike = false;
         }
         public void UpdatePlayerState()
         {
@@ -103,7 +108,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateAnimation()
         {
-            if(StopTiming>0)
+            if (StopTiming > 0)
             {
                 StopTiming--;
                 return;
@@ -171,22 +176,22 @@ namespace HJScarletRework.Projs.Executor
                 //下面基本上是粒子生成了。
                 float slashTrailRotation = Helper.UpdateAngle(beginAngle, endAngle + (0 * (Flip).ToDirectionInt()), Owner.direction, easedProgress);
                 Matrix tFormSlash = Matrix.CreateRotationZ(slashTrailRotation) * Matrix.CreateScale(Width + .24f, Height + .24f, 1f);
-                Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * 1.65f *heldScale;
+                Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * 1.65f * heldScale;
                 Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 120;
                 OldAimPos.Add(slashPosFinal);
-                    
 
-                if (easedProgress < 0.96f)
+                if (easedProgress < 0.98f)
                 {
-                    float lerpVal = Lerp(1f, 1.8f, (SwingTime / 3f));
-                    int total = ThirdSwing ? 8 : (int)(4 * lerpVal);
-                    total = (int)(total* heldScale);
-                    for (int i = 0; i < total+1; i++)
+                    for (int i = 0; i < 6; i++)
                     {
-                        Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 120, Main.rand.NextFloat(0.71f, 0.95f));
+                        Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 120, Main.rand.NextFloat(0.991f, 1.01f));
                         Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
-                        Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy((PiOver2 + ToRadians(10)) * Owner.direction * (Flip.ToDirectionInt())) * Main.rand.NextFloat(1.2f, 6.5f);
-                        BloodyMetaball.SpawnParticle(pos + Projectile.Center.GetNormalVector2(pos).RotatedBy(PiOver2*Projectile.spriteDirection) * i * 7.7f, vel, 0.14f, dir.ToRotation() + (PiOver2), true);
+                        Vector2 vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection);
+                        Vector2 posOff = Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2 * Projectile.spriteDirection) * i * 1.4f;
+                        pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 120, Main.rand.NextFloat(0.67f, 0.85f));
+                        dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
+                        vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection);
+                        ECSParticle.SmokeParticle(pos + posOff, vel * 9.3f, RandLerpColor(Color.DarkRed, Color.Black), Main.rand.Next(16, 41), RandRotTwoPi, 0.3670f * (easedProgress), Main.rand.NextFloat(.75f, 1.15f) * Lerp(0.395f, 0.595f, easedProgress), false, BlendState.AlphaBlend);
                     }
 
                     if (Main.rand.NextBool(1))
@@ -209,10 +214,6 @@ namespace HJScarletRework.Projs.Executor
                 UpdateBeginAnimation();
 
             }
-            //else if (!Helper.IsDone[1])
-            //{
-            //    UpdateEndAnimation();
-            //}
             else if (!Helper.IsDone[2] && !Main.mouseLeft)
             {
                 if (OldAimPos.Count > 0)
@@ -250,26 +251,26 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * 1.5f * heldScale;
                 Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 120;
                 OldAimPos.Add(slashPosFinal);
-                if (easedProgress < 0.96f)
+                if (easedProgress < 0.98f)
                 {
-                    float lerpVal = Lerp(1f, 1.8f, (SwingTime / 3f));
-                    int total = ThirdSwing ? 8 : (int)(4 * lerpVal);
-                    total = (int)(total* heldScale);
-                    for (int i = 0; i < total; i++)
+                    for (int i = 0; i <= 4; i += 2)
                     {
-                        Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 120, Main.rand.NextFloat(0.71f, 0.95f));
+                        //Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 120, Main.rand.NextFloat(0.991f, 1.01f));
+                        Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 120, Main.rand.NextFloat(0.67f, 0.85f));
                         Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
-                        Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy((PiOver2 + ToRadians(10)) * Owner.direction * (Flip.ToDirectionInt())) * Main.rand.NextFloat(1.2f, 6.5f);
-                        BloodyMetaball.SpawnParticle(pos + Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2*Projectile.spriteDirection) * i * 7.7f, vel, 0.14f * Main.rand.NextFloat(.95f,1.13f), dir.ToRotation() + (PiOver2), true);
+                        Vector2 vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection);
+                        if (Main.rand.NextBool(3))
+                        {
+                            ECSParticle.SmokeParticle(pos + vel * i * 1.5f, vel * 8.3f, RandLerpColor(Color.DarkRed, Color.Black), Main.rand.Next(16, 41), RandRotTwoPi, 0.970f * (1 - easedProgress), Main.rand.NextFloat(.75f, 1.15f) * Lerp(0.357f, 0.9f, easedProgress), false, BlendState.AlphaBlend);
+                        }
                     }
-                    if (Main.rand.NextBool(6))
+                    if (Main.rand.NextBool(3))
                     {
-                        Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 115, Main.rand.NextFloat(.71f, .95f));
+                        Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 115, Main.rand.NextFloat(.41f, .95f));
                         Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                         Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy(PiOver2 * Owner.direction * Flip.ToDirectionInt()) * Main.rand.NextFloat(1.5f, 1.9f);
                         ECSParticle.SnowCloud(pos, vel, RandLerpColor(Color.DarkRed, Color.Crimson), 40, RandRotTwoPi, 0.45f, 0.15f, BlendState.Additive);
                     }
-
                 }
             }
         }
@@ -296,8 +297,8 @@ namespace HJScarletRework.Projs.Executor
             Helper.UpdateAniState(2);
             float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
             float easedProgress = EaseInCubic(Helper.GetAniProgress(2));
-            float beginAngle = 195f * Flip.ToDirectionInt();
-            float endAngle = 185f * Flip.ToDirectionInt();
+            float beginAngle = 185f * Flip.ToDirectionInt();
+            float endAngle = 183f * Flip.ToDirectionInt();
             float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
             Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(Width, Height, 1);
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.5f * heldScale;
@@ -306,23 +307,26 @@ namespace HJScarletRework.Projs.Executor
             TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .015f);
         }
         #endregion
-
+        #region 处理处死
         public override void OnKill(int timeLeft)
         {
-            if (Main.mouseLeft)
+            HandleExecution();
+            if (Main.mouseLeft && Projectile.ai[0] == 0)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Type, Projectile.damage, Projectile.knockBack, Projectile.owner);
                 ((CrimsonScytheHeldProj)proj.ModProjectile).Flip = !Flip;
                 ((CrimsonScytheHeldProj)proj.ModProjectile).SwingTime = SwingTime + 1;
+                proj.HJScarlet().HasExecutionMechanic = true;
             }
-            else if (!ThirdSwing)
+            else if (!ThirdSwing || Projectile.ai[0] != 0)
             {
                 ScarletSound(HJScarletSounds.Misc_ManaClearUse, Owner.Center, 0.55f, 1, -0.84f, 0.2f);
+                Owner.ScarletHeal(2);
                 for (int i = 0; i < 92; i++)
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + Projectile.rotation.ToRotationVector2() * 125f, Main.rand.NextFloat(.1f, 1.78f));
                     Vector2 dir = Projectile.rotation.ToRotationVector2();
-                    BloodyMetaball.SpawnParticle(pos + dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-1, 1.1f) * 60, RandVelTwoPi(1.4f, 2.1f), 0.145f, RandRotTwoPi, true);
+                    BloodyMetaballAlt.SpawnParticle(pos + dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-1, 1.1f) * 60, RandVelTwoPi(1.4f, 2.1f), 0.145f, RandRotTwoPi, true);
                 }
                 for (int i = 0; i < 20; i++)
                 {
@@ -334,37 +338,138 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + Projectile.rotation.ToRotationVector2() * 125f, Main.rand.NextFloat(.1f, 1.58f));
                     Vector2 dir = Projectile.rotation.ToRotationVector2();
-                    BloodyMetaball.SpawnParticle(pos + dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-1, 1.1f) * 15, dir * Main.rand.NextFloat(1.4f, 2.1f), 0.945f, dir.ToRotation(), false);
+                    BloodyMetaballAlt.SpawnParticle(pos + dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-1, 1.1f) * 15, dir * Main.rand.NextFloat(1.4f, 2.1f), 0.745f, dir.ToRotation(), false, true);
                 }
                 for (int i = 0; i < 20; i++)
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + Projectile.rotation.ToRotationVector2() * 125f, Main.rand.NextFloat(1.41f, 1.58f));
                     Vector2 dir = Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2);
-                    BloodyMetaball.SpawnParticle(pos + dir * Main.rand.NextFloat(-42 * (-Flip.ToDirectionInt() * Owner.direction), 1.1f) * 1.5f, dir * Main.rand.NextFloat(1.4f, 2.1f), 0.945f, dir.ToRotation(), false);
-
+                    BloodyMetaballAlt.SpawnParticle(pos + dir * Main.rand.NextFloat(-42 * (-Flip.ToDirectionInt() * Owner.direction), 1.1f) * 1.5f, dir * Main.rand.NextFloat(1.4f, 2.1f), 0.745f, dir.ToRotation(), false, true);
                 }
             }
         }
+        #endregion
+        #region 处理命中
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             base.ModifyHitNPC(target, ref modifiers);
         }
+        public override bool? CanHitNPC(NPC target)
+        {
+            bool noSwing = (ThirdSwing && Helper.IsDone[0]) || (!ThirdSwing && Helper.IsDone[0]) || StopTiming > 0;
+            if (noSwing)
+                return false;
+            if (!ThirdSwing)
+                return null;
+            if (EaseOutCubic(Helper.GetAniProgress(0)) < 0.97f)
+                return null;
+            return false;
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Projectile.numHits < 1)
+            if (Projectile.numHits < 1 || ThirdSwing)
             {
-                float pitch = ThirdSwing ? 0f : -0.4f + SwingTime * .2f;
-                int t = ThirdSwing ? 2 : 1;
-                ScarletSound(HJScarletSounds.Tlipoca_StoneBonk, target.Center, instances: 0, pitch: pitch, variantType: t);
+                //处理音效
+                HitSoundHandler(target);
+                //目标不可用，别播放下面的特效。
+                if (!target.IsLegal())
+                    return;
                 if (!ThirdSwing)
+                {
                     ScreenShakeSystem.AddScreenShakes(target.Center, 10, 25, Projectile.rotation + PiOver2 * Projectile.spriteDirection, 0, easingFunc: EaseOutExpo);
+                    //普通挥击下最多只生成12次特效，别产太多了
+                    if (Projectile.numHits < 12)
+                        HitSparkle(target, hit, damageDone);
+                }
                 else
-                    ScreenShakeSystem.AddScreenShakes(target.Center, 20, 30, Projectile.rotation + PiOver2 * Projectile.spriteDirection, 0, easingFunc: EaseOutExpo);
+                {
 
-                StopTiming = 35;
+                    ScreenShakeSystem.AddScreenShakes(target.Center, 30, 30, Projectile.rotation + PiOver2 * Projectile.spriteDirection, 0, easingFunc: EaseOutExpo);
+                    ScreenDarknessSystem.AddScreenDarkness(.85f, 2, 1, 12, EaseInCubic, EaseInCubic);
+                    if (Projectile.numHits < 12)
+                        HitSparkleHeavy(target, hit, damageDone);
+                }
+                //只有第一次攻击命中才会给卡肉
+                if (Projectile.numHits < 1)
+                {
+                    StopTiming = 35;
+                    Projectile.AddExecutionTimeImmediate(OriginalItemID);
+                }
+                //在这里给玩家加成
+                Owner.HJScarlet().antiKnockbackTime = 30;
+                if (Owner.HJScarlet().crimsonScytheAttackCounter > 0 && Projectile.numHits < 1)
+                {
+                    Owner.HJScarlet().crimsonScytheAttackCounter--;
+                    Owner.HJScarlet().crimsonScytheDefense += CrimsonScythe.DefensePerAdd;
+                    foreach (var proj in Main.ActiveProjectiles)
+                    {
+                        if (proj.type != ProjectileType<CrimsonScytheSoulStone>())
+                            continue;
+                        if (proj.owner != Owner.whoAmI)
+                            continue;
+                        if (!proj.friendly)
+                            continue;
+                        if (proj.HJScarlet().GlobalTargetIndex == -1)
+                            continue;
+                        if (((CrimsonScytheSoulStone)proj.ModProjectile).AttackState != CrimsonScytheSoulStone.State.Idle)
+                            continue;
+                        ((CrimsonScytheSoulStone)proj.ModProjectile).AttackState = CrimsonScytheSoulStone.State.Explosion;
+                        break;
+                    }
+                }
+
+                //灵魂石
+                if (Owner.ownedProjectileCounts[ProjectileType<CrimsonScytheSoulStone>()] < 15)
+                {
+                    Vector2 dir = Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2 * Projectile.spriteDirection);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir.ToRandVelocity(ToRadians(75f), 8f, 13f), ProjectileType<CrimsonScytheSoulStone>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    proj.originalDamage = Projectile.damage;
+                    if (Owner.HJScarlet().crimsonScytheAttackCounter > 0)
+                    {
+                        proj.HJScarlet().GlobalTargetIndex = target.whoAmI;
+                    }
+                }
             }
-            if(Projectile.numHits < 12)
-                HitSparkle(target, hit, damageDone);
+        }
+        private void HitSoundHandler(NPC target)
+        {
+            //处理音效
+            float pitch = ThirdSwing ? 0.2f : -0.4f + SwingTime * .2f;
+            int t = ThirdSwing ? 2 : 1;
+            ScarletSound(HJScarletSounds.Tlipoca_StoneBonk, target.Center, volume: 0.6f, instances: 1, pitch: pitch, pitchVariance: .05f, variantType: t);
+
+        }
+
+        public void HitSparkleHeavy(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            int reverse = Projectile.spriteDirection;
+            Vector2 dir = Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2 * reverse);
+            for (int i = 0; i < 40; i++)
+            {
+                ECSParticle.SmokeParticle(target.Center, dir.ToRandVelocity(ToRadians(35), 1.2f, 22.5f), RandLerpColor(Color.DarkRed, Color.Black), 40, RandRotTwoPi, 1, Main.rand.NextFloat(.9f, 1.2f) * .52f, blendstate: BlendState.AlphaBlend);
+            }
+            for (int i = 0; i < 40; i++)
+            {
+                ECSParticle.SmokeParticle(target.Center, RandVelTwoPi(1.2f, 8f), RandLerpColor(Color.Red, Color.Black), 40, RandRotTwoPi, 1, Main.rand.NextFloat(.9f, 1.2f) * .28f, Main.rand.NextBool(), blendstate: BlendState.NonPremultiplied);
+            }
+            for (int i = 0; i < 26; i++)
+            {
+                ECSParticle.LiliesFire(target.Center, RandVelTwoPi(1.2f, 8f), RandLerpColor(Color.Black, Color.Red), 40, RandRotTwoPi, 1, 0.2f * Main.rand.NextFloat(0.45f, 1.3f));
+            }
+            for (int i = 0; i < 26; i++)
+            {
+                ECSParticle.ShinyCrossStarECS(target.Center, RandVelTwoPi(1.2f, 8f), RandLerpColor(Color.DarkRed, Color.Red), 40, 1, 0.92f * Main.rand.NextFloat(0.95f, 1.3f), blendstate: BlendState.AlphaBlend);
+            }
+            for (int i = 0; i < 42; i++)
+            {
+                Vector2 vel = dir.ToRandVelocity(ToRadians(25), 1.9f, 44f);
+                BloodyMetaballAlt.SpawnParticle(target.Center, vel, Main.rand.NextFloat(0.75f, 1.2f) * 0.5f, vel.ToRotation() - Pi, true);
+            }
+            for (int i = 0; i < 32; i++)
+            {
+                Vector2 vel = dir.ToRandVelocity(ToRadians(15), 12f, 56f);
+                BloodyMetaballAlt.SpawnParticle(target.Center, vel, Main.rand.NextFloat(0.75f, 1.2f) * 0.92f, vel.ToRotation(), false, true);
+            }
         }
 
         public void HitSparkle(NPC target, NPC.HitInfo hit, int damageDone)
@@ -389,20 +494,18 @@ namespace HJScarletRework.Projs.Executor
             }
             for (int i = 0; i < 32; i++)
             {
-                Vector2 vel = dir.ToRandVelocity(ToRadians(25), 1.9f, 19f);
-                BloodyMetaball.SpawnParticle(target.Center, vel, Main.rand.NextFloat(0.75f, 1.2f) * 0.392f, vel.ToRotation(), true);
+                Vector2 vel = dir.ToRandVelocity(ToRadians(25), 1.9f, 39f);
+                BloodyMetaballAlt.SpawnParticle(target.Center, vel, Main.rand.NextFloat(0.75f, 1.2f) * 0.5f, vel.ToRotation() - Pi, true);
             }
             for (int i = 0; i < 12; i++)
             {
-                Vector2 vel = dir.ToRandVelocity(ToRadians(15), 12f, 28f);
-                BloodyMetaball.SpawnParticle(target.Center, vel, Main.rand.NextFloat(0.75f, 1.2f) * 0.92f, vel.ToRotation());
+                Vector2 vel = dir.ToRandVelocity(ToRadians(15), 12f, 44f);
+                BloodyMetaballAlt.SpawnParticle(target.Center, vel, Main.rand.NextFloat(0.75f, 1.2f) * 0.92f, vel.ToRotation(), false, true);
             }
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            if (projHitbox.Intersects(targetHitbox))
-                return true;
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
@@ -414,64 +517,48 @@ namespace HJScarletRework.Projs.Executor
             bool c = Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), beamBeginPos, beamEndPos, 64f, ref _);
             return c;
         }
-        /// <summary>
-        /// ToDo:当务之急为给这个刀光处理一些黑色底图增强白天效果
-        /// </summary>
-        /// <param name="spriteBatch"></param>
+        #endregion
+        #region 绘制
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
-            HJScarletMethods.EnterShaderAreaPixel(BlendState.AlphaBlend);
-            Texture2D texture = HJScarletTexture.Metaball_Bloody.Value;
-            Effect effect = HJScarletShader.AlphaFade;
-            effect.Parameters["uFadeoutLeftLength"].SetValue(0.31f);
-            effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
-            effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
-            effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.White * 0.90f, 0.95f);
-            DrawSlash(texture, Color.White * 0.60f, 0.55f);
-            DrawSlash(texture, Color.White * 0.40f, 0.40f);
 
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
-            texture = HJScarletTexture.Metaball_Bloody.Value;
-            effect = HJScarletShader.AlphaFade;
+            Texture2D texture = HJScarletTexture.Texture_StandardGradient.Value;
+            Effect effect = HJScarletShader.AlphaFade;
             effect.Parameters["uFadeoutLeftLength"].SetValue(0.31f);
-            effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
+            effect.Parameters["uFadeinRigtLength"].SetValue(0.3f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.IndianRed * 0.90f, 0.95f);
-            DrawSlash(texture, Color.DarkRed * 0.60f, 0.55f);
+            DrawSlash(texture, Color.DarkRed * 0.80f, 0.55f);
             DrawSlash(texture, Color.Red * 0.40f, 0.40f);
+            DrawSlash(texture, Color.IndianRed * 0.140f, 0.350f);
 
-            Effect effect2 = HJScarletShader.AlphaFadeNoiseColor;
-            effect2.Parameters["uFadeoutLeftLength"].SetValue(0.42f);
-            effect2.Parameters["uFadeinRigtLength"].SetValue(0.2f);
-            effect2.Parameters["UVOffset"].SetValue(new Vector2(-Main.GlobalTimeWrappedHourly * .935f, 0));
-            effect2.Parameters["UVMult"].SetValue(new Vector2(2f, 2f));
-            effect2.Parameters["OverlayColor"].SetValue(Color.Red.ToVector4());
-            effect2.CurrentTechnique.Passes[0].Apply();
-            Texture2D texture2 = HJScarletTexture.Noise_Misc.Value;
-            DrawSlash(texture2, Color.Red * .95f, 0.90f);
-            texture2 = HJScarletTexture.Noise_Aura.Value;
-            DrawSlash(texture2, Color.DarkRed * .80f, 0.55f);
-            DrawSlash(texture, Color.Crimson * 0.40f, 0.40f);
 
             texture = HJScarletTexture.Texture_SwordSlash.Value;
             effect = HJScarletShader.AlphaFade;
-            effect.Parameters["uFadeoutLeftLength"].SetValue(0.41f);
-            effect.Parameters["uFadeinRigtLength"].SetValue(0.1f);
+            effect.Parameters["uFadeoutLeftLength"].SetValue(0.21f);
+            effect.Parameters["uFadeinRigtLength"].SetValue(0.3f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.Red * 0.95f, 0.95f);
-            DrawSlash(texture, Color.DarkRed * 0.60f, 0.50f);
-            DrawSlash(texture, Color.Crimson * 0.40f, 0.40f);
-            DrawSlash(texture, Color.Red * 0.40f, 0.40f);
+            DrawSlash(texture, Color.DarkRed * 0.55f, 0.95f);
+            DrawSlash(texture, Color.Red * 0.40f, 0.50f);
+            effect.Parameters["uFadeoutLeftLength"].SetValue(0.1f);
+            effect.Parameters["uFadeinRigtLength"].SetValue(0.05f);
+            DrawSlash(texture, Color.Lerp(Color.Crimson, Color.White, 0.760f) * 0.75f, 0.85f, 1f);
+            DrawSlash(texture, Color.Lerp(Color.IndianRed, Color.White, 0.790f) * 0.75f, 0.90f, 1f);
 
+            Effect effect2 = HJScarletShader.AlphaFadeNoiseColor;
+            HJScarletMethods.ApplyAlphaCut(new Vector4(.1f, .1f, 0, 0), new Vector2(-Main.GlobalTimeWrappedHourly * 1.395f, 0), new Vector2(1, 2), Color.Crimson);
+            Texture2D texture2 = HJScarletTexture.Noise_Misc.Value;
+            DrawSlash(texture2, Color.Red, 0.60f);
+            texture2 = HJScarletTexture.Noise_Aura.Value;
+            DrawSlash(texture2, Color.White, 0.45f);
             HJScarletMethods.EndShaderAreaPixel();
 
 
         }
         private List<ScarletVertex> _vertexCache = new List<ScarletVertex>(); // 类级别缓存
-        public void DrawSlash(Texture2D texture, Color drawcolor, float mult = 0.8f)
+        public void DrawSlash(Texture2D texture, Color drawcolor, float mult = 0.8f, float beginMult = 1f)
         {
             if (OldAimPos.Count < 3)
                 return;
@@ -480,7 +567,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < OldAimPos.Count; i++)
             {
                 float progress = (float)i / OldAimPos.Count;
-                Vector2 DrawPos_Head = OldAimPos[i] + Projectile.Center - Main.screenPosition;
+                Vector2 DrawPos_Head = OldAimPos[i] * beginMult + Projectile.Center - Main.screenPosition;
                 Vector2 DrawPos_Source = OldAimPos[i] * mult + Projectile.Center - Main.screenPosition;
                 _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor, new Vector3(progress, 0, 0)));
                 _vertexCache.Add(new ScarletVertex(DrawPos_Source, drawcolor, new Vector3(progress, 1, 0)));
@@ -521,7 +608,14 @@ namespace HJScarletRework.Projs.Executor
                     SB.Draw(tex, drawPosition + (TwoPi / 16f * i).ToRotationVector2() * 2f * time, null, Color.Red.ToAddColor(), drawRotation, rotationPoint, Projectile.scale, flipSprite, 0);
                 SB.Draw(tex, drawPosition, null, c, drawRotation, rotationPoint, Projectile.scale, flipSprite, 0);
             }
+            SB.EnterShaderArea(BlendState.NonPremultiplied);
+            Texture2D texture = HJScarletTexture.Texture_SwordSlashWhite.Value;
+            HJScarletMethods.ApplyAlphaCut(new Vector4(0.41f, 0.53f, 0.12f, 0.12f), Vector2.One, Vector2.One);
+            DrawSlash(texture, Color.Black * 0.6f, 0.75f, 0.99f);
+            DrawSlash(texture, Color.DarkRed * 0.150f, 0.60f, 0.99f);
+            SB.EndShaderArea();
             return false;
         }
+        #endregion
     }
 }

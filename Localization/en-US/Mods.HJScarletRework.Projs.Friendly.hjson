@@ -132,6 +132,8 @@ Executor: {
 	PureDaggerStar.DisplayName: Pure Dagger Star
 	CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
 	CrimsonScytheSoulStone.DisplayName: Crimson Scythe Soul Stone
+	CrimsonScytheSkillProj.DisplayName: Crimson Scythe Skill Proj
+	CrimsonScytheHealingSoul.DisplayName: Crimson Scythe Healing Soul
 }
 
 Melee: {

@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Globals.Systems;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
@@ -13,14 +14,15 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class CrimsonScythe : ExecutorWeaponClass
     {
-        public override int ExecutionProgress => 80;
+        public override int ExecutionProgress => 40;
+        public static int DefensePerAdd = 2;
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
         public override void ExSD()
         {
-            Item.damage = 456;
+            Item.damage = 956;
             Item.useTime = Item.useAnimation = 30;
             Item.SetUpNoUseGraphicItem(true);
             Item.SetUpRarityPrice(ItemRarityID.Red);
@@ -33,10 +35,11 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool CanShoot(Player player)
         {
-            return !player.HasProj(Item.shoot);
+            return !player.HasProj(Item.shoot) && !player.HasProj<CrimsonScytheSkillProj>();
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+
             bool exe = player.CheckExecution(Type);
             Vector2 dir = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitX);
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
@@ -55,9 +58,14 @@ namespace HJScarletRework.Items.Weapons.Executor
             //植入Tooltip
             tooltips.Insert(flavorTooltipIndex2 + 1, flavorTooltips);
         }
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        public override void AddRecipes()
         {
-            return base.PreDrawTooltipLine(line, ref yOffset);
+            CreateRecipe().
+                AddIngredient(ItemID.DeathSickle).
+                AddCondition(HJScarletCraftingConditions.IsDownSlimeGodAndInEclipse).
+                AddTile(FinalAnvilTile).
+                DisableDecraft().
+                Register();
         }
     }
 }

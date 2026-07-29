@@ -48,7 +48,14 @@ namespace HJScarletRework.Globals.Players
         public bool holdingGaiaStaff = false;
         public bool firstTimeCraftGaia = false;
         public int antiKnockbackTime = 0;
+        public bool infiniteFlightTime = false;
+
+        //猩红镰刀
+        public int crimsonScytheAttackCounter = 0;
+        public int crimsonScytheDefense = 0;
+
         #region 护甲
+
         public bool shinobiExecutor = false;
         public bool monkExecutor = false;
         public bool runeWizardExecutor = false;
@@ -142,7 +149,7 @@ namespace HJScarletRework.Globals.Players
         /// </summary>
         public float PlayerFinalSpeedStoredTime = 0f;
         #endregion
-        #region 处刑攻击
+        #region 处决攻击
         /// <summary>
         /// <para>是否允许手动处决模式</para>
         /// <para>用于标识玩家全局的处决能力类型</para>
@@ -162,7 +169,7 @@ namespace HJScarletRework.Globals.Players
         /// <summary>
         /// 触发处决时这里的值会设置为true，以在某些地方提供加成效果
         /// </summary>
-        public int executionUpdatesFrame = 0;
+        public bool isExecutionStrikeTriggered = false;
         #region 下版本废弃
         public int tacticalTime = 0;
         public bool StopExecutionInit = false;

@@ -71,4 +71,9 @@ HJScarletConfigClient: {
 		Label: Mod S F X Volume
 		Tooltip: ""
 	}
+
+	ScreenDarkStrength: {
+		Label: Screen Dark Strength
+		Tooltip: ""
+	}
 }

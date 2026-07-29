@@ -75,6 +75,14 @@ namespace HJScarletRework.Globals.Methods
         public static void AddExecutionTimeDirectly(this Projectile proj, int itemID, int times = 1)
         {
             Player owner = Main.player[proj.owner];
+            if (owner.HJScarlet().ExecutionListStored.ContainsKey(itemID))
+            {
+                owner.HJScarlet().ExecutionListStored[itemID] += times;
+                if (owner.HJScarlet().ExecutionListStored[itemID] > HJScarletList.IsExecutorWeaponDictionaty[itemID])
+                    owner.HJScarlet().ExecutionListStored[itemID] = HJScarletList.IsExecutorWeaponDictionaty[itemID];
+                if (owner.HeldItem.type != owner.HJScarlet().lastHeldItemIndex)
+                    owner.HJScarlet().hasSendExecutionTint = false;
+            }
             if (owner.HJScarlet().ExecutionListStored.TryGetValue(itemID, out int curExeTime) && owner.HJScarlet().tacticalExecution)
             {
                 if (curExeTime >= HJScarletList.IsExecutorWeaponDictionaty[itemID])
@@ -88,13 +96,7 @@ namespace HJScarletRework.Globals.Methods
                     return;
                 }
             }
-            if (owner.HJScarlet().ExecutionListStored.ContainsKey(itemID))
-            {
-                owner.HJScarlet().ExecutionListStored[itemID] += times;
-                if (owner.HJScarlet().ExecutionListStored[itemID] > HJScarletList.IsExecutorWeaponDictionaty[itemID])
-                    owner.HJScarlet().ExecutionListStored[itemID] = HJScarletList.IsExecutorWeaponDictionaty[itemID];
-                owner.HJScarlet().hasSendExecutionTint = false;
-            }
+
         }
         public static void InsertExecutorTooltips(this List<TooltipLine> tooltips)
         {
@@ -103,6 +105,7 @@ namespace HJScarletRework.Globals.Methods
         /// <summary>
         /// 判断玩家当前是否可以对指定武器发起处决。
         /// 此方法同时处理了手动触发处决与自动处决两种模式。
+        /// <br>Todo：这个方法附带的判定对手持射弹的适配非常垃圾</br>
         /// </summary>
         /// <param name="owner">目标玩家。</param>
         /// <param name="itemID">武器（或处决能力对应物品）的 <see cref="Item.type"/>。</param>
@@ -138,13 +141,22 @@ namespace HJScarletRework.Globals.Methods
             {
                 if (usPlayer.tacticalExecutionInputCache == 0)
                     return false;
-                if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
-                    return false;
-                //无论啥情况，这里都要直接设置为否
-                if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
+                if (!HJScarletKeybinds.GeneralActionKeybind.JustPressed)
                 {
-                    bool canExe = value >= executionTime;
-                    return canExe;
+                    //无论啥情况，这里都要直接设置为否
+                    if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
+                    {
+                        bool canExe = value >= executionTime;
+                        if (canExe)
+                        {
+                            owner.HJScarlet().hasSendExecutionTint = false;
+                            owner.HJScarlet().isExecutionStrikeTriggered = canExe;
+                        }
+
+                        return canExe;
+                    }
+                    else
+                        return false;
                 }
                 else
                     return false;
@@ -153,6 +165,8 @@ namespace HJScarletRework.Globals.Methods
             {
                 if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
                 {
+                    bool canExe = value >= executionTime;
+                    owner.HJScarlet().isExecutionStrikeTriggered = canExe;
                     return value >= executionTime;
                 }
                 else

@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Vanity.Yards
 {
@@ -15,7 +14,7 @@ namespace HJScarletRework.Items.Vanity.Yards
         public override Color ParticleColor1 => Color.SkyBlue;
         public override Color ParticleColor2 => Color.White;
         public override bool HasFlavorTooltip => false;
-         public override void ExSD()
+        public override void ExSD()
         {
             Item.HJScarlet().CanDrawIcon = false;
             Item.HJScarlet().CanDrawGhost = true;

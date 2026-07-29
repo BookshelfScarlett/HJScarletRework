@@ -1,10 +1,6 @@
 ﻿using HJScarletRework.Core.Primitives.Trail;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Core.Lightning
@@ -16,7 +12,7 @@ namespace HJScarletRework.Core.Lightning
         public List<Vector2> Children = children;
     }
     public class HJLightning
-    {       
+    {
         // 缓存计算好的轨迹几何数据
         public List<List<TrailDrawDate>> CachedTrails = new();
         public float RandomFlowOffset;
@@ -45,7 +41,7 @@ namespace HJScarletRework.Core.Lightning
         {
             float progress = (float)lifeTime / MaxlifeTime;
             // 基础淡出曲线
-            float baseAlpha = MathHelper.Lerp(1f, 0f, EaseOutCubic(progress));
+            float baseAlpha = Lerp(1f, 0f, EaseOutCubic(progress));
 
             Opacity = baseAlpha;
 

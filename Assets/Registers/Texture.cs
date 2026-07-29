@@ -22,6 +22,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Texture_StandardGradient { get; set; }
         public static Tex2DWithPath Texture_SnowCloud { get; set; }
         public static Tex2DWithPath Texture_SwordSlash { get; set; }
+        public static Tex2DWithPath Texture_SwordSlashWhite { get; set; }
         public static Tex2DWithPath Texture_SwordSlash1 { get; set; }
         public static Tex2DWithPath Texture_SwordSlash2 { get; set; }
         public static Tex2DWithPath Texture_Fog { get; set; }
@@ -46,6 +47,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_StandardGradient = new Tex2DWithPath($"{Path_General}{nameof(Texture_StandardGradient)}");
             Texture_SnowCloud = new Tex2DWithPath($"{Path_General}{nameof(Texture_SnowCloud)}");
             Texture_SwordSlash = new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash)}");
+            Texture_SwordSlashWhite = new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlashWhite)}");
             Texture_SwordSlash1 = new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash1)}");
             Texture_SwordSlash2 = new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash2)}");
             Texture_Fog = new Tex2DWithPath($"{Path_General}{nameof(Texture_Fog)}");
@@ -72,6 +74,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_StandardGradient = null;
             Texture_SnowCloud = null;
             Texture_SwordSlash = null;
+            Texture_SwordSlashWhite = null;
             Texture_SwordSlash1 = null;
             Texture_SwordSlash2 = null;
             Texture_Fog = null;

@@ -2,6 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ParticleScarlet;
 using HJScarletRework.Core.PixelatedRender;
+using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.ParticleSystem;
 using Terraria;
 using Terraria.ModLoader;
@@ -12,6 +13,7 @@ namespace HJScarletRework.Core
     {
         public override void Load()
         {
+            On_Main.DrawBackground += ScreenDarknessSystem.DrawScreenDarkness;
             On_Main.DrawDust += MetaballManager.DrawRenderTarget;
             On_Main.DrawDust += BaseParticleManager.DrawParticles;
             On_Main.DrawDust += ScarletParticleManager.DrawScarletParticles;
@@ -24,6 +26,7 @@ namespace HJScarletRework.Core
 
         public override void Unload()
         {
+            On_Main.DrawBackground -= ScreenDarknessSystem.DrawScreenDarkness;
             On_Main.DrawDust -= MetaballManager.DrawRenderTarget;
             On_Main.DrawDust -= ScarletParticleManager.DrawScarletParticles;
             On_Main.DrawDust -= BaseParticleManager.DrawParticles;

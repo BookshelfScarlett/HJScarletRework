@@ -29,8 +29,7 @@ namespace HJScarletRework.Items.Armor.Reaper
         public override void UpdateArmorSetBetter(Player player, string setBonusPath)
         {
             player.setBonus += "\n" + setBonusPath.ToLangValue();
-            player.lifeRegen += 4;
-            player.HJScarlet().diverArmor = true;
+            player.HJScarlet().maidReaperArmor = true;
         }
         public override void UpdateEquip(Player player)
         {

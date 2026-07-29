@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Methods
 {
@@ -19,5 +20,7 @@ namespace HJScarletRework.Globals.Methods
                 ratios = 0f;
             return (int)(owner.statDefense * ratios);
         }
+        public static bool IsHolding<T>(this Player player) where T : ModItem => IsHolding(player, ItemType<T>());
+        public static bool IsHolding(this Player player, int itemID) => player.HeldItem.type == itemID;
     }
 }

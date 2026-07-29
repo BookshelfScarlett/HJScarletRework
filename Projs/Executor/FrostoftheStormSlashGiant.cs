@@ -119,11 +119,6 @@ namespace HJScarletRework.Projs.Executor
             float maxPoints = 50;
             float xMult = 5f;
             float yMult = 3.5f;
-            //if (HJScarletMethods.HasFuckingCalamity)
-            //{
-            //    xMult *= 1.4f;
-            //    yMult *= 1.4f;
-            //}
 
 
             if (Projectile.ai[2] > 0)
@@ -131,11 +126,6 @@ namespace HJScarletRework.Projs.Executor
                 maxPoints = 70;
                 xMult = 7.5f;
                 yMult = 4.5f;
-                //if (HJScarletMethods.HasFuckingCalamity)
-                //{
-                //    xMult *= 1.2f;
-                //    yMult *= 1.2f;
-                //}
             }
             float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
             xMult *= heldscale;

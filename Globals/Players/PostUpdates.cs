@@ -1,14 +1,19 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
+using HJScarletRework.Core;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Globals.Players.Dashes;
+using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Useables;
+using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
@@ -52,7 +57,10 @@ namespace HJScarletRework.Globals.Players
             UpdateFishDash();
             UpdatePowerLily();
             UpdateDiverArmorJellyfishSpawn();
+            UpdateMaidReaper();
         }
+
+
         #region PostUpdateMiscEffects的方法
         public void UpdateRandomMinionSpawn()
         {
@@ -171,7 +179,14 @@ namespace HJScarletRework.Globals.Players
                 //这个方法是直接给玩家的防御力加成，也就是增加50%防御力
                 Player.statDefense += Player.DefenseMultiplier(FruitofEternity.DefenseMultipler);
             }
-
+            //猩红镰刀
+            if (Player.HeldItem.type == ItemType<CrimsonScythe>() && crimsonScytheDefense > 0 && antiKnockbackTime > 0)
+            {
+                Player.statDefense += (int)crimsonScytheDefense;
+                Vector2 pos = Player.ToRandRec();
+                if (Player.miscCounter % 4 == 0)
+                    BloodyMetaball.SpawnParticle(pos, -Vector2.UnitY, 0.4f, PiOver2);
+            }
         }
         #endregion
         public override void UpdateLifeRegen()
@@ -363,14 +378,14 @@ namespace HJScarletRework.Globals.Players
         public int HoverItemIndex = -1;
         public override bool HoverSlot(Item[] inventory, int context, int slot)
         {
-            ClearUpParticle(ref inventory, context,slot);
+            ClearUpParticle(ref inventory, context, slot);
             HoverSwitchWeapon(ref inventory, context, slot);
             return false;
         }
 
         public void HoverSwitchWeapon(ref Item[] inventory, int context, int slot)
         {
-            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && swapTimer==0)
+            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && swapTimer == 0)
             {
                 swapTimer = 10;
                 if (!inventory[slot].IsLegal())
@@ -390,7 +405,7 @@ namespace HJScarletRework.Globals.Players
                 }
             }
         }
-        private void DoSwapWeapon(ref Item[] inventory, Item originalItem, int slot,int targetItemID, bool altPrefix)
+        private void DoSwapWeapon(ref Item[] inventory, Item originalItem, int slot, int targetItemID, bool altPrefix)
         {
             Item targetItem = new Item();
             int prefix = originalItem.prefix;
@@ -430,6 +445,24 @@ namespace HJScarletRework.Globals.Players
         }
         private void HandleWeaponAbility()
         {
+            if (Player.IsHolding<CrimsonScythe>() && !Player.HasProj<CrimsonScytheSkillProj>() && Main.mouseRight && Main.mouseRightRelease)
+            {
+                Vector2 dir = (Main.MouseWorld - Player.Center).SafeNormalize(Vector2.UnitX);
+                foreach (var id in Main.ActiveProjectiles)
+                {
+                    if (id.type != ProjectileType<CrimsonScytheHeldProj>())
+                        continue;
+                    if (id.owner != Player.whoAmI)
+                        continue;
+                    id.ai[0] = 114514;
+                    dir = id.velocity;
+                    id.Kill();
+                }
+                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, dir, ProjectileType<CrimsonScytheSkillProj>(), 0, 0, Player.whoAmI);
+                ((CrimsonScytheSkillProj)proj.ModProjectile).BeginTargetRotation = dir.ToRotation();
+                ((CrimsonScytheSkillProj)proj.ModProjectile).Flip = true;
+            }
+
             if (!CanWeaponSpecialAbility)
                 return;
             CanWeaponSpecialAbility = false;
@@ -455,6 +488,18 @@ namespace HJScarletRework.Globals.Players
 
         public void UpdatePowerLily()
         {
+        }
+        public void UpdateMaidReaper()
+        {
+            if (!maidReaperArmor)
+                return;
+            if (Player.HeldItem.type != ItemType<CrimsonScythe>())
+                return;
+            infiniteFlightTime = true;
+            Player.ApplyDash(ScarletContent.DashType<CrimsonScytheDash>());
+            Player.jumpSpeed += 1.6f;
+            Player.runAcceleration *= 1.40f;
+            Player.moveSpeed += .35f;
         }
         public void UpdateDiverArmorJellyfishSpawn()
         {
