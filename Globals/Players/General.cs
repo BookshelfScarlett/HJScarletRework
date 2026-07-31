@@ -1,6 +1,7 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Useables;
@@ -53,7 +54,6 @@ namespace HJScarletRework.Globals.Players
         //猩红镰刀
         public int crimsonScytheAttackCounter = 0;
         public int crimsonScytheDefense = 0;
-
         #region 护甲
 
         public bool shinobiExecutor = false;
@@ -77,7 +77,10 @@ namespace HJScarletRework.Globals.Players
         public int accVanityID = -1;
         public bool arcaeaVanityGive = false;
         public bool diverArmor = false;
+
         public bool maidReaperArmor = false;
+        public bool maidReaperHealUp = false;
+        public int maidReaperIndex = -1;
         #endregion
 
         #region Accessories
@@ -150,26 +153,6 @@ namespace HJScarletRework.Globals.Players
         public float PlayerFinalSpeedStoredTime = 0f;
         #endregion
         #region 处决攻击
-        /// <summary>
-        /// <para>是否允许手动处决模式</para>
-        /// <para>用于标识玩家全局的处决能力类型</para>
-        /// </summary>
-        public bool tacticalExecution = false;
-        /// <summary>
-        /// <para>临时手动处决形态切换标志（与 <see cref="tacticalExecution"/> 无关）。</para>
-        /// <para>该字段专门用于处决攻击时动态切换玩家的手持形态（包括手持射弹）。 </para>
-        /// <para>当玩家按下处决键且满足条件时，此字段会被设为 <c>true</c>，并在处决动画结束后需由调用者手动重置为 <c>false</c></para>
-        /// <para>此开关不依赖任何装备，适用于需要临时改变攻击形态的场景（例如使用特殊射弹替换普通投掷物）</para>
-        /// </summary>
-        public bool tacticalExecutionManual = false;
-        /// <summary>
-        /// 手动处决模式的预输入帧
-        /// </summary>
-        public int tacticalExecutionInputCache = 0;
-        /// <summary>
-        /// 触发处决时这里的值会设置为true，以在某些地方提供加成效果
-        /// </summary>
-        public bool isExecutionStrikeTriggered = false;
         #region 下版本废弃
         public int tacticalTime = 0;
         public bool StopExecutionInit = false;
@@ -183,11 +166,8 @@ namespace HJScarletRework.Globals.Players
         /// </summary>
         public int bonusExecutionReduce = 0;
         #endregion
-        public bool ExecutorSwordMarkPlus = false;
 
-        public Dictionary<int, int> ExecutionListStored = new Dictionary<int, int>();
-        public bool hasSendExecutionTint = false;
-        public int hasSendExecutionTintTimer = 0;
+        public bool ExecutorSwordMarkPlus = false;
         public int lastHeldItemIndex = -1;
 
         //用于hud绘制的计时器
@@ -224,6 +204,7 @@ namespace HJScarletRework.Globals.Players
             if (isBeingLove)
             {
                 DrawLoveRingParticle(drawInfo.Position, drawInfo.drawPlayer);
+            //player.HJScarlet().ExecutionListStored.Remove(itemType);
             }
         }
         public override void DrawPlayer(Camera camera)
@@ -254,6 +235,7 @@ namespace HJScarletRework.Globals.Players
                 Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<DescriptionPaper>());
                 givePaper = false;
             }
+            OnEnterWorldReset();
             resetTerraRecipe = true;
             for (int i = 0; i < Player.inventory.Length; i++)
             {
@@ -340,21 +322,6 @@ namespace HJScarletRework.Globals.Players
                         break;
                 }
             }
-            //if (Condition.DownedPlantera.IsMet())
-            //{
-            //    switch (item.type)
-            //    {
-            //        case ItemID.MaidHead:
-            //            AlterArmorType2(item.type, i, MaidHelmetAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
-            //            break;
-            //        case ItemID.MaidShirt:
-            //            AlterArmorType2(item.type, i,MaidChestplateAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
-            //            break;
-            //        case ItemID.MaidPants:
-            //            AlterArmorType2(item.type, i,MaidLegsAlter.Defense, false, ItemRarityID.Yellow,armorSlot);
-            //            break;
-            //    }
-            //}
         }
 
         private void AlterArmorType2(int targetArmor, int targetindex, int defense = 0, bool vanity = true, int rarityID = -1, bool armorSlot = false)

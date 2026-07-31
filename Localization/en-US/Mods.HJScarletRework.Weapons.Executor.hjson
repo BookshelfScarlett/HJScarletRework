@@ -122,6 +122,7 @@ CrimsonScythe: {
 	Tooltip: ""
 	ExecutionStrike: ""
 	FlavorTooltips: ""
+	ExtraMechanic: ""
 }
 
 DeathTolls: {

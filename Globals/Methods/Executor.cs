@@ -96,7 +96,6 @@ namespace HJScarletRework.Globals.Methods
                     return;
                 }
             }
-
         }
         public static void InsertExecutorTooltips(this List<TooltipLine> tooltips)
         {
@@ -142,21 +141,16 @@ namespace HJScarletRework.Globals.Methods
                 if (usPlayer.tacticalExecutionInputCache == 0)
                     return false;
                 if (!HJScarletKeybinds.GeneralActionKeybind.JustPressed)
+                    return false;
+                //无论啥情况，这里都要直接设置为否
+                if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
                 {
-                    //无论啥情况，这里都要直接设置为否
-                    if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
+                    bool canExe = value >= executionTime;
+                    if (canExe)
                     {
-                        bool canExe = value >= executionTime;
-                        if (canExe)
-                        {
-                            owner.HJScarlet().hasSendExecutionTint = false;
-                            owner.HJScarlet().isExecutionStrikeTriggered = canExe;
-                        }
-
-                        return canExe;
+                        owner.HJScarlet().hasSendExecutionTint = false;
                     }
-                    else
-                        return false;
+                    return canExe;
                 }
                 else
                     return false;
@@ -166,7 +160,7 @@ namespace HJScarletRework.Globals.Methods
                 if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
                 {
                     bool canExe = value >= executionTime;
-                    owner.HJScarlet().isExecutionStrikeTriggered = canExe;
+                    owner.HJScarlet().hasSendExecutionTint = canExe;
                     return value >= executionTime;
                 }
                 else
@@ -185,7 +179,6 @@ namespace HJScarletRework.Globals.Methods
         {
             if (player.HJScarlet().ExecutionListStored.ContainsKey(itemType))
                 player.HJScarlet().ExecutionListStored[itemType] = 0;
-            //player.HJScarlet().ExecutionListStored.Remove(itemType);
         }
         /// <summary>
         /// <para>移除玩家处决位（自动使用玩家手持物品作为键）。</para>

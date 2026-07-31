@@ -69,7 +69,6 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateAnimation()
         {
-            //TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .5f);
             if (!Helper.IsDone[0])
             {
                 Helper.UpdateAniState(0);
@@ -106,13 +105,22 @@ namespace HJScarletRework.Projs.Executor
         }
         public void BreakTheStone()
         {
-            Owner.KillCertainProj(ProjectileType<CrimsonScytheSoulStone>());
+            foreach (var proj in Main.ActiveProjectiles)
+            {
+                if (proj.type != ProjectileType<CrimsonScytheSoulStone>())
+                    continue;
+                if (proj.owner != Owner.whoAmI)
+                    continue;
+                if (!proj.friendly)
+                    continue;
+                ((CrimsonScytheSoulStone)proj.ModProjectile).BreakAI = CrimsonScytheSoulStone.BreakType.Healing;
+                proj.Kill();
+            }
             ScarletSound(HJScarletSounds.Tlipoca_StoneShatter, Projectile.Center, 0.475f, 1, -0.5f);
             Vector2 pos = Owner.GetFrontHandPosition(Player.CompositeArmStretchAmount.Full, ArmRotation - PiOver2).ToRandCirclePos(4) + ArmRotation.ToRotationVector2() * 20f;
             ScreenShakeSystem.AddScreenShakes(Owner.Center, 3, 50, 0, RandRotTwoPi, easingFunc: EaseInOutQuad);
             ScreenDarknessSystem.AddScreenDarkness(.85f, 4, 1, 42, EaseInCubic, EaseInCubic);
             ECSParticle.CrossGlow(pos, Color.White, 45, 1, 0.94f, 0.2f);
-
 
             for (int i = 0; i < 46; i++)
             {
@@ -123,7 +131,6 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(1.2f, 3.3f), Color.White, 120, 1, .71f);
             }
         }
-
         public void UpdateBeginAnimation()
         {
             float curAniPro = Helper.GetAniProgress(0);
@@ -178,14 +185,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.scale = tarPos.Length();
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
 
-            ////这里处理手臂的动画
-            //float armBeginAngle = 0 * Flip.ToDirectionInt();
-            //float armEndAngle = 15 * Flip.ToDirectionInt();
-            //float armRot = Helper.UpdateAngle(armBeginAngle, armEndAngle, Owner.direction, pro);
-            //Matrix armForm = Matrix.CreateRotationZ(armRot) * Matrix.CreateScale(Width, Height, 1);
-            //Vector2 armTarPos = Vector2.Transform(Vector2.UnitX, armForm) * 1.5f;
-            //ArmRotation = armTarPos.ToRotation() + BeginArmRotation;
-
         }
         public void UpdateFinalAnimation()
         {
@@ -198,14 +197,6 @@ namespace HJScarletRework.Projs.Executor
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * 1.5f;
             Projectile.scale = tarPos.Length();
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
-
-            ////这里处理手臂的动画
-            //float armBeginAngle = 15 * Flip.ToDirectionInt();
-            //float armEndAngle = -15 * Flip.ToDirectionInt();
-            //float armRot = Helper.UpdateAngle(armBeginAngle, armEndAngle, Owner.direction, pro);
-            //Matrix armForm = Matrix.CreateRotationZ(armRot) * Matrix.CreateScale(Width, Height, 1);
-            //Vector2 armTarPos = Vector2.Transform(Vector2.UnitX, armForm) * 1.5f;
-            //ArmRotation = armTarPos.ToRotation() + BeginArmRotation;
 
         }
 

@@ -2,9 +2,12 @@
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -41,19 +44,48 @@ namespace HJScarletRework.Globals.Instances.Projs
             {
                 AddExecutionHit = true;
             }
+            HandleMaidReaperOnHit(Owner, projectile, target);
+            HandleBlackKeyOnHit(Owner);
             ModifyDefenderProj(Owner, projectile, target);
+
             if (ExecutionStrike && Owner.HJScarlet().fishExecutor)
-            {
                 Owner.HJScarlet().fishDashStored = true;
-            }
-            if (Owner.HJScarlet().blackKeyDoT && ExecutionStrike && Owner.HJScarlet().blackKeyTimer == 0)
+        }
+
+        public void HandleBlackKeyOnHit(Player owner)
+        {
+            if (owner.HJScarlet().blackKeyDoT && ExecutionStrike && owner.HJScarlet().blackKeyTimer == 0)
             {
                 //对的没错，这个鬼东西的减防数据存在了玩家类里面。
-                Owner.AddBuff(BuffType<BlackKeyExecutionBuff>(), GetSeconds(5));
-                Owner.HJScarlet().blackKeyTimer = GetSeconds(10);
-                if (Owner.HJScarlet().blackKeyDefenseBuff != 0)
-                    Owner.HJScarlet().blackKeyDefenseTrigger = true;
+                owner.AddBuff(BuffType<BlackKeyExecutionBuff>(), GetSeconds(5));
+                owner.HJScarlet().blackKeyTimer = GetSeconds(10);
+                if (owner.HJScarlet().blackKeyDefenseBuff != 0)
+                    owner.HJScarlet().blackKeyDefenseTrigger = true;
             }
+        }
+
+        public void HandleMaidReaperOnHit(Player owner, Projectile proj, NPC target)
+        {
+            if (owner.HJScarlet().maidReaperArmor && target.IsLegal())
+            {
+                owner.HJScarlet().maidReaperIndex = target.whoAmI;
+            }
+        }
+
+        public override void AI(Projectile projectile)
+        {
+            Player Owner = Main.player[projectile.owner];
+            if (Owner.whoAmI == Main.myPlayer)
+            {
+                SpawnGreenSleepyBubble(Owner, projectile);
+                SpawnSkyDragonLightning(Owner, projectile);
+            }
+            if (!FirstFrame)
+            {
+                FirstFrameEffect(projectile);
+                FirstFrame = true;
+            }
+
         }
         public void SpawnGreenSleepyBubble(Player Owner, Projectile projectile)
         {
@@ -74,7 +106,6 @@ namespace HJScarletRework.Globals.Instances.Projs
         {
             if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT3)
             {
-
                 projectile.frameCounter++;
                 if (projectile.frameCounter % 10 == 0)
                 {
@@ -99,57 +130,40 @@ namespace HJScarletRework.Globals.Instances.Projs
                     for (int i = 0; i < availableTarget.Count; i++)
                     {
                         NPC target = availableTarget[i];
+                        if (!target.IsLegal())
+                            continue;
                         Vector2 pos = Owner.Center - Vector2.UnitY * Main.rand.NextFloat(800f, 900f) + Vector2.UnitX * Main.rand.NextFloat(0f, 20f) * Main.rand.NextBool().ToDirectionInt();
                         Vector2 vel = (target.Center - pos).ToSafeNormalize() * Main.rand.NextFloat(4f, 9f);
-                        if (target.IsLegal())
+                        Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, vel, ProjectileType<MonkStaffLightning>(), projectile.damage / 2, 3f, Owner.whoAmI);
+                        ((MonkStaffLightning)proj.ModProjectile).CurTarget = target;
+                        pos = projectile.Center + (target.Center - Owner.Center).ToSafeNormalize() * 50f * projectile.scale;
+                        new CrossGlow(pos, Color.DeepSkyBlue, 30, 1, 0.12f).Spawn();
+                        new CrossGlow(pos, Color.White, 30, 1, 0.08f).Spawn();
+                        for (int j = 0; j < 8; j++)
                         {
-                            Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), pos, vel, ProjectileType<MonkStaffLightning>(), projectile.damage / 2, 3f, Owner.whoAmI);
-                            ((MonkStaffLightning)proj.ModProjectile).CurTarget = target;
-                            pos = projectile.Center + (target.Center - Owner.Center).ToSafeNormalize() * 50f * projectile.scale;
-                            new CrossGlow(pos, Color.DeepSkyBlue, 30, 1, 0.12f).Spawn();
-                            new CrossGlow(pos, Color.White, 30, 1, 0.08f).Spawn();
-                            for (int j = 0; j < 8; j++)
-                            {
-                                Vector2 vel2 = (target.Center - Owner.Center).ToRandVelocity(ToRadians(30f), 1.2f, 8.8f);
-                                new SmokeParticle(pos.ToRandCirclePos(10f), RandVelTwoPi(-3.8f, 2.6f) + vel2 - vel2 * Main.rand.NextFloat(0.1f, 1.2f), RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 40, RandRotTwoPi, 1f, 0.35f).SpawnToPriorityNonPreMult();
-                            }
-                            for (int j = 0; j < 4; j++)
-                            {
-                                Vector2 vel2 = (target.Center - Owner.Center).ToRandVelocity(ToRadians(30f), 1.2f, 9.8f);
-                                Vector2 pos2 = pos.ToRandCirclePos(12f) + vel2 * 0.32f;
-                                new StarShape(pos2, vel2, RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 0.8f, 40).Spawn();
-                            }
-                            for (int j = 0; j < 6; j++)
-                            {
-                                Vector2 pos2 = pos.ToRandCirclePos(6f);
-                                new ShinyCrossStar(pos2, RandVelTwoPi(1.2f, 4f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0, 1, 0.75f, false).Spawn();
-                            }
-                            for (int j = 0; j < 6; j++)
-                            {
-                                Vector2 pos2 = pos.ToRandCirclePos(6f);
-                                Vector2 vel2 = (target.Center - Owner.Center).ToRandVelocity(ToRadians(30f), 1.2f, 9.8f);
-                                new ShinyCrossStar(pos2, vel2, RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0, 1, 0.75f, false).Spawn();
-                            }
+                            Vector2 vel2 = (target.Center - Owner.Center).ToRandVelocity(ToRadians(30f), 1.2f, 8.8f);
+                            new SmokeParticle(pos.ToRandCirclePos(10f), RandVelTwoPi(-3.8f, 2.6f) + vel2 - vel2 * Main.rand.NextFloat(0.1f, 1.2f), RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 40, RandRotTwoPi, 1f, 0.35f).SpawnToPriorityNonPreMult();
+                        }
+                        for (int j = 0; j < 4; j++)
+                        {
+                            Vector2 vel2 = (target.Center - Owner.Center).ToRandVelocity(ToRadians(30f), 1.2f, 9.8f);
+                            Vector2 pos2 = pos.ToRandCirclePos(12f) + vel2 * 0.32f;
+                            new StarShape(pos2, vel2, RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 0.8f, 40).Spawn();
+                        }
+                        for (int j = 0; j < 6; j++)
+                        {
+                            Vector2 pos2 = pos.ToRandCirclePos(6f);
+                            new ShinyCrossStar(pos2, RandVelTwoPi(1.2f, 4f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0, 1, 0.75f, false).Spawn();
+                        }
+                        for (int j = 0; j < 6; j++)
+                        {
+                            Vector2 pos2 = pos.ToRandCirclePos(6f);
+                            Vector2 vel2 = (target.Center - Owner.Center).ToRandVelocity(ToRadians(30f), 1.2f, 9.8f);
+                            new ShinyCrossStar(pos2, vel2, RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0, 1, 0.75f, false).Spawn();
                         }
                     }
                 }
             }
-        }
-
-        public override void AI(Projectile projectile)
-        {
-            Player Owner = Main.player[projectile.owner];
-            if (Owner.whoAmI == Main.myPlayer)
-            {
-                SpawnGreenSleepyBubble(Owner, projectile);
-                SpawnSkyDragonLightning(Owner, projectile);
-            }
-            if (!FirstFrame)
-            {
-                FirstFrameEffect(projectile);
-                FirstFrame = true;
-            }
-
         }
         public override void OnKill(Projectile projectile, int timeLeft)
         {

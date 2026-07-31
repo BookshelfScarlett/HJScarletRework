@@ -50,8 +50,6 @@ namespace HJScarletRework.Globals.Players.Dashes
         }
         public override void OnHitNPC(Player player, NPC target, int DamageDone)
         {
-            int length = 32;
-            int reverse = 1;
             Vector2 dir = player.velocity.ToSafeNormalize();
             ScarletSound(HJScarletSounds.SodomsDisaster_BoomHit, target.Center);
             for (int i = 0; i < 32; i++)

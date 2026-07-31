@@ -24,13 +24,26 @@ namespace HJScarletRework.Projs.Executor
             Idle,
             Explosion
         }
+        public enum BreakType
+        {
+            None,
+            Healing,
+            Return,
+            ExecutionStrike
+        }
         public ref float Timer => ref Projectile.ai[0];
         public State AttackState
         {
             get => (State)Projectile.ai[1];
             set => Projectile.ai[1] = (float)value;
         }
+        public BreakType BreakAI
+        {
+            get => (BreakType)Projectile.ai[2];
+            set => Projectile.ai[2] = (float)value;
+        }
         public AnimationStruct Helper = new AnimationStruct(3);
+        public Vector2 InitVector2 = Vector2.Zero;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(16);
@@ -40,6 +53,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.width = Projectile.height = 84;
             Projectile.extraUpdates = 2;
+            Projectile.timeLeft = GetSeconds(120);
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.penetrate = 1;
@@ -81,7 +95,6 @@ namespace HJScarletRework.Projs.Executor
                     DoExplosion();
                     break;
             }
-            Projectile.timeLeft = 2;
         }
 
         public void DoShoot()
@@ -128,20 +141,45 @@ namespace HJScarletRework.Projs.Executor
             {
                 ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(1.2f, 3.3f), RandLerpColor(c1, c2), 120, 1, .71f);
             }
-
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, RandVelTwoPi(10f, 15f), ProjectileType<CrimsonScytheHealingSoul>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+            switch (BreakAI)
+            {
+                case BreakType.Healing:
+                    BreakIntoHealingSoul(curSelected);
+                    break;
+                case BreakType.Return:
+                    BreakIntoReturningSoul(curSelected);
+                    break;
+                case BreakType.ExecutionStrike:
+                    BreakIntoReturningSoul(curSelected);
+                    BreakIntoHealingSoul(curSelected);
+                    break;
+            }
+        }
+        public void BreakIntoHealingSoul(int curSelected)
+        {
+            Vector2 vel = RandVelTwoPi(10f, 15f);
+            if (InitVector2 != Vector2.Zero)
+                InitVector2 = InitVector2.ToRandVelocity(ToRadians(15), 18, 23);
+            else
+                InitVector2 = vel;
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, InitVector2, ProjectileType<CrimsonScytheHealingSoul>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
             proj.localAI[0] = curSelected;
             proj.localAI[1] = Projectile.localAI[0];
             proj.originalDamage = Projectile.damage;
-            if (Owner.HJScarlet().crimsonScytheAttackCounter > 0 && Projectile.HJScarlet().GlobalTargetIndex != -1)
-            {
-                proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, RandVelTwoPi(10f, 15f), ProjectileType<CrimsonScytheHealingSoul>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
-                ((CrimsonScytheHealingSoul)proj.ModProjectile).AttackState = CrimsonScytheHealingSoul.State.HomingTarget;
-                proj.localAI[0] = curSelected;
-                proj.localAI[1] = Projectile.localAI[0];
-                proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
-                proj.originalDamage = Projectile.damage;
-            }
+        }
+        public void BreakIntoReturningSoul(int curSelected)
+        {
+            Vector2 vel = RandVelTwoPi(10f, 15f);
+            if (InitVector2 != Vector2.Zero)
+                InitVector2 = InitVector2.ToRandVelocity(ToRadians(15), 18, 23);
+            else
+                InitVector2 = vel;
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, InitVector2, ProjectileType<CrimsonScytheHealingSoul>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+            ((CrimsonScytheHealingSoul)proj.ModProjectile).AttackState = CrimsonScytheHealingSoul.State.HomingTarget;
+            proj.localAI[0] = curSelected;
+            proj.localAI[1] = Projectile.localAI[0];
+            proj.HJScarlet().GlobalTargetIndex = Projectile.HJScarlet().GlobalTargetIndex;
+            proj.originalDamage = Projectile.damage;
         }
         public override bool? CanHitNPC(NPC target)
         {
@@ -206,14 +244,12 @@ namespace HJScarletRework.Projs.Executor
 
         public void DrawStone()
         {
-            float velClamp = Clamp(Projectile.velocity.Length(), 0, 1);
             int length = (int)(Projectile.oldPos.Length);
             Texture2D tex = Projectile.GetTexture();
             for (int i = length - 1; i >= 0; i--)
             {
                 float ratios = i / (float)length;
                 Vector2 oldPos = Projectile.oldPos[i] + Projectile.PosToCenter();
-                float rot = Projectile.oldRot[i];
                 Color beginColor = Color.White;
                 Color targetColor = Color.Lerp(Color.White, Color.Silver, 0.68f);
                 Color finalColor = Color.Lerp(beginColor, targetColor, ratios) with { A = 150 };

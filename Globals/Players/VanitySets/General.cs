@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Bestiary;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -72,12 +73,19 @@ namespace HJScarletRework.Globals.Players.VanitySets
                 }
             }
         }
+        public override void UpdateDead()
+        {
+            InIdleStatement = false;
+            IdleTimer = 0;
+        }
         public override void FrameEffects()
         {
             if (accVanityID != -1)
             {
                 UpdateVanityItem();
                 UpdateVanityParticle();
+                if (IdleTimer == 0)
+                    InIdleStatement = false;
             }
 
         }

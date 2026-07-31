@@ -222,6 +222,8 @@ Typeless: {
 	// DragonSwordFireball.DisplayName: Dragon Sword Fireball
 	// DragonSwordHeldProj.DisplayName: Dragon Sword Held Proj
 	// DragonSwordSlash.DisplayName: Dragon Sword Slash
+	// MaidReaperHeal.DisplayName: Maid Reaper Heal
+	// TairitsuProj.DisplayName: Tairitsu Proj
 }
 
 Magic: {

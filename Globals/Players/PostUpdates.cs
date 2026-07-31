@@ -42,8 +42,6 @@ namespace HJScarletRework.Globals.Players
             UpdateTimer();
         }
 
-
-
         public override void PostUpdateEquips()
         {
             HandleTerraRecipe();
@@ -58,6 +56,23 @@ namespace HJScarletRework.Globals.Players
             UpdatePowerLily();
             UpdateDiverArmorJellyfishSpawn();
             UpdateMaidReaper();
+        }
+        public override void PostUpdate()
+        {
+            UpdateNetPacket();
+            SwitchWeaponSystem();
+            PostUpdateMonkHeal();
+            HandleWeaponAbility();
+            HandleUseableItem();
+            HandleBlacKey();
+        }
+
+        public void HandleBlacKey()
+        {
+            if (blackKeyExecutorDamageAdd != 0)
+                Player.GetDamage<ExecutorDamageClass>() += blackKeyExecutorDamageAdd;
+            if (blackKeyExecutorCriticalChanceAdd != 0)
+                Player.GetCritChance<ExecutorDamageClass>() += blackKeyExecutorCriticalChanceAdd;
         }
 
 
@@ -189,30 +204,6 @@ namespace HJScarletRework.Globals.Players
             }
         }
         #endregion
-        public override void UpdateLifeRegen()
-        {
-            if (fruitofEthernity)
-            {
-                Player.lifeRegen += FruitofEternity.LifeRegenSpeed;
-            }
-        }
-        public override void PostUpdate()
-        {
-            UpdateNetPacket();
-            SwitchWeaponSystem();
-            PostUpdateMonkHeal();
-            HandleWeaponAbility();
-            HandleUseableItem();
-            if (blackKeyExecutorDamageAdd != 0)
-            {
-                Player.GetDamage<ExecutorDamageClass>() += blackKeyExecutorDamageAdd;
-            }
-            if (blackKeyExecutorCriticalChanceAdd != 0)
-            {
-                Player.GetCritChance<ExecutorDamageClass>() += blackKeyExecutorCriticalChanceAdd;
-
-            }
-        }
         public float holdingUseableTimer = 0;
         #region 手持物品管理
         public void HandleUseableItem()
@@ -459,7 +450,7 @@ namespace HJScarletRework.Globals.Players
                     id.Kill();
                 }
                 Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, dir, ProjectileType<CrimsonScytheSkillProj>(), 0, 0, Player.whoAmI);
-                ((CrimsonScytheSkillProj)proj.ModProjectile).BeginTargetRotation = dir.ToRotation();
+                ((CrimsonScytheSkillProj)proj.ModProjectile).BeginTargetRotation = 0;
                 ((CrimsonScytheSkillProj)proj.ModProjectile).Flip = true;
             }
 
@@ -493,6 +484,20 @@ namespace HJScarletRework.Globals.Players
         {
             if (!maidReaperArmor)
                 return;
+            bool checkExecution = Player.CheckExecution(Player.HeldItem.type);
+            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && maidReaperIndex != -1 && !checkExecution && Player.HeldItem.DamageType.CountsAsClass<ExecutorDamageClass>())
+            {
+                NPC npc = Main.npc[maidReaperIndex];
+                if (npc.IsLegal())
+                {
+                    ScarletSound(HJScarletSounds.Tlipoca_SoulAbsorb, Player.Center, 0.85f, 1, 0.3f);
+                    float ratios = Clamp((float)ExecutionListStored[Player.HeldItem.type] / (float)HJScarletList.IsExecutorWeaponDictionaty[Player.HeldItem.type], 0, 1);
+                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), npc.Center, RandVelTwoPi(6, 9), ProjectileType<MaidReaperHeal>(), 0, 0, Player.whoAmI);
+                    proj.ai[2] = ratios;
+                    ((MaidReaperHeal)proj.ModProjectile).CurTarget = npc;
+                    Player.RemoveExecutionProgress(Player.HeldItem.type);
+                }
+            }
             if (Player.HeldItem.type != ItemType<CrimsonScythe>())
                 return;
             infiniteFlightTime = true;

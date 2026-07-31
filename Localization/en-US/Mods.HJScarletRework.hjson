@@ -65,6 +65,7 @@ ExecutorDamageClass: {
 	ExecutionDescriptionName: Execution Strike
 	ExecutionProgressRevampedMode: Execution Progress: {0} / {1}
 	ForceTacticalExecution: ""
+	CompanionWeapon: ""
 	DisplayName: Executor Damage
 
 	WeaponType: {
