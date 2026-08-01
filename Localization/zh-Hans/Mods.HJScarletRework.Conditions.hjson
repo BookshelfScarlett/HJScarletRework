@@ -5,4 +5,8 @@ Drop: {
 	FullCowboy: ����ȫ��ţ�л���
 }
 
-// Crafting.IsDownSlimeGodAndInEclipse: Mods.HJScarletRework.Conditions.Crafting.IsDownSlimeGodAndInEclipse
+Crafting: {
+	// IsDownSlimeGodAndInEclipse: Mods.HJScarletRework.Conditions.Crafting.IsDownSlimeGodAndInEclipse
+	// HasFuckingCalamityMod: Mods.HJScarletRework.Conditions.Crafting.HasFuckingCalamityMod
+	// NoFuckingCalamityMod: Mods.HJScarletRework.Conditions.Crafting.NoFuckingCalamityMod
+}

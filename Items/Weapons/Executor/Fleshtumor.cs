@@ -19,6 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.damage = 66;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true, true);
+            Item.HJScarlet().NotFinished = true;
             Item.useTime = Item.useAnimation = 35;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = null;

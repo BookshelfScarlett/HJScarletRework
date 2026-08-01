@@ -53,13 +53,13 @@ namespace HJScarletRework.Projs.Executor
         public override bool? CanHitNPC(NPC target)
         {
             bool hit = AttackType == State.ReadyHeavyHit && target.Equals(CurTarget) || (AttackType != State.ReadyHeavyHit);
-            if (hit && AttackType != State.Return)
+            if (hit)
                 return null;
             return false;
         }
         public override void OnFirstFrame()
         {
-            if (Projectile.HJScarlet().ExecutionStrike)
+            if (Projectile.HJScarlet().ExecutionStrike && Projectile.IsMe())
             {
                 ShootFocusProj(ProjectileType<MantleLayerExecution>());
             }

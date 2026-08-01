@@ -1,9 +1,11 @@
 ﻿using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Methods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
@@ -37,12 +39,22 @@ namespace HJScarletRework.Globals.Players
         public Dictionary<int, int> ExecutionListStored = new Dictionary<int, int>();
         public bool hasSendExecutionTint = false;
         public int hasSendExecutionTintTimer = 0;
+        public bool CanExecutionStrike = false;
         public void OnEnterWorldReset()
         {
             //每次进入世界的时候初始化这个列表
             ExecutionListStored = new Dictionary<int, int>(HJScarletList.IsExecutorWeaponDictionaty);
             for (int i = 0; i < ExecutionListStored.Count; i++)
                 ExecutionListStored[i] = 0;
+        }
+        public void ResetExecutorCheck()
+        {
+            if (Player.HeldItem.IsWeapon())
+            {
+                CanExecutionStrike = Player.CheckExecution(Player.HeldItem.type);
+                if (CanExecutionStrike)
+                    hasSendExecutionTint = false;
+            }
         }
     }
 }

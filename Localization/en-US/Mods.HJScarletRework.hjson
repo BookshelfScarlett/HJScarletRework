@@ -1,6 +1,7 @@
 SwitchWeaponTooltip: Lostbelt Journey: Press Intersect while holding the weapon to switch
 SwitchWeaponVisual: Lostbelt Journey: Press Intersect while holding the weapon to change its visual effect
 SwitchWeaponConditionTooltip: Switch condition: Defeated<{0}>
+NotFinished: ""
 
 SwitchWeaponConditionList: {
 	DownedGolem: Golem

@@ -12,6 +12,7 @@ namespace HJScarletRework.Globals.Players
         public int defenseBuffTimer = 0;
         public int defenseBuff = 0;
         public int swapTimer = 0;
+        public int ruShiWoWenBanTimer = 0;
         public void ResetTimer()
         {
             climaticHawstringLaserCounter = 0;
@@ -36,9 +37,18 @@ namespace HJScarletRework.Globals.Players
             defenseBuffTimer = 0;
             defenseBuff = 0;
             swapTimer = 0;
+            adamantiteHeadExecutorThunderTimer = 0;
+            powerLilyTimer = 0;
+            ruShiWoWenBanTimer = 0;
         }
         public void UpdateTimer()
         {
+            if (ruShiWoWenBanTimer > 0)
+                ruShiWoWenBanTimer--;
+            if (powerLilyTimer > 1)
+                powerLilyTimer--;
+            if (adamantiteHeadExecutorThunderTimer > 0)
+                adamantiteHeadExecutorThunderTimer--;
             if (swapTimer > 0)
                 swapTimer--;
             if (tacticalExecutionInputCache > 0)
@@ -117,8 +127,6 @@ namespace HJScarletRework.Globals.Players
                 if (protectorHerbTimerList[i] != 0)
                     protectorHerbTimerList[i]--;
             }
-            if (fishDash > 0)
-                fishDash--;
             if (PlayerFinalSpeedStoredTime > 0)
                 PlayerFinalSpeedStoredTime--;
             if (PlayerFinalSpeedStoredTime == 0)

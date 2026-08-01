@@ -25,7 +25,7 @@ namespace HJScarletRework.Globals.Players
                 if (poolSizeAmt > 100)
                     poolSizeAmt = 100;
 
-                if (Player.ZoneBeach && DownedBossSystem.downedBarrier)
+                if (Player.ZoneBeach)
                     HandleDiverArmor(poolSizeAmt, power, ref itemDrop, ref sonar);
             }
         }

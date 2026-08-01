@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney;
+using ContinentOfJourney.Buffs;
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.List;
@@ -61,9 +62,6 @@ namespace HJScarletRework.Globals.Players
         public bool runeWizardExecutor = false;
         public bool cowboyExecutor = false;
         public bool monkStaffHeal = false;
-        public bool fishExecutor = false;
-        public int fishDash = 0;
-        public bool fishDashStored = false;
         public int cowboyRevolverTimer = 0;
 
         public bool floretProtectorExecutor = false;
@@ -81,6 +79,11 @@ namespace HJScarletRework.Globals.Players
         public bool maidReaperArmor = false;
         public bool maidReaperHealUp = false;
         public int maidReaperIndex = -1;
+
+        public bool adamantiteHeadExecutor = false;
+        public int adamantiteHeadExecutorThunderTimer = 0;
+        public bool titaniumHeadExecutor = false;
+        public bool chlorophyteHeadExecutor = false;
         #endregion
 
         #region Accessories
@@ -129,6 +132,7 @@ namespace HJScarletRework.Globals.Players
         public float cycleMadenessCrit = 0;
         public bool powerLily = false;
         public int powerLilyTimer = 0;
+        public List<int> powerLilyBanMinionHashSet = new List<int>(); 
         #endregion
         public bool fruitofEthernity = false;
         #region Pets
@@ -137,6 +141,8 @@ namespace HJScarletRework.Globals.Players
         public bool ShadowPet = false;
         public bool SquidPet = false;
         public bool WatcherPet = false;
+        public bool dracoPet = false;
+        public bool sonPet = false;
         #endregion
         #region Player Movement
         /// <summary>
@@ -289,22 +295,6 @@ namespace HJScarletRework.Globals.Players
                 case ItemID.RainCoat:
                     AlterArmorType2(item.type, i, RaincoatChestplate.Defense, false, armorSlot: armorSlot);
                     break;
-            }
-            if (Condition.DownedBrainOfCthulhu.IsMet() || Condition.DownedEaterOfWorlds.IsMet())
-            {
-                switch (item.type)
-                {
-                    case ItemID.FishCostumeMask:
-                        AlterArmorType2(item.type, i, FishCostumeHelmet.Defense, false, ItemRarityID.Orange, armorSlot: armorSlot);
-                        break;
-                    case ItemID.FishCostumeShirt:
-                        AlterArmorType2(item.type, i, FishCostumeChestplate.Defense, false, ItemRarityID.Orange, armorSlot: armorSlot);
-                        break;
-                    case ItemID.FishCostumeFinskirt:
-                        AlterArmorType2(item.type, i, FishCostumeLegs.Defense, false, ItemRarityID.Orange, armorSlot: armorSlot);
-                        break;
-
-                }
             }
 
             if (DownedBossSystem.downedLifeGod)

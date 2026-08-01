@@ -99,9 +99,7 @@ namespace HJScarletRework.Projs.Executor
                 else
                     ((CrimsonScytheSoulStone)proj.ModProjectile).BreakAI = CrimsonScytheSoulStone.BreakType.Return;
                 ((CrimsonScytheSoulStone)proj.ModProjectile).AttackState = CrimsonScytheSoulStone.State.Explosion;
-                //frameCounter = 1
                 ((CrimsonScytheSoulStone)proj.ModProjectile).InitVector2= Owner.Center.GetNormalVector2(proj.Center);
-                ScreenShakeSystem.AddScreenShakes(Owner.Center, 3, 50, 0, RandRotTwoPi, easingFunc: EaseInOutQuad);
             }
         }
         public override void OnExecution()
@@ -414,10 +412,33 @@ namespace HJScarletRework.Projs.Executor
                 CacheTargetList[target] += 1;
             }
             else
+            {
+
                 CacheTargetList.TryAdd(target, 1);
+            }
+            if (CacheTargetList.TryGetValue(target, out int v))
+            {
+                if (v <= 1)
+                {
+                    float rot = Projectile.Center.GetNormalVector2(target.Center).ToRotation();
+                    if (ThirdSwing)
+                    {
+                        float util = Utils.GetLerpValue(0, 12, Projectile.numHits, true);
+                        int lerpValue = (int)(Lerp(30, 10, util));
+                        ScreenShakeSystem.AddScreenShakes(target.Center, lerpValue, lerpValue, rot, 0, easingFunc: EaseOutExpo);
+                    }
+                    else
+                    {
+                        float util = Utils.GetLerpValue(0, 12, Projectile.numHits, true);
+                        int lerpValue = (int)(Lerp(10, 0, util));
+                        int lerpTime = (int)(Lerp(25, 0, util));
+                        ScreenShakeSystem.AddScreenShakes(target.Center, lerpValue, lerpTime, rot, 0, easingFunc: EaseOutExpo);
+                    }
+                }
+            }
 
             HitEffectsHandler(target, hit, damageDone);
-            HitFirstEffectHandler();
+            HitFirstEffectHandler(target);
             PlayerEffectHandler();
             SoulStoneSpawn(target);
         }
@@ -461,7 +482,7 @@ namespace HJScarletRework.Projs.Executor
                 }
             }
         }
-        public void HitFirstEffectHandler()
+        public void HitFirstEffectHandler(NPC target)
         {
             //只有第一次攻击命中才会给卡肉
             if (Projectile.numHits > 0)
@@ -471,18 +492,15 @@ namespace HJScarletRework.Projs.Executor
         }
         public void HitEffectsHandler(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            //float rot = Projectile.rotation + PiOver2 * Projectile.spriteDirection;
             if (!ThirdSwing)
             {
-                ScreenShakeSystem.AddScreenShakes(target.Center, 10, 25, Projectile.rotation + PiOver2 * Projectile.spriteDirection, 0, easingFunc: EaseOutExpo);
                 //普通挥击下最多只生成12次特效，别产太多了
                 if (Projectile.numHits < 12)
                     HitSparkle(target, hit, damageDone);
             }
             else
             {
-                float util = Utils.GetLerpValue(0, 12, Projectile.numHits, true);
-                int lerpValue = (int)(Lerp(30, 10, util));
-                ScreenShakeSystem.AddScreenShakes(target.Center, lerpValue, lerpValue, Projectile.rotation + PiOver2 * Projectile.spriteDirection, 0, easingFunc: EaseOutExpo);
                 ScreenDarknessSystem.AddScreenDarkness(.85f, 2, 1, 12, EaseInCubic, EaseInCubic);
                 if (Projectile.numHits < 12)
                     HitSparkleHeavy(target, hit, damageDone);
@@ -500,6 +518,7 @@ namespace HJScarletRework.Projs.Executor
         public void HitSparkleHeavy(NPC target, NPC.HitInfo hit, int damageDone)
         {
             int reverse = Projectile.spriteDirection;
+            //Vector2 dir = Projectile.Center.GetNormalVector2( target.Center);
             Vector2 dir = Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2 * reverse);
             for (int i = 0; i < 40; i++)
             {
@@ -533,6 +552,7 @@ namespace HJScarletRework.Projs.Executor
         {
             int reverse = Projectile.spriteDirection;
             Vector2 dir = Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2 * reverse);
+            //Vector2 dir = Projectile.Center.GetNormalVector2( target.Center);
             for (int i = 0; i < 32; i++)
             {
                 ECSParticle.SmokeParticle(target.Center, dir.ToRandVelocity(ToRadians(35), 1.2f, 22.5f), RandLerpColor(Color.DarkRed, Color.Black), 40, RandRotTwoPi, 1, Main.rand.NextFloat(.9f, 1.2f) * .52f, blendstate: BlendState.AlphaBlend);

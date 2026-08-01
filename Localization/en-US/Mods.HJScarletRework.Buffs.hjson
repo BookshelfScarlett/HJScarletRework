@@ -101,3 +101,13 @@ FruitofEternityBuff: {
 	DisplayName: Fruitof Eternity Buff
 	Description: Mods.HJScarletRework.Buffs.FruitofEternityBuff.Description
 }
+
+DracoBuff: {
+	DisplayName: Draco Buff
+	Description: Mods.HJScarletRework.Buffs.DracoBuff.Description
+}
+
+SonBuff: {
+	DisplayName: Son Buff
+	Description: Mods.HJScarletRework.Buffs.SonBuff.Description
+}

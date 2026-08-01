@@ -7,19 +7,19 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class TheDefiler : ExecutorWeaponClass
     {
-        public override float ExecutionStrikeDamageMult => 0.8f;
+        public override float ExecutionStrikeDamageMult => 1f;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
-        public override int ExecutionProgress => 16;
+        public override int ExecutionProgress => 20;
         public override void ExSD()
         {
             Item.width = Item.height = 66;
-            Item.damage = 28;
+            Item.damage = 20;
             Item.knockBack = 5f;
             Item.shootSpeed = 16f;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
             Item.shoot = ProjectileType<TheDefilerProj>();
-            Item.useTime = Item.useAnimation = 30;
+            Item.useTime = Item.useAnimation = 28;
             Item.SetUpRarityPrice(ItemRarityID.Green);
             Item.SetUpNoUseGraphicItem();
         }
@@ -27,7 +27,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         {
             CreateRecipe().
                 AddIngredient(ItemID.EbonwoodHammer).
-                AddIngredient(ItemID.DemoniteBar, 10).
+                AddIngredient(ItemID.DemoniteBar, 60).
                 AddTile(TileID.Anvils).
                 Register();
         }

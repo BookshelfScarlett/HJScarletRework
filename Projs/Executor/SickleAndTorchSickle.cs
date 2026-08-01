@@ -241,6 +241,7 @@ namespace HJScarletRework.Projs.Executor
             DrawSlash(texture, Color.White * 0.40f, 0.80f);
 
             SB.EndShaderArea();
+            SB.EndShaderArea();
             return false;
         }
         private List<ScarletVertex> _vertexCache = new List<ScarletVertex>(); // 类级别缓存

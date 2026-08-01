@@ -44,7 +44,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.extraUpdates = 1;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.ignoreWater = true;
-            Projectile.tileCollide = true;
+            Projectile.tileCollide = false;
             Projectile.timeLeft = 600;
             Projectile.SetupImmnuity(15);
         }

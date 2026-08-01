@@ -34,11 +34,10 @@ namespace HJScarletRework.Globals.Players
             bitingClaw = false;
             cycleMadness = false;
             accVanityID = -1;
+            powerLily = false;
         }
         private void ResetArmor()
         {
-            runeWizardExecutor = false;
-            fishExecutor = false;
             shinobiExecutor = false;
             monkExecutor = false;
             cowboyExecutor = false;
@@ -49,6 +48,10 @@ namespace HJScarletRework.Globals.Players
             protectorMoonglow = false;
             diverArmor = false;
             maidReaperArmor = false;
+
+            adamantiteHeadExecutor = false;
+            chlorophyteHeadExecutor = false;
+            titaniumHeadExecutor = false;
         }
         private void ResetBuff()
         {
@@ -62,6 +65,7 @@ namespace HJScarletRework.Globals.Players
             ShadowPet = false;
             SquidPet = false;
             WatcherPet = false;
+            dracoPet = false;
             goldenApple = false;
             goldenAppleEnchanted = false;
             goldenAppleDamageAbsorb = 0;

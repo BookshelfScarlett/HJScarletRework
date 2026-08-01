@@ -52,7 +52,7 @@ namespace HJScarletRework.Globals.Executor
         public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
 
-            if (Item.GetGlobalItem<ExecutorGlobalItem>().ExecutionDamageMult != 1 && damage > 0 && player.CheckExecution(Type))
+            if (Item.GetGlobalItem<ExecutorGlobalItem>().ExecutionDamageMult != 1 && damage > 0 && player.GetExecutionSrike())
             {
                 damage = (int)(damage * ExecutionStrikeDamageMult * (Item.GetGlobalItem<ExecutorGlobalItem>().ExecutionDamageMult));
             }
@@ -61,7 +61,7 @@ namespace HJScarletRework.Globals.Executor
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             //初始化。
-            bool useExecution = player.CheckExecution(Type);
+            bool useExecution = player.GetExecutionSrike();
             int projID = Item.HJScarlet().ExecutionProj != -1 && useExecution ? Item.HJScarlet().ExecutionProj : type;
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, projID, damage, knockback, player.whoAmI);
             proj.HJScarlet().HasExecutionMechanic = true;

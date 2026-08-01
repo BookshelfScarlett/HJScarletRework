@@ -320,7 +320,8 @@ SpaceHorror: {
 	Tooltip: ""
 }
 
-PowerLily: {
+RuShiWoWen: {
 	DisplayName: Power Lily
 	Tooltip: ""
+	BanMinionList: ""
 }

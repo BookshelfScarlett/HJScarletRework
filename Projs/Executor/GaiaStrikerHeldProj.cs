@@ -81,6 +81,7 @@ namespace HJScarletRework.Projs.Executor
                     proj.ai[2] = 4;
                     proj.HJScarlet().HasExecutionMechanic = false;
                 }
+                ScreenDarknessSystem.AddScreenDarkness(0.85f, 5,10,20,easeOut:EaseInOutExpo);
                 ECSParticle.CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f, .4f, BlendState.Additive);
                 ECSParticle.CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.30f, .4f, BlendState.Additive);
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 60, 80, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
@@ -133,6 +134,7 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f, .4f, BlendState.Additive);
                 ECSParticle.CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.30f, .4f, BlendState.Additive);
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 60, 80, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
+                ScreenDarknessSystem.AddScreenDarkness(0.85f, 5,10,20,easeOut:EaseInOutExpo);
                 SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 0, Pitch = -0.4f, Volume = .477f }, Projectile.Center);
                 SoundEngine.PlaySound(HJScarletSounds.Gaia_Toss with { MaxInstances = 0, Pitch = -0.64f, Volume = .577f }, Projectile.Center);
                 Projectile.AddExecutionTimeDelayed(ItemType<GaiaStriker>(), 6);
@@ -198,7 +200,7 @@ namespace HJScarletRework.Projs.Executor
         public void DoInStaff()
         {
             //只有手持武器的情况下才允许发起这个切换
-            if (Owner.HeldItem.type == ItemType<GaiaStriker>() && HJScarletKeybinds.GeneralActionKeybind.JustPressed)
+            if (Owner.IsHolding<GaiaStriker>() && HJScarletKeybinds.GeneralActionKeybind.JustPressed)
             {
                 if (Projectile.IsMe())
                 {
@@ -216,7 +218,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 HandleStaffCondition();
                 StoredLifeTime = Projectile.timeLeft;
-                AngleLerpValue = Lerp(AngleLerpValue, 1.01f, 0.10f);
+                AngleLerpValue = Lerp(AngleLerpValue, 1f, 0.10f);
             }
             else
             {
@@ -248,6 +250,7 @@ namespace HJScarletRework.Projs.Executor
         public void CreateBloodyExplosion()
         {
             //爆开
+                ScreenDarknessSystem.AddScreenDarkness(0.85f, 5,10,20,easeOut:EaseInOutExpo);
             for (int i = 0; i < 36; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
@@ -284,15 +287,16 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Projectile.rotation.AngleLerp(tarRot, AngleLerpValue);
             Projectile.spriteDirection = Projectile.direction = (Owner.LocalMouseWorld().X > Owner.Center.X).ToDirectionInt();
             Owner.ChangeDir(Projectile.direction);
+            int count = 35;
             //使用状态下让锤子挂载玩家手上，同时我们开始占用玩家的手持
-            if (Owner.HeldItem.type == ItemType<GaiaStriker>())
+            if (Owner.IsHolding<GaiaStriker>())
             {
                 Owner.itemTime = Owner.itemAnimation = 2;
                 Owner.ControlPlayerArm(Projectile.rotation, -1);
+                count = 20;
             }
             //递增计时器
             Timer++;
-            int count = 20;
             int dmg = Owner.HeldItem.type == ItemType<GaiaStriker>() ? Projectile.originalDamage : Projectile.originalDamage / 2;
             if (Timer > count * Projectile.MaxUpdates)
             {
@@ -312,23 +316,18 @@ namespace HJScarletRework.Projs.Executor
             Oscillation += ToRadians(1.5f);
             float anchorPosX = Owner.MountedCenter.X - Owner.direction * 0;
             float anchorPosY = Owner.MountedCenter.Y - (30f * MathF.Sin(Oscillation) / 9f);
-            //uca联动，手持屠杀时调整位置
-            if (HJScarletRework.CrossMod_UCA is not null)
+            float lerp = AngleLerpValue;
+            if (!Owner.IsHolding<GaiaStriker>())
             {
-                if (HJScarletRework.CrossMod_UCA.TryFind<ModItem>("CarnageRay", out ModItem value))
-                {
-                    if (Owner.HeldItem.type == value.Type)
-                    {
-                        anchorPosY -= 100f;
-                        anchorPosX += 0f * Owner.direction;
-                    }
-                }
+                anchorPosY -= 100f;
+                anchorPosX -= 60 * Owner.direction;
+                lerp /= 5f;
             }
             //递增的值越大，锤子的摆动幅度越大
             //基本的挂机状态，此处使用了正弦曲线来让锤子常规上下偏移
             Vector2 anchorPos = new Vector2(anchorPosX, anchorPosY);
             //实际更新位置
-            Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, AngleLerpValue);
+            Projectile.Center = Vector2.Lerp(Projectile.Center, anchorPos, lerp);
 
         }
 

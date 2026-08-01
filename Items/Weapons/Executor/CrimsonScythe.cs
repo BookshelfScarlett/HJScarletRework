@@ -43,7 +43,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
 
-            bool exe = player.CheckExecution(Type);
+            bool exe = player.GetExecutionSrike();
             Vector2 dir = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitX);
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
             proj.HJScarlet().HasExecutionMechanic = true;

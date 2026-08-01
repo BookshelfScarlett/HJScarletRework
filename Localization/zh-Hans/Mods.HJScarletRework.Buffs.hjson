@@ -101,3 +101,13 @@ FruitofEternityBuff: {
 	// DisplayName: Fruitof Eternity Buff
 	// Description: Mods.HJScarletRework.Buffs.FruitofEternityBuff.Description
 }
+
+DracoBuff: {
+	DisplayName: 黑泥圣杯
+	Description: Mods.HJScarletRework.Buffs.DracoBuff.Description
+}
+
+SonBuff: {
+	DisplayName: 圣子伙伴
+	Description: 可是我觉得这很神圣啊
+}

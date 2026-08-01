@@ -45,18 +45,6 @@ namespace HJScarletRework.Items.Pets
                 player.AddBuff(Item.buffType, 3600);
             return true;
         }
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            if (!CustomTooltipDraw(line, ref yOffset))
-            {
-                if (line.Name == "ItemName" && line.Mod == "Terraria")
-                {
-                    RarePets.DrawCustomTooltipLine(line);
-                    return false;
-                }
-            }
-            return base.PreDrawTooltipLine(line, ref yOffset);
-        }
         /// <summary>
         /// 返回真以做掉通用的tooltip方法
         /// </summary>

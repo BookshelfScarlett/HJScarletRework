@@ -257,3 +257,51 @@ ReaperLegs: {
 	DisplayName: Reaper Legs
 	Tooltip: ""
 }
+
+AdamantiteHeadExecutor: {
+	DisplayName: Adamantite Head Executor
+	Tooltip: ""
+	SetBonus: ""
+}
+
+ChlorophyteHeadExecutor: {
+	DisplayName: Chlorophyte Head Executor
+	Tooltip: ""
+	SetBonus: ""
+}
+
+CobaltHeadExecutor: {
+	DisplayName: Cobalt Head Executor
+	Tooltip: ""
+	SetBonus: ""
+}
+
+HallowedHeadExecutor: {
+	DisplayName: Hallowed Head Executor
+	Tooltip: ""
+	SetBonus: ""
+}
+
+MythrilHeadExecutor: {
+	DisplayName: Mythril Head Executor
+	Tooltip: ""
+	SetBonus: ""
+}
+
+OrichalcumHeadExecutor: {
+	DisplayName: Orichalcum Head Executor
+	Tooltip: ""
+	SetBonus: ""
+}
+
+PalladiumHeadExecutor: {
+	DisplayName: Palladium Head Executor
+	Tooltip: ""
+	SetBonus: ""
+}
+
+TitaniumHeadExecutor: {
+	DisplayName: Titanium Head Executor
+	Tooltip: ""
+	SetBonus: ""
+}

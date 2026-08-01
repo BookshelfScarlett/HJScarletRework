@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class Sundowner : ExecutorWeaponClass
     {
-        public override int ExecutionProgress => 120;
+        public override int ExecutionProgress => 100;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {

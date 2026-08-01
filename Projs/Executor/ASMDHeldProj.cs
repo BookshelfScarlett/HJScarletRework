@@ -62,8 +62,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public void DoAttack()
         {
-            Owner.itemAnimation = Owner.itemTime = 2;
             Timer++;
+            Owner.itemAnimation = Owner.itemTime = 2;
             int attackSpeed = AttackSpeed;
             if (Owner.HJScarlet().ASMDBuffTime > 0)
                 attackSpeed /= 3;

@@ -40,22 +40,14 @@ namespace HJScarletRework.Globals.Executor
         /// <returns></returns>
         public bool HandleExecution()
         {
-            if (Owner.CheckExecution(OriginalItemID) && !Projectile.HJScarlet().ExecutionStrike)
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
             {
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Owner.RemoveExecutionProgress(OriginalItemID);
                 OnExecution();
                 return true;
             }
-            Owner.HJScarlet().CanExecution = false;
             return false;
-        }
-        public void CanExecutionStrike()
-        {
-            if (Owner.CheckExecution(OriginalItemID) && !Projectile.HJScarlet().ExecutionStrike)
-            {
-                Projectile.HJScarlet().ExecutionStrike = true;
-            }
         }
         public virtual void OnExecution() { }
         public override void OnKill(int timeLeft)

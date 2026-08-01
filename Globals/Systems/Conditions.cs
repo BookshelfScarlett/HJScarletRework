@@ -31,5 +31,7 @@ namespace HJScarletRework.Globals.Systems
             () => (Main.LocalPlayer.HJScarlet().firstTimeCraftGaia || Main.dedServ));
         public static Condition IsDownSlimeGodAndInEclipse = new Condition($"{ConditionString}.{nameof(IsDownSlimeGodAndInEclipse)}",
             () => DownedBossSystem.downedSunGod && Main.eclipse);
+        public static Condition HasFuckingCalamityMod = new Condition($"{ConditionString}.{nameof(HasFuckingCalamityMod)}", () => HJScarletRework.CrossMod_Calamity is not null);
+        public static Condition NoFuckingCalamityMod = new Condition($"{ConditionString}.{nameof(NoFuckingCalamityMod)}", () => HJScarletRework.CrossMod_Calamity is null);
     }
 }

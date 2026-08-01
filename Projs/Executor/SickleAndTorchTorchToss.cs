@@ -198,6 +198,7 @@ namespace HJScarletRework.Projs.Executor
             DrawSlash(texture, Color.White * 0.30f, 0.70f);
 
             SB.EndShaderArea();
+            SB.EndShaderArea();
 
             return false;
         }

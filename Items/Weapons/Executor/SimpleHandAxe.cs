@@ -8,23 +8,21 @@ namespace HJScarletRework.Items.Weapons.Executor
 {
     public class SimpleHandAxe : ExecutorWeaponClass
     {
-        public override int ExecutionProgress => 10;
+        public override int ExecutionProgress => 15;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSD()
         {
-            Item.width = 40;
-            Item.height = 40;
             Item.SetUpNoUseGraphicItem();
             Item.SetUpRarityPrice(ItemRarityID.Blue);
-            Item.shootSpeed = 22;
-            Item.useTime = Item.useAnimation = 20;
+            Item.shootSpeed = 44;
+            Item.useTime = Item.useAnimation = 16;
             Item.shoot = ProjectileType<SimpleHandAxeProj>();
             Item.HJScarlet().ExecutionProj = ProjectileType<SimpleHandAxeExecution>();
             //音效在射弹初始化时进行
             Item.UseSound = null;
-            Item.damage = 13;
+            Item.damage = 15;
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.knockBack = 4f;
+            Item.knockBack = 5f;
         }
         public override void AddRecipes()
         {

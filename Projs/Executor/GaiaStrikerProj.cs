@@ -182,6 +182,8 @@ namespace HJScarletRework.Projs.Executor
                 }
                 if (Projectile.HJScarlet().ExecutionStrike && !Owner.HasProj<GaiaStrikerHeldProj>() && !Owner.HasProj<GaiaStrikerMountedProj>())
                 {
+                ScreenDarknessSystem.AddScreenDarkness(0.95f, 5,20,30,easeOut:EaseInCubic);
+                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 12, 20, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(6), Vector2.Zero, ProjectileType<GaiaStrikerMountedProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     proj.rotation = Projectile.rotation;
                     //No.
@@ -189,8 +191,7 @@ namespace HJScarletRework.Projs.Executor
                 }
                 new CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f).Spawn();
                 new CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.28f).Spawn();
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 12, 20, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
-                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 1, Pitch = 0.4f, PitchVariance = 0.1f, Volume = .37f }, Projectile.Center);
+                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 1, Pitch = 0.4f, PitchVariance = 0.1f, Volume = .57f }, Projectile.Center);
                 Projectile.Kill();
             }
         }

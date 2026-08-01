@@ -134,6 +134,15 @@ Executor: {
 	CrimsonScytheSoulStone.DisplayName: Crimson Scythe Soul Stone
 	CrimsonScytheSkillProj.DisplayName: Crimson Scythe Skill Proj
 	CrimsonScytheHealingSoul.DisplayName: Crimson Scythe Healing Soul
+	MonocleBullet.DisplayName: Monocle Bullet
+	MonocleBulletExecution.DisplayName: Monocle Bullet Execution
+	MonocleHeldProj.DisplayName: Monocle Held Proj
+	ArcticGuanDaoCloud.DisplayName: Arctic Guan Dao Cloud
+	ArcticGuanDaoCloudMoving.DisplayName: Arctic Guan Dao Cloud Moving
+	ArcticGuanDaoHeldProj.DisplayName: Arctic Guan Dao Held Proj
+	ArcticGuanDaoSpike.DisplayName: Arctic Guan Dao Spike
+	ConferenceCallBullet.DisplayName: Conference Call Bullet
+	ConferenceCallHeldProj.DisplayName: Conference Call Held Proj
 }
 
 Melee: {
@@ -224,6 +233,11 @@ Typeless: {
 	DragonSwordSlash.DisplayName: Dragon Sword Slash
 	MaidReaperHeal.DisplayName: Maid Reaper Heal
 	TairitsuProj.DisplayName: Tairitsu Proj
+	AdamantiteThunder.DisplayName: Adamantite Thunder
+	TitaniumShardHoming.DisplayName: Titanium Shard Homing
+	ChlorophyteCrystalBolt.DisplayName: Chlorophyte Crystal Bolt
+	ChlorophyteCrystalExecutor.DisplayName: Chlorophyte Crystal Executor
+	RuShiWoWenProj.DisplayName: Ru Shi Wo Wen Proj
 }
 
 Magic: {
@@ -237,6 +251,8 @@ Pets: {
 	SquidProj.DisplayName: Squid Proj
 	WatcherProj.DisplayName: Watcher Proj
 	WhaleProj.DisplayName: Whale Proj
+	DracoProj.DisplayName: Draco Proj
+	SonProj.DisplayName: Son Proj
 }
 
 Ranged: {

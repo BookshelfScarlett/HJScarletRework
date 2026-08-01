@@ -1,4 +1,6 @@
-﻿using Terraria.ModLoader;
+﻿using HJScarletRework.Items.Accessories;
+using rail;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Assets.Registers
 {
@@ -27,6 +29,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Texture_SwordSlash2 { get; set; }
         public static Tex2DWithPath Texture_Fog { get; set; }
         public static Tex2DWithPath Texture_BloodStain { get; set; }
+        public static Tex2DWithPath Texture_RuShiWoWenFlower{ get; set; }
         public void LoadTexture()
         {
             Texture_BloomRing = new Tex2DWithPath($"{Path_General}{nameof(Texture_BloomRing)}");
@@ -52,6 +55,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_SwordSlash2 = new Tex2DWithPath($"{Path_General}{nameof(Texture_SwordSlash2)}");
             Texture_Fog = new Tex2DWithPath($"{Path_General}{nameof(Texture_Fog)}");
             Texture_BloodStain = new Tex2DWithPath($"{Path_General}{nameof(Texture_BloodStain)}");
+            Texture_RuShiWoWenFlower= new Tex2DWithPath($"{Path_General}{nameof(Texture_RuShiWoWenFlower)}");
 
         }
         public static void UnloadTexture()
@@ -79,6 +83,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_SwordSlash2 = null;
             Texture_Fog = null;
             Texture_BloodStain = null;
+            Texture_RuShiWoWenFlower = null;
         }
     }
 }

@@ -57,12 +57,6 @@ namespace HJScarletRework.Globals.Players
             ItemID.FloretProtectorLegs,
             ItemID.RainHat,
             ItemID.RainCoat,
-            ItemID.FishCostumeMask,
-            ItemID.FishCostumeShirt,
-            ItemID.FishCostumeFinskirt,
-            ItemID.MaidHead,
-            ItemID.MaidShirt,
-            ItemID.MaidPants
         };
         //一个额外的工具方法，用于反向字典映射
         public static int GetReverseWeapon(int curType)
@@ -129,22 +123,6 @@ namespace HJScarletRework.Globals.Players
                     AlterArmorType(item, RaincoatChestplate.Defense, false);
                     break;
             }
-            if (Condition.DownedBrainOfCthulhu.IsMet() || Condition.DownedEaterOfWorlds.IsMet())
-            {
-                switch (item)
-                {
-                    case ItemID.FishCostumeMask:
-                        AlterArmorType(item, FishCostumeHelmet.Defense, false, ItemRarityID.Orange);
-                        break;
-                    case ItemID.FishCostumeShirt:
-                        AlterArmorType(item, FishCostumeChestplate.Defense, false, ItemRarityID.Orange);
-                        break;
-                    case ItemID.FishCostumeFinskirt:
-                        AlterArmorType(item, FishCostumeLegs.Defense, false, ItemRarityID.Orange);
-                        break;
-
-                }
-            }
             if (DownedBossSystem.downedLifeGod)
             {
                 switch (item)
@@ -160,21 +138,6 @@ namespace HJScarletRework.Globals.Players
                         break;
                 }
             }
-            //if(Condition.DownedPlantera.IsMet())
-            //{
-            //    switch(item)
-            //    {
-            //        case ItemID.MaidHead:
-            //            AlterArmorType(item, MaidHelmetAlter.Defense, false, ItemRarityID.Yellow);
-            //            break;
-            //        case ItemID.MaidShirt:
-            //            AlterArmorType(item, MaidChestplateAlter.Defense, false, ItemRarityID.Yellow);
-            //            break;
-            //        case ItemID.MaidPants:
-            //            AlterArmorType(item, MaidLegsAlter.Defense, false, ItemRarityID.Yellow);
-            //            break;
-            //    }
-            //}
             return true;
         }
         private void AlterArmorType(int targetArmor, int defense = 0, bool vanity = true, int rarityID = -1)

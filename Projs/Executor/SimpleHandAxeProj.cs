@@ -44,22 +44,22 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Timer++;
-            float maxTime = 15f;
+            float maxTime = 14f;
             if (Timer > maxTime)
             {
                 if (Timer > maxTime + 10f)
                 {
-                    Projectile.AffactedByGrav(0.93f, yMult: 1f, yAdd: 1.7f, maxGravSpeed: 57f);
+                    Projectile.AffactedByGrav(0.93f, yMult: 1.01f, yAdd: 2.1f, maxGravSpeed: 57f);
                 }
                 else
                 {
-                    Projectile.AffactedByGrav(0.92f, yMult: 1f, yAdd: 0.57f, maxGravSpeed: 57f);
+                    Projectile.AffactedByGrav(0.80f, yMult: 1f, yAdd: 0.57f, maxGravSpeed: 57f);
                 }
-                Projectile.rotation += Projectile.SpeedAffectRotation() / 12f;
+                Projectile.rotation += (Projectile.SpeedAffectRotation() / 12f) * (Projectile.velocity.X>0).ToDirectionInt();
             }
             else
             {
-                Projectile.rotation += 0.21f;
+                Projectile.rotation += (0.21f) *(Projectile.velocity.X>0).ToDirectionInt();
             }
             UpdatePartilce();
         }
@@ -89,7 +89,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { Variants = [1], MaxInstances = 0, Pitch = 0.412f + Projectile.numHits * 0.1f, Volume = 0.925f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.GalvanizedHand_Hit, Projectile.Center, .65f, 0, 0.412f + Projectile.numHits * 0.1f, variantType: 1);
             Projectile.AddExecutionTimeImmediate(ItemType<SimpleHandAxe>());
             for (int i = 0; i < 16; i++)
             {
@@ -105,6 +105,11 @@ namespace HJScarletRework.Projs.Executor
             }
 
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.DefenseEffectiveness *= 0.5f;
+        }
+
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);

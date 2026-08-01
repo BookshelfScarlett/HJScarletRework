@@ -55,7 +55,7 @@ namespace HJScarletRework.Projs.Executor
             HandleHeldProjState();
             HandleAttackAnimation();
             HandlePlayerState();
-            if (Owner.CheckExecution(OriginalItemID) && !Projectile.HJScarlet().ExecutionStrike)
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike && Projectile.IsMe())
             {
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Owner.RemoveExecutionProgress(OriginalItemID);

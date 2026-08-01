@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.NPCs.Boss_ScarabBelief;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -378,14 +379,21 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+
             if (FinalSwing)
             {
-                modifiers.FinalDamage *= 1.3f;
+                if (target.type == NPCType<ScarabBelief>() || target.type == NPCType<ScarabBelief_Minion>())
+                    modifiers.FinalDamage *= 0.7f;
+                else
+                    modifiers.FinalDamage *= 1.3f;
                 modifiers.SetCrit();
             }
             else
             {
-                modifiers.SourceDamage *= 1.2f;
+                if (target.type == NPCType<ScarabBelief>() || target.type == NPCType<ScarabBelief_Minion>())
+                    modifiers.SourceDamage *= .7f;
+                else
+                    modifiers.SourceDamage *= 1.2f;
             }
         }
         public void RenderPixelated(SpriteBatch spriteBatch)

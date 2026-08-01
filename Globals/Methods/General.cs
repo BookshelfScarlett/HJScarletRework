@@ -195,6 +195,10 @@ namespace HJScarletRework.Globals.Methods
             float value2 = value * 100f;
             return $"{(int)value2}%";
         }
+        public static string ToLifeRegenFormat(this int value)
+        {
+            return $"+{(value/2)} HP/s";
+        }
         public static int SetAxePower(this int percent) => percent / 5;
         /// <summary>
         /// 将玩家的鼠标向量获取的值限制在1080p屏幕内，类似于天顶剑

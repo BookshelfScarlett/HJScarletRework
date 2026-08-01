@@ -2,6 +2,7 @@
 using ReLogic.Content;
 using Terraria;
 using Terraria.Graphics.Shaders;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Assets.Registers
@@ -22,6 +23,10 @@ namespace HJScarletRework.Assets.Registers
         public static Effect SlashTrailShader;
         public static Effect FogShader;
         public static Effect EdgeMeltsShader;
+        /// <summary>
+        /// 从UCA模组偷来的shader
+        /// </summary>
+        public static Effect UCAPolarDistortShaderColor;
         public override void Load()
         {
             if (Main.dedServ)
@@ -42,6 +47,7 @@ namespace HJScarletRework.Assets.Registers
             SlashTrailShader = LoadShader(nameof(SlashTrailShader));
             FogShader = LoadShader(nameof(FogShader));
             EdgeMeltsShader = LoadShader(nameof(EdgeMeltsShader));
+            UCAPolarDistortShaderColor = LoadShader("PolarDistortShaderWithR");
 
             RegisterMiscShader(TerrarRayLaser, "HJScarletReworkTerrarRayLaserPass", nameof(TerrarRayLaser));
             RegisterMiscShader(VolcanoEruptingShader, ToPassName(nameof(VolcanoEruptingShader)), nameof(VolcanoEruptingShader));
@@ -54,6 +60,7 @@ namespace HJScarletRework.Assets.Registers
             RegisterMiscShader(AlphaFadeNoiseColor, ToPassName("AlphaFade_Noise_OColor"), "AlphaFade_Noise_OColor");
             RegisterMiscShader(FogShader, ToPassName(nameof(FogShader)), nameof(FogShader));
             RegisterMiscShader(EdgeMeltsShader, ToPassName(nameof(EdgeMeltsShader)), nameof(EdgeMeltsShader));
+            RegisterMiscShader(UCAPolarDistortShaderColor, ToPassName("PolarDistortShaderWithR"), "PolarDistortShaderWithR");
         }
         public override void Unload()
         {

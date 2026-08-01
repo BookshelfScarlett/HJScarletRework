@@ -16,6 +16,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override void ExSD()
         {
             Item.width = Item.height = 72;
+            Item.HJScarlet().NotFinished = true;
             Item.damage = 108;
             Item.useTime = Item.useAnimation = 35;
             Item.rare = ItemRarityID.Yellow;

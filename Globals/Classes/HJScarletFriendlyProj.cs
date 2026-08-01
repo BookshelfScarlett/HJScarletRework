@@ -45,7 +45,7 @@ namespace HJScarletRework.Globals.Classes
         public virtual void ProjAI() { }
 
         public virtual void ExSD() { }
-        private DamageClass SetDamageClass
+        public DamageClass SetDamageClass
         {
             get
             {

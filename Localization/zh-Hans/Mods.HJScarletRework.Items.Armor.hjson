@@ -55,15 +55,10 @@ RuneWizardExecutor: {
 }
 
 CowboyExecutor: {
-	HelmetTooltip: 增加10%代行者伤害
-	ChestplateTooltip: 增加10%代行者暴击概率
+	HelmetTooltip: 增加5%代行者伤害
+	ChestplateTooltip: 增加5%代行者暴击概率
 	LegsTooltip: 增加15%移动速度
-	SetBonus:
-		'''
-		命中时追加一把左轮攻击，造成25%武器伤害
-		左轮以1/6的概率造成50%武器伤害
-		这一概率在发起处决攻击时提升至100%
-		'''
+	SetBonus: 命中时追加一把左轮攻击，造成120点伤害，受代行者伤害加成
 }
 
 MaidExecutor: {
@@ -218,48 +213,39 @@ MonkLegs: {
 
 DiverBody: {
 	DisplayName: 潜航员护胸
-	Tooltip:
-		'''
-		增加15%代行者暴击伤害
-		敌人更有可能攻击你
-		'''
+	Tooltip: 增加{0}代行者暴击伤害
 }
 
 DiverHead: {
 	DisplayName: 潜航员面罩
-	Tooltip:
-		'''
-		增加25%代行者伤害
-		增加25%代行者暴击概率
-		敌人更有可能攻击你
-		'''
-	SetBonus:
-		'''
-		+2 HP/s 生命恢复速度
-		移动时沿轨迹生成在空中滞留的水母
-		'''
+	Tooltip: 增加{0}代行者伤害
+	SetBonus: 移动时沿轨迹生成在空中滞留的水母
 }
 
 DiverLegs: {
 	DisplayName: 潜航员护腿
 	Tooltip:
 		'''
-		增加25%移动速度
+		增加{0}暴击概率
 		敌人更有可能攻击你
 		'''
 }
 
 ReaperBody: {
 	DisplayName: 前台死神长裙
-	Tooltip: ""
+	Tooltip:
+		'''
+		增加{0}代行者暴击伤害
+		敌人更有可能攻击你
+		'''
 }
 
 ReaperHead: {
 	DisplayName: 前台死神发箍
 	Tooltip:
 		'''
-		增加30%代行者暴击伤害
-		获得狩猎药水的效果
+		增加{0}代行者伤害，{0}代行者暴击概率
+		敌人更有可能攻击你
 		'''
 	SetBonus:
 		'''
@@ -272,5 +258,95 @@ ReaperHead: {
 
 ReaperLegs: {
 	DisplayName: 前台死神下着
-	Tooltip: ""
+	Tooltip:
+		'''
+		增加{0}移动速度
+		敌人更有可能攻击你
+		'''
+}
+
+AdamantiteHeadExecutor: {
+	DisplayName: 精金兜帽
+	Tooltip: 增加{0}代行者伤害，{1}代行者暴击概率
+	SetBonus:
+		'''
+		增加{0}代行者暴击伤害
+		以{1}秒1次的频率向附近最多{2}名敌人降下精金闪电
+		每道闪电造成{3}伤害，受代行者职业加成，1/{4}的概率暴击
+		'''
+}
+
+ChlorophyteHeadExecutor: {
+	DisplayName: 叶绿翼盔
+	Tooltip:
+		'''
+		增加{0}代行者伤害，{1}代行者暴击概率
+		增加{2}代行者暴击伤害
+		'''
+	SetBonus:
+		'''
+		召唤强大的叶状水晶来射击附近的敌人
+		叶状水晶攻击频率更高，攻击无限穿透，造成{0}伤害，受代行者职业加成
+		水晶射线首次命中敌人时会为你恢复一定量的飞行时间
+		'''
+}
+
+CobaltHeadExecutor: {
+	DisplayName: 钴便帽
+	Tooltip: 增加{0}代行者伤害
+	SetBonus: 增加{0}代行者暴击伤害
+}
+
+HallowedHeadExecutor: {
+	DisplayName: 神圣战罩
+	Tooltip:
+		'''
+		增加{0}代行者伤害，{1}代行者暴击概率
+		增加{2}代行者暴击伤害
+		'''
+	SetBonus: 攻击敌人后进入免疫状态
+}
+
+MythrilHeadExecutor: {
+	DisplayName: 秘银覆面
+	Tooltip:
+		'''
+		增加{0}代行者暴击概率
+		增加{1}代行者暴击伤害
+		'''
+	SetBonus: 增加{0}代行者暴击概率
+}
+
+OrichalcumHeadExecutor: {
+	DisplayName: 山铜战盔
+	Tooltip:
+		'''
+		增加{0}代行者暴击伤害
+		增加{1}移动速度
+		'''
+	SetBonus: 花瓣将落到目标身上造成额外伤害
+}
+
+PalladiumHeadExecutor: {
+	DisplayName: 钯金顿项
+	Tooltip:
+		'''
+		增加{0}伤害
+		{1}生命恢复速度
+		'''
+	SetBonus: 攻击敌人后大大提高生命再生速度
+}
+
+TitaniumHeadExecutor: {
+	DisplayName: 钛金冠盔
+	Tooltip:
+		'''
+		增加{0}代行者伤害，{1}代行者暴击概率
+		增加{2}代行者暴击伤害
+		'''
+	SetBonus:
+		'''
+		攻击时快速发射多枚追踪的钛金碎片
+		钛金碎片基础伤害为{0}，受代行者伤害加成
+		'''
 }

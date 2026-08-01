@@ -6,6 +6,7 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs;
 using HJScarletRework.Projs.Executor;
+using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -42,14 +43,24 @@ namespace HJScarletRework.Globals.Instances.Projs
             Player Owner = Main.player[projectile.owner];
             if (HasExecutionMechanic && !AddExecutionHit && projectile.numHits < 1)
             {
+                HandleCowboy(Owner, target);
                 AddExecutionHit = true;
             }
             HandleMaidReaperOnHit(Owner, projectile, target);
             HandleBlackKeyOnHit(Owner);
             ModifyDefenderProj(Owner, projectile, target);
-
-            if (ExecutionStrike && Owner.HJScarlet().fishExecutor)
-                Owner.HJScarlet().fishDashStored = true;
+        }
+        public void HandleCowboy(Player Owner, NPC target)
+        {
+            if (Owner.HJScarlet().cowboyExecutor && Owner.HJScarlet().cowboyRevolverTimer == 0)
+            {
+                int revolverDamage = (int)Owner.GetTotalDamage<ExecutorDamageClass>().ApplyTo(120);
+                Projectile proj2 = Projectile.NewProjectileDirect(Owner.GetSource_FromThis(), target.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(35f), 9f, 11f), ProjectileType<CowboyRevolverProj>(), revolverDamage, 0f, Owner.whoAmI);
+                proj2.timeLeft = 300;
+                if (target.CanBeChasedBy())
+                    ((CowboyRevolverProj)proj2.ModProjectile).CurTarget = target;
+                Owner.HJScarlet().cowboyRevolverTimer = 30;
+            }
         }
 
         public void HandleBlackKeyOnHit(Player owner)

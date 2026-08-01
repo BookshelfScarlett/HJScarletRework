@@ -9,9 +9,5 @@ namespace HJScarletRework.Rarity.RarityShiny
     {
         public override Color RarityColor => Color.SkyBlue;
         internal static List<RaritySparkle> RarePetsParticle = [];
-        public static void DrawCustomTooltipLine(DrawableTooltipLine tooltipLine)
-        {
-            RarityDrawHelper.DrawCustomTooltipLine(tooltipLine, Color.SkyBlue, Color.Black, Color.DeepSkyBlue, 1.2f);
-        }
     }
 }

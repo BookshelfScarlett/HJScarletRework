@@ -63,7 +63,7 @@ namespace HJScarletRework.Projs.Executor
             }
             Timer++;
             if (Timer % 2f == 0)
-                SoundEngine.PlaySound(HJScarletSounds.Light_Fire with { Volume = 0.45f }, Projectile.Center);
+                ScarletSound(HJScarletSounds.Light_Fire, Projectile.Center,volume: 0.25f);
             if (Timer % 2f == 0)
             {
                 HandleExecution();
@@ -73,7 +73,7 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 shootPos = Projectile.Center + safedir * 60f - (safedir.RotatedBy(PiOver2) * 5f * Projectile.direction);
                     int damage = Projectile.damage;
                     if (buffTimer != 0)
-                        damage *= 3;
+                        damage = (int)(Projectile.damage * 1.15f);
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), shootPos - safedir * 40f + safedir.RotatedBy(PiOver2 * i) * 7f * Main.rand.NextFloat(), safedir * 10f, ProjectileType<ExsanguinationBulletProj>(), damage, Projectile.knockBack);
                     proj.HJScarlet().HasExecutionMechanic = buffTimer == 0;
                 }

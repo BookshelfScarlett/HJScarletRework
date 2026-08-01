@@ -399,3 +399,21 @@ PureDagger: {
 	Tooltip: ""
 	ExecutionStrike: ""
 }
+
+Monocle: {
+	DisplayName: Monocle
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+ArcticGuanDao: {
+	DisplayName: Arctic Guan Dao
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+ConferenceCall: {
+	DisplayName: Conference Call
+	Tooltip: ""
+	ExecutionStrike: ""
+}

@@ -49,14 +49,6 @@ namespace HJScarletRework.Globals.Players
 
                 if (cowboyExecutor && cowboyRevolverTimer == 0)
                 {
-                    cowboyRevolverTimer = Player.ApplyWeaponAttackSpeed(Player.HeldItem, (int)(Player.HeldItem.useTime * 0.5f), 5);
-                    int revolverDamage = Player.GetWeaponDamage(Player.HeldItem);
-                    if (proj.HJScarlet().ExecutionStrike)
-                        revolverDamage *= 3;
-                    Projectile proj2 = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), target.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(35f), 9f, 11f), ProjectileType<CowboyRevolverProj>(), revolverDamage, 0f, Player.whoAmI);
-                    proj2.timeLeft = 300;
-                    if (target.CanBeChasedBy())
-                        ((CowboyRevolverProj)proj2.ModProjectile).CurTarget = target;
                 }
 
             }

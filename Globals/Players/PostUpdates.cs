@@ -2,6 +2,7 @@
 using HJScarletRework.Buffs;
 using HJScarletRework.Core;
 using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Metaballs;
@@ -12,6 +13,8 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players.Dashes;
 using HJScarletRework.Globals.Systems;
+using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Armor.ExecutorVanillaHead;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor;
 using HJScarletRework.Items.Weapons.Melee;
@@ -19,6 +22,7 @@ using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using Microsoft.Xna.Framework;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -50,13 +54,14 @@ namespace HJScarletRework.Globals.Players
             UpdateFloretProtectorHerbSpawn();
             UpdateHerbBuff();
             UpdateStardustRune();
-            UpdateArmorAbility();
             UpdateTacticalExecution();
-            UpdateFishDash();
             UpdatePowerLily();
             UpdateDiverArmorJellyfishSpawn();
             UpdateMaidReaper();
+            UpdateHeadExecutor();
         }
+
+
         public override void PostUpdate()
         {
             UpdateNetPacket();
@@ -65,8 +70,8 @@ namespace HJScarletRework.Globals.Players
             HandleWeaponAbility();
             HandleUseableItem();
             HandleBlacKey();
+            ResetExecutorCheck();
         }
-
         public void HandleBlacKey()
         {
             if (blackKeyExecutorDamageAdd != 0)
@@ -80,26 +85,28 @@ namespace HJScarletRework.Globals.Players
         public void UpdateRandomMinionSpawn()
         {
             if (!powerLily)
+            {
+                //确认玩家没有佩戴的情况下立刻杀死召唤物
+                if (powerLilyTimer > 0)
+                {
+                    KillMinion();
+                    powerLilyTimer = 0;
+                }
                 return;
-            if (powerLilyTimer > 0)
+            }
+            if (powerLilyTimer > 1)
                 return;
             //入场清除周围的召唤物
-            foreach (var proj in Main.ActiveProjectiles)
-            {
-                if (Main.myPlayer != Player.whoAmI)
-                    continue;
-                if (proj.owner != Player.whoAmI)
-                    continue;
-                if (!proj.minion)
-                    continue;
-                proj.Kill();
-                proj.active = false;
-            }
+            KillMinion();
             float curSlots = Player.maxMinions - Player.slotsMinions;
             List<Item> hasList = [];
             int applyDmg = -1;
-
+            //生成装饰射弹
+            int projFather = -1;
+            if(!Player.HasProj<RuShiWoWenProj>(out int projID))
+            projFather = Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, projID, 0, 0, Player.whoAmI);
             ScarletSound(HJScarletSounds.Misc_ManaClearUse, Player.Center, 0.85f, 1, 0.4f, 0.1f);
+            Vector2 spawnPos = Player.MountedCenter - Vector2.UnitY * 100f;
             while (curSlots >= 1)
             {
                 //武器列表
@@ -112,15 +119,45 @@ namespace HJScarletRework.Globals.Players
                     applyDmg = Math.Min(applyDmg, item.damage);
                 }
                 Projectile proj = ContentSamples.ProjectilesByType[item.shoot];
-                if (curSlots >= proj.minionSlots && !hasList.Contains(item))
+                if (curSlots >= proj.minionSlots && !hasList.Contains(item) && !powerLilyBanMinionHashSet.Contains(item.type))
                 {
                     int dmg = (int)Player.GetTotalDamage<SummonDamageClass>().ApplyTo(applyDmg);
                     var src = new EntitySource_ItemUse_WithAmmo(Player, item, AmmoID.None);
-                    ItemLoader.Shoot(item, Player, src, Player.MountedCenter, RandDirTwoPi, proj.type, dmg, item.knockBack);
+                    ItemLoader.Shoot(item, Player, src, spawnPos, RandDirTwoPi, proj.type, dmg, item.knockBack);
                     hasList.Add(item);
+                    curSlots -= proj.minionSlots;
                 }
             }
-            powerLilyTimer = GetSeconds(30);
+            float glowScale = .36f;
+            ECSParticle.CrossGlow(spawnPos, Color.HotPink, 45, 1, glowScale);
+            ECSParticle.CrossGlow(spawnPos, Color.Pink, 45, 1, glowScale*.95f);
+            ECSParticle.CrossGlow(spawnPos, Color.White, 45, 1, glowScale*.90f);
+            //特效相关
+            for (int i = 0; i < 6; i++)
+            {
+                Color color = RandLerpColor(Color.LightPink, Color.Violet);
+                new NoiseShockRing(spawnPos, Vector2.Zero, color, 45, 1f, .5f + i * 0.2f, projFather, Vector2.Zero, false).Spawn();
+            }
+            for(int i= 0;i<50;i++)
+            ECSParticle.TurbulenceShinyOrb(spawnPos.ToRandCirclePosEdge(60), Main.rand.NextFloat(1.2f, 2.4f) * 2, RandLerpColor(Color.Pink, Color.LightPink), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .13f);
+            ScreenDarknessSystem.AddScreenDarkness(0.75f, 10, 5, 30,easeOut:EaseInCubic);
+            //重置timer
+            powerLilyTimer = GetSeconds(RuShiWoWen.Cooldown) +1;
+        }
+        public void KillMinion()
+        {
+            foreach (var proj in Main.ActiveProjectiles)
+            {
+                if (Main.myPlayer != Player.whoAmI)
+                    continue;
+                if (proj.owner != Player.whoAmI)
+                    continue;
+                if (!proj.minion)
+                    continue;
+                proj.Kill();
+                proj.active = false;
+            }
+
         }
         public void UpdateFlybackBuff()
         {
@@ -227,7 +264,31 @@ namespace HJScarletRework.Globals.Players
             {
                 PurePrismFateHandler(itemHover);
             }
+            if(itemMouse.type == ItemType<RuShiWoWen>())
+            {
+                RuShiWoWenMinionBanHandler(itemHover);
+            }
         }
+        /// <summary>
+        /// 如是我闻ban召唤物的逻辑
+        /// </summary>
+        /// <param name="itemHover"></param>
+        public void RuShiWoWenMinionBanHandler(Item itemHover)
+        {
+            int id = itemHover.type;
+            {
+                bool isMinion = HJScarletList.SummonWeaponList.Contains(id);
+                int totalMinionCount = HJScarletList.SummonWeaponList.Count;
+                if (totalMinionCount - powerLilyBanMinionHashSet.Count < RuShiWoWen.MinMinionSelected)
+                    return;
+                if (isMinion && !powerLilyBanMinionHashSet.Contains(id) && HJScarletKeybinds.GeneralActionKeybind.JustPressed)
+                {
+                ScarletSound(HJScarletSounds.Misc_Spell, Player.Center, pitch: .2f, volume: .6f);
+                    powerLilyBanMinionHashSet.Add(id);
+                }
+            }
+        }
+
         /// <summary>
         /// 天命圣水的使用逻辑。必须得是魔法药水，且鼠标悬停的物品必须是魔法药水
         /// </summary>
@@ -371,14 +432,34 @@ namespace HJScarletRework.Globals.Players
         {
             ClearUpParticle(ref inventory, context, slot);
             HoverSwitchWeapon(ref inventory, context, slot);
+            HoverRuShiWoWen(ref inventory, context, slot);
             return false;
         }
-
+        public void HoverRuShiWoWen(ref Item[] inventory, int context, int slot)
+        {
+            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && ruShiWoWenBanTimer == 0)
+            {
+                ruShiWoWenBanTimer = 30;
+                if (!inventory[slot].IsLegal())
+                    return;
+                Item item = inventory[slot];
+                if (item.type != ItemType<RuShiWoWen>())
+                    return;
+                if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
+                {
+                    if (powerLilyBanMinionHashSet.Count > 0)
+                    {
+                        ScarletSound(HJScarletSounds.Misc_Spell, Player.Center, pitch: -.2f, volume: .6f);
+                        powerLilyBanMinionHashSet.RemoveAt(powerLilyBanMinionHashSet.Count - 1);
+                    }
+                }
+            }
+        }
         public void HoverSwitchWeapon(ref Item[] inventory, int context, int slot)
         {
             if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && swapTimer == 0)
             {
-                swapTimer = 10;
+                swapTimer = 30;
                 if (!inventory[slot].IsLegal())
                     return;
                 Item item = inventory[slot];
@@ -480,6 +561,75 @@ namespace HJScarletRework.Globals.Players
         public void UpdatePowerLily()
         {
         }
+        public void UpdateHeadExecutor()
+        {
+            if (Main.myPlayer != Player.whoAmI)
+                return;
+            TitaniumHeadExecutorShard();
+            AdamantiteHeadExecutorThunder();
+            ChlorophyteHeadExecutorCrystal();
+        }
+        #region 代行者的矿石套
+        //钛金碎片
+        public void TitaniumHeadExecutorShard()
+        {
+            if (!(titaniumHeadExecutor && Player.HeldItem.IsWeapon() && Main.mouseLeft && Player.miscCounter % 8 == 0))
+                return;
+            int damage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(TitaniumHeadExecutor.ShardDamage);
+            Vector2 dir = Player.Center.GetNormalVector2(Main.MouseWorld);
+            Vector2 off = dir.RotatedByRandom(PiOver4).ToSafeNormalize();
+            Vector2 pos = Player.Center - off * Main.rand.NextFloat(0.7f, 1.1f) * 120f;
+            Projectile.NewProjectileDirect(Player.GetSource_FromThis(), pos, dir * 14f, ProjectileType<TitaniumShardHoming>(), damage, 1f, Player.whoAmI);
+
+        }
+        //精金闪电
+        public void AdamantiteHeadExecutorThunder()
+        {
+            if (!(adamantiteHeadExecutor && adamantiteHeadExecutorThunderTimer == 0))
+                return;
+            float searchDist = 1100f;
+            List<NPC> availableTarget = [];
+            foreach (NPC needTar in Main.ActiveNPCs)
+            {
+                if (availableTarget.Count >= AdamantiteHeadExecutor.ThunderCount)
+                    break;
+                bool legalTarget = needTar.CanBeChasedBy();
+                float distPerTar = Vector2.Distance(needTar.Center, Player.Center);
+                if (legalTarget && distPerTar < searchDist)
+                {
+                    availableTarget.Add(needTar);
+                }
+            }
+            if (availableTarget.Count == 0)
+            {
+                return;
+            }
+            for (int i = 0; i < availableTarget.Count; i++)
+            {
+                NPC target = availableTarget[i];
+                if (!target.IsLegal())
+                    continue;
+
+                ScarletSound(HJScarletSounds.Lightning_Strike, Player.Center, 0.4f, 1, 0.35f);
+                Vector2 pos = Player.Center - Vector2.UnitY * Main.rand.NextFloat(800f, 900f) + Vector2.UnitX * Main.rand.NextFloat(0f, 20f) * Main.rand.NextBool().ToDirectionInt();
+                Vector2 vel = (target.Center - pos).ToSafeNormalize() * Main.rand.NextFloat(4f, 9f);
+                int damage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(AdamantiteHeadExecutor.ThunderDamage);
+                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), pos, vel, ProjectileType<AdamantiteThunder>(), damage, 3f, Player.whoAmI);
+                ((AdamantiteThunder)proj.ModProjectile).CurTarget = target;
+            }
+            adamantiteHeadExecutorThunderTimer = GetSeconds(AdamantiteHeadExecutor.StrikeChance);
+        }
+        public void ChlorophyteHeadExecutorCrystal()
+        {
+            if(chlorophyteHeadExecutor && !Player.HasProj<ChlorophyteCrystalExecutor>(out int crystalLeaf))
+            {
+                int damage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(ChlorophyteHeadExecutor.BoltDamage);
+                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, crystalLeaf, damage, 2, Player.whoAmI);
+                proj.originalDamage = damage;
+            }
+
+        }
+        #endregion
         public void UpdateMaidReaper()
         {
             if (!maidReaperArmor)
@@ -510,7 +660,7 @@ namespace HJScarletRework.Globals.Players
         {
             if (!diverArmor)
                 return;
-            if (Player.miscCounter % 15 == 0 && Player.velocity.LengthSquared() > 2f * 2f)
+            if (Player.miscCounter % 45 == 0 && Player.velocity.LengthSquared() > 2f * 2f)
             {
                 int damage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(150);
                 Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Player.velocity.ToSafeNormalize() * -3f, ProjectileType<DiverJellyFish>(), damage, 0f, Player.whoAmI);
@@ -518,54 +668,6 @@ namespace HJScarletRework.Globals.Players
 
             }
         }
-
-        private void UpdateFishDash()
-        {
-            //小鱼冲刺。动量保存冲刺的初步实现
-            if (fishDashStored && fishExecutor)
-            {
-                if (Main.rand.NextBool())
-                    new ShinyRing(Player.ToRandRec(), (-Vector2.UnitY).ToRandVelocity(ToRadians(20f), 0f, .3f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0.012f).Spawn();
-            }
-            if (fishDash <= 0)
-                return;
-
-            //在此过程中玩家不会受到击退
-            Player.noKnockback = true;
-            Player.RemoveAllGrapplingHooks();
-            Player.RemoveAllFishingBobbers();
-            FishParticles();
-            //这里基本上用帧来算
-            if (fishDash < 4)
-            {
-                //这里用一些硬编码的案例来实现一些可能的冲刺效果
-                float buffer = -10f;
-                float lerpValue = .35f;
-                //除非玩家的速度方向与面朝的方向相同，不然我们不会给这个加速
-                if (Player.direction == Math.Sign(Player.velocity.X))
-                {
-                    buffer = 10f;
-                    lerpValue = .6f;
-                }
-                Vector2 finalMoveSpeed = Player.velocity.ToSafeNormalize() * (PlayerLastSpeedStored + buffer);
-                //额外的，如果玩家正在向上移动，则根据玩家的速度方向给予一个推开的速度
-                if (Math.Abs(Player.velocity.Y) - Math.Abs(Player.velocity.X) > 0 && Player.velocity.Y < 0)
-                {
-                    finalMoveSpeed += Player.direction * Vector2.UnitX * 10f;
-                    lerpValue = .4f;
-                }
-
-                Player.velocity = Vector2.Lerp(Player.velocity, finalMoveSpeed, lerpValue);
-                //需注意的是这里的速度
-            }
-            else
-            {
-                //查看速度情况。
-                float speedValue = PlayerLastSpeedStored > 40 ? PlayerLastSpeedStored : 40;
-                Player.velocity = Vector2.Lerp(Player.velocity, FishDashVector * speedValue, 0.5f);
-            }
-        }
-
         public void UpdateTacticalExecution()
         {
             if (!tacticalExecution)
@@ -579,42 +681,6 @@ namespace HJScarletRework.Globals.Players
             }
         }
 
-        public void FishParticles()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                Dust d = Dust.NewDustPerfect(Player.ToRandRec(), DustID.GemSapphire);
-                d.velocity = Player.velocity.ToSafeNormalize() * Main.rand.NextFloat(1.2f, 2.4f);
-                d.scale = 1f;
-                d.noGravity = true;
-            }
-            new ShinyRing(Player.ToRandRec(), (-Vector2.UnitY).ToRandVelocity(ToRadians(20f), 0.5f, 1.3f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 0.032f).Spawn();
-        }
-
-        //必须得存储玩家当前的速度动量
-        public float CurSpeed = 0;
-        public Vector2 FishDashVector;
-        private void UpdateArmorAbility()
-        {
-            if (!CanArmorAbility)
-                return;
-            CanArmorAbility = false;
-            if (fishExecutor && fishDash == 0 && fishDashStored)
-            {
-                fishDash = 12;
-                fishDashStored = false;
-                //查看动量保存帧，是否在动量保存帧期间准备执行下一个冲刺
-                //如果是，在原来的基础上提供1.10x的速度
-                //这个时期给的非常的紧，没什么容错
-                PlayerLastSpeedStored = Player.velocity.Length();
-                if (PlayerFinalSpeedStoredTime > 0)
-                    PlayerLastSpeedStored *= 1.1f;
-                FishDashVector = Player.ToMouseVector2();
-                PlayerFinalSpeedStoredTime = 4;
-                Player.direction = ((Player.Center.X - Main.MouseWorld.X) < 0).ToDirectionInt();
-                SoundEngine.PlaySound(HJScarletSounds.Blunt_Swing with { Pitch = 0.2f, MaxInstances = 0 }, Player.Center);
-            }
-        }
         public void UpdateFloretProtectorHerbSpawn()
         {
             if (floretProtectorTimer == 0 && floretProtectorExecutor)

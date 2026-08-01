@@ -81,6 +81,7 @@ namespace HJScarletRework.Projs.General
                 {
                     Projectile.netUpdate = true;
                     Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Center, ItemType<GaiaStriker>());
+                    ScreenDarknessSystem.AddScreenDarkness(0.95f, 5,20,30,easeOut:EaseInCubic);
                     CreateBloodyExplosion();
                     Projectile.Kill();
                 }

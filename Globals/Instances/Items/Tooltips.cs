@@ -91,20 +91,22 @@ namespace HJScarletRework.Globals.Instances.Items
                 };
                 tooltips.Insert(index + 1, line);
             }
+            if(item.HJScarlet().NotFinished)
+            {
+                tooltips.CreateTooltip(Mod.GetLocalizationKey("NotFinished"),Color.IndianRed);
+            }
             base.ModifyTooltips(item, tooltips);
         }
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
-            if (HJScarletConfigClient.Instance.SpecialRarity)
+            if (!HJScarletConfigClient.Instance.SpecialRarity)
+                return true;
+            if (line.Name == (item.HJScarlet().ItemBelongTo + "Name") && line.Mod == Mod.Name)
             {
-                if (line.Name == (item.HJScarlet().ItemBelongTo + "Name") && line.Mod == Mod.Name)
-                {
-                    RareItemRarity.DrawFlavorTooltipName(line, RareItemRarity.RareType.Donator);
-                    return false;
-                }
-
+                RareItemRarity.DrawFlavorTooltipName(line, RareItemRarity.RareType.Donator);
+                return false;
             }
-            if (line.IsItemName() && HJScarletConfigClient.Instance.SpecialRarity)
+            if (line.IsItemName())
             {
                 if (HJScarletList.ShinyRarityItemDictionary.TryGetValue(item.type, out ShinyRarityType value))
                 {
@@ -113,16 +115,15 @@ namespace HJScarletRework.Globals.Instances.Items
                     return false;
                 }
             }
-            if (line.Mod == Mod.Name && line.Name == "FlavorTooltipsName" && HJScarletConfigClient.Instance.SpecialRarity)
+            if (line.Mod == Mod.Name && line.Name == "FlavorTooltipsName")
             {
                 if (HJScarletList.ShinyRarityItemDictionary.TryGetValue(item.type, out ShinyRarityType value))
                 {
                     RarityDrawHelper.UpdateFlavorNameDraw(line, value);
                     return false;
                 }
-
             }
-            return base.PreDrawTooltipLine(item, line, ref yOffset);
+            return true;
         }
         public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
         {

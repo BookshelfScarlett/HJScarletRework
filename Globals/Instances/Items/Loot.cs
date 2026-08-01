@@ -128,7 +128,7 @@ namespace HJScarletRework.Globals.Instances.Items
             Recipe.Create(ItemID.CobaltShield).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyCobaltBar, 10).
                 DisableDecraft().
-                AddTile(TileID.MythrilAnvil).
+                AddTile(TileID.Anvils).
                 Register();
 
             Recipe.Create(ItemID.CrossNecklace).

@@ -10,7 +10,7 @@ namespace HJScarletRework.Items.Accessories
     public class ArcBow : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
-        public int HealAmt = 25;
+        public int HealAmt = 10;
         public override void ExSD()
         {
             Item.width = Item.height = 32;
@@ -23,7 +23,6 @@ namespace HJScarletRework.Items.Accessories
         {
             player.HJScarlet().blackKeyHeal = 25;
             player.HJScarlet().blackKeyDefenseBuff = .25f;
-            player.longInvince = true;
         }
         public override void AddRecipes()
         {

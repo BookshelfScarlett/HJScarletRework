@@ -35,7 +35,7 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
             Texture2D texture = HJScarletTexture.Particle_HRShinyOrb.Value;
             Main.spriteBatch.Draw(texture, data.Position - Main.screenPosition, null, data.DrawColor * data.Opacity, data.Rotation, texture.Size() / 2, data.Scale, SpriteEffects.None, 0);
             if (data.aifloat1 > 0)
-                Main.spriteBatch.Draw(texture, data.Position - Main.screenPosition, null, data.DrawColor * data.Opacity, data.Rotation, texture.Size() / 2, data.Scale * data.aifloat1, SpriteEffects.None, 0);
+                Main.spriteBatch.Draw(texture, data.Position - Main.screenPosition, null, Color.White* data.Opacity, data.Rotation, texture.Size() / 2, data.Scale * data.aifloat1, SpriteEffects.None, 0);
         }
     }
 }

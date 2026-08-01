@@ -24,6 +24,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.knockBack = 5f;
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
             Item.SetUpNoUseGraphicItem(true, false);
+            Item.HJScarlet().NotFinished = true;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.shoot = ProjectileType<ClimaticHawstringProj>();
             Item.shootSpeed = 12f;

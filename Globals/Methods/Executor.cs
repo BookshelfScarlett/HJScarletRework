@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Players;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -140,16 +141,12 @@ namespace HJScarletRework.Globals.Methods
             {
                 if (usPlayer.tacticalExecutionInputCache == 0)
                     return false;
-                if (!HJScarletKeybinds.GeneralActionKeybind.JustPressed)
+                if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
                     return false;
                 //无论啥情况，这里都要直接设置为否
                 if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
                 {
                     bool canExe = value >= executionTime;
-                    if (canExe)
-                    {
-                        owner.HJScarlet().hasSendExecutionTint = false;
-                    }
                     return canExe;
                 }
                 else
@@ -160,12 +157,16 @@ namespace HJScarletRework.Globals.Methods
                 if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
                 {
                     bool canExe = value >= executionTime;
-                    owner.HJScarlet().hasSendExecutionTint = canExe;
                     return value >= executionTime;
                 }
                 else
                     return false;
             }
+        }
+        public static bool GetExecutionSrike(this Player player)
+        {
+            return (player.HJScarlet().CanExecutionStrike);
+
         }
         /// <summary>
         /// <para>移除指定武器的处决进度记录。</para>

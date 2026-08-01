@@ -29,20 +29,22 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             //直接调用光女的无限飞饰品
-            player.empressBrooch = true;
+            player.HJScarlet().infiniteFlightTime = true;
+            player.noKnockback = true;
         }
         public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
         {
             ascentWhenFalling = 0.85f;
-            ascentWhenRising = 0.15f;
-            maxCanAscendMultiplier = 1f;
+            ascentWhenRising = 0.35f;
+            maxCanAscendMultiplier = 1.2f;
             maxAscentMultiplier = 3f;
-            constantAscend = 0.135f;
+            constantAscend = 0.235f;
         }
 
         public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
         {
-            speed = 6.25f;
+            speed = 8.25f;
+            acceleration = 1.2f;
         }
     }
 }

@@ -62,7 +62,6 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen())
                 return;
-            //return;
             if (Main.rand.NextBool())
                 return;
             if (Main.rand.NextBool(15))
@@ -77,7 +76,7 @@ namespace HJScarletRework.Projs.Executor
             bool hasBuff = Owner.HJScarlet().exsanguinationBuffTime != 0;
             if (!hasBuff)
                 Projectile.AddExecutionTimeImmediate(ItemType<Exsanguination>());
-            SoundStyle style = hasBuff ? HJScarletSounds.Light_FleshHit with { MaxInstances = 4, Volume = 0.70f } : HJScarletSounds.Light_ShieldHit with { MaxInstances = 4, Volume = 0.70f };
+            SoundStyle style = hasBuff ? HJScarletSounds.Light_FleshHit with { MaxInstances = 4, Volume = 0.40f } : HJScarletSounds.Light_ShieldHit with { MaxInstances = 4, Volume = 0.40f };
             SoundEngine.PlaySound(style, Projectile.Center);
         }
         public override void OnKill(int timeLeft)

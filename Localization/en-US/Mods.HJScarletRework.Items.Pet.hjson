@@ -42,3 +42,14 @@ WatcherItem: {
 		"Its bell rings ripple across the river of time"
 		'''
 }
+
+DracoItem: {
+	DisplayName: Draco Item
+	Tooltip: ""
+	FlavorTooltip: ""
+}
+
+SonItem: {
+	DisplayName: Son Item
+	Tooltip: ""
+}

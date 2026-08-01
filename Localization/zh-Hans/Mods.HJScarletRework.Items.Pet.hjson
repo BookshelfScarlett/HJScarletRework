@@ -42,3 +42,19 @@ WatcherItem: {
 		“铃声可以在时间长河中泛起涟漪”
 		'''
 }
+
+DracoItem: {
+	DisplayName: 死灭蔷薇
+	Tooltip: 召唤宠物：德拉科
+	FlavorTooltip:
+		'''
+		获得的枯萎的蔷薇
+		吸收了逝去之人鲜血的蔷薇花瓣
+		即便枯萎，也保持着血一般的鲜红
+		'''
+}
+
+SonItem: {
+	DisplayName: 圣洁百合
+	Tooltip: 召唤一个圣子伙伴
+}

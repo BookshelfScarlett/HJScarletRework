@@ -26,7 +26,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.width = Projectile.height = 30;
             Projectile.SetupImmnuity(30);
-            Projectile.penetrate = 3;
+            Projectile.penetrate = 5;
             Projectile.extraUpdates = 1;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
@@ -35,7 +35,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             Projectile.velocity *= 1.4f;
-            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Toss with { Variants = [1], MaxInstances = 0, Pitch = -0.412f, Volume = 0.825f, PitchVariance = 0.25f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.GalvanizedHand_Toss, Projectile.Center, volume: .750f, instances: 0, pitch: -.412f, pitchVariance: .25f, variantType: 1);
             base.OnFirstFrame();
         }
         public override void ProjAI()
@@ -99,6 +99,10 @@ namespace HJScarletRework.Projs.Executor
             else
                 return null;
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.DefenseEffectiveness *= 0;
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (!IsHit && target.IsLegal())
@@ -107,7 +111,7 @@ namespace HJScarletRework.Projs.Executor
                 IsHit = true;
             }
             Timer = 0;
-            SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { Variants = [2], MaxInstances = 0, Pitch = 0.412f + Projectile.numHits * 0.1f, Volume = 0.925f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.GalvanizedHand_Hit, Projectile.Center, .65f, 0, 0.412f + Projectile.numHits * 0.1f, variantType: 2);
             for (int i = 0; i < 12; i++)
             {
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(4f), Projectile.velocity.ToRandVelocity(ToRadians(20f), 2.4f, 14.7f), RandLerpColor(Color.Gold, Color.Silver), 40, RandRotTwoPi, 1, 1, false).Spawn();

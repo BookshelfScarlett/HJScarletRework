@@ -22,6 +22,7 @@ namespace HJScarletRework.Items.Accessories
             Item.width = Item.height = 60;
             Item.rare = ItemRarityID.Purple;
             Item.accessory = true;
+            Item.HJScarlet().NotFinished = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

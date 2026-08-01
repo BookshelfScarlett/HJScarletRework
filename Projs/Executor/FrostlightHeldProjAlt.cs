@@ -41,7 +41,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.velocity = Projectile.rotation.ToRotationVector2();
-            if (Owner.CheckExecution(OriginalItemID) && !Projectile.HJScarlet().ExecutionStrike)
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
             {
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Owner.RemoveExecutionProgress(OriginalItemID);

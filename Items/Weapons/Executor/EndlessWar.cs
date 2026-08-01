@@ -28,6 +28,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.knockBack = 12f;
             Item.noUseGraphic = true;
             Item.noMelee = true;
+            Item.HJScarlet().NotFinished = true;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.shootSpeed = 16;
         }

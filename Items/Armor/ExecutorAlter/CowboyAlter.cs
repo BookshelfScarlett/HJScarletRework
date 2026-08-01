@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override int[] ArmorSlots => [ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants];
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
-            player.GetDamage<ExecutorDamageClass>() += 0.10f;
+            player.GetDamage<ExecutorDamageClass>() += 0.05f;
         }
         public override void ExSD(Item item)
         {
@@ -50,7 +50,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override ArmorType Category => ArmorType.Chestplate;
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
-            player.GetCritChance<ExecutorDamageClass>() += 10;
+            player.GetCritChance<ExecutorDamageClass>() += 5;
         }
         public override void ExSD(Item item)
         {

@@ -45,10 +45,12 @@ namespace HJScarletRework.Items.Weapons.Executor
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient<ClockworkMinigun>().
-                AddIngredient(ItemID.SDMG).
-                AddIngredient(ItemID.FragmentVortex, 30).
-                AddTile(FinalAnvilTile).
+                AddIngredient(ItemID.ChainGun).
+                AddIngredient(ItemID.FragmentSolar,5).
+                AddIngredient(ItemID.FragmentVortex, 5).
+                AddIngredient(ItemID.FragmentNebula, 5).
+                AddIngredient(ItemID.FragmentStardust, 35).
+                AddTile(TileID.LunarBlockNebula).
                 Register();
         }
     }

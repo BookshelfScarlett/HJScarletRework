@@ -25,6 +25,7 @@ namespace HJScarletRework.Items.Weapons.Executor
             Item.knockBack = 4f;
             Item.shoot = ProjectileType<PestilenceFlowerHeldProj>();
             Item.shootSpeed = 16;
+            Item.HJScarlet().NotFinished = true;
         }
         public override bool CanShoot(Player player)
         {

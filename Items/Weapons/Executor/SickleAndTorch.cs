@@ -12,7 +12,7 @@ namespace HJScarletRework.Items.Weapons.Executor
     {
         public override int ExecutionProgress => 6;
         public bool Flip = true;
-        public float Time = 0;
+        public float Time = 1;
         public override void ExSD()
         {
             Item.SetUpNoUseGraphicItem(true);
@@ -38,7 +38,7 @@ namespace HJScarletRework.Items.Weapons.Executor
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            bool exe = player.CheckExecution(Type);
+            bool exe = player.GetExecutionSrike();
             if (Time <= 2)
             {
                 Vector2 dir = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitX);

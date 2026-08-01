@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using Microsoft.Build.Experimental.ProjectCache;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -26,6 +27,7 @@ namespace HJScarletRework.Globals.Instances.Items
         public int ExecutionProj = -1;
         public bool ForceTacticalExecution = false;
         public bool ApplyTacticalExecution = false;
+        public bool NotFinished = false;
         //控制purePrism的运动
         public float purePrismAnimationCounter = 0;
         public bool purePrismLerpIn = false;
@@ -62,6 +64,28 @@ namespace HJScarletRework.Globals.Instances.Items
             simpleImmersiveBackpackValueAlt = Lerp(simpleImmersiveBackpackValueAlt, maxScale, 0.15f);
         }
         public Player LocalPlayer => Main.LocalPlayer;
+        public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
+        {
+            //if (HJScarletMethods.HasFuckingCalamity)
+            //{
+            //    if (item.IsLegal())
+            //    {
+            //        if (item.ModItem.Mod == HJScarletRework.Instance)
+            //            damage *= 10;
+            //    }
+            //}
+        }
+        public override void ModifyWeaponCrit(Item item, Player player, ref float crit)
+        {
+            //if(HJScarletMethods.HasFuckingCalamity)
+            //{
+            //    if (item.IsLegal())
+            //    {
+            //        if (item.ModItem.Mod == HJScarletRework.Instance)
+            //            crit *= 10;
+            //    }
+            //}
+        }
         public override void UpdateInventory(Item item, Player player)
         {
             if (HJScarletConfigClient.Instance.DrawIcon && CanDrawGhost)
