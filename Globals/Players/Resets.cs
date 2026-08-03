@@ -25,7 +25,6 @@ namespace HJScarletRework.Globals.Players
             blackKeyDefenseBuff = 0;
             blackKeyDoT = false;
             artificalManaStar = false;
-            executorSwordMark = false;
             executorSwordMarkLevel = -1;
             frostHammerHoming = false;
             souloftheTidalMark = false;
@@ -35,6 +34,7 @@ namespace HJScarletRework.Globals.Players
             cycleMadness = false;
             accVanityID = -1;
             powerLily = false;
+            powerLilyVanity = false;
         }
         private void ResetArmor()
         {
@@ -81,9 +81,6 @@ namespace HJScarletRework.Globals.Players
             critDamageExecutor = 0;
             bonusExecutionReduce = 0;
             healingPotionMult = 1;
-            //drawUseableItemIcon = -1;
-            if (!Player.HasProj<GaiaStrikerHeldProj>())
-                holdingGaiaStaff = false;
             ResetAcc();
             ResetPets();
             ResetArmor();
@@ -99,7 +96,6 @@ namespace HJScarletRework.Globals.Players
             PreciousTargetCrtis = 10;
             LifeBalloonAcc = false;
             monkStaffHeal = false;
-            holdingGaiaStaff = false;
             galvanizedHandDashCD = 0;
             crimsonCharmStopReduce = false;
             crimsonScytheAttackCounter = 0;

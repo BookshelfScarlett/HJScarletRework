@@ -1,9 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -59,7 +60,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
-                Projectile.rotation += (0.21f) *(Projectile.velocity.X>0).ToDirectionInt();
+                Projectile.rotation += (0.41f) *(Projectile.velocity.X>0).ToDirectionInt();
             }
             UpdatePartilce();
         }
@@ -68,7 +69,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen())
                 return;
-            if (Main.rand.NextBool(4))
+            if (Main.rand.NextBool())
             {
                 Dust d = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin);
                 d.velocity = Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f) / 4f;
@@ -80,9 +81,12 @@ namespace HJScarletRework.Projs.Executor
                 d.velocity = Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f) / 4f;
                 d.scale *= 1.1f;
             }
-            if (Main.rand.NextBool(4))
+            if (Main.rand.NextBool())
             {
-                new StarShape(Projectile.Center.ToRandCirclePosEdge(8f), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 0.45f, 40).Spawn();
+                if(Projectile.velocity.LengthSquared() > Main.rand.NextFloat(10 * 10, 15 * 15))
+                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 65, 1, .45f);
+                else
+                    new StarShape(Projectile.Center.ToRandCirclePosEdge(8f), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 0.45f, 40).Spawn();
             }
 
         }
@@ -107,7 +111,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.DefenseEffectiveness *= 0.5f;
         }
 
         public override void OnKill(int timeLeft)

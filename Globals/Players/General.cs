@@ -47,7 +47,7 @@ namespace HJScarletRework.Globals.Players
         public float heldProjReUseTime = 0;
         public int containedBlastBuffTime = 0;
         public int containedBlastBoomCount = 0;
-        public bool holdingGaiaStaff = false;
+        public int conferenceCallBuffTime = 0;
         public bool firstTimeCraftGaia = false;
         public int antiKnockbackTime = 0;
         public bool infiniteFlightTime = false;
@@ -79,6 +79,7 @@ namespace HJScarletRework.Globals.Players
         public bool maidReaperArmor = false;
         public bool maidReaperHealUp = false;
         public int maidReaperIndex = -1;
+        public int maidReaperHealTimer = 0;
 
         public bool adamantiteHeadExecutor = false;
         public int adamantiteHeadExecutorThunderTimer = 0;
@@ -118,7 +119,9 @@ namespace HJScarletRework.Globals.Players
         public bool blackKeyDoT = false;
         public int blackKeyReduceDefense = 0;
         public bool blackKeyDefenseTrigger = false;
+
         public bool executorSwordMark = false;
+        public bool executorSwordMarkPing = false;
         public int executorSwordMarkLevel = -1;
         public bool mayaPumper = false;
         public bool crimsonCharm = false;
@@ -131,8 +134,11 @@ namespace HJScarletRework.Globals.Players
         public float cycleMadenssTimer = 0;
         public float cycleMadenessCrit = 0;
         public bool powerLily = false;
+        public bool powerLilyVanity = false;
         public int powerLilyTimer = 0;
-        public List<int> powerLilyBanMinionHashSet = new List<int>(); 
+        public int powerLilyCacheTimer = 0;
+        public List<string> ruShiWoWenBanMinionNameList = new List<string>();
+        public List<string> ruShiWoWenBanMinionNameTrashList = new List<string>();
         #endregion
         public bool fruitofEthernity = false;
         #region Pets
@@ -159,6 +165,7 @@ namespace HJScarletRework.Globals.Players
         public float PlayerFinalSpeedStoredTime = 0f;
         #endregion
         #region 处决攻击
+
         #region 下版本废弃
         public int tacticalTime = 0;
         public bool StopExecutionInit = false;
@@ -193,6 +200,8 @@ namespace HJScarletRework.Globals.Players
         public int terraRecipe_LifeMaxIncre = 10;
         public List<int> terraRecipe_EatenFoodList = new List<int>();
         public List<int> terraRecipe_NotEatenFoodList = new List<int>();
+
+        public bool mouseHoveringBanWeaponAbility = false;
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
             if (Player.HasBuff<HoneyRegenAlt>())
@@ -243,6 +252,28 @@ namespace HJScarletRework.Globals.Players
             }
             OnEnterWorldReset();
             resetTerraRecipe = true;
+            for (int i = 0; i < ruShiWoWenBanMinionNameTrashList.Count; i++)
+            {
+
+                string nameType = ruShiWoWenBanMinionNameTrashList[i];
+                if (HJScarletList.SummonWeaponFullName.Contains(nameType))
+                {
+                    ruShiWoWenBanMinionNameTrashList.RemoveAt(i);
+                    ruShiWoWenBanMinionNameList.Add(nameType);
+                }
+            }
+            for (int i = 0; i < ruShiWoWenBanMinionNameList.Count; i++)
+            {
+                string nameType = ruShiWoWenBanMinionNameList[i];
+                if (!HJScarletList.SummonWeaponFullName.Contains(nameType))
+                {
+                    ruShiWoWenBanMinionNameTrashList.Add(nameType);
+                    ruShiWoWenBanMinionNameList.RemoveAt(i);
+                }
+            }
+
+
+
             for (int i = 0; i < Player.inventory.Length; i++)
             {
                 Item item = Player.inventory[i];

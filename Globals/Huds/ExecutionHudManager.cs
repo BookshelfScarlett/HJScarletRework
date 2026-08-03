@@ -58,7 +58,7 @@ namespace HJScarletRework.Globals.Huds
             Vector2 pos = LocalPlayer.Center + new Vector2(0, 50) - Main.screenPosition;
             pos.Y += LocalPlayer.gfxOffY;
             Texture2D t2d = HJScarletTexture.Hud_ExecutorCounter.Value;
-            //if(HJScarletList.ExecutorWeaponTypeDictionary.TryGetValue(localPlayer.HeldItem.type, out ExecutorWeaponType value));
+            //if(HJScarletList.ExecutorTypes.TryGetValue(localPlayer.HeldItem.type, out ExecutorWeaponType value));
             //{
             //    switch (value)
             //    {
@@ -160,7 +160,7 @@ namespace HJScarletRework.Globals.Huds
             Item heldItem = localPlayer.HeldItem;
             bool hasReforged = ModLoader.HasMod("ExpandedReforge");
             bool isExectuorWeapon = heldItem.DamageType.CountsAsClass<ExecutorDamageClass>();
-            isExectuorWeapon = HJScarletList.IsExecutorWeaponDictionaty.ContainsKey(heldItem.type);
+            isExectuorWeapon = HJScarletList.ExecuteRequests.ContainsKey(heldItem.type);
             if (isExectuorWeapon)
             {
                 if (!ModPlayer.Executor_DrawFadeIn)

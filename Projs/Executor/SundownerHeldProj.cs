@@ -6,7 +6,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Utilities;
@@ -69,7 +69,7 @@ namespace HJScarletRework.Projs.Executor
         /// <returns></returns>
         public bool HandleExecution()
         {
-            if (Owner.CheckExecution(ItemType<Sundowner>()) && !Projectile.HJScarlet().ExecutionStrike)
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
             {
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.Center, Vector2.Zero, ProjectileType<SundownerFlareGun>(), 0, 0, Owner.whoAmI);

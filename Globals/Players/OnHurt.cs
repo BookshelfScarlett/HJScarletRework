@@ -4,10 +4,13 @@ using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.IDSets;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Projs.Executor;
 using Microsoft.Xna.Framework;
+using System.Security.Permissions;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -227,6 +230,23 @@ namespace HJScarletRework.Globals.Players
                 }
             }
             monkStaffHeal = false;
+
+            //处刑者剑章的判定
+            if (executorSwordMarkLevel > 0)
+            {
+                var recoverExecutionTime = executorSwordMarkLevel switch
+                {
+                    1 => ExecutorsSwordMarkSmall.ExecutionProgressRegen,
+                    2 => ExecutorsSwordMark.ExecutionProgressRegen,
+                    3 => ExecutorsSwordMarkPlus.ExecutionProgressRegen,
+                    _ => 0,
+                };
+                int heldType = Player.HeldItem.type;
+                if (HJScarletList.ExecuteRequests.TryGetValue(heldType, out int value))
+                {
+                    Player.AddExecutionTimeDirectly(Player.HeldItem.type, recoverExecutionTime);
+                }
+            }
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {

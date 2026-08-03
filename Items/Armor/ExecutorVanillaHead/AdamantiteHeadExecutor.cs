@@ -17,7 +17,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
         public float CritDamage = 0.14f;
         public float Crit = 7;
         public static int StrikeChance = 2;
-        public static int ThunderDamage = 215;
+        public static int ThunderDamage = 100;
         public static int ThunderCount = 8;
         public static int ThunderCritChance = 4;
         public override bool SetUpArmorSet => true;

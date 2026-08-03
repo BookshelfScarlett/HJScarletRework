@@ -4,6 +4,7 @@ using HJScarletRework.Items.Armor.Diver;
 using HJScarletRework.Items.Armor.Shinobi;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.Monk
@@ -22,10 +23,13 @@ namespace HJScarletRework.Items.Armor.Monk
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
             Item.defense = 16;
         }
+        public int ArmorPenetration = 10;
+        public float MoveSpeed = .3f;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(ArmorPenetration, MoveSpeed.ToPercent());
         public override void UpdateEquip(Player player)
         {
-            player.GetArmorPenetration<ExecutorDamageClass>() += 10;
-            player.moveSpeed += 0.3f;
+            player.GetArmorPenetration<ExecutorDamageClass>() += ArmorPenetration;
+            player.moveSpeed += MoveSpeed;
         }
 
     }

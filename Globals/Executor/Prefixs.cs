@@ -39,6 +39,9 @@ namespace HJScarletRework.Globals.Executor
             CritDamageMult = 0;
         }
     }
+    /// <summary>
+    /// 空想
+    /// </summary>
     public class Phantasmic : ExecutorPrefixs
     {
         public override float DamageMult => 1.12f;
@@ -46,6 +49,9 @@ namespace HJScarletRework.Globals.Executor
         public override int CritAdd => 5;
         public override float KnockbackMult => 1.1f;
     }
+    /// <summary>
+    /// 变革
+    /// </summary>
     public class Evolutional : ExecutorPrefixs
     {
         public override float DamageMult => 1.05f;
@@ -53,18 +59,26 @@ namespace HJScarletRework.Globals.Executor
         public override int CritAdd => 5;
         public override float KnockbackMult => 1.05f;
     }
+    /// <summary>
+    /// 电子
+    /// </summary>
     public class Digital : ExecutorPrefixs
     {
         public override float DamageMult => 1.10f;
         public override float CritDamageAdd => .10f;
     }
-
+    /// <summary>
+    /// 神秘
+    /// </summary>
     public class Mysterious : ExecutorPrefixs
     {
         public override int CritAdd => 10;
         public override float CritDamageAdd => .10f;
         public override float KnockbackMult => .90f;
     }
+    /// <summary>
+    /// 降临
+    /// </summary>
     public class Foreigner : ExecutorPrefixs
     {
         public override int CritAdd => 30;
@@ -72,6 +86,9 @@ namespace HJScarletRework.Globals.Executor
         public override float ExecutionDamageMult => .75f;
         public override float KnockbackMult => 1f;
     }
+    /// <summary>
+    /// 他人格
+    /// </summary>
     public class Alterego : ExecutorPrefixs
     {
         public override int CritAdd => -30;
@@ -79,6 +96,9 @@ namespace HJScarletRework.Globals.Executor
         public override float ExecutionDamageMult => 0.25f;
         public override float KnockbackMult => 1f;
     }
+    /// <summary>
+    /// 赝品
+    /// </summary>
     public class Fake : ExecutorPrefixs
     {
         public override float DamageMult => 0.90f;

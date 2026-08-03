@@ -29,7 +29,7 @@ namespace HJScarletRework.Projs.Executor
             set => Projectile.ai[1] = (float)value;
         }
         public ref float Timer => ref Projectile.ai[0];
-        public int TotalHitTime => 12;
+        public int TotalHitTime => 8;
         public AnimationStruct Helper = new AnimationStruct(3);
         public bool IsHit = false;
         public NPC CurTarget = null;

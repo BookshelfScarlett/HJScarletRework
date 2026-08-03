@@ -7,7 +7,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -182,7 +182,6 @@ namespace HJScarletRework.Projs.Executor
             if (CurAttackTime > MaxAttackTime)
             {
                 Owner.RemoveExecutionProgress(OriginalItemID);
-                Owner.CheckExecution(OriginalItemID);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<PureDaggerProj>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 proj.HJScarlet().HasExecutionMechanic = true;
                 ((PureDaggerProj)proj.ModProjectile).Flip = !Flip;

@@ -2,7 +2,9 @@
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Globals.Methods.Textbox;
 using HJScarletRework.Globals.Players;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -15,30 +17,34 @@ namespace HJScarletRework.Items.Accessories
     {
         public override string AssetPath => AssetHandler.Equips;
         public static int Cooldown = 30;
-        public static int MinMinionSelected = 10;
+        public static int MinMinionSelected()
+        {
+            return (int)(HJScarletList.SummonWeaponList.Count * .1f);
+        }
+
         public override void SetStaticDefaults()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Donator);
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Cooldown, HJScarletList.SummonWeaponList.Count - MinMinionSelected);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Cooldown, HJScarletList.SummonWeaponList.Count - MinMinionSelected());
         public override void ExSD()
         {
             Item.accessory = true;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.HJScarlet().ItemBelongTo = Globals.Enums.EnumItemOwner.Donator;
         }
-        public override void RightClick(Player player)
-        {
-            //ref List<int> list = ref player.HJScarlet().powerLilyBanMinionHashSet;
-            //if (list.Count > 0)
-            //{
-            //    list.RemoveAt(list.Count - 1);
-            //}
-        }
         public override bool ConsumeItem(Player player) => false;
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            if (!hideVisual)
+            {
+                player.HJScarlet().powerLilyVanity = true;
+            }
             player.HJScarlet().powerLily = true;
+        }
+        public override void UpdateVanity(Player player)
+        {
+            player.HJScarlet().powerLilyVanity = true;
         }
         public IReadOnlyList<TooltipLine> CacheTooltip;
         public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -47,7 +53,7 @@ namespace HJScarletRework.Items.Accessories
             if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt))
             {
                 //获取表单与对应的名字。
-                List<int> foodList = new(modPlayer.powerLilyBanMinionHashSet);
+                List<string> foodList = new(modPlayer.ruShiWoWenBanMinionNameList);
                 //直接遍历一个表单
                 //这里表单是严格11对应的，理论来说不会出现问题，大概
                 string combineValue = null;
@@ -82,6 +88,7 @@ namespace HJScarletRework.Items.Accessories
                 tooltips.ReplaceAllTooltip(this.GetLocalizationKey($"BanMinionList"), null, supply+ combineValue, foodList.Count);
 
             }
+            CacheTooltip = tooltips;
         }
         public override void HoldItem(Player player)
         {
@@ -91,16 +98,39 @@ namespace HJScarletRework.Items.Accessories
                 Item item = player.inventory[i];
                 if (item.IsAir || item is null)
                     continue;
-                if (HJScarletList.SummonWeaponList.Contains(item.type) && !player.HJScarlet().powerLilyBanMinionHashSet.Contains(item.type))
+                if (HJScarletList.SummonWeaponList.Contains(item.type))
                 {
-                    item.HJScarlet().purePrismLegalTarget = true;
+                    if (item.type < VanillaMaxItem)
+                    {
+                        if (!player.HJScarlet().ruShiWoWenBanMinionNameList.Contains(item.type.ToString()))
+                            item.HJScarlet().purePrismLegalTarget = true;
+                    }
+                    else
+                    {
+                        if (!player.HJScarlet().ruShiWoWenBanMinionNameList.Contains(item.ModItem.FullName))
+                            item.HJScarlet().purePrismLegalTarget = true;
+
+                    }
                 }
             }
-
         }
         public override void PostDrawTooltipLine(DrawableTooltipLine line)
         {
-            base.PostDrawTooltipLine(line);
+            if (line.IsItemName())
+            {
+                TextboxManager.FirstLineY = line.Y;
+            }
+            string text = this.GetLocalizationKey("FlavorTooltips").ToLangValue();
+            TextboxSettings sets = new TextboxSettings
+            {
+                HasTitle = false,
+                BackgroundColor = Color.White * .24f,
+                BackgroundEdgeColor = Color.White,
+                TextColor = Color.White,
+                TextEdgeColor = Color.Black,
+                MainText = text
+            };
+            TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltip, ref sets);
         }
     }
 }

@@ -3,7 +3,7 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Systems;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
 using Terraria;

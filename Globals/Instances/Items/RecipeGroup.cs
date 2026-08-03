@@ -1,5 +1,5 @@
 ﻿using ContinentOfJourney.Items;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
 using System;
 using Terraria;

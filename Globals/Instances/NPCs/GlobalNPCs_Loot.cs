@@ -13,7 +13,9 @@ using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Pets;
 using HJScarletRework.Items.Useables;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Caster;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Items.Weapons.Ranged;
 using Terraria;
@@ -77,6 +79,10 @@ namespace HJScarletRework.Globals.Instances
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<SquidItem>(), 4);
             if (npc.type == NPCType<ScarabBelief>())
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<NoneItem>(), 4);
+            if(npc.type == NPCType<PolarMimic>())
+            {
+                npcLoot.AddLootSimple(ItemType<Frostlight>(), 4, 1, 1);
+            }
             if (npc.type == NPCType<DesertMimic>() || npc.type == NPCType<PolarMimic>() || npc.type == NPCType<TempleMimic>())
             {
                 npcLoot.AddLootSimple(ItemType<PurePrismFate>(), 1, 30, 50);

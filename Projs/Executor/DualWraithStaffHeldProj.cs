@@ -5,7 +5,7 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Caster;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -64,7 +64,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Main.rand.NextBool(12))
                     if (!Owner.channel)
                         new SmokeParticle(Projectile.Center.ToRandCirclePos(5f) + Projectile.SafeDirByRot() * Main.rand.NextFloat(-10f, 80f), Projectile.SafeDirByRot() * Main.rand.NextFloat(), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.60f, 0.24f, Main.rand.NextBool()).Spawn();
-                if (Owner.CheckExecution(OriginalItemID) && !Projectile.HJScarlet().ExecutionStrike)
+                if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
                 {
                     Projectile.HJScarlet().ExecutionStrike = true;
                     Owner.RemoveExecutionProgress(OriginalItemID);

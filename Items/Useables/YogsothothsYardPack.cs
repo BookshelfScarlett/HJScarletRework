@@ -5,7 +5,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.Reaper;
 using HJScarletRework.Items.Vanity;
 using HJScarletRework.Items.Vanity.Yards;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Misc;
 using Terraria.ID;
 using Terraria.ModLoader;
 

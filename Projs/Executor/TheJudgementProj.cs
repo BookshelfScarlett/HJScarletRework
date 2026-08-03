@@ -4,8 +4,9 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -20,6 +21,7 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(6, 2);
+            ScarletProjIDSets.DivingProjectile[Type] = true;
         }
         public AnimationStruct Helper = new(3);
         public ref float Timer => ref Projectile.ai[0];

@@ -57,10 +57,10 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 66;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 6;
+            Projectile.localNPCHitCooldown = 7;
             Projectile.extraUpdates = SetUpdate;
             Projectile.ignoreWater = true;
-            Projectile.timeLeft = 300;
+            Projectile.timeLeft = 295;
             Projectile.tileCollide = false;
             Projectile.Opacity = 0f;
         }

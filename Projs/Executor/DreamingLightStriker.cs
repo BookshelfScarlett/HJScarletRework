@@ -6,7 +6,7 @@ using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -46,7 +46,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 36;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-            Projectile.ownerHitCheck = true;
             Projectile.SetupImmnuity(30, ImmnuityType.Local);
             Projectile.extraUpdates = 2;
             Projectile.scale = 0f;

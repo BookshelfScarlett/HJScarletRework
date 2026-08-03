@@ -3,7 +3,7 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Caster;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -46,14 +46,11 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Owner.RemoveExecutionProgress(OriginalItemID);
                 Timer = 0;
-                RightClicker = true;
-                ((Frostlight)Owner.HeldItem.ModItem).AlterMode = true;
-            }
-            if (RightClicker)
-            {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostlightFlamethrower>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 ((FrostlightFlamethrower)proj.ModProjectile).BeginTargetRotation = Projectile.rotation;
                 Projectile.Kill();
+                ((Frostlight)Owner.HeldItem.ModItem).AlterMode = true;
+                return;
             }
             HandleProjAttack();
             HandleParticle();

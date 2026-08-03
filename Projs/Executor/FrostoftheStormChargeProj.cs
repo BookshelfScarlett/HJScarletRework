@@ -9,7 +9,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -383,7 +383,7 @@ namespace HJScarletRework.Projs.Executor
             if (FinalSwing)
             {
                 if (target.type == NPCType<ScarabBelief>() || target.type == NPCType<ScarabBelief_Minion>())
-                    modifiers.FinalDamage *= 0.7f;
+                    modifiers.SourceDamage *= 0.6f;
                 else
                     modifiers.FinalDamage *= 1.3f;
                 modifiers.SetCrit();
@@ -391,7 +391,7 @@ namespace HJScarletRework.Projs.Executor
             else
             {
                 if (target.type == NPCType<ScarabBelief>() || target.type == NPCType<ScarabBelief_Minion>())
-                    modifiers.SourceDamage *= .7f;
+                    modifiers.SourceDamage *= 0.6f;
                 else
                     modifiers.SourceDamage *= 1.2f;
             }

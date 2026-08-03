@@ -12,7 +12,6 @@ namespace HJScarletRework.Items.Weapons.Ranged
         public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override void ExSD()
         {
-            Item.width = Item.height = 30;
             Item.damage = 26;
             Item.noMelee = true;
             Item.autoReuse = true;

@@ -4,11 +4,15 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class ExecutorsSwordMarkPlus : HJScarletItemClass
     {
+        public static float CritDamage = .20f;
+        public static int ExecutionProgressRegen = 3;
+        public static int CasterExecutionProgressRegen = 4;
         public override string AssetPath => AssetHandler.Equips;
         public override void ExSD()
         {
@@ -17,10 +21,9 @@ namespace HJScarletRework.Items.Accessories
             Item.SetUpRarityPrice(ItemRarityID.Red);
 
         }
-        public float MeleeStat = 0.10f;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(ExecutionProgressRegen,CasterExecutionProgressRegen,CritDamage.ToPercent());
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.HJScarlet().tacticalExecution = true;
             player.HJScarlet().executorSwordMarkLevel = 3;
         }
         public override void AddRecipes()

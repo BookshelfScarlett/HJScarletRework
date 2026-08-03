@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Armor.DragonSlayer;
 using HJScarletRework.Projs.General;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -67,9 +68,9 @@ namespace HJScarletRework.Globals.Players
                 damage *= (1f + ratios);
 
                 if (item.consumable && item.DamageType.CountsAsClass<RangedDamageClass>())
-                    damage *= 1.10f;
+                    damage *= DragonSlayerHead.RangedConsumeItemMult;
                 if (item.DamageType.CountsAsClass<MagicDamageClass>())
-                    damage *= .80f;
+                    damage *= (1 - DragonSlayerHead.MagicDamageReduce);
             }
             if (monkExecutor)
             {

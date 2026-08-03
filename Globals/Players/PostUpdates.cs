@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
 using HJScarletRework.Core;
 using HJScarletRework.Core.ParticleECS;
@@ -15,8 +16,9 @@ using HJScarletRework.Globals.Players.Dashes;
 using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.ExecutorVanillaHead;
+using HJScarletRework.Items.Armor.Reaper;
 using HJScarletRework.Items.Useables;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Misc;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
@@ -54,13 +56,68 @@ namespace HJScarletRework.Globals.Players
             UpdateFloretProtectorHerbSpawn();
             UpdateHerbBuff();
             UpdateStardustRune();
-            UpdateTacticalExecution();
-            UpdatePowerLily();
             UpdateDiverArmorJellyfishSpawn();
             UpdateMaidReaper();
             UpdateHeadExecutor();
         }
 
+        public void UpdateSwordMark()
+        {
+            //判断是否佩戴处刑者剑章
+            if (executorSwordMarkLevel <= 0)
+                return;
+            int heldType = Player.HeldItem.type;
+            //手持是否为代行者武器
+            if (!HJScarletList.ExecuteRequests.ContainsKey(heldType))
+                return;
+            //是否允许处决，且是否已经进入mark状态，这个主要是为了考虑手动处决的情况
+            if (CanExecutionStrike && !executorSwordMark)
+                executorSwordMark = true;
+            int casterMult = executorSwordMarkLevel switch
+            {
+                1 => ExecutorsSwordMarkSmall.CasterExecutionProgressRegen,
+                2 => ExecutorsSwordMark.CasterExecutionProgressRegen,
+                3 => ExecutorsSwordMarkPlus.CasterExecutionProgressRegen,
+                _ => 0,
+            };
+            //判定是否发起了处决，并且是否允许开始给予加成
+            if (executorSwordMark && !CanExecutionStrike)
+            {
+                //开始给予加成
+                executorSwordMarkPing = true;
+                int addTime = executorSwordMarkLevel switch
+                {
+                    1 => ExecutorsSwordMarkSmall.ExecutionProgressRegen,
+                    2 => ExecutorsSwordMark.ExecutionProgressRegen,
+                    3 => ExecutorsSwordMarkPlus.ExecutionProgressRegen,
+                    _ => 0,
+                };
+                if (HJScarletList.ExecutorTypes.TryGetValue(heldType, out var weaponType) && weaponType == ExecutorWeaponType.Caster)
+                    addTime = HJScarletList.ExecuteRequests[heldType] / casterMult;
+                //移除当前列表所有的处决进程
+                for (int i = 0; i < ExecutionListStored.Count; i++)
+                    Player.RemoveExecutionProgress(i);
+                //在直接加上
+                Player.AddExecutionTimeDirectly(heldType, addTime);
+                //重置mark的标记状态
+                executorSwordMark = false;
+            }
+            //暴击伤害的加成
+            if (executorSwordMarkPing)
+            {
+                float critDamage = executorSwordMarkLevel switch
+                {
+                    1 => ExecutorsSwordMarkSmall.CritDamage,
+                    2 => ExecutorsSwordMark.CritDamage,
+                    3 => ExecutorsSwordMarkPlus.CritDamage,
+                    _ => 0,
+                };
+                if (Player.statLife == Player.statLifeMax2)
+                    critDamageExecutor += critDamage;
+                if (Player.statLife >= Player.statLifeMax2 / 2)
+                    critDamageExecutor += critDamage;
+            }
+        }
 
         public override void PostUpdate()
         {
@@ -71,6 +128,7 @@ namespace HJScarletRework.Globals.Players
             HandleUseableItem();
             HandleBlacKey();
             ResetExecutorCheck();
+            UpdateSwordMark();
         }
         public void HandleBlacKey()
         {
@@ -80,13 +138,21 @@ namespace HJScarletRework.Globals.Players
                 Player.GetCritChance<ExecutorDamageClass>() += blackKeyExecutorCriticalChanceAdd;
         }
 
-
-        #region PostUpdateMiscEffects的方法
+        #region 如是我闻
+        /// <summary>
+        /// 控制如是我闻的核心逻辑：随机召唤物生成
+        /// <br>该方法位于<see cref="PostUpdateMiscEffects"/>内</br>
+        /// </summary>
         public void UpdateRandomMinionSpawn()
         {
+            //生成装饰射弹
+            if (!Player.HasProj<RuShiWoWenProj>(out int projID) && powerLilyVanity)
+                Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, projID, 0, 0, Player.whoAmI);
+
             if (!powerLily)
             {
                 //确认玩家没有佩戴的情况下立刻杀死召唤物
+                //这里对比的是缓存的计时与当前的计时是否处于相同态
                 if (powerLilyTimer > 0)
                 {
                     KillMinion();
@@ -94,19 +160,65 @@ namespace HJScarletRework.Globals.Players
                 }
                 return;
             }
-            if (powerLilyTimer > 1)
+            //召唤物计时器处于0，即此时被初始化时，再次佩戴会给10秒的帧
+            if (powerLilyTimer == 0)
+            {
+                powerLilyTimer = powerLilyCacheTimer + GetSeconds(5);
                 return;
+            }
+            //大于1帧的时候返回，
+            if (powerLilyTimer > 1)
+            {
+                return;
+            }
             //入场清除周围的召唤物
             KillMinion();
-            float curSlots = Player.maxMinions - Player.slotsMinions;
             List<Item> hasList = [];
-            int applyDmg = -1;
-            //生成装饰射弹
-            int projFather = -1;
-            if(!Player.HasProj<RuShiWoWenProj>(out int projID))
-            projFather = Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, projID, 0, 0, Player.whoAmI);
+            int applyDmg = AddMinionToList(ref hasList);
             ScarletSound(HJScarletSounds.Misc_ManaClearUse, Player.Center, 0.85f, 1, 0.4f, 0.1f);
             Vector2 spawnPos = Player.MountedCenter - Vector2.UnitY * 100f;
+            for (int i = 0; i < hasList.Count; i++)
+            {
+                Item item = hasList[i];
+                Projectile proj = ContentSamples.ProjectilesByType[item.shoot];
+                int dmg = (int)Player.GetTotalDamage<SummonDamageClass>().ApplyTo(applyDmg);
+                var src = new EntitySource_ItemUse_WithAmmo(Player, item, AmmoID.None);
+                ItemLoader.Shoot(item, Player, src, spawnPos, RandDirTwoPi, proj.type, dmg, item.knockBack);
+            }
+            SetRespawnParticle(spawnPos);
+            //重置timer
+            powerLilyTimer = GetSeconds(RuShiWoWen.Cooldown) + 1;
+        }
+        /// <summary>
+        /// 粒子生成
+        /// </summary>
+        /// <param name="spawnPos"></param>
+        public void SetRespawnParticle(Vector2 spawnPos)
+        {
+            float glowScale = .36f;
+            ECSParticle.CrossGlow(spawnPos, Color.HotPink, 45, 1, glowScale);
+            ECSParticle.CrossGlow(spawnPos, Color.Pink, 45, 1, glowScale * .95f);
+            ECSParticle.CrossGlow(spawnPos, Color.White, 45, 1, glowScale * .90f);
+            //特效相关
+            for (int i = 0; i < 6; i++)
+            {
+                Color color = RandLerpColor(Color.LightPink, Color.Violet);
+                new NoiseShockRing(spawnPos, Vector2.Zero, color, 45, 1f, .5f + i * 0.2f, -1, Vector2.Zero, false).Spawn();
+            }
+            for (int i = 0; i < 50; i++)
+                ECSParticle.TurbulenceShinyOrb(spawnPos.ToRandCirclePosEdge(60), Main.rand.NextFloat(1.2f, 2.4f) * 2, RandLerpColor(Color.Pink, Color.LightPink), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .13f);
+            ScreenDarknessSystem.AddScreenDarkness(0.75f, 10, 5, 30, easeOut: EaseInCubic);
+        }
+        /// <summary>
+        /// 将召唤的仆从列表加入表单，并返回当前批次的最低伤害值
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public int AddMinionToList(ref List<Item> items)
+        {
+
+            float curSlots = Player.maxMinions - Player.slotsMinions;
+            int applyDmg = -1;
             while (curSlots >= 1)
             {
                 //武器列表
@@ -119,31 +231,33 @@ namespace HJScarletRework.Globals.Players
                     applyDmg = Math.Min(applyDmg, item.damage);
                 }
                 Projectile proj = ContentSamples.ProjectilesByType[item.shoot];
-                if (curSlots >= proj.minionSlots && !hasList.Contains(item) && !powerLilyBanMinionHashSet.Contains(item.type))
+                if (curSlots >= proj.minionSlots&&!items.Contains(item))
                 {
-                    int dmg = (int)Player.GetTotalDamage<SummonDamageClass>().ApplyTo(applyDmg);
-                    var src = new EntitySource_ItemUse_WithAmmo(Player, item, AmmoID.None);
-                    ItemLoader.Shoot(item, Player, src, spawnPos, RandDirTwoPi, proj.type, dmg, item.knockBack);
-                    hasList.Add(item);
-                    curSlots -= proj.minionSlots;
+                    if (itemID < VanillaMaxItem)
+                    {
+                        if (!ruShiWoWenBanMinionNameList.Contains(itemID.ToString()))
+                        {
+                            items.Add(item);
+                            curSlots -= proj.minionSlots;
+                        }
+                               
+                    }
+                    else
+                    {
+                        if (!ruShiWoWenBanMinionNameList.Contains(item.ModItem.FullName))
+                        {
+                            items.Add(item);
+                            curSlots -= proj.minionSlots;
+                        }
+                    }
                 }
             }
-            float glowScale = .36f;
-            ECSParticle.CrossGlow(spawnPos, Color.HotPink, 45, 1, glowScale);
-            ECSParticle.CrossGlow(spawnPos, Color.Pink, 45, 1, glowScale*.95f);
-            ECSParticle.CrossGlow(spawnPos, Color.White, 45, 1, glowScale*.90f);
-            //特效相关
-            for (int i = 0; i < 6; i++)
-            {
-                Color color = RandLerpColor(Color.LightPink, Color.Violet);
-                new NoiseShockRing(spawnPos, Vector2.Zero, color, 45, 1f, .5f + i * 0.2f, projFather, Vector2.Zero, false).Spawn();
-            }
-            for(int i= 0;i<50;i++)
-            ECSParticle.TurbulenceShinyOrb(spawnPos.ToRandCirclePosEdge(60), Main.rand.NextFloat(1.2f, 2.4f) * 2, RandLerpColor(Color.Pink, Color.LightPink), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .13f);
-            ScreenDarknessSystem.AddScreenDarkness(0.75f, 10, 5, 30,easeOut:EaseInCubic);
-            //重置timer
-            powerLilyTimer = GetSeconds(RuShiWoWen.Cooldown) +1;
+            return applyDmg;
         }
+        /// <summary>
+        /// 击杀仆从的快捷方法
+        /// <br>只用于<see cref="RuShiWoWen"/>如是我闻</br>
+        /// </summary>
         public void KillMinion()
         {
             foreach (var proj in Main.ActiveProjectiles)
@@ -159,6 +273,60 @@ namespace HJScarletRework.Globals.Players
             }
 
         }
+        /// <summary>
+        /// 如是我闻ban召唤物的逻辑
+        /// <br>该方法位于<see cref="HandleUseableItem"/>，即钩子<see cref="PostUpdate"/>内</br>
+        /// </summary>
+        /// <param name="itemHover"></param>
+        public void RuShiWoWenMinionBanHandler(Item itemHover)
+        {
+            int id = itemHover.type;
+            bool isMinion = HJScarletList.SummonWeaponList.Contains(id);
+            int totalMinionCount = HJScarletList.SummonWeaponList.Count;
+            if (totalMinionCount - ruShiWoWenBanMinionNameList.Count < RuShiWoWen.MinMinionSelected())
+                return;
+            if (!isMinion)
+                return;
+            if (!HJScarletKeybinds.GeneralActionKeybind.JustPressed)
+                return;
+            //判定是否为原版的召唤物
+            if (id < VanillaMaxItem)
+            {
+                //直接存这个id，原版的召唤物id是固定的
+                if (!ruShiWoWenBanMinionNameList.Contains(id.ToString()))
+                    ruShiWoWenBanMinionNameList.Add(id.ToString());
+            }
+            else
+            {
+                //否则模组物品的全名
+                if (!ruShiWoWenBanMinionNameList.Contains(itemHover.ModItem.FullName))
+                    ruShiWoWenBanMinionNameList.Add(itemHover.ModItem.FullName);
+            }
+            ScarletSound(HJScarletSounds.Misc_Spell, Player.Center, pitch: .2f, volume: .6f);
+        }
+        public void HoverRuShiWoWen(ref Item[] inventory, int context, int slot)
+        {
+            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && ruShiWoWenBanTimer == 0)
+            {
+                ruShiWoWenBanTimer = 30;
+                if (!inventory[slot].IsLegal())
+                    return;
+                Item item = inventory[slot];
+                if (item.type != ItemType<RuShiWoWen>())
+                    return;
+                if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
+                {
+                    if (ruShiWoWenBanMinionNameList.Count > 0)
+                    {
+                        ScarletSound(HJScarletSounds.Misc_Spell, Player.Center, pitch: -.2f, volume: .6f);
+                        ruShiWoWenBanMinionNameList.RemoveAt(ruShiWoWenBanMinionNameList.Count - 1);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region PostUpdateMiscEffects的方法
         public void UpdateFlybackBuff()
         {
             //归零针buff
@@ -269,26 +437,6 @@ namespace HJScarletRework.Globals.Players
                 RuShiWoWenMinionBanHandler(itemHover);
             }
         }
-        /// <summary>
-        /// 如是我闻ban召唤物的逻辑
-        /// </summary>
-        /// <param name="itemHover"></param>
-        public void RuShiWoWenMinionBanHandler(Item itemHover)
-        {
-            int id = itemHover.type;
-            {
-                bool isMinion = HJScarletList.SummonWeaponList.Contains(id);
-                int totalMinionCount = HJScarletList.SummonWeaponList.Count;
-                if (totalMinionCount - powerLilyBanMinionHashSet.Count < RuShiWoWen.MinMinionSelected)
-                    return;
-                if (isMinion && !powerLilyBanMinionHashSet.Contains(id) && HJScarletKeybinds.GeneralActionKeybind.JustPressed)
-                {
-                ScarletSound(HJScarletSounds.Misc_Spell, Player.Center, pitch: .2f, volume: .6f);
-                    powerLilyBanMinionHashSet.Add(id);
-                }
-            }
-        }
-
         /// <summary>
         /// 天命圣水的使用逻辑。必须得是魔法药水，且鼠标悬停的物品必须是魔法药水
         /// </summary>
@@ -430,30 +578,11 @@ namespace HJScarletRework.Globals.Players
         public int HoverItemIndex = -1;
         public override bool HoverSlot(Item[] inventory, int context, int slot)
         {
+            mouseHoveringBanWeaponAbility = inventory[slot].IsLegal();
             ClearUpParticle(ref inventory, context, slot);
             HoverSwitchWeapon(ref inventory, context, slot);
             HoverRuShiWoWen(ref inventory, context, slot);
             return false;
-        }
-        public void HoverRuShiWoWen(ref Item[] inventory, int context, int slot)
-        {
-            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && ruShiWoWenBanTimer == 0)
-            {
-                ruShiWoWenBanTimer = 30;
-                if (!inventory[slot].IsLegal())
-                    return;
-                Item item = inventory[slot];
-                if (item.type != ItemType<RuShiWoWen>())
-                    return;
-                if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
-                {
-                    if (powerLilyBanMinionHashSet.Count > 0)
-                    {
-                        ScarletSound(HJScarletSounds.Misc_Spell, Player.Center, pitch: -.2f, volume: .6f);
-                        powerLilyBanMinionHashSet.RemoveAt(powerLilyBanMinionHashSet.Count - 1);
-                    }
-                }
-            }
         }
         public void HoverSwitchWeapon(ref Item[] inventory, int context, int slot)
         {
@@ -517,7 +646,7 @@ namespace HJScarletRework.Globals.Players
         }
         private void HandleWeaponAbility()
         {
-            if (Player.IsHolding<CrimsonScythe>() && !Player.HasProj<CrimsonScytheSkillProj>() && Main.mouseRight && Main.mouseRightRelease)
+            if (Player.IsHolding<CrimsonScythe>() && !Player.HasProj<CrimsonScytheSkillProj>() && Main.mouseRight && Main.mouseRightRelease && Main.hoverItemName == "" && DownedBossSystem.downedSunGod)
             {
                 Vector2 dir = (Main.MouseWorld - Player.Center).SafeNormalize(Vector2.UnitX);
                 foreach (var id in Main.ActiveProjectiles)
@@ -558,9 +687,6 @@ namespace HJScarletRework.Globals.Players
             }
         }
 
-        public void UpdatePowerLily()
-        {
-        }
         public void UpdateHeadExecutor()
         {
             if (Main.myPlayer != Player.whoAmI)
@@ -634,18 +760,19 @@ namespace HJScarletRework.Globals.Players
         {
             if (!maidReaperArmor)
                 return;
-            bool checkExecution = Player.CheckExecution(Player.HeldItem.type);
-            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && maidReaperIndex != -1 && !checkExecution && Player.HeldItem.DamageType.CountsAsClass<ExecutorDamageClass>())
+            bool checkExecution = Player.GetExecutionSrike();
+            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && maidReaperIndex != -1 && !checkExecution && Player.HeldItem.DamageType.CountsAsClass<ExecutorDamageClass>() && maidReaperHealTimer==0)
             {
                 NPC npc = Main.npc[maidReaperIndex];
                 if (npc.IsLegal())
                 {
                     ScarletSound(HJScarletSounds.Tlipoca_SoulAbsorb, Player.Center, 0.85f, 1, 0.3f);
-                    float ratios = Clamp((float)ExecutionListStored[Player.HeldItem.type] / (float)HJScarletList.IsExecutorWeaponDictionaty[Player.HeldItem.type], 0, 1);
+                    float ratios = Clamp((float)ExecutionListStored[Player.HeldItem.type] / (float)HJScarletList.ExecuteRequests[Player.HeldItem.type], 0, 1);
                     Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), npc.Center, RandVelTwoPi(6, 9), ProjectileType<MaidReaperHeal>(), 0, 0, Player.whoAmI);
                     proj.ai[2] = ratios;
                     ((MaidReaperHeal)proj.ModProjectile).CurTarget = npc;
                     Player.RemoveExecutionProgress(Player.HeldItem.type);
+                    maidReaperHealTimer = GetSeconds((int)(Lerp(0, ReaperHead.MaidReaperMaxHealCooldown, ratios)));
                 }
             }
             if (Player.HeldItem.type != ItemType<CrimsonScythe>())
@@ -672,7 +799,7 @@ namespace HJScarletRework.Globals.Players
         {
             if (!tacticalExecution)
                 return;
-            if (!Player.CheckExecution(Player.HeldItem.type))
+            if (!Player.GetExecutionSrike())
                 return;
             if (tacticalTime == 0 && tacticalPunishTime == 0)
             {

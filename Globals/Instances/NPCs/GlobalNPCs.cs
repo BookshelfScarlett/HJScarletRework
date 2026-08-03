@@ -1,9 +1,13 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Useables;
+using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Instances
@@ -74,6 +78,21 @@ namespace HJScarletRework.Globals.Instances
 
             }
             base.PostDraw(npc, spriteBatch, screenPos, drawColor);
+        }
+        public override void ModifyShop(NPCShop shop)
+        {
+            if (shop.NpcType == NPCID.BestiaryGirl)
+            {
+                shop.ToCustomValue<RuShiWoWen>(0, 30, 0, 0);
+            }
+            if (shop.NpcType == NPCID.Merchant)
+            {
+                shop.ToCustomValue<AxeCharm>(0, 5, 0, 0);
+            }
+            if (shop.NpcType == NPCID.Cyborg)
+            {
+                shop.ToCustomValue<ASMD>(1, 50, 0, 0, Condition.DownedGolem);
+            }
         }
     }
 }

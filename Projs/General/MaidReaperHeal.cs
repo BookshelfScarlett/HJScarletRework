@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Backgrounds;
+using ContinentOfJourney.NPCs;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
@@ -114,7 +115,9 @@ namespace HJScarletRework.Projs.General
                 int damageValue = (int)Clamp(Lerp(5, CurTarget.life * 0.05f, HealRatios),0,CurTarget.life * 0.05f);
                 if (damageValue == 0)
                     damageValue = 1;
-                CurHeal = damageValue;
+                if (damageValue > (int)(CurTarget.lifeMax * .01f))
+                    damageValue = (int)(CurTarget.lifeMax * .01f);
+                CurHeal = (int)(HealRatios * Owner.statLifeMax2);
                 if(Projectile.IsMe())
                  Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), damageValue, 0, Owner.whoAmI);
                 SpawnDamage = true;

@@ -4,6 +4,7 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Projs;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
@@ -54,7 +55,7 @@ namespace HJScarletRework.Globals.Instances.Projs
         {
             if (Owner.HJScarlet().cowboyExecutor && Owner.HJScarlet().cowboyRevolverTimer == 0)
             {
-                int revolverDamage = (int)Owner.GetTotalDamage<ExecutorDamageClass>().ApplyTo(120);
+                int revolverDamage = (int)Owner.GetTotalDamage<ExecutorDamageClass>().ApplyTo(CowboyHelmet.RevolerDamage);
                 Projectile proj2 = Projectile.NewProjectileDirect(Owner.GetSource_FromThis(), target.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(35f), 9f, 11f), ProjectileType<CowboyRevolverProj>(), revolverDamage, 0f, Owner.whoAmI);
                 proj2.timeLeft = 300;
                 if (target.CanBeChasedBy())

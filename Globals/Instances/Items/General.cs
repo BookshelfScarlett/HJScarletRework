@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -38,6 +39,7 @@ namespace HJScarletRework.Globals.Instances.Items
         public float simpleImmersiveBackpackValue = 1f;
         public float simpleImmersiveBackpackValueAlt = 1f;
         public bool DrawFloatingTextBox = false;
+        public bool borderlandWeapon = false;
         /// <summary>
         /// shorthand
         /// </summary>
@@ -213,11 +215,11 @@ namespace HJScarletRework.Globals.Instances.Items
         {
             var usPlayer = player.HJScarlet();
             bool casterWeapon = false;
-            if (HJScarletList.ExecutorWeaponTypeDictionary.TryGetValue(item.type, out Executor.ExecutorWeaponType value))
+            if (HJScarletList.ExecutorTypes.TryGetValue(item.type, out Executor.ExecutorWeaponType value))
             {
                 casterWeapon = value == Executor.ExecutorWeaponType.Caster;
             }
-            if (ForceTacticalExecution || casterWeapon)
+            if (ForceTacticalExecution || casterWeapon || usPlayer.tacticalExecutionManual)
             {
                 usPlayer.tacticalExecution = true;
             }

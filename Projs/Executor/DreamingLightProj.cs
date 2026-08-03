@@ -5,7 +5,7 @@ using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;

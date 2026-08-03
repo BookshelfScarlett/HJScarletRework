@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
@@ -73,7 +74,7 @@ namespace HJScarletRework.Globals.Instances.Items
                     tooltips.QuickAddTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", "50%", "15%", "200%");
                 }
             }
-            if (item.HJScarlet().ForceTacticalExecution && HJScarletList.IsExecutorWeaponDictionaty.ContainsKey(item.type))
+            if ((item.HJScarlet().ForceTacticalExecution || (HJScarletList.ExecutorTypes.TryGetValue(item.type, out ExecutorWeaponType type) && type == ExecutorWeaponType.Caster)) && HJScarletList.ExecuteRequests.ContainsKey(item.type))
             {
                 int index = 0;
                 for (int i = 0; i < tooltips.Count; i++)
@@ -94,6 +95,11 @@ namespace HJScarletRework.Globals.Instances.Items
             if(item.HJScarlet().NotFinished)
             {
                 tooltips.CreateTooltip(Mod.GetLocalizationKey("NotFinished"),Color.IndianRed);
+            }
+            if(item.HJScarlet().borderlandWeapon)
+            {
+                string path = Mod.GetLocalizationKey($"Weapons.Executor.{item.ModItem.Name}.FlavorTooltip");
+                tooltips.CreateTooltip(path,Color.Lerp(Color.DarkRed,Color.Crimson,0.52f));
             }
             base.ModifyTooltips(item, tooltips);
         }

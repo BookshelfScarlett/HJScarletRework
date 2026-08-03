@@ -8,7 +8,7 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -46,7 +46,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            Owner.CheckExecution(OriginalItemID);
             Helper.MaxProgress[0] = (int)(AttackSpeed * .95f);
             Helper.MaxProgress[1] = (int)(AttackSpeed * .45f);
             Helper.MaxProgress[2] = (int)(AttackSpeed * .6f);

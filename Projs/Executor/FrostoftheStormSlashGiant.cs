@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -9,6 +10,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -85,6 +87,15 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.ShinyCrossStarECS(pos, Projectile.velocity / 2f, RandLerpColor(Color.RoyalBlue, Color.LightBlue), 40, 1, 1.180f, 0.2f);
             }
 
+        }
+        public int WhaleHitTime = 0;
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (target.type == NPCType<WorldsEndEverlastingFallingWhale>())
+            {
+                modifiers.SourceDamage *= Clamp((1 - .20f * WhaleHitTime), 0.05f, 1f);
+                WhaleHitTime++;
+            }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

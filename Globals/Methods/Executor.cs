@@ -65,7 +65,7 @@ namespace HJScarletRework.Globals.Methods
         /// <remarks>
         /// <para>逻辑细节：</para>
         /// <list type="number">
-        /// <item><description>从 <see cref="HJScarletList.IsExecutorWeaponDictionaty"/> 获取该武器完成处决所需的总次数 <c>required</c>；</description></item>
+        /// <item><description>从 <see cref="HJScarletList.ExecuteRequests"/> 获取该武器完成处决所需的总次数 <c>required</c>；</description></item>
         /// <item><description>若玩家处于手动处决模式（<see cref="HJScarletPlayer.tacticalExecution"/> 为 <c>true</c>）：<br/>
         ///     当当前累计次数恰好为 <c>required - 1</c> 时，播放 <see cref="SoundID.Item35"/> 音效（提示即将可处决）；<br/>
         ///     如果当前累计次数已达到或超过 <c>required</c>，则直接返回，不再增加。</description></item>
@@ -76,17 +76,28 @@ namespace HJScarletRework.Globals.Methods
         public static void AddExecutionTimeDirectly(this Projectile proj, int itemID, int times = 1)
         {
             Player owner = Main.player[proj.owner];
+            AddExecutionTimeDirectly(owner, itemID, times);
+        }
+        /// <summary>
+        /// 重载方案，用于直接增加玩家的处决进程
+        /// <br>具体操作应看<see cref="AddExecutionTimeDirectly(Projectile, int, int)"/></br>
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <param name="itemID"></param>
+        /// <param name="times"></param>
+        public static void AddExecutionTimeDirectly(this Player owner, int itemID, int times = 1)
+        {
             if (owner.HJScarlet().ExecutionListStored.ContainsKey(itemID))
             {
                 owner.HJScarlet().ExecutionListStored[itemID] += times;
-                if (owner.HJScarlet().ExecutionListStored[itemID] > HJScarletList.IsExecutorWeaponDictionaty[itemID])
-                    owner.HJScarlet().ExecutionListStored[itemID] = HJScarletList.IsExecutorWeaponDictionaty[itemID];
+                if (owner.HJScarlet().ExecutionListStored[itemID] > HJScarletList.ExecuteRequests[itemID])
+                    owner.HJScarlet().ExecutionListStored[itemID] = HJScarletList.ExecuteRequests[itemID];
                 if (owner.HeldItem.type != owner.HJScarlet().lastHeldItemIndex)
                     owner.HJScarlet().hasSendExecutionTint = false;
             }
             if (owner.HJScarlet().ExecutionListStored.TryGetValue(itemID, out int curExeTime) && owner.HJScarlet().tacticalExecution)
             {
-                if (curExeTime >= HJScarletList.IsExecutorWeaponDictionaty[itemID])
+                if (curExeTime >= HJScarletList.ExecuteRequests[itemID])
                 {
                     if (!owner.HJScarlet().hasSendExecutionTint && owner.HJScarlet().hasSendExecutionTintTimer == 0)
                     {
@@ -97,6 +108,7 @@ namespace HJScarletRework.Globals.Methods
                     return;
                 }
             }
+
         }
         public static void InsertExecutorTooltips(this List<TooltipLine> tooltips)
         {
@@ -116,7 +128,7 @@ namespace HJScarletRework.Globals.Methods
         /// <para>处决条件包括：</para>
         /// <list type="bullet">
         /// <item><description>玩家手持的武器必须属于 <see cref="ExecutorDamageClass"/> 伤害类型。</description></item>
-        /// <item><description>根据武器 ID 从 <see cref="HJScarletList.IsExecutorWeaponDictionaty"/> 获取所需累计命中次数（executionTime）。</description></item>
+        /// <item><description>根据武器 ID 从 <see cref="HJScarletList.ExecuteRequests"/> 获取所需累计命中次数（executionTime）。</description></item>
         /// <item><description>累计命中次数记录在 <see cref="HJScarletPlayer.ExecutionListStored"/> 字典中，值达到或超过 executionTime 时满足条件。</description></item>
         /// </list>
         /// <para>处决模式分为两种：</para>
@@ -136,7 +148,7 @@ namespace HJScarletRework.Globals.Methods
             bool hasReforged = ModLoader.HasMod("ExpandedReforge");
             if (!item.DamageType.CountsAsClass<ExecutorDamageClass>() && !hasReforged)
                 return false;
-            int executionTime = HJScarletList.IsExecutorWeaponDictionaty[itemID];
+            int executionTime = HJScarletList.ExecuteRequests[itemID];
             if (usPlayer.tacticalExecution)
             {
                 if (usPlayer.tacticalExecutionInputCache == 0)

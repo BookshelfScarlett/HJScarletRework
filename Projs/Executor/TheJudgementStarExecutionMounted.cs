@@ -3,6 +3,7 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -31,6 +32,10 @@ namespace HJScarletRework.Projs.Executor
         public NPC TargetNPC = null;
         private bool ShouldGrowUp = true;
         public override bool ShouldUpdatePosition() => false;
+        public override void SetStaticDefaults()
+        {
+            ScarletProjIDSets.DivingProjectile[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.width = Projectile.height = 2;

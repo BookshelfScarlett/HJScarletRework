@@ -44,20 +44,29 @@ namespace HJScarletRework.Projs.General
         public override void ExSD()
         {
             Projectile.SetUpHeldProj();
+            Projectile.width = Projectile.height = 1;
+            Projectile.Opacity = 0;
         }
         public override void ProjAI()
         {
-            Vector2 targetVec = Owner.MountedCenter - Vector2.UnitY * 80f;
-            targetVec.Y += Owner.gfxOffY;
-            Projectile.position.X = Owner.position.X;
+            Vector2 targetVec = Owner.MountedCenter - Vector2.UnitY * 60f * Projectile.Opacity;
             Projectile.Center = Vector2.Lerp(Projectile.Center, targetVec, .22f);
+            Projectile.position.Y += Owner.gfxOffY;
+            Projectile.position.X = Owner.Center.X;
             if(Main.rand.NextBool())
             {
-                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(10, 20), -Vector2.UnitY * Main.rand.NextFloat(.8f, 1.2f), RandLerpColor(Color.White, Color.LightGreen), 40, 1, 0.3f,.2f);
+                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(10, 20), -Vector2.UnitY * Main.rand.NextFloat(.8f, 1.2f) * Projectile.Opacity, RandLerpColor(Color.White, Color.LightGreen), 40, Projectile.Opacity, 0.3f,.2f);
             }
             if (Owner.HJScarlet().chlorophyteHeadExecutor)
-                Projectile.timeLeft = 2;
-            Timer++;
+            {
+                Projectile.timeLeft = 20;
+                Projectile.Opacity = Lerp(Projectile.Opacity, 1.01f, .12f);
+            }
+            else
+            {
+                Projectile.Opacity = Lerp(Projectile.Opacity, 0,.12f);
+            }
+                Timer++;
             if (Timer > 60)
             {
 
@@ -164,13 +173,13 @@ namespace HJScarletRework.Projs.General
             Vector2 pos = Projectile.Center - Main.screenPosition;
             SB.EnterShaderArea();
             Texture2D glow = HJScarletTexture.Particle_HRShinyOrbSmall.Value;
-            SB.Draw(glow, pos, null, Color.DarkGreen, 0, glow.Size() / 2, Projectile.scale, 0, 0);
+            SB.Draw(glow, pos, null, Color.DarkGreen * Projectile.Opacity, 0, glow.Size() / 2, Projectile.scale, 0, 0);
             SB.EndShaderArea();
 
             Texture2D tex = Projectile.GetTexture();
             for (int i = 0; i < 8; i++)
-                SB.Draw(tex, pos + (TwoPi / 8 * i).ToRotationVector2() * 2f, null, Color.Green.ToAddColor(10), 0, tex.Size() / 2, Projectile.scale, 0, 0);
-            SB.Draw(tex, pos, null, Color.White.ToAddColor(220), 0, tex.Size() / 2, Projectile.scale, 0, 0);
+                SB.Draw(tex, pos + (TwoPi / 8 * i).ToRotationVector2() * 2f * Projectile.Opacity, null, Color.Green.ToAddColor(10) * Projectile.Opacity, 0, tex.Size() / 2, Projectile.scale * Projectile.Opacity, 0, 0);
+            SB.Draw(tex, pos, null, Color.White.ToAddColor(220) * Projectile.Opacity, 0, tex.Size() / 2, Projectile.scale, 0, 0);
             return false;
         }
         public BlendState BlendState => BlendState.Additive;

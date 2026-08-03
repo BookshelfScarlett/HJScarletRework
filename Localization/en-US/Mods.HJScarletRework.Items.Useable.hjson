@@ -144,3 +144,9 @@ YogsothothsYardPack: {
 	DisplayName: Yogsothoths Yard Pack
 	Tooltip: ""
 }
+
+AxeCharm: {
+	DisplayName: Axe Charm
+	Tooltip: ""
+	EnableTooltips: ""
+}

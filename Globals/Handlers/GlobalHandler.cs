@@ -25,5 +25,6 @@ namespace HJScarletRework.Globals.Handlers
             SlotId sound = SoundEngine.PlaySound(slot, pos);
             return sound;
         }
+        public const int VanillaMaxItem = 5124;
     }
 }

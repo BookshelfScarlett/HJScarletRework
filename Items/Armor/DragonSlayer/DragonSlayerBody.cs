@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.DragonSlayer
@@ -18,7 +19,6 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
 
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
-
         public override void ExSD()
         {
             Item.defense = 35;
@@ -34,11 +34,13 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         {
             return true;
         }
-
+        public float Damage = 0.10f;
+        public int LifeRegen = 16;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(),LifeRegen.ToLifeRegenFormat());
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage<GenericDamageClass>() += 0.10f;
-            player.lifeRegen += 16;
+            player.GetDamage<GenericDamageClass>() += Damage;
+            player.lifeRegen += LifeRegen;
         }
         public override void AddRecipes()
         {

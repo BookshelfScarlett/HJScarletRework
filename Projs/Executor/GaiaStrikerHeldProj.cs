@@ -7,7 +7,7 @@ using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -212,7 +212,6 @@ namespace HJScarletRework.Projs.Executor
                 return;
             }
 
-            Owner.HJScarlet().holdingGaiaStaff = Owner.HeldItem.type == ItemType<GaiaStriker>();
             //使用物品，且手持的物品真的是一把武器，我们才让其准备发起攻击
             if (Owner.controlUseItem && Owner.HeldItem.IsWeapon())
             {

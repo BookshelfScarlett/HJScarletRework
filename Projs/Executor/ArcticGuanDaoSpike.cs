@@ -182,7 +182,6 @@ namespace HJScarletRework.Projs.Executor
             }
             TrailRender.RenderTrail([.. trailDrawDates], drawSetting);
         }
-
     }
 
 }

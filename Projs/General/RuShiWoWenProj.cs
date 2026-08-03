@@ -48,12 +48,11 @@ namespace HJScarletRework.Projs.General
             }
             //对的没错，这是他妈的一个粒子。
             new RuShiWoWenFlower(Projectile.whoAmI, Owner.MountedCenter + Vector2.UnitY * 20f).SpawnToPriority();
-            ScarletSound(HJScarletSounds.Misc_ManaClearUse, Projectile.Center,pitch:.8f);
         }
 
         public override void ProjAI()
         {
-            if (Owner.HJScarlet().powerLily)
+            if (Owner.HJScarlet().powerLilyVanity)
             {
                 Projectile.Opacity = Lerp(Projectile.Opacity, 1.01f, 0.1f);
                 Projectile.timeLeft = 10;
@@ -133,9 +132,6 @@ namespace HJScarletRework.Projs.General
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.79f * RandValueSummary.Z), new Vector2(3.2f, 1.94f), Color.White);
             TrailFunc(texture2, Color.White* 0.92f, 20f);
             TrailFunc(texture2, Color.White * 0.92f, 10f);
-            ApplyTrailAlt(HJScarletTexture.Trail_ManaStreakTiny.Value, Color.DarkGray);
-            ApplyTrailAlt(HJScarletTexture.Trail_FadedStreak.Value, Color.Gray, 10);
-            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.WhiteSmoke, 28);
 
             HJScarletMethods.EndShaderAreaPixel();
 

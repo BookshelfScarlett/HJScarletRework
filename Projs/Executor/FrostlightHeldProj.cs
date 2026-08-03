@@ -6,7 +6,7 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Caster;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace HJScarletRework.Projs.Executor
         public AnimationStruct Helper = new AnimationStruct(3);
         public override int OriginalItemID => ItemType<Frostlight>();
         public List<Vector2> OldAimPos = [];
-        public override bool? CanDamage() => false;
+        public override bool? CanDamage() => true;
         public override bool ShouldUpdatePosition() => false;
         public override void ExSD()
         {
@@ -34,12 +34,22 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            Helper.MaxProgress[0] = (int)(AttackSpeed * 1f);
-            Helper.MaxProgress[1] = (int)(AttackSpeed * 1.2f);
-            Helper.MaxProgress[2] = (int)(AttackSpeed * 0.3f);
+            Helper.MaxProgress[0] = (int)(AttackSpeed * 1f * .75f);
+            Helper.MaxProgress[1] = (int)(AttackSpeed * 1.2f * .75f);
+            Helper.MaxProgress[2] = (int)(AttackSpeed * 0.3f * .75f);
             SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 0, Pitch = .82f });
             SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { MaxInstances = 0, Pitch = .82f });
             TargetRotation = BeginTargetRotation;
+        }
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            if (!Projectile.HJScarlet().FirstFrame)
+                return false;
+            float _ = float.NaN;
+            Vector2 beamBeginPos = Owner.Center;
+            Vector2 beamEndPos = Projectile.Center + (Projectile.rotation).ToRotationVector2() * Projectile.scale * 40;
+            bool c = Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), beamBeginPos, beamEndPos, 64f, ref _);
+            return c;
         }
         public override void ProjAI()
         {

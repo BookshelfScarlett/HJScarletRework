@@ -33,8 +33,8 @@ namespace HJScarletRework.Globals.Executor
         public override void SetStaticDefaults()
         {
             ExSSD();
-            HJScarletList.IsExecutorWeaponDictionaty.Add(Type, ExecutionProgress);
-            HJScarletList.ExecutorWeaponTypeDictionary.Add(Type, ExecutorWeaponType);
+            HJScarletList.ExecuteRequests.Add(Type, ExecutionProgress);
+            HJScarletList.ExecutorTypes.Add(Type, ExecutorWeaponType);
 
         }
 

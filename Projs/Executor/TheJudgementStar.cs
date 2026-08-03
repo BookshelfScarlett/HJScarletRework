@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -38,6 +39,7 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(24, 2);
+            ScarletProjIDSets.DivingProjectile[Type] = true;
         }
         public override void ExSD()
         {

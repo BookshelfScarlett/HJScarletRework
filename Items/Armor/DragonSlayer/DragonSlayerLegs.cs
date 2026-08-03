@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.DragonSlayer
@@ -31,12 +32,13 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         {
             return true;
         }
-
+        public float Crits = 10;
+        public float MoveSpeed = .20f;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crits+"%",MoveSpeed.ToPercent());
         public override void UpdateEquip(Player player)
         {
-            player.GetCritChance<GenericDamageClass>() += 10;
-            player.moveSpeed += 0.20f;
-            player.maxTurrets += 2;
+            player.GetCritChance<GenericDamageClass>() += Crits;
+            player.moveSpeed += MoveSpeed;
         }
         public override void AddRecipes()
         {

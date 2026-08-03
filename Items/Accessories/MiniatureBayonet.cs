@@ -23,7 +23,7 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().blackKeyExecutorCriticalChanceAdd = Crit;
-            player.HJScarlet().critDamageExecutor += 0.15f;
+            player.HJScarlet().critDamageExecutor += CritDamage;
         }
         public override void AddRecipes()
         {

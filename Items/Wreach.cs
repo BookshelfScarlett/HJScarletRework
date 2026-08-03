@@ -160,11 +160,12 @@ namespace HJScarletRework.Items
             //        hasList.Add(item);
             //    }
             //}
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 10f, ProjectileType<RuShiWoWenProj>(), 1, knockback, player.whoAmI);
-            for (int i = 0; i < HJScarletList.IsExecutorWeaponDictionaty.Count; i++)
-            {
-                //int type = HJScarletList.IsExecutorWeaponDictionaty.;
-            }
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 10f, ProjectileType<ConferenceCallBullet>(), 1, knockback, player.whoAmI);
+            //for (int i = 0; i < HJScarletList.SummonWeaponList.Count; i++)
+            //{
+            //    int itemType = HJScarletList.SummonWeaponList[i];
+            //    player.QuickSpawnItem(source, itemType);
+            //}
             sw.Stop();
             // 输出经过的时间（毫秒）
             Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

@@ -139,6 +139,11 @@ CrimsonScythe: {
 		与前台死神套装一同组合时，获得如下效果
 		允许无限飞行时间，获得冲刺能力
 		'''
+	ConditionMechanic:
+		'''
+		黑色的第一太阳封存了这件物品的力量
+		或许应该去尝试超越太阳之神了
+		'''
 }
 
 DeathTolls: {
@@ -425,7 +430,6 @@ ContainedBlast: {
 		先后快速发射冲击弹与粘弹
 		冲击弹会穿透多个敌人，粘弹会粘附在敌人上
 		每个敌人最多粘附一枚粘弹
-		“盖上盖子”
 		'''
 	ExecutionStrike:
 		'''
@@ -434,6 +438,7 @@ ContainedBlast: {
 		增强遏制爆炸的攻击频率，并使遏制爆炸的攻击必定暴击
 		接下来的时间内，冲击弹的命中都会叠加处决进程
 		'''
+	FlavorTooltip: 盖上盖子。
 }
 
 EndlessWar: {
@@ -518,9 +523,20 @@ PureDagger: {
 }
 
 Monocle: {
-	// DisplayName: Monocle
-	// Tooltip: ""
-	// ExecutionStrike: ""
+	DisplayName: 单片镜
+	Tooltip:
+		'''
+		高速精准的子弹贯穿多名敌人
+		贯穿的敌人越多，伤害越高
+		'''
+	ExecutionStrike:
+		'''
+		发射一枚几乎瞬发命中的高速穿透子弹
+		子弹在撞击墙体或一定时间后转火最近的目标
+		该子弹无限穿透，必定暴击
+		并以当前暴击概率一比一转化的暴击伤害加成
+		'''
+	FlavorTooltip: 一个就够了。
 }
 
 ArcticGuanDao: {
@@ -534,7 +550,17 @@ ArcticGuanDao: {
 }
 
 ConferenceCall: {
-	// DisplayName: Conference Call
-	// Tooltip: ""
-	// ExecutionStrike: ""
+	DisplayName: 电话会议
+	Tooltip:
+		'''
+		一次发射5枚子弹
+		每一枚子弹在飞行一小段距离或击中敌人时会横向分裂两颗分裂弹
+		分裂弹会在墙体上进行弹射
+		'''
+	ExecutionStrike:
+		'''
+		强化接下来5秒内的攻击
+		所有的子弹都会在墙体上进行弹射，并可穿透一次敌人
+		'''
+	FlavorTooltip: 干脆一次性呼叫所有人算了。
 }

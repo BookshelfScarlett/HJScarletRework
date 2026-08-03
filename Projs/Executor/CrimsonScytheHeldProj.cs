@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -9,7 +10,7 @@ using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Misc;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -413,30 +414,8 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
-
                 CacheTargetList.TryAdd(target, 1);
             }
-            if (CacheTargetList.TryGetValue(target, out int v))
-            {
-                if (v <= 1)
-                {
-                    float rot = Projectile.Center.GetNormalVector2(target.Center).ToRotation();
-                    if (ThirdSwing)
-                    {
-                        float util = Utils.GetLerpValue(0, 12, Projectile.numHits, true);
-                        int lerpValue = (int)(Lerp(30, 10, util));
-                        ScreenShakeSystem.AddScreenShakes(target.Center, lerpValue, lerpValue, rot, 0, easingFunc: EaseOutExpo);
-                    }
-                    else
-                    {
-                        float util = Utils.GetLerpValue(0, 12, Projectile.numHits, true);
-                        int lerpValue = (int)(Lerp(10, 0, util));
-                        int lerpTime = (int)(Lerp(25, 0, util));
-                        ScreenShakeSystem.AddScreenShakes(target.Center, lerpValue, lerpTime, rot, 0, easingFunc: EaseOutExpo);
-                    }
-                }
-            }
-
             HitEffectsHandler(target, hit, damageDone);
             HitFirstEffectHandler(target);
             PlayerEffectHandler();
@@ -445,8 +424,10 @@ namespace HJScarletRework.Projs.Executor
 
         public void SoulStoneSpawn(NPC target)
         {
+            if (!DownedBossSystem.downedSunGod)
+                return;
             //灵魂石
-            if (Owner.ownedProjectileCounts[ProjectileType<CrimsonScytheSoulStone>()] < 30)
+            if (Owner.ownedProjectileCounts[ProjectileType<CrimsonScytheSoulStone>()] < CrimsonScythe.MaxSoulStone)
             {
                 Vector2 dir = Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2 * Projectile.spriteDirection);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir.ToRandVelocity(ToRadians(75f), 8f, 13f), ProjectileType<CrimsonScytheSoulStone>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
@@ -488,7 +469,23 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.numHits > 0)
                 return;
             StopTiming = 35;
+            if(DownedBossSystem.downedSunGod)
             Projectile.AddExecutionTimeImmediate(OriginalItemID);
+            float rot = Projectile.Center.GetNormalVector2(target.Center).ToRotation();
+            if (ThirdSwing)
+            {
+                float util = Utils.GetLerpValue(0, 12, Projectile.numHits, true);
+                int lerpValue = (int)(Lerp(30, 10, util));
+                ScreenShakeSystem.AddScreenShakes(target.Center, lerpValue, lerpValue, rot, 0, easingFunc: EaseOutExpo);
+            }
+            else
+            {
+                float util = Utils.GetLerpValue(0, 12, Projectile.numHits, true);
+                int lerpValue = (int)(Lerp(10, 0, util));
+                int lerpTime = (int)(Lerp(25, 0, util));
+                ScreenShakeSystem.AddScreenShakes(target.Center, lerpValue, lerpTime, rot, 0, easingFunc: EaseOutExpo);
+            }
+
         }
         public void HitEffectsHandler(NPC target, NPC.HitInfo hit, int damageDone)
         {

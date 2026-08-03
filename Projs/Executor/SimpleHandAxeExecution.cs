@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -81,11 +82,17 @@ namespace HJScarletRework.Projs.Executor
                 d.velocity = -Projectile.velocity.ToRandVelocity(ToRadians(5f), 2f) / 4f;
                 d.scale *= 1.1f;
             }
-            if (Main.rand.NextBool(4))
+            if (Projectile.numHits < 1)
             {
-                new StarShape(Projectile.Center.ToRandCirclePosEdge(8f), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 0.45f, 40).Spawn();
+                for (int i = 0; i < 4; i++)
+                {
+                    ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(8) + Projectile.SafeDir() * i * 4f, Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 45, 1, .45f);
+                }
             }
-
+            else
+                if(Main.rand.NextBool(4))
+                    ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 45, 1, .45f);
+            //new StarShape(Projectile.Center.ToRandCirclePosEdge(8f), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 0.45f, 40).Spawn();
         }
         public override bool? CanHitNPC(NPC target)
         {
@@ -101,7 +108,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.DefenseEffectiveness *= 0;
+            modifiers.DefenseEffectiveness *= .8f;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -120,6 +127,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 new StarShape(Projectile.Center.ToRandCirclePosEdge(10f) - Projectile.SafeDir() * 10f, Projectile.velocity.ToRandVelocity(ToRadians(2f), 1.4f, 14f), Color.Silver, 0.8f, 40).Spawn();
             }
+
         }
         public override bool PreDraw(ref Color lightColor)
         {

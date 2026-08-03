@@ -14,6 +14,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override ArmorType Category => ArmorType.Helmet;
         public override bool SetUpArmorSet => true;
         public override int[] ArmorSlots => [ItemID.CowboyHat, ItemID.CowboyJacket, ItemID.CowboyPants];
+        public static int RevolerDamage = 40;
         public override void ExUpdateEquipAlter(Item item, Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += 0.05f;

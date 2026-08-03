@@ -4,6 +4,7 @@ using HJScarletRework.Items.Armor.Diver;
 using HJScarletRework.Items.Armor.Shinobi;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.Monk
@@ -21,10 +22,12 @@ namespace HJScarletRework.Items.Armor.Monk
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
             Item.defense = 22;
         }
+        public int CritChance = 15;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritChance + "%");
 
         public override void UpdateEquip(Player player)
         {
-            player.GetCritChance<ExecutorDamageClass>() += 15;
+            player.GetCritChance<ExecutorDamageClass>() += CritChance;
         }
     }
 }

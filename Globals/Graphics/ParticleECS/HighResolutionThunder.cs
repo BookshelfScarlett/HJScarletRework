@@ -68,10 +68,9 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
                     sb.Draw(tex, pos, rec, data.DrawColor * data.Opacity, data.Rotation, ori, data.Scale, SpriteEffects.None, 0f);
                     break;
                 default:
-                    sb.Draw(tex, pos, rec, Color.White * data.Opacity, data.Rotation, ori, data.Scale, SpriteEffects.None, 0f);
+                    sb.Draw(tex, pos, rec, data.DrawColor * data.Opacity, data.Rotation, ori, data.Scale, SpriteEffects.None, 0f);
                     sb.Draw(tex, pos, rec, data.DrawColor * data.Opacity, data.Rotation, ori, data.Scale, SpriteEffects.None, 0f);
                     sb.Draw(tex, pos, rec, Color.White * data.Opacity, data.Rotation, ori, data.Scale, SpriteEffects.None, 0f);
-                    sb.Draw(tex, pos, rec, data.DrawColor * data.Opacity, data.Rotation, ori, data.Scale, SpriteEffects.None, 0f);
                     break;
 
             }

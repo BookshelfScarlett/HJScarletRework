@@ -3,7 +3,7 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -34,6 +34,7 @@ namespace HJScarletRework.Projs.Executor
         public ref float MountedLerp => ref Projectile.localAI[0];
         public Vector2 MountedPos = Vector2.Zero;
         public NPC Target = null;
+        public bool IsBuffing => Owner.HJScarlet().containedBlastBuffTime > 0;
         public override void ExSD()
         {
             Projectile.height = Projectile.width = 12;
@@ -84,6 +85,15 @@ namespace HJScarletRework.Projs.Executor
             }
             else
                 Projectile.Kill();
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.oldPosition+Projectile.Size/2, Vector2.Zero, ProjectileType<ContainedBlastBoom>(), Projectile.originalDamage / 2, Projectile.knockBack, Projectile.owner);
+            proj.ai[0] = 0;
+            proj.rotation = Projectile.rotation;
+            proj.HJScarlet().HasExecutionMechanic = true;
+            proj.ai[2] = Projectile.ai[0];
+            return true;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

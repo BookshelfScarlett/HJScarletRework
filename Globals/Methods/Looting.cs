@@ -1,4 +1,5 @@
-﻿using Terraria.GameContent.ItemDropRules;
+﻿using Terraria;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Methods
@@ -41,6 +42,27 @@ namespace HJScarletRework.Globals.Methods
             norExepert.OnSuccess(ItemDropRule.Common(itemID, dropRate, min, max));
             loot.Add(norExepert);
         }
+        public static NPCShop ToCustomValue<T>(this NPCShop shop, int customValue, params Condition[] conditions) where T : ModItem
+        {
+            return ToCustomValue(shop, ItemType<T>(), customValue, conditions);
+        }
+        public static NPCShop ToCustomValue<T>(this NPCShop shop, int plat = 0, int gold = 0, int silver = 10, int copper = 0, params Condition[] conditions) where T : ModItem
+        {
+            return ToCustomValue(shop, ItemType<T>(), plat, gold, silver, copper, conditions);
+        }
+        public static NPCShop ToCustomValue(this NPCShop shop, int itemType, int plat = 0, int gold = 0, int silver = 10, int copper = 0, params Condition[] conditions)
+        {
+            return ToCustomValue(shop, itemType, Item.buyPrice(plat, gold, silver, copper), conditions);
+        }
+        public static NPCShop ToCustomValue(this NPCShop shop, int itemType, int customValue, params Condition[] conditions)
+        {
+            var item = new Item(itemType)
+            {
+                shopCustomPrice = customValue
+            };
+            return shop.Add(item, conditions);
+        }
+
     }
 
 }

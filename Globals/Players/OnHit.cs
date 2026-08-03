@@ -59,27 +59,7 @@ namespace HJScarletRework.Globals.Players
             {
                 hit.DamageType = ExecutorDamageClass.Instance;
             }
-
             GlobalOnHitNPCWithSomething(target, hit, damageDone);
-            if (item.DamageType.CountsAsClass<ExecutorDamageClass>())
-            {
-                GlobalExecutorOnHit(target, hit, damageDone);
-                if (cowboyExecutor && cowboyRevolverTimer == 0)
-                {
-                    cowboyRevolverTimer = Player.ApplyWeaponAttackSpeed(Player.HeldItem, Player.HeldItem.useTime, 5);
-                    int revolverDamage = Player.GetWeaponDamage(Player.HeldItem) / 4;
-                    bool setCrit = false;
-                    if (Player.CheckExecution(Player.HeldItem.type) || Main.rand.NextBool())
-                    {
-                        revolverDamage = (int)(revolverDamage * 0.5f);
-                    }
-                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), target.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(35f), 9f, 11f), ProjectileType<CowboyRevolverProj>(), revolverDamage, 0f, Player.whoAmI);
-                    proj.timeLeft = 300;
-                    proj.HJScarlet().ExecutionStrike = setCrit;
-                    if (target.CanBeChasedBy())
-                        ((CowboyRevolverProj)proj.ModProjectile).CurTarget = target;
-                }
-            }
         }
 
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)

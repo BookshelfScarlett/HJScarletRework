@@ -3,11 +3,10 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Useables;
 using Terraria;
 using Terraria.ID;
 
-namespace HJScarletRework.Items.Accessories
+namespace HJScarletRework.Items.Useables
 {
     public class GoldenAppleEnchantedFully : HJScarletItemClass
     {

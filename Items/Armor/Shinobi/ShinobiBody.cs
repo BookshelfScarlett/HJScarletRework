@@ -4,6 +4,7 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.Shinobi
@@ -22,10 +23,12 @@ namespace HJScarletRework.Items.Armor.Shinobi
         {
             base.UpdateArmorSet(player);
         }
+        public float CritChance = 40;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritChance + "%");
 
         public override void UpdateEquip(Player player)
         {
-            player.GetCritChance<ExecutorDamageClass>() += 40f;
+            player.GetCritChance<ExecutorDamageClass>() += CritChance;
         }
     }
 }

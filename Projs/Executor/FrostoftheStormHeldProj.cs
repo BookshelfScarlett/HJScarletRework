@@ -9,7 +9,7 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -275,7 +275,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (target.type == NPCType<ScarabBelief>() || target.type == NPCType<ScarabBelief_Minion>())
-                modifiers.SourceDamage *= 0.7f;
+                modifiers.SourceDamage *= 0.6f;
             else
                 modifiers.SourceDamage *= 1.2f;
         }

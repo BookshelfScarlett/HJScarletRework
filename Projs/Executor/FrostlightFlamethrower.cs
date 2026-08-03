@@ -4,7 +4,7 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Caster;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -55,21 +55,25 @@ namespace HJScarletRework.Projs.Executor
             HandleHeldProjState();
             HandleAttackAnimation();
             HandlePlayerState();
-            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike && Projectile.IsMe())
+            if (Helper.IsDone[0])
             {
-                Projectile.HJScarlet().ExecutionStrike = true;
-                Owner.RemoveExecutionProgress(OriginalItemID);
-                Timer = 0;
-                Owner.direction = (Main.MouseWorld.X - Owner.Center.X > 0).ToDirectionInt();
-                Vector2 ownerToSky = new Vector2(Owner.Center.X + 250 * Owner.direction, Owner.Center.Y) + new Vector2(0, -500) - Owner.Center;
-                Vector2 skyDir = -(ownerToSky).ToSafeNormalize();
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostlightHeldProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-                proj.originalDamage = Projectile.damage;
-                ((FrostlightHeldProj)proj.ModProjectile).BeginTargetRotation = skyDir.ToRotation();
-                ((FrostlightHeldProj)proj.ModProjectile).Flip = 1;
-                ((FrostlightHeldProj)proj.ModProjectile).CanHeal = true;
-                ((Frostlight)Owner.HeldItem.ModItem).AlterMode = false;
-                Projectile.Kill();
+                if (Owner.GetExecutionSrike() && Projectile.HJScarlet().ExecutionStrike && Projectile.IsMe())
+                {
+                    Projectile.HJScarlet().ExecutionStrike = false;
+                    Owner.RemoveExecutionProgress(OriginalItemID);
+                    Timer = 0;
+                    Owner.direction = (Main.MouseWorld.X - Owner.Center.X > 0).ToDirectionInt();
+                    Vector2 ownerToSky = new Vector2(Owner.Center.X + 250 * Owner.direction, Owner.Center.Y) + new Vector2(0, -500) - Owner.Center;
+                    Vector2 skyDir = -(ownerToSky).ToSafeNormalize();
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostlightHeldProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    proj.originalDamage = Projectile.damage;
+                    ((FrostlightHeldProj)proj.ModProjectile).BeginTargetRotation = skyDir.ToRotation();
+                    ((FrostlightHeldProj)proj.ModProjectile).Flip = 1;
+                    ((FrostlightHeldProj)proj.ModProjectile).CanHeal = true;
+                    ((Frostlight)Owner.HeldItem.ModItem).AlterMode = false;
+                    Projectile.Kill();
+                }
+                HandleExecution();
             }
         }
 
@@ -224,6 +228,8 @@ namespace HJScarletRework.Projs.Executor
         public override bool PreDraw(ref Color lightColor)
         {
             if (Projectile.HJScarlet().ExecutionStrike)
+                return false;
+            if (!Projectile.HJScarlet().FirstFrame)
                 return false;
             if (ShouldUseEdgeMeltShader)
                 DrawEdgeShaderProj();

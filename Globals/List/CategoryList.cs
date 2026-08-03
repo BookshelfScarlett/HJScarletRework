@@ -17,6 +17,7 @@ namespace HJScarletRework.Globals.List
         public static List<int> FemaleNPC = [];
         public static List<int> LegalFoodList = [];
         public static List<int> SummonWeaponList = [];
+        public static List<string> SummonWeaponFullName = [];
 
         public static HashSet<int> OresHashSet = [];
         public static HashSet<int> BarsHashSet = [];
@@ -26,9 +27,10 @@ namespace HJScarletRework.Globals.List
         /// 主要用于Boss方面
         /// </summary>
         public static Dictionary<int, string> DownedBossConditionList = [];
-        public static Dictionary<int, int> IsExecutorWeaponDictionaty = [];
+        public static Dictionary<int, int> ExecuteRequests = [];
         public static Dictionary<int, string> VanityItemDictionary = [];
-        public static Dictionary<int, ExecutorWeaponType> ExecutorWeaponTypeDictionary = [];
+        public static Dictionary<int, ExecutorWeaponType> ExecutorTypes = [];
+        public static Dictionary<int, string> SummonWeaponDicName = [];
         public override void Load()
         {
             //投矛表单
@@ -176,6 +178,7 @@ namespace HJScarletRework.Globals.List
         }
         public override void PostSetupContent()
         {
+
             for (int i = 0; i < ItemLoader.ItemCount; i++)
             {
                 Item item = new Item(i);
@@ -195,7 +198,11 @@ namespace HJScarletRework.Globals.List
                 bool isSummonWeapon = item.damage > 0 && item.DamageType.CountsAsClass<SummonDamageClass>() && item.shoot != ProjectileID.None;
                 Projectile proj = ContentSamples.ProjectilesByType[item.shoot];
                 if (isSummonWeapon && proj.minion && !proj.sentry && proj.minionSlots > 0)
+                {
                     SummonWeaponList.Add(item.type);
+                    if (i > VanillaMaxItem)
+                        SummonWeaponFullName.Add(item.ModItem.FullName);
+                }
             }
         }
         public override void Unload()

@@ -123,7 +123,11 @@ namespace HJScarletRework.Projs.Executor
         }
         public void DoExplosion()
         {
-            ScarletSound(HJScarletSounds.Tlipoca_StoneShatter, Projectile.Center, 0.23f, 1, -0.4f);
+            if (Owner.HJScarlet().globalSoundDelay == 0)
+            {
+                ScarletSound(HJScarletSounds.Tlipoca_StoneShatter, Projectile.Center, 0.13f, 1, -0.4f);
+                Owner.HJScarlet().globalSoundDelay = 45;
+            }
             Projectile.Kill();
         }
         public override void OnKill(int timeLeft)

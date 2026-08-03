@@ -123,6 +123,7 @@ CrimsonScythe: {
 	ExecutionStrike: ""
 	FlavorTooltips: ""
 	ExtraMechanic: ""
+	ConditionMechanic: ""
 }
 
 DeathTolls: {
@@ -343,6 +344,7 @@ ContainedBlast: {
 	DisplayName: Contained Blast
 	Tooltip: ""
 	ExecutionStrike: ""
+	FlavorTooltip: ""
 }
 
 EndlessWar: {
@@ -404,6 +406,7 @@ Monocle: {
 	DisplayName: Monocle
 	Tooltip: ""
 	ExecutionStrike: ""
+	FlavorTooltip: ""
 }
 
 ArcticGuanDao: {
@@ -416,4 +419,5 @@ ConferenceCall: {
 	DisplayName: Conference Call
 	Tooltip: ""
 	ExecutionStrike: ""
+	FlavorTooltip: ""
 }

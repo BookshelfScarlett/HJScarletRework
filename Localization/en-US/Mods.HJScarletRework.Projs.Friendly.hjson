@@ -143,6 +143,7 @@ Executor: {
 	ArcticGuanDaoSpike.DisplayName: Arctic Guan Dao Spike
 	ConferenceCallBullet.DisplayName: Conference Call Bullet
 	ConferenceCallHeldProj.DisplayName: Conference Call Held Proj
+	ExsanguinationHomingBullet.DisplayName: Exsanguination Homing Bullet
 }
 
 Melee: {

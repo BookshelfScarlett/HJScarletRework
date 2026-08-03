@@ -6,7 +6,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Accessories
+namespace HJScarletRework.Items.Useables
 {
     public class CursedGoldenKey : HJScarletItemClass
     {

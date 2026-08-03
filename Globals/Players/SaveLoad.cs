@@ -1,4 +1,5 @@
-﻿using Terraria.ModLoader;
+﻿using System.Collections.Generic;
+using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
 namespace HJScarletRework.Globals.Players
@@ -14,11 +15,15 @@ namespace HJScarletRework.Globals.Players
             tag.Add(nameof(terraRecipe_LifeMaxMultTime), terraRecipe_LifeMaxMultTime);
             tag.Add(nameof(givePaper), givePaper);
             tag.Add(nameof(firstTimeCraftGaia), firstTimeCraftGaia);
+            tag.Add(nameof(ruShiWoWenBanMinionNameTrashList), ruShiWoWenBanMinionNameTrashList);
+            tag.Add(nameof(ruShiWoWenBanMinionNameList), ruShiWoWenBanMinionNameList);
         }
         public override void LoadData(TagCompound tag)
         {
-            terraRecipe_EatenFoodList = (System.Collections.Generic.List<int>)tag.GetList<int>(nameof(terraRecipe_EatenFoodList));
-            terraRecipe_NotEatenFoodList = (System.Collections.Generic.List<int>)tag.GetList<int>(nameof(terraRecipe_NotEatenFoodList));
+            terraRecipe_EatenFoodList = (List<int>)tag.GetList<int>(nameof(terraRecipe_EatenFoodList));
+            terraRecipe_NotEatenFoodList = (List<int>)tag.GetList<int>(nameof(terraRecipe_NotEatenFoodList));
+            ruShiWoWenBanMinionNameList= (List<string>)tag.GetList<string>(nameof(ruShiWoWenBanMinionNameList));
+            ruShiWoWenBanMinionNameTrashList= (List<string>)tag.GetList<string>(nameof(ruShiWoWenBanMinionNameTrashList));
             terraRecipe = tag.GetBool(nameof(terraRecipe));
             terraRecipe_EatenFoodCounts = tag.GetInt(nameof(terraRecipe_EatenFoodCounts));
             terraRecipe_LifeMaxMultTime = tag.GetInt(nameof(terraRecipe_LifeMaxMultTime));

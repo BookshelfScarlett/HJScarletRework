@@ -13,6 +13,7 @@ namespace HJScarletRework.Globals.Players
         public int defenseBuff = 0;
         public int swapTimer = 0;
         public int ruShiWoWenBanTimer = 0;
+        public int globalSoundDelay = 0;
         public void ResetTimer()
         {
             climaticHawstringLaserCounter = 0;
@@ -40,13 +41,27 @@ namespace HJScarletRework.Globals.Players
             adamantiteHeadExecutorThunderTimer = 0;
             powerLilyTimer = 0;
             ruShiWoWenBanTimer = 0;
+            globalSoundDelay = 0;
+            maidReaperHealTimer = 0;
+            conferenceCallBuffTime = 0;
         }
         public void UpdateTimer()
         {
+            if (conferenceCallBuffTime > 0)
+                conferenceCallBuffTime--;
+            if (maidReaperHealTimer > 0)
+                maidReaperHealTimer--;
+            if (globalSoundDelay > 0)
+                globalSoundDelay--;
             if (ruShiWoWenBanTimer > 0)
                 ruShiWoWenBanTimer--;
             if (powerLilyTimer > 1)
+            {
                 powerLilyTimer--;
+                powerLilyCacheTimer = powerLilyTimer;
+            }
+            if (!powerLily && powerLilyTimer > 0)
+                powerLilyTimer = 0;
             if (adamantiteHeadExecutorThunderTimer > 0)
                 adamantiteHeadExecutorThunderTimer--;
             if (swapTimer > 0)
@@ -162,6 +177,7 @@ namespace HJScarletRework.Globals.Players
             {
                 lastHeldItemIndex = Player.HeldItem.type;
                 hasSendExecutionTint = false;
+                executorSwordMarkPing = false;
             }
             if (crimsonScytheDefense > 0 && crimsonScytheAttackCounter < 1)
                 crimsonScytheDefense -= 1;

@@ -35,7 +35,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.ToTrailSetting(6);
         }
         public int HangingHitTime = 0;
-        public int TotalHitTime = 10;
+        public int TotalHitTime = 6;
         public bool IsHit = false;
         public override void ExSD()
         {

@@ -4,7 +4,7 @@ using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Utilities;
@@ -20,6 +20,8 @@ namespace HJScarletRework.Projs.Executor
         public override int OriginalItemID => ItemType<ContainedBlast>();
         public ref float Timer => ref Projectile.ai[0];
         public ref float OnFireTimer => ref Projectile.localAI[0];
+        public float RecoilTimer = 0;
+        public bool IsBuffing => Owner.HJScarlet().containedBlastBuffTime > 0;
         public override void ExSD()
         {
             Projectile.SetUpHeldProj(5);
@@ -30,7 +32,7 @@ namespace HJScarletRework.Projs.Executor
         public bool IsUsing => (Owner.channel) && !Owner.noItems && !Owner.CCed;
         public override void OnFirstFrame()
         {
-            base.OnFirstFrame();
+            Timer = (int)(AttackSpeed * .85f);
         }
         public override void ProjAI()
         {
@@ -58,8 +60,11 @@ namespace HJScarletRework.Projs.Executor
         {
             if (IsUsing)
             {
-                Projectile.position += Main.rand.NextVector2Circular(1, 1);
-                Timer++;
+                if(!IsBuffing)
+                Projectile.position += Main.rand.NextVector2Circular(2, 2);
+                else
+                Projectile.position += Main.rand.NextVector2Circular(3, 3);
+                    Timer++;
                 OnFireTimer++;
                 if (OnFireTimer > 60 * Projectile.MaxUpdates)
                     OnFireTimer = 60 * Projectile.MaxUpdates;
@@ -69,9 +74,8 @@ namespace HJScarletRework.Projs.Executor
                 OnFireTimer--;
                 if (OnFireTimer < 0)
                     OnFireTimer = 0;
-                Timer--;
-                if (Timer < 0)
-                    Timer = 0;
+                if (Timer < AttackSpeed)
+                    Timer += 1;
             }
         }
 
@@ -80,8 +84,10 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, type, damage, Projectile.knockBack, Projectile.owner);
             proj.originalDamage = Projectile.originalDamage;
-            proj.HJScarlet().HasExecutionMechanic = Owner.HJScarlet().containedBlastBuffTime > 0 ? Main.rand.NextBool(4) : true;
+            proj.HJScarlet().HasExecutionMechanic = !IsBuffing || Main.rand.NextBool();
             proj.ai[0] = Owner.HJScarlet().containedBlastBuffTime;
+            if (IsBuffing)
+                proj.extraUpdates += 1;
         }
         public void HandleAttack()
         {
@@ -89,7 +95,7 @@ namespace HJScarletRework.Projs.Executor
             float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
             Vector2 firePos = Projectile.Center + offset2.RotatedBy(drawRot) + Projectile.SafeDirByRot() * 8f;
             HandleExecution();
-            int attackSpeedHand = Owner.HJScarlet().containedBlastBuffTime > 0 ? ((AttackSpeed / 2)) <= 5 ? 5 : AttackSpeed / 2 : AttackSpeed;
+            int attackSpeedHand = IsBuffing ? ((AttackSpeed / 2)) <= 5 ? 5 : AttackSpeed / 2 : AttackSpeed;
             if (Timer > attackSpeedHand && IsUsing && Timer != 0 && Projectile.IsMe())
             {
                 Timer = 0;
@@ -105,30 +111,50 @@ namespace HJScarletRework.Projs.Executor
                 if (IsAlterBullet)
                 {
                     Vector2 bulletPos = firePos + dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-5f, 5f);
-                    Vector2 bulletVel = dir * Main.rand.Next(14, 18);
+                    Vector2 bulletVel = dir * 18;
                     ShootBullet(bulletPos, bulletVel, ProjectileType<ContainedBlastStickBullet>(), bulletDamage);
                 }
                 else
                 {
                     Vector2 bulletPos = firePos + dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-5f, 5f);
-                    Vector2 bulletVel = dir * Main.rand.Next(14, 18);
+                    Vector2 bulletVel = dir * 18;
                     ShootBullet(bulletPos, bulletVel, ProjectileType<ContainedBlastShockBullet>(), bulletDamage);
                 }
                 IsAlterBullet = !IsAlterBullet;
-                for (int i = 0; i < 8; i++)
+                if (!IsBuffing)
                 {
-                    Vector2 posOffset = Projectile.SafeDirByRot().RotatedBy(PiOver2) * Main.rand.NextFloat(-8f, 8f) + Projectile.SafeDirByRot() * 50f;
-                    Vector2 vel = Projectile.SafeDirByRot() * Main.rand.NextFloat(1f, 23f);
-                    ECSParticle.LightntingGlow(firePos + posOffset, vel, RandLerpColor(Color.White, Color.WhiteSmoke), 45, 1, 0.35f * Main.rand.NextFloat(0.75f, 1.1f));
+                    for (int i = 0; i < 8; i++)
+                    {
+                        Vector2 posOffset = Projectile.SafeDirByRot().RotatedBy(PiOver2) * Main.rand.NextFloat(-8f, 8f) + Projectile.SafeDirByRot() * 50f;
+                        Vector2 vel = Projectile.SafeDirByRot() * Main.rand.NextFloat(1f, 23f);
+                        ECSParticle.LightntingGlow(firePos + posOffset, vel, RandLerpColor(Color.White, Color.WhiteSmoke), 45, 1, 0.35f * Main.rand.NextFloat(0.75f, 1.1f));
+                    }
+                    for (int i = 0; i < 14; i++)
+                    {
+                        Vector2 vel = dir.ToRandVelocity(ToRadians(10f), 1.8f, 34.8f);
+                        Vector2 offset = dir.ToRandVelocity(ToRadians(0), 7, 11f);
+                        Vector2 posOffset = offset + Main.rand.NextVector2Circular(10f, 5f) + dir * 14f;
+                        new SmokeParticle(firePos.ToRandCirclePos(10f) + posOffset, vel, RandLerpColor(Color.White, Color.Lerp(Color.OrangeRed, Color.WhiteSmoke, 0.84f)), Main.rand.Next(40, 60), RandRotTwoPi, .61f, 0.24f * Main.rand.NextFloat(.75f, 1.2f), Main.rand.NextBool()).SpawnToPriority();
+                    }
                 }
-                for (int i = 0; i < 14; i++)
+                else
                 {
-                    Vector2 vel = dir.ToRandVelocity(ToRadians(10f), 1.8f, 34.8f);
-                    Vector2 offset = dir.ToRandVelocity(ToRadians(0), 7, 11f);
-                    Vector2 posOffset = offset + Main.rand.NextVector2Circular(10f, 5f) + dir * 14f;
-                    new SmokeParticle(firePos.ToRandCirclePos(10f) + posOffset, vel, RandLerpColor(Color.White, Color.Lerp(Color.OrangeRed, Color.WhiteSmoke, 0.84f)), Main.rand.Next(40, 60), RandRotTwoPi, .61f, 0.24f * Main.rand.NextFloat(.75f, 1.2f), Main.rand.NextBool()).SpawnToPriority();
+                   for (int i = 0; i < 16; i++)
+                    {
+                        Vector2 posOffset = Projectile.SafeDirByRot().RotatedBy(PiOver2) * Main.rand.NextFloat(-8f, 8f) + Projectile.SafeDirByRot() * 50f;
+                        Vector2 vel = Projectile.SafeDirByRot() * Main.rand.NextFloat(1f, 23f);
+                        ECSParticle.LightntingGlow(firePos + posOffset, vel, RandLerpColor(Color.White, Color.WhiteSmoke), 45, 1, 0.35f * Main.rand.NextFloat(0.75f, 1.1f));
+                    }
+                    for (int i = 0; i < 22; i++)
+                    {
+                        Vector2 vel = dir.ToRandVelocity(ToRadians(10f), 1.8f, 34.8f);
+                        Vector2 offset = dir.ToRandVelocity(ToRadians(0), 7, 11f);
+                        Vector2 posOffset = offset + Main.rand.NextVector2Circular(10f, 5f) + dir * 14f;
+                        new SmokeParticle(firePos.ToRandCirclePos(10f) + posOffset, vel, RandLerpColor(Color.White, Color.Lerp(Color.OrangeRed, Color.WhiteSmoke, 0.84f)), Main.rand.Next(40, 60), RandRotTwoPi, .61f, 0.24f * Main.rand.NextFloat(.75f, 1.2f), Main.rand.NextBool()).SpawnToPriority();
+                    }
+
                 }
-                Projectile.HJScarlet().ExecutionStrike = false;
+                    Projectile.HJScarlet().ExecutionStrike = false;
             }
         }
         public override void OnExecution()
@@ -169,6 +195,24 @@ namespace HJScarletRework.Projs.Executor
             Owner.ControlPlayerArm(Projectile.rotation);
             Projectile.Center = Owner.MountedCenter;
             Projectile.position.Y += Owner.gfxOffY;
+
+            //处理后坐力动画
+            float progress = Utils.GetLerpValue(0, AttackSpeed, RecoilTimer, true);
+            float pullBack;
+            float pullBackpower = 25;
+            float rot = (Projectile.Center - Main.MouseWorld).ToRotation() * Owner.gravDir;
+            if (progress >= 0.5f)
+            {
+                float pro = (progress - 0.5f) / .5f;
+                pullBack = Lerp(pullBackpower, 0, (EaseInCubic(pro)));
+            }
+            else
+            {
+                float pro = (progress) / .5f;
+                pullBack = Lerp(0, pullBackpower, (EaseOutCubic(pro)));
+            }
+            Projectile.Center += rot.ToRotationVector2() * pullBack;
+
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -178,8 +222,11 @@ namespace HJScarletRework.Projs.Executor
             drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
             float fireProgess = Utils.GetLerpValue(0, 1, OnFireTimer / (60f * Projectile.MaxUpdates), true);
             float edgeProgress = EaseOutCubic(fireProgess);
+            Color edgeC = Color.White;
+            if (Owner.HJScarlet().containedBlastBuffTime > 0)
+                edgeC = Color.Red;
             for (int i = 0; i < 16; i++)
-                SB.Draw(tex, drawPos + offset.BetterRotatedBy(drawRot) + Projectile.SafeDirByRot() * 0.28f + (TwoPi / 16f * i).ToRotationVector2() * 1.2f * edgeProgress, null, Color.White.ToAddColor(50) * edgeProgress, drawRot, rotPoint, Projectile.scale * .70f, se, 0);
+                SB.Draw(tex, drawPos + offset.BetterRotatedBy(drawRot) + Projectile.SafeDirByRot() * 0.28f + (TwoPi / 16f * i).ToRotationVector2() * 1.2f * edgeProgress, null, edgeC.ToAddColor(50) * edgeProgress, drawRot, rotPoint, Projectile.scale * .70f, se, 0);
             SB.Draw(tex, drawPos + offset.BetterRotatedBy(drawRot), null, Color.White, drawRot, rotPoint, Projectile.scale * .70f, se, 0);
             return false;
         }

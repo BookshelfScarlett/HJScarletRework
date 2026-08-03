@@ -53,7 +53,7 @@ namespace HJScarletRework.Items.Armor.Diver
             Item.defense = 6;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DamageAdd);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DamageAdd.ToPercent());
         public override void UpdateArmorSetBetter(Player player, string setBonusPath)
         {
             player.setBonus += "\n" + setBonusPath.ToLangValue();
@@ -62,7 +62,6 @@ namespace HJScarletRework.Items.Armor.Diver
         public override void UpdateEquip(Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += DamageAdd;
-            player.aggro += 500;
         }
     }
 }

@@ -6,6 +6,7 @@ using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.DragonSlayer
@@ -37,20 +38,27 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         {
             return true;
         }
+        public float Damage = .15f;
+        public int Crit = 10;
+        public float MeleeAttackSpeed = .25f;
+        public int MaxSlots = 1;
+        public static float RangedConsumeItemMult = 1.1f;
+        public static float MagicDamageReduce = .20f;
 
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage,Crit);
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage<ExecutorDamageClass>() += 0.15f;
-            player.GetCritChance<ExecutorDamageClass>() += 10;
+            player.GetDamage<ExecutorDamageClass>() += Damage;
+            player.GetCritChance<ExecutorDamageClass>() += Crit;
         }
         public override void UpdateArmorSet(Player player)
         {
-            string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBouns").ToLangValue();
+            string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBouns").ToLangValue().ToFormatValue(MeleeAttackSpeed,RangedConsumeItemMult +"x",MagicDamageReduce.ToPercent(),MaxSlots);
             player.HJScarlet().redDragonKnight = true;
             player.setBonus += "\n" + value;
-            player.GetAttackSpeed<MeleeDamageClass>() += 0.25f;
-            player.maxMinions = 1;
-            player.maxTurrets = 1;
+            player.GetAttackSpeed<MeleeDamageClass>() += MeleeAttackSpeed;
+            player.maxMinions = MaxSlots;
+            player.maxTurrets = MaxSlots;
         }
         public override void AddRecipes()
         {

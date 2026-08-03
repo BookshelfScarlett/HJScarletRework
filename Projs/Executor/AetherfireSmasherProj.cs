@@ -3,7 +3,7 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -39,9 +39,8 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.penetrate = -1;
             Projectile.ignoreWater = true;
-            Projectile.tileCollide = false;
+            Projectile.tileCollide = true;
             Projectile.extraUpdates = 2;
-            Projectile.ownerHitCheck = true;
             Projectile.width = Projectile.height = 60;
             Projectile.SetupImmnuity(30);
             Projectile.noEnchantmentVisuals = true;
@@ -89,12 +88,14 @@ namespace HJScarletRework.Projs.Executor
                 if (Projectile.GetTargetSafe(out NPC target, true, 1200, canPassWall: false, hitLine: true) && Projectile.numHits < 1 && CurTarget is null)
                 {
                     CurTarget = target;
+                            Timer = 0;
                 }
 
                 if (!isHitNPC)
                 {
                     if (CurTarget.IsLegal())
                     {
+                        Projectile.tileCollide = false;
                         if (!ActiveDash)
                         {
                             Projectile.velocity = (CurTarget.Center - Projectile.Center).ToSafeNormalize() * 18f;
@@ -125,11 +126,15 @@ namespace HJScarletRework.Projs.Executor
                     SpawnFireball();
                     Projectile.velocity = (-(Projectile.Center - Owner.Center)).ToSafeNormalize() * 18f;
                     InitActiveDashParticle();
-                    SoundEngine.PlaySound(SoundID.Item110 with { MaxInstances = 0, Pitch = -0.2f, PitchVariance = 0.1f }, Projectile.Center);
+                    UpdateOnHitNPCParticle(Projectile.Center);
+                    SoundEngine.PlaySound(SoundID.Item110 with { MaxInstances = 1, Pitch = -0.2f, PitchVariance = 0.1f }, Projectile.Center);
+                    Projectile.Kill();
+                    return;
                 }
                 Projectile.netUpdate = true;
                 Timer = 0;
                 AttackState = State.Return;
+                Projectile.tileCollide = false;
             }
         }
 
@@ -164,7 +169,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void SpawnFireball()
         {
-            if (!Collision.SolidCollision(Projectile.Center, Projectile.width, Projectile.height) && Collision.CanHit(Projectile.Center, 1, 1, Owner.Center, 1, 1))
+            if (!Collision.SolidCollision(Projectile.Center, Projectile.width, Projectile.height) && Collision.CanHit(Projectile.Center, 1, 1, Owner.Center, 1, 1) && Projectile.IsMe())
             {
                 for (int i = 0; i < 2; i++)
                 {
@@ -172,7 +177,13 @@ namespace HJScarletRework.Projs.Executor
                 }
             }
         }
-
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            Projectile.BounceOnTile(oldVelocity);
+                    UpdateOnHitNPCParticle(Projectile.oldPosition+Projectile.Size/2);
+                            SoundEngine.PlaySound(SoundID.Item70 with { MaxInstances = 0, Pitch = -0.4f, PitchVariance = 0.1f, Volume = 0.7f }, Projectile.Center);
+            return false;
+        }
         public void UpdateHitParticle()
         {
             if (Main.rand.NextBool(6))
@@ -238,13 +249,19 @@ namespace HJScarletRework.Projs.Executor
             if (!Owner.HasProj<AetherfireSmasherExecution>())
                 Projectile.AddExecutionTimeImmediate(ItemType<AetherfireSmasher>());
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -0.5f, Volume = 0.78f }, Projectile.Center);
-            PickTagColor(out Color baseColor, out Color targetColor);
-            PickTagDust(out short HigherDust, out short BottemDust);
             if (AttackState == State.Shoot)
             {
+                UpdateOnHitNPCParticle(target.Center);
+            }
+        }
+        public void UpdateOnHitNPCParticle(Vector2 center)
+        {
+            PickTagColor(out Color baseColor, out Color targetColor);
+            PickTagDust(out short HigherDust, out short BottemDust);
+
                 Projectile.velocity = Projectile.SafeDir() * 17f;
                 Projectile.netUpdate = true;
-                Vector2 spawnPos = target.Center;
+                Vector2 spawnPos = center;
                 float numberOfDusts = 36f;
                 float rotFactor = 360f / numberOfDusts;
                 for (int i = 0; i < numberOfDusts; i++)
@@ -262,7 +279,7 @@ namespace HJScarletRework.Projs.Executor
                     d.scale = Main.rand.NextFloat(1.4f, 1.8f);
                     d.noGravity = true;
                 }
-            }
+
         }
         private void PickTagDust(out short HigherDust, out short BottemDust)
         {

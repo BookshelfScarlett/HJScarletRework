@@ -43,7 +43,7 @@ namespace HJScarletRework.Globals.Players
         public void OnEnterWorldReset()
         {
             //每次进入世界的时候初始化这个列表
-            ExecutionListStored = new Dictionary<int, int>(HJScarletList.IsExecutorWeaponDictionaty);
+            ExecutionListStored = new Dictionary<int, int>(HJScarletList.ExecuteRequests);
             for (int i = 0; i < ExecutionListStored.Count; i++)
                 ExecutionListStored[i] = 0;
         }

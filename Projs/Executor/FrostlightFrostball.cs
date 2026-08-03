@@ -4,7 +4,7 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Caster;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -32,13 +32,13 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ExSD()
         {
-            Projectile.extraUpdates = 1;
+            Projectile.extraUpdates = 2;
             Projectile.height = Projectile.width = 30;
             Projectile.penetrate = 1;
             Projectile.SetupImmnuity(-1);
             Projectile.tileCollide = false;
             Projectile.friendly = true;
-            Projectile.timeLeft = 360;
+            Projectile.timeLeft = 720;
         }
         public override void OnFirstFrame()
         {
@@ -78,7 +78,7 @@ namespace HJScarletRework.Projs.Executor
             Timer++;
             if (CurTarget is null)
             {
-                NPC target = Main.MouseWorld.FindClosestTarget(240);
+                NPC target = Main.MouseWorld.FindClosestTarget(540);
                 if (target.IsLegal())
                     CurTarget = target;
             }
@@ -105,8 +105,6 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<Frostlight>());
-
-            base.OnHitNPC(target, hit, damageDone);
         }
         public override bool PreDraw(ref Color lightColor)
         {

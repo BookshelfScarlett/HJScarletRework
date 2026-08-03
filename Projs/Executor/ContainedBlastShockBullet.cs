@@ -4,7 +4,7 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -53,6 +53,16 @@ namespace HJScarletRework.Projs.Executor
         {
             base.OnKill(timeLeft);
         }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.oldPosition+Projectile.Size/2, Vector2.Zero, ProjectileType<ContainedBlastBoom>(), Projectile.originalDamage / 2, Projectile.knockBack, Projectile.owner);
+            proj.ai[0] = 0;
+            proj.rotation = Projectile.rotation;
+            proj.HJScarlet().HasExecutionMechanic = true;
+            proj.ai[2] = Projectile.ai[0];
+            return true;
+        }
+
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (Projectile.ai[0] > 0)

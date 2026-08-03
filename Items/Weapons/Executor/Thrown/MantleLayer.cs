@@ -1,0 +1,35 @@
+﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.Executor;
+using Terraria.ID;
+
+namespace HJScarletRework.Items.Weapons.Executor.Thrown
+{
+    public class MantleLayer : ExecutorWeaponClass
+    {
+        public override float ExecutionStrikeDamageMult => 0.5f;
+        public override int ExecutionProgress => 6;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
+        public override void ExSD()
+        {
+            Item.width = Item.height = 66;
+            Item.damage = 30;
+            Item.knockBack = 8f;
+            Item.shootSpeed = 16f;
+            Item.useTime = Item.useAnimation = 42;
+            Item.useStyle = ItemUseStyleID.Swing;
+            Item.UseSound = SoundID.Item1;
+            Item.shoot = ProjectileType<MantleLayerProj>();
+            Item.SetUpRarityPrice(ItemRarityID.Orange);
+            Item.SetUpNoUseGraphicItem();
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.AshWoodHammer).
+                AddIngredient(ItemID.HellstoneBar, 16).
+                AddTile(TileID.Hellforge).
+                Register();
+        }
+    }
+}

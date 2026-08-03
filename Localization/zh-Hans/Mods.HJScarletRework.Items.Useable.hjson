@@ -178,3 +178,13 @@ YogsothothsYardPack: {
 		-
 		'''
 }
+
+AxeCharm: {
+	DisplayName: 板正斧头
+	Tooltip:
+		'''
+		右键以开关代行者武器的手动处决模式
+		对部分武器不生效
+		'''
+	EnableTooltips: 手动处决模式：{0}
+}

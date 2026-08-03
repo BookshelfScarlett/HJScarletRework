@@ -3,7 +3,7 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -143,8 +143,11 @@ namespace HJScarletRework.Projs.Executor
                 }
             }
             int counts = 1 + hasMinion.ToInt();
-            for (int i = 0; i < counts; i++)
-                NightmareArrowDrop(target, Projectile.damage / 2);
+            if (Projectile.numHits < 10)
+            {
+                for (int i = 0; i < counts; i++)
+                    NightmareArrowDrop(target, Projectile.damage / 2);
+            }
 
             if (AttackType != DoType.IsStealth)
                 return;
