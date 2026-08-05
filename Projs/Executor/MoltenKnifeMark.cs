@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class DesertKnifeMark : KnifeMarkClass
+    public class MoltenKnifeMark: KnifeMarkClass
     {
-        public override Color BackgroundColor => Color.LightGoldenrodYellow;
+        public override Color BackgroundColor => Color.OrangeRed;
         public override void ExtraFirstFrame()
         {
         }

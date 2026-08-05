@@ -107,7 +107,7 @@ namespace HJScarletRework.Projs.Executor
             else
             {
                 Projectile.AddExecutionTimeImmediate(ItemType<BinaryStars>());
-                if (Projectile.numHits < 5)
+                if (Projectile.numHits < 3)
                     NormalHit(target);
                 TargetIndex = target.whoAmI;
                 SoundStyle pickSound2 = Utils.SelectRandom(Main.rand, HJScarletSounds.Smash_AirHeavy);

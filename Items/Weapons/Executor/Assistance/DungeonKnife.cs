@@ -21,6 +21,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useTime = Item.useAnimation = 25;
             Item.shootSpeed = 16f;
+            Item.HJScarlet().NotFinished = true;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem();
             Item.HJScarlet().ForceAutomaticExecution = true;

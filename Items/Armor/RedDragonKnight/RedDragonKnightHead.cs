@@ -9,7 +9,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Armor.DragonSlayer
+namespace HJScarletRework.Items.Armor.RedDragonKnight
 {
     [AutoloadEquip(EquipType.Head),LegacyName("DragonSlayerHead")]
     public class RedDragonKnightHead : HJScarletItemClass
@@ -41,9 +41,9 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         public float Damage = .15f;
         public int Crit = 10;
         public float CritDamage = .30f;
-        public int ProgressRegenTime = 10;
-        public int ProgressRegenCount = 1;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage,Crit);
+        public static int ProgressRegenTime = 10;
+        public static int ProgressRegenCount = 1;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(),Crit + "%");
         public override void UpdateEquip(Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += Damage;
@@ -51,7 +51,8 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         }
         public override void UpdateArmorSet(Player player)
         {
-            string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBouns").ToLangValue().ToFormatValue(CritDamage.ToPercent(), ProgressRegenTime, ProgressRegenCount);
+            string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBouns").
+                ToLangValue().ToFormatValue(CritDamage.ToPercent(), ProgressRegenTime, ProgressRegenCount);
             player.setBonus += "\n" + value;
             player.HJScarlet().redDragonKnight = true;
             player.HJScarlet().critDamageExecutor += CritDamage;

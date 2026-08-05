@@ -25,12 +25,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         public override void SetStaticDefaults()
         {
         }
-        public override void ExSD(Item item)
-        {
-            item.vanity = false;
-            item.defense = Defense;
-            item.rare = ItemRarityID.Red;
-        }
         public override void UpdateArmorSet(Player player, string set)
         {
             if (!set.Equals(ArmorSetName))

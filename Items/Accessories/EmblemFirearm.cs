@@ -10,7 +10,7 @@ namespace HJScarletRework.Items.Accessories
 {
     public class EmblemFirearm : HJScarletItemClass
     {
-        public float CritDamage = .15f;
+        public float CritDamage = .30f;
         public int Crit = 5;
 
         public override string AssetPath => AssetHandler.Equips;

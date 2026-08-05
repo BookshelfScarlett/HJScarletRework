@@ -4,7 +4,6 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -21,7 +20,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         }
         public override void ExSD()
         {
-            Item.damage = 54;
+            Item.damage = 48;
             Item.SetUpNoUseGraphicItem(true, false);
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
             Item.shootSpeed = 16f;

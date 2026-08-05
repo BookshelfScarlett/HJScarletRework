@@ -6,7 +6,7 @@ Drop: {
 }
 
 Crafting: {
-	// IsDownSlimeGodAndInEclipse: Mods.HJScarletRework.Conditions.Crafting.IsDownSlimeGodAndInEclipse
+	IsDownSlimeGodAndInEclipse: 击败史莱姆之神后，日食期间
 	// HasFuckingCalamityMod: Mods.HJScarletRework.Conditions.Crafting.HasFuckingCalamityMod
 	// NoFuckingCalamityMod: Mods.HJScarletRework.Conditions.Crafting.NoFuckingCalamityMod
 }

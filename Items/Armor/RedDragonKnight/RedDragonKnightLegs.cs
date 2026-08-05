@@ -2,13 +2,12 @@
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Armor.DragonSlayer
+namespace HJScarletRework.Items.Armor.RedDragonKnight
 {
     [AutoloadEquip(EquipType.Legs),LegacyName("DragonSlayerLegs")]
     public class RedDragonKnightLegs : HJScarletItemClass

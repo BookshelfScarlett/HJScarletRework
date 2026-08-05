@@ -54,7 +54,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.friendly = true;
             Projectile.DamageType = ExecutorDamageClass.Instance;
             Projectile.SetupImmnuity(10);
-            Projectile.penetrate = 2;
+            Projectile.penetrate = 1;
             Projectile.extraUpdates = 2;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.timeLeft = 500;

@@ -4,13 +4,15 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.DragonSlayer;
+using HJScarletRework.Items.Armor.RedDragonKnight;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.DragonHunter
 {
+    [AutoloadEquip(EquipType.Body)]
     public class DragonHunterBody : HJScarletArmor
     {
         public override void SetStaticDefaults()

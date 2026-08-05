@@ -2,7 +2,7 @@
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
-using HJScarletRework.Items.Armor.DragonSlayer;
+using HJScarletRework.Items.Armor.DragonHunter;
 using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.DataStructures;
@@ -15,6 +15,12 @@ namespace HJScarletRework.Globals.Players
     {
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
+            if (dragonHunter && !item.DamageType.CountsAsClass<ExecutorDamageClass>())
+            {
+                crit = Player.GetTotalCritChance<ExecutorDamageClass>();
+                if (item.DamageType.CountsAsClass<RangedDamageClass>())
+                    crit += DragonHunterHead.RangedCrit;
+            }
             if (Player.HasProj<GhostKnifeMark>() && item.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
                 crit += 10;
@@ -63,12 +69,11 @@ namespace HJScarletRework.Globals.Players
         //潜在的问题是，这里实际上有可能因为写法差异导致出现多乘区
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if (redDragonKnight && item.DamageType.CountsAsClass<ExecutorDamageClass>() && !item.DamageType.CountsAsClass<GenericDamageClass>() && item.damage > 0)
+            if (dragonHunter && !item.DamageType.CountsAsClass<ExecutorDamageClass>() && !item.DamageType.CountsAsClass<GenericDamageClass>() && item.damage > 0)
             {
                 damage = StatModifier.Default;
                 float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
                 damage *= (1f + ratios);
-
             }
             if (monkExecutor)
             {

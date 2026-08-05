@@ -22,7 +22,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         {
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = Item.height = 86;
-            Item.damage = 213;
+            Item.damage = 198;
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.shootSpeed = 20f;
@@ -32,10 +32,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.UseSound = SoundID.Item1;
             Item.shoot = ProjectileType<BinaryStarsProj>();
             Item.knockBack = 12f;
-        }
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            return base.PreDrawTooltipLine(line, ref yOffset);
         }
         /// <summary>
         /// 双子星不再以微光作为前置。

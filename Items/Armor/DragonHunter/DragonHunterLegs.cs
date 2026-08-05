@@ -3,12 +3,16 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.DragonSlayer;
+using HJScarletRework.Items.Armor.RedDragonKnight;
+using System;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.DragonHunter
 {
+    [AutoloadEquip(EquipType.Legs)]
     public class DragonHunterLegs :HJScarletArmor
     {
         public override void SetStaticDefaults()
@@ -21,6 +25,7 @@ namespace HJScarletRework.Items.Armor.DragonHunter
             Item.defense = 40;
         }
         public float MoveSpeed = .30f;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeed.ToPercent());
         public override void UpdateEquip(Player player)
         {
             player.moveSpeed += MoveSpeed;

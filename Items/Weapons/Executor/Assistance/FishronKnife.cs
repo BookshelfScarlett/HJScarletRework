@@ -23,6 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
             Item.useTime = Item.useAnimation = 25;
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<FishronKnifeProj>();
+            Item.HJScarlet().NotFinished = true;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem();
             Item.HJScarlet().ForceAutomaticExecution = true;

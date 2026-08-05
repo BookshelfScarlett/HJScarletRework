@@ -5,8 +5,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Instances.Projs;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -47,6 +45,7 @@ namespace HJScarletRework.Projs.Executor
         private const int ArcDuration = 15 * SetUpdate;
         //发起旋转前的原始速度
         private float _originalSpeed;
+        public NPC CurTarget = null;
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 30;
@@ -104,11 +103,13 @@ namespace HJScarletRework.Projs.Executor
 
             if (Projectile.GetTargetSafe(out NPC target, TargetIndex, true, canPassWall: true))
             {
+                CurTarget = target;
                 Projectile.extraUpdates = 4;
                 Projectile.HomingTarget(target.Center, 1800f, 20f, 20f);
             }
             else
             {
+                CurTarget = null;
                 Projectile.extraUpdates = 3;
                 Projectile.HomingTarget(Owner.Center, 1800f, 20f, 10f);
                 if (Projectile.Hitbox.Intersects(Owner.Hitbox))
@@ -146,6 +147,12 @@ namespace HJScarletRework.Projs.Executor
                 }
                 return;
             }
+        }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if (CurTarget.IsLegal() && target.Equals(CurTarget))
+                return null;
+            return false;
         }
         public override Color? GetAlpha(Color lightColor) => new(251, 184, 255, 100);
         #region  Draw

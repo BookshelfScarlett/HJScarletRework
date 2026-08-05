@@ -8,7 +8,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Armor.DragonSlayer
+namespace HJScarletRework.Items.Armor.RedDragonKnight
 {
     [AutoloadEquip(EquipType.Body),LegacyName("DragonSlayerBody")]
     public class RedDragonKnightBody : HJScarletItemClass

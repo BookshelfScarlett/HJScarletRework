@@ -16,10 +16,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         {
             player.GetCritChance<ExecutorDamageClass>() += 5f;
         }
-        public override void ExSD(Item item)
-        {
-            item.defense = Defense;
-        }
         public override bool SetUpArmorSet => true;
         public override int[] ArmorSlots => [ApplyArmor, ItemID.RainCoat];
         public override void UpdateArmorSet(Player player, string set)

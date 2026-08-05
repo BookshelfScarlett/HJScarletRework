@@ -19,12 +19,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         {
             player.GetDamage<ExecutorDamageClass>() += 0.05f;
         }
-        public override void ExSD(Item item)
-        {
-            item.vanity = false;
-            item.defense = Defense;
-            item.rare = ItemRarityID.Orange;
-        }
         public override void UpdateArmorSet(Player player, string set)
         {
             if (!set.Equals(ArmorSetName))

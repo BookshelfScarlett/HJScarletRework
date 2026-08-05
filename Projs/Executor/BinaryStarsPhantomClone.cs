@@ -47,8 +47,6 @@ namespace HJScarletRework.Projs.Executor
         }
         private ref float AttackTimer => ref Projectile.ai[1];
         private int TargetIndex => (int)Projectile.ai[2];
-        private float InitCenterX => Projectile.localAI[0];
-        private float InitCenterY => Projectile.localAI[1];
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 30;

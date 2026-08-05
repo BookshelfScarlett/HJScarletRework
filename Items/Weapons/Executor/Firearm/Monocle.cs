@@ -13,6 +13,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
     {
         public static int ExecutionPenetrate = 15;
         public static float ExecutionDamageMult = 1.5f;
+        public override int ExecutionProgress => 8;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {

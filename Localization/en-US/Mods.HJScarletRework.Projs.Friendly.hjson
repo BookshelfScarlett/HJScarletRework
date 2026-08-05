@@ -156,6 +156,8 @@ Executor: {
 	TheSevenStarHeldProj.DisplayName: The Seven Star Held Proj
 	TheSevenStarStar.DisplayName: The Seven Star Star
 	TheSevenStarBolt.DisplayName: The Seven Star Bolt
+	DungeonKnifeProj.DisplayName: Dungeon Knife Proj
+	MoltenKnifeProj.DisplayName: Molten Knife Proj
 }
 
 Melee: {
@@ -255,6 +257,8 @@ Typeless: {
 	DesertKnifeMark.DisplayName: Desert Knife Mark
 	FishronKnifeMark.DisplayName: Fishron Knife Mark
 	GrassKnifeMark.DisplayName: Grass Knife Mark
+	DungeonKnifeMark.DisplayName: Dungeon Knife Mark
+	MoltenKnifeMark.DisplayName: Molten Knife Mark
 }
 
 Magic: {

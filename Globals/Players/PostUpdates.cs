@@ -17,6 +17,7 @@ using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.ExecutorVanillaHead;
 using HJScarletRework.Items.Armor.Reaper;
+using HJScarletRework.Items.Armor.RedDragonKnight;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Items.Weapons.Executor.Misc;
@@ -26,6 +27,7 @@ using HJScarletRework.Projs.General;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -63,29 +65,27 @@ namespace HJScarletRework.Globals.Players
 
         public void UpdateExecutorKnifeMark()
         {
-            if (Player.HeldItem.IsExecutorWeapon() && Main.mouseLeft && !Player.IsInInventory() && Player.miscCounter % GhostKnife.MarkGhostKnifeAttackSpeed == 0f && Player.HasProj<GhostKnifeMark>())
+            if (Player.HeldItem.IsExecutorWeapon() && Main.mouseLeft && !Player.IsInInventory() && Player.miscCounter % GhostKnife.MarkGhostKnifeAttackSpeed == 0f && KnifeMarkIndex== GetInstance<GhostKnifeMark>().Type)
             {
                 int applyDamage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(GhostKnife.MarkGhostKnifeAttackDamage);
                 Vector2 dir = Player.Center.GetNormalVector2(Main.MouseWorld);
-                Vector2 off = dir.RotatedBy(PiOver2*Main.rand.NextBool().ToDirectionInt()).ToSafeNormalize();
+                Vector2 off = dir.RotatedBy(PiOver2 * Main.rand.NextBool().ToDirectionInt()).ToSafeNormalize();
                 Vector2 pos = Player.Center - dir * 60f + off * 60;
-                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), pos, pos.GetNormalVector2(Main.MouseWorld)* 14f, ProjectileType<GhostKnifeProj>(), applyDamage, 1f, Player.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), pos, pos.GetNormalVector2(Main.MouseWorld) * 14f, ProjectileType<GhostKnifeProj>(), applyDamage, 1f, Player.whoAmI);
                 proj.ai[1] = 1;
-            pos = proj.Center+ proj.Size / 2;
-            for (int i = 0; i < 8; i++)
-            {
-                ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(1.2f, 2.2f), Color.White, 40, 1, 0.4f);
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                ECSParticle.SmokeParticle(pos, RandVelTwoPi(1.2f, 3.2f), RandLerpColor(Color.White, Color.LightSkyBlue), 40, 1, 1, 0.21f, blendstate: BlendState.Additive);
-            }
-            ECSParticle.StarShape(pos, proj.velocity.ToSafeNormalize() * .01f, Color.LightBlue, 40, 1, 0.94f);
-            ECSParticle.StarShape(pos, proj.velocity.RotatedBy(PiOver2).ToSafeNormalize() * .01f, Color.LightBlue, 40, 1, 0.94f);
-
+                pos = proj.Center + proj.Size / 2;
+                for (int i = 0; i < 8; i++)
+                {
+                    ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(1.2f, 2.2f), Color.White, 40, 1, 0.4f);
+                }
+                for (int i = 0; i < 6; i++)
+                {
+                    ECSParticle.SmokeParticle(pos, RandVelTwoPi(1.2f, 3.2f), RandLerpColor(Color.White, Color.LightSkyBlue), 40, 1, 1, 0.21f, blendstate: BlendState.Additive);
+                }
+                ECSParticle.StarShape(pos, proj.velocity.ToSafeNormalize() * .01f, Color.LightBlue, 40, 1, 0.94f);
+                ECSParticle.StarShape(pos, proj.velocity.RotatedBy(PiOver2).ToSafeNormalize() * .01f, Color.LightBlue, 40, 1, 0.94f);
             }
         }
-
         public void UpdateSwordMark()
         {
             //判断是否佩戴处刑者剑章
@@ -153,7 +153,29 @@ namespace HJScarletRework.Globals.Players
             HandleUseableItem();
             HandleBlacKey();
             ResetExecutorCheck();
+            UpdateRedDragonKnight();
             UpdateSwordMark();
+        }
+
+        public void UpdateRedDragonKnight()
+        {
+            if (!redDragonKnight)
+                return;
+            if (Player.miscCounter % GetSeconds(RedDragonKnightHead.ProgressRegenTime) == 0 && Main.mouseLeft && !Player.IsInInventory() && Player.HeldItem.IsExecutorWeapon())
+            {
+                foreach (var keys in ExecutionListStored.Keys.ToList())
+                {
+                    if (HJScarletList.ExecuteRequests.ContainsKey(keys))
+                        Player.AddExecutionTimeDirectly(keys,RedDragonKnightHead.ProgressRegenCount);
+                }
+                ScarletSound(SoundID.DD2_BetsyFireballShot, Player.Center,1,0,pitch:.2f,.1f);
+                for(int i =0;i<16;i++)
+                {
+                    Vector2 pos = Player.ToRandRec();
+                    ECSParticle.SmokeParticle(pos, -Vector2.UnitY, RandLerpColor(Color.DarkRed, Color.Red), 40, RandRotTwoPi, 1, 0.15f, blendstate: BlendState.AlphaBlend);
+                }
+            }
+
         }
         public void HandleBlacKey()
         {

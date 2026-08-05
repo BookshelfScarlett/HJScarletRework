@@ -1,16 +1,12 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Rockets;
-using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -27,7 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         }
         public override void ExSD()
         {
-            Item.damage = 264;
+            Item.damage = 342;
             Item.SetUpNoUseGraphicItem(true, false);
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.useTime = Item.useAnimation = 8;

@@ -314,7 +314,7 @@ DragonHunterBody: {
 DragonHunterHead: {
 	DisplayName: Dragon Hunter Head
 	Tooltip: ""
-	SetBonus:""
+	SetBonus: ""
 }
 
 DragonHunterLegs: {

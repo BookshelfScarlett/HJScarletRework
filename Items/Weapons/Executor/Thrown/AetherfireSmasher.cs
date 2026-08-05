@@ -29,7 +29,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.knockBack = 6f;
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.width = Item.height = 66;
-            Item.damage = 71;
+            Item.damage = 61;
             //这里的ut有意为之
             Item.useTime = 12;
             Item.useAnimation = 12;

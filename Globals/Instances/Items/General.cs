@@ -1,9 +1,11 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Armor.DragonHunter;
 using System;
 using Terraria;
 using Terraria.GameContent;
@@ -198,6 +200,10 @@ namespace HJScarletRework.Globals.Instances.Items
                 usPlayer.critDamageAll += CritsDamageBonus;
             }
             isShivering = usPlayer.protectorShiver;
+            if (item.IsWeapon() && player.HJScarlet().dragonHunter &&player.HeldItem.IsExecutorWeapon())
+            {
+                player.HJScarlet().critDamageExecutor += DragonHunterHead.FixedDamage;
+            }
         }
         public override bool? UseItem(Item item, Player player)
         {

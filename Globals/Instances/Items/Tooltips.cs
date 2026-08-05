@@ -1,6 +1,5 @@
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
@@ -9,7 +8,6 @@ using HJScarletRework.Items.Armor.Monk;
 using HJScarletRework.Items.Armor.Shinobi;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityShiny;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;

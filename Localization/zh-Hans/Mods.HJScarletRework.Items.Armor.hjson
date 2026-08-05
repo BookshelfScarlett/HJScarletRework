@@ -16,11 +16,7 @@ CreationHat: {
 
 RedDragonKnightBody: {
 	DisplayName: 红龙骑士重铠
-	Tooltip:
-		'''
-		增加{0}伤害
-		{1}生命恢复速度
-		'''
+	Tooltip: 增加{0}伤害
 }
 
 RedDragonKnightHead: {
@@ -32,20 +28,15 @@ RedDragonKnightHead: {
 		'''
 	SetBouns:
 		'''
-		获得{0}近战攻速，可消耗远程武器造成额外{1}伤害
-		法术武器以{2}伤害的代价从而不消耗任何魔力，最大仆从/哨兵栏位重设定为{4}
-		将所有非代行者伤害的武器只受到代行者伤害加成
-		所有非代行者伤害的武器全部在命中时造成代行者伤害类型，而非原本的伤害类型
+		增加{0}代行者暴击伤害
+		手持代行者武器攻击时：
+		以{1}秒{2}次的频率为所有代行者武器叠加处决进程
 		'''
 }
 
 RedDragonKnightLegs: {
 	DisplayName: 红龙骑士护腿
-	Tooltip:
-		'''
-		增加{0}暴击概率
-		增加{1}移动速度
-		'''
+	Tooltip: 增加{0}移动速度
 }
 
 RuneWizardExecutor: {
@@ -224,18 +215,12 @@ DiverHead: {
 
 DiverLegs: {
 	DisplayName: 潜航员护腿
-	Tooltip:
-		'''
-		增加{0}暴击概率
-		'''
+	Tooltip: 增加{0}暴击概率
 }
 
 ReaperBody: {
 	DisplayName: 前台死神长裙
-	Tooltip:
-		'''
-		增加{0}代行者暴击伤害
-		'''
+	Tooltip: 增加{0}代行者暴击伤害
 }
 
 ReaperHead: {
@@ -351,15 +336,24 @@ TitaniumHeadExecutor: {
 
 DragonHunterBody: {
 	DisplayName: 猎龙重铠
-	Tooltip: ""
+	Tooltip: 增加{0}代行者暴击概率
 }
 
 DragonHunterHead: {
 	DisplayName: 猎龙头盔
-	Tooltip: ""
+	Tooltip: 增加{0}代行者伤害
+	SetBonus:
+		'''
+		增加{0}近战攻速，远程职业武器增加{1}暴击概率
+		增加{2}最大魔力上限，减少{3}魔力消耗
+		将最大仆从上限与最大哨兵上限重设为{4}
+		代行者武器增加{5}暴击伤害
+		所有非代行者职业武器将只造成代行者伤害
+		非代行者职业的武器伤害与暴击概率仅受到代行者职业加成
+		'''
 }
 
 DragonHunterLegs: {
 	DisplayName: 猎龙护腿
-	Tooltip: ""
+	Tooltip: 增加{0}移动速度
 }

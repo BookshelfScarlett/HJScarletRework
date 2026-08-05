@@ -45,16 +45,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         {
             return entity.type == ApplyArmor;
         }
-        public override void SetDefaults(Item entity)
-        {
-            if (entity.type != ApplyArmor)
-                return;
-            if (!entity.HJScarlet().EnableExecutorVersion)
-                return;
-            entity.vanity = false;
-            entity.HJScarlet().CanDrawIcon = true;
-            ExSD(entity);
-        }
         public override void PostUpdate(Item item)
         {
         }
@@ -94,9 +84,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
                 }
                 return base.IsArmorSet(head, body, legs);
             }
-        }
-        public virtual void ExSD(Item item)
-        {
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
