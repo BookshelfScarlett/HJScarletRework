@@ -4,10 +4,13 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class ExecutorEmblem : HJScarletItemClass
+
+    [LegacyName("ExecutorEmblem")]
+    public class EmblemExecutor : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
         public override void ExSD()

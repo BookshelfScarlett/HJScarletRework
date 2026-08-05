@@ -72,7 +72,7 @@ namespace HJScarletRework.Items.Armor
                     continue;
                 if (Robes.Contains(item.type))
                 {
-                    item.HJScarlet().purePrismLegalTarget = true;
+                    item.HJScarlet().setTintIcon = true;
                 }
             }
 

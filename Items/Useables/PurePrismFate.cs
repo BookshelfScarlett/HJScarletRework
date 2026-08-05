@@ -92,7 +92,7 @@ namespace HJScarletRework.Items.Useables
                 if (!legalTarget2)
                     continue;
 
-                item.HJScarlet().purePrismLegalTarget = true;
+                item.HJScarlet().setTintIcon = true;
             }
             return;
         }

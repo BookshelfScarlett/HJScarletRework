@@ -67,7 +67,6 @@ namespace HJScarletRework.Globals.Executor
         public SpriteBatch SB { get => Main.spriteBatch; }
         public GraphicsDevice GD { get => Main.graphics.GraphicsDevice; }
         public virtual void ProjAI() { }
-
         public virtual void ExSD() { }
     }
 }

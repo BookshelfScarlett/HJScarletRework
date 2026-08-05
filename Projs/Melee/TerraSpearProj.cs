@@ -81,7 +81,6 @@ namespace HJScarletRework.Projs.Melee
                 Vector2 spawnPos = Projectile.Center.ToRandCirclePosEdge(4f);
                 Vector2 vel = -Projectile.velocity.ToRandVelocity(ToRadians(5f), 1.0f, 16.4f);
                 ECSParticle.StarShape(spawnPos, vel, RandLerpColor(Color.Lime, Color.Green), 80, 1f, .70f);
-                //new StarShape(spawnPos, vel, RandLerpColor(Color.Lime, Color.Green), 0.75f, 80).Spawn();
             }
         }
         public void InitPosList()

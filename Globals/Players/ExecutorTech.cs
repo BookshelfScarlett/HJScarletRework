@@ -40,6 +40,13 @@ namespace HJScarletRework.Globals.Players
         public bool hasSendExecutionTint = false;
         public int hasSendExecutionTintTimer = 0;
         public bool CanExecutionStrike = false;
+        /// <summary>
+        /// 支援道具-投刀类的支援效果标记
+        /// <br>这个标记主要直接存储的是Projectile.type，即射弹类型</br>
+        /// <br>会在<see cref="ResetEffects"/>常态重置为-1,在<see cref="PostUpdate"/>的位置进行实际的效果添加（包括对应的射弹生成）</br>
+        /// <br>一般对于投掷小刀而言，需要在每个标记射弹初始化的时候传入这个type，然后在AI里面去检查这个index是否与当前的射弹相同</br>
+        /// </summary>
+        public int KnifeMarkIndex = -1;
         public void OnEnterWorldReset()
         {
             //每次进入世界的时候初始化这个列表

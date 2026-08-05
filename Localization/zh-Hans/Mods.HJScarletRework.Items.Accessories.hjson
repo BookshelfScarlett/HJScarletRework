@@ -146,7 +146,7 @@ CycleMadness: {
 		'''
 }
 
-VanguardEmblem: {
+EmblemVanguard: {
 	DisplayName: 先锋徽章
 	Tooltip:
 		'''
@@ -156,7 +156,7 @@ VanguardEmblem: {
 		'''
 }
 
-ExecutorEmblem: {
+EmblemExecutor: {
 	DisplayName: 刽子手徽章
 	Tooltip: 增加15%代行者伤害
 }
@@ -378,5 +378,35 @@ RuShiWoWen: {
 		善逝，世间解
 		无上士，调御丈夫
 		天人师，佛，世尊
+		'''
+}
+
+EmblemFirearm: {
+	DisplayName: 热武器硬币
+	Tooltip:
+		'''
+		手持代行者的热武器时获得效果
+		增加{0}代行者暴击伤害
+		增加{1}代行者暴击概率
+		'''
+}
+
+EmblemColdSteel: {
+	DisplayName: 冷兵器硬币
+	Tooltip:
+		'''
+		手持代行者的冷兵器时获得效果
+		增加{0}代行者暴击伤害
+		增加{1}代行者暴击概率
+		'''
+}
+
+EmblemThrown: {
+	DisplayName: 投掷品硬币
+	Tooltip:
+		'''
+		手持代行者的投掷品时获得效果
+		增加{0}代行者暴击伤害
+		增加{1}代行者暴击概率
 		'''
 }

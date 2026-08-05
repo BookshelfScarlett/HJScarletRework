@@ -3,8 +3,8 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor.Firearm
@@ -27,9 +27,18 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = null;
             Item.knockBack = 7f;
-            Item.useTime = Item.useAnimation = 60;
+            Item.useTime = Item.useAnimation = 48;
             Item.shoot = ProjectileType<MonocleHeldProj>();
             Item.HJScarlet().borderlandWeapon = true;
+        }
+        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        {
+            Texture2D tex = TextureAssets.Projectile[ProjectileType<MonocleHeldProj>()].Value;
+            Rectangle frame = tex.Frame();
+            Vector2 ori = frame.Size() / 2;
+            Vector2 drawPos = Item.Bottom - Main.screenPosition - new Vector2(0, ori.Y);
+            spriteBatch.Draw(tex, drawPos, frame, lightColor, rotation, ori, scale, 0, 0);
+            return false;
         }
         public override bool CanShoot(Player player)
         {

@@ -31,9 +31,9 @@ namespace HJScarletRework.Items.Useables
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             Player p = Main.LocalPlayer;
-            Color c = p.HJScarlet().tacticalExecution ? Color.LightGreen : Color.Coral;
+            Color c = p.HJScarlet().tacticalExecutionManual? Color.LightGreen : Color.Coral;
             int executionProgressIndex = tooltips.FindIndex(line => line.Name == "Tooltip0" && line.Mod == "Terraria");
-            string text = this.GetLocalizationKey("EnableTooltips").ToLangValue().ToFormatValue(p.HJScarlet().tacticalExecution.ToString());
+            string text = this.GetLocalizationKey("EnableTooltips").ToLangValue().ToFormatValue(p.HJScarlet().tacticalExecutionManual.ToString());
             var executionLine = new TooltipLine(Mod, "EnableTooltipsName", text)
             {
                 OverrideColor = c

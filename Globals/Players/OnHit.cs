@@ -18,7 +18,7 @@ namespace HJScarletRework.Globals.Players
         public float critDamageExecutor = 0;
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (redDragonKnight)
+            if (dragonHunter)
             {
                 hit.DamageType = ExecutorDamageClass.Instance;
             }
@@ -55,7 +55,7 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (redDragonKnight)
+            if (dragonHunter)
             {
                 hit.DamageType = ExecutorDamageClass.Instance;
             }
@@ -115,15 +115,6 @@ namespace HJScarletRework.Globals.Players
         public void ModifyCritDamage(NPC target, ref NPC.HitModifiers modifiers)
         {
             float totalCritsBonus = 0f;
-            if (tacticalTime > 0 && executorSwordMarkLevel > 1 && modifiers.DamageType.CountsAsClass<ExecutorDamageClass>())
-            {
-                modifiers.SetCrit();
-            }
-            if (tacticalTime > 0 && executorSwordMarkLevel == 1 && modifiers.DamageType.CountsAsClass<ExecutorDamageClass>())
-            {
-                if (Main.rand.NextBool(2))
-                    modifiers.SetCrit();
-            }
             if (CreationHatSet && modifiers.DamageType.CountsAsClass(DamageClass.Magic))
             {
                 //将所有伤害直接设置为暴击类型，这里先过暴击情况

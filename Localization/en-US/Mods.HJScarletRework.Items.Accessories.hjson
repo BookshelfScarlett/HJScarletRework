@@ -127,7 +127,7 @@ CycleMadness: {
 	Tooltip: ""
 }
 
-VanguardEmblem: {
+EmblemVanguard: {
 	DisplayName: Vangard Emblem
 	Tooltip:
 		'''
@@ -137,7 +137,7 @@ VanguardEmblem: {
 		'''
 }
 
-ExecutorEmblem: {
+EmblemExecutor: {
 	DisplayName: Handman's Emblem
 	Tooltip: 15% increased executor damage
 }
@@ -325,4 +325,19 @@ RuShiWoWen: {
 	Tooltip: ""
 	BanMinionList: ""
 	FlavorTooltips: ""
+}
+
+EmblemFirearm: {
+	DisplayName: Firearm Emblem
+	Tooltip: ""
+}
+
+EmblemColdSteel: {
+	DisplayName: Emblem Cold Steel
+	Tooltip: ""
+}
+
+EmblemThrown: {
+	DisplayName: Emblem Thrown
+	Tooltip: ""
 }

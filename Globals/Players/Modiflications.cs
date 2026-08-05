@@ -3,10 +3,8 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.DragonSlayer;
-using HJScarletRework.Projs.General;
-using Microsoft.Xna.Framework;
+using HJScarletRework.Projs.Executor;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -17,6 +15,10 @@ namespace HJScarletRework.Globals.Players
     {
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
+            if (Player.HasProj<GhostKnifeMark>() && item.DamageType.CountsAsClass<ExecutorDamageClass>())
+            {
+                crit += 10;
+            }
             if (monkExecutor)
             {
                 crit = Player.GetTotalCritChance<ExecutorDamageClass>() + 4;
@@ -61,16 +63,12 @@ namespace HJScarletRework.Globals.Players
         //潜在的问题是，这里实际上有可能因为写法差异导致出现多乘区
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
         {
-            if (redDragonKnight && item.DamageType != ExecutorDamageClass.Instance && !item.DamageType.CountsAsClass<GenericDamageClass>() && item.damage > 0)
+            if (redDragonKnight && item.DamageType.CountsAsClass<ExecutorDamageClass>() && !item.DamageType.CountsAsClass<GenericDamageClass>() && item.damage > 0)
             {
                 damage = StatModifier.Default;
                 float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
                 damage *= (1f + ratios);
 
-                if (item.consumable && item.DamageType.CountsAsClass<RangedDamageClass>())
-                    damage *= DragonSlayerHead.RangedConsumeItemMult;
-                if (item.DamageType.CountsAsClass<MagicDamageClass>())
-                    damage *= (1 - DragonSlayerHead.MagicDamageReduce);
             }
             if (monkExecutor)
             {
@@ -89,7 +87,6 @@ namespace HJScarletRework.Globals.Players
                     damage *= 1.2f;
                 }
             }
-            base.ModifyWeaponDamage(item, ref damage);
         }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

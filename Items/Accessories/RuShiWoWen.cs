@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
@@ -24,14 +25,15 @@ namespace HJScarletRework.Items.Accessories
 
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Donator);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Donator);
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Cooldown, HJScarletList.SummonWeaponList.Count - MinMinionSelected());
         public override void ExSD()
         {
             Item.accessory = true;
             Item.SetUpRarityPrice(ItemRarityID.Red);
-            Item.HJScarlet().ItemBelongTo = Globals.Enums.EnumItemOwner.Donator;
+            Item.HJScarlet().ItemBelongTo = EnumItemOwner.Donator;
+            Item.HJScarlet().OwnerName = "丰川祥子";
         }
         public override bool ConsumeItem(Player player) => false;
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -103,12 +105,12 @@ namespace HJScarletRework.Items.Accessories
                     if (item.type < VanillaMaxItem)
                     {
                         if (!player.HJScarlet().ruShiWoWenBanMinionNameList.Contains(item.type.ToString()))
-                            item.HJScarlet().purePrismLegalTarget = true;
+                            item.HJScarlet().setTintIcon = true;
                     }
                     else
                     {
                         if (!player.HJScarlet().ruShiWoWenBanMinionNameList.Contains(item.ModItem.FullName))
-                            item.HJScarlet().purePrismLegalTarget = true;
+                            item.HJScarlet().setTintIcon = true;
 
                     }
                 }
@@ -120,6 +122,7 @@ namespace HJScarletRework.Items.Accessories
             {
                 TextboxManager.FirstLineY = line.Y;
             }
+            //var setlist = new List<TextboxSettings>();
             string text = this.GetLocalizationKey("FlavorTooltips").ToLangValue();
             TextboxSettings sets = new TextboxSettings
             {
@@ -130,6 +133,20 @@ namespace HJScarletRework.Items.Accessories
                 TextEdgeColor = Color.Black,
                 MainText = text
             };
+
+            //setlist.Add(sets);
+            //text = $"捐赠者：{Item.HJScarlet().OwnerName}";
+            //sets = new TextboxSettings
+            //{
+            //    HasTitle = false,
+            //    BackgroundColor = Color.White * .24f,
+            //    BackgroundEdgeColor = Color.White,
+            //    TextColor = Color.White,
+            //    TextEdgeColor = Color.Violet,
+            //    MainText = text
+            //};
+            //setlist.Add(sets);
+            //TextboxMethods.DrawMultipleTextboxes(line, CacheTooltip, setlist, 30);
             TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltip, ref sets);
         }
     }

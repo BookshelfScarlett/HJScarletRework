@@ -14,7 +14,6 @@ namespace HJScarletRework.Projs.Executor
     public class MonocleHeldProj : ExecutorHeldProj
     {
         public override int OriginalItemID => ItemType<Monocle>();
-        public override string Texture => GetInstance<Monocle>().Texture;
         public ref float Timer => ref Projectile.ai[0];
         public ref float RecoilTimer => ref Projectile.localAI[0];
         public float RecoilPower = 32f;

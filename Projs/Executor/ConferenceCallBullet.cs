@@ -66,7 +66,6 @@ namespace HJScarletRework.Projs.Executor
             }
             ECSParticle.StarShape(pos, Projectile.oldVelocity.ToSafeNormalize() * .01f, Color.LightGoldenrodYellow, 40, 1, 0.94f);
             ECSParticle.StarShape(pos, Projectile.oldVelocity.RotatedBy(PiOver2).ToSafeNormalize() * .01f, Color.LightGoldenrodYellow, 40, 1, 0.94f);
-
         }
         public override void OnKill(int timeLeft)
         {

@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
@@ -51,7 +52,11 @@ namespace HJScarletRework.Globals.Huds
             HJScarletConfigClient config = HJScarletConfigClient.Instance;
             if (!config.DrawExecutionCounter)
                 return;
+
             Player localPlayer = Main.LocalPlayer;
+            //if (ScarletItemIDSets.NoGeneralExecutionProgressDraw[localPlayer.HeldItem.type])
+            //    return;
+
             if (GeneralOpacity <= 0f && !localPlayer.HJScarlet().Executor_DrawFadeIn)
                 return;
             SpriteBatch SB = Main.spriteBatch;
@@ -160,7 +165,7 @@ namespace HJScarletRework.Globals.Huds
             Item heldItem = localPlayer.HeldItem;
             bool hasReforged = ModLoader.HasMod("ExpandedReforge");
             bool isExectuorWeapon = heldItem.DamageType.CountsAsClass<ExecutorDamageClass>();
-            isExectuorWeapon = HJScarletList.ExecuteRequests.ContainsKey(heldItem.type);
+            isExectuorWeapon = HJScarletList.ExecuteRequests.ContainsKey(heldItem.type) && !ScarletItemIDSets.NoGeneralExecutionProgressDraw[heldItem.type];
             if (isExectuorWeapon)
             {
                 if (!ModPlayer.Executor_DrawFadeIn)

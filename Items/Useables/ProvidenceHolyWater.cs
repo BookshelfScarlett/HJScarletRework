@@ -45,7 +45,7 @@ namespace HJScarletRework.Items.Useables
                 bool isWeapon = item.damage < 1 && item.pick == 0 && item.axe == 0 && item.hammer == 0 && item.healMana > 0;
                 if (isWeapon && item.type != Type)
                 {
-                    item.HJScarlet().purePrismLegalTarget = true;
+                    item.HJScarlet().setTintIcon = true;
                 }
             }
         }

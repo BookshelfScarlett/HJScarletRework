@@ -1,9 +1,8 @@
-﻿using ContinentOfJourney.Items;
-using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -18,6 +17,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
+            ScarletItemIDSets.ForceToAutomaticExecute[Type] = true;
         }
         public override void ExSD()
         {

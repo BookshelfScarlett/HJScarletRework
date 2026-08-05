@@ -41,8 +41,8 @@ namespace HJScarletRework.Globals.Instances
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<DisasterEssence>(), 1, 10, 20);
                     break;
                 case NPCID.WallofFlesh:
-                    npcLoot.Add(ItemDropRule.ByCondition(new ScarletWearingFullCowboy(), ItemType<ExecutorEmblem>()));
-                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<ExecutorEmblem>(), 4);
+                    npcLoot.Add(ItemDropRule.ByCondition(new ScarletWearingFullCowboy(), ItemType<EmblemExecutor>()));
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<EmblemExecutor>(), 4);
                     break;
                 case NPCID.BigMimicCorruption:
                 case NPCID.BigMimicCrimson:

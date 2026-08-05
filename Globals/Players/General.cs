@@ -1,12 +1,10 @@
 ﻿using ContinentOfJourney;
-using ContinentOfJourney.Buffs;
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Useables;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
@@ -33,16 +31,13 @@ namespace HJScarletRework.Globals.Players
         // 用于向上向下冲刺禁用羽落
         public int NoSlowFall = 0;
         public float maxFallspeedModify = 0;
-        public int ownerMinionHammerCount = 0;
         public int ASMDBuffTime = 0;
 
         public int climaticHawstringLaserCounter = 0;
-        public bool goldenApple = false;
         public bool goldenAppleEnchanted = false;
         public int goldenAppleDamageAbsorb = 0;
         public bool goldenAppleEnchantedFully = false;
         public bool givePaper = true;
-        public bool frostHammerHoming = false;
         public int drawUseableItemIcon = -1;
         public float heldProjReUseTime = 0;
         public int containedBlastBuffTime = 0;
@@ -72,9 +67,8 @@ namespace HJScarletRework.Globals.Players
         public int[] protectorHerbTimerList = [0, 0, 0, 0, 0, 0, 0];
         public bool protectorShiver = false;
         public bool protectorMoonglow = false;
-        public int accVanityID = -1;
-        public bool arcaeaVanityGive = false;
         public bool diverArmor = false;
+        public bool dragonHunter = false;
 
         public bool maidReaperArmor = false;
         public bool maidReaperHealUp = false;
@@ -94,7 +88,6 @@ namespace HJScarletRework.Globals.Players
         public int genderChangeTimer = 0;
         public bool artificalManaStar = false;
 
-        public bool ShadowCastAcc = false;
         public bool LifeBalloonAcc = false;
         public int LifeBalloonAccJumps;
 
@@ -111,7 +104,11 @@ namespace HJScarletRework.Globals.Players
         public int PreciousCritsMin = 0;
         public int manaSavingsJar = 0;
 
-        public bool vanguardEmblem = false;
+        public bool emblemVanguard = false;
+        public bool emblemFirearm = false;
+        public bool emblemThrown = false;
+        public bool emblemColdSteel = false;
+        public bool emblemExecutor = false;
         public int defenderEmblemCD = 0;
         public int blackKeyHeal = 0;
         public float blackKeyDefenseBuff = 0;
@@ -133,12 +130,15 @@ namespace HJScarletRework.Globals.Players
         public bool cycleMadness = false;
         public float cycleMadenssTimer = 0;
         public float cycleMadenessCrit = 0;
+
+        #region 如是我闻
         public bool powerLily = false;
         public bool powerLilyVanity = false;
         public int powerLilyTimer = 0;
         public int powerLilyCacheTimer = 0;
         public List<string> ruShiWoWenBanMinionNameList = new List<string>();
         public List<string> ruShiWoWenBanMinionNameTrashList = new List<string>();
+        #endregion
         #endregion
         public bool fruitofEthernity = false;
         #region Pets
@@ -165,20 +165,6 @@ namespace HJScarletRework.Globals.Players
         public float PlayerFinalSpeedStoredTime = 0f;
         #endregion
         #region 处决攻击
-
-        #region 下版本废弃
-        public int tacticalTime = 0;
-        public bool StopExecutionInit = false;
-        public int tacticalPunishTime = 0;
-        /// <summary>
-        /// 旧版处决进程，准备废弃，因为已经使用了一个字典去管理
-        /// </summary>
-        public int ExecutionProgress = 0;
-        /// <summary>
-        /// 处决次数进程要求的减少量，以废弃，与最终设计版本冲突
-        /// </summary>
-        public int bonusExecutionReduce = 0;
-        #endregion
 
         public bool ExecutorSwordMarkPlus = false;
         public int lastHeldItemIndex = -1;
@@ -219,7 +205,6 @@ namespace HJScarletRework.Globals.Players
             if (isBeingLove)
             {
                 DrawLoveRingParticle(drawInfo.Position, drawInfo.drawPlayer);
-            //player.HJScarlet().ExecutionListStored.Remove(itemType);
             }
         }
         public override void DrawPlayer(Camera camera)
@@ -236,15 +221,6 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnEnterWorld()
         {
-            if (arcaeaVanityGive)
-            {
-                string nameLow = Player.name.ToLower();
-                if (nameLow.Contains('光') || nameLow.Contains("对立") || nameLow.Contains("arcaea") || nameLow.Contains("hikari") || nameLow.Contains("tairitsu"))
-                {
-                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<ArcaeaPack>());
-                    arcaeaVanityGive = true;
-                }
-            }
             if (givePaper)
             {
                 Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<DescriptionPaper>());

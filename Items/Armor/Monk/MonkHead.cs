@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.Diver;
 using HJScarletRework.Items.Armor.Shinobi;

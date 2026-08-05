@@ -8,8 +8,6 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 
@@ -19,8 +17,6 @@ namespace HJScarletRework.Projs.Executor
     {
         public override int OriginalItemID => ItemType<PureDagger>();
         public override EnumDamageClass Category => EnumDamageClass.Executor;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
-        public BlendState BlendState => BlendState.Additive;
 
         public override string Texture => GetInstance<PureDagger>().Texture;
         public AnimationStruct Helper = new AnimationStruct(3);
@@ -262,6 +258,9 @@ namespace HJScarletRework.Projs.Executor
             bool c = Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), beamBeginPos, beamEndPos, 64f, ref _);
             return c;
         }
+        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public BlendState BlendState => BlendState.Additive;
+
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);

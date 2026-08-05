@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.Diver;
 using Terraria;
@@ -9,7 +10,7 @@ using Terraria.ModLoader;
 namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
 {
     [AutoloadEquip(EquipType.Head)]
-    public class MythrilHeadExecutor :HJScarletArmor
+    public class MythrilHeadExecutor : HJScarletArmor
     {
         public override int[] ArmorSlots => [Type,ItemID.MythrilChainmail,ItemID.MythrilGreaves];
         public override bool SetUpArmorSet => true;

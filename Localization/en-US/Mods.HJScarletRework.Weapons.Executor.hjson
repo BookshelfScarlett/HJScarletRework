@@ -421,3 +421,45 @@ ConferenceCall: {
 	ExecutionStrike: ""
 	FlavorTooltip: ""
 }
+
+GhostKnife: {
+	DisplayName: Ghost Knife
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+DesertKnife: {
+	DisplayName: Desert Knife
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+DungeonKnife: {
+	DisplayName: Dungeon Knife
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+FishronKnife: {
+	DisplayName: Fishron Knife
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+GrassKnife: {
+	DisplayName: Grass Knife
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+MoltenKnife: {
+	DisplayName: Molten Knife
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+TheSevenStar: {
+	DisplayName: The Seven Star
+	Tooltip: ""
+	ExecutionStrike: ""
+}

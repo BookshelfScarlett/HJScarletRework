@@ -9,8 +9,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Projs.Executor;
-using Microsoft.Xna.Framework;
-using System.Security.Permissions;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -23,10 +21,6 @@ namespace HJScarletRework.Globals.Players
     {
         public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genDust, ref PlayerDeathReason damageSource)
         {
-            if (ShadowCastAcc && Main.rand.NextBool(10))
-            {
-                return false;
-            }
             //星月夜的自活
             if (desterrennacht && desterranRespawnChargeTimer == 0)
             {

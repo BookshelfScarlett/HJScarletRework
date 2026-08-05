@@ -33,7 +33,7 @@ namespace HJScarletRework.Items.Useables
                 bool isTreasureBag = ItemID.Sets.BossBag[item.type];
                 if (isWeapon || isAccessory || isTreasureBag)
                 {
-                    item.HJScarlet().purePrismLegalTarget = true;
+                    item.HJScarlet().setTintIcon = true;
                 }
             }
         }

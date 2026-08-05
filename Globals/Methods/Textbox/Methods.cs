@@ -14,7 +14,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
 {
     public static class TextboxMethods
     {
-        private class TextDrawElement
+        public class TextDrawElement
         {
             public string Text;
             public Vector2 Scale;
@@ -32,7 +32,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
             }
             public Vector2 Size(DynamicSpriteFont font) => ChatManager.GetStringSize(font, Text, Scale);
         }
-        private static float CalcBackgroundX(float lineX, float tooltipMaxWidth, float bgWidth, float spacing = 30f)
+        public static float CalcBackgroundX(float lineX, float tooltipMaxWidth, float bgWidth, float spacing = 30f)
         {
             float bgX = lineX + tooltipMaxWidth + spacing;
             if(bgX + bgWidth > Main.screenWidth)
@@ -43,7 +43,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
             }
             return bgX;
         }
-        private static float CalcBackgroundY(float idealY, float bgHeight, float offsetY)
+        public static float CalcBackgroundY(float idealY, float bgHeight, float offsetY)
         {
             float maxY = idealY + bgHeight + offsetY;
             if (maxY > Main.screenHeight)
@@ -53,7 +53,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
             }
             return idealY;
         }
-        private static void DrawTextWithOutlineCustom(TextDrawElement element, Vector2 position, Vector2 offset, float alpha)
+        public static void DrawTextWithOutlineCustom(TextDrawElement element, Vector2 position, Vector2 offset, float alpha)
         {
             SpriteBatch sb = Main.spriteBatch;
             DynamicSpriteFont font = FontAssets.MouseText.Value;
@@ -64,9 +64,8 @@ namespace HJScarletRework.Globals.Methods.Textbox
                 ChatManager.DrawColorCodedString(sb, font, element.Text, position + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + offset, edge, 0, Vector2.Zero, element.Scale);
             ChatManager.DrawColorCodedString(sb, font, element.Text, position + offset, text, 0, Vector2.Zero, element.Scale);
         }
-        private static void DrawBackground(float x, float y, float width, float height, int padding, Color fillColor, Color? edgeColor, Vector2 offset)
+        public static void DrawBackground(float x, float y, float width, float height, int padding, Color fillColor, Color? edgeColor, Vector2 offset)
         {
-            // 使用你的 DrawTextboxBackground 重载（这里可直接调用第一个原始重载）
             DrawTextboxBackground(x, y, width - padding * 2, height - padding * 2, padding,
                 new Vector2(x, y), fillColor, offset, edgeColor);
         }
@@ -75,21 +74,14 @@ namespace HJScarletRework.Globals.Methods.Textbox
         /// <br>这是一个重载方案，<paramref name="forcedBackgroundWidth"/>会强制指定文本框的背景宽度</br>
         /// <br>使用<see cref="DrawMultipleTextboxes(DrawableTooltipLine, IReadOnlyList{TooltipLine}, List{TextboxSettings}, float)"/>会自动调用该方法以确保所有文本框宽度一致</br>
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="cacheTooltip"></param>
-        /// <param name="textboxSettings"></param>
-        /// <param name="extraYOffset"></param>
-        /// <param name="maxWidth"></param>
-        /// <param name="forcedBackgroundWidth"></param>
-        public static void DrawTextboxTooltipWithBackgroundMultline(DrawableTooltipLine line, IReadOnlyList<TooltipLine> cacheTooltip, 
+        public static void DrawTextboxTooltipWithBackgroundMultline(DrawableTooltipLine line, IReadOnlyList<TooltipLine> cacheTooltip,
             ref TextboxSettings textboxSettings, float extraYOffset = 0, float maxWidth = -1, float? forcedBackgroundWidth = null)
         {
             if (cacheTooltip is null || line.Index != cacheTooltip.Count - 1)
                 return;
-
             DynamicSpriteFont font = line.Font ?? FontAssets.MouseText.Value;
             Vector2 scale = line.BaseScale;
-            if (scale == Vector2.Zero) 
+            if (scale == Vector2.Zero)
                 scale = Vector2.One;
 
             //计算 Tooltip 最大文本宽度（仅用于定位右侧起始点）
@@ -99,7 +91,8 @@ namespace HJScarletRework.Globals.Methods.Textbox
                 foreach (var t in cacheTooltip)
                 {
                     Vector2 size = ChatManager.GetStringSize(font, t.Text, scale);
-                    if (size.X > maxWidth) maxWidth = size.X;
+                    if (size.X > maxWidth)
+                        maxWidth = size.X;
                 }
             }
             //获取浮动偏移
@@ -117,6 +110,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
                     5
                     ));
             }
+
             element.Add(new TextDrawElement(
                 textboxSettings.MainText,
                 scale,
@@ -138,115 +132,13 @@ namespace HJScarletRework.Globals.Methods.Textbox
             DrawBackground(bgX, bgY, bgWidth, bgHeight, padding, textboxSettings.BackgroundColor * lerpValue, textboxSettings.BackgroundEdgeColor * TextboxManager.EdgeValue, posOffset);
             //实际绘制文本
             float curY = bgY + 2;
-            float curX = bgX + 2;
+            float curX = bgX+1;
             foreach (var value in element)
             {
-                Vector2 textPos = new Vector2(curX , curY);
+                Vector2 textPos = new Vector2(curX, curY);
                 DrawTextWithOutlineCustom(value, textPos, posOffset, lerpValue);
                 curY += value.Size(font).Y + value.SpacingAfter;
             }
-            //if (textboxSettings.HasTitle)
-            //{
-            //    Vector2 titleScale = scale * textboxSettings.TitleTextSize;
-            //    float lerpValue = TextboxManager.LerpValue;
-            //    float edgeValue = TextboxManager.EdgeValue;
-            //    Vector2 posOffset = Vector2.Lerp(Vector2.UnitY * -50f, Vector2.Zero, lerpValue)
-            //        + Vector2.UnitY * (float)Math.Sin(Main.timeForVisualEffects / 60f) * 10f;
-
-            //    string titleText = "「" + textboxSettings.TitleText + "」";
-            //    Vector2 titleTextSize = ChatManager.GetStringSize(font, titleText, titleScale);
-            //    Vector2 mainTextSize = ChatManager.GetStringSize(font, textboxSettings.MainText, scale);
-
-            //    // 内容实际宽度
-            //    float contentWidth = Math.Max(mainTextSize.X, titleTextSize.X);
-            //    // 背景实际宽度 = 内容宽度 + 内边距
-            //    int padding = 8;
-            //    float bgWidth = (forcedBackgroundWidth.HasValue ? forcedBackgroundWidth.Value : contentWidth) + padding * 2;
-
-            //    float spacing = 30f;
-            //    float titleTextDrawX = line.X + maxWidth + spacing;
-            //    float titleTextDrawY = TextboxManager.FirstLineY + textboxSettings.MultboxSpacing + extraYOffset;
-
-            //    // 边界检查（使用背景宽度）
-            //    if (titleTextDrawX + bgWidth > Main.screenWidth)
-            //    {
-            //        titleTextDrawX = line.X - bgWidth - spacing;
-            //        if (titleTextDrawX < 0)
-            //            titleTextDrawX = 0;
-            //    }
-
-            //    // 垂直边界检查（使用整个背景高度）
-            //    float maxHeight = Math.Max(titleTextDrawY + titleTextSize.Y, titleTextDrawY + titleTextSize.Y + 5 + mainTextSize.Y) + posOffset.Y;
-            //    if (maxHeight > Main.screenHeight)
-            //    {
-            //        float offset = maxHeight - Main.screenHeight;
-            //        titleTextDrawY -= offset;
-            //        if (titleTextDrawY < 0) titleTextDrawY = 0;
-            //    }
-
-            //    // 文本位置
-            //    Vector2 titlePos = new Vector2(titleTextDrawX, titleTextDrawY);
-            //    Vector2 mainTextPos = new Vector2(titleTextDrawX, titleTextDrawY + titleTextSize.Y + 5);
-
-            //    // 绘制背景（使用第一个重载，直接指定矩形）
-            //    float bgX = titleTextDrawX - padding;
-            //    float bgY = Math.Min(titlePos.Y, mainTextPos.Y) - padding;
-            //    float bgH = Math.Max(titlePos.Y + titleTextSize.Y, mainTextPos.Y + mainTextSize.Y) - bgY;
-            //    DrawTextboxBackground(bgX, bgY, bgWidth - padding * 2, bgH - padding * 2, padding,
-            //        new Vector2(bgX, bgY), textboxSettings.BackgroundColor * lerpValue,
-            //        posOffset, textboxSettings.BackgroundEdgeColor * edgeValue);
-
-            //    // 绘制文本（保持原有多层描边风格）
-            //    SpriteBatch sb = Main.spriteBatch;
-            //    for (int i = 0; i < 16; i++)        
-            //        ChatManager.DrawColorCodedString(sb, font, titleText, titlePos + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + posOffset, textboxSettings.TitleEdgeColor * lerpValue, 0, Vector2.Zero, titleScale);
-            //    ChatManager.DrawColorCodedString(sb, font, titleText, titlePos + posOffset, textboxSettings.TitleTextColor * lerpValue, 0, Vector2.Zero, titleScale);
-            //    for (int i = 0; i < 16; i++)
-            //        ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + posOffset, textboxSettings.TextEdgeColor * lerpValue, 0, Vector2.Zero, scale);
-            //    ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + posOffset, textboxSettings.TextColor * lerpValue, 0, Vector2.Zero, scale);
-            //}
-            //else
-            //{
-            //    Vector2 mainTextSize = ChatManager.GetStringSize(font, textboxSettings.MainText, scale);
-            //    int padding = 8;
-            //    float contentWidth = mainTextSize.X;
-            //    float bgWidth = (forcedBackgroundWidth.HasValue ? forcedBackgroundWidth.Value : contentWidth) + padding * 2;
-
-            //    float spacing = 30f;
-            //    float mainTextDrawX = line.X + maxWidth + spacing;
-            //    float mainTextDrawY = TextboxManager.FirstLineY + extraYOffset;
-
-            //    float lerpValue = TextboxManager.LerpValue;
-            //    float edgeValue = TextboxManager.EdgeValue;
-            //    Vector2 posOffset = Vector2.Lerp(Vector2.UnitY * -50f, Vector2.Zero, lerpValue)
-            //        + Vector2.UnitY * (float)Math.Sin(Main.timeForVisualEffects / 60f) * 10f;
-
-            //    // 边界检查（使用背景宽度）
-            //    if (mainTextDrawX + bgWidth > Main.screenWidth)
-            //    {
-            //        mainTextDrawX = line.X - bgWidth - spacing;
-            //        if (mainTextDrawX < 0) mainTextDrawX = 0;
-            //    }
-            //    float maxHeight = mainTextDrawY + mainTextSize.Y + posOffset.Y;
-            //    if (maxHeight > Main.screenHeight)
-            //    {
-            //        float offset = maxHeight - Main.screenHeight;
-            //        mainTextDrawY -= offset;
-            //        if (mainTextDrawY < 0) mainTextDrawY = 0;
-            //    }
-
-            //    Vector2 mainTextPos = new Vector2(mainTextDrawX, mainTextDrawY);
-            //    float bgX = mainTextDrawX - padding;
-            //    float bgY = mainTextDrawY - padding;
-            //    DrawTextboxBackground(bgX, bgY, bgWidth - padding * 2, mainTextSize.Y, padding,
-            //        new Vector2(bgX, bgY), textboxSettings.BackgroundColor * lerpValue,
-            //        posOffset, textboxSettings.BackgroundEdgeColor * edgeValue);
-
-            //    SpriteBatch sb = Main.spriteBatch;
-            //    for (int i = 0; i < 16; i++)
-            //        ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + posOffset, textboxSettings.TextEdgeColor * lerpValue, 0, Vector2.Zero, scale);
-            //    ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + posOffset, textboxSettings.TextColor * lerpValue, 0, Vector2.Zero, scale);
-            //}
         }
         /// <summary>
         /// 在tootlip的右侧绘制文本框

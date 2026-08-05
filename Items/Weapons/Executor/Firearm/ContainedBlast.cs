@@ -2,6 +2,7 @@
 using ContinentOfJourney.Items.Rockets;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
@@ -22,18 +23,18 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
+            ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
         }
         public override void ExSD()
         {
             Item.damage = 264;
             Item.SetUpNoUseGraphicItem(true, false);
             Item.SetUpRarityPrice(ItemRarityID.Red);
-            Item.useTime = Item.useAnimation = 9;
+            Item.useTime = Item.useAnimation = 8;
             Item.shootSpeed = 16f;
             Item.knockBack = 3f;
             Item.shoot = ProjectileType<ContainedBlastHeldProj>();
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.HJScarlet().ForceTacticalExecution = true;
             Item.UseSound = null;
             Item.HJScarlet().borderlandWeapon = true;
         }

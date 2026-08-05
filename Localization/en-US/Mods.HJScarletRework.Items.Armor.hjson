@@ -10,7 +10,7 @@ CreationHat: {
 		'''
 }
 
-DragonSlayerBody: {
+RedDragonKnightBody: {
 	DisplayName: Red Dragon Knight Body Armor
 	Tooltip:
 		'''
@@ -19,7 +19,7 @@ DragonSlayerBody: {
 		'''
 }
 
-DragonSlayerHead: {
+RedDragonKnightHead: {
 	DisplayName: Red Dragon Knight Helmet
 	Tooltip:
 		'''
@@ -35,7 +35,7 @@ DragonSlayerHead: {
 		'''
 }
 
-DragonSlayerLegs: {
+RedDragonKnightLegs: {
 	DisplayName: Red Dragon Knight Leggings
 	Tooltip:
 		'''
@@ -304,4 +304,20 @@ TitaniumHeadExecutor: {
 	DisplayName: Titanium Head Executor
 	Tooltip: ""
 	SetBonus: ""
+}
+
+DragonHunterBody: {
+	DisplayName: Dragon Hunter Body
+	Tooltip: ""
+}
+
+DragonHunterHead: {
+	DisplayName: Dragon Hunter Head
+	Tooltip: ""
+	SetBonus:""
+}
+
+DragonHunterLegs: {
+	DisplayName: Dragon Hunter Legs
+	Tooltip: ""
 }

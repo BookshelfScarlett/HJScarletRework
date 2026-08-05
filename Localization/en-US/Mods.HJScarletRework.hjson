@@ -66,16 +66,17 @@ ExecutorDamageClass: {
 	ExecutionDescriptionName: Execution Strike
 	ExecutionProgressRevampedMode: Execution Progress: {0} / {1}
 	ForceTacticalExecution: ""
+	ForceAutomaticExecution: ""
 	CompanionWeapon: ""
 	DisplayName: Executor Damage
 
 	WeaponType: {
-		Throw: -Thrownable-
-		ColdSteel: -Cold Steel-
-		Firearm: -Firearm-
-		Caster: -Cast-
-		Minion: -Assist-
-		Misc: -Misc-
+		Throw: Thrownable
+		ColdSteel: Cold Steel
+		Firearm: Firearm
+		Caster: Cast
+		Assistance: Assist
+		Misc: Misc
 	}
 
 	Prefixs: {
@@ -86,6 +87,9 @@ ExecutorDamageClass: {
 		Foreigner.DisplayName: Foreigner
 		Mysterious.DisplayName: Mysterious
 		Phantasmic.DisplayName: Phantasmic
+		ExecutionDamageLine: ""
+		CritDamageLine: ""
+		DefenseReduceValue: ""
 	}
 }
 

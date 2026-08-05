@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
@@ -26,6 +27,7 @@ namespace HJScarletRework.Globals.Executor
         /// 划分为五种：投掷品、不脱手冷兵器、热武器、魔术载体和仆从
         /// </summary>
         public virtual ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Misc;
+        public object[] ExecutionDetail = [];
         public override bool WeaponPrefix() => true;
         public override bool RangedPrefix() => false;
         public virtual int ExecutionProgress => 10;
@@ -35,6 +37,10 @@ namespace HJScarletRework.Globals.Executor
             ExSSD();
             HJScarletList.ExecuteRequests.Add(Type, ExecutionProgress);
             HJScarletList.ExecutorTypes.Add(Type, ExecutorWeaponType);
+            if (ExecutorWeaponType == ExecutorWeaponType.Caster)
+                ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
+            if (ExecutorWeaponType == ExecutorWeaponType.Assistance)
+                ScarletItemIDSets.ForceToAutomaticExecute[Type] = true;
 
         }
 
@@ -79,7 +85,7 @@ namespace HJScarletRework.Globals.Executor
         {
             bool traditionalMode = HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase;
             bool isPressingLeftAlt = Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt);
-            int requirements = Math.Max(0, ExecutionProgress - Main.LocalPlayer.HJScarlet().bonusExecutionReduce);
+            int requirements = Math.Max(0, ExecutionProgress);
             string progressText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(requirements);
             string executionText = (traditionalMode && isPressingLeftAlt) ? Mod.GetLocalizationKey("ExecutorDamaegeClass.ExecutionDescriptionName").ToLangValue() : progressText;
             Color executionColor = (traditionalMode && isPressingLeftAlt) ? Color.Lerp(Color.Red, Color.White, .4f) : Color.GreenYellow;
@@ -93,14 +99,19 @@ namespace HJScarletRework.Globals.Executor
                 };
                 tooltips.Insert(executionProgressIndex, executionLine);
                 if (traditionalMode && isPressingLeftAlt)
-                    tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"));
+                {
+                    if (ExecutionDetail.Length > 0)
+                        tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"), null, ExecutionDetail);
+                    else
+                        tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"));
+                }
             }
 
             string categoryText = Mod.GetLocalizationKey($"ExecutorDamageClass.WeaponType.{ExecutorWeaponType}").ToLangValue();
             int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework");
             if (!traditionalMode)
                 executionLineIndex = executionProgressIndex - 1;
-            var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", categoryText)
+            var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", $"-{categoryText}-")
             {
                 OverrideColor = Color.LightGoldenrodYellow
             };
@@ -126,7 +137,9 @@ namespace HJScarletRework.Globals.Executor
                     TextboxManager.FirstLineY = line.Y;
                 }
                 string detailText = this.GetLocalizationKey("ExecutionStrike").ToLangValue();
-                int requirements = Math.Max(0, ExecutionProgress - Main.LocalPlayer.HJScarlet().bonusExecutionReduce);
+                if (ExecutionDetail.Length > 0)
+                    detailText = this.GetLocalizationKey("ExecutionStrike").ToLangValue().ToFormatValue(ExecutionDetail);
+                int requirements = Math.Max(0, ExecutionProgress);
                 int curRequirement = Main.LocalPlayer.HJScarlet().ExecutionListStored.TryGetValue(Type, out int value) ? value : 0;
                 string numberText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgressRevampedMode").ToLangValue().ToFormatValue(curRequirement, requirements);
                 detailText += "\n" + "\n" + numberText;

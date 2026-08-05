@@ -11,8 +11,8 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.DragonSlayer
 {
-    [AutoloadEquip(EquipType.Head)]
-    public class DragonSlayerHead : HJScarletItemClass
+    [AutoloadEquip(EquipType.Head),LegacyName("DragonSlayerHead")]
+    public class RedDragonKnightHead : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Armors;
         public override void SetStaticDefaults()
@@ -27,7 +27,7 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == ItemType<DragonSlayerBody>() && legs.type == ItemType<DragonSlayerLegs>();
+            return body.type == ItemType<RedDragonKnightBody>() && legs.type == ItemType<RedDragonKnightLegs>();
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
@@ -40,11 +40,9 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         }
         public float Damage = .15f;
         public int Crit = 10;
-        public float MeleeAttackSpeed = .25f;
-        public int MaxSlots = 1;
-        public static float RangedConsumeItemMult = 1.1f;
-        public static float MagicDamageReduce = .20f;
-
+        public float CritDamage = .30f;
+        public int ProgressRegenTime = 10;
+        public int ProgressRegenCount = 1;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage,Crit);
         public override void UpdateEquip(Player player)
         {
@@ -53,21 +51,19 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
         }
         public override void UpdateArmorSet(Player player)
         {
-            string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBouns").ToLangValue().ToFormatValue(MeleeAttackSpeed,RangedConsumeItemMult +"x",MagicDamageReduce.ToPercent(),MaxSlots);
-            player.HJScarlet().redDragonKnight = true;
+            string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBouns").ToLangValue().ToFormatValue(CritDamage.ToPercent(), ProgressRegenTime, ProgressRegenCount);
             player.setBonus += "\n" + value;
-            player.GetAttackSpeed<MeleeDamageClass>() += MeleeAttackSpeed;
-            player.maxMinions = MaxSlots;
-            player.maxTurrets = MaxSlots;
+            player.HJScarlet().redDragonKnight = true;
+            player.HJScarlet().critDamageExecutor += CritDamage;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.FragmentSolar, 10).
-                AddIngredient(ItemID.FragmentVortex, 10).
-                AddIngredient(ItemID.FragmentNebula, 10).
-                AddIngredient(ItemID.FragmentStardust, 10).
-                AddIngredient(ItemID.LunarBar, 10).
+                AddIngredient(ItemID.FragmentSolar, 6).
+                AddIngredient(ItemID.FragmentVortex, 6).
+                AddIngredient(ItemID.FragmentNebula, 6).
+                AddIngredient(ItemID.FragmentStardust, 6).
+                AddIngredient(ItemID.LunarBar, 6).
                 AddTile(TileID.LunarCraftingStation).
                 Register();
         }

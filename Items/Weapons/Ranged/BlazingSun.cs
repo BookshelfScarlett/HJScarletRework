@@ -29,9 +29,13 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.shoot = ProjectileType<ClimaticHawstringProj>();
             Item.shootSpeed = 12f;
         }
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool CanShoot(Player player)
         {
-            return base.Shoot(player, source, position, velocity, type, damage, knockback);
+            return base.CanShoot(player);
+        }
+        public override void HoldItem(Player player)
+        {
+            base.HoldItem(player);
         }
     }
 }

@@ -171,7 +171,7 @@ namespace HJScarletRework.Globals.Executor
         internal const string ArmorPenetrationNameID = "HJScarletRework:PrefixArmorPenetration";
         internal const string CritDamageID = "HJScarletRework:PrefixCritDamage";
         public string ExecutionDamageValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.ExecutionDamageLine").ToLangValue();
-        public string ArmorPenetrationValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.ArmorPenetrationLine").ToLangValue();
+        public string DefenseReduceValue  => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.DefenseReduceLine").ToLangValue();
         public string CritDamageValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.CritDamageLine").ToLangValue();
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
@@ -207,7 +207,7 @@ namespace HJScarletRework.Globals.Executor
                 string insertValue = DefenseAdded > 0 ? "+" : string.Empty;
                 string realValue = $"{insertValue}{DefenseAdded}";
 
-                TooltipLine newLine = new(Mod, ArmorPenetrationNameID, ArmorPenetrationValue.ToFormatValue(realValue))
+                TooltipLine newLine = new(Mod, ArmorPenetrationNameID, DefenseReduceValue.ToFormatValue(realValue))
                 {
                     IsModifier = true,
                     IsModifierBad = DefenseAdded < 0f

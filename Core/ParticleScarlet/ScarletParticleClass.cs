@@ -8,6 +8,9 @@ using Terraria.ID;
 
 namespace HJScarletRework.Core.ParticleScarlet
 {
+    /// <summary>
+    /// 该粒子系统准备废弃
+    /// </summary>
     public abstract class ScarletParticle
     {
         #region 基础属性

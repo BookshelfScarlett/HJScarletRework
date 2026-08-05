@@ -10,8 +10,8 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.DragonSlayer
 {
-    [AutoloadEquip(EquipType.Legs)]
-    public class DragonSlayerLegs : HJScarletItemClass
+    [AutoloadEquip(EquipType.Legs),LegacyName("DragonSlayerLegs")]
+    public class RedDragonKnightLegs : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Armors;
         public override void SetStaticDefaults()
@@ -23,31 +23,20 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
             Item.defense = 30;
             Item.SetUpRarityPrice(ItemRarityID.Purple);
         }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            base.ModifyTooltips(tooltips);
-        }
-
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            return true;
-        }
-        public float Crits = 10;
         public float MoveSpeed = .20f;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crits+"%",MoveSpeed.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeed.ToPercent());
         public override void UpdateEquip(Player player)
         {
-            player.GetCritChance<GenericDamageClass>() += Crits;
             player.moveSpeed += MoveSpeed;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.FragmentSolar, 5).
-                AddIngredient(ItemID.FragmentVortex, 5).
-                AddIngredient(ItemID.FragmentNebula, 5).
-                AddIngredient(ItemID.FragmentStardust, 5).
-                AddIngredient(ItemID.LunarBar, 5).
+                AddIngredient(ItemID.FragmentSolar, 4).
+                AddIngredient(ItemID.FragmentVortex, 4).
+                AddIngredient(ItemID.FragmentNebula, 4).
+                AddIngredient(ItemID.FragmentStardust, 4).
+                AddIngredient(ItemID.LunarBar, 4).
                 AddTile(TileID.LunarCraftingStation).
                 Register();
         }

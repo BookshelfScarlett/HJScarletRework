@@ -62,7 +62,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
             {
                 bool traditionalMode = HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase;
                 bool isPressingLeftAlt = Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt);
-                int requirements = Math.Max(0, ExecutionProgress - Main.LocalPlayer.HJScarlet().bonusExecutionReduce);
+                int requirements = Math.Max(0, ExecutionProgress);
                 string progressText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(requirements);
                 string executionText = traditionalMode && isPressingLeftAlt ? Mod.GetLocalizationKey("ExecutorDamaegeClass.ExecutionDescriptionName").ToLangValue() : progressText;
                 Color executionColor = traditionalMode && isPressingLeftAlt ? Color.Lerp(Color.Red, Color.White, .4f) : Color.GreenYellow;
@@ -128,8 +128,8 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
                 TextboxManager.FirstLineY = line.Y;
             }
             var settingList = new List<TextboxSettings>();
-            string detailText = this.GetLocalizationKey("ExecutionStrike").ToLangValue();
-            int requirements = Math.Max(0, ExecutionProgress - Main.LocalPlayer.HJScarlet().bonusExecutionReduce);
+            string detailText = this.GetLocalizationKey("ExecutionStrike").ToLangValue();   
+            int requirements = Math.Max(0, ExecutionProgress);
             int curRequirement = Main.LocalPlayer.HJScarlet().ExecutionListStored.TryGetValue(Type, out int value) ? value : 0;
             string numberText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgressRevampedMode").ToLangValue().ToFormatValue(curRequirement, requirements);
             detailText += "\n" + "\n" + numberText;

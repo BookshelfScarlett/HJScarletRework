@@ -3,12 +3,12 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria.ID;
 
-namespace HJScarletRework.Items.Weapons.Executor
+namespace HJScarletRework.Items.Weapons.Executor.Assistance
 {
     public class BoneSlap : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 20;
-        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Minion;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Assistance;
         public override void ExSD()
         {
             Item.SetUpNoUseGraphicItem(true);

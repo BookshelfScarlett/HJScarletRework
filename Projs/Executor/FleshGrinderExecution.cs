@@ -92,8 +92,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.HomingTarget(Owner.Center, -1, 20f, 20f);
             if (Projectile.Hitbox.Intersects(Owner.Hitbox))
             {
-                if (Projectile.HJScarlet().AddExecutionHit)
-                    Owner.HJScarlet().ExecutionProgress += 1;
                 Projectile.Kill();
             }
         }

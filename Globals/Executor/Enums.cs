@@ -6,7 +6,7 @@
         ColdSteel,
         Firearm,
         Caster,
-        Minion,
+        Assistance,
         Misc
     }
     public enum ShieldCoreType

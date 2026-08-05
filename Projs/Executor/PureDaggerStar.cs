@@ -192,7 +192,5 @@ namespace HJScarletRework.Projs.Executor
             Vector2 beginScale = new(0.1f, 0.2f);
             return Vector2.Lerp(beginScale, starScale, t) * 1f;
         }
-
-
     }
 }

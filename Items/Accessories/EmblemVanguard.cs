@@ -4,10 +4,12 @@ using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class VanguardEmblem : HJScarletItemClass
+    [LegacyName("VanguardEmblem")]
+    public class EmblemVanguard : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
         public override void ExSD()
@@ -18,7 +20,7 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.HJScarlet().vanguardEmblem = true;
+            player.HJScarlet().emblemVanguard = true;
             player.noKnockback = true;
         }
         public override void AddRecipes()
@@ -27,7 +29,7 @@ namespace HJScarletRework.Items.Accessories
             {
                 CreateRecipe().
                     AddIngredient(ItemID.CobaltShield).
-                    AddIngredient<ExecutorEmblem>().
+                    AddIngredient<EmblemExecutor>().
                     AddIngredient(ItemID.HallowedBar, 10).
                     AddTile(TileID.MythrilAnvil).
                     Register();
@@ -36,7 +38,7 @@ namespace HJScarletRework.Items.Accessories
             {
                 CreateRecipe().
                     AddIngredient(ItemID.CobaltShield).
-                    AddIngredient<ExecutorEmblem>().
+                    AddIngredient<EmblemExecutor>().
                     AddRecipeGroup(HJScarletRecipeGroup.AnyMechBossSoul).
                     AddTile(TileID.Anvils).
                     Register();

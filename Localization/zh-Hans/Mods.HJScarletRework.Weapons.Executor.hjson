@@ -564,3 +564,83 @@ ConferenceCall: {
 		'''
 	FlavorTooltip: 干脆一次性呼叫所有人算了。
 }
+
+GhostKnife: {
+	DisplayName: 幽灵短匕
+	Tooltip: 直线投掷一把穿透多名敌人，命中后额外追击的匕首
+	ExecutionStrike:
+		'''
+		生成一个存在60秒的幽灵标记，强化代行者的所有攻击
+		幽灵标记存在期间，代行者的暴击概率提升10%
+		并且在攻击过程中发射幽灵短匕，命中时不会追击匕首
+		'''
+}
+
+DesertKnife: {
+	DisplayName: 沙丘短刀
+	Tooltip: ""
+	// ExecutionStrike: ""
+}
+
+DungeonKnife: {
+	DisplayName: 钢制匕首
+	Tooltip: 撞击墙体时朝距离最近的敌人弹射
+	ExecutionStrike:
+		'''
+		生成一个存在60秒的地牢标记，强化代行者的所有攻击
+		地牢标记存在期间，代行者的防御力提升5点
+		并且降低地牢内小型敌人伤害的50%
+		'''
+}
+
+FishronKnife: {
+	DisplayName: 公爵长牙
+	Tooltip: 命中时追加追踪敌人的泡泡
+	ExecutionStrike:
+		'''
+		生成一个存在60秒的公爵标记，强化代行者的所有攻击
+		公爵标记存在期间，代行者的伤害提升20%
+		并且使你在水中自由游泳
+		'''
+}
+
+GrassKnife: {
+	DisplayName: 草刀
+	Tooltip:
+		'''
+		命中时对敌人造成特殊的丛林剧毒
+		丛林剧毒会对敌人造成25/50/100点减益伤害
+		减益伤害随流程强化
+		'''
+	ExecutionStrike:
+		'''
+		生成一个存在60秒的丛林标记，强化代行者的所有攻击
+		丛林标记存在期间，代行者附加可堆叠10层的丛林剧毒
+		草刀直接命中时，若目标丛林剧毒超过3层，则立刻结算该次伤害
+		'''
+}
+
+MoltenKnife: {
+	DisplayName: 狱火投刀
+	Tooltip: 命中时造成爆炸
+	ExecutionStrike:
+		'''
+		生成一个存在60秒的狱火标记，强化代行者的所有攻击
+		狱火标记存在期间，代行者附加狱火爆炸
+		狱火爆炸频率固定，取造成伤害的3.25x，不可暴击
+		'''
+}
+
+TheSevenStar: {
+	DisplayName: 七星
+	Tooltip:
+		'''
+		向光标位置发射一颗星星
+		在身后点亮北斗七星
+		'''
+	ExecutionStrike:
+		'''
+		七颗亮星向光标位置发射一道光束
+		光束会穿透多名敌人
+		'''
+}

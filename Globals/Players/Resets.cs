@@ -1,6 +1,4 @@
-﻿using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Ranged;
-using HJScarletRework.Projs.Executor;
+﻿using HJScarletRework.Items.Weapons.Ranged;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -15,7 +13,6 @@ namespace HJScarletRework.Globals.Players
             PreciousCritsMin = 0;
             desterrennacht = false;
             manaSavingsJar = 0;
-            vanguardEmblem = false;
             loveRing = false;
             isBeingLove = false;
             heartoftheCrystal = false;
@@ -26,15 +23,19 @@ namespace HJScarletRework.Globals.Players
             blackKeyDoT = false;
             artificalManaStar = false;
             executorSwordMarkLevel = -1;
-            frostHammerHoming = false;
             souloftheTidalMark = false;
             mayaPumper = false;
             crimsonCharm = false;
             bitingClaw = false;
             cycleMadness = false;
-            accVanityID = -1;
             powerLily = false;
             powerLilyVanity = false;
+
+            emblemVanguard = false;
+            emblemColdSteel = false;
+            emblemFirearm = false;
+            emblemThrown = false;
+            emblemExecutor = false;
         }
         private void ResetArmor()
         {
@@ -48,6 +49,7 @@ namespace HJScarletRework.Globals.Players
             protectorMoonglow = false;
             diverArmor = false;
             maidReaperArmor = false;
+            dragonHunter = false;
 
             adamantiteHeadExecutor = false;
             chlorophyteHeadExecutor = false;
@@ -66,7 +68,6 @@ namespace HJScarletRework.Globals.Players
             SquidPet = false;
             WatcherPet = false;
             dracoPet = false;
-            goldenApple = false;
             goldenAppleEnchanted = false;
             goldenAppleDamageAbsorb = 0;
             goldenAppleEnchantedFully = false;
@@ -75,11 +76,9 @@ namespace HJScarletRework.Globals.Players
         {
             climaticHawstringLaserCounter *= (Player.HeldItem.type == ItemType<ClimaticHawstring>()).ToInt();
             CreationHatSet = false;
-            ShadowCastAcc = false;
             LifeBalloonAcc = false;
             critDamageAll = 0;
             critDamageExecutor = 0;
-            bonusExecutionReduce = 0;
             healingPotionMult = 1;
             ResetAcc();
             ResetPets();
@@ -89,7 +88,6 @@ namespace HJScarletRework.Globals.Players
         }
         public override void UpdateDead()
         {
-            ExecutionProgress = 0;
             flybackhandBuffTime = 0;
             flybackhandCloclCD = 0;
             flybackhandBuffTimeCurrent = 0;
@@ -100,6 +98,7 @@ namespace HJScarletRework.Globals.Players
             crimsonCharmStopReduce = false;
             crimsonScytheAttackCounter = 0;
             isExecutionStrikeTriggered = false;
+            KnifeMarkIndex = -1;
             ResetAcc();
             ResetPets();
             ResetArmor();

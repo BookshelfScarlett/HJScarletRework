@@ -1,6 +1,7 @@
-﻿using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
@@ -19,6 +20,7 @@ namespace HJScarletRework.Globals.Instances.Items
     public partial class HJScarletGlobalItem : GlobalItem
     {
         public IReadOnlyList<TooltipLine> CacheTooltipLine;
+        public string OwnerName = string.Empty;
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             if (ItemBelongTo != EnumItemOwner.None)
@@ -34,10 +36,11 @@ namespace HJScarletRework.Globals.Instances.Items
                         color = Color.Yellow;
                         break;
                     case EnumItemOwner.Donator:
-                        color = Color.HotPink;
+                        color = Color.Pink;
                         break;
                 }
-                tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), color, LineName: item.HJScarlet().ItemBelongTo + "Name");
+                string value = "<" + keyPath.ToLangValue() + "·" + item.HJScarlet().OwnerName + ">";
+                tooltips.QuickAddTooltipDirect(value, color, LineName: item.HJScarlet().ItemBelongTo + "Name");
             }
             if (HJScarletPlayer.AllWeaponSwapValue.Contains(item.type))
             {
@@ -74,17 +77,19 @@ namespace HJScarletRework.Globals.Instances.Items
                     tooltips.QuickAddTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", "50%", "15%", "200%");
                 }
             }
-            if ((item.HJScarlet().ForceTacticalExecution || (HJScarletList.ExecutorTypes.TryGetValue(item.type, out ExecutorWeaponType type) && type == ExecutorWeaponType.Caster)) && HJScarletList.ExecuteRequests.ContainsKey(item.type))
+            if (ScarletItemIDSets.ForceToAutomaticExecute[item.type])
             {
-                int index = 0;
-                for (int i = 0; i < tooltips.Count; i++)
+                int index = tooltips.FindIndex(line => line.Name == "ExecutorWeaponTypeName" && line.Mod == Mod.Name);
+                string path = Mod.GetLocalizationKey($"ExecutorDamageClass.ForceAutomaticExecution").ToLangValue();
+                TooltipLine line = new TooltipLine(Mod, "ForceAutomaticExecution", path)
                 {
-                    if (tooltips[i].Name == "ExecutorWeaponTypeName" && tooltips[i].Mod == Mod.Name)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
+                    OverrideColor = Color.Pink
+                };
+                tooltips.Insert(index + 1, line);
+            }
+            else if (ScarletItemIDSets.ForceToTacticalExecute[item.type])
+            {
+                int index = tooltips.FindIndex(line => line.Name == "ExecutorWeaponTypeName" && line.Mod == Mod.Name);
                 string path = Mod.GetLocalizationKey($"ExecutorDamageClass.ForceTacticalExecution").ToLangValue();
                 TooltipLine line = new TooltipLine(Mod, "ForceTacticalExecutionLine", path)
                 {
@@ -92,16 +97,16 @@ namespace HJScarletRework.Globals.Instances.Items
                 };
                 tooltips.Insert(index + 1, line);
             }
-            if(item.HJScarlet().NotFinished)
+            if (item.HJScarlet().NotFinished)
             {
-                tooltips.CreateTooltip(Mod.GetLocalizationKey("NotFinished"),Color.IndianRed);
+                tooltips.CreateTooltip(Mod.GetLocalizationKey("NotFinished"), Color.IndianRed);
             }
-            if(item.HJScarlet().borderlandWeapon)
+            if (item.HJScarlet().borderlandWeapon)
             {
                 string path = Mod.GetLocalizationKey($"Weapons.Executor.{item.ModItem.Name}.FlavorTooltip");
-                tooltips.CreateTooltip(path,Color.Lerp(Color.DarkRed,Color.Crimson,0.52f));
+                tooltips.CreateTooltip(path, Color.Lerp(Color.DarkRed, Color.Crimson, 0.82f));
             }
-            base.ModifyTooltips(item, tooltips);
+            CacheTooltipLine = tooltips;
         }
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {
@@ -133,6 +138,13 @@ namespace HJScarletRework.Globals.Instances.Items
         }
         public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
         {
+            if (string.IsNullOrEmpty(item.HJScarlet().OwnerName) || item.HJScarlet().ItemBelongTo != EnumItemOwner.Donator)
+                return;
+            DrawOwnerName(item.HJScarlet().OwnerName, line);
+        }
+        public void DrawOwnerName(string name, DrawableTooltipLine line)
+        {
+            return;
         }
     }
 }

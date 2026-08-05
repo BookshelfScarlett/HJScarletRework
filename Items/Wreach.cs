@@ -132,40 +132,7 @@ namespace HJScarletRework.Items
         {
             Stopwatch.StartNew();
             Stopwatch sw = Stopwatch.StartNew();
-            //foreach(var proj2 in Main.ActiveProjectiles)
-            //{
-            //    if (Main.myPlayer != player.whoAmI)
-            //        continue;
-            //    if (!proj2.minion)
-            //        continue;
-            //    if (proj2.owner != player.whoAmI)
-            //        continue;
-            //    //proj2.Kill();
-            //    proj2.active = false;
-            //}
-            //float curSlots = player.maxMinions - player.slotsMinions;
-            //List<Item> hasList = [];
-            //SoundEngine.PlaySound(HJScarletSounds.Misc_Spell);
-            //while (curSlots >= 1)
-            //{
-            //    int itemID = Main.rand.NextFromCollection(HJScarletList.SummonWeaponList);
-            //    Item item = ContentSamples.ItemsByType[itemID];
-
-            //    Projectile proj = ContentSamples.ProjectilesByType[item.shoot];
-
-            //    if (curSlots >= proj.minionSlots && !hasList.Contains(item))
-            //    {
-            //        ItemLoader.Shoot(item, player, source, position, velocity, proj.type, item.damage, knockback);
-            //        curSlots -= proj.minionSlots;
-            //        hasList.Add(item);
-            //    }
-            //}
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 10f, ProjectileType<ConferenceCallBullet>(), 1, knockback, player.whoAmI);
-            //for (int i = 0; i < HJScarletList.SummonWeaponList.Count; i++)
-            //{
-            //    int itemType = HJScarletList.SummonWeaponList[i];
-            //    player.QuickSpawnItem(source, itemType);
-            //}
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<TheSevenStarStar>(), 1, knockback, player.whoAmI);
             sw.Stop();
             // 输出经过的时间（毫秒）
             Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

@@ -139,10 +139,8 @@ namespace HJScarletRework.Projs.Executor
                 //平方放缩
                 faded = MathF.Pow(faded, 2);
                 Color trailColor = Color.Lerp(Color.OrangeRed, Color.Lerp(Color.Orange, Color.White, 0.9f), faded) * 0.70f;
-                float opa = Lerp(0.85f, 1f, faded);
                 trailColor = trailColor.ToAddColor((byte)(Lerp(0, 0, faded)));
                 float scaleMult = Lerp(0.5f, .95f, faded);
-                SB.Draw(tex, trailingDrawPos, null, trailColor, Projectile.oldRot[i] + PiOver4, orig, Projectile.scale * scaleMult, 0, 0);
                 SB.Draw(tex, trailingDrawPos, null, trailColor, Projectile.oldRot[i] + PiOver4, orig, Projectile.scale * scaleMult, 0, 0);
             }
             for (int i = 0; i < 8; i++)

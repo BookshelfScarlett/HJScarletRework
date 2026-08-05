@@ -10,13 +10,12 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.DragonSlayer
 {
-    [AutoloadEquip(EquipType.Body)]
-    public class DragonSlayerBody : HJScarletItemClass
+    [AutoloadEquip(EquipType.Body),LegacyName("DragonSlayerBody")]
+    public class RedDragonKnightBody : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Armors;
         public override void SetStaticDefaults()
         {
-
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
         public override void ExSD()
@@ -35,21 +34,19 @@ namespace HJScarletRework.Items.Armor.DragonSlayer
             return true;
         }
         public float Damage = 0.10f;
-        public int LifeRegen = 16;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(),LifeRegen.ToLifeRegenFormat());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent());
         public override void UpdateEquip(Player player)
         {
             player.GetDamage<GenericDamageClass>() += Damage;
-            player.lifeRegen += LifeRegen;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.FragmentSolar, 15).
-                AddIngredient(ItemID.FragmentVortex, 15).
-                AddIngredient(ItemID.FragmentNebula, 15).
-                AddIngredient(ItemID.FragmentStardust, 15).
-                AddIngredient(ItemID.LunarBar, 15).
+                AddIngredient(ItemID.FragmentSolar, 8).
+                AddIngredient(ItemID.FragmentVortex, 8).
+                AddIngredient(ItemID.FragmentNebula, 8).
+                AddIngredient(ItemID.FragmentStardust, 8).
+                AddIngredient(ItemID.LunarBar, 8).
                 AddTile(TileID.LunarCraftingStation).
                 Register();
 

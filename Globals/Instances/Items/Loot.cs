@@ -36,7 +36,7 @@ namespace HJScarletRework.Globals.Instances.Items
                     itemLoot.AddLoot(ItemID.TallyCounter, 4);
                     break;
                 case ItemID.WallOfFleshBossBag:
-                    itemLoot.AddLoot<ExecutorEmblem>(3);
+                    itemLoot.AddLoot<EmblemExecutor>(3);
                     break;
                 case ItemID.MoonLordBossBag:
                     itemLoot.AddLoot<PrunusMume>(3);
@@ -111,7 +111,7 @@ namespace HJScarletRework.Globals.Instances.Items
                 Register();
 
             Recipe.Create(ItemID.AvengerEmblem).
-                AddIngredient<ExecutorEmblem>().
+                AddIngredient<EmblemExecutor>().
                 AddIngredient(ItemID.SoulofFright, 5).
                 AddIngredient(ItemID.SoulofMight, 5).
                 AddIngredient(ItemID.SoulofSight, 5).

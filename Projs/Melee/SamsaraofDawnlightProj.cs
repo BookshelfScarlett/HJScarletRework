@@ -64,7 +64,6 @@ namespace HJScarletRework.Projs.Melee
             Vector2 pos = Projectile.Center + off * scale - Main.screenPosition;
             SB.Draw(HJScarletTexture.Particle_SharpTear, pos, null, c, 0, new Vector2(36, 36), new Vector2(starScale / 2, starScale * 2f), SpriteEffects.None, 0);
             SB.Draw(HJScarletTexture.Particle_SharpTear, pos, null, c, (float)Math.PI / 2, new Vector2(36, 36), new Vector2(starScale / 2, starScale * 2f), SpriteEffects.None, 0);
-
             SB.Draw(HJScarletTexture.Particle_SharpTear, pos, null, Color.White, 0, new Vector2(36, 36), new Vector2(starScale / 2, starScale * 2f) * 0.66f, SpriteEffects.None, 0);
             SB.Draw(HJScarletTexture.Particle_SharpTear, pos, null, Color.White, PiOver2, new Vector2(36, 36), new Vector2(starScale / 2, starScale * 2f) * 0.66f, SpriteEffects.None, 0);
         }

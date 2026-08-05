@@ -144,6 +144,18 @@ Executor: {
 	// ConferenceCallBullet.DisplayName: Conference Call Bullet
 	// ConferenceCallHeldProj.DisplayName: Conference Call Held Proj
 	// ExsanguinationHomingBullet.DisplayName: Exsanguination Homing Bullet
+	// GhostKnifePhantom.DisplayName: Ghost Knife Proj
+	// GhostKnifeHeldProj.DisplayName: Ghost Knife Held Proj
+	// GhostKnifeProj.DisplayName: Ghost Knife Proj
+	// DesertKnifeProj.DisplayName: Desert Knife Proj
+	// FishronKnifeBubble.DisplayName: Fishron Knife Bubble
+	// FishronKnifeProj.DisplayName: Fishron Knife Proj
+	// GrassKnifeProj.DisplayName: Grass Knife Proj
+	// TheSevenStarDipper.DisplayName: The Seven Star Dipper
+	// TheSevenStarDipperStar.DisplayName: The Seven Star Dipper Star
+	// TheSevenStarHeldProj.DisplayName: The Seven Star Held Proj
+	// TheSevenStarStar.DisplayName: The Seven Star Star
+	// TheSevenStarBolt.DisplayName: The Seven Star Bolt
 }
 
 Melee: {
@@ -239,6 +251,10 @@ Typeless: {
 	// ChlorophyteCrystalBolt.DisplayName: Chlorophyte Crystal Bolt
 	// ChlorophyteCrystalExecutor.DisplayName: Chlorophyte Crystal Executor
 	// RuShiWoWenProj.DisplayName: Ru Shi Wo Wen Proj
+	// GhostKnifeMark.DisplayName: Ghost Knife Mark
+	// DesertKnifeMark.DisplayName: Desert Knife Mark
+	// FishronKnifeMark.DisplayName: Fishron Knife Mark
+	// GrassKnifeMark.DisplayName: Grass Knife Mark
 }
 
 Magic: {

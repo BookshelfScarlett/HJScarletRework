@@ -18,13 +18,12 @@ using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.ExecutorVanillaHead;
 using HJScarletRework.Items.Armor.Reaper;
 using HJScarletRework.Items.Useables;
+using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Items.Weapons.Executor.Misc;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
 using HJScarletRework.Rarity.RarityDrawHandler;
-using Microsoft.Xna.Framework;
-using Steamworks;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -59,6 +58,32 @@ namespace HJScarletRework.Globals.Players
             UpdateDiverArmorJellyfishSpawn();
             UpdateMaidReaper();
             UpdateHeadExecutor();
+            UpdateExecutorKnifeMark();
+        }
+
+        public void UpdateExecutorKnifeMark()
+        {
+            if (Player.HeldItem.IsExecutorWeapon() && Main.mouseLeft && !Player.IsInInventory() && Player.miscCounter % GhostKnife.MarkGhostKnifeAttackSpeed == 0f && Player.HasProj<GhostKnifeMark>())
+            {
+                int applyDamage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(GhostKnife.MarkGhostKnifeAttackDamage);
+                Vector2 dir = Player.Center.GetNormalVector2(Main.MouseWorld);
+                Vector2 off = dir.RotatedBy(PiOver2*Main.rand.NextBool().ToDirectionInt()).ToSafeNormalize();
+                Vector2 pos = Player.Center - dir * 60f + off * 60;
+                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), pos, pos.GetNormalVector2(Main.MouseWorld)* 14f, ProjectileType<GhostKnifeProj>(), applyDamage, 1f, Player.whoAmI);
+                proj.ai[1] = 1;
+            pos = proj.Center+ proj.Size / 2;
+            for (int i = 0; i < 8; i++)
+            {
+                ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(1.2f, 2.2f), Color.White, 40, 1, 0.4f);
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                ECSParticle.SmokeParticle(pos, RandVelTwoPi(1.2f, 3.2f), RandLerpColor(Color.White, Color.LightSkyBlue), 40, 1, 1, 0.21f, blendstate: BlendState.Additive);
+            }
+            ECSParticle.StarShape(pos, proj.velocity.ToSafeNormalize() * .01f, Color.LightBlue, 40, 1, 0.94f);
+            ECSParticle.StarShape(pos, proj.velocity.RotatedBy(PiOver2).ToSafeNormalize() * .01f, Color.LightBlue, 40, 1, 0.94f);
+
+            }
         }
 
         public void UpdateSwordMark()
@@ -378,13 +403,6 @@ namespace HJScarletRework.Globals.Players
                 Player.moveSpeed += 0.10f;
                 Player.GetAttackSpeed<GenericDamageClass>() += 0.10f;
             }
-            if (tacticalExecution && tacticalTime > 0)
-            {
-                if (executorSwordMarkLevel > 2)
-                {
-                    Player.GetDamage<ExecutorDamageClass>() *= 1.05f;
-                }
-            }
             //悠久果实
             if (fruitofEthernity)
             {
@@ -629,7 +647,6 @@ namespace HJScarletRework.Globals.Players
                 ECSParticle.TurbulenceShinyOrb(Player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 1, 0.1f, RandRotTwoPi);
 
         }
-
         public void ClearUpParticle(ref Item[] inventory, int context, int slot)
         {
             if (!HJScarletConfigClient.Instance.SpecialRarity)
@@ -686,7 +703,7 @@ namespace HJScarletRework.Globals.Players
                 }
             }
         }
-
+        #region 代行者的矿石套
         public void UpdateHeadExecutor()
         {
             if (Main.myPlayer != Player.whoAmI)
@@ -695,18 +712,16 @@ namespace HJScarletRework.Globals.Players
             AdamantiteHeadExecutorThunder();
             ChlorophyteHeadExecutorCrystal();
         }
-        #region 代行者的矿石套
         //钛金碎片
         public void TitaniumHeadExecutorShard()
         {
-            if (!(titaniumHeadExecutor && Player.HeldItem.IsWeapon() && Main.mouseLeft && Player.miscCounter % 8 == 0))
+            if (!(titaniumHeadExecutor && Player.HeldItem.IsExecutorWeapon() && Main.mouseLeft && Player.miscCounter % 8 == 0))
                 return;
             int damage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(TitaniumHeadExecutor.ShardDamage);
             Vector2 dir = Player.Center.GetNormalVector2(Main.MouseWorld);
             Vector2 off = dir.RotatedByRandom(PiOver4).ToSafeNormalize();
             Vector2 pos = Player.Center - off * Main.rand.NextFloat(0.7f, 1.1f) * 120f;
             Projectile.NewProjectileDirect(Player.GetSource_FromThis(), pos, dir * 14f, ProjectileType<TitaniumShardHoming>(), damage, 1f, Player.whoAmI);
-
         }
         //精金闪电
         public void AdamantiteHeadExecutorThunder()
@@ -795,19 +810,6 @@ namespace HJScarletRework.Globals.Players
 
             }
         }
-        public void UpdateTacticalExecution()
-        {
-            if (!tacticalExecution)
-                return;
-            if (!Player.GetExecutionSrike())
-                return;
-            if (tacticalTime == 0 && tacticalPunishTime == 0)
-            {
-                tacticalTime = GetSeconds(5);
-                tacticalPunishTime = GetSeconds(1);
-            }
-        }
-
         public void UpdateFloretProtectorHerbSpawn()
         {
             if (floretProtectorTimer == 0 && floretProtectorExecutor)
@@ -843,7 +845,6 @@ namespace HJScarletRework.Globals.Players
                 floretProtectorTimer = 40;
             }
         }
-
         private void UpdateStardustRune()
         {
             //星月夜。和领标之魂
@@ -885,7 +886,6 @@ namespace HJScarletRework.Globals.Players
                 }
             }
         }
-
         public void UpdateHerbBuff()
         {
             if (!floretProtectorExecutor)
@@ -932,7 +932,6 @@ namespace HJScarletRework.Globals.Players
                 }
             }
         }
-
         public void HandleLoveRing()
         {
             if (!loveRing || genderChangeTimer < 1)
@@ -950,7 +949,6 @@ namespace HJScarletRework.Globals.Players
             }
 
         }
-
         public void HandleTerraRecipe()
         {
             //由于需要提供血上限，这里基本上得往reset这里写内容。
@@ -1018,8 +1016,6 @@ namespace HJScarletRework.Globals.Players
             terraRecipe_LifeMaxMultTime = 0;
             resetTerraRecipe = false;
         }
-
-
         public override void PostUpdateRunSpeeds()
         {
             if (NoSlowFall > 0)

@@ -1,15 +1,12 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Build.Experimental.ProjectCache;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.GameContent;
-using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -27,13 +24,13 @@ namespace HJScarletRework.Globals.Instances.Items
         public bool CanDrawGhost = false;
         public int ExecutionProj = -1;
         public bool ForceTacticalExecution = false;
-        public bool ApplyTacticalExecution = false;
+        public bool ForceAutomaticExecution= false;
         public bool NotFinished = false;
         //控制purePrism的运动
-        public float purePrismAnimationCounter = 0;
+        public float tintIconDrawLerp = 0;
         public bool purePrismLerpIn = false;
         public bool purePrismLerpOut = false;
-        public bool purePrismLegalTarget = false;
+        public bool setTintIcon = false;
         public bool isShivering = false;
         public EnumItemOwner ItemBelongTo = EnumItemOwner.None;
         public float simpleImmersiveBackpackValue = 1f;
@@ -66,28 +63,6 @@ namespace HJScarletRework.Globals.Instances.Items
             simpleImmersiveBackpackValueAlt = Lerp(simpleImmersiveBackpackValueAlt, maxScale, 0.15f);
         }
         public Player LocalPlayer => Main.LocalPlayer;
-        public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
-        {
-            //if (HJScarletMethods.HasFuckingCalamity)
-            //{
-            //    if (item.IsLegal())
-            //    {
-            //        if (item.ModItem.Mod == HJScarletRework.Instance)
-            //            damage *= 10;
-            //    }
-            //}
-        }
-        public override void ModifyWeaponCrit(Item item, Player player, ref float crit)
-        {
-            //if(HJScarletMethods.HasFuckingCalamity)
-            //{
-            //    if (item.IsLegal())
-            //    {
-            //        if (item.ModItem.Mod == HJScarletRework.Instance)
-            //            crit *= 10;
-            //    }
-            //}
-        }
         public override void UpdateInventory(Item item, Player player)
         {
             if (HJScarletConfigClient.Instance.DrawIcon && CanDrawGhost)
@@ -102,20 +77,20 @@ namespace HJScarletRework.Globals.Instances.Items
                 if (GhostFrame >= 16)
                     GhostFrame = 1;
             }
-            if (!purePrismLegalTarget)
+            if (!setTintIcon)
             {
-                purePrismAnimationCounter = Lerp(purePrismAnimationCounter, 0f, 0.2f);
-                if (purePrismAnimationCounter <= 0.02f)
-                    purePrismAnimationCounter = 0;
+                tintIconDrawLerp = Lerp(tintIconDrawLerp, 0f, 0.2f);
+                if (tintIconDrawLerp <= 0.02f)
+                    tintIconDrawLerp = 0;
             }
             else
             {
-                purePrismAnimationCounter = Lerp(purePrismAnimationCounter, 1f, 0.2f);
-                if (purePrismAnimationCounter >= 0.98f)
-                    purePrismAnimationCounter = 1;
+                tintIconDrawLerp = Lerp(tintIconDrawLerp, 1f, 0.2f);
+                if (tintIconDrawLerp >= 0.98f)
+                    tintIconDrawLerp = 1;
             }
 
-            purePrismLegalTarget = false;
+            setTintIcon = false;
         }
         private bool MouseHoveringAnySlot(Vector2 slotPos, float drawScale)
         {
@@ -158,7 +133,7 @@ namespace HJScarletRework.Globals.Instances.Items
         public override void PostDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
             DrawSpecialIconDisplay(item, spriteBatch, position);
-            if (HJScarletConfigClient.Instance.DrawIcon && CanDrawGhost && (purePrismAnimationCounter) <= .98f)
+            if (HJScarletConfigClient.Instance.DrawIcon && CanDrawGhost && (tintIconDrawLerp) <= .98f)
             {
                 Vector2 iconPosition = position + new Vector2(15f * Main.inventoryScale, 15f * Main.inventoryScale);
                 float iconScale = 0.31f * simpleImmersiveBackpackValueAlt;
@@ -166,23 +141,23 @@ namespace HJScarletRework.Globals.Instances.Items
                 Vector2 recorigin = new(23, 21);
                 Texture2D tex = HJScarletTexture.ScarletGhost.Value;
                 for (int i = 0; i < 6; i++)
-                    spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, rect, Color.White.ToAddColor() * (1f - purePrismAnimationCounter), 0f, recorigin, iconScale, SpriteEffects.None, 0f);
-                spriteBatch.Draw(tex, iconPosition, rect, Color.White * (1f - purePrismAnimationCounter), 0f, recorigin, iconScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, rect, Color.White.ToAddColor() * (1f - tintIconDrawLerp), 0f, recorigin, iconScale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(tex, iconPosition, rect, Color.White * (1f - tintIconDrawLerp), 0f, recorigin, iconScale, SpriteEffects.None, 0f);
 
             }
-            if (HJScarletConfigClient.Instance.DrawIcon && CanDrawIcon && (purePrismAnimationCounter) <= 0.98f)
+            if (HJScarletConfigClient.Instance.DrawIcon && CanDrawIcon && (tintIconDrawLerp) <= 0.98f)
             {
                 Vector2 iconPosition = position + new Vector2(15f * Main.inventoryScale, 12f * Main.inventoryScale);
                 float iconScale = 0.34f * simpleImmersiveBackpackValueAlt;
                 Texture2D tex = HJScarletTexture.LostbeltJourneyIconLegacy.Value;
                 for (int i = 0; i < 6; i++)
-                    spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.White.ToAddColor() * (1f - purePrismAnimationCounter), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
-                spriteBatch.Draw(tex, iconPosition, null, Color.White * (1f - purePrismAnimationCounter), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.White.ToAddColor() * (1f - tintIconDrawLerp), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(tex, iconPosition, null, Color.White * (1f - tintIconDrawLerp), 0f, tex.ToOrigin(), iconScale, SpriteEffects.None, 0f);
             }
         }
         public void DrawSpecialIconDisplay(Item item, SpriteBatch spriteBatch, Vector2 position)
         {
-            if (purePrismAnimationCounter <= 0.02f)
+            if (tintIconDrawLerp <= 0.02f)
                 return;
             //缩写。
             float time = (float)Main.timeForVisualEffects;
@@ -191,9 +166,8 @@ namespace HJScarletRework.Globals.Instances.Items
             float omega = .03f;
             float xOffset = (float)Math.Sin(time * omega) * amp * .7f;
             float yOffset = (float)Math.Cos(time * omega) * amp * 0.5f;
-            //Vector2 lerpPos = Vector2.Lerp(new Vector2(10f, 15f), new Vector2(10f, 10f), purePrismAnimationCounter);
             Vector2 iconPosition = position - new Vector2(10) + new Vector2(xOffset, yOffset);
-            iconPosition.Y -= Lerp(5f, 0f, purePrismAnimationCounter);
+            iconPosition.Y -= Lerp(5f, 0f, tintIconDrawLerp);
             //算放缩
             float iconScale = Lerp(0.31f, 0.34f, (float)(Math.Abs(Math.Sin(time)))) * simpleImmersiveBackpackValueAlt;
 
@@ -208,18 +182,14 @@ namespace HJScarletRework.Globals.Instances.Items
                 tex = TextureAssets.Item[LocalPlayer.HJScarlet().drawUseableItemIcon].Value;
             Vector2 recorigin = tex.ToOrigin();
             for (int i = 0; i < 8; i++)
-                spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.White.ToAddColor() * purePrismAnimationCounter, 0f, recorigin, iconScale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(tex, iconPosition, null, lerpColor * purePrismAnimationCounter, 0f, recorigin, iconScale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(tex, iconPosition + ToRadians(60f * i).ToRotationVector2() * 2f, null, Color.White.ToAddColor() * tintIconDrawLerp, 0f, recorigin, iconScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(tex, iconPosition, null, lerpColor * tintIconDrawLerp, 0f, recorigin, iconScale, SpriteEffects.None, 0f);
         }
         public override void HoldItem(Item item, Player player)
         {
             var usPlayer = player.HJScarlet();
-            bool casterWeapon = false;
-            if (HJScarletList.ExecutorTypes.TryGetValue(item.type, out Executor.ExecutorWeaponType value))
-            {
-                casterWeapon = value == Executor.ExecutorWeaponType.Caster;
-            }
-            if (ForceTacticalExecution || casterWeapon || usPlayer.tacticalExecutionManual)
+            bool usetactical = ScarletItemIDSets.ForceToTacticalExecute[item.type] || usPlayer.tacticalExecutionManual;
+            if (usetactical && !ScarletItemIDSets.ForceToAutomaticExecute[item.type])
             {
                 usPlayer.tacticalExecution = true;
             }

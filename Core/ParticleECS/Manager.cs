@@ -7,12 +7,12 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Core.ParticleECS
 {
+    /// <summary>
+    /// ECS架构的粒子系统的数据管理器，负责管理<see cref="ECSParticleData"/>数据的生命周期和更新。
+    /// <br>比另一个面向对象的粒子系统更高效，适合大量粒子的场景。</br>
+    /// </summary>
     public class ECSParticleDataManager : ModSystem
     {
-        /// <summary>
-        /// ECS架构的粒子系统的数据管理器，负责管理<see cref="ECSParticleData"/>数据的生命周期和更新。
-        /// 比另一个面向对象的粒子系统更高效，适合大量粒子的场景。
-        /// </summary>
         public const int MaxParticle = 20000;
         public static List<ECSParticleBehavior> PAICollection = [];
         public static ECSParticleData TempleParticle = new ECSParticleData();

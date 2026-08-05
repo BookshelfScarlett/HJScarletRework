@@ -14,7 +14,7 @@ CreationHat: {
 		'''
 }
 
-DragonSlayerBody: {
+RedDragonKnightBody: {
 	DisplayName: 红龙骑士重铠
 	Tooltip:
 		'''
@@ -23,7 +23,7 @@ DragonSlayerBody: {
 		'''
 }
 
-DragonSlayerHead: {
+RedDragonKnightHead: {
 	DisplayName: 红龙骑士战盔
 	Tooltip:
 		'''
@@ -39,7 +39,7 @@ DragonSlayerHead: {
 		'''
 }
 
-DragonSlayerLegs: {
+RedDragonKnightLegs: {
 	DisplayName: 红龙骑士护腿
 	Tooltip:
 		'''
@@ -227,7 +227,6 @@ DiverLegs: {
 	Tooltip:
 		'''
 		增加{0}暴击概率
-		敌人更有可能攻击你
 		'''
 }
 
@@ -236,7 +235,6 @@ ReaperBody: {
 	Tooltip:
 		'''
 		增加{0}代行者暴击伤害
-		敌人更有可能攻击你
 		'''
 }
 
@@ -349,4 +347,19 @@ TitaniumHeadExecutor: {
 		攻击时快速发射多枚追踪的钛金碎片
 		钛金碎片基础伤害为{0}，受代行者伤害加成
 		'''
+}
+
+DragonHunterBody: {
+	DisplayName: 猎龙重铠
+	Tooltip: ""
+}
+
+DragonHunterHead: {
+	DisplayName: 猎龙头盔
+	Tooltip: ""
+}
+
+DragonHunterLegs: {
+	DisplayName: 猎龙护腿
+	Tooltip: ""
 }

@@ -25,11 +25,12 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
-            Item.SetUpNoUseGraphicItem();
             Item.shootSpeed = 16;
             Item.UseSound = HJScarletSounds.Misc_KnifeTossAlt with { Pitch = 0.5f, Variants = [2] };
-            Item.HJScarlet().ItemBelongTo = EnumItemOwner.Donator;
             Item.shoot = ProjectileType<FlowerofDanceProj>();
+            Item.SetUpNoUseGraphicItem();
+            Item.HJScarlet().ItemBelongTo = EnumItemOwner.Donator;
+            Item.HJScarlet().OwnerName = "曦";
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

@@ -62,6 +62,14 @@ namespace HJScarletRework.Assets.Registers
             RegisterMiscShader(EdgeMeltsShader, ToPassName(nameof(EdgeMeltsShader)), nameof(EdgeMeltsShader));
             RegisterMiscShader(UCAPolarDistortShaderColor, ToPassName("PolarDistortShaderWithR"), "PolarDistortShaderWithR");
         }
+        public static string ToPassName(string oriShadername) => ShaderPrefix + oriShadername + "Pass";
+        public static void RegisterMiscShader(Effect shader, string passName, string registrationName)
+        {
+            Ref<Effect> shaderPointer = new(shader);
+            MiscShaderData passParamRegistration = new(shaderPointer, passName);
+            GameShaders.Misc[$"{ShaderPrefix}:{registrationName}"] = passParamRegistration;
+        }
+
         public override void Unload()
         {
             TerrarRayLaser = null;
@@ -75,13 +83,6 @@ namespace HJScarletRework.Assets.Registers
             LightningShader = null;
             FogShader = null;
             EdgeMeltsShader = null;
-        }
-        public static string ToPassName(string oriShadername) => ShaderPrefix + oriShadername + "Pass";
-        public static void RegisterMiscShader(Effect shader, string passName, string registrationName)
-        {
-            Ref<Effect> shaderPointer = new(shader);
-            MiscShaderData passParamRegistration = new(shaderPointer, passName);
-            GameShaders.Misc[$"{ShaderPrefix}:{registrationName}"] = passParamRegistration;
         }
     }
 }

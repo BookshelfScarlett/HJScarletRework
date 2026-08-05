@@ -54,6 +54,7 @@ namespace HJScarletRework.Globals.Methods
                 return;
             proj.AddExecutionTimeDirectly(itemID, times);
         }
+        public static void AddExecutionTimeImmediate<T>(this Projectile proj, int times = 1) where T : ModItem => AddExecutionTimeImmediate(proj, ItemType<T>(), times);
         /// <summary>
         /// 直接增加处决计数的核心方法。
         /// 内部包含手动处决的特殊处理：当即将达到所需次数时播放音效。
@@ -204,6 +205,44 @@ namespace HJScarletRework.Globals.Methods
             if (player.HJScarlet().ExecutionListStored.ContainsKey(player.HeldItem.type))
                 player.HJScarlet().ExecutionListStored[player.HeldItem.type] = 0;
 
+        }
+        /// <summary>
+        /// 获取该代行者武器的武器类型
+        /// <br>若<see cref="HJScarletList.ExecutorTypes"/>中不存在<paramref name="item"/>，则返回<see langword="false"/>以表不存在该值</br>
+        /// </summary>
+        public static bool GetExecuteTypes(this Item item, out ExecutorWeaponType type)
+        {
+            if (HJScarletList.ExecutorTypes.TryGetValue(item.type, out type))
+                return true;
+            else
+                return false;
+        }
+        /// <summary>
+        /// 比对当前武器是否为你需要的类型
+        /// <br>若<see cref="HJScarletList.ExecutorTypes"/>中不存在<paramref name="item"/>，则返回<see langword="false"/>以表不存在该值</br>
+        /// </summary>
+        public static bool CheckExecuteTypes(this Item item, ExecutorWeaponType tpye)
+        {
+            if (HJScarletList.ExecutorTypes.TryGetValue(item.type, out ExecutorWeaponType executorWeaponType))
+                return tpye == executorWeaponType;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// 获取玩家手持的代行者武器的处决进程
+        /// </summary>
+        public static int GetExecuteProgtess(this Player player) => GetExecuteProgress(player, player.HeldItem);
+        /// <summary>
+        /// 获取当前代行者武器的处决进程
+        /// </summary>
+        public static int GetExecuteProgress(this Player player, Item item)
+        {
+            if (!item.DamageType.CountsAsClass<ExecutorDamageClass>())
+                return 0;
+            if (!HJScarletList.ExecuteRequests.ContainsKey(item.type))
+                return 0;
+            return player.HJScarlet().ExecutionListStored[item.type];
         }
     }
 }

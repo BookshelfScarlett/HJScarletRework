@@ -145,6 +145,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(1.2f, 3.3f), RandLerpColor(c1, c2), 120, 1, .71f);
             }
+
             switch (BreakAI)
             {
                 case BreakType.Healing:

@@ -22,8 +22,6 @@ namespace HJScarletRework.Globals.Players
             stardustRuneHitHealTimer = 0;
             defenderEmblemCD = 0;
             exsanguinationBuffTime = 0;
-            tacticalTime = 0;
-            tacticalPunishTime = 0;
             tacticalExecutionInputCache = 0;
             blackKeyTimer = 0;
             heldProjReUseTime = 0;
@@ -44,6 +42,7 @@ namespace HJScarletRework.Globals.Players
             globalSoundDelay = 0;
             maidReaperHealTimer = 0;
             conferenceCallBuffTime = 0;
+            KnifeMarkIndex = -1;
         }
         public void UpdateTimer()
         {
@@ -119,12 +118,6 @@ namespace HJScarletRework.Globals.Players
 
             if (stardustRuneStaticHealTimer > 0)
                 stardustRuneStaticHealTimer--;
-
-            if (tacticalTime > 0)
-                tacticalTime--;
-
-            if (tacticalPunishTime > 0 && tacticalTime == 0)
-                tacticalPunishTime--;
 
             if (cowboyRevolverTimer > 0)
                 cowboyRevolverTimer--;

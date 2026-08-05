@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;

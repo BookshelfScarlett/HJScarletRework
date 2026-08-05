@@ -211,7 +211,7 @@ namespace HJScarletRework.Globals.Instances.Projs
 
         private void ModifyDefenderEmblemBuff(Player owner, Projectile projectile)
         {
-            bool legal = owner.HJScarlet().vanguardEmblem && owner.HJScarlet().defenderEmblemCD == 0;
+            bool legal = owner.HJScarlet().emblemVanguard && owner.HJScarlet().defenderEmblemCD == 0;
             if (!legal)
                 return;
             bool anohterBool = projectile.IsLegalFriendlyProj(ExecutorDamageClass.Instance) && projectile.HJScarlet().ExecutionStrike;

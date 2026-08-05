@@ -40,7 +40,6 @@ namespace HJScarletRework.Projs.Executor
 
         public override void ExSD()
         {
-            //TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
             Projectile.SetUpHeldProj(10);
             Projectile.SetupImmnuity(-1);
             Projectile.penetrate = -1;
@@ -281,7 +280,6 @@ namespace HJScarletRework.Projs.Executor
                     return;
                 for (int i = 0; i <= 4; i += 2)
                 {
-                    //Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 120, Main.rand.NextFloat(0.991f, 1.01f));
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 120, Main.rand.NextFloat(0.67f, 0.85f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                     Vector2 vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection);
@@ -549,7 +547,6 @@ namespace HJScarletRework.Projs.Executor
         {
             int reverse = Projectile.spriteDirection;
             Vector2 dir = Projectile.rotation.ToRotationVector2().RotatedBy(PiOver2 * reverse);
-            //Vector2 dir = Projectile.Center.GetNormalVector2( target.Center);
             for (int i = 0; i < 32; i++)
             {
                 ECSParticle.SmokeParticle(target.Center, dir.ToRandVelocity(ToRadians(35), 1.2f, 22.5f), RandLerpColor(Color.DarkRed, Color.Black), 40, RandRotTwoPi, 1, Main.rand.NextFloat(.9f, 1.2f) * .52f, blendstate: BlendState.AlphaBlend);

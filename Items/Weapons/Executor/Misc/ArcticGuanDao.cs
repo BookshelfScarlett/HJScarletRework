@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
@@ -15,12 +16,12 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
+            ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
         }
         public override void ExSD()
         {
             Item.SetUpNoUseGraphicItem(true);
             Item.SetUpRarityPrice(ItemRarityID.Blue);
-            Item.HJScarlet().ForceTacticalExecution = true;
             Item.damage = 12;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useTime = Item.useAnimation = 25;

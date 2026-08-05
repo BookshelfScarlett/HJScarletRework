@@ -19,7 +19,6 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.statLifeMax2 += 100;
-            player.HJScarlet().ShadowCastAcc = true;
             base.UpdateAccessory(player, hideVisual);
         }
     }
