@@ -8,9 +8,7 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor.Misc;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System.Collections.Generic;
 using Terraria;
 

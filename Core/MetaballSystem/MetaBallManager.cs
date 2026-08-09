@@ -79,7 +79,7 @@ namespace HJScarletRework.Core.MetaballSystem
 
                 HJScarletMethods.SwapToTarget(baseMetaBall.AlphaTexture);
 
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null);
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null);
 
                 baseMetaBall.PrepareRenderTarget();
 

@@ -2,7 +2,6 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
-using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
@@ -301,7 +300,6 @@ namespace HJScarletRework.Projs.Executor
             DrawSlash(texture, Color.Black * 0.136f, 0.45f);
             DrawSlash(texture, Color.DeepSkyBlue* 0.150f, 0.20f);
             SB.EndShaderArea();
-
             return false;
         }
     }

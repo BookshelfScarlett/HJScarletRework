@@ -10,6 +10,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
     public class FishronKnife: ExecutorWeaponClass
     {
         public override int ExecutionProgress => 20;
+        public static float DamageBuff = .20f;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Assistance;
         public override void ExSSD()
         {
@@ -23,6 +24,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
             Item.useTime = Item.useAnimation = 25;
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<FishronKnifeProj>();
+            Item.UseSound = SoundID.Item64;
             Item.HJScarlet().NotFinished = true;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem();

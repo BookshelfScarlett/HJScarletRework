@@ -47,7 +47,8 @@ namespace HJScarletRework.Globals.Graphics.Particles
         public override void Draw(SpriteBatch spriteBatch)
         {
             Texture2D texture = HJScarletTexture.Particle_RingShiny.Value;
-            spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor * Opacity, Rotation, texture.Size() * 0.5f, Scale, 0, 0f);
+            spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor*.85f * Opacity, Rotation, texture.Size() * 0.5f, Scale, 0, 0f);
+            spriteBatch.Draw(texture, Position - Main.screenPosition, null, DrawColor*.85f * Opacity, Rotation+PiOver4+PiOver2, texture.Size() * 0.5f, Scale, 0, 0f);
         }
     }
 }

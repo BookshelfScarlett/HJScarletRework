@@ -1,11 +1,11 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Caster;
-using Microsoft.Xna.Framework;
+using System.Security.Cryptography.Xml;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class AbyssalWorldProj : ExecutorHeldProj
+    public class AbyssalWorldHeldProj : ExecutorHeldProj
     {
         public override int OriginalItemID => ItemType<AbyssalWorld>();
         public override void SetStaticDefaults()
@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ExSD()
         {
-            base.ExSD();
+            Projectile.SetUpHeldProj(10);
         }
         public override void OnFirstFrame()
         {
@@ -26,7 +26,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            return base.PreDraw(ref lightColor);
+            return false;
         }
     }
 }

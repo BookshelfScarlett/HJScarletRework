@@ -158,6 +158,26 @@ Executor: {
 	// TheSevenStarBolt.DisplayName: The Seven Star Bolt
 	// DungeonKnifeProj.DisplayName: Dungeon Knife Proj
 	// MoltenKnifeProj.DisplayName: Molten Knife Proj
+	// AbyssalWorldBeam.DisplayName: Abyssal World Beam
+	// AbyssalWorldBolt.DisplayName: Abyssal World Bolt
+	// AbyssalWorldHeldProj.DisplayName: Abyssal World Held Proj
+	// AbyssalWorldHeldProjAlt.DisplayName: Abyssal World Held Proj Alt
+	// MoltenKnifeBoom.DisplayName: Molten Knife Boom
+	// StormSaberExecution.DisplayName: Storm Saber Execution
+	// StormSaberHeldProj.DisplayName: Storm Saber Held Proj
+	// StormSaberSlash.DisplayName: Storm Saber Slash
+	// StormSaberSlashGiant.DisplayName: Storm Saber Slash Giant
+	// StormSaberCharge.DisplayName: Storm Saber Charge
+	// EndlessWarSmasher.DisplayName: Endless War Smasher
+	// EndlessWarMinion.DisplayName: Endless War Minion
+	// EndlessWarMintTyphoonThunder.DisplayName: Endless War Mint Typhoon Thunder
+	// TheGreatDipperDipper.DisplayName: The Great Dipper Dipper
+	// TheGreatDipperDipperStar.DisplayName: The Great Dipper Dipper Star
+	// TheGreatDipperHeldProj.DisplayName: The Great Dipper Held Proj
+	// TheGreatDipperStar.DisplayName: The Great Dipper Star
+	// BambooBowArrow.DisplayName: Bamboo Bow Arrow
+	// BambooSwordHeldProj.DisplayName: Bamboo Sword Held Proj
+	// BambooSwordSpin.DisplayName: Bamboo Sword Spin
 }
 
 Melee: {

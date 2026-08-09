@@ -1,4 +1,6 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
@@ -26,6 +28,12 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
+            if (Projectile.IsOutScreen())
+                return;
+            if (Main.rand.NextBool(6))
+                ECSParticle.ShinyCrossStarSmall(Projectile.Center.ToRandCirclePosEdge(3), Projectile.SafeDir(), RandLerpColor(Color.LightGray, Color.White), 40, 1, 0.34f, .031f);
+            if (Main.rand.NextBool(6))
+                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(4), Projectile.velocity / 8, RandLerpColor(Color.LightGray, Color.White), 40, 1, 0.42f);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -39,26 +47,24 @@ namespace HJScarletRework.Projs.Executor
         }
         public void DrawProj(Vector2 offset)
         {
-            Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
-            drawPos -= offset;
-            Texture2D tex = Projectile.GetTexture();
-            Vector2 orig = tex.Size() / 2;
-            float disapperRatios = 1;
-            int length = (int)((Projectile.oldPos.Length - 2));
+            Projectile.GetProjDrawInfo_Melee(out Texture2D tex, out Vector2 drawPosition, out float drawRotation, out Vector2 _, out SpriteEffects se);
+            int length = Projectile.oldPos.Length;
             for (int i = length - 1; i >= 0; i--)
             {
-                float ratios = EaseInOutExpo(1 - i / (float)length);
-                Vector2 pos = Projectile.oldPos[i] + Projectile.PosToCenter() - offset;
-                float rot = Projectile.oldRot[i];
-                int addLerp = (int)(Lerp(0, 105, ratios));
-                Color c = Color.Lerp(Color.LightGreen, Color.LimeGreen, ratios).ToAddColor((byte)addLerp) * (Lerp(0.14f, 1f, ratios));
-                float scale = Projectile.scale * Lerp(.35f, 1f, ratios);
-                SB.Draw(projTex, pos, null, c, rot + PiOver4, orig, scale, 0, 0);
+                float ratios = (1f - i / (float)length);
+                Vector2 pos = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
+                float scale = Lerp(.264f, 1f, ratios);
+                float opa = Lerp(.31f, 1f, ratios);
+                Color c = Color.Lerp(Color.LightGray, Color.White, ratios);
+                Vector2 sharpScale = new Vector2(1f, 1.4f);
+                SB.Draw(HJScarletTexture.Particle_SharpTear, pos - new Vector2(25,0).RotatedBy(Projectile.rotation), null, c.ToAddColor(10)*opa*.35f, Projectile.oldRot[i] + PiOver2, HJScarletTexture.Particle_SharpTear.Size() / 2f, sharpScale * scale, 0, 0);
+                c = Color.Lerp(Color.LightGray, Color.White, ratios).ToAddColor(250);
+                SB.FastDraw(tex, pos, c * opa, Projectile.oldRot[i] + PiOver4, tex.Size() / 2f, Projectile.scale * scale, se);
+                
             }
             for (int i = 0; i < 8; i++)
-                SB.Draw(projTex, drawPos + (TwoPi / 8 * i).ToRotationVector2() * 1.5f, null, Color.Green.ToAddColor(), Projectile.rotation + PiOver4, ori, Projectile.scale, 0, 0);
-            Color mainC = Color.Lerp(Color.White, Color.WhiteSmoke, disapperRatios);
-            SB.Draw(projTex, drawPos, null, mainC, Projectile.rotation + PiOver4, ori, Projectile.scale, 0, 0);
+                SB.FastDraw(tex, drawPosition + (TwoPi / 8f * i).ToRotationVector2() * 2f, Color.White.ToAddColor(), drawRotation, tex.Size() / 2f, Projectile.scale, se);
+            SB.FastDraw(tex, drawPosition, Color.White, drawRotation, tex.Size() / 2f, Projectile.scale, se);
         }
     }
 }

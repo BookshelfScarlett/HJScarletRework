@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.List;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -46,6 +47,24 @@ namespace HJScarletRework.Globals.Methods
         public static bool IsExecutorWeapon(this Item item)
         {
             return HJScarletList.ExecuteRequests.ContainsKey(item.type);
+        }
+        /// <summary>
+        /// 让原版的手持也可以像手持弹幕一样旋转<br/>
+        /// 随便找一个每帧调用的方法调用即可<br/>
+        /// </summary>
+        public static void NoHeldProjUpdateAim(this Player player, float rotationOffset = 0f, float rotationSpeed = 1f)
+        {
+            player.ChangeDir(Math.Sign((player.LocalMouseWorld() - player.Center).X));
+
+            Vector2 aimVect = player.LocalMouseWorld() - player.Center;
+            aimVect.SafeNormalize(Vector2.UnitX);
+
+            float targetRotation = aimVect.ToRotation();
+
+            if (player.LocalMouseWorld().X < player.Center.X)
+                player.itemRotation = player.itemRotation.AngleLerp(targetRotation - MathHelper.ToRadians(rotationOffset) + MathHelper.Pi, rotationSpeed);
+            else
+                player.itemRotation = player.itemRotation.AngleLerp(targetRotation + MathHelper.ToRadians(rotationOffset), rotationSpeed);
         }
 
     }

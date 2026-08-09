@@ -598,11 +598,9 @@ namespace HJScarletRework.Globals.Methods
             for (int k = 0; k < Main.maxProjectiles; k++)
             {
                 Projectile otherProj = Main.projectile[k];
-                // Short circuits to make the loop as fast as possible
                 if (!otherProj.active || otherProj.owner != proj.owner || !otherProj.minion || k == proj.whoAmI)
                     continue;
 
-                // If the other Projectile is indeed the same owned by the same player and they're too close, nudge them away.
                 bool sameProjType = otherProj.type == proj.type;
                 float taxicabDist = Math.Abs(proj.position.X - otherProj.position.X) + Math.Abs(proj.position.Y - otherProj.position.Y);
                 if (sameProjType && taxicabDist < proj.width)
@@ -622,6 +620,15 @@ namespace HJScarletRework.Globals.Methods
             rotationPoint = proj.spriteDirection == -1 ? new Vector2(texture.Width, texture.Height) : new Vector2(0, texture.Height);
             flipSprite = proj.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
         }
+        public static void FastDraw(this SpriteBatch sb, Texture2D tex, Vector2 pos, Color c, float rotation, Vector2 origin, float scale, SpriteEffects se, int wtfisthis = 0)
+        {
+            sb.Draw(tex, pos, null, c, rotation, origin, scale, se, wtfisthis);
+        }
+        public static void FastDraw(this SpriteBatch sb, Texture2D tex, Vector2 pos, Color c, float rotation, Vector2 origin, Vector2 scale, SpriteEffects se, int wtfisthis = 0)
+        {
+            sb.Draw(tex, pos, null, c, rotation, origin, scale, se, wtfisthis);
+        }
+        public static int GetHorizonDirection(this Projectile proj) => (proj.velocity.X > 0).ToDirectionInt();
 
     }
 }

@@ -48,10 +48,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         {
             player.GetDamage<GenericDamageClass>() += 0.05f;
         }
-        public override void ExSD(Item item)
-        {
-            item.defense = Defense;
-        }
         public override void AddRecipes()
         {
             Recipe.Create(ApplyArmor).

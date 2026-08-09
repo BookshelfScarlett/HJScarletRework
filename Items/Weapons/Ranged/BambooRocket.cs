@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Ranged
@@ -28,6 +29,11 @@ namespace HJScarletRework.Items.Weapons.Ranged
         {
             return new Vector2(-10f, 0);
         }
+        public override void UseItemFrame(Player player)
+        {
+            player.NoHeldProjUpdateAim();
+        }
+
         public override void AddRecipes()
         {
             CreateRecipe().

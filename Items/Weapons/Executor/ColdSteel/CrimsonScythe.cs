@@ -1,13 +1,13 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
 using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Armor.Reaper;
 using HJScarletRework.Projs.Executor;
-using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -15,16 +15,18 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Weapons.Executor.Misc
+namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
 {
     public class CrimsonScythe : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 40;
         public static int DefensePerAdd = 2;
         public static int MaxSoulStone = 20;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.ColdSteel;
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
+            ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
         }
         public override void ExSD()
         {
@@ -83,7 +85,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
                 int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework");
                 if (!traditionalMode)
                     executionLineIndex = executionProgressIndex - 1;
-                var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", categoryText)
+                var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", "-"+categoryText+"-")
                 {
                     OverrideColor = Color.LightGoldenrodYellow
                 };

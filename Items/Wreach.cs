@@ -132,12 +132,12 @@ namespace HJScarletRework.Items
         {
             Stopwatch.StartNew();
             Stopwatch sw = Stopwatch.StartNew();
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<TheSevenStarStar>(), 1, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 40f, ProjectileType<EndlessWarSmasher>(), 1, knockback, player.whoAmI);
             sw.Stop();
             // 输出经过的时间（毫秒）
-            Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");
-            // 更高精度输出
-            Main.NewText($"精确耗时: {sw.Elapsed.TotalMilliseconds:F4} ms");
+            //Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");
+            //// 更高精度输出
+            //Main.NewText($"精确耗时: {sw.Elapsed.TotalMilliseconds:F4} ms");
             return false;
             //Vector2 ownerMW = player.LocalMouseWorld();
             //添加需要的攻击单位

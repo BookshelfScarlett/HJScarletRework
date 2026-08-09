@@ -99,6 +99,11 @@ namespace HJScarletRework.Globals.Instances.Items
             float hitRadius = 28f * Main.inventoryScale;
             return Vector2.Distance(Main.MouseScreen, slotPos) < hitRadius;
         }
+        public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
+        {
+            if (ScarletItemIDSets.GrantsBoosterAfterSon[item.type] && item.IsExecutorWeapon())
+                damage *= 10f;
+        }
         public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
         {
             base.ModifyManaCost(item, player, ref reduce, ref mult);
@@ -190,7 +195,11 @@ namespace HJScarletRework.Globals.Instances.Items
         public override void HoldItem(Item item, Player player)
         {
             var usPlayer = player.HJScarlet();
-            bool usetactical = ScarletItemIDSets.ForceToTacticalExecute[item.type] || usPlayer.tacticalExecutionManual;
+            if (usPlayer.GeneralWeaponBuffTimer == 0 && ScarletItemIDSets.SharedSameBuffTimer[item.type])
+            {
+                usPlayer.GeneralWeaponIndex = item.type;
+            }
+            bool usetactical = (ScarletItemIDSets.ForceToTacticalExecute[item.type] || usPlayer.tacticalExecutionManual) && (!ScarletItemIDSets.ForceToCustomExecute[item.type]);
             if (usetactical && !ScarletItemIDSets.ForceToAutomaticExecute[item.type])
             {
                 usPlayer.tacticalExecution = true;
@@ -200,9 +209,9 @@ namespace HJScarletRework.Globals.Instances.Items
                 usPlayer.critDamageAll += CritsDamageBonus;
             }
             isShivering = usPlayer.protectorShiver;
-            if (item.IsWeapon() && player.HJScarlet().dragonHunter &&player.HeldItem.IsExecutorWeapon())
+            if (item.IsWeapon() && player.HJScarlet().dragonHunter)
             {
-                player.HJScarlet().critDamageExecutor += DragonHunterHead.FixedDamage;
+                player.HJScarlet().critDamageAll += DragonHunterHead.FixedDamage;
             }
         }
         public override bool? UseItem(Item item, Player player)

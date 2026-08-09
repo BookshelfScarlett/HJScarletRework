@@ -1,13 +1,15 @@
-﻿using ContinentOfJourney.Items;
+﻿using ContinentOfJourney;
+using ContinentOfJourney.Items;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
 {
@@ -18,6 +20,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
+            ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
         }
         public override void ExSD()
         {
@@ -31,6 +34,11 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             Item.knockBack = 2f;
             Item.shoot = ProjectileType<FrostoftheStormHeldProj>();
             Item.shootSpeed = 16;
+        }
+        public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
+        {
+            if (DownedBossSystem.downedSon)
+                damage *= 10;
         }
         public override bool CanUseItem(Player player)
         {

@@ -103,9 +103,6 @@ namespace HJScarletRework.Globals.Players
             ResetPets();
             ResetArmor();
             ResetBuff();
-
         }
-
-
     }
 }

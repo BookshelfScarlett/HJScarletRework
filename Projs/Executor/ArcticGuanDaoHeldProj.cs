@@ -2,14 +2,11 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
-using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Misc;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 
@@ -88,7 +85,6 @@ namespace HJScarletRework.Projs.Executor
             Owner.ChangeDir(Projectile.direction);
             Projectile.spriteDirection = Flip.ToDirectionInt() * Projectile.direction;
             Owner.ControlPlayerArm(Projectile.rotation);
-
         }
 
         public void UpdateHeldState()
@@ -194,7 +190,7 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 90, Main.rand.NextFloat(0.41f, .8f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                     Vector2 vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection);
-                    ECSParticle.SnowCloud(pos, vel, RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 1, 0.75f,0.1f);
+                    ECSParticle.SnowCloud(pos, vel, RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 1, 0.75f, 0.1f);
                 }
 
             }
@@ -246,9 +242,8 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 90, Main.rand.NextFloat(0.41f, .8f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                     Vector2 vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection);
-                    ECSParticle.SnowCloud(pos, vel, RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 1, 0.75f,0.1f);
+                    ECSParticle.SnowCloud(pos, vel, RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 1, 0.75f, 0.1f);
                 }
-
             }
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -271,7 +266,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Projectile.numHits < 1)
-                StopTiming = 2*Projectile.extraUpdates;
+                StopTiming = 2 * Projectile.extraUpdates;
             Projectile.AddExecutionTimeImmediate(OriginalItemID);
             for (int i = 0; i < 34; i++)
             {
@@ -292,7 +287,6 @@ namespace HJScarletRework.Projs.Executor
                 ((ArcticGuanDaoHeldProj)proj.ModProjectile).SwingTime = SwingTime + 1;
                 proj.HJScarlet().HasExecutionMechanic = true;
                 proj.HJScarlet().ExecutionStrike = Projectile.HJScarlet().ExecutionStrike;
-
             }
         }
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
@@ -310,9 +304,9 @@ namespace HJScarletRework.Projs.Executor
             effect.Parameters["uFadeinRigtLength"].SetValue(0.3f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.RoyalBlue* 0.80f, 0.55f);
-            DrawSlash(texture, Color.DeepSkyBlue* 0.40f, 0.40f);
-            DrawSlash(texture, Color.SkyBlue* 0.140f, 0.350f);
+            DrawSlash(texture, Color.RoyalBlue * 0.80f, 0.55f);
+            DrawSlash(texture, Color.DeepSkyBlue * 0.40f, 0.40f);
+            DrawSlash(texture, Color.SkyBlue * 0.140f, 0.350f);
 
 
             texture = HJScarletTexture.Texture_SwordSlash.Value;
@@ -321,8 +315,8 @@ namespace HJScarletRework.Projs.Executor
             effect.Parameters["uFadeinRigtLength"].SetValue(0.3f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.RoyalBlue* 0.55f, 0.95f);
-            DrawSlash(texture, Color.SkyBlue* 0.40f, 0.50f);
+            DrawSlash(texture, Color.RoyalBlue * 0.55f, 0.95f);
+            DrawSlash(texture, Color.SkyBlue * 0.40f, 0.50f);
             effect.Parameters["uFadeoutLeftLength"].SetValue(0.1f);
             effect.Parameters["uFadeinRigtLength"].SetValue(0.05f);
             DrawSlash(texture, Color.Lerp(Color.RoyalBlue, Color.White, 0.760f) * 0.75f, 0.85f, 1f);
@@ -361,8 +355,8 @@ namespace HJScarletRework.Projs.Executor
                 return false;
             PixelatedRenderManager.BeginDrawProj = true;
             Projectile.GetProjDrawInfo_Melee(out Texture2D tex, out Vector2 drawPosition, out float drawRotation, out Vector2 rotationPoint, out SpriteEffects flipSprite);
-                float endPro = EaseInCubic(Helper.GetAniProgress(1));
-                float endPro2 = EaseInBack(Helper.GetAniProgress(1));
+            float endPro = EaseInCubic(Helper.GetAniProgress(1));
+            float endPro2 = EaseInBack(Helper.GetAniProgress(1));
 
             if (ThirdSwing)
             {
@@ -381,15 +375,14 @@ namespace HJScarletRework.Projs.Executor
                     SB.Draw(tex, drawPosition + (TwoPi / 16f * i).ToRotationVector2() * 2f * time, null, Color.White.ToAddColor(), drawRotation, ori, Projectile.scale, flipSprite, 0);
                 SB.Draw(tex, drawPosition, null, c, drawRotation, ori, Projectile.scale, flipSprite, 0);
             }
-                SB.EnterShaderArea();
-                Texture2D glow = HJScarletTexture.Particle_CrossGlow.Value;
-                Vector2 pos = drawPosition + Vector2.UnitX.RotatedBy(Projectile.rotation) * 85f * Projectile.scale * (1 - endPro);
-                float glowScale = Projectile.scale * .1f * (1 - endPro);
-                SB.Draw(glow, pos, null, Color.RoyalBlue, drawRotation, glow.Size() / 2, glowScale, flipSprite, 0);
-                SB.Draw(glow, pos, null, Color.LightSkyBlue, drawRotation, glow.Size() / 2, glowScale * .95f, flipSprite, 0);
-                SB.Draw(glow, pos, null, Color.White, drawRotation, glow.Size() / 2, glowScale * .92f, flipSprite, 0);
-                SB.EndShaderArea();
-
+            SB.EnterShaderArea();
+            Texture2D glow = HJScarletTexture.Particle_CrossGlow.Value;
+            Vector2 pos = drawPosition + Vector2.UnitX.RotatedBy(Projectile.rotation) * 85f * Projectile.scale * (1 - endPro);
+            float glowScale = Projectile.scale * .1f * (1 - endPro);
+            SB.Draw(glow, pos, null, Color.RoyalBlue, drawRotation, glow.Size() / 2, glowScale, flipSprite, 0);
+            SB.Draw(glow, pos, null, Color.LightSkyBlue, drawRotation, glow.Size() / 2, glowScale * .95f, flipSprite, 0);
+            SB.Draw(glow, pos, null, Color.White, drawRotation, glow.Size() / 2, glowScale * .92f, flipSprite, 0);
+            SB.EndShaderArea();
             return false;
 
         }

@@ -8,6 +8,13 @@ namespace HJScarletRework.Globals.IDSets
     [ReinitializeDuringResizeArrays]
     public static class ScarletProjIDSets
     {
+
+        /// <summary>
+        /// 如果为<see langword="true"/>，标记该射弹为<see langword="巨人杀手"/>。
+        /// <br><see langword="巨人杀手"/>射弹会对归属于<see cref="ScarletNPCIDSets.Giant"/><see langword="巨人"/>的单位拥有额外增伤</br>
+        /// <br>默认集合里，包括了风暴战戟（的射弹）</br>
+        /// </summary>
+        public static bool[] GiantKiller = ProjectileID.Sets.Factory.CreateBoolSet(ProjectileType<StormSaberHeldProj>(), ProjectileType<StormSaberSlash>());
         /// <summary>
         /// 如果为<see langword="true"/>，标记该射弹为代行者的鞭子。
         /// <br>代行者的鞭子会有联动作用</br>

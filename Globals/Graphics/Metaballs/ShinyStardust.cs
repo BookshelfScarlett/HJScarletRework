@@ -141,8 +141,13 @@ namespace HJScarletRework.Globals.Graphics.Metaballs
             }
             if (CircleList.Count != 0)
             {
+
                 for (int i = 0; i < CircleList.Count; i++)
-                    Main.spriteBatch.Draw(HJScarletTexture.Texture_WhiteCircle.Value, CircleList[i].Center - Main.screenPosition, null, Color.White, 0, HJScarletTexture.Texture_WhiteCircle.Origin, CircleList[i].Scale, SpriteEffects.None, 0f);
+                {
+                    Texture2D tex = HJScarletTexture.Particle_SmokeAlt.Value;
+                    Rectangle frame = tex.Frame(4, 4, 1, 2);
+                    Main.spriteBatch.Draw(tex, CircleList[i].Center - Main.screenPosition, frame, Color.White, 0, frame.Size()/2f, CircleList[i].Scale, SpriteEffects.None, 0f);
+                }
             }
         }
     }

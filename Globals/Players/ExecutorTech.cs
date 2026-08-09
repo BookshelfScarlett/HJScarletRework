@@ -47,6 +47,13 @@ namespace HJScarletRework.Globals.Players
         /// <br>一般对于投掷小刀而言，需要在每个标记射弹初始化的时候传入这个type，然后在AI里面去检查这个index是否与当前的射弹相同</br>
         /// </summary>
         public int KnifeMarkIndex = -1;
+        /// <summary>
+        /// 总的武器增强Timer
+        /// <br>只有这个值为0，才会更新下方的index，下方的index则用于确认是否与玩家当前手持的index为同一个</br>
+        /// <br>因此，你可以通过这个东西来多地操作一些需要特殊增强的武器。</br>
+        /// </summary>
+        public int GeneralWeaponBuffTimer = 0;
+        public int GeneralWeaponIndex = 0;
         public void OnEnterWorldReset()
         {
             //每次进入世界的时候初始化这个列表

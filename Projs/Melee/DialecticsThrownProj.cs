@@ -2,8 +2,6 @@
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -19,7 +17,7 @@ namespace HJScarletRework.Projs.Melee
     /// </summary>
     public class DialecticsThrownProj : ThrownSpearProjClass
     {
-        public override string Texture => HJScarletItemProj.Proj_Dialectics.Path;
+        public override string Texture => ProjPath+GetType().Name;
         public enum WaveStyle
         {
             Sin,

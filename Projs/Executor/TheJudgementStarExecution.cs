@@ -76,12 +76,8 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsOutScreen())
                 return;
-            if (Projectile.IsOutScreen())
-                return;
             if (Main.rand.NextFloat() < Projectile.scale && Projectile.FinalUpdateNextBool(3))
                 new ShinyOrbParticle(Projectile.Center.ToRandCirclePosEdge(6f), Projectile.velocity / 6f, RandLerpColor(Color.Goldenrod, Color.PaleGoldenrod), 40, Main.rand.NextFloat(0.24f, 0.35f) * Projectile.scale).Spawn();
-            if (Main.rand.NextFloat() < Projectile.scale && Projectile.FinalUpdateNextBool(8))
-                new KiraStar(Projectile.Center.ToRandCirclePosEdge(6f), Vector2.Zero, RandLerpColor(Color.Goldenrod, Color.PaleGoldenrod), 40, 0, 1, Main.rand.NextFloat(0.10f, 0.135f) * Projectile.scale).Spawn();
 
 
         }

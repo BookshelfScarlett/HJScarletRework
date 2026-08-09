@@ -9,6 +9,17 @@ namespace HJScarletRework.Projs.Executor
     public class EndlessWarProj : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
+        public enum State
+        {
+            Shoot,
+            Return
+        }
+        public ref float Timer => ref Projectile.ai[0];
+        public State AttackState
+        {
+            get => (State)Projectile.ai[1];
+            set => Projectile.ai[1]=(float)value;
+        }
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(5);
@@ -29,7 +40,30 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
-            Projectile.rotation = Projectile.velocity.ToRotation();
+            if (AttackState == State.Shoot)
+            {
+                if(Timer > Projectile.MaxUpdates * 15f)
+                {
+                    AttackState = State.Return;
+                    Projectile.netUpdate = true;
+                    Timer = 0;
+                }
+            }
+            else if (AttackState == State.Return)
+            {
+                Projectile.velocity *= .95f;
+                float ratios = Clamp(Timer / 30f,0,1);
+                Projectile.rotation += Lerp(ToRadians(5f), ToRadians(0f), ratios);
+                if(ratios >= .99f)
+                {
+                    Projectile.Kill();
+                }
+            }
+        }
+        public override void OnKill(int timeLeft)
+        {
+            //爆开
+            base.OnKill(timeLeft);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

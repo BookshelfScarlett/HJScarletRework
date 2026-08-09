@@ -8,7 +8,6 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Misc;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
 using Terraria;
 
@@ -29,7 +28,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 10;
             Projectile.penetrate = 1;
             Projectile.scale = 0f;
-            Projectile.tileCollide = false;
+            Projectile.tileCollide = true;
             Projectile.timeLeft = 200;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
@@ -57,13 +56,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-
-        }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            Projectile.AddExecutionTimeImmediate<TheSevenStar>();
-            Projectile.velocity *= .001f;
-            Projectile.timeLeft = 15;
             float centerGlowScale = .12f;
             ECSParticle.CrossGlow(Projectile.Center, Color.SkyBlue, 45, 1, centerGlowScale);
             ECSParticle.CrossGlow(Projectile.Center, Color.LightSkyBlue, 45, 1, centerGlowScale * .98f);
@@ -76,6 +68,12 @@ namespace HJScarletRework.Projs.Executor
             }
             for (int i = 0; i < 10; i++)
                 ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(8), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.SkyBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            Projectile.AddExecutionTimeImmediate<TheSevenStar>();
+            Projectile.velocity *= .001f;
+            Projectile.timeLeft = 5;
         }
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
@@ -154,24 +152,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
-            //实际开始绘制的星星。
-            //Texture2D tex = HJScarletTexture.Particle_OpticalLineGlow.Value;
-            //Vector2 pos = Projectile.Center - Main.screenPosition;
-            //Color c = Color.Lerp(Color.LightSkyBlue, Color.SkyBlue, Projectile.localAI[1] / 6f);
-            //float generalScale = 4.92f * Projectile.Opacity;
-            //Vector2 scale = new Vector2(1.02f, 1.72f) * .024f * generalScale;
-            //Vector2 orig = tex.Size() / 2;
-            //SB.EnterShaderArea();
-            //DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DeepSkyBlue, 1.26f, 1f);
-            //DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.SkyBlue, 0.8f, 1f);
-            //DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.58f);
-            //SB.EnterShaderArea();
-            //SB.EndShaderArea();
-
-            //{
             PixelatedRenderManager.BeginDrawProj = true;
-
-            //}
             return false;
         }
     }

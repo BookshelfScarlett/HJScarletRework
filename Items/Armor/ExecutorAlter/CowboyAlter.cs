@@ -47,12 +47,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         {
             player.GetCritChance<ExecutorDamageClass>() += 5;
         }
-        public override void ExSD(Item item)
-        {
-            item.vanity = false;
-            item.defense = Defense;
-            item.rare = ItemRarityID.Orange;
-        }
 
         public override void AddRecipes()
         {
@@ -75,13 +69,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         {
             player.moveSpeed += 0.15f;
         }
-        public override void ExSD(Item item)
-        {
-            item.vanity = false;
-            item.defense = Defense;
-            item.rare = ItemRarityID.Orange;
-        }
-
         public override void AddRecipes()
         {
             Recipe.Create(ApplyArmor).

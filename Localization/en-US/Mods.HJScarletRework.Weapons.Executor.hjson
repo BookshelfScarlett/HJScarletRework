@@ -463,3 +463,28 @@ TheSevenStar: {
 	Tooltip: ""
 	ExecutionStrike: ""
 }
+
+StormSaber: {
+	DisplayName: Storm Saber
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+TheGreatDipper: {
+	DisplayName: The Great Dipper
+	Tooltip: ""
+	ExecutionStrike: ""
+	Special: ""
+}
+
+BambooBow: {
+	DisplayName: Bamboo Bow
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+BambooSword: {
+	DisplayName: Bamboo Sword
+	Tooltip: ""
+	ExecutionStrike: ""
+}

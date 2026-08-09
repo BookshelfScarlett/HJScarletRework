@@ -33,7 +33,7 @@ namespace HJScarletRework.Items.Armor.RedDragonKnight
         {
             return true;
         }
-        public float Damage = 0.10f;
+        public float Damage = 0.05f;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent());
         public override void UpdateEquip(Player player)
         {

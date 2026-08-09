@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.ParticleECS
@@ -38,7 +37,7 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
         }
         public override void Draw(ref ECSParticleData data)
         {
-            Texture2D tex = HJScarletTexture.Particle_CrossGlow.Value;
+            Texture2D tex = data.aibool0 ? HJScarletTexture.Particle_OpticalLineGlow.Value : HJScarletTexture.Particle_CrossGlow.Value;
             Main.spriteBatch.Draw(tex, data.Position - Main.screenPosition, null, data.DrawColor * data.Opacity, data.Rotation, tex.Size() / 2, data.Scale, 0, 0);
         }
     }

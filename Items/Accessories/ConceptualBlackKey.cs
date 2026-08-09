@@ -16,13 +16,12 @@ namespace HJScarletRework.Items.Accessories
         public int Crit = 15;
         public float CritDamage = .30f;
         public int AP = 60;
-        public int HealAmit = 30;
+        public int HealAmit = 24;
         public override void ExSD()
         {
             Item.width = Item.height = 32;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.accessory = true;
-            Item.defense = 5;
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DamageAdd.ToPercent(), CritDamage.ToPercent(), AP, HealAmit);
         public override void UpdateAccessory(Player player, bool hideVisual)

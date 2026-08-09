@@ -61,12 +61,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
             player.GetDamage<ExecutorDamageClass>() += 0.10f;
             player.noKnockback = true;
         }
-        public override void ExSD(Item item)
-        {
-            item.vanity = false;
-            item.defense = Defense;
-            item.rare = ItemRarityID.Red;
-        }
         public override void ExModifyTooltipsAlter(Item item, List<TooltipLine> tooltips, string path)
         {
             tooltips.AddSwapTooltipValueBossCondition(NPCType<TheLifebringerHead>());
@@ -89,12 +83,6 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
             player.GetDamage<ExecutorDamageClass>() += 0.05f;
             player.GetCritChance<ExecutorDamageClass>() += 5;
             player.moveSpeed += 0.20f;
-        }
-        public override void ExSD(Item item)
-        {
-            item.vanity = false;
-            item.defense = Defense;
-            item.rare = ItemRarityID.Red;
         }
         public override void ExModifyTooltipsAlter(Item item, List<TooltipLine> tooltips, string path)
         {

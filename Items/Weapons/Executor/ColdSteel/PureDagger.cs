@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -31,6 +30,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override bool CanShoot(Player player)
         {
             return !player.HasProj(Item.shoot) && !player.HasProj<PureDaggerExecution>();
+            //return !player.HasProj<EndlessWarSmasher>();
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
@@ -41,6 +41,14 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             proj.HJScarlet().ExecutionStrike = exe;
             ((PureDaggerProj)proj.ModProjectile).BeginTargetRotation = dir.ToRotation();
             ((PureDaggerProj)proj.ModProjectile).Flip = Main.rand.NextBool();
+            //bool exe = player.GetExecutionSrike();
+            //Vector2 dir = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitX);
+            //Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<EndlessWarSmasher>(), damage, knockback, player.whoAmI);
+            //proj.HJScarlet().HasExecutionMechanic = true;
+            //proj.HJScarlet().ExecutionStrike = exe;
+            //((EndlessWarSmasher)proj.ModProjectile).BeginTargetRotation = dir.ToRotation();
+            //((EndlessWarSmasher)proj.ModProjectile).Flip = Main.rand.NextBool();
+
             return false;
         }
     }

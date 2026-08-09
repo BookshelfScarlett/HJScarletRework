@@ -32,7 +32,7 @@ namespace HJScarletRework.Projs.Executor
         public AnimationStruct Helper = new(3);
         public float Oscillation = 0;
         public int LaserShootTime = 0;
-        public int TotalLaserTime = 70;
+        public int TotalLaserTime = 72;
         public bool UseVelocity = false;
         public bool ShootFireball = false;
         public ref float Timer => ref Projectile.ai[0];
@@ -221,7 +221,8 @@ namespace HJScarletRework.Projs.Executor
             Projectile.extraUpdates = 3;
 
             SoundEngine.PlaySound(HJScarletSounds.Misc_MagicStaffFire with { MaxInstances = 2, Pitch = -0.4f, Volume = 0.5f }, Projectile.Center);
-            ScreenShakeSystem.AddScreenShakes(Owner.Center, 60f, 180, Projectile.velocity.ToRotation(), ToRadians(0f));
+            ScreenDarknessSystem.AddScreenDarkness(.85f, 6, 1, 36, easeOut: EaseInCubic);
+            //ScreenShakeSystem.AddScreenShakes(Owner.Center, 60f, 180, Projectile.velocity.ToRotation(), ToRadians(0f));
 
         }
         public void UpdateIdlePosBeforeStrike()

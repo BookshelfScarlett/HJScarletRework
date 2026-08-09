@@ -1,18 +1,17 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class SpearofEscapeMissile : HJScarletFriendlyProj
+    public class SpearofEscapeMissile : HJScarletProj
     {
-        public override string Texture => ProjPath + nameof(SpearofEscapeMissile);
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public enum Style
         {
             Spawn,

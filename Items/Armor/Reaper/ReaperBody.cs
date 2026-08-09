@@ -21,7 +21,7 @@ namespace HJScarletRework.Items.Armor.Reaper
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritDamage.ToPercent());
-        public int Defense = 60;
+        public int Defense = 50;
         public override void ExSD()
         {
             Item.defense = Defense;

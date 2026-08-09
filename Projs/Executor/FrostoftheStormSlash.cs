@@ -7,8 +7,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 
@@ -25,10 +23,6 @@ namespace HJScarletRework.Projs.Executor
         private Vector2 TopRightPoint = new Vector2(50, -100);
         private Vector2 BottomLeftPoint = new Vector2(50, 100);
         private Vector2 BottomRightPoint = new Vector2(-300, 0);
-        //private Vector2 TopLeftPoint = new Vector2(20, -50);
-        //private Vector2 TopRightPoint = new Vector2(20, -50);
-        //private Vector2 BottomLeftPoint = new Vector2(20, 50);
-        //private Vector2 BottomRightPoint = new Vector2(20,50);
 
         public float RandOffset1;
         public float RandOffset2;
@@ -154,12 +148,7 @@ namespace HJScarletRework.Projs.Executor
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             Texture2D tex = HJScarletTexture.Texture_StandardGradient.Value;
             Effect e = HJScarletShader.AlphaFade;
-            e.Parameters["uFadeoutLeftLength"].SetValue(0.1f);
-            e.Parameters["uFadeinRigtLength"].SetValue(0.1f);
-            e.Parameters["uFadeinTopLength"].SetValue(0);
-            e.Parameters["uFadeinBottomLength"].SetValue(0.4f);
-            e.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
-            e.CurrentTechnique.Passes[0].Apply();
+            HJScarletMethods.ApplyAlphaCut(new Vector4(.1f, .1f, 0f, .4f), Vector2.Zero, Vector2.One);
             Color setColor = Color.Lerp(Color.RoyalBlue, Color.WhiteSmoke, 0.7f);
             DrawBaseWave(tex, Color.LightSkyBlue * 0.30f, 18f);
             DrawBaseWave(tex, Color.SkyBlue * 0.40f, 15f);
@@ -180,7 +169,6 @@ namespace HJScarletRework.Projs.Executor
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.15f + RandOffset3), new Vector2(2f, 0.205f), Color.White);
             DrawBaseWave(texture2, setColor, 20f);
             DrawBaseWave(texture2, Color.RoyalBlue * 0.5f, 20f);
-
 
             setColor = Color.Lerp(Color.RoyalBlue, Color.WhiteSmoke, 0.28f);
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.35f + RandOffset4), new Vector2(1.5f, 0.31f), setColor);

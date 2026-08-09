@@ -151,7 +151,8 @@ namespace HJScarletRework.Projs.Executor
         {
 
             SoundEngine.PlaySound(HJScarletSounds.Misc_MagicStaffFire with { MaxInstances = 2, Pitch = -0.4f, Volume = 0.5f }, Projectile.Center);
-            ScreenShakeSystem.AddScreenShakes(Owner.Center, 60f, 180, Projectile.velocity.ToRotation(), ToRadians(0f));
+            //ScreenShakeSystem.AddScreenShakes(Owner.Center, 60f, 180, Projectile.velocity.ToRotation(), ToRadians(0f));
+            ScreenDarknessSystem.AddScreenDarkness(.85f, 6, 1, 36, easeOut: EaseInCubic);
             for (int i = 0; i < 16; i++)
             {
                 Vector2 vel = (Projectile.velocity).ToRandVelocity(ToRadians(12f), 1f, 8f);

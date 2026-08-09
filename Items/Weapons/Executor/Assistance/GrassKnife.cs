@@ -31,8 +31,12 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
-            proj.HJScarlet().HasExecutionMechanic = true;
+            for (int i = 0; i < 3; i++)
+            {
+                Vector2 randomVelocity = velocity.ToSafeNormalize().RotatedByRandom(ToRadians(12.5f)) * Main.rand.NextFloat(0.88f, 1.12f);
+                Projectile proj = Projectile.NewProjectileDirect(source, position, randomVelocity*Item.shootSpeed, type, damage, knockback, player.whoAmI);
+                proj.HJScarlet().HasExecutionMechanic = true;
+            }
             GhostKnife.QuickSpawnMark(Type, Item.HJScarlet().ExecutionProj, player, source, position);
             return false;
         }

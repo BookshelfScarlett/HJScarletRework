@@ -45,7 +45,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public sealed override void OnFirstFrame()
         {
-            //初始化的失活将当前的射弹index传入
+            //初始化将当前的射弹index传入
             Owner.HJScarlet().KnifeMarkIndex = Type;
             ExtraFirstFrame();
         }
@@ -139,22 +139,10 @@ namespace HJScarletRework.Projs.Executor
             return false;
         }
     }
-    
-    public class GhostKnifeMark : HJScarletProj, IPixelatedRenderer
+    public class GhostKnifeMark : KnifeMarkClass
     {
-        public static string MarkPath => $"HJScarletRework/Assets/Texture/Items/Weapons/";
-        public override string Texture => MarkPath + GetType().Name;
-        public ref float Osci => ref Projectile.ai[1];
-        public override void ExSD()
-        {
-            Projectile.width = Projectile.height = 40;
-            Projectile.timeLeft = GetSeconds(60);
-            Projectile.tileCollide = false;
-            Projectile.scale = 0;
-            Projectile.Opacity = 0;
-            Projectile.ignoreWater = true;
-        }
-        public override void OnFirstFrame()
+        public override Color BackgroundColor => Color.WhiteSmoke;
+        public override void ExtraFirstFrame()
         {
             Vector2 spawnPos = Projectile.Center;
             for (int i = 0; i < 6; i++)
@@ -166,75 +154,12 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.TurbulenceShinyOrb(spawnPos.ToRandCirclePosEdge(30), Main.rand.NextFloat(1.2f, 2.4f) * 2, RandLerpColor(Color.SkyBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .13f);
             ScarletSound(HJScarletSounds.Misc_Spell, Projectile.Center, 0.45f);
         }
-        public override void ProjAI()
+        public override void ExProjAI()
         {
-            if (Projectile.timeLeft > 50)
-            {
-                Projectile.Opacity = Lerp(Projectile.Opacity, 1.01f, 0.21f);
-                Projectile.scale = Lerp(Projectile.scale, 1.15f, .21f);
-            }
-            else
-                Projectile.Opacity = Lerp(Projectile.Opacity, 0f, 0.1f);
-            Osci += ToRadians(.5f);
-            Vector2 targetVector = Owner.Center.GetNormalVector2(Main.MouseWorld);
-            Vector2 mountedPos = Owner.MountedCenter - Vector2.UnitX.RotatedBy(targetVector.ToRotation()) * 80f;
-            mountedPos.Y += (float)Math.Sin((Osci * 2f)) * 10f;
-            Projectile.Center = Vector2.Lerp(Projectile.Center, mountedPos, 0.32f);
             if (Main.rand.NextBool(3))
             {
                 new SmokeParticle(Projectile.ToRandRec(), Vector2.UnitY, RandLerpColor(Color.SkyBlue, Color.White), Main.rand.Next(20, 40), RandRotTwoPi, 1, 0.20f, true).Spawn();
             }
-        }
-        public override bool ShouldUpdatePosition() => false;
-        public override bool? CanDamage() => false;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforePlayer;
-        public BlendState BlendState => BlendState.Additive;
-
-        public void RenderPixelated(SpriteBatch sb)
-        {
-            Color BackgroundColor = Color.GhostWhite;
-            Asset<Texture2D> value = HJScarletTexture.Trail_Lightning4.Texture;
-            float BeamLength = (Projectile.Center - Owner.MountedCenter).Length();
-            Vector2 orig = new(0, value.Height() / 2);
-            float xScale = BeamLength / value.Width();
-            //轨迹
-            HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
-            Effect shader = HJScarletShader.StandardFlowShader;
-            shader.Parameters["LaserTextureSize"].SetValue(value.Size());
-            shader.Parameters["targetSize"].SetValue(new Vector2(BeamLength, value.Height()));
-            shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -40);
-            shader.Parameters["uColor"].SetValue(BackgroundColor.ToVector4() * Projectile.Opacity);
-            shader.Parameters["uFadeoutLength"].SetValue(0.02f);
-            shader.Parameters["uFadeinLength"].SetValue(0.02f);
-            shader.CurrentTechnique.Passes[0].Apply();
-            SB.Draw(value.Value, Projectile.Center - Main.screenPosition, null, BackgroundColor, (Owner.MountedCenter - Projectile.Center).ToRotation(), orig, new Vector2(xScale * Clamp(Projectile.scale, 0.02f, 1f), 0.25f * Projectile.scale), 0, 0);
-            SB.Draw(value.Value, Projectile.Center - Main.screenPosition, null, Color.White * 0.5f, (Owner.MountedCenter - Projectile.Center).ToRotation(), orig, new Vector2(xScale * Clamp(Projectile.scale, 0.02f, 1f), 0.20f * Projectile.scale), 0, 0);
-            //边框
-            HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
-            Texture2D ring = HJScarletTexture.Particle_ShinySquareSplit.Value;
-            Texture2D block = HJScarletTexture.Texture_WhiteCube.Value;
-            float scale = Projectile.scale * 0.195f;
-            //用于填色
-            SB.Draw(block, Projectile.Center - Main.screenPosition, null, BackgroundColor * .65f, PiOver4, block.ToOrigin(), Projectile.scale * 2.1f, 0, 0);
-            for (int i = 0; i < 4; i++)
-                SB.Draw(ring, Projectile.Center - Main.screenPosition, null, BackgroundColor, PiOver2 * i, ring.ToOrigin(), scale, 0, 0);
-            HJScarletMethods.EndShaderAreaPixel();
-        }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overWiresUI.Add(index);
-        }
-        public override bool PreDraw(ref Color lightColor)
-        {
-            PixelatedRenderManager.BeginDrawProj = true;
-            Texture2D tex = Projectile.GetTexture();
-            Vector2 drawPos = Projectile.Center - Main.screenPosition;
-            SpriteEffects se = Owner.direction > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            float rot = Owner.direction > 0 ? Projectile.rotation + PiOver4 : Projectile.rotation - PiOver4;
-            for (int i = 0; i < 8; i++)
-                SB.Draw(tex, drawPos + ToRadians(360f / 8 * i).ToRotationVector2() * 2f, null, Color.White.ToAddColor(50), rot, tex.ToOrigin(), Projectile.scale, se, 0);
-            SB.Draw(tex, drawPos, null, Color.White, rot, tex.ToOrigin(), Projectile.scale, se, 0);
-            return false;
         }
     }
 }

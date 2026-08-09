@@ -16,11 +16,19 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Noise_Misc { get; set; }
         public static Tex2DWithPath Noise_Misc2 { get; set; }
         public static Tex2DWithPath Noise_Aura { get; set; }
+        public static Tex2DWithPath Noise_EmptyAura { get; set; }
+        public static Tex2DWithPath Noise_HeavyAura { get; set; }
+        public static Tex2DWithPath Noise_Smoke { get; set; }
+        public static Tex2DWithPath Noise_WaterFlow { get; set; }
+        public static Tex2DWithPath Noise_BlackGalaxy1 { get; set; }
+        public static Tex2DWithPath Noise_BlackGalaxy2 { get; set; }
+
 
         public static Tex2DWithPath ColorMap_Aqua { get; set; }
 
         public static Tex2DWithPath Metaball_ShadowNebula { get; set; }
         public static Tex2DWithPath Metaball_FlickerWater { get; set; }
+        public static Tex2DWithPath Metaball_GreenWater { get; set; }
         public static Tex2DWithPath Metaball_ShinyStardust { get; set; }
         public static Tex2DWithPath Metaball_Bloody { get; set; }
         public static Asset<DynamicSpriteFont> Font_Eras_Bold { get; set; }
@@ -36,12 +44,19 @@ namespace HJScarletRework.Assets.Registers
 
             Metaball_ShadowNebula = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_ShadowNebula)}");
             Metaball_FlickerWater = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_FlickerWater)}");
+            Metaball_GreenWater = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_GreenWater)}");
             Metaball_ShinyStardust = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_ShinyStardust)}");
             Metaball_Bloody = new Tex2DWithPath($"{Path_Metaball}{nameof(Metaball_Bloody)}");
 
             Noise_Misc = new Tex2DWithPath($"{Path_General}{nameof(Noise_Misc)}");
             Noise_Misc2 = new Tex2DWithPath($"{Path_General}{nameof(Noise_Misc2)}");
             Noise_Aura = new Tex2DWithPath($"{Path_General}{nameof(Noise_Aura)}");
+            Noise_EmptyAura = new Tex2DWithPath($"{Path_General}{nameof(Noise_EmptyAura)}");
+            Noise_HeavyAura = new Tex2DWithPath($"{Path_General}{nameof(Noise_HeavyAura)}");
+            Noise_Smoke = new Tex2DWithPath($"{Path_General}{nameof(Noise_Smoke)}");
+            Noise_WaterFlow= new Tex2DWithPath($"{Path_General}{nameof(Noise_WaterFlow)}");
+            Noise_BlackGalaxy1= new Tex2DWithPath($"{Path_General}{nameof(Noise_BlackGalaxy1)}");
+            Noise_BlackGalaxy2= new Tex2DWithPath($"{Path_General}{nameof(Noise_BlackGalaxy2)}");
 
             ColorMap_Aqua = new Tex2DWithPath($"{Path_General}{nameof(ColorMap_Aqua)}");
 
@@ -58,12 +73,19 @@ namespace HJScarletRework.Assets.Registers
 
             Metaball_ShadowNebula = null;
             Metaball_FlickerWater = null;
+            Metaball_GreenWater = null;
             Metaball_ShinyStardust = null;
             Metaball_Bloody = null;
 
             Noise_Misc = null;
             Noise_Misc2 = null;
             Noise_Aura = null;
+            Noise_EmptyAura = null;
+            Noise_Smoke= null;
+            Noise_HeavyAura = null;
+            Noise_WaterFlow = null;
+            Noise_BlackGalaxy2 = null;
+            Noise_BlackGalaxy1= null;
 
             ColorMap_Aqua = null;
 

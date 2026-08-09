@@ -1,13 +1,11 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
-using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Misc;
-using Microsoft.Extensions.Logging.Abstractions;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor

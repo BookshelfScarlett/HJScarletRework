@@ -2,8 +2,6 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -11,9 +9,8 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class CandLanceFire : HJScarletFriendlyProj
+    public class CandLanceFire : HJScarletProj
     {
-        public override string Texture => HJScarletItemProj.Proj_CandLanceFire.Path;
         public override EnumDamageClass Category => EnumDamageClass.Melee;
         public ref float AttackTimer => ref Projectile.ai[0];
 

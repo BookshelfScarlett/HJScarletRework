@@ -2,7 +2,7 @@
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
-using HJScarletRework.Items.Weapons.Executor.Misc;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;

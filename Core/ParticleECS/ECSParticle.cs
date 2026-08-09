@@ -143,5 +143,21 @@ namespace HJScarletRework.Core.ParticleECS
             BlendState bs = blendState ?? BlendState.Additive;
             return ECSMethod.NewParticle(GetInstance<HighResolutionThunder>().Type, timeLeft, pos, vel, color, opacity, rotation, scale, bs, aiint0: thunderType);
         }
+        public static int ShinyCrossStarSmall(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float scale, float rotSpeed = 0.1f, BlendState blendstate = null)
+        {
+            BlendState bs = blendstate ?? BlendState.Additive;
+            return ECSMethod.NewParticle(GetInstance<ShinyCrossStareSmall>().Type, timeLeft, pos, vel, color, opacity, scale: scale, blendstate: bs, ai0: rotSpeed);
+        }
+        /// <summary>
+        /// <paramref name="type"/>为圆环种类。1：普通圆环，2：硬边圆环，3：模糊空圆环，其他：发光圆环<br></br>
+        /// <paramref name="fadinTime"/> 为这个十字辉光的淡入时间（归一化比率），如果设置为0则无淡入
+        /// </summary>
+        public static int Ring(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float rotation, float scale, float fadinTime = 0.4f, int type = 0, BlendState blendState = null)
+        {
+            BlendState bs = blendState ?? BlendState.Additive;
+            return ECSMethod.NewParticle(GetInstance<Ring>().Type, timeLeft, pos, vel, color, opacity, rotation, scale, bs, ai0: fadinTime, aiint0: type);
+        }
+
+
     }
 }

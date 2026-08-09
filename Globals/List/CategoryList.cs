@@ -27,6 +27,10 @@ namespace HJScarletRework.Globals.List
         /// 主要用于Boss方面
         /// </summary>
         public static Dictionary<int, string> DownedBossConditionList = [];
+        /// <summary>
+        /// 代行者处决叠层的核心机制，该字典用于存储每个代行者武器对应的总处决要求次数<br></br>
+        /// <see langword="Key"/>即键为代行者的武器ID，而对应的<see langword="Value"/>即值为该武器对应的处决要求
+        /// </summary>
         public static Dictionary<int, int> ExecuteRequests = [];
         public static Dictionary<int, string> VanityItemDictionary = [];
         public static Dictionary<int, ExecutorWeaponType> ExecutorTypes = [];

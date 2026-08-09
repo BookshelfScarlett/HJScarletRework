@@ -34,9 +34,11 @@ namespace HJScarletRework.Globals.IDSets
             NPCType<TheSon>());
         /// <summary>
         /// 如果为<see langword="true"/>，则该NPC会被视为巨人。主要用于极其巨大的单位。
-        /// <br>默认集合里，包括了滴答钟塔、全景监狱、世界之树与他们的FTW世界变体、和永落鲸本身</br>
+        /// <br>默认集合里，包括了永落鲸本身，天界塔，与月球领主</br>
         /// </summary>
-        public static bool[] Giant = NPCID.Sets.Factory.CreateBoolSet(NPCType<WorldsEndEverlastingFallingWhale>());
+        public static bool[] Giant = NPCID.Sets.Factory.CreateBoolSet(NPCType<WorldsEndEverlastingFallingWhale>(),
+            NPCID.LunarTowerNebula,NPCID.LunarTowerSolar,NPCID.LunarTowerStardust,NPCID.LunarTowerVortex,
+            NPCID.MoonLordCore,NPCID.MoonLordHand,NPCID.MoonLordHead,NPCID.MoonLordLeechBlob,NPCID.MoonLordFreeEye);
 
     }
 }

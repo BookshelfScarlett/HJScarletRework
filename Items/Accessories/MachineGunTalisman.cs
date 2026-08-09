@@ -10,12 +10,11 @@ namespace HJScarletRework.Items.Accessories
     public class MachineGunTalisman : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
-        public int HealAmt = 20;
+        public int HealAmt = 16;
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Cyan);
             Item.accessory = true;
-            Item.defense = 2;
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(HealAmt);
         public override void UpdateAccessory(Player player, bool hideVisual)

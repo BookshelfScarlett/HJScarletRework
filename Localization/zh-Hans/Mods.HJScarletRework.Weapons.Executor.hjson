@@ -137,6 +137,7 @@ CrimsonScythe: {
 	ExtraMechanic:
 		'''
 		与前台死神套装一同组合时，获得如下效果
+		增加15%代行者伤害、暴击概率与暴击伤害和30点防御力
 		允许无限飞行时间，获得冲刺能力
 		'''
 	ConditionMechanic:
@@ -642,5 +643,55 @@ TheSevenStar: {
 		'''
 		七颗亮星向光标位置发射一道光束
 		光束会穿透多名敌人
+		'''
+}
+
+StormSaber: {
+	DisplayName: 风暴战戟
+	Tooltip:
+		'''
+		摧毁敌人
+		以残断剑身与残余风暴之力粗暴重组的异构产物
+		虽非正统，仍可对巨人发挥些旧日之力
+		'''
+	ExecutionStrike: 拥有更大的挥舞范围，发射的剑气也更大
+}
+
+TheGreatDipper: {
+	DisplayName: 极星
+	Tooltip:
+		'''
+		向光标位置发射两枚星星
+		在身后点亮北斗七星
+		该模式下处决手动执行
+		'''
+	ExecutionStrike:
+		'''
+		每轮挥舞发射七枚追踪的亮星，并在背后逐渐点亮北斗七星
+		直接命中时也会追加七枚亮星
+		北斗七星完全点亮后将会执行处决攻击，并在光标位置展开持续性伤害的银河
+		该模式下处决自动执行
+		'''
+	Special: ""
+}
+
+BambooBow: {
+	DisplayName: 竹弓
+	Tooltip: ""
+	ExecutionStrike:
+		'''
+		强化接下来的12次攻击
+		提高攻击速度，箭矢飞行的速度，并且箭矢将穿透一名敌人
+		'''
+}
+
+BambooSword: {
+	DisplayName: 习武竹刀
+	Tooltip: 伤害较低，但击中小型敌人时会短暂制停并击飞
+	ExecutionStrike:
+		'''
+		将习武竹刀直接掷出，并在命中第一个敌人后滞停
+		竹刀将会短暂停留，旋转自身打击靠近的敌人
+		打击时总会制停对方
 		'''
 }

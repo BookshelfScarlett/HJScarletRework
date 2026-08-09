@@ -37,6 +37,24 @@ namespace HJScarletRework.Projs.Executor
         public bool PlaySound = false;
         public int StoredLifeTime = 0;
         public float RightClickHoldingTime = 0;
+        public enum DeadType
+        {
+            AnomarlyDead,
+            TurnIntoMinionDead,
+            TacticalDead,
+            MinionAutoDead
+        }
+        /// <summary>
+        /// 盖亚重锤如果被处死时的类型
+        /// <br>处死模式为<see cref="DeadType.AnomarlyDead"/>时为重击情况下丢失目标的非正常死亡，用于盖亚锤复原自身</br>
+        /// <br>处死模式为<see cref="DeadType.TurnIntoMinionDead"/>时为玩家选择切换为仆从模式引起的死亡，此时生成的飞弹由射线仆从刚生成时接管</br>
+        /// <br>处死模式为<see cref="DeadType.TacticalDead"/>时为玩家手动发起的主动死亡，此时生成的飞弹会具有更多的治疗</br>
+        /// <br>处死模式为<see cref="DeadType.MinionAutoDead"/>时为自然死亡，此时生成的飞弹会有较少的全量治疗</br>
+        /// </summary>
+
+        public DeadType GaiaStrikeDeadType = DeadType.MinionAutoDead;
+
+
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting();
@@ -50,43 +68,82 @@ namespace HJScarletRework.Projs.Executor
         public override bool? CanDamage() => false;
         public override void OnFirstFrame()
         {
+            //刚生成的时候总会重设为这个。
+            GaiaStrikeDeadType = DeadType.MinionAutoDead;
             StoredLifeTime = Projectile.timeLeft;
             Helper.MaxProgress[0] = 30 * Projectile.MaxUpdates;
             Helper.MaxProgress[1] = 25 * Projectile.MaxUpdates;
             Helper.MaxProgress[2] = 30 * Projectile.MaxUpdates;
             Helper.MaxProgress[3] = 25 * Projectile.MaxUpdates;
         }
+        public override void OnKill(int timeLeft)
+        {
+            switch(GaiaStrikeDeadType)
+            {
+                //极端情况下如果是非正常死亡，会刷新自己
+                //但是，这种情况实际上，极其罕见。
+                case DeadType.AnomarlyDead:
+                    RefreshProjStatement(Type);
+                    break;
+                case DeadType.TurnIntoMinionDead:
+                    RefreshProjStatement(ProjectileType<GaiaStrikerMountedProj>());
+                    break;
+                case DeadType.TacticalDead:
+                    ForceDeadOrNormalDead(3);
+                    break;
+                case DeadType.MinionAutoDead:
+                    ForceDeadOrNormalDead(4);
+                    break;
+            }
+        }
 
+        public void RefreshProjStatement(int v)
+        {
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, v, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+            proj.originalDamage = Projectile.originalDamage;
+            //发起转化之后会减去一秒的使用时间
+            int applyDeadTime = StoredLifeTime - GetSeconds(1);
+            if (applyDeadTime <= 50)
+                applyDeadTime = 50;
+            proj.timeLeft = applyDeadTime;
+
+        }
+        public void ForceDeadOrNormalDead(int mode)
+        {
+            //爆开
+            for (int i = 0; i < 36; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
+                Vector2 vel = RandVelTwoPi(0.9f, 6.4f);
+                BloodyMetaball.SpawnParticle(pos, vel, 0.35f, RandRotTwoPi, true);
+            }
+            for (int i = 0; i < 36; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
+                Vector2 vel = RandVelTwoPi(0.9f, 9.4f);
+                BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.75f, vel.ToRotation(), false);
+                BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.15f, RandRotTwoPi, true);
+            }
+            for (int i = 0; i < GaiaStriker.BloodBulletCount; i++)
+            {
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(6), RandVelTwoPi(6f, 10f), ProjectileType<GaiaStrikerBloodyBullet>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                proj.ai[2] = mode;
+                proj.HJScarlet().HasExecutionMechanic = false;
+            }
+            ScreenDarknessSystem.AddScreenDarkness(0.85f, 5, 10, 20, easeOut: EaseInOutExpo);
+            ECSParticle.CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f, .4f, BlendState.Additive);
+            ECSParticle.CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.30f, .4f, BlendState.Additive);
+            ScreenShakeSystem.AddScreenShakes(Projectile.Center, 60, 80, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
+            ScarletSound(HJScarletSounds.Gaia_Toss, Projectile.Center, .75f, 0, -.64f, .1f, 2);
+            ScarletSound(HJScarletSounds.Gaia_Explosion, Projectile.Center, .477f, 0, -.4f, .1f);
+            if (mode == 3)
+                Projectile.AddExecutionTimeDelayed(ItemType<GaiaStriker>(), 6);
+        }
         public override void ProjAI()
         {
             if (Projectile.timeLeft < 20)
             {
-                //爆开
-                for (int i = 0; i < 36; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
-                    Vector2 vel = RandVelTwoPi(0.9f, 6.4f);
-                    BloodyMetaball.SpawnParticle(pos, vel, 0.35f, RandRotTwoPi, true);
-                }
-                for (int i = 0; i < 36; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
-                    Vector2 vel = RandVelTwoPi(0.9f, 9.4f);
-                    BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.75f, vel.ToRotation(), false);
-                    BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.15f, RandRotTwoPi, true);
-                }
-                for (int i = 0; i < GaiaStriker.BloodBulletCount; i++)
-                {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(6), RandVelTwoPi(6f, 10f), ProjectileType<GaiaStrikerBloodyBullet>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
-                    proj.ai[2] = 4;
-                    proj.HJScarlet().HasExecutionMechanic = false;
-                }
-                ScreenDarknessSystem.AddScreenDarkness(0.85f, 5,10,20,easeOut:EaseInOutExpo);
-                ECSParticle.CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f, .4f, BlendState.Additive);
-                ECSParticle.CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.30f, .4f, BlendState.Additive);
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 60, 80, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
-                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 0, Pitch = -0.4f, Volume = .477f }, Projectile.Center);
-                SoundEngine.PlaySound(HJScarletSounds.Gaia_Toss with { MaxInstances = 0, Pitch = -0.64f, Volume = .577f }, Projectile.Center);
+                GaiaStrikeDeadType = DeadType.MinionAutoDead;
                 Projectile.Kill();
                 return;
             }
@@ -112,32 +169,7 @@ namespace HJScarletRework.Projs.Executor
             if (RightClickHoldingTime > GetSeconds(1))
             {
                 //爆开
-                for (int i = 0; i < 36; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
-                    Vector2 vel = RandVelTwoPi(0.9f, 6.4f);
-                    BloodyMetaball.SpawnParticle(pos, vel, 0.35f, RandRotTwoPi, true);
-                }
-                for (int i = 0; i < 36; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
-                    Vector2 vel = RandVelTwoPi(0.9f, 9.4f);
-                    BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.75f, vel.ToRotation(), false);
-                    BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.15f, RandRotTwoPi, true);
-                }
-                for (int i = 0; i < GaiaStriker.BloodBulletCount; i++)
-                {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(6), RandVelTwoPi(6f, 10f), ProjectileType<GaiaStrikerBloodyBullet>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
-                    proj.ai[2] = 3;
-                    proj.HJScarlet().HasExecutionMechanic = false;
-                }
-                ECSParticle.CrossGlow(Projectile.Center, Color.Red, 40, 1, 0.30f, .4f, BlendState.Additive);
-                ECSParticle.CrossGlow(Projectile.Center, Color.DarkRed, 40, 1, 0.30f, .4f, BlendState.Additive);
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 60, 80, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
-                ScreenDarknessSystem.AddScreenDarkness(0.85f, 5,10,20,easeOut:EaseInOutExpo);
-                SoundEngine.PlaySound(HJScarletSounds.Gaia_Explosion with { MaxInstances = 0, Pitch = -0.4f, Volume = .477f }, Projectile.Center);
-                SoundEngine.PlaySound(HJScarletSounds.Gaia_Toss with { MaxInstances = 0, Pitch = -0.64f, Volume = .577f }, Projectile.Center);
-                Projectile.AddExecutionTimeDelayed(ItemType<GaiaStriker>(), 6);
+                GaiaStrikeDeadType = DeadType.TacticalDead;
                 Projectile.Kill();
                 return;
             }
@@ -202,12 +234,7 @@ namespace HJScarletRework.Projs.Executor
             //只有手持武器的情况下才允许发起这个切换
             if (Owner.IsHolding<GaiaStriker>() && HJScarletKeybinds.GeneralActionKeybind.JustPressed)
             {
-                if (Projectile.IsMe())
-                {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<GaiaStrikerMountedProj>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
-                    proj.originalDamage = Projectile.originalDamage;
-                    proj.timeLeft = StoredLifeTime;
-                }
+                GaiaStrikeDeadType = DeadType.TurnIntoMinionDead;
                 Projectile.Kill();
                 return;
             }
@@ -301,7 +328,9 @@ namespace HJScarletRework.Projs.Executor
             {
                 Vector2 dir = tarRot.ToRotationVector2();
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos, dir * 6f, ProjectileType<GaiaStrikerBeam>(), dmg, Projectile.knockBack, Projectile.owner);
-                Projectile.timeLeft += 30;
+                //增加的恢复时间会刚刚好大于攻击频率
+                //这里是特意的
+                Projectile.timeLeft += 22;
                 Timer = 0;
                 SoundEngine.PlaySound(HJScarletSounds.Gaia_Staff with { MaxInstances = 0, Pitch = .5f, PitchVariance = 0.1f, Volume = .45f }, Projectile.Center);
                 SoundEngine.PlaySound(HJScarletSounds.Blunt_Swing with { MaxInstances = 0, Pitch = -.5f, Volume = .45f }, Projectile.Center);
@@ -364,7 +393,7 @@ namespace HJScarletRework.Projs.Executor
         /// </summary>
         public void DoIdle()
         {
-
+            //悬挂在玩家后方不会使仆从死亡
             Projectile.timeLeft = StoredLifeTime;
             //锤子应当朝向的位置
             Projectile.velocity *= .01f;

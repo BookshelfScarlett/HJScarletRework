@@ -20,6 +20,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
             ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
+            ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
         }
         public override void ExSD()
         {

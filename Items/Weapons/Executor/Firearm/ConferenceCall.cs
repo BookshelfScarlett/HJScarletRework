@@ -51,6 +51,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
                 AddIngredient(ItemID.QuadBarrelShotgun).
                 AddIngredient(ItemID.Boomstick).
                 AddIngredient(ItemID.IllegalGunParts).
+                AddIngredient(ItemID.ChlorophyteBar,10).
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }

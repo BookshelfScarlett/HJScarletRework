@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
@@ -62,7 +63,10 @@ namespace HJScarletRework.Projs.Executor
                 {
                     new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(6f) + pos, 1f, RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 30, 0.38f, RandRotTwoPi).Spawn();
                     if (Main.rand.NextBool(8))
-                        new KiraStar(Projectile.Center.ToRandCirclePosEdge(12f) + pos, Vector2.Zero, RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 30, 0, 1, 0.18f).Spawn();
+                    {
+                        //new KiraStar(Projectile.Center.ToRandCirclePosEdge(12f) + pos, Vector2.Zero, RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 30, 0, 1, 0.18f).Spawn();
+                        //ECSParticle.CrossGlow(Projectile.Center.ToRandCirclePosEdge(12f) + pos, Vector2.Zero, RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 30, 1, 0, 0.45f,.2f);
+                    }
                 }
                 for (int j = 0; j < 16; j++)
                 {
@@ -84,8 +88,6 @@ namespace HJScarletRework.Projs.Executor
                 return;
             if (Main.rand.NextFloat() < Projectile.scale && Projectile.FinalUpdateNextBool(3))
                 new ShinyOrbParticle(Projectile.Center.ToRandCirclePosEdge(6f), Projectile.velocity / 6f, RandLerpColor(Color.Goldenrod, Color.PaleGoldenrod), 40, Main.rand.NextFloat(0.24f, 0.35f) * Projectile.scale).Spawn();
-            if (Main.rand.NextFloat() < Projectile.scale && Projectile.FinalUpdateNextBool(8))
-                new KiraStar(Projectile.Center.ToRandCirclePosEdge(6f), Vector2.Zero, RandLerpColor(Color.Goldenrod, Color.PaleGoldenrod), 40, 0, 1, Main.rand.NextFloat(0.10f, 0.135f) * Projectile.scale).Spawn();
         }
 
         public void UpdateAniProgress()

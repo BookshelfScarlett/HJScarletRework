@@ -20,7 +20,7 @@ using HJScarletRework.Items.Armor.Reaper;
 using HJScarletRework.Items.Armor.RedDragonKnight;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
-using HJScarletRework.Items.Weapons.Executor.Misc;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
@@ -84,6 +84,15 @@ namespace HJScarletRework.Globals.Players
                 }
                 ECSParticle.StarShape(pos, proj.velocity.ToSafeNormalize() * .01f, Color.LightBlue, 40, 1, 0.94f);
                 ECSParticle.StarShape(pos, proj.velocity.RotatedBy(PiOver2).ToSafeNormalize() * .01f, Color.LightBlue, 40, 1, 0.94f);
+            }
+            if (KnifeMarkIndex == ProjectileType<FishronKnifeMark>() && Player.HeldItem.IsExecutorWeapon())
+            {
+                Player.GetDamage<ExecutorDamageClass>() += FishronKnife.DamageBuff;
+            }
+            if(KnifeMarkIndex == ProjectileType<DungeonKnifeMark>())
+            {
+                Player.statDefense += 5;
+
             }
         }
         public void UpdateSwordMark()
@@ -165,8 +174,13 @@ namespace HJScarletRework.Globals.Players
             {
                 foreach (var keys in ExecutionListStored.Keys.ToList())
                 {
-                    if (HJScarletList.ExecuteRequests.ContainsKey(keys))
-                        Player.AddExecutionTimeDirectly(keys,RedDragonKnightHead.ProgressRegenCount);
+                    if (HJScarletList.ExecuteRequests.TryGetValue(keys, out int value))
+                    {
+                        int add = (int)(value * RedDragonKnightHead.ProgressRegenCount);
+                        if (add == 0)
+                            add = 1;
+                        Player.AddExecutionTimeDirectly(keys, add);
+                    }
                 }
                 ScarletSound(SoundID.DD2_BetsyFireballShot, Player.Center,1,0,pitch:.2f,.1f);
                 for(int i =0;i<16;i++)
@@ -819,6 +833,10 @@ namespace HJScarletRework.Globals.Players
             Player.jumpSpeed += 1.6f;
             Player.runAcceleration *= 1.40f;
             Player.moveSpeed += .35f;
+            Player.GetDamage<ExecutorDamageClass>() += ReaperHead.TlipocaScytheDamage;
+            Player.GetCritChance<ExecutorDamageClass>() += ReaperHead.TlipocaScytheCrits;
+            Player.statDefense += ReaperHead.TlipocaDefense;
+            critDamageExecutor += ReaperHead.TlipocaCritDamage;
         }
         public void UpdateDiverArmorJellyfishSpawn()
         {

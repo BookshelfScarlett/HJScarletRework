@@ -23,9 +23,14 @@ namespace HJScarletRework.Items.Armor.Reaper
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
         }
-        public float DamageAdd = 0.25f;
-        public int CritAdd = 25;
+        public float DamageAdd = 0.15f;
+        public int CritAdd = 15;
         public static int MaidReaperMaxHealCooldown = 10;
+        public static float TlipocaScytheDamage = .15f;
+        public static int TlipocaScytheCrits = 15;
+        public static float TlipocaCritDamage = .15f;
+        public static int TlipocaDefense = 30;
+        public int LifeRegenSpeed = 4;
         public override int[] ArmorSlots => [Type, ItemType<ReaperBody>(), ItemType<ReaperLegs>()];
         public override bool SetUpArmorSet => true;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DamageAdd.ToPercent(), CritAdd + "%");
@@ -46,6 +51,7 @@ namespace HJScarletRework.Items.Armor.Reaper
             }
             player.setBonus += "\n" + setBonusPath.ToLangValue();
             player.HJScarlet().maidReaperArmor = true;
+            player.lifeRegen += LifeRegenSpeed;
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
@@ -80,7 +86,6 @@ namespace HJScarletRework.Items.Armor.Reaper
 
             player.GetDamage<ExecutorDamageClass>() += DamageAdd;
             player.GetCritChance<ExecutorDamageClass>() += CritAdd;
-            player.aggro += 500;
         }
         public override void AddRecipes()
         {

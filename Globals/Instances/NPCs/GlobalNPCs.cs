@@ -28,6 +28,11 @@ namespace HJScarletRework.Globals.Instances
         public bool isBeingStabByContainedBlast = false;
         public int isBeingStabByContainedStick = 0;
         public float miscCounter = 0;
+        public int StopNpcTime = 0;
+        public Vector2 PostSpeed = Vector2.Zero;
+        public bool grassKnifePoison = false;
+        public int grassKnifePoisionLevel = 1;
+
         public override void ResetEffects(NPC npc)
         {
             isBeingStabByLavaFlow = false;
@@ -38,9 +43,18 @@ namespace HJScarletRework.Globals.Instances
                 isBeingStabByContainedStick--;
             if (isBeingStabByContainedStick > 0)
                 isBeingStabByLavaFlowExecution--;
+            if (StopNpcTime > 0)
+                StopNpcTime--;
         }
         public override void PostAI(NPC npc)
         {
+            if (StopNpcTime > 0)
+                npc.velocity *= 0.1f;
+            if(StopNpcTime==0&&PostSpeed != Vector2.Zero)
+            {
+                npc.velocity = PostSpeed;
+                PostSpeed = Vector2.Zero;
+            }
             if (terraFlamethrowerDebuff)
             {
                 if (miscCounter % 10 == 0 && npc.damage != 0)

@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class SpearofDarknessThrownProj : ThrownSpearProjClass
     {
-        public override string Texture => HJScarletItemProj.Proj_SpearofDarkness.Path;
+        public override string Texture => ProjPath +GetType().Name;
         public int TargetIndex = -1;
         private enum Styles
         {

@@ -41,8 +41,8 @@ namespace HJScarletRework.Items.Armor.RedDragonKnight
         public float Damage = .15f;
         public int Crit = 10;
         public float CritDamage = .30f;
-        public static int ProgressRegenTime = 10;
-        public static int ProgressRegenCount = 1;
+        public static int ProgressRegenTime = 5;
+        public static float ProgressRegenCount = .05f;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(),Crit + "%");
         public override void UpdateEquip(Player player)
         {
@@ -52,7 +52,7 @@ namespace HJScarletRework.Items.Armor.RedDragonKnight
         public override void UpdateArmorSet(Player player)
         {
             string value = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBouns").
-                ToLangValue().ToFormatValue(CritDamage.ToPercent(), ProgressRegenTime, ProgressRegenCount);
+                ToLangValue().ToFormatValue(CritDamage.ToPercent(), ProgressRegenTime, ProgressRegenCount.ToPercent());
             player.setBonus += "\n" + value;
             player.HJScarlet().redDragonKnight = true;
             player.HJScarlet().critDamageExecutor += CritDamage;

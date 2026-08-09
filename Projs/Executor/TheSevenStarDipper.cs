@@ -2,7 +2,6 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Misc;
 using ReLogic.Content;
@@ -230,6 +229,5 @@ namespace HJScarletRework.Projs.Executor
             shader.CurrentTechnique.Passes[0].Apply();
             SB.Draw(tex.Value, beginPos, null, Color.White, rotation, orig, new Vector2(xScale, .0351f * thick), 0, 0);
         }
-
     }
 }
