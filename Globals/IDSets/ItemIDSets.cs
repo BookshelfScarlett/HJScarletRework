@@ -23,13 +23,13 @@ namespace HJScarletRework.Globals.IDSets
         /// <br>只作用于<see cref="Executor"/>代行者伤害</br>
         /// <br>默认为所有<see cref="Executor.ExecutorWeaponType.Caster"/>魔术载体武器，在<see cref="Executor.ExecutorWeaponClass.SetStaticDefaults"/>内自动添加</br>
         /// </summary>
-        public static bool[] ForceToTacticalExecute= ItemID.Sets.Factory.CreateBoolSet();
-                /// <summary>
+        public static bool[] ForceToTacticalExecute = ItemID.Sets.Factory.CreateBoolSet();
+        /// <summary>
         /// 如果为<see langword="true"/>，该武器的处决模式将会完全不由模组内处决系统进行接管，需要手动处理
         /// <br>同时，他也不受<see cref="Players.HJScarletPlayer.tacticalExecutionManual"/>手动处决的切换影响</br>
         /// <br>只作用于<see langword="代行者伤害"/></br>
         /// </summary>
-        public static bool[] ForceToCustomExecute= ItemID.Sets.Factory.CreateBoolSet();
+        public static bool[] ForceToCustomExecute = ItemID.Sets.Factory.CreateBoolSet();
 
         /// <summary>
         /// 如果为<see langword="true"/>，该武器将会禁用处决条的显示，无论设置开关

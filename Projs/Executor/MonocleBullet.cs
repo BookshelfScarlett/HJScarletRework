@@ -1,17 +1,11 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
-using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System.Collections.Generic;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
@@ -88,9 +82,9 @@ namespace HJScarletRework.Projs.Executor
                 int timeLeft = Main.rand.Next(30, 45);
                 ECSParticle.LightntingGlow(pos2, vel, RandLerpColor(Color.Purple, Color.Violet), timeLeft, 1, scale);
             }
-            for(int i =0;i<8;i++)
+            for (int i = 0; i < 8; i++)
             {
-                ECSParticle.HighResolutionThunder(pos.ToRandCirclePos(3), Projectile.SafeDirByRot().ToRandVelocity(ToRadians(5),.1f,.2f), RandLerpColor(Color.Violet, Color.Purple), 45, 1, Projectile.SafeDirByRot().ToRotation(), 0.12f, 1);
+                ECSParticle.HighResolutionThunder(pos.ToRandCirclePos(3), Projectile.SafeDirByRot().ToRandVelocity(ToRadians(5), .1f, .2f), RandLerpColor(Color.Violet, Color.Purple), 45, 1, Projectile.SafeDirByRot().ToRotation(), 0.12f, 1);
             }
             ScarletSound(HJScarletSounds.Atom_StrikeAlt, Projectile.Center, 0.85f, 1, pitch: Projectile.numHits * .1f);
         }

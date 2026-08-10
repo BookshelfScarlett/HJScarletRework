@@ -6,7 +6,7 @@ using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.Metaballs
 {
-    public class GreenWater: BaseMetaball
+    public class GreenWater : BaseMetaball
     {
         public class GreenWaterParticle(Vector2 center, Vector2 vel, Vector2 scale, float rotation, int lifeTime, Texture2D shapeTex)
         {

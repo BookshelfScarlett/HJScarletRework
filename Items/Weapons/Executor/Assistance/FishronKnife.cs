@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor.Assistance
 {
-    public class FishronKnife: ExecutorWeaponClass
+    public class FishronKnife : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 20;
         public static float DamageBuff = .20f;
@@ -25,7 +25,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<FishronKnifeProj>();
             Item.UseSound = SoundID.Item64;
-            Item.HJScarlet().NotFinished = true;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem();
             Item.HJScarlet().ForceAutomaticExecution = true;

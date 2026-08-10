@@ -14,7 +14,7 @@ namespace HJScarletRework.Items.Accessories
         public static int ExecutionProgressRegen = 1;
         public static int CasterExecutionProgressRegen = 8;
         public override string AssetPath => AssetHandler.Equips;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(ExecutionProgressRegen,CasterExecutionProgressRegen,CritDamage.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(ExecutionProgressRegen, CasterExecutionProgressRegen, CritDamage.ToPercent());
         public override void ExSD()
         {
             Item.accessory = true;

@@ -252,7 +252,7 @@ namespace HJScarletRework.Globals.Players
                 blackKeyDefenseTrigger = false;
             }
             modifiers.FinalDamage *= finalDamageModiflication;
-            if (blackKeyHeal != 0&&modifiers.CooldownCounter != ImmunityCooldownID.TileContactDamage)
+            if (blackKeyHeal != 0 && modifiers.CooldownCounter != ImmunityCooldownID.TileContactDamage)
             {
                 Player.Heal(blackKeyHeal);
                 SoundEngine.PlaySound(HJScarletSounds.Heal_Minor with { Volume = 0.75f }, Player.Center);

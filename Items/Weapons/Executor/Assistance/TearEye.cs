@@ -14,10 +14,10 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
             Item.SetUpNoUseGraphicItem(true);
             Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.useTime = Item.useAnimation = 24;
+            Item.useTime = Item.useAnimation = 36;
             Item.knockBack = 2;
             Item.UseSound = SoundID.Item152;
-            Item.damage = 20;
+            Item.damage = 40;
             Item.shootSpeed = 12f;
             Item.shoot = ProjectileType<TearEyeProj>();
         }

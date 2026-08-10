@@ -9,8 +9,6 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -70,7 +68,7 @@ namespace HJScarletRework.Projs.Executor
         public bool ShouldCreate = true;
         public int StoredLifeTime = 0;
         public float RightClickHoldingTime = 0;
-        
+
         public enum DeadType
         {
             AnomarlyDead,
@@ -88,7 +86,7 @@ namespace HJScarletRework.Projs.Executor
 
         public DeadType GaiaStrikeDeadType = DeadType.MinionAutoDead;
         public int GaiaStrikerDeadMode = 4;
-        
+
         public override void ProjAI()
         {
             if (Projectile.timeLeft < 20)
@@ -508,7 +506,7 @@ namespace HJScarletRework.Projs.Executor
         #region 处死模式
         public override void OnKill(int timeLeft)
         {
-            switch(GaiaStrikeDeadType)
+            switch (GaiaStrikeDeadType)
             {
                 case DeadType.AnomarlyDead:
                     RefreshProjStatement(Type);

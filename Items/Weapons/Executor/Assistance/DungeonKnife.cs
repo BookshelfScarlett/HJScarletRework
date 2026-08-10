@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -7,7 +8,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor.Assistance
 {
-    public class DungeonKnife: ExecutorWeaponClass
+    public class DungeonKnife : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 20;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Assistance;
@@ -22,6 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useTime = Item.useAnimation = 25;
             Item.shootSpeed = 16f;
+            Item.UseSound = HJScarletSounds.Misc_KnifeTossAlt with { Volume = .75f, Pitch = .2f, PitchVariance = .1f, Variants = [2] };
             Item.shoot = ProjectileType<DungeonKnifeProj>();
             Item.HJScarlet().ExecutionProj = ProjectileType<DungeonKnifeMark>();
             Item.SetUpRarityPrice(ItemRarityID.Orange);

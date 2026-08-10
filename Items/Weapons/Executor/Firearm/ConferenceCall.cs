@@ -1,9 +1,7 @@
 ﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 
@@ -28,7 +26,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.shoot = ProjectileType<ConferenceCallHeldProj>();
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.HJScarlet().borderlandWeapon = true;
-        
+
         }
         public override bool CanShoot(Player player)
         {
@@ -51,7 +49,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
                 AddIngredient(ItemID.QuadBarrelShotgun).
                 AddIngredient(ItemID.Boomstick).
                 AddIngredient(ItemID.IllegalGunParts).
-                AddIngredient(ItemID.ChlorophyteBar,10).
+                AddIngredient(ItemID.ChlorophyteBar, 10).
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }

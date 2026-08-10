@@ -1,9 +1,5 @@
 ﻿using HJScarletRework.Globals.Executor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -12,6 +8,10 @@ namespace HJScarletRework.Projs.Executor
     /// </summary>
     public class AbyssalWorldHeldProjAlt : ExecutorHeldProj
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override string Texture => GetInstance<AbyssalWorldHeldProj>().Texture;
         public override void SetStaticDefaults()
         {

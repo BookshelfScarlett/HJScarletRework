@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using Microsoft.Xna.Framework;
 using Terraria;
 
 namespace HJScarletRework.Projs.Melee

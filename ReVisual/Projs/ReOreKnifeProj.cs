@@ -1,7 +1,6 @@
 ﻿using ContinentOfJourney.Projectiles.Meelee;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 

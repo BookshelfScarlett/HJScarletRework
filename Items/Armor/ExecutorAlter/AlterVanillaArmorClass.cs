@@ -1,9 +1,6 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
+﻿using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 

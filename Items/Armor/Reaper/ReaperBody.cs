@@ -3,7 +3,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Systems;
-using HJScarletRework.Items.Armor.Diver;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;

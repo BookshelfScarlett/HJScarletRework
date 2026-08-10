@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -16,6 +17,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.ToTrailSetting(8);
         }
+        public int BounceTime = 0;
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 16;
@@ -23,7 +25,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.SetupImmnuity(30);
             Projectile.penetrate = 2;
             Projectile.ignoreWater = true;
-            Projectile.tileCollide = false;
+            Projectile.tileCollide = true;
         }
         public override void ProjAI()
         {
@@ -37,8 +39,35 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (!Owner.HasProj<GrassKnifeMark>())
-                Projectile.AddExecutionTimeImmediate<GrassKnife>();
+            if (!Owner.HasProj<DungeonKnifeMark>())
+                Projectile.AddExecutionTimeImmediate<DungeonKnife>();
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            if (BounceTime > 0)
+            {
+                Projectile.Kill();
+                return true;
+            }
+            else
+            {
+                Projectile.BounceOnTile(oldVelocity);
+                float centerGlowScale = .2f;
+                Vector2 center = Projectile.oldPosition + Projectile.Size / 2f;
+                ECSParticle.CrossGlow(center, Color.White, 45, 1, centerGlowScale);
+                ECSParticle.CrossGlow(center, Color.White, 45, 1, centerGlowScale * .98f);
+                ECSParticle.CrossGlow(center, Color.White, 45, 1, centerGlowScale * .96f);
+                for (int i = 0; i < 16; i++)
+                    ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePosEdge(16), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.LightGray, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
+                ScarletSound(SoundID.Dig, center);
+                if (Projectile.GetTargetSafe(out NPC target, true, 600, canPassWall: false))
+                {
+                    Projectile.velocity = HJScarletMethods.PredictAimToTarget(Projectile.Center, target.Center, target.velocity, 24f, 0);
+                    Projectile.rotation = Projectile.velocity.ToRotation();
+                }
+                BounceTime += 1;
+            }
+            return false;
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -57,10 +86,10 @@ namespace HJScarletRework.Projs.Executor
                 float opa = Lerp(.31f, 1f, ratios);
                 Color c = Color.Lerp(Color.LightGray, Color.White, ratios);
                 Vector2 sharpScale = new Vector2(1f, 1.4f);
-                SB.Draw(HJScarletTexture.Particle_SharpTear, pos - new Vector2(25,0).RotatedBy(Projectile.rotation), null, c.ToAddColor(10)*opa*.35f, Projectile.oldRot[i] + PiOver2, HJScarletTexture.Particle_SharpTear.Size() / 2f, sharpScale * scale, 0, 0);
+                SB.Draw(HJScarletTexture.Particle_SharpTear, pos - new Vector2(20, 0).RotatedBy(Projectile.oldRot[i]), null, c.ToAddColor(10) * opa * .35f, Projectile.oldRot[i] + PiOver2, HJScarletTexture.Particle_SharpTear.Size() / 2f, sharpScale * scale, 0, 0);
                 c = Color.Lerp(Color.LightGray, Color.White, ratios).ToAddColor(250);
                 SB.FastDraw(tex, pos, c * opa, Projectile.oldRot[i] + PiOver4, tex.Size() / 2f, Projectile.scale * scale, se);
-                
+
             }
             for (int i = 0; i < 8; i++)
                 SB.FastDraw(tex, drawPosition + (TwoPi / 8f * i).ToRotationVector2() * 2f, Color.White.ToAddColor(), drawRotation, tex.Size() / 2f, Projectile.scale, se);

@@ -7,7 +7,6 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -128,7 +127,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit with { MaxInstances = 0, Pitch = 0.5f }, Projectile.Center);
                 Projectile lockHammer = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<TheJudgementMinion>(), Projectile.damage, 0f, Owner.whoAmI);
-                ScreenShakeSystem.AddScreenShakes(lockHammer.Center, 30f, 100, lockHammer.velocity.ToRotation(), 0.1f,easingFunc:EaseOutBack);
+                ScreenShakeSystem.AddScreenShakes(lockHammer.Center, 30f, 100, lockHammer.velocity.ToRotation(), 0.1f, easingFunc: EaseOutBack);
                 //处死射弹。
             }
             for (int i = -1; i < 2; i += 2)

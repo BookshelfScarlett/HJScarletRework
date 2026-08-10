@@ -1,18 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
-using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using HJScarletRework.ReVisual.Items;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 
@@ -104,7 +95,7 @@ namespace HJScarletRework.Projs.Executor
             int maxHit = Monocle.ExecutionPenetrate;
             float ratios = Utils.GetLerpValue(0, maxHit, Projectile.numHits, true);
             float damageMult = Lerp(Monocle.ExecutionDamageMult, 0.75f, ratios);
-            if(Projectile.numHits<1)
+            if (Projectile.numHits < 1)
                 modifiers.SetCrit();
             modifiers.SourceDamage *= damageMult;
         }

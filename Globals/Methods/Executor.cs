@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Players;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;

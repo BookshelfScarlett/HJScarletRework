@@ -1,13 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using HJScarletRework.Projs.General;
 using HJScarletRework.Projs.Magic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
@@ -132,7 +128,12 @@ namespace HJScarletRework.Items
         {
             Stopwatch.StartNew();
             Stopwatch sw = Stopwatch.StartNew();
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 40f, ProjectileType<EndlessWarSmasher>(), 1, knockback, player.whoAmI);
+            for (int i = -1; i < 2; i += 2)
+            {
+                Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15f, ProjectileType<FleshtumorHungerStick>(), 1, knockback, player.whoAmI);
+
+                proj.ai[1] = i;
+            }
             sw.Stop();
             // 输出经过的时间（毫秒）
             //Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

@@ -5,12 +5,10 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using Terraria;
-using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class MoltenKnifeProj: HJScarletProj
+    public class MoltenKnifeProj : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<MoltenKnife>().Texture;
@@ -25,7 +23,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.SetupImmnuity(30);
             Projectile.penetrate = 1;
             Projectile.ignoreWater = true;
-            Projectile.tileCollide = false;
+            Projectile.tileCollide = true;
         }
         public override void ProjAI()
         {
@@ -41,8 +39,17 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<MoltenKnifeBoom>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
-                SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { MaxInstances = 0, Pitch = .35f }, Projectile.Center);
+            if (Owner.HasProj<MoltenKnifeMark>())
+                return;
+            Projectile.AddExecutionTimeImmediate<MoltenKnife>();
+        }
+        public override void OnKill(int timeLeft)
+        {
+            if (!Owner.HasProj<MoltenKnifeMark>())
+            {
+                int dmg = (int)(Projectile.originalDamage * MoltenKnife.BoomDamageMult);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<MoltenKnifeBoom>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
+            }
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -62,11 +69,11 @@ namespace HJScarletRework.Projs.Executor
                 float ratios = EaseInOutExpo(1 - i / (float)length);
                 Vector2 pos = Projectile.oldPos[i] + Projectile.PosToCenter() - offset;
                 float rot = Projectile.oldRot[i];
-                Color c= Color.Lerp(Color.OrangeRed, Color.Lerp(Color.Orange, Color.White, 0.39f), ratios) * 0.70f;
+                Color c = Color.Lerp(Color.OrangeRed, Color.Lerp(Color.Orange, Color.White, 0.39f), ratios) * 0.70f;
                 float scale = Projectile.scale * Lerp(.45f, 1f, ratios);
                 SB.Draw(projTex, pos, null, c.ToAddColor(70), rot + PiOver4, orig, scale, 0, 0);
                 Vector2 sharpScale = new Vector2(0.73f, 1.4f);
-                SB.Draw(HJScarletTexture.Particle_SharpTear, pos, null, c.ToAddColor(), rot + PiOver2, HJScarletTexture.Particle_SharpTear.Size() / 2f, sharpScale*scale, 0, 0);
+                SB.Draw(HJScarletTexture.Particle_SharpTear, pos, null, c.ToAddColor(), rot + PiOver2, HJScarletTexture.Particle_SharpTear.Size() / 2f, sharpScale * scale, 0, 0);
             }
             for (int i = 0; i < 8; i++)
                 SB.Draw(projTex, drawPos + (TwoPi / 8 * i).ToRotationVector2() * 1.5f, null, Color.Orange.ToAddColor(), Projectile.rotation + PiOver4, ori, Projectile.scale, 0, 0);

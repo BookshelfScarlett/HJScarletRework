@@ -12,7 +12,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class  GhostKnifeProj : HJScarletProj
+    public class GhostKnifeProj : HJScarletProj
     {
         public override string Texture => GetInstance<GhostKnife>().Texture;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
@@ -84,14 +84,14 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 beginPos = target.Center + Vector2.UnitX.RotatedByRandom(TwoPi).ToSafeNormalize() * Main.rand.NextFloat(150f, 170f);
                 Vector2 dir = beginPos.GetNormalVector2(target.Center) * 16f * 1.15f;
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), beginPos, dir, ProjectileType<GhostKnifePhantom>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-            SetGeneralParticle(proj.position);
+                SetGeneralParticle(proj.position);
             }
             else
                 AngleTimer = -5f * Projectile.MaxUpdates * 1;
         }
         public void SetGeneralParticle(Vector2 pos1)
         {
-            Vector2 pos = pos1+ Projectile.Size / 2;
+            Vector2 pos = pos1 + Projectile.Size / 2;
             for (int i = 0; i < 8; i++)
             {
                 ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(1.2f, 2.2f), Color.White, 40, 1, 0.4f);
@@ -123,7 +123,7 @@ namespace HJScarletRework.Projs.Executor
             Texture2D tex = Projectile.GetTexture();
             Vector2 orig = tex.Size() / 2;
             float disapperRatios = 1;
-            int length = (int)((Projectile.oldPos.Length - 4)*(disapperRatios));
+            int length = (int)((Projectile.oldPos.Length - 4) * (disapperRatios));
             for (int i = length - 1; i >= 0; i--)
             {
                 float ratios = EaseInOutExpo(1 - i / (float)length);

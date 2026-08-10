@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
@@ -26,7 +25,7 @@ namespace HJScarletRework.Globals.Instances.Items
         public bool CanDrawGhost = false;
         public int ExecutionProj = -1;
         public bool ForceTacticalExecution = false;
-        public bool ForceAutomaticExecution= false;
+        public bool ForceAutomaticExecution = false;
         public bool NotFinished = false;
         //控制purePrism的运动
         public float tintIconDrawLerp = 0;

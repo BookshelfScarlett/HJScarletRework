@@ -3,18 +3,13 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
 using HJScarletRework.Projs.Pets;
-using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Pets
 {
-    public class DracoItem :HJScarletPetItem
+    public class DracoItem : HJScarletPetItem
     {
         public override void SetStaticDefaults()
         {
@@ -43,7 +38,7 @@ namespace HJScarletRework.Items.Pets
             TextboxSettings sets = new TextboxSettings
             {
                 HasTitle = false,
-                BackgroundColor = Color.Black* .24f,
+                BackgroundColor = Color.Black * .24f,
                 BackgroundEdgeColor = Color.DarkRed,
                 TextColor = Color.White,
                 TextEdgeColor = Color.DarkRed,

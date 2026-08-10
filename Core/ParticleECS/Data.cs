@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace HJScarletRework.Core.ParticleECS
+﻿namespace HJScarletRework.Core.ParticleECS
 {
     public struct ECSParticleData()
     {

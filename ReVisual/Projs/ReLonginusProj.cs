@@ -2,8 +2,6 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace HJScarletRework.ReVisual.Projs

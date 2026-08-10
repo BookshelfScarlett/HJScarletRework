@@ -46,6 +46,8 @@ namespace HJScarletRework.Globals.Methods
         }
         public static bool IsExecutorWeapon(this Item item)
         {
+            if (!item.IsLegal())
+                return false;
             return HJScarletList.ExecuteRequests.ContainsKey(item.type);
         }
         /// <summary>

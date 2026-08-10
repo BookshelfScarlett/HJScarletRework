@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Vanity.Yards

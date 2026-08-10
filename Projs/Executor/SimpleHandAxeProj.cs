@@ -5,7 +5,6 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -56,11 +55,11 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Projectile.AffactedByGrav(0.80f, yMult: 1f, yAdd: 0.57f, maxGravSpeed: 57f);
                 }
-                Projectile.rotation += (Projectile.SpeedAffectRotation() / 12f) * (Projectile.velocity.X>0).ToDirectionInt();
+                Projectile.rotation += (Projectile.SpeedAffectRotation() / 12f) * (Projectile.velocity.X > 0).ToDirectionInt();
             }
             else
             {
-                Projectile.rotation += (0.41f) *(Projectile.velocity.X>0).ToDirectionInt();
+                Projectile.rotation += (0.41f) * (Projectile.velocity.X > 0).ToDirectionInt();
             }
             UpdatePartilce();
         }
@@ -83,8 +82,8 @@ namespace HJScarletRework.Projs.Executor
             }
             if (Main.rand.NextBool())
             {
-                if(Projectile.velocity.LengthSquared() > Main.rand.NextFloat(10 * 10, 15 * 15))
-                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 65, 1, .45f);
+                if (Projectile.velocity.LengthSquared() > Main.rand.NextFloat(10 * 10, 15 * 15))
+                    ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 65, 1, .45f);
                 else
                     new StarShape(Projectile.Center.ToRandCirclePosEdge(8f), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 0.45f, 40).Spawn();
             }

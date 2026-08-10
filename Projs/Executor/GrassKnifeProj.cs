@@ -1,8 +1,10 @@
-﻿using HJScarletRework.Core.ParticleECS;
+﻿using HJScarletRework.Buffs;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
+using HJScarletRework.Projs.General;
 using Terraria;
 using Terraria.ID;
 
@@ -12,6 +14,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<GrassKnife>().Texture;
+        public bool HasCreatedProj = false;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(8);
@@ -55,8 +58,49 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            ScarletSound(SoundID.Grass, Projectile.Center);
+            if (HasCreatedProj)
+                return;
             if (!Owner.HasProj<GrassKnifeMark>())
+            {
+                if (target.IsLegal())
+                {
+                    target.AddBuff(BuffType<GrassPoison>(), GetSeconds(2));
+                    if (target.HasBuff(BuffType<GrassPoison>()) && !Owner.HasProj<GrassKnifePoisonProj>() && !HasCreatedProj)
+                    {
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<GrassKnifePoisonProj>(), 125, Projectile.knockBack, Owner.whoAmI);
+                        ((GrassKnifePoisonProj)proj.ModProjectile).CurTarget = target;
+                    }
+                }
                 Projectile.AddExecutionTimeImmediate<GrassKnife>();
+            }
+            else
+            {
+                if (target.HasBuff(BuffType<GrassPoison>()))
+                {
+                    foreach (var proj in Main.ActiveProjectiles)
+                    {
+                        if (proj.type != ProjectileType<GrassKnifePoisonProj>())
+                            continue;
+                        if (proj.owner != Owner.whoAmI)
+                            continue;
+                        if (Owner.HasProj<GrassKnifeMark>())
+                        {
+                            if (((GrassKnifePoisonProj)proj.ModProjectile).StackLevel > 3)
+                            {
+                                ((GrassKnifePoisonProj)proj.ModProjectile).InstantDoTDamage = true;
+                                int index = target.FindBuffIndex(BuffType<GrassPoison>());
+                                if (index != -1)
+                                    target.DelBuff(index);
+                                HasCreatedProj = true;
+                                Main.NewText(Owner.ownedProjectileCounts[ProjectileType<GrassKnifePoisonProj>()]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            HasCreatedProj = true;
         }
         public override bool PreDraw(ref Color lightColor)
         {

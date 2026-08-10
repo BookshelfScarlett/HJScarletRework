@@ -1,7 +1,5 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
@@ -14,13 +12,13 @@ namespace HJScarletRework.Projs.Executor
         public override (Texture2D LineTexture, Color LineColor, int LineEndCut, bool FullBright) LineSetting => (
             TextureAssets.FishingLine.Value, Color.SkyBlue, HeadPosOffsetFactor, false);
         public override (int SegmentCount, float RangeFactor, int ExtraUpdates, int SpriteFrames) WhipDefaults => (
-            12, 0.40f, 1, 4);
-        public override (int ExecutorProgressAdd, float PenetrateDamageRedcution) WhipHitDefaults => (1, 0.15f);
+            12, 0.40f, 0, 4);
+        public override (int ExecutorProgressAdd, float PenetrateDamageRedcution) WhipHitDefaults => (1, 0.95f);
 
         public override int HeadPosOffsetFactor => base.HeadPosOffsetFactor;
         public override void ExSD()
         {
-            base.ExSD();
+            Projectile.penetrate = -1;
         }
         public override void OnWhipActualSwinging(float swingProgress)
         {

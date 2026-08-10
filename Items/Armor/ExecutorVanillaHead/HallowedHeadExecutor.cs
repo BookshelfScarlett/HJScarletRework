@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.Diver;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -12,7 +11,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
     [AutoloadEquip(EquipType.Head)]
     public class HallowedHeadExecutor : HJScarletArmor
     {
-        public override int[] ArmorSlots => [Type,ItemID.HallowedPlateMail,ItemID.HallowedGreaves];
+        public override int[] ArmorSlots => [Type, ItemID.HallowedPlateMail, ItemID.HallowedGreaves];
         public override bool SetUpArmorSet => true;
         public float Damage = .10f;
         public float Crti = 10;
@@ -22,7 +21,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
             Item.defense = 16;
             Item.SetUpRarityPrice(ItemRarityID.Pink);
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(),Crti + "%", CritDamage.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crti + "%", CritDamage.ToPercent());
         public override void UpdateArmorSetBetter(Player player, string setBonusPath)
         {
             player.setBonus += "\n" + setBonusPath.ToLangValue();

@@ -10,8 +10,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Projs.Executor;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -81,7 +79,7 @@ namespace HJScarletRework.Projs.General
                 {
                     Projectile.netUpdate = true;
                     Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Center, ItemType<GaiaStriker>());
-                    ScreenDarknessSystem.AddScreenDarkness(0.95f, 5,20,30,easeOut:EaseInCubic);
+                    ScreenDarknessSystem.AddScreenDarkness(0.95f, 5, 20, 30, easeOut: EaseInCubic);
                     CreateBloodyExplosion();
                     Projectile.Kill();
                 }

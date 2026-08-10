@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
@@ -41,7 +40,7 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.IsOutScreen())
                 return;
             //ECSParticle.LiliesFire(Projectile.Center.ToRandCirclePos(4), Projectile.velocity / 8f, RandLerpColor(Color.WhiteSmoke, Color.Silver), 45, RandRotTwoPi, 1, 0.3f, true, BlendState.Additive);
-            
+
         }
         public override void OnFirstFrame()
         {
@@ -72,15 +71,15 @@ namespace HJScarletRework.Projs.Executor
             Vector2 targetTrailPos = drawPos - Vector2.UnitX.RotatedBy(Projectile.rotation) * 1f;
             Vector2 scale = new Vector2(3f, 14f * TimeRatios);
             float rot = Projectile.rotation + PiOver2;
-            SB.Draw(tex, targetTrailPos, null, Color.White * 8f*Projectile.Opacity, rot, trailOrig, scale, 0, 0);
-            SB.Draw(tex, targetTrailPos, null, Color.White * .8f*Projectile.Opacity, rot, trailOrig, scale * new Vector2(0.85f, 1.05f), 0, 0);
+            SB.Draw(tex, targetTrailPos, null, Color.White * 8f * Projectile.Opacity, rot, trailOrig, scale, 0, 0);
+            SB.Draw(tex, targetTrailPos, null, Color.White * .8f * Projectile.Opacity, rot, trailOrig, scale * new Vector2(0.85f, 1.05f), 0, 0);
 
             Texture2D noiseTex = HJScarletTexture.Noise_Aura.Value;
-            targetTrailPos = drawPos - Vector2.UnitX.RotatedBy(Projectile.rotation) * 800f - Vector2.UnitY*10f * Projectile.direction;
+            targetTrailPos = drawPos - Vector2.UnitX.RotatedBy(Projectile.rotation) * 800f - Vector2.UnitY * 10f * Projectile.direction;
             HJScarletMethods.ApplyAlphaCut(new Vector4(.2f, .3f, 0, 0), new Vector2(-Main.GlobalTimeWrappedHourly * 0.5f, 0f), new Vector2(2.5f, 1f), Color.White);
-            SB.Draw(noiseTex, targetTrailPos, null, Color.White, Projectile.rotation, trailOrig,new Vector2(6f,.13f), 0, 0);
+            SB.Draw(noiseTex, targetTrailPos, null, Color.White, Projectile.rotation, trailOrig, new Vector2(6f, .13f), 0, 0);
             noiseTex = HJScarletTexture.Noise_Misc.Value;
-            SB.Draw(noiseTex, targetTrailPos, null, Color.White, Projectile.rotation, trailOrig,new Vector2(6f,.13f), 0, 0);
+            SB.Draw(noiseTex, targetTrailPos, null, Color.White, Projectile.rotation, trailOrig, new Vector2(6f, .13f), 0, 0);
 
             SB.EndShaderArea();
             return false;

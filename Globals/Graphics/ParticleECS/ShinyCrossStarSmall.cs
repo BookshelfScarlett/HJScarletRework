@@ -1,8 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.ParticleECS
@@ -23,12 +20,12 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
         {
             Texture2D star = HJScarletTexture.Particle_SharpTear;
             Vector2 pos = data.Position - Main.screenPosition;
-            Vector2 starScale = new Vector2(.45f, 1f) ;
-        //Vector2 vector = new Vector2(dust.scale / 4f, dust.scale / 2f) * num3;
+            Vector2 starScale = new Vector2(.45f, 1f);
+            //Vector2 vector = new Vector2(dust.scale / 4f, dust.scale / 2f) * num3;
             Main.spriteBatch.Draw(star, pos, null, data.DrawColor * data.Opacity, data.Rotation, star.Size() / 2, starScale * data.Scale, SpriteEffects.None, 0);
             Main.spriteBatch.Draw(star, pos, null, Color.White * data.Opacity, data.Rotation, star.Size() / 2, starScale * data.Scale * .5f, SpriteEffects.None, 0);
             Main.spriteBatch.Draw(star, pos, null, data.DrawColor * data.Opacity, data.Rotation + PiOver2, star.Size() / 2, starScale * data.Scale, SpriteEffects.None, 0);
-            Main.spriteBatch.Draw(star, pos, null, Color.White * data.Opacity, data.Rotation+ PiOver2, star.Size() / 2, starScale * data.Scale * .5f, SpriteEffects.None, 0);
+            Main.spriteBatch.Draw(star, pos, null, Color.White * data.Opacity, data.Rotation + PiOver2, star.Size() / 2, starScale * data.Scale * .5f, SpriteEffects.None, 0);
         }
         public float GetAlphaFade(float t)
         {

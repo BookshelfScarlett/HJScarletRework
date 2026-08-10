@@ -26,17 +26,17 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Projectile.AffactedByGrav(1f, 1f,.036f);
+            Projectile.AffactedByGrav(1f, 1f, .036f);
             if (Projectile.IsOutScreen())
                 return;
-            if(Main.rand.NextBool(9))
-            ECSParticle.LiliesPetal(Projectile.Center.ToRandCirclePosEdge(3), Projectile.SafeDir(), RandLerpColor(Color.LimeGreen, Color.ForestGreen), 60, 1, RandRotTwoPi, 0.1f*Main.rand.NextFloat(.8f,1.01f), 0.6f, false, fullBright: true, blendState: BlendState.AlphaBlend);
+            if (Main.rand.NextBool(9))
+                ECSParticle.LiliesPetal(Projectile.Center.ToRandCirclePosEdge(3), Projectile.SafeDir(), RandLerpColor(Color.LimeGreen, Color.ForestGreen), 60, 1, RandRotTwoPi, 0.1f * Main.rand.NextFloat(.8f, 1.01f), 0.6f, false, fullBright: true, blendState: BlendState.AlphaBlend);
             if (Projectile.extraUpdates > 1)
             {
-                if(Main.rand.NextBool(6))
-                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(6), Projectile.SafeDir(), RandLerpColor(Color.LimeGreen, Color.ForestGreen), 40, 1, 0.34f);
+                if (Main.rand.NextBool(6))
+                    ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(6), Projectile.SafeDir(), RandLerpColor(Color.LimeGreen, Color.ForestGreen), 40, 1, 0.34f);
             }
-            if(Main.rand.NextBool())
+            if (Main.rand.NextBool())
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePosEdge(6), DustID.JungleSpore);
                 d.velocity = Projectile.SafeDir();
@@ -59,7 +59,7 @@ namespace HJScarletRework.Projs.Executor
                 Color c = Color.Lerp(Color.LimeGreen, Color.White, ratios);
                 float scale = Lerp(.264f, 1f, ratios);
                 float opa = Lerp(.51f, 1f, ratios);
-                SB.FastDraw(tex, pos, c * opa, Projectile.oldRot[i] + PiOver4, tex.Size() / 2f, Projectile.scale*scale, se);
+                SB.FastDraw(tex, pos, c * opa, Projectile.oldRot[i] + PiOver4, tex.Size() / 2f, Projectile.scale * scale, se);
             }
             for (int i = 0; i < 8; i++)
                 SB.FastDraw(tex, drawPosition + (TwoPi / 8f * i).ToRotationVector2() * 1.5f, Color.DarkGreen.ToAddColor(), drawRotation, tex.Size() / 2f, Projectile.scale, se);

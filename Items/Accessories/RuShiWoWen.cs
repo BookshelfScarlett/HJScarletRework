@@ -5,7 +5,6 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
 using HJScarletRework.Globals.Players;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -87,7 +86,7 @@ namespace HJScarletRework.Items.Accessories
                     }
                 }
                 //最后使用replace的插值字符串。
-                tooltips.ReplaceAllTooltip(this.GetLocalizationKey($"BanMinionList"), null, supply+ combineValue, foodList.Count);
+                tooltips.ReplaceAllTooltip(this.GetLocalizationKey($"BanMinionList"), null, supply + combineValue, foodList.Count);
 
             }
             CacheTooltip = tooltips;

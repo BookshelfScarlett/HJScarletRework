@@ -1,9 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
 using Terraria;
 
 namespace HJScarletRework.Projs.General
@@ -32,18 +30,18 @@ namespace HJScarletRework.Projs.General
             if (Projectile.IsOutScreen())
                 return;
             float scale = 1.74f;
-            if(Main.rand.NextBool())
-            ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(3), 0.18f, RandLerpColor(Color.LimeGreen, Color.Green), Main.rand.Next(80, 90), 1, Main.rand.NextFloat(0.85f, 1.15f) * .1f * scale, glowMult: .45f);
+            if (Main.rand.NextBool())
+                ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(3), 0.18f, RandLerpColor(Color.LimeGreen, Color.Green), Main.rand.Next(80, 90), 1, Main.rand.NextFloat(0.85f, 1.15f) * .1f * scale, glowMult: .45f);
             ECSParticle.LightntingGlow(Projectile.Center, Projectile.velocity / 8f, RandLerpColor(Color.LimeGreen, Color.LightGreen), 50, 1, 0.4f * scale);
             Vector2 dir = Projectile.SafeDir(); ;
-            if(Main.rand.NextBool(4))
-            ECSParticle.ShinyCrossStarECS(Projectile.Center + dir.RotatedBy(PiOver2 * Main.rand.NextBool().ToDirectionInt()) * 6f, Projectile.velocity / 8f, RandLerpColor(Color.White, Color.Green), 80, 1, Projectile.scale * Main.rand.NextFloat(.75f, 1.15f) * .32f * scale, .2f);
+            if (Main.rand.NextBool(4))
+                ECSParticle.ShinyCrossStarECS(Projectile.Center + dir.RotatedBy(PiOver2 * Main.rand.NextBool().ToDirectionInt()) * 6f, Projectile.velocity / 8f, RandLerpColor(Color.White, Color.Green), 80, 1, Projectile.scale * Main.rand.NextFloat(.75f, 1.15f) * .32f * scale, .2f);
             if (Main.rand.NextBool(8))
             {
-                Color c = Main.rand.NextBool() ? Color.LightGreen: Color.ForestGreen;
+                Color c = Main.rand.NextBool() ? Color.LightGreen : Color.ForestGreen;
                 if (Main.rand.NextBool())
                     c = Main.rand.NextBool() ? Color.LightPink : Color.Pink;
-                ECSParticle.LiliesPetal(Projectile.Center.ToRandCirclePos(4), -Vector2.UnitY * Main.rand.NextFloat(1.2f, 4.2f) * 3.5f, c.ToAddColor(150), 100, .95f, RandRotTwoPi, Main.rand.NextFloat(0.85f, 1.15f) * .061f*scale,.71f,alterTexture:false,fullBright: true, blendState: Microsoft.Xna.Framework.Graphics.BlendState.AlphaBlend);
+                ECSParticle.LiliesPetal(Projectile.Center.ToRandCirclePos(4), -Vector2.UnitY * Main.rand.NextFloat(1.2f, 4.2f) * 3.5f, c.ToAddColor(150), 100, .95f, RandRotTwoPi, Main.rand.NextFloat(0.85f, 1.15f) * .061f * scale, .71f, alterTexture: false, fullBright: true, blendState: Microsoft.Xna.Framework.Graphics.BlendState.AlphaBlend);
             }
         }
         public override void OnKill(int timeLeft)

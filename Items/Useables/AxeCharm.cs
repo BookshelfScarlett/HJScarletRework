@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -31,7 +30,7 @@ namespace HJScarletRework.Items.Useables
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             Player p = Main.LocalPlayer;
-            Color c = p.HJScarlet().tacticalExecutionManual? Color.LightGreen : Color.Coral;
+            Color c = p.HJScarlet().tacticalExecutionManual ? Color.LightGreen : Color.Coral;
             int executionProgressIndex = tooltips.FindIndex(line => line.Name == "Tooltip0" && line.Mod == "Terraria");
             string text = this.GetLocalizationKey("EnableTooltips").ToLangValue().ToFormatValue(p.HJScarlet().tacticalExecutionManual.ToString());
             var executionLine = new TooltipLine(Mod, "EnableTooltipsName", text)

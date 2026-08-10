@@ -8,8 +8,6 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 
@@ -182,8 +180,8 @@ namespace HJScarletRework.Projs.Executor
                 }
                 if (Projectile.HJScarlet().ExecutionStrike && !Owner.HasProj<GaiaStrikerHeldProj>() && !Owner.HasProj<GaiaStrikerMountedProj>())
                 {
-                ScreenDarknessSystem.AddScreenDarkness(0.95f, 5,20,30,easeOut:EaseInCubic);
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 12, 20, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
+                    ScreenDarknessSystem.AddScreenDarkness(0.95f, 5, 20, 30, easeOut: EaseInCubic);
+                    ScreenShakeSystem.AddScreenShakes(Projectile.Center, 12, 20, Projectile.rotation, 0.15f, easingFunc: EaseOutBack);
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(6), Vector2.Zero, ProjectileType<GaiaStrikerMountedProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     proj.rotation = Projectile.rotation;
                     //No.

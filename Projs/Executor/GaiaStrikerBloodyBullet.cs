@@ -4,7 +4,6 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
-using Microsoft.Xna.Framework;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor

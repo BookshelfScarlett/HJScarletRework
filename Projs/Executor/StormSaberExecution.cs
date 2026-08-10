@@ -4,14 +4,13 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using rail;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class StormSaberExecution : HJScarletProj,IPixelatedRenderer
+    public class StormSaberExecution : HJScarletProj, IPixelatedRenderer
     {
         public override string Texture => GetInstance<StormSaberHeldProj>().Texture;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
@@ -85,13 +84,13 @@ namespace HJScarletRework.Projs.Executor
             //做掉可能存在的零向量
             DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
             List<TrailDrawDate> trailDrawDates = [];
-            int posCount = (int)((Projectile.oldPos.Length-6) * Clamp(Projectile.velocity.Length(), 0, 1));
+            int posCount = (int)((Projectile.oldPos.Length - 6) * Clamp(Projectile.velocity.Length(), 0, 1));
             for (int j = 0; j < posCount - 1; j++)
             {
                 if (Projectile.oldPos[j] == Vector2.Zero)
                     continue;
                 float rot = Projectile.oldRot[j];
-                trailDrawDates.Add(new(Projectile.oldPos[j] + Projectile.Size / 2 +Projectile.SafeDir() * 10f, drawColor, new Vector2(0, 28 * multipleSize * Projectile.scale), rot));
+                trailDrawDates.Add(new(Projectile.oldPos[j] + Projectile.Size / 2 + Projectile.SafeDir() * 10f, drawColor, new Vector2(0, 28 * multipleSize * Projectile.scale), rot));
             }
             TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
         }
@@ -110,7 +109,7 @@ namespace HJScarletRework.Projs.Executor
 
             SB.EndShaderArea();
             SB.Draw(tex, drawPosition - DrawOffset.RotatedBy(Projectile.rotation), null, Color.White, drawRotation, drawRot, Projectile.scale * 1.2f, se, 0);
-            
+
             return false;
         }
     }

@@ -1,11 +1,10 @@
-using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor.Thrown
 {
@@ -42,9 +41,8 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         {
             CreateRecipe().
                 AddIngredient<AetherfireSmasher>().
-                AddIngredient<EssenceofTime>(5).
-                AddIngredient<EssenceofLife>(5).
-                AddIngredient<EssenceofMatter>(5).
+                AddIngredient<DeathTolls>().
+                AddIngredient<CrownofSilveryLight>(15).
                 AddTile<ContinentOfJourney.Tiles.FinalAnvil>().
                 Register();
         }

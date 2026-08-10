@@ -4,10 +4,7 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
@@ -90,8 +87,8 @@ namespace HJScarletRework.Projs.Executor
                 }
             }
             else
-                if(Main.rand.NextBool(4))
-                    ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 45, 1, .45f);
+                if (Main.rand.NextBool(4))
+                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 45, 1, .45f);
             //new StarShape(Projectile.Center.ToRandCirclePosEdge(8f), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.DarkGoldenrod), 0.45f, 40).Spawn();
         }
         public override bool? CanHitNPC(NPC target)

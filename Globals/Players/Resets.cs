@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Items.Weapons.Ranged;
+﻿using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -36,6 +36,7 @@ namespace HJScarletRework.Globals.Players
             emblemFirearm = false;
             emblemThrown = false;
             emblemExecutor = false;
+            emblemGalaxy = false;
         }
         private void ResetArmor()
         {
@@ -99,6 +100,7 @@ namespace HJScarletRework.Globals.Players
             crimsonScytheAttackCounter = 0;
             isExecutionStrikeTriggered = false;
             KnifeMarkIndex = -1;
+            theGreatDipperBuff = false;
             ResetAcc();
             ResetPets();
             ResetArmor();

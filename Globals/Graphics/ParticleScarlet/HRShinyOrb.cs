@@ -1,7 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleScarlet;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.ParticleScarlet

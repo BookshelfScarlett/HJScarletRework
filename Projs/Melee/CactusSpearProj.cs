@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;

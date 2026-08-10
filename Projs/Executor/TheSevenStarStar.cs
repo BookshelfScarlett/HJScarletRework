@@ -40,13 +40,13 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
-            if (Projectile.damage != 0 && Projectile.timeLeft >50)
+            if (Projectile.damage != 0 && Projectile.timeLeft > 50)
             {
                 Projectile.scale = Lerp(Projectile.scale, 1.01f, .12f);
             }
             else
                 Projectile.scale = Lerp(Projectile.scale, 0f, .12f);
-                Projectile.rotation = Projectile.velocity.ToRotation();
+            Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.IsOutScreen())
                 return;
             if (Main.rand.NextBool())
@@ -83,13 +83,13 @@ namespace HJScarletRework.Projs.Executor
             Vector2 pos = Projectile.Center - Main.screenPosition;
             Color c = Color.Lerp(Color.LightSkyBlue, Color.SkyBlue, Projectile.localAI[1] / 6f);
             float generalScale = 8f * Projectile.Opacity;
-            Vector2 scale = new Vector2(1.02f, 1.72f) * .024f * generalScale *Projectile.scale;
+            Vector2 scale = new Vector2(1.02f, 1.72f) * .024f * generalScale * Projectile.scale;
             Vector2 orig = tex.Size() / 2;
 
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
-            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DeepSkyBlue, 1.26f, 1f,1.1f);
-            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.SkyBlue, 0.8f, 1f,1f);
-            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.58f,1f,0.95f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DeepSkyBlue, 1.26f, 1f, 1.1f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.SkyBlue, 0.8f, 1f, 1f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.58f, 1f, 0.95f);
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             for (int i = 0; i < 2; i++)
                 SB.Draw(tex, pos, null, c * Projectile.Opacity, PiOver2 * i, orig, scale, 0, 0);
@@ -128,13 +128,13 @@ namespace HJScarletRework.Projs.Executor
             //做掉可能存在的零向量
             DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
             List<TrailDrawDate> trailDrawDates = [];
-            int posCount = (int)((Projectile.oldPos.Length-6) * Clamp(Projectile.velocity.Length(), 0, 1));
+            int posCount = (int)((Projectile.oldPos.Length - 6) * Clamp(Projectile.velocity.Length(), 0, 1));
             for (int j = 0; j < posCount - 1; j++)
             {
                 if (Projectile.oldPos[j] == Vector2.Zero)
                     continue;
                 float rot = Projectile.oldRot[j];
-                trailDrawDates.Add(new(Projectile.oldPos[j] + Projectile.Size / 2 +Projectile.SafeDir() * 10f, drawColor, new Vector2(0, 13 * multipleSize * Projectile.scale), rot));
+                trailDrawDates.Add(new(Projectile.oldPos[j] + Projectile.Size / 2 + Projectile.SafeDir() * 10f, drawColor, new Vector2(0, 13 * multipleSize * Projectile.scale), rot));
             }
             TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
         }

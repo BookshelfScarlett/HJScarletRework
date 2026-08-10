@@ -3,9 +3,7 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Projs.Executor;
-using HJScarletRework.Projs.General;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -35,6 +33,7 @@ namespace HJScarletRework.Globals.Instances.Projs
         public bool AddExecutionHit = false;
         public bool DefenderBuff = false;
         public float[] ExtraAI = new float[10];
+
 
         public override void AI(Projectile projectile)
         {
@@ -142,6 +141,11 @@ namespace HJScarletRework.Globals.Instances.Projs
             Player Owner = Main.player[projectile.owner];
             if (Owner.whoAmI != Main.myPlayer)
                 return;
+            if (Owner.HasBuff<StarofHopeBuff>() && projectile.DamageType.CountsAsClass<ExecutorDamageClass>() && projectile.penetrate > 1)
+            {
+                projectile.penetrate += 1;
+            }
+
             ModifyPreciousTargets(Owner, projectile);
             ModifyDefenderEmblemBuff(Owner, projectile);
             if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT1)

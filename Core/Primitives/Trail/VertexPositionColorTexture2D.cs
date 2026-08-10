@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace HJScarletRework.Core.Primitives.Trail
+﻿namespace HJScarletRework.Core.Primitives.Trail
 {
     public readonly struct ScarletVertex(Vector2 position, Color color, Vector3 textureCoordinates) : IVertexType
     {

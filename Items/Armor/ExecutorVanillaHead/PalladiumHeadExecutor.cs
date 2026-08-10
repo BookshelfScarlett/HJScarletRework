@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.Diver;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -10,9 +9,9 @@ using Terraria.ModLoader;
 namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
 {
     [AutoloadEquip(EquipType.Head)]
-    public class PalladiumHeadExecutor :HJScarletArmor
+    public class PalladiumHeadExecutor : HJScarletArmor
     {
-        public override int[] ArmorSlots => [Type,ItemID.PalladiumBreastplate,ItemID.PalladiumLeggings];
+        public override int[] ArmorSlots => [Type, ItemID.PalladiumBreastplate, ItemID.PalladiumLeggings];
         public override bool SetUpArmorSet => true;
         public float Damage = 0.10f;
         public int LifeRegen = 4;

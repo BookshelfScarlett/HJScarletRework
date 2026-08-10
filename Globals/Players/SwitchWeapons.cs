@@ -7,7 +7,6 @@ using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Armor.Monk;
 using HJScarletRework.Items.Armor.Shinobi;
 using HJScarletRework.Items.Weapons.Melee;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;

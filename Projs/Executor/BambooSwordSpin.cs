@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Executor
     public class BambooSwordSpin : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
-        public override string Texture =>GetInstance<BambooSwordHeldProj>().Texture;
+        public override string Texture => GetInstance<BambooSwordHeldProj>().Texture;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(8);
@@ -49,19 +49,19 @@ namespace HJScarletRework.Projs.Executor
             {
                 if (Timer == 0)
                 {
-                    Helper.MaxProgress[0] = Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, 50* Projectile.MaxUpdates, 5 * Projectile.MaxUpdates);
+                    Helper.MaxProgress[0] = Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, 50 * Projectile.MaxUpdates, 5 * Projectile.MaxUpdates);
                     OriginalSpeed = Projectile.velocity.Length();
                     RandRotation = RandRotTwoPi;
                     TargetRotation = Owner.Center.GetNormalVector2(Main.MouseWorld).ToRotation();
-                    ArmRotation= TargetRotation;
+                    ArmRotation = TargetRotation;
                     ScarletSound(HJScarletSounds.Atom_StrikeAlt, Projectile.Center, pitch: -.264f, pitchVariance: .1f);
                     for (int i = 0; i < 16; i++)
                     {
-                        ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(4f), Projectile.SafeDir().ToRandVelocity(ToRadians(5f),.3f, 34f), RandLerpColor(Color.ForestGreen, Color.LawnGreen), 40, RandRotTwoPi, 1, 0.25f, Main.rand.NextBool(), BlendState.Additive);
+                        ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(4f), Projectile.SafeDir().ToRandVelocity(ToRadians(5f), .3f, 34f), RandLerpColor(Color.ForestGreen, Color.LawnGreen), 40, RandRotTwoPi, 1, 0.25f, Main.rand.NextBool(), BlendState.Additive);
                     }
                     for (int i = 0; i < 10; i++)
                     {
-                        ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(6), Projectile.SafeDir().ToRandVelocity(ToRadians(5f),0.3f, 20.1f), RandLerpColor(Color.ForestGreen, Color.LawnGreen), 40, 1, 0.26f * Main.rand.NextFloat(.9f, 1.1f));
+                        ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(6), Projectile.SafeDir().ToRandVelocity(ToRadians(5f), 0.3f, 20.1f), RandLerpColor(Color.ForestGreen, Color.LawnGreen), 40, 1, 0.26f * Main.rand.NextFloat(.9f, 1.1f));
                     }
 
 
@@ -100,7 +100,7 @@ namespace HJScarletRework.Projs.Executor
                     Timer++;
                     Projectile.rotation += Lerp(ToRadians(0f), ToRadians(20f), ratios) * Projectile.direction;
                     Vector2 vRnd = -rnd * .5f + rnd.RotatedBy(PiOver2) * 2.5f * ratios;
-                    if(Main.rand.NextBool(7))
+                    if (Main.rand.NextBool(7))
                         ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(.3f, 9f), RandLerpColor(Color.ForestGreen, Color.LawnGreen), 40, RandRotTwoPi, 1, 0.45f, Main.rand.NextBool(), BlendState.Additive);
                     Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(20).RotatedBy(Projectile.rotation), DustID.JungleTorch);
                     d.velocity = Projectile.rotation.ToRotationVector2();
@@ -136,7 +136,7 @@ namespace HJScarletRework.Projs.Executor
             float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutExpo(Helper.GetAniProgress(0));
-            float beginAngle = 195f ;
+            float beginAngle = 195f;
             float endAngle = -195f;
             float rot = Helper.UpdateAngle(beginAngle, endAngle, Projectile.direction, easedProgress);
             Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(1, 1, 1);
@@ -171,8 +171,16 @@ namespace HJScarletRework.Projs.Executor
                 d.noGravity = true;
                 d.scale = Main.rand.NextFloat(1.2f, 1.61f);
             }
-            target.HJScarlet().PostSpeed = target.velocity.ToSafeNormalize() * -1.8f;
-            target.HJScarlet().StopNpcTime = 10;
+            if (target.type == NPCID.DungeonGuardian)
+            {
+                target.HJScarlet().PostSpeed = target.velocity.ToSafeNormalize() * -8f;
+                target.HJScarlet().StopNpcTime = 31;
+            }
+            else
+            {
+                target.HJScarlet().PostSpeed = target.velocity.ToSafeNormalize() * -1.8f;
+                target.HJScarlet().StopNpcTime = 10;
+            }
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -186,7 +194,7 @@ namespace HJScarletRework.Projs.Executor
                 float ratios = 1 - i / (float)length;
                 Vector2 pos = Projectile.oldPos[i] + Projectile.PosToCenter();
                 float rot = Projectile.oldRot[i] + (Projectile.spriteDirection == -1 ? PiOver2 + PiOver4 : PiOver4);
-                float opac = Lerp(0.05f, 1f, ratios)*.30f;
+                float opac = Lerp(0.05f, 1f, ratios) * .30f;
                 Color c = Color.Lerp(Color.LimeGreen, Color.White, ratios).ToAddColor(75);
                 SB.FastDraw(tex, pos, c * opac, rot, rotationPoint, Projectile.scale * 1.32f, flipSprite);
             }

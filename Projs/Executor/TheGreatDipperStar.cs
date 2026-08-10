@@ -13,7 +13,7 @@ using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class TheGreatDipperStar : HJScarletProj,IPixelatedRenderer
+    public class TheGreatDipperStar : HJScarletProj, IPixelatedRenderer
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.Particle_GlowStar.Path;
@@ -40,34 +40,65 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
-            if (Projectile.damage != 0 && Projectile.timeLeft >50)
+            if (Projectile.damage != 0 && Projectile.timeLeft > 50)
             {
                 Projectile.scale = Lerp(Projectile.scale, 1.01f, .12f);
             }
             else
                 Projectile.scale = Lerp(Projectile.scale, 0f, .12f);
-                Projectile.rotation = Projectile.velocity.ToRotation();
+            Projectile.rotation = Projectile.velocity.ToRotation();
+            if (Projectile.ai[2] != 0)
+            {
+                if (Projectile.GetTargetSafe(out NPC target, true, searchDistance: 800, true))
+                {
+                    Projectile.HomingTarget(target.Center, -1, 18f, 17);
+                }
+            }
             if (Projectile.IsOutScreen())
                 return;
-            if (Main.rand.NextBool())
-                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePosEdge(6), -Vector2.UnitY, RandLerpColor(Color.SkyBlue, Color.DodgerBlue), 45, 1, Projectile.scale * Main.rand.NextFloat(.75f, 1.15f) * .6f, .2f);
-            for (int i = 0; i < 3; i++)
-                ECSParticle.CrossGlow(Projectile.Center.ToRandCirclePos(6) + i * Projectile.SafeDir() * 5f, RandVelTwoPi(.1f, .3f), RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), 40, 1f, 0, Main.rand.NextFloat(.85f, 1.15f) * Projectile.scale * .041f, fadinTime: .2f);
+            if (Projectile.ai[2] == 0)
+            {
+                if (Main.rand.NextBool())
+                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePosEdge(6), -Vector2.UnitY, RandLerpColor(Color.SkyBlue, Color.DodgerBlue), 45, 1, Projectile.scale * Main.rand.NextFloat(.75f, 1.15f) * .6f, .2f);
+                for (int i = 0; i < 3; i++)
+                    ECSParticle.CrossGlow(Projectile.Center.ToRandCirclePos(6) + i * Projectile.SafeDir() * 5f, RandVelTwoPi(.1f, .3f), RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), 40, 1f, 0, Main.rand.NextFloat(.85f, 1.15f) * Projectile.scale * .041f, fadinTime: .2f);
+            }
+            else
+            {
+                if (Main.rand.NextBool(4))
+                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePosEdge(6), -Vector2.UnitY, RandLerpColor(Color.SkyBlue, Color.DodgerBlue), 45, 1, Projectile.scale * Main.rand.NextFloat(.75f, 1.15f) * .6f, .2f);
+                for (int i = 0; i < 2; i++)
+                    ECSParticle.CrossGlow(Projectile.Center.ToRandCirclePos(6) + i * Projectile.SafeDir() * 5f, RandVelTwoPi(.1f, .3f), RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), 40, 1f, 0, Main.rand.NextFloat(.85f, 1.15f) * Projectile.scale * .041f, fadinTime: .2f);
+            }
         }
         public override void OnKill(int timeLeft)
         {
-            float centerGlowScale = .12f;
-            ECSParticle.CrossGlow(Projectile.Center, Color.SkyBlue, 45, 1, centerGlowScale);
-            ECSParticle.CrossGlow(Projectile.Center, Color.LightSkyBlue, 45, 1, centerGlowScale * .98f);
-            ECSParticle.CrossGlow(Projectile.Center, Color.White, 45, 1, centerGlowScale * .96f);
-
-            for (int i = 0; i < 3; i++)
+            if (Projectile.ai[0] == 0)
             {
-                Color color = RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue);
-                new NoiseShockRing(Projectile.Center, Vector2.Zero, color, 45, 1f, .05f + i * 0.042f, Projectile.whoAmI, Vector2.Zero, false).Spawn();
+                float centerGlowScale = .12f;
+                ECSParticle.CrossGlow(Projectile.Center, Color.SkyBlue, 45, 1, centerGlowScale);
+                ECSParticle.CrossGlow(Projectile.Center, Color.LightSkyBlue, 45, 1, centerGlowScale * .98f);
+                ECSParticle.CrossGlow(Projectile.Center, Color.White, 45, 1, centerGlowScale * .96f);
+
+                for (int i = 0; i < 3; i++)
+                {
+                    Color color = RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue);
+                    new NoiseShockRing(Projectile.Center, Vector2.Zero, color, 45, 1f, .05f + i * 0.042f, Projectile.whoAmI, Vector2.Zero, false).Spawn();
+                }
+                for (int i = 0; i < 10; i++)
+                    ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(8), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.SkyBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
             }
-            for (int i = 0; i < 10; i++)
-                ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(8), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.SkyBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    Color color = RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue);
+                    new NoiseShockRing(Projectile.Center, Vector2.Zero, color, 45, 1f, .05f + i * 0.042f, Projectile.whoAmI, Vector2.Zero, false).Spawn();
+                }
+                for (int i = 0; i < 10; i++)
+                    ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(8), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.SkyBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
+
+            }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -83,13 +114,13 @@ namespace HJScarletRework.Projs.Executor
             Vector2 pos = Projectile.Center - Main.screenPosition;
             Color c = Color.Lerp(Color.LightSkyBlue, Color.SkyBlue, Projectile.localAI[1] / 6f);
             float generalScale = 8f * Projectile.Opacity;
-            Vector2 scale = new Vector2(1.02f, 1.72f) * .024f * generalScale *Projectile.scale;
+            Vector2 scale = new Vector2(1.02f, 1.72f) * .024f * generalScale * Projectile.scale;
             Vector2 orig = tex.Size() / 2;
 
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
-            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DeepSkyBlue, 1.26f, 1f,1.1f);
-            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.SkyBlue, 0.8f, 1f,1f);
-            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.58f,1f,0.95f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.DeepSkyBlue, 1.26f, 1f, 1.1f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.SkyBlue, 0.8f, 1f, 1f);
+            DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.58f, 1f, 0.95f);
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             for (int i = 0; i < 2; i++)
                 SB.Draw(tex, pos, null, c * Projectile.Opacity, PiOver2 * i, orig, scale, 0, 0);
@@ -128,13 +159,13 @@ namespace HJScarletRework.Projs.Executor
             //做掉可能存在的零向量
             DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
             List<TrailDrawDate> trailDrawDates = [];
-            int posCount = (int)((Projectile.oldPos.Length-6) * Clamp(Projectile.velocity.Length(), 0, 1));
+            int posCount = (int)((Projectile.oldPos.Length - 6) * Clamp(Projectile.velocity.Length(), 0, 1));
             for (int j = 0; j < posCount - 1; j++)
             {
                 if (Projectile.oldPos[j] == Vector2.Zero)
                     continue;
                 float rot = Projectile.oldRot[j];
-                trailDrawDates.Add(new(Projectile.oldPos[j] + Projectile.Size / 2 +Projectile.SafeDir() * 10f, drawColor, new Vector2(0, 13 * multipleSize * Projectile.scale), rot));
+                trailDrawDates.Add(new(Projectile.oldPos[j] + Projectile.Size / 2 + Projectile.SafeDir() * 10f, drawColor, new Vector2(0, 13 * multipleSize * Projectile.scale), rot));
             }
             TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
         }

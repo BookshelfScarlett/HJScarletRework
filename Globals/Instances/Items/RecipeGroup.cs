@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Items;
+using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
 using System;
@@ -24,6 +25,7 @@ namespace HJScarletRework.Globals.Instances.Items
         public static string AnyEvilBar;
         public static string AnyCobaltBar;
         public static string AnyGoldSword;
+        public static string AnyPostPlantEmblem;
         #region Crates
         public static string AnyIceCrate;
         public static string AnyJungleCrate;
@@ -65,6 +67,21 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyEvilBar = CreateRecipeGroup(nameof(AnyEvilBar), ItemID.DemoniteBar, ItemID.CrimtaneBar);
             AnyCobaltBar = CreateRecipeGroup(nameof(AnyCobaltBar), ItemID.CobaltBar, ItemID.PalladiumBar);
             AnyGoldSword = CreateRecipeGroup(nameof(AnyGoldSword), ItemID.GoldBroadsword, ItemID.PlatinumBroadsword);
+            AnyPostPlantEmblem = CreateRecipeGroup(nameof(AnyPostPlantEmblem), ItemType<EmblemColdSteel>(), ItemType<EmblemFirearm>(), ItemType<EmblemThrown>());
+        }
+        public override void PostAddRecipes()
+        {
+            for (int i = 0; i < Recipe.numRecipes; i++)
+            {
+                Recipe recipe = Main.recipe[i];
+                if (recipe.TryGetIngredient(ItemID.EyeoftheGolem, out Item ingre))
+                {
+                    Recipe recipe1 = recipe.Clone();
+                    recipe1.RemoveIngredient(ItemID.EyeoftheGolem);
+                    recipe1.AddRecipeGroup(AnyPostPlantEmblem);
+                    recipe1.Register();
+                }
+            }
         }
         public override void Unload()
         {
@@ -84,6 +101,7 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyEvilBar = null;
             AnyCobaltBar = null;
             AnyGoldSword = null;
+            AnyPostPlantEmblem = null;
         }
         public static string CreateRecipeGroup(string name, params int[] AllItem)
         {

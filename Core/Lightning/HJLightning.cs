@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Core.Primitives.Trail;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 

@@ -1,6 +1,4 @@
-﻿using ContinentOfJourney;
-using HJScarletRework.Items.Armor.Diver;
-using Microsoft.Xna.Framework;
+﻿using HJScarletRework.Items.Armor.Diver;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;

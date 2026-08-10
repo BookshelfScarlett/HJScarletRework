@@ -1,10 +1,10 @@
+global using Microsoft.Xna.Framework;
+global using Microsoft.Xna.Framework.Graphics;
 global using static HJScarletRework.Globals.Handlers.EasingHandler;
 global using static HJScarletRework.Globals.Handlers.GlobalHandler;
 global using static HJScarletRework.Globals.Handlers.RandHandler;
 global using static Microsoft.Xna.Framework.MathHelper;
 global using static Terraria.ModLoader.ModContent;
-global using Microsoft.Xna.Framework.Graphics;
-global using Microsoft.Xna.Framework;
 using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.List;

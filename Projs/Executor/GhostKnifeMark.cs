@@ -45,8 +45,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public sealed override void OnFirstFrame()
         {
-            //初始化将当前的射弹index传入
-            Owner.HJScarlet().KnifeMarkIndex = Type;
             ExtraFirstFrame();
         }
         /// <summary>
@@ -61,6 +59,7 @@ namespace HJScarletRework.Projs.Executor
         {
             //这里检查当前射弹的Type是否与玩家内的Index一致
             //如果不一致，准备进入处死状态
+            Owner.HJScarlet().KnifeMarkIndex = Type;
             if (Owner.HJScarlet().KnifeMarkIndex != Type)
             {
                 CanKillCurrentMark = true;
@@ -76,6 +75,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 Projectile.Opacity = Lerp(Projectile.Opacity, 0f, 0.1f);
                 Projectile.scale = Projectile.Opacity;
+                Owner.HJScarlet().KnifeMarkIndex = -1;
             }
             Osci += ToRadians(.5f);
             Vector2 targetVector = Owner.Center.GetNormalVector2(Main.MouseWorld);

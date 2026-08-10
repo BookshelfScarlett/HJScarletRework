@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
-using Microsoft.Xna.Framework;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -42,10 +41,12 @@ namespace HJScarletRework.Globals.Players
             globalSoundDelay = 0;
             maidReaperHealTimer = 0;
             conferenceCallBuffTime = 0;
-            KnifeMarkIndex = -1;
+            tearEyeBuff = 0;
         }
         public void UpdateTimer()
         {
+            if (tearEyeBuff > 0)
+                tearEyeBuff--;
             if (conferenceCallBuffTime > 0)
                 conferenceCallBuffTime--;
             if (maidReaperHealTimer > 0)

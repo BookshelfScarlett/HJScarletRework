@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor.Assistance
 {
-    public class DesertKnife: ExecutorWeaponClass
+    public class DesertKnife : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 20;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Assistance;
@@ -23,7 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
             Item.useTime = Item.useAnimation = 25;
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<DesertKnifeProj>();
-            Item.HJScarlet().NotFinished = true;
+            Item.UseSound = SoundID.Item1;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem();
             Item.HJScarlet().ForceAutomaticExecution = true;

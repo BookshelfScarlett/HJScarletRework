@@ -4,11 +4,16 @@ using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor.Caster
 {
     public class AbyssalWorld : ExecutorWeaponClass
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override int ExecutionProgress => 40;
         public override void ExSD()
         {

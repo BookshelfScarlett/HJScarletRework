@@ -2,8 +2,6 @@
 using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Instances.Projs;
 using HJScarletRework.Globals.Players;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -197,7 +195,7 @@ namespace HJScarletRework.Globals.Methods
         }
         public static string ToLifeRegenFormat(this int value)
         {
-            return $"+{(value/2)} HP/s";
+            return $"+{(value / 2)} HP/s";
         }
         public static int SetAxePower(this int percent) => percent / 5;
         /// <summary>

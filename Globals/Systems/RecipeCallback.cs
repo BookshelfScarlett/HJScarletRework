@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Projs.General;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 

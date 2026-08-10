@@ -22,7 +22,7 @@ namespace HJScarletRework.Items.Armor.Shinobi
         }
         public int ArmorPenetration = 20;
         public float MoveSpeed = .30f;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(ArmorPenetration,MoveSpeed.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(ArmorPenetration, MoveSpeed.ToPercent());
         public override void UpdateEquip(Player player)
         {
             player.GetArmorPenetration<ExecutorDamageClass>() += ArmorPenetration;

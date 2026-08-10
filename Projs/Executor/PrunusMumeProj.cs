@@ -4,7 +4,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -104,12 +103,12 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 16; i++)
             {
                 float rad = Projectile.rotation + ToRadians(360f / length * i);
-                ECSParticle.SmokeParticle(center.ToRandCirclePos(5f), rad.ToRotationVector2() * 10f * Main.rand.NextFloat(), RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 40, RandRotTwoPi, 1, 0.49f, true,BlendState.Additive);
+                ECSParticle.SmokeParticle(center.ToRandCirclePos(5f), rad.ToRotationVector2() * 10f * Main.rand.NextFloat(), RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 40, RandRotTwoPi, 1, 0.49f, true, BlendState.Additive);
             }
             for (int i = 0; i < 30; i++)
             {
-                ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePos(60), 2.2f, RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 120, 1, .128f,glowMult:.05f);
-                ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePos(60), 2.2f, RandLerpColor(Color.HotPink, Color.IndianRed), 120, 1, .12f,glowMult:.05f);
+                ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePos(60), 2.2f, RandLerpColor(Color.DarkGreen, Color.DarkOliveGreen), 120, 1, .128f, glowMult: .05f);
+                ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePos(60), 2.2f, RandLerpColor(Color.HotPink, Color.IndianRed), 120, 1, .12f, glowMult: .05f);
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)

@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Threading;
 using System.Collections.Generic;
 using Terraria;

@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Melee
     /// </summary>
     public class DialecticsThrownProj : ThrownSpearProjClass
     {
-        public override string Texture => ProjPath+GetType().Name;
+        public override string Texture => ProjPath + GetType().Name;
         public enum WaveStyle
         {
             Sin,

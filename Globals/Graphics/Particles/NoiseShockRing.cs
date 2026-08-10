@@ -1,10 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleSystem;
-using HJScarletRework.Globals.ParticleSystem;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.ParticleSystem;
+using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.Particles
 {

@@ -1,12 +1,16 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Caster;
-using System.Security.Cryptography.Xml;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class AbyssalWorldHeldProj : ExecutorHeldProj
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override int OriginalItemID => ItemType<AbyssalWorld>();
         public override void SetStaticDefaults()
         {

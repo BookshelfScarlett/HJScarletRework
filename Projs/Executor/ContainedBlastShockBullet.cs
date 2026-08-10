@@ -5,8 +5,6 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -55,7 +53,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.oldPosition+Projectile.Size/2, Vector2.Zero, ProjectileType<ContainedBlastBoom>(), Projectile.originalDamage / 2, Projectile.knockBack, Projectile.owner);
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.oldPosition + Projectile.Size / 2, Vector2.Zero, ProjectileType<ContainedBlastBoom>(), Projectile.originalDamage / 2, Projectile.knockBack, Projectile.owner);
             proj.ai[0] = 0;
             proj.rotation = Projectile.rotation;
             proj.HJScarlet().HasExecutionMechanic = true;

@@ -1,6 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
@@ -35,7 +33,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
         public static float CalcBackgroundX(float lineX, float tooltipMaxWidth, float bgWidth, float spacing = 30f)
         {
             float bgX = lineX + tooltipMaxWidth + spacing;
-            if(bgX + bgWidth > Main.screenWidth)
+            if (bgX + bgWidth > Main.screenWidth)
             {
                 bgX = lineX - bgWidth - spacing;
                 if (bgX < 0)
@@ -132,7 +130,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
             DrawBackground(bgX, bgY, bgWidth, bgHeight, padding, textboxSettings.BackgroundColor * lerpValue, textboxSettings.BackgroundEdgeColor * TextboxManager.EdgeValue, posOffset);
             //实际绘制文本
             float curY = bgY + 2;
-            float curX = bgX+1;
+            float curX = bgX + 1;
             foreach (var value in element)
             {
                 Vector2 textPos = new Vector2(curX, curY);
@@ -148,7 +146,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
         /// <param name="textboxSettings">设置</param>
         /// <param name="extraYOffset"></param>
         /// <param name="maxWidth"></param>
-        public static void DrawTextboxTooltipWithBackground(DrawableTooltipLine line, IReadOnlyList<TooltipLine> cacheTooltip, 
+        public static void DrawTextboxTooltipWithBackground(DrawableTooltipLine line, IReadOnlyList<TooltipLine> cacheTooltip,
             ref TextboxSettings textboxSettings, float extraYOffset = 0, float maxWidth = -1)
         {
             //line.Index如果不等于最后一行我们都不会绘制，以确保其绘制一次。
@@ -222,7 +220,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
                 //实际描述文本的坐标
                 Vector2 mainTextPos = new Vector2(titleTextDrawX, titleTextDrawY + titleTextSize.Y + 5);
                 SpriteBatch sb = Main.spriteBatch;
-                
+
                 //一个封装的，背景框绘制方案。
                 DrawTextboxBackground(titlePos, titleTextSize, mainTextPos, mainTextSize, 8, titlePos, textboxSettings.BackgroundColor * lerpValue, posOffset, textboxSettings.BackgroundEdgeColor.Value * lerpValue * edgeValue);
                 //最后，我们再画需要的文本内容。
@@ -342,7 +340,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
             //这个好像是右边
             sb.Draw(background, recPos + new Vector2(floatingOuterRec.Width - bw, bw), leftRec, borderColor, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
-        
+
         public static void DrawMultipleTextboxes(DrawableTooltipLine line, IReadOnlyList<TooltipLine> cacheTooltip, List<TextboxSettings> settingsList, float verticalSpacing = 10f)
         {
             if (cacheTooltip is null || line.Index != cacheTooltip.Count - 1)
@@ -357,7 +355,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
             foreach (var t in cacheTooltip)
             {
                 Vector2 size = ChatManager.GetStringSize(font, t.Text, scale);
-                if (size.X > maxWidth) 
+                if (size.X > maxWidth)
                     maxWidth = size.X;
             }
             // 2. 计算所有文本框的内容最大宽度（用于统一背景）

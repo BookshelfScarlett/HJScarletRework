@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Globals.List;
 using HJScarletRework.Items.Useables;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;

@@ -12,6 +12,10 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
 {
     public class EndlessWar : ExecutorWeaponClass
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override float ExecutionStrikeDamageMult => 1.0f;
         public override int ExecutionProgress => 15;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;

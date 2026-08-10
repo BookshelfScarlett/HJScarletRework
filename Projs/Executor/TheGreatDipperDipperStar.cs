@@ -6,11 +6,6 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Misc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
@@ -71,7 +66,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.Opacity = Lerp(Projectile.Opacity, 1.01f, 0.12f);
             Projectile.scale = Projectile.Opacity;
             if (Main.rand.NextBool(14))
-                ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(16), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.RoyalBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f,glowMult:.15f);
+                ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(16), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.RoyalBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f, glowMult: .15f);
         }
         public override void ProjAI()
         {
@@ -104,7 +99,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     if (ShoulGlowUp)
                     {
-                        float centerGlowScale = .12f;
+                        float centerGlowScale = .22f;
                         ECSParticle.CrossGlow(Projectile.Center, Color.RoyalBlue, 45, 1, centerGlowScale);
                         ECSParticle.CrossGlow(Projectile.Center, Color.CornflowerBlue, 45, 1, centerGlowScale * .98f);
                         ECSParticle.CrossGlow(Projectile.Center, Color.White, 45, 1, centerGlowScale * .96f);
@@ -112,10 +107,10 @@ namespace HJScarletRework.Projs.Executor
                         for (int i = 0; i < 3; i++)
                         {
                             Color color = RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue);
-                            new NoiseShockRing(Projectile.Center, Vector2.Zero, color, 45, 1f, .05f + i * 0.082f, Projectile.whoAmI, Vector2.Zero, true).Spawn();
+                            new NoiseShockRing(Projectile.Center, Vector2.Zero, color, 45, 1f, .15f + i * 0.082f, Projectile.whoAmI, Vector2.Zero, true).Spawn();
                         }
                         for (int i = 0; i < 10; i++)
-                            ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(16), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.SkyBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
+                            ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(24), Main.rand.NextFloat(1.2f, 2.4f) * .28f, RandLerpColor(Color.SkyBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
                     }
                     ShouldKill = true;
                     Projectile.netUpdate = true;
@@ -124,9 +119,12 @@ namespace HJScarletRework.Projs.Executor
             else if (AttackState == State.Lanuching)
             {
                 Vector2 vec = Projectile.Center.GetNormalVector2(Main.MouseWorld);
-                int damage = (int)Owner.GetTotalDamage<ExecutorDamageClass>().ApplyTo(34);
-                Projectile bolt = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + vec.ToSafeNormalize() * 10f, vec * 17f, ProjectileType<TheSevenStarBolt>(), damage, 2f, Owner.whoAmI);
-                float centerGlowScale = .12f;
+                if (!Owner.HasProj<TheGreatDipperGalaxyHelper>())
+                {
+                    int damage = (int)Owner.GetTotalDamage<ExecutorDamageClass>().ApplyTo(34);
+                    Projectile bolt = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + vec.ToSafeNormalize() * 10f, vec * 17f, ProjectileType<TheSevenStarBolt>(), damage, 2f, Owner.whoAmI);
+                }
+                float centerGlowScale = .22f;
                 ECSParticle.CrossGlow(Projectile.Center, Color.RoyalBlue, 45, 1, centerGlowScale);
                 ECSParticle.CrossGlow(Projectile.Center, Color.CornflowerBlue, 45, 1, centerGlowScale * .98f);
                 ECSParticle.CrossGlow(Projectile.Center, Color.White, 45, 1, centerGlowScale * .96f);
@@ -134,10 +132,10 @@ namespace HJScarletRework.Projs.Executor
                 for (int i = 0; i < 3; i++)
                 {
                     Color color = RandLerpColor(Color.WhiteSmoke, Color.RoyalBlue);
-                    new NoiseShockRing(Projectile.Center, Vector2.Zero, color, 45, 1f, .08f + i * 0.022f, Projectile.whoAmI, Vector2.Zero, true).Spawn();
+                    new NoiseShockRing(Projectile.Center, Vector2.Zero, color, 45, 1f, .1f + i * 0.022f, Projectile.whoAmI, Vector2.Zero, true).Spawn();
                 }
                 for (int i = 0; i < 10; i++)
-                    ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(4), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.SkyBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
+                    ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePosEdge(16), Main.rand.NextFloat(1.2f, 2.4f) * .28f, RandLerpColor(Color.SkyBlue, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
                 AttackState = (State)(-1);
             }
             else

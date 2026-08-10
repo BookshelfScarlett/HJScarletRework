@@ -1,8 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.MetaballSystem;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 

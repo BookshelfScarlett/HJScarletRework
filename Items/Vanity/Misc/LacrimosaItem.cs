@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria.ID;
+﻿using Terraria.ID;
 
 namespace HJScarletRework.Items.Vanity.Misc
 {

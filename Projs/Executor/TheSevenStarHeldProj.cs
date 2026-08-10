@@ -12,7 +12,7 @@ using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class TheSevenStarHeldProj: ExecutorHeldProj, IPixelatedRenderer
+    public class TheSevenStarHeldProj : ExecutorHeldProj, IPixelatedRenderer
     {
         public override int OriginalItemID => ItemType<TheSevenStar>();
         public override EnumDamageClass Category => EnumDamageClass.Executor;
@@ -83,9 +83,9 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Helper.IsDone[0])
             {
-                if(Helper.OnAnimationBegin(0))
+                if (Helper.OnAnimationBegin(0))
                 {
-                    if(Projectile.IsMe())
+                    if (Projectile.IsMe())
                     {
                         Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.Center.GetNormalVector2(Main.MouseWorld) * 16f, ProjectileType<TheSevenStarStar>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
                         proj.HJScarlet().HasExecutionMechanic = true;
@@ -155,7 +155,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 85, Main.rand.NextFloat(0.51f, 1.08f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
-                    Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy((PiOver2 + ToRadians(10)) * Owner.direction * (Flip.ToDirectionInt())) * Main.rand.NextFloat(1.2f, 1.5f)*2f;
+                    Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy((PiOver2 + ToRadians(10)) * Owner.direction * (Flip.ToDirectionInt())) * Main.rand.NextFloat(1.2f, 1.5f) * 2f;
                     ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.LightSkyBlue, Color.DarkGray), 40, 1f, .04f * Projectile.scale * Main.rand.NextFloat(.8f, 1.1f), glowMult: .51f);
                 }
                 if (Main.rand.NextBool(6))
@@ -163,7 +163,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 85, Main.rand.NextFloat(.51f, .98f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
-                    Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy(PiOver2 * Owner.direction * Flip.ToDirectionInt()) * Main.rand.NextFloat(1.5f, 1.9f)*2f;
+                    Vector2 vel = Owner.velocity * 0.5f + dir.RotatedBy(PiOver2 * Owner.direction * Flip.ToDirectionInt()) * Main.rand.NextFloat(1.5f, 1.9f) * 2f;
                     ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.LightSkyBlue, Color.DarkGray), 20, 1f, Main.rand.NextFloat(.7f, 1.01f) * Projectile.scale * .55f, 0.2f);
                 }
             }
@@ -250,19 +250,19 @@ namespace HJScarletRework.Projs.Executor
             SB.Draw(glow, topPos, null, Color.LightGoldenrodYellow, PiOver4, glow.Size() / 2, scale, 0, 0);
             Texture2D texture = HJScarletTexture.Texture_StandardGradient.Value;
             HJScarletMethods.ApplyAlphaCut(new Vector4(0.31f, 0.1f, 0, 0), Vector2.Zero, Vector2.One);
-            DrawSlash(texture, Color.SkyBlue* 0.90f, 0.95f);
-            DrawSlash(texture, Color.LightSkyBlue* 0.60f, 0.55f);
+            DrawSlash(texture, Color.SkyBlue * 0.90f, 0.95f);
+            DrawSlash(texture, Color.LightSkyBlue * 0.60f, 0.55f);
 
-            HJScarletMethods.ApplyAlphaCut(new Vector4(0.42f, 0.2f, 0, 0), new Vector2(-Main.GlobalTimeWrappedHourly * 1.195f, 0), new Vector2(3.2f,2.1f), Color.SkyBlue);
+            HJScarletMethods.ApplyAlphaCut(new Vector4(0.42f, 0.2f, 0, 0), new Vector2(-Main.GlobalTimeWrappedHourly * 1.195f, 0), new Vector2(3.2f, 2.1f), Color.SkyBlue);
             Texture2D texture2 = HJScarletTexture.Noise_Misc.Value;
-            DrawSlash(texture2, Color.SkyBlue* .95f, 0.90f);
+            DrawSlash(texture2, Color.SkyBlue * .95f, 0.90f);
             texture2 = HJScarletTexture.Noise_Aura.Value;
-            DrawSlash(texture2, Color.LightSkyBlue* .80f, 0.55f);
+            DrawSlash(texture2, Color.LightSkyBlue * .80f, 0.55f);
 
             texture = HJScarletTexture.Texture_SwordSlash.Value;
             HJScarletMethods.ApplyAlphaCut(new Vector4(0.41f, 0.1f, 0, 0), Vector2.Zero, Vector2.One);
-            DrawSlash(texture, Color.SkyBlue* 0.95f, 0.95f);
-            DrawSlash(texture, Color.LightSkyBlue* 0.60f, 0.50f);
+            DrawSlash(texture, Color.SkyBlue * 0.95f, 0.95f);
+            DrawSlash(texture, Color.LightSkyBlue * 0.60f, 0.50f);
             HJScarletMethods.EndShaderAreaPixel();
         }
         private List<ScarletVertex> _vertexCache = new List<ScarletVertex>(); // 类级别缓存
@@ -298,7 +298,7 @@ namespace HJScarletRework.Projs.Executor
             Texture2D texture = HJScarletTexture.Texture_SwordSlashWhite.Value;
             HJScarletMethods.ApplyAlphaCut(new Vector4(0.41f, 0.53f, 0.12f, 0.12f), Vector2.One, Vector2.One);
             DrawSlash(texture, Color.Black * 0.136f, 0.45f);
-            DrawSlash(texture, Color.DeepSkyBlue* 0.150f, 0.20f);
+            DrawSlash(texture, Color.DeepSkyBlue * 0.150f, 0.20f);
             SB.EndShaderArea();
             return false;
         }

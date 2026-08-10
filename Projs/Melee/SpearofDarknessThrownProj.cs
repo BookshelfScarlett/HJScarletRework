@@ -1,9 +1,6 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Graphics.Particles;
+﻿using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -12,7 +9,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class SpearofDarknessThrownProj : ThrownSpearProjClass
     {
-        public override string Texture => ProjPath +GetType().Name;
+        public override string Texture => ProjPath + GetType().Name;
         public int TargetIndex = -1;
         private enum Styles
         {

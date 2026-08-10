@@ -111,3 +111,8 @@ SonBuff: {
 	DisplayName: 圣子伙伴
 	Description: 可是我觉得这很神圣啊
 }
+
+GrassPoison: {
+	// DisplayName: Grass Poison
+	// Description: Mods.HJScarletRework.Buffs.GrassPoison.Description
+}

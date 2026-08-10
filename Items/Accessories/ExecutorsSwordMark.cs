@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Accessories
             Item.SetUpRarityPrice(ItemRarityID.LightPurple);
 
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(ExecutionProgressRegen,CasterExecutionProgressRegen,CritDamage.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(ExecutionProgressRegen, CasterExecutionProgressRegen, CritDamage.ToPercent());
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().executorSwordMarkLevel = 2;

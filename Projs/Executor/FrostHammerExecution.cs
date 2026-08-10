@@ -6,7 +6,6 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;

@@ -34,21 +34,25 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            bool exe = player.GetExecutionSrike();
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
             proj.HJScarlet().HasExecutionMechanic = true;
-            if (exe && !player.HasProj(Item.HJScarlet().ExecutionProj))
-            {
-                Vector2 targetVector = player.Center.GetNormalVector2(Main.MouseWorld);
-                Projectile mark = Projectile.NewProjectileDirect(source, position - targetVector * 80f, Vector2.Zero, Item.HJScarlet().ExecutionProj, damage, knockback, player.whoAmI);
-                player.RemoveExecutionProgress(Type);
-            }
+            QuickSpawnMark(Type, Item.HJScarlet().ExecutionProj, player, source, position);
             return false;
         }
         public static void QuickSpawnMark(int weaponID, int markID, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position)
         {
             bool exe = player.GetExecutionSrike();
-            if (exe && !player.HasProj(markID))
+            if (!exe)
+                return;
+            //场上如果存在其余处死标记，立刻删除
+            foreach (var p in Main.ActiveProjectiles)
+            {
+                if (p.active && p.owner == player.whoAmI && p.ModProjectile is KnifeMarkClass && p.type != markID)
+                {
+                    p.Kill();
+                }
+            }
+            if (!player.HasProj(markID))
             {
                 Vector2 targetVector = player.Center.GetNormalVector2(Main.MouseWorld);
                 Projectile mark = Projectile.NewProjectileDirect(source, position - targetVector * 80f, Vector2.Zero, markID, 0, 0, player.whoAmI);

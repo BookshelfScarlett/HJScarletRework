@@ -70,6 +70,20 @@ DescriptionPaper: {
 		[i:FloretProtectorHelmet][i:FloretProtectorChestplate][i:FloretProtectorLegs]护花员套装 - 在击败万籁携生时允许转化
 		[i:MonkBrows][i:MonkShirt][i:MonkPants]武僧盔甲/[i:MonkAltHead][i:MonkAltShirt][i:MonkAltPants]渗透忍者盔甲则获得代行者版本
 		上述提到的所有被改造的时装都获得了全新的效果和护甲奖励
+		同时，你可以通过按住左Alt以查看参与了本模组的开发人员与支援名单
+		'''
+	ThanksList:
+		'''
+		[c/CC0340:主开发人员：]
+		绯色书架 ScarletShelf - 主编程
+		Inoljw，名字，芙蕾雅 Freya - 贴图画师
+		-
+		[c/BAEE1B:支援人员：]
+		樱羽一花，Demon Lilies，世纪小花 Plantera，溯月 Shizuku
+		论时间的涟漪，Woodi Stigma
+		锯角 Serrat Antler，南鸢北笙，梦山之主
+		巴雷难破长夜，冰川咲，银九，曦
+		[c/AACCCC:非常感谢各位让本模组得以顺利推进并落地]
 		'''
 }
 

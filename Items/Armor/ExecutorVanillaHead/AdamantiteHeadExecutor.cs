@@ -1,8 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Systems;
-using HJScarletRework.Items.Armor.Diver;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -35,7 +33,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
         }
         public override void UpdateArmorSetBetter(Player player, string setBonusPath)
         {
-            player.setBonus += "\n" + setBonusPath.ToLangValue().ToFormatValue(CritDamage.ToPercent(),StrikeChance,ThunderCount,ThunderDamage,ThunderCritChance);
+            player.setBonus += "\n" + setBonusPath.ToLangValue().ToFormatValue(CritDamage.ToPercent(), StrikeChance, ThunderCount, ThunderDamage, ThunderCritChance);
             player.armorEffectDrawShadow = true;
             player.HJScarlet().adamantiteHeadExecutor = true;
             player.HJScarlet().critDamageExecutor += CritDamage;

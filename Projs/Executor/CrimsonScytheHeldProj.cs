@@ -11,8 +11,6 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 
@@ -99,7 +97,7 @@ namespace HJScarletRework.Projs.Executor
                 else
                     ((CrimsonScytheSoulStone)proj.ModProjectile).BreakAI = CrimsonScytheSoulStone.BreakType.Return;
                 ((CrimsonScytheSoulStone)proj.ModProjectile).AttackState = CrimsonScytheSoulStone.State.Explosion;
-                ((CrimsonScytheSoulStone)proj.ModProjectile).InitVector2= Owner.Center.GetNormalVector2(proj.Center);
+                ((CrimsonScytheSoulStone)proj.ModProjectile).InitVector2 = Owner.Center.GetNormalVector2(proj.Center);
             }
         }
         public override void OnExecution()
@@ -332,7 +330,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnKill(int timeLeft)
         {
             HandleExecution();
-            if(ThirdSwing)
+            if (ThirdSwing)
             {
                 Projectile.HJScarlet().ExecutionStrike = false;
             }
@@ -467,8 +465,8 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.numHits > 0)
                 return;
             StopTiming = 35;
-            if(DownedBossSystem.downedSunGod)
-            Projectile.AddExecutionTimeImmediate(OriginalItemID);
+            if (DownedBossSystem.downedSunGod)
+                Projectile.AddExecutionTimeImmediate(OriginalItemID);
             float rot = Projectile.Center.GetNormalVector2(target.Center).ToRotation();
             if (ThirdSwing)
             {

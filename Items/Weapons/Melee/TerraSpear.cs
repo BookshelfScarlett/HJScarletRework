@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Projs.Melee;
-using Microsoft.Xna.Framework;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Melee

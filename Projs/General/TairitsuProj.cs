@@ -6,8 +6,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -39,7 +37,7 @@ namespace HJScarletRework.Projs.General
         }
         public override void OnFirstFrame()
         {
-            Helper.MaxProgress[0] = TotalProgressDead= (int)(AttackSpeed * 1.65f);
+            Helper.MaxProgress[0] = TotalProgressDead = (int)(AttackSpeed * 1.65f);
             Helper.MaxProgress[1] = (int)(AttackSpeed * 1.65f);
             Helper.MaxProgress[2] = (int)(AttackSpeed * .6f);
             Helper.MaxProgress[3] = (int)(AttackSpeed * .95f);
@@ -88,16 +86,16 @@ namespace HJScarletRework.Projs.General
 
                 float rotValueChange = Lerp(ToRadians(-8f), ToRadians(5f), ratios);
                 Vector2 skyDir = (-Vector2.UnitY).RotatedBy(rotValueChange);
-                Projectile.velocity = Vector2.Lerp(Projectile.velocity, skyDir,0.23f);
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, skyDir, 0.23f);
                 float targetRotaiton = Projectile.velocity.ToRotation();
                 float currentRotation = Projectile.rotation;
                 float value = WrapAngle(targetRotaiton - currentRotation);
 
                 float innerRot = Lerp(Projectile.rotation, currentRotation + value, .012f);
-                float targetRot = Lerp(innerRot,currentRotation + value,0.012f);
+                float targetRot = Lerp(innerRot, currentRotation + value, 0.012f);
                 Projectile.rotation = Lerp(targetRot, currentRotation + value, 0.014f);
                 bool killUp = (Math.Abs(Owner.velocity.X) + Math.Abs(Owner.velocity.Y)) > 5f || (Main.mouseLeft && Main.mouseLeftRelease) || (Main.mouseRight && Main.mouseRightRelease);
-                if( killUp && !ShouldKill)
+                if (killUp && !ShouldKill)
                 {
                     ShouldKill = true;
                 }
@@ -108,7 +106,7 @@ namespace HJScarletRework.Projs.General
                     if (progress >= 0.3f && !InitSound)
                     {
                         InitSound = true;
-                        ScarletSound(HJScarletSounds.Misc_ManaClearUse, Projectile.Center,pitch:-.4f);
+                        ScarletSound(HJScarletSounds.Misc_ManaClearUse, Projectile.Center, pitch: -.4f);
 
                         //for (int i = 0; i < 16; i++)
                         //{
@@ -126,7 +124,7 @@ namespace HJScarletRework.Projs.General
                         //}
 
                     }
-                    if(progress== 1f)
+                    if (progress == 1f)
                     {
                         Projectile.Kill();
                     }
@@ -197,7 +195,7 @@ namespace HJScarletRework.Projs.General
                 Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 30 * 1.4f, Main.rand.NextFloat(0.6f, 1f));
                 Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                 Vector2 vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection);
-                ECSParticle.LiliesPetal(pos, vel, RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), 40, 1,RandRotTwoPi, 0.05f,0.2f,true,1,true);
+                ECSParticle.LiliesPetal(pos, vel, RandLerpColor(Color.SkyBlue, Color.DeepSkyBlue), 40, 1, RandRotTwoPi, 0.05f, 0.2f, true, 1, true);
             }
 
         }
@@ -255,14 +253,14 @@ namespace HJScarletRework.Projs.General
         {
             //给刀画刀光的来了
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
-            Texture2D texture =  HJScarletTexture.Texture_SwordSlash.Value;
+            Texture2D texture = HJScarletTexture.Texture_SwordSlash.Value;
             Effect effect = HJScarletShader.AlphaFade;
             effect.Parameters["uFadeoutLeftLength"].SetValue(0.21f);
             effect.Parameters["uFadeinRigtLength"].SetValue(0.3f);
             effect.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             effect.CurrentTechnique.Passes[0].Apply();
-            DrawSlash(texture, Color.DeepSkyBlue* 0.55f, 0.95f);
-            DrawSlash(texture, Color.LightBlue* 0.40f, 0.50f);
+            DrawSlash(texture, Color.DeepSkyBlue * 0.55f, 0.95f);
+            DrawSlash(texture, Color.LightBlue * 0.40f, 0.50f);
             effect.Parameters["uFadeoutLeftLength"].SetValue(0.1f);
             effect.Parameters["uFadeinRigtLength"].SetValue(0.05f);
             DrawSlash(texture, Color.Lerp(Color.SkyBlue, Color.White, 0.760f) * 0.75f, 0.85f, 0.95f);
@@ -328,11 +326,11 @@ namespace HJScarletRework.Projs.General
             }
 
             float progress = Helper.GetAniProgress(0);
-            float meltPro = 1- EaseInOutQuad(progress);
-            if(ShouldKill)
+            float meltPro = 1 - EaseInOutQuad(progress);
+            if (ShouldKill)
             {
 
-                    progress = (Clamp(Timer / TotalProgressDead, 0, 1));
+                progress = (Clamp(Timer / TotalProgressDead, 0, 1));
                 //progress =Utils.GetLerpValue(0, (float)TotalProgressDead, Timer, true);
                 meltPro = EaseInOutExpo(progress);
             }

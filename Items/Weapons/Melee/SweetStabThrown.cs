@@ -1,7 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;

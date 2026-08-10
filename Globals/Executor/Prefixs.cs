@@ -48,6 +48,7 @@ namespace HJScarletRework.Globals.Executor
         public override float CritDamageAdd => .10f;
         public override int CritAdd => 5;
         public override float KnockbackMult => 1.1f;
+        public override float PrefixLevel => 2f;
     }
     /// <summary>
     /// 变革
@@ -58,6 +59,7 @@ namespace HJScarletRework.Globals.Executor
         public override float CritDamageAdd => .05f;
         public override int CritAdd => 5;
         public override float KnockbackMult => 1.05f;
+        public override float PrefixLevel => 1.5f;
     }
     /// <summary>
     /// 电子
@@ -66,6 +68,7 @@ namespace HJScarletRework.Globals.Executor
     {
         public override float DamageMult => 1.10f;
         public override float CritDamageAdd => .10f;
+        public override float PrefixLevel => 1.25f;
     }
     /// <summary>
     /// 神秘
@@ -75,6 +78,7 @@ namespace HJScarletRework.Globals.Executor
         public override int CritAdd => 10;
         public override float CritDamageAdd => .10f;
         public override float KnockbackMult => .90f;
+        public override float PrefixLevel => 1.25f;
     }
     /// <summary>
     /// 降临
@@ -85,6 +89,7 @@ namespace HJScarletRework.Globals.Executor
         public override float CritDamageAdd => -0.5f;
         public override float ExecutionDamageMult => .75f;
         public override float KnockbackMult => 1f;
+        public override float PrefixLevel => .8f;
     }
     /// <summary>
     /// 他人格
@@ -95,6 +100,7 @@ namespace HJScarletRework.Globals.Executor
         public override float CritDamageAdd => .50f;
         public override float ExecutionDamageMult => 0.25f;
         public override float KnockbackMult => 1f;
+        public override float PrefixLevel => 0.8f;
     }
     /// <summary>
     /// 赝品
@@ -106,6 +112,7 @@ namespace HJScarletRework.Globals.Executor
         public override float ExecutionDamageMult => 0.90f;
         public override float KnockbackMult => .90f;
         public override int DefenseAdded => -10;
+        public override float PrefixLevel => .10f;
     }
 
     public abstract class ExecutorPrefixs : ModPrefix, ILocalizedModType
@@ -115,10 +122,6 @@ namespace HJScarletRework.Globals.Executor
         /// 伤害加成
         /// </summary>
         public virtual float DamageMult => 1f;
-        /// <summary>
-        /// 使用时间加成
-        /// </summary>
-        public virtual float UseTimeMult => 1f;
         /// <summary>
         /// 击退力加成
         /// </summary>
@@ -139,6 +142,7 @@ namespace HJScarletRework.Globals.Executor
         /// 暴击伤害加成
         /// </summary>
         public virtual float CritDamageAdd => 0;
+        public virtual float PrefixLevel => 1;
         public override PrefixCategory Category => PrefixCategory.AnyWeapon;
         /// <summary>
         /// 使用CountAsClass会导致射手也能roll代行者的词缀
@@ -150,13 +154,12 @@ namespace HJScarletRework.Globals.Executor
         public override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult, ref float scaleMult, ref float shootSpeedMult, ref float manaMult, ref int critBonus)
         {
             damageMult = DamageMult;
-            useTimeMult = UseTimeMult;
             critBonus = CritAdd;
             knockbackMult = KnockbackMult;
         }
         public override void ModifyValue(ref float valueMult)
         {
-            valueMult *= 1f + DamageMult;
+            valueMult = PrefixLevel;
         }
         public override void Apply(Item item)
         {
@@ -171,7 +174,7 @@ namespace HJScarletRework.Globals.Executor
         internal const string ArmorPenetrationNameID = "HJScarletRework:PrefixArmorPenetration";
         internal const string CritDamageID = "HJScarletRework:PrefixCritDamage";
         public string ExecutionDamageValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.ExecutionDamageLine").ToLangValue();
-        public string DefenseReduceValue  => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.DefenseReduceLine").ToLangValue();
+        public string DefenseReduceValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.DefenseReduceLine").ToLangValue();
         public string CritDamageValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.CritDamageLine").ToLangValue();
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {

@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Globals.Enums;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace HJScarletRework.Core.PixelatedRender
 {

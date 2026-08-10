@@ -4,27 +4,19 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Ranged;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 
-namespace HJScarletRework.Projs.Ranged
+namespace HJScarletRework.Projs.Executor
 {
     public class ClimaticHawstringProj : HJScarletProj
     {
-        public override EnumDamageClass Category => EnumDamageClass.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<ClimaticHawstring>().Texture;
         public AnimationStruct Helper = new(2);
-
-        public override void SetStaticDefaults()
-        {
-            ProjectileID.Sets.NeedsUUID[Projectile.type] = true;
-            ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[Type] = true;
-        }
         public int GetUseTime => Owner.ApplyWeaponAttackSpeed(GetInstance<ClimaticHawstring>().Item, GetInstance<ClimaticHawstring>().Item.useTime, 5);
         public ref float Timer => ref Projectile.ai[0];
         public bool CanLaser => Owner.HJScarlet().climaticHawstringLaserCounter >= 30;
@@ -56,6 +48,7 @@ namespace HJScarletRework.Projs.Ranged
 
         public void UpdateAttackAI()
         {
+            Owner.itemAnimation = Owner.itemTime = 2;
             Vector2 dir = Projectile.SafeDir();
             if (CanLaser)
             {
@@ -91,6 +84,7 @@ namespace HJScarletRework.Projs.Ranged
                 Vector2 pos = dir.RotatedBy(PiOver2) * i * 22f + Projectile.Center;
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos + dir * 17f, dir * 12f, ProjectileType<ClimaticHawstringArrow>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 proj.rotation = dir.ToRotation();
+                proj.HJScarlet().HasExecutionMechanic = true;
                 for (int j = 0; j < 16; j++)
                     new StarShape(pos.ToRandCirclePos(4f) + dir * 17f, dir * Main.rand.NextFloat(0.1f, 6.2f), RandLerpColor(Color.Goldenrod, Color.DarkGoldenrod), Main.rand.NextFloat(0.35f, 0.45f) * 1.2f, 40).Spawn();
                 new ShinyCrossStar(pos + dir * 17f, Vector2.Zero, RandLerpColor(Color.DarkGoldenrod, Color.Goldenrod), 40, 0, 1, 1.2f, false).Spawn();
@@ -104,7 +98,6 @@ namespace HJScarletRework.Projs.Ranged
             Owner.ControlPlayerArm(Projectile.rotation);
             Owner.ChangeDir(Projectile.direction);
             Owner.heldProj = Projectile.whoAmI;
-            Owner.itemAnimation = Owner.itemTime = 2;
             Projectile.Center = Owner.MountedCenter;
             Projectile.position.Y += Owner.gfxOffY;
         }
@@ -126,7 +119,9 @@ namespace HJScarletRework.Projs.Ranged
                 proj.rotation = (-Vector2.UnitX).ToRotation();
                 ((ClimaticHawstringMinion)proj.ModProjectile).Reverse = reverse > 0;
             }
-            UpdateAttackAI();
+            bool ifStillUse = (Owner.channel || Owner.controlUseTile) && !Owner.noItems && !Owner.CCed;
+            if (ifStillUse)
+                UpdateAttackAI();
             UpdateBowStatement();
             UpdatePlayerState();
             Projectile.netUpdate = true;
@@ -134,8 +129,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         public bool CheckOwnerState()
         {
-            bool ifStillUse = (Owner.channel || Owner.controlUseTile) && !Owner.noItems && !Owner.CCed;
-            if (!ifStillUse)
+            if (!Owner.IsHolding<ClimaticHawstring>() || Owner.dead || Owner.CCed)
             {
                 Projectile.Kill();
                 return true;
@@ -152,14 +146,12 @@ namespace HJScarletRework.Projs.Ranged
             float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
             Vector2 rotationPoint = tex.Size() * 0.5f;
             SpriteEffects flipSprite = Projectile.spriteDirection * Main.player[Projectile.owner].gravDir == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            Color endColor = Color.Lerp(Color.White, Color.DarkGoldenrod, 0.5f);
-            for (int i = 0; i < 8; i++)
-            {
-                Color edgeColor = Color.Lerp(Color.Transparent, endColor.ToAddColor(), EaseInOutSin((float)Timer / GetUseTime));
-                if (CanLaser)
-                    edgeColor = endColor.ToAddColor();
-                SB.Draw(tex, drawPos + offset.RotatedBy(drawRot) + ToRadians(60 * i).ToRotationVector2() * 2f, null, edgeColor, drawRot, rotationPoint, Projectile.scale, flipSprite, default);
-            }
+            if (CanLaser)
+                for (int i = 0; i < 8; i++)
+                {
+                    Color edgeColor = Color.White.ToAddColor();
+                    SB.Draw(tex, drawPos + offset.RotatedBy(drawRot) + ToRadians(60 * i).ToRotationVector2() * 2f, null, edgeColor, drawRot, rotationPoint, Projectile.scale, flipSprite, default);
+                }
             SB.Draw(tex, drawPos + offset.RotatedBy(drawRot), null, lightColor, drawRot, rotationPoint, Projectile.scale, flipSprite, default);
             return false;
         }

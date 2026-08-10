@@ -1,10 +1,7 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs;
 using HJScarletRework.Projs.General;
-using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;

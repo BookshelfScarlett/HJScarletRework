@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using Microsoft.Xna.Framework;
 
 namespace HJScarletRework.Projs.General
 {

@@ -8,12 +8,9 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -78,7 +75,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-            switch(GaiaStrikeDeadType)
+            switch (GaiaStrikeDeadType)
             {
                 //极端情况下如果是非正常死亡，会刷新自己
                 //但是，这种情况实际上，极其罕见。
@@ -276,7 +273,7 @@ namespace HJScarletRework.Projs.Executor
         public void CreateBloodyExplosion()
         {
             //爆开
-                ScreenDarknessSystem.AddScreenDarkness(0.85f, 5,10,20,easeOut:EaseInOutExpo);
+            ScreenDarknessSystem.AddScreenDarkness(0.85f, 5, 10, 20, easeOut: EaseInOutExpo);
             for (int i = 0; i < 36; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);

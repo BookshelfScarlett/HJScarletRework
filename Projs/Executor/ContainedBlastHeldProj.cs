@@ -5,8 +5,6 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Utilities;
 using Terraria;
 using Terraria.Audio;
@@ -60,11 +58,11 @@ namespace HJScarletRework.Projs.Executor
         {
             if (IsUsing)
             {
-                if(!IsBuffing)
-                Projectile.position += Main.rand.NextVector2Circular(2, 2);
+                if (!IsBuffing)
+                    Projectile.position += Main.rand.NextVector2Circular(2, 2);
                 else
-                Projectile.position += Main.rand.NextVector2Circular(3, 3);
-                    Timer++;
+                    Projectile.position += Main.rand.NextVector2Circular(3, 3);
+                Timer++;
                 OnFireTimer++;
                 if (OnFireTimer > 60 * Projectile.MaxUpdates)
                     OnFireTimer = 60 * Projectile.MaxUpdates;
@@ -139,7 +137,7 @@ namespace HJScarletRework.Projs.Executor
                 }
                 else
                 {
-                   for (int i = 0; i < 16; i++)
+                    for (int i = 0; i < 16; i++)
                     {
                         Vector2 posOffset = Projectile.SafeDirByRot().RotatedBy(PiOver2) * Main.rand.NextFloat(-8f, 8f) + Projectile.SafeDirByRot() * 50f;
                         Vector2 vel = Projectile.SafeDirByRot() * Main.rand.NextFloat(1f, 23f);
@@ -154,7 +152,7 @@ namespace HJScarletRework.Projs.Executor
                     }
 
                 }
-                    Projectile.HJScarlet().ExecutionStrike = false;
+                Projectile.HJScarlet().ExecutionStrike = false;
             }
         }
         public override void OnExecution()

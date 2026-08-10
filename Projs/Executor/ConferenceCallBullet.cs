@@ -4,8 +4,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 
@@ -43,7 +41,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if ((SetSplitBullet || Projectile.HJScarlet().ExecutionStrike)&& BounceTime < 3)
+            if ((SetSplitBullet || Projectile.HJScarlet().ExecutionStrike) && BounceTime < 3)
             {
                 Projectile.BounceOnTile(oldVelocity);
                 SetGeneralParticle();
@@ -78,7 +76,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
-           if (Timer % (8 * Projectile.MaxUpdates) == 0 && !SetSplitBullet && Timer !=0 && SplitTime < 4 && Projectile.IsMe())
+            if (Timer % (8 * Projectile.MaxUpdates) == 0 && !SetSplitBullet && Timer != 0 && SplitTime < 4 && Projectile.IsMe())
             {
                 ScarletSound(HJScarletSounds.Misc_Ding, Projectile.Center, 0.4f);
                 SplitTime++;
@@ -96,17 +94,17 @@ namespace HJScarletRework.Projs.Executor
                 d.noGravity = true;
                 d.scale = Main.rand.NextFloat(.75f, 1.15f);
             }
-            if(Projectile.HJScarlet().ExecutionStrike && Main.rand.NextBool(9))
+            if (Projectile.HJScarlet().ExecutionStrike && Main.rand.NextBool(9))
             {
                 ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(6), Projectile.velocity / 4f, Color.LightGoldenrodYellow, 30, 1, 0.44f, 4);
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(Owner.HJScarlet().conferenceCallBuffTime<=0)
-            Projectile.AddExecutionTimeImmediate(ItemType<ConferenceCall>());
-            if(Projectile.penetrate !=1)
-            SetGeneralParticle();
+            if (Owner.HJScarlet().conferenceCallBuffTime <= 0)
+                Projectile.AddExecutionTimeImmediate(ItemType<ConferenceCall>());
+            if (Projectile.penetrate != 1)
+                SetGeneralParticle();
             if (!SetSplitBullet)
             {
                 QuickSpawnSplitBullet();

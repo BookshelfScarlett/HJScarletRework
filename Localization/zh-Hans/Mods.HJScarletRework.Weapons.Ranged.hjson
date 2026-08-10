@@ -26,6 +26,10 @@ TerraFlamethrower: {
 }
 
 BlazingSun: {
-	// DisplayName: Blazing Sun
-	// Tooltip: ""
+	DisplayName: 烈阳
+	Tooltip:
+		'''
+		快速连续射出烈火箭矢，并召唤两个微缩太阳为你而战
+		所有的攻击都可穿墙
+		'''
 }

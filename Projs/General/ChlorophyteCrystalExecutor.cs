@@ -5,8 +5,6 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -53,9 +51,9 @@ namespace HJScarletRework.Projs.General
             Projectile.Center = Vector2.Lerp(Projectile.Center, targetVec, .22f);
             Projectile.position.Y += Owner.gfxOffY;
             Projectile.position.X = Owner.Center.X;
-            if(Main.rand.NextBool())
+            if (Main.rand.NextBool())
             {
-                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(10, 20), -Vector2.UnitY * Main.rand.NextFloat(.8f, 1.2f) * Projectile.Opacity, RandLerpColor(Color.White, Color.LightGreen), 40, Projectile.Opacity, 0.3f,.2f);
+                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(10, 20), -Vector2.UnitY * Main.rand.NextFloat(.8f, 1.2f) * Projectile.Opacity, RandLerpColor(Color.White, Color.LightGreen), 40, Projectile.Opacity, 0.3f, .2f);
             }
             if (Owner.HJScarlet().chlorophyteHeadExecutor)
             {
@@ -64,9 +62,9 @@ namespace HJScarletRework.Projs.General
             }
             else
             {
-                Projectile.Opacity = Lerp(Projectile.Opacity, 0,.12f);
+                Projectile.Opacity = Lerp(Projectile.Opacity, 0, .12f);
             }
-                Timer++;
+            Timer++;
             if (Timer > 60)
             {
 
@@ -195,9 +193,9 @@ namespace HJScarletRework.Projs.General
             e.Parameters["uFadeinBottomLength"].SetValue(0.5f);
             e.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             e.CurrentTechnique.Passes[0].Apply();
-            TrailFunc(tex, Color.DarkGreen* 0.60f, 9f);
-            TrailFunc(tex, Color.Green* 0.20f, 6f);
-            TrailFunc(tex, Color.Lime* .20f, 3f);
+            TrailFunc(tex, Color.DarkGreen * 0.60f, 9f);
+            TrailFunc(tex, Color.Green * 0.20f, 6f);
+            TrailFunc(tex, Color.Lime * .20f, 3f);
             TrailFunc(tex, Color.White * .20f, 2f);
 
             Vector4 vector4 = new(0.2f, 0.2f, 0.1f, 0.6f);
@@ -211,7 +209,7 @@ namespace HJScarletRework.Projs.General
             texture2 = HJScarletTexture.Noise_Aura.Value;
 
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.79f * RandValueSummary.Z), new Vector2(3.2f, 1.94f), Color.White);
-            TrailFunc(texture2, Color.White* 0.92f, 20f);
+            TrailFunc(texture2, Color.White * 0.92f, 20f);
             TrailFunc(texture2, Color.White * 0.92f, 10f);
             ApplyTrailAlt(HJScarletTexture.Trail_ManaStreakTiny.Value, Color.DarkGray);
             ApplyTrailAlt(HJScarletTexture.Trail_FadedStreak.Value, Color.Gray, 10);

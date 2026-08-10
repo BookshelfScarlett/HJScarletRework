@@ -1,6 +1,5 @@
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
@@ -33,6 +32,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
             Item.SetUpNoUseGraphicItem(true);
             Item.HJScarlet().OwnerName = "冰川咲";
             Item.HJScarlet().ItemBelongTo = EnumItemOwner.Donator;
+            Item.master = true;
 
         }
         public override bool CanShoot(Player player)
@@ -53,15 +53,11 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
         }
         public override void HoldItem(Player player)
         {
-            for (int i = 0; i < 160; i++)
-            {
-                ShinyStardust.SpawnCircle(player.Center.ToRandCirclePos(18), RandVelTwoPi(1.2f,34f), Main.rand.NextFloat(.9f, 1.1f) * .94f, 120);
-            }
             bool noSevenStar = player.HasProj<TheSevenStarDipper>() && player.HasProj<TheSevenStarDipperStar>();
             if (noSevenStar || player.whoAmI != Main.myPlayer)
                 return;
             Projectile proj = Projectile.NewProjectileDirect(player.GetSource_FromThis(), player.MountedCenter, Vector2.Zero, ProjectileType<TheSevenStarDipper>(), 0, 0, player.whoAmI);
-                proj.Center = player.MountedCenter - player.direction * 80f * Vector2.UnitX;
+            proj.Center = player.MountedCenter - player.direction * 80f * Vector2.UnitX;
         }
     }
 }

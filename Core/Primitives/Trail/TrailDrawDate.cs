@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace HJScarletRework.Core.Primitives.Trail
+﻿namespace HJScarletRework.Core.Primitives.Trail
 {
     public struct TrailDrawDate(Vector2 drawPos, Color drawColor, Vector2 primitivesHeight, float primitivesHeightRot)
     {

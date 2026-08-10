@@ -44,7 +44,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnExecution()
         {
             Owner.HJScarlet().conferenceCallBuffTime = GetSeconds(5);
-            ScarletSound(HJScarletSounds.GrabCharge,Projectile.Center);
+            ScarletSound(HJScarletSounds.GrabCharge, Projectile.Center);
         }
         public void HandleAttack()
         {

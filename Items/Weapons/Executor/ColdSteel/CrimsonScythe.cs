@@ -85,7 +85,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
                 int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework");
                 if (!traditionalMode)
                     executionLineIndex = executionProgressIndex - 1;
-                var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", "-"+categoryText+"-")
+                var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", "-" + categoryText + "-")
                 {
                     OverrideColor = Color.LightGoldenrodYellow
                 };
@@ -130,7 +130,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
                 TextboxManager.FirstLineY = line.Y;
             }
             var settingList = new List<TextboxSettings>();
-            string detailText = this.GetLocalizationKey("ExecutionStrike").ToLangValue();   
+            string detailText = this.GetLocalizationKey("ExecutionStrike").ToLangValue();
             int requirements = Math.Max(0, ExecutionProgress);
             int curRequirement = Main.LocalPlayer.HJScarlet().ExecutionListStored.TryGetValue(Type, out int value) ? value : 0;
             string numberText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgressRevampedMode").ToLangValue().ToFormatValue(curRequirement, requirements);

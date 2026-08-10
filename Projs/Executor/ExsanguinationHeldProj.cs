@@ -3,8 +3,6 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -63,7 +61,7 @@ namespace HJScarletRework.Projs.Executor
             }
             Timer++;
             if (Timer % 2f == 0)
-                ScarletSound(HJScarletSounds.Light_Fire, Projectile.Center,volume: 0.25f);
+                ScarletSound(HJScarletSounds.Light_Fire, Projectile.Center, volume: 0.25f);
             if (Timer % 2f == 0)
             {
                 HandleExecution();

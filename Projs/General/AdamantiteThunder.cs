@@ -1,16 +1,14 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.ExecutorVanillaHead;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 
 namespace HJScarletRework.Projs.General
 {
-    public class AdamantiteThunder: HJScarletProj
+    public class AdamantiteThunder : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public List<Vector2> StoredCenter = [];
@@ -52,7 +50,7 @@ namespace HJScarletRework.Projs.General
                 ECSParticle.HighResolutionThunder(pos, Vector2.Zero, RandLerpColor(Color.RosyBrown, Color.DodgerBlue), lifeTime, 1f, Projectile.rotation + PiOver2, scale, 0);
                 float glowScale = 1.11f;
                 ECSParticle.LightntingGlow(Projectile.Center, Projectile.SafeDir(), Color.RoyalBlue, 30, 1f, glowScale);
-                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(4), Projectile.SafeDir(), Color.White, 30, 1f, glowScale*.65f);
+                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(4), Projectile.SafeDir(), Color.White, 30, 1f, glowScale * .65f);
             }
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -62,12 +60,12 @@ namespace HJScarletRework.Projs.General
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ECSParticle.HighResolutionThunder(Projectile.Center, Vector2.Zero, Color.RoyalBlue, 40,1, RandRotTwoPi, 0.5f * Main.rand.NextFloat(0.75f, 0.95f), 2);
+            ECSParticle.HighResolutionThunder(Projectile.Center, Vector2.Zero, Color.RoyalBlue, 40, 1, RandRotTwoPi, 0.5f * Main.rand.NextFloat(0.75f, 0.95f), 2);
             ScarletSound(HJScarletSounds.Lightning_Quick, Projectile.Center, 0.75f, 1, 0.4f);
             Vector2 spawnPos = Projectile.Center + Projectile.SafeDir() * 10f;
             for (int i = 0; i < 2; i++)
             {
-                ECSParticle.HighResolutionThunder(spawnPos.ToRandCirclePos(64f), Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.DodgerBlue), Main.rand.Next(30, 40), 1, RandRotTwoPi, 0.2f,0);
+                ECSParticle.HighResolutionThunder(spawnPos.ToRandCirclePos(64f), Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.DodgerBlue), Main.rand.Next(30, 40), 1, RandRotTwoPi, 0.2f, 0);
             }
             for (int i = 0; i < 4; i++)
             {
@@ -81,7 +79,7 @@ namespace HJScarletRework.Projs.General
             for (int j = 0; j < 12; j++)
             {
                 Vector2 vel2 = (Projectile.velocity).ToRandVelocity(ToRadians(30f), 1.2f, 8.8f);
-                ECSParticle.ShinyCrossStarECS(pos.ToRandCirclePos(10f), RandVelTwoPi(-3.8f, 6.6f) + vel2 - vel2 * Main.rand.NextFloat(0.1f, 1.2f), RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 40, 1f, 0.45f,.2f);
+                ECSParticle.ShinyCrossStarECS(pos.ToRandCirclePos(10f), RandVelTwoPi(-3.8f, 6.6f) + vel2 - vel2 * Main.rand.NextFloat(0.1f, 1.2f), RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), 40, 1f, 0.45f, .2f);
             }
             for (int j = 0; j < 4; j++)
             {

@@ -2,9 +2,6 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System.ComponentModel.Design.Serialization;
 using Terraria;
 using Terraria.ID;
 
@@ -37,9 +34,9 @@ namespace HJScarletRework.Projs.Executor
             float pro = EaseInOutExpo(Utils.GetLerpValue(0, maxTime, Timer, true));
             Projectile.Center = Vector2.Lerp(Projectile.Center, TargetVector2, 0.1f);
             Vector2 normalVec = Projectile.Center.GetNormalVector2(TargetVector2);
-            ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(24,12), -normalVec * Main.rand.NextFloat(0.3f, 1.2f), RandLerpColor(Color.White, Color.SkyBlue), 40, 1, Projectile.scale * 0.3f, 0.2f);
+            ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(24, 12), -normalVec * Main.rand.NextFloat(0.3f, 1.2f), RandLerpColor(Color.White, Color.SkyBlue), 40, 1, Projectile.scale * 0.3f, 0.2f);
             if (Main.rand.NextBool())
-                ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(24,12), -normalVec * Main.rand.NextFloat(0.3f, 1.2f), RandLerpColor(Color.White, Color.SkyBlue), 40, RandRotTwoPi, 1, Projectile.scale * 0.13f, blendstate: BlendState.AlphaBlend);
+                ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(24, 12), -normalVec * Main.rand.NextFloat(0.3f, 1.2f), RandLerpColor(Color.White, Color.SkyBlue), 40, RandRotTwoPi, 1, Projectile.scale * 0.13f, blendstate: BlendState.AlphaBlend);
             Timer++;
             if (pro == 1)
             {

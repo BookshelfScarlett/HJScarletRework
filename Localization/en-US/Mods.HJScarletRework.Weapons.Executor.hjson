@@ -488,3 +488,13 @@ BambooSword: {
 	Tooltip: ""
 	ExecutionStrike: ""
 }
+
+ClimaticHawstring: {
+	DisplayName: �������
+	Tooltip:
+		'''
+		�ֳ�ʱ��λС�ɹ������������Э����������
+		�������Ϊ����������Ϊ�ҡ�
+		'''
+	ExecutionStrike: �ڽ�������5���������������ܼ���
+}

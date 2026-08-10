@@ -171,6 +171,7 @@ Executor: {
 	// EndlessWarSmasher.DisplayName: Endless War Smasher
 	// EndlessWarMinion.DisplayName: Endless War Minion
 	// EndlessWarMintTyphoonThunder.DisplayName: Endless War Mint Typhoon Thunder
+	// EndlessWarMintTyphoon.DisplayName: Endless War Mint Typhoon
 	// TheGreatDipperDipper.DisplayName: The Great Dipper Dipper
 	// TheGreatDipperDipperStar.DisplayName: The Great Dipper Dipper Star
 	// TheGreatDipperHeldProj.DisplayName: The Great Dipper Held Proj
@@ -178,6 +179,14 @@ Executor: {
 	// BambooBowArrow.DisplayName: Bamboo Bow Arrow
 	// BambooSwordHeldProj.DisplayName: Bamboo Sword Held Proj
 	// BambooSwordSpin.DisplayName: Bamboo Sword Spin
+	// EndlessWarMintTyphoonLightning.DisplayName: Endless War Mint Typhoon Lightning
+	// ClimaticHawstringBeam.DisplayName: Climatic Hawstring Beam
+	// ClimaticHawstringMinion.DisplayName: Climatic Hawstring Minion
+	// ClimaticHawstringProj.DisplayName: Climatic Hawstring Proj
+	// BlazingSunArrow.DisplayName: Blazing Sun Arrow
+	// BlazingSunFireball.DisplayName: Blazing Sun Fireball
+	// TheGreatDipperGalaxy.DisplayName: The Great Dipper Galaxy
+	// TheGreatDipperGalaxyHelper.DisplayName: The Great Dipper Galaxy Helper
 }
 
 Melee: {
@@ -279,6 +288,9 @@ Typeless: {
 	// GrassKnifeMark.DisplayName: Grass Knife Mark
 	// DungeonKnifeMark.DisplayName: Dungeon Knife Mark
 	// MoltenKnifeMark.DisplayName: Molten Knife Mark
+	// GrassKnifePoisonProj.DisplayName: Grass Knife Poison Proj
+	// StarofHoperMark.DisplayName: Starof Hoper Mark
+	// TearEyeMark.DisplayName: Tear Eye Mark
 }
 
 Magic: {
@@ -305,4 +317,5 @@ Ranged: {
 	// TerraFlamethrowerDrop.DisplayName: Terra Flamethrower Drop
 	// TerraFlamethrowerFlame.DisplayName: Terra Flamethrower Flame
 	// TerraFlamethrowerTank.DisplayName: Terra Flamethrower Tank
+	// BlazingSunHeldProj.DisplayName: Blazing Sun Held Proj
 }

@@ -79,6 +79,7 @@ namespace HJScarletRework.Globals.Players
         public int adamantiteHeadExecutorThunderTimer = 0;
         public bool titaniumHeadExecutor = false;
         public bool chlorophyteHeadExecutor = false;
+        public bool theGreatDipperBuff = false;
         #endregion
 
         #region Accessories
@@ -109,6 +110,7 @@ namespace HJScarletRework.Globals.Players
         public bool emblemThrown = false;
         public bool emblemColdSteel = false;
         public bool emblemExecutor = false;
+        public bool emblemGalaxy = false;
         public int defenderEmblemCD = 0;
         public int blackKeyHeal = 0;
         public float blackKeyDefenseBuff = 0;
@@ -130,6 +132,7 @@ namespace HJScarletRework.Globals.Players
         public bool cycleMadness = false;
         public float cycleMadenssTimer = 0;
         public float cycleMadenessCrit = 0;
+        public int tearEyeBuff = 0;
 
         #region 如是我闻
         public bool powerLily = false;

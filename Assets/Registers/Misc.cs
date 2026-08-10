@@ -54,9 +54,9 @@ namespace HJScarletRework.Assets.Registers
             Noise_EmptyAura = new Tex2DWithPath($"{Path_General}{nameof(Noise_EmptyAura)}");
             Noise_HeavyAura = new Tex2DWithPath($"{Path_General}{nameof(Noise_HeavyAura)}");
             Noise_Smoke = new Tex2DWithPath($"{Path_General}{nameof(Noise_Smoke)}");
-            Noise_WaterFlow= new Tex2DWithPath($"{Path_General}{nameof(Noise_WaterFlow)}");
-            Noise_BlackGalaxy1= new Tex2DWithPath($"{Path_General}{nameof(Noise_BlackGalaxy1)}");
-            Noise_BlackGalaxy2= new Tex2DWithPath($"{Path_General}{nameof(Noise_BlackGalaxy2)}");
+            Noise_WaterFlow = new Tex2DWithPath($"{Path_General}{nameof(Noise_WaterFlow)}");
+            Noise_BlackGalaxy1 = new Tex2DWithPath($"{Path_General}{nameof(Noise_BlackGalaxy1)}");
+            Noise_BlackGalaxy2 = new Tex2DWithPath($"{Path_General}{nameof(Noise_BlackGalaxy2)}");
 
             ColorMap_Aqua = new Tex2DWithPath($"{Path_General}{nameof(ColorMap_Aqua)}");
 
@@ -81,11 +81,11 @@ namespace HJScarletRework.Assets.Registers
             Noise_Misc2 = null;
             Noise_Aura = null;
             Noise_EmptyAura = null;
-            Noise_Smoke= null;
+            Noise_Smoke = null;
             Noise_HeavyAura = null;
             Noise_WaterFlow = null;
             Noise_BlackGalaxy2 = null;
-            Noise_BlackGalaxy1= null;
+            Noise_BlackGalaxy1 = null;
 
             ColorMap_Aqua = null;
 

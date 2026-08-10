@@ -5,7 +5,6 @@ using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 

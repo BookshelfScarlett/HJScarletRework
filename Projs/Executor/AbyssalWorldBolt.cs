@@ -26,7 +26,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
-            GreenWater.SpawnParticle(Projectile.Center.ToRandCirclePos(6), RandVelTwoPi(.3f, .9f),Vector2.One, 0, 40, HJScarletTexture.Texture_WhiteCircle.Value);
+            GreenWater.SpawnParticle(Projectile.Center.ToRandCirclePos(6), RandVelTwoPi(.3f, .9f), Vector2.One, 0, 40, HJScarletTexture.Texture_WhiteCircle.Value);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

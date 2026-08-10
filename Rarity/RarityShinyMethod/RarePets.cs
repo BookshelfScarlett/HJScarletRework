@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Rarity.RarityDrawHandler;
-using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Rarity.RarityShinyMethod

@@ -341,3 +341,8 @@ EmblemThrown: {
 	DisplayName: Emblem Thrown
 	Tooltip: ""
 }
+
+EmblemGalaxy: {
+	DisplayName: Emblem Galaxy
+	Tooltip: ""
+}

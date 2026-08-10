@@ -1,7 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.MetaballSystem;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 
@@ -146,7 +144,7 @@ namespace HJScarletRework.Globals.Graphics.Metaballs
                 {
                     Texture2D tex = HJScarletTexture.Particle_SmokeAlt.Value;
                     Rectangle frame = tex.Frame(4, 4, 1, 2);
-                    Main.spriteBatch.Draw(tex, CircleList[i].Center - Main.screenPosition, frame, Color.White, 0, frame.Size()/2f, CircleList[i].Scale, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(tex, CircleList[i].Center - Main.screenPosition, frame, Color.White, 0, frame.Size() / 2f, CircleList[i].Scale, SpriteEffects.None, 0f);
                 }
             }
         }

@@ -9,7 +9,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -269,7 +268,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Main.mouseLeft)
             {
-                if(SwingTime >= 8 && !Projectile.HJScarlet().ExecutionStrike)
+                if (SwingTime >= 8 && !Projectile.HJScarlet().ExecutionStrike)
                 {
                     Owner.RemoveExecutionProgress(OriginalItemID);
                     SwingTime = 0;
@@ -285,7 +284,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                     ((StormSaberHeldProj)proj.ModProjectile).Flip = !Flip;
-                    ((StormSaberHeldProj)proj.ModProjectile).SwingTime = SwingTime+ 1;
+                    ((StormSaberHeldProj)proj.ModProjectile).SwingTime = SwingTime + 1;
                     proj.HJScarlet().HasExecutionMechanic = true;
                     proj.HJScarlet().ExecutionStrike = SwingTime < 6;
                 }
@@ -296,7 +295,7 @@ namespace HJScarletRework.Projs.Executor
                     Owner.RemoveExecutionProgress(OriginalItemID);
 
             }
-            
+
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -387,12 +386,12 @@ namespace HJScarletRework.Projs.Executor
             if (endPro < .5f)
                 pro = endPro / .5f;
             else
-                pro = (endPro-.5f) / .5f;
-                Color c = Color.White;
+                pro = (endPro - .5f) / .5f;
+            Color c = Color.White;
             float offset = (30);
             Vector2 ori = Projectile.spriteDirection == -1 ? new Vector2(tex.Width, tex.Height) - new Vector2(offset) : new Vector2(offset, tex.Height - offset);
             for (int i = 0; i < 16; i++)
-                SB.Draw(tex, drawPosition + (TwoPi / 16f * i).ToRotationVector2() * 1.5f * (1-pro), null, Color.White.ToAddColor(), drawRotation, ori, Projectile.scale, flipSprite, 0);
+                SB.Draw(tex, drawPosition + (TwoPi / 16f * i).ToRotationVector2() * 1.5f * (1 - pro), null, Color.White.ToAddColor(), drawRotation, ori, Projectile.scale, flipSprite, 0);
             SB.Draw(tex, drawPosition, null, c, drawRotation, ori, Projectile.scale, flipSprite, 0);
             SB.EnterShaderArea();
             Texture2D glow = HJScarletTexture.Particle_CrossGlow.Value;

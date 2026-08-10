@@ -7,9 +7,6 @@ using HJScarletRework.Items.Weapons.Executor.Misc;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
@@ -88,8 +85,15 @@ namespace HJScarletRework.Projs.Executor
                 ScarletSound(HJScarletSounds.TheSevenStar_Charge, Projectile.Center, .75f, 1, 0.17f);
                 ShouldKill = true;
                 Owner.RemoveExecutionProgress(ItemType<TheGreatDipper>());
-            }
+                if (Owner.HJScarlet().theGreatDipperBuff)
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<TheGreatDipperGalaxyHelper>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                    ((TheGreatDipperGalaxyHelper)proj.ModProjectile).BeginTargetRotation = Owner.ToMouseVector2().ToRotation();
+                    ((TheGreatDipperGalaxyHelper)proj.ModProjectile).Flip = Main.rand.NextBool();
 
+                }
+                Owner.HJScarlet().theGreatDipperBuff = !Owner.HJScarlet().theGreatDipperBuff;
+            }
         }
 
         public void SetDipperStarBolt()
@@ -232,7 +236,7 @@ namespace HJScarletRework.Projs.Executor
             shader.CurrentTechnique.Passes[0].Apply();
 
             Vector2 noisePos = beginPos;
-            SB.Draw(noiseTex, noisePos, null, Color.White, rotation, orig,new Vector2(xScale,0.01f*thick), 0, 0);
+            SB.Draw(noiseTex, noisePos, null, Color.White, rotation, orig, new Vector2(xScale, 0.01f * thick), 0, 0);
             //noiseTex = HJScarletTexture.Noise_BlackGalaxy2.Value;
             //SB.Draw(noiseTex, noisePos, null, Color.White, rotation, orig,new Vector2(xScale,0.01f*thick), 0, 0);
         }

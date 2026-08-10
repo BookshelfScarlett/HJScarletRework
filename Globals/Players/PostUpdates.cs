@@ -21,6 +21,7 @@ using HJScarletRework.Items.Armor.RedDragonKnight;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
+using HJScarletRework.Items.Weapons.Executor.Misc;
 using HJScarletRework.Items.Weapons.Melee;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
@@ -65,7 +66,11 @@ namespace HJScarletRework.Globals.Players
 
         public void UpdateExecutorKnifeMark()
         {
-            if (Player.HeldItem.IsExecutorWeapon() && Main.mouseLeft && !Player.IsInInventory() && Player.miscCounter % GhostKnife.MarkGhostKnifeAttackSpeed == 0f && KnifeMarkIndex== GetInstance<GhostKnifeMark>().Type)
+            if (tearEyeBuff > 0 && Player.HeldItem.IsExecutorWeapon())
+            {
+                Player.endurance += (1 + Condition.Hardmode.IsMet().ToInt() + DownedBossSystem.downedBarrier.ToInt()) * .05f;
+            }
+            if (Player.HeldItem.IsExecutorWeapon() && Main.mouseLeft && !Player.IsInInventory() && Player.miscCounter % GhostKnife.MarkGhostKnifeAttackSpeed == 0f && KnifeMarkIndex == GetInstance<GhostKnifeMark>().Type)
             {
                 int applyDamage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(GhostKnife.MarkGhostKnifeAttackDamage);
                 Vector2 dir = Player.Center.GetNormalVector2(Main.MouseWorld);
@@ -89,7 +94,7 @@ namespace HJScarletRework.Globals.Players
             {
                 Player.GetDamage<ExecutorDamageClass>() += FishronKnife.DamageBuff;
             }
-            if(KnifeMarkIndex == ProjectileType<DungeonKnifeMark>())
+            if (KnifeMarkIndex == ProjectileType<DungeonKnifeMark>())
             {
                 Player.statDefense += 5;
 
@@ -182,8 +187,8 @@ namespace HJScarletRework.Globals.Players
                         Player.AddExecutionTimeDirectly(keys, add);
                     }
                 }
-                ScarletSound(SoundID.DD2_BetsyFireballShot, Player.Center,1,0,pitch:.2f,.1f);
-                for(int i =0;i<16;i++)
+                ScarletSound(SoundID.DD2_BetsyFireballShot, Player.Center, 1, 0, pitch: .2f, .1f);
+                for (int i = 0; i < 16; i++)
                 {
                     Vector2 pos = Player.ToRandRec();
                     ECSParticle.SmokeParticle(pos, -Vector2.UnitY, RandLerpColor(Color.DarkRed, Color.Red), 40, RandRotTwoPi, 1, 0.15f, blendstate: BlendState.AlphaBlend);
@@ -292,7 +297,7 @@ namespace HJScarletRework.Globals.Players
                     applyDmg = Math.Min(applyDmg, item.damage);
                 }
                 Projectile proj = ContentSamples.ProjectilesByType[item.shoot];
-                if (curSlots >= proj.minionSlots&&!items.Contains(item))
+                if (curSlots >= proj.minionSlots && !items.Contains(item))
                 {
                     if (itemID < VanillaMaxItem)
                     {
@@ -301,7 +306,7 @@ namespace HJScarletRework.Globals.Players
                             items.Add(item);
                             curSlots -= proj.minionSlots;
                         }
-                               
+
                     }
                     else
                     {
@@ -486,11 +491,14 @@ namespace HJScarletRework.Globals.Players
             {
                 PurePrismFateHandler(itemHover);
             }
-            if(itemMouse.type == ItemType<RuShiWoWen>())
+            if (itemMouse.type == ItemType<RuShiWoWen>())
             {
                 RuShiWoWenMinionBanHandler(itemHover);
             }
+
         }
+
+
         /// <summary>
         /// 天命圣水的使用逻辑。必须得是魔法药水，且鼠标悬停的物品必须是魔法药水
         /// </summary>
@@ -633,10 +641,44 @@ namespace HJScarletRework.Globals.Players
         public override bool HoverSlot(Item[] inventory, int context, int slot)
         {
             mouseHoveringBanWeaponAbility = inventory[slot].IsLegal();
+            HoverSevenStarOrGreatDipper(ref inventory, context, slot);
             ClearUpParticle(ref inventory, context, slot);
             HoverSwitchWeapon(ref inventory, context, slot);
             HoverRuShiWoWen(ref inventory, context, slot);
             return false;
+        }
+
+        public void HoverSevenStarOrGreatDipper(ref Item[] inventory, int context, int slot)
+        {
+            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && swapTimer == 0 && emblemGalaxy)
+            {
+                swapTimer = 30;
+                if (!inventory[slot].IsLegal())
+                    return;
+                Item item = inventory[slot];
+                if (item.type == ItemType<TheSevenStar>())
+                {
+                    SwitchToSevenOrDipper(item, ItemType<TheGreatDipper>(), ref inventory, slot);
+                }
+                else if (item.type == ItemType<TheGreatDipper>())
+                {
+                    SwitchToSevenOrDipper(item, ItemType<TheSevenStar>(), ref inventory, slot);
+
+                }
+            }
+        }
+        public void SwitchToSevenOrDipper(Item itemHover, int targetID, ref Item[] inventory, int slot)
+        {
+            Item targetItem = new Item();
+            bool favor = Player.HeldItem.favorited;
+            targetItem.SetDefaults(targetID);
+            targetItem.favorited = favor;
+            targetItem.stack = 1;
+            targetItem.prefix = itemHover.prefix;
+            inventory[slot] = targetItem;
+            SoundEngine.PlaySound(HJScarletSounds.Misc_Spell with { Pitch = .2f }, Player.Center);
+            for (int i = 0; i < 20; i++)
+                new TurbulenceGlowOrb(Player.Center.ToRandCirclePos(30), 1.2f, Color.White, 45, 0.1f, RandRotTwoPi).Spawn();
         }
         public void HoverSwitchWeapon(ref Item[] inventory, int context, int slot)
         {
@@ -798,7 +840,7 @@ namespace HJScarletRework.Globals.Players
         }
         public void ChlorophyteHeadExecutorCrystal()
         {
-            if(chlorophyteHeadExecutor && !Player.HasProj<ChlorophyteCrystalExecutor>(out int crystalLeaf))
+            if (chlorophyteHeadExecutor && !Player.HasProj<ChlorophyteCrystalExecutor>(out int crystalLeaf))
             {
                 int damage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(ChlorophyteHeadExecutor.BoltDamage);
                 Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, crystalLeaf, damage, 2, Player.whoAmI);
@@ -812,7 +854,7 @@ namespace HJScarletRework.Globals.Players
             if (!maidReaperArmor)
                 return;
             bool checkExecution = Player.GetExecutionSrike();
-            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && maidReaperIndex != -1 && !checkExecution && Player.HeldItem.DamageType.CountsAsClass<ExecutorDamageClass>() && maidReaperHealTimer==0)
+            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && maidReaperIndex != -1 && !checkExecution && Player.HeldItem.DamageType.CountsAsClass<ExecutorDamageClass>() && maidReaperHealTimer == 0)
             {
                 NPC npc = Main.npc[maidReaperIndex];
                 if (npc.IsLegal())

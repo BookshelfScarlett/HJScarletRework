@@ -360,15 +360,13 @@ StarofHope: {
 	Tooltip:
 		'''
 		挥舞时，一枚闪耀之星朝向指针位置坠落
-		该武器必定自动处决
 		“爱与希望的故事”
 		'''
 	ExecutionStrike:
 		'''
-		挥舞将同时落下两枚闪耀之星
-		在命中时使你获得“希望之星”效果
-		希望之星效果持续期间，其余所有辅助类型的代行者武器，都会在使用时召唤闪耀之星
-		这一状态下闪耀之星的将允许发起追踪，且在命中时允许参与处决叠层
+		接下来的60秒内，获得“希望之星”的Buff类标记
+		希望之星Buff图标持续期间，所有代行者武器都会在使用时天降闪耀之星
+		该闪耀之星在命中敌人时将允许进行玩家手持武器的处决叠层
 		'''
 }
 
@@ -419,9 +417,14 @@ AngryBomb: {
 }
 
 TearEye: {
-	DisplayName: 恶眼的眼泪
-	Tooltip: 命中时使敌人哭泣
-	// ExecutionStrike: ""
+	DisplayName: 克苏鲁的眼泪
+	Tooltip: 攻击速度更慢，但是伤害衰减力度更低的鞭子
+	ExecutionStrike:
+		'''
+		接下来的60秒内，获得“克苏鲁之泪”的Buff类标记
+		克苏鲁之泪星Buff图标持续期间，代行者武器命中时增加5%/10%/15%伤害减免
+		同时，使代行者获得潮湿减益
+		'''
 }
 
 ContainedBlast: {
@@ -579,8 +582,13 @@ GhostKnife: {
 
 DesertKnife: {
 	DisplayName: 沙丘短刀
-	Tooltip: ""
-	// ExecutionStrike: ""
+	Tooltip: 可穿透3名敌人
+	ExecutionStrike:
+		'''
+		生成一个存在60秒的沙漠标记，强化代行者的所有攻击
+		沙漠标记存在期间，代行者大部分武器的穿透次数+1
+		不穿透的武器不生效
+		'''
 }
 
 DungeonKnife: {
@@ -694,4 +702,14 @@ BambooSword: {
 		竹刀将会短暂停留，旋转自身打击靠近的敌人
 		打击时总会制停对方
 		'''
+}
+
+ClimaticHawstring: {
+	DisplayName: 气候钓弦
+	Tooltip:
+		'''
+		手持时两位小飞棍从天而降，并协助攻击敌人
+		“以天竿为弓，以气候为弦”
+		'''
+	ExecutionStrike: 在接下来的5秒内连续发射热能激光
 }

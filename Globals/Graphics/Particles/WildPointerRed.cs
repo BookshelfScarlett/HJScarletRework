@@ -1,8 +1,6 @@
 ﻿using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.ParticleSystem;
 using HJScarletRework.Items.Weapons.Melee;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.Particles

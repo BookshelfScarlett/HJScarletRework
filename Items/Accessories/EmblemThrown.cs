@@ -10,11 +10,16 @@ namespace HJScarletRework.Items.Accessories
 {
     public class EmblemThrown : HJScarletItemClass
     {
-        public float CritDamage = .30f;
+        public float CritDamage = .20f;
         public int Crit = 5;
 
         public override string AssetPath => AssetHandler.Equips;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritDamage.ToPercent(), Crit + "%");
+        public override void SetStaticDefaults()
+        {
+
+            Type.ShimmerTo(ItemType<EmblemColdSteel>());
+        }
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Lime);
@@ -27,15 +32,6 @@ namespace HJScarletRework.Items.Accessories
                 player.HJScarlet().critDamageExecutor += CritDamage;
                 player.GetCritChance<ExecutorDamageClass>() += Crit;
             }
-        }
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddIngredient(ItemID.AvengerEmblem).
-                AddIngredient(ItemID.EyeoftheGolem).
-                AddIngredient(ItemID.Bomb, 15).
-                AddTile(TileID.MythrilAnvil).
-                Register();
         }
     }
 }

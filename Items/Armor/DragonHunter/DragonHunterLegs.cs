@@ -4,7 +4,6 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.RedDragonKnight;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -13,7 +12,7 @@ using Terraria.ModLoader;
 namespace HJScarletRework.Items.Armor.DragonHunter
 {
     [AutoloadEquip(EquipType.Legs)]
-    public class DragonHunterLegs :HJScarletArmor
+    public class DragonHunterLegs : HJScarletArmor
     {
         public override void SetStaticDefaults()
         {

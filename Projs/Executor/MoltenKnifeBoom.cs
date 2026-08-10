@@ -4,10 +4,12 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class MoltenKnifeBoom :HJScarletProj
+    public class MoltenKnifeBoom : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
@@ -23,6 +25,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             //什么叫你写了这么多就为了处理这个特效爆炸？
+            SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { MaxInstances = 0, Pitch = .35f }, Projectile.Center);
             for (int i = 0; i < 45; i++)
             {
                 Vector2 vel = (TwoPi / 45f * i).ToRotationVector2() * 8f * Main.rand.NextFloat(0f, 1f);

@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.Diver;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -12,7 +11,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
     [AutoloadEquip(EquipType.Head)]
     public class OrichalcumHeadExecutor : HJScarletArmor
     {
-        public override int[] ArmorSlots => [Type,ItemID.OrichalcumBreastplate,ItemID.OrichalcumLeggings];
+        public override int[] ArmorSlots => [Type, ItemID.OrichalcumBreastplate, ItemID.OrichalcumLeggings];
         public override bool SetUpArmorSet => true;
         public float CritDamage = .20f;
         public float MoveSpeed = .20f;

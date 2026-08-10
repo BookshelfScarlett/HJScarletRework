@@ -6,16 +6,12 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class StormSaberSlash : HJScarletProj,IPixelatedRenderer
+    public class StormSaberSlash : HJScarletProj, IPixelatedRenderer
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
@@ -89,7 +85,7 @@ namespace HJScarletRework.Projs.Executor
                 int index = Main.rand.Next(10, CenterPosList.Count - 10);
                 Vector2 pos = CenterPosList[index] + Projectile.Center;
                 int lifeTime = Main.rand.Next(30, 60);
-                ECSParticle.LiliesFire(pos, Projectile.velocity * Main.rand.NextFloat(.4f), RandLerpColor(Color.White, Color.Gray), lifeTime, RandRotTwoPi, 0.55f, Main.rand.NextFloat(.9f, 1.3f) * 0.40f,true,BlendState.Additive);
+                ECSParticle.LiliesFire(pos, Projectile.velocity * Main.rand.NextFloat(.4f), RandLerpColor(Color.White, Color.Gray), lifeTime, RandRotTwoPi, 0.55f, Main.rand.NextFloat(.9f, 1.3f) * 0.40f, true, BlendState.Additive);
             }
 
             for (int i = 0; i < 3; i++)
@@ -141,10 +137,10 @@ namespace HJScarletRework.Projs.Executor
             Texture2D tex = HJScarletTexture.Texture_StandardGradient.Value;
             HJScarletMethods.ApplyAlphaCut(new Vector4(.15f, .15f, 0f, .65f), Vector2.Zero, Vector2.One);
             Color setColor = Color.Lerp(Color.RoyalBlue, Color.WhiteSmoke, 0.7f);
-            DrawBaseWave(tex, Color.WhiteSmoke* .75f, 1.2f);
-            DrawBaseWave(tex, Color.White* 0.30f, 4.4f);
-            DrawBaseWave(tex, Color.White* 0.50f, 8f);
-            DrawBaseWave(tex, Color.WhiteSmoke* .40f, 16f);
+            DrawBaseWave(tex, Color.WhiteSmoke * .75f, 1.2f);
+            DrawBaseWave(tex, Color.White * 0.30f, 4.4f);
+            DrawBaseWave(tex, Color.White * 0.50f, 8f);
+            DrawBaseWave(tex, Color.WhiteSmoke * .40f, 16f);
             Texture2D texture2 = HJScarletTexture.Noise_Aura.Value;
             Vector4 vector4 = new(0.25f, 0.25f, 0.05f, 0.46f);
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.59f + RandOffset1), new Vector2(1.5f, 0.091f), Color.White);
@@ -152,13 +148,13 @@ namespace HJScarletRework.Projs.Executor
 
             texture2 = HJScarletTexture.Noise_Misc.Value;
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.25f + RandOffset2), new Vector2(5f, 0.1f), Color.White);
-            DrawBaseWave(texture2, Color.White* 0.82f, 10f);
+            DrawBaseWave(texture2, Color.White * 0.82f, 10f);
 
             texture2 = HJScarletTexture.Noise_Aura.Value;
             vector4 = new(0.2f, 0.2f, 0.05f, 0.56f);
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.45f + RandOffset3), new Vector2(2.4f, 0.205f), Color.White);
             DrawBaseWave(texture2, Color.WhiteSmoke * .5f, 20f);
-            DrawBaseWave(texture2, Color.White* 0.5f, 20f);
+            DrawBaseWave(texture2, Color.White * 0.5f, 20f);
 
             setColor = Color.Lerp(Color.White, Color.WhiteSmoke, 0.28f);
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.35f + RandOffset4), new Vector2(1.55f, 0.31f), setColor);

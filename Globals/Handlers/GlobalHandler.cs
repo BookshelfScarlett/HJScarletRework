@@ -1,6 +1,5 @@
 ﻿using ContinentOfJourney.Items.Placables;
 using HJScarletRework.Globals.Configs;
-using Microsoft.Xna.Framework;
 using ReLogic.Utilities;
 using Terraria.Audio;
 

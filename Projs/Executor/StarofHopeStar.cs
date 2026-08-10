@@ -1,11 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -18,6 +17,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.FallenStar);
         public override EnumDamageClass Category => EnumDamageClass.Executor;
+        public int WeaponID = -1;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(16);
@@ -49,12 +49,6 @@ namespace HJScarletRework.Projs.Executor
                     return;
                 }
             }
-            //if (Main.rand.NextBool(2))
-            //{
-            //    Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePosEdge(12f), DustID.YellowStarDust);
-            //    d.velocity = Projectile.velocity / 2f;
-            //    d.scale *= Main.rand.NextFloat(0.6f, 1f) ;
-            //}
             if (Projectile.IsOutScreen())
                 return;
             if (Main.rand.NextFloat() < Projectile.Opacity)
@@ -81,7 +75,13 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
                 ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), 30, 1f, 0.1f * 0.45f * Main.rand.NextFloat(0.9f, 1.1f), 0.75f);
             }
-            //SoundEngine.PlaySound(HJScarletSounds.Frosthammer_SnowCharge with { Pitch = .9f, Volume = .5f });
+            if (Owner.HasBuff<StarofHopeBuff>() && Owner.HeldItem.IsExecutorWeapon())
+            {
+                Projectile.AddExecutionTimeImmediate(Owner.HeldItem.type);
+            }
+
+
+
             Projectile.velocity *= 0.01f;
         }
         public override bool PreDraw(ref Color lightColor)
@@ -105,8 +105,6 @@ namespace HJScarletRework.Projs.Executor
                 SB.Draw(projTex, lerpPos + Projectile.PosToCenter(), frame, edgeColor, rot, ori, oriScale * scale * Projectile.scale, 0, 0);
                 scale *= 0.985f;
             }
-
-
             SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
             DrawNebulaTrail(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DarkGoldenrod, 15f);
             SB.EnterShaderArea();

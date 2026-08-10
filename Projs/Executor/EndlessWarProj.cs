@@ -1,13 +1,17 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class EndlessWarProj : HJScarletProj
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum State
         {
@@ -18,7 +22,7 @@ namespace HJScarletRework.Projs.Executor
         public State AttackState
         {
             get => (State)Projectile.ai[1];
-            set => Projectile.ai[1]=(float)value;
+            set => Projectile.ai[1] = (float)value;
         }
         public override void SetStaticDefaults()
         {
@@ -42,7 +46,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (AttackState == State.Shoot)
             {
-                if(Timer > Projectile.MaxUpdates * 15f)
+                if (Timer > Projectile.MaxUpdates * 15f)
                 {
                     AttackState = State.Return;
                     Projectile.netUpdate = true;
@@ -52,9 +56,9 @@ namespace HJScarletRework.Projs.Executor
             else if (AttackState == State.Return)
             {
                 Projectile.velocity *= .95f;
-                float ratios = Clamp(Timer / 30f,0,1);
+                float ratios = Clamp(Timer / 30f, 0, 1);
                 Projectile.rotation += Lerp(ToRadians(5f), ToRadians(0f), ratios);
-                if(ratios >= .99f)
+                if (ratios >= .99f)
                 {
                     Projectile.Kill();
                 }

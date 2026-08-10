@@ -2,8 +2,6 @@
 using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.ParticleSystem;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.Particles
@@ -11,7 +9,7 @@ namespace HJScarletRework.Globals.Graphics.Particles
     /// <summary>
     /// 对的没错，这个是专门给如是我闻做的“粒子”
     /// </summary>
-    public class RuShiWoWenFlower:BaseParticle
+    public class RuShiWoWenFlower : BaseParticle
     {
         public override int UseBlendStateID => BlendStateID.Alpha;
         public int OwnerIndex = -1;
@@ -44,9 +42,9 @@ namespace HJScarletRework.Globals.Graphics.Particles
             Position = Vector2.Lerp(Position, newVec, 1f);
             Texture2D tex = HJScarletTexture.Texture_RuShiWoWenFlower.Value;
             Vector2 pos = Position - Main.screenPosition;
-            for(int i =0;i<8;i++)
-            spriteBatch.Draw(tex, pos + (TwoPi / 8f * i).ToRotationVector2() * 1.25f * LerpTime, null, Color.White.ToAddColor(), 0, tex.Size() / 2, 0.8f* LerpTime, 0, 0);
-            spriteBatch.Draw(tex, pos, null, Color.White*LerpTime, 0, tex.Size() / 2, 0.8f, 0, 0);
+            for (int i = 0; i < 8; i++)
+                spriteBatch.Draw(tex, pos + (TwoPi / 8f * i).ToRotationVector2() * 1.25f * LerpTime, null, Color.White.ToAddColor(), 0, tex.Size() / 2, 0.8f * LerpTime, 0, 0);
+            spriteBatch.Draw(tex, pos, null, Color.White * LerpTime, 0, tex.Size() / 2, 0.8f, 0, 0);
         }
     }
 }

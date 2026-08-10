@@ -11,6 +11,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
     {
         public override int ExecutionProgress => 20;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Assistance;
+        public static float BoomDamageMult = 2.25f;
         public override void ExSSD()
         {
             base.ExSSD();
@@ -23,7 +24,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
             Item.useTime = Item.useAnimation = 25;
             Item.shootSpeed = 12f;
             Item.UseSound = SoundID.Item45 with { MaxInstances = 0 };
-            Item.HJScarlet().NotFinished = true;
             Item.shoot = ProjectileType<MoltenKnifeProj>();
             Item.HJScarlet().ExecutionProj = ProjectileType<MoltenKnifeMark>();
             Item.SetUpRarityPrice(ItemRarityID.Orange);

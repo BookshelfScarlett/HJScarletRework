@@ -1,6 +1,4 @@
 ﻿using HJScarletRework.Items.Weapons.Melee;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.ModLoader;
@@ -60,7 +58,7 @@ namespace HJScarletRework.Assets.Registers
             Item_DialecticsThrown = new Tex2DWithPath($"{WeaponPath}/{nameof(DialecticsThrown)}");
             DualWraithStaffBlade = new Tex2DWithPath($"{WeaponPath}/{nameof(DualWraithStaffBlade)}");
             DualWraithStaff = new Tex2DWithPath($"{WeaponPath}/{nameof(DualWraithStaff)}");
-            }
+        }
         public override void Unload()
         {
             Wreach = null;

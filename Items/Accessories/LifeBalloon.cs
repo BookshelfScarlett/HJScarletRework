@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;

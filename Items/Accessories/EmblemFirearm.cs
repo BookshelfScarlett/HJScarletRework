@@ -10,11 +10,16 @@ namespace HJScarletRework.Items.Accessories
 {
     public class EmblemFirearm : HJScarletItemClass
     {
-        public float CritDamage = .30f;
+        public float CritDamage = .20f;
         public int Crit = 5;
 
         public override string AssetPath => AssetHandler.Equips;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritDamage.ToPercent(), Crit + "%");
+        public override void SetStaticDefaults()
+        {
+
+            Type.ShimmerTo(ItemType<EmblemThrown>());
+        }
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Lime);
@@ -22,20 +27,11 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (player.HeldItem.CheckExecuteTypes(ExecutorWeaponType.Firearm))
+            if (player.HeldItem.CheckExecuteTypes(ExecutorWeaponType.Firearm) || player.HeldItem.CheckExecuteTypes(ExecutorWeaponType.Misc))
             {
                 player.HJScarlet().critDamageExecutor += CritDamage;
                 player.GetCritChance<ExecutorDamageClass>() += Crit;
             }
-        }
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddIngredient(ItemID.AvengerEmblem).
-                AddIngredient(ItemID.EyeoftheGolem).
-                AddIngredient(ItemID.ShroomiteBar, 15).
-                AddTile(TileID.MythrilAnvil).
-                Register();
         }
     }
 }

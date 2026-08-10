@@ -5,8 +5,6 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
-using Microsoft.Build.Tasks;
-using SteelSeries.GameSense;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -73,7 +71,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateAnimation()
         {
-            if(StopTiming>0)
+            if (StopTiming > 0)
             {
                 StopTiming--;
                 return;
@@ -168,17 +166,22 @@ namespace HJScarletRework.Projs.Executor
             Vector2 finalDir = Vector2.Lerp(dir, upDir, t).ToSafeNormalize();
 
             // 击退速度：鼠标越高，力度越大（从 10 到 18）
-            float speed =Lerp(10f, 18f, t);
+            float speed = Lerp(10f, 18f, t);
             //if (!target.boss)
             {
-                if(Helper.GetAniProgress(0)<.98f)
-                target.HJScarlet().PostSpeed = finalDir * speed;
+                if (Helper.GetAniProgress(0) < .98f)
+                {
+                    if (target.type == NPCID.DungeonGuardian)
+                        target.HJScarlet().PostSpeed = finalDir * speed * 50f;
+                    else
+                        target.HJScarlet().PostSpeed = finalDir * speed;
+                }
                 target.HJScarlet().StopNpcTime = 10;
             }
             if (Projectile.numHits < 1)
             {
                 StopTiming = 10;
-                ScreenShakeSystem.AddScreenShakes(target.Center, 12,12, Owner.Center.GetNormalVector2(target.Center).ToRotation(), 0, easingFunc: EaseOutBack);
+                ScreenShakeSystem.AddScreenShakes(target.Center, 12, 12, Owner.Center.GetNormalVector2(target.Center).ToRotation(), 0, easingFunc: EaseOutBack);
                 ScarletSound(HJScarletSounds.Tlipoca_StoneBonk, target.Center, pitch: -.64f, pitchVariance: .1f, variantType: 1);
                 for (int i = 0; i < 26; i++)
                 {
@@ -194,8 +197,8 @@ namespace HJScarletRework.Projs.Executor
                     d.scale = Main.rand.NextFloat(1.2f, 1.61f);
                 }
             }
-            if(!Owner.HasProj<BambooSwordSpin>())
-            Projectile.AddExecutionTimeImmediate(OriginalItemID);
+            if (!Owner.HasProj<BambooSwordSpin>())
+                Projectile.AddExecutionTimeImmediate(OriginalItemID);
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
@@ -213,7 +216,7 @@ namespace HJScarletRework.Projs.Executor
                 float ratios = 1 - i / (float)length;
                 Vector2 pos = Projectile.oldPos[i] + Projectile.PosToCenter();
                 float rot = Projectile.oldRot[i] + (Projectile.spriteDirection == -1 ? PiOver2 + PiOver4 : PiOver4);
-                float opac = Lerp(0.05f, 1f, ratios)*.30f;
+                float opac = Lerp(0.05f, 1f, ratios) * .30f;
                 Color c = Color.Lerp(Color.LimeGreen, Color.White, ratios).ToAddColor(75);
                 SB.FastDraw(tex, pos, c * opac, rot, rotationPoint, Projectile.scale, flipSprite);
             }

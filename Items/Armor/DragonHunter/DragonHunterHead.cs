@@ -13,9 +13,9 @@ using Terraria.ModLoader;
 namespace HJScarletRework.Items.Armor.DragonHunter
 {
     [AutoloadEquip(EquipType.Head)]
-    public class DragonHunterHead :HJScarletArmor
+    public class DragonHunterHead : HJScarletArmor
     {
-        public override int[] ArmorSlots => [Type,ItemType<DragonHunterBody>(),ItemType<DragonHunterLegs>()];
+        public override int[] ArmorSlots => [Type, ItemType<DragonHunterBody>(), ItemType<DragonHunterLegs>()];
         public override bool SetUpArmorSet => true;
         public override void SetStaticDefaults()
         {
@@ -37,7 +37,7 @@ namespace HJScarletRework.Items.Armor.DragonHunter
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent());
         public override void UpdateEquip(Player player)
         {
-            player.GetDamage<ExecutorDamageClass>() += Damage; 
+            player.GetDamage<ExecutorDamageClass>() += Damage;
         }
         public override void UpdateArmorSetBetter(Player player, string setBonusPath)
         {

@@ -3,10 +3,9 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Ranged
 {
@@ -24,18 +23,31 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.knockBack = 5f;
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
             Item.SetUpNoUseGraphicItem(true, false);
-            Item.HJScarlet().NotFinished = true;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.shoot = ProjectileType<ClimaticHawstringProj>();
+            Item.shoot = ProjectileType<BlazingSunHeldProj>();
             Item.shootSpeed = 12f;
         }
         public override bool CanShoot(Player player)
         {
-            return base.CanShoot(player);
+            return false;
         }
         public override void HoldItem(Player player)
         {
-            base.HoldItem(player);
+
+            if (player.HasProj(Item.shoot))
+                return;
+            int damage = (int)player.GetTotalDamage<RangedDamageClass>().ApplyTo(Item.damage);
+            Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, Item.shoot, damage, Item.knockBack, player.whoAmI, ai0: 9);
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.MoltenFury).
+                AddIngredient(ItemID.SoulofSight, 5).
+                AddIngredient(ItemID.SoulofFright, 5).
+                AddIngredient(ItemID.SoulofMight, 5).
+                AddTile(TileID.MythrilAnvil).
+                Register();
         }
     }
 }

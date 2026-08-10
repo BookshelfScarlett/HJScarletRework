@@ -1,15 +1,18 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class BoneSlapProj : ExecutorWhipProj
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override int OriginalWhip => ItemType<BoneSlap>();
         public override (Texture2D LineTexture, Color LineColor, int LineEndCut, bool FullBright) LineSetting => (
             TextureAssets.FishingLine.Value, Color.SkyBlue, HeadPosOffsetFactor, false);

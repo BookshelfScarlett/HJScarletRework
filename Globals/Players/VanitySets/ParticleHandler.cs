@@ -1,8 +1,6 @@
 ﻿using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Vanity.Arceca;
 using HJScarletRework.Projs.General;
-using Microsoft.Xna.Framework;
-using rail;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -22,7 +20,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
             {
                 if (accVanityID == ItemType<TairitsuItem>() && !Player.HasProj<TairitsuProj>())
                 {
-                    
+
                     int id = ProjectileType<TairitsuProj>();
                     float beginRotation = Player.direction > 0 ? 0 : Pi;
                     Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, id, 0, 0, Player.whoAmI);

@@ -4,20 +4,18 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Ranged;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 
-namespace HJScarletRework.Projs.Ranged
+namespace HJScarletRework.Projs.Executor
 {
     public class ClimaticHawstringMinion : HJScarletProj
     {
-        public override EnumDamageClass Category => EnumDamageClass.Ranged;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public ref float Timer => ref Projectile.ai[0];
         public float Osci = 0;
@@ -102,8 +100,8 @@ namespace HJScarletRework.Projs.Ranged
             PosList.Add(Projectile.Center);
             if (PosList.Count > 4)
                 PosList.RemoveAt(0);
-            Projectile.spriteDirection = Math.Sign((Projectile.Center.X - Owner.MountedCenter.X));
-            HJScarletMethods.AddFrames(Projectile, 3, 6);
+            Projectile.spriteDirection = Math.Sign(Projectile.Center.X - Owner.MountedCenter.X);
+            Projectile.AddFrames(3, 6);
             Helper.UpdateAniState(0);
 
         }
@@ -142,7 +140,7 @@ namespace HJScarletRework.Projs.Ranged
                 Timer++;
                 if (Timer > 10)
                 {
-                    Vector2 vel = -Owner.direction * (Projectile.rotation.ToRotationVector2()).ToRandVelocity(0f, 12f, 16f);
+                    Vector2 vel = -Owner.direction * Projectile.rotation.ToRotationVector2().ToRandVelocity(0f, 12f, 16f);
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel, ProjectileType<ClimaticHawstringBeam>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                     proj.rotation = vel.ToRotation();
                     proj.stopsDealingDamageAfterPenetrateHits = true;
@@ -161,7 +159,7 @@ namespace HJScarletRework.Projs.Ranged
             Osci += ToRadians(1f);
             //这里的悬挂路径用的世界差值
             float mountedX = Owner.MountedCenter.X;
-            float mountedY = Owner.MountedCenter.Y - (20f * (float)Math.Sin(Osci)) - 60f - 30f * Reverse.ToInt();
+            float mountedY = Owner.MountedCenter.Y - 20f * (float)Math.Sin(Osci) - 60f - 30f * Reverse.ToInt();
             Vector2 mountedPos = new Vector2(mountedX, mountedY);
             float flyValue = Helper.IsDone[0] ? 0.2f : 0.12f;
             Projectile.Center = Vector2.Lerp(Projectile.Center, mountedPos, flyValue);

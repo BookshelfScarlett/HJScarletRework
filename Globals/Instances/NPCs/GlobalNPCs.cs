@@ -3,8 +3,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -32,6 +30,8 @@ namespace HJScarletRework.Globals.Instances
         public Vector2 PostSpeed = Vector2.Zero;
         public bool grassKnifePoison = false;
         public int grassKnifePoisionLevel = 1;
+        public bool grassPoison = false;
+
 
         public override void ResetEffects(NPC npc)
         {
@@ -50,7 +50,7 @@ namespace HJScarletRework.Globals.Instances
         {
             if (StopNpcTime > 0)
                 npc.velocity *= 0.1f;
-            if(StopNpcTime==0&&PostSpeed != Vector2.Zero)
+            if (StopNpcTime == 0 && PostSpeed != Vector2.Zero)
             {
                 npc.velocity = PostSpeed;
                 PostSpeed = Vector2.Zero;
@@ -76,6 +76,13 @@ namespace HJScarletRework.Globals.Instances
             miscCounter++;
             if (miscCounter > 300)
                 miscCounter = 0;
+
+        }
+        public override void UpdateLifeRegen(NPC npc, ref int damage)
+        {
+            if (grassKnifePoison)
+            {
+            }
         }
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {

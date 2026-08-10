@@ -4,9 +4,11 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Useables;
+using HJScarletRework.Items.Weapons.Executor.Assistance;
+using HJScarletRework.Items.Weapons.Executor.Caster;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Items.Weapons.Ranged;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,24 +25,54 @@ namespace HJScarletRework.Globals.Instances.Items
         {
             switch (item.type)
             {
+                #region 宝藏袋
                 case ItemID.GolemBossBag:
                     itemLoot.AddLoot<DisasterEssence>(1, 10, 20);
                     break;
-                case ItemID.FrozenCrate:
-                case ItemID.FrozenCrateHard:
-                    itemLoot.AddLoot<AzureFrostmark>(4);
-                    break;
-                case ItemID.DungeonFishingCrate:
-                case ItemID.DungeonFishingCrateHard:
-                    itemLoot.AddLoot<DungeonBreaker>(4);
-                    itemLoot.AddLoot(ItemID.TallyCounter, 4);
+                case ItemID.PlanteraBossBag:
+                    itemLoot.AddLoot<GrassKnife>(4);
+                    itemLoot.AddLoot<PestilenceFlower>(4);
+                    itemLoot.AddLoot<EmblemColdSteel>(4);
+                    itemLoot.AddLoot<EmblemFirearm>(4);
+                    itemLoot.AddLoot<EmblemThrown>(4);
                     break;
                 case ItemID.WallOfFleshBossBag:
                     itemLoot.AddLoot<EmblemExecutor>(3);
+                    itemLoot.AddLoot<MoltenKnife>(4);
+                    itemLoot.AddLoot<Fleshtumor>(4);
                     break;
                 case ItemID.MoonLordBossBag:
                     itemLoot.AddLoot<PrunusMume>(3);
                     break;
+                case ItemID.EyeOfCthulhuBossBag:
+                    itemLoot.AddLoot<TearEye>(4);
+                    break;
+                #endregion
+
+                #region 板条箱
+
+                case ItemID.FrozenCrate:
+                case ItemID.FrozenCrateHard:
+                    itemLoot.AddLoot<AzureFrostmark>(4);
+                    break;
+                case ItemID.LockBox:
+                    itemLoot.AddLoot<DungeonBreaker>(4);
+                    itemLoot.AddLoot<DungeonKnife>(4);
+                    break;
+                case ItemID.DungeonFishingCrate:
+                case ItemID.DungeonFishingCrateHard:
+                    itemLoot.AddLoot(ItemID.TallyCounter, 4);
+                    break;
+                case ItemID.FloatingIslandFishingCrate:
+                case ItemID.FloatingIslandFishingCrateHard:
+                    itemLoot.AddLoot<StarofHope>(4);
+                    break;
+                case ItemID.OasisCrate:
+                case ItemID.OasisCrateHard:
+                    itemLoot.AddLoot<DesertKnife>(4);
+                    break;
+
+                    #endregion
             }
             if (item.type == ItemType<WallofShadowTreasureBag>())
             {
@@ -71,6 +103,9 @@ namespace HJScarletRework.Globals.Instances.Items
             if (item.type == ItemType<GoblinChariotTreasureBag>())
             {
                 itemLoot.AddLoot<AngryBomb>(4);
+            }
+            if (item.type == ItemType<BigDipperTreasureBag>())
+            {
             }
         }
         public override void AddRecipes()

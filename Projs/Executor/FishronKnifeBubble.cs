@@ -1,16 +1,11 @@
-﻿using ContinentOfJourney.Items.Pylons;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 
@@ -61,7 +56,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ScarletSound(SoundID.Item54, Projectile.Center,instances:0);
+            ScarletSound(SoundID.Item54, Projectile.Center, instances: 0);
             ECSParticle.ShinyCrossStarSmall(Projectile.Center.ToRandCirclePosEdge(3), Vector2.Zero, RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), 20, 1, 0.68f, .021f);
         }
         public override bool PreDraw(ref Color lightColor)
@@ -103,13 +98,13 @@ namespace HJScarletRework.Projs.Executor
             //做掉可能存在的零向量
             DrawSetting drawSetting = new DrawSetting(useTex.Value, true);
             List<TrailDrawDate> trailDrawDates = [];
-            int posCount = (int)((Projectile.oldPos.Length-6) * Clamp(Projectile.velocity.Length(), 0, 1));
+            int posCount = (int)((Projectile.oldPos.Length - 6) * Clamp(Projectile.velocity.Length(), 0, 1));
             for (int j = 0; j < posCount - 1; j++)
             {
                 if (Projectile.oldPos[j] == Vector2.Zero)
                     continue;
                 float rot = Projectile.oldRot[j];
-                trailDrawDates.Add(new(Projectile.oldPos[j] + Projectile.Size / 2 +Projectile.SafeDir() * 10f, drawColor, new Vector2(0, 13 * multipleSize * Projectile.scale), rot));
+                trailDrawDates.Add(new(Projectile.oldPos[j] + Projectile.Size / 2 + Projectile.SafeDir() * 10f, drawColor, new Vector2(0, 13 * multipleSize * Projectile.scale), rot));
             }
             TrailRender.DrawTrail([.. trailDrawDates], drawSetting);
         }

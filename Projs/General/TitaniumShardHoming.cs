@@ -2,11 +2,6 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Vanity;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Diagnostics;
 using Terraria;
 using Terraria.ID;
 
@@ -32,7 +27,7 @@ namespace HJScarletRework.Projs.General
         public override void OnFirstFrame()
         {
             Projectile.frame = Main.rand.Next(0, 12);
-            ScarletSound(SoundID.Item109,Projectile.Center,volume:.65f,pitch:0.6f,pitchVariance:0.3f);
+            ScarletSound(SoundID.Item109, Projectile.Center, volume: .65f, pitch: 0.6f, pitchVariance: 0.3f);
             for (int i = 0; i < 8; i++)
             {
                 ECSParticle.ShinyCrossStarECS(Projectile.Center, RandVelTwoPi(0.2f, 4.2f), Color.White, 40, 1, 0.36f);
@@ -60,8 +55,8 @@ namespace HJScarletRework.Projs.General
             }
             if (Projectile.IsOutScreen())
                 return;
-            if(Main.rand.NextBool(6) &&(Projectile.velocity.Length() > Main.rand.NextFloat(5f,6f)))
-            ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(6), Projectile.velocity / 8f, RandLerpColor(Color.Gray, Color.White), 45, 1, Main.rand.NextFloat(.75f, 1.15f) * .4f);
+            if (Main.rand.NextBool(6) && (Projectile.velocity.Length() > Main.rand.NextFloat(5f, 6f)))
+                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(6), Projectile.velocity / 8f, RandLerpColor(Color.Gray, Color.White), 45, 1, Main.rand.NextFloat(.75f, 1.15f) * .4f);
             if (Main.rand.NextBool(6))
                 ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(6), Projectile.velocity / 8f, RandLerpColor(Color.Gray, Color.White), 45, 1, Main.rand.NextFloat(.75f, 1.15f) * .3f, .2f);
         }
@@ -99,7 +94,7 @@ namespace HJScarletRework.Projs.General
                 if (Projectile.oldPos[i] == Vector2.Zero)
                     continue;
                 float ratios = i / (float)trailLength;
-                Vector2 scale = Vector2.Lerp( new Vector2(0.66f, 1.44f), new Vector2(0.25f,0.8f),ratios);
+                Vector2 scale = Vector2.Lerp(new Vector2(0.66f, 1.44f), new Vector2(0.25f, 0.8f), ratios);
                 Color drawColor = (Color.Lerp(Color.White, Color.Gray, ratios).ToAddColor(50)) * 0.94f * Projectile.Opacity * (1 - ratios);
                 Vector2 trailPos = Projectile.oldPos[i] + Projectile.PosToCenter() - Projectile.SafeDir() * 15f;
                 float oldRot = Projectile.oldRot[i] + PiOver2;
@@ -107,7 +102,7 @@ namespace HJScarletRework.Projs.General
             }
         }
 
-        public void DrawShardTrail(int trailLength, Texture2D tex, Rectangle frame,float rotFix, Vector2 ori)
+        public void DrawShardTrail(int trailLength, Texture2D tex, Rectangle frame, float rotFix, Vector2 ori)
         {
             for (int i = trailLength - 1; i >= 0; i--)
             {

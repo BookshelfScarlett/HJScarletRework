@@ -22,8 +22,8 @@ namespace HJScarletRework.Globals.Players
         {
             terraRecipe_EatenFoodList = (List<int>)tag.GetList<int>(nameof(terraRecipe_EatenFoodList));
             terraRecipe_NotEatenFoodList = (List<int>)tag.GetList<int>(nameof(terraRecipe_NotEatenFoodList));
-            ruShiWoWenBanMinionNameList= (List<string>)tag.GetList<string>(nameof(ruShiWoWenBanMinionNameList));
-            ruShiWoWenBanMinionNameTrashList= (List<string>)tag.GetList<string>(nameof(ruShiWoWenBanMinionNameTrashList));
+            ruShiWoWenBanMinionNameList = (List<string>)tag.GetList<string>(nameof(ruShiWoWenBanMinionNameList));
+            ruShiWoWenBanMinionNameTrashList = (List<string>)tag.GetList<string>(nameof(ruShiWoWenBanMinionNameTrashList));
             terraRecipe = tag.GetBool(nameof(terraRecipe));
             terraRecipe_EatenFoodCounts = tag.GetInt(nameof(terraRecipe_EatenFoodCounts));
             terraRecipe_LifeMaxMultTime = tag.GetInt(nameof(terraRecipe_LifeMaxMultTime));

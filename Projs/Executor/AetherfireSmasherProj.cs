@@ -4,8 +4,6 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -88,7 +86,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Projectile.GetTargetSafe(out NPC target, true, 1200, canPassWall: false, hitLine: true) && Projectile.numHits < 1 && CurTarget is null)
                 {
                     CurTarget = target;
-                            Timer = 0;
+                    Timer = 0;
                 }
 
                 if (!isHitNPC)
@@ -180,8 +178,8 @@ namespace HJScarletRework.Projs.Executor
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             Projectile.BounceOnTile(oldVelocity);
-                    UpdateOnHitNPCParticle(Projectile.oldPosition+Projectile.Size/2);
-                            SoundEngine.PlaySound(SoundID.Item70 with { MaxInstances = 0, Pitch = -0.4f, PitchVariance = 0.1f, Volume = 0.7f }, Projectile.Center);
+            UpdateOnHitNPCParticle(Projectile.oldPosition + Projectile.Size / 2);
+            SoundEngine.PlaySound(SoundID.Item70 with { MaxInstances = 0, Pitch = -0.4f, PitchVariance = 0.1f, Volume = 0.7f }, Projectile.Center);
             return false;
         }
         public void UpdateHitParticle()
@@ -259,26 +257,26 @@ namespace HJScarletRework.Projs.Executor
             PickTagColor(out Color baseColor, out Color targetColor);
             PickTagDust(out short HigherDust, out short BottemDust);
 
-                Projectile.velocity = Projectile.SafeDir() * 17f;
-                Projectile.netUpdate = true;
-                Vector2 spawnPos = center;
-                float numberOfDusts = 36f;
-                float rotFactor = 360f / numberOfDusts;
-                for (int i = 0; i < numberOfDusts; i++)
-                {
-                    float rot = ToRadians(i * rotFactor);
-                    Vector2 offset = new Vector2(4.8f, 0).RotatedBy(rot * Main.rand.NextFloat(3.1f, 4.1f));
-                    Vector2 velOffset = new Vector2(2.4f, 0).RotatedBy(rot * Main.rand.NextFloat(3.1f, 4.1f));
-                    new ShinyOrbParticle(spawnPos + offset, velOffset, RandLerpColor(baseColor, targetColor), 40, 0.8f).Spawn();
-                }
-                for (int i = 0; i < 30; i++)
-                {
-                    int dType = Main.rand.NextBool() ? HigherDust : BottemDust;
-                    Dust d = Dust.NewDustPerfect(spawnPos + Main.rand.NextVector2CircularEdge(10f, 10f), dType);
-                    d.velocity = Vector2.UnitX.RotatedByRandom(TwoPi) * Main.rand.NextFloat(1.2f, 4.2f);
-                    d.scale = Main.rand.NextFloat(1.4f, 1.8f);
-                    d.noGravity = true;
-                }
+            Projectile.velocity = Projectile.SafeDir() * 17f;
+            Projectile.netUpdate = true;
+            Vector2 spawnPos = center;
+            float numberOfDusts = 36f;
+            float rotFactor = 360f / numberOfDusts;
+            for (int i = 0; i < numberOfDusts; i++)
+            {
+                float rot = ToRadians(i * rotFactor);
+                Vector2 offset = new Vector2(4.8f, 0).RotatedBy(rot * Main.rand.NextFloat(3.1f, 4.1f));
+                Vector2 velOffset = new Vector2(2.4f, 0).RotatedBy(rot * Main.rand.NextFloat(3.1f, 4.1f));
+                new ShinyOrbParticle(spawnPos + offset, velOffset, RandLerpColor(baseColor, targetColor), 40, 0.8f).Spawn();
+            }
+            for (int i = 0; i < 30; i++)
+            {
+                int dType = Main.rand.NextBool() ? HigherDust : BottemDust;
+                Dust d = Dust.NewDustPerfect(spawnPos + Main.rand.NextVector2CircularEdge(10f, 10f), dType);
+                d.velocity = Vector2.UnitX.RotatedByRandom(TwoPi) * Main.rand.NextFloat(1.2f, 4.2f);
+                d.scale = Main.rand.NextFloat(1.4f, 1.8f);
+                d.noGravity = true;
+            }
 
         }
         private void PickTagDust(out short HigherDust, out short BottemDust)

@@ -7,8 +7,6 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -167,7 +165,7 @@ namespace HJScarletRework.Projs.Executor
                 InitVector2 = InitVector2.ToRandVelocity(ToRadians(15), 18, 23);
             else
                 InitVector2 = vel;
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, InitVector2, ProjectileType<CrimsonScytheHealingSoul>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, InitVector2, ProjectileType<CrimsonScytheHealingSoul>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
             proj.localAI[0] = curSelected;
             proj.localAI[1] = Projectile.localAI[0];
             proj.originalDamage = Projectile.damage;

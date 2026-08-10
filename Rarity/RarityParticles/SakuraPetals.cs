@@ -1,7 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Rarity.RarityDrawHandler;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 

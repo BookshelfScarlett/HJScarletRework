@@ -1,7 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace HJScarletRework.Core.ParticleECS
+﻿namespace HJScarletRework.Core.ParticleECS
 {
     public static class ECSMethod
     {

@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.Diver;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -12,7 +11,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
     [AutoloadEquip(EquipType.Head)]
     public class MythrilHeadExecutor : HJScarletArmor
     {
-        public override int[] ArmorSlots => [Type,ItemID.MythrilChainmail,ItemID.MythrilGreaves];
+        public override int[] ArmorSlots => [Type, ItemID.MythrilChainmail, ItemID.MythrilGreaves];
         public override bool SetUpArmorSet => true;
         public int Crit = 10;
         public int ArmorSetCrit = 10;
@@ -30,7 +29,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
         }
         public override void UpdateArmorSetBetter(Player player, string setBonusPath)
         {
-            player.setBonus += "\n" +setBonusPath.ToLangValue().ToFormatValue(ArmorSetCrit + "%");
+            player.setBonus += "\n" + setBonusPath.ToLangValue().ToFormatValue(ArmorSetCrit + "%");
             player.GetCritChance<ExecutorDamageClass>() += ArmorSetCrit;
         }
         public override void AddRecipes()

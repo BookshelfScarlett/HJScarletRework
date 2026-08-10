@@ -6,14 +6,12 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 
 namespace HJScarletRework.Projs.General
 {
-    public class RuShiWoWenProj :HJScarletProj,IPixelatedRenderer
+    public class RuShiWoWenProj : HJScarletProj, IPixelatedRenderer
     {
         public override void SetStaticDefaults()
         {
@@ -71,7 +69,7 @@ namespace HJScarletRework.Projs.General
 
             //这里控制一遍圆环的效果
             Timer = Utils.GetLerpValue(GetSeconds(30) + 1, 1, Owner.HJScarlet().powerLilyTimer, true);
-            ChargeRing = Lerp(ChargeRingShown,Timer, 0.51f);
+            ChargeRing = Lerp(ChargeRingShown, Timer, 0.51f);
         }
         public override bool ShouldUpdatePosition()
         {
@@ -95,13 +93,13 @@ namespace HJScarletRework.Projs.General
             SpriteEffects se = Owner.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Texture2D tex = Projectile.GetTexture();
             for (int i = 0; i < 8; i++)
-                SB.Draw(tex, pos + (TwoPi / 8 * i).ToRotationVector2() * 2f*Projectile.Opacity * ChargeRing, null, Color.White.ToAddColor(0), 0, tex.Size() / 2, Projectile.scale*Projectile.Opacity, se, 0);
+                SB.Draw(tex, pos + (TwoPi / 8 * i).ToRotationVector2() * 2f * Projectile.Opacity * ChargeRing, null, Color.White.ToAddColor(0), 0, tex.Size() / 2, Projectile.scale * Projectile.Opacity, se, 0);
             Color mainColor = Color.Lerp(Color.White, Color.Transparent, ChargeRing);
-            SB.Draw(tex, pos, null, mainColor*Projectile.Opacity, 0, tex.Size() / 2, Projectile.scale, se, 0);
+            SB.Draw(tex, pos, null, mainColor * Projectile.Opacity, 0, tex.Size() / 2, Projectile.scale, se, 0);
             return false;
         }
         //复制粘贴
-         public BlendState BlendState => BlendState.Additive;
+        public BlendState BlendState => BlendState.Additive;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
@@ -114,9 +112,9 @@ namespace HJScarletRework.Projs.General
             e.Parameters["uFadeinBottomLength"].SetValue(0.5f);
             e.Parameters["UVMult"].SetValue(new Vector2(1f, 1f));
             e.CurrentTechnique.Passes[0].Apply();
-            TrailFunc(tex, Color.Gold* 0.60f, 9f);
-            TrailFunc(tex, Color.Yellow* 0.20f, 6f);
-            TrailFunc(tex, Color.LightGoldenrodYellow* .20f, 3f);
+            TrailFunc(tex, Color.Gold * 0.60f, 9f);
+            TrailFunc(tex, Color.Yellow * 0.20f, 6f);
+            TrailFunc(tex, Color.LightGoldenrodYellow * .20f, 3f);
             TrailFunc(tex, Color.White * .20f, 2f);
 
             Vector4 vector4 = new(0.2f, 0.2f, 0.1f, 0.6f);
@@ -130,7 +128,7 @@ namespace HJScarletRework.Projs.General
             texture2 = HJScarletTexture.Noise_Aura.Value;
 
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.79f * RandValueSummary.Z), new Vector2(3.2f, 1.94f), Color.White);
-            TrailFunc(texture2, Color.White* 0.92f, 20f);
+            TrailFunc(texture2, Color.White * 0.92f, 20f);
             TrailFunc(texture2, Color.White * 0.92f, 10f);
 
             HJScarletMethods.EndShaderAreaPixel();

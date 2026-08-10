@@ -9,19 +9,17 @@ namespace HJScarletRework.Globals.List
             [
                 "樱羽一花",
                 "Demon Lilies",
-                "世纪小花",
-
-                "溯月Shizuku",
+                "世纪小花 Plantera",
+                "溯月 Shizuku",
                 "论时间的涟漪",
                 "Woodi Stigma",
-
                 "锯角",
                 "南鸢北笙",
                 "梦山之主",
-
                 "巴雷难破长夜",
                 "冰川咲",
                 "银九",
+                "曦"
             ];
         public static List<string> DeveloperList =
             [

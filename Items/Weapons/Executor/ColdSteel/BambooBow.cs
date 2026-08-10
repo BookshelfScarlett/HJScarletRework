@@ -9,7 +9,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
 {
-    public class BambooBow :ExecutorWeaponClass
+    public class BambooBow : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 12;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.ColdSteel;
@@ -44,7 +44,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             if (exe)
             {
                 ScarletSound(HJScarletSounds.Air_HeavyFlow, player.Center);
-                for(int i =0;i<16;i++)
+                for (int i = 0; i < 16; i++)
                 {
                     Vector2 pos = player.ToRandRec();
                     ECSParticle.ShinyCrossStarECS(pos, -Vector2.UnitY * 2f, RandLerpColor(Color.LimeGreen, Color.ForestGreen), 40, 1, 0.4f);
@@ -60,7 +60,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             if (player.HJScarlet().GeneralWeaponBuffTimer > 0)
                 mult = .5f;
             return mult;
-            
+
         }
         public override Vector2? HoldoutOffset()
         {

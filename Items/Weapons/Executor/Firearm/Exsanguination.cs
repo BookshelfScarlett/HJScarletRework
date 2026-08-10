@@ -46,7 +46,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         {
             CreateRecipe().
                 AddIngredient(ItemID.ChainGun).
-                AddIngredient(ItemID.FragmentSolar,5).
+                AddIngredient(ItemID.FragmentSolar, 5).
                 AddIngredient(ItemID.FragmentVortex, 5).
                 AddIngredient(ItemID.FragmentNebula, 5).
                 AddIngredient(ItemID.FragmentStardust, 5).

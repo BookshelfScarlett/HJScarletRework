@@ -1,7 +1,6 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
-using Microsoft.Xna.Framework;
 using Terraria;
 
 namespace HJScarletRework.ReVisual.Projs

@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.RedDragonKnight
 {
-    [AutoloadEquip(EquipType.Head),LegacyName("DragonSlayerHead")]
+    [AutoloadEquip(EquipType.Head), LegacyName("DragonSlayerHead")]
     public class RedDragonKnightHead : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Armors;
@@ -43,7 +43,7 @@ namespace HJScarletRework.Items.Armor.RedDragonKnight
         public float CritDamage = .30f;
         public static int ProgressRegenTime = 5;
         public static float ProgressRegenCount = .05f;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(),Crit + "%");
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%");
         public override void UpdateEquip(Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += Damage;

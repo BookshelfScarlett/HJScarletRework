@@ -85,6 +85,7 @@ namespace HJScarletRework.Projs.Executor
                 ScarletSound(HJScarletSounds.TheSevenStar_Charge, Projectile.Center, .75f, 1, 0.17f);
                 ShouldKill = true;
                 Owner.RemoveExecutionProgress(ItemType<TheSevenStar>());
+
             }
 
         }
@@ -193,16 +194,16 @@ namespace HJScarletRework.Projs.Executor
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
             SB.EnterShaderArea();
-            if(ActiveStarCounts > 1)
+            if (ActiveStarCounts > 1)
             {
-                for(int i =0;i<ActiveStarCounts - 1;i++)
+                for (int i = 0; i < ActiveStarCounts - 1; i++)
                 {
                     Projectile beginProj = Main.projectile[StarProjIndex[i]];
-                    Projectile endProj = Main.projectile[StarProjIndex[i+1]];
+                    Projectile endProj = Main.projectile[StarProjIndex[i + 1]];
                     Vector2 beginPos = beginProj.Center;
                     Vector2 endPos = endProj.Center;
                     DrawTheLine(beginPos, endPos, Color.RoyalBlue, 1f);
-                    DrawTheLine(beginPos, endPos, Color.White*.805f, .75f);
+                    DrawTheLine(beginPos, endPos, Color.White * .805f, .75f);
                 }
             }
 

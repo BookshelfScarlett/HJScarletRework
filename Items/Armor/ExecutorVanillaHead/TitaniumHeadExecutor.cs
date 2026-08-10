@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.Diver;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -14,7 +13,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
     {
         public override int[] ArmorSlots => [Type, ItemID.TitaniumBreastplate, ItemID.TitaniumLeggings];
         public float Damage = 0.12f;
-        public int Crit= 12;
+        public int Crit = 12;
         public float CritDamage = 0.12f;
         public static int ShardDamage = 40;
         public override bool SetUpArmorSet => true;
@@ -23,7 +22,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
             Item.defense = 17;
             Item.SetUpRarityPrice(ItemRarityID.Pink);
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(),Crit + "%", CritDamage.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%", CritDamage.ToPercent());
         public override void UpdateEquip(Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += Damage;

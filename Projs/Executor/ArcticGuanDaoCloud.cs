@@ -2,8 +2,6 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 
@@ -30,7 +28,7 @@ namespace HJScarletRework.Projs.Executor
         {
             base.OnFirstFrame();
         }
-        public ref float Timer => ref Projectile.ai[0]; 
+        public ref float Timer => ref Projectile.ai[0];
         public override void ProjAI()
         {
             Projectile.AddFrames(5, 6);
@@ -75,8 +73,8 @@ namespace HJScarletRework.Projs.Executor
                 Color c = Color.Lerp(Color.SkyBlue, Color.White.ToAddColor(100), ratios);
                 SB.Draw(tex, oldPos, frame, c.ToAddColor(50) * ratios, 0, ori, Projectile.scale, 0, 0);
             }
-            for(int i =0;i<8;i++)
-            SB.Draw(tex, pos+(TwoPi/8f*i).ToRotationVector2() * 1.5f * LerpValue, frame, Color.White.ToAddColor(0), 0, ori, Projectile.scale, 0, 0);
+            for (int i = 0; i < 8; i++)
+                SB.Draw(tex, pos + (TwoPi / 8f * i).ToRotationVector2() * 1.5f * LerpValue, frame, Color.White.ToAddColor(0), 0, ori, Projectile.scale, 0, 0);
             SB.Draw(tex, pos, frame, Color.White.ToAddColor(150), 0, ori, Projectile.scale, 0, 0);
             return false;
         }

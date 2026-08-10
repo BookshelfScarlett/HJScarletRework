@@ -6,7 +6,6 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -43,7 +42,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Owner.HasProj<FishronKnifeMark>())
                 Projectile.AddExecutionTimeImmediate<FishronKnife>();
-            for(int i =0;i<3;i++)
+            for (int i = 0; i < 3; i++)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.ToRandVelocity(ToRadians(15f), 16f), ProjectileType<FishronKnifeBubble>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
             }
@@ -65,10 +64,10 @@ namespace HJScarletRework.Projs.Executor
                 float opa = Lerp(.31f, 1f, ratios);
                 Color c = Color.Lerp(Color.DeepSkyBlue, Color.SkyBlue, ratios);
                 Vector2 sharpScale = new Vector2(0.83f, 1.4f);
-                SB.Draw(HJScarletTexture.Particle_SharpTear, pos - new Vector2(25,-3).RotatedBy(Projectile.rotation), null, c.ToAddColor(10)*opa, Projectile.oldRot[i] + PiOver2, HJScarletTexture.Particle_SharpTear.Size() / 2f, sharpScale * scale, 0, 0);
+                SB.Draw(HJScarletTexture.Particle_SharpTear, pos - new Vector2(25, -3).RotatedBy(Projectile.rotation), null, c.ToAddColor(10) * opa, Projectile.oldRot[i] + PiOver2, HJScarletTexture.Particle_SharpTear.Size() / 2f, sharpScale * scale, 0, 0);
                 c = Color.Lerp(Color.SkyBlue, Color.DeepSkyBlue, ratios).ToAddColor(250);
                 SB.FastDraw(tex, pos, c * opa, Projectile.oldRot[i] + PiOver4, tex.Size() / 2f, Projectile.scale * scale, se);
-                
+
             }
             for (int i = 0; i < 8; i++)
                 SB.FastDraw(tex, drawPosition + (TwoPi / 8f * i).ToRotationVector2() * 2f, Color.White.ToAddColor(), drawRotation, tex.Size() / 2f, Projectile.scale, se);

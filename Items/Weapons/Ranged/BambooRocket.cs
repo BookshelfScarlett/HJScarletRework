@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 

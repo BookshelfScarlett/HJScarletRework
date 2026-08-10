@@ -3,8 +3,6 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Systems;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 

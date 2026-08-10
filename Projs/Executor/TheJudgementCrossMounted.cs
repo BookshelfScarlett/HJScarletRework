@@ -6,8 +6,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -126,7 +124,7 @@ namespace HJScarletRework.Projs.Executor
                 for (int k = 0; k < 12; k++)
                 {
                     //new KiraStar(Projectile.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.Yellow, Color.DarkOrange), 60, 0, 1, 0.28f).Spawn();
-                    ECSParticle.ShinyCrossStarSmall(Projectile.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.Yellow, Color.DarkOrange), 60, 1, 0.78f,0f);
+                    ECSParticle.ShinyCrossStarSmall(Projectile.Center.ToRandCirclePos(4), RandVelTwoPi(1f, 8f), RandLerpColor(Color.Yellow, Color.DarkOrange), 60, 1, 0.78f, 0f);
                 }
             }
             //处死时释放

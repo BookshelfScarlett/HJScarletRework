@@ -2,8 +2,6 @@
 using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.ParticleSystem;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 

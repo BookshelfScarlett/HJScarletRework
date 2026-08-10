@@ -1,14 +1,10 @@
-﻿using ContinentOfJourney.Backgrounds;
-using ContinentOfJourney.NPCs;
-using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -16,7 +12,7 @@ using Terraria;
 
 namespace HJScarletRework.Projs.General
 {
-    public class MaidReaperHeal: HJScarletProj, IPixelatedRenderer
+    public class MaidReaperHeal : HJScarletProj, IPixelatedRenderer
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public enum State
@@ -112,14 +108,14 @@ namespace HJScarletRework.Projs.General
                 Projectile.Kill();
             if (!SpawnDamage)
             {
-                int damageValue = (int)Clamp(Lerp(5, CurTarget.life * 0.05f, HealRatios),0,CurTarget.life * 0.05f);
+                int damageValue = (int)Clamp(Lerp(5, CurTarget.life * 0.05f, HealRatios), 0, CurTarget.life * 0.05f);
                 if (damageValue == 0)
                     damageValue = 1;
                 if (damageValue > (int)(CurTarget.lifeMax * .01f))
                     damageValue = (int)(CurTarget.lifeMax * .01f);
                 CurHeal = (int)(HealRatios * Owner.statLifeMax2);
-                if(Projectile.IsMe())
-                 Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), damageValue, 0, Owner.whoAmI);
+                if (Projectile.IsMe())
+                    Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), damageValue, 0, Owner.whoAmI);
                 SpawnDamage = true;
             }
             Projectile.velocity *= 0.97f;
@@ -131,7 +127,7 @@ namespace HJScarletRework.Projs.General
                 Projectile.netUpdate = true;
                 AttackState = State.Homingback;
                 Timer = 0;
-                
+
             }
         }
         public void DoHomingBack()

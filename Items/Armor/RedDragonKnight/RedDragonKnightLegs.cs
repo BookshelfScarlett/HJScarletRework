@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Armor.RedDragonKnight
 {
-    [AutoloadEquip(EquipType.Legs),LegacyName("DragonSlayerLegs")]
+    [AutoloadEquip(EquipType.Legs), LegacyName("DragonSlayerLegs")]
     public class RedDragonKnightLegs : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Armors;

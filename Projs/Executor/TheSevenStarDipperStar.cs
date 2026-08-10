@@ -150,7 +150,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 orig = tex.Size() / 2;
             SB.EnterShaderArea();
             for (int i = 0; i < 2; i++)
-                SB.Draw(tex, pos, null, c*Projectile.Opacity, PiOver2 * i, orig, scale, 0, 0);
+                SB.Draw(tex, pos, null, c * Projectile.Opacity, PiOver2 * i, orig, scale, 0, 0);
             Texture2D orb = HJScarletTexture.Particle_HRShinyOrbSmall.Value;
             SB.Draw(orb, pos, null, Color.White * .4f, 0, orb.Size() / 2f, .125f * generalScale, 0, 0);
             SB.EndShaderArea();

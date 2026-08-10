@@ -111,3 +111,8 @@ SonBuff: {
 	DisplayName: Son Buff
 	Description: Mods.HJScarletRework.Buffs.SonBuff.Description
 }
+
+GrassPoison: {
+	DisplayName: Grass Poison
+	Description: Mods.HJScarletRework.Buffs.GrassPoison.Description
+}

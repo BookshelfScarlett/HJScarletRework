@@ -1,7 +1,20 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace HJScarletRework.Core.Lightning
+﻿namespace HJScarletRework.Core.Lightning
 {
+    /// <summary>
+    /// 闪电系统的结构体
+    /// </summary>
+    /// <param name="begin">闪电起始点位</param>
+    /// <param name="end"></param>
+    /// <param name="color"></param>
+    /// <param name="strength"></param>
+    /// <param name="width"></param>
+    /// <param name="lifetime"></param>
+    /// <param name="generationsStep"></param>
+    /// <param name="branchChance"></param>
+    /// <param name="maxBranchGenerations"></param>
+    /// <param name="distanceProtect"></param>
+    /// <param name="strengthDecay"></param>
+    /// <param name="maxBranchAllowedDistance"></param>
     public struct LightningSetting(Vector2 begin, Vector2 end, Color color, float strength, float width, int lifetime, int generationsStep, float branchChance, int maxBranchGenerations,
         float distanceProtect = 100, float strengthDecay = 0.6f, float maxBranchAllowedDistance = 50f)
     {

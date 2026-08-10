@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
+﻿using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -85,7 +84,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_ShinySquareSplit = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_ShinySquareSplit)}");
             Particle_BulletShell = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_BulletShell)}");
             Particle_BloodDrop = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_BloodDrop)}");
-            Particle_GlowStar= new Tex2DWithPath($"{Path_Particle}{nameof(Particle_GlowStar)}");
+            Particle_GlowStar = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_GlowStar)}");
 
         }
         public static void UnLoadParticle()

@@ -1,7 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.ParticleSystem;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace HJScarletRework.Rarity.RarityDrawHandler
 {

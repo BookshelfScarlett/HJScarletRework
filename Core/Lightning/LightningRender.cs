@@ -1,7 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 
@@ -18,7 +16,7 @@ namespace HJScarletRework.Core.Lightning
             if (HasAnyLightning)
             {
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.PointWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-                DrawSetting setting = new(HJScarletTexture.Texture_WhiteCubeBig.Value, SamplerState.PointWrap);
+                DrawSetting setting = new(HJScarletTexture.Trail_Lightning4.Value, SamplerState.PointWrap);
                 for (int i = 0; i < HJLightnings.Length; i++)
                 {
                     if (HJLightnings[i].Active)

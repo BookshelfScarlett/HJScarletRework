@@ -5,13 +5,12 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
 
-namespace HJScarletRework.Projs.Ranged
+namespace HJScarletRework.Projs.Executor
 {
     public class ClimaticHawstringArrow : HJScarletProj, IPixelatedRenderer
     {
@@ -44,10 +43,9 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Owner.HJScarlet().climaticHawstringLaserCounter < 30 && !ShouldAdd)
+            if (Owner.HJScarlet().climaticHawstringLaserCounter < 30)
             {
-                Owner.HJScarlet().climaticHawstringLaserCounter++;
-                ShouldAdd = true;
+                Projectile.AddExecutionTimeImmediate<ClimaticHawstring>();
             }
             for (int i = 0; i < 3; i++)
             {

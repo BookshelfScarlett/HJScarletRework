@@ -4,13 +4,11 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class GhostKnifePhantom : HJScarletProj 
+    public class GhostKnifePhantom : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<GhostKnife>().Texture;
@@ -38,12 +36,12 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
             Timer++;
-            CurRatios = Clamp(Timer / (Projectile.MaxUpdates * 10),0,1);
+            CurRatios = Clamp(Timer / (Projectile.MaxUpdates * 10), 0, 1);
             Projectile.velocity *= .96f;
             Vector2 offset = Projectile.SafeDir() * 30f;
             if (CurRatios >= 1f)
             {
-                for(int i =0;i<16;i++)
+                for (int i = 0; i < 16; i++)
                 {
                     ECSParticle.SmokeParticle(Projectile.Center - Projectile.SafeDir() * i * 5f, Projectile.velocity / 16f, RandLerpColor(Color.White, Color.SkyBlue), 45, RandRotTwoPi, 1, 0.1f, false, BlendState.AlphaBlend);
                 }
@@ -52,7 +50,7 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.IsOutScreen())
                 return;
             if (Main.rand.NextBool(4))
-                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(6f) - offset, Projectile.velocity / 16f, RandLerpColor(Color.White, Color.LightSkyBlue), 40, 1, 0.34f,4);
+                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePosEdge(6f) - offset, Projectile.velocity / 16f, RandLerpColor(Color.White, Color.LightSkyBlue), 40, 1, 0.34f, 4);
             //ECSParticle.StarShape(Projectile.Center.ToRandCirclePos(6) - offset, Projectile.velocity / 16f, RandLerpColor(Color.White, Color.LightSkyBlue), 40, 1, 0.65f * (1-CurRatios));
         }
         public override void OnKill(int timeLeft)
@@ -73,7 +71,7 @@ namespace HJScarletRework.Projs.Executor
             Texture2D tex = Projectile.GetTexture();
             Vector2 orig = tex.Size() / 2;
             float disapperRatios = (1 - CurRatios);
-            int length = (int)((Projectile.oldPos.Length - 4)*(disapperRatios));
+            int length = (int)((Projectile.oldPos.Length - 4) * (disapperRatios));
             for (int i = length - 1; i >= 0; i--)
             {
                 float ratios = EaseInOutExpo(1 - i / (float)length);

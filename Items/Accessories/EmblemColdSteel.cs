@@ -8,11 +8,15 @@ using Terraria.Localization;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class EmblemColdSteel :HJScarletItemClass
+    public class EmblemColdSteel : HJScarletItemClass
     {
-        public float CritDamage = .30f;
+        public float CritDamage = .20f;
         public int Crit = 5;
 
+        public override void SetStaticDefaults()
+        {
+            Type.ShimmerTo(ItemType<EmblemFirearm>());
+        }
         public override string AssetPath => AssetHandler.Equips;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritDamage.ToPercent(), Crit + "%");
         public override void ExSD()
@@ -22,20 +26,11 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if (player.HeldItem.CheckExecuteTypes(ExecutorWeaponType.Firearm))
+            if (player.HeldItem.CheckExecuteTypes(ExecutorWeaponType.ColdSteel) || player.HeldItem.CheckExecuteTypes(ExecutorWeaponType.Assistance))
             {
                 player.HJScarlet().critDamageExecutor += CritDamage;
                 player.GetCritChance<ExecutorDamageClass>() += Crit;
             }
-        }
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddIngredient(ItemID.AvengerEmblem).
-                AddIngredient(ItemID.EyeoftheGolem).
-                AddIngredient(ItemID.BeetleHusk, 15).
-                AddTile(TileID.MythrilAnvil).
-                Register();
         }
     }
 }

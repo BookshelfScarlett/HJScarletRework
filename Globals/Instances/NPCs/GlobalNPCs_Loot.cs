@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.NPCs;
+using ContinentOfJourney.NPCs.Boss_BigDipper;
 using ContinentOfJourney.NPCs.Boss_GoblinChariot;
 using ContinentOfJourney.NPCs.Boss_MarquisMoonsquid;
 using ContinentOfJourney.NPCs.Boss_PriestessRod;
@@ -13,11 +14,12 @@ using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Pets;
 using HJScarletRework.Items.Useables;
+using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Items.Weapons.Executor.Caster;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
+using HJScarletRework.Items.Weapons.Executor.Misc;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
-using HJScarletRework.Items.Weapons.Ranged;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -40,9 +42,18 @@ namespace HJScarletRework.Globals.Instances
                 case NPCID.Golem:
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<DisasterEssence>(), 1, 10, 20);
                     break;
+                case NPCID.Plantera:
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<GrassKnife>(), 4);
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<PestilenceFlower>(), 4);
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<EmblemColdSteel>(), 4);
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<EmblemFirearm>(), 4);
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<EmblemThrown>(), 4);
+                    break;
                 case NPCID.WallofFlesh:
                     npcLoot.Add(ItemDropRule.ByCondition(new ScarletWearingFullCowboy(), ItemType<EmblemExecutor>()));
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<EmblemExecutor>(), 4);
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<MoltenKnife>(), 4);
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<Fleshtumor>(), 4);
                     break;
                 case NPCID.BigMimicCorruption:
                 case NPCID.BigMimicCrimson:
@@ -59,6 +70,9 @@ namespace HJScarletRework.Globals.Instances
                     break;
                 case NPCID.MoonLordCore:
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<PrunusMume>(), 4);
+                    break;
+                case NPCID.EyeofCthulhu:
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<TearEye>(), 4);
                     break;
             }
             if (npc.boss && npc.type != NPCID.KingSlime)
@@ -79,7 +93,7 @@ namespace HJScarletRework.Globals.Instances
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<SquidItem>(), 4);
             if (npc.type == NPCType<ScarabBelief>())
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<NoneItem>(), 4);
-            if(npc.type == NPCType<PolarMimic>())
+            if (npc.type == NPCType<PolarMimic>())
             {
                 npcLoot.AddLootSimple(ItemType<Frostlight>(), 4, 1, 1);
             }
@@ -94,6 +108,11 @@ namespace HJScarletRework.Globals.Instances
             if (npc.type == NPCType<GoblinChariot>())
             {
                 HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<AngryBomb>(), 4);
+            }
+            if (npc.type == NPCType<BigDipper>())
+            {
+
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<TheSevenStar>(), 1);
             }
         }
         public override void ModifyGlobalLoot(GlobalLoot globalLoot)
