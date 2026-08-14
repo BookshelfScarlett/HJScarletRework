@@ -50,6 +50,8 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Owner.HasProj<FrostHammerExecution>() || !Projectile.HJScarlet().ExecutionStrike)
                 return;
+            if (!Projectile.IsMe())
+                return;
             Vector2 vel = -Owner.ToMouseVector2().RotatedBy(PiOver2) * Main.rand.NextFloat(20f, 30f);
             Vector2 spawnPos = Owner.MountedCenter;
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<FrostHammerExecution>(), Projectile.damage, Projectile.knockBack, Projectile.owner);

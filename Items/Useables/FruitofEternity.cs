@@ -1,4 +1,6 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Items.Material;
+using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
@@ -27,7 +29,7 @@ namespace HJScarletRework.Items.Useables
         {
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.value = Item.buyPrice(gold: 5, silver: 30);
-            Item.consumable = true;
+            Item.DefaultToFood(32, 32, BuffType<FruitofEternityBuff>(), GetSeconds(60) * 5);
         }
         public IReadOnlyList<TooltipLine> CacheTooltipList = null;
         public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -55,7 +57,13 @@ namespace HJScarletRework.Items.Useables
         }
         public override void AddRecipes()
         {
-            base.AddRecipes();
+            CreateRecipe(2).
+                AddIngredient<EternalBar>(10).
+                AddIngredient<LivingBar>(10).
+                AddIngredient<CubistBar>(10).
+                AddRecipeGroup(RecipeGroupID.Fruit).
+                AddTile(FinalAnvilTile).
+                Register();
         }
     }
 }

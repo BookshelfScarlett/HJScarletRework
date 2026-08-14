@@ -20,7 +20,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Projectile.IsMe() && !HasFireStar)
             {
-                SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = 0.4f, Volume = 0.6f });
+                ScarletSound(HJScarletSounds.Misc_Ding, Owner.Center, .6f, 0, .4f);
                 for (int i = 0; i < 1; i++)
                 {
                     Vector2 pos = Owner.Center - Vector2.UnitY * Main.rand.NextFloat(600, 700) + Main.rand.NextFloat(80, 120) * i * Vector2.UnitX * Main.rand.NextBool().ToDirectionInt() - ((Main.MouseWorld.X - Owner.Center.X) > 0).ToDirectionInt() * Vector2.UnitX * 100;
@@ -80,13 +80,6 @@ namespace HJScarletRework.Projs.Executor
                 }
                 Main.EntitySpriteDraw(texture, pos - Main.screenPosition, frame, color, rotation, origin, scale, flip, 0);
                 pos += diff;
-                if (isHead)
-                {
-                    SB.EnterShaderArea();
-                    Texture2D tex2 = HJScarletTexture.Particle_KiraStar.Value;
-                    //SB.Draw(tex, list[starIndex] - Main.screenPosition, null, Color.White, 0, tex.ToOrigin(), 0.92f * starScale,0,0);
-                    SB.EndShaderArea();
-                }
             }
         }
         public override void DrawMiscOnHead(Vector2 vector2, SpriteEffects flip)

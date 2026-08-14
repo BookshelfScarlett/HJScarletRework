@@ -27,13 +27,10 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
             Item.shoot = ProjectileType<DeathTollsProj>();
+            Item.useTime = Item.useAnimation= 21;
             Item.knockBack = 8f;
-            Item.width = 88;
-            Item.height = 94;
-            Item.damage = 214;
-            Item.useTime = 21;
+            Item.damage = 162;
             //这里的UseTime是有意改的很慢的
-            Item.useAnimation = 21;
             Item.shootSpeed = 19f;
             //这里不会给音效，因为要考虑一些射弹的联动
             //实际音效会在射弹初始化的时候提供

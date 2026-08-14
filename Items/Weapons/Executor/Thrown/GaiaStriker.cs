@@ -45,7 +45,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override void ExSD()
         {
             Item.width = Item.height = 16;
-            Item.damage = 98;
+            Item.damage = 90;
             Item.SetUpNoUseGraphicItem();
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.shootSpeed = 22;

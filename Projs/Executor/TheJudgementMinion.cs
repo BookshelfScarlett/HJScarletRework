@@ -92,10 +92,6 @@ namespace HJScarletRework.Projs.Executor
             }
 
         }
-
-        private void UpdateIfNoTargetNearbyAndHasNightmareProj()
-        {
-        }
         private void UpdateIfNoTargetNearby()
         {
             //基本的挂机状态，此处使用了正弦曲线

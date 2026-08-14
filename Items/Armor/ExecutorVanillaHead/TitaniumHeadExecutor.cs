@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
         public float Damage = 0.12f;
         public int Crit = 12;
         public float CritDamage = 0.12f;
-        public static int ShardDamage = 40;
+        public static int ShardDamage =30;
         public override bool SetUpArmorSet => true;
         public override void ExSD()
         {

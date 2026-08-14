@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
 using System;
@@ -26,6 +27,8 @@ namespace HJScarletRework.Globals.Instances.Items
         public static string AnyCobaltBar;
         public static string AnyGoldSword;
         public static string AnyPostPlantEmblem;
+        public static string AnyTitaniumBar;
+        public static string AnyBiomeKey;
         #region Crates
         public static string AnyIceCrate;
         public static string AnyJungleCrate;
@@ -68,6 +71,8 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyCobaltBar = CreateRecipeGroup(nameof(AnyCobaltBar), ItemID.CobaltBar, ItemID.PalladiumBar);
             AnyGoldSword = CreateRecipeGroup(nameof(AnyGoldSword), ItemID.GoldBroadsword, ItemID.PlatinumBroadsword);
             AnyPostPlantEmblem = CreateRecipeGroup(nameof(AnyPostPlantEmblem), ItemType<EmblemColdSteel>(), ItemType<EmblemFirearm>(), ItemType<EmblemThrown>());
+            AnyTitaniumBar = CreateRecipeGroup(nameof(AnyTitaniumBar), ItemID.TitaniumBar, ItemID.AdamantiteBar);
+            AnyBiomeKey = CreateRecipeGroup(nameof(AnyBiomeKey), ItemID.CorruptionKey, ItemID.CrimsonKey, ItemID.FrozenKey, ItemID.JungleKey, ItemID.HallowedKey, ItemID.DungeonDesertKey);
         }
         public override void PostAddRecipes()
         {
@@ -79,6 +84,7 @@ namespace HJScarletRework.Globals.Instances.Items
                     Recipe recipe1 = recipe.Clone();
                     recipe1.RemoveIngredient(ItemID.EyeoftheGolem);
                     recipe1.AddRecipeGroup(AnyPostPlantEmblem);
+                    recipe1.AddIngredient<DisasterEssence>(5);
                     recipe1.Register();
                 }
             }
@@ -102,6 +108,7 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyCobaltBar = null;
             AnyGoldSword = null;
             AnyPostPlantEmblem = null;
+            AnyTitaniumBar = null;
         }
         public static string CreateRecipeGroup(string name, params int[] AllItem)
         {

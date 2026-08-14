@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Life);
-            Type.ShimmerEach<GaiaStriker>();
+            //Type.ShimmerEach<GaiaStriker>();
         }
         public override void ExSD()
         {

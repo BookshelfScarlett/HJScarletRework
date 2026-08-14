@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.Instances.Items;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
@@ -20,6 +21,12 @@ namespace HJScarletRework.Items.Useables
         }
         public override void AddRecipes()
         {
+            CreateRecipe().
+                AddIngredient(ItemID.TempleKey).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyBiomeKey).
+                AddTile(TileID.CrystalBall).
+                DisableDecraft().
+                Register();
             CreateRecipe().
                 AddIngredient(ItemID.TempleKey, 5).
                 AddTile(TileID.CrystalBall).

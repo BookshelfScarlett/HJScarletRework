@@ -24,16 +24,16 @@ namespace HJScarletRework.Items.Armor.DragonHunter
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Purple);
-            Item.defense = 30;
+            Item.defense = 35;
         }
         public float Damage = .20f;
-        public float AttackSpeed = .15f;
-        public static int RangedCrit = 40;
+        public float AttackSpeed = .25f;
+        public static int RangedCrit = 50;
         public int MagicMana = 50;
         public float MagicManaCost = .20f;
         public int SummonerMinionSlot = 1;
         public int SummonerSentrySlot = 1;
-        public static float FixedDamage = .20f;
+        public static float FixedDamage = .40f;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent());
         public override void UpdateEquip(Player player)
         {

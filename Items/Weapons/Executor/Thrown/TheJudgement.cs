@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.shoot = ProjectileType<TheJudgementProj>();
             Item.knockBack = 8f;
             Item.width = Item.height = 58;
-            Item.damage = 54;
+            Item.damage = 50;
             Item.useTime = 13;
             Item.useAnimation = 13;
             Item.shootSpeed = 18f;

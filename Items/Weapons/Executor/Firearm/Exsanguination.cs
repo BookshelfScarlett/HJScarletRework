@@ -21,7 +21,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         }
         public override void ExSD()
         {
-            Item.damage = 29;
+            Item.damage = 24;
             Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 5f;
             Item.useStyle = ItemUseStyleID.Shoot;
@@ -50,7 +50,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
                 AddIngredient(ItemID.FragmentVortex, 5).
                 AddIngredient(ItemID.FragmentNebula, 5).
                 AddIngredient(ItemID.FragmentStardust, 5).
-                AddTile(TileID.LunarBlockNebula).
+                AddTile(TileID.LunarCraftingStation).
                 Register();
         }
     }

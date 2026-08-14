@@ -1,321 +1,300 @@
-Executor: {
-	// DragonSwordFireball.DisplayName: Dragon Sword Fireball
-	AetherfireSmasherExecution.DisplayName: ������|����
-	AetherfireSmasherFireball.DisplayName: ������|����
-	AetherfireSmasherProj.DisplayName: ������
-	AetherfireSmasherVolcano.DisplayName: ������|��ɽ
-	AngryBombExecution.DisplayName: ��ŭը��|����
-	AngryBombProj.DisplayName: ��ŭը��
-	BinaryStarsArrow.DisplayName: ˫����|��������
-	BinaryStarsExecution.DisplayName: ˫����|����
-	BinaryStarsPhantom.DisplayName: ˫����|����
-	BinaryStarsPhantomClone.DisplayName: ˫����|����
-	BinaryStarsProj.DisplayName: ˫����
-	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
-	BoneSlapProj.DisplayName: ����
-	ContainedBlastBoom.DisplayName: ���Ʊ�ը|ճ����ը
-	ContainedBlastHeldProj.DisplayName: ���Ʊ�ը
-	ContainedBlastShockBullet.DisplayName: ���Ʊ�ը|�����
-	ContainedBlastStickBullet.DisplayName: ���Ʊ�ը|ճ��
-	DeathTollsArrow.DisplayName: ����ɥ��|����֮��
-	DeathTollsDarkEnergy.DisplayName: ����ɥ��|��Ӱħ��
-	DeathTollsExecution.DisplayName: ����ɥ��|׷�Ӵ���
-	DeathTollsMinion.DisplayName: ����ɥ��|�ʹ�
-	DeathTollsStreak.DisplayName: ����ɥ��|�ʹ�����
-	DeathTollsProj.DisplayName: ����ɥ��
-	DesertDaggerMark.DisplayName: Desert Dagger Mark
-	DreamingLightBeam.DisplayName: ����֮��|����
-	DreamingLightFireball.DisplayName: ����֮��|�������
-	DreamingLightMinion.DisplayName: ����֮��|�ʹ�
-	DreamingLightProj.DisplayName: ����֮��
-	DreamingLightStriker.DisplayName: ����֮��|�ξ�֮��
-	DreamlessNightArrow.DisplayName: ����֮ҹ|�ξ�֮��
-	DreamlessNightBeam.DisplayName: ����֮ҹ|����
-	DreamlessNightMinion.DisplayName: ����֮ҹ|�ʹ�
-	DreamlessNightProj.DisplayName: ����֮ҹ
-	DualWraithStaffGhost.DisplayName: ˫��ħ��|����
-	DualWraithStaffHeldProj.DisplayName: ˫��ħ��
-	DualWraithStaffJavelin.DisplayName: ˫��ħ��|Ͷì
-	DungeonBreakerExecution.DisplayName: �����ƻ���|����
-	DungeonBreakerProj.DisplayName: �����ƻ���
-	DungeonBreakerShockwave.DisplayName: �����ƻ���|���
-	DungeonBreakerWaterbolt.DisplayName: �����ƻ���|ˮ��
-	EndlessWarExecution.DisplayName: �޾�ս��|������
-	EndlessWarLightening.DisplayName: �޾�ս��|��������
-	EndlessWarProj.DisplayName: �޾�ս��
-	ExsanguinationBulletProj.DisplayName: ��Ѫ�Ʒ�|���͵�ҩ
-	ExsanguinationHeldProj.DisplayName: ��Ѫ�Ʒ�
-	FleshGrinderExecution.DisplayName: �����|����
-	FleshGrinderProj.DisplayName: �����
-	FleshtumorHeldProj.DisplayName: ����
-	FleshtumorHunger.DisplayName: ����|����
-	FleshtumorHungerStick.DisplayName: Fleshtumor Hunger Stick
-	FrostHammerExecution.DisplayName: ����|ѩ��
-	FrostHammerIceSpike.DisplayName: ����|��׶
-	FrostHammerProj.DisplayName: ����
-	FrostlightFlamethrower.DisplayName: ��˪���|�����
-	FrostlightFlamethrowerFlame.DisplayName: ��˪���|����
-	FrostlightFrostball.DisplayName: ��˪���|��˪����
-	FrostlightHeldProj.DisplayName: ��˪���
-	FrostlightHeldProjAlt.DisplayName: ��˪���
-	FrostoftheStormChargeProj.DisplayName: ��˪�籩|��������
-	FrostoftheStormExecution.DisplayName: ��˪�籩|̧��ǰҡ
-	FrostoftheStormHeldProj.DisplayName: ��˪�籩
-	FrostoftheStormSlash.DisplayName: ��˪�籩|����
-	FrostoftheStormSlashGiant.DisplayName: ��˪�籩|���͵���
-	GaiaStrikerBeam.DisplayName: �����ش�|����
-	GaiaStrikerBloodyBullet.DisplayName: �����ش�|Ѫ�ȷɵ�
-	GaiaStrikerBolt.DisplayName: �����ش�|΢��Ѫ��
-	GaiaStrikerHeldProj.DisplayName: �����ش�|������̬
-	GaiaStrikerMountedProj.DisplayName: �����ش�|�Զ���̬
-	GaiaStrikerProj.DisplayName: �����ش�
-	GhostDaggerMark.DisplayName: Ghost Dagger Mark
-	JungleMadnessExecution.DisplayName: ���ֿ�ŭ|����
-	JungleMadnessLeafs.DisplayName: ���ֿ�ŭ|��Ҷ
-	JungleMadnessProj.DisplayName: ���ֿ�ŭ
-	LavaFlowBoom.DisplayName: ������|��ը
-	LavaFlowExecution.DisplayName: ������|����
-	LavaFlowProj.DisplayName: ������
-	MantleLayerExecution.DisplayName: ���|����
-	MantleLayerProj.DisplayName: ���
-	MoltenDaggerMark.DisplayName: Molten Dagger Mark
-	MonkStaffBubble.DisplayName: �˯����|����������
-	MonkStaffLightning.DisplayName: ����֮ŭ|����������
-	MonkStaffSkillProj.DisplayName: ����������|��������
-	PestilenceFlowerBomb.DisplayName: ����֮��|Ʈ�ݻ���
-	PestilenceFlowerHeldProj.DisplayName: ����֮��
-	PestilenceFlowerHunger.DisplayName: ����֮��|����
-	PrunusMumeFlower.DisplayName: ��÷|��
-	PrunusMumePetal.DisplayName: ��÷|����
-	PrunusMumeProj.DisplayName: ��÷
-	PureYinyoBlack.DisplayName: ��������|̫��֮��
-	PureYinyoExecution.DisplayName: ��������|����
-	PureYinyoJade.DisplayName: ��������|������
-	PureYinyoShard.DisplayName: ��������|��ͨ��Ƭ
-	PureYinyoWhite.DisplayName: ��������|̫��֮��
-	SimpleHandAxeExecution.DisplayName: ����˫�и�|����
-	SimpleHandAxeProj.DisplayName: ����˫�и�
-	StarofHopeProj.DisplayName: Starof Hope Proj
-	StarofHopeProj2.DisplayName: Starof Hope Proj2
-	StarofHopeStar.DisplayName: Starof Hope Star
-	SundownerAmmo.DisplayName: Sundowner Ammo
-	SundownerFireball.DisplayName: Sundowner Fireball
-	SundownerFlare.DisplayName: Sundowner Flare
-	SundownerFlareGun.DisplayName: Sundowner Flare Gun
-	SundownerHeldProj.DisplayName: Sundowner Held Proj
-	SundownerRocket.DisplayName: Sundowner Rocket
-	TearEyeProj.DisplayName: Tear Eye Proj
-	TheDefilerExecution.DisplayName: The Defiler Execution
-	TheDefilerProj.DisplayName: The Defiler Proj
-	TheJudgementCross.DisplayName: The Judgement Cross
-	TheJudgementCrossMounted.DisplayName: The Judgement Cross Mounted
-	TheJudgementMinion.DisplayName: The Judgement Minion
-	TheJudgementProj.DisplayName: The Judgement Proj
-	TheJudgementStar.DisplayName: The Judgement Star
-	TheJudgementStarExecution.DisplayName: The Judgement Star Execution
-	TheJudgementStarExecutionMounted.DisplayName: The Judgement Star Execution Mounted
-	ThePunishmentExecution.DisplayName: The Punishment Execution
-	ThePunishmentProj.DisplayName: The Punishment Proj
-	ThePunishmentStar.DisplayName: The Punishment Star
-	// ASMDBullet.DisplayName: A S M D Bullet
-	// ASMDExecutionBullet.DisplayName: A S M D Execution Bullet
-	// ASMDHeldProj.DisplayName: A S M D Held Proj
-	// ASMDIceBlock.DisplayName: A S M D Ice Block
-	// SickleAndTorchFireball.DisplayName: Sickle And Torch Fireball
-	// SickleAndTorchSickle.DisplayName: Sickle And Torch Sickle
-	// SickleAndTorchTorch.DisplayName: Sickle And Torch Torch
-	// ASMDBoom.DisplayName: A S M D Boom
-	// AbyssalWorldProj.DisplayName: Abyssal World Proj
-	// PureDaggerProj.DisplayName: Pure Dagger Proj
-	// PureDaggerExecution.DisplayName: Pure Dagger Execution
-	// SickleAndTorchTorchToss.DisplayName: Sickle And Torch Torch Toss
-	// PureDaggerStar.DisplayName: Pure Dagger Star
-	// CrimsonScytheHeldProj.DisplayName: Crimson Scythe Held Proj
-	// CrimsonScytheSoulStone.DisplayName: Crimson Scythe Soul Stone
-	// CrimsonScytheSkillProj.DisplayName: Crimson Scythe Skill Proj
-	// CrimsonScytheHealingSoul.DisplayName: Crimson Scythe Healing Soul
-	// MonocleBullet.DisplayName: Monocle Bullet
-	// MonocleBulletExecution.DisplayName: Monocle Bullet Execution
-	// MonocleHeldProj.DisplayName: Monocle Held Proj
-	// ArcticGuanDaoCloud.DisplayName: Arctic Guan Dao Cloud
-	// ArcticGuanDaoCloudMoving.DisplayName: Arctic Guan Dao Cloud Moving
-	// ArcticGuanDaoHeldProj.DisplayName: Arctic Guan Dao Held Proj
-	// ArcticGuanDaoSpike.DisplayName: Arctic Guan Dao Spike
-	// ConferenceCallBullet.DisplayName: Conference Call Bullet
-	// ConferenceCallHeldProj.DisplayName: Conference Call Held Proj
-	// ExsanguinationHomingBullet.DisplayName: Exsanguination Homing Bullet
-	// GhostKnifePhantom.DisplayName: Ghost Knife Proj
-	// GhostKnifeHeldProj.DisplayName: Ghost Knife Held Proj
-	// GhostKnifeProj.DisplayName: Ghost Knife Proj
-	// DesertKnifeProj.DisplayName: Desert Knife Proj
-	// FishronKnifeBubble.DisplayName: Fishron Knife Bubble
-	// FishronKnifeProj.DisplayName: Fishron Knife Proj
-	// GrassKnifeProj.DisplayName: Grass Knife Proj
-	// TheSevenStarDipper.DisplayName: The Seven Star Dipper
-	// TheSevenStarDipperStar.DisplayName: The Seven Star Dipper Star
-	// TheSevenStarHeldProj.DisplayName: The Seven Star Held Proj
-	// TheSevenStarStar.DisplayName: The Seven Star Star
-	// TheSevenStarBolt.DisplayName: The Seven Star Bolt
-	// DungeonKnifeProj.DisplayName: Dungeon Knife Proj
-	// MoltenKnifeProj.DisplayName: Molten Knife Proj
-	// AbyssalWorldBeam.DisplayName: Abyssal World Beam
-	// AbyssalWorldBolt.DisplayName: Abyssal World Bolt
-	// AbyssalWorldHeldProj.DisplayName: Abyssal World Held Proj
-	// AbyssalWorldHeldProjAlt.DisplayName: Abyssal World Held Proj Alt
-	// MoltenKnifeBoom.DisplayName: Molten Knife Boom
-	// StormSaberExecution.DisplayName: Storm Saber Execution
-	// StormSaberHeldProj.DisplayName: Storm Saber Held Proj
-	// StormSaberSlash.DisplayName: Storm Saber Slash
-	// StormSaberSlashGiant.DisplayName: Storm Saber Slash Giant
-	// StormSaberCharge.DisplayName: Storm Saber Charge
-	// EndlessWarSmasher.DisplayName: Endless War Smasher
-	// EndlessWarMinion.DisplayName: Endless War Minion
-	// EndlessWarMintTyphoonThunder.DisplayName: Endless War Mint Typhoon Thunder
-	// EndlessWarMintTyphoon.DisplayName: Endless War Mint Typhoon
-	// TheGreatDipperDipper.DisplayName: The Great Dipper Dipper
-	// TheGreatDipperDipperStar.DisplayName: The Great Dipper Dipper Star
-	// TheGreatDipperHeldProj.DisplayName: The Great Dipper Held Proj
-	// TheGreatDipperStar.DisplayName: The Great Dipper Star
-	// BambooBowArrow.DisplayName: Bamboo Bow Arrow
-	// BambooSwordHeldProj.DisplayName: Bamboo Sword Held Proj
-	// BambooSwordSpin.DisplayName: Bamboo Sword Spin
-	// EndlessWarMintTyphoonLightning.DisplayName: Endless War Mint Typhoon Lightning
-	// ClimaticHawstringBeam.DisplayName: Climatic Hawstring Beam
-	// ClimaticHawstringMinion.DisplayName: Climatic Hawstring Minion
-	// ClimaticHawstringProj.DisplayName: Climatic Hawstring Proj
-	// BlazingSunArrow.DisplayName: Blazing Sun Arrow
-	// BlazingSunFireball.DisplayName: Blazing Sun Fireball
-	// TheGreatDipperGalaxy.DisplayName: The Great Dipper Galaxy
-	// TheGreatDipperGalaxyHelper.DisplayName: The Great Dipper Galaxy Helper
-}
-
-Melee: {
-	// DragonSwordHeldProj.DisplayName: Dragon Sword Held Proj
-	// DragonSwordSlash.DisplayName: Dragon Sword Slash
-	// AzureFrostmarkEnergy.DisplayName: Azure Frostmark Energy
-	// AzureFrostmarkProj.DisplayName: Azure Frostmark Proj
-	// BamboomerangProj.DisplayName: Bamboomerang Proj
-	// CactusSpearProj.DisplayName: Cactus Spear Proj
-	// CactusSpearSpike.DisplayName: Cactus Spear Spike
-	// CandLanceBeam.DisplayName: Cand Lance Beam
-	// CandLanceFire.DisplayName: Cand Lance Fire
-	// CandLanceThrownProj.DisplayName: Cand Lance Thrown Proj
-	// ColdSakuraArrow.DisplayName: Cold Sakura Arrow
-	// ColdSakuraProj.DisplayName: Cold Sakura Proj
-	// CryoblazeHymnFireball.DisplayName: Cryoblaze Hymn Fireball
-	// CryoblazeHymnFirePortal.DisplayName: Cryoblaze Hymn Fire Portal
-	// CryoblazeHymnFrostEnergy.DisplayName: Cryoblaze Hymn Frost Energy
-	// CryoblazeHymnFrostPortal.DisplayName: Cryoblaze Hymn Frost Portal
-	// CryoblazeHymnProj.DisplayName: Cryoblaze Hymn Proj
-	// DeathTollsProj.DisplayName: Death Tolls Proj
-	// DeepToneHealOrb.DisplayName: Deep Tone Heal Orb
-	// DeepToneMouth.DisplayName: Deep Tone Mouth
-	// DeepToneThrownProj.DisplayName: Deep Tone Thrown Proj
-	// DialecticsCubeProj.DisplayName: Dialectics Cube Proj
-	// DialecticsSkyFall.DisplayName: Dialectics Sky Fall
-	// DialecticsSpiningBlock.DisplayName: Dialectics Spining Block
-	// DialecticsThrownProj.DisplayName: Dialectics Thrown Proj
-	// EclipseWraithBoom.DisplayName: Eclipse Wraith Boom
-	// EclipseWraithFireball.DisplayName: Eclipse Wraith Fireball
-	// EclipseWraithProj.DisplayName: Eclipse Wraith Proj
-	// EnchantedSwordfishJavelin.DisplayName: Enchanted Swordfish Javelin
-	// EnchantedSwordfishProj.DisplayName: Enchanted Swordfish Proj
-	// EvolutionArrow.DisplayName: Evolution Arrow
-	// EvolutionThrownProj.DisplayName: Evolution Thrown Proj
-	// FierySpearFireball.DisplayName: Fiery Spear Fireball
-	// FierySpearProj.DisplayName: Fiery Spear Proj
-	// FlybackHandClockMounted.DisplayName: Flyback Hand Clock Mounted
-	// FlybackHandEdgeProj.DisplayName: Flyback Hand Edge Proj
-	// FlybackHandStar.DisplayName: Flyback Hand Star
-	// FlybackHandThrownProj.DisplayName: Flyback Hand Thrown Proj
-	// GalvanizedHandArrow.DisplayName: Galvanized Hand Arrow
-	// GalvanizedHandSideProj.DisplayName: Galvanized Hand Side Proj
-	// GalvanizedHandThrownProj.DisplayName: Galvanized Hand Thrown Proj
-	// LightBiteDarkStar.DisplayName: Light Bite Dark Star
-	// LightBiteThrownProj.DisplayName: Light Bite Thrown Proj
-	// SamsaraofDawnlightBolt.DisplayName: Samsaraof Dawnlight Bolt
-	// SamsaraofDawnlightMoon.DisplayName: Samsaraof Dawnlight Moon
-	// SamsaraofDawnlightSun.DisplayName: Samsaraof Dawnlight Sun
-	// SpearofDarknessShadow.DisplayName: Spearof Darkness Shadow
-	// SpearofDarknessThrownProj.DisplayName: Spearof Darkness Thrown Proj
-	// SpearofEscapeBoom.DisplayName: Spearof Escape Boom
-	// SpearofEscapeMissile.DisplayName: Spearof Escape Missile
-	// SpearofEscapeRider.DisplayName: Spearof Escape Rider
-	// SweetStabThrownProj.DisplayName: Sweet Stab Thrown Proj
-	// TerraSpearArrow.DisplayName: Terra Spear Arrow
-	// TerraSpearPortal.DisplayName: Terra Spear Portal
-	// TerraSpearProj.DisplayName: Terra Spear Proj
-	// TheMarsMark.DisplayName: The Mars Mark
-	// TheMarsPhantom.DisplayName: The Mars Phantom
-	// TheMarsProj.DisplayName: The Mars Proj
-	// TonbogiriBubble.DisplayName: Tonbogiri Bubble
-	// TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
-	// WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
-	// FlowerofDanceProj.DisplayName: Flowerof Dance Proj
-	// FlowerofDanceFlower.DisplayName: Flowerof Dance Flower
-}
-
 Typeless: {
-	// BoneSlapBone.DisplayName: Bone Slap Bone
-	// CowboyBullet.DisplayName: Cowboy Bullet
-	// CowboyRevolverProj.DisplayName: Cowboy Revolver Proj
-	// DesterrennachtHealProj.DisplayName: Desterrennacht Heal Proj
-	// DiverJellyFish.DisplayName: Diver Jelly Fish
-	// FloatingPlants.DisplayName: Floating Plants
-	// GaiaStrikerLootProj.DisplayName: Gaia Striker Loot Proj
+	SeashineSwordProj.DisplayName: Seashine Sword Proj
+	DesertKnifeMark.DisplayName: 沙丘短刀|标记
+	DungeonKnifeMark.DisplayName: 钢制匕首|标记
+	FishronKnifeMark.DisplayName: 公爵长牙|标记
+	GhostKnifeMark.DisplayName: 幽魂短匕|标记
+	GrassKnifeMark.DisplayName: 草刀|标记
+	MoltenKnifeMark.DisplayName: 狱炎投刀|标记
+	StarofHoperMark.DisplayName: 希望之星|标记
+	TearEyeMark.DisplayName: 克苏鲁的眼泪|标记
+	AdamantiteThunder.DisplayName: 精金|代行者|闪电
+	ChlorophyteCrystalBolt.DisplayName: 叶绿|代行者|叶绿射线
+	ChlorophyteCrystalExecutor.DisplayName: 叶绿|代行者|水晶
+	CowboyBullet.DisplayName: 牛仔|代行者|子弹
+	CowboyRevolverProj.DisplayName: 牛仔|代行者|左轮手枪
+	CycleMadnessStar.DisplayName: 轮回疯狂|暴击星
+	DesterrennachtHealProj.DisplayName: 星月夜|治疗弹
+	DiverJellyFish.DisplayName: 潜航员|水母
+	FloatingPlants.DisplayName: 护花使者|代行者|草药
+	GaiaStrikerLootProj.DisplayName: 盖亚宝箱
+	MaidReaperHeal.DisplayName: 前台死神|治疗弹
+	RuShiWoWenProj.DisplayName: 如是我闻|装饰
+	TairitsuProj.DisplayName: 对立伞
+	TitaniumShardHoming.DisplayName: 钛金|代行者|追踪碎片
+	InvisBoom.DisplayName: 隐形爆炸
+	EvolutionEnergyPortal.DisplayName: 进化|传送门
+	SamsaraofDawnlightProj.DisplayName: Samsaraof Dawnlight Proj
+	RegenOrbsPink.DisplayName: Regen Orbs Pink
+	WeHaveBookshelfBook.DisplayName: 力拔书架气盖世|书
+	GrassKnifePoisonProj.DisplayName: 草刀|剧毒
 	// PowerLilyProj.DisplayName: Power Lily Proj
 	// RuneWizardProj.DisplayName: Rune Wizard Proj
-	// InvisBoom.DisplayName: Invis Boom
-	// EvolutionEnergyPortal.DisplayName: Evolution Energy Portal
-	// SamsaraofDawnlightProj.DisplayName: Samsaraof Dawnlight Proj
-	// TerraFlamethrowerHeldProj.DisplayName: Terra Flamethrower Held Proj
-	// RegenOrbsPink.DisplayName: Regen Orbs Pink
-	// FlowerofDancePetal.DisplayName: Flowerof Dance Petal
-	// CycleMadnessStar.DisplayName: Cycle Madness Star
-	// DragonSwordFireball.DisplayName: Dragon Sword Fireball
-	// DragonSwordHeldProj.DisplayName: Dragon Sword Held Proj
-	// DragonSwordSlash.DisplayName: Dragon Sword Slash
-	// MaidReaperHeal.DisplayName: Maid Reaper Heal
-	// TairitsuProj.DisplayName: Tairitsu Proj
-	// AdamantiteThunder.DisplayName: Adamantite Thunder
-	// TitaniumShardHoming.DisplayName: Titanium Shard Homing
-	// ChlorophyteCrystalBolt.DisplayName: Chlorophyte Crystal Bolt
-	// ChlorophyteCrystalExecutor.DisplayName: Chlorophyte Crystal Executor
-	// RuShiWoWenProj.DisplayName: Ru Shi Wo Wen Proj
-	// GhostKnifeMark.DisplayName: Ghost Knife Mark
-	// DesertKnifeMark.DisplayName: Desert Knife Mark
-	// FishronKnifeMark.DisplayName: Fishron Knife Mark
-	// GrassKnifeMark.DisplayName: Grass Knife Mark
-	// DungeonKnifeMark.DisplayName: Dungeon Knife Mark
-	// MoltenKnifeMark.DisplayName: Molten Knife Mark
-	// GrassKnifePoisonProj.DisplayName: Grass Knife Poison Proj
-	// StarofHoperMark.DisplayName: Starof Hoper Mark
-	// TearEyeMark.DisplayName: Tear Eye Mark
 }
 
-Magic: {
-	// CoronaFireball.DisplayName: Corona Fireball
-	// CoronaHeldProj.DisplayName: Corona Held Proj
-}
-
-Pets: {
-	// NoneProj.DisplayName: None Proj
-	// ShadowProj.DisplayName: Shadow Proj
-	// SquidProj.DisplayName: Squid Proj
-	// WatcherProj.DisplayName: Watcher Proj
-	// WhaleProj.DisplayName: Whale Proj
-	// DracoProj.DisplayName: Draco Proj
-	// SonProj.DisplayName: Son Proj
+Executor: {
+	AbyssalWorldBeam.DisplayName: Abyssal World Beam
+	AbyssalWorldBolt.DisplayName: Abyssal World Bolt
+	AetherfireSmasherExecution.DisplayName: 天炎破|处决
+	AetherfireSmasherFireball.DisplayName: 天炎破|火球
+	AetherfireSmasherProj.DisplayName: 天炎破
+	AetherfireSmasherVolcano.DisplayName: 天炎破|火柱
+	AngryBombExecution.DisplayName: 愤怒炸弹|处决
+	AngryBombProj.DisplayName: 愤怒炸弹
+	ArcticGuanDaoCloud.DisplayName: 极地关刀|云
+	ArcticGuanDaoCloudMoving.DisplayName: 极地关刀|移动云
+	ArcticGuanDaoHeldProj.DisplayName: 极地关刀
+	ArcticGuanDaoSpike.DisplayName: 极地关刀|冰锥
+	ASMDBullet.DisplayName: A.S.M.D|炮弹
+	ASMDExecutionBullet.DisplayName: A.S.M.D|炮弹|处决
+	ASMDHeldProj.DisplayName: A.S.M.D
+	ASMDIceBlock.DisplayName: A.S.M.D|冰块
+	BambooBowArrow.DisplayName: 敏捷竹弓|箭矢
+	BambooSwordHeldProj.DisplayName: 习武竹刀
+	BambooSwordSpin.DisplayName: 习武竹刀|旋转
+	BinaryStarsArrow.DisplayName: 双子星|箭矢
+	BinaryStarsExecution.DisplayName: 双子星|处决
+	BinaryStarsPhantom.DisplayName: 双子星|处决
+	BinaryStarsPhantomClone.DisplayName: 双子星|处决
+	BinaryStarsProj.DisplayName: 双子星
+	BlazingStrikerShockwave.DisplayName: Blazing Striker Shockwave
+	ClimaticHawstringBeam.DisplayName: 气候钓弦|激光
+	ClimaticHawstringMinion.DisplayName: 气候钓弦|仆从
+	ClimaticHawstringProj.DisplayName: 气候钓弦
+	ConferenceCallBullet.DisplayName: 电话会议|子弹
+	ConferenceCallHeldProj.DisplayName: 电话会议
+	ContainedBlastBoom.DisplayName: 遏制爆炸|爆炸
+	ContainedBlastHeldProj.DisplayName: 遏制爆炸
+	ContainedBlastShockBullet.DisplayName: 遏制爆炸|冲击弹
+	ContainedBlastStickBullet.DisplayName: 遏制爆炸|粘弹
+	CrimsonScytheHealingSoul.DisplayName: 猩红重镰|灵魂
+	CrimsonScytheHeldProj.DisplayName: 猩红重镰
+	CrimsonScytheSkillProj.DisplayName: 猩红重镰|右键
+	CrimsonScytheSoulStone.DisplayName: 猩红重镰|灵魂石
+	DeathTollsArrow.DisplayName: 死亡丧钟|梦魇之箭
+	DeathTollsDarkEnergy.DisplayName: 死亡丧钟|暗影魔能
+	DeathTollsExecution.DisplayName: 死亡丧钟|处决
+	DeathTollsMinion.DisplayName: 死亡丧钟|仆从
+	DeathTollsProj.DisplayName: 死亡丧钟
+	DeathTollsStreak.DisplayName: 死亡丧钟|仆从射线
+	DesertKnifeProj.DisplayName: 沙丘短匕
+	DreamingLightBeam.DisplayName: 铸梦之光|仆从射线
+	DreamingLightFireball.DisplayName: 铸梦之光|诅咒火球
+	DreamingLightMinion.DisplayName: 铸梦之光|仆从
+	DreamingLightProj.DisplayName: 铸梦之光
+	DreamingLightStriker.DisplayName: 铸梦之光|梦境之锤
+	DreamlessNightArrow.DisplayName: 无梦之夜|梦境花瓣
+	DreamlessNightBeam.DisplayName: 无梦之夜|射线
+	DreamlessNightMinion.DisplayName: 无梦之夜|仆从
+	DreamlessNightProj.DisplayName: 无梦之夜
+	DualWraithStaffGhost.DisplayName: 双魂魔杖|鬼魂
+	DualWraithStaffHeldProj.DisplayName: 双魂魔杖
+	DualWraithStaffJavelin.DisplayName: 双魂魔杖|投矛
+	DungeonBreakerExecution.DisplayName: 地牢破坏者|处决
+	DungeonBreakerProj.DisplayName: 地牢破坏者
+	DungeonBreakerShockwave.DisplayName: 地牢破坏者|冲击波
+	DungeonBreakerWaterbolt.DisplayName: 地牢破坏者|水箭
+	DungeonKnifeProj.DisplayName: 钢制匕首
+	EndlessWarLightening.DisplayName: 无尽战争|闪电
+	EndlessWarMintTyphoon.DisplayName: 无尽战争|台风
+	EndlessWarMintTyphoonLightning.DisplayName: 无尽战争|台风|闪电
+	EndlessWarSmasher.DisplayName: 无尽战争|粉碎者
+	ExsanguinationBulletProj.DisplayName: 放血疗法|子弹
+	ExsanguinationHeldProj.DisplayName: 放血疗法
+	ExsanguinationHomingBullet.DisplayName: Exsanguination Homing Bullet
+	FishronKnifeBubble.DisplayName: 公爵长牙|泡泡
+	FishronKnifeProj.DisplayName: 公爵长牙
+	FleshGrinderExecution.DisplayName: 碾肉机|处决
+	FleshGrinderProj.DisplayName: 碾肉机
+	FrostHammerExecution.DisplayName: 冰砾|雪花
+	FrostHammerIceSpike.DisplayName: 冰砾|冰锥
+	FrostHammerProj.DisplayName: 冰砾
+	FrostlightFlamethrower.DisplayName: 寒霜火炬
+	FrostlightFlamethrowerFlame.DisplayName: 寒霜火炬|喷火器|火焰
+	FrostlightFrostball.DisplayName: 寒霜火炬|寒霜流火
+	FrostlightHeldProj.DisplayName: 寒霜火炬
+	FrostlightHeldProjAlt.DisplayName: 寒霜火炬
+	FrostoftheStormChargeProj.DisplayName: 寒霜风暴
+	FrostoftheStormExecution.DisplayName: 寒霜风暴|处决
+	FrostoftheStormHeldProj.DisplayName: 寒霜风暴
+	FrostoftheStormSlash.DisplayName: 寒霜风暴|剑气
+	FrostoftheStormSlashGiant.DisplayName: 寒霜风暴|大剑气
+	GaiaStrikerBeam.DisplayName: 盖亚重锤|猩红射线
+	GaiaStrikerBloodyBullet.DisplayName: 盖亚重锤|爆裂血弹
+	GaiaStrikerBolt.DisplayName: 盖亚重锤|猩红射线|衍生血弹
+	GaiaStrikerHeldProj.DisplayName: 盖亚重锤|仆从
+	GaiaStrikerMountedProj.DisplayName: 盖亚重锤|仆从
+	GaiaStrikerProj.DisplayName: 盖亚重锤
+	GhostKnifePhantom.DisplayName: 幽灵短刀|幻影
+	GhostKnifeProj.DisplayName: 幽灵短刀
+	GrassKnifeProj.DisplayName: 草刀
+	JungleMadnessExecution.DisplayName: 丛林狂怒|处决
+	JungleMadnessLeafs.DisplayName: 丛林狂怒|树叶
+	JungleMadnessProj.DisplayName: 丛林狂怒
+	LavaFlowBoom.DisplayName: 熔岩流|爆炸
+	LavaFlowExecution.DisplayName: 熔岩流|处决
+	LavaFlowProj.DisplayName: 熔岩流
+	MantleLayerExecution.DisplayName: 地幔|处决
+	MantleLayerProj.DisplayName: 地幔
+	MoltenKnifeBoom.DisplayName: 狱火投刀|爆炸
+	MoltenKnifeProj.DisplayName: 狱火投刀
+	MonkStaffBubble.DisplayName: 瞌睡章鱼|代行者|追踪射弹
+	MonkStaffLightning.DisplayName: 天龙之怒|代行者|闪电
+	MonkStaffSkillProj.DisplayName: 治疗棍
+	MonocleBullet.DisplayName: 单片镜|子弹
+	MonocleBulletExecution.DisplayName: 单片镜|子弹|处决
+	MonocleHeldProj.DisplayName: 单片镜
+	PrunusMumeFlower.DisplayName: 红梅|花
+	PrunusMumePetal.DisplayName: 红梅|花瓣
+	PrunusMumeProj.DisplayName: 红梅
+	PureDaggerExecution.DisplayName: 结净白刃
+	PureDaggerProj.DisplayName: 结净白刃
+	PureDaggerStar.DisplayName: 结净白刃|纯净之星
+	PureYinyoBlack.DisplayName: 至纯阴阳|太极之阴
+	PureYinyoExecution.DisplayName: 至纯阴阳|处决
+	PureYinyoJade.DisplayName: 至纯阴阳|玉
+	PureYinyoShard.DisplayName: 至纯阴阳|碎块
+	PureYinyoWhite.DisplayName: 至纯阴阳|太极之阳
+	SickleAndTorchFireball.DisplayName: 刀耕火种|火球
+	SickleAndTorchSickle.DisplayName: 刀耕火种|镰刀
+	SickleAndTorchTorch.DisplayName: 刀耕火种|火把
+	SickleAndTorchTorchToss.DisplayName: 刀耕火种|火把
+	SimpleHandAxeExecution.DisplayName: 简易双刃斧|处决
+	SimpleHandAxeProj.DisplayName: 简易双刃斧
+	StarofHopeProj.DisplayName: 希望之星
+	StarofHopeStar.DisplayName: 希望之星|落星
+	StormSaberCharge.DisplayName: 风暴战戟
+	StormSaberExecution.DisplayName: 风暴战戟
+	StormSaberHeldProj.DisplayName: 风暴战戟
+	StormSaberSlash.DisplayName: 风暴战戟|剑气
+	SundownerAmmo.DisplayName: 焚风|炮弹
+	SundownerFireball.DisplayName: 焚风|火球
+	SundownerFlare.DisplayName: 焚风|信号弹
+	SundownerFlareGun.DisplayName: 焚风|信号枪
+	SundownerHeldProj.DisplayName: 焚风
+	SundownerRocket.DisplayName: 焚风|空袭火箭
+	TearEyeProj.DisplayName: 克苏鲁的眼泪
+	TheDefilerExecution.DisplayName: 玷污者|处决
+	TheDefilerProj.DisplayName: 玷污者
+	TheGreatDipperDipper.DisplayName: 极星|北斗七星
+	TheGreatDipperDipperStar.DisplayName: 极星|北斗七星|亮星
+	TheGreatDipperGalaxy.DisplayName: 极星|银河
+	TheGreatDipperGalaxyHelper.DisplayName: 极星
+	TheGreatDipperHeldProj.DisplayName: 极星
+	TheGreatDipperStar.DisplayName: 极星|亮星
+	TheJudgementCross.DisplayName: 圣神断罪|十字射线
+	TheJudgementCrossMounted.DisplayName: 圣神断罪|十字射线
+	TheJudgementMinion.DisplayName: 圣神断罪|仆从
+	TheJudgementProj.DisplayName: 圣神断罪
+	TheJudgementStar.DisplayName: 圣神断罪|断罪之星
+	TheJudgementStarExecution.DisplayName: 圣神断罪|断罪之星
+	TheJudgementStarExecutionMounted.DisplayName: 圣神断罪|断罪之星
+	ThePunishmentExecution.DisplayName: 神明裁决|仆从
+	ThePunishmentProj.DisplayName: 神明裁决
+	ThePunishmentStar.DisplayName: 神明裁决|惩戒之星
+	TheSevenStarBolt.DisplayName: 七星|射线
+	TheSevenStarDipper.DisplayName: 七星|北斗七星
+	TheSevenStarDipperStar.DisplayName: 七星|北斗七星
+	TheSevenStarHeldProj.DisplayName: 七星
+	TheSevenStarStar.DisplayName: 七星|亮星
+	WeHaveBookshelfHeldProj.DisplayName: 力拔书架气盖世
+	BlazingSunArrow.DisplayName: 烈阳
+	BlazingSunFireball.DisplayName: 烈阳|射线
 }
 
 Ranged: {
-	// BambooStick.DisplayName: Bamboo Stick
-	// ClimaticHawstringArrow.DisplayName: Climatic Hawstring Arrow
-	// ClimaticHawstringBeam.DisplayName: Climatic Hawstring Beam
-	// ClimaticHawstringMinion.DisplayName: Climatic Hawstring Minion
-	// ClimaticHawstringProj.DisplayName: Climatic Hawstring Proj
-	// TerraFlamethrowerDrop.DisplayName: Terra Flamethrower Drop
-	// TerraFlamethrowerFlame.DisplayName: Terra Flamethrower Flame
-	// TerraFlamethrowerTank.DisplayName: Terra Flamethrower Tank
-	// BlazingSunHeldProj.DisplayName: Blazing Sun Held Proj
+	ClimaticHawstringArrow.DisplayName: Climatic Hawstring Arrow
+	BambooStick.DisplayName: 火箭竹
+	BlazingSunHeldProj.DisplayName: 烈阳
+	TerraFlamethrowerDrop.DisplayName: 泰拉喷火器|泰拉精华
+	TerraFlamethrowerFlame.DisplayName: 泰拉喷火器|火焰
+	TerraFlamethrowerTank.DisplayName: 泰拉喷火器|燃素罐
+	BlazingSunArrow.DisplayName: 烈焰
+	BlazingSunFireball.DisplayName: 烈焰|射线
+	TerraFlamethrowerHeldProj.DisplayName: 泰拉喷火器
+}
+
+Magic: {
+	CoronaFireball.DisplayName: 烈冕|火球
+	CoronaHeldProj.DisplayName: 烈冕
+	FleshtumorHunger.DisplayName: 肉瘤|饿鬼
+	FleshtumorHungerStick.DisplayName: Fleshtumor Hunger Stick
+	PestilenceFlowerBomb.DisplayName: Pestilence Flower Bomb
+	PestilenceFlowerHeldProj.DisplayName: 恶役之花
+	PestilenceFlowerHunger.DisplayName: 恶役之花|饿鬼
+	FleshtumorHeldProj.DisplayName: 肉瘤
+}
+
+Melee: {
+	AzureFrostmarkEnergy.DisplayName: 湛蓝霜痕|寒霜球
+	AzureFrostmarkProj.DisplayName: 湛蓝霜痕
+	BamboomerangProj.DisplayName: 回旋竹
+	CactusSpearProj.DisplayName: 仙人掌投矛
+	CactusSpearSpike.DisplayName: 仙人掌投矛|毒刺
+	CandLanceBeam.DisplayName: 滴蜡枪|灵魂之火
+	CandLanceFire.DisplayName: 滴蜡枪|灯火
+	CandLanceThrownProj.DisplayName: 滴蜡枪
+	ColdSakuraArrow.DisplayName: 冷樱|箭矢
+	ColdSakuraProj.DisplayName: 冷樱
+	CryoblazeHymnFireball.DisplayName: 冰火颂歌|火球
+	CryoblazeHymnFirePortal.DisplayName: 冰火颂歌|传送门
+	CryoblazeHymnFrostEnergy.DisplayName: 冰火颂歌|寒霜球
+	CryoblazeHymnFrostPortal.DisplayName: 冰火颂歌|传送门
+	CryoblazeHymnProj.DisplayName: 冰火颂歌
+	DeepToneHealOrb.DisplayName: 低吼-投掷|治疗弹
+	DeepToneMouth.DisplayName: 低吼-投掷|吞噬者
+	DeepToneThrownProj.DisplayName: 低吼-投掷
+	DialecticsCubeProj.DisplayName: 辩证法-投掷|方块
+	DialecticsSkyFall.DisplayName: 辩证法-投掷|唯物主义
+	DialecticsSpiningBlock.DisplayName: 辩证法-投掷|方块
+	DialecticsThrownProj.DisplayName: 辩证法-投掷
+	EclipseWraithBoom.DisplayName: 蚀日兽影|爆炸
+	EclipseWraithFireball.DisplayName: 蚀日兽影|火球
+	EclipseWraithProj.DisplayName: 蚀日兽影
+	EnchantedSwordfishJavelin.DisplayName: 附魔剑鱼
+	EnchantedSwordfishProj.DisplayName: 附魔剑鱼
+	EvolutionArrow.DisplayName: 进化-投掷|箭矢
+	EvolutionThrownProj.DisplayName: 进化-投掷
+	FierySpearFireball.DisplayName: 炽焰巨矛|火球
+	FierySpearProj.DisplayName: 炽焰巨矛
+	FlowerofDanceFlower.DisplayName: 花之舞|花
+	FlowerofDanceProj.DisplayName: 花之舞
+	FlybackHandClockMounted.DisplayName: 归零针|时钟
+	FlybackHandEdgeProj.DisplayName: 归零针|治疗弹
+	FlybackHandStar.DisplayName: 归零针|星星
+	FlybackHandThrownProj.DisplayName: 归零针
+	GalvanizedHandArrow.DisplayName: 电表镀针|指针
+	GalvanizedHandSideProj.DisplayName: 电表镀针
+	GalvanizedHandThrownProj.DisplayName: 电表镀针
+	LightBiteDarkStar.DisplayName: 蚀光矛-投掷|日蚀之星
+	LightBiteThrownProj.DisplayName: 蚀光矛-投掷
+	SamsaraofDawnlightBolt.DisplayName: Samsaraof Dawnlight Bolt
+	SamsaraofDawnlightMoon.DisplayName: Samsaraof Dawnlight Moon
+	SamsaraofDawnlightSun.DisplayName: Samsaraof Dawnlight Sun
+	SpearofDarknessShadow.DisplayName: 黑暗之矛-投掷|栅栏
+	SpearofDarknessThrownProj.DisplayName: 黑暗之矛
+	SpearofEscapeBoom.DisplayName: 逃逸速度-投掷|爆炸
+	SpearofEscapeMissile.DisplayName: 逃逸速度-投掷|导弹
+	SpearofEscapeRider.DisplayName: 逃逸速度-投掷
+	SweetStabThrownProj.DisplayName: 甜蜜一刺-投掷
+	TerraSpearArrow.DisplayName: 泰拉投枪|箭矢
+	TerraSpearPortal.DisplayName: 泰拉投枪|传送门
+	TerraSpearProj.DisplayName: 泰拉投枪
+	TheMarsMark.DisplayName: 玛尔斯|标记
+	TheMarsPhantom.DisplayName: 玛尔斯|幻影
+	TheMarsProj.DisplayName: 玛尔斯
+	TonbogiriBubble.DisplayName: 御手秆-投掷|毒泡
+	TonbogiriThrownProj.DisplayName: 御手秆-投掷
+	WildPointerThrownProj.DisplayName: 野指针|投掷
+	FlowerofDancePetal.DisplayName: 花之舞|花瓣
+}
+
+Pets: {
+	DracoProj.DisplayName: Draco Proj
+	NoneProj.DisplayName: None Proj
+	ShadowProj.DisplayName: Shadow Proj
+	SonProj.DisplayName: Son Proj
+	SquidProj.DisplayName: Squid Proj
+	WatcherProj.DisplayName: Watcher Proj
+	WhaleProj.DisplayName: Whale Proj
 }

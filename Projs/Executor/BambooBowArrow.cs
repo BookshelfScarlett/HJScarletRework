@@ -47,6 +47,11 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate<BambooBow>();
+            ScarletSound(SoundID.Grass, Projectile.Center);
+            for (int i = 0; i < 16; i++)
+            {
+                ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(16), RandVelTwoPi(.3f, 4f), RandLerpColor(Color.ForestGreen, Color.LawnGreen), 40, RandRotTwoPi, 1, 0.25f, Main.rand.NextBool(), BlendState.Additive);
+            }
         }
         public override bool PreDraw(ref Color lightColor)
         {

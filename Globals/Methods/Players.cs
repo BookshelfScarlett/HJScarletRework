@@ -23,5 +23,6 @@ namespace HJScarletRework.Globals.Methods
         public static bool IsHolding<T>(this Player player) where T : ModItem => IsHolding(player, ItemType<T>());
         public static bool IsHolding(this Player player, int itemID) => player.HeldItem.type == itemID;
         public static bool IsInInventory(this Player player) => Main.hoverItemName != "";
+        //public static int CountsProj()
     }
 }

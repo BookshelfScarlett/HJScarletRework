@@ -1,10 +1,12 @@
-﻿using ContinentOfJourney.NPCs;
+﻿using ContinentOfJourney;
+using ContinentOfJourney.NPCs;
 using ContinentOfJourney.NPCs.Boss_BigDipper;
 using ContinentOfJourney.NPCs.Boss_GoblinChariot;
 using ContinentOfJourney.NPCs.Boss_MarquisMoonsquid;
 using ContinentOfJourney.NPCs.Boss_PriestessRod;
 using ContinentOfJourney.NPCs.Boss_ScarabBelief;
 using ContinentOfJourney.NPCs.Boss_TheOverwatcher;
+using ContinentOfJourney.NPCs.Boss_TheSon;
 using ContinentOfJourney.NPCs.Boss_WallofShadow;
 using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
 using HJScarletRework.Globals.List;
@@ -19,6 +21,7 @@ using HJScarletRework.Items.Weapons.Executor.Caster;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using HJScarletRework.Items.Weapons.Executor.Misc;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
+using HJScarletRework.Items.Weapons.Magic;
 using HJScarletRework.Items.Weapons.Melee;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
@@ -74,6 +77,9 @@ namespace HJScarletRework.Globals.Instances
                 case NPCID.EyeofCthulhu:
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<TearEye>(), 4);
                     break;
+                case NPCID.DukeFishron:
+                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<FishronKnife>(), 4);
+                    break;
             }
             if (npc.boss && npc.type != NPCID.KingSlime)
             {
@@ -93,6 +99,8 @@ namespace HJScarletRework.Globals.Instances
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<SquidItem>(), 4);
             if (npc.type == NPCType<ScarabBelief>())
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<NoneItem>(), 4);
+            if (npc.type == NPCType<TheSon>())
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<SonItem>(), 4);
             if (npc.type == NPCType<PolarMimic>())
             {
                 npcLoot.AddLootSimple(ItemType<Frostlight>(), 4, 1, 1);
@@ -111,20 +119,19 @@ namespace HJScarletRework.Globals.Instances
             }
             if (npc.type == NPCType<BigDipper>())
             {
-
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<TheSevenStar>(), 1);
             }
         }
         public override void ModifyGlobalLoot(GlobalLoot globalLoot)
         {
-            LeadingConditionRule leadingConditionRule2 = new(Condition.InSnow.ToDropCondition(ShowItemDropInUI.Always));
-            leadingConditionRule2.OnSuccess(ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemType<FrostHammer>(), 250));
-            globalLoot.Add(leadingConditionRule2);
-
-            LeadingConditionRule leadingConditionRule = new(Condition.InUnderworld.ToDropCondition(ShowItemDropInUI.Always));
+            LeadingConditionRule disasterEssenceRule = new(Condition.InUnderworld.ToDropCondition(ShowItemDropInUI.Always));
             IItemDropRuleCondition rule = (Condition.DownedGolem.ToDropCondition(ShowItemDropInUI.Always));
-            leadingConditionRule.OnSuccess(ItemDropRule.ByCondition(rule, ItemType<DisasterEssence>(), 6));
-            globalLoot.Add(leadingConditionRule);
+            disasterEssenceRule.OnSuccess(ItemDropRule.ByCondition(rule, ItemType<DisasterEssence>(), 6));
+            globalLoot.Add(disasterEssenceRule);
+
+            LeadingConditionRule crownofSilveryLightRule = new(Condition.InHallow.ToDropCondition(ShowItemDropInUI.Always));
+            crownofSilveryLightRule.OnSuccess(ItemDropRule.ByCondition(new PostSupremeCondition(), ItemType<CrownofSilveryLight>(), 5, 1, 6));
+            globalLoot.Add(crownofSilveryLightRule);
         }
         public override bool? CanGoToStatue(NPC npc, bool toKingStatue)
         {

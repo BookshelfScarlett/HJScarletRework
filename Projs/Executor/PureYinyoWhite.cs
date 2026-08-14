@@ -42,9 +42,6 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             UpdateAttackAI();
-            //if(WhiteHammer)
-            //DoBlackHammer();
-            //else
             DoWhiteHammer();
         }
         public void UpdateAttackAI()
@@ -69,19 +66,6 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(30f), Projectile.velocity / 4f, RandLerpColor(Color.WhiteSmoke, Color.LightGray), Main.rand.Next(30, 70), RandRotTwoPi, 1, Projectile.scale * Main.rand.NextFloat(.80f, 1.1f) * .3f, false, BlendState.Additive);
             if (Main.rand.NextBool(3))
                 ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePosEdge(25f), Projectile.velocity / 8f, RandLerpColor(Color.WhiteSmoke, Color.LightGray), Main.rand.Next(30, 70), 1, Projectile.scale * Main.rand.NextFloat(0.75f, 1.1f) * .4f, 0.2f);
-        }
-
-        public void UpdateWhiteHammerParticle()
-        {
-        }
-
-        public void DoBlackHammer()
-        {
-            if (Projectile.IsOutScreen())
-                return;
-        }
-        public void UpdateBlackHammerParticle()
-        {
         }
 
         public void ShootedAI()

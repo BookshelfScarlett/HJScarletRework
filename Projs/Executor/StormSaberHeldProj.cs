@@ -94,75 +94,6 @@ namespace HJScarletRework.Projs.Executor
         {
             UpdateHalfCircleSwingAnimation();
         }
-        #region 全向的第三挥砍
-        public void UpdateFullCircleSwingAnimation()
-        {
-        }
-        public void UpdtaeFullCircleEnd()
-        {
-            Helper.UpdateAniState(1);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
-            float easedProgress = EaseOutCubic(Helper.GetAniProgress(1));
-            float beginAngle = 415f * Flip.ToDirectionInt();
-            float endAngle = 420 * Flip.ToDirectionInt();
-            float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
-            Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(Width, Height, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * SwingScale * heldScale;
-            Projectile.scale = tarPos.Length();
-            Projectile.rotation = tarPos.ToRotation() + TargetRotation;
-            TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .05f);
-        }
-
-        public void UpdtaeFullCircleBegin()
-        {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
-            Helper.UpdateAniState(0);
-            float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
-            float beginAngle = -195f * Flip.ToDirectionInt();
-            float endAngle = 415f * Flip.ToDirectionInt();
-            float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
-            Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(Width, Height, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * SwingScale * heldScale;
-            Projectile.scale = tarPos.Length();
-            Projectile.rotation = tarPos.ToRotation() + TargetRotation;
-            if (easedProgress < .01f)
-                TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .5f);
-            else
-            {
-                //下面基本上是粒子生成了。
-                float slashTrailRotation = Helper.UpdateAngle(beginAngle, endAngle + (0 * (Flip).ToDirectionInt()), Owner.direction, easedProgress);
-                Matrix tFormSlash = Matrix.CreateRotationZ(slashTrailRotation) * Matrix.CreateScale(Width, Height, 1f);
-                Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * 1.2f * SwingScale * heldScale;
-                Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 110;
-                OldAimPos.Add(slashPosFinal);
-
-                if (easedProgress >= 0.95f)
-                    return;
-                if (Main.rand.NextBool(4))
-                {
-                    for (int i = 0; i < 3; i++)
-                    {
-                        Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 130, Main.rand.NextFloat(0.41f, 1f));
-                        Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
-                        Vector2 vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection);
-                        Vector2 orbVel = vel * Main.rand.NextFloat(.5f, 1.1f) * 10f;
-                        ECSParticle.ShinyCrossStarECS(pos + orbVel, vel, RandLerpColor(Color.WhiteSmoke, Color.White), 40, 1f, Main.rand.NextFloat(.95f, 1.10f) * .13f);
-                    }
-                }
-                {
-                    Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 110, Main.rand.NextFloat(0.45f, 1f));
-                    Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
-                    Vector2 vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection) * Main.rand.NextFloat(.1f, 1.2f) * 5f;
-                    for (int i = 0; i < 3; i++)
-                    {
-                        ECSParticle.LiliesFire(pos + dir * 5 * i, vel, RandLerpColor(Color.White, Color.WhiteSmoke), 45, RandRotTwoPi, .85f, Main.rand.NextFloat(.95f, 1.10f) * Projectile.scale * .21f, true, BlendState.Additive);
-                    }
-                }
-
-
-            }
-        }
-        #endregion
         public void UpdateHalfCircleSwingAnimation()
         {
             if (!Helper.IsDone[0])
@@ -266,7 +197,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-            if (Main.mouseLeft)
+            if (Main.mouseLeft && !Owner.dead)
             {
                 if (SwingTime >= 8 && !Projectile.HJScarlet().ExecutionStrike)
                 {
@@ -400,6 +331,7 @@ namespace HJScarletRework.Projs.Executor
             SB.Draw(glow, pos, null, Color.White, drawRotation, glow.Size() / 2, glowScale, flipSprite, 0);
             SB.Draw(glow, pos, null, Color.White, drawRotation, glow.Size() / 2, glowScale * .95f, flipSprite, 0);
             SB.Draw(glow, pos, null, Color.White, drawRotation, glow.Size() / 2, glowScale * .92f, flipSprite, 0);
+            SB.EndShaderArea();
             SB.EndShaderArea();
             return false;
         }

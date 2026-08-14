@@ -72,7 +72,7 @@ namespace HJScarletRework.Globals.Instances.Items
                     string path = Mod.GetLocalizationKey($"Items.Armor.{nameof(MonkHead)}.DragonFuryBuff").ToLangValue();
                     string path2 = Mod.GetLocalizationKey($"Items.Armor.{nameof(ShinobiHead)}.WeaponBuff").ToLangValue();
                     tooltips.QuickAddTooltipDirect(path2, Color.Bisque, null, "ShinobiBuffTitle");
-                    tooltips.QuickAddTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", "50%", "15%", "200%");
+                    tooltips.QuickAddTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", "35%", "15%", "200%");
                 }
             }
             if (ScarletItemIDSets.ForceToAutomaticExecute[item.type])

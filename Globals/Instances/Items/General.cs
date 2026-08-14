@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.IDSets;
@@ -100,7 +101,7 @@ namespace HJScarletRework.Globals.Instances.Items
         }
         public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
         {
-            if (ScarletItemIDSets.GrantsBoosterAfterSon[item.type] && item.IsExecutorWeapon())
+            if (ScarletItemIDSets.GrantsBoosterAfterSon[item.type] && item.IsExecutorWeapon()&&DownedBossSystem.downedSon)
                 damage *= 10f;
         }
         public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)

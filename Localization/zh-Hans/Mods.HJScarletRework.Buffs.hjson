@@ -78,8 +78,8 @@ BoneSlapBuff: {
 }
 
 StarofHopeBuff: {
-	// DisplayName: Starof Hope Buff
-	// Description: Mods.HJScarletRework.Buffs.StarofHopeBuff.Description
+	DisplayName: 希望之星
+	Description: 这是一段充满了爱与希望的故事
 }
 
 StreamingProtocalBuff: {
@@ -88,8 +88,8 @@ StreamingProtocalBuff: {
 }
 
 TearEyeBuff: {
-	// DisplayName: Tear Eye Buff
-	// Description: Mods.HJScarletRework.Buffs.TearEyeBuff.Description
+	DisplayName: 克苏鲁的眼泪
+	Description: 增加伤害减免
 }
 
 DragonMinionBuff: {
@@ -98,13 +98,13 @@ DragonMinionBuff: {
 }
 
 FruitofEternityBuff: {
-	// DisplayName: Fruitof Eternity Buff
-	// Description: Mods.HJScarletRework.Buffs.FruitofEternityBuff.Description
+	DisplayName: 悠久果实
+	Description: 肉体强化，但代价是什么？
 }
 
 DracoBuff: {
 	DisplayName: 黑泥圣杯
-	Description: Mods.HJScarletRework.Buffs.DracoBuff.Description
+	Description: 人乃是服从欲望的存在。余乃是品尝欲望的存在
 }
 
 SonBuff: {

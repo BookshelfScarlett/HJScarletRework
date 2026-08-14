@@ -178,7 +178,17 @@ namespace HJScarletRework.Globals.Methods
         public static bool GetExecutionSrike(this Player player)
         {
             return (player.HJScarlet().CanExecutionStrike);
-
+        }
+        public static bool CheckCurWeaponExecution(this Player player, int itemType)
+        {
+            if (!HJScarletList.ExecuteRequests.TryGetValue(itemType, out int value))
+                return false;
+            if (player.HJScarlet().ExecutionListStored.TryGetValue(itemType, out int value2))
+            {
+                return value == value2;
+            }
+            else
+                return false;
         }
         /// <summary>
         /// <para>移除指定武器的处决进度记录。</para>
@@ -231,16 +241,18 @@ namespace HJScarletRework.Globals.Methods
         /// <summary>
         /// 获取玩家手持的代行者武器的处决进程
         /// </summary>
-        public static int GetExecuteProgtess(this Player player) => GetExecuteProgress(player, player.HeldItem);
+        public static int GetExecuteProgress(this Player player) => GetExecuteProgress(player, player.HeldItem);
         /// <summary>
-        /// 获取当前代行者武器的处决进程
+        /// 获取当前代行者武器的处决进程，返回-1为没有这个值，需谨慎使用
         /// </summary>
         public static int GetExecuteProgress(this Player player, Item item)
         {
+            if(!item.IsLegal())
+                return -1;
             if (!item.DamageType.CountsAsClass<ExecutorDamageClass>())
-                return 0;
+                return -1;
             if (!HJScarletList.ExecuteRequests.ContainsKey(item.type))
-                return 0;
+                return -1;
             return player.HJScarlet().ExecutionListStored[item.type];
         }
     }

@@ -86,7 +86,7 @@ namespace HJScarletRework.Globals.Executor
             bool isPressingLeftAlt = Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt);
             int requirements = Math.Max(0, ExecutionProgress);
             string progressText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(requirements);
-            string executionText = (traditionalMode && isPressingLeftAlt) ? Mod.GetLocalizationKey("ExecutorDamaegeClass.ExecutionDescriptionName").ToLangValue() : progressText;
+            string executionText = (traditionalMode && isPressingLeftAlt) ? Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionDescriptionName").ToLangValue() : progressText;
             Color executionColor = (traditionalMode && isPressingLeftAlt) ? Color.Lerp(Color.Red, Color.White, .4f) : Color.GreenYellow;
 
             int executionProgressIndex = tooltips.FindIndex(line => line.Name == "Tooltip0" && line.Mod == "Terraria");
@@ -107,9 +107,9 @@ namespace HJScarletRework.Globals.Executor
             }
 
             string categoryText = Mod.GetLocalizationKey($"ExecutorDamageClass.WeaponType.{ExecutorWeaponType}").ToLangValue();
-            int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework");
+            int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework")-1;
             if (!traditionalMode)
-                executionLineIndex = executionProgressIndex - 1;
+                executionLineIndex = executionProgressIndex-1;
             var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", $"-{categoryText}-")
             {
                 OverrideColor = Color.LightGoldenrodYellow

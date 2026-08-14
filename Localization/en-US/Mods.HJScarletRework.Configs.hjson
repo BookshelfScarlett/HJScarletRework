@@ -63,17 +63,31 @@ HJScarletConfigClient: {
 	}
 
 	TraditionalExecutionTooltipShowcase: {
-		Label: Traditional Execution Tooltip Showcase
-		Tooltip: ""
+		Label: Old Executor Execution Strike Tooltip Display
+		Tooltip:
+			'''
+			Changes the Execution Strike tooltip of Executor weapons to the old version, which displays details when holding Left Alt
+			Disabled by default
+			'''
 	}
 
 	ModSFXVolume: {
-		Label: Mod S F X Volume
-		Tooltip: ""
+		Label: Mod Sound Effect Volume Adjustment
+		Tooltip:
+			'''
+			If you find the mod content a bit too loud, you can adjust this option independently to lower the volume without affecting the base game
+			Currently only partially supported, with more content to be gradually added in the future
+			Default is 1, which means 100% volume
+			'''
 	}
 
 	ScreenDarkStrength: {
-		Label: Screen Dark Strength
-		Tooltip: ""
+		Label: Screen Darkening Effect
+		Tooltip:
+			'''
+			Allows you to adjust the screen darkening intensity for some mod items
+			Range is 0 to 1, i.e. 0% to 100%
+			Default is 1
+			'''
 	}
 }

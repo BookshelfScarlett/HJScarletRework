@@ -22,6 +22,20 @@ namespace HJScarletRework.Globals.Systems
         public bool CanShowItemDropInUI() => true;
         public string GetConditionDescription() => null;
     }
+    public class PostSupremeCondition : IItemDropRuleCondition
+    {
+        private static LocalizedText Description;
+        public PostSupremeCondition()
+        {
+            Description ??= Language.GetOrRegister("Mods.HJScarletRework.Conditions.Drop.PostSupremeCondition");
+        }
+        public bool CanDrop( DropAttemptInfo info)
+        {
+            return DownedBossSystem.downedLifeGod && DownedBossSystem.downedMatterGod && DownedBossSystem.downedTimeGod;
+        }
+        public bool CanShowItemDropInUI() => true;
+        public string GetConditionDescription() => null;
+    }
     public static class HJScarletCraftingConditions
     {
         public static string ConditionString => "Mods.HJScarletRework.Conditions.Crafting";
@@ -31,6 +45,7 @@ namespace HJScarletRework.Globals.Systems
             () => (Main.LocalPlayer.HJScarlet().firstTimeCraftGaia || Main.dedServ));
         public static Condition IsDownSlimeGodAndInEclipse = new Condition($"{ConditionString}.{nameof(IsDownSlimeGodAndInEclipse)}",
             () => DownedBossSystem.downedSunGod && Main.eclipse);
+
         public static Condition HasFuckingCalamityMod = new Condition($"{ConditionString}.{nameof(HasFuckingCalamityMod)}", () => HJScarletRework.CrossMod_Calamity is not null);
         public static Condition NoFuckingCalamityMod = new Condition($"{ConditionString}.{nameof(NoFuckingCalamityMod)}", () => HJScarletRework.CrossMod_Calamity is null);
     }

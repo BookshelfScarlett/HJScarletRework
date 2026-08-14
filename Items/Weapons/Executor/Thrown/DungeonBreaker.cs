@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
+using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor.Thrown
@@ -14,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override void ExSD()
         {
             Item.width = Item.height = 66;
-            Item.damage = 44;
+            Item.damage = 40;
             Item.knockBack = 8f;
             Item.shootSpeed = 19f;
             Item.useTime = Item.useAnimation = 38;
@@ -24,6 +25,13 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem();
             Item.HJScarlet().ExecutionProj = ProjectileType<DungeonBreakerExecution>();
+        }
+        public static void PlayPipes(Player owner)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                ScarletSound(HJScarletSounds.Pipes, owner.Center, 1f, 0);
+            }
         }
     }
 }

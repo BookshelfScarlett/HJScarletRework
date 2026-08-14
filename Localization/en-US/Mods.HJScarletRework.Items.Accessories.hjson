@@ -34,7 +34,7 @@ PreciousAim: {
 		Sets critical strike chance to 20%.
 		Increases critical strike chance by 5% on crit, up to a maximum of 125%.
 		Excess critical strike chance is converted to critical damage boost.
-		While reached maximum crits, increases the flight speed of most projectiles you directly fire.
+		While reached maximum crits, increases your damage by 10%
 		The boost is reduced upon taking damage.
 		"Seems somewhat familiar."
 		'''
@@ -53,22 +53,28 @@ PreciousTarget: {
 }
 
 ExecutorsSwordMarkPlus: {
-	DisplayName: Executor's Sword Mark A++
+	DisplayName: Executioner's Sword Mark A++
 	Tooltip:
 		'''
-		All Execution Strikes become manually triggered by pressing Intersct Key instead of automatic when conditions are met
-		Manually triggering an Execution Strike, guarranted a critical strike
-		And grants a 1.1x multiplier to executor damage for a certain period afterwards
-		Re-triggering Execution Strike during the damage bonus period does not refresh this effect
+		When taking damage, adds {0} Execution Progress to your currently held weapon
+		After an Execution Strike, adds {0} Execution Progress to the current weapon, but clears Execution Progress from all other weapons
+		If holding a Caster weapon, adds 1/{1} of the Execution Progress required to trigger Execution Strike for that weapon
+		After an Execution Strike, until you manually switch weapons, gain the following effects:
+		When current health is above 50%, increases executor critical strike damage by {2}%
+		When current health is 100%, increases executor critical strike damage by {2}%
 		'''
 }
 
 ExecutorsSwordMark: {
-	DisplayName: Executor's Sword Mark
+	DisplayName: Executioner's Sword Mark A
 	Tooltip:
 		'''
-		All Execution Strikes become manually triggered by pressing Intersct Key instead of automatic when conditions are met
-		Manually triggering an Execution Strike guarranted a critical strike
+		When taking damage, adds {0} Execution Progress to your currently held weapon
+		After an Execution Strike, adds {0} Execution Progress to the current weapon, but clears Execution Progress from all other weapons
+		If holding a Caster weapon, adds 1/{1} of the Execution Progress required to trigger Execution Strike for that weapon
+		After an Execution Strike, until you manually switch weapons, gain the following effects:
+		When current health is above 50%, increases executor critical strike damage by {2}%
+		When current health is 100%, increases executor critical strike damage by {2}%
 		'''
 }
 
@@ -86,7 +92,7 @@ SacarbWings: {
 	Tooltip:
 		'''
 		Allows flight and slow falls
-		Grants infinite flight time
+		Grants infinite flight time and immunity of knockback
 		'''
 }
 
@@ -205,7 +211,6 @@ MachineGunTalisman: {
 		Extends invincibility frames after taking damage
 		After a successful Execution Strike, reduce damage taken significantly
 		Taken damage removes this effect
-
 		'''
 }
 
@@ -215,7 +220,6 @@ RocketCharm: {
 		'''
 		+{0} executor armor penetration
 		On Execution Strike, further increases your armor penetration for a short period
-
 		'''
 }
 
@@ -262,11 +266,15 @@ HeartoftheRuinFrost: {
 }
 
 ExecutorsSwordMarkSmall: {
-	DisplayName: Executors Sword Mark Small
+	DisplayName: Executioner's Sword Mark
 	Tooltip:
 		'''
-		All Execution Strikes become manually triggered by pressing Intersct Key instead of automatic when conditions are met
-		Manually triggering an Execution Strike has a 50% chance to guarranted a critical strike
+		When taking damage, adds {0} Execution Progress to your currently held weapon
+		After an Execution Strike, adds {0} Execution Progress to the current weapon, but clears Execution Progress from all other weapons
+		If holding a Caster weapon, adds 1/{1} of the Execution Progress required to trigger Execution Strike for that weapon
+		After an Execution Strike, until you manually switch weapons, gain the following effects:
+		When current health is above 50%, increases executor critical strike damage by {2}%
+		When current health is 100%, increases executor critical strike damage by {2}%
 		'''
 }
 
@@ -306,8 +314,13 @@ CrimsonCharm: {
 }
 
 BitingClaw: {
-	DisplayName: Biting Claw
-	Tooltip: ""
+	DisplayName: Biting Crab Claw
+	Tooltip:
+		'''
+		When equipped, adds special catches provided by the Lostbelt Journey mod
+		Currently only provides the Diver armor set [i:HJScarletRework/DiverHead][i:HJScarletRework/DiverBody][i:HJScarletRework/DiverLegs]
+		Obtained from the ocean biome after defeating the Wall of Shadows
+		'''
 }
 
 PassionfruitJar: {
@@ -321,28 +334,62 @@ SpaceHorror: {
 }
 
 RuShiWoWen: {
-	DisplayName: Power Lily
-	Tooltip: ""
-	BanMinionList: ""
-	FlavorTooltips: ""
+	DisplayName: Thus Have I Heard
+	Tooltip:
+		'''
+		On first equip, instantly clears all summoned minions
+		Every {0} seconds, clears all summoned minions and randomly summons 1 minion from all minion types until the minion cap is reached
+		All minions summoned in the same batch have their base damage set to the lowest base damage among that batch, and benefit from summon damage bonuses
+		While holding this accessory, press the Interact key on a minion summoning staff in your inventory to disable that minion from being summoned
+		Up to {1} minion types can be disabled; pressing the Interact key on this accessory removes the last minion added to the list
+		Hold Left Alt to view the ban list
+		'''
+	BanMinionList: Minion Ban List ({1}){0}
+	FlavorTooltips:
+		'''
+		Namo Tathagata, the Worthy One
+		Perfectly Enlightened, Perfect in Knowledge and Conduct
+		Sugata, Knower of the World
+		Unsurpassed Lord, Tamer of Men
+		Teacher of Gods and Humans, Buddha, the World-Honored One
+		'''
 }
 
 EmblemFirearm: {
-	DisplayName: Firearm Emblem
-	Tooltip: ""
+	DisplayName: Firearm Coin
+	Tooltip:
+		'''
+		Grants effects while holding an Executor Firearm or Misc
+		Increases executor critical strike damage by {0}%
+		Increases executor critical strike chance by {1}%
+		'''
 }
 
 EmblemColdSteel: {
-	DisplayName: Emblem Cold Steel
-	Tooltip: ""
+	DisplayName: Cold Steel Coin
+	Tooltip:
+		'''
+		Grants effects while holding an Executor Cold Steel or Assistance
+		Increases executor critical strike damage by {0}%
+		Increases executor critical strike chance by {1}%
+		'''
 }
 
 EmblemThrown: {
-	DisplayName: Emblem Thrown
-	Tooltip: ""
+	DisplayName: Throwing Coin
+	Tooltip:
+		'''
+		Grants effects while holding an Executor Throwing
+		Increases executor critical strike damage by {0}%
+		Increases executor critical strike chance by {1}%
+		'''
 }
 
 EmblemGalaxy: {
-	DisplayName: Emblem Galaxy
-	Tooltip: ""
+	DisplayName: Proof of the Stars
+	Tooltip:
+		'''
+		While equipped, press the Interact key on [i:HJScarletRework/TheSevenStar]Seven Stars in your inventory to transform it into [i:HJScarletRework/TheGreatDipper]Polaris
+		Polaris can only be used while Proof of the Stars is equipped
+		'''
 }

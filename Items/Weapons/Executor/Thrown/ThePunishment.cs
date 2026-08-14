@@ -12,7 +12,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
     public class ThePunishment : ExecutorWeaponClass
     {
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
-        public override int ExecutionProgress => 40;
+        public override int ExecutionProgress => 25;
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Hallowed);

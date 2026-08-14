@@ -47,9 +47,7 @@ namespace HJScarletRework.Projs.Executor
         public override string Texture => GetInstance<BinaryStars>().Texture;
         public override void SetStaticDefaults()
         {
-
-            ProjectileID.Sets.TrailCacheLength[Type] = 30;
-            ProjectileID.Sets.TrailingMode[Type] = 2;
+            Projectile.ToTrailSetting(30);
         }
         public override void ExSD()
         {
@@ -85,8 +83,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (AttackType is DoType.IsStealth && _drawArcTime > 0 && Projectile.HJScarlet().ExecutionStrike)
             {
-                SoundStyle select = Utils.SelectRandom(Main.rand, HJScarletSounds.Smash_AirHeavy);
-                SoundEngine.PlaySound(select, Projectile.Center);
+                ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, Projectile.Center,instances:0,variantType:2);
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, -80 * Owner.direction, 43, Projectile.rotation, 0.2f, true, 1000);
             }
             return true;
@@ -108,14 +105,12 @@ namespace HJScarletRework.Projs.Executor
                 if (Projectile.numHits < 3)
                     NormalHit(target);
                 TargetIndex = target.whoAmI;
-                SoundStyle pickSound2 = Utils.SelectRandom(Main.rand, HJScarletSounds.Smash_AirHeavy);
-                SoundEngine.PlaySound(pickSound2 with { Pitch = Main.rand.NextFloat(0.3f, 0.5f), Volume = 0.7f, MaxInstances = 1 }, target.Center);
+                ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, target.Center,instances:0, pitch: .4f, pitchVariance: .1f, volume: .7f);
             }
         }
         private void DrawHitSpark(NPC target, int damage)
         {
-            SoundStyle pickSound2 = Utils.SelectRandom(Main.rand, HJScarletSounds.Smash_GroundHeavy);
-            SoundEngine.PlaySound(pickSound2 with { Pitch = Main.rand.NextFloat(0.8f, 0.7f), Volume = 0.7f, MaxInstances = 1 }, target.Center);
+                ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, target.Center,instances:0, pitch: .4f, pitchVariance: .1f, volume: .7f,variantType:2);
             PrettySpark(damage);
         }
         public void StealthHit(NPC target, int hitDamage, int targetIndex)
@@ -134,7 +129,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public void NormalHit(NPC target)
         {
-            Projectile.HJScarlet().IsHitOnEnablFocusMechanicProj = true;
             int dustSets = Main.rand.Next(5, 8);
             int dustRadius = 6;
             Vector2 corner = new(target.Center.X - dustRadius, target.Center.Y - dustRadius);
@@ -327,7 +321,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 AttackTimer = 0;
                 AttackType = DoType.IsReturning;
-                if (Projectile.HJScarlet().ExecutionStrike)
+                if (Projectile.HJScarlet().ExecutionStrike&&Projectile.IsMe())
                     SpawnSkyFallHammer();
                 Update = true;
             }

@@ -260,6 +260,7 @@ namespace HJScarletRework.Projs.Executor
             else
             {
                 GaiaStrikeDeadType = DeadType.AnomarlyDead;
+                Projectile.Kill();
             }
         }
         public void UpdateStrikeIfTargetIsLegal()

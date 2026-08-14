@@ -89,7 +89,7 @@ namespace HJScarletRework.Projs.Executor
                     new StarShape(pos.ToRandCirclePos(4f) + dir * 17f, dir * Main.rand.NextFloat(0.1f, 6.2f), RandLerpColor(Color.Goldenrod, Color.DarkGoldenrod), Main.rand.NextFloat(0.35f, 0.45f) * 1.2f, 40).Spawn();
                 new ShinyCrossStar(pos + dir * 17f, Vector2.Zero, RandLerpColor(Color.DarkGoldenrod, Color.Goldenrod), 40, 0, 1, 1.2f, false).Spawn();
             }
-            SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_Hit with { MaxInstances = 0 }, Owner.Center);
+            ScarletSound(HJScarletSounds.SodomsDisaster_Hit, Projectile.Center, .54f, 0);
             Timer = 0;
         }
         public void UpdatePlayerState()

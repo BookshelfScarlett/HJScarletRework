@@ -24,6 +24,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.extraUpdates = 1;
             Projectile.width = Projectile.height = 32;
             Projectile.penetrate = -1;
+            Projectile.tileCollide = true;
             Projectile.SetupImmnuity(30);
         }
         public float TargetRotation = 0;
@@ -90,8 +91,6 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Projectile.velocity *= .9f;
                 }
-                Vector2 rnd = RandDirTwoPi * Projectile.scale;
-
                 if (!SpinDone)
                 {
 
@@ -99,7 +98,6 @@ namespace HJScarletRework.Projs.Executor
                     float ratios = Utils.GetLerpValue(0, maxtime, Timer, true);
                     Timer++;
                     Projectile.rotation += Lerp(ToRadians(0f), ToRadians(20f), ratios) * Projectile.direction;
-                    Vector2 vRnd = -rnd * .5f + rnd.RotatedBy(PiOver2) * 2.5f * ratios;
                     if (Main.rand.NextBool(7))
                         ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(4f), RandVelTwoPi(.3f, 9f), RandLerpColor(Color.ForestGreen, Color.LawnGreen), 40, RandRotTwoPi, 1, 0.45f, Main.rand.NextBool(), BlendState.Additive);
                     Dust d = Dust.NewDustPerfect(Projectile.Center + new Vector2(20).RotatedBy(Projectile.rotation), DustID.JungleTorch);
@@ -181,6 +179,13 @@ namespace HJScarletRework.Projs.Executor
                 target.HJScarlet().PostSpeed = target.velocity.ToSafeNormalize() * -1.8f;
                 target.HJScarlet().StopNpcTime = 10;
             }
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            Projectile.tileCollide = false;
+            if (Timer < Projectile.MaxUpdates * 18f&&AttackState == State.Shoot)
+                Timer = Projectile.MaxUpdates * 18f;
+            return false;
         }
         public override bool PreDraw(ref Color lightColor)
         {

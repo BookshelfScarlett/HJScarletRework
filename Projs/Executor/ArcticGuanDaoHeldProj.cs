@@ -383,6 +383,7 @@ namespace HJScarletRework.Projs.Executor
             SB.Draw(glow, pos, null, Color.LightSkyBlue, drawRotation, glow.Size() / 2, glowScale * .95f, flipSprite, 0);
             SB.Draw(glow, pos, null, Color.White, drawRotation, glow.Size() / 2, glowScale * .92f, flipSprite, 0);
             SB.EndShaderArea();
+            SB.EndShaderArea();
             return false;
 
         }

@@ -256,3 +256,8 @@ FlowerofDance: {
 		Any additional dagger hit will make the flower fires seeking petals
 		'''
 }
+
+SeashineSword: {
+	DisplayName: Seashine Sword
+	Tooltip: ""
+}

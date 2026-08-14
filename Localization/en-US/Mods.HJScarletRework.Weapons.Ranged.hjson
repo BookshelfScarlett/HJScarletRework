@@ -15,10 +15,21 @@ BambooRocket: {
 
 TerraFlamethrower: {
 	DisplayName: Terra Flamethrower
-	Tooltip: ""
+	Tooltip:
+		'''
+		Bathe your enemies in the dazzling light of Terra
+		Press right-click to throw a phlogiston grenade that explodes on hit, applying Terra Phlogiston to enemies
+		The Terra Phlogiston effect causes enemies to constantly drip Terra Essence from their bodies, dealing damage equal to 100% of the enemy's contact damage
+		Terra Essence does not damage enemies affected by Terra Phlogiston
+		80% chance to not consume gel
+		'''
 }
 
 BlazingSun: {
 	DisplayName: Blazing Sun
-	Tooltip: ""
+	Tooltip:
+		'''
+		Rapidly fires blazing arrows in succession and summons two miniature suns to fight for you
+		All attacks can pass through walls
+		'''
 }

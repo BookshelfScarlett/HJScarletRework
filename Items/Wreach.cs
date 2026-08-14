@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.Magic;
 using ReLogic.Graphics;
 using System;

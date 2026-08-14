@@ -263,7 +263,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 StateSwitchTo(State.Strike);
                 Projectile.velocity = Vector2.UnitX * Main.rand.NextFloat(32f, 38f) * Math.Sign(Projectile.velocity.X - Owner.velocity.X);
-                SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Pitch = -0.2f }, Projectile.Center);
+                ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center,pitch: -.2f);
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 40, Projectile.velocity.ToRotation(), ToRadians(30f));
                 SpawnFireball(target);
                 UpdateMiscHitParticle(target.Center);
@@ -278,7 +278,7 @@ namespace HJScarletRework.Projs.Executor
                     Helper.IsDone[0] = false;
                     Helper.Progress[0] = 0;
                     HeavyStrike += 1;
-                    SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Pitch = 0.2f }, Projectile.Center);
+                    ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center, pitch: .2f);
                     ScreenShakeSystem.AddScreenShakes(Projectile.Center, 40f, 40, Projectile.velocity.ToRotation(), ToRadians(20f));
                 }
                 else
@@ -286,7 +286,7 @@ namespace HJScarletRework.Projs.Executor
                     float speed = Projectile.velocity.Length();
                     Projectile.velocity = (Projectile.velocity).RotatedBy(ToRadians(20)).ToSafeNormalize() * speed;
                     StateSwitchTo(State.Return);
-                    SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { Pitch = 0.4f }, Projectile.Center);
+                    ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center, pitch: .4f);
                     ScreenShakeSystem.AddScreenShakes(Projectile.Center, 40f, 40, Projectile.velocity.ToRotation(), ToRadians(10f));
                 }
                 SpawnFireball(target);

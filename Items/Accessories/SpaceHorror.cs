@@ -4,11 +4,17 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class SpaceHorror : HJScarletItemClass
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {

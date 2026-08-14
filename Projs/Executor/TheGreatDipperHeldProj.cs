@@ -41,9 +41,11 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             if (Owner.HasProj<TheGreatDipperGalaxyHelper>())
+            {
+                Projectile.Kill();
                 return;
+            }
             ScarletSound(HJScarletSounds.TheSevenStar_Swing, Projectile.Center, 0.5f, 1, 0.4f, 0.1f);
-            Projectile.originalDamage = Projectile.damage;
             if (Owner.HJScarlet().theGreatDipperBuff)
             {
                 Helper.MaxProgress[0] = (int)(AttackSpeed * .85f);
@@ -67,7 +69,7 @@ namespace HJScarletRework.Projs.Executor
             UpdateHeldState();
             UpdatePlayerState();
             HandleExecution();
-            if (OldAimPos.Count > 25)
+            if (OldAimPos.Count > 30)
                 OldAimPos.RemoveAt(0);
         }
         public void UpdatePlayerState()
@@ -76,7 +78,6 @@ namespace HJScarletRework.Projs.Executor
             Owner.ChangeDir(Projectile.direction);
             Projectile.spriteDirection = Flip.ToDirectionInt() * Projectile.direction;
             Owner.ControlPlayerArm(Projectile.rotation);
-
         }
 
         public void UpdateHeldState()
@@ -93,12 +94,14 @@ namespace HJScarletRework.Projs.Executor
             else
                 Projectile.timeLeft = 2;
         }
+        public bool ShootingStars = false;
         public void UpdateAnimation()
         {
             if (!Helper.IsDone[0])
             {
-                if (Helper.OnAnimationBegin(0))
+                if (!ShootingStars && Helper.GetAniProgress(0) > .1f)
                 {
+                    ShootingStars = true;
                     if (Projectile.IsMe())
                     {
                         if (Owner.HJScarlet().theGreatDipperBuff)
@@ -122,6 +125,7 @@ namespace HJScarletRework.Projs.Executor
                                 if (i == 0)
                                     randomVelocity = dir;
                                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, randomVelocity * 16f, ProjectileType<TheGreatDipperStar>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
+                                proj.ai[2] = 0;
                                 proj.HJScarlet().HasExecutionMechanic = i == 0;
                             }
                         }
@@ -219,19 +223,15 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .05f);
         }
-
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            modifiers.Knockback *= 1.72f;
-            if (!Projectile.IsMe())
-                return;
-        }
         public override void OnKill(int timeLeft)
         {
+            if (Owner.HasProj<TheGreatDipperGalaxyHelper>())
+                return;
             if (Main.mouseLeft)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 proj.HJScarlet().HasExecutionMechanic = true;
+                proj.originalDamage = Projectile.originalDamage;
                 ((TheGreatDipperHeldProj)proj.ModProjectile).Flip = !Flip;
                 ((TheGreatDipperHeldProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
             }
@@ -252,7 +252,14 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            //Projectile.AddExecutionTimeImmediate(OriginalItemID);
+            if(Projectile.HJScarlet().ExecutionStrike)
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, RandVelTwoPi(13f, 16f), ProjectileType<TheGreatDipperStar>(), Projectile.originalDamage / 2, Projectile.knockBack, Owner.whoAmI);
+                    proj.ai[2] = 1;
+                }
+            }
             ScarletSound(HJScarletSounds.TheSevenStar_Hit, target.Center, .75f);
             for (int i = 0; i < 34; i++)
             {
@@ -261,8 +268,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            if (projHitbox.Intersects(targetHitbox))
-                return true;
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));

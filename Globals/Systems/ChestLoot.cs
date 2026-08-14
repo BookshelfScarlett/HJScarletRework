@@ -221,7 +221,7 @@ namespace HJScarletRework.Globals.Systems
         public void ModifyDesertChestLoost()
         {
             int[] list = [ItemType<DesertKnife>()];
-            PlaceItemsInSpecificChests(10, list, 18, .25f);
+            PlaceItemsInSpecificChests(10, list, 18, .25f,TileID.Containers2);
         }
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
@@ -248,7 +248,7 @@ namespace HJScarletRework.Globals.Systems
         /// <param name="maxItemsToPlace">总共最多放置多少件物品</param>
         /// <param name="skipChance">跳过某个箱子的概率（0~1，0 表示每个箱子都放）</param>
         /// <returns>实际放置的物品数量</returns>
-        public static int PlaceItemsInSpecificChests(int chestTileFrameX, int[] itemsToPlace, int maxItemsToPlace, float skipChance = 0.33f)
+        public static int PlaceItemsInSpecificChests(int chestTileFrameX, int[] itemsToPlace, int maxItemsToPlace, float skipChance = 0.33f, ushort tileID = TileID.Containers)
         {
             if (itemsToPlace == null || itemsToPlace.Length == 0)
                 return 0;
@@ -264,7 +264,7 @@ namespace HJScarletRework.Globals.Systems
 
                 Tile chestTile = Main.tile[chest.x, chest.y];
                 // 检查是否为目标箱子
-                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == chestTileFrameX * 36)
+                if (chestTile.TileType == tileID && chestTile.TileFrameX == chestTileFrameX * 36)
                 {
                     // 随机跳过（如果 skipChance > 0）
                     if (skipChance > 0f && WorldGen.genRand.NextFloat() < skipChance)

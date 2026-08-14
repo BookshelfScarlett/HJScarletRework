@@ -17,6 +17,10 @@ namespace HJScarletRework.Items.ExecutorCards
     }
     public abstract class ExecutorShieldCore : HJScarletItemClass, ILocalizedModType
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override string AssetPath => AssetHandler.Useables;
         public override string Texture => $"HJScarletRework/Assets/Texture/Items/ExecutorShieldCore/{GetType().Name}";
         public virtual ShieldCoreType CoreType => ShieldCoreType.Assault;

@@ -31,8 +31,7 @@ namespace HJScarletRework.Projs.Executor
         private ref float AttackTimer => ref Projectile.ai[1];
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Type] = 30;
-            ProjectileID.Sets.TrailingMode[Type] = 2;
+            Projectile.ToTrailSetting(30);
 
         }
         public override void SetDefaults()
@@ -101,8 +100,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            SoundStyle pickSound2 = Utils.SelectRandom(Main.rand, HJScarletSounds.Smash_GroundHeavy);
-            SoundEngine.PlaySound(pickSound2 with { Pitch = Main.rand.NextFloat(0.8f, 0.7f), Volume = 0.7f, MaxInstances = 1 }, target.Center);
+            ScarletSound(HJScarletSounds.Smash_GroundHeavy,target.Center, instances:0, pitchVariance: .05f, pitch: .75f, volume: .7f);
             PrettySpark(hit.Damage);
         }
         private void PrettySpark(int hitDamage)

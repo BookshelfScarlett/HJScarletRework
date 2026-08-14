@@ -4,44 +4,34 @@ CreationHat: {
 	SetBonus:
 		'''
 		+{0} defense and + {1} max mana
-		{2}%, increased magic damage, {4}%  increased magic critical strike chance
-		Reduces mana cost by {3}%, allows all magic attacks to deal critical strike damage
+		{2} increased magic damage, {4} increased magic critical strike chance
+		Reduces mana cost by {3}, allows all magic attacks to deal critical strike damage
 		Excess critical strike chance is converted to your magic critical strike damage bonus at a 1:2 ratio
 		'''
 }
 
 RedDragonKnightBody: {
 	DisplayName: Red Dragon Knight Body Armor
-	Tooltip:
-		'''
-		10% increased damage
-		+8 HP/s life regen speed
-		'''
+	Tooltip: "{0} increased damage"
 }
 
 RedDragonKnightHead: {
 	DisplayName: Red Dragon Knight Helmet
 	Tooltip:
 		'''
-		15% increased executor damage
-		10% increased executor critcal strike chance
+		{0} increased executor damage
+		{1} increased executor critcal strike chance
 		'''
 	SetBouns:
 		'''
-		25% increased melee attack speed, 1.10x damage for all consumable ranged weapon
-		Magic weapons no longer cost any mana with the cost of 20% damage, reset max minions and sentry slots to 1
-		All weapons that do not deal executor damage only benefit from executor damage bonuses
-		All weapons that do not deal executor damage instead deal executor damage type On Hit, rather than their original damage type
+		{0} increased executor critical strike damage
+		While attacking with an executor weapon, adds {2} Execution Progress to all executor weapons every {1} seconds
 		'''
 }
 
 RedDragonKnightLegs: {
 	DisplayName: Red Dragon Knight Leggings
-	Tooltip:
-		'''
-		5% increased critcal strike chance
-		20% increased movement speed
-		'''
+	Tooltip: "{0} increased movement speed"
 }
 
 RuneWizardExecutor: {
@@ -140,15 +130,15 @@ FishCostumeExecutor: {
 
 ShinobiBody: {
 	DisplayName: Shinobi Infiltrator's Torso Executor
-	Tooltip: 30% increased executor critcal strike chance
+	Tooltip: "{0} increased executor critcal strike chance"
 }
 
 ShinobiHead: {
 	DisplayName: Shinobi Infiltrator's Helmet Executor
-	Tooltip: 30% increased executor damage
+	Tooltip: "{0} increased executor damage"
 	SetBonus:
 		'''
-		+4 max sentry
+		+{0} max sentry
 		Enhances Sleepy Octopus and Sky Dragon's Fury, and greatly improves Lightning Aura's effectiveness
 		Causes Sleepy Octopus, Sky Dragon's Fury, and Lightning Aura to deal only executor damage, benefiting from executor damage bonuses
 		Increases damage of all Lightning Aura canes by 500%
@@ -160,22 +150,22 @@ ShinobiLegs: {
 	DisplayName: Shinobi Infiltrator's Pants Executor
 	Tooltip:
 		'''
-		+20 executor armor penetration
-		30% increased movement speed
+		{0} executor armor penetration
+		{1} increased movement speed
 		'''
 }
 
 MonkBody: {
 	DisplayName: Monk's Shirt Executor
-	Tooltip: 15% increased executor critcal strike chance
+	Tooltip: "{0} increased executor critcal strike chance"
 }
 
 MonkHead: {
 	DisplayName: Monk's Bushy Brow Bald Cap Executor
-	Tooltip: 15% increased executor damage
+	Tooltip: "{0} increased executor damage"
 	SetBonus:
 		'''
-		+4 max sentry
+		+{0} max sentry
 		Enhances Sleepy Octopus and Sky Dragon's Fury, and greatly improves Lightning Aura's effectiveness
 		Causes Sleepy Octopus, Sky Dragon's Fury, and Lightning Aura to deal only executor damage, benefiting from executor damage bonuses
 		Increases damage of all Lightning Aura canes by 200%
@@ -204,120 +194,164 @@ MonkLegs: {
 	DisplayName: Monk's Pants Executor
 	Tooltip:
 		'''
-		+10 executor armor penetration
-		30% increased movement speed
+		{0} executor armor penetration
+		{1} increased movement speed
 		'''
 }
 
 DiverBody: {
-	DisplayName: Diver Body
-	Tooltip:
-		'''
-		15% increased executor critical strike damage
-		Enemies are more likely to target you
-		'''
+	DisplayName: Diver's Chestplate
+	Tooltip: Increases executor critical strike damage by {0}
 }
 
 DiverHead: {
-	DisplayName: Diver Head
+	DisplayName: Diver's Mask
+	Tooltip: Increases executor damage by {0}
+	SetBonus: Generates jellyfish that linger in the air along your movement trail
+}
+
+DiverLegs: {
+	DisplayName: Diver's Leggings
+	Tooltip: Increases critical strike chance by {0}
+}
+
+ReaperBody: {
+	DisplayName: Front Desk Reaper Dress
+	Tooltip: Increases executor critical strike damage by {0}
+}
+
+ReaperHead: {
+	DisplayName: Front Desk Reaper Headband
 	Tooltip:
 		'''
-		25% increased executor damage
-		25% increased executor critical strike chance 
+		Increases executor damage by {0}, executor critical strike chance by {0}
 		Enemies are more likely to target you
 		'''
 	SetBonus:
 		'''
-		+2 HP/s life regen speed
-		Generates jellyfish that linger in the air along your movement trail
+		+2 HP/s health regeneration
+		Press the Interact key to drain an enemy's health by consuming the current weapon's Execution Progress
+		The health drained is determined by the enemy's current HP and the ratio of current Execution Progress to the required Execution count
+		The more health drained, the longer the cooldown of this ability; maximum drain is 5% of the enemy's current HP
+		This ability takes lower priority than manual Execution Strike
 		'''
 }
 
-DiverLegs: {
-	DisplayName: Diver Legs
+ReaperLegs: {
+	DisplayName: Front Desk Reaper Bottom
 	Tooltip:
 		'''
-		25% increased movement speed
+		Increases movement speed by {0}
 		Enemies are more likely to target you
 		'''
 }
 
-ReaperBody: {
-	DisplayName: Reaper Body
-	Tooltip: ""
-}
-
-ReaperHead: {
-	DisplayName: Reaper Head
-	Tooltip: ""
-	SetBonus: ""
-}
-
-ReaperLegs: {
-	DisplayName: Reaper Legs
-	Tooltip: ""
-}
-
 AdamantiteHeadExecutor: {
-	DisplayName: Adamantite Head Executor
-	Tooltip: ""
-	SetBonus: ""
+	DisplayName: Adamantite Hood
+	Tooltip: Increases executor damage by {0}, executor critical strike chance by {1}
+	SetBonus:
+		'''
+		Increases executor critical strike damage by {0}
+		Strikes up to {2} nearby enemies with Adamantite Lightning every {1} seconds
+		Each lightning deals {3} damage, benefits from executor damage bonuses, with a 1/{4} chance to critically strike
+		'''
 }
 
 ChlorophyteHeadExecutor: {
-	DisplayName: Chlorophyte Head Executor
-	Tooltip: ""
-	SetBonus: ""
+	DisplayName: Chlorophyte Wing Helm
+	Tooltip:
+		'''
+		Increases executor damage by {0}, executor critical strike chance by {1}
+		Increases executor critical strike damage by {2}
+		'''
+	SetBonus:
+		'''
+		Summons powerful leaf crystals to shoot nearby enemies
+		Leaf crystals fire at a higher rate with unlimited piercing, dealing {0} damage, benefiting from executor damage bonuses
+		Crystal rays restore a certain amount of flight time on the first hit against an enemy
+		'''
 }
 
 CobaltHeadExecutor: {
-	DisplayName: Cobalt Head Executor
-	Tooltip: ""
-	SetBonus: ""
+	DisplayName: Cobalt Skullcap
+	Tooltip: Increases executor damage by {0}
+	SetBonus: Increases executor critical strike damage by {0}
 }
 
 HallowedHeadExecutor: {
-	DisplayName: Hallowed Head Executor
-	Tooltip: ""
-	SetBonus: ""
+	DisplayName: Hallowed War Visor
+	Tooltip:
+		'''
+		Increases executor damage by {0}, executor critical strike chance by {1}
+		Increases executor critical strike damage by {2}
+		'''
+	SetBonus: Become immune after striking an enemy
 }
 
 MythrilHeadExecutor: {
-	DisplayName: Mythril Head Executor
-	Tooltip: ""
-	SetBonus: ""
+	DisplayName: Mythril Face Guard
+	Tooltip:
+		'''
+		Increases executor critical strike chance by {0}
+		Increases executor critical strike damage by {1}
+		'''
+	SetBonus: Increases executor critical strike chance by {0}
 }
 
 OrichalcumHeadExecutor: {
-	DisplayName: Orichalcum Head Executor
-	Tooltip: ""
-	SetBonus: ""
+	DisplayName: Orichalcum War Helm
+	Tooltip:
+		'''
+		Increases executor critical strike damage by {0}
+		Increases movement speed by {1}
+		'''
+	SetBonus: Petal petals will fall on targets, dealing extra damage
 }
 
 PalladiumHeadExecutor: {
-	DisplayName: Palladium Head Executor
-	Tooltip: ""
-	SetBonus: ""
+	DisplayName: Palladium Gorget
+	Tooltip:
+		'''
+		Increases damage by {0}
+		{1} health regeneration speed
+		'''
+	SetBonus: Greatly increases health regeneration after striking an enemy
 }
 
 TitaniumHeadExecutor: {
-	DisplayName: Titanium Head Executor
-	Tooltip: ""
-	SetBonus: ""
+	DisplayName: Titanium Crown Helm
+	Tooltip:
+		'''
+		Increases executor damage by {0}, executor critical strike chance by {1}
+		Increases executor critical strike damage by {2}
+		'''
+	SetBonus:
+		'''
+		On attack, rapidly fires multiple seeking titanium shards
+		Titanium shards have a base damage of {0}, benefiting from executor damage bonuses
+		'''
 }
 
 DragonHunterBody: {
-	DisplayName: Dragon Hunter Body
-	Tooltip: ""
+	DisplayName: Dragon Hunter Heavy Armor
+	Tooltip: Increases executor critical strike chance by {0}
 }
 
 DragonHunterHead: {
-	DisplayName: Dragon Hunter Head
-	Tooltip: ""
-	SetBonus: ""
+	DisplayName: Dragon Hunter Helmet
+	Tooltip: Increases executor damage by {0}
+	SetBonus:
+		'''
+		Increases melee attack speed by {0}, increases critical strike chance of ranged weapons by {1}
+		Increases maximum mana by {2}, reduces mana cost by {3}
+		Resets max minion cap and max sentry cap to {4}
+		Increases critical strike damage of all weapons by {5}
+		All non-executor class weapons will only deal executor damage
+		Damage and critical strike chance of non-executor class weapons only benefit from executor class bonuses
+		'''
 }
 
 DragonHunterLegs: {
-	DisplayName: Dragon Hunter Legs
-	Tooltip: ""
+	DisplayName: Dragon Hunter Greaves
+	Tooltip: Increases movement speed by {0}
 }

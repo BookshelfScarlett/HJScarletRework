@@ -27,7 +27,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 16;
-            Projectile.tileCollide = true;
+            Projectile.tileCollide = false;
             Projectile.extraUpdates = 4;
             Projectile.penetrate = 1;
             Projectile.SetupImmnuity(-1);
@@ -160,7 +160,7 @@ namespace HJScarletRework.Projs.Executor
             BombRotation += Lerp(0.15f, 0.01f, progress);
             ChargingParticle();
             PosLerp = Helper.GetAniProgress(1);
-            if (Projectile.GetTargetSafe(out NPC target))
+            if (Projectile.GetTargetSafe(out NPC target,searchDistance:1800))
                 Target = target;
 
         }
@@ -205,6 +205,7 @@ namespace HJScarletRework.Projs.Executor
             proj.extraUpdates = 2;
             proj.HJScarlet().ExecutionStrike = true;
             proj.ai[2] = 1;
+            proj.tileCollide = false;
         }
         public override bool PreKill(int timeLeft)
         {

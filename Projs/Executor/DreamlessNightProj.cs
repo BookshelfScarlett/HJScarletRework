@@ -56,7 +56,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Helper.MaxProgress[0] = 60;
             if (DontSpawnAdditionHammer)
-                SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeToss[0] with { MaxInstances = 0, Pitch = -0.5f }, Projectile.Center);
+                ScarletSound(HJScarletSounds.Misc_KnifeTossAlt, Projectile.Center, instances: 0, pitch: -.5f, variantType: 1);
         }
 
 
@@ -100,6 +100,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Projectile.ResetLocalNPCHitImmunity();
                     InitReturn();
+                    if(Projectile.IsMe())
                     PoweredUpHammer();
                     Timer += 1;
                 }
@@ -122,7 +123,7 @@ namespace HJScarletRework.Projs.Executor
         public void InitReturn()
         {
             Projectile.velocity = (Projectile.Center - Owner.Center).ToSafeNormalize() * -12f;
-            SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeToss[2] with { MaxInstances = 0, Pitch = -0.20f }, Projectile.Center);
+                ScarletSound(HJScarletSounds.Misc_KnifeTossAlt, Projectile.Center, instances: 0, pitch: -.2f, variantType: 3);
             for (int i = 0; i < 16; i++)
             {
                 Vector2 vel = (Projectile.velocity).ToRandVelocity(ToRadians(12f), 1f, 8f);
@@ -200,7 +201,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.AddExecutionTimeImmediate(ItemType<DreamlessNight>());
             //在命中的时候，我们才生成需要的仆从
             //当然，前提是条件合理
-            if (!Owner.HasProj<DreamlessNightMinion>() && Projectile.HJScarlet().ExecutionStrike)
+            if (!Owner.HasProj<DreamlessNightMinion>() && Projectile.HJScarlet().ExecutionStrike&&Projectile.numHits<1)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, projID, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 proj.rotation = Projectile.rotation;
@@ -221,7 +222,7 @@ namespace HJScarletRework.Projs.Executor
                 ((DreamlessNightArrow)proj.ModProjectile).CurSpeed = 0;
             }
 
-            SoundEngine.PlaySound(HJScarletSounds.Dream_Toss with { MaxInstances = 0, Volume = 1.5f }, Projectile.Center);
+                ScarletSound(HJScarletSounds.Dream_Toss, Projectile.Center, instances: 0);
             int count = 5;
             for (int i = 0; i < count; i++)
             {

@@ -31,3 +31,13 @@ DragonSniper: {
 	// DisplayName: Dragon Sniper
 	// Tooltip: ""
 }
+
+Fleshtumor: {
+	DisplayName: 肉瘤
+	Tooltip: 快速释放饿鬼攻击敌人
+}
+
+PestilenceFlower: {
+	DisplayName: 恶役之花
+	Tooltip: 快速释放触手攻击敌人
+}

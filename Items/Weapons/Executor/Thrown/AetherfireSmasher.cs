@@ -28,11 +28,9 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.shoot = ProjectileType<AetherfireSmasherProj>();
             Item.knockBack = 6f;
             Item.DamageType = ExecutorDamageClass.Instance;
-            Item.width = Item.height = 66;
-            Item.damage = 61;
+            Item.damage = 55;
             //这里的ut有意为之
-            Item.useTime = 12;
-            Item.useAnimation = 12;
+            Item.useTime = Item.useAnimation =12;
             Item.shootSpeed = 18f;
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
         }

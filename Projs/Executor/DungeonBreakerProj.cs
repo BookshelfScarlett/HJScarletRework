@@ -103,7 +103,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 Vector2 dir = (Owner.Center - Projectile.Center).ToSafeNormalize();
                 Projectile.velocity = dir.RotatedBy(ToRadians(30) * Main.rand.NextBool().ToDirectionInt()) * 24f;
-                SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { Pitch = -0.5f }, Projectile.Center);
+                ScarletSound(SoundID.DD2_BetsyFireballImpact, Projectile.Center, pitch: -.5f);
                 GenerateBackDust(-1);
                 UpdateToNextState(State.Return);
             }
@@ -139,7 +139,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 velDir = (Owner.Center - Projectile.Center).ToSafeNormalize();
                 Projectile.velocity = velDir * 8f;
                 Projectile.timeLeft = GetSeconds(5);
-                SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_Hit with { MaxInstances = 0, Pitch = -0.15f }, Projectile.Center);
+                ScarletSound(HJScarletSounds.SodomsDisaster_Hit, Projectile.Center, 1f, 0, -.15f, .05f);
                 UpdateToNextState(State.Return);
                 GenerateBackDust(-1);
             }
@@ -205,7 +205,12 @@ namespace HJScarletRework.Projs.Executor
             Vector2 dir = (Owner.Center - Projectile.Center).ToSafeNormalize();
             Projectile.velocity = dir.RotatedBy(ToRadians(30) * Main.rand.NextBool().ToDirectionInt()) * 24f;
             GenerateBackDust(-1);
-            SoundEngine.PlaySound(HJScarletSounds.Hammer_LightHit with { Pitch = -0.2f }, Projectile.Center);
+            if(Main.zenithWorld)
+            {
+                DungeonBreaker.PlayPipes(Owner);
+            }
+            else
+                ScarletSound(HJScarletSounds.Hammer_LightHit, Projectile.Center, 1f, 1, -.2f, .05f);
             UpdateToNextState(State.Bounce);
         }
 
@@ -218,7 +223,13 @@ namespace HJScarletRework.Projs.Executor
                         TileID.CrackedBlueDungeonBrick,
                         TileID.Spikes
                     ];
-            int radius = 16;
+            if (Condition.Hardmode.IsMet())
+            {
+                tileTypeList.Add(TileID.BlueDungeonBrick);
+                tileTypeList.Add(TileID.PinkDungeonBrick);
+                tileTypeList.Add(TileID.GreenDungeonBrick);
+            }
+            int radius = 32;
             if (Main.dedServ)
             {
                 Point center = Utils.ToTileCoordinates(Projectile.Center);

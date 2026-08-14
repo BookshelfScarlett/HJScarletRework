@@ -9,7 +9,15 @@ DisasterEssence: {
 }
 
 CrownofSilveryLight: {
-	DisplayName: Crownof Silvery Light
-	Tooltip: ""
-	FlavorTooltip: ""
+	DisplayName: Crown of Silvery Light
+	Tooltip:
+		'''
+		Resources obtained from enemies in the Hallow
+		Perhaps a sign of some Lostbelt's arrival
+		'''
+	FlavorTooltip:
+		'''
+		A crown brimming with the radiance of moonlight
+		Granted to those who dedicate themselves to serving the gods
+		'''
 }

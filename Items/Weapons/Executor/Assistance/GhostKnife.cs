@@ -10,7 +10,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
     public class GhostKnife : ExecutorWeaponClass
     {
         public static int MarkGhostKnifeAttackSpeed = 30;
-        public static int MarkGhostKnifeAttackDamage = 45;
+        public static int MarkGhostKnifeAttackDamage = 28;
         public static int LastTime = 30;
         public static int CritBonus = 10;
         public override int ExecutionProgress => 20;

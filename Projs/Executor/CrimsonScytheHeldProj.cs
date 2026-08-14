@@ -7,12 +7,14 @@ using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Metaballs;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -383,6 +385,8 @@ namespace HJScarletRework.Projs.Executor
             bool noSwing = (ThirdSwing && Helper.IsDone[0]) || (!ThirdSwing && Helper.IsDone[0]) || StopTiming > 0;
             if (noSwing)
                 return false;
+            if (target.friendly &&target.townNPC && target.type != NPCID.DD2EterniaCrystal)
+                return true;
             if (!ThirdSwing)
                 return null;
             if (EaseOutCubic(Helper.GetAniProgress(0)) < 0.97f)
@@ -399,6 +403,14 @@ namespace HJScarletRework.Projs.Executor
         public Dictionary<NPC, int> CacheTargetList = [];
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if(target.friendly&&target.townNPC)
+            {
+                new ScytheBlood(target.Center, Main.rand.NextFloat(.4f,.6f)*.6f).Spawn();
+                ScreenDarknessSystem.AddScreenDarkness(.85f, 2, 1, 12, EaseInCubic, EaseInCubic);
+
+                return;
+            }
+
             //处理音效
             HitSoundHandler(target);
             //目标不可用，别播放下面的特效。

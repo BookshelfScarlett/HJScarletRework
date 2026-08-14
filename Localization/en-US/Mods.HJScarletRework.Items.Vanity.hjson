@@ -31,26 +31,31 @@ TairitsuItem: {
 }
 
 CantoneseGirlItem: {
-	DisplayName: Cantonese Girl Item
+	DisplayName: Spirit-Slaying Scabbard
 	FlavorTooltip: ""
 	Tooltip: ""
 }
 
 LeafMaidItem: {
-	DisplayName: Leaf Maid Item
+	DisplayName: Puppet Crystal
 	FlavorTooltip: ""
 	Tooltip: ""
 }
 
 RedDragonItem: {
-	DisplayName: Red Dragon Item
+	DisplayName: Red Dragon Horn
 	FlavorTooltip: ""
 	Tooltip: ""
 }
 
 LacrimosaItem: {
-	DisplayName: Lacrimosa Item
-	FlavorTooltip: ""
+	DisplayName: 100% Tomato Jelly Box
+	FlavorTooltip: Tomato 100%
 	Tooltip: ""
-	DetailTooltip: ""
+	DetailTooltip:
+		'''
+		"Yeah, yeah... that's it, Lacrimosa-sensei, say your line"
+		"..."
+		"100% Tomato, 100% delicious"
+		'''
 }

@@ -224,8 +224,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            if (projHitbox.Intersects(targetHitbox))
-                return true;
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));

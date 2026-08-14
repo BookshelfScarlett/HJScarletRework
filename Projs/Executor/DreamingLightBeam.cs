@@ -45,7 +45,6 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.scale = 0;
                 Projectile.Opacity = 0;
                 Projectile.tileCollide = false;
-                Projectile.ownerHitCheck = true;
 
             }
             else

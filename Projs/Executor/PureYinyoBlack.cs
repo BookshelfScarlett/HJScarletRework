@@ -76,9 +76,6 @@ namespace HJScarletRework.Projs.Executor
                 case State.Shoot:
                     DoShoot();
                     break;
-                case State.ReadyBack:
-                    DoReadyBack();
-                    break;
                 case State.Back:
                     DoBack();
                     break;
@@ -94,21 +91,6 @@ namespace HJScarletRework.Projs.Executor
                 AttackState = State.Back;
                 Projectile.netUpdate = true;
                 Projectile.tileCollide = false;
-                //AttackState = State.ReadyBack;
-                Projectile.netUpdate = true;
-            }
-        }
-        public void DoReadyBack()
-        {
-            if (Helper.IsDone[0])
-            {
-
-            }
-            else
-            {
-
-                Projectile.velocity *= 0.927f;
-                //Projectile.rotation = Projectile.rotation.AngleLerp((Projectile.velocity).ToRotation(), 0.05f);
             }
         }
         public void DoBack()
@@ -143,8 +125,8 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Silver, Color.WhiteSmoke), Main.rand.Next(30, 70), 1, Main.rand.NextFloat(.7f, 1.1f) * .4f, .15f);
             }
             new CrossGlow(Projectile.Center, Color.WhiteSmoke, 40, 1, .24f).Spawn();
-            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = -.8f, Volume = .4f }, Projectile.Center);
-            SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 0, Pitch = -.8f, Volume = .4f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.Misc_Ding, Projectile.Center, .4f, 0, -.8f);
+            ScarletSound(HJScarletSounds.TheMars_Hit, Projectile.Center, .4f, 0, -.8f);
             Projectile.velocity = -Projectile.oldVelocity;
             return false;
         }
@@ -152,10 +134,10 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<PureYinyo>());
-            for (int i = -2; i < 3; i++)
+            for (int i = -1; i < 2; i++)
             {
                 Vector2 dir = RandDirTwoPi;
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir * Main.rand.NextFloat(10f, 12.5f), ProjectileType<PureYinyoShard>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, dir * Main.rand.NextFloat(10f, 12.5f), ProjectileType<PureYinyoShard>(), (Projectile.damage / 4) * 3, Projectile.knockBack, Projectile.owner);
                 ((PureYinyoShard)proj.ModProjectile).CurTarget = target;
                 ((PureYinyoShard)proj.ModProjectile).BlackShard = true;
             }
@@ -177,8 +159,9 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Silver, Color.WhiteSmoke), Main.rand.Next(30, 70), 1, Main.rand.NextFloat(.7f, 1.1f) * .4f, .15f);
             }
             new CrossGlow(target.Center, Color.WhiteSmoke, 40, 1, .24f).Spawn();
-            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, Pitch = -.8f });
-            SoundEngine.PlaySound(HJScarletSounds.TheMars_Hit with { MaxInstances = 0, Pitch = -.8f });
+            ScarletSound(HJScarletSounds.Misc_Ding, Projectile.Center, .6f, 0, -.8f);
+            ScarletSound(HJScarletSounds.TheMars_Hit, Projectile.Center, .6f, 0, -.8f);
+
         }
         public override void OnKill(int timeLeft)
         {

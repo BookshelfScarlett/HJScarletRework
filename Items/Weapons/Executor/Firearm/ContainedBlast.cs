@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         }
         public override void ExSD()
         {
-            Item.damage = 342;
+            Item.damage = 540;
             Item.SetUpNoUseGraphicItem(true, false);
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.useTime = Item.useAnimation = 8;

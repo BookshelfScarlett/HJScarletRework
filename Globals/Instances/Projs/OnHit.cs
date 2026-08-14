@@ -35,42 +35,43 @@ namespace HJScarletRework.Globals.Instances.Projs
             HandleMaidReaperOnHit(Owner, projectile, target);
             HandleBlackKeyOnHit(Owner);
             ModifyDefenderProj(Owner, projectile, target);
-            if (!projectile.DamageType.CountsAsClass<ExecutorDamageClass>())
-                return;
-            if (Owner.HasBuff<TearEyeBuff>() && projectile.DamageType.CountsAsClass<ExecutorDamageClass>())
+            if (projectile.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
-                Owner.HJScarlet().tearEyeBuff = GetSeconds(1);
-            }
-            if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<MoltenKnifeMark>() && projectile.type != ProjectileType<MoltenKnifeBoom>())
-            {
-                int dmg = (int)(projectile.originalDamage * MoltenKnife.BoomDamageMult);
-                Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), projectile.Center, Vector2.Zero, ProjectileType<MoltenKnifeBoom>(), dmg, 1f, Owner.whoAmI);
-            }
-            if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<GrassKnifeMark>() && projectile.type != ProjectileType<GrassKnifePoisonProj>() && projectile.type != ProjectileType<InvisBoom>())
-            {
-                if (target.HasBuff<GrassPoison>())
+                if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<TearEyeMark>() && projectile.DamageType.CountsAsClass<ExecutorDamageClass>())
                 {
-                    foreach (var proj in Main.ActiveProjectiles)
-                    {
-                        if (proj.type != ProjectileType<GrassKnifePoisonProj>())
-                            continue;
-                        if (proj.owner != Owner.whoAmI)
-                            continue;
-                        ((GrassKnifePoisonProj)proj.ModProjectile).StackLevel += 1;
-                        target.AddBuff(BuffType<GrassPoison>(), GetSeconds(10));
-                        proj.timeLeft = GetSeconds(10);
-                    }
+                    Owner.HJScarlet().tearEyeBuff = GetSeconds(1);
                 }
-                else
+                if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<MoltenKnifeMark>() && projectile.type != ProjectileType<MoltenKnifeBoom>()&&projectile.type != ProjectileType<MoltenKnifeProj>())
                 {
-                    if (!HasCreatedProj)
+                    int dmg = (int)(projectile.originalDamage * MoltenKnife.BoomDamageMult);
+                    Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<MoltenKnifeBoom>(), dmg, 1f, Owner.whoAmI);
+                }
+                if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<GrassKnifeMark>() && projectile.type != ProjectileType<GrassKnifePoisonProj>() && projectile.type != ProjectileType<InvisBoom>())
+                {
+                    if (target.HasBuff<GrassPoison>())
                     {
-                        target.AddBuff(BuffType<GrassPoison>(), GetSeconds(10));
-                        int damageValueInstance = 25 * (1 + DownedBossSystem.downedBarrier.ToInt() + Condition.Hardmode.IsMet().ToInt());
-                        Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<GrassKnifePoisonProj>(), damageValueInstance / 5, 0, Owner.whoAmI);
-                        HasCreatedProj = true;
-                        proj.originalDamage = damageValueInstance;
-                        ((GrassKnifePoisonProj)proj.ModProjectile).CurTarget = target;
+                        foreach (var proj in Main.ActiveProjectiles)
+                        {
+                            if (proj.type != ProjectileType<GrassKnifePoisonProj>())
+                                continue;
+                            if (proj.owner != Owner.whoAmI)
+                                continue;
+                            ((GrassKnifePoisonProj)proj.ModProjectile).StackLevel += 1;
+                            target.AddBuff(BuffType<GrassPoison>(), GetSeconds(10));
+                            proj.timeLeft = GetSeconds(10);
+                        }
+                    }
+                    else
+                    {
+                        if (!HasCreatedProj)
+                        {
+                            target.AddBuff(BuffType<GrassPoison>(), GetSeconds(10));
+                            int damageValueInstance = 25 * (1 + DownedBossSystem.downedBarrier.ToInt() + Condition.Hardmode.IsMet().ToInt());
+                            Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<GrassKnifePoisonProj>(), damageValueInstance / 5, 0, Owner.whoAmI);
+                            HasCreatedProj = true;
+                            proj.originalDamage = damageValueInstance;
+                            ((GrassKnifePoisonProj)proj.ModProjectile).CurTarget = target;
+                        }
                     }
                 }
             }

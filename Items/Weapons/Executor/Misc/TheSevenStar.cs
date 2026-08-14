@@ -22,13 +22,13 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
         }
         public override void ExSD()
         {
+            Item.damage = 32;
             Item.knockBack = 4.5f;
-            Item.damage = 36;
             Item.useTime = Item.useAnimation = 25;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<TheSevenStarHeldProj>();
-            Item.SetUpRarityPrice(ItemRarityID.Green);
+            Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem(true);
             Item.HJScarlet().OwnerName = "冰川咲";
             Item.HJScarlet().ItemBelongTo = EnumItemOwner.Donator;

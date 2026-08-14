@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         }
         public override void ExSD()
         {
-            Item.damage = 56;
+            Item.damage = 50;
             Item.SetUpRarityPrice(ItemRarityID.LightPurple);
             Item.SetUpNoUseGraphicItem();
             Item.knockBack = 2f;

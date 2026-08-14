@@ -168,7 +168,7 @@ namespace HJScarletRework.Projs.Magic
                 Vector2 dir = (spawnPos2 - Projectile.Center).ToSafeNormalize();
                 new ShinyCrossStar(Projectile.Center + dir * Main.rand.NextFloat(5f), dir * Main.rand.NextFloat(4f, 8f), RandLerpColor(Color.Orange, Color.OrangeRed), 40, RandRotTwoPi, 1f, Projectile.scale, false).Spawn();
             }
-            SoundEngine.PlaySound(HJScarletSounds.Misc_MagicStaffFire with { MaxInstances = 0, Pitch = 0.7f, Volume = 0.30f });
+            ScarletSound(HJScarletSounds.Misc_MagicStaffFire, Projectile.Center, .22f, 0, .7f, .1f);
             Vector2 dir2 = (-(Projectile.Center - Main.MouseWorld)).ToSafeNormalize();
             for (int i = 0; i < 7; i++)
             {

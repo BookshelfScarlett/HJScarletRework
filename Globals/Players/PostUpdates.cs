@@ -59,18 +59,35 @@ namespace HJScarletRework.Globals.Players
             UpdateHerbBuff();
             UpdateStardustRune();
             UpdateDiverArmorJellyfishSpawn();
-            UpdateMaidReaper();
             UpdateHeadExecutor();
+            UpdateMaidReaper();
             UpdateExecutorKnifeMark();
         }
 
         public void UpdateExecutorKnifeMark()
         {
-            if (tearEyeBuff > 0 && Player.HeldItem.IsExecutorWeapon())
+            if (!Player.HeldItem.IsExecutorWeapon())
+                return;
+            //希望之星
+            if (KnifeMarkIndex == ProjectileType<StarofHoperMark>() && !Player.IsInInventory() && Main.mouseLeft && Player.miscCounter % 25f == 0)
             {
+                for (int i = 0; i < 1; i++)
+                {
+                    Vector2 pos = Player.Center - Vector2.UnitY * Main.rand.NextFloat(600, 700) + Main.rand.NextFloat(80, 120) * i * Vector2.UnitX * Main.rand.NextBool().ToDirectionInt() - ((Main.MouseWorld.X - Player.Center.X) > 0).ToDirectionInt() * Vector2.UnitX * 100;
+                    int dmg = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(20);
+                    Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), pos, pos.GetNormalVector2(Main.MouseWorld) * 30f, ProjectileType<StarofHopeStar>(), dmg, 1f, Player.whoAmI);
+                    proj.HJScarlet().HasExecutionMechanic = true;
+                }
+
+            }
+            //克苏鲁的眼泪
+            if (tearEyeBuff > 0)
+            {
+                Player.AddBuff(BuffID.Wet, GetSeconds(1));
                 Player.endurance += (1 + Condition.Hardmode.IsMet().ToInt() + DownedBossSystem.downedBarrier.ToInt()) * .05f;
             }
-            if (Player.HeldItem.IsExecutorWeapon() && Main.mouseLeft && !Player.IsInInventory() && Player.miscCounter % GhostKnife.MarkGhostKnifeAttackSpeed == 0f && KnifeMarkIndex == GetInstance<GhostKnifeMark>().Type)
+            //幽灵短匕
+            if (Main.mouseLeft && !Player.IsInInventory() && Player.miscCounter % GhostKnife.MarkGhostKnifeAttackSpeed == 0f && KnifeMarkIndex == GetInstance<GhostKnifeMark>().Type)
             {
                 int applyDamage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(GhostKnife.MarkGhostKnifeAttackDamage);
                 Vector2 dir = Player.Center.GetNormalVector2(Main.MouseWorld);
@@ -90,13 +107,15 @@ namespace HJScarletRework.Globals.Players
                 ECSParticle.StarShape(pos, proj.velocity.ToSafeNormalize() * .01f, Color.LightBlue, 40, 1, 0.94f);
                 ECSParticle.StarShape(pos, proj.velocity.RotatedBy(PiOver2).ToSafeNormalize() * .01f, Color.LightBlue, 40, 1, 0.94f);
             }
-            if (KnifeMarkIndex == ProjectileType<FishronKnifeMark>() && Player.HeldItem.IsExecutorWeapon())
+            //公爵长牙
+            if (KnifeMarkIndex == ProjectileType<FishronKnifeMark>())
             {
                 Player.GetDamage<ExecutorDamageClass>() += FishronKnife.DamageBuff;
             }
+            //钢制匕首
             if (KnifeMarkIndex == ProjectileType<DungeonKnifeMark>())
             {
-                Player.statDefense += 5;
+                Player.statDefense += 8;
 
             }
         }
@@ -696,7 +715,6 @@ namespace HJScarletRework.Globals.Players
                 int reverseWeapon = GetReverseWeapon(item.type);
                 if (reverseWeapon != -1)
                 {
-                    Main.NewText(1);
                     DoSwapWeapon(ref inventory, item, slot, reverseWeapon, true);
                     return;
                 }
@@ -853,8 +871,23 @@ namespace HJScarletRework.Globals.Players
         {
             if (!maidReaperArmor)
                 return;
-            bool checkExecution = Player.GetExecutionSrike();
-            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && maidReaperIndex != -1 && !checkExecution && Player.HeldItem.DamageType.CountsAsClass<ExecutorDamageClass>() && maidReaperHealTimer == 0)
+            if (Player.HeldItem.type == ItemType<CrimsonScythe>())
+            {
+                infiniteFlightTime = true;
+                Player.ApplyDash(ScarletContent.DashType<CrimsonScytheDash>());
+                Player.jumpSpeed += 1.6f;
+                Player.runAcceleration *= 1.40f;
+                Player.moveSpeed += .35f;
+                Player.GetDamage<ExecutorDamageClass>() += ReaperHead.TlipocaScytheDamage;
+                Player.GetCritChance<ExecutorDamageClass>() += ReaperHead.TlipocaScytheCrits;
+                Player.statDefense += ReaperHead.TlipocaDefense;
+                critDamageExecutor += ReaperHead.TlipocaCritDamage;
+            }
+
+            bool checkExecution = Player.CheckCurWeaponExecution(Player.HeldItem.type);
+            if (checkExecution)
+                return;
+            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && maidReaperIndex != -1  && Player.HeldItem.DamageType.CountsAsClass<ExecutorDamageClass>() && maidReaperHealTimer == 0)
             {
                 NPC npc = Main.npc[maidReaperIndex];
                 if (npc.IsLegal())
@@ -868,17 +901,6 @@ namespace HJScarletRework.Globals.Players
                     maidReaperHealTimer = GetSeconds((int)(Lerp(0, ReaperHead.MaidReaperMaxHealCooldown, ratios)));
                 }
             }
-            if (Player.HeldItem.type != ItemType<CrimsonScythe>())
-                return;
-            infiniteFlightTime = true;
-            Player.ApplyDash(ScarletContent.DashType<CrimsonScytheDash>());
-            Player.jumpSpeed += 1.6f;
-            Player.runAcceleration *= 1.40f;
-            Player.moveSpeed += .35f;
-            Player.GetDamage<ExecutorDamageClass>() += ReaperHead.TlipocaScytheDamage;
-            Player.GetCritChance<ExecutorDamageClass>() += ReaperHead.TlipocaScytheCrits;
-            Player.statDefense += ReaperHead.TlipocaDefense;
-            critDamageExecutor += ReaperHead.TlipocaCritDamage;
         }
         public void UpdateDiverArmorJellyfishSpawn()
         {

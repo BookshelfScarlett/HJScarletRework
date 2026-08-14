@@ -3,11 +3,11 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 
-namespace HJScarletRework.Projs.Executor
+namespace HJScarletRework.Projs.Magic
 {
     public class PestilenceFlowerBomb : HJScarletProj
     {
-        public override EnumDamageClass Category => EnumDamageClass.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override string Texture => $"Terraria/Images/NPC_265";
         public override void SetStaticDefaults()
         {

@@ -43,7 +43,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.tileCollide = false;
             Projectile.extraUpdates = 2;
             Projectile.width = Projectile.height = 66;
-            Projectile.SetupImmnuity(45);
+            Projectile.SetupImmnuity(66);
             Projectile.timeLeft = 300;
             Projectile.scale = 1;
             Projectile.ownerHitCheck = true;
@@ -160,18 +160,19 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            SoundStyle pickSound2 = Utils.SelectRandom(Main.rand, HJScarletSounds.Smash_AirHeavy);
-            SoundEngine.PlaySound(pickSound2 with { Pitch = Main.rand.NextFloat(0.42f, 0.47f), Volume = 0.84f, MaxInstances = 1 }, target.Center);
+            ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, target.Center, .80f, 1, .44f, .02f);
             bool hasProj = Owner.HasProj<TheJudgementMinion>();
             Vector2 spawnPos = target.Center;
             Vector2 vel = RandVelTwoPi(16f, 19f);
+            if (Projectile.numHits > 3)
+                return;
             if (!hasProj)
             {
                 Projectile.AddExecutionTimeImmediate(ItemType<TheJudgement>());
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<TheJudgementStar>(), Projectile.damage / 2, 1f, Owner.whoAmI);
                 ((TheJudgementStar)proj.ModProjectile).TargetNPC = target;
             }
-            else if (Projectile.numHits < 1)
+            else
             {
                 for (int i = -1; i < 2; i += 2)
                 {

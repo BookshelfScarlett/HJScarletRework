@@ -61,11 +61,6 @@ namespace HJScarletRework.Projs.Executor
                 for (int i = 0; i < 8; i++)
                 {
                     new TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(6f) + pos, 1f, RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 30, 0.38f, RandRotTwoPi).Spawn();
-                    if (Main.rand.NextBool(8))
-                    {
-                        //new KiraStar(Projectile.Center.ToRandCirclePosEdge(12f) + pos, Vector2.Zero, RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 30, 0, 1, 0.18f).Spawn();
-                        //ECSParticle.CrossGlow(Projectile.Center.ToRandCirclePosEdge(12f) + pos, Vector2.Zero, RandLerpColor(Color.PaleGoldenrod, Color.Goldenrod), 30, 1, 0, 0.45f,.2f);
-                    }
                 }
                 for (int j = 0; j < 16; j++)
                 {

@@ -12,19 +12,16 @@ namespace HJScarletRework.Projs.Pets
         public override void SimplePetFunction()
         {
             SimplePetAnimation(4);
-            if (Owner.dead)
-                Owner.HJScarlet().sonPet = false;
 
             if (Owner.HJScarlet().sonPet)
                 Projectile.timeLeft = 2;
-
-
+            if (Owner.dead)
+                Owner.HJScarlet().sonPet = false;
         }
         public override void PetAI()
         {
             Vector2 mountedPos = Owner.MountedCenter - Vector2.UnitY * 90;
             Projectile.Center = Vector2.Lerp(Projectile.Center, mountedPos, 0.50f);
-            //Lighting.AddLight(Projectile.Center, TorchID.White);
             Lighting.AddLight(Owner.Center, new Vector3(255, 255, 255) * .1f);
         }
         public override bool PreDraw(ref Color lightColor)
@@ -51,7 +48,6 @@ namespace HJScarletRework.Projs.Pets
             float ringScale = Projectile.scale * .17f * lerpScale;
             sb.Draw(ring, pos, null, Color.White, 0, ring.Size() / 2, ringScale, 0, 0);
             sb.EndShaderArea();
-
 
             sb.Draw(tex, pos, frame, Color.White, 0, ori, Projectile.scale, se, 0);
             return false;

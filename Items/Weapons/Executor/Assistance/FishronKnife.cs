@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
         }
         public override void ExSD()
         {
-            Item.damage = 54;
+            Item.damage = 100;
             Item.knockBack = 4;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useTime = Item.useAnimation = 25;

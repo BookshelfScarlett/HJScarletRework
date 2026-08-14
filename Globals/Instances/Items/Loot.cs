@@ -5,9 +5,9 @@ using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
-using HJScarletRework.Items.Weapons.Executor.Caster;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
+using HJScarletRework.Items.Weapons.Magic;
 using HJScarletRework.Items.Weapons.Melee;
 using Terraria;
 using Terraria.ID;
@@ -46,6 +46,9 @@ namespace HJScarletRework.Globals.Instances.Items
                     break;
                 case ItemID.EyeOfCthulhuBossBag:
                     itemLoot.AddLoot<TearEye>(4);
+                    break;
+                case ItemID.FishronBossBag:
+                    itemLoot.AddLoot<FishronKnife>(4);
                     break;
                 #endregion
 
@@ -103,9 +106,6 @@ namespace HJScarletRework.Globals.Instances.Items
             if (item.type == ItemType<GoblinChariotTreasureBag>())
             {
                 itemLoot.AddLoot<AngryBomb>(4);
-            }
-            if (item.type == ItemType<BigDipperTreasureBag>())
-            {
             }
         }
         public override void AddRecipes()

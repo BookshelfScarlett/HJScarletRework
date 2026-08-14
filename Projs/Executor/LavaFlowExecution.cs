@@ -45,8 +45,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            SoundEngine.PlaySound(SoundID.DD2_BetsyFireballShot with { MaxInstances = 0, Pitch = .25f });
-            SoundEngine.PlaySound(SoundID.Item64 with { MaxInstances = 0, Pitch = .55f });
+            ScarletSound(SoundID.DD2_BetsyFireballShot, Projectile.Center, pitch: .25f, instances: 0, pitchVariance: .1f);
+            ScarletSound(SoundID.Item64, Projectile.Center, pitch: .55f, instances: 0, pitchVariance: .1f);
         }
         public override void ProjAI()
         {
@@ -65,7 +65,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (StabTarget.IsLegal())
             {
-                StabTarget.HJScarlet().isBeingStabByLavaFlowExecution = 5;
+                StabTarget.HJScarlet().isBeingStabByLavaFlowExecution = 2;
                 Projectile.Center = StabTarget.Center + StoredPosition;
                 Vector2 dir = -Projectile.SafeDirByRot();
                 Vector2 offset = Projectile.SafeDirByRot() * 35f * Projectile.scale;
@@ -106,6 +106,10 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Fireball)
                 return;
+            if (StabTarget.IsLegal())
+            {
+                StabTarget.HJScarlet().isBeingStabByLavaFlowExecution = 0;
+            }
             for (int i = 0; i < 46; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePosEdge(16);
@@ -115,9 +119,8 @@ namespace HJScarletRework.Projs.Executor
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, -Vector2.UnitY.ToRandVelocity(ToRadians(10f), 9f, 13f), ProjectileType<LavaFlowBoom>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
-            SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);
-            SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);
-
+            ScarletSound(SoundID.DD2_BetsyFlameBreath, Projectile.Center, pitch: .65f, instances: 0, pitchVariance: .1f);
+            ScarletSound(SoundID.DD2_BetsyFireballImpact, Projectile.Center, pitch: .65f, instances: 0, pitchVariance: .1f);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

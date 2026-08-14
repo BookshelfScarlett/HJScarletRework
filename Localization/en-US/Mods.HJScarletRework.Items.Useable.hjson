@@ -70,8 +70,23 @@ DescriptionPaper: {
 		[i:FloretProtectorHelmet][i:FloretProtectorChestplate][i:FloretProtectorLegs]Floret Protector Set – can be transformed after defeating The Lifebringer
 		[i:MonkBrows][i:MonkShirt][i:MonkPants]Monk Armor / [i:MonkAltHead][i:MonkAltShirt][i:MonkAltPants]Shinobi Armor – also receive Executor versions
 		All of the reworked vanity sets mentioned above gain brand new effects and set bonuses.
+		Also, you can hold Left Alt to view the list of developers and support staff who contributed to this mod
 		'''
-	ThanksList: ""
+	ThanksList:
+		'''
+		[c/CC0340:Lead Developers:]
+		ScarletShelf - Lead Programmer
+		Inoljw, 名字, Freya - Artists
+		-
+		[c/BAEE1B:Support Staff:]
+		Sakuraba Ichika, Demon Lilies, Plantare
+		Serrat Antler, 南鸢北笙, 梦山之主, Yilyn, TIM
+		[c/B19CD9:Testers:]
+		Endtimeless, Woodi Stigma, 妩媚の5妹儿, Shizuku, 步出夏门行
+		[c/FFC0CB:Donators:]
+		巴雷难破长夜, 冰川咲, 银九, 曦, 丰川祥子, 苏利, 池堂爱吃糖, 咕咕叶子
+		[c/AACCCC:Many thanks to everyone for making this mod a success and pushing it forward]
+		'''
 }
 
 PurePrismFate: {
@@ -114,7 +129,7 @@ CursedGoldenKey: {
 }
 
 ProvidenceHolyWater: {
-	DisplayName: Providence Holy Water
+	DisplayName: Holy Water of Destiny
 	Tooltip: ""
 }
 
@@ -124,28 +139,58 @@ MadnessCritStar: {
 }
 
 BiomeKeyString: {
-	DisplayName: Biome Key String
-	Tooltip: ""
+	DisplayName: Treasure Keychain
+	Tooltip: Place it in an empty chest to fill it with Dungeon treasure
 }
 
 FruitofEternity: {
-	DisplayName: Fruitof Eternity
-	Tooltip: ""
-	DetailTooltip: ""
+	DisplayName: Fruit of Eternity
+	Tooltip:
+		'''
+		Gain {0} defense and +{1} HP/s health regeneration
+		Any divine enemy present on the field deals {2} less damage when hit, and resets its speed with a 1/{3} chance to teleport randomly
+		'''
+	DetailTooltip:
+		'''
+		Any who consume this fruit become immortal, but at a price.
+		Those who accept its boon also become servants of the gods for eternity.
+		'''
 }
 
 GaiaStrikerLootBox: {
-	DisplayName: Gaia Striker Loot Box
-	Tooltip: ""
+	DisplayName: Gaia Chest
+	Tooltip:
+		'''
+		Opens to provide you with [i:HJScarletRework/GaiaStriker][c/FE0000:Gaia Hammer]
+		Please use in an open area
+		'''
 }
 
 YogsothothsYardPack: {
-	DisplayName: Yogsothoths Yard Pack
-	Tooltip: ""
+	DisplayName: Yog-Sothoth's Yard Reward Pack
+	Tooltip:
+		'''
+		Instantly grants the following items upon opening:
+		[i:HJScarletRework/CrimsonScythe][c/DC143C:Crimson Heavy Scythe]
+		[i:HJScarletRework/ReaperHead][c/DC143C:Front Desk Reaper Headband]
+		[i:HJScarletRework/ReaperBody][c/DC143C:Front Desk Reaper Top]
+		[i:HJScarletRework/ReaperLegs][c/DC143C:Front Desk Reaper Skirt]
+		[i:HJScarletRework/LeafMaidItem][c/00BFFF:Puppet Crystal]
+		[i:HJScarletRework/RedDragonItem][c/F08080:Red Dragon Horn]
+		[i:HJScarletRework/CantoneseGirlItem][c/2E8B57:Spirit-Slaying Scabbard]
+		Includes the Telipoca series items, as well as costume transformation items for Little Leaf, Yevna, and XiaLuLing
+		-
+		"Also, employees are romanceable."
+		-
+		'''
 }
 
 AxeCharm: {
 	DisplayName: Axe Charm
-	Tooltip: ""
-	EnableTooltips: ""
+	Tooltip:
+		'''
+		Right-click to toggle manual execution mode for Executor weapons
+		Does not work on some weapons
+		'''
+	EnableTooltips: Manual Execution Mode: {0}
 }

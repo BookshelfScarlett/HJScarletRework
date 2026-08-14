@@ -58,7 +58,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Volume = 0.75f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.DeathsToll_Toss, Projectile.Center,.75f);
             Helper.MaxProgress[0] = GetSeconds(20);
             Helper.MaxProgress[1] = 85;
             Helper.MaxProgress[2] = 60;
@@ -114,7 +114,6 @@ namespace HJScarletRework.Projs.Executor
         {
             Item item = GetInstance<DreamingLight>().Item;
             int attackRates = (int)(Owner.ApplyWeaponAttackSpeed(item, item.useTime, 10) * 0.60f);
-            float rates = Clamp(Timer / (attackRates / 2f), 0f, 1f);
             HandleMinionShootAnimation(Vector2.Zero);
             if (Timer < attackRates)
                 return;
@@ -147,7 +146,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, dir * -16f, ProjectileType<DreamingLightBeam>(), Projectile.damage, 1f, Owner.whoAmI);
             proj.rotation = proj.velocity.ToRotation();
             ((DreamingLightBeam)proj.ModProjectile).BeamState = DreamingLightBeam.BeamType.Minion;
-            SpawnDreamParticle(spawnPos);
             SoundEngine.PlaySound(HJScarletSounds.Hammer_Shoot[1] with { MaxInstances = 2, Pitch = 0.5f }, spawnPos);
         }
         public void UpdateIdleAI(bool isLeftClicking)
@@ -245,11 +243,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Projectile.rotation.AngleLerp(angleToWhat, 0.18f);
         }
         #endregion
-        private void SpawnDreamParticle(Vector2 spawnPos)
-        {
-        }
-
-
 
         public override bool? CanHitNPC(NPC target)
         {

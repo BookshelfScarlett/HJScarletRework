@@ -41,8 +41,8 @@ namespace HJScarletRework.Globals.Instances
             terraFlamethrowerDropDamage = 0;
             if (isBeingStabByContainedStick > 0)
                 isBeingStabByContainedStick--;
-            if (isBeingStabByContainedStick > 0)
-                isBeingStabByLavaFlowExecution--;
+            if(isBeingStabByLavaFlowExecution>0)
+            isBeingStabByLavaFlowExecution = 0;
             if (StopNpcTime > 0)
                 StopNpcTime--;
         }

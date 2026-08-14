@@ -8,7 +8,6 @@ namespace HJScarletRework.Globals.IDSets
     [ReinitializeDuringResizeArrays]
     public static class ScarletProjIDSets
     {
-
         /// <summary>
         /// 如果为<see langword="true"/>，标记该射弹为<see langword="巨人杀手"/>。
         /// <br><see langword="巨人杀手"/>射弹会对归属于<see cref="ScarletNPCIDSets.Giant"/><see langword="巨人"/>的单位拥有额外增伤</br>

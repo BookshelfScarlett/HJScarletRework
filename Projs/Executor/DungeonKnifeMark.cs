@@ -7,6 +7,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class DungeonKnifeMark : KnifeMarkClass
     {
+        public override int LifeTime => 30;
         public override Color BackgroundColor => Color.White;
         public override void ExtraFirstFrame()
         {

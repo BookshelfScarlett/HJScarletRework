@@ -9,11 +9,11 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 
-namespace HJScarletRework.Projs.Executor
+namespace HJScarletRework.Projs.Magic
 {
     public class PestilenceFlowerHunger : HJScarletProj
     {
-        public override EnumDamageClass Category => EnumDamageClass.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override string Texture => $"Terraria/Images/NPC_{NPCID.PlanterasTentacle}";
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()

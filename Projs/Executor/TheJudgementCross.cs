@@ -27,10 +27,9 @@ namespace HJScarletRework.Projs.Executor
             Projectile.height = 30;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
-            Projectile.SetupImmnuity(10, ImmnuityType.Static);
+            Projectile.SetupImmnuity(8, ImmnuityType.Static);
             //这玩意是转起来的，所以实际dps会更少的，给他多点判定吧！！
             Projectile.tileCollide = false;
-            Projectile.ownerHitCheck = true;
             Projectile.light = 1f;
             Projectile.scale = 1f;
             Projectile.timeLeft = 80;

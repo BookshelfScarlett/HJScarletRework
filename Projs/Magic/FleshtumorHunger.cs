@@ -9,11 +9,11 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 
-namespace HJScarletRework.Projs.Executor
+namespace HJScarletRework.Projs.Magic
 {
     public class FleshtumorHunger : HJScarletProj
     {
-        public override EnumDamageClass Category => EnumDamageClass.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override string Texture => $"Terraria/Images/NPC_{NPCID.TheHungryII}";
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()
@@ -125,7 +125,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < length; i++)
             {
                 float rads = (float)i / length;
-                Color edgeColor = Color.Lerp(Color.White, Color.DarkRed, (1 - rads)).ToAddColor((byte)(int)Clamp(rads * 250f, 100, 250)) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads);
+                Color edgeColor = Color.Lerp(Color.White, Color.DarkRed, 1 - rads).ToAddColor((byte)(int)Clamp(rads * 250f, 100, 250)) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads);
                 float rot = Projectile.oldRot[i];
                 SB.Draw(tex, Projectile.oldPos[i] + Projectile.PosToCenter(), frame, edgeColor, rot, frameOri, DrawScale * scale * Projectile.scale, SpriteEffects.FlipHorizontally, 0);
                 scale *= 0.990f;

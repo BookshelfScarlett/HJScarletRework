@@ -2,11 +2,16 @@
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
     public class EnchantedSwordfish : ThrownSpearClass
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {

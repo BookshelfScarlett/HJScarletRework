@@ -46,5 +46,14 @@ namespace HJScarletRework.Items.Pets
             };
             TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.Silk, 15).
+                AddIngredient(ItemID.JungleRose).
+                DisableDecraft().
+                AddTile(TileID.Loom).
+                Register();
+        }
     }
 }

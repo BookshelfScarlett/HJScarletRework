@@ -11,8 +11,8 @@ namespace HJScarletRework.Items.Vanity.Misc
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.Umbrella).
-                AddIngredient(ItemID.UlyssesButterfly).
+                AddIngredient(ItemID.FruitJuice).
+                AddIngredient(ItemID.Silk,10).
                 DisableDecraft().
                 AddTile(TileID.Loom).
                 Register();

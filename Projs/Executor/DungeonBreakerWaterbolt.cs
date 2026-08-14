@@ -48,7 +48,7 @@ namespace HJScarletRework.Projs.Executor
         {
             //这边得生成一个大点的粒子盖住一下
             //不然好像这个真没什么好的解决方法
-            SoundEngine.PlaySound(SoundID.Item35 with { MaxInstances = 1, Pitch = -0.5f + BouceTime * 0.05f }, Projectile.Center);
+            ScarletSound(SoundID.Item35, Projectile.Center, instances: 1, pitch: -.5f + BouceTime * .05f);
             BouceTime++;
             if (BouceTime > TotalBounceTime)
             {

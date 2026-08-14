@@ -5,11 +5,11 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 
-namespace HJScarletRework.Projs.Executor
+namespace HJScarletRework.Projs.Magic
 {
     public class FleshtumorHungerStick : HJScarletProj
     {
-        public override EnumDamageClass Category => EnumDamageClass.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override string Texture => $"Terraria/Images/NPC_{NPCID.TheHungry}";
         public override void SetStaticDefaults()
         {

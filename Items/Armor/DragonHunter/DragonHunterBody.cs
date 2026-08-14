@@ -22,9 +22,9 @@ namespace HJScarletRework.Items.Armor.DragonHunter
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Purple);
-            Item.defense = 40;
+            Item.defense = 50;
         }
-        public int Crit = 30;
+        public int Crit =50;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crit + "%");
         public override void UpdateEquip(Player player)
         {

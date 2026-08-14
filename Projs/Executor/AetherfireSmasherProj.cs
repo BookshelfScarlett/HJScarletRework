@@ -98,7 +98,7 @@ namespace HJScarletRework.Projs.Executor
                         {
                             Projectile.velocity = (CurTarget.Center - Projectile.Center).ToSafeNormalize() * 18f;
                             InitActiveDashParticle();
-                            SoundEngine.PlaySound(SoundID.Item69 with { MaxInstances = 0, Pitch = -0.4f, PitchVariance = 0.1f, Volume = 0.7f }, Projectile.Center);
+                            ScarletSound(SoundID.Item69, Projectile.Center, .7f, 0, -.4f, .1f);
                         }
                         Projectile.rotation = Projectile.velocity.ToRotation();
                         ActiveDash = true;
@@ -125,7 +125,7 @@ namespace HJScarletRework.Projs.Executor
                     Projectile.velocity = (-(Projectile.Center - Owner.Center)).ToSafeNormalize() * 18f;
                     InitActiveDashParticle();
                     UpdateOnHitNPCParticle(Projectile.Center);
-                    SoundEngine.PlaySound(SoundID.Item110 with { MaxInstances = 1, Pitch = -0.2f, PitchVariance = 0.1f }, Projectile.Center);
+                    ScarletSound(SoundID.Item110, Projectile.Center, 1, pitch: -.2f, pitchVariance: .1f);
                     Projectile.Kill();
                     return;
                 }
@@ -179,7 +179,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.BounceOnTile(oldVelocity);
             UpdateOnHitNPCParticle(Projectile.oldPosition + Projectile.Size / 2);
-            SoundEngine.PlaySound(SoundID.Item70 with { MaxInstances = 0, Pitch = -0.4f, PitchVariance = 0.1f, Volume = 0.7f }, Projectile.Center);
+            ScarletSound(SoundID.Item70, Projectile.Center, .7f, 0, -.4f, .1f);
             return false;
         }
         public void UpdateHitParticle()
@@ -247,6 +247,7 @@ namespace HJScarletRework.Projs.Executor
             if (!Owner.HasProj<AetherfireSmasherExecution>())
                 Projectile.AddExecutionTimeImmediate(ItemType<AetherfireSmasher>());
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -0.5f, Volume = 0.78f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.SodomsDisaster_BoomHit, Projectile.Center, .78f, 1, -.5f, .1f);
             if (AttackState == State.Shoot)
             {
                 UpdateOnHitNPCParticle(target.Center);

@@ -2,11 +2,17 @@
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor.Assistance
 {
     public class StreamingProtocol : ExecutorWeaponClass
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         public override int ExecutionProgress => 20;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Assistance;
         public override void ExSD()

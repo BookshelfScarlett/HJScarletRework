@@ -1,22 +1,25 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Weapons.Executor.Caster;
+using HJScarletRework.Items.Weapons.Magic;
 using System;
 using Terraria;
 using Terraria.Audio;
 
-namespace HJScarletRework.Projs.Executor
+namespace HJScarletRework.Projs.Magic
 {
 
-    public class PestilenceFlowerHeldProj : ExecutorHeldProj
+    public class PestilenceFlowerHeldProj : HJScarletProj
     {
-        public override int OriginalItemID => ItemType<PestilenceFlower>();
         public override string Texture => GetInstance<PestilenceFlower>().Texture;
+        public override EnumDamageClass Category => EnumDamageClass.Magic;
         public AnimationStruct Helper = new(2);
+        public int AttackSpeed => Owner.ApplyWeaponAttackSpeed(GetInstance<PestilenceFlower>().Item, GetInstance<PestilenceFlower>().Item.useTime * Projectile.MaxUpdates, 5 * Projectile.MaxUpdates);
         public ref float Timer => ref Projectile.ai[0];
         public ref float AnimationTimer => ref Projectile.localAI[0];
         public ref float AnimationState => ref Projectile.localAI[1];
@@ -31,11 +34,11 @@ namespace HJScarletRework.Projs.Executor
             Helper.MaxProgress[0] = (int)(AttackSpeed * .75f);
             Helper.MaxProgress[1] = (int)(AttackSpeed * .35f);
         }
-        public bool IsUsing => (Owner.channel) && !Owner.noItems && !Owner.CCed;
+        public bool IsUsing => Owner.channel && !Owner.noItems && !Owner.CCed;
         public override void ProjAI()
         {
             Projectile.timeLeft = 2;
-            if (Owner.HeldItem.type != OriginalItemID)
+            if (Owner.HeldItem.type != ItemType<PestilenceFlower>())
             {
                 Helper.IsDone[0] = false;
                 Helper.IsDone[1] = false;
@@ -56,7 +59,7 @@ namespace HJScarletRework.Projs.Executor
             Owner.ChangeDir(Projectile.direction);
             Owner.itemTime = Owner.itemAnimation = 2;
             Owner.ControlPlayerArm(Projectile.rotation, 2);
-            bool reverse = (!Helper.IsDone[0] && Owner.HeldItem.type != OriginalItemID) || Owner.controlUseTile;
+            bool reverse = !Helper.IsDone[0] && Owner.HeldItem.type != ItemType<PestilenceFlower>()|| Owner.controlUseTile;
         }
 
         private void HoldIdleState()
@@ -67,14 +70,14 @@ namespace HJScarletRework.Projs.Executor
             float beginRot = Projectile.rotation;
             float value = WrapAngle(tarRot - beginRot);
             Projectile.rotation = beginRot + value;
-            bool reverse = (!Helper.IsDone[0] && Owner.HeldItem.type != OriginalItemID) || Owner.controlUseTile;
+            bool reverse = !Helper.IsDone[0] && Owner.HeldItem.type != ItemType<PestilenceFlower>() || Owner.controlUseTile;
             Vector2 tarPos = Owner.MountedCenter + Owner.Center.GetNormalVector2(Main.MouseWorld).ToSafeNormalize() * 60;
             if (reverse)
                 tarPos = Owner.MountedCenter + Owner.Center.GetNormalVector2(Main.MouseWorld).ToSafeNormalize() * 0;
             float lerpValue = reverse ? 0.10f : .05f;
             Projectile.Center = Vector2.Lerp(Projectile.Center, tarPos, lerpValue);
             Projectile.position.Y += (float)(Math.Sin(Main.GlobalTimeWrappedHourly * 1.1f) * 0.5f);
-            Projectile.spriteDirection = Projectile.direction = ((Owner.LocalMouseWorld().X - Projectile.Center.X) > 0).ToDirectionInt();
+            Projectile.spriteDirection = Projectile.direction = (Owner.LocalMouseWorld().X - Projectile.Center.X > 0).ToDirectionInt();
         }
         public float PrevProgress1 = 0;
         private void HoldAttacks()
@@ -89,7 +92,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     PrevProgress1 = Helper.Progress[1];
                     if (Helper.OnAnimationBegin(1))
-                        SoundEngine.PlaySound(HJScarletSounds.Evolution_Thrown with { Pitch = 0.71f }, Projectile.Center);
+                        ScarletSound(HJScarletSounds.Evolution_Thrown, Projectile.Center, pitch: .71f);
                     if (!Helper.IsDone[1])
                         Helper.UpdateAniState(1);
                     else
@@ -98,22 +101,25 @@ namespace HJScarletRework.Projs.Executor
                 else
                 {
                     if (PrevProgress1 == Helper.Progress[1])
-                        SoundEngine.PlaySound(HJScarletSounds.Evolution_Thrown with { Pitch = 0.9f }, Projectile.Center);
+                        ScarletSound(HJScarletSounds.Evolution_Thrown, Projectile.Center, pitch: .91f);
 
                     Helper.Progress[1]--;
                     Helper.IsDone[1] = false;
                     if (Helper.Progress[1] <= 0)
                         Helper.Progress[1] = 0;
                 }
-                if (Timer > AttackSpeed / 5 && Helper.IsDone[1])
+                if (Timer > AttackSpeed / 5 && Helper.IsDone[1]&&Projectile.IsMe())
                 {
-                    SoundEngine.PlaySound(HJScarletSounds.HymnFireball_Release with { MaxInstances = 0, Pitch = -.9f, PitchVariance = .1f, Volume = .55f }, Projectile.Center);
+                        Timer = 0;
+                    if (!Owner.CheckMana(Owner.HeldItem, (int)(Owner.HeldItem.mana * Owner.manaCost), true, false))
+                        return;
+
+                    ScarletSound(HJScarletSounds.HymnFireball_Release, Projectile.Center, .55f, 0, -.9f, .1f);
                     for (int i = 0; i < 2; i++)
                     {
                         Vector2 pos = Projectile.Center.ToRandCirclePosEdge(4);
                         Vector2 vel = Projectile.SafeDir().RotateRandom(ToRadians(15f)).ToSafeNormalize() * Main.rand.NextFloat(0.9f, 1.1f) * 7f;
                         Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, ProjectileType<PestilenceFlowerHunger>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
-                        Timer = 0;
                     }
                     for (int i = 0; i < 8; i++)
                     {

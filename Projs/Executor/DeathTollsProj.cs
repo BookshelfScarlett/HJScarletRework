@@ -34,8 +34,7 @@ namespace HJScarletRework.Projs.Executor
         public override string Texture => GetInstance<DeathTolls>().Texture;
         public override void SetStaticDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Type] = 6;
-            ProjectileID.Sets.TrailingMode[Type] = 2;
+            Projectile.ToTrailSetting(6);
         }
         public override void ExSD()
         {

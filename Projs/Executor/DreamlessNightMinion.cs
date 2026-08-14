@@ -51,7 +51,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Volume = 0.75f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.DeathsToll_Toss, Projectile.Center, .75f);
             Helper.MaxProgress[0] = GetSeconds(20);
             Helper.MaxProgress[1] = 85;
         }
@@ -118,7 +118,7 @@ namespace HJScarletRework.Projs.Executor
                         ShadowNebula.SpawnParticle(spawnPos + vel.ToRandVelocity(ToRadians(12f), 1f, 8f), vel, Main.rand.NextFloat(0.1f, 0.135f) * 1.1f, HJScarletTexture.Texture_WhiteCircle.Value);
                     }
 
-                    SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Volume = 0.75f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.DeathsToll_Toss, Projectile.Center, .75f);
                 }
                 Helper.UpdateAniState(1);
                 UpdateIdlePosBeforeStrike();
@@ -148,8 +148,7 @@ namespace HJScarletRework.Projs.Executor
         public void StrikeInit()
         {
 
-            SoundEngine.PlaySound(HJScarletSounds.Misc_MagicStaffFire with { MaxInstances = 2, Pitch = -0.4f, Volume = 0.5f }, Projectile.Center);
-            //ScreenShakeSystem.AddScreenShakes(Owner.Center, 60f, 180, Projectile.velocity.ToRotation(), ToRadians(0f));
+            ScarletSound(HJScarletSounds.Misc_MagicStaffFire, Projectile.Center,.5f, 2,-.4f);
             ScreenDarknessSystem.AddScreenDarkness(.85f, 6, 1, 36, easeOut: EaseInCubic);
             for (int i = 0; i < 16; i++)
             {
@@ -184,14 +183,14 @@ namespace HJScarletRework.Projs.Executor
         public void ShooDreamLaser()
         {
             int getItemUseSpeed = (int)Owner.ApplyWeaponAttackSpeed(GetInstance<DreamlessNight>().Item, GetInstance<DreamlessNight>().Item.useTime, 10);
-            if (Timer < getItemUseSpeed)
+            if (Timer < getItemUseSpeed && Projectile.IsMe())
                 return;
             Vector2 spawnPos = Projectile.Center + Projectile.rotation.ToRotationVector2() * 15f;
             Vector2 dir = (spawnPos - Main.MouseWorld).ToSafeNormalize();
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, dir * -16f, ProjectileType<DreamlessNightBeam>(), Projectile.damage, 1f, Owner.whoAmI);
             ((DreamlessNightBeam)proj.ModProjectile).BeamState = DreamlessNightBeam.BeamType.MinionBeam;
             SpawnDreamParticle(spawnPos);
-            SoundEngine.PlaySound(HJScarletSounds.Hammer_Shoot[1] with { MaxInstances = 2, Pitch = 0.5f }, spawnPos);
+            ScarletSound(HJScarletSounds.Hammer_ShootAlt, spawnPos, 1, 2, -.5f, variantType: 2);
             Timer = 0;
         }
 

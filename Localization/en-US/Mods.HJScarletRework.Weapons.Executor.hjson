@@ -86,12 +86,6 @@ TheDefiler: {
 		'''
 }
 
-GrandFinale: {
-	DisplayName: GrandFinale
-	Tooltip: ""
-	ExecutionStrike: ""
-}
-
 AetherfireSmasher: {
 	DisplayName: Aetherfire Smasher
 	Tooltip:
@@ -118,12 +112,31 @@ BinaryStars: {
 }
 
 CrimsonScythe: {
-	DisplayName: Crimson Scythe
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltips: ""
-	ExtraMechanic: ""
-	ConditionMechanic: ""
+	DisplayName: Crimson Heavy Scythe
+	Tooltip:
+		'''
+		Fourth swing has wider range
+		Each hit grants knockback immunity, causes bleed, and releases Soul Stones
+		You can slash the Soul Stones to return souls, or Right-click to harvest and heal
+		'''
+	ExecutionStrike:
+		'''
+		Each of the next 20 slashes grants you 2 defense on hit
+		During these slashes, automatically collect Soul Stons on the field
+		Absorb one soul while returning the other to its owner
+		'''
+	FlavorTooltips: —Beneath the crimson moon, none can escape her harvest—
+	ExtraMechanic:
+		'''
+		When combined with the Front Desk Reaper set, gain the following effects:
+		Increase executor damage, critical strike chance, and critical strike damage by 15%
+		+30 defense, allows unlimited flight time and grants a dash ability
+		'''
+	ConditionMechanic:
+		'''
+		The Black First Sun has sealed the power of this item
+		Perhaps it is time to surpass the Sun God
+		'''
 }
 
 DeathTolls: {
@@ -141,7 +154,7 @@ DeathTolls: {
 }
 
 TheJudgement: {
-	DisplayName: TheJudgement
+	DisplayName: The Judgement
 	Tooltip:
 		'''
 		Throw a Judgment Hammer unleashes a Judgment Nova on hit
@@ -179,13 +192,6 @@ ThePunishment: {
 		The attached Hammer consumes its presence duration only when attacking enemies
 		At most one Attached Hammer can exist, and while it is present, it does not increase Execution Times 
 		'''
-}
-
-TrueScarlet: {
-	DisplayName: True Scarlet
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltips: ""
 }
 
 SimpleHandAxe: {
@@ -227,12 +233,6 @@ FrostoftheStorm: {
 		Performs a rapid series of slashes with alternating tempo
 		Each slash sweeps a wider area and the cold wind covers a larger range
 		'''
-}
-
-Fleshtumor: {
-	DisplayName: Fleshtumor
-	Tooltip: ""
-	ExecutionStrike: ""
 }
 
 FrostHammer: {
@@ -282,219 +282,409 @@ StaffofFrostbite: {
 	Tooltip: ""
 }
 
+GaiaStriker: {
+	DisplayName: Gaia Hammer
+	Tooltip: After a delay, bursts into bloody missiles
+	ExecutionStrike:
+		'''
+		Transforms into a special Minion Hammer on hit
+		While active, press the Interact key to switch between Staff mode and Minion mode
+		In Minion mode, it automatically attacks nearby enemies
+		In Staff mode, it releases a crimson ray; while holding the Gaia Hammer, its normal attack is replaced to enhance the ray
+		In Staff mode, each attack with the held Gaia Hammer restores a small amount of the Minion Hammer's duration
+		When duration runs out, the Gaia Hammer bursts, healing you
+		You may also hold right-click for a moment to prematurely burst the Minion Hammer, granting more healing and refunding Execution Progress
+		'''
+	FlavorTooltips: —The most brutal aspect of Mother Earth—
+
+	Conditions: {
+		FirstTime: Before first crafting and not in multiplayer
+		SecondTime: After first using the Gaia Chest, or while in multiplayer
+	}
+}
+
 Frostlight: {
 	DisplayName: Frostlight
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Fires swift frost flames that rapidly follow the cursor
+	ExecutionStrike:
+		'''
+		Rotate the torch forward, unleashing frost fire like a flamethrower
+		When Execution Strike conditions are met again, press the Interact key to switch back to the first form
+		'''
 }
 
 PureYinyo: {
-	DisplayName: Pure Yinyo
-	Tooltip: ""
+	DisplayName: Pure Yin-Yang
+	Tooltip:
+		'''
+		Alternates throwing the Yin and Yang Hammers
+		The Yin Hammer inflicts both Cursed Flame and Ichor on hit, and bursts out dark shards
+		The Yang Hammer leaves behind erratic light shards along its path
+		'''
 	ExecutionStrike:
 		'''
-		Toss a hammer upward
-		Meanwhile, the blossom continuously releases rotating petals
+		Locks onto the enemy nearest to the cursor, attacking them
+		After the attack ends, it bounces off the enemy and bursts out a large number of shards
 		'''
 }
 
 LavaFlow: {
 	DisplayName: Lava Flow
-	Tooltip: ""
-	ExecutionStrike: ""
-}
-
-PestilenceFlower: {
-	DisplayName: Pestilence Flower
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip:
+		'''
+		Explodes On Hit
+		"Old things reborn"
+		'''
+	ExecutionStrike:
+		'''
+		Sticks to the enemy on hit, dealing continuous damage
+		On subsequent strikes, fireballs are launched upward from the enemy
+		'''
 }
 
 StarofHope: {
-	DisplayName: Starof Hope
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Star of Hope
+	Tooltip:
+		'''
+		On swing, a shining star falls toward the cursor
+		"A story of love and hope"
+		'''
+	ExecutionStrike:
+		'''
+		For the next 60 seconds, gain the "Star of Hope" buff icon
+		While the buff is active, all Executor weapons will summon shining stars on use
+		These stars add Execution Progress to the currently held weapon On Hit
+		'''
 }
 
 BoneSlap: {
 	DisplayName: Bone Slap
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip:
+		'''
+		Ignores the defense of the first enemy hit
+		Launches a shower of tiny bone shards upon hitting an enemy
+		This weapon always triggers Execution Strike automatically
+		"You! Can't! Even! Use a search engine"
+		'''
+	ExecutionStrike:
+		'''
+		Generates more bone shards on hit, which linger on the field
+		Grants the "Slap Master" effect on hit
+		While under Slap Master, all auxiliary Executor weapons ignore defense and ignore penetration damage reduction
+		'''
 }
 
 StreamingProtocol: {
 	DisplayName: Streaming Protocol
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip:
+		'''
+		Sends a spam email to the target On Hit
+		The spam email attempts to strike the enemy multiple times
+		This weapon always triggers Execution Strike automatically
+		"Based on HTTPS"
+		'''
+	ExecutionStrike:
+		'''
+		On hit, sends a red spam email that explodes and spawns more spam emails
+		Grants the "High-Score Stream" effect on hit
+		While under High-Score Stream:
+		- Streaming Protocol hits add Execution Progress to other auxiliary weapons
+		- Other auxiliary weapons spawn spam emails and red spam emails on hit
+		'''
 }
 
 AngryBomb: {
 	DisplayName: Angry Bomb
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Throws a bomb that locks onto the nearest target after a delay
+	ExecutionStrike:
+		'''
+		The bomb becomes even angrier
+		Has a wider search range and repairs itself multiple times after hitting to strike back
+		'''
 }
 
 TearEye: {
-	DisplayName: Tear Eye
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Cthulhu's Tear
+	Tooltip: A whip with slower attack speed but lower damage falloff
+	ExecutionStrike:
+		'''
+		For the next 60 seconds, gain the "Cthulhu's Tear" buff icon
+		While the buff is active, Executor weapon hits grant 5%/10%/15% damage reduction
+		Also applies the Wet debuff to the Executor
+		'''
 }
 
 ContainedBlast: {
 	DisplayName: Contained Blast
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltip: ""
+	Tooltip:
+		'''
+		Fires a shock round and a sticky round in quick succession
+		The shock round pierces multiple enemies, while the sticky round attaches to an enemy
+		Each enemy can have only one sticky round attached at a time
+		'''
+	ExecutionStrike:
+		'''
+		Detonates all sticky rounds on the field, granting effects based on the number of damage instances dealt:
+		- Increases Contained Blast's damage independently, up to 50%
+		- Increases Contained Blast's attack rate and makes its attacks always critically strike
+		- For a duration, shock round hits also add Execution Progress
+		'''
+	FlavorTooltip: Put a lid on it.
 }
 
 EndlessWar: {
 	DisplayName: Endless War
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltips: ""
-}
-
-GaiaStriker: {
-	DisplayName: Gaia Striker
-	Tooltip: Burst into crisom bolt after a while
+	Tooltip: On Hit, summons punishing lightning
 	ExecutionStrike:
 		'''
-		Gaia Striker transform into a special minion
-		While minion hammer present, press the Intersect Key to switch between Staff Mode and Minion Mode
-		Minion Mode will automatically attacks nearby target
-		Staff Mdoe releases a crisom ray
-		Normal attack is replaced to enhance the ray's capabilities while holding Gaia Striker
-		In Staff Mode, Each attack made while holding the Gaia Striker restores a small amount of duration to the minion
-		When the duration expires, Gaia Striker bursts, healing you
-		You may also hold the right mouse button for a moment to prematurely burst the minion
-		Granting additional healing and refunding Execution Progress
+		Transforms into a special Minion Hammer on hit
+		The suspended Minion Hammer automatically attacks nearby enemies and calls down multiple lightning strikes around itself
+		While the Minion Hammer is active, pressing the Interact key again—or when it is about to expire—performs three wide-area heavy strikes in the direction of your attack
+		These heavy strikes ignore defense, release lightning during the swing, and stun enemies on each hit
 		'''
-	FlavorTooltips: -The Fiercest Face of Mother Earth-
-
-	Conditions: {
-		FirstTime: Mods.HJScarletRework.Weapons.Executor.GaiaStriker.Conditions.FirstTime
-		SecondTime: Mods.HJScarletRework.Weapons.Executor.GaiaStriker.Conditions.SecondTime
-	}
+	FlavorTooltips: ""
 }
 
 SplendidofTerra: {
-	DisplayName: Splendidof Terra
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltips: ""
+	DisplayName: Splendid Terra
+	Tooltip: After a delay, releases life missiles
+	ExecutionStrike:
+		'''
+		Transforms into a special Minion Hammer on hit
+		While active, press the Interact key to switch between Staff mode and Minion mode
+		In Minion mode, it automatically attacks nearby enemies
+		In Staff mode, it releases a life ray; while holding the Splendid Terra, its normal attack is replaced to enhance the ray
+		In Staff mode, each attack with the held Splendid Terra restores a small amount of the Minion Hammer's duration
+		When duration runs out, the Splendid Terra disperses, healing you
+		You may also hold right-click for a moment to prematurely disperse the Minion Hammer, granting more healing and refunding Execution Progress
+		'''
+	FlavorTooltips: —An existence that belongs to Pan-Human History—
 }
 
 ASMD: {
-	DisplayName: A S M D
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: A.S.M.D
+	Tooltip: Fires an electromagnetic frost-fire shell that explodes on hit
+	ExecutionStrike:
+		'''
+		Implanted into the victim, dealing multiple explosive damage instances
+		The final explosion bursts out multiple ice chunks from the body, lingering on the field
+		Subsequent shell hits will cause one ice chunk to chase that enemy and grant you Execution Progress
+		'''
 }
 
 SickleAndTorch: {
-	DisplayName: Sickle And Torch
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Slash and Burn
+	Tooltip: Throws a torch on the third attack
+	ExecutionStrike:
+		'''
+		Sickle attacks have stronger knockback and increase fire burn damage on hit
+		Torch direct hits launch gravity-affected fireballs
+		'''
 }
 
 PureDagger: {
-	DisplayName: Pure Dagger
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Pure White Dagger
+	Tooltip: On blade hit, grants [i:CobaltShield] knockback immunity
+	ExecutionStrike:
+		'''
+		Increases swing speed. Hits with the swing spawn Pure White Stars
+		Also increases defense by 6
+		'''
 }
 
 Monocle: {
 	DisplayName: Monocle
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltip: ""
+	Tooltip:
+		'''
+		High-speed, precise bullets pierce multiple enemies
+		Damage increases with each enemy pierced
+		'''
+	ExecutionStrike:
+		'''
+		Fires a nearly instantaneous high-speed piercing bullet
+		The bullet ricochets to the nearest target upon hitting a wall or after a short time
+		Infinite piercing, always critically strikes
+		Critical strike chance is converted to critical strike damage at a 1:1 ratio
+		'''
+	FlavorTooltip: One is enough.
 }
 
 ArcticGuanDao: {
 	DisplayName: Arctic Guan Dao
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Swing the guan dao to knock back nearby enemies
+	ExecutionStrike:
+		'''
+		Sends a snow cloud toward the cursor position
+		The cloud lingers on the field and drops icicles
+		'''
 }
 
 ConferenceCall: {
 	DisplayName: Conference Call
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltip: ""
+	Tooltip:
+		'''
+		Fires 5 bullets at once
+		Each bullet splits into two split shots after traveling a short distance or hitting an enemy
+		Split shots bounce off walls
+		'''
+	ExecutionStrike:
+		'''
+		Empowers attacks for the next 5 seconds
+		All bullets bounce off walls and can pierce one enemy
+		'''
+	FlavorTooltip: Let's just ping everyone all at once.
 }
 
 GhostKnife: {
-	DisplayName: Ghost Knife
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Ghost Dagger
+	Tooltip: Throws a knife in a straight line that pierces multiple enemies and pursues on hit
+	ExecutionStrike:
+		'''
+		Creates a Ghost Mark lasting 60 seconds, enhancing all Executor attacks
+		While the mark is active, Executor critical strike chance is increased by 10%
+		Also fires Ghost Daggers during attacks, which do not pursue on hit
+		'''
 }
 
 DesertKnife: {
 	DisplayName: Desert Knife
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Can pierce up to 3 enemies
+	ExecutionStrike:
+		'''
+		Creates a Desert Mark lasting 120 seconds, enhancing all Executor attacks
+		While the mark is active, most Executor weapons gain +2 piercing
+		Weapons that do not pierce are unaffected
+		'''
 }
 
 DungeonKnife: {
-	DisplayName: Dungeon Knife
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Steel Dagger
+	Tooltip: Bounces toward the nearest enemy when hitting a wall
+	ExecutionStrike:
+		'''
+		Creates a Dungeon Mark lasting 30 seconds, enhancing all Executor attacks
+		While the mark is active, Executor defense is increased by 8
+		Damage taken from Dungeon enemies is reduced by 85%
+		'''
 }
 
 FishronKnife: {
-	DisplayName: Fishron Knife
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Duke's Fang
+	Tooltip: On Hit, spawns seeking bubbles
+	ExecutionStrike:
+		'''
+		Creates a Duke Mark lasting 60 seconds, enhancing all Executor attacks
+		While the mark is active, Executor damage is increased by 20%
+		Also allows you to swim freely in water
+		'''
 }
 
 GrassKnife: {
-	DisplayName: Grass Knife
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Grass Blade
+	Tooltip:
+		'''
+		Inflicts a special Jungle Venom On Hit
+		Jungle Venom deals 25/50/100 damage over time, scaling with game progression
+		'''
+	ExecutionStrike:
+		'''
+		Creates a Jungle Mark lasting 60 seconds, enhancing all Executor attacks
+		While the mark is active, Executor applies Jungle Venom that stacks up to 10 times
+		If the target has more than 3 stacks of Jungle Venom, a direct hit with Grass Blade immediately triggers the damage
+		'''
 }
 
 MoltenKnife: {
-	DisplayName: Molten Knife
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Molten Throwing Knife
+	Tooltip: Explodes On Hit
+	ExecutionStrike:
+		'''
+		Creates a Molten Mark lasting 60 seconds, enhancing all Executor attacks
+		While the mark is active, Executor adds Molten Explosion
+		Molten Explosion has a fixed frequency, deals 2.75x the damage dealt, and cannot critically strike
+		'''
 }
 
 TheSevenStar: {
-	DisplayName: The Seven Star
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Seven Stars
+	Tooltip:
+		'''
+		Fires a star toward the cursor
+		Lights up the Big Dipper behind you
+		'''
+	ExecutionStrike:
+		'''
+		The seven bright stars fire a beam toward the cursor
+		The beam pierces multiple enemies
+		'''
 }
 
 StormSaber: {
 	DisplayName: Storm Saber
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip:
+		'''
+		Destroys enemies
+		A heteromorphic product crudely reassembled from a broken blade still holding residual storm power
+		Though not authentic, it still wields some of its former might against giants
+		'''
+	ExecutionStrike: Has a larger swing range and fires larger projectiles
 }
 
 TheGreatDipper: {
-	DisplayName: The Great Dipper
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Polaris
+	Tooltip:
+		'''
+		Fires two stars toward the cursor
+		Lights up the Big Dipper behind you
+		Execution is manual in this mode
+		'''
+	ExecutionStrike:
+		'''
+		Each swing fires seven seeking stars, gradually lighting up the Big Dipper behind
+		Direct hits also add seven stars
+		When the Big Dipper is fully lit, Execution Strike triggers automatically, unfolding a sustained damage galaxy at the cursor position
+		Execution is automatic in this mode
+		'''
 	Special: ""
 }
 
 BambooBow: {
-	DisplayName: Bamboo Bow
+	DisplayName: Agile Bamboo Bow
 	Tooltip: ""
-	ExecutionStrike: ""
+	ExecutionStrike:
+		'''
+		Enhances the next 12 attacks
+		Increases attack speed, arrow speed, and allows arrows to pierce one enemy
+		'''
 }
 
 BambooSword: {
-	DisplayName: Bamboo Sword
-	Tooltip: ""
-	ExecutionStrike: ""
+	DisplayName: Bamboo Practice Sword
+	Tooltip: Low damage, but briefly stops and knocks back small enemies on hit
+	ExecutionStrike:
+		'''
+		Throws the bamboo sword directly; it stops on the first enemy hit
+		The sword lingers briefly, spinning and striking nearby enemies
+		Each strike always stops the enemy
+		'''
 }
 
 ClimaticHawstring: {
-	DisplayName: �������
+	DisplayName: Climatic Bowstring
 	Tooltip:
 		'''
-		�ֳ�ʱ��λС�ɹ������������Э����������
-		�������Ϊ����������Ϊ�ҡ�
+		While held, two small flying rods descend from the sky and assist in attacking enemies
+		"With the sky's rod as the bow, and the breath of the climate as the string"
 		'''
-	ExecutionStrike: �ڽ�������5���������������ܼ���
+	ExecutionStrike: Fires thermal lasers continuously for the next 5 seconds
+}
+
+WeHaveBookshelf: {
+	DisplayName: We Have a Bookshelf
+	Tooltip:
+		'''
+		Stuns enemies
+		"We have a big bookshelf!"
+		'''
+	ExecutionStrike: The next 15 swings each release more books
 }

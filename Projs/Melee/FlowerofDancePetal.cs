@@ -2,6 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace HJScarletRework.Projs.Melee
 {
     public class FlowerofDancePetal : HJScarletProj
     {
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(36);

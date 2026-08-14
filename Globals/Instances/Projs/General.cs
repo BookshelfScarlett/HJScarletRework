@@ -141,9 +141,9 @@ namespace HJScarletRework.Globals.Instances.Projs
             Player Owner = Main.player[projectile.owner];
             if (Owner.whoAmI != Main.myPlayer)
                 return;
-            if (Owner.HasBuff<StarofHopeBuff>() && projectile.DamageType.CountsAsClass<ExecutorDamageClass>() && projectile.penetrate > 1)
+            if (Owner.HasProj<DesertKnifeMark>() && projectile.DamageType.CountsAsClass<ExecutorDamageClass>() && projectile.penetrate > 1)
             {
-                projectile.penetrate += 1;
+                projectile.penetrate += 2;
             }
 
             ModifyPreciousTargets(Owner, projectile);
@@ -190,6 +190,7 @@ namespace HJScarletRework.Globals.Instances.Projs
 
         private void ModifyPreciousTargets(Player owner, Projectile projectile)
         {
+            return;
             //大部分“由“玩家直接通过shoot属性发射出去的射弹都会吃到这个加成。
             //衍生射弹除外
             //需注意的是这个写法排除了一些可能存在的手持射弹，如果真的有神人手持射弹也吃了这个加成……嗯我也不知道怎么说了。

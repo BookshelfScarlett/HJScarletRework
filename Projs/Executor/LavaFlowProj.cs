@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Core.ParticleECS;
+﻿using ContinentOfJourney.Items.ThrowerWeapons;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -53,10 +54,7 @@ namespace HJScarletRework.Projs.Executor
         public bool SetSpecial = false;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            //Main.NewText(target.HJScarlet().isBeingStabByLavaFlow);
             SetSpecial = target.HJScarlet().isBeingStabByLavaFlowExecution > 0;
-            Projectile.ExpandHitboxBy(3f);
-            Projectile.Damage();
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
@@ -64,6 +62,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
+            Projectile boom = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), Projectile.originalDamage / 2, 1f, Owner.whoAmI);
+            boom.scale = 1.5f;
             Projectile.AddExecutionTimeDelayed(ItemType<LavaFlow>());
             //什么叫你写了这么多就为了处理这个特效爆炸？
             for (int i = 0; i < 45; i++)
@@ -110,14 +110,14 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, -Vector2.UnitY.ToRandVelocity(ToRadians(10f), 9f, 13f), ProjectileType<LavaFlowBoom>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 }
-                SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);
-                SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 0, Pitch = .65f }, Projectile.Center);
+                ScarletSound(SoundID.DD2_BetsyFireballImpact, Projectile.Center, instances: 0, pitch: .65f, pitchVariance: .1f);
+                ScarletSound(SoundID.DD2_BetsyFlameBreath, Projectile.Center, instances: 0, pitch: .65f, pitchVariance: .1f);
             }
             new CrossGlow(Projectile.Center, Color.OrangeRed, 40, .75f, .25f).Spawn();
             new CrossGlow(Projectile.Center, Color.Orange, 40, .75f, .23f).Spawn();
             new CrossGlow(Projectile.Center, Color.White, 40, .75f, .20f).Spawn();
             if (!SetSpecial)
-                SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { MaxInstances = 0, Pitch = .35f }, Projectile.Center);
+                ScarletSound(SoundID.DD2_BetsyFireballImpact, Projectile.Center, instances: 0, pitch: .35f, pitchVariance: .1f);
 
         }
         public override bool PreDraw(ref Color lightColor)

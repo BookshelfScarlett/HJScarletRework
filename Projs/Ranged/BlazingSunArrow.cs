@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class BlazingSunArrow : HJScarletProj, IPixelatedRenderer
     {
-        public override EnumDamageClass Category => EnumDamageClass.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(16);

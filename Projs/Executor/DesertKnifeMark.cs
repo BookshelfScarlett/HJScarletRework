@@ -8,6 +8,7 @@ namespace HJScarletRework.Projs.Executor
     public class DesertKnifeMark : KnifeMarkClass
     {
         public override Color BackgroundColor => Color.SaddleBrown;
+        public override int LifeTime => 120;
         public override void ExtraFirstFrame()
         {
             Vector2 spawnPos = Projectile.Center;

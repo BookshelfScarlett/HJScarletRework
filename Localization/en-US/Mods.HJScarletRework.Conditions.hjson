@@ -3,6 +3,7 @@ Drop: {
 	SnowBiome: Mods.HJScarletRework.Conditions.Drop.SnowBiome
 	UnderworldBiome: Mods.HJScarletRework.Conditions.Drop.UnderworldBiome
 	FullCowboy: Mods.HJScarletRework.Conditions.Drop.FullCowboy
+	PostSupremeCondition: Mods.HJScarletRework.Conditions.Drop.PostSupremeCondition
 }
 
 Crafting: {

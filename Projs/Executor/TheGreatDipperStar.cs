@@ -23,9 +23,11 @@ namespace HJScarletRework.Projs.Executor
         }
         public float OriginalSpeed = 0;
         public ref float Osci => ref Projectile.ai[1];
+        public ref float Timer => ref Projectile.ai[0];
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 10;
+            Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.scale = 0f;
             Projectile.tileCollide = true;
@@ -49,9 +51,13 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.ai[2] != 0)
             {
-                if (Projectile.GetTargetSafe(out NPC target, true, searchDistance: 800, true))
+                Timer++;
+                if (Timer > Projectile.MaxUpdates* 15)
                 {
-                    Projectile.HomingTarget(target.Center, -1, 18f, 17);
+                    if (Projectile.GetTargetSafe(out NPC target, true, searchDistance: 800, true))
+                    {
+                        Projectile.HomingTarget(target.Center, -1, 18f, 17);
+                    }
                 }
             }
             if (Projectile.IsOutScreen())
@@ -70,6 +76,12 @@ namespace HJScarletRework.Projs.Executor
                 for (int i = 0; i < 2; i++)
                     ECSParticle.CrossGlow(Projectile.Center.ToRandCirclePos(6) + i * Projectile.SafeDir() * 5f, RandVelTwoPi(.1f, .3f), RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), 40, 1f, 0, Main.rand.NextFloat(.85f, 1.15f) * Projectile.scale * .041f, fadinTime: .2f);
             }
+        }
+        public override bool? CanDamage()
+        {
+            return true;
+            bool canDamage = Projectile.ai[2] == 0;
+            return Projectile.ai[2] == 0 || (Projectile.ai[2] != 0 && Timer > Projectile.MaxUpdates * 15);
         }
         public override void OnKill(int timeLeft)
         {

@@ -5,11 +5,17 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Melee
 {
     public class EnchantedSwordfishJavelin : HJScarletProj
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         public override string Texture => GetInstance<EnchantedSwordfishProj>().Texture;
         public override EnumDamageClass Category => EnumDamageClass.Melee;
         public enum State

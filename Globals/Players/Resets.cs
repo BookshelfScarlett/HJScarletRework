@@ -69,6 +69,7 @@ namespace HJScarletRework.Globals.Players
             SquidPet = false;
             WatcherPet = false;
             dracoPet = false;
+            sonPet = false;
             goldenAppleEnchanted = false;
             goldenAppleDamageAbsorb = 0;
             goldenAppleEnchantedFully = false;

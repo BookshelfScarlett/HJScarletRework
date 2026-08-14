@@ -12,7 +12,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.ColdSteel;
         public override void ExSD()
         {
-            Item.damage = 60;
+            Item.damage = 50    ;
             Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 5f;
             Item.SetUpRarityPrice(ItemRarityID.LightRed);

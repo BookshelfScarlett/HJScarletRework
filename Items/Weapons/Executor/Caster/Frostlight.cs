@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Caster
         }
         public override void ExSD()
         {
-            Item.damage = 220;
+            Item.damage = 200;
             Item.SetUpRarityPrice(ItemRarityID.LightPurple);
             Item.shootSpeed = 21;
             Item.shoot = ProjectileType<FrostlightHeldProj>();

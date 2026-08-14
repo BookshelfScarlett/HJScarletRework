@@ -45,11 +45,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-            if (!Owner.HasProj<MoltenKnifeMark>())
-            {
-                int dmg = (int)(Projectile.originalDamage * MoltenKnife.BoomDamageMult);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<MoltenKnifeBoom>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
-            }
+            int dmg = (int)(Projectile.originalDamage * 1.5f);
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<MoltenKnifeBoom>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
         }
         public override bool PreDraw(ref Color lightColor)
         {

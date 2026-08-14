@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
@@ -13,7 +14,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSSD()
         {
-            Type.ShimmerEach(ItemID.Amarok);
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
         }
         public override void ExSD()
@@ -24,6 +24,16 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
             Item.SetUpItemShoot<FrostHammerProj>(18);
             Item.SetUpItemUseTime(ItemUseStyleID.Swing, 30);
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddRecipeGroup(HJScarletRecipeGroup.AnyTitaniumBar, 15).
+                AddIngredient(ItemID.FrostCore, 3).
+                AddIngredient(ItemID.SoulofLight, 15).
+                AddIngredient(ItemID.SoulofNight, 15).
+                AddTile(TileID.MythrilAnvil).
+                Register();
         }
     }
 }

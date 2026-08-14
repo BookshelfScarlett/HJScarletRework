@@ -7,6 +7,7 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using System;
+using System.Xml.Schema;
 using Terraria;
 using Terraria.Audio;
 
@@ -176,7 +177,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void SpawnShadowNebulaBeam(NPC target)
         {
-            SoundEngine.PlaySound(HJScarletSounds.Dream_Toss with { Pitch = 0f, Volume = 1.5f, MaxInstances = 0 }, Projectile.Center);
+            ScarletSound(HJScarletSounds.Dream_Toss, Projectile.Center, instances: 0);
             new CrossGlow(target.Center, Color.DarkViolet, 40, 1, 0.38f).Spawn();
             new CrossGlow(target.Center, Color.Violet, 40, 1, 0.28f).Spawn();
             new CrossGlow(target.Center, Color.Violet, 40, 1, 0.18f).Spawn();

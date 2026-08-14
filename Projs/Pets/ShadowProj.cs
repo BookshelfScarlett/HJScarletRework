@@ -1,52 +1,49 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Pets
 {
-    public class ShadowProj : ModProjectile, ILocalizedModType
+    public class ShadowProj:ScarletPetProjClass
     {
-        public override string LocalizationCategory => "Projs.Friendly.Pets";
-        public override string Texture => $"HJScarletRework/Assets/Texture/Pets/Pet_{GetType().Name}";
-        public Player Owner => Main.player[Projectile.owner];
+        public override int TotalFrames => 12;
         public override void SetStaticDefaults()
         {
-            Main.projPet[Type] = true;
-            Main.projFrames[Type] = 11;
             ProjectileID.Sets.LightPet[Type] = true;
+            Main.projPet[Type] = true;
         }
-        public override void SetDefaults()
+        
+        public override void ExSD()
         {
-            Projectile.CloneDefaults(ProjectileType<NoneProj>());
+            base.ExSD();
         }
-        public override bool ShouldUpdatePosition() => false;
-        public override void AI()
+        public override void SimplePetFunction()
         {
-            if (Owner.dead)
-                Owner.HJScarlet().ShadowPet = false;
-
+            SimplePetAnimation(4);
             if (Owner.HJScarlet().ShadowPet)
                 Projectile.timeLeft = 2;
-            SimplePetAnimation(15f);
-            Projectile.Center = new Vector2(Owner.MountedCenter.X - 40f, Owner.MountedCenter.Y - 35f);
-            Projectile.light = 1;
+            if (Owner.dead)
+                Owner.HJScarlet().ShadowPet= false;
+
+            base.SimplePetFunction();
         }
-        public void SimplePetAnimation(float Speed)
+        public override void PetAI()
         {
-            Projectile.frameCounter++;
-            if (Projectile.frameCounter > Speed)
-            {
-                Projectile.frameCounter = 0;
-                Projectile.frame++;
-                if (Projectile.frame > Main.projFrames[Projectile.type] - 1)
-                    Projectile.frame = 0;
-            }
+            Projectile.Center = Owner.MountedCenter;
+            Projectile.position.Y += Owner.gfxOffY;
         }
-        //public override bool PreDraw(ref Color lightColor)
-        //{
-        //    Projectile.DrawProj(Color.White, 1);
-        //    return false;
-        //}
+        public override bool PreDraw(ref Color lightColor)
+        {
+            SpriteBatch sb = Main.spriteBatch;
+            Texture2D tex = Projectile.GetTexture();
+            Rectangle frame = tex.Frame(1, TotalFrames, 0, Projectile.frame);
+            Vector2 ori = frame.Size() / 2;
+            Vector2 pos = Projectile.Center - Main.screenPosition;
+            SpriteEffects se = Owner.direction > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            sb.Draw(tex, pos, frame, Color.White, 0, ori, Projectile.scale, se, 0);
+            return false;
+        }
     }
-}
+ }

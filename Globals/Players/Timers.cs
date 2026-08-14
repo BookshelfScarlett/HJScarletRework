@@ -13,6 +13,7 @@ namespace HJScarletRework.Globals.Players
         public int swapTimer = 0;
         public int ruShiWoWenBanTimer = 0;
         public int globalSoundDelay = 0;
+        public int bookcaseBuffTime = 0;
         public void ResetTimer()
         {
             climaticHawstringLaserCounter = 0;
@@ -42,9 +43,12 @@ namespace HJScarletRework.Globals.Players
             maidReaperHealTimer = 0;
             conferenceCallBuffTime = 0;
             tearEyeBuff = 0;
+            bookcaseBuffTime = 0;
         }
         public void UpdateTimer()
         {
+            if (bookcaseBuffTime > 0)
+                bookcaseBuffTime--;
             if (tearEyeBuff > 0)
                 tearEyeBuff--;
             if (conferenceCallBuffTime > 0)

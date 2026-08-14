@@ -59,8 +59,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            float rat = Utils.GetLerpValue(0, 10, Projectile.numHits, true);
-            modifiers.SourceDamage *= Lerp(1f, 2.5f, rat);
+            float rat = Utils.GetLerpValue(0, 8, Projectile.numHits, true);
+            modifiers.SourceDamage *= Lerp(1f, 3f, rat);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

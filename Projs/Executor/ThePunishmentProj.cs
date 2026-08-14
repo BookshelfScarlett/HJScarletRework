@@ -32,11 +32,12 @@ namespace HJScarletRework.Projs.Executor
         public override void ExSD()
         {
             Projectile.height = Projectile.width = 32;
-            Projectile.penetrate = 6;
             Projectile.ownerHitCheck = true;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 2;
+            Projectile.penetrate = -1;
+            Projectile.SetupImmnuity(Projectile.MaxUpdates * 45);
             Projectile.timeLeft = 600;
             Projectile.scale *= 1.1f;
         }
@@ -128,7 +129,7 @@ namespace HJScarletRework.Projs.Executor
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             Projectile.BounceOnTile(oldVelocity, 0.24f);
-            SoundEngine.PlaySound(HJScarletSounds.Hammer_LightHit with { Pitch = 0.25f, PitchVariance = 0.1f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.Hammer_LightHit, Projectile.Center, pitch: .25f, pitchVariance: .1f);
             for (int i = 0; i < 10; i++)
             {
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(16f), RandVelTwoPi(1.3f, 5f), RandLerpColor(Color.Goldenrod, Color.Orange), 120, RandRotTwoPi, 1f, 0.48f, false).Spawn();
@@ -138,7 +139,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            SoundEngine.PlaySound(HJScarletSounds.Hammer_LightHit with { MaxInstances = 0, Pitch = 0.25f, PitchVariance = 0.1f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.Hammer_LightHit, Projectile.Center, 1, 0, .25f, .1f);
             if (!Owner.HasProj<ThePunishmentExecution>())
                 Projectile.AddExecutionTimeImmediate(ItemType<ThePunishment>());
             for (int i = 0; i < 10; i++)
@@ -148,7 +149,7 @@ namespace HJScarletRework.Projs.Executor
             int reverse = Main.rand.NextBool().ToDirectionInt();
             Vector2 spawnPos = Owner.Center + Projectile.SafeDir().RotatedBy(PiOver2) * reverse * 25f - Owner.ToMouseVector2() * 100f;
             Vector2 vel = Owner.ToMouseVector2().RotatedBy(ToRadians(15f) * reverse) * 28f;
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<ThePunishmentStar>(), Projectile.damage, 1f, Owner.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, vel, ProjectileType<ThePunishmentStar>(), Projectile.damage /2, 1f, Owner.whoAmI);
             ((ThePunishmentStar)proj.ModProjectile).TargetNPC = target;
 
         }

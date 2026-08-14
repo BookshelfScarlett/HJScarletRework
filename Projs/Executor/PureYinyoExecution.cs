@@ -50,7 +50,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { MaxInstances = 0, Pitch = -.5f });
+            ScarletSound(HJScarletSounds.DeathsToll_Toss, Projectile.Center, 1f, 0, -.5f, .1f);
             Vector2 offset = Vector2.UnitY * -18f;
             for (int i = 0; i < 10; i++)
             {
@@ -123,7 +123,7 @@ namespace HJScarletRework.Projs.Executor
 
             if (Projectile.MeetMaxUpdatesFrame(Timer, 25))
             {
-                SoundEngine.PlaySound(HJScarletSounds.Frosthammer_SnowCharge with { MaxInstances = 0, Pitch = -.4f });
+                ScarletSound(HJScarletSounds.Frosthammer_SnowCharge, Projectile.Center, 1f, 0, -.4f, .1f);
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 100, 120, Projectile.velocity.ToRotation(), 0, easingFunc: EaseOutExpo);
                 for (int i = 0; i < 40; i++)
                 {
@@ -159,11 +159,11 @@ namespace HJScarletRework.Projs.Executor
                         Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(8), vel, ProjectileType<PureYinyoJade>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                         ((PureYinyoJade)proj.ModProjectile).BlackShard = false;
                     }
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < 12; i++)
                     {
                         float rot = Main.rand.NextFloat(ToRadians(15), ToRadians(180 - 15));
                         Vector2 vel = rot.ToRotationVector2() * Main.rand.NextFloat(7f, 11f) * .7f;
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(8), vel, ProjectileType<PureYinyoJade>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center.ToRandCirclePos(8), vel, ProjectileType<PureYinyoJade>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
                         ((PureYinyoJade)proj.ModProjectile).BlackShard = true;
 
                     }
@@ -315,15 +315,15 @@ namespace HJScarletRework.Projs.Executor
                 SetHitParticle(target.Center);
                 if (Projectile.numHits < 16)
                 {
-                    SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { Variants = [1], MaxInstances = 0, Pitch = -.8f, Volume = .60f });
+                    ScarletSound(HJScarletSounds.GalvanizedHand_Hit, Projectile.Center, .6f, 0, -.8f, 0.1f, 1);
                     return;
                 }
                 SwitchNextState(State.BreakIntoShard);
                 Projectile.velocity = (-Vector2.UnitY) * Main.rand.NextFloat(43f, 48f);
                 Projectile.rotation = Projectile.velocity.ToRotation();
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30, 120, Projectile.rotation, 0, easingFunc: EaseOutExpo);
-                SoundEngine.PlaySound(HJScarletSounds.TheMars_Toss with { MaxInstances = 0, Pitch = -.4f, Volume = .85f });
-                SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { MaxInstances = 0, Pitch = -.70f, Volume = .65f });
+                ScarletSound(HJScarletSounds.TheMars_Toss, Projectile.Center, .85f, 0, -.4f, .05f);
+                ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center, .65f, 0, -.7f, .05f);
                 for (int i = 0; i < 32; i++)
                 {
                     Vector2 pos = target.Center.ToRandCirclePos(3);

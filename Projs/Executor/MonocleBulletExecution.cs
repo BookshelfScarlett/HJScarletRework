@@ -94,7 +94,7 @@ namespace HJScarletRework.Projs.Executor
         {
             int maxHit = Monocle.ExecutionPenetrate;
             float ratios = Utils.GetLerpValue(0, maxHit, Projectile.numHits, true);
-            float damageMult = Lerp(Monocle.ExecutionDamageMult, 0.75f, ratios);
+            float damageMult = Lerp(Monocle.ExecutionDamageMult, 3f, ratios);
             if (Projectile.numHits < 1)
                 modifiers.SetCrit();
             modifiers.SourceDamage *= damageMult;

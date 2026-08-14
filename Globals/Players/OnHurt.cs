@@ -155,7 +155,7 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
-            if (ScarletNPCIDSets.DivineNPC[npc.type] && fruitofEthernity && NPC.AnyNPCs(npc.type))
+            if (ScarletNPCIDSets.DivineNPC[npc.type] && fruitofEthernity)
             {
                 //悠久果实效果下的玩家受到NPC攻击时，重置玩家的移动状态
                 Player.velocity *= 0;
@@ -246,6 +246,10 @@ namespace HJScarletRework.Globals.Players
         {
             modifiers.ModifyHurtInfo += Modifiers_ModifyHurtInfo;
             float finalDamageModiflication = 1f;
+            if (KnifeMarkIndex == ProjectileType<DungeonKnifeMark>() && Player.ZoneDungeon&&NPC.AnyDanger(true,true))
+            {
+                finalDamageModiflication *= .85f;
+            }
             if (Player.HasBuff<BlackKeyExecutionBuff>() && blackKeyDefenseTrigger)
             {
                 finalDamageModiflication -= blackKeyDefenseBuff;

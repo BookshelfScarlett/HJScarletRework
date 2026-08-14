@@ -1,47 +1,47 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Pets
 {
-    public class NoneProj : ModProjectile, ILocalizedModType
+    public class NoneProj : ScarletPetProjClass
     {
-        public override string LocalizationCategory => "Projs.Friendly.Pets";
-        public override string Texture => $"HJScarletRework/Assets/Texture/Pets/Pet_{GetType().Name}";
-        public Player Owner => Main.player[Projectile.owner];
+        public override int TotalFrames => 1;
         public override void SetStaticDefaults()
         {
-            Main.projPet[Type] = true;
             ProjectileID.Sets.LightPet[Type] = true;
+            Main.projPet[Type] = true;
         }
-        public override void SetDefaults()
-        {
-            Projectile.penetrate = -1;
-            Projectile.netImportant = true;
-            Projectile.timeLeft *= 5;
-            Projectile.friendly = true;
-            Projectile.tileCollide = false;
-            Projectile.aiStyle = -1;
-            Projectile.width = 22;
-            Projectile.height = 22;
-            Projectile.ignoreWater = true;
-        }
-        public override bool ShouldUpdatePosition() => false;
-        public override void AI()
-        {
-            if (Owner.dead)
-                Owner.HJScarlet().NonePet = false;
 
+        public override void ExSD()
+        {
+            base.ExSD();
+        }
+        public override void SimplePetFunction()
+        {
             if (Owner.HJScarlet().NonePet)
                 Projectile.timeLeft = 2;
+            if (Owner.dead)
+                Owner.HJScarlet().NonePet= false;
 
-            Projectile.Center = new Vector2(Owner.Center.X, Owner.Center.Y - 35f);
-            Projectile.light = 1;
+            base.SimplePetFunction();
+        }
+        public override void PetAI()
+        {
+            Projectile.Center = Owner.MountedCenter;
+            Projectile.position.Y += Owner.gfxOffY;
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Projectile.DrawProj(Color.White, 1);
+            SpriteBatch sb = Main.spriteBatch;
+            Texture2D tex = Projectile.GetTexture();
+            Rectangle frame = tex.Frame();
+            Vector2 ori = frame.Size() / 2;
+            Vector2 pos = Projectile.Center - Main.screenPosition;
+            SpriteEffects se = Owner.direction > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            sb.Draw(tex, pos, frame, Color.White, 0, ori, Projectile.scale, se, 0);
             return false;
         }
     }

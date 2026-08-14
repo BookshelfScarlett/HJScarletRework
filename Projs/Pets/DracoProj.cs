@@ -1,12 +1,13 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
+using System;
 using Terraria;
 
 namespace HJScarletRework.Projs.Pets
 {
-    public class DracoProj : ScarletFloatingPet
+    public class DracoProj : ScarletPetProjClass
     {
-        public override int PetFrames => 6;
+        public override int TotalFrames => 6;
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 10;
@@ -14,25 +15,31 @@ namespace HJScarletRework.Projs.Pets
         }
         public override void SimplePetFunction()
         {
-            SimplePetAnimation(15f);
+            SimplePetAnimation(12f);
             if (Owner.dead)
-                Owner.HJScarlet().WatcherPet = false;
-            if (Owner.HJScarlet().WatcherPet)
+                Owner.HJScarlet().dracoPet = false;
+            if (Owner.HJScarlet().dracoPet)
                 Projectile.timeLeft = 2;
         }
-        public override void GetPetSpriteState(out bool FaceLeft, out bool ShouldFiip)
+        public float Osci = 0;
+        public override void PetAI()
         {
-            FaceLeft = true;
-            ShouldFiip = true;
+            Osci += ToRadians(1f);
+            float mountedPosX = Owner.MountedCenter.X - 80f * Owner.direction;
+            float mountedPosY = Owner.MountedCenter.Y + (float)(Math.Sin(Osci) * 5f) - 10f;
+            Vector2 mountedPos = new(mountedPosX, mountedPosY);
+            Projectile.Center = Vector2.Lerp(Projectile.Center, mountedPos, 0.10f);
         }
-        public override Vector2 GetIdlePos(Player player)
+        public override bool PreDraw(ref Color lightColor)
         {
-            return base.GetIdlePos(player);
+            SpriteBatch sb = Main.spriteBatch;
+            Texture2D tex = Projectile.GetTexture();
+            Rectangle frame = tex.Frame(1, TotalFrames, 0, Projectile.frame);
+            Vector2 ori = frame.Size() / 2;
+            Vector2 pos = Projectile.Center - Main.screenPosition;
+            SpriteEffects se = Owner.direction > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            sb.Draw(tex, pos, frame, Color.White, 0, ori, Projectile.scale*.82f, se, 0);
+            return false;
         }
-        public override void GetIdleState(out float MinDistance, out float SpeedMult, out float FloatingMult)
-        {
-            base.GetIdleState(out MinDistance, out SpeedMult, out FloatingMult);
-        }
-
     }
 }

@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         }
         public override void ExSD()
         {
-            Item.damage = 1450;
+            Item.damage = 1276;
             Item.crit = 20;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true, true);
@@ -37,8 +37,6 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         }
         public override void ModifyWeaponDamage(Player player, ref StatModifier damage)
         {
-            if (DownedBossSystem.downedSon)
-                damage *= 10;
         }
         public override bool CanUseItem(Player player)
         {

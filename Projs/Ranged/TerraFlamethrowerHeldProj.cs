@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Ranged;
@@ -13,6 +14,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class TerraFlamethrowerHeldProj : HJScarletProj
     {
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override string Texture => GetInstance<TerraFlamethrower>().Texture + "Alt";
         public int AttackTime => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, Owner.HeldItem.useTime, 2);
         public ref float Timer => ref Projectile.ai[0];

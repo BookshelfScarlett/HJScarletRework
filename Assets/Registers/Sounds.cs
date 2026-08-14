@@ -105,6 +105,7 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle Tlipoca_StoneBonk => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_StoneBonk)}", numVariants: 2);
         public static SoundStyle Tlipoca_StoneShatter => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_StoneShatter)}");
         public static SoundStyle Tlipoca_Swing => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_Swing)}", numVariants: 2);
+        public static SoundStyle Tlipoca_NpcKillSound => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_NpcKillSound)}");
         public static SoundStyle EndlessWar_SmashReady => new SoundStyle($"{SoundsPath}{nameof(EndlessWar_SmashReady)}");
         public static SoundStyle EndlessWar_SmashSwing => new SoundStyle($"{SoundsPath}{nameof(EndlessWar_SmashSwing)}");
         public static SoundStyle EndlessWar_MinionReady => new SoundStyle($"{SoundsPath}{nameof(EndlessWar_MinionReady)}");

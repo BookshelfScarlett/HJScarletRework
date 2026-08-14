@@ -40,7 +40,6 @@ namespace HJScarletRework.Globals.Players
                 return;
             if (PlayerInput.Triggers.JustPressed.QuickHeal && Player.statLife != Player.statLifeMax2)
             {
-                Main.NewText(crimsonCharmReduceTime);
                 if (!Player.HasBuff<CrimsonCharmBuff>())
                 {
                     Player.AddBuff(BuffType<CrimsonCharmBuff>(), CrimsonCharm.OverSatuTime * 60);

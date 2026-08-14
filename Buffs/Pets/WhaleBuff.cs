@@ -20,9 +20,10 @@ namespace HJScarletRework.Buffs.Pets
         public override void SetStaticDefaults()
         {
             Main.buffNoTimeDisplay[Type] = true;
-            Main.vanityPet[Type] = true;
             if (IsLightPet)
                 Main.lightPet[Type] = true;
+            else
+                Main.vanityPet[Type] = true;
         }
     }
 }

@@ -27,7 +27,6 @@ namespace HJScarletRework.Projs.Executor
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 16;
-            Projectile.tileCollide = true;
             Projectile.extraUpdates = 4;
             Projectile.penetrate = 1;
             Projectile.SetupImmnuity(-1);
@@ -37,7 +36,11 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            BombRotation = RandRotTwoPi;
+            if(Projectile.HJScarlet().ExecutionStrike)
+            Projectile.tileCollide = false;
+            else
+            Projectile.tileCollide = true;
+                BombRotation = RandRotTwoPi;
             Helper.MaxProgress[0] = 15 * Projectile.MaxUpdates;
             Helper.MaxProgress[1] = 16 * Projectile.MaxUpdates;
             if (Projectile.HJScarlet().ExecutionStrike)
@@ -199,6 +202,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 18, ProjectileType<AngryBombProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 proj.extraUpdates = 2;
                 proj.HJScarlet().ExecutionStrike = true;
+                proj.tileCollide = false;
 
             }
         }
@@ -253,12 +257,13 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 pos = Projectile.Center.ToRandCirclePosEdge(16);
                     ECSParticle.StarShape(pos, Projectile.Center.GetNormalVector2(pos) * Main.rand.NextFloat(0.3f, 1f) * 7f, RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(0, 55), 1, 0.8f * Main.rand.NextFloat(.7f, 1.1f), .89f, BlendState.Additive);
                 }
+                ScarletSound(HJScarletSounds.Frostwave_Boom , Projectile.Center, .685f, 0, 0.88f, .1f);
 
                 SoundEngine.PlaySound(HJScarletSounds.Frostwave_Boom with { MaxInstances = 0, Pitch = 0.872f, Volume = 0.85f }, Projectile.Center);
             }
             else
-                SoundEngine.PlaySound(HJScarletSounds.Misc_GunHit with { MaxInstances = 0, Pitch = -0.172f + Main.rand.NextFloat(-0.1f, 0.1f), Volume = 0.65f }, Projectile.Center);
-            SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact with { MaxInstances = 0, Pitch = 0.82f, Volume = 1 }, Projectile.Center);
+                ScarletSound(HJScarletSounds.Misc_GunHit, Projectile.Center, .65f, 0, -0.172f, .1f);
+            ScarletSound(SoundID.DD2_BetsyFireballImpact, Projectile.Center, 1, 0, .82f);
             ScreenShakeSystem.AddScreenShakes(Projectile.Center, 4f, 6, RandRotTwoPi);
             return true;
         }

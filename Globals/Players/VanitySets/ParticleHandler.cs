@@ -10,7 +10,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
     public partial class ScarletVanityPlayer : ModPlayer
     {
         public float IdleTimer = 0;
-        public const int TotalIdleTime = 600;
+        public const int TotalIdleTime = 18000;
         public bool InIdleStatement = false;
         public override void PostUpdateEquips()
         {

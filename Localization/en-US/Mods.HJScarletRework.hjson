@@ -11,7 +11,7 @@ SwitchWeaponConditionList: {
 }
 
 ItemBelongTo: {
-	Donator: -Donator Item-
+	Donator: Donator Item
 	Developer: ""
 	Supporter: ""
 }
@@ -65,9 +65,9 @@ ExecutorDamageClass: {
 	ExecutionProgress: Strike your enemy for {0} times to Execute. Press Left Alt for details
 	ExecutionDescriptionName: Execution Strike
 	ExecutionProgressRevampedMode: Execution Progress: {0} / {1}
-	ForceTacticalExecution: ""
-	ForceAutomaticExecution: ""
-	CompanionWeapon: ""
+	ForceTacticalExecution: This weapon's Execution Strike must be manually triggered using the Interact key
+	ForceAutomaticExecution: This weapon's Execution Strike is forced to trigger automatically
+	CompanionWeapon: Companion
 	DisplayName: Executor Damage
 
 	WeaponType: {
@@ -75,7 +75,7 @@ ExecutorDamageClass: {
 		ColdSteel: Cold Steel
 		Firearm: Firearm
 		Caster: Cast
-		Assistance: Assist
+		Assistance: Assistance
 		Misc: Misc
 	}
 
@@ -87,9 +87,9 @@ ExecutorDamageClass: {
 		Foreigner.DisplayName: Foreigner
 		Mysterious.DisplayName: Mysterious
 		Phantasmic.DisplayName: Phantasmic
-		ExecutionDamageLine: ""
-		CritDamageLine: ""
-		DefenseReduceValue: ""
+		ExecutionDamageLine: "{0}% Execution Damage"
+		CritDamageLine: "{0}Critical Strike Damage"
+		DefenseReduceValue: "{0} Defense"
 	}
 }
 

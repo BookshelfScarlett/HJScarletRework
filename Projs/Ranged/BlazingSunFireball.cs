@@ -14,7 +14,7 @@ namespace HJScarletRework.Projs.Ranged
 {
     public class BlazingSunFireball : HJScarletProj, IPixelatedRenderer
     {
-        public override EnumDamageClass Category => EnumDamageClass.Executor;
+        public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public AnimationStruct Helper = new AnimationStruct(3);
         public ref float Timer => ref Projectile.ai[0];
@@ -39,7 +39,6 @@ namespace HJScarletRework.Projs.Ranged
         public override void OnFirstFrame()
         {
             Helper.MaxProgress[0] = 20;
-            base.OnFirstFrame();
         }
         public static int BeamLength = 1200;
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -48,7 +47,7 @@ namespace HJScarletRework.Projs.Ranged
                 return false;
             float _ = float.NaN;
             Vector2 beamEndPos = Projectile.Center + Projectile.rotation.ToRotationVector2().SafeNormalize(Vector2.Zero) * BeamLength;
-            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, beamEndPos, 24f, ref _);
+            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, beamEndPos, 18f, ref _);
         }
         public int ShootTimer = 5;
         public override void ProjAI()
@@ -68,11 +67,12 @@ namespace HJScarletRework.Projs.Ranged
             }
             else
             {
-                if (Owner.channel)
+                if (Owner.channel &&Projectile.IsMe())
                 {
                     Projectile.Opacity = Lerp(Projectile.Opacity, 1.01f, .2f);
                     Vector2 targetPos = Owner.MountedCenter - Vector2.UnitY.RotatedBy(Projectile.rotation) * Direction * 50f;
-                    Projectile.Center = Vector2.Lerp(Projectile.Center, targetPos, .4f);
+                     Projectile.Center = Vector2.Lerp(Projectile.Center, targetPos, .4f);
+                    
                     Projectile.rotation = Projectile.Center.GetNormalVector2(Main.MouseWorld).ToRotation();
 
                     if (Projectile.Opacity >= 1f)
@@ -93,8 +93,6 @@ namespace HJScarletRework.Projs.Ranged
                             Vector2 pos = Projectile.Center + dir;
                             if (HJScarletMethods.OutOffScreen(pos))
                                 continue;
-
-                            //ECSParticle.HRShinyOrb(pos, dir.ToRandVelocity(ToRadians(15f), 1f, 9f), Color.Orange, 40, 1, 0.14f, 0.5f);
                             ECSParticle.TurbulenceShinyOrb(pos, 0.42f, RandLerpColor(Color.Orange, Color.OrangeRed), 40, 1, 0.12f, glowMult: .5f);
                         }
                     }
@@ -104,7 +102,6 @@ namespace HJScarletRework.Projs.Ranged
                     Timer -= 2f;
                     if (Timer <= 0)
                         Timer = 0;
-                    //Vector2 targetPos = Owner.MountedCenter - Vector2.UnitY * Direction * 50f;
                     Projectile.Center = Vector2.Lerp(Projectile.Center, Owner.MountedCenter, .14f);
                     Projectile.Opacity = Lerp(Projectile.Opacity, 0f, 0.3f);
                     if (Projectile.Opacity <= 0.12f)
@@ -147,9 +144,6 @@ namespace HJScarletRework.Projs.Ranged
         public BlendState BlendState => BlendState.Additive;
         public void RenderPixelated(SpriteBatch sb)
         {
-            HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
-            HJScarletMethods.EndShaderAreaPixel();
-
         }
 
         public override bool PreDraw(ref Color lightColor)

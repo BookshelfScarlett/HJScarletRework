@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Executor.Thrown;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -57,13 +58,14 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeToss[2] with { Pitch = -0.5f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.Misc_KnifeTossAlt, Projectile.Center, 1f, 1, -.5f, .1f, 2);
             GenerateBackDust(-1);
             StoredCenter.Add(Projectile.Center);
         }
 
         public override void ProjAI()
         {
+            Lighting.AddLight(Projectile.Center, TorchID.Blue);
             UpdateAttackAI();
             UpdateParticle();
         }
@@ -147,10 +149,10 @@ namespace HJScarletRework.Projs.Executor
         public void SpawnWaterbolt()
         {
             Vector2 projPos = Projectile.Center + OldVec * 10f;
-            if (Projectile.timeLeft % GetSeconds(1) == 0)
+            if (Projectile.timeLeft % GetSeconds(1) == 0&&Projectile.IsMe())
             {
                 new ShinyCrossStar(projPos, Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, 1, 2.4f, useLegacy: false).Spawn();
-                SoundEngine.PlaySound(SoundID.Item60 with { MaxInstances = 0 }, Projectile.Center);
+                ScarletSound(SoundID.Item60, Projectile.Center, instances: 0);
                 Vector2 oldDir = -OldVec;
                 for (int i = -1; i < 2; i++)
                 {
@@ -207,12 +209,6 @@ namespace HJScarletRework.Projs.Executor
                     flame.scale *= 1.262f;
                 }
             }
-        }
-        /// <summary>
-        /// 砸地时的粒子
-        /// </summary>
-        private void DrawSmashDust()
-        {
         }
         private Vector2 GetScale
         {
@@ -293,6 +289,7 @@ namespace HJScarletRework.Projs.Executor
                 d.scale *= Main.rand.NextFloat(0.75f, 1.2f);
             }
         }
+        public int StrikeTime = 0;
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             if (Projectile.velocity == Vector2.Zero)
@@ -300,10 +297,62 @@ namespace HJScarletRework.Projs.Executor
             if (AttackType == State.Shoot)
             {
                 UpdateOnTileParticle(oldVelocity);
+                BreakTiles();
                 ResetToSmashWall(oldVelocity);
             }
             return false;
         }
+        private void BreakTiles()
+        {
+            List<int> tileTypeList =
+                    [
+                        TileID.CrackedPinkDungeonBrick,
+                        TileID.CrackedGreenDungeonBrick,
+                        TileID.CrackedBlueDungeonBrick,
+                        TileID.Spikes
+                    ];
+            if (Condition.Hardmode.IsMet())
+            {
+                tileTypeList.Add(TileID.BlueDungeonBrick);
+                tileTypeList.Add(TileID.PinkDungeonBrick);
+                tileTypeList.Add(TileID.GreenDungeonBrick);
+            }
+            int radius = 32;
+            if (Main.dedServ)
+            {
+                Point center = Utils.ToTileCoordinates(Projectile.Center);
+                NetMessage.SendTileSquare(-1, center.X - radius * 2, center.Y - radius * 2, 4 * radius);
+            }
+            for (int i = -radius; i <= radius; i++)
+            {
+                for (int j = -radius; j <= radius; j++)
+                {
+                    int tilePosX = (int)((float)i + Projectile.Center.X / 16f);
+                    int tilePosY = (int)((float)j + Projectile.Center.Y / 16f);
+                    if (tilePosX >= 0 && tilePosX < Main.maxTilesX && tilePosY >= 0 && tilePosY < Main.maxTilesY)
+                    {
+                        Tile tile = Main.tile[tilePosX, tilePosY];
+                        if ((i * i + j * j) <= radius && !tile.IsActuated)
+                        {
+                            if (!tileTypeList.Contains(tile.TileType))
+                            {
+                                continue;
+                            }
+                            if (WorldGen.CanKillTile(tilePosX, tilePosY))
+                            {
+                                WorldGen.KillTile(tilePosX, tilePosY);
+
+                            }
+                            for (int k = 0; k < 8; k++)
+                            {
+                                Dust d = Dust.NewDustDirect(new Vector2(tilePosX, tilePosY), 10, 10, DustID.WaterCandle, 2, 2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         #region 接触物块后的工具方法
         private void ResetToSmashWall(Vector2 oldVel)
         {
@@ -326,7 +375,6 @@ namespace HJScarletRework.Projs.Executor
             //这里刷新一遍射弹的生命值，我们会用这个生命值来总控一下射弹的进程
             Projectile.timeLeft = GetSeconds(12);
             CanSmashDust = true;
-
             //天顶世界下变成……钢管。
             //并且钢管会在玩家中心播放。
             //并且他会同时播放五次
@@ -334,10 +382,15 @@ namespace HJScarletRework.Projs.Executor
             if (Main.zenithWorld)
             {
                 for (int i = 0; i < 2; i++)
-                    SoundEngine.PlaySound(HJScarletSounds.Pipes with { MaxInstances = 0 }, Owner.Center);
+                {
+                    ScarletSound(HJScarletSounds.Pipes, Owner.Center, 1f, 0);
+                }
             }
             else
-                SoundEngine.PlaySound(HJScarletSounds.Smash_GroundHeavy with { MaxInstances = 1, Pitch = -0.1f }, Projectile.Center);
+            {
+                ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center, 1f, 1, -.1f, .1f);
+            }
+
             UpdateToNextAttack(State.SmashToWall);
         }
 
@@ -356,8 +409,16 @@ namespace HJScarletRework.Projs.Executor
         {
             if (AttackType == State.Shoot)
             {
-                SoundEngine.PlaySound(HJScarletSounds.Smash_AirHeavy[0] with { MaxInstances = 1, Pitch = -0.4f }, Projectile.Center);
-                UpdateOnTileParticle(Projectile.velocity);
+                if (Main.zenithWorld)
+                {
+                    DungeonBreaker.PlayPipes(Owner);
+                }
+                else
+                {
+
+                    ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, Projectile.Center, 1, 1, -.4f,variantType:1);
+                }
+                    UpdateOnTileParticle(Projectile.velocity);
                 Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<DungeonBreakerShockwave>(), Projectile.damage, 1f, Owner.whoAmI);
             }
         }

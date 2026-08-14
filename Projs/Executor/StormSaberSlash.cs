@@ -116,7 +116,14 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate<StormSaber>();
-            base.OnHitNPC(target, hit, damageDone);
+            for (int i = 0; i < 34; i++)
+            {
+                ECSParticle.ShinyCrossStarECS(target.Center, RandVelTwoPi(1.2f, 4.2f), Color.White, 40, 1, 0.6f);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                ECSParticle.SmokeParticle(target.Center, RandVelTwoPi(1.2f, 6.2f), RandLerpColor(Color.WhiteSmoke, Color.White), 40, 1, 0.9f, 0.31f, blendstate: BlendState.AlphaBlend);
+            }
         }
         public override bool PreDraw(ref Color lightColor)
         {

@@ -44,12 +44,16 @@ WatcherItem: {
 }
 
 DracoItem: {
-	DisplayName: Draco Item
-	Tooltip: ""
-	FlavorTooltip: ""
+	DisplayName: Rose of Annihilation
+	Tooltip: Summon the pet: Draco
+	FlavorTooltip:
+		'''
+		Rose petals soaked in the blood of the dying still retain their crimson hue
+		Even after withering
+		'''
 }
 
 SonItem: {
-	DisplayName: Son Item
-	Tooltip: ""
+	DisplayName: Holy Lily
+	Tooltip: Summons a Son companion
 }

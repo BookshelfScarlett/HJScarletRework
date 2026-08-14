@@ -31,3 +31,13 @@ DragonSniper: {
 	DisplayName: Dragon Sniper
 	Tooltip: ""
 }
+
+Fleshtumor: {
+	DisplayName: Fleshtumor
+	Tooltip: Rapidly releases hungry ghosts to attack enemies
+}
+
+PestilenceFlower: {
+	DisplayName: Pestilence Flower
+	Tooltip: Rapidly releases tentacles to attack enemies
+}

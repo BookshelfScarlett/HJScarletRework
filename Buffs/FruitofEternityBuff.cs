@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using HJScarletRework.Globals.Methods;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Buffs
@@ -11,7 +12,7 @@ namespace HJScarletRework.Buffs
         }
         public override void Update(Player player, ref int buffIndex)
         {
-            base.Update(player, ref buffIndex);
+            player.HJScarlet().fruitofEthernity = true;
         }
     }
 }

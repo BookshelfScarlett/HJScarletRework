@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override void ExSD()
         {
             Item.width = Item.height = 66;
-            Item.damage = 76;
+            Item.damage = 60;
             Item.knockBack = 8f;
             Item.shootSpeed = 20f;
             Item.useTime = Item.useAnimation = 40;

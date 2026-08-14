@@ -64,7 +64,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         }
         public override Vector2? HoldoutOffset()
         {
-            return new Vector2(-10f, 0);
+            return new Vector2(-1f, 0);
         }
 
         public override void UseItemFrame(Player player)

@@ -78,8 +78,8 @@ BoneSlapBuff: {
 }
 
 StarofHopeBuff: {
-	DisplayName: Starof Hope Buff
-	Description: Mods.HJScarletRework.Buffs.StarofHopeBuff.Description
+	DisplayName: Star of Hope
+	Description: This is a story full of love and hope
 }
 
 StreamingProtocalBuff: {
@@ -88,8 +88,8 @@ StreamingProtocalBuff: {
 }
 
 TearEyeBuff: {
-	DisplayName: Tear Eye Buff
-	Description: Mods.HJScarletRework.Buffs.TearEyeBuff.Description
+	DisplayName: Cthulhu's Tear
+	Description: Increases damage reduction
 }
 
 DragonMinionBuff: {
@@ -98,18 +98,18 @@ DragonMinionBuff: {
 }
 
 FruitofEternityBuff: {
-	DisplayName: Fruitof Eternity Buff
-	Description: Mods.HJScarletRework.Buffs.FruitofEternityBuff.Description
+	DisplayName: Eternal Fruit
+	Description: Physical enhancement, but at what cost
 }
 
 DracoBuff: {
-	DisplayName: Draco Buff
-	Description: Mods.HJScarletRework.Buffs.DracoBuff.Description
+	DisplayName: Black Mud Holy Grail
+	Description: Humans are beings that obey desires. I am a being that savors desires
 }
 
 SonBuff: {
-	DisplayName: Son Buff
-	Description: Mods.HJScarletRework.Buffs.SonBuff.Description
+	DisplayName: Son Companion
+	Description: But I think this is sacred
 }
 
 GrassPoison: {

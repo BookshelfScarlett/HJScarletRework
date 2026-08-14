@@ -27,7 +27,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<TheGreatDipperHeldProj>();
-            Item.SetUpRarityPrice(ItemRarityID.Green);
+            Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true);
             Item.HJScarlet().OwnerName = "冰川咲";
             Item.HJScarlet().ItemBelongTo = EnumItemOwner.Donator;
@@ -47,6 +47,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
             bool exe = player.GetExecutionSrike();
             Vector2 dir = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitX);
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
+            proj.originalDamage = damage;
             proj.HJScarlet().HasExecutionMechanic = true;
             proj.HJScarlet().ExecutionStrike = exe;
             ((TheGreatDipperHeldProj)proj.ModProjectile).BeginTargetRotation = dir.ToRotation();

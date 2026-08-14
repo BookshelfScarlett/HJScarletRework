@@ -21,11 +21,12 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         }
         public override void ExSD()
         {
-            Item.damage = 36;
+            Item.damage = 360;
             Item.useTime = Item.useAnimation = 26;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<StormSaberHeldProj>();
+            Item.knockBack = 4f;
             Item.SetUpRarityPrice(ItemRarityID.Green);
             Item.SetUpNoUseGraphicItem(true);
         }

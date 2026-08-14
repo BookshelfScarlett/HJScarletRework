@@ -23,7 +23,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 16;
             Projectile.extraUpdates = 2;
             Projectile.SetupImmnuity(30);
-            Projectile.penetrate = 2;
+            Projectile.penetrate = 3;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
         }
@@ -44,14 +44,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if (BounceTime > 0)
-            {
-                Projectile.Kill();
-                return true;
-            }
-            else
-            {
-                Projectile.BounceOnTile(oldVelocity);
                 float centerGlowScale = .2f;
                 Vector2 center = Projectile.oldPosition + Projectile.Size / 2f;
                 ECSParticle.CrossGlow(center, Color.White, 45, 1, centerGlowScale);
@@ -60,6 +52,15 @@ namespace HJScarletRework.Projs.Executor
                 for (int i = 0; i < 16; i++)
                     ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePosEdge(16), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.LightGray, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
                 ScarletSound(SoundID.Dig, center);
+
+            if (BounceTime > 1)
+            {
+                Projectile.Kill();
+                return true;
+            }
+            else
+            {
+                Projectile.BounceOnTile(oldVelocity);
                 if (Projectile.GetTargetSafe(out NPC target, true, 600, canPassWall: false))
                 {
                     Projectile.velocity = HJScarletMethods.PredictAimToTarget(Projectile.Center, target.Center, target.velocity, 24f, 0);

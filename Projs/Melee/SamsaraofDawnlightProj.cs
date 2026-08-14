@@ -18,6 +18,10 @@ namespace HJScarletRework.Projs.Melee
 {
     public class SamsaraofDawnlightProj : HJScarletProj, IPixelatedRenderer
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override string Texture => GetInstance<SamsaraofDawnlightAlter>().Texture;
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;

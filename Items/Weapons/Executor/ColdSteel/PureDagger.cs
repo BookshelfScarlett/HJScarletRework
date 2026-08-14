@@ -22,6 +22,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             Item.useTime = Item.useAnimation = 19;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shootSpeed = 16f;
+            Item.knockBack = 5;
             Item.shoot = ProjectileType<PureDaggerProj>();
             Item.SetUpRarityPrice(ItemRarityID.Green);
             Item.SetUpNoUseGraphicItem(true);
@@ -41,14 +42,6 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             proj.HJScarlet().ExecutionStrike = exe;
             ((PureDaggerProj)proj.ModProjectile).BeginTargetRotation = dir.ToRotation();
             ((PureDaggerProj)proj.ModProjectile).Flip = Main.rand.NextBool();
-            //bool exe = player.GetExecutionSrike();
-            //Vector2 dir = (Main.MouseWorld - player.Center).SafeNormalize(Vector2.UnitX);
-            //Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<EndlessWarSmasher>(), damage, knockback, player.whoAmI);
-            //proj.HJScarlet().HasExecutionMechanic = true;
-            //proj.HJScarlet().ExecutionStrike = exe;
-            //((EndlessWarSmasher)proj.ModProjectile).BeginTargetRotation = dir.ToRotation();
-            //((EndlessWarSmasher)proj.ModProjectile).Flip = Main.rand.NextBool();
-
             return false;
         }
     }

@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Items.Material;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.List;
@@ -44,6 +45,13 @@ namespace HJScarletRework.Items.Weapons.Melee
                     proj.ai[2] = 1;
             }
             return false;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient<SolarFlareScoria>(12).
+                AddTile(FinalAnvilTile).
+                Register();
         }
     }
 }

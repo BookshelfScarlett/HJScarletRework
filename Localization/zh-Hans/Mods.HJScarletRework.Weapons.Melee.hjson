@@ -267,3 +267,8 @@ FlowerofDance: {
 		在命中时生成一朵小花，并在投刀命中时让小花发射追踪的花瓣
 		'''
 }
+
+SeashineSword: {
+	// DisplayName: Seashine Sword
+	// Tooltip: ""
+}

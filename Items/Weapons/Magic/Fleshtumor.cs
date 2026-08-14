@@ -1,18 +1,20 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs.Executor;
+using HJScarletRework.Projs.Magic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
-namespace HJScarletRework.Items.Weapons.Executor.Caster
+namespace HJScarletRework.Items.Weapons.Magic
 {
-    public class PestilenceFlower : ExecutorWeaponClass
+    public class Fleshtumor : HJScarletWeapon
     {
-        public override int ExecutionProgress => 10;
-        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Caster;
+        public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override void ExSD()
         {
             Item.damage = 66;
@@ -21,33 +23,31 @@ namespace HJScarletRework.Items.Weapons.Executor.Caster
             Item.useTime = Item.useAnimation = 35;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = null;
+            Item.mana = 5;
             Item.knockBack = 4f;
-            Item.shoot = ProjectileType<PestilenceFlowerHeldProj>();
+            Item.shoot = ProjectileType<FleshtumorHeldProj>();
             Item.shootSpeed = 16;
-            Item.HJScarlet().NotFinished = true;
         }
         public override bool CanShoot(Player player)
         {
             return true;
         }
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            return false;
-        }
         public override void HoldItem(Player player)
         {
             if (player.HasProj(Item.shoot))
                 return;
+            Vector2 dir = player.ToMouseVector2();
+            int projDamage = (int)player.GetTotalDamage<MagicDamageClass>().ApplyTo(Item.damage);
             if (Main.myPlayer != player.whoAmI)
                 return;
-            Vector2 dir = player.ToMouseVector2();
-            int projDamage = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);
             Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, Item.shoot, projDamage, Item.knockBack, player.whoAmI);
             proj.originalDamage = projDamage;
             proj.netUpdate = true;
-            SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeExpired with { Pitch = -0.2f, MaxInstances = 0 }, proj.Center);
-
+            ScarletSound(HJScarletSounds.Misc_KnifeExpired, player.Center, 1, 0, -.2f);
         }
-
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            return false;
+        }
     }
 }
