@@ -14,6 +14,8 @@ namespace HJScarletRework.Projs.Executor
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
+        public float TileTime = 0;
+        public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(24);
@@ -37,6 +39,18 @@ namespace HJScarletRework.Projs.Executor
             Lighting.AddLight(Projectile.Center, TorchID.Purple);
             Projectile.rotation = Projectile.velocity.ToRotation();
             Vector2 MountedPos = Projectile.SafeDir() * -15f;
+            Timer++;
+            if (Timer > Projectile.MaxUpdates * 4 && TileTime == 0)
+            {
+                if (Projectile.GetTargetSafe(out NPC target, true, 1600, false))
+                {
+                    TileTime = 1;
+                    Vector2 vel = Projectile.Center.GetNormalVector2(target.Center) * Projectile.oldVelocity.Length();
+                    Projectile.velocity = vel;
+                    DoTileParticle(Projectile.Center);
+
+                }
+            }
             if (Projectile.IsOutScreen())
                 return;
             ECSParticle.LightntingGlow(Projectile.Center, Projectile.SafeDir(), Color.Violet, 10, 1, 0.35f);
@@ -46,6 +60,11 @@ namespace HJScarletRework.Projs.Executor
         public override void OnKill(int timeLeft)
         {
             Vector2 pos = Projectile.oldPosition + Projectile.Size / 2;
+            DoTileParticle(pos);
+
+        }
+        public void DoTileParticle(Vector2 pos)
+        {
             float scale = .3f;
             ECSParticle.CrossGlow(pos, Color.Violet, 45, 1, scale, 0.1f);
             ECSParticle.CrossGlow(pos, Color.DarkViolet, 45, 1, scale * .98f, .1f);
@@ -55,7 +74,21 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.TurbulenceShinyOrb(pos.ToRandCirclePos(6), 1.1f, RandLerpColor(Color.Violet, Color.Purple), 45, 1, 0.14f, glowMult: .7f);
             }
 
-            base.OnKill(timeLeft);
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1400) && TileTime == 0)
+            {
+                TileTime = 1;
+                Vector2 vel = Projectile.Center.GetNormalVector2(target.Center) * Projectile.oldVelocity.Length();
+                Projectile.velocity = vel;
+            }
+            else
+            {
+                Projectile.BounceOnTile(oldVelocity);
+            }
+            DoTileParticle(Projectile.Center);
+            return false;
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
@@ -92,28 +125,28 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
-            PixelatedRenderManager.BeginDrawProj = true;
-            ////这里是强行使用ex98拼凑出来的子弹效果
-            Texture2D tex = HJScarletTexture.Particle_SharpTear;
-            Rectangle frame = tex.Frame();
-            Vector2 ori = tex.Size() / 2;
-            SB.EnterShaderArea();
-            //绘制残影
-            float oriScale = 1f;
-            float scale = 0.97f;
-            int length = 19;
-            for (int i = 0; i < length; i++)
-            {
-                scale *= 0.975f;
-                float rads = (float)i / length;
-                Color edgeColor = Color.Lerp(Color.Purple, Color.Violet, (1 - rads)).ToAddColor(255) * Clamp(Projectile.velocity.Length(), 0f, 1f);
-                Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.20f);
-                float rot = Lerp(Projectile.oldRot[i], Projectile.oldRot[0], 1f) + PiOver2;
-                SB.Draw(tex, lerpPos + Projectile.PosToCenter(), null, edgeColor, rot, ori, oriScale * scale * Projectile.scale, 0, 0);
-            }
-            Vector2 pos = Projectile.Center - Main.screenPosition;
-            SB.Draw(tex, pos, null, Color.Violet, Projectile.rotation + PiOver2, ori, oriScale, 0, 0);
-            SB.EndShaderArea();
+            //PixelatedRenderManager.BeginDrawProj = true;
+            //////这里是强行使用ex98拼凑出来的子弹效果
+            //Texture2D tex = HJScarletTexture.Particle_SharpTear;
+            //Rectangle frame = tex.Frame();
+            //Vector2 ori = tex.Size() / 2;
+            //SB.EnterShaderArea();
+            ////绘制残影
+            //float oriScale = 1f;
+            //float scale = 0.97f;
+            //int length = 19;
+            //for (int i = 0; i < length; i++)
+            //{
+            //    scale *= 0.975f;
+            //    float rads = (float)i / length;
+            //    Color edgeColor = Color.Lerp(Color.Purple, Color.Violet, (1 - rads)).ToAddColor(255) * Clamp(Projectile.velocity.Length(), 0f, 1f);
+            //    Vector2 lerpPos = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[0], 0.20f);
+            //    float rot = Lerp(Projectile.oldRot[i], Projectile.oldRot[0], 1f) + PiOver2;
+            //    SB.Draw(tex, lerpPos + Projectile.PosToCenter(), null, edgeColor, rot, ori, oriScale * scale * Projectile.scale, 0, 0);
+            //}
+            //Vector2 pos = Projectile.Center - Main.screenPosition;
+            //SB.Draw(tex, pos, null, Color.Violet, Projectile.rotation + PiOver2, ori, oriScale, 0, 0);
+            //SB.EndShaderArea();
             return false;
         }
     }

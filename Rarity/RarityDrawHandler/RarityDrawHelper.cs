@@ -109,6 +109,12 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
                 case ShinyRarityType.Donator:
                     DonatorRarity.DrawItemName(tooltipLine);
                     break;
+                case ShinyRarityType.Developer:
+                    DeveloperRarity.DrawItemName(tooltipLine);
+                    break;
+                case ShinyRarityType.Supporter:
+                    SupporterRarity.DrawItemName(tooltipLine);
+                    break;
                 case ShinyRarityType.Nebula:
                     NebulaRarity.DrawItemName(tooltipLine);
                     break;
@@ -157,6 +163,13 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
                 case ShinyRarityType.Donator:
                     DonatorRarity.DrawItemNameParticle(tooltipLine, ref RaritySparklesList);
                     break;
+                case ShinyRarityType.Supporter:
+                    SupporterRarity.DrawItemNameParticle(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.Developer:
+                    DeveloperRarity.DrawItemNameParticle(tooltipLine, ref RaritySparklesList);
+                    break;
+
                 case ShinyRarityType.Nebula:
                     NebulaRarity.DrawItemNameParticle(tooltipLine, ref RaritySparklesList);
                     break;
@@ -180,6 +193,12 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
                     break;
                 case ShinyRarityType.Hallowed:
                     HallowedRarity.DrawItemNameParticle(tooltipLine, ref RaritySparklesList);
+                    break;
+                case ShinyRarityType.FateCopper:
+                    break;
+                case ShinyRarityType.SunGod:
+                    break;
+                case ShinyRarityType.RarePets:
                     break;
             }
             if (RaritySparklesList.Count > 0)
@@ -211,6 +230,13 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
                 case ShinyRarityType.Donator:
                     DonatorRarity.DrawItemName(tooltipLine);
                     break;
+                case ShinyRarityType.Developer:
+                    DeveloperRarity.DrawItemName(tooltipLine);
+                    break;
+                case ShinyRarityType.Supporter:
+                    SupporterRarity.DrawItemName(tooltipLine);
+                    break;
+
                 case ShinyRarityType.Nebula:
                     NebulaRarity.DrawItemName(tooltipLine);
                     break;

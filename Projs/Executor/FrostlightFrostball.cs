@@ -8,6 +8,7 @@ using HJScarletRework.Items.Weapons.Executor.Caster;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -76,16 +77,21 @@ namespace HJScarletRework.Projs.Executor
             Timer++;
             if (CurTarget is null)
             {
-                NPC target = Main.MouseWorld.FindClosestTarget(540);
+                NPC target = Main.MouseWorld.FindClosestTarget(600);
                 if (target.IsLegal())
                     CurTarget = target;
+                else
+                {
+                    if (Projectile.GetTargetSafe(out NPC tar2, true, 1200, canPassWall: true))
+                        CurTarget = tar2;
+                }
             }
             float speedValue = Clamp((12f + (Timer - 30f) / 10f) / 2f, 0, 15f);
             float speed = Projectile.velocity.Length();
             Projectile.velocity = Projectile.SafeDir().RotatedBy(ToRadians(5f) * Main.rand.NextBool().ToDirectionInt()) * speed;
             if (CurTarget.IsLegal())
             {
-                Projectile.HomingTarget(CurTarget.Center, -1f, speedValue, 15f, MaxAngleChange);
+                Projectile.HomingTarget(CurTarget.Center, -1f, speedValue, 15f, MaxAngleChange);    
                 Projectile.timeLeft = InitLifeTime;
             }
             else
@@ -103,6 +109,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<Frostlight>());
+            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
         }
         public override bool PreDraw(ref Color lightColor)
         {

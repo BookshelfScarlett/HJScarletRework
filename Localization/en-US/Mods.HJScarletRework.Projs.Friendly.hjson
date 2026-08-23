@@ -30,6 +30,8 @@ Typeless: {
 	GrassKnifePoisonProj.DisplayName: Grass Knife Poison Proj
 	PowerLilyProj.DisplayName: Power Lily Proj
 	RuneWizardProj.DisplayName: Rune Wizard Proj
+	PandorasBurgerHeldProj.DisplayName: Pandoras Burger Held Proj
+	RitualofReposeStar.DisplayName: Ritualof Repose Star
 }
 
 Executor: {
@@ -287,6 +289,8 @@ Melee: {
 	TonbogiriThrownProj.DisplayName: Tonbogiri Thrown Proj
 	WildPointerThrownProj.DisplayName: Wild Pointer Thrown Proj
 	FlowerofDancePetal.DisplayName: Flowerof Dance Petal
+	HighTechBladeHeldProj.DisplayName: High Tech Blade Held Proj
+	RitualofReposeProj.DisplayName: Ritualof Repose Proj
 }
 
 Pets: {

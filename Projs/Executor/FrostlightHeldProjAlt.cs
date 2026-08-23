@@ -18,6 +18,7 @@ namespace HJScarletRework.Projs.Executor
         public ref float ShootTimer => ref Projectile.ai[1];
         public ref float HeldAnimationHelper => ref Projectile.ai[2];
         public ref bool IsAlterModeNow => ref GetInstance<Frostlight>().AlterMode;
+        public new int AttackSpeed => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, GetInstance<Frostlight>().Item.useTime * Projectile.MaxUpdates, MinAttackRates * Projectile.MaxUpdates);
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(24);
@@ -38,16 +39,23 @@ namespace HJScarletRework.Projs.Executor
         public bool RightClicker = false;
         public override void ProjAI()
         {
+            if(Owner.JustPressRightClick()&&Owner.IsHolding(OriginalItemID))
+            {
+                Projectile.Kill();
+                return;
+            }
+
             Projectile.velocity = Projectile.rotation.ToRotationVector2();
-            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike && Owner.IsHolding(OriginalItemID)&&Projectile.IsMe())
             {
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Owner.RemoveExecutionProgress(OriginalItemID);
+                Owner.HJScarlet().hasSendExecutionTint = false;
                 Timer = 0;
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostlightFlamethrower>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 ((FrostlightFlamethrower)proj.ModProjectile).BeginTargetRotation = Projectile.rotation;
-                Projectile.Kill();
                 ((Frostlight)Owner.HeldItem.ModItem).AlterMode = true;
+                Projectile.Kill();
                 return;
             }
             HandleProjAttack();
@@ -59,8 +67,8 @@ namespace HJScarletRework.Projs.Executor
         {
             //处死时的粒子
             //需注意的是处决姿态下，粒子不会播报
-            if (Projectile.HJScarlet().ExecutionStrike)
-                return;
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), Projectile.damage, 0, Owner.whoAmI);
+            proj.width = proj.height = 120;
             Vector2 dir = Projectile.SafeDirByRot();
             for (int i = 0; i < 60; i++)
             {
@@ -119,10 +127,10 @@ namespace HJScarletRework.Projs.Executor
             int dir = (Main.MouseWorld.X > Owner.Center.X).ToDirectionInt();
             Owner.ChangeDir(dir);
             Owner.heldProj = Projectile.whoAmI;
-            Owner.itemAnimation = Owner.itemTime = 2;
             Projectile.Center = Owner.MountedCenter;
             Projectile.position.Y += Owner.gfxOffY;
-            bool ifStillInUse = (Main.mouseLeft || Owner.controlUseTile) && !Owner.noItems && !Owner.CCed;
+            bool holding = Owner.IsHolding(OriginalItemID) || !Owner.HeldItem.IsWeapon();
+            bool ifStillInUse = !Owner.noItems && !Owner.CCed && holding && !Owner.dead;
             if (ifStillInUse)
                 Projectile.timeLeft = 2;
             else

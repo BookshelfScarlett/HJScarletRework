@@ -174,7 +174,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            base.OnHitNPC(target, hit, damageDone);
+            target.AddBuff(BuffID.Venom, GetSeconds(10));
         }
         public override bool PreDraw(ref Color lightColor)
         {

@@ -205,6 +205,7 @@ namespace HJScarletRework.Projs.Executor
            targetHitbox.Intersects(Utils.CenteredRectangle(Projectile.Center - Vector2.UnitY * 10.5f * GetScaleFromAI().X, new Vector2(10, 21) * GetScaleFromAI()));
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(5));
             for (int i = 0; i < 10; i++)
             {
                 Dust burst = Dust.NewDustPerfect(target.Center, GetDust);

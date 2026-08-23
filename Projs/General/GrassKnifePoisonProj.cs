@@ -24,6 +24,7 @@ namespace HJScarletRework.Projs.General
             Projectile.penetrate = -1;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
+            Projectile.ArmorPenetration = 10000;
         }
 
         public override void ProjAI()
@@ -31,7 +32,7 @@ namespace HJScarletRework.Projs.General
             if (InstantDoTDamage)
             {
                 Projectile.damage = 0;
-                int damage = Projectile.originalDamage * StackLevel * (Projectile.timeLeft / 60);
+                int damage = Projectile.originalDamage * 5 * StackLevel * (Projectile.timeLeft / 60);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), damage, 0, Owner.whoAmI);
                 Projectile.Kill();
                 CombatText.NewText(Projectile.Hitbox, Color.LimeGreen, damage);
@@ -81,8 +82,6 @@ namespace HJScarletRework.Projs.General
                 d.noGravity = true;
                 d.scale = Main.rand.NextFloat(1.2f, 1.61f);
             }
-
-            base.OnHitNPC(target, hit, damageDone);
         }
         public override void OnKill(int timeLeft)
         {

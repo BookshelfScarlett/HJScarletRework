@@ -16,6 +16,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
             ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {

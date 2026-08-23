@@ -1,0 +1,21 @@
+PrefixData: {
+	Warding: 护佑
+	Mencing: 险恶
+	Quick: 迅捷
+	Violent: 暴力
+	Lucky: 幸运
+}
+
+PocketMirrorModiflication:
+	'''
+	空想归途：
+	佩戴时，按下 互动键 以传送回出生点
+	你可以通过饰品可见性以启用或关闭这个功能
+	置于时装栏内默认生效
+	'''
+
+ItemBelongTo: {
+	Donator: 捐赠者物品
+	Developer: 开发者物品
+	Supporter: 支援者物品
+}

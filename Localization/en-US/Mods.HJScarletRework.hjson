@@ -12,8 +12,8 @@ SwitchWeaponConditionList: {
 
 ItemBelongTo: {
 	Donator: Donator Item
-	Developer: ""
-	Supporter: ""
+	Developer: Developer Item
+	Supporter: Supporter Item
 }
 
 SwitchWeapon: {
@@ -58,6 +58,13 @@ Items: {
 	DragonMinion: {
 		DisplayName: Dragon Minion
 		Tooltip: ""
+	}
+
+	"": {
+		SkyofHorizon: {
+			DisplayName: Lightof Horizon
+			Tooltip: ""
+		}
 	}
 }
 

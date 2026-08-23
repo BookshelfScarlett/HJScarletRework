@@ -5,6 +5,7 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Vanity.Arceca;
+using HJScarletRework.Items.Vanity.Misc;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -34,10 +35,24 @@ namespace HJScarletRework.Globals.Players.VanitySets
             "tairitsu",
             "arcaea",
         ];
+        public List<string> LacrimosaName =
+        [
+            "安魂曲",
+            "lacrimosa",
+            "requim"
+        ];
+        public List<string> KajuName =
+        [
+            "笑面教授",
+            "niyaniya"
+        ];
+
 
         public int accVanityID = -1;
         public bool arcaceVanity = false;
         public bool yardVanity = false;
+        public bool lacrimosaVanity = false;
+        public bool niyaniyakajuVanity = false;
         public override void ResetEffects()
         {
             accVanityID = -1;
@@ -56,7 +71,26 @@ namespace HJScarletRework.Globals.Players.VanitySets
         }
         public override void OnEnterWorld()
         {
-            if (arcaceVanity)
+            if (!niyaniyakajuVanity)
+            {
+                string nameLow = Player.name.ToLower();
+                if (KajuName.Contains(nameLow))
+                {
+                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<KajuItem>());
+                    niyaniyakajuVanity= true;
+                }
+            }
+            if (!lacrimosaVanity)
+            {
+                string nameLow = Player.name.ToLower();
+                if (LacrimosaName.Contains(nameLow))
+                {
+                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<LacrimosaItem>());
+                    lacrimosaVanity= true;
+                }
+            }
+
+            if (!arcaceVanity)
             {
                 string nameLow = Player.name.ToLower();
                 if (ArcaceName.Contains(nameLow))
@@ -64,6 +98,10 @@ namespace HJScarletRework.Globals.Players.VanitySets
                     Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<ArcaeaPack>());
                     arcaceVanity = true;
                 }
+            }
+            if (!yardVanity)
+            {
+                string nameLow = Player.name.ToLower();
                 if (YardName.Contains(nameLow))
                 {
                     Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<YogsothothsYardPack>());

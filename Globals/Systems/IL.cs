@@ -2,6 +2,7 @@
 using HJScarletRework.Items.Armor.Shinobi;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Systems
@@ -27,6 +28,10 @@ namespace HJScarletRework.Globals.Systems
             if (type == ItemType<MonkLegs>() || type == ItemType<ShinobiLegs>())
             {
                 return !Condition.DownedGolem.IsMet();
+            }
+            if(type == ItemID.PrincessWeapon)
+            {
+                return !Condition.DownedPlantera.IsMet();
             }
             return orig(type);
 

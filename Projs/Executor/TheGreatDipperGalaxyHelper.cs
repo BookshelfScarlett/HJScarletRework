@@ -43,8 +43,6 @@ namespace HJScarletRework.Projs.Executor
             ScarletSound(HJScarletSounds.TheSevenStar_Swing, Projectile.Center, 0.5f, 1, 0.4f, 0.1f);
             Projectile.originalDamage = Projectile.damage;
             Helper.MaxProgress[0] = (int)(AttackSpeed * 1.6f);
-            Helper.MaxProgress[1] = (int)(AttackSpeed * .35f);
-            //Helper.MaxProgress[2] = (int)(AttackSpeed * 1.20f);
             BeginTargetRotation = Owner.Center.ToMouseVector2().ToRotation();
             TargetRotation = BeginTargetRotation;
         }
@@ -71,11 +69,8 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateHeldState()
         {
             Projectile.Center = Owner.MountedCenter;
-            if (!(Helper.IsDone[0] && Helper.IsDone[1]))
-            {
                 Owner.itemTime = 2;
                 Owner.itemAnimation = 2;
-            }
             Owner.heldProj = Projectile.whoAmI;
             if (Owner.dead)
                 Projectile.Kill();
@@ -97,12 +92,6 @@ namespace HJScarletRework.Projs.Executor
                 }
                 UpdateBeginAnimation();
 
-            }
-            else if (!Helper.IsDone[1])
-            {
-                if (OldAimPos.Count > 0)
-                    OldAimPos.RemoveAt(0);
-                UpdateEndAnimation();
             }
             else
                 Projectile.Kill();

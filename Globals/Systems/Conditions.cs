@@ -22,6 +22,12 @@ namespace HJScarletRework.Globals.Systems
         public bool CanShowItemDropInUI() => true;
         public string GetConditionDescription() => null;
     }
+    public class FirstTimeKillingTheSon : IItemDropRuleCondition, IProvideItemConditionDescription
+    {
+        public bool CanDrop(DropAttemptInfo info) => !DownedBossSystem.downedSon;
+        public bool CanShowItemDropInUI() => true;
+        public string GetConditionDescription() => null;
+    }
     public class PostSupremeCondition : IItemDropRuleCondition
     {
         private static LocalizedText Description;
@@ -48,5 +54,7 @@ namespace HJScarletRework.Globals.Systems
 
         public static Condition HasFuckingCalamityMod = new Condition($"{ConditionString}.{nameof(HasFuckingCalamityMod)}", () => HJScarletRework.CrossMod_Calamity is not null);
         public static Condition NoFuckingCalamityMod = new Condition($"{ConditionString}.{nameof(NoFuckingCalamityMod)}", () => HJScarletRework.CrossMod_Calamity is null);
+        public static Condition InMultiplayer = new Condition($"{ConditionString}.{nameof(InMultiplayer)}", () => Main.dedServ);
+        public static Condition InSingleplayer = new Condition($"{ConditionString}.{nameof(InSingleplayer)}", () => !Main.dedServ);
     }
 }

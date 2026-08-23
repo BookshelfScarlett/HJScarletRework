@@ -272,3 +272,22 @@ SeashineSword: {
 	// DisplayName: Seashine Sword
 	// Tooltip: ""
 }
+
+HighTechBlade: {
+	DisplayName: 高频红刃
+	Tooltip:
+		'''
+		手持时使你免疫击退
+		斩切敌人，无视敌方防御力
+		'''
+}
+
+RitualofRepose: {
+	DisplayName: 安息仪式
+	Tooltip:
+		'''
+		向天空抛掷十字架，一定时间后从光标上空落下
+		在落下至光标位置，十字架迸裂的同时，释放大量的亮星
+		“主啊，对我来说你已经死了，安息吧。”
+		'''
+}

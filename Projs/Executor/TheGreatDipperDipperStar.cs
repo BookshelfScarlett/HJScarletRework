@@ -123,6 +123,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     int damage = (int)Owner.GetTotalDamage<ExecutorDamageClass>().ApplyTo(34);
                     Projectile bolt = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + vec.ToSafeNormalize() * 10f, vec * 17f, ProjectileType<TheSevenStarBolt>(), damage, 2f, Owner.whoAmI);
+                    bolt.tileCollide = false;
                 }
                 float centerGlowScale = .22f;
                 ECSParticle.CrossGlow(Projectile.Center, Color.RoyalBlue, 45, 1, centerGlowScale);

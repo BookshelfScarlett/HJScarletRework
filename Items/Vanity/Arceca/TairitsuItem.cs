@@ -13,16 +13,5 @@ namespace HJScarletRework.Items.Vanity.Arceca
         {
             EquipLoader.AddEquipTexture(Mod, $"{VanityPrefix}Hair", EquipType.Back, this);
         }
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddIngredient(ItemID.Umbrella).
-                AddIngredient(ItemID.UlyssesButterfly).
-                DisableDecraft().
-                AddTile(TileID.Loom).
-                Register();
-        }
     }
-
-
 }

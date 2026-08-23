@@ -59,3 +59,8 @@ LacrimosaItem: {
 		"100% Tomato, 100% delicious"
 		'''
 }
+
+KajuItem: {
+	DisplayName: Niyaniya Professor's Cane
+	Tooltip: ""
+}

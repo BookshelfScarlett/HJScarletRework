@@ -97,3 +97,16 @@ HJScarletConfigClient: {
 			'''
 	}
 }
+
+HJScarletConfigServer: {
+	DisplayName: 空想归途：服务器设置
+
+	CrossModSupport: {
+		Label: 跨模组联动
+		Tooltip:
+			'''
+			启用后，空想归途会为一些其他的模组进行联动，从而使对应模组的内容匹配进旅人归途和空想归途的流程
+			默认关闭
+			'''
+	}
+}

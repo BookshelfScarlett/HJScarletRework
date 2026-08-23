@@ -54,6 +54,7 @@ namespace HJScarletRework.Projs.Executor
         public bool SetSpecial = false;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(2));
             SetSpecial = target.HJScarlet().isBeingStabByLavaFlowExecution > 0;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)

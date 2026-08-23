@@ -102,6 +102,10 @@ namespace HJScarletRework.Projs.Executor
                 });
             }
         }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.Frostburn2, GetSeconds(2));
+        }
         public override void OnKill(int timeLeft)
         {
 

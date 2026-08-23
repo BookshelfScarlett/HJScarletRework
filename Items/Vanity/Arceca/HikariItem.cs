@@ -11,15 +11,6 @@ namespace HJScarletRework.Items.Vanity.Arceca
             Color.White);
         public override Color ParticleColor1 => Color.IndianRed;
         public override Color ParticleColor2 => Color.White;
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddIngredient(ItemID.JungleRose).
-                AddIngredient(ItemID.JuliaButterfly).
-                DisableDecraft().
-                AddTile(TileID.Loom).
-                Register();
-        }
     }
 }
 

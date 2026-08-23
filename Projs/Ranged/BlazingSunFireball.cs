@@ -9,6 +9,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Ranged;
 using ReLogic.Content;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Ranged
 {
@@ -138,6 +139,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(5));
             base.OnHitNPC(target, hit, damageDone);
         }
         public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;

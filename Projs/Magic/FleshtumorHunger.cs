@@ -16,6 +16,7 @@ namespace HJScarletRework.Projs.Magic
         public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override string Texture => $"Terraria/Images/NPC_{NPCID.TheHungryII}";
         public ref float Timer => ref Projectile.ai[0];
+        public ref float CanHomingToTarget => ref Projectile.ai[1];
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(8);
@@ -30,13 +31,21 @@ namespace HJScarletRework.Projs.Magic
             Projectile.timeLeft = 600;
             Projectile.penetrate = 2;
             Projectile.scale = 0;
+            Projectile.SetupImmnuity(60);
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
-            Projectile.SetupImmnuity(-1);
             Projectile.noEnchantmentVisuals = true;
         }
+        public float OriginalSpeed = 0;
         public override void OnFirstFrame()
         {
-            base.OnFirstFrame();
+            OriginalSpeed = Projectile.velocity.Length();
+        }
+        public void ResetSpeed()
+        {
+            if (Projectile.velocity.LengthSquared() < OriginalSpeed * OriginalSpeed)
+                Projectile.velocity *= 1.1f;
+            else
+                Projectile.velocity *= 0.9f;
         }
         public override void ProjAI()
         {
@@ -45,9 +54,21 @@ namespace HJScarletRework.Projs.Magic
             Timer++;
             if (Projectile.MeetMaxUpdatesFrame(Timer, 9))
             {
+                CanHomingToTarget++;
+                if (CanHomingToTarget > Projectile.MaxUpdates * 10f)
+                {
+                    if (Projectile.GetTargetSafe(out NPC target))
+                    {
+                        Projectile.HomingTarget(target.Center, -1, OriginalSpeed, 20f);
+                    }
+                    else
+                        ResetSpeed();
+                }
+                else
+                    ResetSpeed();
                 if (Projectile.penetrate == -1 && Projectile.damage == 0)
                 {
-                    Projectile.Opacity = Lerp(Projectile.scale, 0f, 0.05f);
+                    Projectile.Opacity = Lerp(Projectile.Opacity, 0f, 0.2f);
                     if (Projectile.Opacity <= 0.02f)
                     {
                         Projectile.Kill();
@@ -101,6 +122,7 @@ namespace HJScarletRework.Projs.Magic
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            CanHomingToTarget = 0;
             for (int i = 0; i < 3; i++)
             {
                 Vector2 dVel = Projectile.SafeDir().ToRandVelocity(ToRadians(10f)) * Main.rand.NextFloat(4f, 12f);

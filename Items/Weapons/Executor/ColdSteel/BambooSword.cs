@@ -15,6 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override void ExSSD()
         {
             ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public bool Flip = false;
         public int ReuseDelay = 0;

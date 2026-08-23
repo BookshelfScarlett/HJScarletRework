@@ -30,7 +30,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.scale = 0f;
-            Projectile.tileCollide = true;
+            Projectile.tileCollide = false;
             Projectile.timeLeft = 200;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 1;
@@ -49,39 +49,23 @@ namespace HJScarletRework.Projs.Executor
             else
                 Projectile.scale = Lerp(Projectile.scale, 0f, .12f);
             Projectile.rotation = Projectile.velocity.ToRotation();
-            if (Projectile.ai[2] != 0)
+            if (Projectile.GetTargetSafe(out NPC target, true, searchDistance: 800, true))
             {
-                Timer++;
-                if (Timer > Projectile.MaxUpdates* 15)
-                {
-                    if (Projectile.GetTargetSafe(out NPC target, true, searchDistance: 800, true))
-                    {
-                        Projectile.HomingTarget(target.Center, -1, 18f, 17);
-                    }
-                }
+                Projectile.HomingTarget(target.Center, -1, 18f, 17);
             }
+            else if (Projectile.velocity.LengthSquared() < 16f * 16f)
+                Projectile.velocity *= 1.1f;
+
             if (Projectile.IsOutScreen())
                 return;
-            if (Projectile.ai[2] == 0)
-            {
-                if (Main.rand.NextBool())
-                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePosEdge(6), -Vector2.UnitY, RandLerpColor(Color.SkyBlue, Color.DodgerBlue), 45, 1, Projectile.scale * Main.rand.NextFloat(.75f, 1.15f) * .6f, .2f);
-                for (int i = 0; i < 3; i++)
-                    ECSParticle.CrossGlow(Projectile.Center.ToRandCirclePos(6) + i * Projectile.SafeDir() * 5f, RandVelTwoPi(.1f, .3f), RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), 40, 1f, 0, Main.rand.NextFloat(.85f, 1.15f) * Projectile.scale * .041f, fadinTime: .2f);
-            }
-            else
-            {
-                if (Main.rand.NextBool(4))
-                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePosEdge(6), -Vector2.UnitY, RandLerpColor(Color.SkyBlue, Color.DodgerBlue), 45, 1, Projectile.scale * Main.rand.NextFloat(.75f, 1.15f) * .6f, .2f);
-                for (int i = 0; i < 2; i++)
-                    ECSParticle.CrossGlow(Projectile.Center.ToRandCirclePos(6) + i * Projectile.SafeDir() * 5f, RandVelTwoPi(.1f, .3f), RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), 40, 1f, 0, Main.rand.NextFloat(.85f, 1.15f) * Projectile.scale * .041f, fadinTime: .2f);
-            }
+            if (Main.rand.NextBool(4))
+                ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePosEdge(6), -Vector2.UnitY, RandLerpColor(Color.SkyBlue, Color.DodgerBlue), 45, 1, Projectile.scale * Main.rand.NextFloat(.75f, 1.15f) * .6f, .2f);
+            for (int i = 0; i < 2; i++)
+                ECSParticle.CrossGlow(Projectile.Center.ToRandCirclePos(6) + i * Projectile.SafeDir() * 5f, RandVelTwoPi(.1f, .3f), RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), 40, 1f, 0, Main.rand.NextFloat(.85f, 1.15f) * Projectile.scale * .041f, fadinTime: .2f);
         }
         public override bool? CanDamage()
         {
             return true;
-            bool canDamage = Projectile.ai[2] == 0;
-            return Projectile.ai[2] == 0 || (Projectile.ai[2] != 0 && Timer > Projectile.MaxUpdates * 15);
         }
         public override void OnKill(int timeLeft)
         {

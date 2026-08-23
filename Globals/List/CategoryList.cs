@@ -1,8 +1,10 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -35,6 +37,7 @@ namespace HJScarletRework.Globals.List
         public static Dictionary<int, string> VanityItemDictionary = [];
         public static Dictionary<int, ExecutorWeaponType> ExecutorTypes = [];
         public static Dictionary<int, string> SummonWeaponDicName = [];
+        public static List<int> PandorasBurgerWeaponList = [];
         public override void Load()
         {
             //投矛表单
@@ -182,14 +185,15 @@ namespace HJScarletRework.Globals.List
         }
         public override void PostSetupContent()
         {
-
+            string[] heldProjNameMaybe = ["Hold", "Held", "Spear", "Drill", "Shortsword"];
             for (int i = 0; i < ItemLoader.ItemCount; i++)
             {
                 Item item = new Item(i);
-                //处理食物的
+                //食物处理
                 bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
                 if (isFood && !LegalFoodList.Contains(item.type))
                     LegalFoodList.Add(item.type);
+                //oreType和barType的处理
                 string name = item.GetType().Name.ToLower();
                 bool isOre = name.Contains("ore") && item.createTile != -1;
                 bool isBar = name.Contains("bar") && item.createTile != -1;
@@ -206,6 +210,18 @@ namespace HJScarletRework.Globals.List
                     SummonWeaponList.Add(item.type);
                     if (i > VanillaMaxItem)
                         SummonWeaponFullName.Add(item.ModItem.FullName);
+                }
+                //排除掉所有召唤武器
+                bool isWeapon = item.damage > 0 && !item.DamageType.CountsAsClass<SummonDamageClass>() && item.shoot != ProjectileID.None;
+                Projectile proj2 = ContentSamples.ProjectilesByType[item.shoot];
+                if(isWeapon)
+                {
+                    string internalName = proj2.GetType().Name;
+                    bool shouldBanned = heldProjNameMaybe.Any(i => internalName.Contains(i, System.StringComparison.OrdinalIgnoreCase));
+                    if(!shouldBanned)
+                    {
+                        PandorasBurgerWeaponList.Add(item.type);
+                    }
                 }
             }
         }

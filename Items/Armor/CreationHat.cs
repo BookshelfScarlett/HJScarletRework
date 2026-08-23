@@ -1,4 +1,5 @@
-﻿using ContinentOfJourney.Items.Armor;
+﻿using ContinentOfJourney.Items;
+using ContinentOfJourney.Items.Armor;
 using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
@@ -44,6 +45,17 @@ namespace HJScarletRework.Items.Armor
                 ItemID.RubyRobe,
                 ItemID.DiamondRobe,
                 ItemType<OnyxRobe>()
+            ];
+        public static List<int> Staffs =
+            [
+            ItemID.AmethystStaff,
+            ItemID.TopazStaff,
+            ItemID.SapphireStaff,
+            ItemID.EmeraldStaff,
+            ItemID.RubyStaff,
+            ItemID.DiamondStaff,
+            ItemID.AmberStaff,
+            ItemType<OnyxStaff>()
             ];
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {

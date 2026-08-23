@@ -89,12 +89,14 @@ namespace HJScarletRework.Projs.Executor
 
         public override void ProjAI()
         {
+            #region 处理自爆
             if (Projectile.timeLeft < 20)
             {
                 GaiaStrikeDeadType = DeadType.MinionAutoDead;
                 Projectile.Kill();
                 return;
             }
+            //按住右键，准备处死
             if (Owner.controlUseTile && Owner.HeldItem.type == ItemType<GaiaStriker>())
             {
                 Projectile.timeLeft = StoredLifeTime;
@@ -120,6 +122,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.Kill();
                 return;
             }
+            #endregion
 
             switch (AttackState)
             {

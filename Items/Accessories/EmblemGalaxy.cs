@@ -4,6 +4,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Materials;
 using Terraria;
 using Terraria.ID;
@@ -38,6 +39,16 @@ namespace HJScarletRework.Items.Accessories
                 AddIngredient<CrownofSilveryLight>(15).
                 AddTile(FinalAnvilTile).
                 Register();
+            CreateRecipe().
+                AddIngredient<EssenceofTime>(5).
+                AddIngredient<EssenceofLife>(5).
+                AddIngredient<EssenceofMatter>(5).
+                AddIngredient<FinalBar>().
+                AddCondition(HJScarletCraftingConditions.InMultiplayer).
+                DisableDecraft().
+                AddTile(FinalAnvilTile).
+                Register();
+
         }
     }
 }

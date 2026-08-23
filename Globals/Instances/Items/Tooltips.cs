@@ -31,7 +31,7 @@ namespace HJScarletRework.Globals.Instances.Items
                         color = Color.Red;
                         break;
                     case EnumItemOwner.Supporter:
-                        color = Color.Yellow;
+                        color = Color.Lime;
                         break;
                     case EnumItemOwner.Donator:
                         color = Color.Pink;
@@ -58,6 +58,7 @@ namespace HJScarletRework.Globals.Instances.Items
                         tooltips.QuickAddTooltipDirect((path + "NotEaten").ToLangValue(), Color.SkyBlue);
                 }
             }
+            //因为各种原因导致的史山
             if (LocalPlayer.HJScarlet().monkExecutor)
             {
                 if (item.type == ItemID.MonkStaffT1)
@@ -75,9 +76,10 @@ namespace HJScarletRework.Globals.Instances.Items
                     tooltips.QuickAddTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", "35%", "15%", "200%");
                 }
             }
+            //强制自动处决/手动处决的字段
             if (ScarletItemIDSets.ForceToAutomaticExecute[item.type])
             {
-                int index = tooltips.FindIndex(line => line.Name == "ExecutorWeaponTypeName" && line.Mod == Mod.Name);
+                int index = tooltips.FindLineIndex("ExecutorWeaponTypeName", Mod.Name);
                 string path = Mod.GetLocalizationKey($"ExecutorDamageClass.ForceAutomaticExecution").ToLangValue();
                 TooltipLine line = new TooltipLine(Mod, "ForceAutomaticExecution", path)
                 {
@@ -87,7 +89,7 @@ namespace HJScarletRework.Globals.Instances.Items
             }
             else if (ScarletItemIDSets.ForceToTacticalExecute[item.type])
             {
-                int index = tooltips.FindIndex(line => line.Name == "ExecutorWeaponTypeName" && line.Mod == Mod.Name);
+                int index = tooltips.FindLineIndex("ExecutorWeaponTypeName", Mod.Name);
                 string path = Mod.GetLocalizationKey($"ExecutorDamageClass.ForceTacticalExecution").ToLangValue();
                 TooltipLine line = new TooltipLine(Mod, "ForceTacticalExecutionLine", path)
                 {
@@ -95,14 +97,23 @@ namespace HJScarletRework.Globals.Instances.Items
                 };
                 tooltips.Insert(index + 1, line);
             }
+            //标记物品未完成
             if (item.HJScarlet().NotFinished)
             {
                 tooltips.CreateTooltip(Mod.GetLocalizationKey("NotFinished"), Color.IndianRed);
             }
+            //无主之地系列的武器，红字文本。
             if (item.HJScarlet().borderlandWeapon)
             {
                 string path = Mod.GetLocalizationKey($"Weapons.Executor.{item.ModItem.Name}.FlavorTooltip");
-                tooltips.CreateTooltip(path, Color.Lerp(Color.DarkRed, Color.Crimson, 0.82f));
+                int index = tooltips.FindLineIndex("Tooltip0");
+                tooltips.CreateTooltip(path, Color.Lerp(Color.DarkRed, Color.Crimson, 0.82f), LineName: "BorderlandRedLineName", index: index);
+            }
+            if(item.type == ItemID.PocketMirror)
+            {
+                int index = tooltips.FindLineIndexLast("Tooltip");
+                string path = Mod.GetLocalizationKey($"Database.PocketMirrorModiflication");
+                tooltips.CreateTooltip(path, LineName: "PocketMirrorModiflication",color:Color.SkyBlue  , index: index + 2, args: Main.LocalPlayer.HJScarlet().pocketMirror.ToString());
             }
             CacheTooltipLine = tooltips;
         }
@@ -112,7 +123,12 @@ namespace HJScarletRework.Globals.Instances.Items
                 return true;
             if (line.Name == (item.HJScarlet().ItemBelongTo + "Name") && line.Mod == Mod.Name)
             {
-                RareItemRarity.DrawFlavorTooltipName(line, RareItemRarity.RareType.Donator);
+                if (item.HJScarlet().ItemBelongTo == EnumItemOwner.Donator)
+                    RareItemRarity.DrawFlavorTooltipName(line, RareItemRarity.RareType.Donator);
+                if (item.HJScarlet().ItemBelongTo == EnumItemOwner.Developer)
+                    RareItemRarity.DrawFlavorTooltipName(line, RareItemRarity.RareType.Developer);
+                if (item.HJScarlet().ItemBelongTo == EnumItemOwner.Supporter)
+                    RareItemRarity.DrawFlavorTooltipName(line, RareItemRarity.RareType.Support);
                 return false;
             }
             if (line.IsItemName())
@@ -133,16 +149,6 @@ namespace HJScarletRework.Globals.Instances.Items
                 }
             }
             return true;
-        }
-        public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
-        {
-            if (string.IsNullOrEmpty(item.HJScarlet().OwnerName) || item.HJScarlet().ItemBelongTo != EnumItemOwner.Donator)
-                return;
-            DrawOwnerName(item.HJScarlet().OwnerName, line);
-        }
-        public void DrawOwnerName(string name, DrawableTooltipLine line)
-        {
-            return;
         }
     }
 }

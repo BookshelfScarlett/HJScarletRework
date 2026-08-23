@@ -8,6 +8,7 @@ using HJScarletRework.Items.Weapons.Executor.Firearm;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -110,6 +111,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.velocity *= .01f;
             IsHitWall = true;
             Projectile.AddExecutionTimeImmediate(ItemType<ASMD>());
+            target.AddBuff(BuffID.Frostburn2, GetSeconds(2));
             foreach (var activeProj in Main.ActiveProjectiles)
             {
                 if (activeProj.type != ProjectileType<ASMDIceBlock>())

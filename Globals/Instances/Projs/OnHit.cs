@@ -3,12 +3,16 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.IDSets;
+using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Globals.Players;
 using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Projs;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
+using System;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -30,6 +34,7 @@ namespace HJScarletRework.Globals.Instances.Projs
             if (HasExecutionMechanic && !AddExecutionHit && projectile.numHits < 1)
             {
                 HandleCowboy(Owner, target);
+                HandlePendant(Owner, target);
                 AddExecutionHit = true;
             }
             HandleMaidReaperOnHit(Owner, projectile, target);
@@ -37,17 +42,19 @@ namespace HJScarletRework.Globals.Instances.Projs
             ModifyDefenderProj(Owner, projectile, target);
             if (projectile.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
-                if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<TearEyeMark>() && projectile.DamageType.CountsAsClass<ExecutorDamageClass>())
+                if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<TearEyeMark>())
                 {
                     Owner.HJScarlet().tearEyeBuff = GetSeconds(1);
                 }
-                if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<MoltenKnifeMark>() && projectile.type != ProjectileType<MoltenKnifeBoom>()&&projectile.type != ProjectileType<MoltenKnifeProj>())
+                if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<MoltenKnifeMark>() && projectile.type != ProjectileType<MoltenKnifeBoom>() && projectile.type != ProjectileType<MoltenKnifeProj>() && Owner.HJScarlet().markProjTimer == 0 && HasExecutionMechanic)
                 {
                     int dmg = (int)(projectile.originalDamage * MoltenKnife.BoomDamageMult);
+                    Owner.HJScarlet().markProjTimer = GetInstance<MoltenKnife>().Item.useTime;
                     Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<MoltenKnifeBoom>(), dmg, 1f, Owner.whoAmI);
                 }
-                if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<GrassKnifeMark>() && projectile.type != ProjectileType<GrassKnifePoisonProj>() && projectile.type != ProjectileType<InvisBoom>())
+                if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<GrassKnifeMark>() && projectile.type != ProjectileType<GrassKnifePoisonProj>() && projectile.type != ProjectileType<InvisBoom>() && Owner.HJScarlet().markProjTimer == 0)
                 {
+                    Owner.HJScarlet().markProjTimer = GetInstance<GrassKnife>().Item.useTime;
                     if (target.HasBuff<GrassPoison>())
                     {
                         foreach (var proj in Main.ActiveProjectiles)
@@ -66,7 +73,7 @@ namespace HJScarletRework.Globals.Instances.Projs
                         if (!HasCreatedProj)
                         {
                             target.AddBuff(BuffType<GrassPoison>(), GetSeconds(10));
-                            int damageValueInstance = 25 * (1 + DownedBossSystem.downedBarrier.ToInt() + Condition.Hardmode.IsMet().ToInt());
+                            int damageValueInstance = 25 * (1 + DownedBossSystem.downedBarrier.ToInt() * 2 + Condition.Hardmode.IsMet().ToInt());
                             Projectile proj = Projectile.NewProjectileDirect(projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<GrassKnifePoisonProj>(), damageValueInstance / 5, 0, Owner.whoAmI);
                             HasCreatedProj = true;
                             proj.originalDamage = damageValueInstance;
@@ -78,6 +85,24 @@ namespace HJScarletRework.Globals.Instances.Projs
             if (Owner.HJScarlet().KnifeMarkIndex != -1)
                 Owner.HJScarlet().KnifeMarkIndex = -1;
         }
+
+        public void HandlePendant(Player owner, NPC target)
+        {
+            HJScarletPlayer usPlayer = owner.HJScarlet();
+            if (owner.HJScarlet().pendantLevel < 1)
+                return;
+            if (!owner.HeldItem.IsExecutorWeapon())
+                return;
+
+            foreach (var keys in usPlayer.ExecutionListStored.Keys.ToList())
+            {
+                if (HJScarletMethods.CheckExecuteTypes(keys, ExecutorWeaponType.Assistance))
+                {
+                    owner.AddExecutionTimeDirectly(keys, 1 * usPlayer.pendantLevel);
+                }
+            }
+        }
+
         public void HandleCowboy(Player Owner, NPC target)
         {
             if (Owner.HJScarlet().cowboyExecutor && Owner.HJScarlet().cowboyRevolverTimer == 0)

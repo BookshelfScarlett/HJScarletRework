@@ -193,4 +193,37 @@ AxeCharm: {
 		Does not work on some weapons
 		'''
 	EnableTooltips: Manual Execution Mode: {0}
+	CritDamageMult: Current Executor Critical Damage Bonus: {0}
+}
+
+TheSonBuff: {
+	DisplayName: Post-Son Level Up
+	Tooltip:
+		'''
+		Right-click to toggle whether certain items are allowed to gain the damage boost from the Son
+		While holding, you can view eligible items in your inventory
+		'''
+	EnableTooltips: Upgrade: {0}
+}
+
+CrystallizedLore: {
+	DisplayName: Crystallized Lore
+	Tooltip:
+		'''
+		While held, press the Interact key on a weapon in your inventory to attempt to grant it the highest-tier prefix 
+		If it fails, grants the "Demonic" modifier instead
+		If Use on an accessory, it will attempt to grant it the highest-tier accessory prefix
+		Press right-click on the Crystallized Lore itself to cycle through the available accessory prefix options
+		'''
+	DetailTooltip:
+		'''
+		A highly pure crystal of magic created when human history crosses a stream of Mana.
+		It can be said that it is the ingredient for materializing Heroic Spirits.
+		'''
+	PrefixLine: Current selected accessory prefix: {0}
+}
+
+FreehandFrame: {
+	DisplayName: Freehand Frame
+	Tooltip: Used to craft vanity that added by Lostbelt Journey
 }

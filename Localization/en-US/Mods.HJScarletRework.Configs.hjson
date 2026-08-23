@@ -91,3 +91,12 @@ HJScarletConfigClient: {
 			'''
 	}
 }
+
+HJScarletConfigServer: {
+	DisplayName: H J Scarlet Config Server
+
+	CrossModSupport: {
+		Label: Cross Mod Support
+		Tooltip: ""
+	}
+}

@@ -138,7 +138,7 @@ namespace HJScarletRework.Projs.Executor
             if (!Owner.HasProj<SundownerRocket>())
                 SoundEngine.PlaySound(SoundID.Item45 with { MaxInstances = 1, Pitch = 0.3f }, Projectile.Center);
             Projectile.AddExecutionTimeImmediate(ItemType<Sundowner>());
-            base.OnHitNPC(target, hit, damageDone);
+            target.AddBuff(BuffID.OnFire3, GetSeconds(5));
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)

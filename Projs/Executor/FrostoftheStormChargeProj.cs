@@ -93,6 +93,7 @@ namespace HJScarletRework.Projs.Executor
         public bool FinalSwing => CurTime > TotalSwingTime;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
             if (FinalSwing)
             {
                 Projectile.AddExecutionTimeImmediate(ItemType<FrostoftheStorm>(), 3);

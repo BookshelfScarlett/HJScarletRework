@@ -2,6 +2,8 @@
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
@@ -62,7 +64,20 @@ namespace HJScarletRework.Globals.Players
             if (Player.HeldItem.IsWeapon())
             {
                 CanExecutionStrike = Player.CheckExecution(Player.HeldItem.type);
-                if (CanExecutionStrike)
+                if (tacticalExecution || tacticalExecutionManual)
+                {
+                    if (Player.CheckCurWeaponExecution(Player.HeldItem.type))
+                    {
+                        if (!hasSendExecutionTint)
+                        {
+                            SoundEngine.PlaySound(SoundID.Item35 with { MaxInstances = 0 }, Player.Center);
+                            hasSendExecutionTint = true;
+                        }
+                    }
+                    else
+                        hasSendExecutionTint = false;
+                }
+                else
                     hasSendExecutionTint = false;
             }
         }

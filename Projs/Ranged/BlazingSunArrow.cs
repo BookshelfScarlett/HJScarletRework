@@ -58,6 +58,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(5));
             for (int i = 0; i < 10; i++)
             {
                 ECSParticle.ShinyCrossStarECS(target.Center, RandVelTwoPi(1.2f, 4.2f), Color.OrangeRed, 40, 1, 0.36f);

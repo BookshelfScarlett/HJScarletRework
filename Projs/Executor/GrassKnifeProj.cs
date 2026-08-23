@@ -69,8 +69,9 @@ namespace HJScarletRework.Projs.Executor
                     target.AddBuff(BuffType<GrassPoison>(), GetSeconds(2));
                     if (target.HasBuff(BuffType<GrassPoison>()) && !Owner.HasProj<GrassKnifePoisonProj>() && !HasCreatedProj)
                     {
-                            int damageValueInstance = 25 * (1 + DownedBossSystem.downedBarrier.ToInt() + Condition.Hardmode.IsMet().ToInt());
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<GrassKnifePoisonProj>(), damageValueInstance/5, Projectile.knockBack, Owner.whoAmI);
+                        int damageValueInstance = 25 * (1 + DownedBossSystem.downedBarrier.ToInt() * 2 + Condition.Hardmode.IsMet().ToInt());
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<GrassKnifePoisonProj>(), damageValueInstance / 5, Projectile.knockBack, Owner.whoAmI);
+                        proj.originalDamage = (damageValueInstance / 5);
                         ((GrassKnifePoisonProj)proj.ModProjectile).CurTarget = target;
                     }
                 }

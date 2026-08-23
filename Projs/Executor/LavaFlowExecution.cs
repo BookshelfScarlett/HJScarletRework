@@ -124,6 +124,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(2));
             if (target.IsLegal() && AttackState == State.Attack && target.HJScarlet().isBeingStabByLavaFlowExecution == 0)
             {
                 StabTarget = target;

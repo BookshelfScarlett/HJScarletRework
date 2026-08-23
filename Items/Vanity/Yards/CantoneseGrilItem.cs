@@ -19,14 +19,5 @@ namespace HJScarletRework.Items.Vanity.Yards
             Item.HJScarlet().CanDrawIcon = false;
             Item.HJScarlet().CanDrawGhost = true;
         }
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddRecipeGroup(HJScarletRecipeGroup.AnyGoldSword, 1).
-                AddIngredient(ItemID.Silk, 15).
-                DisableDecraft().
-                AddTile(TileID.Loom).
-                Register();
-        }
     }
 }

@@ -61,3 +61,8 @@ LacrimosaItem: {
 		"番茄百分百，美味百分百！"
 		'''
 }
+
+KajuItem: {
+	DisplayName: 教授拐杖
+	Tooltip: ""
+}

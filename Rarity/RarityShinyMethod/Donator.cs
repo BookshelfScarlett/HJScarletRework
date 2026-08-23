@@ -6,6 +6,46 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Rarity.RarityShinyMethod
 {
+    public static class DeveloperRarity
+    {
+        public static void DrawItemName(DrawableTooltipLine line)
+        {
+            RarityDrawHelper.DrawCustomTooltipLine(line, Color.Crimson, Color.Crimson, Color.Black, 1);
+        }
+        public static void DrawItemNameParticle(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> particleList)
+        {
+            //在这里手动创建新的粒子，然后我们再将其添加进需要的表单内
+            if (Main.rand.NextBool(10))
+            {
+                float scale = Main.rand.NextFloat(0.30f * 0.5f, 0.30f) * 1.2f;
+                int lifetime = 160;
+                Vector2 position = RarityDrawHelper.GetParticlePosition(tooltipLine);
+                Vector2 velocity = -Vector2.UnitY * Main.rand.NextFloat(0.25f, 0.55f) * (1 * -0.75f);
+                RarityShinyOrb rarityShinyOrb = new(position, velocity, RandLerpColor(Color.Black, Color.Red), lifetime, scale);
+                particleList.Add(rarityShinyOrb);
+            }
+        }
+    }
+    public static class SupporterRarity
+    {
+        public static void DrawItemName(DrawableTooltipLine line)
+        {
+            RarityDrawHelper.DrawCustomTooltipLine(line, Color.GreenYellow, Color.DarkOliveGreen, Color.White, 1);
+        }
+        public static void DrawItemNameParticle(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> particleList)
+        {
+            //在这里手动创建新的粒子，然后我们再将其添加进需要的表单内
+            if (Main.rand.NextBool(10))
+            {
+                float scale = Main.rand.NextFloat(0.30f * 0.5f, 0.30f) * 1.2f;
+                int lifetime = 160;
+                Vector2 position = RarityDrawHelper.GetParticlePosition(tooltipLine);
+                Vector2 velocity = -Vector2.UnitY * Main.rand.NextFloat(0.25f, 0.55f) * (1 * -0.75f);
+                RarityShinyOrb rarityShinyOrb = new(position, velocity, RandLerpColor(Color.GreenYellow, Color.Green), lifetime, scale);
+                particleList.Add(rarityShinyOrb);
+            }
+        }
+    }
     public static class DonatorRarity
     {
         public static void DrawItemName(DrawableTooltipLine line)

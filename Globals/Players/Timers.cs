@@ -14,8 +14,12 @@ namespace HJScarletRework.Globals.Players
         public int ruShiWoWenBanTimer = 0;
         public int globalSoundDelay = 0;
         public int bookcaseBuffTime = 0;
+        public int markProjTimer = 0;
+        public int emblemFirearmTimer = 0;
         public void ResetTimer()
         {
+            markProjTimer = 0;
+            emblemFirearmTimer = 0;
             climaticHawstringLaserCounter = 0;
             desterrannachtImmortalTime = 0;
             desterranRespawnChargeTimer = 0;
@@ -47,6 +51,10 @@ namespace HJScarletRework.Globals.Players
         }
         public void UpdateTimer()
         {
+            if (!emblemFirearm)
+                emblemFirearmTimer = 0;
+            if (markProjTimer > 0)
+                markProjTimer--;
             if (bookcaseBuffTime > 0)
                 bookcaseBuffTime--;
             if (tearEyeBuff > 0)
@@ -153,7 +161,6 @@ namespace HJScarletRework.Globals.Players
                 blackKeyDefenseTrigger = false;
             if (!Player.HasBuff<CrimsonCharmBuff>())
             {
-                crimsonCharmStopReduce = false;
                 if (Player.miscCounter % 10 == 0 && crimsonCharmReduceTime > 0)
                     crimsonCharmReduceTime--;
             }
@@ -176,6 +183,7 @@ namespace HJScarletRework.Globals.Players
                 lastHeldItemIndex = Player.HeldItem.type;
                 hasSendExecutionTint = false;
                 executorSwordMarkPing = false;
+                emblemFirearmTimer = 0;
             }
             if (crimsonScytheDefense > 0 && crimsonScytheAttackCounter < 1)
                 crimsonScytheDefense -= 1;

@@ -33,3 +33,8 @@ BlazingSun: {
 		All attacks can pass through walls
 		'''
 }
+
+PandorasBurger: {
+	DisplayName: Pandoras Burger
+	Tooltip: ""
+}

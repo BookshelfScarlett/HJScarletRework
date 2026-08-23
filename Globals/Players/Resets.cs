@@ -8,8 +8,12 @@ namespace HJScarletRework.Globals.Players
     {
         private void ResetAcc()
         {
+            pocketMirror = false;
+            blackKeyExecutorCriticalChanceAdd = 0;
+            blackKeyExecutorDamageAdd = 0;
             PreciousTargetAcc = false;
             PreciousAimAcc = false;
+            pendantLevel = 0;
             PreciousCritsMin = 0;
             desterrennacht = false;
             manaSavingsJar = 0;
@@ -30,6 +34,11 @@ namespace HJScarletRework.Globals.Players
             cycleMadness = false;
             powerLily = false;
             powerLilyVanity = false;
+            LightofHorizon = false;
+            ankhShieldImmnue = false;
+            infiniteBreath = false;
+            terraSparkBoostImmnue = false;
+            celesitalShellEffect = false;
 
             emblemVanguard = false;
             emblemColdSteel = false;
@@ -60,6 +69,8 @@ namespace HJScarletRework.Globals.Players
         {
             fruitofEthernity = false;
             infiniteFlightTime = false;
+            absoluteZeroBuff = false;
+            theBleachingBuff = false;
         }
         private void ResetPets()
         {
@@ -97,7 +108,6 @@ namespace HJScarletRework.Globals.Players
             LifeBalloonAcc = false;
             monkStaffHeal = false;
             galvanizedHandDashCD = 0;
-            crimsonCharmStopReduce = false;
             crimsonScytheAttackCounter = 0;
             isExecutionStrikeTriggered = false;
             KnifeMarkIndex = -1;

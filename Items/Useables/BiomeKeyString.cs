@@ -132,39 +132,39 @@ namespace HJScarletRework.Items.Useables
             int otherTreasureChoice = 0;
             for (int i = 0; i < Chest.maxItems; i++)
             {
-                if (i < 5)
+                if (i < 6)
                 {
                     c.item[i].SetDefaults(Treasureitem[i]);
                 }
                 otherTreasureChoice++;
-                if (otherTreasureChoice == 5)
+                if (otherTreasureChoice == 6)
                 {
                     c.item[otherTreasureChoice].SetDefaults(MeleeWeapons[Main.rand.Next(0, MeleeWeapons.Count)]);
                     continue;
                 }
-                if (otherTreasureChoice == 6)
+                if (otherTreasureChoice == 7)
                 {
                     c.item[otherTreasureChoice].SetDefaults(RangedWeapons[Main.rand.Next(0, RangedWeapons.Count)]);
                     continue;
                 }
-                if (otherTreasureChoice == 7)
+                if (otherTreasureChoice == 8)
                 {
                     int id = MagicWeapon[Main.rand.Next(0, MagicWeapon.Count)];
                     c.item[otherTreasureChoice].SetDefaults(id);
                     continue;
                 }
-                if (otherTreasureChoice == 8)
+                if (otherTreasureChoice == 9)
                 {
                     c.item[otherTreasureChoice].SetDefaults(ItemID.MaceWhip);
                     continue;
                 }
-                if (otherTreasureChoice == 9 || otherTreasureChoice == 10 || otherTreasureChoice == 11)
+                if (otherTreasureChoice == 10 || otherTreasureChoice == 12 || otherTreasureChoice == 11)
                 {
                     int id = RandomTreasure[Main.rand.Next(0, RandomTreasure.Count)];
                     c.item[otherTreasureChoice].SetDefaults(id);
                     continue;
                 }
-                if (otherTreasureChoice == 12)
+                if (otherTreasureChoice == 13)
                 {
                     int id = RandomMat[Main.rand.Next(0, RandomMat.Count)];
                     c.item[otherTreasureChoice] = new Item(id, Main.rand.Next(49, 100));

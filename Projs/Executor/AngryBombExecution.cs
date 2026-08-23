@@ -200,6 +200,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire, GetSeconds(2));
             Vector2 dir = Projectile.Center.GetNormalVector2(Owner.MountedCenter).RotatedByRandom(Pi);
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 18, ProjectileType<AngryBombProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             proj.extraUpdates = 2;

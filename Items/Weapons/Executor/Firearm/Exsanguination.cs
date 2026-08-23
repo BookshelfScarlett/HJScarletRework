@@ -18,6 +18,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
             ScarletItemIDSets.ForceToAutomaticExecute[Type] = true;
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {
@@ -31,6 +32,8 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.noUseGraphic = true;
             Item.shoot = ProjectileType<ExsanguinationHeldProj>();
             Item.shootSpeed = 12f;
+            Item.HJScarlet().ItemBelongTo = Globals.Enums.EnumItemOwner.Developer;
+            Item.HJScarlet().OwnerName = "绯色书架 ScarletShelf";
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {

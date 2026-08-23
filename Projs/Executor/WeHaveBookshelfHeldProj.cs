@@ -175,7 +175,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-            if (Main.mouseLeft)
+            if (Main.mouseLeft && !Owner.dead)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 ((WeHaveBookshelfHeldProj)proj.ModProjectile).TargetRotation = Projectile.rotation;

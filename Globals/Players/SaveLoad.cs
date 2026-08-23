@@ -17,6 +17,9 @@ namespace HJScarletRework.Globals.Players
             tag.Add(nameof(firstTimeCraftGaia), firstTimeCraftGaia);
             tag.Add(nameof(ruShiWoWenBanMinionNameTrashList), ruShiWoWenBanMinionNameTrashList);
             tag.Add(nameof(ruShiWoWenBanMinionNameList), ruShiWoWenBanMinionNameList);
+            tag.Add(nameof(weaponUpgradePostSon), weaponUpgradePostSon);
+            tag.Add(nameof(crystallizeLoreReforgeIndex), crystallizeLoreReforgeIndex);
+            tag.Add(nameof(crimsonScytheSlayNPCType), crimsonScytheSlayNPCType);
         }
         public override void LoadData(TagCompound tag)
         {
@@ -29,6 +32,9 @@ namespace HJScarletRework.Globals.Players
             terraRecipe_LifeMaxMultTime = tag.GetInt(nameof(terraRecipe_LifeMaxMultTime));
             givePaper = tag.GetBool(nameof(givePaper));
             firstTimeCraftGaia = tag.GetBool(nameof(firstTimeCraftGaia));
+            weaponUpgradePostSon = tag.GetBool(nameof(weaponUpgradePostSon));
+            crystallizeLoreReforgeIndex = tag.GetInt(nameof(crystallizeLoreReforgeIndex));
+            crimsonScytheSlayNPCType = tag.GetInt(nameof(crimsonScytheSlayNPCType));
         }
     }
 }

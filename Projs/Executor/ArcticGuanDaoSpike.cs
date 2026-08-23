@@ -98,9 +98,9 @@ namespace HJScarletRework.Projs.Executor
                     ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePos(10), RandVelTwoPi(0.1f, 1.1f), RandLerpColor(Color.WhiteSmoke, Color.LightSkyBlue), 40, RandRotTwoPi, 0.75f, Projectile.scale * Main.rand.NextFloat(.7f, 1.2f) * .13f, true, BlendState.AlphaBlend);
             }
         }
-        public override bool? CanDamage()
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            return true;
+            target.AddBuff(BuffID.Frostburn, GetSeconds(1));
         }
         public override bool PreDraw(ref Color lightColor)
         {

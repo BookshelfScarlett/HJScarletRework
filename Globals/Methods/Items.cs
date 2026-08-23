@@ -68,6 +68,11 @@ namespace HJScarletRework.Globals.Methods
             else
                 player.itemRotation = player.itemRotation.AngleLerp(targetRotation + MathHelper.ToRadians(rotationOffset), rotationSpeed);
         }
+        public static void ApplyPrefixToThis(ref Item item, int prefixID)
+        {
+            if (item.CanApplyPrefix(prefixID))
+                item.Prefix(prefixID);
+        }
 
     }
 }

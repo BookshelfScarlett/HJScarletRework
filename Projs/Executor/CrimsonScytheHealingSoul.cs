@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Buffs;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -154,6 +155,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (AttackState == State.HomingTarget)
             {
+                target.AddBuff(BuffType<DivineFireBuff>(), GetSeconds(2));
                 AttackState = State.Fade;
                 Timer = 0;
                 Projectile.netUpdate = true;

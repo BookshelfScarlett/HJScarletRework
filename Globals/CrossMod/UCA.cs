@@ -1,18 +1,46 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Tiles;
+using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
+using HJScarletRework.Items.Materials;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.CrossMod
 {
+    public class UCACrossModSupportProj : GlobalProjectile
+    {
+        public override bool InstancePerEntity => true;
+        public override void SetStaticDefaults()
+        {
+            if (!HJScarletConfigServer.Instance.CrossModSupport)
+                return;
+            if (HJScarletRework.CrossMod_UCA is null)
+                return;
+            int heavySwing = HJScarletRework.CrossMod_UCA.Find<ModProjectile>("StormRulerHeldHeavySwing").Type;
+            int normalSwing = HJScarletRework.CrossMod_UCA.Find<ModProjectile>("StormRulerHeldSwingProj").Type;
+            int kingofStorm = HJScarletRework.CrossMod_UCA.Find<ModProjectile>("StormRulerHeld_KingofStorm").Type;
+            int Lunge = HJScarletRework.CrossMod_UCA.Find<ModProjectile>("StormRulerHeldProj_Lunge").Type;
+            int LungeKingofStorm = HJScarletRework.CrossMod_UCA.Find<ModProjectile>("StormRulerHeldProj_Lunge_KingofStorm").Type;
+            ScarletItemIDSets.GiantKiller[heavySwing] = true;
+            ScarletItemIDSets.GiantKiller[normalSwing] = true;
+            ScarletItemIDSets.GiantKiller[kingofStorm] = true;
+            ScarletItemIDSets.GiantKiller[Lunge] = true;
+            ScarletItemIDSets.GiantKiller[LungeKingofStorm] = true;
+        }
+    }
     public class UCACrossModSupport : GlobalItem
     {
         public override bool InstancePerEntity => true;
         public override void SetStaticDefaults()
         {
+            if (!HJScarletConfigServer.Instance.CrossModSupport)
+                return;
+
             if (HJScarletRework.CrossMod_UCA is null)
                 return;
             int carnage = HJScarletRework.CrossMod_UCA.Find<ModItem>("CarnageRay").Type;
@@ -27,6 +55,7 @@ namespace HJScarletRework.Globals.CrossMod
             HJScarletList.ShinyRarityItemDictionary.Add(vivid, Enums.ShinyRarityType.FateWhite);
             HJScarletList.ShinyRarityItemDictionary.Add(element, Enums.ShinyRarityType.FateWhite);
             HJScarletList.ShinyRarityItemDictionary.Add(sword, Enums.ShinyRarityType.FateWhite);
+            ScarletItemIDSets.GiantKiller[sword] = true;
             int terra = HJScarletRework.CrossMod_UCA.Find<ModItem>("TerraRay").Type;
             HJScarletList.ShinyRarityItemDictionary.Add(terra, Enums.ShinyRarityType.Life);
             int plasma = HJScarletRework.CrossMod_UCA.Find<ModItem>("PlasmaRodAlt").Type;
@@ -40,10 +69,16 @@ namespace HJScarletRework.Globals.CrossMod
     {
         public override void PostAddRecipes()
         {
+            if (!HJScarletConfigServer.Instance.CrossModSupport)
+                return;
+
             if (HJScarletRework.CrossMod_UCA is null)
                 return;
             if (HJScarletRework.CrossMod_Calamity is not null)
                 return;
+            int carnageRay = HJScarletRework.CrossMod_UCA.Find<ModItem>("CarnageRay").Type;
+            int nightRay = HJScarletRework.CrossMod_UCA.Find<ModItem>("NightsRayAlt").Type;
+            int terraRay = HJScarletRework.CrossMod_UCA.Find<ModItem>("TerraRay").Type;
             int shadowbolt = HJScarletRework.CrossMod_UCA.Find<ModItem>("ShadowBoltStaffAlt").Type;
             //元素射线
             int elementalRay = HJScarletRework.CrossMod_UCA.Find<ModItem>("ElementRayAlt").Type;
@@ -53,68 +88,87 @@ namespace HJScarletRework.Globals.CrossMod
             int vividClarity = HJScarletRework.CrossMod_UCA.Find<ModItem>("VividClarityAlt").Type;
             //风暴管束者
             int stormBlade = HJScarletRework.CrossMod_UCA.Find<ModItem>("StormRulerAlt").Type;
-
+            int[] ucaWeapons = [carnageRay, nightRay, terraRay, shadowbolt, elementalRay, soulPiercer, vividClarity, stormBlade];
             for (int i = 0; i < Recipe.numRecipes; i++)
             {
                 Recipe recipe = Main.recipe[i];
-                //影流法杖：合成站更改为物质喷泉，添加物质精华
-                if (recipe.HasResult(shadowbolt) && recipe.createItem.stack == 1 && recipe.HasIngredient(ItemID.LunarBar) && recipe.HasIngredient(ItemID.ShadowbeamStaff) && recipe.HasTile(TileID.LunarCraftingStation))
+                if (recipe.HasResult(terraRay))
                 {
-                    recipe.RemoveTile(TileID.LunarCraftingStation);
-                    recipe.AddIngredient<EssenceofMatter>(10);
-                    recipe.AddTile<FountainofMatter>();
+                    recipe.DisableRecipe();
                 }
-                //元素法杖：合成站更改为最终金属砧，三精华
+                if (recipe.HasResult(shadowbolt))
+                {
+                    recipe.DisableRecipe();
+                }
                 if (recipe.HasResult(elementalRay) && recipe.HasTile(TileID.LunarCraftingStation))
                 {
-                    recipe.RemoveTile(TileID.LunarCraftingStation);
-                    recipe.AddIngredient<EssenceofLife>(10);
-                    recipe.AddIngredient<EssenceofMatter>(10);
-                    recipe.AddIngredient<EssenceofTime>(10);
-                    recipe.AddTile(FinalAnvilTile);
+                    recipe.DisableRecipe();
                 }
-                //耀界：合成站更改为最终金属砧，加入所有版本的考验罐子
                 if (recipe.HasResult(vividClarity) && recipe.HasTile(TileID.LunarCraftingStation))
                 {
                     recipe.DisableRecipe();
                 }
-                //灵魂穿透者：合成站为生命喷泉，加入生命物质
                 if (recipe.HasResult(soulPiercer) && recipe.HasTile(TileID.LunarCraftingStation))
                 {
-                    recipe.RemoveTile(TileID.LunarCraftingStation);
-                    recipe.AddIngredient<EssenceofLife>(10);
-                    recipe.AddTile<FountainofLife>();
+                    recipe.DisableRecipe();
                 }
-                //风暴管束者：毙掉原本的合成，加入三矿锭和毁灭者刃
                 if (recipe.HasResult(stormBlade) && recipe.HasTile(TileID.LunarCraftingStation))
                 {
-                    recipe.RemoveTile(TileID.LunarCraftingStation);
-                    recipe.RemoveIngredient(ItemID.FragmentVortex);
-                    recipe.AddIngredient<DestroyerBlade>();
-                    recipe.AddIngredient<LivingBar>(10);
-                    recipe.AddIngredient<CubistBar>(10);
-                    recipe.AddIngredient<EternalBar>(10);
-                    recipe.AddTile(FinalAnvilTile);
+                    recipe.DisableRecipe();
                 }
 
             }
+            Recipe.Create(stormBlade).
+                AddIngredient<TornadoScythe>().
+                AddIngredient<SoulofBlight>(5).
+                AddIngredient<DeepBar>(5).
+                AddTile(TileID.MythrilAnvil).
+                Register();
+
+            Recipe.Create(terraRay).
+                AddIngredient(nightRay).
+                AddIngredient(ItemID.BrokenHeroSword).
+                AddTile(TileID.MythrilAnvil).
+                Register();
+
+            Recipe.Create(terraRay).
+                AddIngredient(carnageRay).
+                AddIngredient(ItemID.BrokenHeroSword).
+                AddTile(TileID.MythrilAnvil).
+                Register();
+
+            Recipe.Create(elementalRay).
+                AddIngredient(terraRay).
+                AddIngredient(ItemID.FragmentSolar, 5).
+                AddIngredient(ItemID.FragmentVortex, 5).
+                AddIngredient(ItemID.FragmentNebula, 5).
+                AddIngredient(ItemID.FragmentStardust, 5).
+                AddTile(TileID.LunarCraftingStation).
+                Register();
+
+            Recipe.Create(shadowbolt).
+                AddIngredient(ItemID.ShadowbeamStaff).
+                AddIngredient<CubistBar>(5).
+                AddIngredient<LivingBar>(5).
+                AddIngredient<EternalBar>(5).
+                AddTile(FinalAnvilTile).
+                Register();
+
+            Recipe.Create(soulPiercer).
+                AddIngredient(ItemID.ShadowbeamStaff).
+                AddIngredient<EssenceofTime>(5).
+                AddIngredient<EssenceofLife>(5).
+                AddIngredient<EssenceofMatter>(5).
+                AddTile(FinalAnvilTile).
+                Register();
+
             Recipe.Create(vividClarity)
-                    .AddIngredient(elementalRay)
-                    .AddIngredient(shadowbolt)
-                    .AddIngredient(soulPiercer)
-                    .AddIngredient<TankOfThePastCave>(10)
-                    .AddIngredient<TankOfThePastCave>(10)
-                    .AddIngredient<TankOfThePastCorruption>(10)
-                    .AddIngredient<TankOfThePastCrimson>(10)
-                    .AddIngredient<TankOfThePastDesert>(10)
-                    .AddIngredient<TankOfThePastForest>(10)
-                    .AddIngredient<TankOfThePastHallow>(10)
-                    .AddIngredient<TankOfThePastJungle>(10)
-                    .AddIngredient<TankOfThePastSky>(10)
-                    .AddIngredient<TankOfThePastSnowland>(10)
-                    .AddIngredient<TankOfThePastUnderworld>(10)
-                    .AddTile(FinalAnvilTile)
-                    .Register();
+                .AddIngredient(elementalRay)
+                .AddIngredient(shadowbolt)
+                .AddIngredient(soulPiercer)
+                .AddIngredient<CrownofSilveryLight>(15)
+                .AddTile(FinalAnvilTile)
+                .Register();
         }
     }
 }

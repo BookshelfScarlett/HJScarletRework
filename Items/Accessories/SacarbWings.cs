@@ -1,4 +1,6 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Buffs;
+using ContinentOfJourney.Items.Accessories;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
@@ -20,8 +22,7 @@ namespace HJScarletRework.Items.Accessories
 
         public override void ExSD()
         {
-            Item.width = 40;
-            Item.height = 50;
+            Item.defense = 32;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.accessory = true;
             Item.master = true;
@@ -30,7 +31,14 @@ namespace HJScarletRework.Items.Accessories
         {
             //直接调用光女的无限飞饰品
             player.HJScarlet().infiniteFlightTime = true;
+            player.longInvince = true;
+            player.noFallDmg = true;
             player.noKnockback = true;
+            player.buffImmune[BuffType<IcarusBuff>()] = true;
+            player.buffImmune[BuffType<UnexistBuff>()] = true;
+            player.buffImmune[BuffType<MonarchButterflyBuff>()] = true;
+            player.buffImmune[BuffType<PlagueBuff>()] = true;
+            player.buffImmune[BuffType<DivineFireBuff>()] = true;
         }
         public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
         {

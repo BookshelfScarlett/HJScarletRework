@@ -43,11 +43,6 @@ namespace HJScarletRework.Globals.Players
                 if (cycleMadness)
                 {
                 }
-
-                if (cowboyExecutor && cowboyRevolverTimer == 0)
-                {
-                }
-
             }
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
@@ -106,6 +101,8 @@ namespace HJScarletRework.Globals.Players
                         break;
                 }
             }
+            if (theBleachingBuff)
+                sourceDamageModify *= .5f;
             modifiers.SourceDamage *= sourceDamageModify;
 
         }

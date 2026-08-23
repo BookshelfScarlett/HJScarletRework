@@ -277,6 +277,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(5));
             if (LockTarget is null && target.IsLegal())
                 LockTarget = target;
             Vector2 vel = RandVelTwoPi(16, 18f);

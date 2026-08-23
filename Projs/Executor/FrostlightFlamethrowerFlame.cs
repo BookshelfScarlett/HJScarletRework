@@ -7,6 +7,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Caster;
 using System;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -92,11 +93,12 @@ namespace HJScarletRework.Projs.Executor
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            base.ModifyHitNPC(target, ref modifiers);
+            modifiers.SourceDamage *= 2;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<Frostlight>(), Main.rand.Next(2, 5));
+            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
         }
         public override bool PreDraw(ref Color lightColor)
         {

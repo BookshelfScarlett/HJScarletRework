@@ -12,6 +12,7 @@ CreationHat: {
 		减少{3}魔力消耗，允许所有魔法攻击造成暴击伤害
 		溢出的暴击概率以1/2的形式等价转模为你的魔法暴击伤害加成
 		'''
+	// BonusDetail: ""
 }
 
 RedDragonKnightBody: {
@@ -48,7 +49,7 @@ CowboyExecutor: {
 	HelmetTooltip: 增加5%代行者伤害
 	ChestplateTooltip: 增加5%代行者暴击概率
 	LegsTooltip: 增加15%移动速度
-	SetBonus: 命中时追加一把左轮攻击，造成120点伤害，受代行者伤害加成
+	SetBonus: 命中时追加一把左轮攻击，造成40点伤害，受代行者伤害加成
 }
 
 MaidExecutor: {

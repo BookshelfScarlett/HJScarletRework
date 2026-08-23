@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Buffs
@@ -7,7 +8,9 @@ namespace HJScarletRework.Buffs
     {
         public override void SetStaticDefaults()
         {
-            Terraria.Main.buffNoSave[Type] = true;
+            Main.buffNoSave[Type] = true;
+            Main.debuff[Type] = true;
+            BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
         }
         public override void Update(Player player, ref int buffIndex)
         {

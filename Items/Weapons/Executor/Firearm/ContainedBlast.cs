@@ -1,9 +1,11 @@
 ﻿using ContinentOfJourney.Items;
+using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Rockets;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -21,6 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
             ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
             ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {
@@ -54,6 +57,16 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
                 AddIngredient<TheBlackBox>().
                 AddIngredient(ItemID.IllegalGunParts, 10).
                 AddIngredient<CrownofSilveryLight>(15).
+                AddTile(FinalAnvilTile).
+                Register();
+
+            CreateRecipe().
+                AddIngredient<ClockworkMinigun>().
+                AddIngredient<TheBlackBox>().
+                AddIngredient(ItemID.IllegalGunParts, 10).
+                AddIngredient<FinalBar>().
+                AddCondition(HJScarletCraftingConditions.InMultiplayer).
+                DisableDecraft().
                 AddTile(FinalAnvilTile).
                 Register();
         }

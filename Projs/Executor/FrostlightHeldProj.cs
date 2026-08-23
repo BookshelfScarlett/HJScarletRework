@@ -51,7 +51,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
-            //Projectile.velocity = Projectile.SafeDir();
             HandleHeldProjState();
             HandleAttackAnimation();
             HandlePlayerState();
@@ -87,7 +86,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 if (CanHeal)
                     CombatText.NewText(Utils.CenteredRectangle(Vector2.UnitY * -80f + Owner.Center, new(Owner.width, Owner.height)), Color.SkyBlue, $"治疗总量：{HealAmt}");
-                if (!Owner.HasProj<FrostlightHeldProjAlt>(out int projID) && Main.mouseLeft)
+                if (!Owner.HasProj<FrostlightHeldProjAlt>(out int projID))
                 {
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, projID, Projectile.damage, Projectile.knockBack, Projectile.owner);
                     proj.rotation = Projectile.rotation;
@@ -260,10 +259,14 @@ namespace HJScarletRework.Projs.Executor
 
             }
         }
-
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
+        }
         public void HandlePlayerState()
         {
             Projectile.velocity = TargetRotation.ToRotationVector2();
+            Owner.heldProj = Projectile.whoAmI;
             Owner.ControlPlayerArm(Projectile.rotation);
         }
         public override bool PreDraw(ref Color lightColor)

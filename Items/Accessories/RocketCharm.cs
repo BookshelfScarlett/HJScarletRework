@@ -29,7 +29,6 @@ namespace HJScarletRework.Items.Accessories
         {
             CreateRecipe().
                 AddIngredient<DeepBar>(10).
-                AddIngredient(ItemID.SoulofFright, 10).
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }

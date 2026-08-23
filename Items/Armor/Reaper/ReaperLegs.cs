@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Systems;
+using HJScarletRework.Items.Useables;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -51,8 +52,7 @@ namespace HJScarletRework.Items.Armor.Reaper
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.MaidPants2).
-                AddCondition(HJScarletCraftingConditions.IsDownSlimeGodAndInEclipse).
+                AddIngredient<FreehandFrame>().
                 DisableDecraft().
                 Register();
         }

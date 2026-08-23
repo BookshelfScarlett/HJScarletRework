@@ -1,11 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Magic;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -15,6 +14,10 @@ namespace HJScarletRework.Items.Weapons.Magic
     public class PestilenceFlower : HJScarletWeapon
     {
         public override EnumDamageClass Category => EnumDamageClass.Magic;
+        public override void SetStaticDefaults()
+        {
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
+        }
         public override void ExSD()
         {
             Item.damage = 66;

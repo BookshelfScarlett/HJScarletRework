@@ -26,7 +26,6 @@ namespace HJScarletRework.Items.Accessories
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.CrossNecklace).
                 AddIngredient(ItemID.HallowedBar, 10).
                 AddTile(TileID.MythrilAnvil).
                 Register();

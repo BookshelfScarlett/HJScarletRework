@@ -11,7 +11,7 @@ namespace HJScarletRework.ReVisual.Items
     {
         public override void ExModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            tooltips.CreateTooltip(Mod.GetLocalizationKey("SwitchWeapon.AllFix"), Color.LightGray, Mod, "HJScarlet",
+            tooltips.CreateTooltip(Mod.GetLocalizationKey("SwitchWeapon.AllFix"), Color.LightGray, Mod, "HJScarlet",-1,
                 GetValue(nameof(TinKnife)) + GetValue(nameof(CopperKnife)) +
                 GetValue(nameof(IronKnife)) + GetValue(nameof(LeadKnife)) +
                 GetValue(nameof(TungstenKnife)) + GetValue(nameof(SilverKnife)) +

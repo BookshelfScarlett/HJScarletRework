@@ -261,3 +261,13 @@ SeashineSword: {
 	DisplayName: Seashine Sword
 	Tooltip: ""
 }
+
+HighTechBlade: {
+	DisplayName: High Tech Blade
+	Tooltip: ""
+}
+
+RitualofRepose: {
+	DisplayName: Ritualof Repose
+	Tooltip: ""
+}

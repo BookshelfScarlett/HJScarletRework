@@ -46,10 +46,18 @@ namespace HJScarletRework.Globals.Players
         public bool firstTimeCraftGaia = false;
         public int antiKnockbackTime = 0;
         public bool infiniteFlightTime = false;
+        public bool LightofHorizon = false;
+        public bool ankhShieldImmnue = false;
+        public bool terraSparkBoostImmnue = false;
+        public bool infiniteBreath = false;
+        public bool celesitalShellEffect = false;
+        public int crystallizeLoreReforgeIndex = 0;
 
         //猩红镰刀
         public int crimsonScytheAttackCounter = 0;
         public int crimsonScytheDefense = 0;
+        public int crimsonScytheSlayNPCType = 0;
+        public bool weaponUpgradePostSon = false;
         #region 护甲
 
         public bool shinobiExecutor = false;
@@ -88,10 +96,12 @@ namespace HJScarletRework.Globals.Players
         public bool isBeingLove = false;
         public int genderChangeTimer = 0;
         public bool artificalManaStar = false;
+        public bool pocketMirror = false;
 
         public bool LifeBalloonAcc = false;
         public int LifeBalloonAccJumps;
 
+        public int pendantLevel = 0;
         public bool souloftheTidalMark = false;
         public bool desterrennacht = false;
         public int stardustRuneHitHealTimer = 0;
@@ -111,6 +121,7 @@ namespace HJScarletRework.Globals.Players
         public bool emblemColdSteel = false;
         public bool emblemExecutor = false;
         public bool emblemGalaxy = false;
+
         public int defenderEmblemCD = 0;
         public int blackKeyHeal = 0;
         public float blackKeyDefenseBuff = 0;
@@ -125,7 +136,6 @@ namespace HJScarletRework.Globals.Players
         public bool mayaPumper = false;
         public bool crimsonCharm = false;
         public int crimsonCharmReduceTime = 0;
-        public bool crimsonCharmStopReduce = false;
         public float healingPotionMult = 1f;
         public bool bitingClaw = false;
         public int providenceHolyWaterHealMana = 0;

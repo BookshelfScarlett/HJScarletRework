@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Items;
+using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Placables.FishingCrate;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
@@ -9,6 +10,7 @@ using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Magic;
 using HJScarletRework.Items.Weapons.Melee;
+using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -77,6 +79,7 @@ namespace HJScarletRework.Globals.Instances.Items
 
                     #endregion
             }
+            ModifyHardmodeCrateLooting(item.type, ref itemLoot);
             if (item.type == ItemType<WallofShadowTreasureBag>())
             {
                 itemLoot.AddLoot<ExecutorBadge>(3);
@@ -85,10 +88,6 @@ namespace HJScarletRework.Globals.Instances.Items
             if (item.type == ItemType<PriestessRodTreasureBag>())
             {
                 itemLoot.AddLoot<ClimaticHawstring>(3);
-            }
-            if (item.type == ItemType<ScarabBeliefTreasureBag>())
-            {
-                HJScarletMethods.ApplyMasterLoot(ref itemLoot, ItemType<SacarbWings>(), 4);
             }
             if (item.type == ItemType<ShadowCrate>()
                 || item.type == ItemType<ShinyCrate>()
@@ -106,6 +105,70 @@ namespace HJScarletRework.Globals.Instances.Items
             if (item.type == ItemType<GoblinChariotTreasureBag>())
             {
                 itemLoot.AddLoot<AngryBomb>(4);
+            }
+        }
+        public void ModifyHardmodeCrateLooting(int crateType, ref ItemLoot loot)
+        {
+            switch (crateType)
+            {
+                case ItemID.FrozenCrateHard:
+                    loot.AddLoot(ItemID.FrozenTurtleShell, 5);
+                    loot.AddLoot(ItemID.ArcticDivingGear, 5);
+                    break;
+                case ItemID.JungleFishingCrateHard:
+                    loot.AddLoot(ItemID.Bezoar, 5);
+                    loot.AddLoot(ItemID.AdhesiveBandage, 5);
+                    loot.AddLoot(ItemID.JungleRose, 5);
+                    loot.AddLoot(ItemID.NaturesGift, 5);
+                    break;
+                case ItemID.WoodenCrateHard:
+                    loot.AddLoot(ItemID.PaintSprayer, 5);
+                    loot.AddLoot(ItemID.ExtendoGrip, 5);
+                    loot.AddLoot(ItemID.PortableCementMixer, 5);
+                    loot.AddLoot(ItemID.BrickLayer, 5);
+                    break;
+                case ItemID.IronCrateHard:
+                    loot.AddLoot(ItemID.TigerClimbingGear, 5);
+                    loot.AddLoot(ItemID.SharkToothNecklace, 5);
+                    break;
+                case ItemID.GoldenCrateHard:
+                    loot.AddLoot(ItemID.GoblinTech, 5);
+                    loot.AddLoot(ItemID.REK, 5);
+                    loot.AddLoot(ItemID.GPS, 5);
+                    break;
+                case ItemID.OceanCrateHard:
+                    loot.AddLoot(ItemID.HighTestFishingLine, 5);
+                    loot.AddLoot(ItemID.TackleBox, 5);
+                    loot.AddLoot(ItemID.AnglerEarring, 5);
+                    break;
+            }
+            if (crateType == ItemType<QuakyCrate>())
+            {
+                loot.AddLoot(ItemID.FireGauntlet, 5);
+                loot.AddLoot(ItemID.LavaWaders, 5);
+                loot.AddLoot(ItemID.LavaproofTackleBag, 5);
+
+            }
+            if (crateType == ItemType<SolarCrate>() || crateType == ItemType<ShinyCrate>())
+            {
+                loot.AddLoot(ItemID.HorseshoeBundle, 5);
+                loot.AddLoot(ItemID.CelestialStone, 5);
+
+            }
+            if (crateType == ItemType<ForeverCrate>() || crateType == ItemType<CountdownCrate>())
+            {
+                loot.AddLoot(ItemID.Shellphone, 5);
+                loot.AddLoot(ItemID.GreedyRing, 5);
+
+            }
+            if (crateType == ItemType<CubistCrate>() || crateType == ItemType<CubeCrate>())
+            {
+                loot.AddLoot(ItemID.FrozenShield, 5);
+                loot.AddLoot(ItemID.FrostsparkBoots, 5);
+            }
+            if (crateType == ItemType<LivingCrate>() || crateType == ItemType<MembraneCrate>())
+            {
+
             }
         }
         public override void AddRecipes()
@@ -173,7 +236,28 @@ namespace HJScarletRework.Globals.Instances.Items
                 AddTile(TileID.MythrilAnvil).
                 Register();
 
-            if (!ModLoader.TryGetMod("Fargowiltas", out Mod fargoWiltas))
+            Recipe.Create(ItemID.MedicatedBandage).
+                AddIngredient<BambooShield>().
+                AddIngredient(ItemID.AdhesiveBandage).
+                AddTile(TileID.TinkerersWorkbench).
+                DisableDecraft().
+                Register();
+
+            Recipe.Create(ItemType<MoltenKnife>()).
+                AddIngredient<NetherStar>().
+                AddTile(TileID.DemonAltar).
+                DisableDecraft().
+                Register();
+
+            Recipe.Create(ItemID.PocketMirror).
+                AddIngredient(ItemID.MagicMirror).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyGoldBar, 10).
+                DisableDecraft().
+                AddTile(TileID.TinkerersWorkbench).
+                Register();
+
+            if(!ModLoader.TryGetMod("Fargowiltas", out Mod fargoWiltas))
+
                 return;
             Recipe.Create(ItemType<AzureFrostmark>()).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyIceCrate, 5).

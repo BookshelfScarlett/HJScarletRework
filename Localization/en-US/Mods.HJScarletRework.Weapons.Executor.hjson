@@ -137,6 +137,24 @@ CrimsonScythe: {
 		The Black First Sun has sealed the power of this item
 		Perhaps it is time to surpass the Sun God
 		'''
+
+	KillerType: {
+		OnlyCoins:
+			'''
+			Right-click this item to toggle the town NPC killing option
+			Current setting: Allows killing town NPCs, dropping only coins
+			'''
+		AllStuff:
+			'''
+			Right-click this item to toggle the town NPC killing option
+			Current setting: Allows killing town NPCs, dropping coins and special items
+			'''
+		NoKilling:
+			'''
+			Right-click this item to toggle the town NPC killing option
+			Current setting: Town NPC killing is disabled
+			'''
+	}
 }
 
 DeathTolls: {

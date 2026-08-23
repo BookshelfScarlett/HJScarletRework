@@ -1,0 +1,20 @@
+PrefixData: {
+	Warding: ""
+	Mencing: ""
+	Quick: ""
+	Violent: ""
+	Lucky: ""
+}
+
+PocketMirrorModiflication:
+	'''
+	Lostbelt Journey: While equipped, press the Interact key to teleport back to the spawn point
+	You can enable or disable this function through accessory visibility
+	Takes effect by default when placed in vanity slot
+	'''
+
+ItemBelongTo: {
+	Donator: Donator Item
+	Developer: ""
+	Supporter: ""
+}

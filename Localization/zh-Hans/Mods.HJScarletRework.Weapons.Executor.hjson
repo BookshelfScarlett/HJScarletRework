@@ -139,6 +139,24 @@ CrimsonScythe: {
 		黑色的第一太阳封存了这件物品的力量
 		或许应该去尝试超越太阳之神了
 		'''
+
+	KillerType: {
+		OnlyCoins:
+			'''
+			对该物品按下右键以切换城镇NPC击杀选项：
+			当前允许击杀NPC，仅掉落钱币
+			'''
+		AllStuff:
+			'''
+			对该物品按下右键以切换城镇NPC击杀选项：
+			当前允许击杀城镇NPC，掉落钱币和特殊物品
+			'''
+		NoKilling:
+			'''
+			对该物品按下右键以切换城镇NPC击杀选项：
+			当前击杀城镇NPC功能已关闭
+			'''
+	}
 }
 
 DeathTolls: {
@@ -247,7 +265,7 @@ DualWraithStaff: {
 	DisplayName: 双魂魔杖
 	Tooltip:
 		'''
-		发射不可穿墙的追踪幽魂
+		发射追踪幽魂
 		“幽魂之咒，一杖双形”
 		'''
 	ExecutionStrike:
@@ -682,5 +700,5 @@ WeHaveBookshelf: {
 		震撼敌人
 		“我们有大书架！”
 		'''
-	ExecutionStrike: 接下来的15次挥舞，每次释放的追踪敌人的书本会更多
+	ExecutionStrike: 接下来的15次挥舞，每次释放的书本会更多
 }

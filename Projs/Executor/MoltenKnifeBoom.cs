@@ -55,9 +55,13 @@ namespace HJScarletRework.Projs.Executor
         {
             base.ProjAI();
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.DisableCrit();
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            base.OnHitNPC(target, hit, damageDone);
+            target.AddBuff(BuffID.OnFire3, GetSeconds(2));
         }
     }
 }

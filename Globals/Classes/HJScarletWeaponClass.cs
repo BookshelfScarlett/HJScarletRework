@@ -18,7 +18,7 @@ namespace HJScarletRework.Globals.Classes
             ExSD();
         }
         public virtual void ExSD() { }
-        private DamageClass GetDamageClass
+        public DamageClass GetDamageClass
         {
             get
             {

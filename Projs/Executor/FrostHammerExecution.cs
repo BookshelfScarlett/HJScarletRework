@@ -9,6 +9,7 @@ using HJScarletRework.Globals.Methods;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -257,6 +258,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.Frostburn2, GetSeconds(2));
             if (Projectile.numHits > 1)
             {
                 Attacking = true;

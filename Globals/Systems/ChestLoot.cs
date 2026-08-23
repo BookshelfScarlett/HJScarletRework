@@ -3,6 +3,7 @@ using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -47,107 +48,6 @@ namespace HJScarletRework.Globals.Systems
                             }
                         }
                     }
-                }
-            }
-        }
-
-        public void PlaceDungeonBreaker()
-        {
-            // Place some additional items in Frozen Chests:
-            // These are the 3 new items we will place.
-            int[] itemsToPlaceInFrozenChests = [ItemType<DungeonBreaker>()];
-            // This variable will help cycle through the items so that different Frozen Chests get different items
-            int itemsToPlaceInFrozenChestsChoice = 0;
-            // Rather than place items in each chest, we'll place up to 6 items (2 of each).
-            int itemsPlaced = 0;
-            int maxItems = 6;
-            // Loop over all the chests
-            bool forceSpawn = false;
-            int chestIndex = 0;
-            if (!forceSpawn)
-            {
-                for (; chestIndex < Main.maxChests; chestIndex++)
-                {
-                    Chest chest = Main.chest[chestIndex];
-                    if (chest == null)
-                    {
-                        continue;
-                    }
-                    Tile chestTile = Main.tile[chest.x, chest.y];
-                    if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 2 * 36)
-                    {
-                        // We have found a Frozen Chest
-                        // If we don't want to add one of the items to every Frozen Chest, we can randomly skip this chest with a 33% chance.
-                        if (WorldGen.genRand.NextBool(3))
-                            continue;
-                        // Next we need to find the first empty slot for our item
-                        for (int inventoryIndex = 0; inventoryIndex < Chest.maxItems; inventoryIndex++)
-                        {
-                            if (chest.item[inventoryIndex].type == ItemID.None)
-                            {
-                                // Place the item
-                                chest.item[inventoryIndex].SetDefaults(itemsToPlaceInFrozenChests[itemsToPlaceInFrozenChestsChoice]);
-                                // Decide on the next item that will be placed.
-                                itemsPlaced++;
-                                break;
-                            }
-                        }
-                    }
-                    // Once we've placed as many items as we wanted, break out of the loop
-                    if (itemsPlaced >= maxItems)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-
-        public void PlaceIceSpear()
-        {
-            // Place some additional items in Frozen Chests:
-            // These are the 3 new items we will place.
-            int[] itemsToPlaceInFrozenChests = [ItemType<AzureFrostmark>()];
-            // This variable will help cycle through the items so that different Frozen Chests get different items
-            int itemsToPlaceInFrozenChestsChoice = 0;
-            // Rather than place items in each chest, we'll place up to 6 items (2 of each).
-            int itemsPlaced = 0;
-            int maxItems = 6;
-            // Loop over all the chests
-            for (int chestIndex = 0; chestIndex < Main.maxChests; chestIndex++)
-            {
-                Chest chest = Main.chest[chestIndex];
-                if (chest == null)
-                {
-                    continue;
-                }
-                Tile chestTile = Main.tile[chest.x, chest.y];
-                // We need to check if the current chest is the Frozen Chest. We need to check that it exists and has the TileType and TileFrameX values corresponding to the Frozen Chest.
-                // If you look at the sprite for Chests by extracting Tiles_21.xnb, you'll see that the 12th chest is the Frozen Chest.
-                // Since we are counting from 0, this is where 11 comes from. 36 comes from the width of each tile including padding.
-                // An alternate approach is to check the wiki and looking for the "Internal Tile ID" section in the infobox: https://terraria.wiki.gg/wiki/Frozen_Chest
-                if (chestTile.TileType == TileID.Containers && chestTile.TileFrameX == 11 * 36)
-                {
-                    // We have found a Frozen Chest
-                    // If we don't want to add one of the items to every Frozen Chest, we can randomly skip this chest with a 33% chance.
-                    if (WorldGen.genRand.NextBool(3))
-                        continue;
-                    // Next we need to find the first empty slot for our item
-                    for (int inventoryIndex = 0; inventoryIndex < Chest.maxItems; inventoryIndex++)
-                    {
-                        if (chest.item[inventoryIndex].type == ItemID.None)
-                        {
-                            // Place the item
-                            chest.item[inventoryIndex].SetDefaults(itemsToPlaceInFrozenChests[itemsToPlaceInFrozenChestsChoice]);
-                            // Decide on the next item that will be placed.
-                            itemsPlaced++;
-                            break;
-                        }
-                    }
-                }
-                // Once we've placed as many items as we wanted, break out of the loop
-                if (itemsPlaced >= maxItems)
-                {
-                    break;
                 }
             }
         }
@@ -205,7 +105,7 @@ namespace HJScarletRework.Globals.Systems
         }
         public void ModifyFrozenChestLoot()
         {
-            int[] list = [ItemType<AzureFrostmark>()];
+            int[] list = [ItemType<AzureFrostmark>(),ItemID.ArcticDivingGear,ItemID.HandWarmer];
             PlaceItemsInSpecificChests(11, list, 24);
         }
         public void ModifySkyChestLoot()
@@ -223,6 +123,30 @@ namespace HJScarletRework.Globals.Systems
             int[] list = [ItemType<DesertKnife>()];
             PlaceItemsInSpecificChests(10, list, 18, .25f,TileID.Containers2);
         }
+        public void ModifyShadowChestLoot()
+        {
+            int[] list = [ItemID.DemonScythe];
+            PlaceItemsInSpecificChests(3, list, 6, .3f);
+            int[] list2 = [ItemID.MagmaStone, ItemID.ObsidianRose, ItemID.LavaFishingHook, ItemID.GuideVoodooDoll];
+            PlaceItemsInSpecificChests(3, list2, 12, .3f);
+        }
+        public void ModifyWaterChestLoot()
+        {
+            int[] list = [ItemID.WeatherRadio,ItemID.FishermansGuide,ItemID.Sextant];
+            PlaceItemsInSpecificChests(17, list, 16, .4f);
+        }
+        public void ModifyJungleChestLoot()
+        {
+            int[] list = [ItemID.NaturesGift,ItemID.JungleRose];
+            PlaceItemsInSpecificChests(10, list, 16, .4f);
+        }
+        public void ModifyMiscChestLoot()
+        {
+            //大理石
+            int[] marbleList = [ItemID.PocketMirror];
+            PlaceItemsInSpecificChests(51, marbleList, 10, .4f);
+        }
+
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             base.ModifyWorldGenTasks(tasks, ref totalWeight);
@@ -234,8 +158,14 @@ namespace HJScarletRework.Globals.Systems
             ModifyFrozenChestLoot();
             ModifyDungeonChestLoot();
             ModifyDesertChestLoost();
+            ModifyShadowChestLoot();
+            ModifyWaterChestLoot();
+            ModifyJungleChestLoot();
+            ModifyMiscChestLoot();
             PlacePurePrism();
         }
+
+
         public override void PostUpdateWorld()
         {
         }

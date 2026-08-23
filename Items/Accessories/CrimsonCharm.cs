@@ -11,18 +11,16 @@ namespace HJScarletRework.Items.Accessories
     public class CrimsonCharm : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
-        public static int MinusHeal = 75;
-        public static int OverSatuTime = 15;
+        public static int OverSatuTime = 45;
         public static int MininumHeal = 1;
-        public static float MaxHealPower = 2.0f;
+        public static float MinusRatios = .2f;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MinusHeal, OverSatuTime, MininumHeal, MaxHealPower.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MinusRatios.ToPercent(), OverSatuTime, MininumHeal);
         public override void ExSD()
         {
-            Item.defense = 4;
             Item.accessory = true;
             Item.SetUpRarityPrice(ItemRarityID.Red);
         }
@@ -30,7 +28,6 @@ namespace HJScarletRework.Items.Accessories
         {
             player.PotionDelayModifier *= 0f;
             player.HJScarlet().crimsonCharm = true;
-            player.HJScarlet().healingPotionMult += MaxHealPower;
             player.crimsonRegen = true;
         }
         public override void AddRecipes()

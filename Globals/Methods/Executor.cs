@@ -92,23 +92,7 @@ namespace HJScarletRework.Globals.Methods
                 owner.HJScarlet().ExecutionListStored[itemID] += times;
                 if (owner.HJScarlet().ExecutionListStored[itemID] > HJScarletList.ExecuteRequests[itemID])
                     owner.HJScarlet().ExecutionListStored[itemID] = HJScarletList.ExecuteRequests[itemID];
-                if (owner.HeldItem.type != owner.HJScarlet().lastHeldItemIndex)
-                    owner.HJScarlet().hasSendExecutionTint = false;
             }
-            if (owner.HJScarlet().ExecutionListStored.TryGetValue(itemID, out int curExeTime) && owner.HJScarlet().tacticalExecution)
-            {
-                if (curExeTime >= HJScarletList.ExecuteRequests[itemID])
-                {
-                    if (!owner.HJScarlet().hasSendExecutionTint && owner.HJScarlet().hasSendExecutionTintTimer == 0)
-                    {
-                        SoundEngine.PlaySound(SoundID.Item35 with { MaxInstances = 0 }, owner.Center);
-                        owner.HJScarlet().hasSendExecutionTintTimer = 5;
-                        owner.HJScarlet().hasSendExecutionTint = true;
-                    }
-                    return;
-                }
-            }
-
         }
         public static void InsertExecutorTooltips(this List<TooltipLine> tooltips)
         {
@@ -237,6 +221,18 @@ namespace HJScarletRework.Globals.Methods
             else
                 return false;
         }
+        /// <summary>
+        /// 比对当前武器是否为你需要的类型
+        /// <br>若<see cref="HJScarletList.ExecutorTypes"/>中不存在<paramref name="item"/>，则返回<see langword="false"/>以表不存在该值</br>
+        /// </summary>
+        public static bool CheckExecuteTypes(this int item, ExecutorWeaponType tpye)
+        {
+            if (HJScarletList.ExecutorTypes.TryGetValue(item, out ExecutorWeaponType executorWeaponType))
+                return tpye == executorWeaponType;
+            else
+                return false;
+        }
+
 
         /// <summary>
         /// 获取玩家手持的代行者武器的处决进程

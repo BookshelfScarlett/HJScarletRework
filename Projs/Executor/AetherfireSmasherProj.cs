@@ -248,6 +248,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.AddExecutionTimeImmediate(ItemType<AetherfireSmasher>());
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_BoomHit with { MaxInstances = 1, Pitch = -0.5f, Volume = 0.78f }, Projectile.Center);
             ScarletSound(HJScarletSounds.SodomsDisaster_BoomHit, Projectile.Center, .78f, 1, -.5f, .1f);
+            target.AddBuff(BuffID.OnFire3, GetSeconds(5));
             if (AttackState == State.Shoot)
             {
                 UpdateOnHitNPCParticle(target.Center);

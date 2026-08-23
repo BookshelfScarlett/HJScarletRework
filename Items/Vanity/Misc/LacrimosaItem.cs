@@ -8,15 +8,5 @@ namespace HJScarletRework.Items.Vanity.Misc
         public override Color ParticleColor1 => Color.Lerp(Color.Red, Color.Crimson, 0.3f);
         public override Color ParticleColor2 => Color.DarkRed;
         public override string VanityName => "Lacrimosa";
-        public override void AddRecipes()
-        {
-            CreateRecipe().
-                AddIngredient(ItemID.FruitJuice).
-                AddIngredient(ItemID.Silk,10).
-                DisableDecraft().
-                AddTile(TileID.Loom).
-                Register();
-        }
-
     }
 }

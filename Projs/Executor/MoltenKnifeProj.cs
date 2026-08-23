@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -39,6 +40,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(2));
             if (Owner.HasProj<MoltenKnifeMark>())
                 return;
             Projectile.AddExecutionTimeImmediate<MoltenKnife>();

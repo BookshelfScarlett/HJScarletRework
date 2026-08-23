@@ -203,4 +203,37 @@ AxeCharm: {
 		对部分武器不生效
 		'''
 	EnableTooltips: 手动处决模式：{0}
+	CritDamageMult: 当前代行者暴击伤害加成：{0}
+}
+
+TheSonBuff: {
+	DisplayName: 圣子后物品强化道具
+	Tooltip:
+		'''
+		右键以开关部分物品是否允许获得圣子后伤害强化
+		可通过手持时查看背包内符合要求的物品
+		'''
+	EnableTooltips: 强化: {0}
+}
+
+CrystallizedLore: {
+	DisplayName: 传承结晶
+	Tooltip:
+		'''
+		手持时，对背包内的武器使用可尝试赋予其最高级词缀，若失败则获得“恶魔”词缀
+		对饰品使用可尝试赋予其最高级饰品词缀
+		对传承结晶按下右键可切换饰品词缀的可选项
+		'''
+	DetailTooltip:
+		'''
+		从人类史与玛纳洪流的交错中，
+		产生的高纯度魔力结晶。
+		也可以称之为物质化的英灵素材。
+		'''
+	PrefixLine: 当前选中的饰品词缀：{0}
+}
+
+FreehandFrame: {
+	DisplayName: 随心画框
+	Tooltip: 可用于合成空想归途内所有的变身时装物品
 }

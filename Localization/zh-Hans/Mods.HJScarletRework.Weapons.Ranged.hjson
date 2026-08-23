@@ -33,3 +33,13 @@ BlazingSun: {
 		所有的攻击都可穿墙
 		'''
 }
+
+PandorasBurger: {
+	DisplayName: 潘多拉的汉堡包
+	Tooltip:
+		'''
+		使用时随机发射三种不同的射弹
+		会从你启用的所有模组中的武器内随机选择
+		"什么？"
+		'''
+}

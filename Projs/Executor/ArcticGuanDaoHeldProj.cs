@@ -9,6 +9,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Misc;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -265,6 +266,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.Frostburn, GetSeconds(1));
             if (Projectile.numHits < 1)
                 StopTiming = 2 * Projectile.extraUpdates;
             Projectile.AddExecutionTimeImmediate(OriginalItemID);

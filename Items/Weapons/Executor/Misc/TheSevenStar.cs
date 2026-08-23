@@ -19,6 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Donator);
             ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
             ScarletItemIDSets.NoGeneralExecutionProgressDraw[Type] = true;
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {

@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -49,6 +50,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(2));
             base.OnHitNPC(target, hit, damageDone);
         }
         public override bool? CanDamage()

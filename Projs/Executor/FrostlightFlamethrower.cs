@@ -25,6 +25,7 @@ namespace HJScarletRework.Projs.Executor
         public bool ShouldUseEdgeMeltShader = false;
         public AnimationStruct Helper = new(3);
         public Vector2 BeginPos = Vector2.Zero;
+        public new int AttackSpeed => Owner.ApplyWeaponAttackSpeed(Owner.HeldItem, GetInstance<Frostlight>().Item.useTime * Projectile.MaxUpdates, MinAttackRates * Projectile.MaxUpdates);
         public List<Vector2> OldAimPos = [];
         public override bool? CanDamage() => false;
         public override bool ShouldUpdatePosition() => false;
@@ -50,6 +51,11 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
+            if(Owner.JustPressRightClick()&&Owner.IsHolding(OriginalItemID))
+            {
+                Projectile.Kill();
+                return;
+            }
             HandleHeldProjState();
             HandleAttackAnimation();
             HandlePlayerState();
@@ -59,6 +65,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Projectile.HJScarlet().ExecutionStrike = false;
                     Owner.RemoveExecutionProgress(OriginalItemID);
+                    Owner.HJScarlet().hasSendExecutionTint = false;
                     Timer = 0;
                     Owner.direction = (Main.MouseWorld.X - Owner.Center.X > 0).ToDirectionInt();
                     Vector2 ownerToSky = new Vector2(Owner.Center.X + 250 * Owner.direction, Owner.Center.Y) + new Vector2(0, -500) - Owner.Center;
@@ -80,8 +87,9 @@ namespace HJScarletRework.Projs.Executor
             if (Helper.IsDone[0])
                 Projectile.Center = Owner.MountedCenter;
             Projectile.position.Y += Owner.gfxOffY;
-            bool ifStillUse = (Owner.controlUseItem) && !Owner.noItems && !Owner.CCed;
-            if (!ifStillUse || Owner.dead)
+            bool holding = Owner.IsHolding(OriginalItemID) || !Owner.HeldItem.IsWeapon();
+            bool ifStillInUse = !Owner.noItems && !Owner.CCed && holding;
+            if (!ifStillInUse || Owner.dead)
                 Projectile.Kill();
             else
                 Projectile.timeLeft = 2;
@@ -94,6 +102,7 @@ namespace HJScarletRework.Projs.Executor
             UpdateBeginAnimation();
             if (!Helper.IsDone[0])
             {
+                Owner.itemTime = Owner.itemAnimation = 2;
                 Helper.UpdateAniState(0);
                 if (ShouldUseEdgeMeltShader)
                     Projectile.Center = Vector2.Lerp(BeginPos, Owner.MountedCenter, EaseOutExpo(Helper.GetAniProgress(0)));
@@ -111,7 +120,7 @@ namespace HJScarletRework.Projs.Executor
                 Rotations = Lerp(Rotations, 1.01f, 0.12f / Projectile.MaxUpdates);
                 HandleParticle();
                 Vector2 fireSpawnPosition = Projectile.Center + Projectile.rotation.ToRotationVector2().SafeNormalize(Vector2.UnitY) * 85;
-                Vector2 fireShootVelocity = Projectile.rotation.ToRotationVector2() * Owner.HeldItem.shootSpeed * .5f;
+                Vector2 fireShootVelocity = Projectile.rotation.ToRotationVector2() *  21* .5f;
                 if (Projectile.MeetMaxUpdatesFrame(ShootTimer, 13) || ShootTimer == 0)
                 {
                     SoundEngine.PlaySound(HJScarletSounds.HymnFireball_Release with { MaxInstances = 0, Pitch = -.35f, PitchVariance = .1f });
@@ -122,7 +131,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Projectile.MeetMaxUpdatesFrame(Timer, 2))
                 {
                     Timer = 0;
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), fireSpawnPosition.ToRandCirclePos(10), fireShootVelocity, ProjectileType<FrostlightFlamethrowerFlame>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), fireSpawnPosition.ToRandCirclePos(10), fireShootVelocity, ProjectileType<FrostlightFlamethrowerFlame>(), Projectile.damage*2, Projectile.knockBack, Projectile.owner);
                     proj.HJScarlet().HasExecutionMechanic = true;
                 }
             }
@@ -182,9 +191,7 @@ namespace HJScarletRework.Projs.Executor
         public void HandlePlayerState()
         {
             Owner.ChangeDir(Projectile.direction);
-            Owner.heldProj = Projectile.whoAmI;
-            Owner.itemTime = Owner.itemAnimation = 2;
-            Owner.ControlPlayerArm(Projectile.rotation);
+            Owner.ControlPlayerArm(Projectile.rotation,-1);
         }
         public void DrawEdgeShaderProj()
         {

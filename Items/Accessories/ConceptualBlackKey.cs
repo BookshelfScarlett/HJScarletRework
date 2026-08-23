@@ -28,7 +28,7 @@ namespace HJScarletRework.Items.Accessories
         {
             player.GetArmorPenetration<ExecutorDamageClass>() += AP;
             player.HJScarlet().blackKeyExecutorDamageAdd = DamageAdd;
-            player.HJScarlet().blackKeyExecutorCriticalChanceAdd = (int)(DamageAdd * 100f);
+            player.HJScarlet().blackKeyExecutorCriticalChanceAdd = Crit;
             player.HJScarlet().critDamageExecutor += CritDamage;
             player.HJScarlet().blackKeyHeal = HealAmit;
             player.HJScarlet().blackKeyDoT = true;

@@ -4,6 +4,7 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Systems;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using System.Collections.Generic;
 using Terraria;
@@ -88,8 +89,7 @@ namespace HJScarletRework.Items.Armor.Reaper
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.JungleRose).
-                AddCondition(HJScarletCraftingConditions.IsDownSlimeGodAndInEclipse).
+                AddIngredient<FreehandFrame>().
                 DisableDecraft().
                 Register();
         }

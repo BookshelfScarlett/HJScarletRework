@@ -16,6 +16,7 @@ namespace HJScarletRework.Projs.Magic
         public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override string Texture => $"Terraria/Images/NPC_{NPCID.PlanterasTentacle}";
         public ref float Timer => ref Projectile.ai[0];
+        public ref float CanHomingToTarget => ref Projectile.ai[1];
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(12);
@@ -31,15 +32,24 @@ namespace HJScarletRework.Projs.Magic
             Projectile.penetrate = 2;
             Projectile.scale = 0;
             Projectile.stopsDealingDamageAfterPenetrateHits = true;
-            Projectile.SetupImmnuity(-1);
+            Projectile.SetupImmnuity(60);
             Projectile.noEnchantmentVisuals = true;
         }
+        public float OriginalSpeed = 0;
         public override void OnFirstFrame()
         {
             Projectile.localAI[1] = Main.rand.Next(100, 300);
             Projectile.localAI[2] = Main.rand.NextFloat(.9f, 1.2f);
-            base.OnFirstFrame();
+            OriginalSpeed = Projectile.velocity.Length();
         }
+        public void ResetSpeed()
+        {
+            if (Projectile.velocity.LengthSquared() < OriginalSpeed * OriginalSpeed)
+                Projectile.velocity *= 1.1f;
+            else
+                Projectile.velocity *= 0.9f;
+        }
+
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
@@ -47,9 +57,22 @@ namespace HJScarletRework.Projs.Magic
             Timer++;
             if (Projectile.MeetMaxUpdatesFrame(Timer, 9))
             {
+                CanHomingToTarget++;
+                if (CanHomingToTarget > Projectile.MaxUpdates * 10f)
+                {
+                    if (Projectile.GetTargetSafe(out NPC target))
+                    {
+                        Projectile.HomingTarget(target.Center, -1, OriginalSpeed, 10f,5);
+                    }
+                    else
+                        ResetSpeed();
+                }
+                else
+                    ResetSpeed();
+
                 if (Projectile.penetrate == -1 && Projectile.damage == 0)
                 {
-                    Projectile.Opacity = Lerp(Projectile.scale, 0f, 0.05f);
+                    Projectile.Opacity = Lerp(Projectile.Opacity, 0f, 0.2f);
                     if (Projectile.Opacity <= 0.02f)
                     {
                         Projectile.Kill();
@@ -111,6 +134,7 @@ namespace HJScarletRework.Projs.Magic
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            CanHomingToTarget = 0;
             for (int i = 0; i < 3; i++)
             {
                 Vector2 dVel = Projectile.SafeDir().ToRandVelocity(ToRadians(10f)) * Main.rand.NextFloat(4f, 12f);
@@ -130,15 +154,6 @@ namespace HJScarletRework.Projs.Magic
             Vector2 pos = Projectile.Center - Main.screenPosition;
             float scaleLerp = Utils.GetLerpValue(0, 6f * Projectile.MaxUpdates, Timer, true);
             //绘制残影
-            int length = Projectile.oldPos.Length;
-            //for (int i = 0; i < length; i++)
-            //{
-            //    float rads = (float)i / length;
-            //    Color edgeColor = Color.Lerp(Color.White, Color.DarkGreen, (1 - rads)).ToAddColor((byte)(int)Clamp(rads * 250f, 100, 250)) * Clamp(Projectile.velocity.Length(), 0f, 1f) * (1 - rads);
-            //    float rot = Projectile.oldRot[i];
-            //    SB.Draw(tex, Projectile.oldPos[i] + Projectile.PosToCenter(), frame, edgeColor, rot, frameOri, DrawScale * scale * Projectile.scale, SpriteEffects.FlipHorizontally, 0);
-            //    scale *= 0.980f;
-            //}
             for (int i = 0; i < 16; i++)
             {
                 SB.Draw(tex, pos + (TwoPi / 16f * i).ToRotationVector2() * 1.5f * DrawScale, frame, Color.DarkGreen.ToAddColor() * scaleLerp, Projectile.rotation, frameOri, Projectile.scale * DrawScale, SpriteEffects.FlipHorizontally, 0);

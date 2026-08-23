@@ -9,6 +9,7 @@ using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -168,6 +169,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.Frostburn2, GetSeconds(2));
             if (AttackState == State.Strike)
             {
                 ScarletSound(HJScarletSounds.ASMD_IceBlockSplit, Projectile.Center, 0.45f, 1, 0.3f, 0.2f);

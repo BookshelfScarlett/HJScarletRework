@@ -4,6 +4,7 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
 using HJScarletRework.Globals.Players.VanitySets;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityParticles;
 using System.Collections.Generic;
@@ -182,6 +183,13 @@ namespace HJScarletRework.Items.Vanity
                 };
                 TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
             }
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient<FreehandFrame>().
+                DisableDecraft().
+                Register();
         }
     }
 }

@@ -94,5 +94,6 @@ ProjectileType<SlimeGodLightOrb>(), ProjectileType<SlimeGodLightOrb_2>(), Projec
             ProjectileType<SlimeGod_Master_30>(), ProjectileType<SlimeGod_Master_31>()
         #endregion
             );
+        public static bool[] IsHeldProj= ProjectileID.Sets.Factory.CreateBoolSet();
     }
 }

@@ -128,6 +128,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(5));
         }
         public override void OnKill(int timeLeft)
         {

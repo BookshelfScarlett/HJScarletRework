@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Useables;
@@ -31,6 +32,8 @@ namespace HJScarletRework.Globals.Instances
         public bool grassKnifePoison = false;
         public int grassKnifePoisionLevel = 1;
         public bool grassPoison = false;
+        public bool absoluteZeroBuffEnemy = false;
+        public bool theBleachingBuffEnemy = false;
 
 
         public override void ResetEffects(NPC npc)
@@ -39,15 +42,22 @@ namespace HJScarletRework.Globals.Instances
             isBeingStabByContainedBlast = false;
             terraFlamethrowerDebuff = false;
             terraFlamethrowerDropDamage = 0;
+            absoluteZeroBuffEnemy = false;
+            theBleachingBuffEnemy = false;
+
             if (isBeingStabByContainedStick > 0)
                 isBeingStabByContainedStick--;
-            if(isBeingStabByLavaFlowExecution>0)
-            isBeingStabByLavaFlowExecution = 0;
+            if (isBeingStabByLavaFlowExecution > 0)
+                isBeingStabByLavaFlowExecution = 0;
             if (StopNpcTime > 0)
                 StopNpcTime--;
         }
         public override void PostAI(NPC npc)
         {
+            if(absoluteZeroBuffEnemy)
+            {
+                npc.velocity *= AbsoluteZeroBuff.BadMoveSpeedEnemy;
+            }
             if (StopNpcTime > 0)
                 npc.velocity *= 0.1f;
             if (StopNpcTime == 0 && PostSpeed != Vector2.Zero)
@@ -80,8 +90,30 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void UpdateLifeRegen(NPC npc, ref int damage)
         {
-            if (grassKnifePoison)
+            if (absoluteZeroBuffEnemy)
             {
+                if (npc.lifeRegen > 0)
+                    npc.lifeRegen = 0;
+                npc.lifeRegen -= AbsoluteZeroBuff.BadLifeRegenEnemy * 2;
+                damage = AbsoluteZeroBuff.BadLifeRegenEnemy;
+            }
+        }
+        public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
+        {
+            if(theBleachingBuffEnemy)
+            {
+                modifiers.FinalDamage *= TheBleachingBuff.HitDamageMultEnemy;
+            }
+        }
+        public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
+        {
+            if (absoluteZeroBuffEnemy)
+            {
+                modifiers.SourceDamage *= (1 + AbsoluteZeroBuff.BadDamageMult);
+            }
+            if(theBleachingBuffEnemy)
+            {
+                modifiers.DefenseEffectiveness *= 0;
             }
         }
         public override void DrawEffects(NPC npc, ref Color drawColor)

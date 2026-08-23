@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
@@ -15,6 +16,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
         public override void SetStaticDefaults()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Solar);
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {

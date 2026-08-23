@@ -50,5 +50,10 @@ namespace HJScarletRework.Globals.IDSets
         /// </summary>
 
         public static bool[] SharedSameBuffTimer = ItemID.Sets.Factory.CreateBoolSet();
+        /// <summary>
+        /// 如果为<see langword="true"/>，标记该物品发射的是一个手持射弹
+        /// <br>用于过滤某些特殊的需求</br>
+        /// </summary>
+        public static bool[] IsHeldProjItem = ItemID.Sets.Factory.CreateBoolSet();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
@@ -18,6 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {
@@ -28,7 +30,8 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = null;
             Item.knockBack = 7f;
-            Item.useTime = Item.useAnimation = 48;
+            Item.useTime = Item.useAnimation = 45;
+            Item.crit = 46;
             Item.shoot = ProjectileType<MonocleHeldProj>();
             Item.HJScarlet().borderlandWeapon = true;
         }

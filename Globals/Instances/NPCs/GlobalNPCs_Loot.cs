@@ -98,9 +98,15 @@ namespace HJScarletRework.Globals.Instances
             if (npc.type == NPCType<MarquisMoonsquid>())
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<SquidItem>(), 4);
             if (npc.type == NPCType<ScarabBelief>())
+            {
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<NoneItem>(), 4);
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<SacarbWings>(), 50);
+            }
             if (npc.type == NPCType<TheSon>())
+            {
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<SonItem>(), 4);
+                HJScarletMethods.ApplyFirstTimeLoot(ref npcLoot, new FirstTimeKillingTheSon(), ItemType<TheSonBuff>(), onFailDropRate: 5);
+            }
             if (npc.type == NPCType<PolarMimic>())
             {
                 npcLoot.AddLootSimple(ItemType<Frostlight>(), 4, 1, 1);
@@ -132,6 +138,9 @@ namespace HJScarletRework.Globals.Instances
             LeadingConditionRule crownofSilveryLightRule = new(Condition.InHallow.ToDropCondition(ShowItemDropInUI.Always));
             crownofSilveryLightRule.OnSuccess(ItemDropRule.ByCondition(new PostSupremeCondition(), ItemType<CrownofSilveryLight>(), 5, 1, 6));
             globalLoot.Add(crownofSilveryLightRule);
+
+
+
         }
         public override bool? CanGoToStatue(NPC npc, bool toKingStatue)
         {

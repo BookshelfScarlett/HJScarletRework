@@ -195,6 +195,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire, GetSeconds(2));
             Projectile.AddExecutionTimeImmediate(ItemType<AngryBomb>());
             if (Projectile.ai[2] == 1 && Projectile.HJScarlet().ExecutionStrike)
             {

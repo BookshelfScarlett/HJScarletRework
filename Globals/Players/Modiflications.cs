@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Armor;
 using HJScarletRework.Items.Armor.DragonHunter;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -13,8 +14,13 @@ namespace HJScarletRework.Globals.Players
 {
     public partial class HJScarletPlayer : ModPlayer
     {
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            base.ModifyHitNPC(target, ref modifiers);
+        }
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
+            int totalCrit = 0;
             if (dragonHunter && !item.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
                 crit = Player.GetTotalCritChance<ExecutorDamageClass>();
@@ -27,17 +33,9 @@ namespace HJScarletRework.Globals.Players
             }
             if (monkExecutor)
             {
-                crit = Player.GetTotalCritChance<ExecutorDamageClass>() + 4;
-                if (item.type == ItemID.MonkStaffT3)
-                {
+                if (item.type == ItemID.MonkStaffT3 || item.type == ItemID.MonkStaffT1)
                     crit += 15;
-                }
-                if (item.type == ItemID.MonkStaffT1)
-                {
-                    crit += 15;
-                }
             }
-
             //下面这个必须得最后执行
             if (PreciousTargetAcc && item.damage > 0)
             {
@@ -55,16 +53,20 @@ namespace HJScarletRework.Globals.Players
         }
         public override void ModifyManaCost(Item item, ref float reduce, ref float mult)
         {
-            if ((heartoftheCrystal || redDragonKnight) && item.DamageType.CountsAsClass(DamageClass.Magic))
+            int totalReduce = 0;
+            if (heartoftheCrystal)
             {
                 mult = 0;
             }
+            if (CreationHat.Staffs.Contains(item.type))
+            {
+                totalReduce += 3;
+            }
             if (artificalManaStar)
             {
-                reduce = 1;
+                totalReduce += 1;
             }
-
-            base.ModifyManaCost(item, ref reduce, ref mult);
+            reduce -= totalReduce;
         }
         //潜在的问题是，这里实际上有可能因为写法差异导致出现多乘区
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)
@@ -72,7 +74,7 @@ namespace HJScarletRework.Globals.Players
             if (dragonHunter && !item.DamageType.CountsAsClass<ExecutorDamageClass>() && !item.DamageType.CountsAsClass<GenericDamageClass>() && item.damage > 0)
             {
                 damage = StatModifier.Default;
-                float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
+                float ratios = Player.GetDamageBonusRatio(item.damage, ExecutorDamageClass.Instance);
                 damage *= (1f + ratios);
             }
             if (monkExecutor)
@@ -80,17 +82,24 @@ namespace HJScarletRework.Globals.Players
                 if (item.type == ItemID.MonkStaffT3)
                 {
                     damage = StatModifier.Default;
-                    float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
+                    float ratios = Player.GetDamageBonusRatio(item.damage, ExecutorDamageClass.Instance);
                     damage *= (1 + ratios);
                     damage *= 1.35f;
                 }
                 if (item.type == ItemID.MonkStaffT1)
                 {
                     damage = StatModifier.Default;
-                    float ratios = (Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(item.damage) - (float)item.damage) / (float)item.damage;
+                    float ratios = Player.GetDamageBonusRatio(item.damage, ExecutorDamageClass.Instance);
                     damage *= (1 + ratios);
                     damage *= 1.2f;
                 }
+            }
+            if (CreationHatSet && item.DamageType.CountsAsClass<MagicDamageClass>() && CreationHat.Staffs.Contains(item.type))
+            {
+                damage = StatModifier.Default;
+                float ratios = Player.GetDamageBonusRatio(item.damage, DamageClass.Magic);
+                damage *= (1 + ratios);
+                damage *= 10;
             }
         }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -100,32 +109,23 @@ namespace HJScarletRework.Globals.Players
         public override void GetHealLife(Item item, bool quickHeal, ref int healValue)
         {
             healValue = (int)(healValue * healingPotionMult);
-            HandleCrimsonCharmEffect(item, quickHeal, ref healValue);
-        }
-
-        public void HandleCrimsonCharmEffect(Item item, bool quickHeal, ref int healValue)
-        {
-            bool isOverSatu = Player.HasBuff(BuffType<CrimsonCharmBuff>());
-            bool pass = quickHeal || crimsonCharm || isOverSatu;
-            if (!pass)
+            if (!crimsonCharm)
                 return;
-            if (isOverSatu)
+            if (item.healLife <= 0)
+                return;
+            int maxLife = Player.statLifeMax2;
+            bool hasOverSatu = Player.HasBuff<CrimsonCharmBuff>();
+            if (!hasOverSatu)
             {
-                int healAmt = (int)(item.healLife * healingPotionMult);
-                CalOverHeal(healAmt, ref healValue);
-            }
-        }
-        public void CalOverHeal(int healAmt, ref int healValue)
-        {
-            int shouldHeal = healAmt;
-            shouldHeal -= CrimsonCharm.MinusHeal * (1 + crimsonCharmReduceTime);
-            if (shouldHeal <= 0f)
-            {
-                healValue = 1;
-                crimsonCharmStopReduce = true;
+                healValue = maxLife;
                 return;
             }
-            healValue = shouldHeal;
+            float percent = 1f - CrimsonCharm.MinusRatios * crimsonCharmReduceTime;
+            if (percent < 0f)
+                percent = 0;
+            healValue = (int)(maxLife * percent);
+            if (healValue < CrimsonCharm.MininumHeal)
+                healValue = CrimsonCharm.MininumHeal;
         }
 
         public override void GetHealMana(Item item, bool quickHeal, ref int healValue)

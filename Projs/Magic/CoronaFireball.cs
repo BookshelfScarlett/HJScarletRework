@@ -120,6 +120,7 @@ namespace HJScarletRework.Projs.Magic
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffID.OnFire3, GetSeconds(5));
             for (int i = 0; i < 16; i++)
             {
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(4f), RandVelTwoPi(0f, 1.4f), RandLerpColor(Color.Lerp(Color.DarkOrange, Color.Red, 0.64f), Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.43f * Projectile.Opacity, ToRadians(1f)).Spawn();

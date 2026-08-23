@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
@@ -17,6 +18,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Solar);
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {

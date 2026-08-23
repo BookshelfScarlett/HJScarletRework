@@ -138,7 +138,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<PrunusMume>());
-            target.AddBuff(BuffID.Poisoned, GetSeconds(1));
+            target.AddBuff(BuffID.Venom, GetSeconds(10));
             SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundImpact with { MaxInstances = 2, Pitch = 0.3f }, Projectile.Center);
             if (Projectile.numHits < 1)
             {

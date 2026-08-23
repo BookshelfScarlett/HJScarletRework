@@ -37,7 +37,7 @@ namespace HJScarletRework.Globals.Methods
                 getTooltip.OverrideColor = textColor;
             }
         }
-        public static void CreateTooltip(this List<TooltipLine> tooltips, string textPath, Color? color = null, Mod mod = null, string LineName = "HJScarlet")
+        public static void CreateTooltip(this List<TooltipLine> tooltips, string textPath, Color? color = null, Mod mod = null, string LineName = "HJScarlet", int index = -1)
         {
             string text = textPath.ToLangValue();
             Mod tooltipMod = mod ?? HJScarletRework.Instance;
@@ -46,12 +46,17 @@ namespace HJScarletRework.Globals.Methods
             {
                 OverrideColor = overrideColor
             };
-            if (tooltips.Count is 0)
+            int count = tooltips.Count;
+            if (count is 0)
                 tooltips.Add(newLine);
             else
-                tooltips.Insert(tooltips.Count, newLine);
+            {
+                if (index != -1)
+                    count = index;
+                tooltips.Insert(count, newLine);
+            }
         }
-        public static void CreateTooltip(this List<TooltipLine> tooltips, string textPath, Color? color = null, Mod mod = null, string LineName = "HJScarlet", params object[] args)
+        public static void CreateTooltip(this List<TooltipLine> tooltips, string textPath, Color? color = null, Mod mod = null, string LineName = "HJScarlet", int index = -1, params object[] args)
         {
             string text = textPath.ToLangValue().ToFormatValue(args);
             Mod tooltipMod = mod ?? HJScarletRework.Instance;
@@ -60,11 +65,18 @@ namespace HJScarletRework.Globals.Methods
             {
                 OverrideColor = overrideColor
             };
-            if (tooltips.Count is 0)
+            int count = tooltips.Count;
+            if (count is 0)
                 tooltips.Add(newLine);
             else
-                tooltips.Insert(tooltips.Count, newLine);
+            {
+                if (index != -1)
+                    count = index;
+                tooltips.Insert(count, newLine);
+            }
         }
+        public static int FindLineIndex(this List<TooltipLine> tooltips, string lineName, string lineMod = "Terraria") => tooltips.FindIndex(t => t.Name == lineName && t.Mod == lineMod);
+        public static int FindLineIndexLast(this List<TooltipLine> tooltips, string lineName, string lineMod = "Terraria") => tooltips.FindLastIndex(t => t.Name.Contains(lineName) && t.Mod == lineMod);
         /// <summary>
         /// 从最后一行Tooltip后插入值，需直接传入需要的文本内容而不是对应的本地化路径，重载颜色代码
         /// </summary>

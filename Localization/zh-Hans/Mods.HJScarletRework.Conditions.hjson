@@ -10,4 +10,6 @@ Crafting: {
 	IsDownSlimeGodAndInEclipse: 击败史莱姆之神后，日食期间
 	// HasFuckingCalamityMod: Mods.HJScarletRework.Conditions.Crafting.HasFuckingCalamityMod
 	// NoFuckingCalamityMod: Mods.HJScarletRework.Conditions.Crafting.NoFuckingCalamityMod
+	InSingleplayer: 单人模式下
+	InMultiplayer: 多人模式下
 }

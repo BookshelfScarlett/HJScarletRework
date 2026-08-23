@@ -17,6 +17,8 @@
         SunGod,
         Solar,
         RarePets,
+        Supporter,
+        Developer,
         Hallowed
     }
 }

@@ -80,4 +80,9 @@ namespace HJScarletRework.Globals.Players.VanitySets
     {
         public override int VanityItemType => ItemType<RedDragonItem>();
     }
+    public class KajuPlayer: MenuVanityPlayer
+    {
+        public override int VanityItemType => ItemType<KajuItem>();
+    }
+
 }

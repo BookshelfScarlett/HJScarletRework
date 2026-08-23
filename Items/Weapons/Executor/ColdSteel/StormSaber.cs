@@ -1,6 +1,7 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
@@ -18,6 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {

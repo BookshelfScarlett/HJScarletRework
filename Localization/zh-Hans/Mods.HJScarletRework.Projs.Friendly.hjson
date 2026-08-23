@@ -30,6 +30,8 @@ Typeless: {
 	GrassKnifePoisonProj.DisplayName: 草刀|剧毒
 	// PowerLilyProj.DisplayName: Power Lily Proj
 	// RuneWizardProj.DisplayName: Rune Wizard Proj
+	// PandorasBurgerHeldProj.DisplayName: Pandoras Burger Held Proj
+	// RitualofReposeStar.DisplayName: Ritualof Repose Star
 }
 
 Executor: {
@@ -287,6 +289,8 @@ Melee: {
 	TonbogiriThrownProj.DisplayName: 御手秆-投掷
 	WildPointerThrownProj.DisplayName: 野指针|投掷
 	FlowerofDancePetal.DisplayName: 花之舞|花瓣
+	// HighTechBladeHeldProj.DisplayName: High Tech Blade Held Proj
+	// RitualofReposeProj.DisplayName: Ritualof Repose Proj
 }
 
 Pets: {

@@ -27,6 +27,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
             ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {
@@ -45,6 +46,14 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         {
             return !player.HasProj(Item.shoot) && !player.HasProj<CrimsonScytheSkillProj>();
         }
+        public override bool CanRightClick() => true;
+        public override void RightClick(Player player)
+        {
+            player.HJScarlet().crimsonScytheSlayNPCType += 1;
+            if (player.HJScarlet().crimsonScytheSlayNPCType > 2)
+                player.HJScarlet().crimsonScytheSlayNPCType = 0;
+        }
+        public override bool ConsumeItem(Player player) => false;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (!DownedBossSystem.downedSunGod)
@@ -91,6 +100,17 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
                 };
                 tooltips.Insert(executionLineIndex + 1, categoryLine);
             }
+            int killerType = tooltips.FindLastIndex(t => t.Name.Contains("Tooltip") && t.Mod == "Terraria");
+            int killerIndex = Main.LocalPlayer.HJScarlet().crimsonScytheSlayNPCType;
+            string killName = null;
+            killName = killerIndex switch
+            {
+                1 => "OnlyCoins",
+                2 => "AllStuff",
+                _ => "NoKilling",
+            };
+            string killerText = this.GetLocalizationKey("KillerType."+killName);
+            tooltips.CreateTooltip(killerText, Color.SkyBlue, Mod, "KillerTypeName", killerType+1);
             CacheTooltipList = tooltips;
             ExModifyTooltips(tooltips);
         }

@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -12,6 +13,10 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
         public override int ExecutionProgress => 6;
         public bool Flip = true;
         public float Time = 1;
+        public override void ExSSD()
+        {
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
+        }
         public override void ExSD()
         {
             Item.SetUpNoUseGraphicItem(true);

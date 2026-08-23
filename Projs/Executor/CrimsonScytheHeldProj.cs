@@ -1,4 +1,9 @@
 ﻿using ContinentOfJourney;
+using ContinentOfJourney.Buffs;
+using ContinentOfJourney.Items;
+using ContinentOfJourney.Items.Accessories.Bookmarks;
+using ContinentOfJourney.Items.Accessories.GrazeBadge;
+using ContinentOfJourney.Items.Zeus;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
@@ -11,6 +16,8 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System.Collections.Generic;
 using Terraria;
@@ -385,7 +392,8 @@ namespace HJScarletRework.Projs.Executor
             bool noSwing = (ThirdSwing && Helper.IsDone[0]) || (!ThirdSwing && Helper.IsDone[0]) || StopTiming > 0;
             if (noSwing)
                 return false;
-            if (target.friendly &&target.townNPC && target.type != NPCID.DD2EterniaCrystal)
+            //是否友好，是否城镇NPC，是否为非那个神人塔防水晶，是否允许启用击杀
+            if (target.friendly &&target.townNPC && target.type != NPCID.DD2EterniaCrystal && Owner.HJScarlet().crimsonScytheSlayNPCType>0)
                 return true;
             if (!ThirdSwing)
                 return null;
@@ -403,14 +411,14 @@ namespace HJScarletRework.Projs.Executor
         public Dictionary<NPC, int> CacheTargetList = [];
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(target.friendly&&target.townNPC)
+            if (target.friendly && target.townNPC)
             {
-                new ScytheBlood(target.Center, Main.rand.NextFloat(.4f,.6f)*.6f).Spawn();
+                new ScytheBlood(target.Center, Main.rand.NextFloat(.4f, .6f) * .6f).Spawn();
                 ScreenDarknessSystem.AddScreenDarkness(.85f, 2, 1, 12, EaseInCubic, EaseInCubic);
-
+                ApplyKilledNPCSpecialDrop(target);
                 return;
             }
-
+            target.AddBuff(BuffType<DivineFireBuff>(), GetSeconds(2));
             //处理音效
             HitSoundHandler(target);
             //目标不可用，别播放下面的特效。
@@ -430,6 +438,133 @@ namespace HJScarletRework.Projs.Executor
             SoulStoneSpawn(target);
         }
 
+        public void ApplyKilledNPCSpecialDrop(NPC target)
+        {
+            if (Owner.HJScarlet().crimsonScytheSlayNPCType ==0)
+                return;
+            //世界范围内是否有骷髅王，且背包内是否有300颗和星星炮，且必须得没有史莱姆ang，且是否为夜晚
+            bool ezNumberCheck = Owner.CountItem(ItemID.FallenStar, 300) == 300
+                              && Owner.HasItem(ItemID.StarCannon)
+                              && NPC.AnyNPCs(NPCID.SkeletronHead)
+                              && !(Owner.HasItem(ItemID.SlimySaddle) || Owner.mount.Type == MountID.Slime);
+            if (ezNumberCheck)
+            {
+                FastDrop(ItemID.PlatinumCoin, 591);
+                FastDrop(ItemID.GoldCoin, 60);
+                FastDrop(ItemID.SilverCoin, 15);
+                FastDrop(ItemID.CopperCoin, 3);
+            }
+            else
+            {
+                if (DownedBossSystem.downedBarrier)
+                    FastDrop(ItemID.GoldCoin, Main.rand.Next(30, 61));
+                else if (Main.hardMode)
+                    FastDrop(ItemID.GoldCoin, Main.rand.Next(10, 31));
+                else
+                    FastDrop(ItemID.GoldCoin, Main.rand.Next(5, 11));
+                if (Main.rand.NextBool(15))
+                {
+                    if (DownedBossSystem.downedBarrier)
+                        FastDrop(ItemID.PlatinumCoin, Main.rand.Next(5, 11));
+                    else if (Main.hardMode)
+                        FastDrop(ItemID.PlatinumCoin, Main.rand.Next(1, 6));
+                    else
+                        FastDrop(ItemID.PlatinumCoin, 1);
+                }
+            }
+            if (Owner.HJScarlet().crimsonScytheSlayNPCType != 2)
+                return;
+
+            //各种特殊掉落，这些特殊掉落需要玩家特殊启用
+            //护士：生命水晶/生命果（世纪之花后），按流程分配的血瓶
+            if (target.type == NPCID.Nurse)
+            {
+                FastDrop(ItemID.LifeCrystal, Main.rand.Next(1, 3));
+                if (Condition.DownedPlantera.IsMet())
+                    FastDrop(ItemID.LifeFruit, Main.rand.Next(2, 6));
+                if (DownedBossSystem.downedBarrier)
+                    FastDrop(ItemType<UltraHealingPotion>(), Main.rand.Next(5, 15));
+                else if (Condition.DownedCultist.IsMet())
+                    FastDrop(ItemID.SuperHealingPotion, Main.rand.Next(5, 15));
+                else if (Main.hardMode)
+                    FastDrop(ItemID.GreaterHealingPotion, Main.rand.Next(5, 15));
+                else
+                    FastDrop(ItemID.HealingPotion, Main.rand.Next(5, 15));
+            }
+            if (target.type == NPCID.Guide)
+            {
+                if (DownedBossSystem.downedSon && Main.rand.NextBool(15))
+                {
+                    List<int> randItem = [ItemID.Zenith, ItemType<Zeus>(), ItemType<GoldenAppleEnchantedFully>(), ItemID.LongRainbowTrailWings, ItemType<BadgeFinal>(), ItemType<SpellPage_Finale>(), ItemType<HeartoftheMountain>()];
+                    int num = Main.rand.NextFromCollection(randItem);
+                    FastDrop(num, 1);
+                }
+            }
+            if (target.type == NPCID.Truffle)
+            {
+                FastDrop(ItemID.MushroomSpear, 1);
+                //把你的自动锤炼机给我交出来！！
+                if (Condition.DownedPlantera.IsMet())
+                    FastDrop(ItemID.Autohammer, 1);
+            }
+            if (target.type == NPCID.Wizard)
+            {
+                //把你的传承结晶给我交出来！！
+                if (Main.rand.NextBool(8))
+                    FastDrop(ItemType<CrystallizedLore>(), Main.rand.Next(1, 4));
+                FastDrop(ItemType<PurePrismFate>(), Main.rand.Next(10, 30));
+            }
+            if (target.type == NPCID.ArmsDealer)
+            {
+                //把你的枪给我！！
+                FastDrop(ItemID.IllegalGunParts, Main.rand.Next(1, 4));
+            }
+            if (target.type == NPCID.Mechanic || target.type == NPCID.BoundMechanic)
+            {
+                //把你的精密线控仪给我！！
+                if (Main.hardMode)
+                {
+                    FastDrop(ItemID.WireKite, 1);
+
+                }
+                else
+                {
+                    FastDrop(ItemID.MulticolorWrench, 1);
+                }
+            }
+            if (target.type == NPCID.Steampunker && Condition.DownedGolem.IsMet())
+            {
+                //把你的蒸汽朋克翅膀给我！！
+                FastDrop(ItemID.SteampunkWings);
+            }
+            if (target.type == NPCID.WitchDoctor)
+            {
+                //把你的矮人物品给我！！
+                FastDrop(ItemID.PygmyNecklace);
+                if (Condition.DownedPlantera.IsMet())
+                {
+                    FastDrop(ItemID.TikiMask);
+                    FastDrop(ItemID.TikiShirt);
+                    FastDrop(ItemID.TikiPants);
+                    FastDrop(ItemID.PygmyStaff);
+                    FastDrop(ItemID.PapyrusScarab);
+                }
+            }
+            if (target.type == NPCID.DD2Bartender)
+            {
+                if (DownedBossSystem.downedBarrier)
+                    FastDrop(ItemID.DefenderMedal, Main.rand.Next(100, 151));
+                else if (Main.hardMode)
+                    FastDrop(ItemID.DefenderMedal, Main.rand.Next(10, 31));
+                else
+                    FastDrop(ItemID.DefenderMedal, Main.rand.Next(1, 11));
+            }
+        }
+        public void FastDrop(int drop, int num=1)
+        {
+
+                Owner.QuickSpawnItem(Owner.GetSource_FromThis(), drop, num);
+        }
         public void SoulStoneSpawn(NPC target)
         {
             if (!DownedBossSystem.downedSunGod)
@@ -476,7 +611,7 @@ namespace HJScarletRework.Projs.Executor
             //只有第一次攻击命中才会给卡肉
             if (Projectile.numHits > 0)
                 return;
-            StopTiming = 35;
+            StopTiming = 20;
             if (DownedBossSystem.downedSunGod)
                 Projectile.AddExecutionTimeImmediate(OriginalItemID);
             float rot = Projectile.Center.GetNormalVector2(target.Center).ToRotation();

@@ -304,10 +304,10 @@ CrimsonCharm: {
 	DisplayName: Greedy Mask
 	Tooltip:
 		'''
-		Grants immunity to Potion Sickness
-		{3} increased the power of healing potion
-		Everytime use a healing potion, you gain Over Saturation for {1} seconds
-		Using a healing potion again while under Over Saturation redues the healing amonut by {0}, down to a minimum of {2}
+		Resets the healing amount of all healing potions to scale based on a percentage of the player's maximum health
+		Using a healing potion no longer causes Potion Sickness; instead, it applies Over Saturation to you
+		Each use of a healing potion grants you the Over Saturation effect for {1} seconds
+		While under Over Saturation, using another healing potion reduces the healing amount by {0}, down to a minimum of {2}
 		Greatly increases health regen speed
 		"Unimagined madness just to stay alive"
 		'''
@@ -392,4 +392,51 @@ EmblemGalaxy: {
 		While equipped, press the Interact key on [i:HJScarletRework/TheSevenStar]Seven Stars in your inventory to transform it into [i:HJScarletRework/TheGreatDipper]Polaris
 		Polaris can only be used while Proof of the Stars is equipped
 		'''
+}
+
+SkyofHorizon: {
+	DisplayName: Sky of Horizon
+	Tooltip:
+		'''
+		Grants infinite wing and rocket boot flight
+		Grants immunity of knockback
+		Increases flight and jump mobility
+		'''
+}
+
+LightofHorizon: {
+	DisplayName: Light of Horizon
+	Tooltip:
+		'''
+		Grants the all ability of [i:ContinentOfJourney/Horizon]Horizon
+		Grants the all ability of [i:ContinentOfJourney/Altitude]Altitude
+		Grants extra accessory slot and immunity of knockback
+		Grants infinite wing and rocket boot flight
+		Increases flight and jump mobility
+		"Fly, toward the sky beyond"
+		'''
+}
+
+BambooShield: {
+	DisplayName: Bamboo Shield
+	Tooltip:
+		'''
+		Grants immnuity to poison
+		Can be used as a substitute for [i:Bezoar]
+		'''
+}
+
+PendantFlow: {
+	DisplayName: Pendant Flow
+	Tooltip: ""
+}
+
+PendantGold: {
+	DisplayName: Pendant Gold
+	Tooltip: ""
+}
+
+PendantWitness: {
+	DisplayName: Pendant Witness
+	Tooltip: ""
 }

@@ -8,6 +8,7 @@ CreationHat: {
 		Reduces mana cost by {3}, allows all magic attacks to deal critical strike damage
 		Excess critical strike chance is converted to your magic critical strike damage bonus at a 1:2 ratio
 		'''
+	BonusDetail: ""
 }
 
 RedDragonKnightBody: {
@@ -41,14 +42,10 @@ RuneWizardExecutor: {
 }
 
 CowboyExecutor: {
-	HelmetTooltip: 10% increased executor damage
-	ChestplateTooltip: 10% increased executor critcal strike chance
+	HelmetTooltip: 5% increased executor damage
+	ChestplateTooltip: 5% increased executor critcal strike chance
 	LegsTooltip: 15% increased movement speed
-	SetBonus:
-		'''
-		On hit, adds a revolver attack, deals 0.25x damage
-		The revolver has a 1/6 chance, or on execution strike, to deal 0.5x damage
-		'''
+	SetBonus: On hit, adds a revolver attack, deals 40 damage, affected by executor class
 }
 
 MaidExecutor: {

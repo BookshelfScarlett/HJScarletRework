@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -14,6 +15,10 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
     {
         public override string Texture => GetVanillaAssetPath(Globals.Enums.VanillaAsset.Item, ItemID.Bookcase);
         public override int ExecutionProgress => 20;
+        public override void ExSSD()
+        {
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
+        }
         public override void ExSD()
         {
             Item.SetUpNoUseGraphicItem(true);

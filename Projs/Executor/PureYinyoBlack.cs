@@ -8,6 +8,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using Terraria;
 using Terraria.Audio;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -134,6 +135,8 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<PureYinyo>());
+            target.AddBuff(BuffID.Ichor, GetSeconds(2));
+            target.AddBuff(BuffID.CursedInferno, GetSeconds(2));
             for (int i = -1; i < 2; i++)
             {
                 Vector2 dir = RandDirTwoPi;

@@ -10,6 +10,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using Terraria;
 using Terraria.Audio;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -202,6 +203,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<FrostHammer>());
+            target.AddBuff(BuffID.Frostburn2, GetSeconds(2));
             if (Projectile.numHits % 3 == 0)
                 SoundEngine.PlaySound(HJScarletSounds.GalvanizedHand_Hit with { Variants = [1], MaxInstances = 1, Pitch = -0.5f, Volume = 0.5f });
             if (Projectile.numHits == 2)
