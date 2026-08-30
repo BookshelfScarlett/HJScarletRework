@@ -10,10 +10,6 @@ namespace HJScarletRework.Projs.Executor
 {
     public class EndlessWarMinion : HJScarletProj
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
         public override string Texture => GetInstance<EndlessWarProj>().Texture;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum State

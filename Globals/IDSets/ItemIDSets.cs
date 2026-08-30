@@ -55,5 +55,12 @@ namespace HJScarletRework.Globals.IDSets
         /// <br>用于过滤某些特殊的需求</br>
         /// </summary>
         public static bool[] IsHeldProjItem = ItemID.Sets.Factory.CreateBoolSet();
+        /// <summary>
+        /// 如果为<see langword="true"/>，将该物品标记为“武器”，使其能通过<see cref="Methods.HJScarletMethods.IsWeapon(Terraria.Item)"/>
+        /// <br>对于部分具备其他非武器性质功能的物品而言可用，或者一些为饰品，但表现为武器的</br>
+        /// </summary>
+
+        public static bool[] CountAsWeapon= ItemID.Sets.Factory.CreateBoolSet();
+
     }
 }

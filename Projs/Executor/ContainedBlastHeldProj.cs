@@ -82,7 +82,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, type, damage, Projectile.knockBack, Projectile.owner);
             proj.originalDamage = Projectile.originalDamage;
-            proj.HJScarlet().HasExecutionMechanic = !IsBuffing || Main.rand.NextBool();
+            proj.HJScarlet().HasExecutionMechanic = Owner.HJScarlet().containedBlastBuffTime < GetSeconds(3);
             proj.ai[0] = Owner.HJScarlet().containedBlastBuffTime;
             if (IsBuffing)
                 proj.extraUpdates += 1;
@@ -104,8 +104,8 @@ namespace HJScarletRework.Projs.Executor
                     sound.Volume /= 2;
                 }
                 Vector2 dir = Projectile.rotation.ToRotationVector2();
-                float rnd = Owner.HJScarlet().containedBlastBuffTime > 0 ? Main.rand.NextFloat(.95f, 1.2f) * 1f : 1f;
-                int bulletDamage = (int)(Projectile.originalDamage * rnd * Clamp((1 + 0.15f * Owner.HJScarlet().containedBlastBoomCount), 1f, 1.75f));
+                float rnd = Owner.HJScarlet().containedBlastBuffTime > 0 ? Main.rand.NextFloat(.90f, 1.1f) * 1f : 1f;
+                int bulletDamage = (int)(Projectile.originalDamage * rnd * Clamp((1 + Owner.HJScarlet().containedBlastBoomCount), 1f, 1.45f));
                 if (IsAlterBullet)
                 {
                     Vector2 bulletPos = firePos + dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-5f, 5f);
@@ -171,8 +171,11 @@ namespace HJScarletRework.Projs.Executor
                 proj2.HJScarlet().ExecutionStrike = true;
                 proj.Kill();
             }
-            Owner.HJScarlet().containedBlastBuffTime = GetSeconds(4) * count;
-            Owner.HJScarlet().containedBlastBoomCount = count;
+            if (count == 0)
+                return;
+            float ratios = Utils.GetLerpValue(0, 15, count, true);
+            Owner.HJScarlet().containedBlastBuffTime = (int)Lerp(5, 15, ratios) *60;
+            Owner.HJScarlet().containedBlastBoomCount = Lerp(0f, .45f, ratios);
         }
         public bool HandleDeadOrAlive()
         {

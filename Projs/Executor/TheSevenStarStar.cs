@@ -10,6 +10,7 @@ using HJScarletRework.Items.Weapons.Executor.Misc;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -46,6 +47,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
                 Projectile.scale = Lerp(Projectile.scale, 0f, .12f);
+            Lighting.AddLight(Projectile.Center, TorchID.White);
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Projectile.IsOutScreen())
                 return;

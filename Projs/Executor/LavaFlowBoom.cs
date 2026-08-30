@@ -32,6 +32,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Timer++;
             Projectile.AffactedByGrav(velMult: 1f, yAdd: 0.32f, maxGravSpeed: 12f);
+            Lighting.AddLight(Projectile.Center, TorchID.Orange);
             if (Projectile.IsOutScreen())
                 return;
             for (int i = 0; i < 2; i++)

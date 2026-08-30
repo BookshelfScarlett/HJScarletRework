@@ -17,6 +17,8 @@ namespace HJScarletRework.Globals.Players
         }
         public override void UpdateBadLifeRegen()
         {
+            if (saintChurch && saintChurchLastStanding > 0)
+                ApplyDoT(0);
             if (absoluteZeroBuff)
             {
                 ApplyDoT(AbsoluteZeroBuff.BadLifeRegen);

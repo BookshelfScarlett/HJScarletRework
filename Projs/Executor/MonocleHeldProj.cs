@@ -91,7 +91,7 @@ namespace HJScarletRework.Projs.Executor
 
             pos = Projectile.Center + offset;
             //震屏，粒子特效
-            ScreenShakeSystem.AddScreenShakes(pos, 32 + Projectile.HJScarlet().ExecutionStrike.ToInt() * 12, 60, -Projectile.SafeDirByRot().ToRotation(), 0, true, easingFunc: EaseOutExpo);
+            ScreenShakeSystem.AddScreenShakes(pos, 12 + Projectile.HJScarlet().ExecutionStrike.ToInt() * 12, 60, -Projectile.SafeDirByRot().ToRotation(), 0, true, easingFunc: EaseOutExpo);
             Vector2 particleOffset = new Vector2(10, 0 * Projectile.direction).RotatedBy(Projectile.rotation);
             for (int i = 0; i < 36; i++)
             {

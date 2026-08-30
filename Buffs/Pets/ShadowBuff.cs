@@ -9,7 +9,7 @@ namespace HJScarletRework.Buffs.Pets
         public override bool IsLightPet => true;
         public override void Update(Player player, ref int buffIndex)
         {
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref player.HJScarlet().ShadowPet, ProjectileType<ShadowProj>());
+            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref player.HJScarlet().petShadow, ProjectileType<ShadowProj>());
         }
 
     }

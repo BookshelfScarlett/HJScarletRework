@@ -99,4 +99,9 @@ HJScarletConfigServer: {
 		Label: Cross Mod Support
 		Tooltip: ""
 	}
+
+	LostbeltJourneyTestAI: {
+		Label: Lostbelt Journey Test A I
+		Tooltip: ""
+	}
 }

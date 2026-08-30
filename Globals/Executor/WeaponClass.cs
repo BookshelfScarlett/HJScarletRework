@@ -31,6 +31,7 @@ namespace HJScarletRework.Globals.Executor
         public override bool RangedPrefix() => false;
         public virtual int ExecutionProgress => 10;
         public virtual float ExecutionStrikeDamageMult => 1.0f;
+        public virtual float TextBoxSize => 1f;
         public override void SetStaticDefaults()
         {
             ExSSD();
@@ -122,12 +123,9 @@ namespace HJScarletRework.Globals.Executor
         {
 
         }
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        public override void PostDrawTooltipLine(DrawableTooltipLine line)
         {
-
-            if (HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase)
-                return base.PreDrawTooltipLine(line, ref yOffset);
-            else
+            if (!HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase)
             {
                 //记录起始点坐标。
                 //通常情况下，物品不可能没有名字，而物品名称通常都在第一行，所以可以用这个来记录第一行的坐标
@@ -154,12 +152,19 @@ namespace HJScarletRework.Globals.Executor
                     MainText = detailText,
                     TextColor = Color.White,
                     TextEdgeColor = Color.Black,
-                    TitleTextSize = 1.15f
+                    TitleTextSize = 1.15f,
+                    BoxSize = TextBoxSize
                 };
                 //最后传值。
                 TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
-                return true;
             }
+            ExPostDrawTooltipLine(line);
+        }
+        public virtual void ExPostDrawTooltipLine(DrawableTooltipLine line) { }
+        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
+        {
+
+            return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public virtual void ExSD() { }
     }

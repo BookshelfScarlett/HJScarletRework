@@ -17,7 +17,6 @@ namespace HJScarletRework.Projs.Executor
     {
         public override int OriginalItemID => ItemType<PureDagger>();
         public override EnumDamageClass Category => EnumDamageClass.Executor;
-
         public override string Texture => GetInstance<PureDagger>().Texture;
         public AnimationStruct Helper = new AnimationStruct(3);
         public float SwordLength = 60;
@@ -33,6 +32,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ExSD()
         {
+            Projectile.width = Projectile.height = 200;
             Projectile.SetUpHeldProj(6);
             Projectile.SetupImmnuity(-1);
             Projectile.penetrate = -1;

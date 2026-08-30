@@ -64,3 +64,8 @@ KajuItem: {
 	DisplayName: Niyaniya Professor's Cane
 	Tooltip: ""
 }
+
+TendouKeiItem: {
+	DisplayName: Tendou Kei Item
+	Tooltip: ""
+}

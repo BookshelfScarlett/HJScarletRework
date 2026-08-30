@@ -115,7 +115,9 @@ namespace HJScarletRework.Items.Vanity
             ArmorIDs.Body.Sets.HidesTopSkin[equipSlotBody] = true;
             ArmorIDs.Body.Sets.HidesArms[equipSlotBody] = true;
             ArmorIDs.Legs.Sets.HidesBottomSkin[equipSlotLegs] = true;
+            ExSSD();
         }
+        public virtual void ExSSD() { }
         public static int FlavorTooltipIndex = -1;
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {

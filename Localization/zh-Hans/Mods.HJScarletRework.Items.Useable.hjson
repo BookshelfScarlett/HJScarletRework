@@ -237,3 +237,12 @@ FreehandFrame: {
 	DisplayName: 随心画框
 	Tooltip: 可用于合成空想归途内所有的变身时装物品
 }
+
+RandomNewFolder: {
+	DisplayName: 新建文件夹（1）
+	Tooltip:
+		'''
+		可同时满足多种不同弹药需求的武器的弹药
+		“不要再新建一个文件夹，不重命名然后把所有东西一股脑扔进去了。”
+		'''
+}

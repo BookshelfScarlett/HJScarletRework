@@ -706,3 +706,56 @@ WeHaveBookshelf: {
 		'''
 	ExecutionStrike: The next 15 swings each release more books
 }
+
+Stella: {
+	DisplayName: Stella
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+Headsplosion: {
+	DisplayName: Headsplosion
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltip: ""
+}
+
+Moonfire: {
+	DisplayName: Moonfire
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltip: ""
+}
+
+Reflux: {
+	DisplayName: Reflux
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltip: ""
+}
+
+TheGarcia: {
+	DisplayName: The Garcia
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltip: ""
+}
+
+CrescentRose: {
+	DisplayName: Crescent Rose
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltips: ""
+}
+
+CobaltYoyo: {
+	DisplayName: Cobalt Yoyo
+	Tooltip: ""
+	ExecutionStrike: ""
+}
+
+TitaniumBattleShovel: {
+	DisplayName: Titanium Battle Shovel
+	Tooltip: ""
+	ExecutionStrike: ""
+}

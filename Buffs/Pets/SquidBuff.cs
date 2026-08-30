@@ -8,7 +8,7 @@ namespace HJScarletRework.Buffs.Pets
     {
         public override void Update(Player player, ref int buffIndex)
         {
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref player.HJScarlet().SquidPet, ProjectileType<SquidProj>());
+            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref player.HJScarlet().petSquid, ProjectileType<SquidProj>());
         }
     }
 }

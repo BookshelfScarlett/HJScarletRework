@@ -17,13 +17,13 @@ namespace HJScarletRework.Globals.Executor
         /// </summary>
         public virtual int OriginalWhip => -1;
         /// <summary>
-        /// 鞭子中，每个节点之间的连线。一般使用了原版的鱼线
-        /// 这个是预留的，后续如果有自定义的连线，就会用到这个。
+        /// 鞭子中，每个节点之间的连线，一般使用了原版的鱼线
+        /// <br>这个是预留的，后续如果有自定义的连线，就会用到这个。</br>
         /// </summary>
         public virtual (Texture2D LineTexture, Color LineColor, int LineEndCut, bool FullBright) LineSetting => (TextureAssets.FishingLine.Value, Color.White, 2, false);
         /// <summary>
         /// 鞭子的基础数据
-        /// 第一个空位记录鞭子的段数，第二个空位记录绳子的长度系数，第三个空位记录额外更新
+        /// <br>第一个空位记录鞭子的段数，第二个空位记录绳子的长度系数，第三个空位记录额外更新</br>
         /// </summary>
         public virtual (int SegmentCount, float RangeFactor, int ExtraUpdates, int SpriteFrames) WhipDefaults => (12, 0.6f, 0, 3);
         public virtual (int ExecutorProgressAdd, float PenetrateDamageRedcution) WhipHitDefaults => (1, 0.35f);
@@ -36,8 +36,8 @@ namespace HJScarletRework.Globals.Executor
         public virtual int HeadPosOffsetFactor => 1;
         /// <summary>
         /// 是否持续不断地记录末端节点的位置
-        /// 用于绘制一些轨迹，比如顶点轨迹。
-        /// 设置为true时，即可使用<see cref="HeadOldPosList"/>正常进行储存
+        /// <br>用于绘制一些轨迹，比如顶点轨迹。</br>
+        /// <br>设置为true时，即可使用<see cref="HeadOldPosList"/>正常进行储存</br>
         /// </summary>
         public virtual bool StoredHeadPosition => false;
         public List<Vector2> HeadOldPosList = [];

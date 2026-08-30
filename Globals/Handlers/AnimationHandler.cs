@@ -1,4 +1,6 @@
-﻿namespace HJScarletRework.Globals.Handlers
+﻿using Terraria;
+
+namespace HJScarletRework.Globals.Handlers
 {
     public struct AnimationStruct(int slot)
     {
@@ -39,8 +41,8 @@
         }
         public static float GetAniProgress(this AnimationStruct animationStruct, int slotID)
         {
-            int id = (int)slotID;
-            float progress = animationStruct.Progress[id] / (float)animationStruct.MaxProgress[id];
+            int id = slotID;
+            float progress = animationStruct.Progress[slotID] / (float)animationStruct.MaxProgress[slotID];
             return Clamp(progress, 0f, 1f);
         }
         public static bool OnAnimationBegin(this AnimationStruct animationStruct, int slotID) => GetAniProgress(animationStruct, slotID) == 0;

@@ -116,3 +116,18 @@ GrassPoison: {
 	DisplayName: Grass Poison
 	Description: Mods.HJScarletRework.Buffs.GrassPoison.Description
 }
+
+AbsoluteZeroBuff: {
+	DisplayName: Absolute Zero Buff
+	Description: Mods.HJScarletRework.Buffs.AbsoluteZeroBuff.Description
+}
+
+TheBleachingBuff: {
+	DisplayName: The Bleaching Buff
+	Description: Mods.HJScarletRework.Buffs.TheBleachingBuff.Description
+}
+
+SaintChurchBuff: {
+	DisplayName: Saint Church Buff
+	Description: Mods.HJScarletRework.Buffs.SaintChurchBuff.Description
+}

@@ -17,17 +17,16 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
     public class ContainedBlast : ExecutorWeaponClass
     {
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
-        public override int ExecutionProgress => 150;
+        public override int ExecutionProgress => 75;
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
             ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
-            ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {
-            Item.damage = 540;
+            Item.damage = 320;
             Item.SetUpNoUseGraphicItem(true, false);
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.useTime = Item.useAnimation = 8;
@@ -55,18 +54,8 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             CreateRecipe().
                 AddIngredient<ClockworkMinigun>().
                 AddIngredient<TheBlackBox>().
-                AddIngredient(ItemID.IllegalGunParts, 10).
-                AddIngredient<CrownofSilveryLight>(15).
-                AddTile(FinalAnvilTile).
-                Register();
-
-            CreateRecipe().
-                AddIngredient<ClockworkMinigun>().
-                AddIngredient<TheBlackBox>().
-                AddIngredient(ItemID.IllegalGunParts, 10).
-                AddIngredient<FinalBar>().
-                AddCondition(HJScarletCraftingConditions.InMultiplayer).
-                DisableDecraft().
+                AddIngredient(ItemID.IllegalGunParts, 5).
+                AddIngredient<CubistBar>(15).
                 AddTile(FinalAnvilTile).
                 Register();
         }

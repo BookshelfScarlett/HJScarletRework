@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.List;
 using Terraria;
 using Terraria.ModLoader;
 

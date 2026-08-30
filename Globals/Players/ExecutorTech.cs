@@ -35,6 +35,12 @@ namespace HJScarletRework.Globals.Players
         /// <br><see langword="Key"/>键为武器的ID，而<see langword="Value"/>值为当前键值下的处决进程</br>
         /// </summary>
         public Dictionary<int, int> ExecutionListStored = new Dictionary<int, int>();
+        /// <summary>
+        /// 部分武器的处决攻击为强化自身的性能，这个字典便用于对这类处决的存储管理
+        /// <br>该字典专门用于处理“时长”类的管理</br>
+        /// <br><see langword="Key"/>键为强化中的武器ID，而<see langword="Value"/>值则为对应键值下的持续时间</br>
+        /// </summary>
+        public Dictionary<int, int> ExecutionBuffTimeStored = new Dictionary<int, int>();
         public bool hasSendExecutionTint = false;
         public int hasSendExecutionTintTimer = 0;
         public bool CanExecutionStrike = false;

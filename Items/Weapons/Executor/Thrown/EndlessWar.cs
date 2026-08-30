@@ -12,10 +12,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
 {
     public class EndlessWar : ExecutorWeaponClass
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
         public override float ExecutionStrikeDamageMult => 1.0f;
         public override int ExecutionProgress => 15;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
@@ -34,17 +30,13 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.knockBack = 12f;
             Item.noUseGraphic = true;
             Item.noMelee = true;
-            Item.HJScarlet().NotFinished = true;
             Item.SetUpRarityPrice(ItemRarityID.Red);
+            Item.HJScarlet().NotFinished = true;
             Item.shootSpeed = 16;
         }
         public override void ExModifyTooltips(List<TooltipLine> tooltips)
         {
             base.ExModifyTooltips(tooltips);
-        }
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override void AddRecipes()
         {

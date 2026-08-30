@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Instances.Items;
+﻿using HJScarletRework.Globals.IDSets;
+using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.List;
 using System;
 using Terraria;
@@ -42,7 +43,7 @@ namespace HJScarletRework.Globals.Methods
         }
         public static bool IsWeapon(this Item item)
         {
-            return !item.IsTool() && (item.damage > 0 || item.type == ItemID.CoinGun);
+            return (!item.IsTool() && (item.damage > 0 || item.type == ItemID.CoinGun) || (ScarletItemIDSets.CountAsWeapon[item.type]));
         }
         public static bool IsExecutorWeapon(this Item item)
         {

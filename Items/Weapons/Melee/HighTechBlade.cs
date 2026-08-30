@@ -16,10 +16,6 @@ namespace HJScarletRework.Items.Weapons.Melee
 {
     public class HighTechBlade : HJScarletWeapon
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
         public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults()
         {

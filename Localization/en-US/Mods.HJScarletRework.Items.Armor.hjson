@@ -352,3 +352,19 @@ DragonHunterLegs: {
 	DisplayName: Dragon Hunter Greaves
 	Tooltip: Increases movement speed by {0}
 }
+
+SaintChurchHead: {
+	DisplayName: Saint Church Head
+	Tooltip: ""
+	SetBonus: ""
+}
+
+SaintChurchLegs: {
+	DisplayName: Saint Church Legs
+	Tooltip: ""
+}
+
+SaintChurchBody: {
+	DisplayName: Saint Church Body
+	Tooltip: ""
+}

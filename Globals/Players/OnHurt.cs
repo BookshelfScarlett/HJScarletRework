@@ -7,6 +7,7 @@ using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Armor.SaintChurch;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -26,7 +27,7 @@ namespace HJScarletRework.Globals.Players
             {
                 desterranRespawnChargeTimer = GetSeconds(90);
                 desterrannachtImmortalTime = 2;
-                Player.statLife = (int)(Player.statLifeMax2 * .15f);
+                Player.RestoreHealthByPercent(.15f);
                 SoundEngine.PlaySound(HJScarletSounds.Evolution_Thrown with { MaxInstances = 0, Pitch = 0.5f }, Player.Center);
                 for (int i = 0; i < 20; i++)
                 {
@@ -42,7 +43,35 @@ namespace HJScarletRework.Globals.Players
                 }
                 return false;
             }
+            if (saintChurch)
+            {
+                //是否首次死亡，如果是，将这个lastStand标记为True
+                if (saintChurchLastStanding == 0)
+                {
+                    Player.RestoreHealthByPercent(SaintChurchHead.RespawnLifePercentFirst);
+                    saintChurchLastStanding += 1;
+                    SaintChurchUndead();
+                    return false;
+                }
+                else
+                {
+                    if (Main.rand.NextBool())
+                    {
+                        saintChurchLastStanding += 1;
+                        Player.RestoreHealthByPercent(SaintChurchHead.RespawnLifePercent);
+                        SaintChurchUndead();
+                        return false;
+
+                    }
+                    else
+                        return true;
+                }
+            }
             return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genDust, ref damageSource);
+        }
+        public void SaintChurchUndead()
+        {
+            Player.GetImmnue(ImmunityCooldownID.General, 60, true);
         }
         public override bool ConsumableDodge(Player.HurtInfo info)
         {
@@ -204,12 +233,6 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnHurt(Player.HurtInfo info)
         {
-            if (PreciousTargetAcc && info.Damage > 5)
-            {
-                PreciousTargetCrtis -= 300;
-                if (PreciousTargetCrtis < PreciousCritsMin)
-                    PreciousTargetCrtis = PreciousCritsMin;
-            }
             if (Player.HasProj<MonkStaffSkillProj>())
             {
                 foreach (var projID in Main.ActiveProjectiles)

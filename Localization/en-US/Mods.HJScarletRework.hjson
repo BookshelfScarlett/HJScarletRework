@@ -47,6 +47,8 @@ Projectiles: {
 	DragonMinionFlame.DisplayName: Dragon Minion Flame
 	DragonMinionProj.DisplayName: Dragon Minion Proj
 	DragonminionFireball.DisplayName: Dragonminion Fireball
+	TechBladeHeldProj.DisplayName: Tech Blade Held Proj
+	TechBladeLaser.DisplayName: Tech Blade Laser
 }
 
 Items: {
@@ -65,6 +67,11 @@ Items: {
 			DisplayName: Lightof Horizon
 			Tooltip: ""
 		}
+	}
+
+	TechBlade: {
+		DisplayName: Tech Blade
+		Tooltip: ""
 	}
 }
 

@@ -17,8 +17,8 @@ namespace HJScarletRework.Projs.Pets
         {
             SimplePetAnimation(12f);
             if (Owner.dead)
-                Owner.HJScarlet().dracoPet = false;
-            if (Owner.HJScarlet().dracoPet)
+                Owner.HJScarlet().petDraco = false;
+            if (Owner.HJScarlet().petDraco)
                 Projectile.timeLeft = 2;
         }
         public float Osci = 0;

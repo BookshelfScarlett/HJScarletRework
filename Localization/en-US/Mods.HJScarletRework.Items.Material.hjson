@@ -21,3 +21,9 @@ CrownofSilveryLight: {
 		Granted to those who dedicate themselves to serving the gods
 		'''
 }
+
+UniversalCube: {
+	DisplayName: Universal Cube
+	Tooltip: ""
+	FlavorTooltip: ""
+}

@@ -53,6 +53,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateHeldState()
         {
             Projectile.Center = Owner.MountedCenter;
+            Projectile.position.Y += Owner.gfxOffY;
             Owner.itemTime = 2;
             Owner.itemAnimation = 2;
             Owner.heldProj = Projectile.whoAmI;
@@ -131,7 +132,6 @@ namespace HJScarletRework.Projs.Executor
         {
 
         }
-
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             if (!Projectile.HJScarlet().FirstFrame)

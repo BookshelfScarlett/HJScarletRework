@@ -17,8 +17,13 @@ namespace HJScarletRework.Globals.Configs
         }
         public override ConfigScope Mode => ConfigScope.ServerSide;
         [BackgroundColor(211, 211, 211, 192)]
+        [ReloadRequired]
         [DefaultValue(false)]
         public bool CrossModSupport { get; set; }
+        [BackgroundColor(211, 211, 211, 192)]
+        [ReloadRequired]
+        [DefaultValue(false)]
+        public bool LostbeltJourneyTestAI { get; set; }
 
         
     }

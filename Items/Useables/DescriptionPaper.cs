@@ -25,9 +25,5 @@ namespace HJScarletRework.Items.Useables
             if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt))
                 tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ThanksList"));
         }
-        public override void PostDrawTooltipLine(DrawableTooltipLine line)
-        {
-            base.PostDrawTooltipLine(line);
-        }
     }
 }

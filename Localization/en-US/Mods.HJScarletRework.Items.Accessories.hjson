@@ -27,7 +27,7 @@ HeartoftheMountain: {
 		'''
 }
 
-PreciousAim: {
+SteadyBreath: {
 	DisplayName: Precious Aim
 	Tooltip:
 		'''
@@ -438,5 +438,10 @@ PendantGold: {
 
 PendantWitness: {
 	DisplayName: Pendant Witness
+	Tooltip: ""
+}
+
+CombatSlot: {
+	DisplayName: Combat Slot
 	Tooltip: ""
 }

@@ -11,27 +11,24 @@ namespace HJScarletRework.Globals.Players
             pocketMirror = false;
             blackKeyExecutorCriticalChanceAdd = 0;
             blackKeyExecutorDamageAdd = 0;
-            PreciousTargetAcc = false;
-            PreciousAimAcc = false;
+            preciousTargetLevel = 0;
             pendantLevel = 0;
-            PreciousCritsMin = 0;
             desterrennacht = false;
             manaSavingsJar = 0;
             loveRing = false;
             isBeingLove = false;
             heartoftheCrystal = false;
             tacticalExecution = false;
-            ExecutorSwordMarkPlus = false;
             blackKeyHeal = 0;
             blackKeyDefenseBuff = 0;
             blackKeyDoT = false;
+            cycleMadnessLevel = 0;
             artificalManaStar = false;
             executorSwordMarkLevel = -1;
             souloftheTidalMark = false;
             mayaPumper = false;
             crimsonCharm = false;
             bitingClaw = false;
-            cycleMadness = false;
             powerLily = false;
             powerLilyVanity = false;
             LightofHorizon = false;
@@ -46,6 +43,7 @@ namespace HJScarletRework.Globals.Players
             emblemThrown = false;
             emblemExecutor = false;
             emblemGalaxy = false;
+            combatSlot = false;
         }
         private void ResetArmor()
         {
@@ -60,6 +58,7 @@ namespace HJScarletRework.Globals.Players
             diverArmor = false;
             maidReaperArmor = false;
             dragonHunter = false;
+            saintChurch = false;
 
             adamantiteHeadExecutor = false;
             chlorophyteHeadExecutor = false;
@@ -74,13 +73,13 @@ namespace HJScarletRework.Globals.Players
         }
         private void ResetPets()
         {
-            WhalePet = false;
-            NonePet = false;
-            ShadowPet = false;
-            SquidPet = false;
-            WatcherPet = false;
-            dracoPet = false;
-            sonPet = false;
+            petWhale = false;
+            petNone = false;
+            petShadow = false;
+            petSquid = false;
+            petWatcher = false;
+            petDraco = false;
+            petSon = false;
             goldenAppleEnchanted = false;
             goldenAppleDamageAbsorb = 0;
             goldenAppleEnchantedFully = false;
@@ -88,7 +87,7 @@ namespace HJScarletRework.Globals.Players
         public override void ResetEffects()
         {
             climaticHawstringLaserCounter *= (Player.HeldItem.type == ItemType<ClimaticHawstring>()).ToInt();
-            CreationHatSet = false;
+            creationHat = false;
             LifeBalloonAcc = false;
             critDamageAll = 0;
             critDamageExecutor = 0;
@@ -102,9 +101,7 @@ namespace HJScarletRework.Globals.Players
         public override void UpdateDead()
         {
             flybackhandBuffTime = 0;
-            flybackhandCloclCD = 0;
             flybackhandBuffTimeCurrent = 0;
-            PreciousTargetCrtis = 10;
             LifeBalloonAcc = false;
             monkStaffHeal = false;
             galvanizedHandDashCD = 0;
@@ -112,6 +109,7 @@ namespace HJScarletRework.Globals.Players
             isExecutionStrikeTriggered = false;
             KnifeMarkIndex = -1;
             theGreatDipperBuff = false;
+            saintChurchLastStanding = 0;
             ResetAcc();
             ResetPets();
             ResetArmor();

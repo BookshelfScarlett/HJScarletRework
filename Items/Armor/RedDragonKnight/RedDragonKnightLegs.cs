@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Materials;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -31,10 +32,7 @@ namespace HJScarletRework.Items.Armor.RedDragonKnight
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.FragmentSolar, 4).
-                AddIngredient(ItemID.FragmentVortex, 4).
-                AddIngredient(ItemID.FragmentNebula, 4).
-                AddIngredient(ItemID.FragmentStardust, 4).
+                AddIngredient<UniversalCube>(4).
                 AddIngredient(ItemID.LunarBar, 4).
                 AddTile(TileID.LunarCraftingStation).
                 Register();

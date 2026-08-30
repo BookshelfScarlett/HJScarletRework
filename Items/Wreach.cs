@@ -2,8 +2,8 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.Magic;
-using HJScarletRework.Projs.Melee;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
@@ -128,12 +128,7 @@ namespace HJScarletRework.Items
         {
             Stopwatch.StartNew();
             Stopwatch sw = Stopwatch.StartNew();
-            for (int i = -1; i < 2; i += 2)
-            {
-                Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15f, ProjectileType<RitualofReposeProj>(), 1, knockback, player.whoAmI);
-
-                proj.ai[1] = i;
-            }
+                Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15f, ProjectileType<TitaniumBattleShovelSpikeBall>(), 1, knockback, player.whoAmI);
             sw.Stop();
             // 输出经过的时间（毫秒）
             //Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

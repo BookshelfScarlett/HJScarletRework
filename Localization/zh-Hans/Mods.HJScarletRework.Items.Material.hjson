@@ -21,3 +21,14 @@ CrownofSilveryLight: {
 		被赐予向诸神献身之人。
 		'''
 }
+
+UniversalCube: {
+	DisplayName: 宇宙立方体
+	Tooltip: 强化素材之一
+	FlavorTooltip:
+		'''
+		通过输入任意数据，
+		来变化成各种形态、材质的半物质。
+		在重置状态下就会成为立方体状。
+		'''
+}

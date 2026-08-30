@@ -32,7 +32,8 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
                 float remaining = (data.LifetimeRatio - fadeInTime) / (1f - fadeInTime);
                 //防止为0
                 remaining = Clamp(remaining, 0f, 1f);
-                data.Scale = Lerp(data.Scale, 0, remaining);
+                //data.Scale = Lerp(data.Scale, 0, remaining);
+                data.Opacity = Lerp(data.Opacity, 0, remaining);
             }
             data.DrawColor *= Lerp(1f, .2f, (float)Math.Pow(data.LifetimeRatio, 30));
             data.Velocity *= .95f;

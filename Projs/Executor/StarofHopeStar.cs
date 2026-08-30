@@ -137,10 +137,8 @@ namespace HJScarletRework.Projs.Executor
                 float ratios = i / (float)Projectile.oldPos.Length;
                 float rot = Projectile.oldRot[i];
                 date.Add(new(listPos, Color.White, new(0, height * 5), rot));
-                //date2.Add(new(listPos + rot.ToRotationVector2().RotatedBy(PiOver2) * 10, Color.White, new(0, height * 5), rot));
             }
             TrailRender.DrawTrail(date.ToArray(), sets);
-            //TrailRender.DrawTrail(date2.ToArray(), sets);
         }
     }
 }

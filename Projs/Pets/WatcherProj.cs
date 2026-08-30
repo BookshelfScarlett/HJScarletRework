@@ -16,8 +16,8 @@ namespace HJScarletRework.Projs.Pets
         {
             SimplePetAnimation(15f);
             if (Owner.dead)
-                Owner.HJScarlet().WatcherPet = false;
-            if (Owner.HJScarlet().WatcherPet)
+                Owner.HJScarlet().petWatcher = false;
+            if (Owner.HJScarlet().petWatcher)
                 Projectile.timeLeft = 2;
         }
         public override void GetPetSpriteState(out bool FaceLeft, out bool ShouldFiip)

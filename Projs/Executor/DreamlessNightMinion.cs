@@ -190,7 +190,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, dir * -16f, ProjectileType<DreamlessNightBeam>(), Projectile.damage, 1f, Owner.whoAmI);
             ((DreamlessNightBeam)proj.ModProjectile).BeamState = DreamlessNightBeam.BeamType.MinionBeam;
             SpawnDreamParticle(spawnPos);
-            ScarletSound(HJScarletSounds.Hammer_ShootAlt, spawnPos, 1, 2, -.5f, variantType: 2);
+            ScarletSound(HJScarletSounds.Hammer_ShootAlt, spawnPos, .75f, 2, .5f, variantType: 2);
             Timer = 0;
         }
 

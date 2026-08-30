@@ -1,47 +1,34 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Accessories;
-using HJScarletRework.Items.Useables;
-using HJScarletRework.Items.Weapons.Executor.Firearm;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Globals.Instances
+namespace HJScarletRework.Globals.Instances.NPCs
 {
     public partial class HJScarletGlobalNPCs : GlobalNPC
     {
         public override bool InstancePerEntity => true;
-        public bool DeepToneThrownMark = false;
         public bool Dialectics_Mark = false;
         public int Dialectics_Timer = 0;
         public int Dialectics_HitTime = 0;
-        public int blackKeyDefensesReduces = 0;
         public bool terraFlamethrowerDebuff = false;
-        public int terraFlamethrowerDropDamage = 0;
         public List<int> StabList = [];
-        public bool isBeingStabByLavaFlow = false;
         public int isBeingStabByLavaFlowExecution = 0;
         public bool isBeingStabByContainedBlast = false;
         public int isBeingStabByContainedStick = 0;
         public float miscCounter = 0;
         public int StopNpcTime = 0;
         public Vector2 PostSpeed = Vector2.Zero;
-        public bool grassKnifePoison = false;
-        public int grassKnifePoisionLevel = 1;
-        public bool grassPoison = false;
         public bool absoluteZeroBuffEnemy = false;
         public bool theBleachingBuffEnemy = false;
 
 
         public override void ResetEffects(NPC npc)
         {
-            isBeingStabByLavaFlow = false;
             isBeingStabByContainedBlast = false;
             terraFlamethrowerDebuff = false;
-            terraFlamethrowerDropDamage = 0;
             absoluteZeroBuffEnemy = false;
             theBleachingBuffEnemy = false;
 
@@ -54,7 +41,7 @@ namespace HJScarletRework.Globals.Instances
         }
         public override void PostAI(NPC npc)
         {
-            if(absoluteZeroBuffEnemy)
+            if (absoluteZeroBuffEnemy)
             {
                 npc.velocity *= AbsoluteZeroBuff.BadMoveSpeedEnemy;
             }
@@ -98,24 +85,6 @@ namespace HJScarletRework.Globals.Instances
                 damage = AbsoluteZeroBuff.BadLifeRegenEnemy;
             }
         }
-        public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
-        {
-            if(theBleachingBuffEnemy)
-            {
-                modifiers.FinalDamage *= TheBleachingBuff.HitDamageMultEnemy;
-            }
-        }
-        public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
-        {
-            if (absoluteZeroBuffEnemy)
-            {
-                modifiers.SourceDamage *= (1 + AbsoluteZeroBuff.BadDamageMult);
-            }
-            if(theBleachingBuffEnemy)
-            {
-                modifiers.DefenseEffectiveness *= 0;
-            }
-        }
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
             base.DrawEffects(npc, ref drawColor);
@@ -131,21 +100,6 @@ namespace HJScarletRework.Globals.Instances
 
             }
             base.PostDraw(npc, spriteBatch, screenPos, drawColor);
-        }
-        public override void ModifyShop(NPCShop shop)
-        {
-            if (shop.NpcType == NPCID.BestiaryGirl)
-            {
-                shop.ToCustomValue<RuShiWoWen>(0, 30, 0, 0);
-            }
-            if (shop.NpcType == NPCID.Merchant)
-            {
-                shop.ToCustomValue<AxeCharm>(0, 5, 0, 0);
-            }
-            if (shop.NpcType == NPCID.Cyborg)
-            {
-                shop.ToCustomValue<ASMD>(1, 50, 0, 0, Condition.DownedGolem);
-            }
         }
     }
 }

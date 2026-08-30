@@ -737,7 +737,6 @@ namespace HJScarletRework.Projs.Executor
         #region 绘制
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
-
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             Texture2D texture = HJScarletTexture.Texture_StandardGradient.Value;
             Effect effect = HJScarletShader.AlphaFade;

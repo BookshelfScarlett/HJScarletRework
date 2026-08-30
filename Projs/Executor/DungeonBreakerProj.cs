@@ -205,7 +205,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 dir = (Owner.Center - Projectile.Center).ToSafeNormalize();
             Projectile.velocity = dir.RotatedBy(ToRadians(30) * Main.rand.NextBool().ToDirectionInt()) * 24f;
             GenerateBackDust(-1);
-            if(Main.zenithWorld)
+            if (Main.zenithWorld)
             {
                 DungeonBreaker.PlayPipes(Owner);
             }
@@ -252,10 +252,6 @@ namespace HJScarletRework.Projs.Executor
                             {
                                 WorldGen.KillTile(tilePosX, tilePosY);
 
-                            }
-                            for (int k = 0; k < 8; k++)
-                            {
-                                Dust d = Dust.NewDustDirect(new Vector2(tilePosX, tilePosY), 10, 10, DustID.WaterCandle, 2, 2);
                             }
                         }
                     }

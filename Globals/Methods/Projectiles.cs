@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Enums;
 using System;
 using Terraria;
 using Terraria.GameContent;
@@ -627,6 +628,11 @@ namespace HJScarletRework.Globals.Methods
             sb.Draw(tex, pos, null, c, rotation, origin, scale, se, wtfisthis);
         }
         public static int GetHorizonDirection(this Projectile proj) => (proj.velocity.X > 0).ToDirectionInt();
+        public static void FastDrawCube(this SpriteBatch sb, Vector2 pos, float scale =1)
+        {
+            Texture2D cube = HJScarletTexture.Texture_WhiteCube.Value;
+            sb.Draw(cube, pos - Main.screenPosition, null, Color.White, 0, cube.Size() / 2f, scale, 0, 0);
+        }
 
     }
 }

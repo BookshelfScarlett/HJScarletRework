@@ -22,10 +22,10 @@ namespace HJScarletRework.Projs.Pets
         public override void SimplePetFunction()
         {
             SimplePetAnimation(4);
-            if (Owner.HJScarlet().ShadowPet)
+            if (Owner.HJScarlet().petShadow)
                 Projectile.timeLeft = 2;
             if (Owner.dead)
-                Owner.HJScarlet().ShadowPet= false;
+                Owner.HJScarlet().petShadow= false;
 
             base.SimplePetFunction();
         }

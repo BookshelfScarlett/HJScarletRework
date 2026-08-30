@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Instances.Items;
+using HJScarletRework.Globals.Instances.NPCs;
 using HJScarletRework.Globals.Instances.Projs;
 using HJScarletRework.Globals.Players;
 using System;
@@ -80,6 +81,11 @@ namespace HJScarletRework.Globals.Methods
         public static bool JustPressRightClick(this Player player)
         {
             return !player.HJScarlet().MouseLeft && player.HJScarlet().MouseRight;
+        }
+        public static void RestoreHealthByPercent(this Player player, float ratios)
+        {
+            float clampValue = Clamp(ratios, 0, 1);
+            player.statLife = (int)(player.statLifeMax2 * ratios);
         }
         public static bool GetImmnue(this Player player, int cooldownSlot, int frames, bool blink = false)
         {

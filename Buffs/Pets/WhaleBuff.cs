@@ -9,7 +9,7 @@ namespace HJScarletRework.Buffs.Pets
     {
         public override void Update(Player player, ref int buffIndex)
         {
-            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref player.HJScarlet().WhalePet, ProjectileType<WhaleProj>());
+            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref player.HJScarlet().petWhale, ProjectileType<WhaleProj>());
         }
     }
     public abstract class PetsBuff : ModBuff

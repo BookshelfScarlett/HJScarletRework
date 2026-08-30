@@ -8,7 +8,6 @@ using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
 {
@@ -31,10 +30,6 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             Item.knockBack = 4f;
             Item.SetUpRarityPrice(ItemRarityID.Green);
             Item.SetUpNoUseGraphicItem(true);
-        }
-        public override void PostDrawTooltipLine(DrawableTooltipLine line)
-        {
-            base.PostDrawTooltipLine(line);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

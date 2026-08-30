@@ -87,10 +87,11 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
-                if (CurTarget.CanBeChasedBy() && CurTarget != null)
+                //if (CurTarget.CanBeChasedBy() && CurTarget != null)
+                if(CurTarget.IsLegal()&&CurTarget.CanBeChasedBy())
                 {
-                    Projectile.HomingTarget(CurTarget.Center, -1, 20f, 20f);
-                    Projectile.rotation += 0.2f;
+                        Projectile.HomingTarget(CurTarget.Center, -1, 20f, 20f);
+                        Projectile.rotation += 0.2f;
                 }
                 else
                 {

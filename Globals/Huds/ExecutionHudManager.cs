@@ -5,6 +5,7 @@ using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
+using rail;
 using ReLogic.Graphics;
 using System.Collections.Generic;
 using Terraria;
@@ -56,6 +57,8 @@ namespace HJScarletRework.Globals.Huds
             //    return;
 
             if (GeneralOpacity <= 0f && !localPlayer.HJScarlet().Executor_DrawFadeIn)
+                return;
+            if (LocalPlayer.dead)
                 return;
             SpriteBatch SB = Main.spriteBatch;
             Vector2 pos = LocalPlayer.Center + new Vector2(0, 50) - Main.screenPosition;

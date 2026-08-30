@@ -28,7 +28,7 @@ namespace HJScarletRework.Projs.General
             Projectile.timeLeft = GetSeconds(15);
             Projectile.extraUpdates = 1;
             Projectile.width = Projectile.height = 100;
-            Projectile.SetupImmnuity(45);
+            Projectile.SetupImmnuity(15, ImmnuityType.Static);
             Projectile.penetrate = -1;
             Projectile.Opacity = 0;
             Projectile.noEnchantmentVisuals = true;

@@ -129,7 +129,7 @@ namespace HJScarletRework.Projs.Executor
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             Projectile.BounceOnTile(oldVelocity, 0.24f);
-            ScarletSound(HJScarletSounds.Hammer_LightHit, Projectile.Center, pitch: .25f, pitchVariance: .1f);
+            ScarletSound(HJScarletSounds.Hammer_LightHit, Projectile.Center, volume:.6f,pitch: .25f, pitchVariance: .1f);
             for (int i = 0; i < 10; i++)
             {
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(16f), RandVelTwoPi(1.3f, 5f), RandLerpColor(Color.Goldenrod, Color.Orange), 120, RandRotTwoPi, 1f, 0.48f, false).Spawn();

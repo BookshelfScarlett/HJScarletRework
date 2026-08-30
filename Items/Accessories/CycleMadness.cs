@@ -4,16 +4,11 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class CycleMadness : HJScarletItemClass
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
         public override string AssetPath => AssetHandler.Equips;
         public static int CritsAdd = 5;
         public static int CritsPerSecond = 5;
@@ -31,7 +26,16 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.HJScarlet().cycleMadness = true;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.SoulofLight, 10).
+                AddIngredient(ItemID.SoulofNight, 10).
+                AddIngredient(ItemID.LightShard, 1).
+                AddIngredient(ItemID.DarkShard, 1).
+                AddTile(TileID.CrystalBall).
+                Register();
         }
     }
 }

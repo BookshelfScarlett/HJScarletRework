@@ -32,6 +32,8 @@ Typeless: {
 	// RuneWizardProj.DisplayName: Rune Wizard Proj
 	// PandorasBurgerHeldProj.DisplayName: Pandoras Burger Held Proj
 	// RitualofReposeStar.DisplayName: Ritualof Repose Star
+	// PreciousTargetCross.DisplayName: Precious Target Cross
+	// TitaniumBattleShovelMiningMechanic.DisplayName: Titanium Battle Shovel Mining Mechanic
 }
 
 Executor: {
@@ -202,6 +204,15 @@ Executor: {
 	WeHaveBookshelfHeldProj.DisplayName: 力拔书架气盖世
 	BlazingSunArrow.DisplayName: 烈阳
 	BlazingSunFireball.DisplayName: 烈阳|射线
+	// EndlessWarMinion.DisplayName: Endless War Minion
+	// EndlessWarProj.DisplayName: Endless War Proj
+	// HeadsplosionBombBullet.DisplayName: Headsplosion Bomb Bullet
+	// HeadsplosionBullet.DisplayName: Headsplosion Bullet
+	// HeadsplosionHeldProj.DisplayName: Headsplosion Held Proj
+	// TitaniumBattleShovelHeldProj.DisplayName: Titanium Battle Shovel Held Proj
+	// TitaniumBattleShovelSpikeBall.DisplayName: Titanium Battle Shovel Spike Ball
+	// CobaltYoyoProj.DisplayName: Cobalt Yoyo Proj
+	// CobaltYoyoSlash.DisplayName: Cobalt Yoyo Slash
 }
 
 Ranged: {

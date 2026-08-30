@@ -1,8 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.GJKCollision;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using Terraria;
+using Terraria.GameContent.Generation;
 
 namespace HJScarletRework.Projs
 {
@@ -27,8 +29,9 @@ namespace HJScarletRework.Projs
         public override void SetDefaults()
         {
             Projectile.width = Projectile.height = 16;
-            Projectile.damage = 0;
             Projectile.friendly = true;
+            Projectile.penetrate = -1;
+            Projectile.SetupImmnuity(1);
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 300;
@@ -37,38 +40,32 @@ namespace HJScarletRework.Projs
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-
-            switch (AttackType)
-            {
-                case Styles.Slowdown:
-                    DoSlowdown();
-                    break;
-                case Styles.Return:
-                    DoReturn();
-                    break;
-            }
+            Projectile.Center = Main.MouseWorld;
+            Projectile.timeLeft = 2;
         }
-
-        public void DoReturn()
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            Projectile.HomingTarget(Owner.MountedCenter, 9999, 20f, 20f);
-            if (Projectile.Hitbox.Intersects(Owner.Hitbox))
-                return;
-        }
-        public void DoSlowdown()
-        {
-            Projectile.velocity *= 0.95f;
-            if (Projectile.velocity.Length() <= 0.5f)
+            //创建一个局部顶点
+            Vector2[] localVertices = [new Vector2(30), new Vector2(30), new Vector2(0, -30)];
+            //转化为需要的实际坐标值
+            Vector2[] world = new Vector2[localVertices.Length];
+            Matrix transform = Matrix.CreateRotationZ(Projectile.rotation) * Matrix.CreateScale(Projectile.scale);
+            for (int i = 0; i < localVertices.Length; i++)
+                world[i] = Vector2.Transform(localVertices[i], transform) + Projectile.Center;
+            //最后，构建两个形状：
+            var shapeA = new ConvexPolygon { Vertices = world };
+            //构建目标形状：
+            Vector2[] targetVert = [targetHitbox.TopLeft(), targetHitbox.TopRight(), targetHitbox.BottomRight(), targetHitbox.BottomLeft()];
+            var shapeB = new ConvexPolygon { Vertices = targetVert };
+            if (ConvexPolygon.GJKIntersect(shapeA, shapeB))
             {
-                Projectile.velocity *= 0;
-                Projectile.timeLeft = 300;
-                Projectile.netUpdate = true;
-                AttackType = Styles.Return;
+                return true;
             }
+            return false;
         }
-
         public override bool PreDraw(ref Color lightColor)
         {
+            SB.FastDrawCube(Projectile.Center);
             return false;
         }
     }

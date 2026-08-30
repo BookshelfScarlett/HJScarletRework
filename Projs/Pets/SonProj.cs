@@ -13,10 +13,10 @@ namespace HJScarletRework.Projs.Pets
         {
             SimplePetAnimation(4);
 
-            if (Owner.HJScarlet().sonPet)
+            if (Owner.HJScarlet().petSon)
                 Projectile.timeLeft = 2;
             if (Owner.dead)
-                Owner.HJScarlet().sonPet = false;
+                Owner.HJScarlet().petSon = false;
         }
         public override void PetAI()
         {

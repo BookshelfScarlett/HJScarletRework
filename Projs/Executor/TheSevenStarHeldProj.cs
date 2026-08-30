@@ -32,6 +32,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ExSD()
         {
+            Projectile.width = Projectile.height = 132;
             Projectile.SetUpHeldProj(10);
             Projectile.SetupImmnuity(-1);
             Projectile.penetrate = -1;
@@ -71,10 +72,13 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateHeldState()
         {
             Projectile.Center = Owner.MountedCenter;
-            Owner.itemTime = 2;
-            Owner.itemAnimation = 2;
+            if (!(Helper.IsDone[0] && Helper.IsDone[1]))
+            {
+                Owner.itemTime = 2;
+                Owner.itemAnimation = 2;
+            }
             Owner.heldProj = Projectile.whoAmI;
-            if (Owner.dead)
+            if (Owner.dead||!Owner.IsHolding(OriginalItemID))
                 Projectile.Kill();
             else
                 Projectile.timeLeft = 2;
@@ -191,7 +195,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-            if (Main.mouseLeft)
+            if (Main.mouseLeft && Owner.IsHolding(OriginalItemID) && !Owner.dead) 
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 proj.HJScarlet().HasExecutionMechanic = true;

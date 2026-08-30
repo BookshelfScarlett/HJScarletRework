@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
+using HJScarletRework.Items.Materials;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;

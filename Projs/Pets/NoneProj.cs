@@ -21,10 +21,10 @@ namespace HJScarletRework.Projs.Pets
         }
         public override void SimplePetFunction()
         {
-            if (Owner.HJScarlet().NonePet)
+            if (Owner.HJScarlet().petNone)
                 Projectile.timeLeft = 2;
             if (Owner.dead)
-                Owner.HJScarlet().NonePet= false;
+                Owner.HJScarlet().petNone= false;
 
             base.SimplePetFunction();
         }

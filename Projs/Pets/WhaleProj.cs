@@ -28,9 +28,9 @@ namespace HJScarletRework.Projs.Pets
         {
             SimplePetAnimation(15f);
             if (Owner.dead)
-                Owner.HJScarlet().WhalePet = false;
+                Owner.HJScarlet().petWhale = false;
 
-            if (Owner.HJScarlet().WhalePet)
+            if (Owner.HJScarlet().petWhale)
                 Projectile.timeLeft = 2;
         }
     }

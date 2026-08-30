@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Buffs;
+﻿using ContinentOfJourney.Items;
+using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
@@ -36,20 +37,6 @@ namespace HJScarletRework.Globals.Players
                 if (item.type == ItemID.MonkStaffT3 || item.type == ItemID.MonkStaffT1)
                     crit += 15;
             }
-            //下面这个必须得最后执行
-            if (PreciousTargetAcc && item.damage > 0)
-            {
-                crit = PreciousTargetCrtis;
-                int limitedCrit = PreciousAimAcc ? 125 : 115;
-                if (PreciousTargetCrtis > limitedCrit)
-                    PreciousTargetCrtis = limitedCrit;
-            }
-            if (cycleMadness && item.damage > 0 && item.DamageType.CountsAsClass<ExecutorDamageClass>())
-            {
-                crit = cycleMadenessCrit;
-                if (cycleMadenessCrit > 200)
-                    cycleMadenessCrit = 200;
-            }
         }
         public override void ModifyManaCost(Item item, ref float reduce, ref float mult)
         {
@@ -73,34 +60,26 @@ namespace HJScarletRework.Globals.Players
         {
             if (dragonHunter && !item.DamageType.CountsAsClass<ExecutorDamageClass>() && !item.DamageType.CountsAsClass<GenericDamageClass>() && item.damage > 0)
             {
-                damage = StatModifier.Default;
-                float ratios = Player.GetDamageBonusRatio(item.damage, ExecutorDamageClass.Instance);
-                damage *= (1f + ratios);
+                ApplyWeaponDamageMult(ref damage, item.damage, ExecutorDamageClass.Instance, 1);
             }
             if (monkExecutor)
             {
                 if (item.type == ItemID.MonkStaffT3)
-                {
-                    damage = StatModifier.Default;
-                    float ratios = Player.GetDamageBonusRatio(item.damage, ExecutorDamageClass.Instance);
-                    damage *= (1 + ratios);
-                    damage *= 1.35f;
-                }
+                    ApplyWeaponDamageMult(ref damage, item.damage, ExecutorDamageClass.Instance, 1.35f);
                 if (item.type == ItemID.MonkStaffT1)
-                {
-                    damage = StatModifier.Default;
-                    float ratios = Player.GetDamageBonusRatio(item.damage, ExecutorDamageClass.Instance);
-                    damage *= (1 + ratios);
-                    damage *= 1.2f;
-                }
+                    ApplyWeaponDamageMult(ref damage, item.damage, ExecutorDamageClass.Instance, 1.2f);
             }
-            if (CreationHatSet && item.DamageType.CountsAsClass<MagicDamageClass>() && CreationHat.Staffs.Contains(item.type))
-            {
-                damage = StatModifier.Default;
-                float ratios = Player.GetDamageBonusRatio(item.damage, DamageClass.Magic);
-                damage *= (1 + ratios);
-                damage *= 10;
-            }
+            if (creationHat && item.DamageType.CountsAsClass<MagicDamageClass>() && CreationHat.Staffs.Contains(item.type))
+                ApplyWeaponDamageMult(ref damage, item.damage, DamageClass.Magic, 10);
+            if (creationHat && item.type == ItemType<OnyxStaff>())
+                ApplyWeaponDamageMult(ref damage, item.damage, DamageClass.Magic, 5);
+        }
+        public void ApplyWeaponDamageMult(ref StatModifier damage, int originalDamage, DamageClass damageClass, float mult)
+        {
+            damage = StatModifier.Default;
+            float ratios = Player.GetDamageBonusRatio(originalDamage, damageClass);
+            damage *= (1 + ratios);
+            damage *= mult;
         }
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

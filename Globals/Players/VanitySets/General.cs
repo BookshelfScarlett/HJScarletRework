@@ -46,6 +46,12 @@ namespace HJScarletRework.Globals.Players.VanitySets
             "笑面教授",
             "niyaniya"
         ];
+        public List<string> KeiName =
+        [
+            "凯伊",
+            "kei"
+        ];
+
 
 
         public int accVanityID = -1;
@@ -53,6 +59,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
         public bool yardVanity = false;
         public bool lacrimosaVanity = false;
         public bool niyaniyakajuVanity = false;
+        public bool keiVanity = false;
         public override void ResetEffects()
         {
             accVanityID = -1;
@@ -62,12 +69,18 @@ namespace HJScarletRework.Globals.Players.VanitySets
             tag.Add(nameof(accVanityID), accVanityID);
             tag.Add(nameof(arcaceVanity), arcaceVanity);
             tag.Add(nameof(yardVanity), yardVanity);
+            tag.Add(nameof(niyaniyakajuVanity), niyaniyakajuVanity);
+            tag.Add(nameof(keiVanity), keiVanity);
+            tag.Add(nameof(lacrimosaVanity), lacrimosaVanity);
         }
         public override void LoadData(TagCompound tag)
         {
             accVanityID = tag.GetInt(nameof(accVanityID));
             arcaceVanity = tag.GetBool(nameof(arcaceVanity));
-            arcaceVanity = tag.GetBool(nameof(yardVanity));
+            yardVanity = tag.GetBool(nameof(yardVanity));
+            lacrimosaVanity = tag.GetBool(nameof(lacrimosaVanity));
+            niyaniyakajuVanity = tag.GetBool(nameof(niyaniyakajuVanity));
+            keiVanity = tag.GetBool(nameof(keiVanity));
         }
         public override void OnEnterWorld()
         {
@@ -107,6 +120,16 @@ namespace HJScarletRework.Globals.Players.VanitySets
                     Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<YogsothothsYardPack>());
                     yardVanity = true;
                 }
+            }
+            if(!keiVanity)
+            {
+                string nameLow = Player.name.ToLower();
+                if (YardName.Contains(nameLow))
+                {
+                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<TendouKeiItem>());
+                    yardVanity = true;
+                }
+
             }
         }
         public override void UpdateDead()
@@ -237,7 +260,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
         {
             string name = HJScarletList.VanityItemDictionary[accVanityID];
             //怎么都是特殊情况。
-            if (name == nameof(TairitsuItem))
+            if (name == nameof(TairitsuItem)||name == nameof(TendouKeiItem))
                 Player.back = EquipLoader.GetEquipSlot(Mod, name, EquipType.Back);
             Player.legs = EquipLoader.GetEquipSlot(Mod, name, EquipType.Legs);
             Player.body = EquipLoader.GetEquipSlot(Mod, name, EquipType.Body);

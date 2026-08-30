@@ -30,7 +30,6 @@ namespace HJScarletRework.Projs.Executor
         public override void ExSD()
         {
             Projectile.tileCollide = false;
-            Projectile.ownerHitCheck = true;
             Projectile.ignoreWater = true;
             Projectile.width = Projectile.height = 60;
             Projectile.extraUpdates = 2;

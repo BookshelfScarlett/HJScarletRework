@@ -28,7 +28,7 @@ HeartoftheMountain: {
 		'''
 }
 
-PreciousAim: {
+SteadyBreath: {
 	DisplayName: 精准打击
 	Tooltip:
 		'''
@@ -373,7 +373,7 @@ RuShiWoWen: {
 		南无如来，应供
 		正遍知，明行足
 		善逝，世间解
-		无上士，调御丈夫
+		无上士，调御丈夫base.AddRecipes();
 		天人师，佛，世尊
 		'''
 }
@@ -479,5 +479,14 @@ PendantWitness: {
 		'''
 		延长1秒代行者支援物品的支援效果持续时间
 		手持代行者武器叠加处决时，为同样位于右方的代行者支援物品叠加1次处决进程
+		'''
+}
+
+CombatSlot: {
+	DisplayName: 战斗镶嵌框
+	Tooltip:
+		'''
+		佩戴后获得额外饰品栏
+		没有别的了
 		'''
 }

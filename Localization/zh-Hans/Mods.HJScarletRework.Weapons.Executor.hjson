@@ -702,3 +702,109 @@ WeHaveBookshelf: {
 		'''
 	ExecutionStrike: 接下来的15次挥舞，每次释放的书本会更多
 }
+
+Stella: {
+	DisplayName: 流星一条
+	Tooltip: 发射着魔的火焰箭矢
+	ExecutionStrike:
+		'''
+		在处决过程中免疫伤害
+		蓄力一定时间后，自动向光标位置发射一枚威力极大的流星箭矢
+		流星箭矢将会造成10000%伤害，无视防御力，必定暴击，且拥有极广的伤害范围
+		处决执行完毕后处死你自己
+		'''
+}
+
+Headsplosion: {
+	DisplayName: 爆头
+	Tooltip:
+		'''
+		你的攻击必定暴击
+		射出的子弹总会造成爆炸
+		爆炸总会向周围的敌人弹射3颗可以造成二次爆炸的小型爆炸跳弹
+		'''
+	ExecutionStrike:
+		'''
+		小型爆炸跳弹会更多
+		会在周围没有敌人的情况下回击被命中的敌人
+		'''
+	FlavorTooltip: 这样的事天天都有。
+}
+
+Moonfire: {
+	DisplayName: 月火
+	Tooltip:
+		'''
+		精度极高的左轮手枪
+		可随时按下互动键进行处决
+		'''
+	ExecutionStrike:
+		'''
+		立刻发射一枚强化子弹，这枚强化子弹会在撞击墙体后追踪
+		强化子弹造成的伤害和积攒的处决进程成正比
+		'''
+	FlavorTooltip: 接受命运的安排……
+}
+
+Reflux: {
+	DisplayName: 逆流
+	Tooltip: 每次发射7颗子弹，命中
+	ExecutionStrike: ""
+	FlavorTooltip: 烧起来吧。
+}
+
+TheGarcia: {
+	DisplayName: 加西亚家族
+	Tooltip: 射速较快的霰弹枪
+	ExecutionStrike: 发射更多的子弹，散射更小
+	FlavorTooltip: 木仓，木仓。
+}
+
+CrescentRose: {
+	DisplayName: 新月玫瑰
+	Tooltip:
+		'''
+		手持时无视击退
+		持续劈砍下，第三次挥舞提升攻击范围
+		每一轮挥砍，或者命中时，都会向前方发射大口径狙击弹
+		按下右键时将镰刀置于身后开火，利用其强大后坐力的使你向前方推进
+		推进时自动斩切沿途的敌人，并为您提供无敌帧与治疗效果
+		'''
+	ExecutionStrike:
+		'''
+		新月玫瑰将转为狙击步枪模式
+		该模式下使用左键，将会以无后坐力的形式发射大口径狙击弹
+		按下使用右键开火时提供极大的后坐力，使你向后方退开
+		在退开的过程中将会为您提供无敌帧，沿途滞留延迟追踪敌人的玫瑰
+		该模式下大口径狙击弹必定造成暴击
+		'''
+	FlavorTooltips: 「-艳若玫瑰填我梦，带我入尔安息所-」
+}
+
+CobaltYoyo: {
+	DisplayName: 钴蓝悠悠球
+	Tooltip: 
+		'''
+		命中时造成钴蓝爆炸
+		可以被悠悠球袋增强，但只有主悠悠球才会叠加处决进程
+		'''
+	ExecutionStrike:
+		'''
+		再次命中时会对被命中的敌人造成多次钴蓝爆炸
+		具备高额护甲穿透
+		'''
+}
+
+TitaniumBattleShovel: {
+	DisplayName: 钛金工兵铲
+	Tooltip:
+		'''
+		命中时击晕敌人一定时间
+		'''
+	ExecutionStrike:
+		'''
+		强化接下来10秒内的攻击
+		提升攻击范围，与判定次数
+		命中敌人时追加滞留于地面上的钛金刺球
+		'''
+}

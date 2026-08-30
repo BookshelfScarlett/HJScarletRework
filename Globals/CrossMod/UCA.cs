@@ -139,10 +139,7 @@ namespace HJScarletRework.Globals.CrossMod
 
             Recipe.Create(elementalRay).
                 AddIngredient(terraRay).
-                AddIngredient(ItemID.FragmentSolar, 5).
-                AddIngredient(ItemID.FragmentVortex, 5).
-                AddIngredient(ItemID.FragmentNebula, 5).
-                AddIngredient(ItemID.FragmentStardust, 5).
+                AddIngredient<UniversalCube>().
                 AddTile(TileID.LunarCraftingStation).
                 Register();
 

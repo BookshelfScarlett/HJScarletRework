@@ -58,6 +58,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.velocity = Projectile.velocity.ToSafeNormalize();
+            Lighting.AddLight(Projectile.Center, TorchID.White);
             UpdateAnimation();
             UpdateHeldState();
             UpdatePlayerState();

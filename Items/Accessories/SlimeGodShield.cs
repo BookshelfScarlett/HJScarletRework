@@ -14,11 +14,6 @@ namespace HJScarletRework.Items.Accessories
     [AutoloadEquip(EquipType.Shield)]
     public class SlimeGodShield : HJScarletItemClass
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
-
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {
@@ -42,10 +37,6 @@ namespace HJScarletRework.Items.Accessories
             player.buffImmune[BuffID.OnFire] = true;
             player.buffImmune[BuffID.OnFire3] = true;
             player.buffImmune[BuffID.Burning] = true;
-        }
-        public override void AddRecipes()
-        {
-            base.AddRecipes();
         }
     }
 }

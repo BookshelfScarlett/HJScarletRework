@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Graphics.ParticleECS;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 
 namespace HJScarletRework.Core.ParticleECS
@@ -155,7 +156,20 @@ namespace HJScarletRework.Core.ParticleECS
             BlendState bs = blendState ?? BlendState.Additive;
             return ECSMethod.NewParticle(GetInstance<Ring>().Type, timeLeft, pos, vel, color, opacity, rotation, scale, bs, ai0: fadinTime, aiint0: type);
         }
-
+        /// <summary>
+        /// 抓痕轨迹，这个抓痕总体较小。<br></br>
+        /// <paramref name="squashScale"/>为形变的大小，如果不输入，默认为<see langword="Vector2(1.2f,0.8f)"/><br></br>
+        /// <paramref name="squashSpeedX"/>为这个抓痕对于x大小的形变速度，如果什么都不输入，默认为<see langword="0"/>，即无形变速度<br></br>
+        /// <paramref name="squashSpeedY"/>为这个抓痕对于y大小的形变速度，如果什么都不输入，默认为<see langword="0"/>，即无形变速度<br></br>
+        /// <paramref name="scale"/>总控这个抓痕的大小，与上述的形变大小另外区分
+        /// </summary>
+        /// <returns></returns>
+        public static int Stain(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float rotation, float scale, Vector2? squashScale = null, float squashSpeedX = 0, float squashSpeedY = 0, BlendState blendstate = null)
+        {
+            BlendState bs = blendstate ?? BlendState.Additive;
+            Vector2 vec = squashScale ?? new Vector2(1.2f, .8f);
+            return ECSMethod.NewParticle(GetInstance<Stain>().Type, timeLeft, pos, vel, color, vec, opacity, rotation, bs, squashSpeedX, squashSpeedY, scale);
+        }
 
     }
 }

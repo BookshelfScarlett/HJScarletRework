@@ -40,9 +40,6 @@ namespace HJScarletRework.Globals.Players
             if (proj.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
                 GlobalExecutorOnHit(target, hit, damageDone);
-                if (cycleMadness)
-                {
-                }
             }
         }
         public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
@@ -109,7 +106,7 @@ namespace HJScarletRework.Globals.Players
         public void ModifyCritDamage(NPC target, ref NPC.HitModifiers modifiers)
         {
             float totalCritsBonus = 0f;
-            if (CreationHatSet && modifiers.DamageType.CountsAsClass(DamageClass.Magic))
+            if (creationHat && modifiers.DamageType.CountsAsClass(DamageClass.Magic))
             {
                 //将所有伤害直接设置为暴击类型，这里先过暴击情况
                 modifiers.SetCrit();
@@ -120,12 +117,6 @@ namespace HJScarletRework.Globals.Players
                 baseCritsbuff /= 2f;
                 //最后。直接将暴击伤害设置
                 totalCritsBonus += baseCritsbuff;
-            }
-            //精确打击取溢出暴击率的100伤害。
-            if (PreciousTargetCrtis > 0 && PreciousTargetAcc)
-            {
-                float critBuff = PreciousTargetCrtis / 100f;
-                totalCritsBonus += critBuff;
             }
             if (modifiers.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
@@ -163,16 +154,6 @@ namespace HJScarletRework.Globals.Players
                 }
                 stardustRuneHitHealTimer = GetSeconds(3);
             }
-            if (PreciousTargetAcc && hit.Crit)
-                PreciousTargetCrtis += 5;
-            if (Main.rand.NextBool(3))
-            {
-                for (int i = 0; i < 2; i++)
-                {
-
-                }
-            }
-
         }
     }
 }

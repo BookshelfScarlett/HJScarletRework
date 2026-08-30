@@ -66,3 +66,8 @@ KajuItem: {
 	DisplayName: 教授拐杖
 	Tooltip: ""
 }
+
+TendouKeiItem: {
+	DisplayName: 粉色科技光环
+	Tooltip: ""
+}

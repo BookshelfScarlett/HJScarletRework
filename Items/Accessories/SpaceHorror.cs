@@ -4,17 +4,11 @@ using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class SpaceHorror : HJScarletItemClass
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
-
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {
@@ -22,14 +16,16 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void ExSD()
         {
-            Item.width = Item.height = 60;
-            Item.rare = ItemRarityID.Purple;
+            Item.SetUpRarityPrice(ItemRarityID.Purple);
             Item.accessory = true;
             Item.HJScarlet().NotFinished = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.HJScarlet().cycleMadness = true;
+        }
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
         }
 
     }

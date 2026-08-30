@@ -162,8 +162,8 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Silver, Color.WhiteSmoke), Main.rand.Next(30, 70), 1, Main.rand.NextFloat(.7f, 1.1f) * .4f, .15f);
             }
             new CrossGlow(target.Center, Color.WhiteSmoke, 40, 1, .24f).Spawn();
-            ScarletSound(HJScarletSounds.Misc_Ding, Projectile.Center, .6f, 0, -.8f);
-            ScarletSound(HJScarletSounds.TheMars_Hit, Projectile.Center, .6f, 0, -.8f);
+            ScarletSound(HJScarletSounds.Misc_Ding, Projectile.Center, .4f, 1, -.8f);
+            ScarletSound(HJScarletSounds.TheMars_Hit, Projectile.Center, .4f, 1, -.8f);
 
         }
         public override void OnKill(int timeLeft)

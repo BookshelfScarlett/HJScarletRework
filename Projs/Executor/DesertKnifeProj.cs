@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -28,9 +29,9 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
+            Lighting.AddLight(Projectile.Center, TorchID.Desert);
             if (Projectile.IsOutScreen())
                 return;
-            //new SmokeParticle(proj.Center.ToRandCirclePosEdge(5f) - proj.SafeDir() * 40f, RandVelTwoPi(3f), RandLerpColor(Color.Brown, Color.Orange), 40, RandRotTwoPi, 0.75f, Main.rand.NextFloat(0.4f, 0.6f) * 0.32f, Main.rand.NextBool()).SpawnToNonPreMult();
             if (Main.rand.NextBool(4))
             {
                 ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePosEdge(5), Projectile.velocity / 4, RandLerpColor(Color.Brown, Color.Orange), 40, 1, Projectile.scale * Main.rand.NextFloat(.9f, 1.10f) * .1f, .4f);
@@ -63,7 +64,15 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-            base.OnKill(timeLeft);
+            for (int i = 0; i < 14; i++)
+            {
+                ECSParticle.ShinyCrossStarECS(Projectile.Center, RandVelTwoPi(0.2f, 4.2f), Color.Brown, 40, 1, 0.6f);
+            }
+            for (int i = 0; i < 6; i++)
+            {
+                ECSParticle.SmokeParticle(Projectile.Center, RandVelTwoPi(0.2f, 6.2f), RandLerpColor(Color.Brown, Color.Orange), 40, 1, 0.9f, 0.31f, blendstate: BlendState.AlphaBlend);
+            }
+            ScarletSound(SoundID.Dig, Projectile.Center, .65f, pitch: -.2f);
         }
         public void DrawProj(Vector2 offset)
         {

@@ -227,3 +227,8 @@ FreehandFrame: {
 	DisplayName: Freehand Frame
 	Tooltip: Used to craft vanity that added by Lostbelt Journey
 }
+
+RandomNewFolder: {
+	DisplayName: Random New Folder
+	Tooltip: ""
+}

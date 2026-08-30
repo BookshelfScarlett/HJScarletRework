@@ -55,7 +55,6 @@ namespace HJScarletRework.Items.Armor
             ItemID.RubyStaff,
             ItemID.DiamondStaff,
             ItemID.AmberStaff,
-            ItemType<OnyxStaff>()
             ];
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
@@ -70,7 +69,7 @@ namespace HJScarletRework.Items.Armor
             player.GetDamage<MagicDamageClass>() += ManaDamage;
             player.GetCritChance<MagicDamageClass>() += ManaCrits;
             player.manaCost -= ManaCost;
-            player.HJScarlet().CreationHatSet = true;
+            player.HJScarlet().creationHat = true;
 
         }
         public override void HoldItem(Player player)

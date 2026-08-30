@@ -109,4 +109,9 @@ HJScarletConfigServer: {
 			默认关闭
 			'''
 	}
+
+	LostbeltJourneyTestAI: {
+		// Label: Lostbelt Journey Test A I
+		// Tooltip: ""
+	}
 }

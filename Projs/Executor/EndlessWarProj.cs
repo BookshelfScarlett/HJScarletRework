@@ -8,10 +8,6 @@ namespace HJScarletRework.Projs.Executor
 {
     public class EndlessWarProj : HJScarletProj
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public enum State
         {

@@ -14,10 +14,6 @@ namespace HJScarletRework.Projs.Melee
 {
     public class HighTechBladeHeldProj : HJScarletHeldProj, IPixelatedRenderer
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
         public override ModItem OriginalItem => GetInstance<HighTechBlade>();
         public override string Texture => OriginalItem.Texture;
         public override int ExtraUpdates => 10;

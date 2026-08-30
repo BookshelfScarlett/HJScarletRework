@@ -152,11 +152,13 @@ namespace HJScarletRework.Globals.Methods
             {
                 if (usPlayer.ExecutionListStored.TryGetValue(itemID, out int value))
                 {
-                    bool canExe = value >= executionTime;
                     return value >= executionTime;
                 }
                 else
+                {
+                    Main.NewText(1);
                     return false;
+                }
             }
         }
         public static bool GetExecutionSrike(this Player player)

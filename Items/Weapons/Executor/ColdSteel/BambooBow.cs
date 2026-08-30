@@ -20,7 +20,6 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             Item.knockBack = 2;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
-            //Item.UseSound = SoundID.Item11;
             Item.SetUpRarityPrice(ItemRarityID.Blue);
             Item.shoot = ProjectileType<BambooBowArrow>();
             Item.shootSpeed = 9f;

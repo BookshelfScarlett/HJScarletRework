@@ -18,6 +18,7 @@ using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.ExecutorVanillaHead;
 using HJScarletRework.Items.Armor.Reaper;
 using HJScarletRework.Items.Armor.RedDragonKnight;
+using HJScarletRework.Items.Armor.SaintChurch;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
@@ -289,8 +290,32 @@ namespace HJScarletRework.Globals.Players
             UpdateShorthandFunction();
             UpdateDrowingEffect();
             UpdatePocketMirror();
+            UpdateSaintChurch();
         }
 
+        public void UpdateSaintChurch()
+        {
+            if (!Player.HasBuff<SaintChurchBuff>())
+                saintChurchLastStanding = 0;
+            if (!(saintChurch && saintChurchLastStanding > 0))
+                return;
+            foreach (var p in Main.ActivePlayers)
+            {
+                if (p.team == Player.team && p.whoAmI != Player.whoAmI)
+                {
+                    p.GetDamage<GenericDamageClass>() += SaintChurchHead.DamageBonus * saintChurchLastStanding;
+                    p.GetCritChance<GenericDamageClass>() += SaintChurchHead.CritBonus * saintChurchLastStanding;
+                }
+            }
+            Player.aggro += SaintChurchHead.Aggro;
+            Player.GetDamage<GenericDamageClass>() += SaintChurchHead.DamageBonus * saintChurchLastStanding;
+            Player.GetCritChance<GenericDamageClass>() += SaintChurchHead.CritBonus * saintChurchLastStanding;
+            Player.AddBuff(BuffID.PotionSickness, 2);
+            
+            //不死巴卢的粒子与特效
+            
+
+        }
 
         #region PostUpdateEquips 辅助方法
         public void UpdatePocketMirror()
@@ -524,7 +549,7 @@ namespace HJScarletRework.Globals.Players
                 return;
             if (Player.miscCounter % 45 == 0 && Player.velocity.LengthSquared() > 2f * 2f)
             {
-                int damage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(150);
+                int damage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(50);
                 Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Player.velocity.ToSafeNormalize() * -3f, ProjectileType<DiverJellyFish>(), damage, 0f, Player.whoAmI);
                 proj.timeLeft = GetSeconds(10);
 

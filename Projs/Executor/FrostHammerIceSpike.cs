@@ -42,7 +42,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.Opacity = 0;
             Projectile.extraUpdates = 0;
             Projectile.ignoreWater = true;
-            Projectile.ownerHitCheck = true;
         }
         public override void OnFirstFrame()
         {

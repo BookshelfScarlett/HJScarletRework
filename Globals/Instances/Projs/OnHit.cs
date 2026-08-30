@@ -3,7 +3,6 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using HJScarletRework.Items.Armor.ExecutorAlter;
@@ -11,9 +10,9 @@ using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Projs;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
-using System;
 using System.Linq;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Instances.Projs
@@ -31,10 +30,13 @@ namespace HJScarletRework.Globals.Instances.Projs
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player Owner = Main.player[projectile.owner];
-            if (HasExecutionMechanic && !AddExecutionHit && projectile.numHits < 1)
+            //判定是否为悠悠球
+            bool isYoyo = projectile.aiStyle == ProjAIStyleID.Yoyo && projectile.DamageType.CountsAsClass<ExecutorDamageClass>();
+            if (HasExecutionMechanic && ((!AddExecutionHit && projectile.numHits < 1)||isYoyo))
             {
                 HandleCowboy(Owner, target);
                 HandlePendant(Owner, target);
+                if(!isYoyo)
                 AddExecutionHit = true;
             }
             HandleMaidReaperOnHit(Owner, projectile, target);

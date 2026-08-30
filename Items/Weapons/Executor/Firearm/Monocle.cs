@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.GameContent;
@@ -14,23 +15,24 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
     {
         public static int ExecutionPenetrate = 15;
         public static float ExecutionDamageMult = 1.5f;
-        public override int ExecutionProgress => 8;
+        public override int ExecutionProgress => 12;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
+            ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
         }
         public override void ExSD()
         {
-            Item.damage = 2010;
+            Item.damage = 1845;
             Item.shootSpeed = 19;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true);
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = null;
             Item.knockBack = 7f;
-            Item.useTime = Item.useAnimation = 45;
+            Item.useTime = Item.useAnimation = 42;
             Item.crit = 46;
             Item.shoot = ProjectileType<MonocleHeldProj>();
             Item.HJScarlet().borderlandWeapon = true;
@@ -61,9 +63,9 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.SniperRifle).
+                AddIngredient<Headsplosion>().
                 AddIngredient(ItemID.ShadowbeamStaff).
-                AddIngredient<CubistBar>(10).
+                AddIngredient<CrownofSilveryLight>(15).
                 AddTile(FinalAnvilTile).
                 Register();
         }

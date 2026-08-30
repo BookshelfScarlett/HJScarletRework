@@ -28,7 +28,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Globals.Instances
+namespace HJScarletRework.Globals.Instances.NPCs
 {
     public partial class HJScarletGlobalNPCs : GlobalNPC
     {
@@ -141,30 +141,6 @@ namespace HJScarletRework.Globals.Instances
 
 
 
-        }
-        public override bool? CanGoToStatue(NPC npc, bool toKingStatue)
-        {
-            return base.CanGoToStatue(npc, toKingStatue);
-        }
-        public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
-        {
-            bool isMale = HJScarletList.MaleNPC.Contains(npc.type);
-            bool isFemale = HJScarletList.FemaleNPC.Contains(npc.type);
-            Player player = Main.LocalPlayer;
-            if (!player.HJScarlet().loveRing)
-                return;
-            foreach (var item in items)
-            {
-                if (item is null || item.IsAir)
-                    continue;
-                float modify = 0.60f;
-
-                if (player.Male && isFemale)
-                    modify -= 0.05f;
-                if (!player.Male && isMale)
-                    modify -= 0.05f;
-                item.shopCustomPrice = (int)((item.shopCustomPrice ?? item.GetStoreValue()) * modify);
-            }
         }
     }
 }

@@ -16,191 +16,153 @@ namespace HJScarletRework.Globals.Players
 {
     public partial class HJScarletPlayer : ModPlayer
     {
-        public int flybackhandCloclCD = 0;
-        public int flybackhandBuffTime = 0;
-        public int flybackhandBuffTimeCurrent = 0;
-        //用给归零针，查阅玩家当前损失的HP量
-        public int flybackhandHealthRecord = 0;
-        public int flybackHandManaRecord = 0;
-        public int flybackInGameTimeBuff = 0;
-
-        public bool CreationHatSet = false;
-        //电表镀针的冲刺冷却
-        public int galvanizedHandDashCD = 0;
-
-        // 用于向上向下冲刺禁用羽落
-        public int NoSlowFall = 0;
-        public float maxFallspeedModify = 0;
-        public int ASMDBuffTime = 0;
-
-        public int climaticHawstringLaserCounter = 0;
-        public bool goldenAppleEnchanted = false;
-        public int goldenAppleDamageAbsorb = 0;
-        public bool goldenAppleEnchantedFully = false;
-        public bool givePaper = true;
-        public int drawUseableItemIcon = -1;
-        public float heldProjReUseTime = 0;
-        public int containedBlastBuffTime = 0;
-        public int containedBlastBoomCount = 0;
-        public int conferenceCallBuffTime = 0;
-        public bool firstTimeCraftGaia = false;
-        public int antiKnockbackTime = 0;
-        public bool infiniteFlightTime = false;
-        public bool LightofHorizon = false;
+        /// 排序要求：相同类型的字段并一块，按字母表排序
+        // bool 字段
+        public bool adamantiteHeadExecutor = false;
         public bool ankhShieldImmnue = false;
-        public bool terraSparkBoostImmnue = false;
-        public bool infiniteBreath = false;
+        public bool artificalManaStar = false;
+        public bool bitingClaw = false;
+        public bool blackKeyDefenseTrigger = false;
+        public bool blackKeyDoT = false;
         public bool celesitalShellEffect = false;
-        public int crystallizeLoreReforgeIndex = 0;
+        public bool chlorophyteHeadExecutor = false;
+        public bool combatSlot = false;
+        public bool cowboyExecutor = false;
+        public bool creationHat = false;
+        public bool crimsonCharm = false;
+        public bool cycleMadness = false;
+        public bool desterrennacht = false;
+        public bool diverArmor = false;
+        public bool petDraco = false;
+        public bool dragonHunter = false;
+        public bool emblemColdSteel = false;
+        public bool emblemExecutor = false;
+        public bool emblemFirearm = false;
+        public bool emblemGalaxy = false;
+        public bool emblemThrown = false;
+        public bool emblemVanguard = false;
+        public bool executorSwordMark = false;
+        public bool executorSwordMarkPing = false;
+        public bool Executor_DrawFadeIn = false;
+        public bool Executor_DrawFadeOut = false;
+        public bool firstTimeCraftGaia = false;
+        public bool floretProtectorExecutor = false;
+        public bool fruitofEthernity = false;
+        public bool givePaper = true;
+        public bool goldenAppleEnchanted = false;
+        public bool goldenAppleEnchantedFully = false;
+        public bool heartoftheCrystal = false;
+        public bool infiniteBreath = false;
+        public bool infiniteFlightTime = false;
+        public bool isBeingLove = false;
+        public bool LifeBalloonAcc = false;
+        public bool LightofHorizon = false;
+        public bool loveRing = false;
+        public bool maidReaperArmor = false;
+        public bool maidReaperHealUp = false;
+        public bool mayaPumper = false;
+        public bool monkExecutor = false;
+        public bool monkStaffHeal = false;
+        public bool mouseHoveringBanWeaponAbility = false;
+        public bool pocketMirror = false;
+        public bool powerLily = false;
+        public bool powerLilyVanity = false;
+        public bool protectorMoonglow = false;
+        public bool protectorShiver = false;
+        public bool raincoatExecutor = false;
+        public bool redDragonKnight = false;
+        public bool resetEatenFoodCounts = false;
+        public bool resetTerraRecipe = false;
+        public bool petNone = false;
+        public bool petShadow = false;
+        public bool petSon = false;
+        public bool petSquid = false;
+        public bool petWatcher = false;
+        public bool petWhale = false;
+        public bool saintChurch = false;
+        public bool shinobiExecutor = false;
+        public bool souloftheTidalMark = false;
+        public bool terraRecipe = false;
+        public bool terraSparkBoostImmnue = false;
+        public bool theGreatDipperBuff = false;
+        public bool titaniumHeadExecutor = false;
+        public bool weaponUpgradePostSon = false;
 
-        //猩红镰刀
+        // int 字段
+        public int adamantiteHeadExecutorThunderTimer = 0;
+        public int antiKnockbackTime = 0;
+        public int ASMDBuffTime = 0;
+        public int blackKeyHeal = 0;
+        public int blackKeyReduceDefense = 0;
+        public int blackKeyTimer = 0;
+        public int climaticHawstringLaserCounter = 0;
+        public int conferenceCallBuffTime = 0;
+        public int containedBlastBuffTime = 0;
+        public int cowboyRevolverTimer = 0;
+        public int crimsonCharmReduceTime = 0;
         public int crimsonScytheAttackCounter = 0;
         public int crimsonScytheDefense = 0;
         public int crimsonScytheSlayNPCType = 0;
-        public bool weaponUpgradePostSon = false;
-        #region 护甲
-
-        public bool shinobiExecutor = false;
-        public bool monkExecutor = false;
-        public bool runeWizardExecutor = false;
-        public bool cowboyExecutor = false;
-        public bool monkStaffHeal = false;
-        public int cowboyRevolverTimer = 0;
-
-        public bool floretProtectorExecutor = false;
-        public int floretProtectorTimer = 0;
-        public bool raincoatExecutor = false;
-        public bool redDragonKnight = false;
-        public int protectorPlantID = -1;
-        public int[] protectorHerbTimerList = [0, 0, 0, 0, 0, 0, 0];
-        public bool protectorShiver = false;
-        public bool protectorMoonglow = false;
-        public bool diverArmor = false;
-        public bool dragonHunter = false;
-
-        public bool maidReaperArmor = false;
-        public bool maidReaperHealUp = false;
-        public int maidReaperIndex = -1;
-        public int maidReaperHealTimer = 0;
-
-        public bool adamantiteHeadExecutor = false;
-        public int adamantiteHeadExecutorThunderTimer = 0;
-        public bool titaniumHeadExecutor = false;
-        public bool chlorophyteHeadExecutor = false;
-        public bool theGreatDipperBuff = false;
-        #endregion
-
-        #region Accessories
-        public bool heartoftheCrystal = false;
-        public bool loveRing = false;
-        public bool isBeingLove = false;
-        public int genderChangeTimer = 0;
-        public bool artificalManaStar = false;
-        public bool pocketMirror = false;
-
-        public bool LifeBalloonAcc = false;
-        public int LifeBalloonAccJumps;
-
-        public int pendantLevel = 0;
-        public bool souloftheTidalMark = false;
-        public bool desterrennacht = false;
-        public int stardustRuneHitHealTimer = 0;
-        public int stardustRuneStaticHealTimer = 0;
+        public int crystallizeLoreReforgeIndex = 0;
+        public int cycleMadnessLevel = 0;
+        public int defenderEmblemCD = 0;
         public int desterrannachtImmortalTime = 0;
         public int desterranRespawnChargeTimer = 0;
-
-        public bool PreciousTargetAcc = false;
-        public bool PreciousAimAcc = false;
-        public int PreciousTargetCrtis = 10;
-        public int PreciousCritsMin = 0;
-        public int manaSavingsJar = 0;
-
-        public bool emblemVanguard = false;
-        public bool emblemFirearm = false;
-        public bool emblemThrown = false;
-        public bool emblemColdSteel = false;
-        public bool emblemExecutor = false;
-        public bool emblemGalaxy = false;
-
-        public int defenderEmblemCD = 0;
-        public int blackKeyHeal = 0;
-        public float blackKeyDefenseBuff = 0;
-        public int blackKeyTimer = 0;
-        public bool blackKeyDoT = false;
-        public int blackKeyReduceDefense = 0;
-        public bool blackKeyDefenseTrigger = false;
-
-        public bool executorSwordMark = false;
-        public bool executorSwordMarkPing = false;
+        public int drawUseableItemIcon = -1;
         public int executorSwordMarkLevel = -1;
-        public bool mayaPumper = false;
-        public bool crimsonCharm = false;
-        public int crimsonCharmReduceTime = 0;
-        public float healingPotionMult = 1f;
-        public bool bitingClaw = false;
+        public int Executor_AFKTimer = 0;
+        public int exsanguinationBuffTime = 0;
+        public int floretProtectorTimer = 0;
+        public int flybackhandBuffTime = 0;
+        public int flybackhandBuffTimeCurrent = 0;
+        public int flybackhandHealthRecord = 0;
+        public int flybackHandManaRecord = 0;
+        public int flybackInGameTimeBuff = 0;
+        public int galvanizedHandDashCD = 0;
+        public int genderChangeTimer = 0;
+        public int goldenAppleDamageAbsorb = 0;
+        public int lastHeldItemIndex = -1;
+        public int LifeBalloonAccJumps;
+        public int maidReaperHealTimer = 0;
+        public int maidReaperIndex = -1;
+        public int manaSavingsJar = 0;
+        public int NoSlowFall = 0;
+        public int pendantLevel = 0;
+        public int powerLilyCacheTimer = 0;
+        public int powerLilyTimer = 0;
+        public int preciousTargetLevel = 0;
+        public int protectorPlantID = -1;
         public int providenceHolyWaterHealMana = 0;
-        public bool cycleMadness = false;
+        public int saintChurchLastStanding = 0;
+        public int stardustRuneHitHealTimer = 0;
+        public int stardustRuneStaticHealTimer = 0;
+        public int tearEyeBuff = 0;
+        public int terraRecipe_EatenFoodCounts = 0;
+        public int terraRecipe_LifeMaxIncre = 10;
+        public int terraRecipe_LifeMaxMultTime = 0;
+
+        // float 字段
+        public float blackKeyDefenseBuff = 0;
+        public float containedBlastBoomCount = 0;
         public float cycleMadenssTimer = 0;
         public float cycleMadenessCrit = 0;
-        public int tearEyeBuff = 0;
+        public float Executor_BarOpacity = 0;
+        public float healingPotionMult = 1f;
+        public float heldProjReUseTime = 0;
+        public float maxFallspeedModify = 0;
+        public float PlayerFinalSpeedStoredTime = 0f;
+        public float PlayerLastSpeedStored = 0f;
 
-        #region 如是我闻
-        public bool powerLily = false;
-        public bool powerLilyVanity = false;
-        public int powerLilyTimer = 0;
-        public int powerLilyCacheTimer = 0;
+        // List<string> 字段
         public List<string> ruShiWoWenBanMinionNameList = new List<string>();
         public List<string> ruShiWoWenBanMinionNameTrashList = new List<string>();
-        #endregion
-        #endregion
-        public bool fruitofEthernity = false;
-        #region Pets
-        public bool WhalePet = false;
-        public bool NonePet = false;
-        public bool ShadowPet = false;
-        public bool SquidPet = false;
-        public bool WatcherPet = false;
-        public bool dracoPet = false;
-        public bool sonPet = false;
-        #endregion
-        #region Player Movement
-        /// <summary>
-        /// 在进入保存动量的冲刺之前，玩家当前的速度
-        /// </summary>
-        public float PlayerLastSpeedStored = 0f;
-        /// <summary>
-        /// 玩家是否按下了跳跃键
-        /// </summary>
-        public bool PlayerHasUseJump = false;
-        /// <summary>
-        /// 玩家的动量保存的时间
-        /// </summary>
-        public float PlayerFinalSpeedStoredTime = 0f;
-        #endregion
-        #region 处决攻击
 
-        public bool ExecutorSwordMarkPlus = false;
-        public int lastHeldItemIndex = -1;
-
-        //用于hud绘制的计时器
-        public int Executor_AFKTimer = 0;
-        public float Executor_BarOpacity = 0;
-        public bool Executor_DrawFadeIn = false;
-        public bool Executor_DrawFadeOut = false;
-
-        public int exsanguinationBuffTime = 0;
-
-        #endregion
-        public bool terraRecipe = false;
-        public bool resetTerraRecipe = false;
-        public bool resetEatenFoodCounts = false;
-        public int terraRecipe_EatenFoodCounts = 0;
-        public int terraRecipe_LifeMaxMultTime = 0;
-        public int terraRecipe_LifeMaxIncre = 10;
+        // List<int> 字段
         public List<int> terraRecipe_EatenFoodList = new List<int>();
         public List<int> terraRecipe_NotEatenFoodList = new List<int>();
 
-        public bool mouseHoveringBanWeaponAbility = false;
+        // int[] 字段
+        public int[] protectorHerbTimerList = [0, 0, 0, 0, 0, 0, 0];
         public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
             if (Player.HasBuff<HoneyRegenAlt>())

@@ -1,5 +1,7 @@
 ﻿using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -51,6 +53,23 @@ namespace HJScarletRework.Globals.Players
         }
         public void UpdateTimer()
         {
+            if (ExecutionBuffTimeStored.Keys.Count != 0)
+            {
+                List<int> keys = ExecutionBuffTimeStored.Keys.ToList();
+                if (keys.Count != 0)
+                {
+                    foreach (int key in keys)
+                    {
+                        if (ExecutionBuffTimeStored.ContainsKey(key))
+                        {
+                            if (ExecutionBuffTimeStored[key] > 0)
+                                ExecutionBuffTimeStored[key] -= 1;
+                            if (ExecutionBuffTimeStored[key] == 0)
+                                ExecutionBuffTimeStored.Remove(key);
+                        }
+                    }
+                }
+            }
             if (!emblemFirearm)
                 emblemFirearmTimer = 0;
             if (markProjTimer > 0)
@@ -114,8 +133,6 @@ namespace HJScarletRework.Globals.Players
             if (desterranRespawnChargeTimer == 0)
                 desterrannachtImmortalTime = 0;
 
-            if (flybackhandCloclCD > 0)
-                flybackhandCloclCD--;
 
             if (NoSlowFall > 0)
                 NoSlowFall--;

@@ -1,4 +1,5 @@
-﻿using ContinentOfJourney.Items.Material;
+﻿using ContinentOfJourney.Items.Accessories;
+using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Tiles;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
@@ -6,34 +7,39 @@ using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class PreciousAim : HJScarletItemClass
+    [LegacyName("PreciousAim")]
+    public class SteadyBreath : HJScarletItemClass
     {
+        public float Damage = .20f;
+        public int Crit = 10;
+        public static float ExtraDamage = 1.1f;
+        public static float ChanceToCrit = .35f; 
         public override string AssetPath => AssetHandler.Equips;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%", ExtraDamage + "x", ChanceToCrit.ToPercent());
         public override void ExSD()
         {
             Item.accessory = true;
             Item.SetUpRarityPrice(ItemRarityID.Purple);
 
         }
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            Player player = Main.LocalPlayer;
-        }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.HJScarlet().PreciousTargetAcc = true;
-            player.HJScarlet().PreciousAimAcc = true;
-            player.HJScarlet().PreciousCritsMin = 20;
+            player.GetDamage<RangedDamageClass>() += Damage;
+            player.GetCritChance<RangedDamageClass>() += Crit;
+            player.HJScarlet().preciousTargetLevel = 2;
+
         }
         public override void AddRecipes()
         {
             CreateRecipe().
                 AddIngredient<PreciousTarget>().
-                AddIngredient<EssenceofLife>(10).
+                AddIngredient<BullseyeBadge>().
+                AddIngredient<LivingBar>(15).
                 AddTile<FinalAnvil>().
                 Register();
         }
