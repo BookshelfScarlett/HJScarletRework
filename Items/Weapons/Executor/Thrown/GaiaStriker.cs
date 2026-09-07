@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Systems;
 using HJScarletRework.Projs.Executor;
@@ -40,7 +41,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public static int BloodBulletHealMinionDeadEarly = 10;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.ScarletRed);
         }
         public override void ExSD()
         {

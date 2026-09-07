@@ -2,7 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using ReLogic.Content;
@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
     {
         #region 基础
         public override EnumDamageClass Category => EnumDamageClass.Executor;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
 
         public enum State

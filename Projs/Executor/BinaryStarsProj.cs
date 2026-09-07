@@ -1,8 +1,9 @@
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
@@ -83,7 +84,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (AttackType is DoType.IsStealth && _drawArcTime > 0 && Projectile.HJScarlet().ExecutionStrike)
             {
-                ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, Projectile.Center,instances:0,variantType:2);
+                ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, Projectile.Center, instances: 0, variantType: 2);
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, -80 * Owner.direction, 43, Projectile.rotation, 0.2f, true, 1000);
             }
             return true;
@@ -105,12 +106,12 @@ namespace HJScarletRework.Projs.Executor
                 if (Projectile.numHits < 3)
                     NormalHit(target);
                 TargetIndex = target.whoAmI;
-                ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, target.Center,instances:0, pitch: .4f, pitchVariance: .1f, volume: .7f);
+                ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, target.Center, instances: 0, pitch: .4f, pitchVariance: .1f, volume: .7f);
             }
         }
         private void DrawHitSpark(NPC target, int damage)
         {
-                ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, target.Center,instances:0, pitch: .4f, pitchVariance: .1f, volume: .7f,variantType:2);
+            ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, target.Center, instances: 0, pitch: .4f, pitchVariance: .1f, volume: .7f, variantType: 2);
             PrettySpark(damage);
         }
         public void StealthHit(NPC target, int hitDamage, int targetIndex)
@@ -211,7 +212,8 @@ namespace HJScarletRework.Projs.Executor
                 SB.End();
                 SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
                 float spinRotation = Main.GlobalTimeWrappedHourly * 5.2f;
-                DrawTrails(HJScarletTexture.Trail_MegaBeam.Texture, Color.Violet);
+                float deepGlowMult = 1;
+                    DrawTrails(HJScarletTexture.Trail_MegaBeam.Texture, Color.Violet,alphaValue:deepGlowMult);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: -12f);
                 DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f, alphaValue: 1f);
@@ -321,7 +323,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 AttackTimer = 0;
                 AttackType = DoType.IsReturning;
-                if (Projectile.HJScarlet().ExecutionStrike&&Projectile.IsMe())
+                if (Projectile.HJScarlet().ExecutionStrike && Projectile.IsMe())
                     SpawnSkyFallHammer();
                 Update = true;
             }

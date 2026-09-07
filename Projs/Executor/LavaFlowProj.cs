@@ -1,13 +1,11 @@
-﻿using ContinentOfJourney.Items.ThrowerWeapons;
-using HJScarletRework.Core.ParticleECS;
+﻿using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using System;
 using Terraria;
-using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 

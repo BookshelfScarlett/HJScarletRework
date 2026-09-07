@@ -13,8 +13,13 @@ namespace HJScarletRework.Projs
             Projectile.tileCollide = false;
             Projectile.ownerHitCheck = true;
             Projectile.ignoreWater = true;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = -1;
             Projectile.SetupImmnuity(60);
+            Projectile.timeLeft = 60;
+        }
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            return base.Colliding(projHitbox, targetHitbox);
         }
         public override void AI()
         {

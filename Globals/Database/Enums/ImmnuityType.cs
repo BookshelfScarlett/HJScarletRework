@@ -1,4 +1,4 @@
-﻿namespace HJScarletRework.Globals.Enums
+﻿namespace HJScarletRework.Globals.Database.Enums
 {
     public enum ImmnuityType
     {

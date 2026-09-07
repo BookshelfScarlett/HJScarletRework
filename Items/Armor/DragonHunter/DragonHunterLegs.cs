@@ -1,7 +1,7 @@
 ﻿using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.RedDragonKnight;
 using Terraria;

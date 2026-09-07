@@ -14,6 +14,11 @@ PocketMirrorModiflication:
 	置于时装栏内默认生效
 	'''
 
+GenericText: {
+	BuffDetail: 按住左 LeftAlt 以查看具体效果
+	// SwitchDetail: ""
+}
+
 ItemBelongTo: {
 	Donator: 捐赠者物品
 	Developer: 开发者物品

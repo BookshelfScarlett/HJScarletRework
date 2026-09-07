@@ -1,7 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -232,8 +233,11 @@ namespace HJScarletRework.Projs.Executor
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
             SB.EnterShaderArea();
-            DrawBeam(SB, Color.Lerp(Color.DarkViolet, Color.Purple, 0.5f), 0.12f * Projectile.scale);
-            DrawBeam(SB, Color.Lerp(Color.DarkViolet, Color.Violet, 0.55f), 0.10f * Projectile.scale);
+            DeepGlow.SubmitCustomGlow(() =>
+            {
+                DrawBeam(SB, Color.Lerp(Color.DarkViolet, Color.Purple, 0.5f), 0.12f*.35f * Projectile.scale);
+                DrawBeam(SB, Color.Lerp(Color.DarkViolet, Color.Violet, 0.55f), 0.10f *.35f* Projectile.scale);
+            });
             DrawBeam(SB, Color.Lerp(Color.Violet, Color.DarkViolet, 0.62f), 0.08f * Projectile.scale);
             DrawBeam(SB, Color.White, 0.05f * Projectile.scale);
             SB.EndShaderArea();
@@ -254,7 +258,7 @@ namespace HJScarletRework.Projs.Executor
             shader.CurrentTechnique.Passes[0].Apply();
             Vector2 orig = new(0, value.Height() / 2);
             float xScale = BeamLength / value.Width();
-            sb.Draw(value.Value, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, orig, new Vector2(xScale * Clamp(Projectile.scale, 0.02f, 1f), height * 0.9f), 0, 0);
+            sb.Draw(value.Value, Projectile.Center - Main.screenPosition, null, color, Projectile.rotation, orig, new Vector2(xScale * Clamp(Projectile.scale, 0.02f, 1f), height * 0.9f), 0, 0);
         }
     }
 }

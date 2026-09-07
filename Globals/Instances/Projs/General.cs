@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
@@ -23,6 +22,7 @@ namespace HJScarletRework.Globals.Instances.Projs
         /// 射弹是否正在启用专注攻击的字段
         /// </summary>
         public bool ExecutionStrike = false;
+        public bool ExecutionStrikeManual = false;
         /// <summary>
         /// 当前射弹是否允许使用专注机制，标记用
         /// </summary>

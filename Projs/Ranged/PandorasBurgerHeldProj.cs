@@ -1,8 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Ranged;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;

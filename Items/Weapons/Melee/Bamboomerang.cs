@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Projs.Melee;
 using Terraria;
 using Terraria.ID;

@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -263,7 +263,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 StateSwitchTo(State.Strike);
                 Projectile.velocity = Vector2.UnitX * Main.rand.NextFloat(32f, 38f) * Math.Sign(Projectile.velocity.X - Owner.velocity.X);
-                ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center,pitch: -.2f);
+                ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center, pitch: -.2f);
                 ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30f, 40, Projectile.velocity.ToRotation(), ToRadians(30f));
                 SpawnFireball(target);
                 UpdateMiscHitParticle(target.Center);

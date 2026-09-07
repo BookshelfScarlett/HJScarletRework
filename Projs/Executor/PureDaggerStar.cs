@@ -3,7 +3,7 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
         public NPC CurTarget = null;
         public enum State

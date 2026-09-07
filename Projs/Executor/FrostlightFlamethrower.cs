@@ -51,7 +51,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
-            if(Owner.JustPressRightClick()&&Owner.IsHolding(OriginalItemID))
+            if (Owner.JustPressRightClick() && Owner.IsHolding(OriginalItemID))
             {
                 Projectile.Kill();
                 return;
@@ -120,7 +120,7 @@ namespace HJScarletRework.Projs.Executor
                 Rotations = Lerp(Rotations, 1.01f, 0.12f / Projectile.MaxUpdates);
                 HandleParticle();
                 Vector2 fireSpawnPosition = Projectile.Center + Projectile.rotation.ToRotationVector2().SafeNormalize(Vector2.UnitY) * 85;
-                Vector2 fireShootVelocity = Projectile.rotation.ToRotationVector2() *  21* .5f;
+                Vector2 fireShootVelocity = Projectile.rotation.ToRotationVector2() * 21 * .5f;
                 if (Projectile.MeetMaxUpdatesFrame(ShootTimer, 13) || ShootTimer == 0)
                 {
                     SoundEngine.PlaySound(HJScarletSounds.HymnFireball_Release with { MaxInstances = 0, Pitch = -.35f, PitchVariance = .1f });
@@ -131,7 +131,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Projectile.MeetMaxUpdatesFrame(Timer, 2))
                 {
                     Timer = 0;
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), fireSpawnPosition.ToRandCirclePos(10), fireShootVelocity, ProjectileType<FrostlightFlamethrowerFlame>(), Projectile.damage*2, Projectile.knockBack, Projectile.owner);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), fireSpawnPosition.ToRandCirclePos(10), fireShootVelocity, ProjectileType<FrostlightFlamethrowerFlame>(), Projectile.damage * 2, Projectile.knockBack, Projectile.owner);
                     proj.HJScarlet().HasExecutionMechanic = true;
                 }
             }
@@ -191,7 +191,7 @@ namespace HJScarletRework.Projs.Executor
         public void HandlePlayerState()
         {
             Owner.ChangeDir(Projectile.direction);
-            Owner.ControlPlayerArm(Projectile.rotation,-1);
+            Owner.ControlPlayerArm(Projectile.rotation, -1);
         }
         public void DrawEdgeShaderProj()
         {

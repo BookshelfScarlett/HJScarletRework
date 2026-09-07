@@ -7,7 +7,7 @@ namespace HJScarletRework.Buffs
     public class TheBleachingBuff : ModBuff
     {
         public static float HitDamageMult = .5f;
-        public static float HitDamageMultEnemy= .05f;
+        public static float HitDamageMultEnemy = .05f;
         public static int BadLifeRegenEnemy = 1000;
         public static int BadLifeRegen = 100;
         public override void SetStaticDefaults()

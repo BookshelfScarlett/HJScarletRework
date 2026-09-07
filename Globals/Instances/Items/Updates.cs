@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Instances.Items
 {
-    public partial class HJScarletGlobalItem :GlobalItem
+    public partial class HJScarletGlobalItem : GlobalItem
     {
         public override void UpdateAccessory(Item item, Player player, bool hideVisual)
         {

@@ -1,11 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleSystem;
 using HJScarletRework.Globals.ParticleSystem;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.Particles
@@ -57,7 +52,7 @@ namespace HJScarletRework.Globals.Graphics.Particles
             spriteBatch.Draw(texture, Position - Main.screenPosition, frame, c, Rotation, orig, Scale, se, 0f);
             frame = texture.Frame(1, 3, 0, 1);
             orig = frame.Size() / 2f;
-            spriteBatch.Draw(texture, Position - Main.screenPosition, frame, c, Rotation, orig, Scale*1.14f, se, 0f);
+            spriteBatch.Draw(texture, Position - Main.screenPosition, frame, c, Rotation, orig, Scale * 1.14f, se, 0f);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using ContinentOfJourney.Items;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Useables;

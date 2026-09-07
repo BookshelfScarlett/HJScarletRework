@@ -2,7 +2,7 @@
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
@@ -18,7 +18,7 @@ namespace HJScarletRework.Projs.Magic
     public class CoronaFireball : HJScarletProj, IPixelatedRenderer
     {
         public override EnumDamageClass Category => EnumDamageClass.Magic;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
 
         public override string Texture => HJScarletTexture.InvisAsset.Path;

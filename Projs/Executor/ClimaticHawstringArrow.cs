@@ -2,7 +2,7 @@
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public Vector2 DrawOffset => Projectile.SafeDirByRot() * -10f;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforePlayer;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforePlayer;
         public BlendState BlendState => BlendState.Additive;
         public List<Vector2> PosList = [];
         public bool ShouldAdd = false;

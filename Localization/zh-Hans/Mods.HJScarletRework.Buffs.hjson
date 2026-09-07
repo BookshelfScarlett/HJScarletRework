@@ -68,8 +68,12 @@ CrimsonCharmBuff: {
 }
 
 TerraFlamethrowerBuff: {
-	// DisplayName: Terra Flamethrower Buff
-	// Description: Mods.HJScarletRework.Buffs.TerraFlamethrowerBuff.Description
+	DisplayName: 泰拉燃素
+	Description:
+		'''
+		泰拉喷火器命中时使目标滴落等量于其伤害的泰拉精华
+		泰拉精华不会对该目标本身造成伤害
+		'''
 }
 
 BoneSlapBuff: {
@@ -118,13 +122,21 @@ GrassPoison: {
 }
 
 AbsoluteZeroBuff: {
-	// DisplayName: Absolute Zero Buff
-	// Description: Mods.HJScarletRework.Buffs.AbsoluteZeroBuff.Description
+	DisplayName: 绝对零度
+	Description:
+		'''
+		极寒冻结了生者的脉搏，连时间都开始迟疑……
+		大幅度降低移动速度，减少防御力与生命值
+		'''
 }
 
 TheBleachingBuff: {
-	// DisplayName: The Bleaching Buff
-	// Description: Mods.HJScarletRework.Buffs.TheBleachingBuff.Description
+	DisplayName: 人理漂白
+	Description:
+		'''
+		灵魂正在褪去，只留下一层外皮……
+		清空防御力，减少造成的伤害与生命值
+		'''
 }
 
 SaintChurchBuff: {

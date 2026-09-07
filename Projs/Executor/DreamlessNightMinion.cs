@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -9,7 +9,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using System;
 using Terraria;
-using Terraria.Audio;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -118,7 +117,7 @@ namespace HJScarletRework.Projs.Executor
                         ShadowNebula.SpawnParticle(spawnPos + vel.ToRandVelocity(ToRadians(12f), 1f, 8f), vel, Main.rand.NextFloat(0.1f, 0.135f) * 1.1f, HJScarletTexture.Texture_WhiteCircle.Value);
                     }
 
-            ScarletSound(HJScarletSounds.DeathsToll_Toss, Projectile.Center, .75f);
+                    ScarletSound(HJScarletSounds.DeathsToll_Toss, Projectile.Center, .75f);
                 }
                 Helper.UpdateAniState(1);
                 UpdateIdlePosBeforeStrike();
@@ -148,7 +147,7 @@ namespace HJScarletRework.Projs.Executor
         public void StrikeInit()
         {
 
-            ScarletSound(HJScarletSounds.Misc_MagicStaffFire, Projectile.Center,.5f, 2,-.4f);
+            ScarletSound(HJScarletSounds.Misc_MagicStaffFire, Projectile.Center, .5f, 2, -.4f);
             ScreenDarknessSystem.AddScreenDarkness(.85f, 6, 1, 36, easeOut: EaseInCubic);
             for (int i = 0; i < 16; i++)
             {

@@ -6,7 +6,7 @@ using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Globals.IDSets
+namespace HJScarletRework.Globals.Database.IDSets
 {
     [ReinitializeDuringResizeArrays]
     public static partial class ScarletNPCIDSets

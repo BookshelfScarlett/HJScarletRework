@@ -2,7 +2,7 @@
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
@@ -128,7 +128,7 @@ namespace HJScarletRework.Projs.Melee
                 float slashTrailRotation = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
                 Matrix tFormSlash = Matrix.CreateRotationZ(slashTrailRotation) * Matrix.CreateScale(Width, Height, 1f);
                 Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * 1f * heldScale;
-                Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 120*SwordScale;
+                Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 120 * SwordScale;
                 OldAimPos.Add(slashPosFinal);
                 SetSwingParticle();
             }
@@ -190,7 +190,7 @@ namespace HJScarletRework.Projs.Melee
                 float slashTrailRotation = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
                 Matrix tFormSlash = Matrix.CreateRotationZ(slashTrailRotation) * Matrix.CreateScale(Width, Height, 1f);
                 Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * 1f * heldScale;
-                Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 120*SwordScale;
+                Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * 120 * SwordScale;
                 OldAimPos.Add(slashPosFinal);
                 SetSwingParticle();
             }
@@ -304,9 +304,9 @@ namespace HJScarletRework.Projs.Melee
             if (Main.mouseLeft && !Owner.dead)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
-                proj.ai[1] = Projectile.ai[1]+ 1;
+                proj.ai[1] = Projectile.ai[1] + 1;
                 ((HighTechBladeHeldProj)proj.ModProjectile).Flip = !Flip;
-                ((HighTechBladeHeldProj)proj.ModProjectile).SwingTime = SwingTime + 1 ;
+                ((HighTechBladeHeldProj)proj.ModProjectile).SwingTime = SwingTime + 1;
             }
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -337,7 +337,7 @@ namespace HJScarletRework.Projs.Melee
             return false;
         }
         public BlendState BlendState => BlendState.Additive;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
@@ -349,7 +349,7 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.ai[1] == 2)
             {
                 DrawSlash2(texture, Color.DarkRed * 0.80f, 0.45f);
-                DrawSlash2(texture, Color.Crimson* 0.40f, 0.30f);
+                DrawSlash2(texture, Color.Crimson * 0.40f, 0.30f);
                 DrawSlash2(texture, Color.Orange * 0.140f, 0.150f);
             }
 
@@ -371,7 +371,7 @@ namespace HJScarletRework.Projs.Melee
             DrawSlash(texture2, Color.Crimson * .75f, 0.70f, 0.9f);
             if (Projectile.ai[1] == 2)
             {
-                DrawSlash2(texture2, Color.Red* .75f, 0.70f, 0.9f);
+                DrawSlash2(texture2, Color.Red * .75f, 0.70f, 0.9f);
             }
             texture2 = HJScarletTexture.Noise_Misc.Value;
 
@@ -380,7 +380,7 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.ai[1] == 2)
             {
                 DrawSlash2(texture2, Color.OrangeRed, 0.45f);
-                DrawSlash2(texture2, Color.Red* .5f, 0.55f);
+                DrawSlash2(texture2, Color.Red * .5f, 0.55f);
 
             }
             HJScarletMethods.EndShaderAreaPixel();
@@ -412,13 +412,13 @@ namespace HJScarletRework.Projs.Melee
             if (OldAimPos.Count < 3)
                 return;
             _vertexCache2.Clear();
-            drawcolor *= SlashOpacity*.75f;
+            drawcolor *= SlashOpacity * .75f;
             List<ScarletVertex> Vertexlist = new List<ScarletVertex>();
             for (int i = 0; i < OldAimPos.Count; i++)
             {
                 float progress = (float)i / OldAimPos.Count;
-                Vector2 DrawPos_Head = OldAimPos[i] * beginMult*.5f + Projectile.Center - Main.screenPosition;
-                Vector2 DrawPos_Source = OldAimPos[i] * mult*.65f + Projectile.Center - Main.screenPosition;
+                Vector2 DrawPos_Head = OldAimPos[i] * beginMult * .5f + Projectile.Center - Main.screenPosition;
+                Vector2 DrawPos_Source = OldAimPos[i] * mult * .65f + Projectile.Center - Main.screenPosition;
                 _vertexCache2.Add(new ScarletVertex(DrawPos_Head, drawcolor, new Vector3(progress, 0, 0)));
                 _vertexCache2.Add(new ScarletVertex(DrawPos_Source, drawcolor, new Vector3(progress, 1, 0)));
             }

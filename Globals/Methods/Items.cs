@@ -1,6 +1,6 @@
-﻿using HJScarletRework.Globals.IDSets;
+﻿using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Instances.Items;
-using HJScarletRework.Globals.List;
 using System;
 using Terraria;
 using Terraria.ID;

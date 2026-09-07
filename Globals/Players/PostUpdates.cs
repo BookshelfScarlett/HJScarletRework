@@ -5,12 +5,12 @@ using HJScarletRework.Core;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Keybinds;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players.Dashes;
 using HJScarletRework.Globals.Systems;
@@ -29,7 +29,6 @@ using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
 using HJScarletRework.Projs.Ranged;
 using HJScarletRework.Rarity.RarityDrawHandler;
-using rail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +42,7 @@ namespace HJScarletRework.Globals.Players
 {
     public partial class HJScarletPlayer : ModPlayer
     {
-        
+
         // ==================== 字段 ====================
         public int CalamityValue = HJScarletMethods.HasFuckingCalamity.ToInt();
         public float blackKeyExecutorDamageAdd = 0;
@@ -311,9 +310,9 @@ namespace HJScarletRework.Globals.Players
             Player.GetDamage<GenericDamageClass>() += SaintChurchHead.DamageBonus * saintChurchLastStanding;
             Player.GetCritChance<GenericDamageClass>() += SaintChurchHead.CritBonus * saintChurchLastStanding;
             Player.AddBuff(BuffID.PotionSickness, 2);
-            
+
             //不死巴卢的粒子与特效
-            
+
 
         }
 
@@ -802,7 +801,7 @@ namespace HJScarletRework.Globals.Players
             {
                 foreach (var proj in Main.ActiveProjectiles)
                 {
-                    if (proj.owner == Player.whoAmI && proj.friendly&&proj.type != ProjectileType<PandorasBurgerHeldProj>())
+                    if (proj.owner == Player.whoAmI && proj.friendly && proj.type != ProjectileType<PandorasBurgerHeldProj>())
                     {
                         proj.active = false;
                     }
@@ -1052,9 +1051,9 @@ namespace HJScarletRework.Globals.Players
         {
             if (itemHover.IsWeapon())
             {
-                if(HJScarletKeybinds.GeneralActionKeybind.JustPressed)
+                if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
                 {
-                   
+
                 }
             }
         }
@@ -1169,7 +1168,7 @@ namespace HJScarletRework.Globals.Players
         public override bool HoverSlot(Item[] inventory, int context, int slot)
         {
             mouseHoveringBanWeaponAbility = inventory[slot].IsLegal();
-            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && swapTimer == 0&&mouseHoveringBanWeaponAbility)
+            if (HJScarletKeybinds.GeneralActionKeybind.JustPressed && swapTimer == 0 && mouseHoveringBanWeaponAbility)
             {
                 HoverSevenStarOrGreatDipper(ref inventory, context, slot);
                 ClearUpParticle(ref inventory, context, slot);
@@ -1250,7 +1249,7 @@ namespace HJScarletRework.Globals.Players
                     Player.HeldItem.stack -= 1;
                 Item targetItem = item;
                 targetItem.ResetPrefix();
-                switch(crystallizeLoreReforgeIndex)
+                switch (crystallizeLoreReforgeIndex)
                 {
                     default:
                         HJScarletMethods.ApplyPrefixToThis(ref targetItem, PrefixID.Warding);

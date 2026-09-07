@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
@@ -232,7 +233,13 @@ namespace HJScarletRework.Projs.Melee
             SB.Draw(missle, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation + rotFixer, missle.Size() / 2, Projectile.scale, 0, 0);
             SB.EnterShaderArea();
             if (AttackType != Style.Direct || (AttackType == Style.Direct && Timer > 35f * Projectile.MaxUpdates))
-                DrawTrail();
+            {
+
+                DeepGlow.SubmitCustomGlow(() =>
+                {
+                    DrawTrail();
+                });
+            }
             SB.EndShaderArea();
             return false;
         }
@@ -246,7 +253,7 @@ namespace HJScarletRework.Projs.Melee
             //重新设定原点
             Vector2 ori = new Vector2(cutSource.Width / 2, cutSource.Height);
             //设定缩放大小
-            Vector2 baseScale = new Vector2(5.2f, 4.2f);
+            Vector2 baseScale = new Vector2(5.2f, 7.2f);
             Effect shader = HJScarletShader.VolcanoEruptingShader;
             shader.Parameters["uBaseColor"].SetValue(Color.Orange.ToVector4() * 0.3f);
             shader.Parameters["uTargetColor"].SetValue(Color.OrangeRed.ToVector4() * 0.9f);

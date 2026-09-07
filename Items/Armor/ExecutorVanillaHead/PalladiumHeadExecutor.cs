@@ -34,21 +34,10 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
         }
         public override void AddRecipes()
         {
-            if (!HJScarletMethods.HasFuckingCalamity)
-            {
-                CreateRecipe().
-                    AddIngredient(ItemID.PalladiumBar, 10).
-                    AddTile(TileID.MythrilAnvil).
-                    Register();
-            }
-            else
-            {
-                CreateRecipe().
-                    AddIngredient(ItemID.PalladiumBar, 10).
-                    AddTile(TileID.Anvils).
-                    Register();
-            }
+            CreateRecipe().
+                AddIngredient(ItemID.PalladiumBar, 10).
+                AddTile(TileID.Anvils).
+                Register();
         }
-
     }
 }

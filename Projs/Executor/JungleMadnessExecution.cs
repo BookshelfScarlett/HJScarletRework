@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -88,10 +88,10 @@ namespace HJScarletRework.Projs.Executor
             else
             {
                 //if (CurTarget.CanBeChasedBy() && CurTarget != null)
-                if(CurTarget.IsLegal()&&CurTarget.CanBeChasedBy())
+                if (CurTarget.IsLegal() && CurTarget.CanBeChasedBy())
                 {
-                        Projectile.HomingTarget(CurTarget.Center, -1, 20f, 20f);
-                        Projectile.rotation += 0.2f;
+                    Projectile.HomingTarget(CurTarget.Center, -1, 20f, 20f);
+                    Projectile.rotation += 0.2f;
                 }
                 else
                 {

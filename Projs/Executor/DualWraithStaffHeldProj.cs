@@ -1,8 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleScarlet;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Caster;
@@ -166,16 +165,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 pos = Projectile.Center.ToRandCirclePos(5f) + Projectile.SafeDirByRot() * Main.rand.NextFloat(-10f, 80f) + Projectile.SafeDirByRot().RotatedBy(PiOver2) * Main.rand.NextFloat(-20f, 21f);
                 Vector2 dirMulter = Projectile.SafeDirByRot() * executeProgress;
                 new SmokeParticle(pos, dirMulter * Main.rand.NextFloat(0.8f, 3.2f), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.80f, 0.24f, Main.rand.NextBool()).Spawn();
-                ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                    {
-                        p.Position = pos;
-                        p.Velocity = dirMulter * Main.rand.NextFloat(1.8f, 4.2f);
-                        p.DrawColor = Color.White;
-                        p.Scale = Main.rand.NextFloat(0.8f, 1.2f) * .1f;
-                        p.Opacity = Main.rand.NextFloat(0.68f, 0.9f);
-                        p.Lifetime = 40;
-                        p.GlowCenterMult = 0.5f;
-                    });
+                ECSParticle.HRShinyOrb(pos, dirMulter * Main.rand.NextFloat(1.8f, 4.2f), Color.White, Main.rand.Next(40, 45), 1, .1f * Main.rand.NextFloat(.8f, 1.1f), .5f);
             }
             if (executeProgress == 1)
             {
@@ -185,17 +175,7 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 pos = Projectile.Center.ToRandCirclePos(5f) + Projectile.SafeDirByRot() * Main.rand.NextFloat(-10f, 80f) + Projectile.SafeDirByRot().RotatedBy(PiOver2) * Main.rand.NextFloat(-20f, 21f);
                     Vector2 dirMulter = Projectile.SafeDirByRot() * executeProgress;
                     new SmokeParticle(pos, dirMulter * Main.rand.NextFloat(0.8f, 3.2f), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.80f, 0.24f, Main.rand.NextBool()).Spawn();
-                    ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                        {
-                            p.Position = pos;
-                            p.Velocity = dirMulter * Main.rand.NextFloat(1.8f, 4.2f);
-                            p.DrawColor = Color.White;
-                            p.Scale = Main.rand.NextFloat(0.8f, 1.2f) * .1f;
-                            p.Opacity = Main.rand.NextFloat(0.68f, 0.9f);
-                            p.Lifetime = 40;
-                            p.GlowCenterMult = 0.5f;
-                        });
-
+                    ECSParticle.HRShinyOrb(pos, dirMulter * Main.rand.NextFloat(1.8f, 4.2f), Color.White, Main.rand.Next(40, 45), 1, .1f * Main.rand.NextFloat(.8f, 1.1f), .5f);
                 }
                 Projectile.Kill();
             }

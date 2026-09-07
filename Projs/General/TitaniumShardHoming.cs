@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -9,7 +10,7 @@ namespace HJScarletRework.Projs.General
 {
     public class TitaniumShardHoming : HJScarletProj
     {
-        public override string Texture => GetVanillaAssetPath(Globals.Enums.VanillaAsset.Projectile, ProjectileID.TitaniumStormShard);
+        public override string Texture => GetVanillaAssetPath(VanillaAsset.Projectile, ProjectileID.TitaniumStormShard);
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(8);

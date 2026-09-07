@@ -2,7 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -78,7 +78,7 @@ namespace HJScarletRework.Projs.Executor
                 Owner.itemAnimation = 2;
             }
             Owner.heldProj = Projectile.whoAmI;
-            if (Owner.dead||!Owner.IsHolding(OriginalItemID))
+            if (Owner.dead || !Owner.IsHolding(OriginalItemID))
                 Projectile.Kill();
             else
                 Projectile.timeLeft = 2;
@@ -122,11 +122,8 @@ namespace HJScarletRework.Projs.Executor
             Helper.UpdateAniState(2);
             float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
             float easedProgress = EaseInOutSin(Helper.GetAniProgress(2));
-            float beginAngle = 180f * Flip.ToDirectionInt();
-            float endAngle = 185 * Flip.ToDirectionInt();
-            float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
-            Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(1f, Height, 1);
-            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * SwordScale * heldScale;
+            float rot = Helper.ToCurAnimationRot(180, 185, Owner.direction, Flip, easedProgress);
+            Vector2 tarPos = rot.ToTargetPosByMartix(SwordScale * heldScale);
             Projectile.scale = tarPos.Length();
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .05f);
@@ -195,7 +192,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-            if (Main.mouseLeft && Owner.IsHolding(OriginalItemID) && !Owner.dead) 
+            if (Main.mouseLeft && Owner.IsHolding(OriginalItemID) && !Owner.dead)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 proj.HJScarlet().HasExecutionMechanic = true;
@@ -239,7 +236,7 @@ namespace HJScarletRework.Projs.Executor
             bool c = Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), beamBeginPos, beamEndPos, 64f, ref _);
             return c;
         }
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
 
         public void RenderPixelated(SpriteBatch spriteBatch)

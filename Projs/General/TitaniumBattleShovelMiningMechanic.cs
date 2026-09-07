@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using HJScarletRework.Projs.Executor;
@@ -46,7 +46,7 @@ namespace HJScarletRework.Projs.General
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             int radius = 32;
-                    Main.NewText(1);
+            Main.NewText(1);
             if (Main.dedServ)
             {
                 Point center = Projectile.Center.ToTileCoordinates();

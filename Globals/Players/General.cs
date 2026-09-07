@@ -1,7 +1,7 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Useables;

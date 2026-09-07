@@ -1,11 +1,9 @@
-﻿using HJScarletRework.Globals.List;
-using Terraria;
-using Terraria.ID;
+﻿using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Buffs
 {
-    public class SaintChurchBuff: ModBuff
+    public class SaintChurchBuff : ModBuff
     {
         public override void SetStaticDefaults()
         {

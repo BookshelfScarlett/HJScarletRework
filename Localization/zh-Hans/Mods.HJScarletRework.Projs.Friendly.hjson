@@ -213,6 +213,11 @@ Executor: {
 	// TitaniumBattleShovelSpikeBall.DisplayName: Titanium Battle Shovel Spike Ball
 	// CobaltYoyoProj.DisplayName: Cobalt Yoyo Proj
 	// CobaltYoyoSlash.DisplayName: Cobalt Yoyo Slash
+	// CrescentRoseHeldProj.DisplayName: Crescent Rose Held Proj
+	// CrescentRoseHeldSkill.DisplayName: Crescent Rose Held Skill
+	// CrescentRoseHeldSniper.DisplayName: Crescent Rose Held Sniper
+	// CrescentRoseSniperBullet.DisplayName: Crescent Rose Sniper Bullet
+	// CrescentRoseSniperSkill.DisplayName: Crescent Rose Sniper Skill
 }
 
 Ranged: {
@@ -236,6 +241,9 @@ Magic: {
 	PestilenceFlowerHeldProj.DisplayName: 恶役之花
 	PestilenceFlowerHunger.DisplayName: 恶役之花|饿鬼
 	FleshtumorHeldProj.DisplayName: 肉瘤
+	// TheFinalDawnHeldProj.DisplayName: The Final Dawn Held Proj
+	// TheFinalDawnSun.DisplayName: The Final Dawn Sun
+	// BrimstoneHeartHeldProj.DisplayName: Brimstone Heart Held Proj
 }
 
 Melee: {
@@ -302,6 +310,7 @@ Melee: {
 	FlowerofDancePetal.DisplayName: 花之舞|花瓣
 	// HighTechBladeHeldProj.DisplayName: High Tech Blade Held Proj
 	// RitualofReposeProj.DisplayName: Ritualof Repose Proj
+	// RitualofReposeRest.DisplayName: Ritualof Repose Rest
 }
 
 Pets: {

@@ -1,6 +1,7 @@
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
@@ -16,7 +17,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Solar);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Solar);
         }
         public override void ExSD()
         {
@@ -30,7 +31,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.DamageType = ExecutorDamageClass.Instance;
             Item.damage = 55;
             //这里的ut有意为之
-            Item.useTime = Item.useAnimation =12;
+            Item.useTime = Item.useAnimation = 12;
             Item.shootSpeed = 18f;
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
         }

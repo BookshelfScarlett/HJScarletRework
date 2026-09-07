@@ -4,7 +4,7 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Configs;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class ArcticGuanDaoSpike : HJScarletProj, IPixelatedRenderer
     {
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
 
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Projectile, ProjectileID.NorthPoleSnowflake);

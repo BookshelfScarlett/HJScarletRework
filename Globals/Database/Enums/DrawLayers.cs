@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace HJScarletRework.Globals.Enums
+namespace HJScarletRework.Globals.Database.Enums
 {
     [Flags]
-    public enum HJScarletDrawLayer
+    public enum ScarletDrawLayer
     {
         BeforeTiles,
         BeforeNPCs,
@@ -11,5 +11,7 @@ namespace HJScarletRework.Globals.Enums
         BeforePlayer,
         BeforeDusts,
         AfterDusts,
+        AfterProjectiles,
+        EndCapture
     }
 }

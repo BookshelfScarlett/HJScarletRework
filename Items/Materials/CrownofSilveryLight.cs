@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace HJScarletRework.Items.Materials
         public override string AssetPath => AssetHandler.Materials;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
             ItemID.Sets.ItemNoGravity[Type] = true;
         }
         public override void ExSD()

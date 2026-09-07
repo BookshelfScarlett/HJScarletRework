@@ -1,15 +1,10 @@
-﻿using HJScarletRework.Globals.Configs;
+﻿using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
-using HJScarletRework.Rarity.RarityShinyMethod;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -23,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.ColdSteel;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.ScarletRed);
             ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }

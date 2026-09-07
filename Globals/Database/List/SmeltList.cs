@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria.ID;
 
-namespace HJScarletRework.Globals.List
+namespace HJScarletRework.Globals.Database.List
 {
     public class SmeltList
     {

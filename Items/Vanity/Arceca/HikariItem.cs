@@ -1,6 +1,4 @@
-﻿using Terraria.ID;
-
-namespace HJScarletRework.Items.Vanity.Arceca
+﻿namespace HJScarletRework.Items.Vanity.Arceca
 {
     public class HikariItem : AccVanityItem
     {

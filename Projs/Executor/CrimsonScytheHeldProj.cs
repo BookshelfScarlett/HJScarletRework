@@ -9,12 +9,12 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Useables;
@@ -27,7 +27,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class CrimsonScytheHeldProj : ExecutorHeldProj, IPixelatedRenderer
     {
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
         public override int OriginalItemID => ItemType<CrimsonScythe>();
         public AnimationStruct Helper = new AnimationStruct(3);
@@ -393,7 +393,7 @@ namespace HJScarletRework.Projs.Executor
             if (noSwing)
                 return false;
             //是否友好，是否城镇NPC，是否为非那个神人塔防水晶，是否允许启用击杀
-            if (target.friendly &&target.townNPC && target.type != NPCID.DD2EterniaCrystal && Owner.HJScarlet().crimsonScytheSlayNPCType>0)
+            if (target.friendly && target.townNPC && target.type != NPCID.DD2EterniaCrystal && Owner.HJScarlet().crimsonScytheSlayNPCType > 0)
                 return true;
             if (!ThirdSwing)
                 return null;
@@ -418,7 +418,8 @@ namespace HJScarletRework.Projs.Executor
                 ApplyKilledNPCSpecialDrop(target);
                 return;
             }
-            target.AddBuff(BuffType<DivineFireBuff>(), GetSeconds(2));
+            if (DownedBossSystem.downedSunGod)
+                target.AddBuff(BuffType<DivineFireBuff>(), GetSeconds(2));
             //处理音效
             HitSoundHandler(target);
             //目标不可用，别播放下面的特效。
@@ -440,7 +441,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void ApplyKilledNPCSpecialDrop(NPC target)
         {
-            if (Owner.HJScarlet().crimsonScytheSlayNPCType ==0)
+            if (Owner.HJScarlet().crimsonScytheSlayNPCType == 0)
                 return;
             //世界范围内是否有骷髅王，且背包内是否有300颗和星星炮，且必须得没有史莱姆ang，且是否为夜晚
             bool ezNumberCheck = Owner.CountItem(ItemID.FallenStar, 300) == 300
@@ -560,10 +561,10 @@ namespace HJScarletRework.Projs.Executor
                     FastDrop(ItemID.DefenderMedal, Main.rand.Next(1, 11));
             }
         }
-        public void FastDrop(int drop, int num=1)
+        public void FastDrop(int drop, int num = 1)
         {
 
-                Owner.QuickSpawnItem(Owner.GetSource_FromThis(), drop, num);
+            Owner.QuickSpawnItem(Owner.GetSource_FromThis(), drop, num);
         }
         public void SoulStoneSpawn(NPC target)
         {

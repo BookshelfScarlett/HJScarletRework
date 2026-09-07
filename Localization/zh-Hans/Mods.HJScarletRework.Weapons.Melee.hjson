@@ -71,6 +71,9 @@ Wreach: {
 		'''
 		调试道具，可能根据实际版本不同有不同的功能
 		不过你是怎么看到这个小玩意的？
+		[ScarletBuff/HJScarletRework/TheBleachingBuff]减益
+		[ScarletBuff/HJScarletRework/AbsoluteZeroBuff]减益
+		[ScarletBuff/ContinentOfJourney/DivineFireBuff]减益
 		'''
 }
 
@@ -286,6 +289,7 @@ RitualofRepose: {
 	DisplayName: 安息仪式
 	Tooltip:
 		'''
+		攻击时造成[ScarletDebuff/HJScarletRework/TheBleachingBuff]
 		向天空抛掷十字架，一定时间后从光标上空落下
 		在落下至光标位置，十字架迸裂的同时，释放大量的亮星
 		“主啊，对我来说你已经死了，安息吧。”

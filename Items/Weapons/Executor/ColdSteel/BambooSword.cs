@@ -1,5 +1,5 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
+﻿using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;

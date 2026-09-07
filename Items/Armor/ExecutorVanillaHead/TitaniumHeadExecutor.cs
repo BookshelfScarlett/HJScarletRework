@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
         public float Damage = 0.12f;
         public int Crit = 12;
         public float CritDamage = 0.12f;
-        public static int ShardDamage =30;
+        public static int ShardDamage = 30;
         public override bool SetUpArmorSet => true;
         public override void ExSD()
         {
@@ -38,7 +38,7 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.TitaniumBar, 10).
+                AddIngredient(ItemID.TitaniumBar, 13).
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }

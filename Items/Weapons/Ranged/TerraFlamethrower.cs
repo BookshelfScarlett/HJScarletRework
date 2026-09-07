@@ -1,7 +1,7 @@
 ﻿using ContinentOfJourney.Items.Flamethrowers;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
 using Terraria;
@@ -24,6 +24,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.knockBack = 5f;
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
             Item.SetUpNoUseGraphicItem(true, false);
+            Item.HJScarlet().drawBuffIcon = true;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.shoot = ProjectileType<TerraFlamethrowerHeldProj>();
             Item.shootSpeed = 12f;

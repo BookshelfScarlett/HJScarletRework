@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using Terraria;
@@ -16,7 +17,7 @@ namespace HJScarletRework.Items.Armor.RedDragonKnight
         public override string AssetPath => AssetHandler.Armors;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.ScarletRed);
         }
         public override void ExSD()
         {

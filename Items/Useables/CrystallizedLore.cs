@@ -1,9 +1,9 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
-using HJScarletRework.Items.Materials;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Useables
         public override string AssetPath => AssetHandler.Useables;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateGolden);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateGolden);
         }
         public override void ExSD()
         {

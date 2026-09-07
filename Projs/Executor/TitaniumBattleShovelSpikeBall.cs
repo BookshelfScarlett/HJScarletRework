@@ -1,17 +1,12 @@
 ﻿using HJScarletRework.Globals.Classes;
-using Terraria.ID;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Enums;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class TitaniumBattleShovelSpikeBall:HJScarletProj
+    public class TitaniumBattleShovelSpikeBall : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Projectile, ProjectileID.SpikyBall);
@@ -32,7 +27,7 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.AffactedByGrav(0.98f, 1f, 0.14f, 30);
-            Projectile.rotation= Projectile.SpeedAffectRotation();
+            Projectile.rotation = Projectile.SpeedAffectRotation();
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

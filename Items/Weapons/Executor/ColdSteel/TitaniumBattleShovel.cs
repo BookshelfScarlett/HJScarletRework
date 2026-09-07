@@ -1,19 +1,14 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
+﻿using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
 {
-    public class TitaniumBattleShovel :ExecutorWeaponClass
+    public class TitaniumBattleShovel : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 9;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.ColdSteel;

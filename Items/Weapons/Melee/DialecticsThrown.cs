@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Terraria;
@@ -17,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public int UsePhase = 0;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Matter);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Matter);
             ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.33f;
         }
         public override void ExSD()

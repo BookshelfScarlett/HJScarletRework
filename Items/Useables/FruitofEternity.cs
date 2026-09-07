@@ -1,8 +1,9 @@
 ﻿using ContinentOfJourney.Items.Material;
 using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace HJScarletRework.Items.Useables
         public static int LifeRegenSpeed = 4;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateGolden);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateGolden);
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs((DefenseMultipler - 1).ToPercent(), LifeRegenSpeed / 2, DamageReduceMultiplier.ToPercent(), TeleportChance);
         public override void ExSD()

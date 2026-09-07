@@ -1,10 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleScarlet;
+using HJScarletRework.Core.DeepGlowSystem;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using System.Collections.Generic;
@@ -139,16 +139,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Main.rand.NextBool(5))
             {
-                ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                {
-                    p.Position = Projectile.Center.ToRandCirclePos(4);
-                    p.Velocity = Projectile.velocity / 4f;
-                    p.Scale = 0.105f * Main.rand.NextFloat(0.75f, 0.95f);
-                    p.DrawColor = RandLerpColor(Color.IndianRed, Color.DarkRed);
-                    p.Lifetime = 40;
-                    p.Opacity = 1;
-                    p.GlowCenterMult = 0.65f;
-                });
+                ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePos(4), Projectile.velocity / 4f, RandLerpColor(Color.IndianRed, Color.DarkRed), 40, 1, .105f * Main.rand.NextFloat(.75f, .95f), .65f);
             }
             if (Main.rand.NextBool())
             {

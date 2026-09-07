@@ -1,6 +1,8 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
+﻿using HJScarletRework.Core.DeepGlowSystem;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -15,7 +17,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public static int ExecutionIceBlockCount = 7;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Frost);
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
@@ -29,7 +31,9 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.HJScarlet().ExecutionProj = ProjectileType<ASMDExecutionBullet>();
             Item.shootSpeed = 18f;
             Item.knockBack = 3;
-
+        }
+        public override void UpdateInventory(Player player)
+        {
         }
         public override bool CanShoot(Player player)
         {

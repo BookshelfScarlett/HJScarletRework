@@ -3,17 +3,15 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using HJScarletRework.Projs.General;
-using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -252,7 +250,7 @@ namespace HJScarletRework.Projs.Executor
             ScarletSound(HJScarletSounds.Tlipoca_StoneBonk, target.Center, .54f, 1, -.3f, .12f, 2);
         }
         public BlendState BlendState => BlendState.Additive;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
             if (!Projectile.HJScarlet().FirstFrame)
@@ -260,22 +258,22 @@ namespace HJScarletRework.Projs.Executor
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             Texture2D texture = HJScarletTexture.Texture_StandardGradient.Value;
             HJScarletMethods.ApplyAlphaCut(new Vector4(0.31f, 0.32f, 0, 0.3f), Vector2.Zero, Vector2.One);
-            DrawSlash(texture, Color.White* 0.95f, 0.95f);
+            DrawSlash(texture, Color.White * 0.95f, 0.95f);
             DrawSlash(texture, Color.White * 0.60f, 0.55f);
 
             HJScarletMethods.ApplyAlphaCut(new Vector4(0.42f, 0.32f, 0, 0), new Vector2(-Main.GlobalTimeWrappedHourly * .935f, 0), new Vector2(2f), Color.Silver);
             Texture2D texture2 = HJScarletTexture.Noise_Misc.Value;
-            DrawSlash(texture2, Color.White* .95f, 0.90f);
+            DrawSlash(texture2, Color.White * .95f, 0.90f);
             texture2 = HJScarletTexture.Noise_Aura.Value;
             DrawSlash(texture2, Color.White * .80f, 0.55f);
             texture2 = HJScarletTexture.Noise_WaterFlow.Value;
-            DrawSlash(texture2, Color.White* .65f, 0.70f);
+            DrawSlash(texture2, Color.White * .65f, 0.70f);
 
 
             texture = HJScarletTexture.Texture_SwordSlash.Value;
             HJScarletMethods.ApplyAlphaCut(new Vector4(0.41f, 0.32f, 0, .1f), Vector2.Zero, Vector2.One);
-            DrawSlash(texture, Color.White* 0.95f, 0.95f);
-            DrawSlash(texture, Color.White* 0.70f, 0.50f);
+            DrawSlash(texture, Color.White * 0.95f, 0.95f);
+            DrawSlash(texture, Color.White * 0.70f, 0.50f);
 
             HJScarletMethods.EndShaderAreaPixel();
 
@@ -293,8 +291,8 @@ namespace HJScarletRework.Projs.Executor
                 float progress = (float)i / OldAimPos.Count;
                 Vector2 DrawPos_Head = OldAimPos[i] + Projectile.Center - Main.screenPosition;
                 Vector2 DrawPos_Source = OldAimPos[i] * mult + Projectile.Center - Main.screenPosition;
-                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor*SlashOpa, new Vector3(progress, 0, 0)));
-                _vertexCache.Add(new ScarletVertex(DrawPos_Source, drawcolor*SlashOpa, new Vector3(progress, 1, 0)));
+                _vertexCache.Add(new ScarletVertex(DrawPos_Head, drawcolor * SlashOpa, new Vector3(progress, 0, 0)));
+                _vertexCache.Add(new ScarletVertex(DrawPos_Source, drawcolor * SlashOpa, new Vector3(progress, 1, 0)));
             }
             GD.Textures[0] = texture;
             GD.SamplerStates[0] = SamplerState.PointWrap;

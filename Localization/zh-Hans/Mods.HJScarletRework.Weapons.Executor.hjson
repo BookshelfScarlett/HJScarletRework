@@ -331,7 +331,7 @@ PureYinyo: {
 	Tooltip:
 		'''
 		交替投掷阴阳双锤
-		太阴之锤命中时同时造成咒火与灵液，并迸发黑暗碎块
+		太阴之锤命中时同时造成[ScarletDebuff/Terraria/CursedInferno]与[ScarletDebuff/Terraria/Ichor]，并迸发黑暗碎块
 		太阳之锤沿途生成轨迹飘忽不定的光明碎块
 		'''
 	ExecutionStrike:
@@ -483,6 +483,7 @@ ASMD: {
 		最后一发爆炸将从其体内迸裂出多个冰块，滞留在场上一段时间
 		接下来的炮弹命中时，都会使一枚冰块追击该名敌人，并为您提供叠加处决进程
 		'''
+	// AlterDisplayName: ""
 }
 
 SickleAndTorch: {
@@ -783,7 +784,7 @@ CrescentRose: {
 
 CobaltYoyo: {
 	DisplayName: 钴蓝悠悠球
-	Tooltip: 
+	Tooltip:
 		'''
 		命中时造成钴蓝爆炸
 		可以被悠悠球袋增强，但只有主悠悠球才会叠加处决进程
@@ -797,14 +798,16 @@ CobaltYoyo: {
 
 TitaniumBattleShovel: {
 	DisplayName: 钛金工兵铲
-	Tooltip:
-		'''
-		命中时击晕敌人一定时间
-		'''
+	Tooltip: 命中时击晕敌人一定时间
 	ExecutionStrike:
 		'''
 		强化接下来10秒内的攻击
 		提升攻击范围，与判定次数
 		命中敌人时追加滞留于地面上的钛金刺球
 		'''
+}
+
+MythrilStaff: {
+	// DisplayName: Mythril Staff
+	// Tooltip: ""
 }

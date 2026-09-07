@@ -13,6 +13,11 @@ PocketMirrorModiflication:
 	Takes effect by default when placed in vanity slot
 	'''
 
+GenericText: {
+	BuffDetail: ""
+	SwitchDetail: ""
+}
+
 ItemBelongTo: {
 	Donator: Donator Item
 	Developer: ""

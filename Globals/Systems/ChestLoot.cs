@@ -3,7 +3,6 @@ using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -105,7 +104,7 @@ namespace HJScarletRework.Globals.Systems
         }
         public void ModifyFrozenChestLoot()
         {
-            int[] list = [ItemType<AzureFrostmark>(),ItemID.ArcticDivingGear,ItemID.HandWarmer];
+            int[] list = [ItemType<AzureFrostmark>(), ItemID.ArcticDivingGear, ItemID.HandWarmer];
             PlaceItemsInSpecificChests(11, list, 24);
         }
         public void ModifySkyChestLoot()
@@ -121,7 +120,7 @@ namespace HJScarletRework.Globals.Systems
         public void ModifyDesertChestLoost()
         {
             int[] list = [ItemType<DesertKnife>()];
-            PlaceItemsInSpecificChests(10, list, 18, .25f,TileID.Containers2);
+            PlaceItemsInSpecificChests(10, list, 18, .25f, TileID.Containers2);
         }
         public void ModifyShadowChestLoot()
         {
@@ -132,12 +131,12 @@ namespace HJScarletRework.Globals.Systems
         }
         public void ModifyWaterChestLoot()
         {
-            int[] list = [ItemID.WeatherRadio,ItemID.FishermansGuide,ItemID.Sextant];
+            int[] list = [ItemID.WeatherRadio, ItemID.FishermansGuide, ItemID.Sextant];
             PlaceItemsInSpecificChests(17, list, 16, .4f);
         }
         public void ModifyJungleChestLoot()
         {
-            int[] list = [ItemID.NaturesGift,ItemID.JungleRose];
+            int[] list = [ItemID.NaturesGift, ItemID.JungleRose];
             PlaceItemsInSpecificChests(10, list, 16, .4f);
         }
         public void ModifyMiscChestLoot()

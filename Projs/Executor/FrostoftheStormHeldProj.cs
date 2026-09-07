@@ -4,7 +4,7 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -24,7 +24,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override int OriginalItemID => ItemType<FrostoftheStorm>();
         public override string Texture => GetInstance<FrostoftheStorm>().Texture;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public AnimationStruct Helper = new(3);

@@ -1,8 +1,9 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -17,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override int ExecutionProgress => 10;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()

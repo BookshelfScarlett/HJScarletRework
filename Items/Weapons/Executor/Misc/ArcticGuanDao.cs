@@ -1,6 +1,7 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
+﻿using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -14,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
         public override int ExecutionProgress => 9;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Frost);
             ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }

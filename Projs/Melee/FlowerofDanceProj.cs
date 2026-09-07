@@ -1,7 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
@@ -239,6 +240,7 @@ namespace HJScarletRework.Projs.Melee
             if (AttackState != State.AngleTo)
             {
                 rad = 1;
+
                 for (int i = 0; i < length; i++)
                 {
                     float rads = (float)i / length;
@@ -250,16 +252,17 @@ namespace HJScarletRework.Projs.Melee
                 DrawDaggerTrail(length - 2, rotFixer, scale, tex, ori);
             }
             if (Projectile.damage != 0)
+            {
                 for (int i = 0; i < 16; i++)
                 {
                     SB.Draw(tex, pos + (TwoPi / 16f * i).ToRotationVector2() * 2 * rad * EaseInBack(timeLeftProgress), null, Color.White.ToAddColor() * EaseInBack(timeLeftProgress), Projectile.rotation + rotFixer, ori, scale, 0, 0);
                 }
+            }
             tex.ApplyMeltShader(Color.White, 1 - EaseInOutExpo(timeLeftProgress));
             SB.Draw(tex, pos, null, Color.White * rad * timeLeftProgress, Projectile.rotation + rotFixer, ori, scale, 0, 0);
             SB.EndShaderArea();
             return false;
         }
-
         private void DrawDetailLine(Color c)
         {
             Asset<Texture2D> value = HJScarletTexture.Trail_Lightning4.Texture;

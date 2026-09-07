@@ -1,9 +1,9 @@
-﻿using ContinentOfJourney;
-using ContinentOfJourney.Items;
+﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Materials;
@@ -21,7 +21,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.ColdSteel;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Frost);
             ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }

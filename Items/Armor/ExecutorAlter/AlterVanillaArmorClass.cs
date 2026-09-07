@@ -87,7 +87,7 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
             if (item.type != ApplyArmor)
                 return;
             string keyPath = Mod.GetLocalizationKey($"SwitchWeaponTooltip");
-            tooltips.QuickAddTooltipDirect(keyPath.ToLangValue(), Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f));
+            tooltips.CreateTooltipDirect(keyPath.ToLangValue(), Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f));
             if (item.HJScarlet().EnableExecutorVersion)
             {
                 int flavorTooltipIndex = tooltips.FindIndex(line => line.Name == "Defense" && line.Mod == "Terraria");

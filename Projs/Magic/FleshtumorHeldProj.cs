@@ -1,14 +1,13 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Magic;
 using System;
 using Terraria;
-using Terraria.Audio;
 
 namespace HJScarletRework.Projs.Magic
 {
@@ -108,7 +107,7 @@ namespace HJScarletRework.Projs.Magic
 
                 if (Timer > AttackSpeed / 5 && Helper.IsDone[1])
                 {
-                        Timer = 0;
+                    Timer = 0;
 
                     if (!Owner.CheckMana(Owner.HeldItem, (int)(Owner.HeldItem.mana * Owner.manaCost), true, false))
                         return;

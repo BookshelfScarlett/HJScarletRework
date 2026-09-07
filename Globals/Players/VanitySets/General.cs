@@ -1,7 +1,6 @@
-﻿using HJScarletRework.Core.ParticleScarlet;
+﻿using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.Graphics.ParticleScarlet;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Vanity.Arceca;
@@ -90,7 +89,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
                 if (KajuName.Contains(nameLow))
                 {
                     Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<KajuItem>());
-                    niyaniyakajuVanity= true;
+                    niyaniyakajuVanity = true;
                 }
             }
             if (!lacrimosaVanity)
@@ -99,7 +98,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
                 if (LacrimosaName.Contains(nameLow))
                 {
                     Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<LacrimosaItem>());
-                    lacrimosaVanity= true;
+                    lacrimosaVanity = true;
                 }
             }
 
@@ -121,7 +120,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
                     yardVanity = true;
                 }
             }
-            if(!keiVanity)
+            if (!keiVanity)
             {
                 string nameLow = Player.name.ToLower();
                 if (YardName.Contains(nameLow))
@@ -175,16 +174,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
                 if (Main.rand.NextBool(3))
                 {
                     Vector2 posBase = Player.ToRandRec() - Player.velocity.ToSafeNormalize() * Main.rand.NextFloat(0.8f, 1.3f);
-                    ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                    {
-                        p.Position = posBase;
-                        p.Velocity = Player.velocity.ToSafeNormalize().ToRandVelocity(ToRadians(5f), 0.8f, 1.1f);
-                        p.DrawColor = RandLerpColor(Color.IndianRed, Color.HotPink);
-                        p.Lifetime = Main.rand.Next(45, 85);
-                        p.Scale = .051f * Main.rand.NextFloat(0.8f, 1.1f);
-                        p.Opacity = 1;
-                        p.GlowCenterMult = 0.85f;
-                    });
+                    ECSParticle.HRShinyOrb(posBase, Player.velocity.ToSafeNormalize().ToRandVelocity(ToRadians(5f), .8f, 1.1f), RandLerpColor(Color.IndianRed, Color.HotPink), Main.rand.Next(45, 85), 1, .05f * Main.rand.NextFloat(.8f, 1.1f), .85f);
                 }
 
             }
@@ -222,16 +212,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
                 if (Main.rand.NextBool(3))
                 {
                     Vector2 posBase = Player.ToRandRec() - Player.velocity.ToSafeNormalize() * Main.rand.NextFloat(0.8f, 1.3f) - offset;
-                    ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                    {
-                        p.Position = posBase;
-                        p.Velocity = Player.velocity.ToSafeNormalize().ToRandVelocity(ToRadians(5f), 0.8f, 1.1f);
-                        p.DrawColor = RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue);
-                        p.Lifetime = Main.rand.Next(45, 85);
-                        p.Scale = .05f * Main.rand.NextFloat(0.8f, 1.1f);
-                        p.Opacity = 1;
-                        p.GlowCenterMult = 0.85f;
-                    });
+                    ECSParticle.HRShinyOrb(posBase, Player.velocity.ToSafeNormalize().ToRandVelocity(ToRadians(5f), .8f, 1.1f), RandLerpColor(Color.DeepSkyBlue, Color.RoyalBlue), Main.rand.Next(45, 85), 1, .05f * Main.rand.NextFloat(.8f, 1.1f), .85f);
                 }
 
             }
@@ -260,7 +241,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
         {
             string name = HJScarletList.VanityItemDictionary[accVanityID];
             //怎么都是特殊情况。
-            if (name == nameof(TairitsuItem)||name == nameof(TendouKeiItem))
+            if (name == nameof(TairitsuItem) || name == nameof(TendouKeiItem))
                 Player.back = EquipLoader.GetEquipSlot(Mod, name, EquipType.Back);
             Player.legs = EquipLoader.GetEquipSlot(Mod, name, EquipType.Legs);
             Player.body = EquipLoader.GetEquipSlot(Mod, name, EquipType.Body);

@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using Terraria;
 using Terraria.ID;
 
@@ -11,7 +12,7 @@ namespace HJScarletRework.Items.Materials
         public override string AssetPath => AssetHandler.Materials;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Solar);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Solar);
         }
         public override void ExSD()
         {

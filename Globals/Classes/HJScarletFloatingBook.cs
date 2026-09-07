@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using System;
 using Terraria;
@@ -35,7 +35,7 @@ namespace HJScarletRework.Globals.Classes
         /// </summary>
         public bool IsLeftUsing => Owner.channel && !Owner.noItems && !Owner.CCed;
         public bool IsRightUsing => Owner.controlUseTile && !Owner.noItems && !Owner.CCed;
-        
+
         public override void AI()
         {
             if (!Projectile.HJScarlet().FirstFrame)
@@ -61,7 +61,7 @@ namespace HJScarletRework.Globals.Classes
             float beginRot = Projectile.rotation;
             float value = WrapAngle(tarRot - beginRot);
             Projectile.rotation = beginRot + value;
-            bool reverse = !Helper.IsDone[0] &&!Owner.IsHolding(OriginalItemID) || Owner.controlUseTile;
+            bool reverse = !Helper.IsDone[0] && !Owner.IsHolding(OriginalItemID) || Owner.controlUseTile;
             Vector2 tarPos = Owner.MountedCenter + Owner.Center.GetNormalVector2(Main.MouseWorld).ToSafeNormalize() * 60;
             if (reverse)
                 tarPos = Owner.MountedCenter + Owner.Center.GetNormalVector2(Main.MouseWorld).ToSafeNormalize() * 0;
@@ -128,7 +128,7 @@ namespace HJScarletRework.Globals.Classes
             float globalTimeProgress = Lerp(0.95f, 1.05f, (float)Math.Abs(Math.Sin(Main.GlobalTimeWrappedHourly * 0.5f)));
             Texture2D tex = Projectile.GetTexture();
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
-            float rotation = Projectile.rotation - RotFixer + (Projectile.spriteDirection == -1 ? Pi: 0);
+            float rotation = Projectile.rotation - RotFixer + (Projectile.spriteDirection == -1 ? Pi : 0);
             Vector2 origin = tex.Size() / 2;
             Vector2 realDrawPos = drawPos;
             SpriteEffects se = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;

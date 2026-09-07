@@ -2,7 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
@@ -183,7 +183,7 @@ namespace HJScarletRework.Projs.Executor
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             Projectile.tileCollide = false;
-            if (Timer < Projectile.MaxUpdates * 18f&&AttackState == State.Shoot)
+            if (Timer < Projectile.MaxUpdates * 18f && AttackState == State.Shoot)
                 Timer = Projectile.MaxUpdates * 18f;
             return false;
         }

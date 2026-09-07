@@ -1,5 +1,5 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
+﻿using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -88,9 +88,8 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
         {
             CreateRecipe().
                 AddIngredient(ItemID.Sickle).
-                AddIngredient(ItemID.TikiTorch).
+                AddIngredient(ItemID.Torch).
                 AddIngredient(ItemID.RopeCoil).
-                AddTile(TileID.WorkBenches).
                 Register();
         }
     }

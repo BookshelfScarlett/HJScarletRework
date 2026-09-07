@@ -1,7 +1,7 @@
-﻿using ContinentOfJourney.Items.Material;
+﻿using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
             ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
         }

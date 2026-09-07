@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney;
-using HJScarletRework.Globals.IDSets;
+using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ModLoader;
@@ -12,6 +13,10 @@ namespace HJScarletRework.Globals.Instances.Items
         {
             if (ScarletItemIDSets.GrantsBoosterAfterSon[item.type] && item.IsExecutorWeapon() && DownedBossSystem.downedSon && player.HJScarlet().weaponUpgradePostSon)
                 damage *= 10f;
+            if (HJScarletConfigServer.Instance.ModWeaponDamageMult != 1f && item.damage > 0)
+            {
+                damage *= HJScarletConfigServer.Instance.ModWeaponDamageMult;
+            }
         }
         public override void ModifyManaCost(Item item, Player player, ref float reduce, ref float mult)
         {

@@ -338,7 +338,7 @@ BitingClaw: {
 		'''
 		佩戴后，添加由空想归途模组提供的特殊渔获
 		目前仅提供了潜航员盔甲[i:HJScarletRework/DiverHead][i:HJScarletRework/DiverBody][i:HJScarletRework/DiverLegs]
-		击败暗影墙后于海洋环境获取
+		击败任意邪恶Boss后于海洋环境获取
 		'''
 }
 
@@ -373,7 +373,7 @@ RuShiWoWen: {
 		南无如来，应供
 		正遍知，明行足
 		善逝，世间解
-		无上士，调御丈夫base.AddRecipes();
+		无上士，调御丈夫;
 		天人师，佛，世尊
 		'''
 }

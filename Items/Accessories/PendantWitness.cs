@@ -1,7 +1,8 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Instances.Items;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -19,7 +20,7 @@ namespace HJScarletRework.Items.Accessories
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateCopper);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateCopper);
         }
         public override void ExSD()
         {

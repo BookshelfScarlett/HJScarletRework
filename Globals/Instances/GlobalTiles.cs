@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Globals.List;
+﻿using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Items.Useables;
 using Terraria;
 using Terraria.Audio;

@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney;
-using ContinentOfJourney.NPCs;
+﻿using ContinentOfJourney.NPCs;
 using ContinentOfJourney.NPCs.Boss_BigDipper;
 using ContinentOfJourney.NPCs.Boss_GoblinChariot;
 using ContinentOfJourney.NPCs.Boss_MarquisMoonsquid;
@@ -9,7 +8,6 @@ using ContinentOfJourney.NPCs.Boss_TheOverwatcher;
 using ContinentOfJourney.NPCs.Boss_TheSon;
 using ContinentOfJourney.NPCs.Boss_WallofShadow;
 using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Accessories;

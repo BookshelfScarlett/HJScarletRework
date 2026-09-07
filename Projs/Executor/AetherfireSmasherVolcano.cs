@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Utilities;
 using Terraria;
@@ -236,7 +237,7 @@ namespace HJScarletRework.Projs.Executor
             DrawSmoke(tex, scale, cutSource, ori);
             HJScarletMethods.EnterShaderArea();
             //实际绘制火柱，套用shader
-            DrawPillar(tex, scale, cutSource, ori);
+                DrawPillar(tex, scale, cutSource, ori);
             HJScarletMethods.EndShaderArea();
             return false;
         }
@@ -282,7 +283,7 @@ namespace HJScarletRework.Projs.Executor
                 for (float i = 1; i >= 0; i -= 0.1f)
                 {
                     shader.Parameters["uColorFactor"].SetValue(i);
-                    Color drawColor = Color.White;
+                    Color drawColor = tarColor;
                     drawColor.A /= 2;
                     Vector2 scale2 = scale * new Vector2(1 - i, i);
                     Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, cutSource, drawColor, 0f, ori, scale2, SpriteEffects.None, 0);

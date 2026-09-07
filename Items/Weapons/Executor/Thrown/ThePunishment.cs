@@ -1,6 +1,7 @@
-﻿using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Instances.Items;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -15,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override int ExecutionProgress => 25;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Hallowed);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Hallowed);
         }
 
         public override void ExSD()

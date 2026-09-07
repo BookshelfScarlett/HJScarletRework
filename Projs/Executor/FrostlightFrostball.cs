@@ -2,7 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Caster;
 using ReLogic.Content;
@@ -91,7 +91,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.velocity = Projectile.SafeDir().RotatedBy(ToRadians(5f) * Main.rand.NextBool().ToDirectionInt()) * speed;
             if (CurTarget.IsLegal())
             {
-                Projectile.HomingTarget(CurTarget.Center, -1f, speedValue, 15f, MaxAngleChange);    
+                Projectile.HomingTarget(CurTarget.Center, -1f, speedValue, 15f, MaxAngleChange);
                 Projectile.timeLeft = InitLifeTime;
             }
             else

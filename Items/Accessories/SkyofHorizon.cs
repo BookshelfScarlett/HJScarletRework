@@ -1,19 +1,20 @@
 ﻿using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Accessories
 {
-    public class SkyofHorizon :HJScarletItemClass
+    public class SkyofHorizon : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Matter);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Matter);
         }
         public override void ExSD()
         {

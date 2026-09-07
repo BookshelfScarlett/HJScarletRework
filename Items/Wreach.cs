@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.Magic;
@@ -32,6 +32,7 @@ namespace HJScarletRework.Items
             Item.useTime = Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noUseGraphic = true;
+            Item.HJScarlet().drawBuffIcon = true;
         }
         private IReadOnlyList<TooltipLine> AlterTooltip = null;
         private float LineY = -1;
@@ -51,6 +52,7 @@ namespace HJScarletRework.Items
         public override bool PreDrawTooltip(ReadOnlyCollection<TooltipLine> lines, ref int x, ref int y)
         {
             return base.PreDrawTooltip(lines, ref x, ref y);
+            //BuffType<divinbu>
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
@@ -128,7 +130,7 @@ namespace HJScarletRework.Items
         {
             Stopwatch.StartNew();
             Stopwatch sw = Stopwatch.StartNew();
-                Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15f, ProjectileType<TitaniumBattleShovelSpikeBall>(), 1, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15f, ProjectileType<TitaniumBattleShovelSpikeBall>(), 1, knockback, player.whoAmI);
             sw.Stop();
             // 输出经过的时间（毫秒）
             //Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

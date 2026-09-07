@@ -43,6 +43,12 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Particle_BulletShell { get; set; }
         public static Tex2DWithPath Particle_BloodDrop { get; set; }
         public static Tex2DWithPath Particle_GlowStar { get; set; }
+        public static Tex2DWithPath Particle_GlowBlade { get; set; }
+        public static Tex2DWithPath Particle_GlowSquare { get; set; }
+        public static Tex2DWithPath Particle_GlowSquareBig { get; set; }
+        public static Tex2DWithPath Particle_GlowSquareThick { get; set; }
+        public static Tex2DWithPath Particle_Smear { get; set; }
+        public static Tex2DWithPath Particle_ThunderBolt { get; set; }
         public static Texture2D Particle_SharpTear => TextureAssets.Extra[ExtrasID.SharpTears].Value;
 
 
@@ -85,6 +91,12 @@ namespace HJScarletRework.Assets.Registers
             Particle_BulletShell = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_BulletShell)}");
             Particle_BloodDrop = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_BloodDrop)}");
             Particle_GlowStar = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_GlowStar)}");
+            Particle_GlowBlade = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_GlowBlade)}");
+            Particle_GlowSquare = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_GlowSquare)}");
+            Particle_GlowSquareBig = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_GlowSquareBig)}");
+            Particle_GlowSquareThick = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_GlowSquareThick)}");
+            Particle_Smear = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_Smear)}");
+            Particle_ThunderBolt = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_ThunderBolt)}");
 
         }
         public static void UnLoadParticle()
@@ -126,6 +138,12 @@ namespace HJScarletRework.Assets.Registers
             Particle_BulletShell = null;
             Particle_BloodDrop = null;
             Particle_GlowStar = null;
+            Particle_GlowBlade = null;
+            Particle_ThunderBolt = null;
+            Particle_GlowSquare = null;
+            Particle_GlowSquareBig = null;
+            Particle_GlowSquareThick = null;
+            Particle_Smear = null;
         }
     }
 }

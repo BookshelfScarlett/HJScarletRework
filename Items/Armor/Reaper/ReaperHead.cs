@@ -1,9 +1,9 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Armor.Reaper
     {
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.ScarletRed);
         }
         public float DamageAdd = 0.15f;
         public int CritAdd = 15;

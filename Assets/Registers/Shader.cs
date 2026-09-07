@@ -21,6 +21,7 @@ namespace HJScarletRework.Assets.Registers
         public static Effect SlashTrailShader;
         public static Effect FogShader;
         public static Effect EdgeMeltsShader;
+        public static Effect DeepGlow;
         /// <summary>
         /// 从UCA模组偷来的shader
         /// </summary>
@@ -45,6 +46,7 @@ namespace HJScarletRework.Assets.Registers
             SlashTrailShader = LoadShader(nameof(SlashTrailShader));
             FogShader = LoadShader(nameof(FogShader));
             EdgeMeltsShader = LoadShader(nameof(EdgeMeltsShader));
+            DeepGlow = LoadShader(nameof(DeepGlow));
             UCAPolarDistortShaderColor = LoadShader("PolarDistortShaderWithR");
 
             RegisterMiscShader(TerrarRayLaser, "HJScarletReworkTerrarRayLaserPass", nameof(TerrarRayLaser));
@@ -58,6 +60,7 @@ namespace HJScarletRework.Assets.Registers
             RegisterMiscShader(AlphaFadeNoiseColor, ToPassName("AlphaFade_Noise_OColor"), "AlphaFade_Noise_OColor");
             RegisterMiscShader(FogShader, ToPassName(nameof(FogShader)), nameof(FogShader));
             RegisterMiscShader(EdgeMeltsShader, ToPassName(nameof(EdgeMeltsShader)), nameof(EdgeMeltsShader));
+            RegisterMiscShader(DeepGlow, ToPassName(nameof(DeepGlow)), nameof(DeepGlow));
             RegisterMiscShader(UCAPolarDistortShaderColor, ToPassName("PolarDistortShaderWithR"), "PolarDistortShaderWithR");
         }
         public static string ToPassName(string oriShadername) => ShaderPrefix + oriShadername + "Pass";
@@ -81,6 +84,7 @@ namespace HJScarletRework.Assets.Registers
             LightningShader = null;
             FogShader = null;
             EdgeMeltsShader = null;
+            DeepGlow = null;
         }
     }
 }

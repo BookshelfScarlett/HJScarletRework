@@ -1,8 +1,8 @@
-﻿using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Database.Enums;
 using System.Collections.Generic;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Globals.List
+namespace HJScarletRework.Globals.Database.List
 {
     public partial class HJScarletList : ModSystem
     {

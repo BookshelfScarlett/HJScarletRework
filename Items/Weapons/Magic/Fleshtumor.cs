@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.IDSets;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Magic;
 using Terraria;

@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Globals.IDSets;
+﻿using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ModLoader;

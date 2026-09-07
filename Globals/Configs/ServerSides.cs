@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ModLoader.Config;
 
 namespace HJScarletRework.Globals.Configs
@@ -24,7 +20,12 @@ namespace HJScarletRework.Globals.Configs
         [ReloadRequired]
         [DefaultValue(false)]
         public bool LostbeltJourneyTestAI { get; set; }
+        [BackgroundColor(211, 211, 211, 192)]
+        [Range(0, 10f)]
+        [DefaultValue(1f)]
+        public float ModWeaponDamageMult { get; set; }
 
-        
+
+
     }
 }

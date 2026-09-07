@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Buffs.Pets;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Pets;
 using HJScarletRework.Rarity.RarityShiny;
@@ -28,7 +29,7 @@ namespace HJScarletRework.Items.Pets
         //封住这个sd避免误重写
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.RarePets);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.RarePets);
         }
         public sealed override void SetDefaults()
         {

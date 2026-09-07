@@ -1,16 +1,13 @@
 ﻿using ContinentOfJourney.Items.Material;
-using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
-using Steamworks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
@@ -56,7 +53,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                 AddIngredient<CubistBar>(25).
                 AddTile(FinalAnvilTile).
                 Register();
-                
+
         }
     }
 }

@@ -32,7 +32,7 @@ namespace HJScarletRework.Items.Accessories
         {
             CreateRecipe().
                 AddIngredient(ItemID.RangerEmblem).
-                AddIngredient(ItemID.ShroomiteBar,15).
+                AddIngredient(ItemID.ShroomiteBar, 15).
                 AddTile(TileID.Autohammer).
                 Register();
         }

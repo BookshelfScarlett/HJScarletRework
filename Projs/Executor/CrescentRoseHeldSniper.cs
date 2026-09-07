@@ -1,13 +1,8 @@
 ﻿using HJScarletRework.Globals.Executor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class CrescentRoseHeldSniper :ExecutorHeldProj
+    public class CrescentRoseHeldSniper : ExecutorHeldProj
     {
         public override void SetStaticDefaults()
         {

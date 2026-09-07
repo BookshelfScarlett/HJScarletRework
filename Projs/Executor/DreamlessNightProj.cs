@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -8,7 +8,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -100,8 +99,8 @@ namespace HJScarletRework.Projs.Executor
                 {
                     Projectile.ResetLocalNPCHitImmunity();
                     InitReturn();
-                    if(Projectile.IsMe())
-                    PoweredUpHammer();
+                    if (Projectile.IsMe())
+                        PoweredUpHammer();
                     Timer += 1;
                 }
                 ReturnToOwner();
@@ -123,7 +122,7 @@ namespace HJScarletRework.Projs.Executor
         public void InitReturn()
         {
             Projectile.velocity = (Projectile.Center - Owner.Center).ToSafeNormalize() * -12f;
-                ScarletSound(HJScarletSounds.Misc_KnifeTossAlt, Projectile.Center, instances: 0, pitch: -.2f, variantType: 3);
+            ScarletSound(HJScarletSounds.Misc_KnifeTossAlt, Projectile.Center, instances: 0, pitch: -.2f, variantType: 3);
             for (int i = 0; i < 16; i++)
             {
                 Vector2 vel = (Projectile.velocity).ToRandVelocity(ToRadians(12f), 1f, 8f);
@@ -201,7 +200,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.AddExecutionTimeImmediate(ItemType<DreamlessNight>());
             //在命中的时候，我们才生成需要的仆从
             //当然，前提是条件合理
-            if (!Owner.HasProj<DreamlessNightMinion>() && Projectile.HJScarlet().ExecutionStrike&&Projectile.numHits<1)
+            if (!Owner.HasProj<DreamlessNightMinion>() && Projectile.HJScarlet().ExecutionStrike && Projectile.numHits < 1)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, projID, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 proj.rotation = Projectile.rotation;
@@ -222,7 +221,7 @@ namespace HJScarletRework.Projs.Executor
                 ((DreamlessNightArrow)proj.ModProjectile).CurSpeed = 0;
             }
 
-                ScarletSound(HJScarletSounds.Dream_Toss, Projectile.Center, instances: 0);
+            ScarletSound(HJScarletSounds.Dream_Toss, Projectile.Center, instances: 0);
             int count = 5;
             for (int i = 0; i < count; i++)
             {

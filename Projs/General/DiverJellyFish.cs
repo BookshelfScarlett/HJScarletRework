@@ -1,9 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleScarlet;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.Methods;
 using System;
 using Terraria;
@@ -72,44 +71,12 @@ namespace HJScarletRework.Projs.General
             }
         }
 
-        private void GreenParticle()
-        {
-
-        }
-        private void PinkParticle()
-        {
-        }
         private void ParticleHandler(Color color1, Color color2)
         {
             if (Projectile.FinalUpdateNextBool(6))
                 new StarShape(Projectile.Center.ToRandCirclePos(30), Vector2.UnitY * Main.rand.NextFloat(1f, 3f) * .2f, RandLerpColor(color1, color2), Projectile.scale * 0.5f, 40, true).Spawn();
             if (Projectile.FinalUpdateNextBool(6))
-                ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                {
-                    p.Position = Projectile.Center.ToRandCirclePos(30);
-                    p.Velocity = Vector2.UnitY * Main.rand.NextFloat(1.3f, 4.8f) * .2f;
-                    p.DrawColor = RandLerpColor(color1, color2);
-                    p.Scale = Main.rand.NextFloat(0.9f, 1.1f) * 0.10f;
-                    p.Opacity = 1;
-                    p.GlowCenterMult = 0.6f;
-                    p.Lifetime = 40;
-                });
-        }
-        private void BlueParticle()
-        {
-            if (Projectile.FinalUpdateNextBool(6))
-                new LightningParticle(Projectile.Center.ToRandCirclePos(30), Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.CornflowerBlue), 40, PiOver2 + Vector2.UnitY.RotatedByRandom(ToRadians(10f)).ToRotation(), Projectile.scale * 0.30f, 0).Spawn();
-            if (Projectile.FinalUpdateNextBool(6))
-                ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                {
-                    p.Position = Projectile.Center.ToRandCirclePos(30);
-                    p.Velocity = Vector2.UnitY * Main.rand.NextFloat(1.3f, 4.8f);
-                    p.DrawColor = RandLerpColor(Color.RoyalBlue, Color.CornflowerBlue);
-                    p.Scale = Main.rand.NextFloat(0.9f, 1.1f) * 0.10f;
-                    p.Opacity = 1;
-                    p.GlowCenterMult = 0.6f;
-                    p.Lifetime = 40;
-                });
+                ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePos(30), Vector2.UnitY * Main.rand.NextFloat(1.3f, 4.8f) * .2f, RandLerpColor(color1, color2), 40, 1, Main.rand.NextFloat(.8f, 1.1f) * Projectile.scale * .1f, .65f);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

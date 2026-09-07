@@ -1,13 +1,14 @@
 ﻿using ContinentOfJourney.Buffs;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players.Dashes;
 using HJScarletRework.Globals.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using HJScarletRework.Globals.Database.Enums;
 
 namespace HJScarletRework.Items.Accessories
 {
@@ -17,7 +18,7 @@ namespace HJScarletRework.Items.Accessories
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Solar);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Solar);
         }
         public override void ExSD()
         {

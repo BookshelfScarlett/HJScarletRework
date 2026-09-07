@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Pets
 {
@@ -24,7 +23,7 @@ namespace HJScarletRework.Projs.Pets
             if (Owner.HJScarlet().petNone)
                 Projectile.timeLeft = 2;
             if (Owner.dead)
-                Owner.HJScarlet().petNone= false;
+                Owner.HJScarlet().petNone = false;
 
             base.SimplePetFunction();
         }

@@ -2,11 +2,11 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System.Collections.Generic;
@@ -344,7 +344,7 @@ namespace HJScarletRework.Projs.Executor
         }
         #endregion
         public BlendState BlendState => BlendState.AlphaBlend;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
 
         public void RenderPixelated(SpriteBatch spriteBatch)
         {

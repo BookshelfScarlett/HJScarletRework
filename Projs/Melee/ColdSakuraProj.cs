@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.PixelatedRender;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using System;
@@ -12,7 +12,7 @@ namespace HJScarletRework.Projs.Melee
     public class ColdSakuraProj : ThrownSpearProjClass
     {
         public override string Texture => ProjPath + "Proj_ColdSakura";
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeProjectiles;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeProjectiles;
         public BlendState BlendState => BlendState.AlphaBlend;
 
         public enum Style

@@ -1,7 +1,7 @@
 ﻿using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 namespace HJScarletRework.Items.Armor.SaintChurch
 {
     [AutoloadEquip(EquipType.Head)]
-    public class SaintChurchHead :HJScarletArmor
+    public class SaintChurchHead : HJScarletArmor
     {
         public override bool SetUpArmorSet => true;
         public override int[] ArmorSlots => [Type, ItemType<SaintChurchBody>(), ItemType<SaintChurchLegs>()];
@@ -27,7 +27,7 @@ namespace HJScarletRework.Items.Armor.SaintChurch
         public static int RespawnChance = 1;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateGolden);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Database.Enums.ShinyRarityType.FateGolden);
             ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%", CritDamage.ToPercent());

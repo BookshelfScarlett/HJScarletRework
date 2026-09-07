@@ -31,7 +31,12 @@ SwitchWeapon: {
 }
 
 CrossModSupport.Calamity: ""
-Keybinds.GeneralActionKeybind.DisplayName: Intersct Key
+
+Keybinds: {
+	GeneralActionKeybind.DisplayName: Intersct Key
+	GenerialSkillKeybind.DisplayName: Generial Skill Keybind
+	ParryActionKeybind.DisplayName: Parry Action Keybind
+}
 
 Projectiles: {
 	DragonStaffHeldProj.DisplayName: Dragon Staff Held Proj

@@ -12,7 +12,7 @@ namespace HJScarletRework.Rarity.RarityShiny
         public Color ParticleColorEnd;
         public Color GlowColor;
         public Color EdgeColor;
-        public Color MainColor; 
+        public Color MainColor;
     }
     public class RareItemRarity : ModRarity
     {
@@ -59,7 +59,7 @@ namespace HJScarletRework.Rarity.RarityShiny
                 case RareType.Developer:
                     colorCombination.MainColor = Color.DarkViolet;
                     colorCombination.GlowColor = Color.Violet;
-                    colorCombination.EdgeColor = Color.Black ;
+                    colorCombination.EdgeColor = Color.Black;
                     colorCombination.ParticleColorBegin = Color.Violet;
                     colorCombination.ParticleColorEnd = Color.Purple;
                     break;

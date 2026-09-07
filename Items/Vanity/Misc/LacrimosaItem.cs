@@ -1,6 +1,4 @@
-﻿using Terraria.ID;
-
-namespace HJScarletRework.Items.Vanity.Misc
+﻿namespace HJScarletRework.Items.Vanity.Misc
 {
     public class LacrimosaItem : AccVanityItem
     {

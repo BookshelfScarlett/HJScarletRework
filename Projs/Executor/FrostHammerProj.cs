@@ -1,10 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleScarlet;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
@@ -140,15 +139,7 @@ namespace HJScarletRework.Projs.Executor
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(30), Vector2.UnitY * Main.rand.NextFloat(1.8f, 5.4f), RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 0, 1, 0.68f * Main.rand.NextFloat(0.8f, 1.1f)).Spawn();
             if (Main.rand.NextBool(8))
             {
-                ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                {
-                    p.Position = Projectile.Center.ToRandCirclePos(40);
-                    p.Velocity = Projectile.velocity.ToRandVelocity(ToRadians(10f), 1.2f, 4.2f);
-                    p.DrawColor = RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue);
-                    p.Lifetime = 40;
-                    p.Scale = Projectile.scale * Main.rand.NextFloat(0.8f, 1.1f) * .1f;
-                    p.GlowCenterMult = 0.75f;
-                });
+                ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePos(40), Projectile.velocity.ToRandVelocity(ToRadians(10), 1.4f, 4.2f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 1, Main.rand.NextFloat(.8f, 1.1f) * Projectile.scale * .1f, .75f);
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -177,16 +168,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 pos = Projectile.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
                 Vector2 vel = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(0.2f, 7.4f);
                 float scale = Main.rand.NextFloat(0.4f, 0.9f) * .2f;
-                ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                {
-                    p.Position = pos;
-                    p.Velocity = vel;
-                    p.DrawColor = RandLerpColor(Color.LightBlue, Color.RoyalBlue);
-                    p.Lifetime = 45;
-                    p.Scale = scale;
-                    p.Opacity = 1;
-                    p.GlowCenterMult = 0.75f;
-                });
+                ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.LightBlue, Color.RoyalBlue), 45, 1, scale, .75f);
             }
 
             for (int i = 0; i < 5; i++)
@@ -220,16 +202,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 pos = target.Center + Main.rand.NextVector2CircularEdge(10f, 10f);
                 Vector2 vel = Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(0.2f, 7.4f);
                 float scale = Main.rand.NextFloat(0.4f, 0.9f) * .2f;
-                ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                {
-                    p.Position = pos;
-                    p.Velocity = vel;
-                    p.DrawColor = RandLerpColor(Color.LightBlue, Color.RoyalBlue);
-                    p.Lifetime = 45;
-                    p.Scale = scale;
-                    p.Opacity = 1;
-                    p.GlowCenterMult = 0.75f;
-                });
+                ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.LightBlue, Color.RoyalBlue), 45, 1, scale, .75f);
             }
 
             for (int i = 0; i < 5; i++)

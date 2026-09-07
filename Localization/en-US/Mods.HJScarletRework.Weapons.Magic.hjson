@@ -41,3 +41,13 @@ PestilenceFlower: {
 	DisplayName: Pestilence Flower
 	Tooltip: Rapidly releases tentacles to attack enemies
 }
+
+TheFinalDawn: {
+	DisplayName: The Final Dawn
+	Tooltip: ""
+}
+
+BrimstoneHeart: {
+	DisplayName: Brimstone Heart
+	Tooltip: ""
+}

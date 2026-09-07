@@ -1,21 +1,17 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class CobaltYoyoProj :HJScarletProj
+    public class CobaltYoyoProj : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public const int MaxUpdates = 2;
@@ -24,7 +20,7 @@ namespace HJScarletRework.Projs.Executor
         {
             ProjectileID.Sets.YoyosLifeTimeMultiplier[Type] = GetSeconds(10);
             ProjectileID.Sets.YoyosMaximumRange[Type] = 600f;
-            ProjectileID.Sets.YoyosTopSpeed[Type] = 16f / MaxUpdates;
+            ProjectileID.Sets.YoyosTopSpeed[Type] = 22f / MaxUpdates;
 
             Projectile.ToTrailSetting(8, 0);
         }
@@ -50,7 +46,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void NotCloneYoyoBehaviour()
         {
-            if(!Projectile.HJScarlet().ExecutionStrike &&Owner.GetExecutionSrike())
+            if (!Projectile.HJScarlet().ExecutionStrike && Owner.GetExecutionSrike())
             {
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Owner.RemoveExecutionProgress();
@@ -136,7 +132,7 @@ namespace HJScarletRework.Projs.Executor
                 }
             }
             SB.FastDraw(projTex, drawPos, Color.White, Projectile.rotation, ori, Projectile.scale, 0);
-            
+
             return false;
         }
     }

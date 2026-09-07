@@ -1,22 +1,18 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.List;
+﻿using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
 {
-    public class Stella:ExecutorWeaponClass
+    public class Stella : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 50;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Solar);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Solar);
         }
         public override void ExSD()
         {

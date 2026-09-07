@@ -1,8 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using System.Collections.Generic;
@@ -140,9 +141,12 @@ namespace HJScarletRework.Projs.Melee
                 float scale = Lerp(0.6f, 0.15f, rads);
                 SB.Draw(tex, lerpPos, null, color, lerpRot, ori, Projectile.scale * scale, 0, 0);
             }
-            SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-            DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DeepSkyBlue, 1.2f);
-            DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.Black, 1.12f);
+            DeepGlow.SubmitCustomGlow(() =>
+            {
+                SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+                DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DeepSkyBlue, 1.2f);
+                //DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.Black, 1.12f);
+            });
             SB.EnterShaderArea();
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.Aquamarine, 1f);
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.White, 0.85f, offsetHeight: 0f);
@@ -153,6 +157,7 @@ namespace HJScarletRework.Projs.Melee
             return false;
         }
         public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
+
         {
             if (!Projectile.HJScarlet().FirstFrame)
                 return;
@@ -181,7 +186,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     Vector2 vec = Projectile.oldRot[j].ToRotationVector2().RotatedBy(PiOver2);
                     Vector2 drawPos = Projectile.oldPos[j] + new Vector2(Projectile.width / 2, Projectile.height / 2) + vec * -1.2f;
-                    trailDrawDates.Add(new(drawPos, drawColor, new Vector2(0, 40 * multipleSize * Projectile.scale), Projectile.oldRot[j]));
+                    trailDrawDates.Add(new(drawPos, drawColor, new Vector2(0, 30 * multipleSize * Projectile.scale), Projectile.oldRot[j]));
                 }
             }
             TrailRender.RenderTrail([.. trailDrawDates], drawSetting);

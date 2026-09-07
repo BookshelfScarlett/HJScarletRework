@@ -1,7 +1,8 @@
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
@@ -136,8 +137,8 @@ namespace HJScarletRework.Projs.Executor
         public override bool PreDraw(ref Color lightColor)
         {
             SB.EnterShaderArea();
-            DrawNebulaTrail(Color.MediumPurple, 14f);
-            DrawNebulaTrail(Color.LightPink with { A = 50 }, 12.2f);
+                DrawNebulaTrail(Color.MediumPurple, 14f);
+                DrawNebulaTrail(Color.LightPink with { A = 50 }, 12.2f);
             DrawNebulaTrail(Color.White with { A = 100 }, 10.8f);
             SB.EnterShaderArea();
             if (Projectile.oldPos.Length > 12)

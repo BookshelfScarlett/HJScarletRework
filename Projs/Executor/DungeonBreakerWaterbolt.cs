@@ -1,18 +1,17 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class DungeonBreakerWaterbolt : HJScarletProj, IPixelatedRenderer
     {
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.AlphaBlend;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;

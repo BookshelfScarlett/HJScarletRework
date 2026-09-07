@@ -1,6 +1,4 @@
-﻿using HJScarletRework.Globals.Instances.Items;
-using HJScarletRework.Globals.Methods;
-using Terraria.ID;
+﻿using HJScarletRework.Globals.Methods;
 
 namespace HJScarletRework.Items.Vanity.Yards
 {

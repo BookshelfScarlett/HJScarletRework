@@ -1,6 +1,7 @@
 using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
@@ -18,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ForeverNight);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.ForeverNight);
         }
         public override void ExSD()
         {
@@ -27,7 +28,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = SoundID.Item1;
             Item.shoot = ProjectileType<DeathTollsProj>();
-            Item.useTime = Item.useAnimation= 21;
+            Item.useTime = Item.useAnimation = 21;
             Item.knockBack = 8f;
             Item.damage = 162;
             //这里的UseTime是有意改的很慢的

@@ -22,6 +22,8 @@ namespace HJScarletRework.Globals.Methods
         }
         public static bool IsHolding<T>(this Player player) where T : ModItem => IsHolding(player, ItemType<T>());
         public static bool IsHolding(this Player player, int itemID) => player.HeldItem.type == itemID;
+        public static bool CanUseHoldout(this Player player, int itemID) => !player.dead && !player.CCed && player.IsHolding(itemID);
+        public static bool CanUseHoldout<T>(this Player player)where T :ModItem => !player.dead && !player.CCed && player.IsHolding(ItemType<T>());
         public static bool IsInInventory(this Player player) => Main.hoverItemName != "";
         public static bool IsInwater(this Player player) => Collision.DrownCollision(player.position, player.width, player.height, player.gravDir);
         /// <summary>

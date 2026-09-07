@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,7 +7,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class BoneSlapBone : HJScarletProj
     {
-        public override string Texture => GetVanillaAssetPath(Globals.Enums.VanillaAsset.Item, ItemID.Bone);
+        public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.Bone);
         public override bool IsLoadingEnabled(Mod mod)
         {
             return false;

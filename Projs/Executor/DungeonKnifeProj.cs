@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using Terraria;
@@ -44,14 +44,14 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-                float centerGlowScale = .2f;
-                Vector2 center = Projectile.oldPosition + Projectile.Size / 2f;
-                ECSParticle.CrossGlow(center, Color.White, 45, 1, centerGlowScale);
-                ECSParticle.CrossGlow(center, Color.White, 45, 1, centerGlowScale * .98f);
-                ECSParticle.CrossGlow(center, Color.White, 45, 1, centerGlowScale * .96f);
-                for (int i = 0; i < 16; i++)
-                    ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePosEdge(16), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.LightGray, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
-                ScarletSound(SoundID.Dig, center);
+            float centerGlowScale = .2f;
+            Vector2 center = Projectile.oldPosition + Projectile.Size / 2f;
+            ECSParticle.CrossGlow(center, Color.White, 45, 1, centerGlowScale);
+            ECSParticle.CrossGlow(center, Color.White, 45, 1, centerGlowScale * .98f);
+            ECSParticle.CrossGlow(center, Color.White, 45, 1, centerGlowScale * .96f);
+            for (int i = 0; i < 16; i++)
+                ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePosEdge(16), Main.rand.NextFloat(1.2f, 2.4f) * .24f, RandLerpColor(Color.LightGray, Color.White), 120, 1, Main.rand.NextFloat(.9f, 1.15f) * .043f);
+            ScarletSound(SoundID.Dig, center);
 
             if (BounceTime > 1)
             {
@@ -90,7 +90,6 @@ namespace HJScarletRework.Projs.Executor
                 SB.Draw(HJScarletTexture.Particle_SharpTear, pos - new Vector2(20, 0).RotatedBy(Projectile.oldRot[i]), null, c.ToAddColor(10) * opa * .35f, Projectile.oldRot[i] + PiOver2, HJScarletTexture.Particle_SharpTear.Size() / 2f, sharpScale * scale, 0, 0);
                 c = Color.Lerp(Color.LightGray, Color.White, ratios).ToAddColor(250);
                 SB.FastDraw(tex, pos, c * opa, Projectile.oldRot[i] + PiOver4, tex.Size() / 2f, Projectile.scale * scale, se);
-
             }
             for (int i = 0; i < 8; i++)
                 SB.FastDraw(tex, drawPosition + (TwoPi / 8f * i).ToRotationVector2() * 2f, Color.White.ToAddColor(), drawRotation, tex.Size() / 2f, Projectile.scale, se);

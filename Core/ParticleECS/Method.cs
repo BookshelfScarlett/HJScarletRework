@@ -22,7 +22,7 @@
                 if (ECSParticleDataManager.activePoint_add < ECSParticleDataManager.MaxParticle)
                 {
                     ref ECSParticleData particleDate = ref ECSParticleDataManager.particleData_add[ECSParticleDataManager.activePoint_add];
-                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, Vector2.Zero,opacity, rotation, scale, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
+                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, Vector2.Zero, opacity, rotation, scale, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
                     ECSParticleDataManager.activePoint_add++;
                     p.OnSpawn(ref particleDate);
                     return ECSParticleDataManager.activePoint_add - 1;
@@ -33,7 +33,7 @@
                 if (ECSParticleDataManager.activePoint_Nonmult < ECSParticleDataManager.MaxParticle)
                 {
                     ref ECSParticleData particleDate = ref ECSParticleDataManager.particleData_nopremult[ECSParticleDataManager.activePoint_Nonmult];
-                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, Vector2.Zero,opacity, rotation, scale, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
+                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, Vector2.Zero, opacity, rotation, scale, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
                     ECSParticleDataManager.activePoint_Nonmult++;
                     p.OnSpawn(ref particleDate);
                     return ECSParticleDataManager.activePoint_Nonmult - 1;
@@ -50,7 +50,7 @@
                 if (ECSParticleDataManager.activePoint_alpha < ECSParticleDataManager.MaxParticle)
                 {
                     ref ECSParticleData particleDate = ref ECSParticleDataManager.particleData_alpha[ECSParticleDataManager.activePoint_alpha];
-                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor,scale, opacity, rotation, 0, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
+                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, scale, opacity, rotation, 0, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
                     ECSParticleDataManager.activePoint_alpha++;
                     p.OnSpawn(ref particleDate);
                     return ECSParticleDataManager.activePoint_alpha - 1;
@@ -61,7 +61,7 @@
                 if (ECSParticleDataManager.activePoint_add < ECSParticleDataManager.MaxParticle)
                 {
                     ref ECSParticleData particleDate = ref ECSParticleDataManager.particleData_add[ECSParticleDataManager.activePoint_add];
-                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, scale,opacity, rotation, 0, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
+                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, scale, opacity, rotation, 0, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
                     ECSParticleDataManager.activePoint_add++;
                     p.OnSpawn(ref particleDate);
                     return ECSParticleDataManager.activePoint_add - 1;
@@ -72,7 +72,7 @@
                 if (ECSParticleDataManager.activePoint_Nonmult < ECSParticleDataManager.MaxParticle)
                 {
                     ref ECSParticleData particleDate = ref ECSParticleDataManager.particleData_nopremult[ECSParticleDataManager.activePoint_Nonmult];
-                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor,scale, opacity, rotation, 0, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
+                    ReSetParticleInfo(ref particleDate, Type, timeLeft, position, velocity, drawColor, scale, opacity, rotation, 0, ai0, ai1, ai2, aibool0, aibool1, aibool2, aiint0, aiint1, aiint2);
                     ECSParticleDataManager.activePoint_Nonmult++;
                     p.OnSpawn(ref particleDate);
                     return ECSParticleDataManager.activePoint_Nonmult - 1;

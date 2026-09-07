@@ -1,6 +1,6 @@
 ﻿using ContinentOfJourney.Tiles;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Items.Materials;
 using Terraria.ID;
 using Terraria.ModLoader;

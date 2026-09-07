@@ -1,11 +1,5 @@
 ﻿using HJScarletRework.Globals.Methods;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
-using Terraria.GameContent.UI.BigProgressBar;
 
 namespace HJScarletRework.Core.GJKCollision
 {
@@ -41,10 +35,10 @@ namespace HJScarletRework.Core.GJKCollision
         {
             float maxDot = float.NegativeInfinity;
             Vector2 best = Vertices[0];
-            foreach (var v in  Vertices)
+            foreach (var v in Vertices)
             {
                 float dot = Vector2.Dot(v, direction);
-                if(dot >maxDot)
+                if (dot > maxDot)
                 {
                     maxDot = dot;
                     best = v;
@@ -69,7 +63,7 @@ namespace HJScarletRework.Core.GJKCollision
         public static bool GJKIntersect(IConvexShape shapeA, IConvexShape shapeB)
         {
             Vector2 direciton = GetInitialDirection(shapeA, shapeB);
-            Vector2 support = SupportMinkowski(shapeA,shapeB,direciton);
+            Vector2 support = SupportMinkowski(shapeA, shapeB, direciton);
             List<Vector2> simplex = new List<Vector2> { support };
             //方向取反
             direciton = -support;

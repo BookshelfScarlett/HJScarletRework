@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Database.Enums;
 
 namespace HJScarletRework.Core.PixelatedRender
 {
@@ -8,7 +8,7 @@ namespace HJScarletRework.Core.PixelatedRender
     public interface IPixelatedRenderer
     {
         BlendState BlendState => BlendState.AlphaBlend;
-        HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         void RenderPixelated(SpriteBatch spriteBatch);
     }
 }

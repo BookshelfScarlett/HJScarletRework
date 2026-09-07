@@ -2,7 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
@@ -62,7 +62,7 @@ namespace HJScarletRework.Projs.Magic
                 {
                     if (Projectile.GetTargetSafe(out NPC target))
                     {
-                        Projectile.HomingTarget(target.Center, -1, OriginalSpeed, 10f,5);
+                        Projectile.HomingTarget(target.Center, -1, OriginalSpeed, 10f, 5);
                     }
                     else
                         ResetSpeed();

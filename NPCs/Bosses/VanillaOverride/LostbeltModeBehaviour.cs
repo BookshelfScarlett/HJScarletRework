@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -98,7 +96,7 @@ namespace HJScarletRework.NPCs.Bosses.VanillaOverride
 
             }
         }
-        public virtual void OnFirstFrame( NPC npc) { }
+        public virtual void OnFirstFrame(NPC npc) { }
         public virtual void NpcAI(NPC npc) { }
         public virtual void ModifyHitByAnything(NPC npc, Player player, ref NPC.HitModifiers modifiers) { }
         public virtual void ModifyHitByItemSafe(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers) { }

@@ -111,7 +111,23 @@ HJScarletConfigServer: {
 	}
 
 	LostbeltJourneyTestAI: {
-		// Label: Lostbelt Journey Test A I
-		// Tooltip: ""
+		Label: 空想归途Boss的重做
+		Tooltip:
+			'''
+			启用后，空想归途会为部分已有的Boss重置为全新的AI，以及一些新的贴图和新的事件
+			该功能会很大程度上影响游戏流程，同时也是本模组世界观的核心之一
+			如果需要考虑部分的适配，可以考虑关闭这个选项
+			默认开启
+			'''
+	}
+
+	ModWeaponDamageMult: {
+		Label: 模组武器伤害倍率调整
+		Tooltip:
+			'''
+			允许你调整模组内武器的伤害倍率，也就是武器的强度
+			范围为0~10倍。如果你觉得模组内武器实在是太强，可以考虑这个选项
+			默认为1倍
+			'''
 	}
 }

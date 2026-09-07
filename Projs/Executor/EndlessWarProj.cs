@@ -1,8 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {

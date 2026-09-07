@@ -1,8 +1,8 @@
 ﻿using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.RedDragonKnight;
 using Terraria;
@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Armor.DragonHunter
             Item.SetUpRarityPrice(ItemRarityID.Purple);
             Item.defense = 50;
         }
-        public int Crit =50;
+        public int Crit = 50;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crit + "%");
         public override void UpdateEquip(Player player)
         {

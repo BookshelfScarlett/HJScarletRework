@@ -2,8 +2,9 @@
 using ContinentOfJourney.Tiles;
 using HJScarletRework.Core;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players.Dashes;
 using HJScarletRework.Globals.Systems;
@@ -20,7 +21,7 @@ namespace HJScarletRework.Items.Accessories
         public int LifeMax2 = 50;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Frost);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Frost);
         }
         public override void ExSD()
         {

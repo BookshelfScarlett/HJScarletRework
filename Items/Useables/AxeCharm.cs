@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using Microsoft.VisualBasic.FileIO;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -41,7 +40,7 @@ namespace HJScarletRework.Items.Useables
             tooltips.Insert(executionProgressIndex, executionLine);
             int finalIndex = tooltips.FindLastIndex(line => line.Name.Contains("Tooltip") && line.Mod == "Terraria");
             string critDamage = this.GetLocalizationKey("CritDamageMult");
-            tooltips.CreateTooltip(critDamage, Color.SkyBlue, Mod, "CritDamageLine", finalIndex+1, p.HJScarlet().critDamageExecutor.ToPercent());
+            tooltips.CreateTooltip(critDamage, Color.SkyBlue, Mod, "CritDamageLine", finalIndex + 1, p.HJScarlet().critDamageExecutor.ToPercent());
         }
     }
 }

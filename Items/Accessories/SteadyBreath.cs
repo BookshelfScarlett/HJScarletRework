@@ -4,7 +4,6 @@ using ContinentOfJourney.Tiles;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -18,7 +17,7 @@ namespace HJScarletRework.Items.Accessories
         public float Damage = .20f;
         public int Crit = 10;
         public static float ExtraDamage = 1.1f;
-        public static float ChanceToCrit = .35f; 
+        public static float ChanceToCrit = .35f;
         public override string AssetPath => AssetHandler.Equips;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%", ExtraDamage + "x", ChanceToCrit.ToPercent());
         public override void ExSD()

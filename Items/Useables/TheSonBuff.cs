@@ -1,13 +1,10 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -19,7 +16,7 @@ namespace HJScarletRework.Items.Useables
         public override string AssetPath => AssetHandler.Useables;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateGolden);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateGolden);
         }
         public override void ExSD()
         {
@@ -46,7 +43,7 @@ namespace HJScarletRework.Items.Useables
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             Player p = Main.LocalPlayer;
-            Color c = p.HJScarlet().weaponUpgradePostSon? Color.LightGreen : Color.Coral;
+            Color c = p.HJScarlet().weaponUpgradePostSon ? Color.LightGreen : Color.Coral;
             int index = tooltips.FindLineIndex("Tooltip0");
             string text = this.GetLocalizationKey("EnableTooltips").ToLangValue().ToFormatValue(p.HJScarlet().weaponUpgradePostSon.ToString());
             var executionLine = new TooltipLine(Mod, "EnableTooltipsName", text)

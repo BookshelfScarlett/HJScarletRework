@@ -29,7 +29,7 @@ namespace HJScarletRework.Globals.Systems
             {
                 return !Condition.DownedGolem.IsMet();
             }
-            if(type == ItemID.PrincessWeapon)
+            if (type == ItemID.PrincessWeapon)
             {
                 return !Condition.DownedPlantera.IsMet();
             }

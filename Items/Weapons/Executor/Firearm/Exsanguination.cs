@@ -1,6 +1,7 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
+﻿using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -16,7 +17,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.ScarletRed);
             ScarletItemIDSets.ForceToAutomaticExecute[Type] = true;
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
@@ -32,7 +33,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.noUseGraphic = true;
             Item.shoot = ProjectileType<ExsanguinationHeldProj>();
             Item.shootSpeed = 12f;
-            Item.HJScarlet().ItemBelongTo = Globals.Enums.EnumItemOwner.Developer;
+            Item.HJScarlet().ItemBelongTo = EnumItemOwner.Developer;
             Item.HJScarlet().OwnerName = "绯色书架 ScarletShelf";
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)

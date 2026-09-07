@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Globals.Configs;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
 using System;
@@ -108,9 +108,9 @@ namespace HJScarletRework.Globals.Executor
             }
 
             string categoryText = Mod.GetLocalizationKey($"ExecutorDamageClass.WeaponType.{ExecutorWeaponType}").ToLangValue();
-            int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework")-1;
+            int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework") - 1;
             if (!traditionalMode)
-                executionLineIndex = executionProgressIndex-1;
+                executionLineIndex = executionProgressIndex - 1;
             var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", $"-{categoryText}-")
             {
                 OverrideColor = Color.LightGoldenrodYellow

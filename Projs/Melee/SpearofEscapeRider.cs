@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
@@ -123,8 +124,11 @@ namespace HJScarletRework.Projs.Melee
             //烟雾。
             DrawSmoke(drawPos);
             SB.EnterShaderArea();
-            //实际尾焰轨迹
-            DrawTrail(drawPos);
+            DeepGlow.SubmitCustomGlow(() =>
+            {
+                //实际尾焰轨迹
+                DrawTrail(drawPos);
+            });
             SB.EndShaderArea();
             //绘制辉光效果
             Projectile.DrawProj(Color.White, drawTime: 1, rotFix: rotFix);
@@ -183,7 +187,7 @@ namespace HJScarletRework.Projs.Melee
             //重新设定原点
             Vector2 ori = new Vector2(cutSource.Width / 2, cutSource.Height);
             //设定缩放大小
-            Vector2 baseScale = new Vector2(5.2f, 10.2f);
+            Vector2 baseScale = new Vector2(5.2f, 18.2f);
             Effect shader = HJScarletShader.VolcanoEruptingShader;
             shader.Parameters["uBaseColor"].SetValue(Color.Orange.ToVector4() * 0.5f);
             shader.Parameters["uTargetColor"].SetValue(Color.OrangeRed.ToVector4());

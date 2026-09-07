@@ -3,12 +3,11 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using Terraria;
-using Terraria.Audio;
 using Terraria.GameContent;
 
 namespace HJScarletRework.Projs.Executor
@@ -194,27 +193,27 @@ namespace HJScarletRework.Projs.Executor
                 else
                 {
                     SwitchNextState(State.BreakIntoShard);
-                Projectile.velocity = (-Vector2.UnitY) * Main.rand.NextFloat(43f, 48f);
-                Projectile.rotation = Projectile.velocity.ToRotation();
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30, 120, Projectile.rotation, 0, easingFunc: EaseOutExpo);
-                ScarletSound(HJScarletSounds.TheMars_Toss, Projectile.Center, .85f, 0, -.4f, .05f);
-                ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center, .65f, 0, -.7f, .05f);
-                for (int i = 0; i < 32; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3);
-                    Vector2 vel = Projectile.SafeDir().ToRandVelocity(ToRadians(24f), 0.3f, 17f) * 1.2f;
-                    int lifeTime = Main.rand.Next(30, 70);
-                    float rot = RandRotTwoPi;
-                    QuickYinyoSmokeBlack(pos, vel, lifeTime, rot, scaleMult: Main.rand.NextFloat(.7f, 1.1f));
-                }
-                for (int i = 0; i < 32; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3);
-                    Vector2 vel = Projectile.SafeDir().ToRandVelocity(ToRadians(16f), 0.3f, 14f) * 1.2f;
-                    int lifeTime = Main.rand.Next(30, 70);
-                    float rot = RandRotTwoPi;
-                    QuickYinyoSmokeWhite(pos, vel, lifeTime, rot, scaleMult: Main.rand.NextFloat(.7f, 1.1f));
-                }
+                    Projectile.velocity = (-Vector2.UnitY) * Main.rand.NextFloat(43f, 48f);
+                    Projectile.rotation = Projectile.velocity.ToRotation();
+                    ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30, 120, Projectile.rotation, 0, easingFunc: EaseOutExpo);
+                    ScarletSound(HJScarletSounds.TheMars_Toss, Projectile.Center, .85f, 0, -.4f, .05f);
+                    ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center, .65f, 0, -.7f, .05f);
+                    for (int i = 0; i < 32; i++)
+                    {
+                        Vector2 pos = Projectile.Center.ToRandCirclePos(3);
+                        Vector2 vel = Projectile.SafeDir().ToRandVelocity(ToRadians(24f), 0.3f, 17f) * 1.2f;
+                        int lifeTime = Main.rand.Next(30, 70);
+                        float rot = RandRotTwoPi;
+                        QuickYinyoSmokeBlack(pos, vel, lifeTime, rot, scaleMult: Main.rand.NextFloat(.7f, 1.1f));
+                    }
+                    for (int i = 0; i < 32; i++)
+                    {
+                        Vector2 pos = Projectile.Center.ToRandCirclePos(3);
+                        Vector2 vel = Projectile.SafeDir().ToRandVelocity(ToRadians(16f), 0.3f, 14f) * 1.2f;
+                        int lifeTime = Main.rand.Next(30, 70);
+                        float rot = RandRotTwoPi;
+                        QuickYinyoSmokeWhite(pos, vel, lifeTime, rot, scaleMult: Main.rand.NextFloat(.7f, 1.1f));
+                    }
 
                 }
 
@@ -226,27 +225,27 @@ namespace HJScarletRework.Projs.Executor
                 else
                 {
                     SwitchNextState(State.BreakIntoShard);
-                Projectile.velocity = (-Vector2.UnitY) * Main.rand.NextFloat(43f, 48f);
-                Projectile.rotation = Projectile.velocity.ToRotation();
-                ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30, 120, Projectile.rotation, 0, easingFunc: EaseOutExpo);
-                ScarletSound(HJScarletSounds.TheMars_Toss, Projectile.Center, .85f, 0, -.4f, .05f);
-                ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center, .65f, 0, -.7f, .05f);
-                for (int i = 0; i < 32; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3);
-                    Vector2 vel = Projectile.SafeDir().ToRandVelocity(ToRadians(24f), 0.3f, 17f) * 1.2f;
-                    int lifeTime = Main.rand.Next(30, 70);
-                    float rot = RandRotTwoPi;
-                    QuickYinyoSmokeBlack(pos, vel, lifeTime, rot, scaleMult: Main.rand.NextFloat(.7f, 1.1f));
-                }
-                for (int i = 0; i < 32; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3);
-                    Vector2 vel = Projectile.SafeDir().ToRandVelocity(ToRadians(16f), 0.3f, 14f) * 1.2f;
-                    int lifeTime = Main.rand.Next(30, 70);
-                    float rot = RandRotTwoPi;
-                    QuickYinyoSmokeWhite(pos, vel, lifeTime, rot, scaleMult: Main.rand.NextFloat(.7f, 1.1f));
-                }
+                    Projectile.velocity = (-Vector2.UnitY) * Main.rand.NextFloat(43f, 48f);
+                    Projectile.rotation = Projectile.velocity.ToRotation();
+                    ScreenShakeSystem.AddScreenShakes(Projectile.Center, 30, 120, Projectile.rotation, 0, easingFunc: EaseOutExpo);
+                    ScarletSound(HJScarletSounds.TheMars_Toss, Projectile.Center, .85f, 0, -.4f, .05f);
+                    ScarletSound(HJScarletSounds.Smash_GroundHeavy, Projectile.Center, .65f, 0, -.7f, .05f);
+                    for (int i = 0; i < 32; i++)
+                    {
+                        Vector2 pos = Projectile.Center.ToRandCirclePos(3);
+                        Vector2 vel = Projectile.SafeDir().ToRandVelocity(ToRadians(24f), 0.3f, 17f) * 1.2f;
+                        int lifeTime = Main.rand.Next(30, 70);
+                        float rot = RandRotTwoPi;
+                        QuickYinyoSmokeBlack(pos, vel, lifeTime, rot, scaleMult: Main.rand.NextFloat(.7f, 1.1f));
+                    }
+                    for (int i = 0; i < 32; i++)
+                    {
+                        Vector2 pos = Projectile.Center.ToRandCirclePos(3);
+                        Vector2 vel = Projectile.SafeDir().ToRandVelocity(ToRadians(16f), 0.3f, 14f) * 1.2f;
+                        int lifeTime = Main.rand.Next(30, 70);
+                        float rot = RandRotTwoPi;
+                        QuickYinyoSmokeWhite(pos, vel, lifeTime, rot, scaleMult: Main.rand.NextFloat(.7f, 1.1f));
+                    }
 
                 }
             }

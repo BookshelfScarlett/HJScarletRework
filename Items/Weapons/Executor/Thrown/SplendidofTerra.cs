@@ -1,5 +1,6 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.List;
+﻿using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override int ExecutionProgress => 18 * (GaiaStriker.BloodBulletCount - 2);
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Life);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Life);
             //Type.ShimmerEach<GaiaStriker>();
         }
         public override void ExSD()

@@ -3,7 +3,7 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using System;
@@ -170,7 +170,7 @@ namespace HJScarletRework.Projs.General
         }
 
         public BlendState BlendState => BlendState.Additive;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
             if (!Projectile.HJScarlet().FirstFrame)

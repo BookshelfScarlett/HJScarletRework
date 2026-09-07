@@ -1,15 +1,13 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Magic;
 using System;
 using Terraria;
-using Terraria.Audio;
 
 namespace HJScarletRework.Projs.Magic
 {
@@ -59,7 +57,7 @@ namespace HJScarletRework.Projs.Magic
             Owner.ChangeDir(Projectile.direction);
             Owner.itemTime = Owner.itemAnimation = 2;
             Owner.ControlPlayerArm(Projectile.rotation, 2);
-            bool reverse = !Helper.IsDone[0] && Owner.HeldItem.type != ItemType<PestilenceFlower>()|| Owner.controlUseTile;
+            bool reverse = !Helper.IsDone[0] && Owner.HeldItem.type != ItemType<PestilenceFlower>() || Owner.controlUseTile;
         }
 
         private void HoldIdleState()
@@ -108,9 +106,9 @@ namespace HJScarletRework.Projs.Magic
                     if (Helper.Progress[1] <= 0)
                         Helper.Progress[1] = 0;
                 }
-                if (Timer > AttackSpeed / 5 && Helper.IsDone[1]&&Projectile.IsMe())
+                if (Timer > AttackSpeed / 5 && Helper.IsDone[1] && Projectile.IsMe())
                 {
-                        Timer = 0;
+                    Timer = 0;
                     if (!Owner.CheckMana(Owner.HeldItem, (int)(Owner.HeldItem.mana * Owner.manaCost), true, false))
                         return;
 

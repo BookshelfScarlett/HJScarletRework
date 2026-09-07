@@ -1,12 +1,11 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Rockets;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Systems;
-using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.DataStructures;
@@ -20,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override int ExecutionProgress => 75;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
             ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }

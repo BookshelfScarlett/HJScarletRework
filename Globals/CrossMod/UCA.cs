@@ -1,11 +1,9 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Tiles;
 using HJScarletRework.Globals.Configs;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Items.Materials;
-using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -44,24 +42,24 @@ namespace HJScarletRework.Globals.CrossMod
             if (HJScarletRework.CrossMod_UCA is null)
                 return;
             int carnage = HJScarletRework.CrossMod_UCA.Find<ModItem>("CarnageRay").Type;
-            HJScarletList.ShinyRarityItemDictionary.Add(carnage, Enums.ShinyRarityType.ScarletRed);
+            HJScarletList.ShinyRarityItemDictionary.Add(carnage, Globals.Database.Enums.ShinyRarityType.ScarletRed);
             int night = HJScarletRework.CrossMod_UCA.Find<ModItem>("NightsRayAlt").Type;
             int shadow = HJScarletRework.CrossMod_UCA.Find<ModItem>("ShadowBoltStaffAlt").Type;
-            HJScarletList.ShinyRarityItemDictionary.Add(night, Enums.ShinyRarityType.ForeverNight);
-            HJScarletList.ShinyRarityItemDictionary.Add(shadow, Enums.ShinyRarityType.ForeverNight);
+            HJScarletList.ShinyRarityItemDictionary.Add(night, Globals.Database.Enums.ShinyRarityType.ForeverNight);
+            HJScarletList.ShinyRarityItemDictionary.Add(shadow, Globals.Database.Enums.ShinyRarityType.ForeverNight);
             int vivid = HJScarletRework.CrossMod_UCA.Find<ModItem>("VividClarityAlt").Type;
             int element = HJScarletRework.CrossMod_UCA.Find<ModItem>("ElementRayAlt").Type;
             int sword = HJScarletRework.CrossMod_UCA.Find<ModItem>("StormRulerAlt").Type;
-            HJScarletList.ShinyRarityItemDictionary.Add(vivid, Enums.ShinyRarityType.FateWhite);
-            HJScarletList.ShinyRarityItemDictionary.Add(element, Enums.ShinyRarityType.FateWhite);
-            HJScarletList.ShinyRarityItemDictionary.Add(sword, Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(vivid, Globals.Database.Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(element, Globals.Database.Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(sword, Globals.Database.Enums.ShinyRarityType.FateWhite);
             ScarletItemIDSets.GiantKiller[sword] = true;
             int terra = HJScarletRework.CrossMod_UCA.Find<ModItem>("TerraRay").Type;
-            HJScarletList.ShinyRarityItemDictionary.Add(terra, Enums.ShinyRarityType.Life);
+            HJScarletList.ShinyRarityItemDictionary.Add(terra, Globals.Database.Enums.ShinyRarityType.Life);
             int plasma = HJScarletRework.CrossMod_UCA.Find<ModItem>("PlasmaRodAlt").Type;
             int soul = HJScarletRework.CrossMod_UCA.Find<ModItem>("SoulPiercerAlt").Type;
-            HJScarletList.ShinyRarityItemDictionary.Add(plasma, Enums.ShinyRarityType.Nebula);
-            HJScarletList.ShinyRarityItemDictionary.Add(soul, Enums.ShinyRarityType.Nebula);
+            HJScarletList.ShinyRarityItemDictionary.Add(plasma, Globals.Database.Enums.ShinyRarityType.Nebula);
+            HJScarletList.ShinyRarityItemDictionary.Add(soul, Globals.Database.Enums.ShinyRarityType.Nebula);
 
         }
     }

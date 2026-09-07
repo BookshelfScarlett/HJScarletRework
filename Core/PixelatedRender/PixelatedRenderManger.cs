@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
@@ -90,18 +90,18 @@ namespace HJScarletRework.Core.PixelatedRender
                     {
                         if (pRPlayer.BlendState == BlendState.AlphaBlend)
                         {
-                            if (pRPlayer.LayerToRenderTo.HasFlag(HJScarletDrawLayer.BeforePlayer))
+                            if (pRPlayer.LayerToRenderTo.HasFlag(ScarletDrawLayer.BeforePlayer))
                                 BeforePlayers.Add(pRPlayer);
-                            if (pRPlayer.LayerToRenderTo.HasFlag(HJScarletDrawLayer.BeforeDusts))
+                            if (pRPlayer.LayerToRenderTo.HasFlag(ScarletDrawLayer.BeforeDusts))
                                 BeforeDusts.Add(pRPlayer);
-                            if (pRPlayer.LayerToRenderTo.HasFlag(HJScarletDrawLayer.BeforeProjectiles))
+                            if (pRPlayer.LayerToRenderTo.HasFlag(ScarletDrawLayer.BeforeProjectiles))
                                 BeforeProjs.Add(pRPlayer);
                         }
                         if (pRPlayer.BlendState == BlendState.Additive)
                         {
-                            if (pRPlayer.LayerToRenderTo.HasFlag(HJScarletDrawLayer.BeforePlayer))
+                            if (pRPlayer.LayerToRenderTo.HasFlag(ScarletDrawLayer.BeforePlayer))
                                 BeforePlayers_Addictive.Add(pRPlayer);
-                            if (pRPlayer.LayerToRenderTo.HasFlag(HJScarletDrawLayer.BeforeDusts))
+                            if (pRPlayer.LayerToRenderTo.HasFlag(ScarletDrawLayer.BeforeDusts))
                                 BeforeDusts_Addictive.Add(pRPlayer);
 
                         }
@@ -206,7 +206,8 @@ namespace HJScarletRework.Core.PixelatedRender
             orig(self);
         }
         public static void DrawTarget_BeforeDust(On_Main.orig_DrawDust orig, Main self)
-        {            // 只有当前面标记启用时才会尝试画出
+        {            
+            // 只有当前面标记启用时才会尝试画出
             if (BeginDrawBeforeDusts)
             {
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);

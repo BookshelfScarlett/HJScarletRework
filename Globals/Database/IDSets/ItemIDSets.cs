@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Globals.IDSets
+namespace HJScarletRework.Globals.Database.IDSets
 {
     [ReinitializeDuringResizeArrays]
     public static class ScarletItemIDSets
@@ -60,7 +60,7 @@ namespace HJScarletRework.Globals.IDSets
         /// <br>对于部分具备其他非武器性质功能的物品而言可用，或者一些为饰品，但表现为武器的</br>
         /// </summary>
 
-        public static bool[] CountAsWeapon= ItemID.Sets.Factory.CreateBoolSet();
+        public static bool[] CountAsWeapon = ItemID.Sets.Factory.CreateBoolSet();
 
     }
 }

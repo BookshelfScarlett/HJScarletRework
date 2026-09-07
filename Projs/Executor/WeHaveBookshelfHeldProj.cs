@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -23,14 +24,14 @@ namespace HJScarletRework.Projs.Executor
         public bool ThirdSwing = false;
         public float SwingTime = 0;
         public float StopTiming = 0;
-        public List<int> BookcaseList = 
+        public List<int> BookcaseList =
             [
-            ItemID.Bookcase, 
-            ItemID.BorealWoodBookcase, 
-            ItemID.EbonwoodBookcase, 
-            ItemID.RichMahoganyBookcase, 
-            ItemID.BambooBookcase, 
-            ItemID.PalmWoodBookcase, 
+            ItemID.Bookcase,
+            ItemID.BorealWoodBookcase,
+            ItemID.EbonwoodBookcase,
+            ItemID.RichMahoganyBookcase,
+            ItemID.BambooBookcase,
+            ItemID.PalmWoodBookcase,
             ItemID.ShadewoodBookcase
             ];
         public int RandomBookcase = -1;
@@ -67,13 +68,13 @@ namespace HJScarletRework.Projs.Executor
             UpdatePlayerState();
             HandleExecution();
             if (Owner.HJScarlet().bookcaseBuffTime > 0 && Projectile.FinalUpdateNextBool(4))
-            ECSParticle.LightntingGlow(Owner.ToRandRec(), -Vector2.UnitY, RandLerpColor(Color.LimeGreen, Color.GreenYellow), 40, 1, 0.4f);
+                ECSParticle.LightntingGlow(Owner.ToRandRec(), -Vector2.UnitY, RandLerpColor(Color.LimeGreen, Color.GreenYellow), 40, 1, 0.4f);
         }
         public override void OnExecution()
         {
             Owner.HJScarlet().bookcaseBuffTime = GetSeconds(15);
             ScarletSound(HJScarletSounds.Misc_ManaClearUse, Owner.Center, 0.55f, 1, -0.84f, 0.2f);
-            for(int i =0;i<8;i++)
+            for (int i = 0; i < 8; i++)
             {
                 ECSParticle.LightntingGlow(Owner.ToRandRec(), -Vector2.UnitY, RandLerpColor(Color.LimeGreen, Color.GreenYellow), 40, 1, 0.4f);
             }
@@ -184,7 +185,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (Owner.HJScarlet().bookcaseBuffTime == 0)
                 Projectile.AddExecutionTimeImmediate(OriginalItemID);
-                target.HJScarlet().StopNpcTime = 16;
+            target.HJScarlet().StopNpcTime = 16;
             if (Projectile.numHits < 1)
             {
                 StopTiming = 4 * Projectile.MaxUpdates;
@@ -192,7 +193,7 @@ namespace HJScarletRework.Projs.Executor
                 ScarletSound(HJScarletSounds.Misc_GunHit, Projectile.Center, .65f, 1, -.32f, .1f);
             }
 
-            switch(RandomBookcase)
+            switch (RandomBookcase)
             {
                 case 0:
                     QuickSetParticle(target, RandLerpColor(Color.Brown, Color.Orange), RandLerpColor(Color.Brown, Color.Orange), DustID.DesertTorch);
@@ -215,7 +216,7 @@ namespace HJScarletRework.Projs.Executor
                 case 6:
                     QuickSetParticle(target, RandLerpColor(Color.DarkRed, Color.Red), RandLerpColor(Color.DarkRed, Color.Crimson), DustID.CrimsonTorch);
                     break;
-             }
+            }
         }
         public void QuickSetParticle(NPC target, Color smokeColor, Color starColor, int dType)
         {
@@ -252,8 +253,8 @@ namespace HJScarletRework.Projs.Executor
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
             Projectile.GetProjDrawInfo_Melee(out Texture2D tex, out Vector2 drawPosition, out float drawRotation, out Vector2 rotationPoint, out SpriteEffects flipSprite);
-            tex = GetVanillaAsset(Globals.Enums.VanillaAsset.Item,BookcaseList[RandomBookcase]);
-            
+            tex = GetVanillaAsset(VanillaAsset.Item, BookcaseList[RandomBookcase]);
+
             SB.FastDraw(tex, drawPosition, Color.White, drawRotation, rotationPoint, Projectile.scale, flipSprite);
             return false;
         }

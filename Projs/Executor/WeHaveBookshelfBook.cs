@@ -1,8 +1,7 @@
 ﻿using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
-using System;
 using Terraria;
 using Terraria.ID;
 
@@ -10,7 +9,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class WeHaveBookshelfBook : HJScarletProj
     {
-        public override string Texture => GetVanillaAssetPath(Globals.Enums.VanillaAsset.Item, ItemID.Book);
+        public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.Book);
         public ref float Timer => ref Projectile.ai[0];
         public enum State
         {

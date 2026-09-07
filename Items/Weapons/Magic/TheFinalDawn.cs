@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.DataStructures;
@@ -9,7 +9,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Magic
 {
-    public class TheFinalDawn:HJScarletWeapon
+    public class TheFinalDawn : HJScarletWeapon
     {
         public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override void SetStaticDefaults()

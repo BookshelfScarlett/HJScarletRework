@@ -38,7 +38,7 @@ namespace HJScarletRework.Projs.Pets
             Vector2 ori = frame.Size() / 2;
             Vector2 pos = Projectile.Center - Main.screenPosition;
             SpriteEffects se = Owner.direction > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            sb.Draw(tex, pos, frame, Color.White, 0, ori, Projectile.scale*.82f, se, 0);
+            sb.Draw(tex, pos, frame, Color.White, 0, ori, Projectile.scale * .82f, se, 0);
             return false;
         }
     }

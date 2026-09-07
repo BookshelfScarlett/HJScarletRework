@@ -1,8 +1,8 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using HJScarletRework.Items.Armor.ExecutorAlter;
@@ -32,12 +32,12 @@ namespace HJScarletRework.Globals.Instances.Projs
             Player Owner = Main.player[projectile.owner];
             //判定是否为悠悠球
             bool isYoyo = projectile.aiStyle == ProjAIStyleID.Yoyo && projectile.DamageType.CountsAsClass<ExecutorDamageClass>();
-            if (HasExecutionMechanic && ((!AddExecutionHit && projectile.numHits < 1)||isYoyo))
+            if (HasExecutionMechanic && ((!AddExecutionHit && projectile.numHits < 1) || isYoyo))
             {
                 HandleCowboy(Owner, target);
                 HandlePendant(Owner, target);
-                if(!isYoyo)
-                AddExecutionHit = true;
+                if (!isYoyo)
+                    AddExecutionHit = true;
             }
             HandleMaidReaperOnHit(Owner, projectile, target);
             HandleBlackKeyOnHit(Owner);

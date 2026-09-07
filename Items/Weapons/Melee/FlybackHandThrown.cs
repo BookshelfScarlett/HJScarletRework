@@ -1,6 +1,7 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Terraria;
@@ -16,7 +17,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool HasLegendary => true;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Eternity);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Eternity);
         }
         public override void ExSD()
         {

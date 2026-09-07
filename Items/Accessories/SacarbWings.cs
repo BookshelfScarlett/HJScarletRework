@@ -1,5 +1,4 @@
 ﻿using ContinentOfJourney.Buffs;
-using ContinentOfJourney.Items.Accessories;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;

@@ -2,7 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -89,7 +89,7 @@ namespace HJScarletRework.Projs.Executor
                 Owner.itemAnimation = 2;
             }
             Owner.heldProj = Projectile.whoAmI;
-            if (Owner.dead||Owner.HeldItem.type != OriginalItemID)
+            if (Owner.dead || Owner.HeldItem.type != OriginalItemID)
                 Projectile.Kill();
             else
                 Projectile.timeLeft = 2;
@@ -141,8 +141,8 @@ namespace HJScarletRework.Projs.Executor
             //}
             else if (!Helper.IsDone[2] && !Main.mouseLeft)
             {
-            if (OldAimPos.Count > 0)
-                OldAimPos.RemoveAt(0);
+                if (OldAimPos.Count > 0)
+                    OldAimPos.RemoveAt(0);
                 if (Main.mouseLeft)
                 {
                     Projectile.Kill();
@@ -254,7 +254,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(Projectile.HJScarlet().ExecutionStrike)
+            if (Projectile.HJScarlet().ExecutionStrike)
             {
                 for (int i = 0; i < 7; i++)
                 {
@@ -281,7 +281,7 @@ namespace HJScarletRework.Projs.Executor
             bool c = Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), beamBeginPos, beamEndPos, 64f, ref _);
             return c;
         }
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
 
         public void RenderPixelated(SpriteBatch spriteBatch)

@@ -2,7 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -69,8 +69,8 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateHeldState()
         {
             Projectile.Center = Owner.MountedCenter;
-                Owner.itemTime = 2;
-                Owner.itemAnimation = 2;
+            Owner.itemTime = 2;
+            Owner.itemAnimation = 2;
             Owner.heldProj = Projectile.whoAmI;
             if (Owner.dead)
                 Projectile.Kill();
@@ -200,7 +200,7 @@ namespace HJScarletRework.Projs.Executor
         {
             return false;
         }
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
 
         public void RenderPixelated(SpriteBatch spriteBatch)

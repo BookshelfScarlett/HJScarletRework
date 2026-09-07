@@ -39,14 +39,14 @@ namespace HJScarletRework.Projs.Executor
         public bool RightClicker = false;
         public override void ProjAI()
         {
-            if(Owner.JustPressRightClick()&&Owner.IsHolding(OriginalItemID))
+            if (Owner.JustPressRightClick() && Owner.IsHolding(OriginalItemID))
             {
                 Projectile.Kill();
                 return;
             }
 
             Projectile.velocity = Projectile.rotation.ToRotationVector2();
-            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike && Owner.IsHolding(OriginalItemID)&&Projectile.IsMe())
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike && Owner.IsHolding(OriginalItemID) && Projectile.IsMe())
             {
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Owner.RemoveExecutionProgress(OriginalItemID);

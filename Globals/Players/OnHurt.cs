@@ -1,10 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
 using HJScarletRework.Core.ScreenEffect;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.SaintChurch;
@@ -269,7 +269,7 @@ namespace HJScarletRework.Globals.Players
         {
             modifiers.ModifyHurtInfo += Modifiers_ModifyHurtInfo;
             float finalDamageModiflication = 1f;
-            if (KnifeMarkIndex == ProjectileType<DungeonKnifeMark>() && Player.ZoneDungeon&&NPC.AnyDanger(true,true))
+            if (KnifeMarkIndex == ProjectileType<DungeonKnifeMark>() && Player.ZoneDungeon && NPC.AnyDanger(true, true))
             {
                 finalDamageModiflication *= .85f;
             }

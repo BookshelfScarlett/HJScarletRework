@@ -35,7 +35,7 @@ namespace HJScarletRework.Globals.Systems
         {
             Description ??= Language.GetOrRegister("Mods.HJScarletRework.Conditions.Drop.PostSupremeCondition");
         }
-        public bool CanDrop( DropAttemptInfo info)
+        public bool CanDrop(DropAttemptInfo info)
         {
             return DownedBossSystem.downedLifeGod && DownedBossSystem.downedMatterGod && DownedBossSystem.downedTimeGod;
         }

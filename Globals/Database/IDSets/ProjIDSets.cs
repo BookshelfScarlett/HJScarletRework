@@ -3,7 +3,7 @@ using HJScarletRework.Projs.Executor;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Globals.IDSets
+namespace HJScarletRework.Globals.Database.IDSets
 {
     [ReinitializeDuringResizeArrays]
     public static class ScarletProjIDSets
@@ -94,6 +94,6 @@ ProjectileType<SlimeGodLightOrb>(), ProjectileType<SlimeGodLightOrb_2>(), Projec
             ProjectileType<SlimeGod_Master_30>(), ProjectileType<SlimeGod_Master_31>()
         #endregion
             );
-        public static bool[] IsHeldProj= ProjectileID.Sets.Factory.CreateBoolSet();
+        public static bool[] IsHeldProj = ProjectileID.Sets.Factory.CreateBoolSet();
     }
 }

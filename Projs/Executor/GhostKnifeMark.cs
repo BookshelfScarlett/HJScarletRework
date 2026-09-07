@@ -2,7 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
@@ -90,7 +90,7 @@ namespace HJScarletRework.Projs.Executor
         public virtual void ExProjAI() { }
         public override bool ShouldUpdatePosition() => false;
         public override bool? CanDamage() => false;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforePlayer;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforePlayer;
         public BlendState BlendState => BlendState.Additive;
 
         public void RenderPixelated(SpriteBatch sb)

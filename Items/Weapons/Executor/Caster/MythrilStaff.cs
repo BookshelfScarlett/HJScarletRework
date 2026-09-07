@@ -1,5 +1,5 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
+﻿using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.DataStructures;
@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor.Caster
 {
-    public class MythirlStaff :ExecutorWeaponClass
+    public class MythrilStaff : ExecutorWeaponClass
     {
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Caster;
         public override int ExecutionProgress => 25;

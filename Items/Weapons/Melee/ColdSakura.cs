@@ -1,6 +1,7 @@
 ﻿using ContinentOfJourney.Items.Material;
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetStaticDefaults()
         {
             ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.33f;
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Sakura);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Sakura);
         }
         public override void ExSD()
         {

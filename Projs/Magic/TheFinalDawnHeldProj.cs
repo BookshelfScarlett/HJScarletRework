@@ -1,18 +1,12 @@
 ﻿using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Magic;
-using Steamworks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HJScarletRework.Projs.Magic
 {
-    public class TheFinalDawnHeldProj :HJScarletProj, IPixelatedRenderer
+    public class TheFinalDawnHeldProj : HJScarletProj, IPixelatedRenderer
     {
         public override string Texture => GetInstance<TheFinalDawn>().Texture;
         public override EnumDamageClass Category => EnumDamageClass.Magic;
@@ -36,7 +30,7 @@ namespace HJScarletRework.Projs.Magic
             base.ProjAI();
         }
         public BlendState BlendState => BlendState.AlphaBlend;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
         }

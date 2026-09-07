@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Globals.List;
+﻿using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Items.Vanity.Arceca;
 using HJScarletRework.Items.Vanity.Misc;
 using HJScarletRework.Items.Vanity.Yards;

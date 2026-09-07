@@ -1,8 +1,5 @@
-﻿using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Accessories;
-using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow.ValueContentAnalysis;
+﻿using HJScarletRework.Items.Accessories;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players.AccessoriesSlot
@@ -18,7 +15,7 @@ namespace HJScarletRework.Globals.Players.AccessoriesSlot
             return isEnable;
         }
     }
-    public class CombatSlotAcceesorySlot :ModAccessorySlot
+    public class CombatSlotAcceesorySlot : ModAccessorySlot
     {
         public override string Name => "CombatSlot";
         public override string FunctionalBackgroundTexture => GetInstance<CombatSlot>().Texture;

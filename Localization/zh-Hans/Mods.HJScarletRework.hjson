@@ -31,7 +31,12 @@ SwitchWeapon: {
 }
 
 CrossModSupport.Calamity: 灾厄联动适配
-Keybinds.GeneralActionKeybind.DisplayName: 互动键
+
+Keybinds: {
+	GeneralActionKeybind.DisplayName: 互动键
+	// GenerialSkillKeybind.DisplayName: Generial Skill Keybind
+	// ParryActionKeybind.DisplayName: Parry Action Keybind
+}
 
 Projectiles: {
 	// DragonStaffHeldProj.DisplayName: Dragon Staff Held Proj

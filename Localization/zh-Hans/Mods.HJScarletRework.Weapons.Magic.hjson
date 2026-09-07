@@ -41,3 +41,18 @@ PestilenceFlower: {
 	DisplayName: 恶役之花
 	Tooltip: 快速释放触手攻击敌人
 }
+
+TheFinalDawn: {
+	DisplayName: 落日余晖
+	Tooltip:
+		'''
+		在光标位置降下一个小型太阳
+		小型太阳会在一定时间后展开为大型火柱，滞留在场上持续造成伤害
+		火柱会在消失时，对世界范围内的所有敌人造成一次伤害
+		'''
+}
+
+BrimstoneHeart: {
+	// DisplayName: Brimstone Heart
+	// Tooltip: ""
+}

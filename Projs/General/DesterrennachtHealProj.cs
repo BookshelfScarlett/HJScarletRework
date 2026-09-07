@@ -2,7 +2,7 @@
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
@@ -17,7 +17,7 @@ namespace HJScarletRework.Projs.General
         public override int HealAmt => 10;
         public override int TrailLength => 24;
         public override int ExtraUpdates => 2;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
         public override void OnFirstFrame()
         {

@@ -1,9 +1,11 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
@@ -12,7 +14,7 @@ namespace HJScarletRework.Items.Accessories
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
         }
         public override void ExSD()
         {
@@ -22,10 +24,10 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
+            player.GetCritChance<GenericDamageClass>() -= 100;
         }
         public override void AddRecipes()
         {
-            base.AddRecipes();
         }
 
     }

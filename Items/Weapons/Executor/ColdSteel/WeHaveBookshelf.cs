@@ -1,5 +1,6 @@
-﻿using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
+﻿using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -13,7 +14,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
     /// </summary>
     public class WeHaveBookshelf : ExecutorWeaponClass
     {
-        public override string Texture => GetVanillaAssetPath(Globals.Enums.VanillaAsset.Item, ItemID.Bookcase);
+        public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.Bookcase);
         public override int ExecutionProgress => 20;
         public override void ExSSD()
         {

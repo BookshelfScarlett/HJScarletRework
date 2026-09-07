@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Globals.Graphics.ParticleECS;
-using HJScarletRework.Globals.Methods;
 using Terraria;
 
 namespace HJScarletRework.Core.ParticleECS

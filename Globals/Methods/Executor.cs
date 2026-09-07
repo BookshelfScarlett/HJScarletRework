@@ -1,10 +1,9 @@
-﻿using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Keybinds;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Players;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -132,7 +131,8 @@ namespace HJScarletRework.Globals.Methods
             bool hasReforged = ModLoader.HasMod("ExpandedReforge");
             if (!item.DamageType.CountsAsClass<ExecutorDamageClass>() && !hasReforged)
                 return false;
-            int executionTime = HJScarletList.ExecuteRequests[itemID];
+            if (!HJScarletList.ExecuteRequests.TryGetValue(itemID, out int executionTime))
+                return false;
             if (usPlayer.tacticalExecution)
             {
                 if (usPlayer.tacticalExecutionInputCache == 0)
@@ -245,7 +245,7 @@ namespace HJScarletRework.Globals.Methods
         /// </summary>
         public static int GetExecuteProgress(this Player player, Item item)
         {
-            if(!item.IsLegal())
+            if (!item.IsLegal())
                 return -1;
             if (!item.DamageType.CountsAsClass<ExecutorDamageClass>())
                 return -1;

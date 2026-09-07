@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -58,7 +58,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            ScarletSound(HJScarletSounds.DeathsToll_Toss, Projectile.Center,.75f);
+            ScarletSound(HJScarletSounds.DeathsToll_Toss, Projectile.Center, .75f);
             Helper.MaxProgress[0] = GetSeconds(20);
             Helper.MaxProgress[1] = 85;
             Helper.MaxProgress[2] = 60;
@@ -124,7 +124,6 @@ namespace HJScarletRework.Projs.Executor
 
         public void HandleMinionShootAnimation(Vector2 offset)
         {
-
             Vector2 aimVec = Owner.LocalMouseWorld();
             float anchorPosX = Owner.MountedCenter.X - Owner.direction * 120f;
             float anchorPosY = Owner.MountedCenter.Y - (60f * MathF.Sin(Oscillation) / 9f + 130);

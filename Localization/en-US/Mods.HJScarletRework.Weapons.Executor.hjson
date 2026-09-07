@@ -488,6 +488,7 @@ ASMD: {
 		The final explosion bursts out multiple ice chunks from the body, lingering on the field
 		Subsequent shell hits will cause one ice chunk to chase that enemy and grant you Execution Progress
 		'''
+	AlterDisplayName: ""
 }
 
 SickleAndTorch: {
@@ -758,4 +759,9 @@ TitaniumBattleShovel: {
 	DisplayName: Titanium Battle Shovel
 	Tooltip: ""
 	ExecutionStrike: ""
+}
+
+MythrilStaff: {
+	DisplayName: Mythril Staff
+	Tooltip: ""
 }

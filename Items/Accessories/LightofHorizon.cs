@@ -1,15 +1,14 @@
-﻿using ContinentOfJourney;
-using ContinentOfJourney.Buffs;
+﻿using ContinentOfJourney.Buffs;
 using ContinentOfJourney.Items.Accessories;
 using ContinentOfJourney.Items.Accessories.GrazeBadge;
 using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Tiles;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Materials;
+using HJScarletRework.Globals.Database.Enums;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -28,7 +27,7 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Matter);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Matter);
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             if (Main.netMode != 2)
             {
@@ -39,7 +38,7 @@ namespace HJScarletRework.Items.Accessories
         public override void ExSD()
         {
             Item.accessory = true;
-            Item.expert= true;
+            Item.expert = true;
             Item.SetUpRarityPrice(ItemRarityID.Red);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)

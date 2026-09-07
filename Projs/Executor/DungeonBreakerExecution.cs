@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -149,7 +149,7 @@ namespace HJScarletRework.Projs.Executor
         public void SpawnWaterbolt()
         {
             Vector2 projPos = Projectile.Center + OldVec * 10f;
-            if (Projectile.timeLeft % GetSeconds(1) == 0&&Projectile.IsMe())
+            if (Projectile.timeLeft % GetSeconds(1) == 0 && Projectile.IsMe())
             {
                 new ShinyCrossStar(projPos, Vector2.Zero, RandLerpColor(Color.RoyalBlue, Color.MidnightBlue), 40, 0, 1, 2.4f, useLegacy: false).Spawn();
                 ScarletSound(SoundID.Item60, Projectile.Center, instances: 0);
@@ -416,9 +416,9 @@ namespace HJScarletRework.Projs.Executor
                 else
                 {
 
-                    ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, Projectile.Center, 1, 1, -.4f,variantType:1);
+                    ScarletSound(HJScarletSounds.Smash_AirHeavyAlt, Projectile.Center, 1, 1, -.4f, variantType: 1);
                 }
-                    UpdateOnTileParticle(Projectile.velocity);
+                UpdateOnTileParticle(Projectile.velocity);
                 Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<DungeonBreakerShockwave>(), Projectile.damage, 1f, Owner.whoAmI);
             }
         }

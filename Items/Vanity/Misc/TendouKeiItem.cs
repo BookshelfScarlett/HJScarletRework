@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Vanity.Misc
 {
@@ -18,14 +12,6 @@ namespace HJScarletRework.Items.Vanity.Misc
         {
             EquipLoader.AddEquipTexture(Mod, $"{VanityPrefix}Back", EquipType.Back, this);
         }
-        public override void ExSSD()
-        {
-        }
-        public override void ExSD()
-        {
-            base.ExSD();
-        }
         public override string VanityName => "TendouKei";
-
     }
 }

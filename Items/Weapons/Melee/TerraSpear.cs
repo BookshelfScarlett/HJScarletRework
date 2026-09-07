@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Instances.Items;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Projs.Melee;
 using Terraria.ID;
 
@@ -12,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override bool HasLegendary => false;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.Life);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Life);
         }
         public override void ExSD()
         {

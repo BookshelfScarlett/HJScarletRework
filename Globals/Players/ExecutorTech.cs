@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Globals.List;
+﻿using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;

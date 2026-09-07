@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Instances.Items
 {
-    public partial class HJScarletGlobalItem:GlobalItem
+    public partial class HJScarletGlobalItem : GlobalItem
     {
         public override bool PreDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {

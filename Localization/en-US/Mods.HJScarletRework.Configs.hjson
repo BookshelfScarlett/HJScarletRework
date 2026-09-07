@@ -104,4 +104,9 @@ HJScarletConfigServer: {
 		Label: Lostbelt Journey Test A I
 		Tooltip: ""
 	}
+
+	ModWeaponDamageMult: {
+		Label: Mod Weapon Damage Mult
+		Tooltip: ""
+	}
 }

@@ -1,15 +1,13 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -100,7 +98,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ScarletSound(HJScarletSounds.Smash_GroundHeavy,target.Center, instances:0, pitchVariance: .05f, pitch: .75f, volume: .7f);
+            ScarletSound(HJScarletSounds.Smash_GroundHeavy, target.Center, instances: 0, pitchVariance: .05f, pitch: .75f, volume: .7f);
             PrettySpark(hit.Damage);
         }
         private void PrettySpark(int hitDamage)

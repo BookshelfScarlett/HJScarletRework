@@ -1,7 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -12,7 +13,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.AlphaBlend;
 
         private ref float Counter => ref Projectile.ai[0];
@@ -99,11 +100,10 @@ namespace HJScarletRework.Projs.Executor
             int laserLengthScale = 35;
             //基础大小设定
             Vector2 baseScale = Projectile.scale * 0.32f * new Vector2(1, opc);
-            DrawLaser(warn, drawPos, Color.DarkOrange * opc, baseScale * new Vector2(laserLengthScale, 1.2f));
-            DrawLaser(warn, drawPos, Color.Orange * opc, baseScale * new Vector2(laserLengthScale, 0.8f));
-            DrawLaser(warn, drawPos, Color.LightYellow * opc, baseScale * new Vector2(laserLengthScale, 0.65f));
-            DrawLaser(warn, drawPos, Color.White * opc, baseScale * new Vector2(laserLengthScale, 0.35f));
-
+                DrawLaser(warn, drawPos, Color.DarkOrange * opc, baseScale * new Vector2(laserLengthScale, 1.2f));
+                DrawLaser(warn, drawPos, Color.Orange * opc, baseScale * new Vector2(laserLengthScale, 0.8f));
+                DrawLaser(warn, drawPos, Color.LightYellow * opc, baseScale * new Vector2(laserLengthScale, 0.65f));
+                DrawLaser(warn, drawPos, Color.White * opc, baseScale * new Vector2(laserLengthScale, 0.35f));
             HJScarletMethods.EndShaderAreaPixel();
         }
     }

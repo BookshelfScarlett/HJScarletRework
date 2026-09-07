@@ -1,7 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace HJScarletRework.Globals.List
+namespace HJScarletRework.Globals.Database.List
 {
     public partial class HJScarletList : ModSystem
     {
@@ -214,11 +213,11 @@ namespace HJScarletRework.Globals.List
                 //排除掉所有召唤武器
                 bool isWeapon = item.damage > 0 && !item.DamageType.CountsAsClass<SummonDamageClass>() && item.shoot != ProjectileID.None;
                 Projectile proj2 = ContentSamples.ProjectilesByType[item.shoot];
-                if(isWeapon)
+                if (isWeapon)
                 {
                     string internalName = proj2.GetType().Name;
                     bool shouldBanned = heldProjNameMaybe.Any(i => internalName.Contains(i, System.StringComparison.OrdinalIgnoreCase));
-                    if(!shouldBanned)
+                    if (!shouldBanned)
                     {
                         PandorasBurgerWeaponList.Add(item.type);
                     }

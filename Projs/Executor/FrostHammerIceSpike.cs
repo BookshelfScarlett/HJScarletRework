@@ -1,11 +1,10 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleScarlet;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.Graphics.ParticleScarlet;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using System;
@@ -18,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class FrostHammerIceSpike : HJScarletProj, IPixelatedRenderer
     {
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
 
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Projectile, ProjectileID.NorthPoleSnowflake);
@@ -90,15 +89,7 @@ namespace HJScarletRework.Projs.Executor
                 new ShinyCrossStar(Projectile.Center.ToRandCirclePos(10), Vector2.UnitY * Main.rand.NextFloat(1.8f, 5.4f), RandLerpColor(Color.SkyBlue, Color.RoyalBlue), 40, 0, 1, 0.68f * Main.rand.NextFloat(0.8f, 1.1f)).Spawn();
             if (Main.rand.NextBool(9))
             {
-                ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                {
-                    p.Position = Projectile.Center.ToRandCirclePos(10);
-                    p.Velocity = Projectile.velocity.ToRandVelocity(ToRadians(10f), 1.2f, 4.2f);
-                    p.DrawColor = RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue);
-                    p.Lifetime = 40;
-                    p.Scale = Projectile.scale * Main.rand.NextFloat(0.8f, 1.1f) * .1f;
-                    p.GlowCenterMult = 0.75f;
-                });
+                ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePos(10), Projectile.velocity.ToRandVelocity(ToRadians(10f), 1.2f, 4.2f), RandLerpColor(Color.RoyalBlue, Color.DeepSkyBlue), 40, 1, Main.rand.NextFloat(.8f, 1.1f) * Projectile.scale * .1f, .75f);
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -117,16 +108,7 @@ namespace HJScarletRework.Projs.Executor
             }
             for (int i = 0; i < 16; i++)
             {
-                ScarletParticle.Spawn<HRShinyOrbAlt>(p =>
-                {
-                    p.Position = Projectile.Center.ToRandCirclePos(10);
-                    p.Velocity = -Projectile.oldVelocity.ToRandVelocity(0, 0.4f, 10f);
-                    p.Scale = Main.rand.NextFloat(0.9f, 1.1f) * 0.1f;
-                    p.Opacity = 1f;
-                    p.DrawColor = RandLerpColor(Color.AliceBlue, Color.RoyalBlue);
-                    p.Lifetime = 40;
-                    p.GlowCenterMult = 0.5f;
-                });
+                ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePos(10), -Projectile.oldVelocity.ToRandVelocity(ToRadians(2f), .4f, 12f), RandLerpColor(Color.RoyalBlue, Color.AliceBlue), 40, 1, Main.rand.NextFloat(.8f, 1.1f) * Projectile.scale * .1f, .5f);
             }
             SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 1, Volume = 0.25f, PitchVariance = 0.05f, Pitch = -0.3f });
 

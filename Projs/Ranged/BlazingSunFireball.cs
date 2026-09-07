@@ -1,8 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -13,7 +14,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.Ranged
 {
-    public class BlazingSunFireball : HJScarletProj, IPixelatedRenderer
+    public class BlazingSunFireball : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
@@ -68,12 +69,12 @@ namespace HJScarletRework.Projs.Ranged
             }
             else
             {
-                if (Owner.channel &&Projectile.IsMe())
+                if (Owner.channel && Projectile.IsMe())
                 {
                     Projectile.Opacity = Lerp(Projectile.Opacity, 1.01f, .2f);
                     Vector2 targetPos = Owner.MountedCenter - Vector2.UnitY.RotatedBy(Projectile.rotation) * Direction * 50f;
-                     Projectile.Center = Vector2.Lerp(Projectile.Center, targetPos, .4f);
-                    
+                    Projectile.Center = Vector2.Lerp(Projectile.Center, targetPos, .4f);
+
                     Projectile.rotation = Projectile.Center.GetNormalVector2(Main.MouseWorld).ToRotation();
 
                     if (Projectile.Opacity >= 1f)
@@ -142,12 +143,6 @@ namespace HJScarletRework.Projs.Ranged
             target.AddBuff(BuffID.OnFire3, GetSeconds(5));
             base.OnHitNPC(target, hit, damageDone);
         }
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
-        public BlendState BlendState => BlendState.Additive;
-        public void RenderPixelated(SpriteBatch sb)
-        {
-        }
-
         public override bool PreDraw(ref Color lightColor)
         {
             if (!Projectile.HJScarlet().FirstFrame)
@@ -165,10 +160,12 @@ namespace HJScarletRework.Projs.Ranged
             SB.FastDraw(orb, center, Color.Orange, Projectile.rotation + PiOver2, orb.Size() / 2f, glowSize, 0);
             SB.FastDraw(orb, center, Color.White, Projectile.rotation, orb.Size() / 2f, glowSize * .85f, 0);
             SB.FastDraw(orb, center, Color.White, Projectile.rotation + PiOver2, orb.Size() / 2f, glowSize * .85f, 0);
-            DrawBeam(SB, Color.Lerp(Color.Orange, Color.Red, 0.5f), 0.12f * Projectile.scale);
-            DrawBeam(SB, Color.Lerp(Color.OrangeRed, Color.Orange, 0.55f), 0.10f * Projectile.scale);
-            DrawBeam(SB, Color.Lerp(Color.Orange, Color.White, 0.62f), 0.08f * Projectile.scale);
-            DrawBeam(SB, Color.White, 0.05f * Projectile.scale);
+            SB.End();
+            SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
+                DrawBeam(SB, Color.Lerp(Color.Orange, Color.Red, 0.5f), 0.12f * Projectile.scale);
+                DrawBeam(SB, Color.Lerp(Color.OrangeRed, Color.Orange, 0.55f), 0.10f * Projectile.scale);
+                DrawBeam(SB, Color.Lerp(Color.Orange, Color.White, 0.62f), 0.08f * Projectile.scale);
+                DrawBeam(SB, Color.White, 0.05f * Projectile.scale);
             SB.EndShaderArea();
 
             return false;
@@ -186,7 +183,7 @@ namespace HJScarletRework.Projs.Ranged
             shader.CurrentTechnique.Passes[0].Apply();
             Vector2 orig = new(0, value.Height() / 2);
             float xScale = BeamLength / value.Width();
-            sb.Draw(value.Value, Projectile.Center - Main.screenPosition - Projectile.SafeDirByRot() * 5f, null, Color.White, Projectile.rotation, orig, new Vector2(xScale * Clamp(Timer / (float)(ShootTimer), 0f, 1f), height * 0.59f), 0, 0);
+            sb.Draw(value.Value, Projectile.Center - Main.screenPosition - Projectile.SafeDirByRot() * 5f, null, color, Projectile.rotation, orig, new Vector2(xScale * Clamp(Timer / (float)(ShootTimer), 0f, 1f), height * 0.6f), 0, 0);
         }
 
     }

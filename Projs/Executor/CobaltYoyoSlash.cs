@@ -1,21 +1,21 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class CobaltYoyoSlash :HJScarletProj
+    public class CobaltYoyoSlash : HJScarletProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override void ExSD()
         {
             Projectile.MaxUpdates = 3;
-            Projectile.SetupImmnuity(10*Projectile.MaxUpdates);
+            Projectile.SetupImmnuity(10 * Projectile.MaxUpdates);
             Projectile.penetrate = 4;
             Projectile.timeLeft = 600;
             Projectile.noEnchantmentVisuals = true;
@@ -46,7 +46,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 ECSParticle.ShinyCrossStarECS(target.Center, RandVelTwoPi(1f, 4.5f), RandLerpColor(Color.SkyBlue, Color.LightSkyBlue), 25, 1, Projectile.scale * Main.rand.NextFloat(.90f, 1.05f) * .75f, .2f);
             }
-            ScarletSound(SoundID.DD2_GoblinBomb, Projectile.Center,volume : .75f,pitch : .6f);
+            ScarletSound(SoundID.DD2_GoblinBomb, Projectile.Center, volume: .75f, pitch: .6f);
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -55,7 +55,7 @@ namespace HJScarletRework.Projs.Executor
             float scale = Projectile.scale * 0.62f;
             SB.EnterShaderArea();
             SB.FastDraw(tex, pos, Color.RoyalBlue, 0, tex.Size() / 2f, scale, 0);
-            SB.FastDraw(tex, pos, Color.LightSkyBlue, 0, tex.Size() / 2f, scale*.95f,0);
+            SB.FastDraw(tex, pos, Color.LightSkyBlue, 0, tex.Size() / 2f, scale * .95f, 0);
             SB.EndShaderArea();
             return false;
         }

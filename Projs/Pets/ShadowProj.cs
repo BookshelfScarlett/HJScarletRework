@@ -2,11 +2,10 @@
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Pets
 {
-    public class ShadowProj:ScarletPetProjClass
+    public class ShadowProj : ScarletPetProjClass
     {
         public override int TotalFrames => 12;
         public override void SetStaticDefaults()
@@ -14,7 +13,7 @@ namespace HJScarletRework.Projs.Pets
             ProjectileID.Sets.LightPet[Type] = true;
             Main.projPet[Type] = true;
         }
-        
+
         public override void ExSD()
         {
             base.ExSD();
@@ -25,7 +24,7 @@ namespace HJScarletRework.Projs.Pets
             if (Owner.HJScarlet().petShadow)
                 Projectile.timeLeft = 2;
             if (Owner.dead)
-                Owner.HJScarlet().petShadow= false;
+                Owner.HJScarlet().petShadow = false;
 
             base.SimplePetFunction();
         }
@@ -46,4 +45,4 @@ namespace HJScarletRework.Projs.Pets
             return false;
         }
     }
- }
+}

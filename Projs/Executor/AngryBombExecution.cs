@@ -2,7 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -160,7 +160,7 @@ namespace HJScarletRework.Projs.Executor
             BombRotation += Lerp(0.15f, 0.01f, progress);
             ChargingParticle();
             PosLerp = Helper.GetAniProgress(1);
-            if (Projectile.GetTargetSafe(out NPC target,searchDistance:1800))
+            if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1800))
                 Target = target;
 
         }

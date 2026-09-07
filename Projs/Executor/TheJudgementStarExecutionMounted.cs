@@ -1,9 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Graphics.Particles;
-using HJScarletRework.Globals.IDSets;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.Audio;
@@ -13,7 +13,7 @@ namespace HJScarletRework.Projs.Executor
 {
     public class TheJudgementStarExecutionMounted : HJScarletProj, IPixelatedRenderer
     {
-        public HJScarletDrawLayer LayerToRenderTo => HJScarletDrawLayer.BeforeDusts;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.AlphaBlend;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
@@ -98,7 +98,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 float totalOffset = i * TwoPi / TotalProjCounts;
                 Vector2 dir = Vector2.UnitX.RotatedBy(beginAngle + totalOffset);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 8f, ProjectileType<TheJudgementStarExecution>(), (int)(Projectile.damage /2), Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir * 8f, ProjectileType<TheJudgementStarExecution>(), (int)(Projectile.damage / 2), Projectile.knockBack, Projectile.owner);
                 if (TargetNPC.CanBeChasedBy() && TargetNPC != null)
                     ((TheJudgementStarExecution)proj.ModProjectile).TargetNPC = TargetNPC;
                 for (int j = 0; j < 12; j++)

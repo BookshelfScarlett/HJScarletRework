@@ -174,7 +174,7 @@ namespace HJScarletRework.Projs.Executor
             if (count == 0)
                 return;
             float ratios = Utils.GetLerpValue(0, 15, count, true);
-            Owner.HJScarlet().containedBlastBuffTime = (int)Lerp(5, 15, ratios) *60;
+            Owner.HJScarlet().containedBlastBuffTime = (int)Lerp(5, 15, ratios) * 60;
             Owner.HJScarlet().containedBlastBoomCount = Lerp(0f, .45f, ratios);
         }
         public bool HandleDeadOrAlive()

@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Buffs.Pets;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Projs.Pets;
 using Terraria.ID;
 
@@ -9,7 +10,7 @@ namespace HJScarletRework.Items.Pets
     {
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
         }
         public override void BuffAndProj()
         {

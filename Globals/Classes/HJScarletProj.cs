@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Globals.Configs;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using Terraria;

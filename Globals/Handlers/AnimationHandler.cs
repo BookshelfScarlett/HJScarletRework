@@ -55,5 +55,15 @@ namespace HJScarletRework.Globals.Handlers
                 baseRotation = baseRotation * Filp;
             return baseRotation;
         }
+        public static Vector2 ToTargetPosByMartix(this float rot, float tarScale, float width = 1, float height = 1)
+        {
+            Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(width, height, 1);
+            Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * tarScale;
+            return tarPos;
+        }
+        public static float ToCurAnimationRot(this AnimationStruct helper, float beginAngle, float endAngle, int dir, bool Flip, float easedProgress, float preFlipAdd = 0)
+        {
+            return helper.UpdateAngle(beginAngle * Flip.ToDirectionInt(), endAngle * Flip.ToDirectionInt(), dir, easedProgress, preFlipAdd);
+        }
     }
 }

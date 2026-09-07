@@ -2,7 +2,7 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -36,11 +36,11 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            if(Projectile.HJScarlet().ExecutionStrike)
-            Projectile.tileCollide = false;
+            if (Projectile.HJScarlet().ExecutionStrike)
+                Projectile.tileCollide = false;
             else
-            Projectile.tileCollide = true;
-                BombRotation = RandRotTwoPi;
+                Projectile.tileCollide = true;
+            BombRotation = RandRotTwoPi;
             Helper.MaxProgress[0] = 15 * Projectile.MaxUpdates;
             Helper.MaxProgress[1] = 16 * Projectile.MaxUpdates;
             if (Projectile.HJScarlet().ExecutionStrike)
@@ -258,7 +258,7 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 pos = Projectile.Center.ToRandCirclePosEdge(16);
                     ECSParticle.StarShape(pos, Projectile.Center.GetNormalVector2(pos) * Main.rand.NextFloat(0.3f, 1f) * 7f, RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(0, 55), 1, 0.8f * Main.rand.NextFloat(.7f, 1.1f), .89f, BlendState.Additive);
                 }
-                ScarletSound(HJScarletSounds.Frostwave_Boom , Projectile.Center, .685f, 0, 0.88f, .1f);
+                ScarletSound(HJScarletSounds.Frostwave_Boom, Projectile.Center, .685f, 0, 0.88f, .1f);
 
                 SoundEngine.PlaySound(HJScarletSounds.Frostwave_Boom with { MaxInstances = 0, Pitch = 0.872f, Volume = 0.85f }, Projectile.Center);
             }

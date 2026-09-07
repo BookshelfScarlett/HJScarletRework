@@ -1,23 +1,21 @@
-﻿using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Core.ScreenEffect;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using HJScarletRework.Items.Weapons.Requirement;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class HeadsplosionHeldProj :ExecutorHeldProj
+    public class HeadsplosionHeldProj : ExecutorHeldProj
     {
         public override string Texture => GetInstance<Headsplosion>().Texture;
         public override int OriginalItemID => ItemType<Headsplosion>();
         public ref float Timer => ref Projectile.ai[0];
         public ref float RecoilTimer => ref Projectile.localAI[0];
-        public float RecoilPower = 30;
+        public float RecoilPower = 20;
         public override void ExSD()
         {
             Projectile.SetDefaultsHeldProj(2);
@@ -31,7 +29,96 @@ namespace HJScarletRework.Projs.Executor
         {
             UpdateHeldProjState();
             UpdatePlayerState();
+            UpdateAttack();
+            //计时器的重置
+            if (RecoilTimer > 0)
+                RecoilTimer--;
+
         }
+
+        public void UpdateAttack()
+        {
+            if (IsUsing)
+            {
+                DoAttack();
+            }
+            else
+            {
+                if (Timer < AttackSpeed)
+                    Timer++;
+            }
+
+        }
+        public void DoAttack()
+        {
+            Timer++;
+            Owner.itemAnimation = Owner.itemTime = 2;
+            int attackSpeed = AttackSpeed;
+            if (Timer < attackSpeed)
+                return;
+            if (Projectile.IsMe())
+            {
+                HandleShoot();
+            }
+            Timer = 0;
+            RecoilTimer = attackSpeed;
+
+        }
+
+        public void HandleShoot()
+        {
+            Vector2 offset = new Vector2(90, -5 * Projectile.direction).RotatedBy(Projectile.rotation);
+            Vector2 pos = Projectile.Center + offset;
+            Vector2 dir = Projectile.SafeDirByRot();
+            int type = ProjectileType<HeadsplosionBullet>();
+            HandleExecution();
+            if (Projectile.HJScarlet().ExecutionStrike)
+            {
+                type = ProjectileType<MonocleBulletExecution>();
+            }
+            pos -= new Vector2(80, 0).RotatedBy(Projectile.rotation);
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+            proj.HJScarlet().HasExecutionMechanic = true;
+            if (Projectile.HJScarlet().ExecutionStrike)
+            {
+                ScarletSound(HJScarletSounds.ASMD_ExecutionFire, Projectile.Center, 0.30f, 0, .24f, 0.1f);
+                ScreenDarknessSystem.AddScreenDarkness(0.75f, 20);
+            }
+            else
+                ScarletSound(HJScarletSounds.ASMD_Fire, Projectile.Center, 0.20f, 0, .34f, 0.1f);
+
+            pos = Projectile.Center + offset;
+            //震屏，粒子特效
+            ScreenShakeSystem.AddScreenShakes(pos, 12 + Projectile.HJScarlet().ExecutionStrike.ToInt() * 12, 60, -Projectile.SafeDirByRot().ToRotation(), 0, true, easingFunc: EaseOutExpo);
+            Vector2 particleOffset = new Vector2(10, 0 * Projectile.direction).RotatedBy(Projectile.rotation);
+            for (int i = 0; i < 36; i++)
+            {
+                Vector2 pos2 = pos.ToRandCirclePos(8) - particleOffset;
+                Vector2 vel = Projectile.SafeDirByRot().ToRandVelocity(ToRadians(15), .1f, 11.6f);
+                float scale = Projectile.scale * Main.rand.NextFloat(.95f, 1.15f) * 0.48f;
+                int timeLeft = Main.rand.Next(30, 45);
+                ECSParticle.ShinyCrossStarECS(pos2, vel, RandLerpColor(Color.Goldenrod, Color.White), timeLeft, 1, scale);
+            }
+            for (int i = 0; i < 36; i++)
+            {
+                Vector2 pos2 = pos.ToRandCirclePos(3) - particleOffset;
+                Vector2 vel = Projectile.SafeDirByRot().ToRandVelocity(ToRadians(0), .1f, 19.6f);
+                float scale = Projectile.scale * Main.rand.NextFloat(.95f, 1.15f) * 0.38f;
+                int timeLeft = Main.rand.Next(30, 45);
+                ECSParticle.LightntingGlow(pos2, vel, RandLerpColor(Color.Goldenrod, Color.White), timeLeft, 1, scale);
+            }
+            if (Projectile.HJScarlet().ExecutionStrike)
+            {
+                for (int i = 0; i < 24; i++)
+                {
+                    bool alt = Main.rand.NextBool();
+                    BlendState bs = alt ? BlendState.Additive : BlendState.AlphaBlend;
+                    ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(15), 0.4f, 21.4f), RandLerpColor(Color.Violet, Color.White), Main.rand.Next(45, 65), RandRotTwoPi, 1, 0.33f * Main.rand.NextFloat(.95f, 1.25f), alt, bs);
+                }
+            }
+            Projectile.HJScarlet().ExecutionStrike = false;
+        }
+
 
         public void UpdateHeldProjState()
         {
@@ -81,7 +168,7 @@ namespace HJScarletRework.Projs.Executor
             float progress = Utils.GetLerpValue(0, AttackSpeed, RecoilTimer, true);
             float scale = Projectile.scale;
             for (int i = 0; i < 8; i++)
-                SB.Draw(tex, drawPos + (TwoPi / 8f * i).ToRotationVector2() * 3f * EaseInCubic(progress), null, Color.Red.ToAddColor(), drawRot, rotPoint, scale, se, 0);
+                SB.Draw(tex, drawPos + (TwoPi / 8f * i).ToRotationVector2() * 3f * EaseInCubic(progress), null, Color.Goldenrod.ToAddColor(), drawRot, rotPoint, scale, se, 0);
             SB.Draw(tex, drawPos, null, Color.White, drawRot, rotPoint, scale, se, 0);
             return false;
         }

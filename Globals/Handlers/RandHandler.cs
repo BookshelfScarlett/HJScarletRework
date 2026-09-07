@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Database.Enums;
 using Terraria;
 using Terraria.GameContent;
 

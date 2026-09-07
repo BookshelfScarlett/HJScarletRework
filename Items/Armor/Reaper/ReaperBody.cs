@@ -1,8 +1,8 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.List;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Useables;
 using System.Collections.Generic;
 using Terraria;
@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Armor.Reaper
         public float CritDamage = 0.15f;
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.ScarletRed);
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritDamage.ToPercent());
         public int Defense = 50;

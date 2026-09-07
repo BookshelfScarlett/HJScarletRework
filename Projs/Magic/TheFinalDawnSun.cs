@@ -1,18 +1,12 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Enums;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Projs.Magic
 {
-    public class TheFinalDawnSun:HJScarletProj
+    public class TheFinalDawnSun : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override string Texture => GetInstance<SlimeGodShield>().Texture;
@@ -36,7 +30,7 @@ namespace HJScarletRework.Projs.Magic
         {
             return base.CanDamage();
         }
-        
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             base.OnHitNPC(target, hit, damageDone);

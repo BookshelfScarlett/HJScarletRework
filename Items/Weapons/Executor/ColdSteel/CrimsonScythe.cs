@@ -1,8 +1,9 @@
 ﻿using ContinentOfJourney;
 using HJScarletRework.Globals.Configs;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.IDSets;
-using HJScarletRework.Globals.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
 using HJScarletRework.Globals.Systems;
@@ -25,7 +26,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.ColdSteel;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Enums.ShinyRarityType.ScarletRed);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.ScarletRed);
             ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
@@ -91,7 +92,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
                 }
 
                 string categoryText = Mod.GetLocalizationKey($"ExecutorDamageClass.WeaponType.{ExecutorWeaponType}").ToLangValue();
-                int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework")-1;
+                int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework") - 1;
                 if (!traditionalMode)
                     executionLineIndex = executionProgressIndex - 1;
                 var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", "-" + categoryText + "-")
@@ -109,8 +110,8 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
                 2 => "AllStuff",
                 _ => "NoKilling",
             };
-            string killerText = this.GetLocalizationKey("KillerType."+killName);
-            tooltips.CreateTooltip(killerText, Color.SkyBlue, Mod, "KillerTypeName", killerType+1);
+            string killerText = this.GetLocalizationKey("KillerType." + killName);
+            tooltips.CreateTooltip(killerText, Color.SkyBlue, Mod, "KillerTypeName", killerType + 1);
             CacheTooltipList = tooltips;
             ExModifyTooltips(tooltips);
         }
