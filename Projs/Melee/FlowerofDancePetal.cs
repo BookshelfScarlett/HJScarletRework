@@ -145,7 +145,6 @@ namespace HJScarletRework.Projs.Melee
             {
                 SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
                 DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DeepSkyBlue, 1.2f);
-                //DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.Black, 1.12f);
             });
             SB.EnterShaderArea();
             DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.Aquamarine, 1f);

@@ -1,5 +1,7 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Methods;
 using Terraria;
 
 namespace HJScarletRework.Projs.Melee
@@ -9,7 +11,7 @@ namespace HJScarletRework.Projs.Melee
         public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults()
         {
-            base.SetStaticDefaults();
+            Projectile.ToTrailSetting(16);
         }
         public override void ExSD()
         {

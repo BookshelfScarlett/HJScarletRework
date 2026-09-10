@@ -3,6 +3,7 @@ using HJScarletRework.Core.MetaballSystem;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.ScreenEffect;
+using HJScarletRework.Core.SeperateVisualEffect;
 using HJScarletRework.Globals.ParticleSystem;
 using Terraria;
 using Terraria.Graphics.Effects;
@@ -14,26 +15,48 @@ namespace HJScarletRework.Core
     {
         public override void Load()
         {
+            //屏幕暗化效果
             On_Main.DrawBackground += ScreenDarknessSystem.DrawScreenDarkness;
+            //Metaball层级，可以考虑直接分离出去
             On_Main.DrawDust += MetaballManager.DrawRenderTarget;
-            On_Main.DrawDust += BaseParticleManager.DrawParticles;
+            //ECS粒子
             On_Main.DrawDust += ECSParticleDataManager.DrawParticle_ECS;
+            //使用类射弹的实例化粒子
+            On_Main.DrawDust += BaseParticleManager.DrawParticles;
+            On_Main.DrawProjectiles += SeperateVisualManager.SeperateVisual_PreProjectiles;
+            On_Main.DrawDust += SeperateVisualManager.SeperateVisual_PostDust;
+            //未使用，待删除
             On_Main.DrawPlayers_BehindNPCs += MetaballManager.DrawRenderTargetPiority;
+            //未使用，待删除
             On_Main.DrawProjectiles += PixelatedRenderManager.On_Main_DrawProjectiles;
+            //像素化渲染
             On_Main.DrawDust += PixelatedRenderManager.DrawTarget_BeforeDust;
             On_Main.DrawPlayers_AfterProjectiles += PixelatedRenderManager.DrawTarget_BeforePlayers;
+            //DeepGlow
             On_FilterManager.EndCapture += DeepGlow.DrawDeepGlow;
         }
+
+
         public override void Unload()
         {
+            //屏幕暗化效果
             On_Main.DrawBackground -= ScreenDarknessSystem.DrawScreenDarkness;
+            //Metaball层级，可以考虑直接分离出去
             On_Main.DrawDust -= MetaballManager.DrawRenderTarget;
-            On_Main.DrawDust -= BaseParticleManager.DrawParticles;
+            //ECS粒子
             On_Main.DrawDust -= ECSParticleDataManager.DrawParticle_ECS;
+            //使用类射弹的实例化粒子
+            On_Main.DrawDust -= BaseParticleManager.DrawParticles;
+            On_Main.DrawProjectiles -= SeperateVisualManager.SeperateVisual_PreProjectiles;
+            On_Main.DrawDust -= SeperateVisualManager.SeperateVisual_PostDust;
+            //待删除
             On_Main.DrawPlayers_BehindNPCs -= MetaballManager.DrawRenderTargetPiority;
+            //待删除
             On_Main.DrawProjectiles -= PixelatedRenderManager.On_Main_DrawProjectiles;
+            //像素化渲染
             On_Main.DrawDust -= PixelatedRenderManager.DrawTarget_BeforeDust;
             On_Main.DrawPlayers_AfterProjectiles -= PixelatedRenderManager.DrawTarget_BeforePlayers;
+            //DeepGlow
             On_FilterManager.EndCapture -= DeepGlow.DrawDeepGlow;
         }
     }

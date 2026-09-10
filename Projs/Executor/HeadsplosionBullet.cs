@@ -66,9 +66,8 @@ namespace HJScarletRework.Projs.Executor
             ScarletSound(HJScarletSounds.Misc_Boom, Projectile.Center, variantType: 4);
             for (int i = 0; i < 2; i++)
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, RandVelTwoPi(14f, 17f), ProjectileType<HeadsplosionBombBullet>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(30),14f,17f), ProjectileType<HeadsplosionBombBullet>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
             }
-            Projectile.Resize(160, 160);
             Projectile.Damage();
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
