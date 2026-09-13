@@ -29,15 +29,15 @@ namespace HJScarletRework.Projs.Executor
         /// <summary>
         /// 复写后什么都不做，这样可以让武器不执行后坐力动画
         /// </summary>
-        protected override void HandleRecoilStatement()
+        protected override void UpdateRecoil()
         {
 
         }
-        protected override void HandleWeaponUsingReset()
+        protected override void UpdateWeaponUsing()
         {
             Projectile.position += Main.rand.NextVector2Circular(1.3f, 1.3f);
         }
-        protected override void PreHandleWeaponAttackStatement()
+        protected override void PreAttack()
         {
             if (!Owner.GetExecutionSrike())
                 Projectile.HJScarlet().ExecutionStrike = false;
@@ -49,11 +49,11 @@ namespace HJScarletRework.Projs.Executor
                 Owner.RemoveExecutionProgress(OriginalItemID);
             }
         }
-        protected override void HandleGlobalIdleReset()
+        protected override void UpdateGlobalReset()
         {
             Projectile.HJScarlet().ExecutionStrikeManual = false;
         }
-        protected override void HandleWeaponAttackStatement()
+        protected override void OnAttack()
         {
             if (Owner.HJScarlet().ExecutionBuffTimeStored.TryGetValue(OriginalItemID, out int value))
                 Projectile.HJScarlet().ExecutionStrikeManual = true;

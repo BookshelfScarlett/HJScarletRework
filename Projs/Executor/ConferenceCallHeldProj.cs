@@ -18,7 +18,7 @@ namespace HJScarletRework.Projs.Executor
         public override float HoldoutDrawScale => .65f;
         public override float RecoilPower => 5;
         public override float RecoilWeaponPullbackRatios => .5f;
-        protected override void PreHandleWeaponAttackStatement()
+        protected override void PreAttack()
         {
             if (!Owner.GetExecutionSrike())
                 Projectile.HJScarlet().ExecutionStrike = false;
@@ -30,7 +30,7 @@ namespace HJScarletRework.Projs.Executor
                 Owner.RemoveExecutionProgress(OriginalItemID);
             }
         }
-        protected override void HandleWeaponAttackStatement()
+        protected override void OnAttack()
         {
             Vector2 offset = new Vector2(20, -5 * Projectile.direction).RotatedBy(Projectile.rotation);
             Vector2 pos = Projectile.Center + offset;
@@ -62,8 +62,6 @@ namespace HJScarletRework.Projs.Executor
                 BlendState bs = alt ? BlendState.Additive : BlendState.AlphaBlend;
                 ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(10), 0.4f, 21.4f), RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), Main.rand.Next(45, 65), RandRotTwoPi, 1, 0.33f * Main.rand.NextFloat(.95f, 1.25f), alt, bs);
             }
-
-            base.HandleWeaponAttackStatement();
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -104,10 +102,10 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             UpdatePlayerState();
-            UpdateWeaponAttack();
+            UpdateWeapUpdateAttack();
             UpdateMiscLerp();
         }
-        public void UpdateWeaponAttack()
+        public void UpdateWeapUpdateAttack()
         {
             if (IsUsing)
                 HandleAttack();

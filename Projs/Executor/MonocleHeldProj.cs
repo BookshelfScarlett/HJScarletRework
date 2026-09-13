@@ -20,7 +20,7 @@ namespace HJScarletRework.Projs.Executor
         public override Vector2 HoldoutOffset => new(40, 0);
         public override Color HoldoutEdgeColor => Color.Violet;
         public override int ProjExtraUpdates => 2;
-        protected override void PreHandleWeaponAttackStatement()
+        protected override void PreAttack()
         {
             if (!Owner.GetExecutionSrike())
                 Projectile.HJScarlet().ExecutionStrike = false;
@@ -30,7 +30,7 @@ namespace HJScarletRework.Projs.Executor
                 Owner.RemoveExecutionProgress(OriginalItemID);
             }
         }
-        protected override void HandleWeaponAttackStatement()
+        protected override void OnAttack()
         {
             Vector2 offset = new Vector2(90, -5 * Projectile.direction).RotatedBy(Projectile.rotation);
             Vector2 pos = Projectile.Center + offset;

@@ -15,15 +15,15 @@ namespace HJScarletRework.Projs.Ranged
     public class ExsanguinationHeldProjRanged : ExsanguinationHeldProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Ranged;
-        protected override void PreHandleWeaponAttackStatement()
+        protected override void PreAttack()
         {
 
         }
-        protected override void HandleGlobalIdleReset()
+        protected override void UpdateGlobalReset()
         {
 
         }
-        protected override void HandleWeaponAttackStatement()
+        protected override void OnAttack()
         {
             ScarletSound(HJScarletSounds.Light_Fire, Projectile.Center, volume: 0.25f);
             Owner.PickAmmo(Owner.HeldItem, out int bulletType, out float speed, out int bulletDamage, out float knockback, out _);

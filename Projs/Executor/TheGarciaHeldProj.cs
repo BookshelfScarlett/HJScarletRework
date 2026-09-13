@@ -16,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
         public override float HoldoutDrawScale => base.HoldoutDrawScale;
         public override Color HoldoutEdgeColor => Color.WhiteSmoke;
         public override Vector2 HoldoutOffset => new(25, -5);
-        protected override void PreHandleWeaponAttackStatement()
+        protected override void PreAttack()
         {
             if (!Owner.GetExecutionSrike())
             {
@@ -30,7 +30,7 @@ namespace HJScarletRework.Projs.Executor
                 Owner.RemoveExecutionProgress(OriginalItemID);
             }
         }
-        protected override void HandleWeaponAttackStatement()
+        protected override void OnAttack()
         {
             ScarletSound(HJScarletSounds.Shotgun_Mastiff, Projectile.Center);
             ScreenShakeSystem.AddScreenShakes(Projectile.Center, 16, 16, Projectile.rotation, ToRadians(2));

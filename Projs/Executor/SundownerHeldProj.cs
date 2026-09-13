@@ -21,7 +21,7 @@ namespace HJScarletRework.Projs.Executor
         public override float HoldoutDrawScale => base.HoldoutDrawScale;
         public override Vector2 HoldoutOffset => new Vector2(0, -10);
         public override bool HoldoutEdgeEnable => false;
-        protected override void HandleRecoilStatement()
+        protected override void UpdateRecoil()
         {
             if (!Owner.IsHolding(OriginalItemID))
                 return;
@@ -42,17 +42,17 @@ namespace HJScarletRework.Projs.Executor
             }
         }
         //后坐力
-        protected override void HandleWeaponUsingReset()
+        protected override void UpdateWeaponUsing()
         {
             Projectile.position += Main.rand.NextVector2Circular(1.3f, 1.3f);
             Projectile.position += -Projectile.SafeDirByRot() * Main.rand.NextFloat(5f, 10f);
         }
         public int Reverse = 1;
-        protected override void PreHandleWeaponAttackStatement()
+        protected override void PreAttack()
         {
-            base.PreHandleWeaponAttackStatement();
+            base.PreAttack();
         }
-        protected override void HandleWeaponAttackStatement()
+        protected override void OnAttack()
         {
             Vector2 offset2 = new(0 * Owner.direction, -10f);
             float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
@@ -117,8 +117,6 @@ namespace HJScarletRework.Projs.Executor
                     new SmokeParticle(firePos.ToRandCirclePos(10f) + posOffset, vel, RandLerpColor(Color.White, Color.Lerp(Color.OrangeRed, Color.Gold, 0.4f)), 40, RandRotTwoPi, 1f, 0.34f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
                 }
             }
-
-            base.HandleWeaponAttackStatement();
         }
     }
     public class SundownerHeldProj2 : HJScarletProj

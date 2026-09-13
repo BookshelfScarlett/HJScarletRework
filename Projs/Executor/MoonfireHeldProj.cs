@@ -26,13 +26,13 @@ namespace HJScarletRework.Projs.Executor
         /// 复写这个是因为月火的特殊处决攻击，需要让月火在玩家按下处决键（互动键）时立刻发射一枚子弹
         /// <br>而这个钩子会在执行完毕后立刻执行攻击的判定，即上方的<see cref="IsUsing"/></br>
         /// </summary>
-        protected override void HandleRecoilStatement()
+        protected override void UpdateRecoil()
         {
             //保留原本的自动管理方案
-            base.HandleRecoilStatement();
+            base.UpdateRecoil();
             MoonfireExecutionCheck();
         }
-        protected override void HandleWeaponAttackReset()
+        protected override void PostAttack()
         {
             if (!Projectile.HJScarlet().ExecutionStrike)
             {
@@ -45,7 +45,7 @@ namespace HJScarletRework.Projs.Executor
                 Timer = -Projectile.MaxUpdates * 10f;
             }
         }
-        protected override void HandleGlobalIdleReset()
+        protected override void UpdateGlobalReset()
         {
             //计时器的重置
             if (RecoilTimer > 0)
@@ -58,7 +58,7 @@ namespace HJScarletRework.Projs.Executor
         /// <summary>
         /// 我也不知道我这攻击写了个啥
         /// </summary>
-        protected override void HandleWeaponAttackStatement()
+        protected override void OnAttack()
         {
             Vector2 offset = new Vector2(20, -5 * Projectile.direction).RotatedBy(Projectile.rotation);
             Vector2 pos = Projectile.Center + offset;
@@ -115,7 +115,7 @@ namespace HJScarletRework.Projs.Executor
             }
 
         }
-        protected override void HandlePlayerHeldStatement()
+        protected override void UpdateHeldProjectile()
         {
             Projectile.rotation = Owner.ToMouseVector2().ToRotation();
             Projectile.spriteDirection = Projectile.direction = (Owner.LocalMouseWorld().X > Owner.Center.X).ToDirectionInt();

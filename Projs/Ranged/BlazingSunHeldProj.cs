@@ -28,14 +28,14 @@ namespace HJScarletRework.Projs.Ranged
                 }
             }
         }
-        protected override void HandleRecoilStatement()
+        protected override void UpdateRecoil()
         {
         }
-        protected override void HandleGlobalIdleReset()
+        protected override void UpdateGlobalReset()
         {
             
         }
-        protected override void HandleWeaponAttackStatement()
+        protected override void OnAttack()
         {
             int c = Main.rand.Next(1, 3);
             for (int i = 0; i < c; i++)

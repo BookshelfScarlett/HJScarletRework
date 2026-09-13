@@ -38,13 +38,13 @@ namespace HJScarletRework.Globals.Classes
         public ref float RecoilTimer => ref Projectile.ai[1];
         /// <summary>
         /// 后坐力动画的力度
-        /// <br>如果选择复写<see cref="HandleRecoilStatement"/>则不会有任何作用</br>
+        /// <br>如果选择复写<see cref="UpdateRecoil"/>则不会有任何作用</br>
         /// </summary>
         public virtual float RecoilPower => 10;
         /// <summary>
         /// 执行后坐力动画时，拉回武器的时刻
         /// <br>这是一个归一化比率，默认值为<see langword="0.13f"/>，即在13%进程时开始拉回</br>
-        /// <br>自动管理，如果你完全复写了<see cref="HandleRecoilStatement"/>，则不会生效</br>
+        /// <br>自动管理，如果你完全复写了<see cref="UpdateRecoil"/>，则不会生效</br>
         /// </summary>
         public virtual float RecoilWeaponPullbackRatios => .13f;
         /// <summary>
@@ -78,43 +78,6 @@ namespace HJScarletRework.Globals.Classes
             Timer = (int)(AttackSpeed * .9f);
         }
         public virtual bool IsUsing => (Owner.channel) && !Owner.noItems && !Owner.CCed;
-        public override void ProjAI()
-        {
-            //手持物品不对，玩家状态不对，处死射弹
-            if (Owner.IsHolding(OriginalItemID) && !Owner.CCed && !Owner.dead)
-                Projectile.timeLeft = 2;
-
-            //处理玩家手持该武器时的状态
-            HandlePlayerHeldStatement();
-            //后坐力动画
-            HandleRecoilStatement();
-            
-            if (IsUsing)
-            {
-                Timer++;
-                Owner.itemAnimation = Owner.itemTime = 2;
-                HandleWeaponUsingReset();
-                if (Timer >= AttackSpeed && Projectile.IsMe())
-                {
-                    PreHandleWeaponAttackStatement();
-                    HandleWeaponAttackStatement();
-                    HandleWeaponAttackReset();
-                }
-            }
-            else
-            {
-                HandleWeaponIdleReset();
-            }
-            HandleGlobalIdleReset();
-        }
-        protected virtual void HandleWeaponUsingReset()
-        {
-
-        }
-        protected virtual void PreHandleWeaponAttackStatement()
-        {
-
-        }
         public override bool ShouldUpdatePosition()
         {
             return false;
@@ -123,22 +86,69 @@ namespace HJScarletRework.Globals.Classes
         {
             return false;
         }
+
+        public override void ProjAI()
+        {
+            //手持物品不对，玩家状态不对，处死射弹
+            if (Owner.IsHolding(OriginalItemID) && !Owner.CCed && !Owner.dead)
+                Projectile.timeLeft = 2;
+
+            //处理玩家手持该武器时的状态
+            UpdateHeldProjectile();
+            //后坐力动画
+            UpdateRecoil();
+            
+            if (IsUsing)
+            {
+                Timer++;
+                Owner.itemAnimation = Owner.itemTime = 2;
+                UpdateWeaponUsing();
+                if (Timer >= AttackSpeed && Projectile.IsMe())
+                {
+                    PreAttack();
+                    OnAttack();
+                    PostAttack();
+                }
+            }
+            else
+            {
+                UpdateWeaponIdle();
+            }
+            UpdateGlobalReset();
+        }
         /// <summary>
-        /// 全局状态重置
-        /// <br>无论条件，永远在<see cref="Projectile.AI()"/>内执行</br>
+        /// 在使用武器期间每帧调用，攻击判定之前。
+        /// <br>可用于处理蓄力、持续消耗、状态叠加等前置逻辑。</br>
+        /// </summary>
+        protected virtual void UpdateWeaponUsing()
+        {
+
+        }
+        /// <summary>
+        /// 在执行<see cref="OnAttack"/>前执行
+        /// <br>可用于一些发起攻击前的准备</br>
+        /// </summary>
+        protected virtual void PreAttack()
+        {
+
+        }
+        /// <summary>
+        /// 全局状态重置，无论状态每帧执行，且最后更新
+        /// <br>可用于一些最后更新的其他功能，默认用于递减后坐力的计时器</br>
         /// </summary>
 
-        protected virtual void HandleGlobalIdleReset()
+        protected virtual void UpdateGlobalReset()
         {
             if (RecoilTimer > 0)
                 RecoilTimer--;
         }
 
         /// <summary>
-        /// 在停止攻击时的状态重置
+        /// 仅在未攻击时的状态更新
         /// <br>仅在<see cref="IsUsing"/>为<see langword="false"/>时执行</br>
+        /// <br>默认状态下让武器本身自然回复到攻击速度（<see cref="AttackSpeed"/>) </br>
         /// </summary>
-        protected virtual void HandleWeaponIdleReset()
+        protected virtual void UpdateWeaponIdle()
         {
             //我做的不是灾厄，在没有攻击的时候计时器也会叠到attackspeed这的
             if (Timer < AttackSpeed)
@@ -146,26 +156,26 @@ namespace HJScarletRework.Globals.Classes
         }
         /// <summary>
         /// 在执行攻击之后的状态重置
-        /// <br>在<see cref="HandleWeaponAttackStatement"/>后立刻执行</br>
+        /// <br>在<see cref="OnAttack"/>后立刻执行</br>
         /// </summary>
-        protected virtual void HandleWeaponAttackReset()
+        protected virtual void PostAttack()
         {
             Timer = 0;
             RecoilTimer = AttackSpeed;
         }
         /// <summary>
         /// 武器的实际攻击效果
-        /// <br>复写这个就可以实际进行攻击，继续怎么操作就看你了</br>
+        /// <br>复写这个就可以实际进行攻击，怎么操作就看你了</br>
         /// <br>只支持左键</br>
         /// </summary>
-        protected virtual void HandleWeaponAttackStatement()
+        protected virtual void OnAttack()
         {
 
         }
         /// <summary>
         /// 玩家手持状态的控制
         /// </summary>
-        protected virtual void HandlePlayerHeldStatement()
+        protected virtual void UpdateHeldProjectile()
         {
             Projectile.rotation = Owner.ToMouseVector2().ToRotation();
             Projectile.spriteDirection = Projectile.direction = (Owner.LocalMouseWorld().X > Owner.Center.X).ToDirectionInt();
@@ -180,7 +190,7 @@ namespace HJScarletRework.Globals.Classes
         /// 武器后坐力动画的进程控制
         /// </summary>
 
-        protected virtual void HandleRecoilStatement()
+        protected virtual void UpdateRecoil()
         {
             float progress = Utils.GetLerpValue(AttackSpeed, 0, RecoilTimer, true);
             float pullback;
