@@ -25,25 +25,11 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void AddRecipes()
         {
-            if (!HJScarletMethods.HasFuckingCalamity)
-            {
-                CreateRecipe().
-                    AddIngredient(ItemID.CobaltShield).
-                    AddIngredient<EmblemExecutor>().
-                    AddIngredient(ItemID.HallowedBar, 10).
-                    AddTile(TileID.MythrilAnvil).
-                    Register();
-            }
-            else
-            {
-                CreateRecipe().
-                    AddIngredient(ItemID.CobaltShield).
-                    AddIngredient<EmblemExecutor>().
-                    AddRecipeGroup(HJScarletRecipeGroup.AnyMechBossSoul).
-                    AddTile(TileID.Anvils).
-                    Register();
-            }
-
+            CreateRecipe().
+                AddIngredient(ItemID.CobaltShield).
+                AddIngredient(ItemID.HallowedBar, 10).
+                AddTile(TileID.MythrilAnvil).
+                Register();
         }
     }
 }

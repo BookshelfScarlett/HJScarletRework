@@ -50,7 +50,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             CreateRecipe().
                 AddIngredient(ItemID.Shotgun).
                 AddIngredient(ItemID.QuadBarrelShotgun).
-                AddIngredient(ItemID.Boomstick).
+                AddIngredient<TheGarcia>().
                 AddIngredient(ItemID.IllegalGunParts).
                 AddIngredient(ItemID.ChlorophyteBar, 10).
                 AddTile(TileID.MythrilAnvil).

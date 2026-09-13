@@ -169,6 +169,18 @@ namespace HJScarletRework.Core.ParticleECS
             Vector2 vec = squashScale ?? new Vector2(1.2f, .8f);
             return ECSMethod.NewParticle(GetInstance<Stain>().Type, timeLeft, pos, vel, color, vec, opacity, rotation, bs, squashSpeedX, squashSpeedY, scale);
         }
+        /// <summary>
+        /// 发光方块。<br></br>
+        /// <paramref name="rotSpeed"/>为方块的旋转速度，默认为<see langword="0"/><br></br>
+        /// <paramref name="type"/>为方块的类型。1：较大，2：边缘较厚，其余：普通，默认为<see langword="0"/><br></br>
+        /// <paramref name="glowMult"/>方块的内部发光，默认为<see langword="0"/>，即无形变速度<br></br>
+        /// </summary>
+        /// <returns></returns>
+        public static int GlowSquare(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float rotation, float scale,int type = 0, float rotSpeed = 0, float glowMult = 0, BlendState blendstate = null)
+        {
+            BlendState bs = blendstate ?? BlendState.Additive;
+            return ECSMethod.NewParticle(GetInstance<GlowSquare>().Type, timeLeft, pos, vel, color, opacity, rotation, scale,bs, ai1: glowMult, aiint0: type, ai0: rotSpeed);
+        }
 
     }
 }

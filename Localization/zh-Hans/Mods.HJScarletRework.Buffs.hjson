@@ -143,3 +143,8 @@ SaintChurchBuff: {
 	// DisplayName: Saint Church Buff
 	// Description: Mods.HJScarletRework.Buffs.SaintChurchBuff.Description
 }
+
+LifeWormBuff: {
+	DisplayName: 小小万籁携生
+	Description: 茁壮地成长
+}

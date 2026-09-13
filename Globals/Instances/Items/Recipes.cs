@@ -76,20 +76,14 @@ namespace HJScarletRework.Globals.Instances.Items
         }
         public void GlobalMaterialRecipes()
         {
-            Recipe.Create(ItemType<CrownofSilveryLight>(), 30).
-                AddIngredient<FinalBar>(1).
-                DisableDecraft().
-                AddTile(FinalAnvilTile).
-                Register();
             Recipe.Create(ItemType<FinalBar>()).
-                AddIngredient<CrownofSilveryLight>(30).
+                AddIngredient<CrownofSilveryLight>(15).
                 DisableDecraft().
                 AddTile(FinalAnvilTile).
                 Register();
         }
-        public override void AddRecipes()
+        public void GlobalWeaponRecipes()
         {
-            GlobalAccessoriesRecipe();
             Recipe.Create(ItemID.Spear).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyCopperBar, 12).
                 DisableDecraft().
@@ -117,9 +111,21 @@ namespace HJScarletRework.Globals.Instances.Items
                 AddTile(TileID.DemonAltar).
                 DisableDecraft().
                 Register();
+        }
+        public void GlobalMiscRecipes()
+        {
+            Recipe.Create(ItemID.Autohammer).
+                AddIngredient(ItemID.ChlorophyteWarhammer).
+                AddIngredient(ItemID.GlowingMushroom, 100).
+                AddIngredient(ItemID.Ectoplasm, 30).
+                DisableDecraft().
+                AddTile(TileID.CrystalBall).
+                Register();
+        }
+        public void FargoMutantCrossMod()
+        {
 
             if (!ModLoader.TryGetMod("Fargowiltas", out Mod fargoWiltas))
-
                 return;
             Recipe.Create(ItemType<AzureFrostmark>()).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyIceCrate, 5).
@@ -129,6 +135,15 @@ namespace HJScarletRework.Globals.Instances.Items
                 AddRecipeGroup(HJScarletRecipeGroup.AnyDungeonCrate, 5).
                 AddTile(TileID.Solidifier).
                 Register();
+
+        }
+        public override void AddRecipes()
+        {
+            GlobalAccessoriesRecipe();
+            GlobalMaterialRecipes();
+            GlobalWeaponRecipes();
+            GlobalMiscRecipes();
+            FargoMutantCrossMod();
         }
 
     }

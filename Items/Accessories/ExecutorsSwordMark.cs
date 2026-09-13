@@ -27,24 +27,12 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void AddRecipes()
         {
-            if (HJScarletMethods.HasFuckingCalamity)
-            {
-                CreateRecipe().
-                    AddIngredient<ExecutorsSwordMarkSmall>().
-                    AddIngredient(ItemID.SoulofLight, 5).
-                    AddIngredient(ItemID.SoulofNight, 5).
-                    AddTile(TileID.Anvils).
-                    Register();
-            }
-            else
-            {
-                CreateRecipe().
-                    AddIngredient<ExecutorsSwordMarkSmall>().
-                    AddIngredient(ItemID.SoulofLight, 5).
-                    AddIngredient(ItemID.SoulofNight, 5).
-                    AddTile(TileID.MythrilAnvil).
-                    Register();
-            }
+            CreateRecipe().
+                AddIngredient<ExecutorsSwordMarkSmall>().
+                AddIngredient(ItemID.SoulofLight, 5).
+                AddIngredient(ItemID.SoulofNight, 5).
+                AddTile(TileID.Anvils).
+                Register();
         }
     }
 }

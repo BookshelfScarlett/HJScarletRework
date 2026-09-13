@@ -156,7 +156,6 @@ namespace HJScarletRework.Globals.Methods
                 }
                 else
                 {
-                    Main.NewText(1);
                     return false;
                 }
             }

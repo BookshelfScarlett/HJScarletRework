@@ -20,7 +20,7 @@ namespace HJScarletRework.Globals.Classes
         }
         public override void SetDefaults()
         {
-            Projectile.SetUpHeldProj(ExtraUpdates);
+            HJScarletMethods.PetDefaultsCommon(Projectile, 20, 20);
             ExSD();
         }
         public virtual void ExSD()

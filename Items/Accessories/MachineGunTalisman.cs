@@ -27,7 +27,7 @@ namespace HJScarletRework.Items.Accessories
         {
             CreateRecipe().
                 AddIngredient<ArcBow>().
-                AddIngredient(ItemID.SpectreBar, 10).
+                AddIngredient(ItemID.ShroomiteBar, 10).
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }

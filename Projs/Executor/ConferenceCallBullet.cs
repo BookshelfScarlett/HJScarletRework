@@ -53,12 +53,14 @@ namespace HJScarletRework.Projs.Executor
         }
         public void SetGeneralParticle()
         {
+            if (Projectile.IsOutScreen())
+                return;
             Vector2 pos = Projectile.oldPosition + Projectile.Size / 2;
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 5; i++)
             {
                 ECSParticle.ShinyCrossStarECS(pos, RandVelTwoPi(1.2f, 2.2f), Color.LightGoldenrodYellow, 40, 1, 0.4f);
             }
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 4; i++)
             {
                 ECSParticle.SmokeParticle(pos, RandVelTwoPi(1.2f, 3.2f), RandLerpColor(Color.LightGoldenrodYellow, Color.Gold), 40, 1, 1, 0.21f, blendstate: BlendState.Additive);
             }
@@ -94,9 +96,10 @@ namespace HJScarletRework.Projs.Executor
                 d.noGravity = true;
                 d.scale = Main.rand.NextFloat(.75f, 1.15f);
             }
-            if (Projectile.HJScarlet().ExecutionStrike && Main.rand.NextBool(9))
+            if (Projectile.HJScarlet().ExecutionStrike && Main.rand.NextBool(11))
             {
-                ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(6), Projectile.velocity / 4f, Color.LightGoldenrodYellow, 30, 1, 0.44f, 4);
+                //ECSParticle.LightntingGlow(Projectile.Center.ToRandCirclePos(6), Projectile.velocity / 4f, Color.LightGoldenrodYellow, 30, 1, 0.44f, 3);
+                ECSParticle.Stain(Projectile.Center.ToRandCirclePos(6), Projectile.velocity / 4f, Color.LightGoldenrodYellow, 30, 1, Projectile.rotation, .44f);
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
@@ -128,6 +131,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            if (Projectile.IsOutScreen())
+                return false;
             ////这里是强行使用ex98拼凑出来的子弹效果
             Texture2D tex = HJScarletTexture.Particle_SharpTear;
             Rectangle frame = tex.Frame();
@@ -135,8 +140,8 @@ namespace HJScarletRework.Projs.Executor
             SB.EnterShaderArea();
             //绘制残影
             float oriScale = .8f;
-            float scale = 0.91f;
-            int length = (int)(8);
+            Vector2 scale = new (0.56f,1.6f);
+            int length = (int)(3);
             for (int i = 0; i < length; i++)
             {
                 scale *= 0.965f;

@@ -9,7 +9,7 @@ namespace HJScarletRework.Core.SeperateVisualEffect
     /// 将视觉效果与部分实例分离出来的管理方案
     /// <br>对于一些极为复杂的特效，如果不想绑定在如射弹上导致射弹生成或消失时带来的违和感，就可以用上这个了</br>
     /// </summary>
-    public class SeperateVisualManager:ModSystem
+    public class SeperateVisualManager : ModSystem
     {
         public const int MaxVisual = 500;
         public static bool AnyActiveVisual;
@@ -47,7 +47,7 @@ namespace HJScarletRework.Core.SeperateVisualEffect
         }
         public static void SeperateVisual_PostDust(On_Main.orig_DrawDust orig, Main self)
         {
-if (!AnyActiveVisual)
+            if (!AnyActiveVisual)
             {
                 orig(self);
                 return;
@@ -67,11 +67,11 @@ if (!AnyActiveVisual)
                     continue;
                 AnyActiveVisual = true;
                 SingleUpdate();
-                if (vfx.ExtraUpdates!= 0)
+                if (vfx.ExtraUpdates != 0)
                 {
                     for (int a = 0; a < vfx.ExtraUpdates; a++)
                     {
-                        if (vfx.ExtraUpdates== 0 || vfx.Time > vfx.LifeTime)
+                        if (vfx.ExtraUpdates == 0 || vfx.Time > vfx.LifeTime)
                             break;
                         SingleUpdate();
                     }

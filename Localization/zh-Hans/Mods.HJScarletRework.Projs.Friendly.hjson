@@ -35,6 +35,10 @@ Typeless: {
 	// PreciousTargetCross.DisplayName: Precious Target Cross
 	// TitaniumBattleShovelMiningMechanic.DisplayName: Titanium Battle Shovel Mining Mechanic
 	// EnchantedSwordfishJavelin.DisplayName: Enchanted Swordfish Javelin
+	// MoonfireBullet.DisplayName: Moonfire Bullet
+	// MonocleHeldProj.DisplayName: Monocle Held Proj
+	// ConferenceCallHeldProj.DisplayName: Conference Call Held Proj
+	// TheGarciaHeldProj.DisplayName: The Garcia Held Proj
 }
 
 Executor: {
@@ -219,6 +223,15 @@ Executor: {
 	// CrescentRoseHeldSniper.DisplayName: Crescent Rose Held Sniper
 	// CrescentRoseSniperBullet.DisplayName: Crescent Rose Sniper Bullet
 	// CrescentRoseSniperSkill.DisplayName: Crescent Rose Sniper Skill
+	// MoonfireHeldProj.DisplayName: Moonfire Held Proj
+	// MoonfireBulletExecution.DisplayName: Moonfire Bullet Execution
+	// MonocleHeldProj2.DisplayName: Monocle Held Proj2
+	// MoonfireHeldProj2.DisplayName: Moonfire Held Proj2
+	// ConferenceCallHeldProj2.DisplayName: Conference Call Held Proj2
+	// HeadsplosionHeldProj2.DisplayName: Headsplosion Held Proj2
+	// TheGarciaBullet.DisplayName: The Garcia Bullet
+	// ExsanguinationHeldProj2.DisplayName: Exsanguination Held Proj2
+	// SundownerHeldProj2.DisplayName: Sundowner Held Proj2
 }
 
 Ranged: {
@@ -231,6 +244,8 @@ Ranged: {
 	BlazingSunArrow.DisplayName: 烈焰
 	BlazingSunFireball.DisplayName: 烈焰|射线
 	TerraFlamethrowerHeldProj.DisplayName: 泰拉喷火器
+	// ExsanguinationHeldProjRanged.DisplayName: Exsanguination Held Proj Ranged
+	// BlazingSunHeldProj2.DisplayName: Blazing Sun Held Proj2
 }
 
 Magic: {
@@ -322,4 +337,5 @@ Pets: {
 	SquidProj.DisplayName: Squid Proj
 	WatcherProj.DisplayName: Watcher Proj
 	WhaleProj.DisplayName: Whale Proj
+	// LifeWormProj.DisplayName: Life Worm Proj
 }

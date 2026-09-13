@@ -131,3 +131,8 @@ SaintChurchBuff: {
 	DisplayName: Saint Church Buff
 	Description: Mods.HJScarletRework.Buffs.SaintChurchBuff.Description
 }
+
+LifeWormBuff: {
+	DisplayName: Life Worm Buff
+	Description: Mods.HJScarletRework.Buffs.LifeWormBuff.Description
+}

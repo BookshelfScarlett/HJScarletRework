@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
@@ -7,7 +8,80 @@ using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class ConferenceCallHeldProj : ExecutorHeldProj
+    public class ConferenceCallHeldProj : HJScarletRangedWeaponoutClass
+    {
+        public override string Texture => GetInstance<ConferenceCall>().Texture;
+        public override int OriginalItemID => ItemType<ConferenceCall>();
+        public bool SetExecution => Owner.HJScarlet().conferenceCallBuffTime > 0;
+        public override int ProjExtraUpdates => 2;
+        public override Vector2 HoldoutOffset => new(10, -5);
+        public override float HoldoutDrawScale => .65f;
+        public override float RecoilPower => 5;
+        public override float RecoilWeaponPullbackRatios => .5f;
+        protected override void PreHandleWeaponAttackStatement()
+        {
+            if (!Owner.GetExecutionSrike())
+                Projectile.HJScarlet().ExecutionStrike = false;
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
+            {
+                Projectile.HJScarlet().ExecutionStrike = true;
+                Owner.HJScarlet().conferenceCallBuffTime = GetSeconds(5);
+                ScarletSound(HJScarletSounds.GrabCharge, Projectile.Center);
+                Owner.RemoveExecutionProgress(OriginalItemID);
+            }
+        }
+        protected override void HandleWeaponAttackStatement()
+        {
+            Vector2 offset = new Vector2(20, -5 * Projectile.direction).RotatedBy(Projectile.rotation);
+            Vector2 pos = Projectile.Center + offset;
+            Vector2 dir = Projectile.SafeDirByRot();
+            int type = ProjectileType<ConferenceCallBullet>();
+            pos -= new Vector2(20, 0).RotatedBy(Projectile.rotation);
+            for (int i = 0; i < (ConferenceCall.BulletsPerShot); i++)
+            {
+                Vector2 randomVelocity = dir.RotatedByRandom(ToRadians(12.5f)) * Main.rand.NextFloat(0.88f, 1.12f);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, randomVelocity * 8f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                proj.HJScarlet().HasExecutionMechanic = true;
+                proj.HJScarlet().ExecutionStrike = SetExecution;
+            }
+            ScarletSound(HJScarletSounds.ASMD_IceBlockSplit, Projectile.Center, 0.20f, 0, .34f, 0.1f);
+            pos = Projectile.Center + offset;
+            //震屏，粒子特效
+            Vector2 particleOffset = new Vector2(10, 0 * Projectile.direction).RotatedBy(Projectile.rotation);
+            for (int i = 0; i < 16; i++)
+            {
+                Vector2 pos2 = pos.ToRandCirclePos(8) - particleOffset;
+                Vector2 vel = Projectile.SafeDirByRot().ToRandVelocity(ToRadians(25), .1f, 11.6f);
+                float scale = Projectile.scale * Main.rand.NextFloat(.95f, 1.15f) * 0.48f;
+                int timeLeft = Main.rand.Next(30, 45);
+                ECSParticle.ShinyCrossStarECS(pos2, vel, RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), timeLeft, 1, scale);
+            }
+            for (int i = 0; i < 16; i++)
+            {
+                bool alt = Main.rand.NextBool();
+                BlendState bs = alt ? BlendState.Additive : BlendState.AlphaBlend;
+                ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(10), 0.4f, 21.4f), RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), Main.rand.Next(45, 65), RandRotTwoPi, 1, 0.33f * Main.rand.NextFloat(.95f, 1.25f), alt, bs);
+            }
+
+            base.HandleWeaponAttackStatement();
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Projectile.GetRangedWeaponHeldProjData(out Texture2D tex, out Vector2 drawPos, out Vector2 rotPoint, out float _, out SpriteEffects se);
+            Vector2 offset = HoldoutOffset * new Vector2(Owner.direction, 1);
+            float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
+            drawPos += offset.BetterRotatedBy(drawRot);
+            float progress = Utils.GetLerpValue(0, AttackSpeed, RecoilTimer, true);
+            float scale = Projectile.scale * HoldoutDrawScale;
+            Color c = SetExecution ? Color.Red : Color.WhiteSmoke;
+            float lerp = SetExecution ? 2f : 2f * EaseInCubic(progress);
+            for (int i = 0; i < 8; i++)
+                SB.Draw(tex, drawPos + (TwoPi / 8f * i).ToRotationVector2() * lerp, null, c.ToAddColor(), drawRot, rotPoint, scale, se, 0);
+            SB.Draw(tex, drawPos, null, Color.White, drawRot, rotPoint, scale, se, 0);
+            return false;
+        }
+    }
+    public class ConferenceCallHeldProj2 : ExecutorHeldProj
     {
         public override string Texture => GetInstance<ConferenceCall>().Texture;
         public override int OriginalItemID => ItemType<ConferenceCall>();

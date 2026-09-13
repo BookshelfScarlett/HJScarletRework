@@ -16,6 +16,7 @@ PocketMirrorModiflication:
 GenericText: {
 	BuffDetail: ""
 	SwitchDetail: ""
+	HoldShiftAndRightClick: ""
 }
 
 ItemBelongTo: {

@@ -649,6 +649,51 @@ namespace HJScarletRework.Globals.Methods
             }
 
         }
+        /// <summary>
+        /// 快速设置宠物静态默认值的辅助函数
+        /// </summary>
+        /// <param name="type">宠物ID</param>
+        /// <param name="frameCount">竖直帧总数</param>
+        /// <param name="isLightPet">是否为发光宠物</param>
+        public static void PetStaticDefaultsCommon(int type, int frameCount, bool isLightPet = false)
+        {
+            Main.projFrames[type] = frameCount;
+            Main.projPet[type] = true;
+        }
+
+        /// <summary>
+        /// 快速设置宠物默认值的辅助函数
+        /// </summary>
+        /// <param name="projectile">宠物弹幕实例</param>
+        /// <param name="width">宽</param>
+        /// <param name="height">高</param>
+        public static void PetDefaultsCommon(Projectile projectile, int width, int height)
+        {
+            projectile.netImportant = true;
+            projectile.aiStyle = -1;
+            projectile.friendly = true;
+            projectile.penetrate = -1;
+            projectile.timeLeft = 18000;
+            projectile.tileCollide = false;
+            projectile.width = width;
+            projectile.height = height;
+        }
+
+        /// <summary>
+        /// 宠物buff常规检查
+        /// </summary>
+        /// <param name="projectile">宠物弹幕实例</param>
+        /// <param name="buffType">宠物Buff的ID</param>
+        public static bool PetCommonBuffCheck(Projectile projectile, int buffType)
+        {
+            Player player = Main.player[projectile.owner];
+            if (!player.dead && player.HasBuff(buffType))
+            {
+                projectile.timeLeft = 2;
+                return false;
+            }
+            return true;
+        }
 
     }
 }

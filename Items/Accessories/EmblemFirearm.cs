@@ -10,9 +10,9 @@ namespace HJScarletRework.Items.Accessories
 {
     public class EmblemFirearm : HJScarletItemClass
     {
-        public float CritDamage = .50f;
-        public int Crit = 25;
-        public static int MaxSecondsBuff = 10;
+        public float CritDamage = .30f;
+        public int Crit = 20;
+        public static int MaxSecondsBuff = 15;
 
         public override string AssetPath => AssetHandler.Equips;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritDamage.ToPercent(), Crit + "%");

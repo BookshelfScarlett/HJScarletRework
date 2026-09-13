@@ -47,7 +47,8 @@ namespace HJScarletRework.Globals.Methods.Textbox
             if (maxY > Main.screenHeight)
             {
                 idealY -= (maxY - Main.screenHeight);
-                if (idealY < 0) idealY = 0;
+                if (idealY < 0)
+                    idealY = 0;
             }
             return idealY;
         }

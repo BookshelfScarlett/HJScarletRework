@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Buffs.Pets;
+﻿using ContinentOfJourney.Items.Banners;
+using HJScarletRework.Buffs.Pets;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
@@ -31,14 +32,23 @@ namespace HJScarletRework.Items.Pets
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.RarePets);
         }
+        public virtual int PetProjType => 0;
+        public virtual int PetBuffType => 0;
         public sealed override void SetDefaults()
         {
-            ExSD();
             BuffAndProj();
-            Item.rare = RarityType<RarePets>();
+            Item.damage = 0;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.value = Item.sellPrice(gold: 50);
+            Item.noMelee = true;
+            Item.useAnimation = Item.useTime = 20;
+            Item.UseSound = SoundID.Item2;
+            Item.rare = RarityType<RarePets>();
             Item.master = true;
+            Item.buffType = PetBuffType;
+            Item.shoot = PetProjType;
             Item.HJScarlet().CanDrawIcon = true;
+            ExSD();
         }
         public override bool? UseItem(Player player)
         {

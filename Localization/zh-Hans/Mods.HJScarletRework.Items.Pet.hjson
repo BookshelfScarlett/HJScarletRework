@@ -58,3 +58,12 @@ SonItem: {
 	DisplayName: 圣洁百合
 	Tooltip: 召唤一个圣子伙伴
 }
+
+LifeWormItem: {
+	DisplayName: 携生苹果
+	Tooltip:
+		'''
+		召唤生命神的幼体
+		“焕发着勃勃生机”
+		'''
+}

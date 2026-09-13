@@ -79,6 +79,7 @@ namespace HJScarletRework.Globals.Players
         public bool petSquid = false;
         public bool petWatcher = false;
         public bool petWhale = false;
+        public bool petLifeWorm = false;
         public bool saintChurch = false;
         public bool shinobiExecutor = false;
         public bool souloftheTidalMark = false;

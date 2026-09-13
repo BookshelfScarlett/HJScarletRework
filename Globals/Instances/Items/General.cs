@@ -105,6 +105,10 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 usPlayer.GeneralWeaponIndex = item.type;
             }
+            //这里的判断如下：
+            //tacticalExecutionManual (HJScarletPlayer类内) 只用于板正斧头，给代行者玩家自由切换手动处决与自动处决的模式
+            //ForceToCustomExecute 则必须得否，即这个武器不能经过这里默认提供的管理
+            //ForceToTactialExecute 便为强制自动处决
             bool usetactical = (ScarletItemIDSets.ForceToTacticalExecute[item.type] || usPlayer.tacticalExecutionManual) && (!ScarletItemIDSets.ForceToCustomExecute[item.type]);
             if (usetactical && !ScarletItemIDSets.ForceToAutomaticExecute[item.type])
             {

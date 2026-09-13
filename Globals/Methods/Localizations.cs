@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Globals.Database.Localization;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria.Localization;
@@ -114,7 +115,10 @@ namespace HJScarletRework.Globals.Methods
                 tooltips.Insert(count, newLine);
             }
         }
-
+        public static void CreateHoldShiftRightClickTooltip(this List<TooltipLine> tooltips)
+        {
+            tooltips.CreateTooltip(ScarletTextSets.GeneralText_HoldShiftRightClick, ScarletTextSets.GeneralText_BuffShowColor, HJScarletRework.Instance, "HoldShiftAndRightClickTooltipLine");
+        }
         public static int FindLineIndex(this List<TooltipLine> tooltips, string lineName, string lineMod = "Terraria") => tooltips.FindIndex(t => t.Name == lineName && t.Mod == lineMod);
         public static int FindLineIndexLast(this List<TooltipLine> tooltips, string lineName, string lineMod = "Terraria") => tooltips.FindLastIndex(t => t.Name.Contains(lineName) && t.Mod == lineMod);
         public static string SwapTooltipValue()
