@@ -26,6 +26,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             Item.knockBack = 5;
             Item.shoot = ProjectileType<PureDaggerProj>();
             Item.SetUpRarityPrice(ItemRarityID.Green);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.SetUpNoUseGraphicItem(true);
             Item.master = true;
         }

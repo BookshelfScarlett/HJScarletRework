@@ -39,6 +39,10 @@ Typeless: {
 	MonocleHeldProj.DisplayName: Monocle Held Proj
 	ConferenceCallHeldProj.DisplayName: Conference Call Held Proj
 	TheGarciaHeldProj.DisplayName: The Garcia Held Proj
+	HeadsplosionBoom.DisplayName: Headsplosion Boom
+	RefluxBullet.DisplayName: Reflux Bullet
+	RefluxHeldProj.DisplayName: Reflux Held Proj
+	GunWitchHeldProj.DisplayName: Gun Witch Held Proj
 }
 
 Executor: {
@@ -232,6 +236,9 @@ Executor: {
 	TheGarciaBullet.DisplayName: The Garcia Bullet
 	ExsanguinationHeldProj2.DisplayName: Exsanguination Held Proj2
 	SundownerHeldProj2.DisplayName: Sundowner Held Proj2
+	RefluxBullet.DisplayName: Reflux Bullet
+	RefluxChain.DisplayName: Reflux Chain
+	RefluxHeldProj.DisplayName: Reflux Held Proj
 }
 
 Ranged: {
@@ -327,6 +334,8 @@ Melee: {
 	HighTechBladeHeldProj.DisplayName: High Tech Blade Held Proj
 	RitualofReposeProj.DisplayName: Ritualof Repose Proj
 	RitualofReposeRest.DisplayName: Ritualof Repose Rest
+	RitualofReposeStar.DisplayName: Ritualof Repose Star
+	RitualofReposeThunder.DisplayName: Ritualof Repose Thunder
 }
 
 Pets: {

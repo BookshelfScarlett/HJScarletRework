@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.NPCs.Boss_ScarabBelief;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -93,7 +94,7 @@ namespace HJScarletRework.Projs.Executor
         public bool FinalSwing => CurTime > TotalSwingTime;
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
+            target.AddBuff(BuffType<AbsoluteZeroBuff>(), GetSeconds(1));
             if (FinalSwing)
             {
                 Projectile.AddExecutionTimeImmediate(ItemType<FrostoftheStorm>(), 3);

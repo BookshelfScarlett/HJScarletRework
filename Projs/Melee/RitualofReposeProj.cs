@@ -19,6 +19,7 @@ namespace HJScarletRework.Projs.Melee
         public bool BeginDisapper = false;
         public bool BeginAppear = false;
         public bool JustStartAttacked = false;
+        public bool JustPressedRightClick = false;
         public float AppearRatios = 0;
         public float ReadyAttackFrame = 2000;
         public enum State
@@ -62,10 +63,34 @@ namespace HJScarletRework.Projs.Melee
                     break;
             }
         }
+        public bool StopAllDrawing = false;
 
         public void DoShoot()
         {
+                Owner.itemTime = Owner.itemAnimation = 2;
+            Owner.ControlPlayerArm((Projectile.Center - Owner.Center).ToRotation(),1);
+            if ((Projectile.Center - Owner.Center).LengthSquared() > 1900f * 1900f)
+            {
+
+                if (!StopAllDrawing)
+                {
+                    ScarletSound(HJScarletSounds.Moonlight_Ding, Owner.Center,0.6f);
+                    StopAllDrawing = true;
+                }
+                if (Projectile.timeLeft < GetSeconds(1)*Projectile.MaxUpdates)
+                {
+                    float xPos = Owner.MountedCenter.X + Owner.direction * 200f;
+                    float yPos = Owner.MountedCenter.Y - 1200f;
+                    Vector2 mountedPos = new(xPos, yPos);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), mountedPos, Vector2.Zero, ProjectileType<RitualofReposeRest>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
+                    proj.ai[2] = JustPressedRightClick.ToInt();
+                    ((RitualofReposeRest)proj.ModProjectile).TargetPos = new Vector2(Owner.MountedCenter.X + Owner.direction * 200, Owner.MountedCenter.Y);
+                    Projectile.Kill();
+                    return;
+                }
+            }
             Projectile.rotation = Projectile.velocity.ToRotation();
+            
             if (Projectile.IsOutScreen())
                 return;
             if (Main.rand.NextBool(9))
@@ -102,7 +127,11 @@ namespace HJScarletRework.Projs.Melee
                 }
                 else
                 {
-                    Projectile.Kill();
+                    IdleTimer--;
+                    if (IdleTimer <= 0)
+                    {
+                        Projectile.Kill();
+                    }
                 }
             }
             //只有完全出现的时候，才开始更新玩家的状态
@@ -112,17 +141,20 @@ namespace HJScarletRework.Projs.Melee
                 {
                     IdleTimer = GetSeconds(5) * Projectile.MaxUpdates;
                     Projectile.timeLeft = 10;
+                    BeginDisapper = false;
                 }
                 else
                 {
-                    IdleTimer--;
-                    if (IdleTimer <= 0)
-                    {
-                        //死亡的时候给一个特效
+                    BeginAppear = false;
+                    BeginDisapper = true;
                         ScarletSound(HJScarletSounds.Misc_ManaClearUse, Projectile.Center, pitch: -.4f);
-                        BeginAppear = false;
-                        BeginDisapper = true;
-                    }
+                    //IdleTimer--;
+                    //if (IdleTimer <= 0)
+                    //{
+                    //    //死亡的时候给一个特效
+                    //    BeginAppear = false;
+                    //    BeginDisapper = true;
+                    //}
                 }
             }
             //挂载
@@ -145,68 +177,40 @@ namespace HJScarletRework.Projs.Melee
                 ECSParticle.ShinyCrossStarSmall(Projectile.Center.ToRandCirclePos(45 * Projectile.scale, 110 * Projectile.scale), Vector2.UnitX.RotatedBy(Projectile.rotation) * Main.rand.NextFloat(.2f, 1f) * 4f, RandLerpColor(Color.White, Color.Gold), Main.rand.Next(10, 46), 1, Main.rand.NextFloat(.65f, 1.1f) * .15f, 0f);
 
             //待一切尘埃落定，我们会给这个世界献上带来安息
-            if (Owner.CanUseHoldout(ItemType<RitualofRepose>()) && Owner.JustPressLeftClick() && !JustStartAttacked)
+            if (Owner.CanUseHoldout(ItemType<RitualofRepose>()) &&  !Owner.IsInInventory() && !JustStartAttacked&&AppearRatios>=1f)
             {
-                JustStartAttacked = true;
-                InitAttack();
+                if (Owner.JustPressLeftClick())
+                {
+                    JustStartAttacked = true;
+                    InitAttack();
+                    return;
+                }
+                if(Owner.JustPressRightClick())
+                {
+                    JustStartAttacked = true;
+                    JustPressedRightClick = true;
+                    InitAttack();
+                    return;
+                }
             }
             if (JustStartAttacked)
             {
-
                 //更新动画进程，这里控制的，其实是手臂的动画
-                if (!Helper.IsDone[0])
-                {
-                    Helper.UpdateAniState(0);
-                    float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
-                    if (LockDirection > 0)
-                    {
-                        float curRot = Helper.ToCurAnimationRot(-120, -150, Owner.direction, true, easedProgress);
-                        Vector2 tarPos = curRot.ToTargetPosByMartix(1, 1, 1);
-                        ArmRotation = tarPos.ToRotation() + TargetRotation;
-                    }
-                    else
-                    {
-                        float curRot = Helper.ToCurAnimationRot(-120, -150, Owner.direction, true, easedProgress);
-                        Vector2 tarPos = curRot.ToTargetPosByMartix(1, 1, 1);
-                        ArmRotation = tarPos.ToRotation() + TargetRotation;
-
-                    }
-                }
-                else if (!Helper.IsDone[1])
-                {
-                    Helper.UpdateAniState(1);
-                    float easedProgress = EaseOutCubic(Helper.GetAniProgress(1));
-                    if (LockDirection > 0)
-                    {
-                        float curRot = Helper.ToCurAnimationRot(-150, 100, Owner.direction, true, easedProgress);
-                        Vector2 tarPos = curRot.ToTargetPosByMartix(1, 1, 1);
-                        ArmRotation = tarPos.ToRotation() + TargetRotation;
-                    }
-                    else
-                    {
-                        float curRot = Helper.ToCurAnimationRot(-150, 100, Owner.direction, true, easedProgress);
-                        Vector2 tarPos = curRot.ToTargetPosByMartix(1, 1, 1);
-                        ArmRotation = tarPos.ToRotation() + TargetRotation;
-                    }
-                }
-                else
-                {
-                    Projectile.MaxUpdates = 4;
-                    Projectile.timeLeft = GetSeconds(5) * Projectile.MaxUpdates;
-                    //准备完毕，向上。
-                    ChargeReady();
-                    AttackState = State.Shoot;
-                }
+                Projectile.MaxUpdates = 4;
+                Projectile.timeLeft = GetSeconds(2) * Projectile.MaxUpdates;
+                //准备完毕，向上。
+                AttackState = State.Shoot;
                 //占用玩家攻击
-                Owner.itemTime = Owner.itemAnimation = 2;
                 Owner.ChangeDir(LockDirection);
                 Owner.ControlPlayerArm(ArmRotation);
+                ChargeReady();
             }
         }
 
         public void ChargeReady()
         {
-
+            Projectile.velocity = Projectile.rotation.ToRotationVector2() * 21f;
+            ScarletSound(HJScarletSounds.TheSevenStar_Swing, Projectile.Center);
         }
 
         public AnimationStruct Helper = new AnimationStruct(2);
@@ -218,7 +222,8 @@ namespace HJScarletRework.Projs.Melee
         {
             Helper.MaxProgress[0] = (int)(AttackSpeed * .75f);
             Helper.MaxProgress[1] = (int)(AttackSpeed * .25f);
-            LockDirection = ((Owner.LocalMouseWorld().X - Owner.MountedCenter.X) > 0).ToDirectionInt();
+            LockDirection = Owner.direction;
+                Owner.ChangeDir(LockDirection);
             TargetRotation = 0;
         }
 
@@ -275,7 +280,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            if (!Projectile.HJScarlet().FirstFrame)
+            if (!Projectile.HJScarlet().FirstFrame ||StopAllDrawing)
                 return false;
             PixelatedRenderManager.BeginDrawProj = true;
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
@@ -299,6 +304,5 @@ namespace HJScarletRework.Projs.Melee
             SB.EndShaderArea();
             return false;
         }
-
     }
 }

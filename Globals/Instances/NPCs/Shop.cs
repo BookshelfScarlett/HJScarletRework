@@ -34,6 +34,10 @@ namespace HJScarletRework.Globals.Instances.NPCs
             {
                 shop.ToCustomValue<CrystallizedLore>(0, 30, 0, 0);
             }
+            if(shop.NpcType==NPCID.Clothier)
+            {
+                shop.ToCustomValue<CombatSlot>(0, 50, 0, 0);
+            }
         }
 
         public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)

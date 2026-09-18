@@ -20,6 +20,10 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override int ExecutionProgress => 300;
         public override float ExecutionStrikeDamageMult => 1;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
+        public override bool BlockTextboxDetail()
+        {
+            return RangerMode;
+        }
         public bool RangerMode = false;
         public override void ExSSD()
         {

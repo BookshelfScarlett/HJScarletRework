@@ -90,6 +90,16 @@ HJScarletConfigClient: {
 			Default is 1
 			'''
 	}
+
+	TextboxSize: {
+		Label: Textbox Size Adjustment
+		Tooltip:
+			'''
+			Allows you to adjust the size of extra Textboxes for items in the mod
+			If you encounter an issue where the Textbox is too large, you can adjust this setting
+			Default is 1, which means 100%
+			'''
+	}
 }
 
 HJScarletConfigServer: {

@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using HJScarletRework.Buffs;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Methods
@@ -44,5 +45,6 @@ namespace HJScarletRework.Globals.Methods
         /// <returns>额外伤害比例，即实际伤害相对于原始伤害的增幅（0 表示无加成，0.5 表示加成 50%）。</returns>
 
         public static float GetDamageBonusRatio(int targetDamage, int originalDamage) => ((float)targetDamage - originalDamage) / (float)originalDamage;
+        public static void ApplyNoKnockbackBuff(this Player player, int frame) => player.AddBuff(BuffType<AntiKnockbackBuff>(), frame);
     }
 }

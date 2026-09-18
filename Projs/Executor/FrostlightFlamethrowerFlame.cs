@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
@@ -98,7 +99,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<Frostlight>(), Main.rand.Next(2, 5));
-            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
+            target.AddBuff(BuffType<AbsoluteZeroBuff>(), GetSeconds(1));
         }
         public override bool PreDraw(ref Color lightColor)
         {

@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.General;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -26,7 +27,15 @@ namespace HJScarletRework.Items.Accessories
             player.GetDamage<RangedDamageClass>() += Damage;
             player.GetCritChance<RangedDamageClass>() += Crit;
             player.HJScarlet().preciousTargetLevel = 1;
-
+            if (player.HeldItem.IsLegal() && player.HeldItem.DamageType.CountsAsClass<RangedDamageClass>())
+            {
+                if (!hideVisual && !player.IsInInventory())
+                    player.HJScarlet().cursorID = 1;
+                if (player.whoAmI == Main.myPlayer && !player.HasProj<PreciousTargetCross>())
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(player.GetSource_Accessory(Item), Main.MouseWorld, Vector2.Zero, ProjectileType<PreciousTargetCross>(), 0, 0, player.whoAmI);
+                }
+            }
         }
         public override void AddRecipes()
         {

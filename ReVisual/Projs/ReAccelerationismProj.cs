@@ -62,7 +62,7 @@ namespace HJScarletRework.ReVisual.Projs
             Vector2 dir = proj.SafeDirByRot();
             Tex2DWithPath lineGlow = HJScarletTexture.Particle_OpticalLineGlow;
             Vector2 glowScale = proj.scale * new Vector2(1.2f, 0.7f);
-            SB.Draw(lineGlow.Value, drawPos + dir * 10f, null, Color.CornflowerBlue * proj.Opacity, proj.rotation, lineGlow.Origin, glowScale * 0.10f, 0, 0);
+            SB.Draw(lineGlow.Value, drawPos + dir * 10f, null, Color.CornflowerBlue * proj.Opacity, proj.rotation, lineGlow.Value.Size()/2f, glowScale * 0.10f, 0, 0);
             SB.EndShaderArea();
         }
         public void DrawTheTrail(Projectile proj, Color trailColor, float height)
@@ -70,8 +70,8 @@ namespace HJScarletRework.ReVisual.Projs
             SB.EnterShaderArea();
             float laserLength = 50;
             Effect shader = HJScarletShader.TerrarRayLaser;
-            shader.Parameters["LaserTextureSize"].SetValue(HJScarletTexture.Trail_ManaStreak.Size);
-            shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, HJScarletTexture.Trail_ManaStreak.Height));
+            shader.Parameters["LaserTextureSize"].SetValue(HJScarletTexture.Trail_ManaStreak.Value.Size());
+            shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, HJScarletTexture.Trail_ManaStreak.Value.Height));
             shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -50);
             shader.Parameters["uColor"].SetValue(trailColor.ToVector4() * DrawScale);
             shader.Parameters["uFadeoutLength"].SetValue(0.1f);

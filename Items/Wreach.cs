@@ -3,7 +3,9 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
+using HJScarletRework.Projs.General;
 using HJScarletRework.Projs.Magic;
+using HJScarletRework.Projs.Melee;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
@@ -32,7 +34,7 @@ namespace HJScarletRework.Items
             Item.useTime = Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noUseGraphic = true;
-            Item.HJScarlet().drawBuffIcon = true;
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         private IReadOnlyList<TooltipLine> AlterTooltip = null;
         private float LineY = -1;
@@ -130,7 +132,7 @@ namespace HJScarletRework.Items
         {
             Stopwatch.StartNew();
             Stopwatch sw = Stopwatch.StartNew();
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15f, ProjectileType<MoonfireBulletExecution>(), 1, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15, ProjectileType<RitualofReposeStar>(), 1, knockback, player.whoAmI);
             sw.Stop();
             // 输出经过的时间（毫秒）
             //Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

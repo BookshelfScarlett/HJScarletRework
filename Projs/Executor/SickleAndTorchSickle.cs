@@ -187,6 +187,10 @@ namespace HJScarletRework.Projs.Executor
             }
             modifiers.HitDirectionOverride = ((target.Center.X - Owner.Center.X) > 0).ToDirectionInt();
         }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.Oiled, GetSeconds(2));
+        }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             if (projHitbox.Intersects(targetHitbox))

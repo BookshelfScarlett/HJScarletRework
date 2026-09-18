@@ -49,7 +49,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         {
             CreateRecipe().
                 AddIngredient(ItemID.Shotgun).
-                AddIngredient(ItemID.QuadBarrelShotgun).
+                AddIngredient<Reflux>().
                 AddIngredient<TheGarcia>().
                 AddIngredient(ItemID.IllegalGunParts).
                 AddIngredient(ItemID.ChlorophyteBar, 10).

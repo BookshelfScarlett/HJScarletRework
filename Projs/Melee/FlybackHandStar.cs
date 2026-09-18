@@ -91,8 +91,8 @@ namespace HJScarletRework.Projs.Melee
         {
             float laserLength = 15;
             Effect shader = HJScarletShader.TerrarRayLaser;
-            shader.Parameters["LaserTextureSize"].SetValue(HJScarletTexture.Trail_TerraRayFlow.Size);
-            shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, HJScarletTexture.Trail_TerraRayFlow.Height));
+            shader.Parameters["LaserTextureSize"].SetValue(HJScarletTexture.Trail_TerraRayFlow.Value.Size());
+            shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, HJScarletTexture.Trail_TerraRayFlow.Value.Height));
             shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -10);
             shader.Parameters["uColor"].SetValue(trailColor.ToVector4());
             shader.Parameters["uFadeoutLength"].SetValue(0.5f);

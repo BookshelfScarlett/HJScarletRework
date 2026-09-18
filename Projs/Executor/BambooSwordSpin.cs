@@ -14,6 +14,7 @@ namespace HJScarletRework.Projs.Executor
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<BambooSwordHeldProj>().Texture;
+        public override Vector2 TileHitbox => new Vector2(32);
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(8);
@@ -22,7 +23,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.tileCollide = true;
             Projectile.extraUpdates = 1;
-            Projectile.width = Projectile.height = 32;
+            Projectile.width = Projectile.height = 64;
             Projectile.penetrate = -1;
             Projectile.tileCollide = true;
             Projectile.SetupImmnuity(30);

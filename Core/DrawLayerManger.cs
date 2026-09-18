@@ -5,6 +5,7 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Core.SeperateVisualEffect;
 using HJScarletRework.Globals.ParticleSystem;
+using HJScarletRework.Globals.Systems;
 using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.ModLoader;
@@ -34,9 +35,9 @@ namespace HJScarletRework.Core
             On_Main.DrawPlayers_AfterProjectiles += PixelatedRenderManager.DrawTarget_BeforePlayers;
             //DeepGlow
             On_FilterManager.EndCapture += DeepGlow.DrawDeepGlow;
+            //指针绘制
+            On_Main.DrawInterface_36_Cursor += HJScarletCustomCursor.On_Main_DrawInterface_36_Cursor;
         }
-
-
         public override void Unload()
         {
             //屏幕暗化效果
@@ -58,6 +59,8 @@ namespace HJScarletRework.Core
             On_Main.DrawPlayers_AfterProjectiles -= PixelatedRenderManager.DrawTarget_BeforePlayers;
             //DeepGlow
             On_FilterManager.EndCapture -= DeepGlow.DrawDeepGlow;
+            //指针绘制
+            On_Main.DrawInterface_36_Cursor -= HJScarletCustomCursor.On_Main_DrawInterface_36_Cursor;
         }
     }
 }

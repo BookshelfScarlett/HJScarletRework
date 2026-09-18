@@ -26,6 +26,7 @@ namespace HJScarletRework.Items.Accessories
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Red);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.accessory = true;
             Item.expert = true;
             Item.defense = 10;
@@ -40,7 +41,6 @@ namespace HJScarletRework.Items.Accessories
             player.buffImmune[BuffID.Frostburn] = true;
             player.buffImmune[BuffID.Frostburn2] = true;
             player.buffImmune[BuffID.Chilled] = true;
-            player.buffImmune[BuffID.Frozen] = true;
             player.resistCold = true;
             if (Collision.DrownCollision(player.position, player.width, player.height, player.gravDir))
             {

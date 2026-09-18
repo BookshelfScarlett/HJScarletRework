@@ -23,6 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
         {
             Item.SetUpNoUseGraphicItem(true);
             Item.SetUpRarityPrice(ItemRarityID.Blue);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.damage = 12;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useTime = Item.useAnimation = 25;

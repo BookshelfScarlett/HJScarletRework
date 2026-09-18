@@ -13,6 +13,7 @@ namespace HJScarletRework.Globals.Players
             blackKeyExecutorDamageAdd = 0;
             preciousTargetLevel = 0;
             pendantLevel = 0;
+            cursorID = -1;
             desterrennacht = false;
             manaSavingsJar = 0;
             loveRing = false;
@@ -22,9 +23,9 @@ namespace HJScarletRework.Globals.Players
             blackKeyHeal = 0;
             blackKeyDefenseBuff = 0;
             blackKeyDoT = false;
-            cycleMadnessLevel = 0;
             artificalManaStar = false;
             executorSwordMarkLevel = -1;
+            selfPortraitType = -1;
             souloftheTidalMark = false;
             mayaPumper = false;
             crimsonCharm = false;
@@ -36,6 +37,8 @@ namespace HJScarletRework.Globals.Players
             infiniteBreath = false;
             terraSparkBoostImmnue = false;
             celesitalShellEffect = false;
+            cycleMadnessLevel = -1;
+            spellBreakerLevel = 0;
 
             emblemVanguard = false;
             emblemColdSteel = false;
@@ -103,6 +106,7 @@ namespace HJScarletRework.Globals.Players
         {
             flybackhandBuffTime = 0;
             flybackhandBuffTimeCurrent = 0;
+            cycleMadnessCrit = 0;
             LifeBalloonAcc = false;
             monkStaffHeal = false;
             galvanizedHandDashCD = 0;
@@ -110,7 +114,6 @@ namespace HJScarletRework.Globals.Players
             isExecutionStrikeTriggered = false;
             KnifeMarkIndex = -1;
             theGreatDipperBuff = false;
-            saintChurchLastStanding = 0;
             ResetAcc();
             ResetPets();
             ResetArmor();

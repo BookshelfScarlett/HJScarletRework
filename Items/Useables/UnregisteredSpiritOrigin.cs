@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Useables
         public override void ExSD()
         {
             Item.rare = ItemRarityID.Orange;
-            Item.maxStack = 1;
+            Item.maxStack = 9999;
             Item.master = true;
         }
         public override void HoldItem(Player player)

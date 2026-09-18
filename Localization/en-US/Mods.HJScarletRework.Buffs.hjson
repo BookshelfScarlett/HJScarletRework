@@ -136,3 +136,13 @@ LifeWormBuff: {
 	DisplayName: Life Worm Buff
 	Description: Mods.HJScarletRework.Buffs.LifeWormBuff.Description
 }
+
+CycleMadnessBuff: {
+	DisplayName: Cycle Madness Buff
+	Description: Mods.HJScarletRework.Buffs.CycleMadnessBuff.Description
+}
+
+AntiKnockbackBuff: {
+	DisplayName: Anti Knockback Buff
+	Description: Mods.HJScarletRework.Buffs.AntiKnockbackBuff.Description
+}

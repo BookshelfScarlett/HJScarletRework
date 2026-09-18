@@ -53,7 +53,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             CreateRecipe().
                 AddIngredient<ClockworkMinigun>().
                 AddIngredient<TheBlackBox>().
-                AddIngredient(ItemID.IllegalGunParts, 5).
+                AddIngredient(ItemID.IllegalGunParts, 15).
                 AddIngredient<CubistBar>(15).
                 AddTile(FinalAnvilTile).
                 Register();

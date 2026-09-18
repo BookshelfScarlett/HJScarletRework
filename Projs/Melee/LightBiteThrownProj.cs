@@ -18,8 +18,15 @@ namespace HJScarletRework.Projs.Melee
         public ref float SpawnStar => ref Projectile.ai[1];
         public float MaxTime = 10f;
         public float Ratios = 0f;
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            width = 16;
+            height = 16;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
         public override void ExSD()
         {
+            Projectile.width = Projectile.height = 42;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 30;
             Projectile.ignoreWater = true;

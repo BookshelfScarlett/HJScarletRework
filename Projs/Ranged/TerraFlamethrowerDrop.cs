@@ -53,7 +53,7 @@ namespace HJScarletRework.Projs.Ranged
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 projPos, out Vector2 ori);
             projTex = HJScarletTexture.Particle_ShinyOrbHard.Value;
-            ori = HJScarletTexture.Particle_ShinyOrbHard.Origin;
+            ori = projTex.Size()/2f;
             Color baseColor = Color.DarkSeaGreen;
             Color targetColor = Color.LimeGreen;
             //绘制残影

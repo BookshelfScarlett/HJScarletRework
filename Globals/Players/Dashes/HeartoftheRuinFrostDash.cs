@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
@@ -49,8 +50,9 @@ namespace HJScarletRework.Globals.Players.Dashes
         }
         public override void OnHitNPC(Player player, NPC target, int DamageDone)
         {
-            player.velocity = new Vector2(-player.velocity.X * .75f, -10f);
-            SoundEngine.PlaySound(HJScarletSounds.Misc_Ding with { MaxInstances = 0, PitchVariance = .2f });
+            player.velocity = new Vector2(-player.velocity.X * .45f, -5f);
+            ScarletSound(HJScarletSounds.Misc_Ding, target.Center, .75f, 0, pitchVariance: .2f);
+            target.AddBuff(BuffType<AbsoluteZeroBuff>(), GetSeconds(1));
             int length = 32;
             for (int i = 0; i < length; i++)
             {

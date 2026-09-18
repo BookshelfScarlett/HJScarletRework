@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -97,7 +98,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
+            target.AddBuff(BuffType<AbsoluteZeroBuff>(), GetSeconds(1));
             if (!target.CanBeChasedBy() || HJScarletMethods.OutOffScreen(target.Center))
                 return;
             for (int i = 0; i < 30; i++)

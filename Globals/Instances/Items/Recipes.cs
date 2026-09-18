@@ -1,4 +1,9 @@
-﻿using ContinentOfJourney.Items.Material;
+﻿using ContinentOfJourney;
+using ContinentOfJourney.Items;
+using ContinentOfJourney.Items.Accessories;
+using ContinentOfJourney.Items.Material;
+using ContinentOfJourney.Items.Mounts.Rudders;
+using ContinentOfJourney.Items.Placables.FishingCrate;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
@@ -7,6 +12,7 @@ using HJScarletRework.Items.Weapons.Melee;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Exceptions;
 
 namespace HJScarletRework.Globals.Instances.Items
 {
@@ -111,6 +117,13 @@ namespace HJScarletRework.Globals.Instances.Items
                 AddTile(TileID.DemonAltar).
                 DisableDecraft().
                 Register();
+
+            Recipe.Create(ItemID.QuadBarrelShotgun).
+                AddIngredient(ItemID.Boomstick).
+                AddIngredient(ItemID.IllegalGunParts, 5).
+                AddIngredient(ItemID.Bone, 30).
+                AddTile(TileID.Anvils).
+                Register();
         }
         public void GlobalMiscRecipes()
         {
@@ -121,6 +134,30 @@ namespace HJScarletRework.Globals.Instances.Items
                 DisableDecraft().
                 AddTile(TileID.CrystalBall).
                 Register();
+
+
+            //墓们
+            Recipe.Create(ItemID.Tombstone).
+                AddIngredient(ItemID.StoneBlock, 50).
+                AddTile(TileID.HeavyWorkBench).
+                DisableDecraft().
+                Register();
+            for (int i = ItemID.Headstone; i <= ItemID.Obelisk; i++)
+            {
+                Recipe.Create(i).
+                    AddIngredient(ItemID.StoneBlock, 50).
+                    AddTile(TileID.HeavyWorkBench).
+                    DisableDecraft().
+                    Register();
+            }
+            for (int i = ItemID.RichGravestone1; i <= ItemID.RichGravestone5; i++)
+            {
+                Recipe.Create(i).
+                    AddIngredient(ItemID.StoneBlock, 50).
+                    AddTile(TileID.HeavyWorkBench).
+                    DisableDecraft().
+                    Register();
+            }
         }
         public void FargoMutantCrossMod()
         {
@@ -129,13 +166,57 @@ namespace HJScarletRework.Globals.Instances.Items
                 return;
             Recipe.Create(ItemType<AzureFrostmark>()).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyIceCrate, 5).
+                DisableDecraft().
                 AddTile(TileID.Solidifier).
                 Register();
             Recipe.Create(ItemType<DungeonBreaker>()).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyDungeonCrate, 5).
+                DisableDecraft().
                 AddTile(TileID.Solidifier).
                 Register();
 
+            //旅人宝匣添加的特殊掉落
+
+            //影子镐
+            Recipe.Create(ItemType<ShadowPickaxe>()).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyDarkCrate, 5).
+                DisableDecraft().
+                AddTile(TileID.Solidifier).
+                Register();
+            //马赛克法杖
+            Recipe.Create(ItemType<MosaicStaff>()).
+                AddIngredient<ShadowCrate>(5).
+                DisableDecraft().
+                AddTile(TileID.Solidifier).
+                Register();
+            //河流法杖
+            Recipe.Create(ItemType<RiverStaff>()).
+                AddIngredient<DistortedCrate>(5).
+                DisableDecraft().
+                AddTile(TileID.Solidifier).
+                Register();
+            //船舵（们）
+            int[] anchor = [ItemType<ClockworkRudder>(), ItemType<DangerousRudder>(), ItemType<FlourishRudder>(), ItemType<HotRudder>(), ItemType<LunarRudder>(), ItemType<NoRudder>(), ItemType<TriangularRudder>(), ItemType<WoodenRudder>()];
+            for (int i = 0; i < anchor.Length; i++)
+            {
+                Recipe.Create(anchor[i]).
+                    AddIngredient<CubistCrate>(5).
+                    DisableDecraft().
+                    AddTile(TileID.Solidifier).
+                    Register();
+            }
+            //叶绿复合弓
+            Recipe.Create(ItemType<ChlorophyteCompositeBow>()).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyLivingCrate, 5).
+                DisableDecraft().
+                AddTile(TileID.Solidifier).
+                Register();
+            //时转
+            Recipe.Create(ItemType<TimeTurner>()).
+                AddIngredient<CountdownCrate>(5).
+                DisableDecraft().
+                AddTile(TileID.Solidifier).
+                Register();
         }
         public override void AddRecipes()
         {

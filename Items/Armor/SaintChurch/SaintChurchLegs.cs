@@ -26,6 +26,7 @@ namespace HJScarletRework.Items.Armor.SaintChurch
         {
             Item.defense = 10;
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         public override void UpdateEquip(Player player)
         {

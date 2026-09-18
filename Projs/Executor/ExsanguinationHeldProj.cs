@@ -1,13 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
-using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using System.Reflection.Metadata.Ecma335;
 using Terraria;
-using Terraria.Audio;
-using Terraria.GameContent;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
@@ -26,12 +22,9 @@ namespace HJScarletRework.Projs.Executor
             base.SetStaticDefaults();
         }
         public override int ProjExtraUpdates => 0;
-        /// <summary>
-        /// 复写后什么都不做，这样可以让武器不执行后坐力动画
-        /// </summary>
         protected override void UpdateRecoil()
         {
-
+            // 复写后什么都不做，这样可以让武器不执行后坐力动画
         }
         protected override void UpdateWeaponUsing()
         {

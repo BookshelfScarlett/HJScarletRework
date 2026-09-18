@@ -170,6 +170,21 @@ namespace HJScarletRework.Core.ParticleECS
             return ECSMethod.NewParticle(GetInstance<Stain>().Type, timeLeft, pos, vel, color, vec, opacity, rotation, bs, squashSpeedX, squashSpeedY, scale);
         }
         /// <summary>
+        /// 抓痕轨迹，这个抓痕总体较小。<br></br>
+        /// <paramref name="squashScale"/>为形变的大小，如果不输入，默认为<see langword="Vector2(1.2f,0.8f)"/><br></br>
+        /// <paramref name="squashSpeedX"/>为这个抓痕对于x大小的形变速度，如果什么都不输入，默认为<see langword="0"/>，即无形变速度<br></br>
+        /// <paramref name="squashSpeedY"/>为这个抓痕对于y大小的形变速度，如果什么都不输入，默认为<see langword="0"/>，即无形变速度<br></br>
+        /// <paramref name="scale"/>总控这个抓痕的大小，与上述的形变大小另外区分
+        /// </summary>
+        /// <returns></returns>
+        public static int ShrinkParticle(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float rotation, float scale,int type, Vector2? squashScale = null, float squashSpeedX = 0, float squashSpeedY = 0, BlendState blendstate = null)
+        {
+            BlendState bs = blendstate ?? BlendState.Additive;
+            Vector2 vec = squashScale ?? new Vector2(1.2f, .8f);
+            return ECSMethod.NewParticle(GetInstance<ShrinkParticle>().Type, timeLeft, pos, vel, color, vec, opacity, rotation, bs, squashSpeedX, squashSpeedY, scale, aiint0: type);
+        }
+
+        /// <summary>
         /// 发光方块。<br></br>
         /// <paramref name="rotSpeed"/>为方块的旋转速度，默认为<see langword="0"/><br></br>
         /// <paramref name="type"/>为方块的类型。1：较大，2：边缘较厚，其余：普通，默认为<see langword="0"/><br></br>

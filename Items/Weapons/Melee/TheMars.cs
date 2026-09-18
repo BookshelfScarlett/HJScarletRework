@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Terraria;
 using Terraria.ID;
@@ -20,6 +21,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.shoot = ProjectileType<TheMarsProj>();
             Item.rare = ItemRarityID.Red;
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         public override Color MainTooltipColor => Color.LightGray;
     }

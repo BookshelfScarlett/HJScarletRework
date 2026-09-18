@@ -7,8 +7,8 @@ Exsanguination: {
 		'''
 	ExecutionStrike:
 		'''
-		On triggering Execution Strike, completely shatter the shield of the hit enemy
-		For a period of time afterwards, deal 3 times the weapon's damage to that enemy.
+		Completely shatter the shield of the hit enemy
+		For a period of time afterwards, deal 1.12x damage
 		'''
 }
 
@@ -16,13 +16,13 @@ MantleLayer: {
 	DisplayName: Mantle Layer
 	Tooltip:
 		'''
-		Bounce off the enemy and then perform a heavy strike on hit
+		Bounces off, then performs a heavy strike on hit
 		Does not trigger this effect on return
 		'''
 	ExecutionStrike:
 		'''
-		Mantle Layer will attempt to attach to your enemy, dealing damage over time
-		Attempts to perform two heavier heavy strikes after dealing a fixed number of damage instances
+		Mantle Layer will attach to your enemy, dealing continuous damage
+		After a certain time, it will perform two heavier heavy strikes
 		'''
 }
 
@@ -36,18 +36,17 @@ DungeonBreaker: {
 	ExecutionStrike:
 		'''
 		Thrown at high speed and allows infinite penetration
-		Smashes into the wall and forcibly knocks back all nearby small enemies upon hitting a wall
+		Forcibly knocks back all nearby small enemies upon smashes into a wall
 		Continuously release small water bolts backwards that can bounce off walls
 		'''
 }
 
 FleshGrinder: {
 	DisplayName: Flesh Grinder
-	Tooltip: Crush the enemy's flesh, causing it to burst open on hit
+	Tooltip: Crush the target's flesh on hit
 	ExecutionStrike:
 		'''
-		Execution Strike will attempt to seek out multiple enemies
-		Each time it finds an available enemy, it will attempt to attack that enemy 6 times
+		Seek out multiple enemies and attacks for 6 times
 		Can attack up to 4 enemies
 		'''
 }
@@ -64,24 +63,28 @@ JungleMadness: {
 
 DreamlessNight: {
 	DisplayName: Dreamless Night
-	Tooltip: Release dreamflower On Hit
+	Tooltip: Release dream flower on hit
 	ExecutionStrike:
 		'''
-		On return, transforms into a Minion
-		Minion mimics your actions, does not disappear after switching weapons, and enhances the normal attacks of Dreamless Night
-		Minion's presence duration is consumed only when attacking, and before it runs out, it will dash toward to your cursor
-		At most one Minion can exist  and while it is present, it does not increase exectuion times 
+		Summon a minion that mimics player actions
+		Persists after switching weapons, enhances Dreamless Night's normal strikes 
+		Duration is consumed only when attacking
+		Dashes toward the player's cursor before expiring
+		Does not increase Execution Progress while present
 		'''
-	FlavorTooltips: -Through that endless, lingering night, I ache for the presence of a dream-
+	FlavorTooltips:
+		'''
+		Through that endless, lingering night,
+		I ache for the presence of a dream
+		'''
 }
 
 TheDefiler: {
 	DisplayName: The Defiler
-	Tooltip: nfect the enemy's flesh, causing it to fester on hit
+	Tooltip: Infected victim on hit
 	ExecutionStrike:
 		'''
-		Execution Strike will attempt to seek out multiple enemies
-		Each time it finds an available enemy, it will attempt to attack that enemy 4 times
+		Seek out multiple enemies and attacks for 4 times
 		Can attack up to 7 enemies
 		'''
 }
@@ -90,24 +93,24 @@ AetherfireSmasher: {
 	DisplayName: Aetherfire Smasher
 	Tooltip:
 		'''
-		After being thrown, it flies over to a nearby available enemy.
-		On a successful hit, releases seeking fireballs.
+		Flies over to a neaby available enemy
+		Releases seeking fireballs on hit
 		'''
 	ExecutionStrike:
 		'''
-		Directly throw a heavy hammer. After a certain time, it dashes toward the nearest enemy
-		The heavy hammer continuously attaches to the enemy and continuously releases pillars of fire
+		Aetherfire Smasher attaches to the target
+		Also releases pillars of fire and seeking fireballs
 		'''
 }
 
 BinaryStars: {
 	DisplayName: Binary Stars
-	Tooltip: Throws a powerful Galaxy Hammer fires swift Nebula Arrows when hitting enemies
+	Tooltip: On hit, release ultra-fast nebula arrows
 	ExecutionStrike:
 		'''
-		Throw two Galaxy Hammers at once, they strike enemies on their return
-		Upon impact, they split into two smaller hammers that attach to enemies and deal continuous damage
-		When the attach effect ends, the smaller hammers return to you and strike again once more
+		Throw two galaxy hammers that strike on return
+		Upon Impact, split into two sub-hammers that attach
+		After attachment, sub-hammers return and strike again
 		'''
 }
 
@@ -116,16 +119,16 @@ CrimsonScythe: {
 	Tooltip:
 		'''
 		Fourth swing has wider range
-		Each hit grants knockback immunity, causes bleed, and releases Soul Stones
-		You can slash the Soul Stones to return souls, or Right-click to harvest and heal
+		Each hit grants knockback immunity, causes bleed, and releases soul stones
+		You can slash the soul stones to return souls, or Right-click to harvest and heal
 		'''
 	ExecutionStrike:
 		'''
 		Each of the next 20 slashes grants you 2 defense on hit
-		During these slashes, automatically collect Soul Stons on the field
+		During these slashes, automatically collect souls int the stones
 		Absorb one soul while returning the other to its owner
 		'''
-	FlavorTooltips: —Beneath the crimson moon, none can escape her harvest—
+	FlavorTooltips: Beneath the crimson moon, none can escape her harvest
 	ExtraMechanic:
 		'''
 		When combined with the Front Desk Reaper set, gain the following effects:
@@ -159,56 +162,62 @@ CrimsonScythe: {
 
 DeathTolls: {
 	DisplayName: Death Tolls
-	Tooltip: Throw a powerful Death Hammer that release regular Nightmare Star upon hitting enemies
+	Tooltip: Release nightmare arrow on hit
 	ExecutionStrike:
 		'''
-		Death Hammer will return as a Servant Hammer after boomeranging back
-		While the Servant Hammer is active, Execution Strike makes the Death Hammer delay its attach, releasing Shadow Demonic Energy and Nightmare Arrows
-		The hanging Servant Hammer mimics the player's actions, does not disappear when switching weapons, and strengthens the Death Tolls's normal attacks
-		The Servant Hammer's duration is only consumed while attacking, and it will dash toward the player's cursor before its duration runs out
-		Only one attached Hammer and one Servant Hammer can exist at the same time.
+		Summon a minion that mimics player actions
+		Persists after switching weapons, enhances Death Tolls' attacks
+		Duration consumed only when attacking
+		Dashes toward the cursor before expiring
+		While present, Execution Strike attaches with a delay,
+		releasing shadow energy and nightmare arrow
 		'''
-	FlavorTooltips: -Meditate in the death, return the falling stars, unleash nightmares to devour-
+	FlavorTooltips:
+		'''
+		Meditate in the death, return the
+		falling stars, unleash nightmares to devour
+		'''
 }
 
 TheJudgement: {
 	DisplayName: The Judgement
-	Tooltip:
-		'''
-		Throw a Judgment Hammer unleashes a Judgment Nova on hit
-		Focus Attack activates after hitting enemies more than 20 times
-		During Focus Attack
-		'''
+	Tooltip: Unleashes judgement nova on hit
 	ExecutionStrike:
 		'''
-		The Judgment strikes back upon returning, attaches to enemies, and deals continuous damage
-		While attached, it continuously fires Judgment Stars, and fires a Judgment Ray when it expires
-		The attached Holy Hammer only consumes its duration when attacking enemies
-		While the attached hammer is active, hitting enemies does not increase the Execution Attack hit count
+		Summon a minion that auto-attaches to enemies
+		Releases judgement nova while attached, then holy judgement on disappearance
+		Duration consumed only when attacking enemies
+		Max 1, and does not increase Execution Progress while present
 		'''
 }
 
 DreamingLight: {
 	DisplayName: Dreaming Light
-	Tooltip: Summon Dream Hammer on hit
+	Tooltip: Summon dream hammer on hit
 	ExecutionStrike:
 		'''
-		On return, transforms into a Minion
-		Minion mimics your actions, does not disappear after switching weapons, and enhances the normal attacks of Dreamless Night
-		Minion's presence duration is consumed only when attacking, and before it runs out, it will dash toward to your cursor
-		At most one Minion can exist  and while it is present, it does not increase exectuion times 
+		Summon a minion that mimics player actions
+		Persists after switching weapons, enhances Dreaming Light's normal strikes 
+		Duration is consumed only when attacking
+		Dashes toward the player's cursor before expiring
+		Does not increase Execution Progress while present
 		'''
-	FlavorTooltips: -Through that boundless, silent night, I wrought the homecoming of a dream-
+	FlavorTooltips:
+		'''
+		Through that boundless, silent night,
+		I wrought the homecoming of a dream
+		'''
 }
 
 ThePunishment: {
 	DisplayName: The Punishment
-	Tooltip: Launch a seeking punishemnt nova on hit
+	Tooltip: Unleashes punishment star on hit
 	ExecutionStrike:
 		'''
-		Exectuion Strikes will` strike back on return, attach to the enemy, and continuously release punishment nova
-		The attached Hammer consumes its presence duration only when attacking enemies
-		At most one Attached Hammer can exist, and while it is present, it does not increase Execution Times 
+		Summon a minion that auto-attaches to enemies
+		Releases punishment star while attached
+		Duration consumed only when attacking enemies
+		Max 1, and does not increase Execution Progress while present
 		'''
 }
 
@@ -232,20 +241,20 @@ Sundowner: {
 	DisplayName: Sundowner
 	Tooltip:
 		'''
-		Fires both straight-flying projectiles and seeking streaming flames
-		The projectiles cause an explosion On Hit
+		Fires straight-flying missile and seeking streaming flames
+		The projectiles cause an explosion on hit
 		"No, you won't become invincible with this."
 		'''
 	ExecutionStrike:
 		'''
 		Throw a flare gun to call in an airstrike
-		Hold right-click to focus the airstrike on the target
+		Hold right-click to focus the airstrike on a target
 		'''
 }
 
 FrostoftheStorm: {
 	DisplayName: Frost of the Storm
-	Tooltip: On swing, generates piercing cold winds
+	Tooltip: Unleashes piercing cold winds
 	ExecutionStrike:
 		'''
 		Performs a rapid series of slashes with alternating tempo
@@ -268,8 +277,7 @@ DualWraithStaff: {
 	DisplayName: Dual-Wraith Staff
 	Tooltip:
 		'''
-		Fires seeking wraith that cannot penetrate walls
-		Execution Strike must be manually triggered with the Interact key
+		Fires seeking wraith
 		"One staff, two forms of the lingering curse."
 		'''
 	ExecutionStrike:
@@ -277,7 +285,7 @@ DualWraithStaff: {
 		The staff unfolds its blade and switches to javelin mode
 		In javelin mode, it can penetrate walls and pierce up to 3 enemies
 		Seeking wraith is generated only on the first hit
-		When Execution Strike available again, press the Interact key to switch back to the first form
+		Trigger Execution Strike again to switch back to the first form
 		'''
 }
 
@@ -285,13 +293,13 @@ PrunusMume: {
 	DisplayName: Prunus Mume
 	Tooltip:
 		'''
-		On Hit, toss a red plum blossom upward
+		Toss a red plum blossom upward on hit
 		The petals scatter after a short delay and can bounce off walls once
 		'''
 	ExecutionStrike:
 		'''
-		Toss a red plum blossom upward, it remains on the field for a short duration
-		Meanwhile, the blossom continuously releases rotating petals
+		Toss a red plum blossom upward for a short duration
+		The blossom continuously releases rotating petals
 		'''
 }
 
@@ -327,7 +335,7 @@ Frostlight: {
 	ExecutionStrike:
 		'''
 		Rotate the torch forward, unleashing frost fire like a flamethrower
-		When Execution Strike conditions are met again, press the Interact key to switch back to the first form
+		Trigger Execution Strike again to switch back to the first form
 		'''
 }
 
@@ -615,7 +623,7 @@ GrassKnife: {
 
 MoltenKnife: {
 	DisplayName: Molten Throwing Knife
-	Tooltip: Explodes On Hit
+	Tooltip: Explodes on hit
 	ExecutionStrike:
 		'''
 		Creates a Molten Mark lasting 60 seconds, enhancing all Executor attacks
@@ -659,9 +667,8 @@ TheGreatDipper: {
 		'''
 	ExecutionStrike:
 		'''
-		Each swing fires seven seeking stars, gradually lighting up the Big Dipper behind
-		Direct hits also add seven stars
-		When the Big Dipper is fully lit, Execution Strike triggers automatically, unfolding a sustained damage galaxy at the cursor position
+		Each swing fires seven seeking stars and lights up the Big Dipper behind you.
+		When fully lit, triggers Execution Strike, unfolding a galaxy at the cursor
 		Execution is automatic in this mode
 		'''
 	Special: ""
@@ -673,16 +680,16 @@ BambooBow: {
 	ExecutionStrike:
 		'''
 		Enhances the next 12 attacks
-		Increases attack speed, arrow speed, and allows arrows to pierce one enemy
+		Increases attack speed, arrow speed, and allows arrows to pierce
 		'''
 }
 
 BambooSword: {
 	DisplayName: Bamboo Practice Sword
-	Tooltip: Low damage, but briefly stops and knocks back small enemies on hit
+	Tooltip: Briefly stops and knocks back small enemies
 	ExecutionStrike:
 		'''
-		Throws the bamboo sword directly; it stops on the first enemy hit
+		Throws the bamboo sword that stops on the first enemy hit
 		The sword lingers briefly, spinning and striking nearby enemies
 		Each strike always stops the enemy
 		'''
@@ -692,8 +699,8 @@ ClimaticHawstring: {
 	DisplayName: Climatic Bowstring
 	Tooltip:
 		'''
-		While held, two small flying rods descend from the sky and assist in attacking enemies
-		"With the sky's rod as the bow, and the breath of the climate as the string"
+		Two small flying rods descend from the sky, assist in attacking enemies
+		"The sky's rod as the bow, and the breath of the climate as the string"
 		'''
 	ExecutionStrike: Fires thermal lasers continuously for the next 5 seconds
 }

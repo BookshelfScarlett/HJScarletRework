@@ -24,6 +24,7 @@ namespace HJScarletRework.Items.Accessories
         {
             Item.defense = 5;
             Item.accessory = true;
+            Item.HJScarlet().drawBuffIcon = true;
             Item.SetUpRarityPrice(ItemRarityID.Red);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)

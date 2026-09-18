@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Items;
+using ContinentOfJourney.Items.Placables.FishingCrate;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
@@ -33,7 +34,8 @@ namespace HJScarletRework.Globals.Instances.Items
         public static string AnyIceCrate;
         public static string AnyJungleCrate;
         public static string AnyDungeonCrate;
-
+        public static string AnyDarkCrate;
+        public static string AnyLivingCrate;
         #endregion
         public override void AddRecipeGroups()
         {
@@ -72,7 +74,9 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyGoldSword = CreateRecipeGroup(nameof(AnyGoldSword), ItemID.GoldBroadsword, ItemID.PlatinumBroadsword);
             AnyPostPlantEmblem = CreateRecipeGroup(nameof(AnyPostPlantEmblem), ItemType<EmblemColdSteel>(), ItemType<EmblemFirearm>(), ItemType<EmblemThrown>());
             AnyTitaniumBar = CreateRecipeGroup(nameof(AnyTitaniumBar), ItemID.TitaniumBar, ItemID.AdamantiteBar);
+            AnyDarkCrate = CreateRecipeGroup(nameof(AnyDarkCrate), ItemType<MazeCrate>(), ItemType<MistyCrate>(), ItemType<ShadowCrate>());
             AnyBiomeKey = CreateRecipeGroup(nameof(AnyBiomeKey), ItemID.CorruptionKey, ItemID.CrimsonKey, ItemID.FrozenKey, ItemID.JungleKey, ItemID.HallowedKey, ItemID.DungeonDesertKey);
+            AnyLivingCrate = CreateRecipeGroup(nameof(AnyLivingCrate), ItemType<LivingCrate>(), ItemType<MembraneCrate>());
         }
         public override void PostAddRecipes()
         {
@@ -109,6 +113,8 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyGoldSword = null;
             AnyPostPlantEmblem = null;
             AnyTitaniumBar = null;
+            AnyDarkCrate = null;
+            AnyLivingCrate = null;
         }
         public static string CreateRecipeGroup(string name, params int[] AllItem)
         {

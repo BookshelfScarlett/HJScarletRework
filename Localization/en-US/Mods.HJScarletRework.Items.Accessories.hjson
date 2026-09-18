@@ -445,3 +445,33 @@ CombatSlot: {
 	DisplayName: Combat Slot
 	Tooltip: ""
 }
+
+SpellBreaker: {
+	DisplayName: Spell Breaker
+	Tooltip: ""
+}
+
+SpellBreakerAdvanced: {
+	DisplayName: Spell Breaker Advanced
+	Tooltip: ""
+}
+
+SpellBreakerSmall: {
+	DisplayName: Spell Breaker Small
+	Tooltip: ""
+}
+
+SelfPortraitoftheSunflower: {
+	DisplayName: Self Portraitofthe Sunflower
+	Tooltip: ""
+}
+
+SelfPortraitoftheBleachingOne: {
+	DisplayName: Self Portraitofthe Bleaching One
+	Tooltip: ""
+}
+
+BloodThornCrown: {
+	DisplayName: Blood Thorn Crown
+	Tooltip: ""
+}

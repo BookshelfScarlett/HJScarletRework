@@ -35,6 +35,7 @@ GoldenApple: {
 		'''
 		所有属性大幅度提升
 		直接减少承受的伤害
+		同时提供[ScarletBuff/HJScarletRework/GoldenAppleBuff]
 		"仅仅巧合"
 		'''
 }
@@ -45,6 +46,7 @@ GoldenAppleEnchanted: {
 		'''
 		所有属性大幅度提升
 		直接减少承受的伤害
+		同时提供[ScarletBuff/HJScarletRework/GoldenAppleBuffEnchanted]
 		"仅仅巧合"
 		'''
 }
@@ -244,5 +246,15 @@ RandomNewFolder: {
 		'''
 		可同时满足多种不同弹药需求的武器的弹药
 		“不要再新建一个文件夹，不重命名然后把所有东西一股脑扔进去了。”
+		'''
+}
+
+SuicideKnife: {
+	DisplayName: 自损八千
+	Tooltip:
+		'''
+		使用后对自己造成高额伤害
+		方便自残
+		“饿啊！”
 		'''
 }

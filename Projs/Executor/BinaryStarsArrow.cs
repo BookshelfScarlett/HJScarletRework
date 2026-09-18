@@ -165,8 +165,8 @@ namespace HJScarletRework.Projs.Executor
         {
             float laserLength = 50;
             Effect shader = HJScarletShader.TerrarRayLaser;
-            shader.Parameters["LaserTextureSize"].SetValue(HJScarletTexture.Trail_ManaStreak.Size);
-            shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, HJScarletTexture.Trail_ManaStreak.Height));
+            shader.Parameters["LaserTextureSize"].SetValue(HJScarletTexture.Trail_ManaStreak.Value.Size());
+            shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, HJScarletTexture.Trail_ManaStreak.Value.Height));
             shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -50);
             shader.Parameters["uColor"].SetValue(trailColor.ToVector4() * DrawScale);
             shader.Parameters["uFadeoutLength"].SetValue(0.1f);

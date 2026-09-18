@@ -23,6 +23,7 @@ namespace HJScarletRework.Globals.Instances.Items
     public partial class HJScarletGlobalItem : GlobalItem
     {
         public IReadOnlyList<TooltipLine> CacheTooltipLine;
+        public bool drawBuffIconAndDetail = false;
         public bool drawBuffIcon = false;
         public string OwnerName = string.Empty;
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
@@ -133,14 +134,11 @@ namespace HJScarletRework.Globals.Instances.Items
         //话说我们为什么要写这么长一串？
         public List<(float, int, string, Texture2D, string, string)> buffs = new();
         public List<string> add = new();
-        public void InsertIconInTooltipLine(Item item, List<TooltipLine> tooltips)
+        public void GlobalIconInsert(Item item, List<TooltipLine> tooltips)
         {
-            //是否绘制buffIcon要在物品的sd里面专门打个标记
-            //主要是为了略过大部分并不需要画这个东西的鬼玩意，避免每次tooltip跑过来都得清一遍无用内存
-            if (!drawBuffIcon)
-                return;
             //先画出buff转化的提示文本
-            tooltips.CreateTooltip(ScarletTextSets.GeneralText_BuffShow, ScarletTextSets.GeneralText_BuffShowColor);
+            if (drawBuffIconAndDetail)
+                tooltips.CreateTooltip(ScarletTextSets.GeneralText_BuffShow, ScarletTextSets.GeneralText_BuffShowColor);
             buffs.Clear();
             //遍历tooltip行，我们开始找匹配的正则表达式
             for (int i = 0; i < tooltips.Count; i++)
@@ -194,7 +192,8 @@ namespace HJScarletRework.Globals.Instances.Items
                     }, 1);
                 }
             }
-            if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt) && buffs.Count != 0)
+            //用于写入具体的buffTooltip
+            if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt) && buffs.Count != 0 && drawBuffIconAndDetail)
             {
                 if (tooltips.Count < 2)
                     return;
@@ -218,10 +217,17 @@ namespace HJScarletRework.Globals.Instances.Items
 
             }
         }
+        public void InsertIconInTooltipLine(Item item, List<TooltipLine> tooltips)
+        {
+            //是否绘制buffIcon要在物品的sd里面专门打个标记
+            //主要是为了略过大部分并不需要画这个东西的鬼玩意，避免每次tooltip跑过来都得清一遍无用内存
+            if (drawBuffIconAndDetail || drawBuffIcon)
+                GlobalIconInsert(item, tooltips);
+        }
         #endregion
         public override void PostDrawTooltip(Item item, ReadOnlyCollection<DrawableTooltipLine> lines)
         {
-            if (!drawBuffIcon)
+            if (!(drawBuffIcon || drawBuffIconAndDetail))
                 return;
             for (int i = 0; i < lines.Count; i++)
             {
@@ -240,7 +246,13 @@ namespace HJScarletRework.Globals.Instances.Items
         }
         public override void PostDrawTooltipLine(Item item, DrawableTooltipLine line)
         {
-            base.PostDrawTooltipLine(item, line);
+            if (LocalPlayer.HJScarlet().cycleMadnessCrit > 0 && LocalPlayer.HJScarlet().cycleMadnessLevel > 0)
+            {
+                if (line.Mod == "Terraria" && line.Name == "CritChance")
+                {
+                    RarityDrawHelper.DrawCustomTooltipLine(line, Color.White, Color.White, Color.Black, 1f);
+                }
+            }
         }
         public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
         {

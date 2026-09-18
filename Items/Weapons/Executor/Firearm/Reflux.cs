@@ -12,6 +12,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
     public class Reflux : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 15;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
@@ -22,12 +23,13 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.shootSpeed = 19;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = null;
             Item.knockBack = 7f;
-            Item.useTime = Item.useAnimation = 45;
+            Item.useTime = Item.useAnimation = 25;
             Item.crit = 46;
-            Item.shoot = ProjectileType<MonocleHeldProj>();
+            Item.shoot = ProjectileType<RefluxHeldProj>();
             Item.HJScarlet().borderlandWeapon = true;
         }
         public override bool CanShoot(Player player)
@@ -47,10 +49,9 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.TacticalShotgun).
-                AddIngredient<DeepBar>(10).
+                AddIngredient(ItemID.QuadBarrelShotgun).
                 AddIngredient(ItemID.IllegalGunParts, 10).
-                AddTile(TileID.MythrilAnvil).
+                AddTile(TileID.Anvils).
                 Register();
         }
     }

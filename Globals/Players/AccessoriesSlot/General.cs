@@ -18,7 +18,6 @@ namespace HJScarletRework.Globals.Players.AccessoriesSlot
     public class CombatSlotAcceesorySlot : ModAccessorySlot
     {
         public override string Name => "CombatSlot";
-        public override string FunctionalBackgroundTexture => GetInstance<CombatSlot>().Texture;
         public override bool IsEnabled()
         {
             bool isEnable = Main.LocalPlayer.TryGetModPlayer<HJScarletPlayer>(out var value);

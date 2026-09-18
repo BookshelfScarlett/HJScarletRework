@@ -32,6 +32,7 @@ namespace HJScarletRework.Projs.Melee
         private ref float Timer => ref Projectile.ai[2];
         public override void ExSD()
         {
+            Projectile.width = Projectile.height = 32;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
             Projectile.penetrate = 1;

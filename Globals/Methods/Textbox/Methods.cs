@@ -1,10 +1,12 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Configs;
 using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
 using Terraria.UI.Chat;
 
@@ -103,7 +105,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
             {
                 element.Add(new TextDrawElement(
                     "「" + textboxSettings.TitleText + "」",
-                    scale * textboxSettings.TitleTextSize,
+                    scale * textboxSettings.TitleTextSize*textboxSettings.BoxSize * HJScarletConfigClient.Instance.TextboxSize,
                     textboxSettings.TitleTextColor,
                     textboxSettings.TitleEdgeColor,
                     5
@@ -112,10 +114,10 @@ namespace HJScarletRework.Globals.Methods.Textbox
 
             element.Add(new TextDrawElement(
                 textboxSettings.MainText,
-                scale,
+                scale*textboxSettings.BoxSize * HJScarletConfigClient.Instance.TextboxSize,
                 textboxSettings.TextColor,
                 textboxSettings.TextEdgeColor,
-                5
+                    5
                 ));
             //计算总的尺寸
             float contentWidth = element.Max(e => e.Size(font).X);
@@ -166,7 +168,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
                 maxWidth = 0;
                 foreach (var t in cacheTooltip)
                 {
-                    Vector2 size = ChatManager.GetStringSize(font, t.Text, scale);
+                    Vector2 size = ChatManager.GetStringSize(font, t.Text, line.BaseScale);
                     if (size.X > maxWidth)
                         maxWidth = size.X;
                 }
@@ -174,7 +176,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
             //如果设置里有Title（标题），这里才会处理标题内容
             if (textboxSettings.HasTitle)
             {
-                Vector2 titleScale = scale * textboxSettings.TitleTextSize;
+                Vector2 titleScale = scale * textboxSettings.TitleTextSize*textboxSettings.BoxSize * HJScarletConfigClient.Instance.TextboxSize;
                 float lerpValue = TextboxManager.LerpValue;
                 float edgeValue = TextboxManager.EdgeValue;
                 Vector2 posOffset = Vector2.Lerp(Vector2.UnitY * -50f, Vector2.Zero, lerpValue) + Vector2.UnitY * (float)Math.Sin(Main.timeForVisualEffects / 60f) * 10f;
@@ -182,7 +184,7 @@ namespace HJScarletRework.Globals.Methods.Textbox
                 //标题文本
                 string titleText = "「" + textboxSettings.TitleText + "」";
                 //实际描述文本的大小
-                Vector2 mainTextSize = ChatManager.GetStringSize(font, textboxSettings.MainText, scale);
+                Vector2 mainTextSize = ChatManager.GetStringSize(font, textboxSettings.MainText, scale*textboxSettings.BoxSize* HJScarletConfigClient.Instance.TextboxSize);
                 //标题文本的大小
                 Vector2 titleTextSize = ChatManager.GetStringSize(font, titleText, titleScale);
                 //spacing用于和原本的文本框之间的间隔
@@ -229,12 +231,13 @@ namespace HJScarletRework.Globals.Methods.Textbox
                     ChatManager.DrawColorCodedString(sb, font, titleText, titlePos + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + posOffset, textboxSettings.TitleEdgeColor * lerpValue, 0, Vector2.Zero, titleScale);
                 ChatManager.DrawColorCodedString(sb, font, titleText, titlePos + posOffset, textboxSettings.TitleTextColor * lerpValue, 0, Vector2.Zero, titleScale);
                 for (int i = 0; i < 16; i++)
-                    ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + posOffset, textboxSettings.TextEdgeColor * lerpValue, 0, Vector2.Zero, scale);
-                ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + posOffset, textboxSettings.TextColor * lerpValue, 0, Vector2.Zero, scale);
+                    ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + posOffset, textboxSettings.TextEdgeColor * lerpValue, 0, Vector2.Zero, scale*textboxSettings.BoxSize*HJScarletConfigClient.Instance.TextboxSize);
+                ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + posOffset, textboxSettings.TextColor * lerpValue, 0, Vector2.Zero, scale*textboxSettings.BoxSize*HJScarletConfigClient.Instance.TextboxSize);
             }
             else
             {
-                Vector2 mainTextSize = ChatManager.GetStringSize(font, textboxSettings.MainText, scale);
+                //Vector2 mainTextSize = ChatManager.GetStringSize(font, textboxSettings.MainText, scale);
+                Vector2 mainTextSize = ChatManager.GetStringSize(font, textboxSettings.MainText, scale*textboxSettings.BoxSize* HJScarletConfigClient.Instance.TextboxSize);
                 float spacing = 30f;
                 float mainTextDrawX = line.X + maxWidth + spacing;
                 float mainTextDrawY = TextboxManager.FirstLineY + extraYOffset;
@@ -263,8 +266,8 @@ namespace HJScarletRework.Globals.Methods.Textbox
                 DrawTextboxBackground(mainTextPos.X, mainTextPos.Y, mainTextSize.X, mainTextSize.Y, 8, mainTextPos, textboxSettings.BackgroundColor * lerpValue, posOffset, textboxSettings.BackgroundEdgeColor * lerpValue);
                 //最后，我们再画需要的文本内容。
                 for (int i = 0; i < 16; i++)
-                    ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + posOffset, textboxSettings.TextEdgeColor * lerpValue, 0, Vector2.Zero, scale);
-                ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + posOffset, textboxSettings.TextColor * lerpValue, 0, Vector2.Zero, scale);
+                    ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + (TwoPi / 16f * i).ToRotationVector2() * 1.2f + posOffset, textboxSettings.TextEdgeColor * lerpValue, 0, Vector2.Zero, scale*textboxSettings.BoxSize*HJScarletConfigClient.Instance.TextboxSize);
+                ChatManager.DrawColorCodedString(sb, font, textboxSettings.MainText, mainTextPos + posOffset, textboxSettings.TextColor * lerpValue, 0, Vector2.Zero, scale* textboxSettings.BoxSize * HJScarletConfigClient.Instance.TextboxSize);
             }
         }
         public static void DrawTextboxBackground(float beginPosX, float beginPosY, float width, float height, int padding, Vector2 drawPos, Color color, Vector2? posOffset = null, Color? edgeColor = null)
@@ -349,7 +352,8 @@ namespace HJScarletRework.Globals.Methods.Textbox
 
             DynamicSpriteFont font = line.Font ?? FontAssets.MouseText.Value;
             Vector2 scale = line.BaseScale;
-            if (scale == Vector2.Zero) scale = Vector2.One;
+            if (scale == Vector2.Zero) 
+                scale = Vector2.One;
 
             // 1. 计算 maxWidth（只需一次）
             float maxWidth = 0;
@@ -363,11 +367,12 @@ namespace HJScarletRework.Globals.Methods.Textbox
             float maxContentWidth = 0;
             foreach (var set in settingsList)
             {
-                Vector2 mainSize = ChatManager.GetStringSize(font, set.MainText, scale);
+                Vector2 textSizeScale = scale * set.BoxSize * HJScarletConfigClient.Instance.TextboxSize;
+                Vector2 mainSize = ChatManager.GetStringSize(font, set.MainText, textSizeScale);
                 float w = mainSize.X;
                 if (set.HasTitle)
                 {
-                    Vector2 titleSize = ChatManager.GetStringSize(font, "「" + set.TitleText + "」", scale * set.TitleTextSize);
+                    Vector2 titleSize = ChatManager.GetStringSize(font, "「" + set.TitleText + "」", textSizeScale* set.TitleTextSize);
                     w = Math.Max(w, titleSize.X);
                 }
                 if (w > maxContentWidth) maxContentWidth = w;
@@ -377,9 +382,10 @@ namespace HJScarletRework.Globals.Methods.Textbox
             float totalHeight = 0;
             foreach (var set in settingsList)
             {
-                Vector2 titleSize = set.HasTitle ? ChatManager.GetStringSize(font, "「" + set.TitleText + "」", scale * set.TitleTextSize) : Vector2.Zero;
-                Vector2 mainSize = ChatManager.GetStringSize(font, set.MainText, scale);
-                float blockHeight = titleSize.Y + (set.HasTitle ? 5 : 0) + mainSize.Y;
+                Vector2 textSizeScale = scale * set.BoxSize * HJScarletConfigClient.Instance.TextboxSize;
+                Vector2 titleSize = set.HasTitle ? ChatManager.GetStringSize(font, "「" + set.TitleText + "」", textSizeScale * set.TitleTextSize) : Vector2.Zero;
+                Vector2 mainSize = ChatManager.GetStringSize(font, set.MainText, textSizeScale);
+                float blockHeight = titleSize.Y + (set.HasTitle ? 5: 0) + mainSize.Y;
                 blockHeights.Add(blockHeight);
                 totalHeight += blockHeight + verticalSpacing;
             }

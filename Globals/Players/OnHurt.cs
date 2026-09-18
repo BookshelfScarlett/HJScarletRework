@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
@@ -46,8 +47,10 @@ namespace HJScarletRework.Globals.Players
             if (saintChurch)
             {
                 //是否首次死亡，如果是，将这个lastStand标记为True
+                Main.NewText(saintChurchLastStanding);
                 if (saintChurchLastStanding == 0)
                 {
+                    Player.AddBuff(BuffType<SaintChurchBuff>(), GetSeconds(10) * 60);
                     Player.RestoreHealthByPercent(SaintChurchHead.RespawnLifePercentFirst);
                     saintChurchLastStanding += 1;
                     SaintChurchUndead();
@@ -61,17 +64,34 @@ namespace HJScarletRework.Globals.Players
                         Player.RestoreHealthByPercent(SaintChurchHead.RespawnLifePercent);
                         SaintChurchUndead();
                         return false;
-
                     }
                     else
+                    {
                         return true;
+                    }
                 }
+            }
+            else
+            {
             }
             return base.PreKill(damage, hitDirection, pvp, ref playSound, ref genDust, ref damageSource);
         }
         public void SaintChurchUndead()
         {
             Player.GetImmnue(ImmunityCooldownID.General, 60, true);
+            ScarletSound(HJScarletSounds.Misc_Spell, Player.Center);
+            new CrossGlow(Player.Center, Color.White, 45, 1, .31f).Spawn();
+            //ECSParticle.CrossGlow(Player.Center, Color.White, 45, 1, .91f);
+            for (int i = 0; i < 32; i++)
+            {
+                Vector2 pos = Player.Center.ToRandCirclePos(3);
+                Vector2 dir = Player.Center.GetNormalVector2(pos);
+                Vector2 vel = dir * Main.rand.NextFloat(0.3f, 7f);
+                int lifeTime = Main.rand.Next(30, 70);
+                float rot = RandRotTwoPi;
+                ECSParticle.SmokeParticle(pos, vel, Color.WhiteSmoke, lifeTime, rot, .8f, .35f, true, BlendState.NonPremultiplied);
+                ECSParticle.SmokeParticle(pos, vel, RandLerpColor(Color.Black,Color.Lerp(Color.Black,Color.White,.1f)), lifeTime, rot, 1f, .3f, true, BlendState.NonPremultiplied);
+            }
         }
         public override bool ConsumableDodge(Player.HurtInfo info)
         {

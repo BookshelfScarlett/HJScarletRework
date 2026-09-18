@@ -1,7 +1,9 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
+using HJScarletRework.Projs.NPCs.Enemy;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,21 +12,21 @@ namespace HJScarletRework.Items.Useables
 {
     public class SuicideKnife : HJScarletItemClass
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
         public override string AssetPath => AssetHandler.Useables;
         public override void SetDefaults()
         {
             Item.width = Item.height = 48;
             Item.DamageType = DamageClass.Generic;
             Item.useTime = Item.useAnimation = 15;
-            Item.scale *= 1.2f;
             Item.UseSound = SoundID.Item1;
-            Item.useStyle = ItemUseStyleID.Swing;
+            Item.useStyle = ItemUseStyleID.Shoot;
+            Item.SetUpNoUseGraphicItem();
             Item.autoReuse = true;
             Item.rare = ItemRarityID.Red;
             Item.useTurn = true;
+            Item.shoot = ProjectileType<SuicideKnifeInvisProj>();
             Item.knockBack = 12f;
-            Item.damage = 100;
+            Item.damage = 7777;
         }
         public override bool? UseItem(Player player)
         {
@@ -42,9 +44,8 @@ namespace HJScarletRework.Items.Useables
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.MoltenPickaxe).
-                AddIngredient<DisasterBar>(10).
-                AddTile(TileID.MythrilAnvil).
+                AddRecipeGroup(RecipeGroupID.IronBar,10).
+                AddTile(TileID.WorkBenches).
                 Register();
 
         }

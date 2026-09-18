@@ -26,6 +26,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.useTime = Item.useAnimation = 48;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.shoot = ProjectileType<ASMDHeldProj>();
             Item.HJScarlet().ExecutionProj = ProjectileType<ASMDExecutionBullet>();

@@ -127,14 +127,14 @@ namespace HJScarletRework.Globals.Graphics.Metaballs
             {
                 for (int i = 0; i < SharpTearsList.Count; i++)
                 {
-                    Main.spriteBatch.Draw(HJScarletTexture.Particle_SharpTearClean.Value, SharpTearsList[i].Center - Main.screenPosition, null, Color.White, SharpTearsList[i].Rot, HJScarletTexture.Particle_SharpTearClean.Origin, SharpTearsList[i].Scale, 0, 0);
+                    Main.spriteBatch.Draw(HJScarletTexture.Particle_SharpTearClean.Value, SharpTearsList[i].Center - Main.screenPosition, null, Color.White, SharpTearsList[i].Rot, HJScarletTexture.Particle_SharpTearClean.Value.Size() / 2f, SharpTearsList[i].Scale, 0, 0);
                 }
             }
             if (SharpCrossStarList.Count != 0)
             {
                 for (int i = 0; i < SharpCrossStarList.Count; i++)
                 {
-                    Main.spriteBatch.Draw(HJScarletTexture.Particle_KiraStar.Value, SharpCrossStarList[i].Center - Main.screenPosition, null, Color.White, 0, HJScarletTexture.Particle_KiraStar.Origin, SharpCrossStarList[i].Scale, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(HJScarletTexture.Particle_KiraStar.Value, SharpCrossStarList[i].Center - Main.screenPosition, null, Color.White, 0, HJScarletTexture.Particle_KiraStar.Value.Size() / 2f, SharpCrossStarList[i].Scale, SpriteEffects.None, 0f);
                 }
             }
             if (CircleList.Count != 0)

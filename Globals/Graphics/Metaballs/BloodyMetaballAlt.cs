@@ -65,16 +65,16 @@ namespace HJScarletRework.Globals.Graphics.Metaballs
                 {
                     if (Particles[i].UseBall)
                     {
-                        Main.spriteBatch.Draw(HJScarletTexture.Particle_BloodDrop.Value, Particles[i].Center - Main.screenPosition, null, Color.White, Particles[i].Rot - PiOver2, HJScarletTexture.Particle_BloodDrop.Size / 2, Particles[i].Scale, SpriteEffects.None, 0f);
+                        Main.spriteBatch.Draw(HJScarletTexture.Particle_BloodDrop.Value, Particles[i].Center - Main.screenPosition, null, Color.White, Particles[i].Rot - PiOver2, HJScarletTexture.Particle_BloodDrop.Value.Size() / 2, Particles[i].Scale, SpriteEffects.None, 0f);
                         continue;
                     }
                     if (Particles[i].UseBiggerStatin)
                     {
-                        Main.spriteBatch.Draw(HJScarletTexture.Texture_BloodStain.Value, Particles[i].Center - Main.screenPosition, null, Color.White, Particles[i].Rot, HJScarletTexture.Texture_BloodStain.Size / 2, Particles[i].Scale * new Vector2(2f, 2f), SpriteEffects.None, 0f);
+                        Main.spriteBatch.Draw(HJScarletTexture.Texture_BloodStain.Value, Particles[i].Center - Main.screenPosition, null, Color.White, Particles[i].Rot, HJScarletTexture.Texture_BloodStain.Value.Size() / 2, Particles[i].Scale * new Vector2(2f, 2f), SpriteEffects.None, 0f);
                         continue;
                     }
 
-                    Main.spriteBatch.Draw(HJScarletTexture.Texture_BloodStain.Value, Particles[i].Center - Main.screenPosition, null, Color.White * .5f, Particles[i].Rot, HJScarletTexture.Texture_BloodStain.Size / 2, Particles[i].Scale * new Vector2(0.30f, 1.5f), SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(HJScarletTexture.Texture_BloodStain.Value, Particles[i].Center - Main.screenPosition, null, Color.White * .5f, Particles[i].Rot, HJScarletTexture.Texture_BloodStain.Value.Size() / 2, Particles[i].Scale * new Vector2(0.30f, 1.5f), SpriteEffects.None, 0f);
                 }
             }
         }

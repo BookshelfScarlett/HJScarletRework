@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.NPCs.Boss_ScarabBelief;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -83,7 +84,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
+            target.AddBuff(BuffType<AbsoluteZeroBuff>(), GetSeconds(1));
             Projectile.AddExecutionTimeImmediate(ItemType<FrostoftheStorm>());
             if (Projectile.numHits < 1)
             {
@@ -119,8 +120,7 @@ namespace HJScarletRework.Projs.Executor
                     ((FrostoftheStormExecution)proj.ModProjectile).Flip = false;
                 ((FrostoftheStormExecution)proj.ModProjectile).BeginTargetRotation = TargetRotation;
             }
-            else
-                if (Main.mouseLeft)
+            else if (Main.mouseLeft&&!Owner.dead&&!Owner.CCed)
             {
                 //挥舞结束的时候处死并立刻生成新的射弹。这样我们不用重置大部分的动画进程，实现起来稍微方便点
                 if (!Flip)

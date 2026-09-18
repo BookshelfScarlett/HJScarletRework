@@ -21,6 +21,7 @@ namespace HJScarletRework.Items.Accessories
         {
             Item.width = Item.height = 32;
             Item.SetUpRarityPrice(ItemRarityID.Red);
+            Item.HJScarlet().drawBuffIcon = true;
             Item.accessory = true;
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DamageAdd.ToPercent(), CritDamage.ToPercent(), AP, HealAmit);

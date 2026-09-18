@@ -86,7 +86,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     if (Projectile.IsMe())
                     {
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Main.MouseWorld, Vector2.Zero, ProjectileType<TheGreatDipperGalaxy>(), Projectile.originalDamage, 0, Owner.whoAmI);
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Main.MouseWorld, Vector2.Zero, ProjectileType<TheGreatDipperGalaxy>(), (int)(Projectile.originalDamage*.80f), 0, Owner.whoAmI);
                         proj.timeLeft = GetSeconds(5);
                     }
                 }

@@ -20,22 +20,6 @@ namespace HJScarletRework.Assets.Registers
             Texture = Request<Texture2D>($"{Path}");
         }
         public Texture2D Value => Texture.Value;
-        public int Height => Texture.Height();
-        public int Width => Texture.Width();
-        public Vector2 Size
-        {
-            get
-            {
-                return new Vector2(Width, Height);
-            }
-        }
-        public Vector2 Origin
-        {
-            get
-            {
-                return Size / 2;
-            }
-        }
     }
     internal class HJScarletItemProj : ModSystem
     {

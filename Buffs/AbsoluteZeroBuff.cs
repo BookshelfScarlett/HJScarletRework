@@ -22,7 +22,7 @@ namespace HJScarletRework.Buffs
         }
         public override void Update(NPC npc, ref int buffIndex)
         {
-            base.Update(npc, ref buffIndex);
+            npc.HJScarlet().absoluteZeroBuffEnemy = true;
         }
         public override void Update(Player player, ref int buffIndex)
         {

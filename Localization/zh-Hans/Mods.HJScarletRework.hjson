@@ -20,12 +20,12 @@ SwitchWeapon: {
 	Tooltip:
 		'''
 		空想归途：
-		手持该物品，按下鼠标中键以切换形态
+		手持该物品，按下 互动键 以切换形态
 		'''
 	Visual:
 		'''
 		空想归途：
-		手持该武器，按下鼠标中键以更改视觉效果
+		手持该武器，按下 互动键 以更改视觉效果
 		'''
 	AllFix: 同样应用于: {0}
 }
@@ -81,11 +81,11 @@ Items: {
 }
 
 ExecutorDamageClass: {
-	ExecutionProgress: 命中{0}次以发起处决，按住左Alt查看
+	ExecutionProgress: 命中{0}次以发起处决，按住左Shift查看
 	ExecutionDescriptionName: 处决执行时
 	ExecutionProgressRevampedMode: 处决进程：{0} / {1}
-	ForceTacticalExecution: 该武器处决攻击必须使用 互动键 手动开启
-	ForceAutomaticExecution: 该武器处决攻击强制自动执行
+	ForceTacticalExecution: 处决攻击需按下 互动键 执行
+	ForceAutomaticExecution: 处决攻击自动执行
 	CompanionWeapon: 伴生
 	DisplayName: 代行者伤害
 
@@ -113,3 +113,4 @@ ExecutorDamageClass: {
 }
 
 DamageClasses.ExecutorDamageClass.DisplayName: 代行者伤害
+Projs.Enemy.SuicideKnifeInvisProj.DisplayName: 自损八千

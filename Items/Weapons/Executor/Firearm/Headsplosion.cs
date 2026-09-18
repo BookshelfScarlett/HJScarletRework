@@ -12,13 +12,14 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
     public class Headsplosion : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 12;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
         }
         public override void ExSD()
         {
-            Item.damage = 2010;
+            Item.damage = 45;
             Item.shootSpeed = 19;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true);
@@ -29,6 +30,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.crit = 46;
             Item.shoot = ProjectileType<HeadsplosionHeldProj>();
             Item.HJScarlet().borderlandWeapon = true;
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         public override bool CanShoot(Player player)
         {

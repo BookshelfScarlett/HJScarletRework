@@ -36,20 +36,19 @@ namespace HJScarletRework.Projs.Executor
             Vector2 pos = Projectile.Center + offset;
             Vector2 dir = Projectile.SafeDirByRot();
             int type = ProjectileType<HeadsplosionBullet>();
-            if (Projectile.HJScarlet().ExecutionStrike)
-            {
-                type = ProjectileType<MonocleBulletExecution>();
-            }
             pos -= new Vector2(80, 0).RotatedBy(Projectile.rotation);
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
-            proj.HJScarlet().HasExecutionMechanic = true;
             if (Projectile.HJScarlet().ExecutionStrike)
             {
                 ScarletSound(HJScarletSounds.ASMD_ExecutionFire, Projectile.Center, 0.30f, 0, .24f, 0.1f);
                 ScreenDarknessSystem.AddScreenDarkness(0.75f, 20);
+                proj.HJScarlet().ExecutionStrike = true;
             }
             else
+            {
                 ScarletSound(HJScarletSounds.ASMD_Fire, Projectile.Center, 0.20f, 0, .34f, 0.1f);
+                proj.HJScarlet().HasExecutionMechanic = true;
+            }
 
             pos = Projectile.Center + offset;
             //震屏，粒子特效

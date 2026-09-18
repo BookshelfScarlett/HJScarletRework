@@ -40,14 +40,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (!HJScarletConfigClient.Instance.SpecialRarity)
-                return base.PreDrawTooltipLine(line, ref yOffset);
-
-            if (line.Name == "FlavorTooltipsName" && line.Mod == Mod.Name)
-            {
-                NightRarity.DrawFlavorRarity(line);
-                return false;
-            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
 
@@ -57,7 +49,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             //通过本地化路径搜索需要的特殊文本
             string value = this.GetLocalizedValue("FlavorTooltips").ToLangValue();
             //实例化toolti并注册名字
-            TooltipLine flavorTooltips = new TooltipLine(Mod, "FlavorTooltipsName", value)
+            TooltipLine flavorTooltips = new(Mod, "FlavorTooltipsName", "「"+ value + "」")
             {
                 OverrideColor = Color.Lerp(Color.MediumPurple, Color.LightPink, 0.3f)
             };

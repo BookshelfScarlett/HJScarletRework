@@ -89,10 +89,7 @@ namespace HJScarletRework.Globals.Classes
 
         public override void ProjAI()
         {
-            //手持物品不对，玩家状态不对，处死射弹
-            if (Owner.IsHolding(OriginalItemID) && !Owner.CCed && !Owner.dead)
-                Projectile.timeLeft = 2;
-
+            UpdatePlayerState();
             //处理玩家手持该武器时的状态
             UpdateHeldProjectile();
             //后坐力动画
@@ -115,6 +112,13 @@ namespace HJScarletRework.Globals.Classes
                 UpdateWeaponIdle();
             }
             UpdateGlobalReset();
+        }
+        protected virtual void UpdatePlayerState()
+        {
+            //手持物品不对，玩家状态不对，处死射弹
+            if (Owner.IsHolding(OriginalItemID) && !Owner.CCed && !Owner.dead)
+                Projectile.timeLeft = 2;
+
         }
         /// <summary>
         /// 在使用武器期间每帧调用，攻击判定之前。

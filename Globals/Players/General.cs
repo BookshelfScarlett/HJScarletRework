@@ -105,7 +105,10 @@ namespace HJScarletRework.Globals.Players
         public int crimsonScytheDefense = 0;
         public int crimsonScytheSlayNPCType = 0;
         public int crystallizeLoreReforgeIndex = 0;
-        public int cycleMadnessLevel = 0;
+        public int cursorID = -1;
+        public int cycleMadnessLevel = -1;
+        public int cycleMadnessCrit = 0;
+        public int cycleMadnessTimer = 0;
         public int defenderEmblemCD = 0;
         public int desterrannachtImmortalTime = 0;
         public int desterranRespawnChargeTimer = 0;
@@ -135,6 +138,9 @@ namespace HJScarletRework.Globals.Players
         public int protectorPlantID = -1;
         public int providenceHolyWaterHealMana = 0;
         public int saintChurchLastStanding = 0;
+        public int selfPortraitType = -1;
+        public int spellBreakerLevel = 0;
+        public int spellBreakerTimer = 0;
         public int stardustRuneHitHealTimer = 0;
         public int stardustRuneStaticHealTimer = 0;
         public int tearEyeBuff = 0;
@@ -145,8 +151,6 @@ namespace HJScarletRework.Globals.Players
         // float 字段
         public float blackKeyDefenseBuff = 0;
         public float containedBlastBoomCount = 0;
-        public float cycleMadenssTimer = 0;
-        public float cycleMadenessCrit = 0;
         public float Executor_BarOpacity = 0;
         public float healingPotionMult = 1f;
         public float heldProjReUseTime = 0;

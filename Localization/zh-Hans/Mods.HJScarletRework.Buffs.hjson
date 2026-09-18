@@ -93,7 +93,11 @@ StreamingProtocalBuff: {
 
 TearEyeBuff: {
 	DisplayName: 克苏鲁的眼泪
-	Description: 增加伤害减免
+	Description:
+		'''
+		增加伤害减免
+		增加幅度为5%/10%/15%，与流程进度相关
+		'''
 }
 
 DragonMinionBuff: {
@@ -140,11 +144,26 @@ TheBleachingBuff: {
 }
 
 SaintChurchBuff: {
-	// DisplayName: Saint Church Buff
-	// Description: Mods.HJScarletRework.Buffs.SaintChurchBuff.Description
+	DisplayName: 不死的巴卢
+	Description:
+		'''
+		月之巴卢就算陷入死亡深渊，也会浮上、苏醒
+		然后厌恶拒绝自身教诲的达恩，规定了它们死后也不会复活的命运
+		也无法修复自身的损伤
+		'''
 }
 
 LifeWormBuff: {
 	DisplayName: 小小万籁携生
 	Description: 茁壮地成长
+}
+
+CycleMadnessBuff: {
+	DisplayName: 暴击星周转
+	Description: Mods.HJScarletRework.Buffs.CycleMadnessBuff.Description
+}
+
+AntiKnockbackBuff: {
+	DisplayName: 防击退
+	Description: 不再受到击退的影响
 }

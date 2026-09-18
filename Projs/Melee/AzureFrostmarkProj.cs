@@ -25,6 +25,12 @@ namespace HJScarletRework.Projs.Melee
         public float SpinMoveTime = 60f;
         public bool HitTarget = false;
         public int SpawnTime = 0;
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            width = 12;
+            height = 12;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
         public override void ExSSD()
         {
             Projectile.ToTrailSetting(8, 2);
@@ -32,7 +38,7 @@ namespace HJScarletRework.Projs.Melee
 
         public override void ExSD()
         {
-            Projectile.height = Projectile.width = 16;
+            Projectile.height = Projectile.width = 40;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
             Projectile.noEnchantmentVisuals = true;
@@ -42,7 +48,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.extraUpdates = 1;
             Projectile.Opacity = 0f;
             Projectile.scale = 0f;
-            Projectile.timeLeft = 300;
+            Projectile.timeLeft = GetSeconds(2);
         }
         public override void AI()
         {
@@ -53,15 +59,7 @@ namespace HJScarletRework.Projs.Melee
                 Projectile.originalDamage = Projectile.damage;
             }
             UpdateParticles();
-            switch (AttackType)
-            {
-                case Style.Shoot:
-                    DoShoot();
-                    break;
-                case Style.SpinAndFade:
-                    DoSpinAndFade();
-                    break;
-            }
+            DoShoot();
         }
         public void UpdateParticles()
         {
@@ -86,27 +84,13 @@ namespace HJScarletRework.Projs.Melee
         private void DoShoot()
         {
             Timer++;
-            if (Timer % 20 == 0)
+            if (Timer % 20 == 0&&Timer<101)
             {
-                if (SpawnTime > 1)
-                {
-                    AttackType = Style.SpinAndFade;
-                    Projectile.netUpdate = true;
-                    return;
-                }
                 SoundEngine.PlaySound(SoundID.Item109 with { Volume = 0.8f, MaxInstances = 1, Pitch = 0.30f + SpawnTime * 0.3f }, Projectile.Center);
-                SpawnTime++;
                 SpawnEnergyBall();
             }
         }
         //这段真的是沉浸于自己的世界了
-        private void DoSpinAndFade()
-        {
-            SpawnEnergyBall();
-            SpawnPreKillParticle();
-            SoundEngine.PlaySound(SoundID.DD2_CrystalCartImpact with { MaxInstances = 1, Pitch = 0.30f }, Projectile.Center);
-            Projectile.Kill();
-        }
         private void SpawnEnergyBall()
         {
             if (!Projectile.IsMe())
@@ -140,21 +124,6 @@ namespace HJScarletRework.Projs.Melee
             new CrossGlow(spawnPos + posOffset, Color.White, 40, 1f, 0.15f).Spawn();
             for (int i = 0; i < 15; i++)
                 new SmokeParticle(posOffset + spawnPos.ToRandCirclePosEdge(4f), RandDirTwoPi * 1f, RandLerpColor(Color.DeepSkyBlue, Color.Gray), 40, RandRotTwoPi, 1f, 0.24f).SpawnToPriorityNonPreMult();
-        }
-        public override bool OnTileCollide(Vector2 oldVelocity)
-        {
-            if (AttackType == Style.Shoot)
-            {
-                AttackType = Style.SpinAndFade;
-                Projectile.velocity = oldVelocity;
-                Projectile.tileCollide = false;
-            }
-
-            for (int i = SpawnTime; i < 2; i++)
-            {
-                SpawnEnergyBall();
-            }
-            return false;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -196,7 +165,7 @@ namespace HJScarletRework.Projs.Melee
             float rot = Projectile.rotation;
             Vector2 offset = Projectile.SafeDir() * 60f;
             drawPos -= offset;
-            float ratios = Lerp(1f, 0f, Timer / 60f);
+            float ratios = 1f;
             for (int i = length - 1; i >= 0; i--)
             {
                 if (AttackType == Style.SpinAndFade)

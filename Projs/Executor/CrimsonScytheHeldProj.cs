@@ -563,7 +563,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public void FastDrop(int drop, int num = 1)
         {
-
             Owner.QuickSpawnItem(Owner.GetSource_FromThis(), drop, num);
         }
         public void SoulStoneSpawn(NPC target)
@@ -582,7 +581,7 @@ namespace HJScarletRework.Projs.Executor
         public void PlayerEffectHandler()
         {
             //在这里给玩家加成
-            Owner.HJScarlet().antiKnockbackTime = 30;
+            Owner.ApplyNoKnockbackBuff(30);
             if (Owner.HJScarlet().crimsonScytheAttackCounter > 0)
             {
                 if (Projectile.numHits < 1)

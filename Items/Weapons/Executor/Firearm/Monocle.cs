@@ -66,6 +66,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
                 AddIngredient<Headsplosion>().
                 AddIngredient(ItemID.ShadowbeamStaff).
                 AddIngredient<CrownofSilveryLight>(15).
+                AddIngredient(ItemID.IllegalGunParts,15).
                 AddTile(FinalAnvilTile).
                 Register();
         }

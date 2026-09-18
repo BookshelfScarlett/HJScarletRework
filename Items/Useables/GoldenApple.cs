@@ -20,6 +20,7 @@ namespace HJScarletRework.Items.Useables
             Item.DefaultToFood(16, 16, BuffType<GoldenAppleBuff>(), GetSeconds(60) * 10);
             Item.SetUpRarityPrice(ItemRarityID.LightPurple);
             Item.value = Item.sellPrice(gold: 3);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         public override bool? UseItem(Player player)
         {

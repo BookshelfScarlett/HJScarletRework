@@ -368,3 +368,19 @@ SaintChurchBody: {
 	DisplayName: Saint Church Body
 	Tooltip: ""
 }
+
+GunWitchBody: {
+	DisplayName: Gun Witch Body
+	Tooltip: ""
+}
+
+GunWitchHead: {
+	DisplayName: Gun Witch Head
+	Tooltip: ""
+	SetBonus: ""
+}
+
+GunWitchLegs: {
+	DisplayName: Gun Witch Legs
+	Tooltip: ""
+}

@@ -15,13 +15,19 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ExSD()
         {
-            Projectile.width = Projectile.height = 16;
+            Projectile.width = Projectile.height = 24;
             Projectile.tileCollide = true;
             Projectile.timeLeft = GetSeconds(5);
             Projectile.usesLocalNPCImmunity = true;
             Projectile.penetrate = 2;
             Projectile.extraUpdates = 1;
             Projectile.localNPCHitCooldown = -1;
+        }
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            width = 16;
+            height = 16;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
         public override void AI()
         {

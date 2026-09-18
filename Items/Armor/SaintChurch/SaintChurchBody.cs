@@ -24,6 +24,7 @@ namespace HJScarletRework.Items.Armor.SaintChurch
         {
             Item.defense = 12;
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritDamage.ToPercent(), Crit + "%");
         public override void UpdateEquip(Player player)

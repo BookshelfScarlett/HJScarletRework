@@ -5,9 +5,11 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.General;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -25,6 +27,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.MaxUpdates = 3;
             Projectile.SetupImmnuity(-1);
             Projectile.ignoreWater = true;
+            Projectile.timeLeft = Projectile.MaxUpdates * GetSeconds(5);
             Projectile.tileCollide = true;
         }
         public override void OnFirstFrame()
@@ -40,24 +43,22 @@ namespace HJScarletRework.Projs.Executor
             if (Main.rand.NextBool(8))
                 ECSParticle.ShinyCrossStarSmall(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 8f, RandLerpColor(Color.LightGoldenrodYellow, Color.DarkGoldenrod), 45, 1, Main.rand.NextFloat(.9f, 1.1f) * .3f);
             Timer++;
-            if(Timer>Projectile.MaxUpdates*30f)
-            {
-                Projectile.Kill();
-            }
         }
         public override bool? CanHitNPC(NPC target)
         {
-            if (Projectile.HJScarlet().ExecutionStrikeManual)
-            {
-                if (Projectile.HJScarlet().CurStoredTarget.IsLegal() && Projectile.HJScarlet().CurStoredTarget.Equals(target))
-                    return null;
-                return false;
-            }
-            return false;
+            return null;
         }
         public override void OnKill(int timeLeft)
         {
             Vector2 pos = Projectile.Center;
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<HeadsplosionBoom>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+            if (Projectile.HJScarlet().ExecutionStrikeManual)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    Projectile proj2 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(30), 8f, 17f), ProjectileType<HeadsplosionBombBullet>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
+                }
+            }
             for (int i = 0; i < 18; i++)
             {
                 Vector2 pos2 = pos.ToRandCirclePos(8);
@@ -74,16 +75,18 @@ namespace HJScarletRework.Projs.Executor
             ECSParticle.CrossGlow(pos, Color.Gold, 40, 1, crossGlowScale, .2f);
             ECSParticle.CrossGlow(pos, Color.LightGoldenrodYellow, 40, 1, crossGlowScale * .98f, .2f);
             ECSParticle.CrossGlow(pos, Color.White, 40, 1, crossGlowScale * .95f, .2f);
-
-            base.OnKill(timeLeft);
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.SetCrit();
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            base.OnHitNPC(target, hit, damageDone);
+            target.AddBuff(BuffID.Ichor, GetSeconds(2));
         }
         public override bool? CanDamage()
         {
-            return false;
+            return Timer > Projectile.MaxUpdates * 5f;
         }
         public override bool PreDraw(ref Color lightColor)
         {

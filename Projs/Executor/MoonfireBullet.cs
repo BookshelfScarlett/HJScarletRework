@@ -5,7 +5,6 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using rail;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria;

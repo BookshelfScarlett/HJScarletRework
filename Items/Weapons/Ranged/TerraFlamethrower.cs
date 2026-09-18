@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.knockBack = 5f;
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
             Item.SetUpNoUseGraphicItem(true, false);
-            Item.HJScarlet().drawBuffIcon = true;
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.shoot = ProjectileType<TerraFlamethrowerHeldProj>();
             Item.shootSpeed = 12f;

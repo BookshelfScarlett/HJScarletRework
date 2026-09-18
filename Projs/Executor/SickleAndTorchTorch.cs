@@ -55,7 +55,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.OnFire, GetSeconds(5));
+            target.AddBuff(BuffID.OnFire3, GetSeconds(2));
             Projectile.AddExecutionTimeImmediate(ItemType<SickleAndTorch>());
         }
         public override void OnKill(int timeLeft)
