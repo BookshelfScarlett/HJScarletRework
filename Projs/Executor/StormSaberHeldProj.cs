@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -43,7 +44,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            ScarletSound(HJScarletSounds.TheSevenStar_Swing, Projectile.Center, 0.75f, 1, -0.1f + 0.14f * SwingTime, 0.1f);
+            if (Projectile.AllowSound())
+                ScarletSound(HJScarletSounds.TheSevenStar_Swing, Projectile.Center, 0.75f, 1, -0.1f + 0.14f * SwingTime, 0.1f);
             if (Projectile.HJScarlet().ExecutionStrike)
             {
                 SwingScale = 1.30f;
@@ -55,7 +57,7 @@ namespace HJScarletRework.Projs.Executor
                 Helper.MaxProgress[0] = (int)(AttackSpeed * .85f);
                 Helper.MaxProgress[1] = (int)(AttackSpeed * .15f);
             }
-            BeginTargetRotation = Owner.Center.ToMouseVector2().ToRotation();
+            BeginTargetRotation = (Owner.AimWorldOf() - Owner.Center).SafeNormalize(Vector2.UnitX).ToRotation();
             TargetRotation = BeginTargetRotation;
         }
         public override void ProjAI()
@@ -98,7 +100,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Helper.IsDone[0])
             {
-                if (Helper.OnAnimationBegin(0))
+                if (Helper.OnAnimationBegin(0) && Projectile.IsOwnerSide())
                 {
                     Vector2 fireVel = (Main.MouseWorld - Owner.Center).ToSafeNormalize() * 40;
                     Vector2 pos = Owner.MountedCenter - fireVel.ToSafeNormalize() * 300;
@@ -145,7 +147,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * SwingScale * heldScale;
             Projectile.scale = tarPos.Length();
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
-            TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .01f);
+            TargetRotation = TargetRotation.AngleTowards((Owner.AimWorldOf() - Projectile.Center).SafeNormalize(Vector2.UnitX).ToRotation(), .01f);
         }
 
         public void UpdateBeginAnimation()
@@ -161,7 +163,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.scale = tarPos.Length();
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             if (easedProgress < .01f)
-                TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .5f);
+                TargetRotation = TargetRotation.AngleTowards((Owner.AimWorldOf() - Projectile.Center).SafeNormalize(Vector2.UnitX).ToRotation(), .5f);
             else
             {
                 //下面基本上是粒子生成了。
@@ -172,7 +174,7 @@ namespace HJScarletRework.Projs.Executor
                 OldAimPos.Add(slashPosFinal);
                 if (easedProgress >= 0.95f)
                     return;
-                if (Main.rand.NextBool(4))
+                if (Main.rand.NextBool(4) && Projectile.Allow(3))
                 {
                     for (int i = 0; i < 3; i++)
                     {
@@ -184,12 +186,14 @@ namespace HJScarletRework.Projs.Executor
                     }
                 }
                 {
+                    if (!Projectile.Allow(3))
+                        return;
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 110, Main.rand.NextFloat(0.45f, 1f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                     Vector2 vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection) * Main.rand.NextFloat(.1f, 1.2f) * 5f;
                     for (int i = 0; i < 3; i++)
                     {
-                        ECSParticle.LiliesFire(pos + dir * 5 * i, vel, RandLerpColor(Color.White, Color.WhiteSmoke), 45, RandRotTwoPi, .85f, Main.rand.NextFloat(.95f, 1.10f) * Projectile.scale * .21f, true, BlendState.Additive);
+                        ECSParticle.LiliesFire(pos + dir * 5 * i, vel, RandLerpColor(Color.White, Color.WhiteSmoke), Projectile.Life(45), RandRotTwoPi, .85f, Main.rand.NextFloat(.95f, 1.10f) * Projectile.scale * .21f, true, BlendState.Additive);
                     }
                 }
 
@@ -197,7 +201,9 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
-            if (Main.mouseLeft && !Owner.dead)
+            if (!Projectile.IsOwnerSide())
+                return;
+            if (HJNetInput.LocalMouseLeft && !Owner.dead)
             {
                 if (SwingTime >= 8 && !Projectile.HJScarlet().ExecutionStrike)
                 {

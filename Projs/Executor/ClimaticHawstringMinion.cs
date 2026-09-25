@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.NPCs.Boss_PriestessRod;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Handlers;
@@ -38,6 +39,7 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
+            HJNetOwnerBound.Register(Type);
         }
         public override void ExSD()
         {
@@ -135,7 +137,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Projectile.rotation.AngleLerp((Owner.direction * (Projectile.Center - target.Center)).ToRotation(), 0.2f);
             Helper.UpdateAniState(1);
 
-            if (Helper.IsDone[1])
+            if (Helper.IsDone[1] && Projectile.CanSpawnChild())
             {
                 Timer++;
                 if (Timer > 10)

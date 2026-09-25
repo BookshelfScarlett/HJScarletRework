@@ -1,4 +1,6 @@
 ﻿using ContinentOfJourney.Items.Material;
+using HJScarletRework.Core.NetSync;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
@@ -15,6 +17,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetStaticDefaults()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Database.Enums.ShinyRarityType.Hallowed);
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {
@@ -35,6 +38,8 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void HoldItem(Player player)
         {
             player.longInvince = true;
+            if (!player.IsOwnerSide())
+                return;
             if (player.HasProj(Item.shoot))
                 return;
             int dmg = (int)player.GetTotalDamage<MeleeDamageClass>().ApplyTo(Item.damage);

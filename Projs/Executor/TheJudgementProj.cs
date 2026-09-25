@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
@@ -123,13 +124,14 @@ namespace HJScarletRework.Projs.Executor
         {
             //音效
             //当前没有任何挂载锤，则正常进入挂载状态
-            if (!Owner.HasProj<TheJudgementMinion>())
+            if (!Owner.HasProj<TheJudgementMinion>() && Projectile.CanSpawnChild())
             {
                 SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit with { MaxInstances = 0, Pitch = 0.5f }, Projectile.Center);
                 Projectile lockHammer = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<TheJudgementMinion>(), Projectile.damage, 0f, Owner.whoAmI);
                 ScreenShakeSystem.AddScreenShakes(lockHammer.Center, 30f, 100, lockHammer.velocity.ToRotation(), 0.1f, easingFunc: EaseOutBack);
                 //处死射弹。
             }
+            if (Projectile.Allow(120))
             for (int i = -1; i < 2; i += 2)
             {
                 for (int j = 0; j < 30; j++)

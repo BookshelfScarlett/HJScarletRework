@@ -4,7 +4,6 @@ using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using HJScarletRework.Items.Weapons.Requirement;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
@@ -18,7 +17,7 @@ namespace HJScarletRework.Projs.Executor
         public float RecoilPower = 20;
         public override void ExSD()
         {
-            Projectile.SetDefaultsHeldProj(2);
+            Projectile.SetUpHeldProj(2);
         }
         public override void OnFirstFrame()
         {

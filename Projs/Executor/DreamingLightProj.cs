@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -154,7 +155,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 2 - PerformanceMode.ToInt(); i++)
                 new KiraStar(target.Center.ToRandCirclePosEdge(4f), RandVelTwoPi(1f, 3f), RandLerpColor(Color.DarkViolet, Color.Violet), 40, 0, 1, 0.34f).SpawnToNonPreMult();
 
-            if (Projectile.HJScarlet().ExecutionStrike && !Owner.HasProj<DreamingLightMinion>(out int projID))
+            if (Projectile.HJScarlet().ExecutionStrike && !Owner.HasProj<DreamingLightMinion>(out int projID) && Projectile.CanSpawnChild())
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, projID, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 proj.rotation = Projectile.rotation;

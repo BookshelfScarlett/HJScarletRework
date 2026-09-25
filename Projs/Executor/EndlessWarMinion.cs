@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -70,6 +71,7 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(8);
+            HJNetOwnerBound.Register(Type);
         }
         public override void ExSD()
         {

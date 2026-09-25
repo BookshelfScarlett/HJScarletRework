@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.ID;
@@ -25,6 +26,8 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override bool CanShoot(Player player) => false;
         public override void HoldItem(Player player)
         {
+            if (!player.IsOwnerSide())
+                return;
             if (player.GetExecutionSrike())
             {
                 player.HJScarlet().climaticHawstringLaserCounter = 30;

@@ -1,5 +1,6 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
@@ -77,7 +78,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.HomingTarget(target.Center, 600f, 24f, 20f);
 
             //如果超出了玩家屏幕范围，且玩家仍然没有仆从锤，生成仆从锤
-            if (Projectile.TooAwayFromOwner(1200f) && !Owner.HasProj<DeathTollsMinion>(out int projID) && Projectile.IsMe())
+            if (Projectile.TooAwayFromOwner(1200f) && !Owner.HasProj<DeathTollsMinion>(out int projID) && Projectile.CanSpawnChild())
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, projID, Projectile.damage, 0f, Projectile.owner);
                 SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss, Owner.Center);

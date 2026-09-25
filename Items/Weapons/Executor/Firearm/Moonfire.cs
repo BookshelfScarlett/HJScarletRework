@@ -1,5 +1,7 @@
 ﻿using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
@@ -14,6 +16,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
+            ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
         public override void ExSD()
         {
@@ -35,6 +38,8 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         }
         public override void HoldItem(Player player)
         {
+            if (!player.IsOwnerSide())
+                return;
             if (player.HasProj(Item.shoot))
                 return;
             int projDamage = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);

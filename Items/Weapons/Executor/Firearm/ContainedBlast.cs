@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
+using HJScarletRework.Core.NetSync;
 using ContinentOfJourney.Items.Rockets;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
@@ -39,6 +40,8 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) => false;
         public override void HoldItem(Player player)
         {
+            if (!player.IsOwnerSide())
+                return;
             if (player.HasProj<ContainedBlastHeldProj>(out int projID))
                 return;
             Vector2 dir = player.ToMouseVector2();

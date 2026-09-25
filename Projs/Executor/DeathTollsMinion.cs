@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
@@ -23,6 +24,7 @@ namespace HJScarletRework.Projs.Executor
         {
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
+            HJNetOwnerBound.Register(Type);
         }
         public override void ExSD()
         {
@@ -100,6 +102,8 @@ namespace HJScarletRework.Projs.Executor
         }
         private void ShootLaserIfNeed()
         {
+            if (!Projectile.CanSpawnChild())
+                return;
             float rate = 18f;
             ShootTimer += 1;
             //延后更新一定时间，确保其正确地进入射击状态

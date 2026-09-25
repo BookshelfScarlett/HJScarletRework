@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -59,13 +60,16 @@ namespace HJScarletRework.Projs.Magic
                 {
                     if (Projectile.Opacity == 1f)
                     {
-                        for (int i = 0; i < 16; i++)
+                        if (Projectile.Allow(36))
                         {
-                            new ShinyCrossStar(Projectile.Center.ToRandCirclePos(30f) - Vector2.UnitY * 15f, Vector2.UnitY.ToRandVelocity(ToRadians(10f), 4.8f, 14f), RandLerpColor(Color.OrangeRed, Color.Orange), 40, RandRotTwoPi, 1f, Main.rand.NextFloat(0.5f, 0.8f), false, 0.2f).Spawn();
-                        }
-                        for (int i = 0; i < 20; i++)
-                        {
-                            new SmokeParticle(Projectile.Center.ToRandCirclePos(30f) - Vector2.UnitY * 15f, Vector2.UnitY.ToRandVelocity(ToRadians(10f), 4.7f, 18f), RandLerpColor(Color.OrangeRed, Color.Gray), 40, RandRotTwoPi, 1f, 0.24f, Main.rand.NextBool()).SpawnToPriority();
+                            for (int i = 0; i < 16; i++)
+                            {
+                                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(30f) - Vector2.UnitY * 15f, Vector2.UnitY.ToRandVelocity(ToRadians(10f), 4.8f, 14f), RandLerpColor(Color.OrangeRed, Color.Orange), Projectile.Life(40), RandRotTwoPi, 1f, Main.rand.NextFloat(0.5f, 0.8f), false, 0.2f).Spawn();
+                            }
+                            for (int i = 0; i < 20; i++)
+                            {
+                                new SmokeParticle(Projectile.Center.ToRandCirclePos(30f) - Vector2.UnitY * 15f, Vector2.UnitY.ToRandVelocity(ToRadians(10f), 4.7f, 18f), RandLerpColor(Color.OrangeRed, Color.Gray), Projectile.Life(40), RandRotTwoPi, 1f, 0.24f, Main.rand.NextBool()).SpawnToPriority();
+                            }
                         }
                     }
                     DrawRatios *= Projectile.Opacity;
@@ -130,16 +134,19 @@ namespace HJScarletRework.Projs.Magic
             }
             else
             {
-                if (ShouldPlaySound)
+                if (ShouldPlaySound && Projectile.AllowSound())
                 {
                     SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 1, Pitch = 0.35f }, Owner.Center);
-                    ShouldPlaySound = false;
                 }
+                if (ShouldPlaySound)
+                    ShouldPlaySound = false;
                 Vector2 particlePos = Projectile.Center.ToRandCirclePos(40f * DrawRatios);
-                if (Main.rand.NextBool(3))
-                    new SmokeParticle(particlePos, Vector2.UnitY * -Main.rand.NextFloat(6f, 8f) * 0.91f, RandLerpColor(Color.Lerp(Color.OrangeRed, Color.DarkOrange, 0.5f), Color.Lerp(Color.Black, Color.OrangeRed, 0.6f)), 40, RandRotTwoPi, 1f, 0.36f, true).SpawnToPriority();
+                if (Main.rand.NextBool(3) && Projectile.Allow())
+                    new SmokeParticle(particlePos, Vector2.UnitY * -Main.rand.NextFloat(6f, 8f) * 0.91f, RandLerpColor(Color.Lerp(Color.OrangeRed, Color.DarkOrange, 0.5f), Color.Lerp(Color.Black, Color.OrangeRed, 0.6f)), Projectile.Life(40), RandRotTwoPi, 1f, 0.36f, true).SpawnToPriority();
             }
             HandleOwnerArms();
+            if (!Projectile.IsOwnerSide())
+                return;
             Item item = Owner.HeldItem;
             UseTime++;
             if (Collision.SolidTiles(Projectile.Center, Projectile.width, Projectile.height))

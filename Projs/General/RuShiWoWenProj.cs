@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -16,6 +17,7 @@ namespace HJScarletRework.Projs.General
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting();
+            HJNetOwnerBound.Register(Type);
         }
         public override void ExSD()
         {

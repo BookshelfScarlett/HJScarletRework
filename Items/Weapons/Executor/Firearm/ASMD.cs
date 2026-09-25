@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
@@ -41,6 +42,8 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         }
         public override void HoldItem(Player player)
         {
+            if (!player.IsOwnerSide())
+                return;
             if (player.HasProj<ASMDHeldProj>(out int projID))
                 return;
             int projDamage = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);

@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -107,7 +108,7 @@ namespace HJScarletRework.Projs.Executor
             if (CheckOwnerState())
                 return;
             //是的这里会全程检查是否拥有这个射弹
-            if (!Owner.HasProj<ClimaticHawstringMinion>(out int projID))
+            if (!Owner.HasProj<ClimaticHawstringMinion>(out int projID) && Projectile.CanSpawnChild())
             {
                 SoundEngine.PlaySound(SoundID.Item44 with { MaxInstances = 0 }, Owner.Center);
                 SpawnProj(1);

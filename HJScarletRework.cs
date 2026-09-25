@@ -10,6 +10,7 @@ using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
 using System.IO;
+using HJScarletRework.Core.NetSync;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -42,6 +43,8 @@ namespace HJScarletRework
         }
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {
+            if (HJNetRoute.TryDispatch(reader, whoAmI))
+                return;
             ModPacket packet = this.GetPacket();
             int id = reader.ReadInt32();
             if (Main.netMode == NetmodeID.Server && id == 20260221)

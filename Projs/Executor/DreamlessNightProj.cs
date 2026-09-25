@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -110,6 +111,8 @@ namespace HJScarletRework.Projs.Executor
 
         public void PoweredUpHammer()
         {
+            if (!Projectile.CanSpawnChild())
+                return;
             if (!Owner.HasProj<DreamlessNightMinion>() || DontSpawnAdditionHammer)
                 return;
             Vector2 velo = (-Projectile.velocity).ToSafeNormalize().RotatedBy(ToRadians(5f) * Main.rand.NextBool().ToDirectionInt()) * 18f;
@@ -200,7 +203,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.AddExecutionTimeImmediate(ItemType<DreamlessNight>());
             //在命中的时候，我们才生成需要的仆从
             //当然，前提是条件合理
-            if (!Owner.HasProj<DreamlessNightMinion>() && Projectile.HJScarlet().ExecutionStrike && Projectile.numHits < 1)
+            if (!Owner.HasProj<DreamlessNightMinion>() && Projectile.HJScarlet().ExecutionStrike && Projectile.numHits < 1 && Projectile.CanSpawnChild())
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, projID, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 proj.rotation = Projectile.rotation;

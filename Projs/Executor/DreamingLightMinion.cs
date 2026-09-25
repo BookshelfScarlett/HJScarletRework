@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -37,6 +38,7 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
+            HJNetOwnerBound.Register(Type);
         }
         public override void ExSD()
         {
@@ -140,6 +142,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public void ShooDreamLaser()
         {
+            if (!Projectile.CanSpawnChild())
+                return;
             Vector2 spawnPos = Projectile.Center + Projectile.rotation.ToRotationVector2() * 15f;
             Vector2 dir = (spawnPos - Main.MouseWorld).ToSafeNormalize();
             Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, dir * -16f, ProjectileType<DreamingLightBeam>(), Projectile.damage, 1f, Owner.whoAmI);

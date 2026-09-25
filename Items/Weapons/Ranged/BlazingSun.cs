@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
@@ -35,6 +36,8 @@ namespace HJScarletRework.Items.Weapons.Ranged
         }
         public override void HoldItem(Player player)
         {
+            if (!player.IsOwnerSide())
+                return;
 
             if (player.HasProj(Item.shoot))
                 return;

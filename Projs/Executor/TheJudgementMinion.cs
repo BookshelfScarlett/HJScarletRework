@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -18,6 +19,7 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting();
+            HJNetOwnerBound.Register(Type);
         }
         private ref float AttackTimer => ref Projectile.ai[0];
         private int MountedIndex = -1;
@@ -105,6 +107,8 @@ namespace HJScarletRework.Projs.Executor
         {
             if (CanSpawnHolyPunishment)
             {
+                if (!Projectile.CanSpawnChild())
+                    return;
                 SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit with { MaxInstances = 0, Pitch = 0.5f }, Projectile.Center);
                 //生成准备进行十字裁决的挂载射弹
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<TheJudgementCrossMounted>(), Projectile.damage, 0f, Owner.whoAmI);
@@ -134,7 +138,7 @@ namespace HJScarletRework.Projs.Executor
                 CurrentLifeTime = Projectile.timeLeft;
                 int type = ProjectileType<TheJudgementStarExecutionMounted>();
                 //生成神圣新星用的挂载弹
-                if (Owner.ownedProjectileCounts[type] < 1)
+                if (Projectile.CanSpawnChild() && Owner.ownedProjectileCounts[type] < 1)
                 {
                     Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, type, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                     proj.localAI[0] = Projectile.Center.X;

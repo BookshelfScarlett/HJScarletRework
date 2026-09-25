@@ -2,6 +2,7 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
 using HJScarletRework.Core;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Configs;
@@ -153,6 +154,8 @@ namespace HJScarletRework.Globals.Players
 
         public void UpdateRandomMinionSpawn()
         {
+            if (!Player.IsOwnerSide())
+                return;
             //生成装饰射弹
             if (!Player.HasProj<RuShiWoWenProj>(out int projID) && powerLilyVanity)
                 Projectile.NewProjectile(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, projID, 0, 0, Player.whoAmI);

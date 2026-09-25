@@ -35,6 +35,7 @@ Typeless: {
 	PreciousTargetCross.DisplayName: Precious Target Cross
 	TitaniumBattleShovelMiningMechanic.DisplayName: Titanium Battle Shovel Mining Mechanic
 	EnchantedSwordfishJavelin.DisplayName: Enchanted Swordfish Javelin
+	MoonfireBullet.DisplayName: Moonfire Bullet
 }
 
 Executor: {
@@ -219,6 +220,7 @@ Executor: {
 	CrescentRoseHeldSniper.DisplayName: Crescent Rose Held Sniper
 	CrescentRoseSniperBullet.DisplayName: Crescent Rose Sniper Bullet
 	CrescentRoseSniperSkill.DisplayName: Crescent Rose Sniper Skill
+	MoonfireHeldProj.DisplayName: Moonfire Held Proj
 }
 
 Ranged: {
