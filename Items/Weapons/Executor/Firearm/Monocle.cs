@@ -20,13 +20,13 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateGolden);
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
             ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
         }
         public override void ExSD()
         {
-            Item.damage = 1845;
+            Item.damage = 2415;
             Item.shootSpeed = 19;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true);
@@ -69,6 +69,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
                 AddIngredient<Headsplosion>().
                 AddIngredient(ItemID.ShadowbeamStaff).
                 AddIngredient<CrownofSilveryLight>(15).
+                AddIngredient(ItemID.IllegalGunParts, 15).
                 AddTile(FinalAnvilTile).
                 Register();
         }

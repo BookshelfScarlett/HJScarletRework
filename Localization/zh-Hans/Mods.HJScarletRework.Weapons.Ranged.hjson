@@ -41,3 +41,12 @@ PandorasBurger: {
 		"什么？"
 		'''
 }
+
+Duskfall: {
+	DisplayName: 日落时分
+	Tooltip:
+		'''
+		投掷追踪的着魔飞斧
+		经过圆环时，着魔飞斧命中时施加[ScarletDebuff/ContinentOfJourney/SolarBurntBuff]
+		'''
+}

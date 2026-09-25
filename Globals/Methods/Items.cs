@@ -21,12 +21,6 @@ namespace HJScarletRework.Globals.Methods
             item.useTime = itemUseTime;
             item.useAnimation = itemUseAnimation ?? itemUseTime;
         }
-        public static void SetUpItemShoot(this Item item, int shootID, float itemShootSpeed, float knocback = 3f)
-        {
-            item.shoot = shootID;
-            item.shootSpeed = itemShootSpeed;
-            item.knockBack = knocback;
-        }
         public static void SetUpItemShoot<T>(this Item item, float itemShootSpeed, float knocback = 3f) where T : ModProjectile
         {
             item.shoot = ProjectileType<T>();

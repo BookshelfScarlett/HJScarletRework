@@ -21,7 +21,6 @@ namespace HJScarletRework.Globals.Players
         }
         public override void ModifyWeaponCrit(Item item, ref float crit)
         {
-            int totalCrit = 0;
             if (dragonHunter && !item.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
                 crit = Player.GetTotalCritChance<ExecutorDamageClass>();
@@ -36,6 +35,13 @@ namespace HJScarletRework.Globals.Players
             {
                 if (item.type == ItemID.MonkStaffT3 || item.type == ItemID.MonkStaffT1)
                     crit += 15;
+            }
+            if (cycleMadnessLevel > 0)
+            {
+                int critCounts = cycleMadnessCrit * cycleMadnessLevel;
+                if (critCounts > CycleMadness.MaxCrits * cycleMadnessLevel)
+                    critCounts = CycleMadness.MaxCrits * cycleMadnessLevel;
+                crit = critCounts;
             }
         }
         public override void ModifyManaCost(Item item, ref float reduce, ref float mult)

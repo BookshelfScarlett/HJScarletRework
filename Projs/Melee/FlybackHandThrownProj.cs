@@ -189,7 +189,7 @@ namespace HJScarletRework.Projs.Melee
                 SB.Draw(star, starPos, null, drawColor with { A = 125 }, Projectile.rotation + PiOver4, star.Size() / 2, new Vector2(1.5f, 0.2f) * Projectile.Opacity, 0, 0);
                 SB.Draw(star, starPos, null, drawColor with { A = 125 }, Projectile.rotation + ToRadians(135), star.Size() / 2, new Vector2(1.5f, 0.2f) * Projectile.Opacity, 0, 0);
             }
-            SB.Draw(HJScarletTexture.Particle_ShinyOrb.Value, drawPos, null, Color.White with { A = 0 }, 0f, HJScarletTexture.Particle_ShinyOrb.Origin, Projectile.scale * 1f * Projectile.Opacity, 0, 0);
+            SB.Draw(HJScarletTexture.Particle_ShinyOrb.Value, drawPos, null, Color.White with { A = 0 }, 0f, HJScarletTexture.Particle_ShinyOrb.Value.Size() / 2f, Projectile.scale * 1f * Projectile.Opacity, 0, 0);
         }
         //这里的实现原理是用一个切边棱形不断叠层
         private void FillColor(Texture2D star)

@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -9,7 +10,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -102,7 +102,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
+            target.AddBuff(BuffType<AbsoluteZeroBuff>(), GetSeconds(1));
             Projectile.AddExecutionTimeImmediate(ItemType<FrostoftheStorm>());
             if (!target.CanBeChasedBy() || HJScarletMethods.OutOffScreen(target.Center))
                 return;
@@ -126,7 +126,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (PostFirstFrame)
                 return;
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldscale = Owner.HeldItem.scale;
             PostFirstFrame = true;
             RandOffset1 = Main.rand.NextFloat(0, 10);
             RandOffset2 = Main.rand.NextFloat(0, 10);
@@ -195,7 +195,7 @@ namespace HJScarletRework.Projs.Executor
 
             List<ScarletVertex> VertexList = [];
             Vector2 projVel = Projectile.velocity.SafeNormalize(Vector2.UnitX) * 42;
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldscale = Owner.HeldItem.scale;
             for (int i = 0; i < CenterPosList.Count; i++)
             {
                 float progress = (float)i / CenterPosList.Count;

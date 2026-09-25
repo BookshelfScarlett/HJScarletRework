@@ -1,61 +1,40 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
-using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class ConferenceCallHeldProj : ExecutorHeldProj
+    public class ConferenceCallHeldProj : HJScarletRangedWeaponoutClass
     {
         public override string Texture => GetInstance<ConferenceCall>().Texture;
         public override int OriginalItemID => ItemType<ConferenceCall>();
-        public ref float Timer => ref Projectile.ai[0];
-        public ref float RecoilTimer => ref Projectile.localAI[0];
         public bool SetExecution => Owner.HJScarlet().conferenceCallBuffTime > 0;
-        public override void SetStaticDefaults()
+        public override int ProjExtraUpdates => 2;
+        public override Vector2 HoldoutOffset => new(10, -5);
+        public override float HoldoutDrawScale => .65f;
+        public override float RecoilPower => 5;
+        public override float RecoilWeaponPullbackRatios => .5f;
+        protected override void PreAttack()
         {
-            base.SetStaticDefaults();
+            if (!Owner.GetExecutionSrike())
+                Projectile.HJScarlet().ExecutionStrike = false;
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
+            {
+                Projectile.HJScarlet().ExecutionStrike = true;
+                Owner.HJScarlet().conferenceCallBuffTime = GetSeconds(5);
+                ScarletSound(HJScarletSounds.GrabCharge, Projectile.Center);
+                Owner.RemoveExecutionProgress(OriginalItemID);
+            }
         }
-        public override void ExSD()
+        protected override void OnAttack()
         {
-            Projectile.SetUpHeldProj(2);
-        }
-        public override void OnFirstFrame()
-        {
-            Timer = (int)(AttackSpeed * .9f);
-        }
-        public bool IsUsing => (Owner.channel) && !Owner.noItems && !Owner.CCed;
-        public override void ProjAI()
-        {
-            UpdatePlayerState();
-            UpdateWeaponAttack();
-            UpdateMiscLerp();
-        }
-        public void UpdateWeaponAttack()
-        {
-            if (IsUsing)
-                HandleAttack();
-            else
-                HandleReset();
-        }
-
-        public override void OnExecution()
-        {
-            Owner.HJScarlet().conferenceCallBuffTime = GetSeconds(5);
-            ScarletSound(HJScarletSounds.GrabCharge, Projectile.Center);
-        }
-        public void HandleAttack()
-        {
-            Timer++;
-            if (Timer < AttackSpeed)
-                return;
             Vector2 offset = new Vector2(20, -5 * Projectile.direction).RotatedBy(Projectile.rotation);
             Vector2 pos = Projectile.Center + offset;
             Vector2 dir = Projectile.SafeDirByRot();
             int type = ProjectileType<ConferenceCallBullet>();
-            HandleExecution();
             pos -= new Vector2(20, 0).RotatedBy(Projectile.rotation);
             for (int i = 0; i < (ConferenceCall.BulletsPerShot); i++)
             {
@@ -63,7 +42,6 @@ namespace HJScarletRework.Projs.Executor
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, randomVelocity * 8f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 proj.HJScarlet().HasExecutionMechanic = true;
                 proj.HJScarlet().ExecutionStrike = SetExecution;
-
             }
             ScarletSound(HJScarletSounds.ASMD_IceBlockSplit, Projectile.Center, 0.20f, 0, .34f, 0.1f);
             pos = Projectile.Center + offset;
@@ -83,61 +61,15 @@ namespace HJScarletRework.Projs.Executor
                 BlendState bs = alt ? BlendState.Additive : BlendState.AlphaBlend;
                 ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(10), 0.4f, 21.4f), RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), Main.rand.Next(45, 65), RandRotTwoPi, 1, 0.33f * Main.rand.NextFloat(.95f, 1.25f), alt, bs);
             }
-            Projectile.HJScarlet().ExecutionStrike = false;
-            Timer = 0;
-            RecoilTimer = AttackSpeed;
-        }
-        public void HandleReset()
-        {
-            if (Timer < AttackSpeed)
-                Timer++;
-        }
-
-        public void UpdatePlayerState()
-        {
-            if (Owner.IsHolding(OriginalItemID) && !Owner.dead)
-                Projectile.timeLeft = 2;
-            Projectile.rotation = Owner.ToMouseVector2().ToRotation();
-            Projectile.spriteDirection = Projectile.direction = (Owner.LocalMouseWorld().X > Owner.Center.X).ToDirectionInt();
-            Owner.ChangeDir(Projectile.direction);
-            Owner.heldProj = Projectile.whoAmI;
-            Owner.ControlPlayerArm(Projectile.rotation);
-            Projectile.Center = Owner.MountedCenter;
-            Projectile.position.Y += Owner.gfxOffY;
-
-            //处理后坐力动画
-            float progress = Utils.GetLerpValue(0, AttackSpeed, RecoilTimer, true);
-            float pullBack;
-            float pullBackpower = 6;
-            float rot = (Projectile.Center - Main.MouseWorld).ToRotation() * Owner.gravDir;
-            if (progress >= 0.5f)
-            {
-                float pro = (progress - 0.5f) / .5f;
-                pullBack = Lerp(pullBackpower, 0, (EaseInCubic(pro)));
-            }
-            else
-            {
-                float pro = (progress) / .5f;
-                pullBack = Lerp(0, pullBackpower, (EaseOutCubic(pro)));
-            }
-            Projectile.Center += Main.rand.NextVector2Circular(1.3f * progress, 1.3f * progress) + rot.ToRotationVector2() * pullBack;
-
-
-        }
-        public void UpdateMiscLerp()
-        {
-            //计时器的重置
-            if (RecoilTimer > 0)
-                RecoilTimer--;
         }
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.GetRangedWeaponHeldProjData(out Texture2D tex, out Vector2 drawPos, out Vector2 rotPoint, out float _, out SpriteEffects se);
-            Vector2 offset = new(10 * Owner.direction, -5);
+            Vector2 offset = HoldoutOffset * new Vector2(Owner.direction, 1);
             float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
             drawPos += offset.BetterRotatedBy(drawRot);
             float progress = Utils.GetLerpValue(0, AttackSpeed, RecoilTimer, true);
-            float scale = Projectile.scale * .65f;
+            float scale = Projectile.scale * HoldoutDrawScale;
             Color c = SetExecution ? Color.Red : Color.WhiteSmoke;
             float lerp = SetExecution ? 2f : 2f * EaseInCubic(progress);
             for (int i = 0; i < 8; i++)

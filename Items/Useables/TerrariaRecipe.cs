@@ -47,8 +47,8 @@ namespace HJScarletRework.Items.Useables
             if (isPressingLeftAlt)
             {
                 //获取表单与对应的名字。
-                List<int> foodList = modPlayer.terraRecipe_EatenFoodList;
-                List<int> notEatenFoodList = modPlayer.terraRecipe_NotEatenFoodList;
+                List<string> foodList = modPlayer.terraRecipeEatenFoodNameList;
+                List<string> notEatenFoodList = modPlayer.terraRecipeNotEatenFoodNameList;
                 //直接遍历一个表单
                 //这里表单是严格11对应的，理论来说不会出现问题，大概
                 string combineValue = null;

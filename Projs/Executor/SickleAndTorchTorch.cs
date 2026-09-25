@@ -16,9 +16,10 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.ToTrailSetting(8);
         }
+        public override Vector2 TileHitbox => new Vector2(16);
         public override void ExSD()
         {
-            Projectile.width = Projectile.height = 16;
+            Projectile.width = Projectile.height = 60;
             Projectile.tileCollide = true;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 2;
@@ -55,7 +56,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.OnFire, GetSeconds(5));
+            target.AddBuff(BuffID.OnFire3, GetSeconds(2));
             Projectile.AddExecutionTimeImmediate(ItemType<SickleAndTorch>());
         }
         public override void OnKill(int timeLeft)

@@ -5,6 +5,7 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Core.SeperateVisualEffect;
 using HJScarletRework.Globals.ParticleSystem;
+using HJScarletRework.Globals.Systems;
 using Terraria;
 using Terraria.Graphics.Effects;
 using Terraria.ModLoader;
@@ -32,11 +33,14 @@ namespace HJScarletRework.Core
             //像素化渲染
             On_Main.DrawDust += PixelatedRenderManager.DrawTarget_BeforeDust;
             On_Main.DrawPlayers_AfterProjectiles += PixelatedRenderManager.DrawTarget_BeforePlayers;
+            //指针绘制
+            On_Main.DrawInterface_36_Cursor += HJScarletCustomCursor.On_Main_DrawInterface_36_Cursor;
             //DeepGlow
+            On_Main.DrawProjectiles += DeepGlow.Hook_AfterProjectile;
+            On_Main.DoDraw_Tiles_Solid += DeepGlow.Hook_BeforeTile;
+            On_Main.DrawDust += DeepGlow.Hook_AfterDust;
             On_FilterManager.EndCapture += DeepGlow.DrawDeepGlow;
         }
-
-
         public override void Unload()
         {
             //屏幕暗化效果
@@ -56,7 +60,12 @@ namespace HJScarletRework.Core
             //像素化渲染
             On_Main.DrawDust -= PixelatedRenderManager.DrawTarget_BeforeDust;
             On_Main.DrawPlayers_AfterProjectiles -= PixelatedRenderManager.DrawTarget_BeforePlayers;
+            //指针绘制
+            On_Main.DrawInterface_36_Cursor -= HJScarletCustomCursor.On_Main_DrawInterface_36_Cursor;
             //DeepGlow
+            On_Main.DrawProjectiles -= DeepGlow.Hook_AfterProjectile;
+            On_Main.DoDraw_Tiles_Solid -= DeepGlow.Hook_BeforeTile;
+            On_Main.DrawDust -= DeepGlow.Hook_AfterDust;
             On_FilterManager.EndCapture -= DeepGlow.DrawDeepGlow;
         }
     }

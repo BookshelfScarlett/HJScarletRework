@@ -32,6 +32,10 @@ namespace HJScarletRework.Globals.Executor
         public virtual int ExecutionProgress => 10;
         public virtual float ExecutionStrikeDamageMult => 1.0f;
         public virtual float TextBoxSize => 1f;
+        public virtual bool BlockTextboxDetail()
+        {
+            return false;
+        }
         public override void SetStaticDefaults()
         {
             ExSSD();
@@ -83,8 +87,9 @@ namespace HJScarletRework.Globals.Executor
         public IReadOnlyList<TooltipLine> CacheTooltipList = null;
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
+            //咱下次还是不要用三元表达式了。
             bool traditionalMode = HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase;
-            bool isPressingLeftAlt = Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt);
+            bool isPressingLeftAlt = Main.keyState.PressingShift();
             int requirements = Math.Max(0, ExecutionProgress);
             string progressText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(requirements);
             string executionText = (traditionalMode && isPressingLeftAlt) ? Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionDescriptionName").ToLangValue() : progressText;
@@ -98,7 +103,7 @@ namespace HJScarletRework.Globals.Executor
                     OverrideColor = executionColor
                 };
                 tooltips.Insert(executionProgressIndex, executionLine);
-                if (traditionalMode && isPressingLeftAlt)
+                if (isPressingLeftAlt)
                 {
                     if (ExecutionDetail.Length > 0)
                         tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"), null, ExecutionDetail);
@@ -125,7 +130,7 @@ namespace HJScarletRework.Globals.Executor
         }
         public override void PostDrawTooltipLine(DrawableTooltipLine line)
         {
-            if (!HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase)
+            if (!HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase && !BlockTextboxDetail())
             {
                 //记录起始点坐标。
                 //通常情况下，物品不可能没有名字，而物品名称通常都在第一行，所以可以用这个来记录第一行的坐标

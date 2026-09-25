@@ -46,6 +46,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.width = Projectile.height = 16;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
+            Projectile.ContinuouslyUpdateDamageStats = true;
             Projectile.timeLeft = 10000;
             Projectile.SetupImmnuity(-1);
             Projectile.penetrate = -1;

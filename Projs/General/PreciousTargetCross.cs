@@ -1,7 +1,10 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.General
 {
@@ -14,13 +17,54 @@ namespace HJScarletRework.Projs.General
         }
         public override void ExSD()
         {
-            base.ExSD();
+            Projectile.SetUpHeldProj(0);
+            //大小需要一定的容错
+            Projectile.width = Projectile.height = 100;
         }
         public override void ProjAI()
         {
-            base.ProjAI();
+            if (Projectile.IsMe())
+            {
+                Projectile.scale = 1;
+                if (Owner.HJScarlet().preciousTargetLevel > 0)
+                    Projectile.timeLeft = 2;
+                Projectile.Center = Main.MouseWorld;
+                if (Owner.HeldItem.IsLegal() && Owner.HeldItem.DamageType.CountsAsClass<RangedDamageClass>())
+                {
+                    foreach (var activeTarget in Main.ActiveNPCs)
+                    {
+                        if (!activeTarget.IsLegal())
+                            continue;
+                        if (activeTarget.friendly)
+                            continue;
+                        if (activeTarget.lifeMax <= 5)
+                            continue;
+                        if (!Projectile.Hitbox.Intersects(activeTarget.Hitbox))
+                            continue;
+                        activeTarget.HJScarlet().isUnderPreciousTargetCross = 2;
+                        TargetParticle(activeTarget);
+                    }
+                }
+            }
+        }
+        public void TargetParticle(NPC tar)
+        {
+            if (Main.rand.NextBool())
+                ECSParticle.GlowSquare(tar.ToRandRec(), -Vector2.UnitY, RandLerpColor(Color.DarkSeaGreen, Color.LightSeaGreen), 40, 1, RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * .61f, rotSpeed: Main.rand.NextFloat(-.1f, .1f));
+        }
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            if (projHitbox.Intersects(targetHitbox))
+            {
+                return true;
+            }
+            return false;
         }
         public override bool? CanDamage() => false;
+        public override bool ShouldUpdatePosition()
+        {
+            return false;
+        }
         public override void OnKill(int timeLeft)
         {
             base.OnKill(timeLeft);
@@ -31,7 +75,10 @@ namespace HJScarletRework.Projs.General
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            return base.PreDraw(ref lightColor);
+            if (!Projectile.HJScarlet().FirstFrame)
+                return false;
+
+            return false;
         }
     }
 }

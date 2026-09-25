@@ -14,6 +14,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.useTime = Item.useAnimation = 30;
             Item.knockBack = 3f;
             Item.UseSound = SoundID.Item45 with { MaxInstances = 0 };
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.shootSpeed = 16f;
             Item.shoot = ProjectileType<CryoblazeHymnProj>();
             Item.rare = ItemRarityID.Orange;

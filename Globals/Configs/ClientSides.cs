@@ -58,5 +58,9 @@ namespace HJScarletRework.Globals.Configs
         [Range(0f, 1f)]
         [DefaultValue(1f)]
         public float ModSFXVolume { get; set; }
+        [BackgroundColor(211, 211, 211, 192)]
+        [Range(0f, 1f)]
+        [DefaultValue(1f)]
+        public float TextboxSize { get; set; }
     }
 }

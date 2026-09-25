@@ -14,23 +14,23 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
     public class TheGarcia : ExecutorWeaponClass
     {
         public override int ExecutionProgress => 3;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
-            ScarletItemIDSets.IsHeldProjItem[Type] = true;
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateCopper);
+            ScarletItemIDSets.ForceToAutomaticExecute[Type] = true;
         }
         public override void ExSD()
         {
-            Item.damage = 2010;
+            Item.damage = 20;
             Item.shootSpeed = 19;
-            Item.SetUpRarityPrice(ItemRarityID.Red);
+            Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem(true);
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = null;
             Item.knockBack = 7f;
             Item.useTime = Item.useAnimation = 45;
-            Item.crit = 46;
-            Item.shoot = ProjectileType<MonocleHeldProj>();
+            Item.shoot = ProjectileType<TheGarciaHeldProj>();
             Item.HJScarlet().borderlandWeapon = true;
         }
         public override bool CanShoot(Player player)

@@ -27,7 +27,9 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.damage = 45;
             Item.SetUpNoUseGraphicItem(true, false);
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
+            Item.useTime = Item.useAnimation = 10;
             Item.shootSpeed = 16f;
+            Item.crit = 16;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 2;
             Item.UseSound = null;

@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.damage = 50;
             Item.SetUpRarityPrice(ItemRarityID.LightPurple);
             Item.SetUpNoUseGraphicItem();
-            Item.HJScarlet().drawBuffIcon = true;
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.knockBack = 2f;
             Item.useTime = Item.useAnimation = 31;
             Item.shootSpeed = 19f;

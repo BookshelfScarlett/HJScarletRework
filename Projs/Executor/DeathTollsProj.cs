@@ -152,16 +152,8 @@ namespace HJScarletRework.Projs.Executor
                 return;
 
             SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit, Projectile.Center);
-            //优先生成挂载射弹
-            if (!hasMinion)
-            {
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, minionID, Projectile.damage, Projectile.knockBack, Projectile.owner);
-                SoundEngine.PlaySound(HJScarletSounds.DeathsToll_Toss with { Volume = 0.75f }, Projectile.Center);
-            }
-            else if (!Owner.HasProj<DeathTollsExecution>(out int projID))
-            {
+            if (hasMinion&&!Owner.HasProj<DeathTollsExecution>(out int projID))
                 Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, projID, Projectile.damage, 0f, Projectile.owner);
-            }
             //然后直接处死这个射弹
             Projectile.Kill();
         }

@@ -81,7 +81,6 @@ namespace HJScarletRework.Projs.Executor
             if (!IsCloneYoyo)
             {
                 if (!Owner.HasProj<CobaltYoyoSlash>())
-
                     Projectile.AddExecutionTimeImmediate<CobaltYoyo>();
                 Projectile proj1 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<InvisBoom>(), Projectile.damage / 4, Projectile.knockBack, Owner.whoAmI);
                 for (int i = 0; i < 15; i++)

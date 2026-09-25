@@ -7,6 +7,42 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Classes
 {
+    public abstract class HJScarletEnemyProj : ModProjectile, ILocalizedModType
+    {
+        public Player Owner => Main.player[Projectile.owner];
+        public static string ProjPath => $"HJScarletRework/Assets/Texture/Projs/NPCs/";
+        public override string Texture => ProjPath + GetType().Name;
+        public new string LocalizationCategory => $"Projs.Enemy";
+        public bool PerformanceMode = HJScarletConfigClient.Instance.PerformanceMode;
+        public virtual Vector2 TileHitbox => Vector2.Zero;
+        public override void SetDefaults()
+        {
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            ExSD();
+        }
+        public virtual void OnFirstFrame() { }
+        public override void AI()
+        {
+            if (!Projectile.HJScarlet().FirstFrame)
+                OnFirstFrame();
+            ProjAI();
+        }
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            if (!TileHitbox.Equals(Vector2.Zero))
+            {
+                width = (int)TileHitbox.X;
+                height = (int)TileHitbox.Y;
+            }
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
+        public SpriteBatch SB { get => Main.spriteBatch; }
+        public GraphicsDevice GD { get => Main.graphics.GraphicsDevice; }
+        public virtual void ProjAI() { }
+        public virtual void ExSD() { }
+    }
+
     public abstract class HJScarletProj : ModProjectile, ILocalizedModType
     {
         public Player Owner => Main.player[Projectile.owner];

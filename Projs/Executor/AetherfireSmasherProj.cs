@@ -27,6 +27,7 @@ namespace HJScarletRework.Projs.Executor
             get => (State)Projectile.ai[1];
             set => Projectile.ai[1] = (float)value;
         }
+        public override Vector2 TileHitbox => new Vector2(24);
         public bool ActiveDash = false;
         public bool ActiveMiscDashHit = false;
         public override void SetStaticDefaults()

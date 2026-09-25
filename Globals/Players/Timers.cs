@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,9 +17,11 @@ namespace HJScarletRework.Globals.Players
         public int bookcaseBuffTime = 0;
         public int markProjTimer = 0;
         public int emblemFirearmTimer = 0;
+        public int cycleMadnessCrtiStarTimer = 0;
         public void ResetTimer()
         {
             markProjTimer = 0;
+            spellBreakerTimer = 0;
             emblemFirearmTimer = 0;
             climaticHawstringLaserCounter = 0;
             desterrannachtImmortalTime = 0;
@@ -33,8 +34,6 @@ namespace HJScarletRework.Globals.Players
             heldProjReUseTime = 0;
             antiKnockbackTime = 0;
             crimsonCharmReduceTime = 0;
-            cycleMadenessCrit = 0;
-            cycleMadenssTimer = 0;
             cowboyRevolverTimer = 0;
             floretProtectorTimer = 0;
             containedBlastBoomCount = 0;
@@ -50,26 +49,40 @@ namespace HJScarletRework.Globals.Players
             conferenceCallBuffTime = 0;
             tearEyeBuff = 0;
             bookcaseBuffTime = 0;
+            cycleMadnessCrtiStarTimer = 0;
         }
+        private readonly List<int> keysToRemoveCache = new();
         public void UpdateTimer()
         {
-            if (ExecutionBuffTimeStored.Keys.Count != 0)
+            if (ExecutionBuffTimeStored.Keys.Count == 0)
             {
-                List<int> keys = ExecutionBuffTimeStored.Keys.ToList();
-                if (keys.Count != 0)
+                keysToRemoveCache.Clear();
+            }
+            else
+            {
+                foreach (var pair in ExecutionBuffTimeStored)
                 {
-                    foreach (int key in keys)
+                    int key = pair.Key;
+                    int time = pair.Value;
+                    if (time > 0)
                     {
-                        if (ExecutionBuffTimeStored.ContainsKey(key))
-                        {
-                            if (ExecutionBuffTimeStored[key] > 0)
-                                ExecutionBuffTimeStored[key] -= 1;
-                            if (ExecutionBuffTimeStored[key] == 0)
-                                ExecutionBuffTimeStored.Remove(key);
-                        }
+                        time--;
+                        ExecutionBuffTimeStored[key] = time;
+                    }
+                    if (time == 0)
+                    {
+                        keysToRemoveCache.Add(key);
                     }
                 }
+                foreach (int key in keysToRemoveCache)
+                {
+                    ExecutionBuffTimeStored.Remove(key);
+                }
             }
+            if (cycleMadnessCrtiStarTimer > 0)
+                cycleMadnessCrtiStarTimer--;
+            if (spellBreakerTimer > 0)
+                spellBreakerTimer--;
             if (!emblemFirearm)
                 emblemFirearmTimer = 0;
             if (markProjTimer > 0)
@@ -101,10 +114,6 @@ namespace HJScarletRework.Globals.Players
                 tacticalExecutionInputCache--;
 
 
-            if (cycleMadenssTimer > 0)
-                cycleMadenssTimer--;
-            if (cycleMadenssTimer == 0)
-                cycleMadenessCrit = 0;
 
             if (flybackhandBuffTime > 0)
                 flybackhandBuffTime--;

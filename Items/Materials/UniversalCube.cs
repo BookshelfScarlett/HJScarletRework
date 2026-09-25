@@ -40,14 +40,14 @@ namespace HJScarletRework.Items.Materials
             }
             string text = this.GetLocalizationKey("FlavorTooltip").ToLangValue();
             TextboxSettings sets = new TextboxSettings
-            {
-                HasTitle = false,
-                BackgroundColor = Color.White * .24f,
-                BackgroundEdgeColor = Color.White,
-                TextColor = Color.White,
-                TextEdgeColor = Color.Black,
-                MainText = text
-            };
+            (
+                hasTitle: false,
+                backgroundColor: Color.White * .24f,
+                backgroundEdgeColor: Color.White,
+                textColor: Color.White,
+                textEdgeColor: Color.Black,
+                mainText: text
+            );
             TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
             return true;
         }

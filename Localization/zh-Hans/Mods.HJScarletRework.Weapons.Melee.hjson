@@ -160,6 +160,7 @@ TheMars: {
 		'''
 		沿途检索可被标记的最大三名敌对单位
 		消失时，向被标记的所有敌对单位追击潮汐之矛
+		攻击总会施加[ScarletDebuff/Terraria/Electrified]
 		"外星的造物"
 		'''
 }
@@ -186,10 +187,10 @@ CryoblazeHymn: {
 	DisplayName: 冰火颂歌
 	Tooltip:
 		'''
-		掷出或命中敌人一定时间后消失
-		消失后交叉生成位寒霜传送门与火焰传送门，并从中释放寒霜弹与火焰弹
-		寒霜弹速度较慢，并尝试攻击两名不同的敌人
-		火焰弹速度较快，且造成的伤害更高，并优先攻击被矛本体优先命中的敌人
+		消失时交叉生成寒霜传送门与火焰传送门，从中释多枚放寒霜弹与火焰弹
+		直接命中时，施加[ScarletDebuff/Terraria/Oiled]
+		寒霜弹速度较慢，伤害较低，攻击多名不同的敌人，施加[ScarletDebuff/Terraria/Frostburn2]
+		火焰弹速度较快，伤害较高，优先攻击被矛命中的敌人，施加[ScarletDebuff/Terraria/OnFire3]
 		"纵使迥然不同，也以同样的旋律高声颂歌"
 		'''
 }
@@ -289,9 +290,8 @@ RitualofRepose: {
 	DisplayName: 安息仪式
 	Tooltip:
 		'''
-		攻击时造成[ScarletDebuff/HJScarletRework/TheBleachingBuff]
-		向天空抛掷十字架，一定时间后从光标上空落下
-		在落下至光标位置，十字架迸裂的同时，释放大量的亮星
+		向天空抛掷十字架，一定时间后从你面前降下并迸裂
+		迸裂时将会对世界范围内所有敌人进行闪电打击，并施加[ScarletDebuff/HJScarletRework/TheBleachingBuff]
 		“主啊，对我来说你已经死了，安息吧。”
 		'''
 }

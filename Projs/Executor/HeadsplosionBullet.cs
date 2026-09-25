@@ -3,7 +3,9 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -26,6 +28,10 @@ namespace HJScarletRework.Projs.Executor
         public override void OnFirstFrame()
         {
             base.OnFirstFrame();
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+            return base.OnTileCollide(oldVelocity);
         }
         public override void ProjAI()
         {
@@ -64,15 +70,22 @@ namespace HJScarletRework.Projs.Executor
             ECSParticle.CrossGlow(pos, Color.LightGoldenrodYellow, 40, 1, crossGlowScale * .98f, .2f);
             ECSParticle.CrossGlow(pos, Color.White, 40, 1, crossGlowScale * .95f, .2f);
             ScarletSound(HJScarletSounds.Misc_Boom, Projectile.Center, variantType: 4);
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 4; i++)
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(30),14f,17f), ProjectileType<HeadsplosionBombBullet>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(30), 8f, 17f), ProjectileType<HeadsplosionBombBullet>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                if (Projectile.HJScarlet().ExecutionStrike)
+                    proj.HJScarlet().ExecutionStrikeManual = true;
             }
             Projectile.Damage();
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.SetCrit();
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            base.OnHitNPC(target, hit, damageDone);
+            target.AddBuff(BuffID.Ichor, GetSeconds(2));
+            Projectile.AddExecutionTimeDirectly(ItemType<Headsplosion>());
         }
 
         public override bool PreDraw(ref Color lightColor)

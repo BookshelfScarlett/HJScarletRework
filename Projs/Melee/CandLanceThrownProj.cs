@@ -25,9 +25,16 @@ namespace HJScarletRework.Projs.Melee
             set => Projectile.ai[0] = (float)value;
         }
         public ref float ExtraTimer => ref Projectile.ai[1];
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
+        {
+            width = 12;
+            height = 12;
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
+        }
+
         public override void ExSD()
         {
-            Projectile.height = Projectile.width = 16;
+            Projectile.height = Projectile.width = 32;
             Projectile.noEnchantmentVisuals = true;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;

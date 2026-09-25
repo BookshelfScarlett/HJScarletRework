@@ -14,6 +14,7 @@ namespace HJScarletRework.Projs.Executor
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public ref float Timer => ref Projectile.ai[0];
+        public int BounceTime = 0;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(8);
@@ -43,6 +44,7 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
+                BounceTime++;
                 Projectile.BounceOnTile(oldVelocity);
                 Projectile.ai[1] = 0;
             }
@@ -54,7 +56,7 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.TurbulenceShinyOrb(Projectile.Center, 1.1f, RandLerpColor(Color.Violet, Color.Purple), 45, 1, 0.12f, glowMult: .7f);
             }
 
-            return false;
+            return BounceTime > 10;
         }
         public override void ProjAI()
         {
@@ -94,7 +96,7 @@ namespace HJScarletRework.Projs.Executor
         {
             int maxHit = Monocle.ExecutionPenetrate;
             float ratios = Utils.GetLerpValue(0, maxHit, Projectile.numHits, true);
-            float damageMult = Lerp(Monocle.ExecutionDamageMult, 3f, ratios);
+            float damageMult = Lerp(Monocle.ExecutionDamageMult, 2f, ratios);
             modifiers.SetCrit();
             modifiers.CritDamage *= damageMult;
         }

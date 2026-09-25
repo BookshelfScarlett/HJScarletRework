@@ -57,3 +57,8 @@ SonItem: {
 	DisplayName: Holy Lily
 	Tooltip: Summons a Son companion
 }
+
+LifeWormItem: {
+	DisplayName: Life Worm Item
+	Tooltip: ""
+}

@@ -62,7 +62,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 projPos, out Vector2 ori);
             projTex = HJScarletTexture.Particle_ShinyOrbHard.Value;
-            ori = HJScarletTexture.Particle_ShinyOrbHard.Origin;
+            ori = projTex.Size() / 2f;
             //绘制残影
             float oriScale = 0.64f;
             float scale = .9f;

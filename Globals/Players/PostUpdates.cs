@@ -75,7 +75,13 @@ namespace HJScarletRework.Globals.Players
             if (theBleachingBuff)
             {
                 Player.statDefense *= 0;
-
+            }
+            if (!Player.HasBuff<CycleMadnessBuff>())
+            {
+                if (cycleMadnessCrit > 0 && Player.miscCounter % 2 == 0)
+                    cycleMadnessCrit -= 5;
+                if (cycleMadnessCrit < 0)
+                    cycleMadnessCrit = 0;
             }
         }
         public void UpdateFlybackBuff()

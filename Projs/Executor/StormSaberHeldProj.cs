@@ -109,11 +109,11 @@ namespace HJScarletRework.Projs.Executor
                     if (Projectile.HJScarlet().ExecutionStrike)
                     {
                         proj.extraUpdates += 1;
-                        ScarletSound(HJScarletSounds.TheSevenStar_Charge, Projectile.Center, .3f, 0, 0.10f, .1f);
+                        ScarletSound(HJScarletSounds.TheSevenStar_Charge, Projectile.Center, .25f, 0, 0.10f, .1f);
                     }
                     else
                     {
-                        ScarletSound(HJScarletSounds.TheSevenStar_Charge, Projectile.Center, .6f, 0, .05f, .1f);
+                        ScarletSound(HJScarletSounds.TheSevenStar_Charge, Projectile.Center, .20f, 0, .05f, .1f);
                     }
                 }
                 UpdateBeginAnimation();
@@ -137,7 +137,7 @@ namespace HJScarletRework.Projs.Executor
 
         private void UpdateEndAnimation()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(1);
             float easedProgress = EaseInOutExpo(Helper.GetAniProgress(1));
             float beginAngle = 195f * Flip.ToDirectionInt();
@@ -152,7 +152,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateBeginAnimation()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutExpo(Helper.GetAniProgress(0));
             float beginAngle = -195f * Flip.ToDirectionInt();

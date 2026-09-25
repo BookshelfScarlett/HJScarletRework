@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.NPCs.Boss_WorldsEndEverlastingFallingWhale;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -8,7 +9,6 @@ using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -97,7 +97,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
+            target.AddBuff(BuffType<AbsoluteZeroBuff>(), GetSeconds(1));
             if (!target.CanBeChasedBy() || HJScarletMethods.OutOffScreen(target.Center))
                 return;
             for (int i = 0; i < 30; i++)
@@ -137,7 +137,7 @@ namespace HJScarletRework.Projs.Executor
                 xMult = 7.5f;
                 yMult = 4.5f;
             }
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldscale = Owner.HeldItem.scale;
             xMult *= heldscale;
             yMult *= heldscale;
             for (int i = 0; i < maxPoints; i++)
@@ -216,7 +216,7 @@ namespace HJScarletRework.Projs.Executor
             //连续多次的创建顶点列表可能会遇到性能上的问题
             //这里最好缓存一下。
             _cacheVertex.Clear();
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldscale = Owner.HeldItem.scale;
             Vector2 projVel = Projectile.velocity.SafeNormalize(Vector2.UnitX) * (42 + Projectile.ai[2] * 13f);
             for (int i = 0; i < CenterPosList.Count; i++)
             {

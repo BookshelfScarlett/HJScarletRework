@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -96,7 +95,7 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             Texture2D starShape = HJScarletTexture.Particle_SharpTear;
-                DrawTheTrail(drawPos, starShape);
+            DrawTheTrail(drawPos, starShape);
             Vector2 offsetFixer = Projectile.SafeDir() * 70;
             Projectile.DrawGlowEdge(Color.Red, posMove: 1.4f, rotFix: PiOver4, drawPosOffset: offsetFixer);
             Projectile.DrawProj(Color.White, rotFix: PiOver4, drawPosOffset: offsetFixer);
@@ -109,10 +108,10 @@ namespace HJScarletRework.Projs.Melee
             SB.EnterShaderArea();
             Vector2 dir = Projectile.SafeDirByRot();
             Vector2 glowCirclePos = drawPos + dir * 68f - Projectile.SafeDir() * 70;
-                SB.Draw(HJScarletTexture.Texture_SoftCircleEdge.Value, glowCirclePos, null, Color.Red, Projectile.rotation, HJScarletTexture.Texture_SoftCircleEdge.Origin, Projectile.scale * 0.30f, 0, 0);
+            SB.Draw(HJScarletTexture.Texture_SoftCircleEdge.Value, glowCirclePos, null, Color.Red, Projectile.rotation, HJScarletTexture.Texture_SoftCircleEdge.Value.Size() / 2f, Projectile.scale * 0.30f, 0, 0);
             Tex2DWithPath lineGlow = HJScarletTexture.Particle_OpticalLineGlow;
             Vector2 glowScale = Projectile.scale * new Vector2(1.2f, 0.7f);
-            SB.Draw(lineGlow.Value, drawPos + dir * 52f - Projectile.SafeDir() * 70, null, Color.DarkRed, Projectile.rotation, lineGlow.Origin, glowScale * 0.22f, 0, 0);
+            SB.Draw(lineGlow.Value, drawPos + dir * 52f - Projectile.SafeDir() * 70, null, Color.DarkRed, Projectile.rotation, lineGlow.Value.Size() / 2f, glowScale * 0.22f, 0, 0);
             SB.EndShaderArea();
         }
 

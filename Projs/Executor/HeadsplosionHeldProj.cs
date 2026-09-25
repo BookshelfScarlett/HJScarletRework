@@ -1,90 +1,52 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
-using HJScarletRework.Globals.Executor;
+using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class HeadsplosionHeldProj : ExecutorHeldProj
+    public class HeadsplosionHeldProj : HJScarletRangedWeaponoutClass
     {
-        public override string Texture => GetInstance<Headsplosion>().Texture;
+        public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override int OriginalItemID => ItemType<Headsplosion>();
-        public ref float Timer => ref Projectile.ai[0];
-        public ref float RecoilTimer => ref Projectile.localAI[0];
-        public float RecoilPower = 20;
-        public override void ExSD()
+        public override string Texture => GetInstance<Headsplosion>().Texture;
+        public override float RecoilPower => 20;
+        public override int ProjExtraUpdates => 2;
+        public override Vector2 HoldoutOffset => new(20, 0);
+        public override Color HoldoutEdgeColor => Color.Goldenrod;
+        protected override void PreAttack()
         {
-            Projectile.SetUpHeldProj(2);
-        }
-        public override void OnFirstFrame()
-        {
-            Timer = (int)(AttackSpeed * .9f);
-        }
-        public bool IsUsing => (Owner.channel) && !Owner.noItems && !Owner.CCed;
-        public override void ProjAI()
-        {
-            UpdateHeldProjState();
-            UpdatePlayerState();
-            UpdateAttack();
-            //计时器的重置
-            if (RecoilTimer > 0)
-                RecoilTimer--;
-
-        }
-
-        public void UpdateAttack()
-        {
-            if (IsUsing)
+            if (!Owner.GetExecutionSrike())
+                Projectile.HJScarlet().ExecutionStrike = false;
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
             {
-                DoAttack();
+                Projectile.HJScarlet().ExecutionStrike = true;
+                Owner.RemoveExecutionProgress(OriginalItemID);
             }
-            else
-            {
-                if (Timer < AttackSpeed)
-                    Timer++;
-            }
-
         }
-        public void DoAttack()
-        {
-            Timer++;
-            Owner.itemAnimation = Owner.itemTime = 2;
-            int attackSpeed = AttackSpeed;
-            if (Timer < attackSpeed)
-                return;
-            if (Projectile.IsMe())
-            {
-                HandleShoot();
-            }
-            Timer = 0;
-            RecoilTimer = attackSpeed;
-
-        }
-
-        public void HandleShoot()
+        protected override void OnAttack()
         {
             Vector2 offset = new Vector2(90, -5 * Projectile.direction).RotatedBy(Projectile.rotation);
             Vector2 pos = Projectile.Center + offset;
             Vector2 dir = Projectile.SafeDirByRot();
             int type = ProjectileType<HeadsplosionBullet>();
-            HandleExecution();
-            if (Projectile.HJScarlet().ExecutionStrike)
-            {
-                type = ProjectileType<MonocleBulletExecution>();
-            }
             pos -= new Vector2(80, 0).RotatedBy(Projectile.rotation);
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
-            proj.HJScarlet().HasExecutionMechanic = true;
+            Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
             if (Projectile.HJScarlet().ExecutionStrike)
             {
                 ScarletSound(HJScarletSounds.ASMD_ExecutionFire, Projectile.Center, 0.30f, 0, .24f, 0.1f);
                 ScreenDarknessSystem.AddScreenDarkness(0.75f, 20);
+                proj.HJScarlet().ExecutionStrike = true;
             }
             else
+            {
                 ScarletSound(HJScarletSounds.ASMD_Fire, Projectile.Center, 0.20f, 0, .34f, 0.1f);
+                proj.HJScarlet().HasExecutionMechanic = true;
+            }
 
             pos = Projectile.Center + offset;
             //震屏，粒子特效
@@ -116,60 +78,7 @@ namespace HJScarletRework.Projs.Executor
                 }
             }
             Projectile.HJScarlet().ExecutionStrike = false;
-        }
 
-
-        public void UpdateHeldProjState()
-        {
-            if (Owner.HeldItem.type != OriginalItemID || Owner.dead)
-                Projectile.Kill();
-            else
-                Projectile.timeLeft = 2;
-        }
-
-        public void UpdatePlayerState()
-        {
-            Projectile.rotation = Owner.ToMouseVector2().ToRotation();
-            Projectile.spriteDirection = Projectile.direction = (Owner.LocalMouseWorld().X > Owner.Center.X).ToDirectionInt();
-            Owner.ChangeDir(Projectile.direction);
-            Owner.heldProj = Projectile.whoAmI;
-            Owner.ControlPlayerArm(Projectile.rotation);
-            Projectile.Center = Owner.MountedCenter;
-            Projectile.position.Y += Owner.gfxOffY;
-
-            //处理后坐力动画
-            float progress = Utils.GetLerpValue(AttackSpeed, 0, RecoilTimer, true);
-            float pullBack;
-            float pullBackpower = RecoilPower;
-            float rot = (Projectile.Center - Main.MouseWorld).ToRotation() * Owner.gravDir;
-            float proDivide = .13f;
-            if (progress > proDivide)
-            {
-                float pro = (1 - progress) / (1 - proDivide);
-                pullBack = Lerp(0, pullBackpower, (EaseOutBack(pro)));
-                //Projectile.rotation += rot.ToRotationVector2().RotatedBy((pro) * .1f * -Projectile.spriteDirection).ToRotation();
-            }
-            else
-            {
-                float pro = (progress) / proDivide;
-                pullBack = Lerp(0, pullBackpower, (EaseOutCubic(pro)));
-                //Projectile.rotation += rot.ToRotationVector2().RotatedBy(pro * .1f * -Projectile.spriteDirection).ToRotation();
-            }
-            Projectile.Center += rot.ToRotationVector2() * pullBack;
-
-        }
-        public override bool PreDraw(ref Color lightColor)
-        {
-            Projectile.GetRangedWeaponHeldProjData(out Texture2D tex, out Vector2 drawPos, out Vector2 rotPoint, out float _, out SpriteEffects se);
-            Vector2 offset = new(20 * Owner.direction, 0);
-            float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
-            drawPos += offset.BetterRotatedBy(drawRot);
-            float progress = Utils.GetLerpValue(0, AttackSpeed, RecoilTimer, true);
-            float scale = Projectile.scale;
-            for (int i = 0; i < 8; i++)
-                SB.Draw(tex, drawPos + (TwoPi / 8f * i).ToRotationVector2() * 3f * EaseInCubic(progress), null, Color.Goldenrod.ToAddColor(), drawRot, rotPoint, scale, se, 0);
-            SB.Draw(tex, drawPos, null, Color.White, drawRot, rotPoint, scale, se, 0);
-            return false;
         }
     }
 }

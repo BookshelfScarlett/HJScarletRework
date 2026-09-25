@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -60,8 +61,8 @@ namespace HJScarletRework.Projs.Magic
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D chains = TextureAssets.Chain12.Value;
-            Vector2 pCenter = Owner.MountedCenter;
+            Texture2D chains = Request<Texture2D>(GetInstance<RefluxChain>().Texture).Value;
+            Vector2 pCenter = Owner.MountedCenter - new Vector2(160);
             Vector2 projCenter = Projectile.Center;
             Vector2 directionToPlayer = pCenter - projCenter;
             float chainRot = directionToPlayer.ToRotation() - PiOver2;

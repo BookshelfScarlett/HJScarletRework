@@ -232,3 +232,8 @@ RandomNewFolder: {
 	DisplayName: Random New Folder
 	Tooltip: ""
 }
+
+SuicideKnife: {
+	DisplayName: Suicide Knife
+	Tooltip: ""
+}

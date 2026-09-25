@@ -35,6 +35,7 @@ GoldenApple: {
 		'''
 		所有属性大幅度提升
 		直接减少承受的伤害
+		同时提供[ScarletBuff/HJScarletRework/GoldenAppleBuff]
 		"仅仅巧合"
 		'''
 }
@@ -45,6 +46,7 @@ GoldenAppleEnchanted: {
 		'''
 		所有属性大幅度提升
 		直接减少承受的伤害
+		同时提供[ScarletBuff/HJScarletRework/GoldenAppleBuffEnchanted]
 		"仅仅巧合"
 		'''
 }
@@ -79,12 +81,12 @@ DescriptionPaper: {
 		Inoljw，名字，芙蕾雅 Freya - 贴图画师
 		-
 		[c/BAEE1B:支援人员：]
-		樱羽一花，Demon Lilies，世纪小花 Plantare
+		樱羽一花，Demon Lilies，世纪小花 Plantare、中学生
 		锯角 Serrat Antler，南鸢北笙，梦山之主，依琳 Yilyn，TIM
 		[c/B19CD9:测试人员：]
 		论时间的涟漪，Woodi Stigma，妩媚の5妹儿，步出夏门行，溯月 Shizuku
 		[c/FFC0CB:捐赠人员：]
-		巴雷难破长夜，冰川咲，银九，曦，丰川祥子，苏利，池堂爱吃糖，咕咕叶子
+		巴雷难破长夜，冰川咲，银九，曦，丰川祥子，苏利，池堂爱吃糖，咕咕叶子，Kino，林为简
 		[c/AACCCC:非常感谢各位让本模组得以顺利落地并推进]
 		'''
 }
@@ -156,8 +158,10 @@ FruitofEternity: {
 	DisplayName: 悠久果实
 	Tooltip:
 		'''
+		使用后提供[ScarletBuff/HJScarletRework/FruitofEternityBuff]
 		强化自身{0}防御力，+{1}HP/s生命再生
-		任何神明类敌人在场并受击时造成的伤害减少{2}，并重置速度，以1/{3}的概率随机传送
+		任何神明类敌人在场时：
+		造成的伤害减少{2}，受击时重置速度，以1/{3}的概率随机传送
 		'''
 	DetailTooltip:
 		'''
@@ -220,9 +224,9 @@ CrystallizedLore: {
 	DisplayName: 传承结晶
 	Tooltip:
 		'''
-		手持时，对背包内的武器使用可尝试赋予其最高级词缀，若失败则获得“恶魔”词缀
-		对饰品使用可尝试赋予其最高级饰品词缀
-		对传承结晶按下右键可切换饰品词缀的可选项
+		对背包内的武器使用会赋予其最高级词缀
+		对饰品使用可赋予其最高级饰品词缀
+		对传承结晶按住 Shift + 右键 可切换饰品词缀的可选项
 		'''
 	DetailTooltip:
 		'''
@@ -244,5 +248,15 @@ RandomNewFolder: {
 		'''
 		可同时满足多种不同弹药需求的武器的弹药
 		“不要再新建一个文件夹，不重命名然后把所有东西一股脑扔进去了。”
+		'''
+}
+
+SuicideKnife: {
+	DisplayName: 自损八千
+	Tooltip:
+		'''
+		使用后对自己造成高额伤害
+		方便自残
+		“饿啊！”
 		'''
 }

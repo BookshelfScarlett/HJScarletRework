@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items.Material;
-using HJScarletRework.Globals.Database.Enums;
+﻿using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
@@ -13,24 +12,24 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
 {
     public class Reflux : ExecutorWeaponClass
     {
-        public override int ExecutionProgress => 15;
+        public override int ExecutionProgress => 75;
+        public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
-            ScarletItemIDSets.IsHeldProjItem[Type] = true;
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateCopper);
         }
         public override void ExSD()
-        {
-            Item.damage = 2010;
+        { 
+            Item.damage = 25;
             Item.shootSpeed = 19;
-            Item.SetUpRarityPrice(ItemRarityID.Red);
+            Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem(true);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = null;
             Item.knockBack = 7f;
-            Item.useTime = Item.useAnimation = 45;
-            Item.crit = 46;
-            Item.shoot = ProjectileType<MonocleHeldProj>();
+            Item.useTime = Item.useAnimation = 32;
+            Item.shoot = ProjectileType<RefluxHeldProj>();
             Item.HJScarlet().borderlandWeapon = true;
         }
         public override bool CanShoot(Player player)
@@ -52,10 +51,9 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.TacticalShotgun).
-                AddIngredient<DeepBar>(10).
-                AddIngredient(ItemID.IllegalGunParts, 10).
-                AddTile(TileID.MythrilAnvil).
+                AddIngredient(ItemID.QuadBarrelShotgun).
+                AddIngredient(ItemID.IllegalGunParts, 5).
+                AddTile(TileID.Anvils).
                 Register();
         }
     }

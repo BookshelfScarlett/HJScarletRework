@@ -1,5 +1,4 @@
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
@@ -213,7 +212,7 @@ namespace HJScarletRework.Projs.Executor
                 SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
                 float spinRotation = Main.GlobalTimeWrappedHourly * 5.2f;
                 float deepGlowMult = 1;
-                    DrawTrails(HJScarletTexture.Trail_MegaBeam.Texture, Color.Violet,alphaValue:deepGlowMult);
+                DrawTrails(HJScarletTexture.Trail_MegaBeam.Texture, Color.Violet, alphaValue: deepGlowMult);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: 12f);
                 DrawTrails(HJScarletTexture.Trail_FadedStreak.Texture, Color.Orchid, 0.4f, 0.8f, offsetHeight: -12f);
                 DrawTrails(HJScarletTexture.Trail_ParaLine.Texture, Color.White, 0.4f, alphaValue: 1f);

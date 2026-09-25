@@ -29,7 +29,7 @@ namespace HJScarletRework.Items.Accessories
         {
             CreateRecipe().
                 AddIngredient<AxeofPerun>().
-                AddIngredient(ItemID.SpectreBar, 10).
+                AddIngredient(ItemID.ChlorophyteBar, 10).
                 AddTile(TileID.TinkerersWorkbench).
                 Register();
         }

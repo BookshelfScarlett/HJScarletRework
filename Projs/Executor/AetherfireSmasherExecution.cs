@@ -22,6 +22,7 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.ToTrailSetting();
         }
+        public override Vector2 TileHitbox => new Vector2(24);
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 60;

@@ -56,7 +56,7 @@ namespace HJScarletRework.Globals.Executor
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             Vector2 pos = TryGetPossibleHeadPos();
-            return HJScarletMethods.LineThroughRect(Projectile.Center, pos, targetHitbox);
+            return HJScarletMethods.LineThroughRect(Projectile.Center, pos, targetHitbox, 20);
         }
         /// <summary>
         /// 一个工具方法，用于尝试直接获得末端位置

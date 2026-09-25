@@ -61,7 +61,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Main.rand.NextBool(12))
                     if (!Owner.channel)
                         new SmokeParticle(Projectile.Center.ToRandCirclePos(5f) + Projectile.SafeDirByRot() * Main.rand.NextFloat(-10f, 80f), Projectile.SafeDirByRot() * Main.rand.NextFloat(), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.60f, 0.24f, Main.rand.NextBool()).Spawn();
-                if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
+                if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike&&Owner.IsHolding(OriginalItemID))
                 {
                     Projectile.HJScarlet().ExecutionStrike = true;
                     Owner.RemoveExecutionProgress(OriginalItemID);
@@ -302,13 +302,13 @@ namespace HJScarletRework.Projs.Executor
             SoundEngine.PlaySound(HJScarletSounds.Misc_KnifeExpired with { MaxInstances = 0, Pitch = -0.4f, PitchVariance = 0.1f, Volume = 0.6f });
             Timer = 0;
             Vector2 spawnPos = Projectile.Center + Projectile.SafeDirByRot() * 70f;
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, Projectile.velocity.ToRandVelocity(ToRadians(0f), 12f, 18f), ProjectileType<DualWraithStaffGhost>(), Projectile.damage, 2f, Owner.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), spawnPos, Projectile.velocity.ToRandVelocity(ToRadians(0f), 12f, 18f), ProjectileType<DualWraithStaffGhost>(), Projectile.damage, 2f, Owner.whoAmI);
             proj.extraUpdates = 2;
             proj.HJScarlet().HasExecutionMechanic = true;
             proj.ai[2] = 1;
             for (int i = 0; i < 2; i++)
             {
-                proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), spawnPos, Projectile.velocity.ToRandVelocity(ToRadians(10f), 12f, 18f), ProjectileType<DualWraithStaffGhost>(), Projectile.damage, 2f, Owner.whoAmI);
+                proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), spawnPos, Projectile.velocity.ToRandVelocity(ToRadians(10f), 12f, 18f), ProjectileType<DualWraithStaffGhost>(), Projectile.damage, 2f, Owner.whoAmI);
                 proj.extraUpdates = 2;
                 proj.HJScarlet().HasExecutionMechanic = true;
                 proj.ai[2] = 1;

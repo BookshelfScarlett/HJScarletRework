@@ -17,6 +17,7 @@ PocketMirrorModiflication:
 GenericText: {
 	BuffDetail: 按住左 LeftAlt 以查看具体效果
 	// SwitchDetail: ""
+	HoldShiftAndRightClick: 按住 Shift 后右键以切换
 }
 
 ItemBelongTo: {

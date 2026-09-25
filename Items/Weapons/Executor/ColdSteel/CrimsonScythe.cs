@@ -38,6 +38,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.HJScarlet().CanDrawIcon = false;
             Item.HJScarlet().CanDrawGhost = true;
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.shootSpeed = 10;
             Item.shoot = ProjectileType<CrimsonScytheHeldProj>();
             Item.useStyle = ItemUseStyleID.Swing;
@@ -168,7 +169,8 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
                 MainText = detailText,
                 TextColor = Color.White,
                 TextEdgeColor = Color.Black,
-                TitleTextSize = 1.15f
+                TitleTextSize = 1.15f,
+                BoxSize = 1
             };
             settingList.Add(sets);
             //最后传值。
@@ -184,10 +186,15 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
                 MainText = detailText,
                 TextColor = Color.White,
                 TextEdgeColor = Color.Black,
-                TitleTextSize = 1.15f
+                TitleTextSize = 1.15f,
+                BoxSize = 1
             };
             settingList.Add(sets);
             TextboxMethods.DrawMultipleTextboxes(line, CacheTooltipList, settingList, 30);
+        }
+        public override void HoldItem(Player player)
+        {
+            player.ApplyNoKnockbackBuff(30);
         }
         public override void AddRecipes()
         {

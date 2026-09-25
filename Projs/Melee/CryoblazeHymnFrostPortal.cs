@@ -83,7 +83,7 @@ namespace HJScarletRework.Projs.Melee
             Texture2D circle = HJScarletTexture.Texture_SoftCircleEdge.Value;
             float scaleLerp = Projectile.Opacity * Projectile.scale;
             //底图处理
-            SB.Draw(HJScarletTexture.Texture_BloomShockwave.Value, drawPos, null, Color.DeepSkyBlue, 0, HJScarletTexture.Texture_BloomShockwave.Origin, 0.02f * scaleLerp, 0, 0);
+            SB.Draw(HJScarletTexture.Texture_BloomShockwave.Value, drawPos, null, Color.DeepSkyBlue, 0, HJScarletTexture.Texture_BloomShockwave.Value.Size() / 2f, 0.02f * scaleLerp, 0, 0);
             //光圈，叠加
             SB.EnterShaderArea();
             //绘制辉光

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HJScarletRework.Globals.Methods;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
@@ -22,6 +23,22 @@ namespace HJScarletRework.Globals.Systems
         public int Damage = damage;
         public float KnockBack = knockBack;
         public DamageClass damageClass = dc;
+    }
+    public enum DashDirectionEnum
+    {
+        Horizonal,
+        /// <summary>
+        /// 垂直与横向
+        /// </summary>
+        VerticalAndHorizonal,
+        /// <summary>
+        /// 全向，360°的无死角
+        /// </summary>
+        Onmi,
+        /// <summary>
+        /// 8向，即蔚蓝方案
+        /// </summary>
+        Celeste
     }
     public enum DashEnum
     {
@@ -65,7 +82,7 @@ namespace HJScarletRework.Globals.Systems
                     Index = OverideCurDashID;
                 PlayerDashClass ActiveDash = DashCollection[Index];
                 // 监测是否开始冲刺
-                HandleDashBegin(out bool ThisCanDash);
+                HandleDashBegin(out bool ThisCanDash,ActiveDash.DashDirection);
                 if (!ActiveDash.PreDash(Player))
                     return;
                 if (ThisCanDash)
@@ -81,9 +98,24 @@ namespace HJScarletRework.Globals.Systems
                     {
                         if (!ActiveDash.UseCustomDashSpeed)
                         {
-                            float PlayerXVel = BeginDirection * Vector2.UnitX.X * ActiveDash.DashSpeed(Player);
-                            if (MathF.Abs(Player.velocity.X) < MathF.Abs(PlayerXVel))
-                                Player.velocity.X = Lerp(PlayerXVel * ActiveDash.DashEndSpeedMult(Player), PlayerXVel, ActiveDash.DashAmount(Player, DashTime, ActiveDash.DashTime(Player)));
+                            //查看begindirection，如果是垂直处理，则处理垂直情况
+                            if (Math.Abs(BeginDirection) == 2)
+                            {
+                                Player.HJScarlet().NoSlowFall = DashTime;
+                                Player.HJScarlet().maxFallspeedModify += 10000;
+                                float PlayerYVel = (BeginDirection > 0).ToDirectionInt() * Vector2.UnitY.Y * ActiveDash.DashSpeed(Player);
+                                if (MathF.Abs(Player.velocity.Y) < MathF.Abs(PlayerYVel))
+                                {
+                                    Player.velocity.Y = Lerp(PlayerYVel * ActiveDash.DashEndSpeedMult(Player), PlayerYVel, ActiveDash.DashAmount(Player, DashTime, ActiveDash.DashTime(Player)));
+
+                                }
+                            }
+                            else
+                            {
+                                float PlayerXVel = BeginDirection * Vector2.UnitX.X * ActiveDash.DashSpeed(Player);
+                                if (MathF.Abs(Player.velocity.X) < MathF.Abs(PlayerXVel))
+                                    Player.velocity.X = Lerp(PlayerXVel * ActiveDash.DashEndSpeedMult(Player), PlayerXVel, ActiveDash.DashAmount(Player, DashTime, ActiveDash.DashTime(Player)));
+                            }
                         }
                         else
                             ActiveDash.ModifyDashSpeed(Player);
@@ -102,7 +134,7 @@ namespace HJScarletRework.Globals.Systems
                 }
             }
         }
-        public void HandleDashBegin(out bool CanDash)
+        public void HandleDashBegin(out bool CanDash, DashDirectionEnum dashType)
         {
             bool canDash = false;
             CanDash = canDash;
@@ -112,27 +144,79 @@ namespace HJScarletRework.Globals.Systems
             // 原版的双击冲刺判定
             bool vanillaLeftDashInput = Player.controlLeft && Player.releaseLeft;
             bool vanillaRightDashInput = Player.controlRight && Player.releaseRight;
-            if (vanillaRightDashInput)
+            bool vanillaUpDashInput = Player.controlUp && Player.releaseUp;
+            bool vanillaDownDashInput = Player.controlDown && Player.releaseDown;
+            if (dashType == DashDirectionEnum.Horizonal)
             {
-                if (VanillaDashInput > 0)
+                if (vanillaRightDashInput)
                 {
-                    BeginDirection = 1;
-                    canDash = true;
-                    VanillaDashInput = 0;
+                    if (VanillaDashInput > 0)
+                    {
+                        BeginDirection = 1;
+                        canDash = true;
+                        VanillaDashInput = 0;
+                    }
+                    else
+                        VanillaDashInput = 15;
                 }
-                else
-                    VanillaDashInput = 15;
+                else if (vanillaLeftDashInput)
+                {
+                    if (VanillaDashInput < 0)
+                    {
+                        BeginDirection = -1;
+                        canDash = true;
+                        VanillaDashInput = 0;
+                    }
+                    else
+                        VanillaDashInput = -15;
+                }
             }
-            else if (vanillaLeftDashInput)
+            else if (dashType == DashDirectionEnum.VerticalAndHorizonal)
             {
-                if (VanillaDashInput < 0)
+                if (vanillaRightDashInput)
                 {
-                    BeginDirection = -1;
-                    canDash = true;
-                    VanillaDashInput = 0;
+                    if (VanillaDashInput > 0)
+                    {
+                        BeginDirection = 1;
+                        canDash = true;
+                        VanillaDashInput = 0;
+                    }
+                    else
+                        VanillaDashInput = 15;
                 }
-                else
-                    VanillaDashInput = -15;
+                else if (vanillaLeftDashInput)
+                {
+                    if (VanillaDashInput < 0)
+                    {
+                        BeginDirection = -1;
+                        canDash = true;
+                        VanillaDashInput = 0;
+                    }
+                    else
+                        VanillaDashInput = -15;
+                }
+                else if (vanillaUpDashInput)
+                {
+                    if (VanillaDashInput > 0)
+                    {
+                        BeginDirection = -2;
+                        canDash = true;
+                        VanillaDashInput = 0;
+                    }
+                    else
+                        VanillaDashInput = 15;
+                }
+                else if (vanillaDownDashInput)
+                {
+                    if (VanillaDashInput > 0)
+                    {
+                        BeginDirection = 2;
+                        canDash = true;
+                        VanillaDashInput = 0;
+                    }
+                    else
+                        VanillaDashInput = 15;
+                }
             }
             CanDash = canDash;
         }
@@ -214,6 +298,7 @@ namespace HJScarletRework.Globals.Systems
         /// </summary>
         public virtual bool PreDash(Player player) => true;
         public virtual bool CanHitNPC(Player player, NPC target) => true;
+        public virtual DashDirectionEnum DashDirection => DashDirectionEnum.Horizonal; 
         public virtual DashDamageInfo DashDamageInfo(Player player) => new(50, 3, DamageClass.Default);
         /// <summary>
         /// 这个冲刺给予的无敌时间

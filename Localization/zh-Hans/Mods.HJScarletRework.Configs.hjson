@@ -96,6 +96,16 @@ HJScarletConfigClient: {
 			默认为1
 			'''
 	}
+
+	TextboxSize: {
+		Label: 文本框大小调整
+		Tooltip:
+			'''
+			允许你调整模组内物品额外文本框的大小
+			如果你遇到了文本框过大的问题，可以调整这个设置
+			默认为1，即100%
+			'''
+	}
 }
 
 HJScarletConfigServer: {

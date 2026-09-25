@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.NPCs.Boss_ScarabBelief;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -13,7 +14,6 @@ using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -83,7 +83,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Frostburn2, GetSeconds(10));
+            target.AddBuff(BuffType<AbsoluteZeroBuff>(), GetSeconds(1));
             Projectile.AddExecutionTimeImmediate(ItemType<FrostoftheStorm>());
             if (Projectile.numHits < 1)
             {
@@ -119,8 +119,7 @@ namespace HJScarletRework.Projs.Executor
                     ((FrostoftheStormExecution)proj.ModProjectile).Flip = false;
                 ((FrostoftheStormExecution)proj.ModProjectile).BeginTargetRotation = TargetRotation;
             }
-            else
-                if (Main.mouseLeft)
+            else if (Main.mouseLeft && !Owner.dead && !Owner.CCed)
             {
                 //挥舞结束的时候处死并立刻生成新的射弹。这样我们不用重置大部分的动画进程，实现起来稍微方便点
                 if (!Flip)
@@ -170,7 +169,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, fireVel, ProjectileType<FrostoftheStormSlash>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 proj.HJScarlet().HasExecutionMechanic = true;
             }
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldscale = Owner.HeldItem.scale;
             //这里挥砍动画一定程度上使用了矩阵变化。
             Helper.UpdateAniState(0);
             float easedProgress = EaseInBack(Helper.GetAniProgress(0));
@@ -226,7 +225,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateMidAnimation()
         {
             Helper.UpdateAniState(1);
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldscale = Owner.HeldItem.scale;
             float easedProgress = EaseOutBack(Helper.GetAniProgress(1));
             float beginAngle = 135 * Flip.ToDirectionInt();
             float endAngle = 150 * Flip.ToDirectionInt();

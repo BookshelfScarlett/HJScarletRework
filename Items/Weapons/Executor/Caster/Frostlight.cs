@@ -24,6 +24,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Caster
         {
             Item.damage = 225;
             Item.SetUpRarityPrice(ItemRarityID.LightPurple);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.shootSpeed = 21;
             Item.shoot = ProjectileType<FrostlightHeldProj>();
             Item.knockBack = 1;

@@ -156,7 +156,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateFinalAnimation()
         {
             Helper.UpdateAniState(2);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldScale = Owner.HeldItem.scale;
             float easedProgress = EaseOutExpo(Helper.GetAniProgress(2));
             float beginAngle = 185f * Flip.ToDirectionInt();
             float endAngle = 190 * Flip.ToDirectionInt();
@@ -171,7 +171,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateBeginAnimation()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale =  Owner.HeldItem.scale ;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutExpo(Helper.GetAniProgress(0));
             float beginAngle = -185f * Flip.ToDirectionInt();
@@ -214,7 +214,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateEndAnimation()
         {
             Helper.UpdateAniState(1);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldScale = Owner.HeldItem.scale;
             float easedProgress = EaseInCubic(Helper.GetAniProgress(1));
             float beginAngle = 175f * Flip.ToDirectionInt();
             float endAngle = 185 * Flip.ToDirectionInt();

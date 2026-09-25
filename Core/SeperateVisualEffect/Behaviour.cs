@@ -1,9 +1,4 @@
 ﻿using HJScarletRework.Globals.Database.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Core.SeperateVisualEffect
@@ -11,7 +6,7 @@ namespace HJScarletRework.Core.SeperateVisualEffect
     public class SeperateVisualBehavior : ModType
     {
         public SeperateVisualInstance Instance = null;
-        public int Type {  get; set; }
+        public int Type { get; set; }
         protected sealed override void Register()
         {
             Type = SeperateVisualManager.VisualBehaviors.Count;

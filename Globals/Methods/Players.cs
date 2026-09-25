@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using HJScarletRework.Buffs;
+using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Methods
@@ -23,7 +24,7 @@ namespace HJScarletRework.Globals.Methods
         public static bool IsHolding<T>(this Player player) where T : ModItem => IsHolding(player, ItemType<T>());
         public static bool IsHolding(this Player player, int itemID) => player.HeldItem.type == itemID;
         public static bool CanUseHoldout(this Player player, int itemID) => !player.dead && !player.CCed && player.IsHolding(itemID);
-        public static bool CanUseHoldout<T>(this Player player)where T :ModItem => !player.dead && !player.CCed && player.IsHolding(ItemType<T>());
+        public static bool CanUseHoldout<T>(this Player player) where T : ModItem => !player.dead && !player.CCed && player.IsHolding(ItemType<T>());
         public static bool IsInInventory(this Player player) => Main.hoverItemName != "";
         public static bool IsInwater(this Player player) => Collision.DrownCollision(player.position, player.width, player.height, player.gravDir);
         /// <summary>
@@ -44,5 +45,6 @@ namespace HJScarletRework.Globals.Methods
         /// <returns>额外伤害比例，即实际伤害相对于原始伤害的增幅（0 表示无加成，0.5 表示加成 50%）。</returns>
 
         public static float GetDamageBonusRatio(int targetDamage, int originalDamage) => ((float)targetDamage - originalDamage) / (float)originalDamage;
+        public static void ApplyNoKnockbackBuff(this Player player, int frame) => player.AddBuff(BuffType<AntiKnockbackBuff>(), frame);
     }
 }

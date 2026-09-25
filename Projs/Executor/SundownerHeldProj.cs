@@ -13,80 +13,52 @@ using Terraria.Audio;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class SundownerHeldProj : HJScarletProj
+    public class SundownerHeldProj : HJScarletRangedWeaponoutClass
     {
         public override string Texture => GetInstance<Sundowner>().Texture;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
-        public ref float Timer => ref Projectile.ai[0];
-        public AnimationStruct Helper = new(2);
-        public bool CanShoot = false;
-        public bool JustSpawned = false;
-        public override void ExSD()
+        public override int OriginalItemID => ItemType<Sundowner>();
+        public override float HoldoutDrawScale => base.HoldoutDrawScale;
+        public override Vector2 HoldoutOffset => new Vector2(0, -10);
+        public override bool HoldoutEdgeEnable => false;
+        protected override void UpdateRecoil()
         {
-            Projectile.SetUpHeldProj();
-            Projectile.SetupImmnuity(-1);
-            Projectile.width = Projectile.height = 40;
-            Projectile.Opacity = 0;
-        }
-        public override void OnFirstFrame()
-        {
-            JustSpawned = true;
-            Helper.MaxProgress[0] = 20;
-            Helper.MaxProgress[1] = 10;
-            base.OnFirstFrame();
-        }
-        public override void ProjAI()
-        {
-            if (Projectile.Opacity < 0.98f)
-                Projectile.Opacity = Lerp(Projectile.Opacity, 1, 0.15f);
-            else
-                Projectile.Opacity = 1;
-            if (HandleDeadOrAlive())
-            {
-                Projectile.Kill();
+            if (!Owner.IsHolding(OriginalItemID))
                 return;
-            }
-            HandleOwnerState();
-            HandleRecoil();
-            HandleAttack();
-        }
-        public bool IsUsing => (Owner.channel) && !Owner.noItems && !Owner.CCed;
-
-        public bool HandleDeadOrAlive()
-        {
-            if (Owner.HeldItem.type != ItemType<Sundowner>())
+            int curExecuteCount = Owner.GetExecuteProgress();
+            if (curExecuteCount == 0)
+                return;
+            if (Owner.HJScarlet().tacticalExecutionInputCache > 0)
             {
-                return true;
-            }
-            Projectile.timeLeft = 2;
-            return false;
-        }
-        /// <summary>
-        /// 直接管理的工具方法。
-        /// </summary>
-        /// <returns></returns>
-        public bool HandleExecution()
-        {
-            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
-            {
+                //将武器标记为发起处决模式
                 Projectile.HJScarlet().ExecutionStrike = true;
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Owner.Center, Vector2.Zero, ProjectileType<SundownerFlareGun>(), 0, 0, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), Owner.Center, Vector2.Zero, ProjectileType<SundownerFlareGun>(), 0, 0, Owner.whoAmI);
                 proj.originalDamage = Projectile.originalDamage;
-                Owner.RemoveExecutionProgress(ItemType<Sundowner>());
-                return true;
+                //移除处决进程
+                Owner.RemoveExecutionProgress();
+                Owner.HJScarlet().tacticalExecutionInputCache = 0;
+                //处决会强行发射这枚子弹
+                Timer = AttackSpeed;
             }
-            Owner.HJScarlet().CanExecution = false;
-            return false;
+        }
+        //后坐力
+        protected override void UpdateWeaponUsing()
+        {
+            Projectile.position += Main.rand.NextVector2Circular(1.3f, 1.3f);
+            Projectile.position += -Projectile.SafeDirByRot() * Main.rand.NextFloat(5f, 10f);
         }
         public int Reverse = 1;
-        public void HandleAttack()
+        protected override void PreAttack()
+        {
+            base.PreAttack();
+        }
+        protected override void OnAttack()
         {
             Vector2 offset2 = new(0 * Owner.direction, -10f);
             float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
             Vector2 firePos = Projectile.Center + offset2.RotatedBy(drawRot);
-            HandleExecution();
             bool nonStop = !Owner.HasProj<SundownerFlare>() && !Owner.HasProj<SundownerFlareGun>() && !Projectile.HJScarlet().ExecutionStrike;
-            if (Timer % 10 == 0 && Projectile.IsMe())
+            if (Projectile.IsMe())
             {
                 ScreenShakeSystem.AddScreenShakes(firePos, 1f, 10, Projectile.rotation + Pi, 0f);
 
@@ -98,7 +70,7 @@ namespace HJScarletRework.Projs.Executor
                 }
                 for (int i = -1; i < 2; i += 2)
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) * i * 10f, Projectile.rotation.ToRotationVector2() * 20, ProjectileType<SundownerAmmo>(), Projectile.originalDamage, 0, Owner.whoAmI);
+                    Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) * i * 10f, Projectile.rotation.ToRotationVector2() * 20, ProjectileType<SundownerAmmo>(), Projectile.originalDamage, 0, Owner.whoAmI);
                     if (nonStop)
                         proj.HJScarlet().HasExecutionMechanic = true;
                     ((SundownerAmmo)proj.ModProjectile).CanPlaySound = i == -1;
@@ -107,7 +79,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     for (int i = -1; i < 2; i += 2)
                     {
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) * i * -10f, Projectile.rotation.ToRotationVector2() * 10, ProjectileType<SundownerFireball>(), (int)(Projectile.originalDamage * .5f), 0, Owner.whoAmI);
+                        Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), firePos + Projectile.SafeDirByRot() * 30f + Projectile.SafeDirByRot().RotatedBy(PiOver2) * i * -10f, Projectile.rotation.ToRotationVector2() * 10, ProjectileType<SundownerFireball>(), (int)(Projectile.originalDamage * .5f), 0, Owner.whoAmI);
                         proj.extraUpdates += 1;
                     }
                 }
@@ -145,61 +117,6 @@ namespace HJScarletRework.Projs.Executor
                     new SmokeParticle(firePos.ToRandCirclePos(10f) + posOffset, vel, RandLerpColor(Color.White, Color.Lerp(Color.OrangeRed, Color.Gold, 0.4f)), 40, RandRotTwoPi, 1f, 0.34f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
                 }
             }
-            Projectile.HJScarlet().ExecutionStrike = false;
-        }
-        public void ResetAniState()
-        {
-            Helper.IsDone[0] = false;
-            Helper.Progress[0] = 0;
-        }
-        public void HandleRecoil()
-        {
-            if (!IsUsing)
-            {
-                Timer = 9;
-            }
-            else
-            {
-                Owner.itemTime = Owner.itemAnimation = 2;
-                Projectile.position += Main.rand.NextVector2Circular(1.3f, 1.3f);
-                Projectile.position += -Projectile.SafeDirByRot() * Main.rand.NextFloat(5f, 10f);
-                Timer++;
-                if (Timer > 60f)
-                    Timer = 1;
-            }
-        }
-        public void HandleOwnerState()
-        {
-            Projectile.rotation = Owner.ToMouseVector2().ToRotation();
-            Projectile.spriteDirection = Projectile.direction = (Owner.LocalMouseWorld().X > Owner.Center.X).ToDirectionInt();
-            Owner.ChangeDir(Projectile.direction);
-            Owner.heldProj = Projectile.whoAmI;
-            Owner.ControlPlayerArm(Projectile.rotation);
-            if (!JustSpawned)
-            {
-                Projectile.Center = Vector2.Lerp(Projectile.Center, Owner.MountedCenter, 0.2f);
-                if ((Projectile.Center - Owner.MountedCenter).LengthSquared() < 5f)
-                    JustSpawned = true;
-            }
-            else
-            {
-                Projectile.Center = Owner.MountedCenter;
-
-            }
-        }
-
-        public Vector2 DrawOffset = Vector2.Zero;
-
-        public override bool PreDraw(ref Color lightColor)
-        {
-            Vector2 offset = new(0 * Owner.direction, -10f);
-            Texture2D tex = Projectile.GetTexture();
-            Vector2 drawPos = Projectile.Center - Main.screenPosition + DrawOffset;
-            float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
-            Vector2 rotationPoint = tex.Size() * 0.5f;
-            SpriteEffects flipSprite = Projectile.spriteDirection * Owner.gravDir == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            SB.Draw(tex, drawPos + offset.RotatedBy(drawRot), null, Color.Lerp(Color.Transparent, Color.White, Projectile.Opacity), drawRot, rotationPoint, Projectile.scale * 1f, flipSprite, default);
-            return false;
         }
     }
 }

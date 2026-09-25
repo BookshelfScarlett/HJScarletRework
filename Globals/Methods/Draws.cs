@@ -143,5 +143,26 @@ namespace HJScarletRework.Globals.Methods
             shader.Parameters["EdgeWidth"].SetValue(edgeWidth);
             shader.CurrentTechnique.Passes[0].Apply();
         }
+        public static void SetCrossStar(this Projectile proj, float scale, float rot, Color mainColor, float xScale = .45f, float yScale = 1f)
+        {
+            Texture2D star = HJScarletTexture.Particle_SharpTear;
+            Vector2 pos = proj.Center - Main.screenPosition;
+            Vector2 starScale = new Vector2(xScale, yScale);
+            Main.spriteBatch.Draw(star, pos, null, mainColor, rot, star.Size() / 2, starScale * proj.scale * scale, SpriteEffects.None, 0);
+            Main.spriteBatch.Draw(star, pos, null, Color.White, rot, star.Size() / 2, starScale * proj.scale * scale * .5f, SpriteEffects.None, 0);
+            Main.spriteBatch.Draw(star, pos, null, mainColor, rot + PiOver2, star.Size() / 2, starScale * proj.scale * scale, SpriteEffects.None, 0);
+            Main.spriteBatch.Draw(star, pos, null, Color.White, rot + PiOver2, star.Size() / 2, starScale * proj.scale * scale * .5f, SpriteEffects.None, 0);
+        }
+        public static void SetCrossStar(this Projectile proj, Vector2 pos, float scale, float rot, Color mainColor, float xScale = .45f, float yScale = 1f)
+        {
+            Texture2D star = HJScarletTexture.Particle_SharpTear;
+            pos = pos - Main.screenPosition;
+            Vector2 starScale = new Vector2(xScale, yScale);
+            Main.spriteBatch.Draw(star, pos, null, mainColor, rot, star.Size() / 2, starScale * proj.scale * scale, SpriteEffects.None, 0);
+            Main.spriteBatch.Draw(star, pos, null, Color.White, rot, star.Size() / 2, starScale * proj.scale * scale * .5f, SpriteEffects.None, 0);
+            Main.spriteBatch.Draw(star, pos, null, mainColor, rot + PiOver2, star.Size() / 2, starScale * proj.scale * scale, SpriteEffects.None, 0);
+            Main.spriteBatch.Draw(star, pos, null, Color.White, rot + PiOver2, star.Size() / 2, starScale * proj.scale * scale * .5f, SpriteEffects.None, 0);
+        }
+
     }
 }

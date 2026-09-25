@@ -23,7 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void ExSD()
         {
             Item.damage = 54;
-            Item.SetUpRarityPrice(ItemRarityID.Orange);
+            Item.SetUpRarityPrice(ItemRarityID.Lime);
             Item.SetUpNoUseGraphicItem(true);
             Item.knockBack = 2f;
             Item.useTime = Item.useAnimation = 20;
@@ -52,9 +52,9 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         {
             CreateRecipe().
                 AddIngredient(ItemID.Shotgun).
-                AddIngredient(ItemID.QuadBarrelShotgun).
-                AddIngredient(ItemID.Boomstick).
-                AddIngredient(ItemID.IllegalGunParts).
+                AddIngredient<Reflux>().
+                AddIngredient<TheGarcia>().
+                AddIngredient(ItemID.IllegalGunParts,10).
                 AddIngredient(ItemID.ChlorophyteBar, 10).
                 AddTile(TileID.MythrilAnvil).
                 Register();

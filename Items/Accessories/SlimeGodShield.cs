@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Buffs;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -8,7 +9,6 @@ using HJScarletRework.Globals.Systems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HJScarletRework.Globals.Database.Enums;
 
 namespace HJScarletRework.Items.Accessories
 {

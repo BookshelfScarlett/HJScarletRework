@@ -206,7 +206,7 @@ namespace HJScarletRework.Core.PixelatedRender
             orig(self);
         }
         public static void DrawTarget_BeforeDust(On_Main.orig_DrawDust orig, Main self)
-        {            
+        {
             // 只有当前面标记启用时才会尝试画出
             if (BeginDrawBeforeDusts)
             {

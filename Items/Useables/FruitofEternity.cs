@@ -29,6 +29,7 @@ namespace HJScarletRework.Items.Useables
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Red);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.value = Item.buyPrice(gold: 5, silver: 30);
             Item.DefaultToFood(32, 32, BuffType<FruitofEternityBuff>(), GetSeconds(60) * 5);
         }
@@ -46,14 +47,14 @@ namespace HJScarletRework.Items.Useables
             }
             string text = this.GetLocalizationKey("DetailTooltip").ToLangValue();
             TextboxSettings sets = new TextboxSettings
-            {
-                HasTitle = false,
-                BackgroundColor = Color.White * .24f,
-                TextColor = Color.White,
-                TextEdgeColor = Color.Lerp(Color.HotPink, Color.Black, .74f),
-                MainText = text
-            };
-            TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
+                (
+                backgroundColor: Color.White * .24f,
+                textColor: Color.White,
+                textEdgeColor: Color.Lerp(Color.HotPink, Color.Black, .74f),
+                mainText: text,
+                hasTitle: false
+                );
+            //TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
             return true;
         }
         public override void AddRecipes()

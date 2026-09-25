@@ -1,5 +1,4 @@
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
@@ -137,8 +136,8 @@ namespace HJScarletRework.Projs.Executor
         public override bool PreDraw(ref Color lightColor)
         {
             SB.EnterShaderArea();
-                DrawNebulaTrail(Color.MediumPurple, 14f);
-                DrawNebulaTrail(Color.LightPink with { A = 50 }, 12.2f);
+            DrawNebulaTrail(Color.MediumPurple, 14f);
+            DrawNebulaTrail(Color.LightPink with { A = 50 }, 12.2f);
             DrawNebulaTrail(Color.White with { A = 100 }, 10.8f);
             SB.EnterShaderArea();
             if (Projectile.oldPos.Length > 12)
@@ -165,8 +164,8 @@ namespace HJScarletRework.Projs.Executor
         {
             float laserLength = 50;
             Effect shader = HJScarletShader.TerrarRayLaser;
-            shader.Parameters["LaserTextureSize"].SetValue(HJScarletTexture.Trail_ManaStreak.Size);
-            shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, HJScarletTexture.Trail_ManaStreak.Height));
+            shader.Parameters["LaserTextureSize"].SetValue(HJScarletTexture.Trail_ManaStreak.Value.Size());
+            shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, HJScarletTexture.Trail_ManaStreak.Value.Height));
             shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -50);
             shader.Parameters["uColor"].SetValue(trailColor.ToVector4() * DrawScale);
             shader.Parameters["uFadeoutLength"].SetValue(0.1f);

@@ -5,7 +5,7 @@
 
 	<!-- General -->
 	<PropertyGroup>
-		
+	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<ItemGroup>
 	  <AdditionalFiles Remove="Assets\Texture\Items\Weapons\New\**" />
@@ -23,6 +23,9 @@
 	  <Reference Include="ContinentOfJourney">
 	    <HintPath>..\..\ModReader\ContinentOfJourney\ContinentOfJourney.dll</HintPath>
 	  </Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Assets\Texture\Projs\NPCs\" />
 	</ItemGroup>
 
 	<!-- References -->

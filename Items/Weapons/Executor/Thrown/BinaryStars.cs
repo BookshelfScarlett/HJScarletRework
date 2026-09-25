@@ -1,5 +1,6 @@
 using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
@@ -19,6 +20,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override void ExSSD()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Nebula);
+            ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
         }
         public override void ExSD()
         {

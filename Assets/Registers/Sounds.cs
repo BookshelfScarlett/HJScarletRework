@@ -25,6 +25,9 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle Dream_Toss => new($"{SoundsPath}{nameof(Dream_Toss)}");
 
         public static SoundStyle Evolution_Thrown => new($"{SoundsPath}{nameof(Evolution_Thrown)}");
+        public static SoundStyle EndlessWar_SmashReady => new SoundStyle($"{SoundsPath}{nameof(EndlessWar_SmashReady)}");
+        public static SoundStyle EndlessWar_SmashSwing => new SoundStyle($"{SoundsPath}{nameof(EndlessWar_SmashSwing)}");
+        public static SoundStyle EndlessWar_MinionReady => new SoundStyle($"{SoundsPath}{nameof(EndlessWar_MinionReady)}");
 
         public static SoundStyle Frosthammer_SnowCharge => new SoundStyle($"{SoundsPath}{nameof(Frosthammer_SnowCharge)}");
         public static SoundStyle Frostwave_Boom => new SoundStyle($"{SoundsPath}{nameof(Frostwave_Boom)}");
@@ -76,6 +79,8 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle Misc_MagicStaffFire => new($"{SoundsPath}{nameof(Misc_MagicStaffFire)}");
         public static SoundStyle Misc_ManaClearUse => new SoundStyle($"{SoundsPath}{nameof(Misc_ManaClearUse)}");
         public static SoundStyle Misc_MayaPumper => new SoundStyle($"{SoundsPath}{nameof(Misc_MayaPumper)}", numVariants: 2);
+        public static SoundStyle Misc_Pistol=> new SoundStyle($"{SoundsPath}{nameof(Misc_Pistol)}");
+        public static SoundStyle Misc_PistolClear=> new SoundStyle($"{SoundsPath}{nameof(Misc_PistolClear)}");
         public static SoundStyle Misc_Spell => new SoundStyle($"{SoundsPath}{nameof(Misc_Spell)}");
         public static SoundStyle Misc_SwordHit => new($"{SoundsPath}{nameof(Misc_SwordHit)}");
         public static SoundStyle Moonlight_Ding => new SoundStyle($"{SoundsPath}{nameof(Moonlight_Ding)}");
@@ -96,6 +101,8 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle Sundowner_Fire => new SoundStyle($"{SoundsPath}{nameof(Sundowner_Fire)}");
 
         public static SoundStyle Tank_Fire => new SoundStyle($"{SoundsPath}{nameof(Tank_Fire)}", numVariants: 2);
+        public static SoundStyle Shotgun_Mastiff => new SoundStyle($"{SoundsPath}{nameof(Shotgun_Mastiff)}", 3);
+        public static SoundStyle Shotgun_EvaAuto => new SoundStyle($"{SoundsPath}{nameof(Shotgun_EvaAuto)}", 4);
         public static SoundStyle TheMars_Hit => new($"{SoundsPath}{nameof(TheMars_Hit)}");
         public static SoundStyle TheMars_Toss => new($"{SoundsPath}{nameof(TheMars_Toss)}");
         public static SoundStyle TheSevenStar_Charge => new SoundStyle($"{SoundsPath}{nameof(TheSevenStar_Charge)}");
@@ -106,9 +113,7 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle Tlipoca_StoneShatter => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_StoneShatter)}");
         public static SoundStyle Tlipoca_Swing => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_Swing)}", numVariants: 2);
         public static SoundStyle Tlipoca_NpcKillSound => new SoundStyle($"{SoundsPath}{nameof(Tlipoca_NpcKillSound)}");
-        public static SoundStyle EndlessWar_SmashReady => new SoundStyle($"{SoundsPath}{nameof(EndlessWar_SmashReady)}");
-        public static SoundStyle EndlessWar_SmashSwing => new SoundStyle($"{SoundsPath}{nameof(EndlessWar_SmashSwing)}");
-        public static SoundStyle EndlessWar_MinionReady => new SoundStyle($"{SoundsPath}{nameof(EndlessWar_MinionReady)}");
+        public static SoundStyle Wingman => new SoundStyle($"{SoundsPath}{nameof(Wingman)}", numVariants: 4);
 
     }
 }

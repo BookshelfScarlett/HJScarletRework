@@ -109,7 +109,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void UpdateBeginAnimation()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
             float beginAngle = -210f * Flip.ToDirectionInt();
@@ -153,7 +153,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateEndAnimation()
         {
             Helper.UpdateAniState(1);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldScale = Owner.HeldItem.scale;
             float easedProgress = EaseInOutExpo(Helper.GetAniProgress(1));
             float beginAngle = 115f * Flip.ToDirectionInt();
             float endAngle = 125 * Flip.ToDirectionInt();
@@ -171,8 +171,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            //Projectile.GetProjDrawInfo_Melee(out Texture2D tex, out Vector2 drawPosition, out float drawRotation, out Vector2 rotationPoint, out SpriteEffects flipSprite);
-            //SB.Draw(tex, drawPosition, null, Color.White, drawRotation, rotationPoint, Projectile.scale, flipSprite, 0);
             SB.EnterShaderArea();
             Effect effect2 = HJScarletShader.AlphaFadeNoiseColor;
             effect2.Parameters["uFadeoutLeftLength"].SetValue(0.2f);

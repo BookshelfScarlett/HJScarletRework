@@ -235,8 +235,8 @@ namespace HJScarletRework.Projs.Executor
             SB.EnterShaderArea();
             DeepGlow.SubmitCustomGlow(() =>
             {
-                DrawBeam(SB, Color.Lerp(Color.DarkViolet, Color.Purple, 0.5f), 0.12f*.35f * Projectile.scale);
-                DrawBeam(SB, Color.Lerp(Color.DarkViolet, Color.Violet, 0.55f), 0.10f *.35f* Projectile.scale);
+                DrawBeam(SB, Color.Lerp(Color.DarkViolet, Color.Purple, 0.5f), 0.12f * .35f * Projectile.scale);
+                DrawBeam(SB, Color.Lerp(Color.DarkViolet, Color.Violet, 0.55f), 0.10f * .35f * Projectile.scale);
             });
             DrawBeam(SB, Color.Lerp(Color.Violet, Color.DarkViolet, 0.62f), 0.08f * Projectile.scale);
             DrawBeam(SB, Color.White, 0.05f * Projectile.scale);

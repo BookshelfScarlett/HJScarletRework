@@ -31,6 +31,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             Item.crit = 20;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true, true);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.useTime = Item.useAnimation = 35;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = null;

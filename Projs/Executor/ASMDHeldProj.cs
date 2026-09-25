@@ -78,7 +78,7 @@ namespace HJScarletRework.Projs.Executor
                 Owner.HJScarlet().ASMDBuffTime = GetSeconds(3);
             }
 
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+            Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
             proj.HJScarlet().HasExecutionMechanic = true;
             if (Projectile.HJScarlet().ExecutionStrike)
                 ScarletSound(HJScarletSounds.ASMD_ExecutionFire, Projectile.Center, 0.20f, 0, -.4f, 0.1f);

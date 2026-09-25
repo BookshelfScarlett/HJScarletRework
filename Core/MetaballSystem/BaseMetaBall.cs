@@ -53,7 +53,7 @@ namespace HJScarletRework.Core.MetaballSystem
         /// </summary>
         public virtual void PrepareRenderTarget()
         {
-            Main.spriteBatch.Draw(HJScarletTexture.Texture_WhiteCube.Value, new Vector2(960, 540), null, Color.White, 0, HJScarletTexture.Texture_WhiteCube.Origin, 10, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(HJScarletTexture.Texture_WhiteCube.Value, new Vector2(960, 540), null, Color.White, 0, HJScarletTexture.Texture_WhiteCube.Value.Size() / 2f, 10, SpriteEffects.None, 0f);
         }
 
         public virtual bool PreDrawRT2D()

@@ -17,6 +17,12 @@ namespace HJScarletRework.Buffs.Pets
         internal static string BuffPath = "HJScarletRework/Assets/Texture/Pets/Pet_";
         public override string Texture => BuffPath + GetType().Name;
         public virtual bool IsLightPet => false;
+        public virtual int PetProjType => 0;
+        public override void Update(Player player, ref int buffIndex)
+        {
+            bool unused = false;
+            player.BuffHandle_SpawnPetIfNeededAndSetTime(buffIndex, ref unused, PetProjType);
+        }
         public override void SetStaticDefaults()
         {
             Main.buffNoTimeDisplay[Type] = true;

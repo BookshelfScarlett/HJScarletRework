@@ -44,28 +44,6 @@ namespace HJScarletRework.Globals.Methods
         public static Vector2 SafeDirByRot(this Projectile proj, float rotDegree) => proj.rotation.ToRotationVector2().RotatedBy(ToRadians(rotDegree));
         public static Texture2D GetTexture(this Projectile proj) => TextureAssets.Projectile[proj.type].Value;
         /// <summary>
-        /// 从GlobalTargetIndex中获取需要的合规NPC
-        /// 多判定一个是否允许穿墙
-        /// 如果不合规会直接返回为否
-        /// </summary>
-        /// <param name="proj"></param>
-        /// <param name="target"></param>
-        /// <param name="shouldPassWall"></param>
-        /// <returns></returns>
-        public static bool GetLegalTarget(this Projectile proj, out NPC target, bool shouldPassWall = false)
-        {
-            target = null;
-            int targetIndex = proj.HJScarlet().GlobalTargetIndex;
-            if (targetIndex == -1)
-                return false;
-            target = Main.npc[targetIndex];
-            if (target.CanBeChasedBy() && target != null && (shouldPassWall || Collision.CanHit(proj.Center, 1, 1, target.Center, 1, 1)))
-            {
-                return true;
-            }
-            return false;
-        }
-        /// <summary>
         /// 获取一个单位，这里优先判定输入的NPC索引
         /// 如果需要直接忽略npc索引。输入-1
         /// </summary>
@@ -483,12 +461,6 @@ namespace HJScarletRework.Globals.Methods
         public static Vector2 GetNormalVector2(this Vector2 beginPos, Vector2 endPos, Vector2? normalvalue = null) => (endPos - beginPos).ToSafeNormalize(normalvalue);
 
         public static bool IsLegal(this NPC target) => target != null && target.CanBeChasedBy();
-        public static void ResetBoomerangReturn(this Projectile proj, int pene = -1)
-        {
-            proj.tileCollide = false;
-            proj.penetrate = pene;
-            proj.stopsDealingDamageAfterPenetrateHits = true;
-        }
         public static bool IntersectOwnerByDistance(this Projectile proj, float dist = 70f)
         {
             return (proj.Center - Main.player[proj.owner].Center).LengthSquared() < dist * dist;
@@ -648,6 +620,51 @@ namespace HJScarletRework.Globals.Methods
                 Main.spriteBatch.FastDraw(tex, pos, c * opa, proj.oldRot[i] + rotFixer, tex.Size() / 2f, proj.scale * scale, 0);
             }
 
+        }
+        /// <summary>
+        /// 快速设置宠物静态默认值的辅助函数
+        /// </summary>
+        /// <param name="type">宠物ID</param>
+        /// <param name="frameCount">竖直帧总数</param>
+        /// <param name="isLightPet">是否为发光宠物</param>
+        public static void PetStaticDefaultsCommon(int type, int frameCount, bool isLightPet = false)
+        {
+            Main.projFrames[type] = frameCount;
+            Main.projPet[type] = true;
+        }
+
+        /// <summary>
+        /// 快速设置宠物默认值的辅助函数
+        /// </summary>
+        /// <param name="projectile">宠物弹幕实例</param>
+        /// <param name="width">宽</param>
+        /// <param name="height">高</param>
+        public static void PetDefaultsCommon(Projectile projectile, int width, int height)
+        {
+            projectile.netImportant = true;
+            projectile.aiStyle = -1;
+            projectile.friendly = true;
+            projectile.penetrate = -1;
+            projectile.timeLeft = 18000;
+            projectile.tileCollide = false;
+            projectile.width = width;
+            projectile.height = height;
+        }
+
+        /// <summary>
+        /// 宠物buff常规检查
+        /// </summary>
+        /// <param name="projectile">宠物弹幕实例</param>
+        /// <param name="buffType">宠物Buff的ID</param>
+        public static bool PetCommonBuffCheck(Projectile projectile, int buffType)
+        {
+            Player player = Main.player[projectile.owner];
+            if (!player.dead && player.HasBuff(buffType))
+            {
+                projectile.timeLeft = 2;
+                return false;
+            }
+            return true;
         }
 
     }

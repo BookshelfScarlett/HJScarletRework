@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Items;
+using ContinentOfJourney.Items.Accessories.SummonerRings;
 using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Items.Weapons.Melee;
@@ -17,12 +18,18 @@ namespace HJScarletRework.Globals.Database.List
         public static List<int> MaleNPC = [];
         public static List<int> FemaleNPC = [];
         public static List<int> LegalFoodList = [];
+        public static List<string> LegalFoodListName = [];
         public static List<int> SummonWeaponList = [];
         public static List<string> SummonWeaponFullName = [];
 
         public static HashSet<int> OresHashSet = [];
         public static HashSet<int> BarsHashSet = [];
         public static HashSet<int> ExecutorWhip = [];
+        /// <summary>
+        /// 减益列表，这个列表自动添加<see langword="并且仅建议用于敌对单位"/>
+        /// <br>因为会把如药水疾病与魔力病这一类效果全部加入到这个表内</br>
+        /// </summary>
+        public static HashSet<int> DebuffListTarget = [];
 
         /// <summary>
         /// 主要用于Boss方面
@@ -174,12 +181,45 @@ namespace HJScarletRework.Globals.Database.List
                 ItemID.Bacon,
                 ItemID.GoldenDelight
             ];
+            for (int i = 0; i < LegalFoodList.Count; i++)
+            {
+                string name = ItemID.Search.GetName(LegalFoodList[i]);
+                LegalFoodListName.Add(name);
+            }
             DownedBossConditionList = new Dictionary<int, string>()
             {
                 { NPCID.EaterofWorldsHead, "DownedEvilBoss" },
                 { NPCID.Golem, "DownedGolem" },
                 { NPCID.Plantera,"DownedPlantera" },
                 { NPCType<TheLifebringerHead>(),"DownedLifeGods"},
+            };
+            DebuffListTarget = new HashSet<int>()
+            {
+                BuffID.Bleeding,
+                BuffID.Poisoned,
+                BuffID.Venom,
+                BuffID.OnFire,
+                BuffID.OnFire3,
+                BuffID.CursedInferno,
+                BuffID.Frostburn,
+                BuffID.Frostburn2,
+                397,
+                BuffID.Ichor,
+                BuffID.BrokenArmor,
+                BuffID.Shimmer,
+                BuffID.Stinky,
+                BuffID.Wet,
+                BuffID.Slimed,
+                BuffID.Confused,
+                BuffID.Midas,
+                BuffID.BetsysCurse,
+                BuffID.ShadowFlame,
+                BuffID.Oiled,
+                BuffID.BoneJavelin,
+                BuffID.Daybreak,
+                BuffID.StardustMinionBleed,
+                BuffID.BloodButcherer,
+                BuffID.DryadsWardDebuff
             };
         }
         public override void PostSetupContent()
@@ -189,9 +229,20 @@ namespace HJScarletRework.Globals.Database.List
             {
                 Item item = new Item(i);
                 //食物处理
-                bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
+                bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3 || ItemID.Sets.IsFood[item.type];
                 if (isFood && !LegalFoodList.Contains(item.type))
+                {
                     LegalFoodList.Add(item.type);
+                    if (i > VanillaMaxItem)
+                    {
+                        ModItem modItem = item.ModItem;
+                        if (modItem is not null)
+                        {
+                            LegalFoodListName.Add(modItem.FullName);
+                        }
+                    }
+                }
+                    
                 //oreType和barType的处理
                 string name = item.GetType().Name.ToLower();
                 bool isOre = name.Contains("ore") && item.createTile != -1;
@@ -223,6 +274,14 @@ namespace HJScarletRework.Globals.Database.List
                     }
                 }
             }
+            for (int i = 0; i < BuffLoader.BuffCount; i++)
+            {
+                ModBuff buff = BuffLoader.GetBuff(i);
+                if (buff is null)
+                    continue;
+                if (Main.debuff[buff.Type])
+                    DebuffListTarget.Add(buff.Type);
+            }
         }
         public override void Unload()
         {
@@ -230,7 +289,9 @@ namespace HJScarletRework.Globals.Database.List
             ThrownSpearList = null;
             HJSpearList = null;
             LegalFoodList = null;
+            LegalFoodListName= null;
             DownedBossConditionList = null;
+            SummonWeaponFullName = null;
 
             OresHashSet.Clear();
             BarsHashSet.Clear();

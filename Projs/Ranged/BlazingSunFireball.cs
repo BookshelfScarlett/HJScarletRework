@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
@@ -34,6 +33,7 @@ namespace HJScarletRework.Projs.Ranged
         {
             Projectile.SetUpHeldProj();
             Projectile.penetrate = -1;
+            Projectile.ContinuouslyUpdateDamageStats = true;
             Projectile.SetupImmnuity(20);
             Projectile.ignoreWater = true;
             Projectile.Opacity = 0;
@@ -162,10 +162,10 @@ namespace HJScarletRework.Projs.Ranged
             SB.FastDraw(orb, center, Color.White, Projectile.rotation + PiOver2, orb.Size() / 2f, glowSize * .85f, 0);
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
-                DrawBeam(SB, Color.Lerp(Color.Orange, Color.Red, 0.5f), 0.12f * Projectile.scale);
-                DrawBeam(SB, Color.Lerp(Color.OrangeRed, Color.Orange, 0.55f), 0.10f * Projectile.scale);
-                DrawBeam(SB, Color.Lerp(Color.Orange, Color.White, 0.62f), 0.08f * Projectile.scale);
-                DrawBeam(SB, Color.White, 0.05f * Projectile.scale);
+            DrawBeam(SB, Color.Lerp(Color.Orange, Color.Red, 0.5f), 0.12f * Projectile.scale);
+            DrawBeam(SB, Color.Lerp(Color.OrangeRed, Color.Orange, 0.55f), 0.10f * Projectile.scale);
+            DrawBeam(SB, Color.Lerp(Color.Orange, Color.White, 0.62f), 0.08f * Projectile.scale);
+            DrawBeam(SB, Color.White, 0.05f * Projectile.scale);
             SB.EndShaderArea();
 
             return false;

@@ -96,10 +96,10 @@ namespace HJScarletRework.Projs.Melee
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             Vector2 dir = Projectile.rotation.ToRotationVector2();
             Tex2DWithPath cube = HJScarletTexture.Texture_WhiteCube;
-            SB.Draw(cube.Value, drawPos + dir.RotatedBy(PiOver2) * 30f, null, color, Projectile.rotation, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
-            SB.Draw(cube.Value, drawPos + dir.RotatedBy(Pi) * 30f, null, color, Projectile.rotation + PiOver2, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
-            SB.Draw(cube.Value, drawPos + dir.RotatedBy(PiOver2) * -30f, null, color, Projectile.rotation, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
-            SB.Draw(cube.Value, drawPos + dir.RotatedBy(Pi) * -30f, null, color, Projectile.rotation + PiOver2, cube.Origin, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
+            SB.Draw(cube.Value, drawPos + dir.RotatedBy(PiOver2) * 30f, null, color, Projectile.rotation, cube.Value.Size() / 2f, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
+            SB.Draw(cube.Value, drawPos + dir.RotatedBy(Pi) * 30f, null, color, Projectile.rotation + PiOver2, cube.Value.Size() / 2f, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
+            SB.Draw(cube.Value, drawPos + dir.RotatedBy(PiOver2) * -30f, null, color, Projectile.rotation, cube.Value.Size() / 2f, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
+            SB.Draw(cube.Value, drawPos + dir.RotatedBy(Pi) * -30f, null, color, Projectile.rotation + PiOver2, cube.Value.Size() / 2f, new Vector2(0.2f, 2f) * Projectile.scale * 0.8f * scale, 0, 0);
 
         }
     }

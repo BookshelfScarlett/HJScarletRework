@@ -50,8 +50,15 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             string localAddress = Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}");
-            string path = $"{localAddress}.Tooltip";
-            tooltips.ReplaceAllTooltip(path, MainTooltipColor);
+            for (int i = 0; i < tooltips.Count; i++)
+            {
+                TooltipLine line = tooltips[i];
+                if (!line.Name.Contains("Tooltip") || line.Mod != "Terraria")
+                    continue;
+                tooltips[i].OverrideColor = MainTooltipColor;
+            }
+            //string path = $"{localAddress}.Tooltip";
+            //tooltips.ReplaceAllTooltip(path, MainTooltipColor);
             ExModifyTooltips(tooltips, localAddress);
 
         }

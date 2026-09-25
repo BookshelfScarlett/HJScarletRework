@@ -60,7 +60,7 @@ namespace HJScarletRework.Projs.Ranged
             if (JustPressRight)
             {
                 Owner.HJScarlet().heldProjReUseTime = 40;
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<TerraFlamethrowerTank>(), Projectile.damage, 5f, Owner.whoAmI);
+                Projectile.NewProjectile(Owner.GetSource_ItemUse(Owner.HeldItem), Projectile.Center, Vector2.Zero, ProjectileType<TerraFlamethrowerTank>(), Projectile.damage, 5f, Owner.whoAmI);
                 Vector2 dir = Owner.ToMouseVector2();
                 for (int i = 0; i < 16; i++)
                 {
@@ -101,7 +101,7 @@ namespace HJScarletRework.Projs.Ranged
             if (Projectile.MeetMaxUpdatesFrame(Timer, 2))
             {
                 Timer = 0;
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), fireSpawnPosition.ToRandCirclePos(2), fireShootVelocity, ProjectileType<TerraFlamethrowerFlame>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), fireSpawnPosition.ToRandCirclePos(2), fireShootVelocity, ProjectileType<TerraFlamethrowerFlame>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
         }
 

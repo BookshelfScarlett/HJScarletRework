@@ -17,9 +17,14 @@ namespace HJScarletRework.Globals.Players
             tag.Add(nameof(firstTimeCraftGaia), firstTimeCraftGaia);
             tag.Add(nameof(ruShiWoWenBanMinionNameTrashList), ruShiWoWenBanMinionNameTrashList);
             tag.Add(nameof(ruShiWoWenBanMinionNameList), ruShiWoWenBanMinionNameList);
+            tag.Add(nameof(terraRecipeEatenFoodNameList), terraRecipeEatenFoodNameList);
+            tag.Add(nameof(terraRecipeEatenFoodNameTrashList), terraRecipeEatenFoodNameTrashList);
+            tag.Add(nameof(terraRecipeNotEatenFoodNameList), terraRecipeNotEatenFoodNameList);
+            tag.Add(nameof(terraRecipeNotEatenFoodNameTrashList), terraRecipeNotEatenFoodNameTrashList);
             tag.Add(nameof(weaponUpgradePostSon), weaponUpgradePostSon);
             tag.Add(nameof(crystallizeLoreReforgeIndex), crystallizeLoreReforgeIndex);
             tag.Add(nameof(crimsonScytheSlayNPCType), crimsonScytheSlayNPCType);
+            tag.Add(nameof(brimstoneHeartKilling), brimstoneHeartKilling);
         }
         public override void LoadData(TagCompound tag)
         {
@@ -27,6 +32,12 @@ namespace HJScarletRework.Globals.Players
             terraRecipe_NotEatenFoodList = (List<int>)tag.GetList<int>(nameof(terraRecipe_NotEatenFoodList));
             ruShiWoWenBanMinionNameList = (List<string>)tag.GetList<string>(nameof(ruShiWoWenBanMinionNameList));
             ruShiWoWenBanMinionNameTrashList = (List<string>)tag.GetList<string>(nameof(ruShiWoWenBanMinionNameTrashList));
+            terraRecipeEatenFoodNameList = (List<string>)tag.GetList<string>(nameof(terraRecipeEatenFoodNameList));
+            terraRecipeEatenFoodNameTrashList = (List<string>)tag.GetList<string>(nameof(terraRecipeEatenFoodNameTrashList));
+            terraRecipeNotEatenFoodNameTrashList= (List<string>)tag.GetList<string>(nameof(terraRecipeNotEatenFoodNameTrashList));
+            terraRecipeNotEatenFoodNameList= (List<string>)tag.GetList<string>(nameof(terraRecipeNotEatenFoodNameList));
+
+            brimstoneHeartKilling = tag.GetBool(nameof(brimstoneHeartKilling));
             terraRecipe = tag.GetBool(nameof(terraRecipe));
             terraRecipe_EatenFoodCounts = tag.GetInt(nameof(terraRecipe_EatenFoodCounts));
             terraRecipe_LifeMaxMultTime = tag.GetInt(nameof(terraRecipe_LifeMaxMultTime));

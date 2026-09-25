@@ -17,8 +17,6 @@ namespace HJScarletRework.Items.Accessories
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crit + "%", CritDamage.ToPercent());
         public override void ExSD()
         {
-            Item.width = 42;
-            Item.height = 34;
             Item.accessory = true;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
         }
@@ -35,6 +33,7 @@ namespace HJScarletRework.Items.Accessories
                 AddRecipeGroup(HJScarletRecipeGroup.AnyCopperBar, 15).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyEvilBar, 10).
                 AddRecipeGroup(HJScarletRecipeGroup.AnyEvilScale, 5).
+                AddIngredient(ItemID.Bone, 5).
                 AddTile(TileID.Anvils).
                 Register();
         }

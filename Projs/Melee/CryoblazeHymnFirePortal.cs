@@ -120,7 +120,7 @@ namespace HJScarletRework.Projs.Melee
             Texture2D crossGlow = HJScarletTexture.Particle_CrossGlow.Value;
             Texture2D circle = HJScarletTexture.Texture_SoftCircleEdge.Value;
             //底图处理
-            SB.Draw(HJScarletTexture.Texture_BloomShockwave.Value, drawPos, null, Color.Orange, 0, HJScarletTexture.Texture_BloomShockwave.Origin, 0.02f * Projectile.scale * Projectile.Opacity, 0, 0);
+            SB.Draw(HJScarletTexture.Texture_BloomShockwave.Value, drawPos, null, Color.Orange, 0, HJScarletTexture.Texture_BloomShockwave.Value.Size() / 2f, 0.02f * Projectile.scale * Projectile.Opacity, 0, 0);
             //光圈，叠加
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);

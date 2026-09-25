@@ -76,6 +76,42 @@ namespace HJScarletRework.Globals.Instances.Items
 
         public override bool ConsumeItem(Item item, Player player)
         {
+            var usPlayer = player.HJScarlet();
+            if (usPlayer.terraRecipe)
+            {
+                if (item.type < VanillaMaxItem)
+                {
+                    string name = ItemID.Search.GetName(item.type);
+                    if (!usPlayer.terraRecipeEatenFoodNameList.Contains(name))
+                    {
+                        usPlayer.terraRecipeEatenFoodNameList.Add(name);
+                        usPlayer.terraRecipeNotEatenFoodNameList.Remove(name);
+                        usPlayer.terraRecipe_EatenFoodCounts++;
+                    }
+                }
+                else
+                {
+                    string name = item.ModItem.FullName;
+                    if (!usPlayer.terraRecipeEatenFoodNameList.Contains(name))
+                    {
+                        usPlayer.terraRecipeEatenFoodNameList.Add(name);
+                        usPlayer.terraRecipeNotEatenFoodNameList.Remove(name);
+                        usPlayer.terraRecipe_EatenFoodCounts++;
+                    }
+                }
+                if (HJScarletList.LegalFoodList.Contains(item.type))
+                {
+                    //物品都是独立的实例，这里必须得把表单直接扔到玩家类里进行保存
+                    if (!usPlayer.terraRecipe_EatenFoodList.Contains(item.type))
+                    {
+                        usPlayer.terraRecipe_EatenFoodList.Add(item.type);
+                        //这里也会尝试删除这个表的一个元素
+                        usPlayer.terraRecipe_NotEatenFoodList.Remove(item.type);
+                        usPlayer.terraRecipe_EatenFoodCounts++;
+                    }
+                }
+            }
+            
             if (item.healLife > 0 && player.HJScarlet().crimsonCharm)
             {
                 player.AddBuff(BuffType<CrimsonCharmBuff>(), CrimsonCharm.OverSatuTime * 60);
@@ -105,6 +141,10 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 usPlayer.GeneralWeaponIndex = item.type;
             }
+            //这里的判断如下：
+            //tacticalExecutionManual (HJScarletPlayer类内) 只用于板正斧头，给代行者玩家自由切换手动处决与自动处决的模式
+            //ForceToCustomExecute 则必须得否，即这个武器不能经过这里默认提供的管理
+            //ForceToTactialExecute 便为强制自动处决
             bool usetactical = (ScarletItemIDSets.ForceToTacticalExecute[item.type] || usPlayer.tacticalExecutionManual) && (!ScarletItemIDSets.ForceToCustomExecute[item.type]);
             if (usetactical && !ScarletItemIDSets.ForceToAutomaticExecute[item.type])
             {
@@ -126,17 +166,7 @@ namespace HJScarletRework.Globals.Instances.Items
             var usPlayer = player.HJScarlet();
             if (usPlayer.terraRecipe)
             {
-                if (HJScarletList.LegalFoodList.Contains(item.type))
-                {
-                    //物品都是独立的实例，这里必须得把表单直接扔到玩家类里进行保存
-                    if (!usPlayer.terraRecipe_EatenFoodList.Contains(item.type))
-                    {
-                        usPlayer.terraRecipe_EatenFoodList.Add(item.type);
-                        //这里也会尝试删除这个表的一个元素
-                        usPlayer.terraRecipe_NotEatenFoodList.Remove(item.type);
-                        usPlayer.terraRecipe_EatenFoodCounts++;
-                    }
-                }
+                
             }
             return base.UseItem(item, player);
         }

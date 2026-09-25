@@ -28,11 +28,11 @@ namespace HJScarletRework.Core.DeepGlowSystem
         public static Color DrawColor = Color.White;
         public static float SoftKnee = .25f;
         public static Queue<Action> GlowRequest = new Queue<Action>();
-        public static void SubmitCustomGlow(Action drawAction, ScarletDrawLayer layer = ScarletDrawLayer.EndCapture )
+        public static void SubmitCustomGlow(Action drawAction, ScarletDrawLayer layer = ScarletDrawLayer.EndCapture)
         {
             if (Main.dedServ || drawAction is null || HJScarletConfigClient.Instance.PerformanceMode)
                 return;
-            if(layer == ScarletDrawLayer.AfterProjectiles)
+            if (layer == ScarletDrawLayer.AfterProjectiles)
                 GlowRequests_AfterProjectiles.Enqueue(drawAction);
             else if (layer == ScarletDrawLayer.AfterDusts)
                 GlowRequests_AfterDust.Enqueue(drawAction);
@@ -85,7 +85,7 @@ namespace HJScarletRework.Core.DeepGlowSystem
             {
                 float width = Main.screenWidth;
                 float height = Main.screenHeight;
-                _upTargets = new RenderTarget2D[Iterations-1];
+                _upTargets = new RenderTarget2D[Iterations - 1];
                 //这边vibe了一次
                 //需要进行反向遍历，并且要确保迭代次数少一个元素，这里是很重要的，因为uptargets本就比downtargets少一个元素了
                 for (int i = Iterations - 2; i >= 0; i--)

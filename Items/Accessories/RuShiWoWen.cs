@@ -124,14 +124,14 @@ namespace HJScarletRework.Items.Accessories
             //var setlist = new List<TextboxSettings>();
             string text = this.GetLocalizationKey("FlavorTooltips").ToLangValue();
             TextboxSettings sets = new TextboxSettings
-            {
-                HasTitle = false,
-                BackgroundColor = Color.White * .24f,
-                BackgroundEdgeColor = Color.White,
-                TextColor = Color.White,
-                TextEdgeColor = Color.Black,
-                MainText = text
-            };
+            (
+                hasTitle: false,
+                backgroundColor: Color.White * .24f,
+                backgroundEdgeColor: Color.White,
+                textColor: Color.White,
+                textEdgeColor : Color.Black,
+                mainText: text
+            );
 
             //setlist.Add(sets);
             //text = $"捐赠者：{Item.HJScarlet().OwnerName}";

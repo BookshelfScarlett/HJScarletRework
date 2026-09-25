@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
+using Terraria;
 
 namespace HJScarletRework.Projs
 {
@@ -20,6 +21,13 @@ namespace HJScarletRework.Projs
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             return base.Colliding(projHitbox, targetHitbox);
+        }
+        public override bool? CanHitNPC(NPC target)
+        {
+            NPC tar = Projectile.HJScarlet().CurStoredTarget;
+            if (tar.IsLegal() && tar.Equals(target))
+                return false;
+            return null;
         }
         public override void AI()
         {

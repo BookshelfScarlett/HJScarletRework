@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Items.Material;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
@@ -40,14 +41,14 @@ namespace HJScarletRework.Items.Materials
             }
             string text = this.GetLocalizationKey("FlavorTooltip").ToLangValue();
             TextboxSettings sets = new TextboxSettings
-            {
-                HasTitle = false,
-                BackgroundColor = Color.White * .24f,
-                BackgroundEdgeColor = Color.White,
-                TextColor = Color.White,
-                TextEdgeColor = Color.Black,
-                MainText = text
-            };
+            (
+                hasTitle: false,
+                backgroundColor: Color.White * .24f,
+                backgroundEdgeColor: Color.White,
+                textColor: Color.White,
+                textEdgeColor: Color.Black,
+                mainText : text
+            );
             TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
             return true;
         }
@@ -61,6 +62,14 @@ namespace HJScarletRework.Items.Materials
                 spriteBatch.Draw(itemTexture, drawPosition + (TwoPi / 16f * i).ToRotationVector2() * 1.2f, itemFrame, Color.White.ToAddColor(), rotation, drawOrigin, scale, SpriteEffects.None, 0);
             spriteBatch.Draw(itemTexture, drawPosition, itemFrame, Color.White, rotation, drawOrigin, scale, SpriteEffects.None, 0);
             return false;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe(15).
+                AddIngredient<FinalBar>().
+                DisableDecraft().
+                AddTile(FinalAnvilTile).
+                Register();
         }
     }
 }

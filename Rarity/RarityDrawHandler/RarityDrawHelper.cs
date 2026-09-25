@@ -21,9 +21,9 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
             Vector2 glowPosition = new(tooltipLine.X + textCenter.X, tooltipLine.Y + textCenter.Y / 1.5f);
             Vector2 glowScale = new Vector2(textSize.X * 0.135f, 0.6f) * glowScaleMult;
             //绘制需要的……发光背景。
-            Main.spriteBatch.Draw(HJScarletTexture.Texture_RarityGlow.Value, glowPosition, null, glowColor.ToAddColor() * 0.85f, 0f, HJScarletTexture.Texture_RarityGlow.Origin, glowScale, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(HJScarletTexture.Texture_RarityGlow.Value, glowPosition, null, glowColor.ToAddColor() * 0.85f, 0f, HJScarletTexture.Texture_RarityGlow.Value.Size() / 2f, glowScale, SpriteEffects.None, 0f);
 
-            float sine = (float)((1 + Math.Sin(Main.GlobalTimeWrappedHourly * 2.5f)) / 2);
+            float sine = (float)((1 + Math.Sin(Main.GlobalTimeWrappedHourly * .35f)) / 2);
             float sineOffset = Lerp(0.75f, 1f, sine);
 
             //绘制发光描边，带渐变
@@ -42,8 +42,8 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
             string textValue = tooltipLine.Text;
             Vector2 textPosition = new(tooltipLine.X, tooltipLine.Y);
             //绘制需要的……发光背景。
-            float sine = (float)((1 + Math.Sin(Main.GlobalTimeWrappedHourly * 2.5f)) / 2);
-            float sineOffset = Lerp(0.5f, 1f, sine);
+            float sine = (float)((1 + Math.Sin(Main.GlobalTimeWrappedHourly * 0.35f)) / 2);
+            float sineOffset = Lerp(0.75f, 1f, sine);
 
             //绘制发光描边，带渐变
             for (int i = 0; i < 12; i++)
@@ -119,12 +119,13 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
                     NebulaRarity.DrawItemName(tooltipLine);
                     break;
                 case ShinyRarityType.ForeverNight:
-                    ForeverNightRarity.DrawItemName(tooltipLine);
+                    ForeverNightRarity.DrawFlavorNameRarity(tooltipLine);
                     break;
                 case ShinyRarityType.ScarletRed:
                     ScarletRedRarity.DrawFlavorNameRarity(tooltipLine);
                     break;
                 case ShinyRarityType.Solar:
+                case ShinyRarityType.SunGod:
                     SolarRarity.DrawItemName(tooltipLine);
                     break;
                 case ShinyRarityType.Life:
@@ -180,6 +181,7 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
                     ScarletRedRarity.DrawItemNameParticle(tooltipLine, ref RaritySparklesList);
                     break;
                 case ShinyRarityType.Solar:
+                case ShinyRarityType.SunGod:
                     SolarRarity.DrawItemNameParticle(tooltipLine, ref RaritySparklesList);
                     break;
                 case ShinyRarityType.Life:
@@ -195,8 +197,6 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
                     HallowedRarity.DrawItemNameParticle(tooltipLine, ref RaritySparklesList);
                     break;
                 case ShinyRarityType.FateCopper:
-                    break;
-                case ShinyRarityType.SunGod:
                     break;
                 case ShinyRarityType.RarePets:
                     break;
@@ -247,6 +247,7 @@ namespace HJScarletRework.Rarity.RarityDrawHandler
                     ScarletRedRarity.DrawItemName(tooltipLine);
                     break;
                 case ShinyRarityType.Solar:
+                case ShinyRarityType.SunGod:
                     SolarRarity.DrawItemName(tooltipLine);
                     break;
                 case ShinyRarityType.Life:

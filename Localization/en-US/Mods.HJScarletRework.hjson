@@ -84,8 +84,8 @@ ExecutorDamageClass: {
 	ExecutionProgress: Strike your enemy for {0} times to Execute. Press Left Alt for details
 	ExecutionDescriptionName: Execution Strike
 	ExecutionProgressRevampedMode: Execution Progress: {0} / {1}
-	ForceTacticalExecution: This weapon's Execution Strike must be manually triggered using the Interact key
-	ForceAutomaticExecution: This weapon's Execution Strike is forced to trigger automatically
+	ForceTacticalExecution: Press Interact key to trigger Execution Strike
+	ForceAutomaticExecution: Execution Strike is always automatic
 	CompanionWeapon: Companion
 	DisplayName: Executor Damage
 
@@ -113,3 +113,4 @@ ExecutorDamageClass: {
 }
 
 DamageClasses.ExecutorDamageClass.DisplayName: Executor Damage Class
+Projs.Enemy.SuicideKnifeInvisProj.DisplayName: Suicide Knife Invis Proj

@@ -1,79 +1,71 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
-using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Terraria;
-using Terraria.Audio;
-using Terraria.GameContent;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class ExsanguinationHeldProj : ExecutorHeldProj
+    public class ExsanguinationHeldProj : HJScarletRangedWeaponoutClass
     {
+        public override int AttackSpeed => 2;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<Exsanguination>().Texture;
-        public int ExecutionProgress = GetInstance<Exsanguination>().ExecutionProgress;
         public override int OriginalItemID => ItemType<Exsanguination>();
-        public ref float Timer => ref Projectile.ai[0];
-        public int BuffTime = 0;
+        public override float HoldoutDrawScale => .5f;
+        public override bool HoldoutEdgeEnable => false;
+        public override Vector2 HoldoutOffset => new Vector2(15, 5);
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
         }
-        public override void ExSD()
+        public override int ProjExtraUpdates => 0;
+        protected override void UpdateRecoil()
         {
-            Projectile.width = Projectile.height = 16;
-            Projectile.ignoreWater = true;
-            Projectile.tileCollide = false;
-            Projectile.SetupImmnuity(-1);
-            Projectile.penetrate = -1;
-            Projectile.timeLeft = 10000;
-            Projectile.extraUpdates = 0;
-            Projectile.noEnchantmentVisuals = true;
+            // 复写后什么都不做，这样可以让武器不执行后坐力动画
         }
-        public override bool? CanDamage() => false;
-        public override bool ShouldUpdatePosition() => false;
-        public override void ProjAI()
+        protected override void UpdateWeaponUsing()
         {
-            if (CheckOwnerDead())
-                return;
-            UpdatePlayerState();
-            UpdateAttack();
-            UpdateHeldAnimation();
-            Projectile.netUpdate = true;
+            Projectile.position += Main.rand.NextVector2Circular(1.3f, 1.3f);
         }
-        public override void OnExecution()
+        protected override void PreAttack()
         {
-            Owner.HJScarlet().exsanguinationBuffTime = GetSeconds(5);
-            SoundEngine.PlaySound(HJScarletSounds.Light_CrackedShield with { MaxInstances = 0 }, Owner.Center);
-        }
-
-        private void UpdateAttack()
-        {
-            if (!Projectile.HJScarlet().FirstFrame)
-                return;
-            Projectile.timeLeft = 2;
-            ref int buffTimer = ref Owner.HJScarlet().exsanguinationBuffTime;
-            if (buffTimer == 0)
-            {
+            if (!Owner.GetExecutionSrike())
                 Projectile.HJScarlet().ExecutionStrike = false;
-            }
-            Timer++;
-            if (Timer % 2f == 0)
-                ScarletSound(HJScarletSounds.Light_Fire, Projectile.Center, volume: 0.25f);
-            if (Timer % 2f == 0)
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
             {
-                HandleExecution();
+                Projectile.HJScarlet().ExecutionStrike = true;
+                Owner.HJScarlet().ExecutionBuffTimeStored.TryAdd(OriginalItemID, GetSeconds(5));
+                ScarletSound(HJScarletSounds.Light_CrackedShield, Owner.Center, volume: .75f);
+                Owner.RemoveExecutionProgress(OriginalItemID);
+            }
+        }
+        protected override void UpdateGlobalReset()
+        {
+            Projectile.HJScarlet().ExecutionStrikeManual = false;
+        }
+        protected override void OnAttack()
+        {
+            if (Owner.HJScarlet().ExecutionBuffTimeStored.TryGetValue(OriginalItemID, out int value))
+                Projectile.HJScarlet().ExecutionStrikeManual = true;
+            int damage = Projectile.originalDamage;
+            if (Projectile.HJScarlet().ExecutionStrikeManual)
+                damage = (int)(Projectile.originalDamage * 1.12f);
+            Owner.PickAmmo(Owner.HeldItem, out _, out _, out _, out _, out int ammoID);
+            bool homing = ammoID == ItemID.ChlorophyteBullet;
+            int bulletType = homing ? ProjectileType<ExsanguinationHomingBullet>() : ProjectileType<ExsanguinationBulletProj>();
+            ScarletSound(HJScarletSounds.Light_Fire, Projectile.Center, volume: 0.25f);
+            {
                 for (int i = -1; i < 2; i += 2)
                 {
                     Vector2 safedir = Projectile.rotation.ToRotationVector2();
                     Vector2 shootPos = Projectile.Center + safedir * 60f - (safedir.RotatedBy(PiOver2) * 5f * Projectile.direction);
-                    int damage = Projectile.damage;
-                    if (buffTimer != 0)
-                        damage = (int)(Projectile.damage * 1.12f);
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), shootPos - safedir * 40f + safedir.RotatedBy(PiOver2 * i) * 7f * Main.rand.NextFloat(), safedir * 10f, ProjectileType<ExsanguinationBulletProj>(), damage, Projectile.knockBack);
-                    proj.HJScarlet().HasExecutionMechanic = buffTimer == 0;
+
+                    Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), shootPos - safedir * 40f + safedir.RotatedBy(PiOver2 * i) * 7f * Main.rand.NextFloat(), safedir * 10f, bulletType, damage, Projectile.knockBack);
+                    if (!homing)
+                        proj.HJScarlet().HasExecutionMechanic = !Projectile.HJScarlet().ExecutionStrikeManual;
                 }
                 for (int i = 0; i < 4; i++)
                 {
@@ -86,43 +78,6 @@ namespace HJScarletRework.Projs.Executor
                     d.scale *= Main.rand.NextFloat(0.8f, 1.2f);
                 }
             }
-        }
-        private void UpdateHeldAnimation()
-        {
-            //震动这把枪。
-            Projectile.position += Main.rand.NextVector2Circular(1.3f, 1.3f);
-            Projectile.rotation = Owner.ToMouseVector2().ToRotation();
-        }
-        public bool CheckOwnerDead()
-        {
-            bool ifStillUse = (Owner.channel || Owner.controlUseTile) && !Owner.noItems && !Owner.CCed;
-            if (!ifStillUse)
-            {
-                Projectile.Kill();
-                return true;
-            }
-            return false;
-        }
-        private void UpdatePlayerState()
-        {
-            Projectile.spriteDirection = Projectile.direction = (Owner.LocalMouseWorld().X > Owner.Center.X).ToDirectionInt();
-            Owner.ChangeDir(Projectile.direction);
-            Owner.heldProj = Projectile.whoAmI;
-            Owner.itemAnimation = Owner.itemTime = 2;
-            Owner.ControlPlayerArm(Projectile.rotation);
-            Projectile.Center = Owner.MountedCenter;
-            Projectile.position.Y += Owner.gfxOffY;
-        }
-        public override bool PreDraw(ref Color lightColor)
-        {
-            Vector2 offset = new(15 * Owner.direction, 5);
-            Texture2D tex = TextureAssets.Projectile[Type].Value;
-            Vector2 drawPos = Projectile.Center - Main.screenPosition;
-            float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
-            Vector2 rotationPoint = tex.Size() * 0.5f;
-            SpriteEffects flipSprite = Projectile.spriteDirection * Main.player[Projectile.owner].gravDir == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            Main.spriteBatch.Draw(tex, drawPos + offset.RotatedBy(drawRot), null, Projectile.GetAlpha(lightColor), drawRot, rotationPoint, Projectile.scale * Main.player[Projectile.owner].gravDir * 0.6f, flipSprite, default);
-            return false;
         }
     }
 }

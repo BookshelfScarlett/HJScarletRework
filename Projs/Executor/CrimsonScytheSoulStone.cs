@@ -297,9 +297,6 @@ namespace HJScarletRework.Projs.Executor
             HJScarletMethods.ApplyAlphaCut(vector4, new(0, -Main.GlobalTimeWrappedHourly * 0.79f * RandValueSummary.Z), new Vector2(3.2f, 1.94f), Color.White);
             TrailFunc(texture2, Color.White * 0.92f, 20f);
             TrailFunc(texture2, Color.White * 0.92f, 10f);
-            ApplyTrailAlt(HJScarletTexture.Trail_ManaStreakTiny.Value, Color.DarkGray);
-            ApplyTrailAlt(HJScarletTexture.Trail_FadedStreak.Value, Color.Gray, 10);
-            ApplyTrailAlt(HJScarletTexture.Trail_TerraRayFlow.Value, Color.WhiteSmoke, 28);
 
             HJScarletMethods.EndShaderAreaPixel();
 

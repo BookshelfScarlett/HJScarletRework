@@ -16,8 +16,8 @@ namespace HJScarletRework.Projs.Executor
     public class TheJudgementStar : HJScarletProj, IPixelatedRenderer
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
-        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
+        public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.AlphaBlend;
         public AnimationStruct Helper = new(3);
         public NPC TargetNPC = null;

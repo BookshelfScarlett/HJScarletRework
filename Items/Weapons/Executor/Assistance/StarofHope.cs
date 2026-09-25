@@ -15,6 +15,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Assistance
         {
             Item.SetUpNoUseGraphicItem(true);
             Item.SetUpRarityPrice(ItemRarityID.Orange);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useTime = Item.useAnimation = 24;
             Item.knockBack = 2;

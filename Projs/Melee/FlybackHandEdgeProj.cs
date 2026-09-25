@@ -137,8 +137,8 @@ namespace HJScarletRework.Projs.Melee
         public void DrawTrails(Color trailColor, float height)
         {
             float laserLength = 50;
-            HJScarletShader.TerrarRayLaser.Parameters["LaserTextureSize"].SetValue(HJScarletTexture.Trail_ManaStreak.Size);
-            HJScarletShader.TerrarRayLaser.Parameters["targetSize"].SetValue(new Vector2(laserLength, HJScarletTexture.Trail_ManaStreak.Height));
+            HJScarletShader.TerrarRayLaser.Parameters["LaserTextureSize"].SetValue(HJScarletTexture.Trail_ManaStreak.Value.Size());
+            HJScarletShader.TerrarRayLaser.Parameters["targetSize"].SetValue(new Vector2(laserLength, HJScarletTexture.Trail_ManaStreak.Value.Height));
             HJScarletShader.TerrarRayLaser.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -50);
             HJScarletShader.TerrarRayLaser.Parameters["uColor"].SetValue(trailColor.ToVector4());
             HJScarletShader.TerrarRayLaser.Parameters["uFadeoutLength"].SetValue(0.51f);

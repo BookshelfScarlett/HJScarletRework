@@ -35,6 +35,7 @@ namespace HJScarletRework.Items.Armor.SaintChurch
         {
             Item.defense = 12;
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         public override void UpdateEquip(Player player)
         {
@@ -44,7 +45,7 @@ namespace HJScarletRework.Items.Armor.SaintChurch
         }
         public override void UpdateArmorSetBetter(Player player, string setBonusPath)
         {
-            player.setBonus += "\n" + setBonusPath.ToLangValue().ToFormatValue(Aggro, RespawnLifePercentFirst.ToPercent(), RespawnLifePercent.ToPercent(), DamageBonus.ToPercent(), CritBonus + "%");
+            player.setBonus += setBonusPath.ToLangValue().ToFormatValue(Aggro, RespawnLifePercentFirst.ToPercent(), RespawnLifePercent.ToPercent(), DamageBonus.ToPercent(), CritBonus + "%");
             player.HJScarlet().saintChurch = true;
         }
         public override void AddRecipes()

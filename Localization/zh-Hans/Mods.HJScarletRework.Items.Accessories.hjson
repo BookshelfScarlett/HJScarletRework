@@ -29,14 +29,13 @@ HeartoftheMountain: {
 }
 
 SteadyBreath: {
-	DisplayName: 精准打击
+	DisplayName: 屏息静神
 	Tooltip:
 		'''
-		将暴击概率设定为20%
-		造成暴击时增加5%暴击概率，最大增加至125%暴击概率
-		将你溢出的暴击概率1比1转化为暴击伤害加成
-		达到最大暴击概率加成后，额外增加10%伤害
-		受到伤害时重置
+		增加{0}远程伤害与{1}远程暴击概率
+		在光标位置召唤一枚准星，准星瞄准的敌人会额外受到{2}的伤害
+		并会对没有造成暴击的远程攻击以{3}的独立概率设置为暴击伤害
+		可通过饰品可见性以开关准星可见与否
 		'''
 }
 
@@ -44,11 +43,10 @@ PreciousTarget: {
 	DisplayName: 精确瞄准
 	Tooltip:
 		'''
-		将暴击概率设定为10%
-		造成暴击时增加5%暴击概率，最大增加至115%暴击概率
-		将你溢出的暴击概率1比1转化为暴击伤害加成
-		受到伤害时重置
-		"似乎有点眼熟"
+		增加{0}远程伤害与{1}远程暴击概率
+		在光标位置召唤一枚准星，准星瞄准的敌人会额外受到{2}的伤害
+		并会对没有造成暴击的远程攻击以{3}的独立概率设置为暴击伤害
+		可通过饰品可见性以开关准星可见与否
 		'''
 }
 
@@ -92,7 +90,8 @@ SacarbWings: {
 	Tooltip:
 		'''
 		可飞行或缓降，拥有无限飞行时间
-		使你免疫击退、非存在性、伊卡洛斯、屈服、圣火和瘟疫
+		使你[ScarletBuff/HJScarletRework/AntiKnockbackBuff]，免疫[ScarletDebuff/ContinentOfJourney/IcarusBuff]，[ScarletDebuff/ContinentOfJourney/PlagueBuff]，[ScarletDebuff/ContinentOfJourney/MonarchButterflyBuff]和[ScarletDebuff/ContinentOfJourney/DivineFireBuff]
+		所有的攻击都会造成[ScarletDebuff/HJScarletRework/TheBleachingBuff]
 		延长受伤后的无敌帧时间
 		'''
 }
@@ -101,10 +100,10 @@ ShadowCast: {
 	DisplayName: 死灵之心
 	Tooltip:
 		'''
-		增加100点生命值上限
-		承受致死伤害时以50%概率复活
-		复活成功时获得一定时间的无敌帧
-		“加工、控制、操纵自身残躯，如此禁忌的法术”
+		双击上/下/左/右方向键执行死灵冲刺，可以穿过敌人和弹幕
+		横穿敌人时为敌人施加特殊的侵染效果
+		被侵染的敌人会承受强力且带有传染性的持续伤害
+		侵染效果不会被敌人免疫
 		'''
 }
 
@@ -139,10 +138,10 @@ CycleMadness: {
 	DisplayName: 轮回疯狂
 	Tooltip:
 		'''
-		将代行者的暴击概率重设定为0%
-		造成代行者伤害时，总会以一定的概率掉落[i:HJScarletRework/MadnessCritStar]暴击之星
-		拾取一枚暴击之星会增加5%的暴击概率，最大增加至200%
-		该暴击概率加成在每次拾取时都会刷新持续时间
+		清空武器的暴击概率
+		造成任意伤害时，总会生成暴击星
+		每次拾取暴击星增加{0}的暴击概率，最大增加至{2}
+		拾取暴击星时总会刷新上述效果{1}秒
 		'''
 }
 
@@ -196,8 +195,9 @@ ConceptualBlackKey: {
 		'''
 		增加{0}代行者伤害与暴击概率，{1}代行者暴击伤害
 		增加{2}点代行者护甲穿透
-		处决攻击时，在一段时间进一步提升自己的代行者穿透
-		同时大幅度降低来犯的伤害，这一效果触发后移除
+		处决攻击时提供[ScarletBuff/HJScarletRework/BlackKeyExecutionBuff]
+		在一段时间进一步提升自己的代行者穿透
+		大幅度降低来犯的伤害，触发后移除[ScarletBuff/HJScarletRework/BlackKeyExecutionBuff]
 		延长受伤后的无敌帧时间
 		自身被伤害时，回复{3}点生命值
 		“代行赞美主”
@@ -266,9 +266,11 @@ HeartoftheRuinFrost: {
 	Tooltip:
 		'''
 		+{0} 最大生命上限
-		免疫击退、岩浆、寒冷、冰冻、霜火和冻伤
+		免疫击退和岩浆
+		免疫[ScarletDebuff/Terraria/Frozen]、[ScarletDebuff/Terraria/Frostburn]、[ScarletDebuff/Terraria/Frostburn2]和[ScarletDebuff/Terraria/Chilled]
 		允许玩家冲入敌人和水下呼吸
 		获得冰冻护盾所有效果
+		冲入敌人时施加[ScarletDebuff/HJScarletRework/AbsoluteZeroBuff]
 		“那曾经繁华一时的异界王国如今崩毁沉寂于暴雪之中”
 		'''
 }
@@ -323,10 +325,10 @@ CrimsonCharm: {
 	DisplayName: 嗜血面具
 	Tooltip:
 		'''
+		+2HP/s 生命恢复速度
 		将所有治疗药水的治疗量重设定为依据玩家生命上限的治疗百分比
-		使用治疗药水不再造成药水疾病，相反会使你对治疗饱和
-		每使用一次治疗药水都会使你获得治疗饱和的效果{1}秒
-		在治疗饱和期间再次使用治疗药水，会减少{0}治疗量，直至{2}点
+		使用治疗药水不再造成[ScarletDebuff/Terraria/PotionSickness]，相反造成[ScarletBuff/HJScarletRework/CrimsonCharmBuff]{1}秒
+		在[ScarletBuff/HJScarletRework/CrimsonCharmBuff]期间再次使用治疗药水，会减少{0}治疗量，直至{2}点
 		大幅度增强生命恢复速度
 		“难以想象为了活下去竟如此疯狂”
 		'''
@@ -353,7 +355,13 @@ PassionfruitJar: {
 
 SpaceHorror: {
 	DisplayName: 宇宙恐慌
-	Tooltip: ""
+	Tooltip:
+		'''
+		清空武器的暴击概率
+		造成任意伤害时，总会生成暴击星
+		每次拾取暴击星增加{0}的暴击概率，最大增加至{2}
+		拾取暴击星时总会刷新上述效果{1}秒
+		'''
 }
 
 RuShiWoWen: {
@@ -382,7 +390,7 @@ EmblemFirearm: {
 	DisplayName: 热武器硬币
 	Tooltip:
 		'''
-		手持代行者的热武器或特殊时获得效果
+		手持代行者的热武器时获得效果
 		增加{1}代行者暴击概率
 		手持对应武器时间越长，代行者的暴击伤害更高，最高{0}
 		切换武器时立刻重置
@@ -393,9 +401,9 @@ EmblemColdSteel: {
 	DisplayName: 冷兵器硬币
 	Tooltip:
 		'''
-		手持代行者的冷兵器或支援道具时获得效果
-		增加{0}代行者暴击伤害
-		增加{1}代行者暴击概率
+		手持代行者的冷兵器时获得效果
+		增加{0}代行者伤害，{1}代行者暴击概率
+		对原始护甲值较低的目标造成额外伤害，最大额外造成{2}
 		'''
 }
 
@@ -488,5 +496,78 @@ CombatSlot: {
 		'''
 		佩戴后获得额外饰品栏
 		没有别的了
+		'''
+}
+
+SpellBreaker: {
+	DisplayName: 破法之刃-进阶
+	Tooltip:
+		'''
+		增加{0}近战伤害
+		近战攻击命中时施加[ScarletDebuff/Terraria/Venom]，[ScarletDebuff/Terraria/CursedInferno]和[ScarletDebuff/Terraria/Ichor]
+		敌人每拥有1个减益，则额外造成{1}伤害
+		该伤害加成发生在所有伤害结算之后
+		触发效果后会有短暂的冷却
+		'''
+}
+
+SpellBreakerAdvanced: {
+	DisplayName: 破法之刃-精通
+	Tooltip:
+		'''
+		增加{0}近战伤害，{1}近战暴击概率
+		近战攻击命中时施加[ScarletDebuff/ContinentOfJourney/PlagueBuff]，[ScarletDebuff/ContinentOfJourney/DivineFireBuff]和[ScarletDebuff/ContinentOfJourney/VulnerableBuff]
+		敌人每拥有1个减益，则额外造成{2}伤害
+		该伤害加成发生在所有伤害结算之后
+		触发效果后会有短暂的冷却
+		'''
+}
+
+SpellBreakerSmall: {
+	DisplayName: 破法之刃
+	Tooltip:
+		'''
+		近战攻击命中时施加[ScarletDebuff/Terraria/Poisoned]和[ScarletDebuff/Terraria/OnFire]
+		敌人每拥有1个减益，则额外造成{0}伤害
+		该伤害加成发生在所有伤害结算之后
+		触发效果后会有短暂的冷却
+		'''
+}
+
+SelfPortraitoftheSunflower: {
+	DisplayName: 向日葵的自画像
+	Tooltip:
+		'''
+		命中时，敌人承受的持续性减益伤害放大{0}
+		敌人每拥有1个减益，持续性减益伤害额外放大{1}，上限至{2}
+		“在艰难时刻下，作家无法保证其创作的作品所发生的事情。”
+		'''
+}
+
+SelfPortraitoftheBleachingOne: {
+	DisplayName: 褪色之人的自画像
+	Tooltip:
+		'''
+		命中时，敌人承受的持续性减益伤害放大{0}
+		敌人每拥有1个减益，持续性减益伤害额外放大{1}，上限至{3}
+		敌人每拥有{2}个减益，施加[ScarletDebuff/HJScarletRework/TheBleachingBuff]1秒
+		该效果发生在减益伤害放大之前
+		“文明已然消失，随同那被舍弃的可能世界。”
+		'''
+}
+
+BloodThornCrown: {
+	DisplayName: 荆棘王冠
+	Tooltip: ""
+}
+
+HandofGods: {
+	DisplayName: 神之一手
+	Tooltip:
+		'''
+		增加{0}物块放置速度，{3}格放置距离
+		增加{1}墙壁放置速度，{2}挖掘速度
+		使你获得各种探索便利，光标位置发光
+		你可以凭空放置物块
 		'''
 }

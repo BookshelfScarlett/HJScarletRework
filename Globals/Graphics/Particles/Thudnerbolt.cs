@@ -26,9 +26,7 @@ namespace HJScarletRework.Globals.Graphics.Particles
         }
         public override void Update()
         {
-            float fade = 1f - .05f * Clamp((Time - 10) / 10f, 0, 1);
-            Opacity *= fade;
-            Squish.X *= fade;
+            Opacity *= (1 - EaseInOutExpo(LifetimeRatio));
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

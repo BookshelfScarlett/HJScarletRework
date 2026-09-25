@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Core.ScreenEffect;
@@ -269,8 +268,8 @@ namespace HJScarletRework.Projs.Melee
             float deepGlowMult = 1f;
             //DeepGlow.SubmitCustomGlow(() =>
             //{
-                DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DarkGreen, 1.26f * deepGlowMult, 1f);
-                DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.GreenYellow, 0.8f * deepGlowMult, 1f);
+            DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DarkGreen, 1.26f * deepGlowMult, 1f);
+            DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.GreenYellow, 0.8f * deepGlowMult, 1f);
             //});
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.58f);
             SB.EndShaderArea();

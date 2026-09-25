@@ -1,9 +1,6 @@
 ﻿using HJScarletRework.Globals.Methods;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -34,7 +31,7 @@ namespace HJScarletRework.Core.DeepGlowSystem
         {
             if (action.Count == 0)
                 return;
-            if (_downTargets == null || HighlightTarget== null || GlowEffect == null || Iterations < 2)
+            if (_downTargets == null || HighlightTarget == null || GlowEffect == null || Iterations < 2)
             {
                 action.Clear();
                 return;

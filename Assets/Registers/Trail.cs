@@ -18,6 +18,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Trail_Lightning2 { get; set; }
         public static Tex2DWithPath Trail_Lightning3 { get; set; }
         public static Tex2DWithPath Trail_Lightning4 { get; set; }
+        public static Tex2DWithPath Trail_BloomDualLine{ get; set; }
         public void LoadTrail()
         {
             Trail_ManaStreak = new Tex2DWithPath($"{Path_General}{nameof(Trail_ManaStreak)}");
@@ -34,6 +35,7 @@ namespace HJScarletRework.Assets.Registers
             Trail_Lightning2 = new Tex2DWithPath($"{Path_General}{nameof(Trail_Lightning2)}");
             Trail_Lightning3 = new Tex2DWithPath($"{Path_General}{nameof(Trail_Lightning3)}");
             Trail_Lightning4 = new Tex2DWithPath($"{Path_General}{nameof(Trail_Lightning4)}");
+            Trail_BloomDualLine= new Tex2DWithPath($"{Path_General}{nameof(Trail_BloomDualLine)}");
         }
         public static void UnloadTrail()
         {
@@ -51,6 +53,7 @@ namespace HJScarletRework.Assets.Registers
             Trail_Lightning2 = null;
             Trail_Lightning3 = null;
             Trail_Lightning4 = null;
+            Trail_BloomDualLine = null;
         }
     }
 }
