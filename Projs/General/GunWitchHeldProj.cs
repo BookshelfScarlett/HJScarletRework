@@ -1,11 +1,6 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 
@@ -15,7 +10,7 @@ namespace HJScarletRework.Projs.General
     {
         //无所谓，会直接复写
         public override int OriginalItemID => -1;
-        public override string Texture => GetVanillaAssetPath(Globals.Database.Enums.VanillaAsset.Item,ItemID.QuadBarrelShotgun);
+        public override string Texture => GetVanillaAssetPath(Globals.Database.Enums.VanillaAsset.Item, ItemID.QuadBarrelShotgun);
         public override float HoldoutDrawScale => base.HoldoutDrawScale;
         public override Vector2 HoldoutOffset => base.HoldoutOffset;
         public override Color HoldoutEdgeColor => base.HoldoutEdgeColor;

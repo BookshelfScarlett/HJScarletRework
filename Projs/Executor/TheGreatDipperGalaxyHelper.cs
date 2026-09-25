@@ -86,7 +86,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     if (Projectile.IsMe())
                     {
-                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Main.MouseWorld, Vector2.Zero, ProjectileType<TheGreatDipperGalaxy>(), (int)(Projectile.originalDamage*.80f), 0, Owner.whoAmI);
+                        Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Main.MouseWorld, Vector2.Zero, ProjectileType<TheGreatDipperGalaxy>(), (int)(Projectile.originalDamage * .80f), 0, Owner.whoAmI);
                         proj.timeLeft = GetSeconds(5);
                     }
                 }
@@ -100,7 +100,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateFinalAnimation()
         {
             Helper.UpdateAniState(2);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldScale =  Owner.HeldItem.scale;
             float easedProgress = EaseOutExpo(Helper.GetAniProgress(2));
             float beginAngle = 185f * Flip.ToDirectionInt();
             float endAngle = 190 * Flip.ToDirectionInt();
@@ -115,7 +115,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateBeginAnimation()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
             float beginAngle = -185f * Flip.ToDirectionInt();
@@ -156,7 +156,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateEndAnimation()
         {
             Helper.UpdateAniState(1);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldScale =  Owner.HeldItem.scale ;
             float easedProgress = EaseInCubic(Helper.GetAniProgress(1));
             float beginAngle = 215f * Flip.ToDirectionInt();
             float endAngle = 225 * Flip.ToDirectionInt();

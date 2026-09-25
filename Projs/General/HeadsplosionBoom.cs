@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
-using Steamworks;
 using Terraria;
 using Terraria.ID;
 

@@ -239,6 +239,10 @@ Executor: {
 	// RefluxBullet.DisplayName: Reflux Bullet
 	// RefluxChain.DisplayName: Reflux Chain
 	// RefluxHeldProj.DisplayName: Reflux Held Proj
+	// MythrilStaffProj.DisplayName: Mythril Staff Proj
+	// StellaHeldProj.DisplayName: Stella Held Proj
+	// TheCompanionBullet.DisplayName: The Companion Bullet
+	// TheCompanionHeldProj.DisplayName: The Companion Held Proj
 }
 
 Ranged: {
@@ -253,6 +257,8 @@ Ranged: {
 	TerraFlamethrowerHeldProj.DisplayName: 泰拉喷火器
 	// ExsanguinationHeldProjRanged.DisplayName: Exsanguination Held Proj Ranged
 	// BlazingSunHeldProj2.DisplayName: Blazing Sun Held Proj2
+	// DuskfallBait.DisplayName: Duskfall Bait
+	// DuskfallProj.DisplayName: Duskfall Proj
 }
 
 Magic: {
@@ -267,6 +273,10 @@ Magic: {
 	// TheFinalDawnHeldProj.DisplayName: The Final Dawn Held Proj
 	// TheFinalDawnSun.DisplayName: The Final Dawn Sun
 	// BrimstoneHeartHeldProj.DisplayName: Brimstone Heart Held Proj
+	// BrimstoneHeartBoom.DisplayName: Brimstone Heart Boom
+	// BrimstoneHeartFireball.DisplayName: Brimstone Heart Fireball
+	// LivingBoomerangMagicHeldProj.DisplayName: Living Boomerang Magic Held Proj
+	// LivingBoomerangMagicPetal.DisplayName: Living Boomerang Magic Petal
 }
 
 Melee: {

@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override int ExecutionProgress => 75;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateGolden);
             ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
         }
@@ -51,7 +51,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient<ClockworkMinigun>().
+                AddIngredient(ItemID.VortexBeater).
                 AddIngredient<TheBlackBox>().
                 AddIngredient(ItemID.IllegalGunParts, 15).
                 AddIngredient<CubistBar>(15).

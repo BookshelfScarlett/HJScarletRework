@@ -23,7 +23,7 @@ namespace HJScarletRework.Items.Armor.Shinobi
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
             Item.defense = 10;
         }
-        public float Damaeg = .40f;
+        public float Damaeg = .30f;
         public int MaxTurrets = 4;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damaeg);
         public override void UpdateArmorSet(Player player)

@@ -178,7 +178,7 @@ namespace HJScarletRework.Projs.Magic
             for (int i = 0; i < 8; i++)
             {
                 dir2 = Vector2.UnitX.RotatedBy((PiOver4 * i) + Main.rand.NextFloat(ToRadians(-15f), ToRadians(15f)));
-                Projectile proj1 = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, dir2 * 7f, ProjectileType<CoronaFireball>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
+                Projectile proj1 = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), Projectile.Center, dir2 * 7f, ProjectileType<CoronaFireball>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
             }
             UseTime = 0;
 

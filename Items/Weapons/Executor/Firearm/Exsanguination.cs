@@ -9,7 +9,6 @@ using HJScarletRework.Projs.Ranged;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -111,7 +110,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.ChainGun).
+                AddIngredient(ItemID.Megashark).
                 AddIngredient<UniversalCube>(5).
                 AddTile(TileID.LunarCraftingStation).
                 Register();

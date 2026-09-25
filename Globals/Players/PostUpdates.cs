@@ -29,7 +29,6 @@ using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.General;
 using HJScarletRework.Projs.Ranged;
 using HJScarletRework.Rarity.RarityDrawHandler;
-using rail;
 using System;
 using System.Collections.Generic;
 using System.Linq;

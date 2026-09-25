@@ -4,6 +4,7 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Armor.ExecutorVanillaHead;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using ReLogic.Content;
 using System.Collections.Generic;
@@ -20,9 +21,10 @@ namespace HJScarletRework.Projs.Executor
         {
             Projectile.ToTrailSetting(30);
         }
+        public override Vector2 TileHitbox => new Vector2(16);
         public override void ExSD()
         {
-            Projectile.height = Projectile.width = 16;
+            Projectile.height = Projectile.width = 48;
             Projectile.extraUpdates = 5;
             Projectile.SetupImmnuity(-1);
             Projectile.penetrate = 1;
@@ -111,6 +113,10 @@ namespace HJScarletRework.Projs.Executor
             Projectile.velocity *= .01f;
             IsHitWall = true;
             Projectile.AddExecutionTimeImmediate(ItemType<ASMD>());
+            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), Projectile.damage, 0, Owner.whoAmI);
+            proj.ExpandHitboxBy(160, 160);
+            proj.HJScarlet().CurStoredTarget = target;
+
             target.AddBuff(BuffID.Frostburn2, GetSeconds(2));
             foreach (var activeProj in Main.ActiveProjectiles)
             {

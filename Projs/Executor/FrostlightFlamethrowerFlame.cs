@@ -8,7 +8,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Caster;
 using System;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {

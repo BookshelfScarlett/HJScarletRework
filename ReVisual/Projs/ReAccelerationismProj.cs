@@ -62,7 +62,7 @@ namespace HJScarletRework.ReVisual.Projs
             Vector2 dir = proj.SafeDirByRot();
             Tex2DWithPath lineGlow = HJScarletTexture.Particle_OpticalLineGlow;
             Vector2 glowScale = proj.scale * new Vector2(1.2f, 0.7f);
-            SB.Draw(lineGlow.Value, drawPos + dir * 10f, null, Color.CornflowerBlue * proj.Opacity, proj.rotation, lineGlow.Value.Size()/2f, glowScale * 0.10f, 0, 0);
+            SB.Draw(lineGlow.Value, drawPos + dir * 10f, null, Color.CornflowerBlue * proj.Opacity, proj.rotation, lineGlow.Value.Size() / 2f, glowScale * 0.10f, 0, 0);
             SB.EndShaderArea();
         }
         public void DrawTheTrail(Projectile proj, Color trailColor, float height)

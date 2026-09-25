@@ -88,7 +88,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void UpdateBeginAnimation()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutExpo(Helper.GetAniProgress(0));
             float beginAngle = -195f * Flip.ToDirectionInt();

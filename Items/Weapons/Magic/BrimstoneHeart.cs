@@ -3,13 +3,17 @@ using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Projs.Magic;
+using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader.IO;
 
 namespace HJScarletRework.Items.Weapons.Magic
 {
     public class BrimstoneHeart : HJScarletWeaponoutItemClass
     {
         public override EnumDamageClass Category => EnumDamageClass.Magic;
+        public bool StopKilling = false;
         public override void ExSSD()
         {
             ScarletItemIDSets.IsHeldProjItem[Type] = true;
@@ -17,11 +21,44 @@ namespace HJScarletRework.Items.Weapons.Magic
         }
         public override void ExSD()
         {
-            Item.SetUpRarityPrice(ItemRarityID.Lime);
             Item.damage = 124;
-            Item.useTime = Item.useAnimation = 30;
-            Item.shootSpeed = 16f;
             Item.HJScarlet().ItemBelongTo = EnumItemOwner.Donator;
+            Item.SetUpRarityPrice(ItemRarityID.Lime);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
+            Item.knockBack = 2;
+            Item.mana = 4;
+            Item.useStyle = ItemUseStyleID.Shoot;
+            Item.useTime = Item.useAnimation = 60;
+            Item.shoot = ProjectileType<BrimstoneHeartHeldProj>();
+            Item.shootSpeed = 16f;
+            Item.crit = 20;
+        }
+        public override bool CanRightClick()
+        {
+            return Main.keyState.PressingShift();
+        }
+        public override void RightClick(Player player)
+        {
+            player.HJScarlet().brimstoneHeartKilling=!player.HJScarlet().brimstoneHeartKilling;
+        }
+        public override bool ConsumeItem(Player player) => false;
+        public override void SaveData(TagCompound tag)
+        {
+            base.SaveData(tag);
+        }
+        public override void LoadData(TagCompound tag)
+        {
+            base.LoadData(tag);
+        }
+        public override void HoldItem(Player player)
+        {
+            base.HoldItem(player);
+            if (!player.HJScarlet().brimstoneHeartKilling)
+            {
+                player.buffImmune[BuffID.Regeneration] = true;
+                if (player.lifeRegen > 0)
+                    player.lifeRegen /= 2;
+            }
         }
     }
 }

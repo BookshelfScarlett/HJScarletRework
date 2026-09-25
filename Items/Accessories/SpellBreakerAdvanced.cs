@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Accessories
         public static float Damage = .10f;
         public static int Crit = 5;
         public static float DamageMult = .1f;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(),Crit +"%", DamageMult.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%", DamageMult.ToPercent());
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Yellow);

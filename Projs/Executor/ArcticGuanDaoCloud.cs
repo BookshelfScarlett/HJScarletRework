@@ -44,7 +44,7 @@ namespace HJScarletRework.Projs.Executor
             if (!Projectile.IsMe())
                 return;
             Timer++;
-            float dropTime = HJScarletMethods.HasFuckingCalamity ? 15f : 15f;
+            float dropTime =  15f ;
             if (Timer <= dropTime)
                 return;
             Timer = 0;

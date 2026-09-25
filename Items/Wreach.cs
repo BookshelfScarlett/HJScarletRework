@@ -2,8 +2,6 @@
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs.Executor;
-using HJScarletRework.Projs.General;
 using HJScarletRework.Projs.Magic;
 using HJScarletRework.Projs.Melee;
 using ReLogic.Graphics;
@@ -132,7 +130,7 @@ namespace HJScarletRework.Items
         {
             Stopwatch.StartNew();
             Stopwatch sw = Stopwatch.StartNew();
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15, ProjectileType<RitualofReposeStar>(), 1, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15, ProjectileType<BrimstoneHeartFireball>(), 1, knockback, player.whoAmI);
             sw.Stop();
             // 输出经过的时间（毫秒）
             //Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

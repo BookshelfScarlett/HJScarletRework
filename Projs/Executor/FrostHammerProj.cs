@@ -100,7 +100,9 @@ namespace HJScarletRework.Projs.Executor
 
         public void DoReturn()
         {
-            Projectile.ResetBoomerangReturn();
+            Projectile.tileCollide = false;
+            Projectile.penetrate = -1;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.HomingTarget(Owner.MountedCenter, -1, 20f, 20f);
             Projectile.rotation += 0.2f;
             if (Projectile.IntersectOwnerByDistance(100))

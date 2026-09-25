@@ -41,7 +41,7 @@ namespace HJScarletRework.Globals.Classes
             if (!Projectile.HJScarlet().FirstFrame)
                 OnFirstFrame();
             Projectile.timeLeft = 2;
-            if (!Owner.IsHolding(OriginalItemID))
+            if (!Owner.IsHolding(OriginalItemID)||Owner.dead)
             {
                 Helper.IsDone[0] = false;
                 Helper.IsDone[1] = false;
@@ -53,7 +53,7 @@ namespace HJScarletRework.Globals.Classes
             {
                 HandleBookAttack();
             }
-
+            GlobalReset();
             //控制漂浮书本的位置。
             Vector2 targetMountedPosition = Owner.GetToMouseVector2(Projectile.Center) * 150f;
             Projectile.velocity = Vector2.Lerp(Projectile.velocity, targetMountedPosition.ToSafeNormalize(), .05f);
@@ -75,6 +75,10 @@ namespace HJScarletRework.Globals.Classes
                 Owner.itemTime = Owner.itemAnimation = 2;
                 Owner.ControlPlayerArm(Projectile.rotation, 2);
             }
+        }
+        protected virtual void GlobalReset()
+        {
+
         }
         public float PrevProgress1 = 0;
         public override void OnFirstFrame()

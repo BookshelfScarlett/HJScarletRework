@@ -840,3 +840,19 @@ MythrilStaff: {
 	// DisplayName: Mythril Staff
 	// Tooltip: ""
 }
+
+TheCompanion: {
+	DisplayName: 同伴
+	Tooltip:
+		'''
+		不暴击时施加[ScarletDebuff/Terraria/Oiled]
+		暴击时施加[ScarletDebuff/Terraria/OnFire3]
+		'''
+	ExecutionStrike:
+		'''
+		发射一枚必定暴击的子弹
+		在命中时对大范围的敌人施加狱火
+		无数量上限
+		'''
+	FlavorTooltip: 你无法夺走我的天空。
+}

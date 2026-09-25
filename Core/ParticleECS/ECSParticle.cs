@@ -177,7 +177,7 @@ namespace HJScarletRework.Core.ParticleECS
         /// <paramref name="scale"/>总控这个抓痕的大小，与上述的形变大小另外区分
         /// </summary>
         /// <returns></returns>
-        public static int ShrinkParticle(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float rotation, float scale,int type, Vector2? squashScale = null, float squashSpeedX = 0, float squashSpeedY = 0, BlendState blendstate = null)
+        public static int ShrinkParticle(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float rotation, float scale, int type, Vector2? squashScale = null, float squashSpeedX = 0, float squashSpeedY = 0, BlendState blendstate = null)
         {
             BlendState bs = blendstate ?? BlendState.Additive;
             Vector2 vec = squashScale ?? new Vector2(1.2f, .8f);
@@ -191,10 +191,10 @@ namespace HJScarletRework.Core.ParticleECS
         /// <paramref name="glowMult"/>方块的内部发光，默认为<see langword="0"/>，即无形变速度<br></br>
         /// </summary>
         /// <returns></returns>
-        public static int GlowSquare(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float rotation, float scale,int type = 0, float rotSpeed = 0, float glowMult = 0, BlendState blendstate = null)
+        public static int GlowSquare(Vector2 pos, Vector2 vel, Color color, int timeLeft, float opacity, float rotation, float scale, int type = 0, float rotSpeed = 0, float glowMult = 0, BlendState blendstate = null)
         {
             BlendState bs = blendstate ?? BlendState.Additive;
-            return ECSMethod.NewParticle(GetInstance<GlowSquare>().Type, timeLeft, pos, vel, color, opacity, rotation, scale,bs, ai1: glowMult, aiint0: type, ai0: rotSpeed);
+            return ECSMethod.NewParticle(GetInstance<GlowSquare>().Type, timeLeft, pos, vel, color, opacity, rotation, scale, bs, ai1: glowMult, aiint0: type, ai0: rotSpeed);
         }
 
     }

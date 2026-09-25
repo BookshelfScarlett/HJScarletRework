@@ -37,7 +37,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
             Projectile.timeLeft = 300 * 3;
-            Projectile.SetupImmnuity(30);
+            Projectile.SetupImmnuity(45);
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
@@ -102,6 +102,13 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.Stain(Projectile.Center.ToRandCirclePos(6), Projectile.velocity / 4f, Color.LightGoldenrodYellow, 30, 1, Projectile.rotation, .44f);
             }
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if(BounceTime>0)
+            {
+                modifiers.SourceDamage *= .5f;
+            }
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Owner.HJScarlet().conferenceCallBuffTime <= 0)
@@ -140,7 +147,7 @@ namespace HJScarletRework.Projs.Executor
             SB.EnterShaderArea();
             //绘制残影
             float oriScale = .8f;
-            Vector2 scale = new (0.56f,1.6f);
+            Vector2 scale = new(0.56f, 1.6f);
             int length = (int)(3);
             for (int i = 0; i < length; i++)
             {

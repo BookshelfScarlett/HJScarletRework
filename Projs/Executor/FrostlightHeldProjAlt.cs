@@ -67,7 +67,7 @@ namespace HJScarletRework.Projs.Executor
         {
             //处死时的粒子
             //需注意的是处决姿态下，粒子不会播报
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), Projectile.damage, 0, Owner.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), Projectile.Center, Vector2.Zero, ProjectileType<InvisBoom>(), Projectile.damage, 0, Owner.whoAmI);
             proj.width = proj.height = 120;
             Vector2 dir = Projectile.SafeDirByRot();
             for (int i = 0; i < 60; i++)
@@ -109,7 +109,7 @@ namespace HJScarletRework.Projs.Executor
                 NPC target = HJScarletMethods.FindClosestTarget(Main.MouseWorld, 240);
                 bool reverse = Main.rand.NextBool();
                 dir = dir.RotatedBy(PiOver2 * reverse.ToDirectionInt()).RotatedBy(Main.rand.NextFloat(ToRadians(-10f), ToRadians(60f)) * -reverse.ToDirectionInt());
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), posBase, dir * Main.rand.NextFloat(15f, 18f), ProjectileType<FrostlightFrostball>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), posBase, dir * Main.rand.NextFloat(15f, 18f), ProjectileType<FrostlightFrostball>(), Projectile.originalDamage, Projectile.knockBack, Owner.whoAmI);
                 proj.ai[1] = Main.rand.Next(50, 300);
                 proj.ai[2] = Main.rand.NextFloat(4.5f, 7.5f);
                 proj.HJScarlet().HasExecutionMechanic = true;

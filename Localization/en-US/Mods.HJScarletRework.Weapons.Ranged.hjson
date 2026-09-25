@@ -38,3 +38,8 @@ PandorasBurger: {
 	DisplayName: Pandoras Burger
 	Tooltip: ""
 }
+
+Duskfall: {
+	DisplayName: Duskfall
+	Tooltip: ""
+}

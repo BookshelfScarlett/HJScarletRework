@@ -9,7 +9,6 @@ using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -138,7 +137,7 @@ namespace HJScarletRework.Projs.Executor
                 xMult = 7.5f;
                 yMult = 4.5f;
             }
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldscale = Owner.HeldItem.scale;
             xMult *= heldscale;
             yMult *= heldscale;
             for (int i = 0; i < maxPoints; i++)
@@ -217,7 +216,7 @@ namespace HJScarletRework.Projs.Executor
             //连续多次的创建顶点列表可能会遇到性能上的问题
             //这里最好缓存一下。
             _cacheVertex.Clear();
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldscale = Owner.HeldItem.scale;
             Vector2 projVel = Projectile.velocity.SafeNormalize(Vector2.UnitX) * (42 + Projectile.ai[2] * 13f);
             for (int i = 0; i < CenterPosList.Count; i++)
             {

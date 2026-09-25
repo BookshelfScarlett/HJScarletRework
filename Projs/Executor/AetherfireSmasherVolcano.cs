@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
@@ -237,7 +236,7 @@ namespace HJScarletRework.Projs.Executor
             DrawSmoke(tex, scale, cutSource, ori);
             HJScarletMethods.EnterShaderArea();
             //实际绘制火柱，套用shader
-                DrawPillar(tex, scale, cutSource, ori);
+            DrawPillar(tex, scale, cutSource, ori);
             HJScarletMethods.EndShaderArea();
             return false;
         }

@@ -79,6 +79,8 @@ namespace HJScarletRework.Assets.Registers
         public static SoundStyle Misc_MagicStaffFire => new($"{SoundsPath}{nameof(Misc_MagicStaffFire)}");
         public static SoundStyle Misc_ManaClearUse => new SoundStyle($"{SoundsPath}{nameof(Misc_ManaClearUse)}");
         public static SoundStyle Misc_MayaPumper => new SoundStyle($"{SoundsPath}{nameof(Misc_MayaPumper)}", numVariants: 2);
+        public static SoundStyle Misc_Pistol=> new SoundStyle($"{SoundsPath}{nameof(Misc_Pistol)}");
+        public static SoundStyle Misc_PistolClear=> new SoundStyle($"{SoundsPath}{nameof(Misc_PistolClear)}");
         public static SoundStyle Misc_Spell => new SoundStyle($"{SoundsPath}{nameof(Misc_Spell)}");
         public static SoundStyle Misc_SwordHit => new($"{SoundsPath}{nameof(Misc_SwordHit)}");
         public static SoundStyle Moonlight_Ding => new SoundStyle($"{SoundsPath}{nameof(Moonlight_Ding)}");

@@ -1,12 +1,11 @@
-using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -38,6 +37,27 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.UseSound = null;
 
         }
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            //初始化。
+            int projID =  type;
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, projID, damage, knockback, player.whoAmI);
+            proj.HJScarlet().HasExecutionMechanic = true;
+            if(player.GetExecutionSrike()&&player.HasProj<DeathTollsMinion>())
+            proj.HJScarlet().ExecutionStrike= true;
+            return false;
+        }
+        public override void HoldItem(Player player)
+        {
+            if (player.HasProj<DeathTollsMinion>())
+                return;
+            if (!player.GetExecutionSrike())
+                return;
+            int damage = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);
+            Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, ProjectileType<DeathTollsMinion>(), damage, Item.knockBack, player.whoAmI);
+            player.RemoveExecutionProgress();
+            player.HJScarlet().tacticalExecutionInputCache= 0;
+        }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
             return base.PreDrawTooltipLine(line, ref yOffset);
@@ -49,7 +69,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             //通过本地化路径搜索需要的特殊文本
             string value = this.GetLocalizedValue("FlavorTooltips").ToLangValue();
             //实例化toolti并注册名字
-            TooltipLine flavorTooltips = new(Mod, "FlavorTooltipsName", "「"+ value + "」")
+            TooltipLine flavorTooltips = new(Mod, "FlavorTooltipsName", "「" + value + "」")
             {
                 OverrideColor = Color.Lerp(Color.MediumPurple, Color.LightPink, 0.3f)
             };

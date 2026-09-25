@@ -57,9 +57,18 @@ namespace HJScarletRework.Globals.Instances.Items
                 if (HJScarletList.LegalFoodList.Contains(item.type))
                 {
                     //表单里有这个内容我们才写这个东西。没有则写另一条
+                    string itemName = string.Empty;
+                    if(item.type>VanillaMaxItem)
+                    {
+                        itemName = item.ModItem.FullName;
+                    }
+                    else
+                    {
+                        itemName = ItemID.Search.GetName(item.type);
+                    }
                     string path = Mod.GetLocalizationKey($"Items.Useable.TerrariaRecipe.");
-                    List<int> list = LocalPlayer.HJScarlet().terraRecipe_EatenFoodList;
-                    if (list.Contains(item.type))
+                    List<string> list = LocalPlayer.HJScarlet().terraRecipeEatenFoodNameList;
+                    if (list.Contains(itemName))
                         tooltips.CreateTooltipDirect((path + "Eaten").ToLangValue(), Color.GreenYellow);
                     else
                         tooltips.CreateTooltipDirect((path + "NotEaten").ToLangValue(), Color.SkyBlue);
@@ -132,7 +141,7 @@ namespace HJScarletRework.Globals.Instances.Items
         private static Regex MatchingSpecificBuff = new Regex(@"([^\/]+)\/([^\/]+)");
         //要绘制的Buff列表
         //话说我们为什么要写这么长一串？
-        public List<(float, int, string, Texture2D, string, string)> buffs = new();
+        public List<(float, int, string, Texture2D, string, string, string)> buffs = new();
         public List<string> add = new();
         public void GlobalIconInsert(Item item, List<TooltipLine> tooltips)
         {
@@ -170,7 +179,7 @@ namespace HJScarletRework.Globals.Instances.Items
                                     texture = TextureAssets.Buff[buffID].Value;
                                     name = Lang.GetBuffName(buffID);
                                     descrip = Lang.GetBuffDescription(buffID);
-                                    buffs.Add((length, i, color, texture, name, descrip));
+                                    buffs.Add((length, i, color, texture, name, descrip, tooltips[i].Name));
                                 }
                             }
                             else
@@ -183,7 +192,7 @@ namespace HJScarletRework.Globals.Instances.Items
                                         texture = Request<Texture2D>(modBuff.Texture).Value;
                                         name = modBuff.DisplayName.Value;
                                         descrip = modBuff.Description.Value;
-                                        buffs.Add((length, i, color, texture, name, descrip));
+                                        buffs.Add((length, i, color, texture, name, descrip, tooltips[i].Name));
                                     }
                                 }
                             }
@@ -200,7 +209,13 @@ namespace HJScarletRework.Globals.Instances.Items
                 tooltips.RemoveRange(1, tooltips.Count - 1);
                 for (int j = 0; j < buffs.Count; j++)
                 {
-                    buffs[j] = (0, tooltips.Count, buffs[j].Item3, buffs[j].Item4, buffs[j].Item5, buffs[j].Item6);
+                    
+                    //终于差不多了……加tooltip
+                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName"+j, $"        [c/{buffs[j].Item3}:{buffs[j].Item5}]");
+                    TooltipLine buffTextDescripLine = new TooltipLine(Mod, "ScarletBuffDescripName"+j, $"{buffs[j].Item6}");
+                    tooltips.Add(buffTextNameLine);
+                    tooltips.Add(buffTextDescripLine);
+                    buffs[j] = (0, tooltips.Count, buffs[j].Item3, buffs[j].Item4, buffs[j].Item5, buffs[j].Item6, buffTextNameLine.Name);
                     if (add.Contains(buffs[j].Item5))
                     {
                         buffs.Remove(buffs[j]);
@@ -208,11 +223,6 @@ namespace HJScarletRework.Globals.Instances.Items
                     }
                     else
                         add.Add(buffs[j].Item5);
-                    //终于差不多了……加tooltip
-                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName", $"        [c/{buffs[j].Item3}:{buffs[j].Item5}]");
-                    TooltipLine buffTextDescripLine = new TooltipLine(Mod, "ScarletBuffDescripName", $"{buffs[j].Item6}");
-                    tooltips.Add(buffTextNameLine);
-                    tooltips.Add(buffTextDescripLine);
                 }
 
             }
@@ -233,13 +243,13 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 foreach (var buf in buffs)
                 {
-                    if (buf.Item2 == i)
+                    if (buf.Item7 == lines[i].Name)
                     {
                         Vector2 pos = new Vector2(lines[i].X + buf.Item1 + 2.5f, lines[i].Y - 5f);
                         Main.spriteBatch.Draw(buf.Item4, pos, null, Color.White, 0, Vector2.Zero, .98f, 0, 0);
                     }
-                    if (buf.Item2 > i)
-                        break;
+                    if (buf.Item7 != lines[i].Name)
+                        continue;
                 }
             }
             add.Clear();

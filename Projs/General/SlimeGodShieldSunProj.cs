@@ -62,7 +62,7 @@ namespace HJScarletRework.Projs.General
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
-            SB.Draw(HJScarletTexture.Texture_WhiteCube.Value, Owner.Center, null, Color.DarkOrange * .13f, 0, HJScarletTexture.Texture_WhiteCube.Value.Size()/2f, new Vector2(30000f, 30000f), 0, 0);
+            SB.Draw(HJScarletTexture.Texture_WhiteCube.Value, Owner.Center, null, Color.DarkOrange * .13f, 0, HJScarletTexture.Texture_WhiteCube.Value.Size() / 2f, new Vector2(30000f, 30000f), 0, 0);
             DrawBeam(Color.DarkOrange, .95f);
             DrawBeam(Color.OrangeRed, .75f);
             DrawBeam(Color.White, .65f);

@@ -33,16 +33,16 @@ namespace HJScarletRework.Projs.Executor
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Lighting.AddLight(Projectile.Center, Color.Green.ToVector3()*2);
+            Lighting.AddLight(Projectile.Center, Color.Green.ToVector3() * 2);
             if (Projectile.IsOutScreen())
                 return;
-            if(Main.rand.NextBool(3))
+            if (Main.rand.NextBool(3))
             {
                 float scale = Projectile.scale * Main.rand.NextFloat(.9f, 1.1f) * 1f;
                 Vector2 pos = Projectile.Center.ToRandCirclePos(8);
-                ECSParticle.GlowSquare(pos, Projectile.velocity / 6f, RandLerpColor(Color.LimeGreen, Color.Lime), 45, 1, RandRotTwoPi, scale, 0, Main.rand.NextFloat(-.05f,.05f), 0.9f);
+                ECSParticle.GlowSquare(pos, Projectile.velocity / 6f, RandLerpColor(Color.LimeGreen, Color.Lime), 45, 1, RandRotTwoPi, scale, 0, Main.rand.NextFloat(-.05f, .05f), 0.9f);
             }
-            if(Main.rand.NextBool(3))
+            if (Main.rand.NextBool(3))
             {
                 float scale = Projectile.scale * Main.rand.NextFloat(.9f, 1.1f) * .3f;
                 Vector2 pos = Projectile.Center.ToRandCirclePos(8);
@@ -97,7 +97,7 @@ namespace HJScarletRework.Projs.Executor
             DeepGlow.SubmitCustomGlow(() =>
             {
                 SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-                DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.LimeGreen, 1f,1f,0.78f);
+                DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.LimeGreen, 1f, 1f, 0.78f);
             });
             SB.EnterShaderArea();
             DrawTrails(HJScarletTexture.Noise_HeavyAura.Texture, Color.LimeGreen, 0.25f);
@@ -105,9 +105,9 @@ namespace HJScarletRework.Projs.Executor
             SB.EnterShaderArea();
             //绘制残影
             float oriScale = .8f;
-            Vector2 scale = new Vector2(0.51f,1.4f);
+            Vector2 scale = new Vector2(0.51f, 1.4f);
             Vector2 pos = Projectile.Center - Main.screenPosition;
-            SB.Draw(tex, pos, null, Color.Green, Projectile.rotation, ori, oriScale*.3f, 0, 0);
+            SB.Draw(tex, pos, null, Color.Green, Projectile.rotation, ori, oriScale * .3f, 0, 0);
             Projectile.SetCrossStar(1.2f, Projectile.rotation, Color.Green);
             SB.EndShaderArea();
             return false;
@@ -123,7 +123,7 @@ namespace HJScarletRework.Projs.Executor
             Effect shader = HJScarletShader.StandardFlowShader;
             shader.Parameters["LaserTextureSize"].SetValue(useTex.Size());
             shader.Parameters["targetSize"].SetValue(new Vector2(useTex.Width(), useTex.Height()));
-            shader.Parameters["uTime"].SetValue(-Main.GlobalTimeWrappedHourly * 170f*offsetHeight);
+            shader.Parameters["uTime"].SetValue(-Main.GlobalTimeWrappedHourly * 170f * offsetHeight);
             shader.Parameters["uColor"].SetValue(drawColor.ToVector4() * Projectile.Opacity * alphaValue * Clamp(Projectile.velocity.Length(), 0f, 1f));
             shader.Parameters["uFadeoutLength"].SetValue(0.8f);
             shader.Parameters["uFadeinLength"].SetValue(0.06f);

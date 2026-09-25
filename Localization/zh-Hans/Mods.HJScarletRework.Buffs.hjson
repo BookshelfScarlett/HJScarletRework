@@ -107,7 +107,12 @@ DragonMinionBuff: {
 
 FruitofEternityBuff: {
 	DisplayName: 悠久果实
-	Description: 肉体强化，但代价是什么？
+	Description:
+		'''
+		吃下这果实之人的肉体将会抗拒所有变化，
+		成为等同于不老不死的存在，
+		但这也意味着成为众神永远的奴仆。
+		'''
 }
 
 DracoBuff: {

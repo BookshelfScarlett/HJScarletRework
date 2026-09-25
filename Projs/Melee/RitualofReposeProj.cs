@@ -67,17 +67,17 @@ namespace HJScarletRework.Projs.Melee
 
         public void DoShoot()
         {
-                Owner.itemTime = Owner.itemAnimation = 2;
-            Owner.ControlPlayerArm((Projectile.Center - Owner.Center).ToRotation(),1);
+            Owner.itemTime = Owner.itemAnimation = 2;
+            Owner.ControlPlayerArm((Projectile.Center - Owner.Center).ToRotation(), 1);
             if ((Projectile.Center - Owner.Center).LengthSquared() > 1900f * 1900f)
             {
 
                 if (!StopAllDrawing)
                 {
-                    ScarletSound(HJScarletSounds.Moonlight_Ding, Owner.Center,0.6f);
+                    ScarletSound(HJScarletSounds.Moonlight_Ding, Owner.Center, 0.6f);
                     StopAllDrawing = true;
                 }
-                if (Projectile.timeLeft < GetSeconds(1)*Projectile.MaxUpdates)
+                if (Projectile.timeLeft < 75*Projectile.MaxUpdates)
                 {
                     float xPos = Owner.MountedCenter.X + Owner.direction * 200f;
                     float yPos = Owner.MountedCenter.Y - 1200f;
@@ -90,7 +90,7 @@ namespace HJScarletRework.Projs.Melee
                 }
             }
             Projectile.rotation = Projectile.velocity.ToRotation();
-            
+
             if (Projectile.IsOutScreen())
                 return;
             if (Main.rand.NextBool(9))
@@ -147,7 +147,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     BeginAppear = false;
                     BeginDisapper = true;
-                        ScarletSound(HJScarletSounds.Misc_ManaClearUse, Projectile.Center, pitch: -.4f);
+                    ScarletSound(HJScarletSounds.Misc_ManaClearUse, Projectile.Center, pitch: -.4f);
                     //IdleTimer--;
                     //if (IdleTimer <= 0)
                     //{
@@ -177,7 +177,7 @@ namespace HJScarletRework.Projs.Melee
                 ECSParticle.ShinyCrossStarSmall(Projectile.Center.ToRandCirclePos(45 * Projectile.scale, 110 * Projectile.scale), Vector2.UnitX.RotatedBy(Projectile.rotation) * Main.rand.NextFloat(.2f, 1f) * 4f, RandLerpColor(Color.White, Color.Gold), Main.rand.Next(10, 46), 1, Main.rand.NextFloat(.65f, 1.1f) * .15f, 0f);
 
             //待一切尘埃落定，我们会给这个世界献上带来安息
-            if (Owner.CanUseHoldout(ItemType<RitualofRepose>()) &&  !Owner.IsInInventory() && !JustStartAttacked&&AppearRatios>=1f)
+            if (Owner.CanUseHoldout(ItemType<RitualofRepose>()) && !Owner.IsInInventory() && !JustStartAttacked && AppearRatios >= 1f)
             {
                 if (Owner.JustPressLeftClick())
                 {
@@ -185,7 +185,7 @@ namespace HJScarletRework.Projs.Melee
                     InitAttack();
                     return;
                 }
-                if(Owner.JustPressRightClick())
+                if (Owner.JustPressRightClick())
                 {
                     JustStartAttacked = true;
                     JustPressedRightClick = true;
@@ -223,7 +223,7 @@ namespace HJScarletRework.Projs.Melee
             Helper.MaxProgress[0] = (int)(AttackSpeed * .75f);
             Helper.MaxProgress[1] = (int)(AttackSpeed * .25f);
             LockDirection = Owner.direction;
-                Owner.ChangeDir(LockDirection);
+            Owner.ChangeDir(LockDirection);
             TargetRotation = 0;
         }
 
@@ -280,7 +280,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            if (!Projectile.HJScarlet().FirstFrame ||StopAllDrawing)
+            if (!Projectile.HJScarlet().FirstFrame || StopAllDrawing)
                 return false;
             PixelatedRenderManager.BeginDrawProj = true;
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);

@@ -61,7 +61,7 @@ namespace HJScarletRework.Projs.Magic
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D chains =Request<Texture2D>(GetInstance<RefluxChain>().Texture).Value;
+            Texture2D chains = Request<Texture2D>(GetInstance<RefluxChain>().Texture).Value;
             Vector2 pCenter = Owner.MountedCenter - new Vector2(160);
             Vector2 projCenter = Projectile.Center;
             Vector2 directionToPlayer = pCenter - projCenter;

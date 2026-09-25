@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Buffs;
 using HJScarletRework.Globals.Graphics.Particles;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -70,12 +69,12 @@ namespace HJScarletRework.Globals.Players
                         time--;
                         ExecutionBuffTimeStored[key] = time;
                     }
-                    if(time==0)
+                    if (time == 0)
                     {
                         keysToRemoveCache.Add(key);
                     }
                 }
-                foreach(int key in keysToRemoveCache)
+                foreach (int key in keysToRemoveCache)
                 {
                     ExecutionBuffTimeStored.Remove(key);
                 }

@@ -21,8 +21,9 @@ namespace HJScarletRework.Items.Accessories
 
         public override void ExSD()
         {
-            Item.defense = 32;
+            Item.defense = 50;
             Item.SetUpRarityPrice(ItemRarityID.Red);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.accessory = true;
             Item.master = true;
         }
@@ -34,7 +35,6 @@ namespace HJScarletRework.Items.Accessories
             player.noFallDmg = true;
             player.noKnockback = true;
             player.buffImmune[BuffType<IcarusBuff>()] = true;
-            player.buffImmune[BuffType<UnexistBuff>()] = true;
             player.buffImmune[BuffType<MonarchButterflyBuff>()] = true;
             player.buffImmune[BuffType<PlagueBuff>()] = true;
             player.buffImmune[BuffType<DivineFireBuff>()] = true;

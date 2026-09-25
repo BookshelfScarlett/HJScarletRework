@@ -23,7 +23,7 @@ namespace HJScarletRework.Items.Armor.Shinobi
         {
             base.UpdateArmorSet(player);
         }
-        public float CritChance = 40;
+        public float CritChance = 30;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritChance + "%");
 
         public override void UpdateEquip(Player player)

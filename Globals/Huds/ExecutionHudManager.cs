@@ -149,11 +149,6 @@ namespace HJScarletRework.Globals.Huds
         {
             GeneralOpactiy = 0;
         }
-        public bool StopNow = false;
-        public override void ModifyTimeRate(ref double timeRate, ref double tileUpdateRate, ref double eventUpdateRate)
-        {
-            base.ModifyTimeRate(ref timeRate, ref tileUpdateRate, ref eventUpdateRate);
-        }
         public override void UpdateUI(GameTime gameTime)
         {
             HJScarletConfigClient config = HJScarletConfigClient.Instance;

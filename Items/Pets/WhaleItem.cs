@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items.Banners;
-using HJScarletRework.Buffs.Pets;
+﻿using HJScarletRework.Buffs.Pets;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;

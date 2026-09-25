@@ -1,13 +1,12 @@
 ﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Materials;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 using Terraria.Localization;
-using HJScarletRework.Items.Materials;
 
 namespace HJScarletRework.Items.Accessories
 {

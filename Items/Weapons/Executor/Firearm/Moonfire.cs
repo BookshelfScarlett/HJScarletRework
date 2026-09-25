@@ -17,19 +17,19 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public static int MaxPenetrateTimeExecution = 12;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateGolden);
             ScarletItemIDSets.ForceToTacticalExecute[Type] = true;
         }
         public override void ExSD()
         {
-            Item.damage = 105;
+            Item.damage = 415;
             Item.shootSpeed = 19;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true);
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = null;
             Item.knockBack = 7f;
-            Item.useTime = Item.useAnimation = 30;
+            Item.useTime = Item.useAnimation = 28;
             Item.shoot = ProjectileType<MoonfireHeldProj>();
             Item.HJScarlet().borderlandWeapon = true;
         }

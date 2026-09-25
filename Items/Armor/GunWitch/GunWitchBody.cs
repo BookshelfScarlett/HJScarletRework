@@ -21,7 +21,7 @@ namespace HJScarletRework.Items.Armor.GunWitch
             Item.defense = 22;
         }
         public int Crit = 25;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crit+"%");
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crit + "%");
         public override void UpdateEquip(Player player)
         {
             player.GetCritChance<ExecutorDamageClass>() += Crit;

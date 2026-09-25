@@ -6,16 +6,14 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Methods;
-using Microsoft.Extensions.Logging;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class RitualofReposeStar : HJScarletProj,IPixelatedRenderer
+    public class RitualofReposeStar : HJScarletProj, IPixelatedRenderer
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override EnumDamageClass Category => EnumDamageClass.Melee;
@@ -33,7 +31,7 @@ namespace HJScarletRework.Projs.Melee
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 2;
-            Projectile.timeLeft = GetSeconds(5)*Projectile.MaxUpdates;
+            Projectile.timeLeft = GetSeconds(5) * Projectile.MaxUpdates;
         }
 
         public override void OnFirstFrame()
@@ -46,7 +44,7 @@ namespace HJScarletRework.Projs.Melee
             if (Projectile.damage != 0 && Projectile.timeLeft > 50)
             {
                 Projectile.scale = Lerp(Projectile.scale, 1.01f, .12f);
-                if (Projectile.scale > 1&&Timer>45)
+                if (Projectile.scale > 1 && Timer > 45)
                 {
                     NPC CurTarget = Projectile.HJScarlet().CurStoredTarget;
                     if (CurTarget.IsLegal())
@@ -68,9 +66,9 @@ namespace HJScarletRework.Projs.Melee
                     }
                     else
                     {
-                        if(Projectile.GetTargetSafe(out NPC tar, true, 1200f, true))
+                        if (Projectile.GetTargetSafe(out NPC tar, true, 1200f, true))
                         {
-                            Projectile.HJScarlet().CurStoredTarget= tar;
+                            Projectile.HJScarlet().CurStoredTarget = tar;
                         }
                     }
                 }
@@ -86,7 +84,7 @@ namespace HJScarletRework.Projs.Melee
                 if (Projectile.scale <= 0.2f)
                     Projectile.Kill();
             }
-            
+
             Timer++;
 
             if (Projectile.IsOutScreen())
@@ -131,7 +129,7 @@ namespace HJScarletRework.Projs.Melee
             for (int i = 0; i < 2; i++)
                 SB.Draw(tex, pos, null, c * Projectile.Opacity, PiOver2 * i, orig, scale, 0, 0);
             Texture2D orb = HJScarletTexture.Particle_HRShinyOrbSmall.Value;
-            SB.Draw(orb, pos, null, Color.Gold* .64f, 0, orb.Size() / 2f, .125f * generalScale, 0, 0);
+            SB.Draw(orb, pos, null, Color.Gold * .64f, 0, orb.Size() / 2f, .125f * generalScale, 0, 0);
             HJScarletMethods.EndShaderAreaPixel();
         }
         public void DrawCoreStar(SpriteBatch sb)

@@ -5,13 +5,7 @@ using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
@@ -51,7 +45,7 @@ namespace HJScarletRework.Projs.Melee
         {
             if (Projectile.numHits < 1)
             {
-                if(target.IsLegal())
+                if (target.IsLegal())
                     Projectile.HJScarlet().CurStoredTarget = target;
                 int time = Main.rand.Next(30, 90);
                 new ThunderboltParticle(Projectile.Center, 0, 1.15f, Color.Gold, time, 15f, .75f, new Vector2(0.5f, 1.25f)).Spawn();

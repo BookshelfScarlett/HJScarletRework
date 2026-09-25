@@ -24,7 +24,7 @@ namespace HJScarletRework.Projs.Melee
             get => Projectile.ai[1] == 1f;
             set => Projectile.ai[1] = value ? 1 : 0;
         }
-        public Vector2 TargetPos =Vector2.Zero;
+        public Vector2 TargetPos = Vector2.Zero;
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(24);
@@ -45,7 +45,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override bool? CanHitNPC(NPC target)
         {
-            if (target.type != NPCID.CultistBossClone)
+            if (target.type != NPCID.CultistBossClone && target.type != NPCID.TargetDummy)
                 return null;
 
             return false;
@@ -55,14 +55,14 @@ namespace HJScarletRework.Projs.Melee
             return (Timer >= (MaxLandTime) * Projectile.MaxUpdates);
         }
         public float Osci = 0;
-        public float MaxLandTime = 50f;
+        public float MaxLandTime = 35f;
         public override void ProjAI()
         {
             //这里还会再卡住玩家一点时间，不让其投掷安息仪式
             Timer++;
             if (VisualKilled)
             {
-                if (Timer < Projectile.MaxUpdates * GetSeconds(1))
+                if (Timer < GetSeconds(1))
                 {
                 }
                 else
@@ -71,7 +71,7 @@ namespace HJScarletRework.Projs.Melee
                 }
                 return;
             }
-                Owner.ControlPlayerArm((Projectile.Center - Owner.Center).ToRotation(),1);
+            Owner.ControlPlayerArm((Projectile.Center - Owner.Center).ToRotation(), 1);
             Owner.ChangeDir((Projectile.Center.X - Owner.MountedCenter.X > 0).ToDirectionInt());
             float ratios = Clamp((Timer / MaxLandTime * Projectile.MaxUpdates), 0f, 1f);
             Osci -= ToRadians(2f);
@@ -103,7 +103,7 @@ namespace HJScarletRework.Projs.Melee
                     }
                     for (int i = 0; i < 36; i++)
                     {
-                        ECSParticle.ShinyCrossStarSmall(pos.ToRandCirclePos(5), RandVelTwoPi(.2f, 28f), RandLerpColor(Color.DarkGoldenrod, Color.LightGoldenrodYellow), Main.rand.Next(30, 50), 1, Main.rand.NextFloat(.9f, 1.1f) * 1.18f,0);
+                        ECSParticle.ShinyCrossStarSmall(pos.ToRandCirclePos(5), RandVelTwoPi(.2f, 28f), RandLerpColor(Color.DarkGoldenrod, Color.LightGoldenrodYellow), Main.rand.Next(30, 50), 1, Main.rand.NextFloat(.9f, 1.1f) * 1.18f, 0);
                     }
                     for (int i = 0; i < 36; i++)
                     {
@@ -130,7 +130,7 @@ namespace HJScarletRework.Projs.Melee
                         {
                             break;
                         }
-                        bool legalTar = tar.CanBeChasedBy();
+                        bool legalTar = tar.CanBeChasedBy()&&tar.type != NPCID.TargetDummy;
                         float distPerTar = Vector2.Distance(tar.Center, Projectile.Center);
                         //别穿墙搜
                         if (legalTar && distPerTar < searchDistance && !legalTargetList.Contains(tar))

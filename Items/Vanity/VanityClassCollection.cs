@@ -182,7 +182,7 @@ namespace HJScarletRework.Items.Vanity
                     TextEdgeColor = VanityData.EdgeColor,
                     MainText = this.GetLocalizationKey("DetailTooltip").ToLangValue(),
                     TextColor = VanityData.MainColor,
-                    BoxSize=1
+                    BoxSize = 1
                 };
                 TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
             }

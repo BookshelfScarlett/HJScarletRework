@@ -4,14 +4,13 @@ using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
-using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class MoonfireHeldProj: HJScarletRangedWeaponoutClass
+    public class MoonfireHeldProj : HJScarletRangedWeaponoutClass
     {
         public override int OriginalItemID => ItemType<Moonfire>();
         public override string Texture => GetInstance<Moonfire>().Texture;
@@ -20,8 +19,8 @@ namespace HJScarletRework.Projs.Executor
         public override Color HoldoutEdgeColor => Color.Green;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override float RecoilPower => 15f;
-        public override bool IsUsing => ((Owner.channel) && !Owner.noItems && !Owner.CCed)||Projectile.HJScarlet().ExecutionStrike;
-        public int NextBulletTileCollidingTime =0;
+        public override bool IsUsing => ((Owner.channel) && !Owner.noItems && !Owner.CCed) || Projectile.HJScarlet().ExecutionStrike;
+        public int NextBulletTileCollidingTime = 0;
         /// <summary>
         /// 复写这个是因为月火的特殊处决攻击，需要让月火在玩家按下处决键（互动键）时立刻发射一枚子弹
         /// <br>而这个钩子会在执行完毕后立刻执行攻击的判定，即上方的<see cref="IsUsing"/></br>
@@ -69,7 +68,7 @@ namespace HJScarletRework.Projs.Executor
                 type = ProjectileType<MoonfireBulletExecution>();
             }
             pos -= new Vector2(5, 0).RotatedBy(Projectile.rotation);
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+            Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
             if (Projectile.HJScarlet().ExecutionStrike)
             {
                 proj.penetrate = NextBulletTileCollidingTime;

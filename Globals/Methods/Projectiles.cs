@@ -44,28 +44,6 @@ namespace HJScarletRework.Globals.Methods
         public static Vector2 SafeDirByRot(this Projectile proj, float rotDegree) => proj.rotation.ToRotationVector2().RotatedBy(ToRadians(rotDegree));
         public static Texture2D GetTexture(this Projectile proj) => TextureAssets.Projectile[proj.type].Value;
         /// <summary>
-        /// 从GlobalTargetIndex中获取需要的合规NPC
-        /// 多判定一个是否允许穿墙
-        /// 如果不合规会直接返回为否
-        /// </summary>
-        /// <param name="proj"></param>
-        /// <param name="target"></param>
-        /// <param name="shouldPassWall"></param>
-        /// <returns></returns>
-        public static bool GetLegalTarget(this Projectile proj, out NPC target, bool shouldPassWall = false)
-        {
-            target = null;
-            int targetIndex = proj.HJScarlet().GlobalTargetIndex;
-            if (targetIndex == -1)
-                return false;
-            target = Main.npc[targetIndex];
-            if (target.CanBeChasedBy() && target != null && (shouldPassWall || Collision.CanHit(proj.Center, 1, 1, target.Center, 1, 1)))
-            {
-                return true;
-            }
-            return false;
-        }
-        /// <summary>
         /// 获取一个单位，这里优先判定输入的NPC索引
         /// 如果需要直接忽略npc索引。输入-1
         /// </summary>
@@ -483,12 +461,6 @@ namespace HJScarletRework.Globals.Methods
         public static Vector2 GetNormalVector2(this Vector2 beginPos, Vector2 endPos, Vector2? normalvalue = null) => (endPos - beginPos).ToSafeNormalize(normalvalue);
 
         public static bool IsLegal(this NPC target) => target != null && target.CanBeChasedBy();
-        public static void ResetBoomerangReturn(this Projectile proj, int pene = -1)
-        {
-            proj.tileCollide = false;
-            proj.penetrate = pene;
-            proj.stopsDealingDamageAfterPenetrateHits = true;
-        }
         public static bool IntersectOwnerByDistance(this Projectile proj, float dist = 70f)
         {
             return (proj.Center - Main.player[proj.owner].Center).LengthSquared() < dist * dist;

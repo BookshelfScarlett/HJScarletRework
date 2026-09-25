@@ -1,5 +1,4 @@
-﻿using HJScarletRework.Items.Accessories;
-using Terraria;
+﻿using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players.AccessoriesSlot

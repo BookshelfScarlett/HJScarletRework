@@ -3,10 +3,8 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
-using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using System;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
@@ -41,7 +39,7 @@ namespace HJScarletRework.Projs.Executor
                 type = ProjectileType<MonocleBulletExecution>();
             }
             pos -= new Vector2(80, 0).RotatedBy(Projectile.rotation);
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+            Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
             proj.HJScarlet().HasExecutionMechanic = true;
             if (Projectile.HJScarlet().ExecutionStrike)
             {
@@ -86,4 +84,4 @@ namespace HJScarletRework.Projs.Executor
             }
         }
     }
-    }
+}

@@ -61,7 +61,7 @@ namespace HJScarletRework.Globals.Graphics.Particles
                 Vector2 starScale = new(1.2f, 0.8f);
                 spriteBatch.Draw(star, drawPos, null, DrawColor * Opacity, Rotation, star.Size() / 2, starScale * Scale, SpriteEffects.None, 0);
                 spriteBatch.Draw(star, drawPos, null, DrawColor * Opacity, Rotation + PiOver2, star.Size() / 2, starScale * Scale, SpriteEffects.None, 0);
-                spriteBatch.Draw(shinyOrb.Value, drawPos, null, Color.Lerp(Color.White, DrawColor, 0.5f) * 0.95f * Opacity, 0, shinyOrb.Value.Size()/2f, Scale * 0.75f, SpriteEffects.None, 0);
+                spriteBatch.Draw(shinyOrb.Value, drawPos, null, Color.Lerp(Color.White, DrawColor, 0.5f) * 0.95f * Opacity, 0, shinyOrb.Value.Size() / 2f, Scale * 0.75f, SpriteEffects.None, 0);
             }
             else
                 for (float i = 0; i < 1f; i += 0.1f)

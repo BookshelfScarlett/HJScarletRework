@@ -4,6 +4,7 @@ using ContinentOfJourney.NPCs.Boss_GoblinChariot;
 using ContinentOfJourney.NPCs.Boss_MarquisMoonsquid;
 using ContinentOfJourney.NPCs.Boss_PriestessRod;
 using ContinentOfJourney.NPCs.Boss_ScarabBelief;
+using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using ContinentOfJourney.NPCs.Boss_TheOverwatcher;
 using ContinentOfJourney.NPCs.Boss_TheSon;
 using ContinentOfJourney.NPCs.Boss_WallofShadow;
@@ -87,9 +88,13 @@ namespace HJScarletRework.Globals.Instances.NPCs
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<WhaleItem>(), 4);
             if (npc.type == NPCType<TheOverwatcher>())
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<WatcherItem>(), 4);
+            if(npc.type ==NPCType<TheLifebringerHead>())
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<LifeWormItem>(), 4);
+
             if (npc.type == NPCType<WallofShadow>())
             {
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<ShadowItem>(), 4);
+                HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<ShadowCast>(), 5);
                 HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<DeathTolls>(), 4);
                 HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<ExecutorBadge>(), 4);
             }
@@ -124,7 +129,7 @@ namespace HJScarletRework.Globals.Instances.NPCs
             if (npc.type == NPCType<BigDipper>())
             {
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<TheSevenStar>(), 1);
-            }
+           }
         }
         public override void ModifyGlobalLoot(GlobalLoot globalLoot)
         {

@@ -26,15 +26,11 @@ namespace HJScarletRework.Globals.Instances.NPCs
             {
                 shop.ToCustomValue<ASMD>(1, 50, 0, 0, Condition.DownedGolem);
             }
-            if (shop.NpcType == NPCID.GoblinTinkerer)
-            {
-                shop.ToCustomValue<PurpleFlareGun>(0, 5, 0, 0);
-            }
             if (shop.NpcType == NPCID.Wizard)
             {
-                shop.ToCustomValue<CrystallizedLore>(0, 30, 0, 0);
+                shop.ToCustomValue<CrystallizedLore>(0, 60, 0, 0);
             }
-            if(shop.NpcType==NPCID.Clothier)
+            if (shop.NpcType == NPCID.Clothier)
             {
                 shop.ToCustomValue<CombatSlot>(0, 50, 0, 0);
             }

@@ -112,7 +112,7 @@ namespace HJScarletRework.Globals.Instances.NPCs
                 ApplyDoT(ref npc, AbsoluteZeroBuff.BadLifeRegenEnemy);
                 damage = AbsoluteZeroBuff.BadLifeRegenEnemy;
             }
-            if(theBleachingBuffEnemy)
+            if (theBleachingBuffEnemy)
             {
                 ApplyDoT(ref npc, TheBleachingBuff.BadLifeRegenEnemy);
                 damage = TheBleachingBuff.BadLifeRegenEnemy;

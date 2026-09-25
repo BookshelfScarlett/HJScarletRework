@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Items.Weapons.Melee;
 using ReLogic.Content;
-using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Assets.Registers

@@ -59,15 +59,14 @@ namespace HJScarletRework.Items.Useables
                 TextboxManager.FirstLineY = line.Y;
             }
             string text = this.GetLocalizationKey("DetailTooltip").ToLangValue();
-            TextboxSettings sets = new TextboxSettings
-            {
-                HasTitle = false,
-                BackgroundColor = Color.White * .24f,
-                TextColor = Color.White,
-                TextEdgeColor = Color.Lerp(Color.Black, Color.Black, .74f),
-                BackgroundEdgeColor = Color.White,
-                MainText = text
-            };
+            TextboxSettings sets = new TextboxSettings(
+                backgroundColor: Color.White * .24f,
+                textColor: Color.White,
+                textEdgeColor: Color.Lerp(Color.Black, Color.Black, .74f),
+                mainText: text,
+                backgroundEdgeColor: Color.White,
+                hasTitle: false
+                );
             TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
         }
     }

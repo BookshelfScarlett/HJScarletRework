@@ -1,12 +1,9 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HJScarletRework.Items.Useables;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.NPCs.Enemy
 {
@@ -36,13 +33,17 @@ namespace HJScarletRework.Projs.NPCs.Enemy
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
-            if (Projectile.owner == target.whoAmI)
-                modifiers.FinalDamage *= 114;
+            modifiers.SetMaxDamage(150);
+            if (Projectile.owner == target.whoAmI && target.IsHolding<SuicideKnife>())
+                modifiers.FinalDamage *= 1;
             else
-                modifiers.FinalDamage *= 0;
+                modifiers.FinalDamage *= 1;
+            Owner.AddImmuneTime(ImmunityCooldownID.General, 180);
+            //Main.NewText(Owner.immuneTime);
+            //Owner.GetImmnue(ImmunityCooldownID.General, 180,true);
             Projectile.Kill();
         }
-        
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             base.OnHitNPC(target, hit, damageDone);

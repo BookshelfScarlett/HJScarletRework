@@ -39,7 +39,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = Projectile.velocity.ToRotation();
             Projectile.AffactedByGrav(velMult: .985f, yMult: 1.0f, yAdd: 0.13f, maxGravSpeed: 45);
             if (Main.rand.NextBool(8))
-                ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(8), 0.6f, RandLerpColor(Color.Goldenrod, Color.DarkGoldenrod), 45, 1, 0.11f*Main.rand.NextFloat(.9f,1.1f),glowMult:.45f);
+                ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(8), 0.6f, RandLerpColor(Color.Goldenrod, Color.DarkGoldenrod), 45, 1, 0.11f * Main.rand.NextFloat(.9f, 1.1f), glowMult: .45f);
             if (Main.rand.NextBool(8))
                 ECSParticle.ShinyCrossStarSmall(Projectile.Center.ToRandCirclePosEdge(8), Projectile.velocity / 8f, RandLerpColor(Color.LightGoldenrodYellow, Color.DarkGoldenrod), 45, 1, Main.rand.NextFloat(.9f, 1.1f) * .3f);
             Timer++;
@@ -123,7 +123,7 @@ namespace HJScarletRework.Projs.Executor
             shader.Parameters["uFadeinLength"].SetValue(0.06f);
             shader.CurrentTechnique.Passes[0].Apply();
             TrailDrawer(useTex, drawColor, multipleSize, alphaValue, offsetHeight);
-                }
+        }
         public void TrailDrawer(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
         {
             if (Projectile.oldPos.Length < 3)

@@ -5,7 +5,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.General;
-using System.Xml.Schema;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;

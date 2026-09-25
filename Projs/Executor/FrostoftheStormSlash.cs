@@ -10,7 +10,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -127,7 +126,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (PostFirstFrame)
                 return;
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldscale = Owner.HeldItem.scale;
             PostFirstFrame = true;
             RandOffset1 = Main.rand.NextFloat(0, 10);
             RandOffset2 = Main.rand.NextFloat(0, 10);
@@ -196,7 +195,7 @@ namespace HJScarletRework.Projs.Executor
 
             List<ScarletVertex> VertexList = [];
             Vector2 projVel = Projectile.velocity.SafeNormalize(Vector2.UnitX) * 42;
-            float heldscale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldscale = Owner.HeldItem.scale;
             for (int i = 0; i < CenterPosList.Count; i++)
             {
                 float progress = (float)i / CenterPosList.Count;

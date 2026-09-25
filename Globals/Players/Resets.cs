@@ -20,7 +20,9 @@ namespace HJScarletRework.Globals.Players
             isBeingLove = false;
             heartoftheCrystal = false;
             tacticalExecution = false;
+            sacarbWings = false;
             blackKeyHeal = 0;
+            handOfGods = false;
             blackKeyDefenseBuff = 0;
             blackKeyDoT = false;
             artificalManaStar = false;
@@ -96,6 +98,7 @@ namespace HJScarletRework.Globals.Players
             critDamageAll = 0;
             critDamageExecutor = 0;
             healingPotionMult = 1;
+            iFrameHurtAdd = 0;
             ResetAcc();
             ResetPets();
             ResetArmor();

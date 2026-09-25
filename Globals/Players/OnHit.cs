@@ -1,7 +1,4 @@
 ﻿using ContinentOfJourney.Buffs;
-using ContinentOfJourney.Items;
-using ContinentOfJourney.Projectiles;
-using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Database.List;
@@ -10,7 +7,6 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Projs.General;
-using rail;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -67,7 +63,7 @@ namespace HJScarletRework.Globals.Players
             finalDamageMult *= SpellBreakerModify(target, ref modifiers);
             modifiers.SourceDamage *= srcDamageMult;
             modifiers.FinalDamage *= finalDamageMult;
-                        
+
         }
 
         public float FloretProtectorModify(NPC target, ref NPC.HitModifiers modifiers)
@@ -152,7 +148,7 @@ namespace HJScarletRework.Globals.Players
                 if (buff <= 0)
                     continue;
                 if (HJScarletList.DebuffListTarget.Contains(buff))
-                    k+= 1;
+                    k += 1;
             }
             return k;
         }
@@ -247,6 +243,10 @@ namespace HJScarletRework.Globals.Players
         }
         public void GlobalOnHitNPCWithSomething(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if(sacarbWings)
+            {
+                target.AddBuff(BuffType<TheBleachingBuff>(), GetSeconds(5));
+            }
             if (selfPortraitType > 0)
             {
                 target.HJScarlet().isPotraitTimer = GetSeconds(5);

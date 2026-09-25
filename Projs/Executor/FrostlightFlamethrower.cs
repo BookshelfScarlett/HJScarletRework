@@ -70,7 +70,7 @@ namespace HJScarletRework.Projs.Executor
                     Owner.direction = (Main.MouseWorld.X - Owner.Center.X > 0).ToDirectionInt();
                     Vector2 ownerToSky = new Vector2(Owner.Center.X + 250 * Owner.direction, Owner.Center.Y) + new Vector2(0, -500) - Owner.Center;
                     Vector2 skyDir = -(ownerToSky).ToSafeNormalize();
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostlightHeldProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), Projectile.Center, Projectile.velocity, ProjectileType<FrostlightHeldProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     proj.originalDamage = Projectile.damage;
                     ((FrostlightHeldProj)proj.ModProjectile).BeginTargetRotation = skyDir.ToRotation();
                     ((FrostlightHeldProj)proj.ModProjectile).Flip = 1;

@@ -1,9 +1,9 @@
 ﻿using ContinentOfJourney.Items.Armor;
 using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
-using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;

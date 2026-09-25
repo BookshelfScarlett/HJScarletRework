@@ -43,8 +43,12 @@ namespace HJScarletRework.Projs.Executor
             {
                 Vector2 randomVelocity = dir.RotatedByRandom(randRot) * Main.rand.NextFloat(0.88f, 1.12f);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, randomVelocity * 16f, ProjectileType<TheGarciaBullet>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                proj.HJScarlet().HasExecutionMechanic = true;
                 if (Projectile.HJScarlet().ExecutionStrike)
+                {
                     proj.CritChance += 10;
+                    proj.penetrate += 1;
+                }
             }
             if (Projectile.HJScarlet().ExecutionStrike)
             {
@@ -77,7 +81,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     bool alt = Main.rand.NextBool();
                     BlendState bs = alt ? BlendState.Additive : BlendState.AlphaBlend;
-                    ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(20), 0.1f,12.4f), RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), Main.rand.Next(45, 65), RandRotTwoPi, 1, 0.33f * Main.rand.NextFloat(.95f, 1.25f), alt, bs);
+                    ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(20), 0.1f, 12.4f), RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), Main.rand.Next(45, 65), RandRotTwoPi, 1, 0.33f * Main.rand.NextFloat(.95f, 1.25f), alt, bs);
                 }
 
             }

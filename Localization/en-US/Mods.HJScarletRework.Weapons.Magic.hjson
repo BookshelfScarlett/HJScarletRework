@@ -51,3 +51,8 @@ BrimstoneHeart: {
 	DisplayName: Brimstone Heart
 	Tooltip: ""
 }
+
+LivingBoomerangMagic: {
+	DisplayName: Living Boomerang Magic
+	Tooltip: ""
+}

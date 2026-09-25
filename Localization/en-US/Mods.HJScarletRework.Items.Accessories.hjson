@@ -475,3 +475,8 @@ BloodThornCrown: {
 	DisplayName: Blood Thorn Crown
 	Tooltip: ""
 }
+
+HandofGods: {
+	DisplayName: Handof Gods
+	Tooltip: ""
+}

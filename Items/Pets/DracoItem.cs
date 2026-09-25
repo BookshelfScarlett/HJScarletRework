@@ -37,14 +37,14 @@ namespace HJScarletRework.Items.Pets
             }
             string text = this.GetLocalizationKey("FlavorTooltip").ToLangValue();
             TextboxSettings sets = new TextboxSettings
-            {
-                HasTitle = false,
-                BackgroundColor = Color.Black * .24f,
-                BackgroundEdgeColor = Color.DarkRed,
-                TextColor = Color.White,
-                TextEdgeColor = Color.DarkRed,
-                MainText = text
-            };
+                (
+                hasTitle: false,
+                backgroundColor: Color.Black * .24f,
+                backgroundEdgeColor: Color.DarkRed,
+                textColor: Color.White,
+                textEdgeColor: Color.DarkRed,
+                mainText: text
+                );
             TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
         }
         public override void AddRecipes()

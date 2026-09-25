@@ -63,7 +63,7 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 safedir = Projectile.rotation.ToRotationVector2();
                     Vector2 shootPos = Projectile.Center + safedir * 60f - (safedir.RotatedBy(PiOver2) * 5f * Projectile.direction);
 
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), shootPos - safedir * 40f + safedir.RotatedBy(PiOver2 * i) * 7f * Main.rand.NextFloat(), safedir * 10f, bulletType, damage, Projectile.knockBack);
+                    Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), shootPos - safedir * 40f + safedir.RotatedBy(PiOver2 * i) * 7f * Main.rand.NextFloat(), safedir * 10f, bulletType, damage, Projectile.knockBack);
                     if (!homing)
                         proj.HJScarlet().HasExecutionMechanic = !Projectile.HJScarlet().ExecutionStrikeManual;
                 }

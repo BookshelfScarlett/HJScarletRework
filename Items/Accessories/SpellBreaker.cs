@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Accessories
         public override string AssetPath => AssetHandler.Equips;
         public static float Damage = .05f;
         public static float DamageMult = .05f;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(),DamageMult.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), DamageMult.ToPercent());
         public override void ExSD()
         {
             Item.accessory = true;

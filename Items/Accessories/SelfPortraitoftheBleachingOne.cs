@@ -3,25 +3,20 @@ using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 
 namespace HJScarletRework.Items.Accessories
 {
-        public class SelfPortraitoftheBleachingOne : HJScarletItemClass
+    public class SelfPortraitoftheBleachingOne : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
         public static float DotDamageMult = 5f;
         public static float ExtraDamageMult = .5f;
         public static int DoTMulter = 4;
         public static int MaxDoTCounts = 12;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DotDamageMult.ToPercent(), ExtraDamageMult.ToPercent(), DoTMulter,MaxDoTCounts);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DotDamageMult.ToPercent(), ExtraDamageMult.ToPercent(), DoTMulter, MaxDoTCounts);
         public override void SetStaticDefaults()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Database.Enums.ShinyRarityType.FateWhite);

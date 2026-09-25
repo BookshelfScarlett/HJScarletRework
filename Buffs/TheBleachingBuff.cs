@@ -22,7 +22,7 @@ namespace HJScarletRework.Buffs
         {
 
             npc.HJScarlet().theBleachingBuffEnemy = true;
-            Vector2 pos = npc.Center.ToRandCirclePos(32) ;
+            Vector2 pos = npc.Center.ToRandCirclePos(32);
             Vector2 dir = -Vector2.UnitY * 1f;
             Vector2 vel = dir * Main.rand.NextFloat(0.3f, 7.7f);
             int lifeTime = Main.rand.Next(30, 70);

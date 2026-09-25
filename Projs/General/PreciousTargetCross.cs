@@ -49,8 +49,8 @@ namespace HJScarletRework.Projs.General
         }
         public void TargetParticle(NPC tar)
         {
-            if(Main.rand.NextBool())
-            ECSParticle.GlowSquare(tar.ToRandRec(), -Vector2.UnitY, RandLerpColor(Color.DarkSeaGreen, Color.LightSeaGreen), 40, 1, RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * .61f, rotSpeed: Main.rand.NextFloat(-.1f, .1f));
+            if (Main.rand.NextBool())
+                ECSParticle.GlowSquare(tar.ToRandRec(), -Vector2.UnitY, RandLerpColor(Color.DarkSeaGreen, Color.LightSeaGreen), 40, 1, RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * .61f, rotSpeed: Main.rand.NextFloat(-.1f, .1f));
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
@@ -77,7 +77,7 @@ namespace HJScarletRework.Projs.General
         {
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
-            
+
             return false;
         }
     }

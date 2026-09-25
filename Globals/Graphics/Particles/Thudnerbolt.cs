@@ -26,7 +26,7 @@ namespace HJScarletRework.Globals.Graphics.Particles
         }
         public override void Update()
         {
-            Opacity *= (1- EaseInOutExpo(LifetimeRatio));
+            Opacity *= (1 - EaseInOutExpo(LifetimeRatio));
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

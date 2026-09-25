@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Accessories
         public static int CritsAdd = 5;
         public static int CritsPerSecond = 3;
         public static int MaxCrits = 250;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritsAdd+"%",CritsPerSecond,MaxCrits +"%");
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritsAdd + "%", CritsPerSecond, MaxCrits + "%");
         public override void SetStaticDefaults()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);

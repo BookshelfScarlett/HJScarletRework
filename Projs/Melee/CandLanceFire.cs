@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
@@ -87,8 +86,8 @@ namespace HJScarletRework.Projs.Melee
 
             SB.End();
             SB.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
-                SB.Draw(ring, Projectile.Center - Main.screenPosition, null, Color.DeepSkyBlue * Projectile.Opacity, 0, ring.ToOrigin(), 0.13f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
-                SB.Draw(ring, Projectile.Center - Main.screenPosition, null, Color.White * Projectile.Opacity * 0.85f, 0, ring.ToOrigin(), 0.13f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
+            SB.Draw(ring, Projectile.Center - Main.screenPosition, null, Color.DeepSkyBlue * Projectile.Opacity, 0, ring.ToOrigin(), 0.13f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
+            SB.Draw(ring, Projectile.Center - Main.screenPosition, null, Color.White * Projectile.Opacity * 0.85f, 0, ring.ToOrigin(), 0.13f * DrawGlowScale * Projectile.scale * Projectile.Opacity, SpriteEffects.None, 0);
             SB.End();
             SB.BeginDefault();
             for (int i = 0; i < 8; i++)

@@ -6,6 +6,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Useables;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Graphics;
@@ -24,6 +25,7 @@ namespace HJScarletRework.Globals.Players
         public bool bitingClaw = false;
         public bool blackKeyDefenseTrigger = false;
         public bool blackKeyDoT = false;
+        public bool brimstoneHeartKilling = false;
         public bool celesitalShellEffect = false;
         public bool chlorophyteHeadExecutor = false;
         public bool combatSlot = false;
@@ -51,6 +53,7 @@ namespace HJScarletRework.Globals.Players
         public bool givePaper = true;
         public bool goldenAppleEnchanted = false;
         public bool goldenAppleEnchantedFully = false;
+        public bool handOfGods = false;
         public bool heartoftheCrystal = false;
         public bool infiniteBreath = false;
         public bool infiniteFlightTime = false;
@@ -73,6 +76,7 @@ namespace HJScarletRework.Globals.Players
         public bool redDragonKnight = false;
         public bool resetEatenFoodCounts = false;
         public bool resetTerraRecipe = false;
+        public bool sacarbWings = false;
         public bool petNone = false;
         public bool petShadow = false;
         public bool petSon = false;
@@ -125,6 +129,7 @@ namespace HJScarletRework.Globals.Players
         public int galvanizedHandDashCD = 0;
         public int genderChangeTimer = 0;
         public int goldenAppleDamageAbsorb = 0;
+        public int iFrameHurtAdd= 0;
         public int lastHeldItemIndex = -1;
         public int LifeBalloonAccJumps;
         public int maidReaperHealTimer = 0;
@@ -161,6 +166,10 @@ namespace HJScarletRework.Globals.Players
         // List<string> 字段
         public List<string> ruShiWoWenBanMinionNameList = new List<string>();
         public List<string> ruShiWoWenBanMinionNameTrashList = new List<string>();
+        public List<string> terraRecipeEatenFoodNameTrashList = new List<string>();
+        public List<string> terraRecipeEatenFoodNameList = new List<string>();
+        public List<string> terraRecipeNotEatenFoodNameTrashList = new List<string>();
+        public List<string> terraRecipeNotEatenFoodNameList = new List<string>();
 
         // List<int> 字段
         public List<int> terraRecipe_EatenFoodList = new List<int>();
@@ -199,6 +208,18 @@ namespace HJScarletRework.Globals.Players
                 new HeartParticle(pos, Vector2.UnitY * -Main.rand.NextFloat(0.51f, 2.3f), RandLerpColor(Color.Crimson, Color.HotPink), 40, 0.08f, 0.8f, fadeIn: true).Spawn();
             }
         }
+        public void SwapListForNeeded(IReadOnlyList<string> matcher, ref List<string> trasher, ref List<string> apply)
+        {
+            for (int i = 0; i < trasher.Count; i++)
+            {
+                string nameType = trasher[i];
+                if (matcher.Contains(nameType))
+                {
+                    trasher.RemoveAt(i);
+                    apply.Add(nameType);
+                }
+            }
+        }
         public override void OnEnterWorld()
         {
             if (givePaper)
@@ -208,27 +229,39 @@ namespace HJScarletRework.Globals.Players
             }
             OnEnterWorldReset();
             resetTerraRecipe = true;
-            for (int i = 0; i < ruShiWoWenBanMinionNameTrashList.Count; i++)
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terraRecipeNotEatenFoodNameTrashList, ref terraRecipeNotEatenFoodNameList);
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terraRecipeEatenFoodNameTrashList, ref terraRecipeEatenFoodNameList);
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terraRecipeEatenFoodNameList, ref terraRecipeEatenFoodNameTrashList);
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terraRecipeNotEatenFoodNameList, ref terraRecipeNotEatenFoodNameTrashList);
+            SwapListForNeeded(HJScarletList.SummonWeaponFullName, ref ruShiWoWenBanMinionNameTrashList, ref ruShiWoWenBanMinionNameList);
+            SwapListForNeeded(HJScarletList.SummonWeaponFullName, ref ruShiWoWenBanMinionNameList, ref ruShiWoWenBanMinionNameTrashList);
+            for (int i = 0; i < HJScarletList.LegalFoodListName.Count; i++)
             {
-
-                string nameType = ruShiWoWenBanMinionNameTrashList[i];
-                if (HJScarletList.SummonWeaponFullName.Contains(nameType))
+                string name = HJScarletList.LegalFoodListName[i];
+                if (!terraRecipeEatenFoodNameList.Contains(name) && !terraRecipeNotEatenFoodNameList.Contains(name))
                 {
-                    ruShiWoWenBanMinionNameTrashList.RemoveAt(i);
-                    ruShiWoWenBanMinionNameList.Add(nameType);
+                    terraRecipeNotEatenFoodNameList.Add(name);
                 }
             }
-            for (int i = 0; i < ruShiWoWenBanMinionNameList.Count; i++)
-            {
-                string nameType = ruShiWoWenBanMinionNameList[i];
-                if (!HJScarletList.SummonWeaponFullName.Contains(nameType))
-                {
-                    ruShiWoWenBanMinionNameTrashList.Add(nameType);
-                    ruShiWoWenBanMinionNameList.RemoveAt(i);
-                }
-            }
+            //for (int i = 0; i < ruShiWoWenBanMinionNameTrashList.Count; i++)
+            //{
 
-
+            //    string nameType = ruShiWoWenBanMinionNameTrashList[i];
+            //    if (HJScarletList.SummonWeaponFullName.Contains(nameType))
+            //    {
+            //        ruShiWoWenBanMinionNameTrashList.RemoveAt(i);
+            //        ruShiWoWenBanMinionNameList.Add(nameType);
+            //    }
+            //}
+            //for (int i = 0; i < ruShiWoWenBanMinionNameList.Count; i++)
+            //{
+            //    string nameType = ruShiWoWenBanMinionNameList[i];
+            //    if (!HJScarletList.SummonWeaponFullName.Contains(nameType))
+            //    {
+            //        ruShiWoWenBanMinionNameTrashList.Add(nameType);
+            //        ruShiWoWenBanMinionNameList.RemoveAt(i);
+            //    }
+            //}
 
             for (int i = 0; i < Player.inventory.Length; i++)
             {

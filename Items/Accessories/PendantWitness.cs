@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Instances.Items;
-using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -12,11 +12,6 @@ namespace HJScarletRework.Items.Accessories
 {
     public class PendantWitness : HJScarletItemClass
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
-
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {
@@ -29,7 +24,7 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            base.UpdateAccessory(player, hideVisual);
+            player.HJScarlet().pendantLevel = 1;
         }
         public override void AddRecipes()
         {

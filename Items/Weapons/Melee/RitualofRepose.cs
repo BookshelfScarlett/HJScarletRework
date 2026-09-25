@@ -1,6 +1,7 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
 using HJScarletRework.Core.ScreenEffect;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
@@ -17,6 +18,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void SetStaticDefaults()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Database.Enums.ShinyRarityType.Hallowed);
+            ScarletItemIDSets.GrantsBoosterAfterSon[Type] = true;
         }
         public override void ExSD()
         {
@@ -46,7 +48,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             player.longInvince = true;
             ScreenDarknessSystem.AddScreenDarkness(0.80f, 10, 2, 5, easeOut: EaseInCubic, holdCondition: () => Main.LocalPlayer.IsHolding(Type));
-            if (player.HasProj(Item.shoot)||player.HasProj<RitualofReposeRest>())
+            if (player.HasProj(Item.shoot) || player.HasProj<RitualofReposeRest>())
                 return;
             int dmg = (int)player.GetTotalDamage<MeleeDamageClass>().ApplyTo(Item.damage);
             Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.MountedCenter, Vector2.Zero, Item.shoot, dmg, Item.knockBack, player.whoAmI);

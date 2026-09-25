@@ -18,7 +18,7 @@ namespace HJScarletRework.Items.Accessories
             Type.ShimmerTo(ItemType<EmblemFirearm>());
         }
         public override string AssetPath => AssetHandler.Equips;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%",MaxDamageMult.ToPercent());
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%", MaxDamageMult.ToPercent());
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Lime);

@@ -117,7 +117,7 @@ namespace HJScarletRework.Projs.Magic
                     {
                         Vector2 pos = Projectile.Center.ToRandCirclePosEdge(4);
                         Vector2 vel = Projectile.SafeDir().RotateRandom(ToRadians(15f)).ToSafeNormalize() * Main.rand.NextFloat(0.9f, 1.1f) * 7f;
-                        Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, ProjectileType<PestilenceFlowerHunger>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                        Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), pos, vel, ProjectileType<PestilenceFlowerHunger>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                     }
                     for (int i = 0; i < 8; i++)
                     {

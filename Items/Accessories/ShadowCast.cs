@@ -6,7 +6,6 @@ using HJScarletRework.Globals.Players.Dashes;
 using HJScarletRework.Globals.Systems;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {

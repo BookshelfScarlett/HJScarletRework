@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Items;
+using ContinentOfJourney.Items.Accessories.SummonerRings;
 using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Items.Weapons.Melee;
@@ -17,6 +18,7 @@ namespace HJScarletRework.Globals.Database.List
         public static List<int> MaleNPC = [];
         public static List<int> FemaleNPC = [];
         public static List<int> LegalFoodList = [];
+        public static List<string> LegalFoodListName = [];
         public static List<int> SummonWeaponList = [];
         public static List<string> SummonWeaponFullName = [];
 
@@ -179,6 +181,11 @@ namespace HJScarletRework.Globals.Database.List
                 ItemID.Bacon,
                 ItemID.GoldenDelight
             ];
+            for (int i = 0; i < LegalFoodList.Count; i++)
+            {
+                string name = ItemID.Search.GetName(LegalFoodList[i]);
+                LegalFoodListName.Add(name);
+            }
             DownedBossConditionList = new Dictionary<int, string>()
             {
                 { NPCID.EaterofWorldsHead, "DownedEvilBoss" },
@@ -222,9 +229,20 @@ namespace HJScarletRework.Globals.Database.List
             {
                 Item item = new Item(i);
                 //食物处理
-                bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3;
+                bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3 || ItemID.Sets.IsFood[item.type];
                 if (isFood && !LegalFoodList.Contains(item.type))
+                {
                     LegalFoodList.Add(item.type);
+                    if (i > VanillaMaxItem)
+                    {
+                        ModItem modItem = item.ModItem;
+                        if (modItem is not null)
+                        {
+                            LegalFoodListName.Add(modItem.FullName);
+                        }
+                    }
+                }
+                    
                 //oreType和barType的处理
                 string name = item.GetType().Name.ToLower();
                 bool isOre = name.Contains("ore") && item.createTile != -1;
@@ -271,7 +289,9 @@ namespace HJScarletRework.Globals.Database.List
             ThrownSpearList = null;
             HJSpearList = null;
             LegalFoodList = null;
+            LegalFoodListName= null;
             DownedBossConditionList = null;
+            SummonWeaponFullName = null;
 
             OresHashSet.Clear();
             BarsHashSet.Clear();

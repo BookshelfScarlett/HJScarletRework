@@ -66,7 +66,7 @@ namespace HJScarletRework.Projs.Executor
             int length = Projectile.oldPos.Length;
             float generalScale = .84f;
             SB.EnterShaderArea();
-            SB.FastDraw(HJScarletTexture.Particle_CrossGlow.Value, drawPosition, Color.SkyBlue, 0, HJScarletTexture.Particle_CrossGlow.Value.Size()/2f, Projectile.scale * generalScale * .14f, 0);
+            SB.FastDraw(HJScarletTexture.Particle_CrossGlow.Value, drawPosition, Color.SkyBlue, 0, HJScarletTexture.Particle_CrossGlow.Value.Size() / 2f, Projectile.scale * generalScale * .14f, 0);
             SB.EndShaderArea();
             for (int i = length - 1; i >= 0; i--)
             {

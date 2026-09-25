@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.NPCs.Enemy;
 using Terraria;
 using Terraria.ID;
@@ -22,6 +21,7 @@ namespace HJScarletRework.Items.Useables
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.SetUpNoUseGraphicItem();
             Item.autoReuse = true;
+            Item.HJScarlet().CanDrawIcon = true;
             Item.rare = ItemRarityID.Red;
             Item.useTurn = true;
             Item.shoot = ProjectileType<SuicideKnifeInvisProj>();
@@ -44,7 +44,7 @@ namespace HJScarletRework.Items.Useables
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddRecipeGroup(RecipeGroupID.IronBar,10).
+                AddRecipeGroup(RecipeGroupID.IronBar, 10).
                 AddTile(TileID.WorkBenches).
                 Register();
 

@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney;
-using ContinentOfJourney.Items;
+﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Accessories;
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Mounts.Rudders;
@@ -12,7 +11,6 @@ using HJScarletRework.Items.Weapons.Melee;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Exceptions;
 
 namespace HJScarletRework.Globals.Instances.Items
 {

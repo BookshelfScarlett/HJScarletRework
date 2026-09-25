@@ -7,7 +7,7 @@ using Terraria;
 
 namespace HJScarletRework.Projs.Ranged
 {
-    public class BlazingSunHeldProj:HJScarletRangedWeaponoutClass
+    public class BlazingSunHeldProj : HJScarletRangedWeaponoutClass
     {
         public override EnumDamageClass Category => EnumDamageClass.Ranged;
         public override string Texture => GetInstance<BlazingSun>().Texture;
@@ -23,7 +23,7 @@ namespace HJScarletRework.Projs.Ranged
             {
                 for (int i = -1; i < 2; i += 2)
                 {
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<BlazingSunFireball>(), Projectile.originalDamage, 1f, Projectile.owner);
+                    Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), Projectile.Center, Vector2.Zero, ProjectileType<BlazingSunFireball>(), Projectile.originalDamage, 1f, Projectile.owner);
                     proj.ai[1] = i;
                 }
             }
@@ -33,7 +33,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         protected override void UpdateGlobalReset()
         {
-            
+
         }
         protected override void OnAttack()
         {
@@ -42,7 +42,7 @@ namespace HJScarletRework.Projs.Ranged
             {
                 Vector2 firePos = Projectile.Center - new Vector2(-15f * Projectile.direction, Main.rand.Next(-25, 26)).BetterRotatedBy(Projectile.rotation);
                 Vector2 dir = Projectile.SafeDirByRot();
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), firePos, dir * Main.rand.NextFloat(.9f, 1.1f) * 16f, ProjectileType<BlazingSunArrow>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), firePos, dir * Main.rand.NextFloat(.9f, 1.1f) * 16f, ProjectileType<BlazingSunArrow>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
             ScarletSound(HJScarletSounds.HymnFireball_Release, Projectile.Center, instances: 0, pitch: -.4f, pitchVariance: .1f);
         }

@@ -85,7 +85,7 @@ namespace HJScarletRework.Projs.General
         {
             RingScale = Lerp(RingScale, 1f, .05f);
             float distance = (Projectile.Center - Owner.Center).LengthSquared();
-            float searchDist = 160;
+            float searchDist = 16*20;
             if (Owner.HJScarlet().cycleMadnessLevel == 2)
                 searchDist *= 2;
 
@@ -110,7 +110,7 @@ namespace HJScarletRework.Projs.General
             if (Main.rand.NextBool(8))
             {
                 bool boolenValue = Main.rand.NextBool();
-                Color c = Color.White ;
+                Color c = Color.White;
                 ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(16), -Vector2.UnitY * Main.rand.NextFloat(0.1f, 1.2f) * 1.1f, c, Main.rand.Next(30, 45), 1, Projectile.scale * 0.30f * Main.rand.NextFloat(.9f, 1.05f), 0.2f);
             }
         }
@@ -118,7 +118,7 @@ namespace HJScarletRework.Projs.General
         {
             if (Projectile.IsOutScreen())
                 return;
-            if(Main.rand.NextBool(4))
+            if (Main.rand.NextBool(4))
             {
                 ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePos(16), Projectile.velocity / 8f, RandLerpColor(Color.White, Color.WhiteSmoke), Main.rand.Next(35, 45), 1f, Main.rand.NextFloat(.9f, 1.1f) * .051f, .85f);
             }
@@ -162,7 +162,7 @@ namespace HJScarletRework.Projs.General
                 Vector2 sharpScale = new Vector2(1, 1f) * Projectile.scale;
                 Vector2 sharpPos = oldpos - new Vector2(0, 0).RotatedBy(Projectile.oldRot[i]);
                 float oldRot = Projectile.oldRot[i];
-                SB.FastDraw(ring, sharpPos, c*opa, oldRot, ringOrig, sharpScale*oldscale*.65f*RingScale, 0);
+                SB.FastDraw(ring, sharpPos, c * opa, oldRot, ringOrig, sharpScale * oldscale * .65f * RingScale, 0);
             }
             SB.EndShaderArea();
             return false;

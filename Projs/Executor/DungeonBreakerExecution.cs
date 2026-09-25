@@ -269,7 +269,9 @@ namespace HJScarletRework.Projs.Executor
 
             }
             Projectile.rotation += 0.2f;
-            Projectile.ResetBoomerangReturn();
+            Projectile.tileCollide = false;
+            Projectile.penetrate = -1;
+            Projectile.stopsDealingDamageAfterPenetrateHits = true;
             Projectile.HomingTarget(Owner.Center, -1, 20f, 2f);
             if (Projectile.IntersectOwnerByDistance(20))
             {

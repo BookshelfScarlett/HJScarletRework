@@ -72,7 +72,7 @@ namespace HJScarletRework.Projs.Executor
             ScarletSound(HJScarletSounds.Misc_Boom, Projectile.Center, variantType: 4);
             for (int i = 0; i < 4; i++)
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(30),8f,17f), ProjectileType<HeadsplosionBombBullet>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(30), 8f, 17f), ProjectileType<HeadsplosionBombBullet>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
                 if (Projectile.HJScarlet().ExecutionStrike)
                     proj.HJScarlet().ExecutionStrikeManual = true;
             }

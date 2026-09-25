@@ -200,13 +200,6 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.AddExecutionTimeImmediate(ItemType<DreamlessNight>());
             //在命中的时候，我们才生成需要的仆从
             //当然，前提是条件合理
-            if (!Owner.HasProj<DreamlessNightMinion>() && Projectile.HJScarlet().ExecutionStrike && Projectile.numHits < 1)
-            {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, projID, Projectile.damage, Projectile.knockBack, Owner.whoAmI);
-                proj.rotation = Projectile.rotation;
-                for (int i = 0; i < 8; i++)
-                    new Fire(target.Center.ToRandCirclePos(6), RandVelTwoPi(0.1f, 8.8f), RandLerpColor(Color.DarkViolet, Color.Black), 40, RandRotTwoPi, 1, 0.25f).SpawnToNonPreMult();
-            }
         }
 
         public void ShootNightLaser(NPC target)

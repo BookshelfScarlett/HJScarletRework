@@ -1,5 +1,4 @@
-﻿using HJScarletRework.Core.DeepGlowSystem;
-using HJScarletRework.Globals.Database.Enums;
+﻿using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;

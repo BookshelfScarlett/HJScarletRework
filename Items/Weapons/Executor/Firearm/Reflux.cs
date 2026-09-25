@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items.Material;
-using HJScarletRework.Globals.Database.Enums;
+﻿using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
@@ -11,24 +10,23 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
 {
     public class Reflux : ExecutorWeaponClass
     {
-        public override int ExecutionProgress => 15;
+        public override int ExecutionProgress => 75;
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateCopper);
         }
         public override void ExSD()
-        {
-            Item.damage = 2010;
+        { 
+            Item.damage = 25;
             Item.shootSpeed = 19;
-            Item.SetUpRarityPrice(ItemRarityID.Red);
+            Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.SetUpNoUseGraphicItem(true);
             Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = null;
             Item.knockBack = 7f;
-            Item.useTime = Item.useAnimation = 25;
-            Item.crit = 46;
+            Item.useTime = Item.useAnimation = 32;
             Item.shoot = ProjectileType<RefluxHeldProj>();
             Item.HJScarlet().borderlandWeapon = true;
         }
@@ -50,7 +48,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         {
             CreateRecipe().
                 AddIngredient(ItemID.QuadBarrelShotgun).
-                AddIngredient(ItemID.IllegalGunParts, 10).
+                AddIngredient(ItemID.IllegalGunParts, 5).
                 AddTile(TileID.Anvils).
                 Register();
         }

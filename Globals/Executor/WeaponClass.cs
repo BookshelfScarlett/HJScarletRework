@@ -130,7 +130,7 @@ namespace HJScarletRework.Globals.Executor
         }
         public override void PostDrawTooltipLine(DrawableTooltipLine line)
         {
-            if (!HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase&&!BlockTextboxDetail())
+            if (!HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase && !BlockTextboxDetail())
             {
                 //记录起始点坐标。
                 //通常情况下，物品不可能没有名字，而物品名称通常都在第一行，所以可以用这个来记录第一行的坐标
@@ -158,7 +158,7 @@ namespace HJScarletRework.Globals.Executor
                     TextColor = Color.White,
                     TextEdgeColor = Color.Black,
                     TitleTextSize = 1.15f,
-                    BoxSize =TextBoxSize
+                    BoxSize = TextBoxSize
                 };
                 //最后传值。
                 TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);

@@ -13,14 +13,14 @@ namespace HJScarletRework.Projs.Executor
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override float HoldoutDrawScale => 1;
-        public override bool HoldoutEdgeEnable => base.HoldoutEdgeEnable;
+        public override bool HoldoutEdgeEnable => false;
         public override Color HoldoutEdgeColor => Color.LimeGreen;
-        public override Vector2 HoldoutOffset => new Vector2(20f,0);
+        public override Vector2 HoldoutOffset => new Vector2(20f, 0);
         public override float RecoilPower => 15;
         public override float RecoilWeaponPullbackRatios => base.RecoilWeaponPullbackRatios;
         public override int OriginalItemID => ItemType<Reflux>();
         public override string Texture => GetInstance<Reflux>().Texture;
-        public override bool IsUsing => base.IsUsing || Projectile.HJScarlet().ExecutionStrike;
+        public override bool IsUsing => base.IsUsing;
         protected override void UpdateRecoil()
         {
             base.UpdateRecoil();
@@ -28,7 +28,18 @@ namespace HJScarletRework.Projs.Executor
         protected override void PreAttack()
         {
             base.PreAttack();
+            if (!Owner.GetExecutionSrike())
+                Projectile.HJScarlet().ExecutionStrike = false;
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
+            {
+                Projectile.HJScarlet().ExecutionStrike = true;
+                Owner.RemoveExecutionProgress(OriginalItemID);
+            }
             ScarletSound(HJScarletSounds.Shotgun_EvaAuto, Projectile.Center);
+            if (Projectile.HJScarlet().ExecutionStrike)
+                ScarletSound(HJScarletSounds.Shotgun_Mastiff, Projectile.Center);
+
+
         }
         protected override void OnAttack()
         {
@@ -36,24 +47,17 @@ namespace HJScarletRework.Projs.Executor
             Vector2 pos = Projectile.Center + offset;
             Vector2 dir = Projectile.SafeDirByRot();
             int type = ProjectileType<RefluxBullet>();
-            if (Projectile.HJScarlet().ExecutionStrike)
-            {
-                type = ProjectileType<MoonfireBulletExecution>();
-            }
             pos -= new Vector2(5, 0).RotatedBy(Projectile.rotation);
-                        float randRot = Projectile.HJScarlet().ExecutionStrike ? ToRadians(4.5f) : ToRadians(17.5f);
+            float randRot = Projectile.HJScarlet().ExecutionStrike ? ToRadians(4.5f) : ToRadians(17.5f);
             for (int i = 0; i < 5; i++)
             {
                 Vector2 randomVelocity = dir.RotatedByRandom(randRot) * Main.rand.NextFloat(0.88f, 1.12f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, randomVelocity * 11f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), pos, randomVelocity * 11f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                proj.HJScarlet().HasExecutionMechanic = !Projectile.HJScarlet().ExecutionStrike;
+                proj.HJScarlet().ExecutionStrike = Projectile.HJScarlet().ExecutionStrike;
+                proj.penetrate += Projectile.HJScarlet().ExecutionStrike.ToInt();
             }
-            if (Projectile.HJScarlet().ExecutionStrike)
-            {
-            }
-            else
-            {
-            }
-                ScreenShakeSystem.AddScreenShakes(pos, 15, 15, -Projectile.SafeDirByRot().ToRotation(), 0, true, easingFunc: EaseOutExpo);
+            ScreenShakeSystem.AddScreenShakes(pos, 15, 15, -Projectile.SafeDirByRot().ToRotation(), 0, true, easingFunc: EaseOutExpo);
 
             pos = Projectile.Center + offset;
             //震屏，粒子特效
@@ -63,7 +67,7 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 pos2 = pos.ToRandCirclePos(5) - particleOffset;
                 Vector2 vel = Projectile.SafeDirByRot().ToRandVelocity(ToRadians(20), .1f, 11.6f);
                 int timeLeft = Main.rand.Next(30, 45);
-                ECSParticle.SmokeParticle(pos2, vel, RandLerpColor(Color.LimeGreen, Color.DarkGreen), timeLeft, RandRotTwoPi, .55f, Main.rand.NextFloat(.9f, 1.1f) * .30f,blendstate:BlendState.AlphaBlend);
+                ECSParticle.SmokeParticle(pos2, vel, RandLerpColor(Color.LimeGreen, Color.DarkGreen), timeLeft, RandRotTwoPi, .55f, Main.rand.NextFloat(.9f, 1.1f) * .30f, blendstate: BlendState.AlphaBlend);
                 //ECSParticle.GlowSquare(pos2, vel, RandLerpColor(Color.LimeGreen, Color.Lime), timeLeft, 1, RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * 0.71f, 0, Main.rand.NextFloat(-.08f, 0.09f), 1f);
             }
             for (int i = 0; i < 36; i++)

@@ -4,7 +4,6 @@ using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
 {
@@ -17,10 +16,10 @@ namespace HJScarletRework.Items.Accessories
         {
             Item.accessory = true;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            Item.HJScarlet().drawBuffIconAndDetail = true;
             player.HJScarlet().spellBreakerLevel = 1;
         }
         public override void AddRecipes()

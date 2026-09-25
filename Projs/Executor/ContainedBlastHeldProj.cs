@@ -80,7 +80,7 @@ namespace HJScarletRework.Projs.Executor
         public bool IsAlterBullet = false;
         public void ShootBullet(Vector2 pos, Vector2 vel, int type, int damage)
         {
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, vel, type, damage, Projectile.knockBack, Projectile.owner);
+            Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), pos, vel, type, damage, Projectile.knockBack, Projectile.owner);
             proj.originalDamage = Projectile.originalDamage;
             proj.HJScarlet().HasExecutionMechanic = Owner.HJScarlet().containedBlastBuffTime < GetSeconds(3);
             proj.ai[0] = Owner.HJScarlet().containedBlastBuffTime;
@@ -105,7 +105,7 @@ namespace HJScarletRework.Projs.Executor
                 }
                 Vector2 dir = Projectile.rotation.ToRotationVector2();
                 float rnd = Owner.HJScarlet().containedBlastBuffTime > 0 ? Main.rand.NextFloat(.90f, 1.1f) * 1f : 1f;
-                int bulletDamage = (int)(Projectile.originalDamage * rnd * Clamp((1 + Owner.HJScarlet().containedBlastBoomCount), 1f, 1.45f));
+                int bulletDamage = (int)(Projectile.originalDamage * rnd * Clamp((1 + Owner.HJScarlet().containedBlastBoomCount), 1f, 1.30f));
                 if (IsAlterBullet)
                 {
                     Vector2 bulletPos = firePos + dir.RotatedBy(PiOver2) * Main.rand.NextFloat(-5f, 5f);

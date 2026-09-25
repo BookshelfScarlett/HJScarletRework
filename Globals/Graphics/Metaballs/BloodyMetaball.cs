@@ -64,11 +64,11 @@ namespace HJScarletRework.Globals.Graphics.Metaballs
                 {
                     if (Particles[i].UseBall)
                     {
-                        Main.spriteBatch.Draw(HJScarletTexture.Texture_WhiteCircle.Value, Particles[i].Center - Main.screenPosition, null, Color.White, Particles[i].Rot, HJScarletTexture.Texture_WhiteCircle.Value.Size()/ 2, Particles[i].Scale, SpriteEffects.None, 0f);
+                        Main.spriteBatch.Draw(HJScarletTexture.Texture_WhiteCircle.Value, Particles[i].Center - Main.screenPosition, null, Color.White, Particles[i].Rot, HJScarletTexture.Texture_WhiteCircle.Value.Size() / 2, Particles[i].Scale, SpriteEffects.None, 0f);
                         continue;
                     }
 
-                    Main.spriteBatch.Draw(HJScarletTexture.Texture_BloodStain.Value, Particles[i].Center - Main.screenPosition, null, Color.White, Particles[i].Rot, HJScarletTexture.Texture_BloodStain.Value.Size()/ 2, Particles[i].Scale, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(HJScarletTexture.Texture_BloodStain.Value, Particles[i].Center - Main.screenPosition, null, Color.White, Particles[i].Rot, HJScarletTexture.Texture_BloodStain.Value.Size() / 2, Particles[i].Scale, SpriteEffects.None, 0f);
                 }
             }
         }

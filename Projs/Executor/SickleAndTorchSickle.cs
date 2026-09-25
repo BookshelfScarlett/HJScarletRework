@@ -34,6 +34,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ExSD()
         {
+            Projectile.width = 115;
+            Projectile.height = 115;
             Projectile.SetUpHeldProj(6);
             Projectile.SetupImmnuity(-1);
             Projectile.penetrate = 2;
@@ -113,7 +115,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void UpdateBeginAnimation()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
             float beginAngle = -210f * Flip.ToDirectionInt();
@@ -153,7 +155,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateEndAnimation()
         {
             Helper.UpdateAniState(1);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldScale = Owner.HeldItem.scale;
             float easedProgress = EaseInOutExpo(Helper.GetAniProgress(1));
             float beginAngle = 125f * Flip.ToDirectionInt();
             float endAngle = 130 * Flip.ToDirectionInt();

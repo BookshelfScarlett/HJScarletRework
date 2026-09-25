@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Globals.Methods;
-using System;
 using Terraria;
 
 namespace HJScarletRework.Globals.Classes
@@ -30,7 +29,7 @@ namespace HJScarletRework.Globals.Classes
         /// 额外更新，这个额外更新默认为<see langword="1"/>，即提供1额外更新
         /// <br>一般情况下会用于手持射弹本身的粒子特效</br>
         /// </summary>
-        public virtual int ProjExtraUpdates => 1;
+        public virtual int ProjExtraUpdates => 2;
         /// <summary>
         /// 该远程武器的计时器，用于和<see cref="AttackSpeed"/>一起实际控制武器的攻击频率
         /// </summary>
@@ -94,7 +93,7 @@ namespace HJScarletRework.Globals.Classes
             UpdateHeldProjectile();
             //后坐力动画
             UpdateRecoil();
-            
+
             if (IsUsing)
             {
                 Timer++;
@@ -166,6 +165,7 @@ namespace HJScarletRework.Globals.Classes
         {
             Timer = 0;
             RecoilTimer = AttackSpeed;
+            Projectile.ContinuouslyUpdateDamageStats= true;
         }
         /// <summary>
         /// 武器的实际攻击效果
@@ -217,7 +217,7 @@ namespace HJScarletRework.Globals.Classes
             Vector2 offset = HoldoutOffset * new Vector2(Owner.direction, 1);
             float drawRot = Projectile.rotation + (Projectile.spriteDirection == -1 ? Pi : 0);
             drawPos += offset.BetterRotatedBy(drawRot);
-            
+
             float scale = Projectile.scale * HoldoutDrawScale;
             if (HoldoutEdgeEnable)
             {

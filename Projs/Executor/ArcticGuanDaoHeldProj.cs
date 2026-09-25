@@ -33,6 +33,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ExSD()
         {
+            Projectile.width = Projectile.height = 180;
             Projectile.SetUpHeldProj(8);
             Projectile.SetupImmnuity(-1);
             Projectile.penetrate = 3;
@@ -142,7 +143,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdtaeFullCircleEnd()
         {
             Helper.UpdateAniState(1);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldScale = Owner.HeldItem.scale;
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(1));
             float beginAngle = 415f * Flip.ToDirectionInt();
             float endAngle = 420 * Flip.ToDirectionInt();
@@ -156,7 +157,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdtaeFullCircleBegin()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
             float beginAngle = -210f * Flip.ToDirectionInt();
@@ -209,7 +210,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void UpdateBeginAnimation()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutExpo(Helper.GetAniProgress(0));
             float beginAngle = -195f * Flip.ToDirectionInt();

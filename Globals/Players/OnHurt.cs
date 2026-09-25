@@ -90,7 +90,7 @@ namespace HJScarletRework.Globals.Players
                 int lifeTime = Main.rand.Next(30, 70);
                 float rot = RandRotTwoPi;
                 ECSParticle.SmokeParticle(pos, vel, Color.WhiteSmoke, lifeTime, rot, .8f, .35f, true, BlendState.NonPremultiplied);
-                ECSParticle.SmokeParticle(pos, vel, RandLerpColor(Color.Black,Color.Lerp(Color.Black,Color.White,.1f)), lifeTime, rot, 1f, .3f, true, BlendState.NonPremultiplied);
+                ECSParticle.SmokeParticle(pos, vel, RandLerpColor(Color.Black, Color.Lerp(Color.Black, Color.White, .1f)), lifeTime, rot, 1f, .3f, true, BlendState.NonPremultiplied);
             }
         }
         public override bool ConsumableDodge(Player.HurtInfo info)
@@ -341,6 +341,16 @@ namespace HJScarletRework.Globals.Players
                 Rectangle location = new Rectangle((int)Player.position.X, (int)Player.position.Y - 16, Player.width, Player.height);
                 //CombatText.NewText(location, Color.Gold, Language.GetTextValue(reduceText));
             }
+        }
+        public override void PostHurt(Player.HurtInfo info)
+        {
+            int iTime = iFrameHurtAdd;
+            if (info.CooldownCounter != -1)
+                Player.hurtCooldowns[info.CooldownCounter] += iTime;
+            else
+                Player.immuneTime += iTime;
+
+            base.PostHurt(info);
         }
     }
 }

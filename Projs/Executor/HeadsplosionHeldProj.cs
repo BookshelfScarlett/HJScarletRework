@@ -3,10 +3,8 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
-using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using HJScarletRework.Items.Weapons.Requirement;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
@@ -18,7 +16,7 @@ namespace HJScarletRework.Projs.Executor
         public override string Texture => GetInstance<Headsplosion>().Texture;
         public override float RecoilPower => 20;
         public override int ProjExtraUpdates => 2;
-        public override Vector2 HoldoutOffset => new(20,0);
+        public override Vector2 HoldoutOffset => new(20, 0);
         public override Color HoldoutEdgeColor => Color.Goldenrod;
         protected override void PreAttack()
         {
@@ -37,7 +35,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 dir = Projectile.SafeDirByRot();
             int type = ProjectileType<HeadsplosionBullet>();
             pos -= new Vector2(80, 0).RotatedBy(Projectile.rotation);
-            Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+            Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), pos, dir * 18f, type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
             if (Projectile.HJScarlet().ExecutionStrike)
             {
                 ScarletSound(HJScarletSounds.ASMD_ExecutionFire, Projectile.Center, 0.30f, 0, .24f, 0.1f);

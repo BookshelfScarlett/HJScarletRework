@@ -14,6 +14,7 @@ namespace HJScarletRework.Projs.Executor
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public float TileTime = 0;
+        public int TotalTile = 0;
         public ref float Timer => ref Projectile.ai[0];
         public override void SetStaticDefaults()
         {
@@ -86,13 +87,14 @@ namespace HJScarletRework.Projs.Executor
             {
                 Projectile.BounceOnTile(oldVelocity);
             }
+            TotalTile++;
             DoTileParticle(Projectile.Center);
-            return false;
+            return TotalTile>10;
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             float rat = Utils.GetLerpValue(0, 8, Projectile.numHits, true);
-            modifiers.SourceDamage *= Lerp(1f, 3f, rat);
+            modifiers.SourceDamage *= Lerp(1f, 1.75f, rat);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

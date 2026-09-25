@@ -1,10 +1,4 @@
 ﻿using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs.General;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -12,10 +6,10 @@ namespace HJScarletRework.Globals.Systems
 {
     public class HJScarletCustomCursor : ModSystem
     {
-        public static Texture2D CursorTargetCross { get; set; } 
+        public static Texture2D CursorTargetCross { get; set; }
         public override void Load()
         {
-            CursorTargetCross= Request<Texture2D>("HJScarletRework/Assets/Texture/Items/Equips/PreciousTarget").Value;
+            CursorTargetCross = Request<Texture2D>("HJScarletRework/Assets/Texture/Items/Equips/PreciousTarget").Value;
         }
         public override void Unload()
         {

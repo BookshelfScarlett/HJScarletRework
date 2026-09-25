@@ -15,12 +15,12 @@ namespace HJScarletRework.Items.Armor.ExecutorVanillaHead
         public override bool SetUpArmorSet => true;
         public float Damage = 0.10f;
         public float CritDamage = 0.10f;
-        public int Crit = 10;
+        public int Crit = 5;
         public static int BoltDamage = 75;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%", CritDamage.ToPercent());
         public override void ExSD()
         {
-            Item.defense = 30;
+            Item.defense = 17;
             Item.SetUpRarityPrice(ItemRarityID.Lime);
         }
         public override void UpdateEquip(Player player)

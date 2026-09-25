@@ -111,7 +111,9 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnExecution()
         {
-            Owner.HJScarlet().crimsonScytheAttackCounter = 20;
+            Owner.HJScarlet().crimsonScytheAttackCounter = 20;            //在这里给玩家加成
+            Owner.ApplyNoKnockbackBuff(30);
+
             ScarletSound(HJScarletSounds.Misc_ManaClearUse, Owner.Center, 0.55f, 1, -0.84f, 0.2f);
         }
         public void UpdatePlayerState()
@@ -178,7 +180,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdtaeFullCircleEnd()
         {
             Helper.UpdateAniState(1);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldScale = Owner.HeldItem.scale;
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(1));
             float beginAngle = 415f * Flip.ToDirectionInt();
             float endAngle = 420 * Flip.ToDirectionInt();
@@ -192,7 +194,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdtaeFullCircleBegin()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
             float beginAngle = -210f * Flip.ToDirectionInt();
@@ -263,7 +265,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public void UpdateBeginAnimation()
         {
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutExpo(Helper.GetAniProgress(0));
             float beginAngle = -195f * Flip.ToDirectionInt();
@@ -305,7 +307,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateEndAnimation()
         {
             Helper.UpdateAniState(1);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldScale = Owner.HeldItem.scale;
             float easedProgress = EaseOutBack(Helper.GetAniProgress(1));
             float beginAngle = 185f * Flip.ToDirectionInt();
             float endAngle = 195 * Flip.ToDirectionInt();
@@ -323,7 +325,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateFinalAnimation()
         {
             Helper.UpdateAniState(2);
-            float heldScale = HJScarletMethods.HasFuckingCalamity ? Owner.HeldItem.scale : 1f;
+            float heldScale = Owner.HeldItem.scale;
             float easedProgress = EaseInCubic(Helper.GetAniProgress(2));
             float beginAngle = 185f * Flip.ToDirectionInt();
             float endAngle = 183f * Flip.ToDirectionInt();
@@ -580,8 +582,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public void PlayerEffectHandler()
         {
-            //在这里给玩家加成
-            Owner.ApplyNoKnockbackBuff(30);
             if (Owner.HJScarlet().crimsonScytheAttackCounter > 0)
             {
                 if (Projectile.numHits < 1)

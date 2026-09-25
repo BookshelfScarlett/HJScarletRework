@@ -28,7 +28,7 @@ namespace HJScarletRework.Globals.Graphics.ParticleECS
             Main.spriteBatch.Draw(tex, data.Position - Main.screenPosition, null, data.DrawColor * data.Opacity, data.Rotation, tex.Size() / 2f, data.Scale2 * data.aifloat2, 0, 0);
         }
     }
-    public class ShrinkParticle: ECSParticleBehavior
+    public class ShrinkParticle : ECSParticleBehavior
     {
         public override void Update(ref ECSParticleData data)
         {

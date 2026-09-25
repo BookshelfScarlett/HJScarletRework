@@ -9,7 +9,7 @@ using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
-using System.Xml.Schema;
+using System.Reflection.Metadata.Ecma335;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
@@ -38,7 +38,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.timeLeft = GetSeconds(8) * Projectile.MaxUpdates;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = true;
-            Projectile.HJScarlet().ExecutionStrikeManual= true;
+            Projectile.HJScarlet().ExecutionStrikeManual = true;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
@@ -166,14 +166,18 @@ namespace HJScarletRework.Projs.Executor
                     {
                         ECSParticle.HighResolutionThunder(Projectile.Center.ToRandCirclePos(66), Vector2.Zero, RandLerpColor(Color.LimeGreen, Color.Green), 45, 1, RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * .34f, 2);
                     }
-                    if(Projectile.penetrate >8)
-                    ScreenShakeSystem.AddScreenShakes(Projectile.Center, 32f, 32, RandRotTwoPi);
+                    if (Projectile.penetrate > 8)
+                        ScreenShakeSystem.AddScreenShakes(Projectile.Center, 32f, 32, RandRotTwoPi);
                     else
                         ScreenShakeSystem.AddScreenShakes(Projectile.Center, 16f, 16, RandRotTwoPi);
-                    if(Projectile.penetrate > 8)
-                    ScreenDarknessSystem.AddScreenDarkness(0.90f, 5, 20, 30, easeOut: EaseInCubic);
+                    if (Projectile.penetrate > 8)
+                        ScreenDarknessSystem.AddScreenDarkness(0.90f, 5, 20, 30, easeOut: EaseInCubic);
                 }
             }
+        }
+        public override bool? CanDamage()
+        {
+            return JustShootTimer > Projectile.MaxUpdates * BeginUsingChasingFrame;
         }
         public void HitParticle()
         {
@@ -205,7 +209,7 @@ namespace HJScarletRework.Projs.Executor
             HitParticle();
             if (JustShootTimer <= Projectile.MaxUpdates * BeginUsingChasingFrame)
                 return;
-            Timer = 0; 
+            Timer = 0;
             if (!TargetList.Contains(target))
                 TargetList.Add(target);
             float searchDistance = 1200f * 1200f;
@@ -242,7 +246,7 @@ namespace HJScarletRework.Projs.Executor
             DeepGlow.SubmitCustomGlow(() =>
             {
                 SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-                DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.LimeGreen, 1f,1f,0.78f);
+                DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.LimeGreen, 1f, 1f, 0.78f);
             });
             SB.EnterShaderArea();
             DrawTrails(HJScarletTexture.Noise_HeavyAura.Texture, Color.LimeGreen, 0.25f);
@@ -264,7 +268,7 @@ namespace HJScarletRework.Projs.Executor
             Effect shader = HJScarletShader.StandardFlowShader;
             shader.Parameters["LaserTextureSize"].SetValue(useTex.Size());
             shader.Parameters["targetSize"].SetValue(new Vector2(useTex.Width(), useTex.Height()));
-            shader.Parameters["uTime"].SetValue(-Main.GlobalTimeWrappedHourly * 170f*offsetHeight);
+            shader.Parameters["uTime"].SetValue(-Main.GlobalTimeWrappedHourly * 170f * offsetHeight);
             shader.Parameters["uColor"].SetValue(drawColor.ToVector4() * Projectile.Opacity * alphaValue * Clamp(Projectile.velocity.Length(), 0f, 1f));
             shader.Parameters["uFadeoutLength"].SetValue(0.8f);
             shader.Parameters["uFadeinLength"].SetValue(0.06f);

@@ -772,3 +772,10 @@ MythrilStaff: {
 	DisplayName: Mythril Staff
 	Tooltip: ""
 }
+
+TheCompanion: {
+	DisplayName: The Companion
+	Tooltip: ""
+	ExecutionStrike: ""
+	FlavorTooltip: ""
+}

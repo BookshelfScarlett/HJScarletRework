@@ -159,7 +159,6 @@ namespace HJScarletRework.Projs.Executor
                     Vector2 vel = RandVelTwoPi(0.9f, 9.4f);
                     BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.75f, vel.ToRotation(), false);
                     BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.15f, RandRotTwoPi, true);
-
                 }
                 int bloodBulletCount = GaiaStriker.BloodBulletCount;
                 int healType = Main.rand.Next(0, bloodBulletCount);

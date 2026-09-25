@@ -127,7 +127,7 @@ namespace HJScarletRework.Globals.Graphics.Metaballs
             {
                 for (int i = 0; i < SharpTearsList.Count; i++)
                 {
-                    Main.spriteBatch.Draw(HJScarletTexture.Particle_SharpTearClean.Value, SharpTearsList[i].Center - Main.screenPosition, null, Color.White, SharpTearsList[i].Rot, HJScarletTexture.Particle_SharpTearClean.Value.Size()/2f, SharpTearsList[i].Scale, 0, 0);
+                    Main.spriteBatch.Draw(HJScarletTexture.Particle_SharpTearClean.Value, SharpTearsList[i].Center - Main.screenPosition, null, Color.White, SharpTearsList[i].Rot, HJScarletTexture.Particle_SharpTearClean.Value.Size() / 2f, SharpTearsList[i].Scale, 0, 0);
                 }
             }
             if (SharpCrossStarList.Count != 0)

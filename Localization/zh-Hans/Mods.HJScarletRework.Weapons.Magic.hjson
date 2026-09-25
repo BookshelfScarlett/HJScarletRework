@@ -53,6 +53,23 @@ TheFinalDawn: {
 }
 
 BrimstoneHeart: {
-	// DisplayName: Brimstone Heart
-	// Tooltip: ""
+	DisplayName: 硫磺火之心
+	Tooltip:
+		'''
+		手持时自身的生命恢复速度减半，并禁用[ScarletBuff/Terraria/Regeneration]
+		启动时自残150点生命值并造成[ScarletDebuff/Terraria/Bleeding]，但给予自身极长的无敌时间
+		发射较为迅捷的硫磺火球，命中时造成熔岩爆炸
+		你的生命值越低，熔岩爆炸造成的伤害越高
+		Shift + 右键以切换物品模式，更为安全地掏出心脏，但不提供自残与无敌效果
+		'''
+}
+
+LivingBoomerangMagic: {
+	DisplayName: 魔能活旋镖
+	Tooltip:
+		'''
+		使用时为自己施加[ScarletBuff/Terraria/ManaRegeneration]
+		持续生成追杀敌人的花瓣与树叶
+		活旋镖本身直接命中时，为你恢复魔力值
+		'''
 }

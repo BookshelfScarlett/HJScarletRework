@@ -1,18 +1,10 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Buffs.Pets;
+﻿using HJScarletRework.Buffs.Pets;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
-using ReLogic.Content;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Pets
 {
@@ -56,7 +48,7 @@ namespace HJScarletRework.Projs.Pets
         {
             HJScarletMethods.PetCommonBuffCheck(Projectile, BuffType<LifeWormBuff>());
             var player = Main.player[Projectile.owner];
-            if (player.miscCounter % 10 == 0&&AttackState == State.Idle)
+            if (player.miscCounter % 10 == 0 && AttackState == State.Idle)
             {
                 float dist = 16f * 500;
                 //后续改为“WorldItem”，需注意
@@ -86,7 +78,7 @@ namespace HJScarletRework.Projs.Pets
                     var worldItem = Main.item[CurrentFetching];
                     var direction = Projectile.Center.DirectionTo(worldItem.Center);
 
-                    Vector2 catchingSpot = Projectile.Center + (Projectile.rotation+PiOver2).ToRotationVector2()* -25f;
+                    Vector2 catchingSpot = Projectile.Center + (Projectile.rotation + PiOver2).ToRotationVector2() * -25f;
                     if (!worldItem.active || worldItem.beingGrabbed || !Owner.CanPullItem(worldItem, Owner.ItemSpace(worldItem)))
                     {
                         CurrentFetching = 0;
@@ -180,13 +172,13 @@ namespace HJScarletRework.Projs.Pets
                 return Main.projFrames[Type] - 1;
             else
                 return 1;
-                //return index == 0
-                //    ? 0
-                //    : (
-                //        index == max - 1
-                //        ? Main.projFrames[Type] - 1
-                //        : 1
-                //      );
+            //return index == 0
+            //    ? 0
+            //    : (
+            //        index == max - 1
+            //        ? Main.projFrames[Type] - 1
+            //        : 1
+            //      );
             //return index == max - 1 ? Main.projFrames[Type] - 1 : 1;
         }
         public override bool PreDraw(ref Color lightColor)

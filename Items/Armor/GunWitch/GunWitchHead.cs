@@ -11,7 +11,7 @@ namespace HJScarletRework.Items.Armor.GunWitch
     [AutoloadEquip(EquipType.Head)]
     public class GunWitchHead : HJScarletArmor
     {
-        public override int[] ArmorSlots => [Type, ItemType<GunWitchBody>(),ItemType<GunWitchLegs>()];
+        public override int[] ArmorSlots => [Type, ItemType<GunWitchBody>(), ItemType<GunWitchLegs>()];
         public override bool SetUpArmorSet => true;
         public override void SetStaticDefaults()
         {
@@ -25,7 +25,7 @@ namespace HJScarletRework.Items.Armor.GunWitch
         }
         public float Damage = .10f;
         public int Crit = 5;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(),Crit+"%");
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%");
         public override void UpdateEquip(Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += Damage;

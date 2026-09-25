@@ -84,7 +84,7 @@ namespace HJScarletRework.Projs.Melee
         private void DoShoot()
         {
             Timer++;
-            if (Timer % 20 == 0&&Timer<101)
+            if (Timer % 20 == 0 && Timer < 101)
             {
                 SoundEngine.PlaySound(SoundID.Item109 with { Volume = 0.8f, MaxInstances = 1, Pitch = 0.30f + SpawnTime * 0.3f }, Projectile.Center);
                 SpawnEnergyBall();

@@ -1,12 +1,14 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Items.FielderSentries;
+using ContinentOfJourney.Items.ThrowerWeapons;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
-using System;
-using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
@@ -49,7 +51,7 @@ namespace HJScarletRework.Projs.Executor
                 Projectile.Kill();
                 return;
             }
-            float searchDistance = 600f*600f;
+            float searchDistance = 600f * 600f;
             NPC curTar = null;
             foreach (var tar in Main.ActiveNPCs)
             {
@@ -62,12 +64,10 @@ namespace HJScarletRework.Projs.Executor
                 }
             }
             if (curTar.IsLegal())
-                ChainTarget = curTar;
-            //第一帧搜索附近的可用单位
-            /*if (Projectile.GetTargetSafe(out NPC target, true, canPassWall: true))
             {
-                ChainTarget = target;
-            }*/
+                ChainTarget = curTar;
+            }
+            //第一帧搜索附近的可用单位
             //搜索完毕后如果ChainTarget为null，立即处死
             if (!ChainTarget.IsLegal())
             {
@@ -84,9 +84,18 @@ namespace HJScarletRework.Projs.Executor
             }
             if (MountedTarget.IsLegal())
                 Projectile.Center = MountedTarget.Center;
-            ChainLengthRatios = Lerp(ChainLengthRatios, 1f, .12f);
-            if (ChainLengthRatios > .98f)
-                ChainLengthRatios = 1;
+            int fadeTime = 30 * Projectile.MaxUpdates;
+            if (Projectile.timeLeft > fadeTime)
+            {
+                ChainLengthRatios = Lerp(ChainLengthRatios, 1f, .12f);
+                if (ChainLengthRatios > .98f)
+                    ChainLengthRatios = 1;
+            }
+            else
+            {
+                Projectile.damage = 0;
+                ChainLengthRatios = Lerp(ChainLengthRatios, 0f, 0.09f);
+            }
             MountedTarget.HJScarlet().refluxChain = true;
             ChainTarget.HJScarlet().refluxChain = true;
         }
@@ -108,7 +117,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            base.OnHitNPC(target, hit, damageDone);
+            target.AddBuff(BuffID.CursedInferno,GetSeconds(2));
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -118,11 +127,8 @@ namespace HJScarletRework.Projs.Executor
                 return false;
             //开始绘制链条
             Texture2D chains = Projectile.GetTexture();
-            SB.EnterShaderArea();
-            DeepGlow.SubmitCustomGlow(() =>
-            DrawTheLine(Projectile.Center, ChainTarget.Center, Color.Green, 1)
-            );
-            SB.EndShaderArea();
+            SB.EnterShaderArea(BlendState.Additive);
+            DrawTheLine(Projectile.Center, ChainTarget.Center, Color.LimeGreen, 1);
             SB.EndShaderArea();
 
             Vector2 pCenter = ChainTarget.Center;
@@ -130,7 +136,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 directionToPlayer = pCenter - projCenter;
             float chainRot = directionToPlayer.ToRotation() - PiOver2;
             float distanceToPlayer = directionToPlayer.Length();
-            while (distanceToPlayer > 40f && !float.IsNaN(distanceToPlayer))
+            while (distanceToPlayer > 30f && !float.IsNaN(distanceToPlayer))
             {
                 directionToPlayer /= distanceToPlayer;
                 directionToPlayer *= chains.Height;
@@ -138,9 +144,14 @@ namespace HJScarletRework.Projs.Executor
                 directionToPlayer = pCenter - projCenter;
                 distanceToPlayer = directionToPlayer.Length();
                 Color c = Color.White * ChainLengthRatios;
-                SB.Draw(chains, projCenter - Main.screenPosition, chains.Bounds, c, chainRot, chains.Size() / 2f, 1, 0, 0);
+                Vector2 pos = projCenter - Main.screenPosition;
+                SB.Draw(chains, pos + Main.rand.NextVector2Circular(5, 5), chains.Bounds, Color.LimeGreen.ToAddColor()*ChainLengthRatios, chainRot, chains.Size() / 2f, 1 * new Vector2(ChainLengthRatios, 1), 0, 0);
+                SB.Draw(chains, pos + Main.rand.NextVector2Circular(1, 1), chains.Bounds, c.ToAddColor(175), chainRot, chains.Size() / 2f, 1 * new Vector2(ChainLengthRatios, 1), 0, 0);
             }
-
+            //Texture2D orb = HJScarletTexture.Particle_HRShinyOrb.Value;
+            SB.EnterShaderArea();
+            //SB.FastDraw(orb, orbPos, Color.Green, 0, orb.Size() / 2f, Projectile.scale * 0.5f, 0);
+            SB.EndShaderArea();
             return false;
         }
         public void DrawTheLine(Vector2 beginPos, Vector2 targetPos, Color c, float thick)
@@ -148,7 +159,7 @@ namespace HJScarletRework.Projs.Executor
             targetPos -= Main.screenPosition;
             beginPos -= Main.screenPosition;
             c *= .75f;
-            Asset<Texture2D> tex = HJScarletTexture.Trail_ManaStreak.Texture;
+            Asset<Texture2D> tex = HJScarletTexture.Trail_BloomDualLine.Texture;
             Vector2 vec = beginPos.GetNormalVector2(targetPos);
             float length = Vector2.Distance(beginPos, targetPos);
             Vector2 orig = new Vector2(0, tex.Height() / 2f);
@@ -157,12 +168,12 @@ namespace HJScarletRework.Projs.Executor
             Effect shader = HJScarletShader.StandardFlowShader;
             shader.Parameters["LaserTextureSize"].SetValue(tex.Size());
             shader.Parameters["targetSize"].SetValue(new Vector2(length, tex.Height()));
-            shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -20);
+            shader.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * -0);
             shader.Parameters["uColor"].SetValue(c.ToVector4());
-            shader.Parameters["uFadeoutLength"].SetValue(0.1f);
-            shader.Parameters["uFadeinLength"].SetValue(0.1f);
+            shader.Parameters["uFadeoutLength"].SetValue(0.21f);
+            shader.Parameters["uFadeinLength"].SetValue(0.21f);
             shader.CurrentTechnique.Passes[0].Apply();
-            SB.Draw(tex.Value, beginPos, null, c, rotation, orig, new Vector2(xScale, .0351f * thick), 0, 0);
+            SB.Draw(tex.Value, beginPos+Main.rand.NextVector2Circular(5,5), null, c, rotation, orig, new Vector2(xScale*ChainLengthRatios, .15f * thick*ChainLengthRatios), 0, 0);
         }
     }
 }

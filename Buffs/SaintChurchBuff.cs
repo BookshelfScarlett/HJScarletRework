@@ -1,7 +1,5 @@
 ﻿using HJScarletRework.Core.ParticleECS;
-using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Accessories;
 using Terraria;
 using Terraria.ModLoader;
 
