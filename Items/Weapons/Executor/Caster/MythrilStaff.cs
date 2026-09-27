@@ -4,11 +4,16 @@ using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor.Caster
 {
     public class MythrilStaff : ExecutorWeaponClass
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Caster;
         public override int ExecutionProgress => 25;
         public override void ExSSD()

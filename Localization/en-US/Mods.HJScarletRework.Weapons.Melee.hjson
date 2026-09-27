@@ -271,3 +271,78 @@ RitualofRepose: {
 	DisplayName: Ritualof Repose
 	Tooltip: ""
 }
+
+CopperRapierThrown: {
+	DisplayName: Copper Rapier Thrown
+	Tooltip: ""
+}
+
+GoldRapierThrown: {
+	DisplayName: Gold Rapier Thrown
+	Tooltip: ""
+}
+
+IronRapierThrown: {
+	DisplayName: Iron Rapier Thrown
+	Tooltip: ""
+}
+
+LeadRapierThrown: {
+	DisplayName: Lead Rapier Thrown
+	Tooltip: ""
+}
+
+PlatinumRapierThrown: {
+	DisplayName: Platinum Rapier Thrown
+	Tooltip: ""
+}
+
+SilverRapierThrown: {
+	DisplayName: Silver Rapier Thrown
+	Tooltip: ""
+}
+
+TinRapierThrown: {
+	DisplayName: Tin Rapier Thrown
+	Tooltip: ""
+}
+
+TungstenRapierThrown: {
+	DisplayName: Tungsten Rapier Thrown
+	Tooltip: ""
+}
+
+AmberYoyo: {
+	DisplayName: Amber Yoyo
+	Tooltip: ""
+}
+
+AmethystYoyo: {
+	DisplayName: Amethyst Yoyo
+	Tooltip: ""
+}
+
+DiamondYoyo: {
+	DisplayName: Diamond Yoyo
+	Tooltip: ""
+}
+
+EmeraldYoyo: {
+	DisplayName: Emerald Yoyo
+	Tooltip: ""
+}
+
+RubyYoyo: {
+	DisplayName: Ruby Yoyo
+	Tooltip: ""
+}
+
+SapphireYoyo: {
+	DisplayName: Sapphire Yoyo
+	Tooltip: ""
+}
+
+TopazYoyo: {
+	DisplayName: Topaz Yoyo
+	Tooltip: ""
+}

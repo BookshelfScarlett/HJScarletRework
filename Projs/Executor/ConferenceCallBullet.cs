@@ -104,7 +104,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if(BounceTime>0)
+            if (BounceTime > 0)
             {
                 modifiers.SourceDamage *= .5f;
             }

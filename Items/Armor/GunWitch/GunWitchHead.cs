@@ -11,6 +11,11 @@ namespace HJScarletRework.Items.Armor.GunWitch
     [AutoloadEquip(EquipType.Head)]
     public class GunWitchHead : HJScarletArmor
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         public override int[] ArmorSlots => [Type, ItemType<GunWitchBody>(), ItemType<GunWitchLegs>()];
         public override bool SetUpArmorSet => true;
         public override void SetStaticDefaults()

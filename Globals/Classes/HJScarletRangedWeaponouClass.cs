@@ -165,7 +165,7 @@ namespace HJScarletRework.Globals.Classes
         {
             Timer = 0;
             RecoilTimer = AttackSpeed;
-            Projectile.ContinuouslyUpdateDamageStats= true;
+            Projectile.ContinuouslyUpdateDamageStats = true;
         }
         /// <summary>
         /// 武器的实际攻击效果

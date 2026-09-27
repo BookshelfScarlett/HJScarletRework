@@ -3,7 +3,7 @@ using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Systems;
+using HJScarletRework.Globals.Systems.Conditions;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
@@ -46,7 +46,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override void ExSD()
         {
             Item.width = Item.height = 16;
-            Item.damage = 90;
+            Item.damage = 84;
             Item.SetUpNoUseGraphicItem();
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.shootSpeed = 22;

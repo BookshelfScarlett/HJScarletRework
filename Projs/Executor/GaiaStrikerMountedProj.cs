@@ -422,6 +422,8 @@ namespace HJScarletRework.Projs.Executor
                 modifiers.SetCrit();
                 modifiers.SourceDamage *= 2;
             }
+
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
             base.ModifyHitNPC(target, ref modifiers);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

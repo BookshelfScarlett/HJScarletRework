@@ -50,3 +50,19 @@ Duskfall: {
 		经过圆环时，着魔飞斧命中时施加[ScarletDebuff/ContinentOfJourney/SolarBurntBuff]
 		'''
 }
+
+PropellerRapierRanged: {
+	DisplayName: 风暴螺旋桨
+	Tooltip:
+		'''
+		命中后持续释放小型龙卷风
+		经过圆环时生成一个追杀敌人的大型龙卷风
+		大型龙卷风命中时造成[ScarletDebuff/HJScarletRework/TheBleachingBuff]
+		“另一个世界真实的存在过的证明”
+		'''
+}
+
+RadiantBlazeDawn: {
+	DisplayName: 辉炎之晓
+	Tooltip: 允许穿墙
+}

@@ -71,13 +71,12 @@ namespace HJScarletRework.Projs.Melee
             Owner.ControlPlayerArm((Projectile.Center - Owner.Center).ToRotation(), 1);
             if ((Projectile.Center - Owner.Center).LengthSquared() > 1900f * 1900f)
             {
-
                 if (!StopAllDrawing)
                 {
-                    ScarletSound(HJScarletSounds.Moonlight_Ding, Owner.Center, 0.6f);
+                    ScarletSound(HJScarletSounds.Moonlight_Ding, Owner.Center, 0.36f);
                     StopAllDrawing = true;
                 }
-                if (Projectile.timeLeft < 75*Projectile.MaxUpdates)
+                if (Projectile.timeLeft < 65 * Projectile.MaxUpdates)
                 {
                     float xPos = Owner.MountedCenter.X + Owner.direction * 200f;
                     float yPos = Owner.MountedCenter.Y - 1200f;
@@ -106,7 +105,7 @@ namespace HJScarletRework.Projs.Melee
             if (!BeginAppear && !BeginDisapper)
             {
                 if (AppearRatios == 0)
-                    ScarletSound(HJScarletSounds.Misc_ManaClearUse, Projectile.Center);
+                    ScarletSound(HJScarletSounds.Misc_ManaClearUse, Projectile.Center, .45f);
                 Projectile.timeLeft = 10;
                 if (Projectile.FinalUpdate())
                     AppearRatios += .1f;
@@ -147,7 +146,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     BeginAppear = false;
                     BeginDisapper = true;
-                    ScarletSound(HJScarletSounds.Misc_ManaClearUse, Projectile.Center, pitch: -.4f);
+                    ScarletSound(HJScarletSounds.Misc_ManaClearUse, Projectile.Center, volume: .65f, pitch: -.4f);
                     //IdleTimer--;
                     //if (IdleTimer <= 0)
                     //{
@@ -210,7 +209,7 @@ namespace HJScarletRework.Projs.Melee
         public void ChargeReady()
         {
             Projectile.velocity = Projectile.rotation.ToRotationVector2() * 21f;
-            ScarletSound(HJScarletSounds.TheSevenStar_Swing, Projectile.Center);
+            ScarletSound(HJScarletSounds.TheSevenStar_Swing, Projectile.Center, volume: .35f);
         }
 
         public AnimationStruct Helper = new AnimationStruct(2);

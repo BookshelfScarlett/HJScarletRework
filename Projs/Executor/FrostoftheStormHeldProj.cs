@@ -110,6 +110,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnKill(int timeLeft)
         {
+            _vertexCache.Clear();
             if (Projectile.HJScarlet().ExecutionStrike)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostoftheStormExecution>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);

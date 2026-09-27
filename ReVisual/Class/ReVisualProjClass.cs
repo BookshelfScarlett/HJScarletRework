@@ -5,6 +5,36 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.ReVisual.Class
 {
+    public abstract class ReVisualProjectile : GlobalProjectile
+    {
+        public sealed override bool InstancePerEntity => true;
+        protected virtual int ApplyProjectile => -1;
+        public ReVisualPlayer VisualOwner => Main.LocalPlayer.GetModPlayer<ReVisualPlayer>();
+        public SpriteBatch SB { get => Main.spriteBatch; }
+        public GraphicsDevice GD { get => Main.graphics.GraphicsDevice; }
+        protected virtual int TrailLength => 0;
+        public List<float> OldRotationList = new List<float>();
+        public List<Vector2> OldPositionList = new List<Vector2>();
+        public sealed override bool AppliesToEntity(Projectile entity, bool lateInstantiation)
+        {
+            return entity.type == ApplyProjectile;
+        }
+        public override bool PreAI(Projectile projectile)
+        {
+            if (TrailLength > 0)
+            {
+                OldRotationList.Add(projectile.rotation);
+                OldPositionList.Add(projectile.Center);
+                if (OldRotationList.Count > TrailLength)
+                    OldRotationList.RemoveAt(0);
+                if (OldPositionList.Count > TrailLength)
+                    OldPositionList.RemoveAt(0);
+            }
+            return base.PreAI(projectile);
+        }
+
+
+    }
     public abstract class ReVisualProjClass : GlobalProjectile
     {
         public sealed override bool InstancePerEntity => true;

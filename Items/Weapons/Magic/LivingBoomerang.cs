@@ -24,14 +24,19 @@ namespace HJScarletRework.Items.Weapons.Magic
         {
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.HJScarlet().drawBuffIconAndDetail = true;
-            Item.damage = 456;
+            Item.damage = 1012;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.mana = 15;
-            Item.useTime = Item.useAnimation = 30;
+            Item.useTime = Item.useAnimation = 40;
             Item.shoot = ProjectileType<LivingBoomerangMagicHeldProj>();
             Item.shootSpeed = 16f;
             Item.SetUpNoUseGraphicItem(true);
         }
+        public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+        {
+            base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
+        }
+
         public override bool CanUseItem(Player player)
         {
             return !player.HasProj(Item.shoot);

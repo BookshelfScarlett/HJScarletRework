@@ -11,11 +11,17 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class CrescentRoseHeldProj : ExecutorHeldProj, IPixelatedRenderer
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         public override int OriginalItemID => ItemType<CrescentRose>();
         public AnimationStruct Helper = new AnimationStruct(3);
         public float BeginTargetRotation = 0;

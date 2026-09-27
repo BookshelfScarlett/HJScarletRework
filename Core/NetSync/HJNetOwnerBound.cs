@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Core.NetSync
 {

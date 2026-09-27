@@ -1,8 +1,7 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
-using HJScarletRework.Core.ScreenEffect;
-using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
@@ -52,8 +51,8 @@ namespace HJScarletRework.Items.Weapons.Melee
             player.longInvince = true;
             ScreenDarknessSystem.AddScreenDarkness(0.80f, 10, 2, 5, easeOut: EaseInCubic, holdCondition: () => Main.LocalPlayer.IsHolding(Type));
             if (player.HasProj(Item.shoot) || player.HasProj<RitualofReposeRest>())
-            if (!player.IsOwnerSide())
-                return;
+                if (!player.IsOwnerSide())
+                    return;
             if (player.HasProj(Item.shoot))
                 return;
             int dmg = (int)player.GetTotalDamage<MeleeDamageClass>().ApplyTo(Item.damage);

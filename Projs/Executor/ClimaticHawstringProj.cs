@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
 using HJScarletRework.Core.NetSync;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -58,7 +58,7 @@ namespace HJScarletRework.Projs.Executor
                 {
                     SoundEngine.PlaySound(SoundID.Item158 with { MaxInstances = 0, Pitch = -0.38f, PitchVariance = 0.1f }, Projectile.Center);
                     Vector2 laserPos = Projectile.SafeDir().RotatedBy(PiOver2) * Main.rand.NextFloat(-15f, 16f);
-                    Projectile proj2 = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem),Projectile.Center + laserPos + dir * 17f, dir * 12f, ProjectileType<ClimaticHawstringBeam>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
+                    Projectile proj2 = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), Projectile.Center + laserPos + dir * 17f, dir * 12f, ProjectileType<ClimaticHawstringBeam>(), Projectile.damage / 2, Projectile.knockBack, Owner.whoAmI);
                     proj2.rotation = dir.ToRotation();
                     new ShinyCrossStar(Projectile.Center + laserPos + dir * 27f, Vector2.Zero, RandLerpColor(Color.DarkGoldenrod, Color.Goldenrod), 40, 0, 1, 0.80f, false).Spawn();
                     for (int j = 0; j < 8; j++)

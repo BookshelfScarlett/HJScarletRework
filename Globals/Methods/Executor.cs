@@ -252,5 +252,15 @@ namespace HJScarletRework.Globals.Methods
                 return -1;
             return player.HJScarlet().ExecutionListStored[item.type];
         }
+        /// <summary>
+        /// 查看射弹是否允许处决
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <returns></returns>
+        public static bool CheckExecution(this Projectile projectile)
+        {
+            Player player = Main.player[projectile.owner];
+            return player.GetExecutionSrike() && !projectile.HJScarlet().ExecutionStrike;
+        }
     }
 }

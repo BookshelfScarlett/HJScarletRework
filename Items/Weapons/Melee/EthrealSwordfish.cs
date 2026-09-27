@@ -1,29 +1,58 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Useables;
+using HJScarletRework.Projs.Melee;
+using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
-    public class EthrealSwordfish : ThrownSpearClass
+    public class EthrealSwordfish : HJScarletWeapon
     {
-        public override bool IsLoadingEnabled(Mod mod)
+        public override EnumDamageClass Category => EnumDamageClass.Melee;
+        public override void SetStaticDefaults()
         {
-            return false;
+            ItemID.Sets.SkipsInitialUseSound[Type] = true;
+            ItemID.Sets.Spears[Type] = true;
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.Eternity);
         }
-
-        public override bool NotHomewardJourneySpear => true;
         public override void ExSD()
         {
-            Item.damage = 190;
-            Item.knockBack = 2f;
-            Item.useTime = 10;
-            Item.useAnimation = 10;
-            Item.useStyle = ItemUseStyleID.Rapier;
-            Item.SetUpRarityPrice(ItemRarityID.Red);
-            Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { Volume = 0.6f, Pitch = 0.5f, PitchVariance = 0.1f, MaxInstances = 0 };
-            Item.shootSpeed = 16f;
+            Item.SetUpRarityPrice(ItemRarityID.Yellow);
+            Item.damage = 154;
+            Item.SetUpNoUseGraphicItem(true);
+            Item.UseSound = SoundID.Item1;
+            Item.knockBack = .5f;
+            Item.useTime = 24;
+            Item.useAnimation = 24;
+            Item.useStyle = ItemUseStyleID.Shoot;
+            Item.shootSpeed = 2.5f;
+            Item.shoot = ProjectileType<EthrealSwordfishHeldProj>();
         }
-        public override Color MainTooltipColor => Color.Lerp(Color.Gold, Color.LightGoldenrodYellow, .3f);
+        public override bool CanUseItem(Player player)
+        {
+            return !player.HasProj(Item.shoot);
+        }
+        public override bool? UseItem(Player player)
+        {
+            // Because we're skipping sound playback on use animation start, we have to play it ourselves whenever the item is actually used.
+            if (!Main.dedServ && Item.UseSound.HasValue)
+            {
+                SoundEngine.PlaySound(Item.UseSound.Value, player.Center);
+            }
+            return null;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.GoldenFishingRod).
+                AddIngredient<SunWorm>(300).
+                AddTile(FinalAnvilTile).
+                Register();
+        }
+
     }
 }

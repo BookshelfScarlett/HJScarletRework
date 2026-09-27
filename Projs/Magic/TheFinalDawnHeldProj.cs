@@ -3,11 +3,16 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Magic;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Magic
 {
     public class TheFinalDawnHeldProj : HJScarletProj, IPixelatedRenderer
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override string Texture => GetInstance<TheFinalDawn>().Texture;
         public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override void SetStaticDefaults()

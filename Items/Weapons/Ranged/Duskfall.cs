@@ -5,7 +5,6 @@ using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Ranged
@@ -32,10 +31,6 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.shootSpeed = 11f;
             Item.shoot = ProjectileType<DuskfallProj>();
             Item.knockBack = .5f;
-        }
-        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
-        {
-            return base.Shoot(player, source, position, velocity, type, damage, knockback);
         }
         public override void AddRecipes()
         {

@@ -4,12 +4,12 @@ using Terraria;
 
 namespace HJScarletRework.ReVisual.Items
 {
-    public class ReVisualPurplePuffer : ReVisualItemClass
+    public class ReSkeletronYoyo : ReVisualItemClass
     {
-        public override int ApplyItem => ItemType<PurplePuffer>();
+        public override int ApplyItem => ItemType<SkeletronYoyo>();
         public override void ExHoldItem(Item item, Player player, ReVisualPlayer vp)
         {
-            vp.reVisualPurplePuffer = !vp.reVisualPurplePuffer;
+            vp.reSkeletronYoyo = !vp.reSkeletronYoyo;
         }
     }
 }

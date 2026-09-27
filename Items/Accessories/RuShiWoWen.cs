@@ -129,7 +129,7 @@ namespace HJScarletRework.Items.Accessories
                 backgroundColor: Color.White * .24f,
                 backgroundEdgeColor: Color.White,
                 textColor: Color.White,
-                textEdgeColor : Color.Black,
+                textEdgeColor: Color.Black,
                 mainText: text
             );
 

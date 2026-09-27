@@ -43,3 +43,13 @@ Duskfall: {
 	DisplayName: Duskfall
 	Tooltip: ""
 }
+
+PropellerRapierRanged: {
+	DisplayName: Propeller Rapier Ranged
+	Tooltip: ""
+}
+
+RadiantBlazeDawn: {
+	DisplayName: Radiant Blaze Dawn
+	Tooltip: ""
+}

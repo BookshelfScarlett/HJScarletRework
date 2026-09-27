@@ -4,12 +4,12 @@ using Terraria;
 
 namespace HJScarletRework.ReVisual.Items
 {
-    public class ReDesertScourge : ReVisualItemClass
+    public class ReCasta : ReVisualItemClass
     {
-        public override int ApplyItem => ItemType<DesertScourge>();
+        public override int ApplyItem => ItemType<Casta>();
         public override void ExHoldItem(Item item, Player player, ReVisualPlayer vp)
         {
-            vp.reVisualDesertScourge = !vp.reVisualDesertScourge;
+            vp.reCasta = !vp.reCasta;
         }
     }
 }

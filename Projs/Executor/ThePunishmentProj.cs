@@ -137,6 +137,11 @@ namespace HJScarletRework.Projs.Executor
 
             return false;
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             ScarletSound(HJScarletSounds.Hammer_LightHit, Projectile.Center, 1, 0, .25f, .1f);

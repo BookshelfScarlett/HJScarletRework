@@ -40,7 +40,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnFirstFrame()
         {
-            ScarletSound(HJScarletSounds.Misc_MagicStaffFire, Owner.Center, .35f, 1, pitch: .4f);
+            //ScarletSound(HJScarletSounds.Misc_MagicStaffFire, Owner.Center, .2f, 1, pitch: .4f);
 
         }
         public override bool? CanHitNPC(NPC target)
@@ -55,7 +55,7 @@ namespace HJScarletRework.Projs.Melee
             return (Timer >= (MaxLandTime) * Projectile.MaxUpdates);
         }
         public float Osci = 0;
-        public float MaxLandTime = 35f;
+        public float MaxLandTime = 40f;
         public override void ProjAI()
         {
             //这里还会再卡住玩家一点时间，不让其投掷安息仪式
@@ -90,7 +90,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     new ThunderboltParticle(Projectile.Center, 0, 1.25f, Color.Gold, 40, 15f, .75f, new Vector2(0.5f, 1.5f)).Spawn();
                     new ThunderboltParticle(Projectile.Center, 0, 1.15f, Color.LightGoldenrodYellow, 40, 15f, .75f, new Vector2(.5f, 1.5f)).Spawn();
-                    ScarletSound(HJScarletSounds.Lightning_QuickHeavy, Projectile.Center, .85f, 1, .3f, pitchVariance: .1f);
+                    ScarletSound(HJScarletSounds.Lightning_QuickHeavy, Projectile.Center, .65f, 1, .3f, pitchVariance: .1f);
                     Projectile.timeLeft = GetSeconds(8) * Projectile.MaxUpdates;
                     Vector2 pos = Projectile.Center;
                     //弹幕
@@ -130,7 +130,7 @@ namespace HJScarletRework.Projs.Melee
                         {
                             break;
                         }
-                        bool legalTar = tar.CanBeChasedBy()&&tar.type != NPCID.TargetDummy;
+                        bool legalTar = tar.CanBeChasedBy() && tar.type != NPCID.TargetDummy;
                         float distPerTar = Vector2.Distance(tar.Center, Projectile.Center);
                         //别穿墙搜
                         if (legalTar && distPerTar < searchDistance && !legalTargetList.Contains(tar))

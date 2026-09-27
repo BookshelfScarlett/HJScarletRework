@@ -447,23 +447,40 @@ CombatSlot: {
 }
 
 SpellBreaker: {
-	DisplayName: Spell Breaker
-	Tooltip: ""
+	DisplayName: Spell Breaker Prestige I
+	Tooltip:
+		'''
+		{0} increased melee damage
+		Your melee attack inflicts[ScarletDebuff/Terraria/Venom], [ScarletDebuff/Terraria/CursedInferno] and [ScarletDebuff/Terraria/Ichor]
+		Deals extra {1} damage every inflicted debuff on target
+		Has a minor cooldown upon a successful hit
+		'''
 }
 
 SpellBreakerAdvanced: {
-	DisplayName: Spell Breaker Advanced
-	Tooltip: ""
+	DisplayName: Spell Breaker Prestige II
+	Tooltip:
+		'''
+		{0} increased melee damage, {1} increased melee critical strike chance
+		Your melee attack inflicts[ScarletDebuff/ContinentOfJourney/PlagueBuff], [ScarletDebuff/ContinentOfJourney/DivineFireBuff] and [ScarletDebuff/ContinentOfJourney/VulnerableBuff]
+		Deals extra {1} damage every inflicted debuff on target
+		Has a minor cooldown upon a successful hit
+		'''
 }
 
 SpellBreakerSmall: {
-	DisplayName: Spell Breaker Small
-	Tooltip: ""
+	DisplayName: Spell Breaker
+	Tooltip:
+		'''
+		Your melee attack inflict[ScarletDebuff/Terraria/Poisioned] and [ScarletDebuff/Terraria/OnFire]
+		Deals extra {0} damage every inflicted debuff on target
+		Has a minor cooldown upon a successful hit
+		'''
 }
 
 SelfPortraitoftheSunflower: {
-	DisplayName: Self Portraitofthe Sunflower
-	Tooltip: ""
+	DisplayName: Self Portrait of the Sunflower
+	Tooltip: "Enemy taken {0} more DOT damage "
 }
 
 SelfPortraitoftheBleachingOne: {
@@ -477,6 +494,12 @@ BloodThornCrown: {
 }
 
 HandofGods: {
-	DisplayName: Handof Gods
-	Tooltip: ""
+	DisplayName: Hand of Gods
+	Tooltip:
+		'''
+		{0} increased tile placement speed, {3} tile range
+		{1} increased wall placement speed, {2} mining speed
+		Emit lighting on cursor position, grants various exploration ability
+		You can freely place any tiles on air
+		'''
 }

@@ -5,15 +5,9 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
-using rail;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.Graphics;
 
 namespace HJScarletRework.Projs.Magic
 {
@@ -47,9 +41,9 @@ namespace HJScarletRework.Projs.Magic
             Projectile.scale = Lerp(Projectile.scale, 1.01f, .1f);
             Projectile.rotation = Projectile.velocity.ToRotation();
             if (Main.rand.NextBool(2))
-                ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePosEdge(10), Projectile.velocity / 6f, Color.DarkRed*1.2f, Main.rand.Next(20, 45), RandRotTwoPi, 1, 0.25f, true, BlendState.Additive);
+                ECSParticle.SmokeParticle(Projectile.Center.ToRandCirclePosEdge(10), Projectile.velocity / 6f, Color.DarkRed * 1.2f, Main.rand.Next(20, 45), RandRotTwoPi, 1, 0.25f, true, BlendState.Additive);
             if (Main.rand.NextBool(2))
-                ECSParticle.ShrinkParticle(Projectile.Center.ToRandCirclePosEdge(10), Projectile.velocity / 6f, RandLerpColor(Color.DarkRed, Color.Crimson), Main.rand.Next(20, 45), 1, RandRotTwoPi, 0.4f, 1,blendstate:BlendState.Additive);
+                ECSParticle.ShrinkParticle(Projectile.Center.ToRandCirclePosEdge(10), Projectile.velocity / 6f, RandLerpColor(Color.DarkRed, Color.Crimson), Main.rand.Next(20, 45), 1, RandRotTwoPi, 0.4f, 1, blendstate: BlendState.Additive);
             if (Main.rand.NextBool())
             {
                 ECSParticle.TurbulenceShinyOrb(Projectile.Center.ToRandCirclePos(16), 1.2f, RandLerpColor(Color.Red, Color.DarkRed), 45, 1, .1f, RandRotTwoPi, .40f);
@@ -60,7 +54,7 @@ namespace HJScarletRework.Projs.Magic
                 Timer = maxtime;
             if (Projectile.GetTargetSafe(out NPC target, true, searchDistance: 300, false))
             {
-                Projectile.HomingTarget(target.Center, -1, 13f, Lerp(20f, 1.5f, Timer / maxtime),90);
+                Projectile.HomingTarget(target.Center, -1, 13f, Lerp(20f, 1.5f, Timer / maxtime), 90);
             }
             if (Projectile.velocity.LengthSquared() < 13f * 13f)
                 Projectile.velocity *= 1.1f;
@@ -105,12 +99,11 @@ namespace HJScarletRework.Projs.Magic
                 float xMult = Lerp(1f, .05f, (progress));
                 float yMult = Lerp(1.2f, .55f, progress);
                 Vector2 scale = new Vector2(xMult, yMult) * Projectile.scale;
-                Color c = Color.Lerp(Color.Crimson, Color.Lerp(Color.White,Color.DarkRed,.63f), EaseInOutQuad(progress));
+                Color c = Color.Lerp(Color.Crimson, Color.Lerp(Color.White, Color.DarkRed, .63f), EaseInOutQuad(progress));
                 float opac = Lerp(1f, .9f, EaseInOutExpo(progress));
                 Color pixelColor = Color.Lerp(Color.Crimson, Color.Lerp(Color.DarkRed, Color.Red, .63f), EaseInOutQuad(progress));
                 SB.FastDraw(fireballPixel, oldPos, pixelColor.ToAddColor(100) * opac * 1.15f, oldRot, fireballPixel.Size() / 2f, scale * .95f, 0);
-                SB.FastDraw(fireball, oldPos + Main.rand.NextVector2Circular(10, 10) * (1 - progress), c.ToAddColor() * opac *1.5f*progress, oldRot, fireball.Size() / 2f, scale, 0);
-                
+                SB.FastDraw(fireball, oldPos + Main.rand.NextVector2Circular(10, 10) * (1 - progress), c.ToAddColor() * opac * 1.5f * progress, oldRot, fireball.Size() / 2f, scale, 0);
             }
             SB.FastDraw(fireball, drawPos + Main.rand.NextVector2Circular(10, 10), Color.DarkRed.ToAddColor() * 1.5f, Projectile.rotation + PiOver2, fireball.Size() / 2f, Projectile.scale * new Vector2(1f, 1.2f), 0);
             SB.FastDraw(fireball, drawPos, Color.White.ToAddColor(0) * .855f, Projectile.rotation + PiOver2, fireball.Size() / 2f, Projectile.scale * .95f * new Vector2(1f, 1.2f), 0);
@@ -125,7 +118,7 @@ namespace HJScarletRework.Projs.Magic
             float laserLength = 50;
             shader.Parameters["LaserTextureSize"].SetValue(useTex.Size());
             shader.Parameters["targetSize"].SetValue(new Vector2(laserLength, useTex.Height()));
-            shader.Parameters["uTime"].SetValue(offsetHeight*Main.GlobalTimeWrappedHourly*-.1f);
+            shader.Parameters["uTime"].SetValue(offsetHeight * Main.GlobalTimeWrappedHourly * -.1f);
             shader.Parameters["uColor"].SetValue(drawColor.ToVector4() * alphaValue);
             shader.Parameters["uFadeoutLength"].SetValue(.8f);
             shader.Parameters["uFadeinLength"].SetValue(0.31f);

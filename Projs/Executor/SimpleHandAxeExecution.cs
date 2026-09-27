@@ -105,6 +105,8 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
             modifiers.DefenseEffectiveness *= .8f;
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

@@ -1,11 +1,9 @@
 ﻿using ContinentOfJourney.Items;
-using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -64,14 +62,6 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
                 AddTile(FinalAnvilTile).
                 Register();
 
-            CreateRecipe().
-                AddIngredient(ItemID.Frostbrand).
-                AddIngredient<Frostgrief>().
-                AddIngredient<FinalBar>().
-                AddCondition(HJScarletCraftingConditions.InMultiplayer).
-                DisableDecraft().
-                AddTile(FinalAnvilTile).
-                Register();
         }
     }
 }

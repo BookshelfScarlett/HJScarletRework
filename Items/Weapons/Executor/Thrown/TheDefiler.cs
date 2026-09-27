@@ -27,7 +27,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         {
             CreateRecipe().
                 AddIngredient(ItemID.EbonwoodHammer).
-                AddIngredient(ItemID.DemoniteBar, 16).
+                AddIngredient(ItemID.DemoniteBar, 14).
                 AddTile(TileID.Anvils).
                 Register();
         }

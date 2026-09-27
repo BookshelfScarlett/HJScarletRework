@@ -85,7 +85,7 @@ namespace HJScarletRework.Projs.General
         {
             RingScale = Lerp(RingScale, 1f, .05f);
             float distance = (Projectile.Center - Owner.Center).LengthSquared();
-            float searchDist = 16*20;
+            float searchDist = 16 * 20;
             if (Owner.HJScarlet().cycleMadnessLevel == 2)
                 searchDist *= 2;
 

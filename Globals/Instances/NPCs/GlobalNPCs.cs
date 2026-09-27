@@ -163,20 +163,20 @@ namespace HJScarletRework.Globals.Instances.NPCs
             {
 
             }
-            if (theBleachingBuffEnemy)
-            {
-                spriteBatch.EnterShaderArea(BlendState.AlphaBlend);
-                Effect shader = HJScarletShader.StandardFlowShader;
-                shader.Parameters["LaserTextureSize"].SetValue(npc.frame.Size());
-                shader.Parameters["targetSize"].SetValue(new Vector2(npc.frame.Width, npc.frame.Height));
-                shader.Parameters["uTime"].SetValue(-Main.GlobalTimeWrappedHourly * 0f);
-                shader.Parameters["uColor"].SetValue(Color.White.ToVector4() * .5f);
-                shader.Parameters["uFadeoutLength"].SetValue(0f);
-                shader.Parameters["uFadeinLength"].SetValue(0f);
-                shader.CurrentTechnique.Passes[0].Apply();
-                //HJScarletMethods.ApplyAlphaCut(new Vector4(0f, 0f, 0, 0), new Vector2(-Main.GlobalTimeWrappedHourly * 0f, 0), new Vector2(1f, 1f), Color.Black);
-                IsOnShader = true;
-            }
+            //if (theBleachingBuffEnemy)
+            //{
+            //    spriteBatch.EnterShaderArea(BlendState.AlphaBlend);
+            //    Effect shader = HJScarletShader.StandardFlowShader;
+            //    shader.Parameters["LaserTextureSize"].SetValue(npc.frame.Size());
+            //    shader.Parameters["targetSize"].SetValue(new Vector2(npc.frame.Width, npc.frame.Height));
+            //    shader.Parameters["uTime"].SetValue(-Main.GlobalTimeWrappedHourly * 0f);
+            //    shader.Parameters["uColor"].SetValue(Color.White.ToVector4() * .5f);
+            //    shader.Parameters["uFadeoutLength"].SetValue(0f);
+            //    shader.Parameters["uFadeinLength"].SetValue(0f);
+            //    shader.CurrentTechnique.Passes[0].Apply();
+            //    //HJScarletMethods.ApplyAlphaCut(new Vector4(0f, 0f, 0, 0), new Vector2(-Main.GlobalTimeWrappedHourly * 0f, 0), new Vector2(1f, 1f), Color.Black);
+            //    IsOnShader = true;
+            //}
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

@@ -666,6 +666,7 @@ namespace HJScarletRework.Globals.Methods
             }
             return true;
         }
+        public static int ApplyDirectionOverride(this Projectile proj, NPC target) => (Main.player[proj.owner].Center.X < target.Center.X).ToDirectionInt();
 
     }
 }

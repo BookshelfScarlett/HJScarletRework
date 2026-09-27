@@ -5,19 +5,13 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class TheCompanionHeldProj : HJScarletRangedWeaponoutClass
     {
-         public override int OriginalItemID => ItemType<TheCompanion>();
+        public override int OriginalItemID => ItemType<TheCompanion>();
         public override string Texture => GetInstance<TheCompanion>().Texture;
         public override Vector2 HoldoutOffset => new Vector2(19, -2.5f);
         public override float HoldoutDrawScale => .85f;
@@ -37,8 +31,8 @@ namespace HJScarletRework.Projs.Executor
         }
         protected override void PostAttack()
         {
-                RecoilTimer = AttackSpeed;
-                Timer = 0;
+            RecoilTimer = AttackSpeed;
+            Timer = 0;
         }
         protected override void UpdateGlobalReset()
         {
@@ -80,19 +74,19 @@ namespace HJScarletRework.Projs.Executor
             //震屏，粒子特效
             Vector2 particleOffset = new Vector2(0, 0 * Projectile.direction).RotatedBy(Projectile.rotation);
             for (int i = 0; i < 15; i++)
-                {
-                    Vector2 pos2 = pos.ToRandCirclePos(8);
-                    Vector2 vel = Projectile.SafeDirByRot().ToRandVelocity(ToRadians(10), .1f, 10.6f);
-                    float scale = Projectile.scale * Main.rand.NextFloat(.95f, 1.15f) * 0.28f;
-                    int timeLeft = Main.rand.Next(30, 45);
-                    ECSParticle.ShinyCrossStarSmall(pos2, vel, RandLerpColor(Color.LightGoldenrodYellow, Color.Gold), timeLeft, 1, scale, Main.rand.NextFloat(-.1f, .1f));
-                }
-                for (int i = 0; i < 10; i++)
-                {
-                    bool alt = Main.rand.NextBool();
-                    BlendState bs = alt ? BlendState.Additive : BlendState.AlphaBlend;
-                    ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(10), 0.1f, 12.4f), RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), Main.rand.Next(45, 65), RandRotTwoPi, 1, 0.21f * Main.rand.NextFloat(.95f, 1.25f), alt, bs);
-                }
+            {
+                Vector2 pos2 = pos.ToRandCirclePos(8);
+                Vector2 vel = Projectile.SafeDirByRot().ToRandVelocity(ToRadians(10), .1f, 10.6f);
+                float scale = Projectile.scale * Main.rand.NextFloat(.95f, 1.15f) * 0.28f;
+                int timeLeft = Main.rand.Next(30, 45);
+                ECSParticle.ShinyCrossStarSmall(pos2, vel, RandLerpColor(Color.LightGoldenrodYellow, Color.Gold), timeLeft, 1, scale, Main.rand.NextFloat(-.1f, .1f));
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                bool alt = Main.rand.NextBool();
+                BlendState bs = alt ? BlendState.Additive : BlendState.AlphaBlend;
+                ECSParticle.SmokeParticle(pos, dir.ToRandVelocity(ToRadians(10), 0.1f, 12.4f), RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), Main.rand.Next(45, 65), RandRotTwoPi, 1, 0.21f * Main.rand.NextFloat(.95f, 1.25f), alt, bs);
+            }
 
         }
         protected override void UpdateHeldProjectile()
@@ -112,7 +106,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Owner.IsHolding(OriginalItemID))
                 return;
-            if (Owner.GetExecutionSrike()&&!Projectile.HJScarlet().ExecutionStrike)
+            if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike)
             {
                 //归一化比率
                 //将武器标记为发起处决模式

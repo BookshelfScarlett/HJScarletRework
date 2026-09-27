@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
 using HJScarletRework.Core.NetSync;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -163,7 +163,11 @@ namespace HJScarletRework.Projs.Executor
                     ((TheJudgementStarExecutionMounted)proj.ModProjectile).TargetNPC = TargetNPC;
             }
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
 
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //持续更新挂载单位

@@ -1,9 +1,7 @@
-﻿using ContinentOfJourney.Items;
-using HJScarletRework.Globals.Database.List;
+﻿using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Useables;
-using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -21,10 +19,6 @@ namespace HJScarletRework.Globals.Instances.NPCs
             if (shop.NpcType == NPCID.Merchant)
             {
                 shop.ToCustomValue<AxeCharm>(0, 5, 0, 0);
-            }
-            if (shop.NpcType == NPCID.Cyborg)
-            {
-                shop.ToCustomValue<ASMD>(1, 50, 0, 0, Condition.DownedGolem);
             }
             if (shop.NpcType == NPCID.Wizard)
             {

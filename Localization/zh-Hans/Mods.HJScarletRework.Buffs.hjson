@@ -172,3 +172,8 @@ AntiKnockbackBuff: {
 	DisplayName: 防击退
 	Description: 不再受到击退的影响
 }
+
+DiamondYoyoBuff: {
+	DisplayName: 钻石星尘
+	Description: 闪耀发光，吸引炫目的宝石
+}

@@ -1,10 +1,6 @@
-﻿using ContinentOfJourney.Items.FielderSentries;
-using ContinentOfJourney.Items.ThrowerWeapons;
-using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
+﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using Terraria;
@@ -117,7 +113,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.CursedInferno,GetSeconds(2));
+            target.AddBuff(BuffID.CursedInferno, GetSeconds(2));
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -145,7 +141,7 @@ namespace HJScarletRework.Projs.Executor
                 distanceToPlayer = directionToPlayer.Length();
                 Color c = Color.White * ChainLengthRatios;
                 Vector2 pos = projCenter - Main.screenPosition;
-                SB.Draw(chains, pos + Main.rand.NextVector2Circular(5, 5), chains.Bounds, Color.LimeGreen.ToAddColor()*ChainLengthRatios, chainRot, chains.Size() / 2f, 1 * new Vector2(ChainLengthRatios, 1), 0, 0);
+                SB.Draw(chains, pos + Main.rand.NextVector2Circular(5, 5), chains.Bounds, Color.LimeGreen.ToAddColor() * ChainLengthRatios, chainRot, chains.Size() / 2f, 1 * new Vector2(ChainLengthRatios, 1), 0, 0);
                 SB.Draw(chains, pos + Main.rand.NextVector2Circular(1, 1), chains.Bounds, c.ToAddColor(175), chainRot, chains.Size() / 2f, 1 * new Vector2(ChainLengthRatios, 1), 0, 0);
             }
             //Texture2D orb = HJScarletTexture.Particle_HRShinyOrb.Value;
@@ -173,7 +169,7 @@ namespace HJScarletRework.Projs.Executor
             shader.Parameters["uFadeoutLength"].SetValue(0.21f);
             shader.Parameters["uFadeinLength"].SetValue(0.21f);
             shader.CurrentTechnique.Passes[0].Apply();
-            SB.Draw(tex.Value, beginPos+Main.rand.NextVector2Circular(5,5), null, c, rotation, orig, new Vector2(xScale*ChainLengthRatios, .15f * thick*ChainLengthRatios), 0, 0);
+            SB.Draw(tex.Value, beginPos + Main.rand.NextVector2Circular(5, 5), null, c, rotation, orig, new Vector2(xScale * ChainLengthRatios, .15f * thick * ChainLengthRatios), 0, 0);
         }
     }
 }

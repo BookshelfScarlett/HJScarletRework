@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
@@ -8,17 +7,13 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Executor
 {
-    internal class TheCompanionBullet : HJScarletProj   
+    internal class TheCompanionBullet : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
@@ -64,38 +59,38 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if(Projectile.HJScarlet().ExecutionStrike)
+            if (Projectile.HJScarlet().ExecutionStrike)
             {
                 modifiers.SetCrit();
             }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (hit.Crit&&Projectile.HJScarlet().ExecutionStrike&&Projectile.numHits <1)
+            if (hit.Crit && Projectile.HJScarlet().ExecutionStrike && Projectile.numHits < 1)
             {
 
-                            for (int i = 0; i < 20; i++)
-            {
-                Vector2 vel = Projectile.oldVelocity.ToSafeNormalize() * Main.rand.NextFloat(0f, 10) * Main.rand.NextBool().ToDirectionInt();
-                Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f);
-                new SmokeParticle(spawnpos, vel, RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.50f), Color.Orange), 40, RandRotTwoPi, 1f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
-                if (Main.rand.NextBool())
+                for (int i = 0; i < 20; i++)
+                {
+                    Vector2 vel = Projectile.oldVelocity.ToSafeNormalize() * Main.rand.NextFloat(0f, 10) * Main.rand.NextBool().ToDirectionInt();
+                    Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f);
+                    new SmokeParticle(spawnpos, vel, RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.50f), Color.Orange), 40, RandRotTwoPi, 1f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
+                    if (Main.rand.NextBool())
 
-                    new SmokeParticle(spawnpos, Projectile.oldVelocity.ToSafeNormalize().RotatedByRandom(Pi) * Main.rand.NextFloat(0.2f, 8f), RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.75f), Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
-            }
-            for (int j = 0; j < 30; j++)
-            {
-                Vector2 dir = -Projectile.SafeDirByRot();
-                new ShinyCrossStar(Projectile.Center.ToRandCirclePos(20f) + dir * Main.rand.NextFloat(0f, 12f), dir * 12f * Main.rand.NextFloat(), RandLerpColor(Color.Orange, Color.OrangeRed), 50, RandRotTwoPi, 1, 0.7f, false).Spawn();
-            }
-            for (int i = 0; i < 16; i++)
-            {
-                Vector2 pos = Projectile.Center.ToRandCirclePos(6f);
-                Vector2 vel = RandVelTwoPi(1f, 7.9f);
-                new HRShinyOrb(pos, vel, RandLerpColor((Color.Lerp(Color.Red, Color.Orange, 0.5f)), Color.OrangeRed), 40, 0.12f).Spawn();
-                new HRShinyOrb(pos, vel, Color.White, 40, 0.12f * 0.5f).Spawn();
-            }
-            ScarletSound(HJScarletSounds.Misc_GunHit,Projectile.Center,volume:.65f,pitch:.3f);
+                        new SmokeParticle(spawnpos, Projectile.oldVelocity.ToSafeNormalize().RotatedByRandom(Pi) * Main.rand.NextFloat(0.2f, 8f), RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.75f), Color.OrangeRed), 40, RandRotTwoPi, 1f, 0.30f * Main.rand.NextFloat(0.75f, 1.1f), true).SpawnToPriority();
+                }
+                for (int j = 0; j < 30; j++)
+                {
+                    Vector2 dir = -Projectile.SafeDirByRot();
+                    new ShinyCrossStar(Projectile.Center.ToRandCirclePos(20f) + dir * Main.rand.NextFloat(0f, 12f), dir * 12f * Main.rand.NextFloat(), RandLerpColor(Color.Orange, Color.OrangeRed), 50, RandRotTwoPi, 1, 0.7f, false).Spawn();
+                }
+                for (int i = 0; i < 16; i++)
+                {
+                    Vector2 pos = Projectile.Center.ToRandCirclePos(6f);
+                    Vector2 vel = RandVelTwoPi(1f, 7.9f);
+                    new HRShinyOrb(pos, vel, RandLerpColor((Color.Lerp(Color.Red, Color.Orange, 0.5f)), Color.OrangeRed), 40, 0.12f).Spawn();
+                    new HRShinyOrb(pos, vel, Color.White, 40, 0.12f * 0.5f).Spawn();
+                }
+                ScarletSound(HJScarletSounds.Misc_GunHit, Projectile.Center, volume: .65f, pitch: .3f);
                 int count = 242;
                 float seartchDist = 400;
                 for (int i = 0; i < count; i++)
@@ -160,8 +155,8 @@ namespace HJScarletRework.Projs.Executor
                 Rectangle frame = tex.Frame();
                 Vector2 ori = tex.Size() / 2;
 
-                    SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-                    DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DarkOrange, 1f, 1f, 0.78f);
+                SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+                DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DarkOrange, 1f, 1f, 0.78f);
                 SB.EnterShaderArea();
                 DrawTrails(HJScarletTexture.Noise_HeavyAura.Texture, Color.OrangeRed, 0.25f);
                 DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.15f, offsetHeight: 1.1f);
@@ -181,8 +176,8 @@ namespace HJScarletRework.Projs.Executor
                 Rectangle frame = tex.Frame();
                 Vector2 ori = tex.Size() / 2;
 
-                    SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-                    DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DarkGoldenrod, 1f, 1f, 0.78f);
+                SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+                DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.DarkGoldenrod, 1f, 1f, 0.78f);
                 SB.EnterShaderArea();
                 DrawTrails(HJScarletTexture.Noise_HeavyAura.Texture, Color.Goldenrod, 0.25f);
                 DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.15f, offsetHeight: 1.1f);

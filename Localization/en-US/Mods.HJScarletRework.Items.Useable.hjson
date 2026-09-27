@@ -237,3 +237,23 @@ SuicideKnife: {
 	DisplayName: Suicide Knife
 	Tooltip: ""
 }
+
+LivingReaverShark: {
+	DisplayName: Living Reaver Shark
+	Tooltip: ""
+}
+
+MatterSawtoothShark: {
+	DisplayName: Matter Sawtooth Shark
+	Tooltip: ""
+}
+
+SunWorm: {
+	DisplayName: Sun Worm
+	Tooltip: ""
+}
+
+DarkenRockFish: {
+	DisplayName: Darken Rock Fish
+	Tooltip: ""
+}

@@ -1,6 +1,6 @@
-﻿using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Core.NetSync;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Core.NetSync;
 using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.ID;
@@ -13,7 +13,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.ColdSteel;
         public override void ExSD()
         {
-            Item.damage = 50;
+            Item.damage = 46;
             Item.useTime = Item.useAnimation = 20;
             Item.knockBack = 5f;
             Item.SetUpRarityPrice(ItemRarityID.LightRed);

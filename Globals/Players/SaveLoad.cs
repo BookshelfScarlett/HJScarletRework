@@ -34,8 +34,8 @@ namespace HJScarletRework.Globals.Players
             ruShiWoWenBanMinionNameTrashList = (List<string>)tag.GetList<string>(nameof(ruShiWoWenBanMinionNameTrashList));
             terraRecipeEatenFoodNameList = (List<string>)tag.GetList<string>(nameof(terraRecipeEatenFoodNameList));
             terraRecipeEatenFoodNameTrashList = (List<string>)tag.GetList<string>(nameof(terraRecipeEatenFoodNameTrashList));
-            terraRecipeNotEatenFoodNameTrashList= (List<string>)tag.GetList<string>(nameof(terraRecipeNotEatenFoodNameTrashList));
-            terraRecipeNotEatenFoodNameList= (List<string>)tag.GetList<string>(nameof(terraRecipeNotEatenFoodNameList));
+            terraRecipeNotEatenFoodNameTrashList = (List<string>)tag.GetList<string>(nameof(terraRecipeNotEatenFoodNameTrashList));
+            terraRecipeNotEatenFoodNameList = (List<string>)tag.GetList<string>(nameof(terraRecipeNotEatenFoodNameList));
 
             brimstoneHeartKilling = tag.GetBool(nameof(brimstoneHeartKilling));
             terraRecipe = tag.GetBool(nameof(terraRecipe));

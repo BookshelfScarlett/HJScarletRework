@@ -1,6 +1,6 @@
-﻿using HJScarletRework.Globals.Database.Enums;
+﻿using HJScarletRework.Core.NetSync;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
-using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;

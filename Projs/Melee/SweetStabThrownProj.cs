@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Melee;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -106,7 +105,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.HitDirectionOverride = (int)(Math.Sign(target.Center.X - Owner.Center.X));
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
@@ -180,5 +179,4 @@ namespace HJScarletRework.Projs.Melee
         public SpriteBatch SB { get => Main.spriteBatch; }
         public GraphicsDevice GD { get => Main.graphics.GraphicsDevice; }
     }
-
 }

@@ -1,4 +1,8 @@
-﻿using HJScarletRework.Items.Armor.Diver;
+﻿using ContinentOfJourney;
+using HJScarletRework.Globals.Systems.Conditions;
+using HJScarletRework.Items.Armor.Diver;
+using HJScarletRework.Items.Useables;
+using HJScarletRework.Items.Weapons.Melee;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
@@ -23,8 +27,25 @@ namespace HJScarletRework.Globals.Players
                 if (poolSizeAmt > 100)
                     poolSizeAmt = 100;
 
-                if (Player.ZoneBeach)
+                if (Player.ZoneBeach && ScarletDownedBoss.DownedEvilBosses)
                     HandleDiverArmor(poolSizeAmt, power, ref itemDrop, ref sonar);
+                if (Player.ZoneDesert && DownedBossSystem.downedTimeGod)
+                    FastPoolHandler(1800, ItemType<EthrealSwordfish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
+                if (Player.ZoneSnow && DownedBossSystem.downedMatterGod)
+                    FastPoolHandler(1800, ItemType<MatterSawtoothShark>(), poolSizeAmt, power, ref itemDrop, ref sonar);
+                if (Player.ZoneJungle && DownedBossSystem.downedLifeGod)
+                    FastPoolHandler(1800, ItemType<LivingReaverShark>(), poolSizeAmt, power, ref itemDrop, ref sonar);
+                if (DownedBossSystem.downedBarrier)
+                    FastPoolHandler(1800, ItemType<DarkenRockFish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
+            }
+        }
+        public void FastPoolHandler(int chanceAmt, int targetItem, int poolSizeAmt, int power, ref int itemDrop, ref AdvancedPopupRequest sonar)
+        {
+            int fishPowerDiv = power + poolSizeAmt;
+            int chanceToCatch = chanceAmt / fishPowerDiv;
+            if (Main.rand.NextBool(chanceToCatch))
+            {
+                itemDrop = targetItem;
             }
         }
         public void HandleDiverArmor(int poolSizeAmt, int power, ref int itemDrop, ref AdvancedPopupRequest sonar)

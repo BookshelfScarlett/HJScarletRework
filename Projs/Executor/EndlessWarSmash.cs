@@ -10,11 +10,17 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     internal class EndlessWarSmasher : HJScarletProj, IPixelatedRenderer
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public AnimationStruct Helper = new AnimationStruct(6);
         public float SwordLength = 60;

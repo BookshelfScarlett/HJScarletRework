@@ -1,17 +1,16 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
-    public class StellaHeldProj:HJScarletRangedWeaponoutClass
+    public class StellaHeldProj : HJScarletRangedWeaponoutClass
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => GetInstance<Stella>().Texture;
         public override float RecoilPower => 0;
@@ -35,11 +34,11 @@ namespace HJScarletRework.Projs.Executor
         }
         protected override void UpdateRecoil()
         {
-            
+
         }
         protected override void UpdateGlobalReset()
         {
-            
+
         }
         protected override void PreAttack()
         {

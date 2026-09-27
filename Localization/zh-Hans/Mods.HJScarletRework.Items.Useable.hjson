@@ -86,7 +86,7 @@ DescriptionPaper: {
 		[c/B19CD9:测试人员：]
 		论时间的涟漪，Woodi Stigma，妩媚の5妹儿，步出夏门行，溯月 Shizuku
 		[c/FFC0CB:捐赠人员：]
-		巴雷难破长夜，冰川咲，银九，曦，丰川祥子，苏利，池堂爱吃糖，咕咕叶子，Kino，林为简
+		巴雷难破长夜，冰川咲，银九，曦，丰川祥子，苏利，池堂爱吃糖，咕咕叶子，Kagura Kino，林为简
 		[c/AACCCC:非常感谢各位让本模组得以顺利落地并推进]
 		'''
 }
@@ -258,5 +258,43 @@ SuicideKnife: {
 		使用后对自己造成高额伤害
 		方便自残
 		“饿啊！”
+		'''
+}
+
+LivingReaverShark: {
+	DisplayName: 生命掠夺鲨
+	Tooltip:
+		'''
+		手持时提供[ScarletBuff/Terraria/Regeneration]、[ScarletBuff/Terraria/Ironskin]、[ScarletBuff/Terraria/Swiftness]和[ScarletBuff/Terraria/WellFed3]
+		可开采[i:ContinentOfJourney/FinalOre]最终矿
+		凝聚了生命之神的力量
+		……等会，为什么这能存在？
+		'''
+}
+
+MatterSawtoothShark: {
+	DisplayName: 物质巨齿鲨
+	Tooltip:
+		'''
+		凝聚了物质之神的力量
+		……等会，为什么这能存在？
+		'''
+}
+
+SunWorm: {
+	DisplayName: 日光蚯蚓
+	Tooltip:
+		'''
+		凝聚了太阳之神的力量
+		……等会，为什么这能存在？
+		'''
+}
+
+DarkenRockFish: {
+	DisplayName: 暗影岩石鱼
+	Tooltip:
+		'''
+		凝聚力黑暗之地的力量
+		……等会，为什么这能存在？
 		'''
 }

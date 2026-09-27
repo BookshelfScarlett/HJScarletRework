@@ -1,10 +1,8 @@
-using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
 using Terraria;
@@ -41,14 +39,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
                 AddIngredient<AetherfireSmasher>().
                 AddIngredient<DeathTolls>().
                 AddIngredient<CrownofSilveryLight>(15).
-                AddTile<ContinentOfJourney.Tiles.FinalAnvil>().
-                Register();
-            CreateRecipe().
-                AddIngredient<AetherfireSmasher>().
-                AddIngredient<DeathTolls>().
-                AddIngredient<FinalBar>().
-                AddCondition(HJScarletCraftingConditions.InMultiplayer).
-                DisableDecraft().
                 AddTile<ContinentOfJourney.Tiles.FinalAnvil>().
                 Register();
 

@@ -25,10 +25,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Owner.IsHolding(OriginalItemID))
                 return;
-            int curExecuteCount = Owner.GetExecuteProgress();
-            if (curExecuteCount == 0)
-                return;
-            if (Owner.HJScarlet().tacticalExecutionInputCache > 0)
+            if (Projectile.CheckExecution())
             {
                 //将武器标记为发起处决模式
                 Projectile.HJScarlet().ExecutionStrike = true;

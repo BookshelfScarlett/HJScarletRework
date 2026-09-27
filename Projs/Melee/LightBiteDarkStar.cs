@@ -63,6 +63,11 @@ namespace HJScarletRework.Projs.Melee
         {
             return Projectile.timeLeft < 40;
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
+
         public override bool PreKill(int timeLeft)
         {
             //SpawnFlowerParticles();

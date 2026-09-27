@@ -11,6 +11,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
 {
     public class SplendidofTerra : ExecutorWeaponClass
     {
+
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Throw;
         public override int ExecutionProgress => 18 * (GaiaStriker.BloodBulletCount - 2);
         public override void ExSSD()

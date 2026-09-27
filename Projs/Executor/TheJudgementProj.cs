@@ -132,17 +132,17 @@ namespace HJScarletRework.Projs.Executor
                 //处死射弹。
             }
             if (Projectile.Allow(120))
-            for (int i = -1; i < 2; i += 2)
-            {
-                for (int j = 0; j < 30; j++)
+                for (int i = -1; i < 2; i += 2)
                 {
-                    for (int k = 0; k < 2; k++)
+                    for (int j = 0; j < 30; j++)
                     {
-                        new StarShape(Projectile.Center.ToRandCirclePosEdge(3), Projectile.velocity.ToRandVelocity(0, -2f, 10f).RotatedBy(k * PiOver2) * i, RandLerpColor(Color.Orange, Color.Goldenrod), 0.8f, 40).Spawn();
-                        new StarShape(Projectile.Center.ToRandCirclePosEdge(3), Projectile.velocity.ToRandVelocity(0, -1f, 4.5f).RotatedBy(PiOver4 + k * PiOver2) * i, RandLerpColor(Color.Orange, Color.Goldenrod), 0.8f, 40).Spawn();
+                        for (int k = 0; k < 2; k++)
+                        {
+                            new StarShape(Projectile.Center.ToRandCirclePosEdge(3), Projectile.velocity.ToRandVelocity(0, -2f, 10f).RotatedBy(k * PiOver2) * i, RandLerpColor(Color.Orange, Color.Goldenrod), 0.8f, 40).Spawn();
+                            new StarShape(Projectile.Center.ToRandCirclePosEdge(3), Projectile.velocity.ToRandVelocity(0, -1f, 4.5f).RotatedBy(PiOver4 + k * PiOver2) * i, RandLerpColor(Color.Orange, Color.Goldenrod), 0.8f, 40).Spawn();
+                        }
                     }
                 }
-            }
             for (int j = 0; j < 60; j++)
             {
                 Vector2 rotArg = ToRadians(360f / 60f * j).ToRotationVector2();
@@ -159,6 +159,11 @@ namespace HJScarletRework.Projs.Executor
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             return base.OnTileCollide(oldVelocity);
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

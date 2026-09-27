@@ -1,6 +1,6 @@
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
 using HJScarletRework.Core.NetSync;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
@@ -152,7 +152,7 @@ namespace HJScarletRework.Projs.Executor
                 return;
 
             SoundEngine.PlaySound(HJScarletSounds.Misc_SwordHit, Projectile.Center);
-            if (hasMinion&&!Owner.HasProj<DeathTollsExecution>(out int projID))
+            if (hasMinion && !Owner.HasProj<DeathTollsExecution>(out int projID))
                 Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, projID, Projectile.damage, 0f, Projectile.owner);
             //然后直接处死这个射弹
             Projectile.Kill();

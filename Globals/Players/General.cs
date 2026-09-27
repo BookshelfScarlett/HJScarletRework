@@ -129,7 +129,7 @@ namespace HJScarletRework.Globals.Players
         public int galvanizedHandDashCD = 0;
         public int genderChangeTimer = 0;
         public int goldenAppleDamageAbsorb = 0;
-        public int iFrameHurtAdd= 0;
+        public int iFrameHurtAdd = 0;
         public int lastHeldItemIndex = -1;
         public int LifeBalloonAccJumps;
         public int maidReaperHealTimer = 0;

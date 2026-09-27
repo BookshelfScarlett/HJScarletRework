@@ -28,7 +28,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         {
             CreateRecipe().
                 AddIngredient(ItemID.ShadewoodHammer).
-                AddIngredient(ItemID.CrimtaneBar, 16).
+                AddIngredient(ItemID.CrimtaneBar, 14).
                 AddTile(TileID.Anvils).
                 Register();
         }

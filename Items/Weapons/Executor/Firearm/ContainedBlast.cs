@@ -1,7 +1,6 @@
-﻿using ContinentOfJourney.Items;
-using ContinentOfJourney.Items.Material;
-using HJScarletRework.Core.NetSync;
+﻿using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Rockets;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;

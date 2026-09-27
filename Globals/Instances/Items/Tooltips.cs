@@ -58,7 +58,7 @@ namespace HJScarletRework.Globals.Instances.Items
                 {
                     //表单里有这个内容我们才写这个东西。没有则写另一条
                     string itemName = string.Empty;
-                    if(item.type>VanillaMaxItem)
+                    if (item.type > VanillaMaxItem)
                     {
                         itemName = item.ModItem.FullName;
                     }
@@ -209,10 +209,10 @@ namespace HJScarletRework.Globals.Instances.Items
                 tooltips.RemoveRange(1, tooltips.Count - 1);
                 for (int j = 0; j < buffs.Count; j++)
                 {
-                    
+
                     //终于差不多了……加tooltip
-                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName"+j, $"        [c/{buffs[j].Item3}:{buffs[j].Item5}]");
-                    TooltipLine buffTextDescripLine = new TooltipLine(Mod, "ScarletBuffDescripName"+j, $"{buffs[j].Item6}");
+                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName" + j, $"        [c/{buffs[j].Item3}:{buffs[j].Item5}]");
+                    TooltipLine buffTextDescripLine = new TooltipLine(Mod, "ScarletBuffDescripName" + j, $"{buffs[j].Item6}");
                     tooltips.Add(buffTextNameLine);
                     tooltips.Add(buffTextDescripLine);
                     buffs[j] = (0, tooltips.Count, buffs[j].Item3, buffs[j].Item4, buffs[j].Item5, buffs[j].Item6, buffTextNameLine.Name);

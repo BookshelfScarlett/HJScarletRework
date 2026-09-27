@@ -1,6 +1,5 @@
-﻿using HJScarletRework.Globals.Database.Enums;
-using HJScarletRework.Core.NetSync;
-using HJScarletRework.Globals.Database.IDSets;
+﻿using HJScarletRework.Core.NetSync;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
@@ -19,7 +18,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateCopper);
         }
         public override void ExSD()
-        { 
+        {
             Item.damage = 25;
             Item.shootSpeed = 19;
             Item.SetUpRarityPrice(ItemRarityID.Orange);

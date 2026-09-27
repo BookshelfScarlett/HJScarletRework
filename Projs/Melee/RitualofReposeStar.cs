@@ -103,6 +103,12 @@ namespace HJScarletRework.Projs.Melee
         {
             base.OnHitPlayer(target, info);
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
+
+
         public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public BlendState BlendState => BlendState.Additive;
 

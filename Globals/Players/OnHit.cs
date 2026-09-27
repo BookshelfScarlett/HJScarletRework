@@ -243,7 +243,7 @@ namespace HJScarletRework.Globals.Players
         }
         public void GlobalOnHitNPCWithSomething(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(sacarbWings)
+            if (sacarbWings)
             {
                 target.AddBuff(BuffType<TheBleachingBuff>(), GetSeconds(5));
             }

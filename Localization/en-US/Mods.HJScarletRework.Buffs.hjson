@@ -146,3 +146,8 @@ AntiKnockbackBuff: {
 	DisplayName: Anti Knockback Buff
 	Description: Mods.HJScarletRework.Buffs.AntiKnockbackBuff.Description
 }
+
+DiamondYoyoBuff: {
+	DisplayName: Diamond Yoyo Buff
+	Description: Mods.HJScarletRework.Buffs.DiamondYoyoBuff.Description
+}

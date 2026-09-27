@@ -25,6 +25,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
             Item.SetUpNoUseGraphicItem(true, false);
             Item.HJScarlet().drawBuffIconAndDetail = true;
+            Item.useAmmo = AmmoID.Gel;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.shoot = ProjectileType<TerraFlamethrowerHeldProj>();
             Item.shootSpeed = 12f;
@@ -41,6 +42,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
         public override void AddRecipes()
         {
             CreateRecipe().
+                AddIngredient<RadiantBlazeDawn>().
                 AddIngredient<FT7SporeGun>().
                 AddIngredient(ItemID.BrokenHeroSword).
                 AddTile(TileID.MythrilAnvil).

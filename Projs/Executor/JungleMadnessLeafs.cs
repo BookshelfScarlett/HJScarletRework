@@ -81,9 +81,7 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.frame > 4)
             {
                 Projectile.frame = 0;
-
             }
-
         }
 
         public void DoNormalState()

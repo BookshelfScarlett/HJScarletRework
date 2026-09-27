@@ -7,7 +7,6 @@ using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Systems;
 using HJScarletRework.Items.Materials;
 using Terraria;
 using Terraria.DataStructures;
@@ -129,17 +128,6 @@ namespace HJScarletRework.Items.Accessories
                 AddTile(FinalAnvilTile).
                 Register();
 
-            CreateRecipe().
-                AddIngredient<SkyofHorizon>().
-                AddIngredient<Altitude>().
-                AddIngredient<Horizon>().
-                AddIngredient(ItemID.ArcticDivingGear).
-                AddIngredient<EssenceofDeath>(15).
-                AddIngredient<FinalBar>().
-                AddCondition(HJScarletCraftingConditions.InMultiplayer).
-                DisableDecraft().
-                AddTile(FinalAnvilTile).
-                Register();
 
         }
 

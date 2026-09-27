@@ -43,6 +43,11 @@ namespace HJScarletRework.ReVisual.Class
         public bool reVisualAccelerationism = false;
         [SaveableBool]
         public bool reVisualPurplePuffer = false;
+        [SaveableBool]
+        public bool reCasta = false;
+        [SaveableBool]
+        public bool reSkeletronYoyo = false;
+
 
 
 
