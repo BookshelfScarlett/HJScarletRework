@@ -66,6 +66,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                 AddIngredient<SpearOfEscape>().
                 AddIngredient<EssenceofNothingness>(10).
                 AddIngredient<EssenceofDeath>(10).
+                DisableDecraft().
                 AddTile(FinalAnvilTile).
                 Register();
             CreateRecipe().

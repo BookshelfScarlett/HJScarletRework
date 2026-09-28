@@ -53,7 +53,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.VenusMagnum).
+                AddIngredient<TheCompanion>().
                 AddIngredient<UniversalCube>(5).
                 AddIngredient(ItemID.LunarBar, 5).
                 AddIngredient(ItemID.IllegalGunParts, 15).

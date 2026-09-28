@@ -73,7 +73,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 if (!StopAllDrawing)
                 {
-                    ScarletSound(HJScarletSounds.Moonlight_Ding, Owner.Center, 0.36f);
+                    ScarletSound(HJScarletSounds.Moonlight_Ding, Owner.Center, 0.15f);
                     StopAllDrawing = true;
                 }
                 if (Projectile.timeLeft < 65 * Projectile.MaxUpdates)

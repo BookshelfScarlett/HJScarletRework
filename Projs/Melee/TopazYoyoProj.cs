@@ -11,8 +11,8 @@ namespace HJScarletRework.Projs.Melee
     {
         public override EnumDamageClass Category => EnumDamageClass.Melee;
         protected virtual float YoyoTopSpeed => 10f;
-        protected virtual float YoyoLength => 450f;
-        protected virtual int YoyoLifeTime => 300;
+        protected virtual float YoyoLength => HJScarletMethods.TilePixel(13.4375f);
+        protected virtual float YoyoLifeTime => 300;
         protected virtual int YoyoMaxUpdates => 1;
         public override void SetStaticDefaults()
         {
@@ -33,8 +33,7 @@ namespace HJScarletRework.Projs.Melee
     public class TopazYoyoProj : GemYoyoProj
     {
         public ref float BoosterTime => ref Projectile.ai[2];
-        protected override float YoyoLength => 16f * 15;
-        protected override int YoyoLifeTime => GetSeconds(3);
+        protected override float YoyoLifeTime => 5;
         protected override int YoyoMaxUpdates => 1;
         protected override float YoyoTopSpeed => 16;
         public override void SetStaticDefaults()

@@ -108,15 +108,13 @@ namespace HJScarletRework.Projs.Melee
             int coinSpawn = -1;
             float chance = Main.rand.NextFloat();
             int stack = 1;
-            if (chance < .5f)
+            if (chance < .68f)
             {
                 coinSpawn = ItemID.SilverCoin;
-                stack = 5;
             }
-            else if (chance >= .5f && chance < .9f)
+            else if (chance >= .68f && chance < .98f)
             {
                 coinSpawn = ItemID.GoldCoin;
-                stack = 3;
             }
             else
                 coinSpawn = ItemID.PlatinumCoin;

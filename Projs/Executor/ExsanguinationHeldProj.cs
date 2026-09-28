@@ -38,7 +38,7 @@ namespace HJScarletRework.Projs.Executor
             {
                 Projectile.HJScarlet().ExecutionStrike = true;
                 Owner.HJScarlet().ExecutionBuffTimeStored.TryAdd(OriginalItemID, GetSeconds(5));
-                ScarletSound(HJScarletSounds.Light_CrackedShield, Owner.Center, volume: .75f);
+                ScarletSound(HJScarletSounds.Light_CrackedShield, Owner.Center, volume: .45f);
                 Owner.RemoveExecutionProgress(OriginalItemID);
             }
         }

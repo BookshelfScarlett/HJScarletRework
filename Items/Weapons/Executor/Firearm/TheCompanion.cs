@@ -46,6 +46,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void AddRecipes()
         {
             CreateRecipe().
+                AddIngredient(ItemID.FlintlockPistol).
                 AddRecipeGroup(RecipeGroupID.IronBar, 10).
                 AddTile(TileID.Anvils).
                 Register();

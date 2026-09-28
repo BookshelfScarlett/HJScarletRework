@@ -87,40 +87,43 @@ namespace HJScarletRework.Globals.Executor
         public IReadOnlyList<TooltipLine> CacheTooltipList = null;
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            //咱下次还是不要用三元表达式了。
-            bool traditionalMode = HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase;
-            bool isPressingLeftAlt = Main.keyState.PressingShift();
-            int requirements = Math.Max(0, ExecutionProgress);
-            string progressText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(requirements);
-            string executionText = (traditionalMode && isPressingLeftAlt) ? Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionDescriptionName").ToLangValue() : progressText;
-            Color executionColor = (traditionalMode && isPressingLeftAlt) ? Color.Lerp(Color.Red, Color.White, .4f) : Color.GreenYellow;
-
-            int executionProgressIndex = tooltips.FindIndex(line => line.Name == "Tooltip0" && line.Mod == "Terraria");
-            if (traditionalMode)
+            if (!BlockTextboxDetail())
             {
-                var executionLine = new TooltipLine(Mod, "ExecutionTooltipName", executionText)
+                //咱下次还是不要用三元表达式了。
+                bool traditionalMode = HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase;
+                bool isPressingLeftAlt = Main.keyState.PressingShift();
+                int requirements = Math.Max(0, ExecutionProgress);
+                string progressText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(requirements);
+                string executionText = (traditionalMode && isPressingLeftAlt) ? Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionDescriptionName").ToLangValue() : progressText;
+                Color executionColor = (traditionalMode && isPressingLeftAlt) ? Color.Lerp(Color.Red, Color.White, .4f) : Color.GreenYellow;
+
+                int executionProgressIndex = tooltips.FindIndex(line => line.Name == "Tooltip0" && line.Mod == "Terraria");
+                if (traditionalMode)
                 {
-                    OverrideColor = executionColor
-                };
-                tooltips.Insert(executionProgressIndex, executionLine);
-                if (isPressingLeftAlt)
-                {
-                    if (ExecutionDetail.Length > 0)
-                        tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"), null, ExecutionDetail);
-                    else
-                        tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"));
+                    var executionLine = new TooltipLine(Mod, "ExecutionTooltipName", executionText)
+                    {
+                        OverrideColor = executionColor
+                    };
+                    tooltips.Insert(executionProgressIndex, executionLine);
+                    if (isPressingLeftAlt)
+                    {
+                        if (ExecutionDetail.Length > 0)
+                            tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"), null, ExecutionDetail);
+                        else
+                            tooltips.ReplaceAllTooltip(this.GetLocalizationKey("ExecutionStrike"));
+                    }
                 }
-            }
 
-            string categoryText = Mod.GetLocalizationKey($"ExecutorDamageClass.WeaponType.{ExecutorWeaponType}").ToLangValue();
-            int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework") - 1;
-            if (!traditionalMode)
-                executionLineIndex = executionProgressIndex - 1;
-            var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", $"-{categoryText}-")
-            {
-                OverrideColor = Color.LightGoldenrodYellow
-            };
-            tooltips.Insert(executionLineIndex + 1, categoryLine);
+                string categoryText = Mod.GetLocalizationKey($"ExecutorDamageClass.WeaponType.{ExecutorWeaponType}").ToLangValue();
+                int executionLineIndex = tooltips.FindIndex(line => line.Name == "ExecutionTooltipName" && line.Mod == "HJScarletRework") - 1;
+                if (!traditionalMode)
+                    executionLineIndex = executionProgressIndex - 1;
+                var categoryLine = new TooltipLine(Mod, "ExecutorWeaponTypeName", $"-{categoryText}-")
+                {
+                    OverrideColor = Color.LightGoldenrodYellow
+                };
+                tooltips.Insert(executionLineIndex + 1, categoryLine);
+            }
             CacheTooltipList = tooltips;
             ExModifyTooltips(tooltips);
         }

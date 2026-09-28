@@ -35,6 +35,7 @@ GoldenApple: {
 		'''
 		Greatly increases all stats
 		Directly reduces damage taken
+		Grants[ScarletBuff/HJScarletRework/GoldenAppleBuff]
 		"Merely a coincidence"
 		'''
 }
@@ -45,6 +46,7 @@ GoldenAppleEnchanted: {
 		'''
 		Greatly increases all stats
 		Directly reduces damage taken
+		Grants[ScarletBuff/HJScarletRework/GoldenAppleBuffEnchanted]
 		"Merely a coincidence"
 		'''
 }
@@ -65,10 +67,10 @@ DescriptionPaper: {
 		'''
 		This note is just to let you know that the Lostbelt Journey mod has added a new class: the Executor.
 		However, since the mod currently lacks sufficient armor sprites, the mod provides Executor-modified versions of the vanilla armors listed below.
-		[i:RainHat][i:RainCoat]Raincoat Set – crafted with [i:Silk]Silk
-		[i:CowboyHat][i:CowboyJacket][i:CowboyPants] Cowboy Set – crafted with [i:ShadowScale] Shadow Scale / [i:TissueSample] Tissue Sample and [i:Silk] Silk
+		[i:RainHat][i:RainCoat]Raincoat Set – crafted with[i:Silk]Silk
+		[i:CowboyHat][i:CowboyJacket][i:CowboyPants] Cowboy Set – crafted with[i:ShadowScale]Shadow Scale /[i:TissueSample]Tissue Sample and[i:Silk]Silk
 		[i:FloretProtectorHelmet][i:FloretProtectorChestplate][i:FloretProtectorLegs]Floret Protector Set – can be transformed after defeating The Lifebringer
-		[i:MonkBrows][i:MonkShirt][i:MonkPants]Monk Armor / [i:MonkAltHead][i:MonkAltShirt][i:MonkAltPants]Shinobi Armor – also receive Executor versions
+		[i:MonkBrows][i:MonkShirt][i:MonkPants]Monk Armor /[i:MonkAltHead][i:MonkAltShirt][i:MonkAltPants]Shinobi Armor – also receive Executor versions
 		All of the reworked vanity sets mentioned above gain brand new effects and set bonuses.
 		Also, you can hold Left Alt to view the list of developers and support staff who contributed to this mod
 		'''
@@ -93,7 +95,7 @@ PurePrismFate: {
 	DisplayName: Pure Prism
 	Tooltip:
 		'''
-		While holding, press the Interact key on a crafting material in your inventory to duplicate it by consuming Prisms.
+		Press the Interact key on a crafting material in your inventory to duplicate it.
 		Up to 100 copies can be duplicated at once, and each duplication consumes 3 Prisms.
 		"A more refined Mana Crystal."
 		'''
@@ -103,7 +105,7 @@ UnregisteredSpiritOrigin: {
 	DisplayName: Unregistered Spirit Origin
 	Tooltip:
 		'''
-		While held, press the Interact key on a weapon/accessory/armor/treasure bag in your inventory to duplicate it by consuming.
+		Press the Interact key on a weapon/accessory/armor/treasure bag in your inventory to duplicate.
 		The Unregistered Spirit Origin itself cannot be duplicated.
 		"The overflowing remnants of a Spirit Origin."
 		'''
@@ -113,7 +115,7 @@ ArcaeaPack: {
 	DisplayName: Arcaea Bonus Bundle
 	Tooltip:
 		'''
-		Grants [i:HJScarletRework/HikariItem]Exquisite Rose and [i:HJScarletRework/TairitsuItem]Black Parasol on open
+		Grants[i:HJScarletRework/HikariItem]Exquisite Rose and[i:HJScarletRework/TairitsuItem]Black Parasol on open
 		Hikari and Tairitsu costume transformation item
 		-
 		WITHOUT LIGHT
@@ -147,8 +149,10 @@ FruitofEternity: {
 	DisplayName: Fruit of Eternity
 	Tooltip:
 		'''
+		Grants[ScarletBuff/HJScarletRework/FruitofEternityBuff]
 		Gain {0} defense and +{1} HP/s health regeneration
-		Any divine enemy present on the field deals {2} less damage when hit, and resets its speed with a 1/{3} chance to teleport randomly
+		You deals {2} less damage to all divine enemy
+		Taken damage will reset your speed, with 1/{3} chance to teleport randomly
 		'''
 	DetailTooltip:
 		'''
@@ -161,7 +165,7 @@ GaiaStrikerLootBox: {
 	DisplayName: Gaia Chest
 	Tooltip:
 		'''
-		Opens to provide you with [i:HJScarletRework/GaiaStriker][c/FE0000:Gaia Hammer]
+		Opens to provide you with[i:HJScarletRework/GaiaStriker][c/FE0000:Gaia Hammer]
 		Please use in an open area
 		'''
 }
@@ -210,15 +214,17 @@ CrystallizedLore: {
 	DisplayName: Crystallized Lore
 	Tooltip:
 		'''
-		While held, press the Interact key on a weapon in your inventory to attempt to grant it the highest-tier prefix 
-		If it fails, grants the "Demonic" modifier instead
-		If Use on an accessory, it will attempt to grant it the highest-tier accessory prefix
-		Press right-click on the Crystallized Lore itself to cycle through the available accessory prefix options
+		Press the Interact key on a weapon in your inventory to grant it the best prefix 
+		If it fails, grants the "Demonic" prefix instead
+		If use on an accessory, it will attempt to grant it the best accessory prefix
+		Hold shift and right-click to cycle through the available accessory prefix options
 		'''
 	DetailTooltip:
 		'''
-		A highly pure crystal of magic created when human history crosses a stream of Mana.
-		It can be said that it is the ingredient for materializing Heroic Spirits.
+		A highly pure crystal of magic created when
+		human history crosses a stream of Mana.
+		It can be said that it is the ingredient
+		for materializing Heroic Spirits.
 		'''
 	PrefixLine: Current selected accessory prefix: {0}
 }
@@ -235,25 +241,64 @@ RandomNewFolder: {
 
 SuicideKnife: {
 	DisplayName: Suicide Knife
-	Tooltip: ""
+	Tooltip: Can damage yourself
 }
 
 LivingReaverShark: {
 	DisplayName: Living Reaver Shark
-	Tooltip: ""
+	Tooltip:
+		'''
+		Grants[ScarletBuff/Terraria/Regeneration], [ScarletBuff/Terraria/Ironskin], [ScarletBuff/Terraria/Swiftness] and [ScarletBuff/Terraria/WellFed3] on held
+		Can be used to mine Final Ore
+		Condensed the power of the Life
+		...Wait, why does this even exist
+		'''
 }
 
 MatterSawtoothShark: {
 	DisplayName: Matter Sawtooth Shark
-	Tooltip: ""
+	Tooltip:
+		'''
+		Condensed the power of the Matter
+		...Wait, why does this even exist
+		'''
 }
 
 SunWorm: {
 	DisplayName: Sun Worm
-	Tooltip: ""
+	Tooltip:
+		'''
+		Condensed the power of the Sun
+		...Wait, why does this even exist
+		'''
 }
 
 DarkenRockFish: {
-	DisplayName: Darken Rock Fish
-	Tooltip: ""
+	DisplayName: Darken Rockfish
+	Tooltip:
+		'''
+		Condensed the power of the Darkness
+		...Wait, why does this even exist
+		'''
+}
+
+StarterBag: {
+	DisplayName: Drifter's Pouch
+	Tooltip: A cloth bag with a few items inside
+}
+
+FishingPaper: {
+	DisplayName: Lostbelt Journey Fishing Guide
+	Tooltip:
+		'''
+		The Lostbelt Journey adds brand new catches, but due to the lack of a wiki
+		Therefore, here is a guide note
+		Before you can obtain the special catches added by Lostbelt Journey, you need to first obtain and equip [i:HJScarletRework/BitingClaw]Biting Claw
+		Special Catch List:
+		[i:HJScarletRework/DiverHead][i:HJScarletRework/DiverBody][i:HJScarletRework/DiverLegs]Diver Armor, obtained by fishing in the Ocean after defeating [i:EaterMask]Eater of Worlds / [i:BrainMask]Brain of Cthulhu
+		[i:HJScarletRework/EthrealSwordfish]Eternal Swordfish, obtained in the Desert after defeating the Overwatcher
+		[i:HJScarletRework/LivingReaverShark]Living Reaver Shark, obtained in the Jungle after defeating the Lifebringer
+		[i:HJScarletRework/MatterSawtoothShark]Matter Sawtooth Shark, obtained in the Snow biome after defeating the Materializer
+		[i:HJScarletRework/DarkenRockFish]Darken Rockfish, obtained Underground after defeating the Wall of Shadows
+		'''
 }

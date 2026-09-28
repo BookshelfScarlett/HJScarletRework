@@ -114,6 +114,8 @@ namespace HJScarletRework.Projs.Executor
                     new SmokeParticle(firePos.ToRandCirclePos(10f) + posOffset, vel, RandLerpColor(Color.White, Color.Lerp(Color.OrangeRed, Color.Gold, 0.4f)), 40, RandRotTwoPi, 1f, 0.34f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
                 }
             }
+            if (Projectile.HJScarlet().ExecutionStrike)
+                Projectile.HJScarlet().ExecutionStrike = false;
         }
     }
 }

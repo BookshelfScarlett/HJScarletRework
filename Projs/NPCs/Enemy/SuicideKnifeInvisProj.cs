@@ -10,6 +10,11 @@ namespace HJScarletRework.Projs.NPCs.Enemy
     public class SuicideKnifeInvisProj : HJScarletEnemyProj
     {
         public override string Texture => HJScarletTexture.InvisAsset.Path;
+        public int SuicideDamage
+        {
+            get => (int)Projectile.ai[2];
+            set => Projectile.ai[2] = value;
+        }
         public override void ExSD()
         {
             Projectile.penetrate = 1;
@@ -33,14 +38,11 @@ namespace HJScarletRework.Projs.NPCs.Enemy
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
-            modifiers.SetMaxDamage(150);
+            modifiers.SetMaxDamage(SuicideDamage);
             if (Projectile.owner == target.whoAmI && target.IsHolding<SuicideKnife>())
                 modifiers.FinalDamage *= 1;
             else
                 modifiers.FinalDamage *= 1;
-            Owner.AddImmuneTime(ImmunityCooldownID.General, 180);
-            //Main.NewText(Owner.immuneTime);
-            //Owner.GetImmnue(ImmunityCooldownID.General, 180,true);
             Projectile.Kill();
         }
 

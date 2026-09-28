@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Useables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -50,6 +51,7 @@ namespace HJScarletRework.Globals.Players
         public bool firstTimeCraftGaia = false;
         public bool floretProtectorExecutor = false;
         public bool fruitofEthernity = false;
+        public bool giveMagicStorage= false;
         public bool givePaper = true;
         public bool goldenAppleEnchanted = false;
         public bool goldenAppleEnchantedFully = false;
@@ -224,7 +226,7 @@ namespace HJScarletRework.Globals.Players
         {
             if (givePaper)
             {
-                Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<DescriptionPaper>());
+                Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<StarterBag>());
                 givePaper = false;
             }
             OnEnterWorldReset();
@@ -243,25 +245,6 @@ namespace HJScarletRework.Globals.Players
                     terraRecipeNotEatenFoodNameList.Add(name);
                 }
             }
-            //for (int i = 0; i < ruShiWoWenBanMinionNameTrashList.Count; i++)
-            //{
-
-            //    string nameType = ruShiWoWenBanMinionNameTrashList[i];
-            //    if (HJScarletList.SummonWeaponFullName.Contains(nameType))
-            //    {
-            //        ruShiWoWenBanMinionNameTrashList.RemoveAt(i);
-            //        ruShiWoWenBanMinionNameList.Add(nameType);
-            //    }
-            //}
-            //for (int i = 0; i < ruShiWoWenBanMinionNameList.Count; i++)
-            //{
-            //    string nameType = ruShiWoWenBanMinionNameList[i];
-            //    if (!HJScarletList.SummonWeaponFullName.Contains(nameType))
-            //    {
-            //        ruShiWoWenBanMinionNameTrashList.Add(nameType);
-            //        ruShiWoWenBanMinionNameList.RemoveAt(i);
-            //    }
-            //}
 
             for (int i = 0; i < Player.inventory.Length; i++)
             {
@@ -290,6 +273,20 @@ namespace HJScarletRework.Globals.Players
                 }
             }
         }
+
+        public void TryGiveMagicStorage()
+        {
+        }
+        private int GetSoftReferrenceItemID(Mod mod, string name)
+        {
+            int itemID = -1;
+            if (mod.TryFind(name, out ModItem value))
+            {
+                return value.Type;
+            }
+            return itemID;
+        }
+
         private void SwitchArmorType2(Item item, int i, bool armorSlot = false)
         {
             switch (item.type)

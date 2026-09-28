@@ -25,6 +25,7 @@ namespace HJScarletRework.Globals.Players
             tag.Add(nameof(crystallizeLoreReforgeIndex), crystallizeLoreReforgeIndex);
             tag.Add(nameof(crimsonScytheSlayNPCType), crimsonScytheSlayNPCType);
             tag.Add(nameof(brimstoneHeartKilling), brimstoneHeartKilling);
+            ScarletSave(ref tag, giveMagicStorage);
         }
         public override void LoadData(TagCompound tag)
         {
@@ -46,6 +47,15 @@ namespace HJScarletRework.Globals.Players
             weaponUpgradePostSon = tag.GetBool(nameof(weaponUpgradePostSon));
             crystallizeLoreReforgeIndex = tag.GetInt(nameof(crystallizeLoreReforgeIndex));
             crimsonScytheSlayNPCType = tag.GetInt(nameof(crimsonScytheSlayNPCType));
+            ScarletLoadBool(ref tag, ref giveMagicStorage);
+        }
+        public void ScarletSave(ref TagCompound tag, object value)
+        {
+            tag.Add("Scarlet:" + nameof(value), value);
+        }
+        public void ScarletLoadBool(ref TagCompound tag,ref bool value)
+        {
+            value = tag.GetBool("Scarlet:" + nameof(value));
         }
     }
 }

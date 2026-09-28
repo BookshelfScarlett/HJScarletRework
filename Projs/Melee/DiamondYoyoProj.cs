@@ -12,8 +12,8 @@ namespace HJScarletRework.Projs.Melee
 {
     public class DiamondYoyoProj : GemYoyoProj
     {
-        protected override float YoyoLength => 16f * 31;
-        protected override int YoyoLifeTime => GetSeconds(5);
+        protected override float YoyoLength => HJScarletMethods.TilePixel(17.5f);
+        protected override float YoyoLifeTime => 8;
         public ref float FloatingTimer => ref Projectile.ai[2];
         protected override int YoyoMaxUpdates => 2;
         protected override float YoyoTopSpeed => 29;

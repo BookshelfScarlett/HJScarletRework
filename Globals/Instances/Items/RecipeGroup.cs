@@ -2,10 +2,12 @@
 using ContinentOfJourney.Items.Placables.FishingCrate;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
+using HJScarletRework.Items.Weapons.Executor.Firearm;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
 using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -36,6 +38,7 @@ namespace HJScarletRework.Globals.Instances.Items
         public static string AnyDungeonCrate;
         public static string AnyDarkCrate;
         public static string AnyLivingCrate;
+        public static string AnyClassEmblem;
         #endregion
         public override void AddRecipeGroups()
         {
@@ -72,25 +75,31 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyEvilBar = CreateRecipeGroup(nameof(AnyEvilBar), ItemID.DemoniteBar, ItemID.CrimtaneBar);
             AnyCobaltBar = CreateRecipeGroup(nameof(AnyCobaltBar), ItemID.CobaltBar, ItemID.PalladiumBar);
             AnyGoldSword = CreateRecipeGroup(nameof(AnyGoldSword), ItemID.GoldBroadsword, ItemID.PlatinumBroadsword);
-            AnyPostPlantEmblem = CreateRecipeGroup(nameof(AnyPostPlantEmblem), ItemType<EmblemColdSteel>(), ItemType<EmblemFirearm>(), ItemType<EmblemThrown>());
+            AnyPostPlantEmblem = CreateRecipeGroup(nameof(AnyPostPlantEmblem), ItemType<EmblemColdSteel>(), ItemType<EmblemThrown>());
             AnyTitaniumBar = CreateRecipeGroup(nameof(AnyTitaniumBar), ItemID.TitaniumBar, ItemID.AdamantiteBar);
             AnyDarkCrate = CreateRecipeGroup(nameof(AnyDarkCrate), ItemType<MazeCrate>(), ItemType<MistyCrate>(), ItemType<ShadowCrate>());
             AnyBiomeKey = CreateRecipeGroup(nameof(AnyBiomeKey), ItemID.CorruptionKey, ItemID.CrimsonKey, ItemID.FrozenKey, ItemID.JungleKey, ItemID.HallowedKey, ItemID.DungeonDesertKey);
             AnyLivingCrate = CreateRecipeGroup(nameof(AnyLivingCrate), ItemType<LivingCrate>(), ItemType<MembraneCrate>());
+            AnyClassEmblem = CreateRecipeGroup(nameof(AnyClassEmblem), ItemID.WarriorEmblem, ItemID.RangerEmblem, ItemID.SorcererEmblem, ItemID.SummonerEmblem);
         }
         public override void PostAddRecipes()
         {
             for (int i = 0; i < Recipe.numRecipes; i++)
             {
                 Recipe recipe = Main.recipe[i];
-                if (recipe.TryGetIngredient(ItemID.EyeoftheGolem, out Item ingre))
-                {
-                    Recipe recipe1 = recipe.Clone();
-                    recipe1.RemoveIngredient(ItemID.EyeoftheGolem);
-                    recipe1.AddRecipeGroup(AnyPostPlantEmblem);
-                    recipe1.AddIngredient<DisasterEssence>(5);
-                    recipe1.Register();
-                }
+                CopyTheRecipe(recipe, ItemID.RocketLauncher, ItemType<Sundowner>());
+                CopyTheRecipe(recipe, ItemID.FlintlockPistol, ItemType<TheCompanion>());
+            }
+        }
+        public void CopyTheRecipe(Recipe recipe, int keyIngredient, int oriResultItem)
+        {
+            if (recipe.HasIngredient(keyIngredient) && !recipe.HasResult(oriResultItem))
+            {
+                Recipe c = recipe.Clone();
+                c.RemoveIngredient(keyIngredient);
+                c.AddIngredient(oriResultItem);
+                c.DisableDecraft();
+                c.Register();
             }
         }
         public override void Unload()
@@ -115,6 +124,7 @@ namespace HJScarletRework.Globals.Instances.Items
             AnyTitaniumBar = null;
             AnyDarkCrate = null;
             AnyLivingCrate = null;
+            AnyClassEmblem = null;
         }
         public static string CreateRecipeGroup(string name, params int[] AllItem)
         {

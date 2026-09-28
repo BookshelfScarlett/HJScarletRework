@@ -59,6 +59,10 @@ SonItem: {
 }
 
 LifeWormItem: {
-	DisplayName: Life Worm Item
-	Tooltip: ""
+	DisplayName: Living Apple
+	Tooltip:
+		'''
+		Summons a larva of the Life God
+		"Brimming with vitality"
+		'''
 }

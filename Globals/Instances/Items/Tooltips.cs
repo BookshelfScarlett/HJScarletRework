@@ -9,6 +9,8 @@ using HJScarletRework.Items.Armor.Monk;
 using HJScarletRework.Items.Armor.Shinobi;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityShiny;
+using ReLogic.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
@@ -196,7 +198,28 @@ namespace HJScarletRework.Globals.Instances.Items
                                     }
                                 }
                             }
-                            return $"       [c/{color}:{name}]";
+                            //计算图标在渲染时应占据的宽度
+                            //此时我们不知道最终的行高，但可以基于当前字体计算一个近似比例
+                            DynamicSpriteFont currentFont = FontAssets.MouseText.Value;
+                            Vector2 currentScale = Vector2.One;
+                            //近似行高，用于计算图标宽度
+                            float approximateLineHeight = currentFont.MeasureString("M").Y * currentScale.Y;
+                            //图标宽高比
+                            float iconAspectRatio = (32+2) / (float)32;
+                            if (texture != null)
+                            {
+                                iconAspectRatio = (texture.Width + 2) / (float)texture.Height;
+                            }
+
+                            //图标应占据的像素宽度
+                            float targetWidth = approximateLineHeight * iconAspectRatio;
+                            //测量单个空格的宽度
+                            float spaceWidth = ChatManager.GetStringSize(currentFont, " ", currentScale).X;
+                            //计算所需空格数量
+                            int spacesNeeded = (int)Math.Ceiling(targetWidth / spaceWidth);
+                            //构建占位空格字符串
+                            string placeholder = new string(' ', spacesNeeded);
+                            return $"{placeholder}[c/{color}:{name}]";
                         });
                     }, 1);
                 }
@@ -209,9 +232,30 @@ namespace HJScarletRework.Globals.Instances.Items
                 tooltips.RemoveRange(1, tooltips.Count - 1);
                 for (int j = 0; j < buffs.Count; j++)
                 {
+                            Texture2D texture = buffs[j].Item4;
+                            //计算图标在渲染时应占据的宽度
+                            //此时我们不知道最终的行高，但可以基于当前字体计算一个近似比例
+                            DynamicSpriteFont currentFont = FontAssets.MouseText.Value;
+                            Vector2 currentScale = Vector2.One;
+                            //近似行高，用于计算图标宽度
+                            float approximateLineHeight = currentFont.MeasureString("M").Y * currentScale.Y;
+                           //图标宽高比
+                            float iconAspectRatio = (32+2) / (float)32;
+                            if (texture != null)
+                            {
+                                iconAspectRatio = (texture.Width + 2) / (float)texture.Height;
+                            }
+                            //图标应占据的像素宽度
+                            float targetWidth = approximateLineHeight * iconAspectRatio;
+                            //测量单个空格的宽度
+                            float spaceWidth = ChatManager.GetStringSize(currentFont, " ", currentScale).X;
+                            //计算所需空格数量
+                            int spacesNeeded = (int)Math.Ceiling(targetWidth / spaceWidth);
+                            //构建占位空格字符串
+                            string placeholder = new string(' ', spacesNeeded);
 
                     //终于差不多了……加tooltip
-                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName" + j, $"        [c/{buffs[j].Item3}:{buffs[j].Item5}]");
+                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName" + j, $"{placeholder}[c/{buffs[j].Item3}:{buffs[j].Item5}]");
                     TooltipLine buffTextDescripLine = new TooltipLine(Mod, "ScarletBuffDescripName" + j, $"{buffs[j].Item6}");
                     tooltips.Add(buffTextNameLine);
                     tooltips.Add(buffTextDescripLine);
@@ -227,6 +271,26 @@ namespace HJScarletRework.Globals.Instances.Items
 
             }
         }
+        /// <summary>
+        /// 用 EM / EN / 分数 EM 空格拼出约等于 targetEm 宽度的占位串。
+        /// 宽度仅与字号成比例，不受字体包影响。
+        /// </summary>
+        private static string BuildEmSpacePlaceholder(float targetEm)
+        {
+            System.Text.StringBuilder sb = new();
+            int fullEm = (int)targetEm;
+            for (int i = 0; i < fullEm; i++)
+                sb.Append('\u2003'); // 1 em
+
+            float remaining = targetEm - fullEm;
+            // 按剩余宽度拼分数空格：1/2, 1/3, 1/4, 1/6
+            if (remaining >= 0.45f) sb.Append('\u2002');      // 0.5 em
+            else if (remaining >= 0.30f) sb.Append('\u2004'); // 0.333 em
+            else if (remaining >= 0.22f) sb.Append('\u2005'); // 0.25 em
+            else if (remaining >= 0.14f) sb.Append('\u2006'); // 0.167 em
+
+            return sb.ToString();
+        }
         public void InsertIconInTooltipLine(Item item, List<TooltipLine> tooltips)
         {
             //是否绘制buffIcon要在物品的sd里面专门打个标记
@@ -241,12 +305,23 @@ namespace HJScarletRework.Globals.Instances.Items
                 return;
             for (int i = 0; i < lines.Count; i++)
             {
+                DrawableTooltipLine line = lines[i];
                 foreach (var buf in buffs)
                 {
-                    if (buf.Item7 == lines[i].Name)
+                    if (buf.Item7 == line.Name)
                     {
-                        Vector2 pos = new Vector2(lines[i].X + buf.Item1 + 2.5f, lines[i].Y - 5f);
-                        Main.spriteBatch.Draw(buf.Item4, pos, null, Color.White, 0, Vector2.Zero, .98f, 0, 0);
+                        DynamicSpriteFont font = line.Font ?? FontAssets.MouseText.Value;
+                        Vector2 textScale = line.BaseScale;
+                        if (textScale == Vector2.Zero)
+                            textScale = Vector2.One;
+                        float lineHeight = font.MeasureString("M").Y * textScale.Y;
+                        Texture2D icon = buf.Item4;
+                        float iconScale = lineHeight / icon.Height;
+                        float scaledHeight = icon.Height * iconScale;
+
+                        float x = line.X + buf.Item1 + iconScale * 2f;
+                        float y = line.Y + (lineHeight - scaledHeight) - iconScale * 4f;
+                        Main.spriteBatch.Draw(buf.Item4, new Vector2(x, y), null, Color.White, 0, Vector2.Zero, iconScale * 1f, 0, 0);
                     }
                     if (buf.Item7 != lines[i].Name)
                         continue;

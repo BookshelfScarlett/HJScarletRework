@@ -11,8 +11,8 @@ namespace HJScarletRework.Projs.Melee
 {
     public class AmberYoyoProj : GemYoyoProj
     {
-        protected override float YoyoLength => 16f * 32;
-        protected override int YoyoLifeTime => GetSeconds(5);
+        protected override float YoyoLength => HJScarletMethods.TilePixel(14.5f);
+        protected override float YoyoLifeTime => 7;
         public ref float FloatingTimer => ref Projectile.ai[2];
         protected override int YoyoMaxUpdates => 2;
         protected override float YoyoTopSpeed => 36;

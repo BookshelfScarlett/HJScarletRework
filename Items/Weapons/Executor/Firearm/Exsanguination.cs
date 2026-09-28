@@ -52,6 +52,10 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void RightClick(Player player)
         {
             RangerMode = !RangerMode;
+            if (RangerMode)
+                Item.DamageType = DamageClass.Ranged;
+            else
+                Item.DamageType = ExecutorDamageClass.Instance;
             Item.NetStateChanged();
         }
         public override bool ConsumeItem(Player player) => false;

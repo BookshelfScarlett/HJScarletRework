@@ -115,8 +115,9 @@ CrimsonScythe: {
 	DisplayName: 猩红重镰
 	Tooltip:
 		'''
+		手持时提供[ScarletBuff/HJScarletRework/AntiKnockbackBuff]
 		持续劈砍下，第四轮劈砍提升攻击范围
-		命中时施加[ScarletDebuff/ContinentOfJourney/DivineFireBuff]，使你[ScarletBuff/HJScarletRework/AntiKnockbackBuff]，并释放灵魂石
+		命中时放血，释放灵魂石，并施加[ScarletDebuff/ContinentOfJourney/DivineFireBuff]，
 		你可以通过劈砍的方式，将灵魂石中的灵魂打回原主
 		也可以通过按下右键以收割灵魂石，恢复你的生命
 		'''
@@ -452,9 +453,8 @@ ContainedBlast: {
 	ExecutionStrike:
 		'''
 		引爆场上所有粘弹，根据造成的伤害次数提供效果：
-		为遏制爆炸提供独立增伤，最大50%
+		为遏制爆炸提供独立增伤，最大35%
 		增强遏制爆炸的攻击频率，并使遏制爆炸的攻击必定暴击
-		接下来的时间内，冲击弹的命中都会叠加处决进程
 		'''
 	FlavorTooltip: 盖上盖子。
 }

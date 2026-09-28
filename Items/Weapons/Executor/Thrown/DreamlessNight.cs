@@ -74,10 +74,18 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddRecipeGroup(HJScarletRecipeGroup.AnyEvilHammer).
+                AddIngredient<TheDefiler>().
                 AddIngredient<JungleMadness>().
                 AddIngredient<DungeonBreaker>().
                 AddIngredient<MantleLayer>().
+                AddTile(TileID.Beds).
+                Register();
+            CreateRecipe().
+                AddIngredient<FleshGrinder>().
+                AddIngredient<JungleMadness>().
+                AddIngredient<DungeonBreaker>().
+                AddIngredient<MantleLayer>().
+                DisableDecraft().
                 AddTile(TileID.Beds).
                 Register();
         }

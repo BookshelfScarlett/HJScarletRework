@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
+using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -22,6 +23,14 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetDamage<ExecutorDamageClass>() += 0.15f;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddRecipeGroup(HJScarletRecipeGroup.AnyClassEmblem).
+                DisableDecraft().
+                AddTile(TileID.TinkerersWorkbench).
+                Register();
         }
     }
 }

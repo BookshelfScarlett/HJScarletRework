@@ -25,7 +25,7 @@ namespace HJScarletRework.Items.Armor.Shinobi
         }
         public float Damaeg = .30f;
         public int MaxTurrets = 4;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damaeg);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damaeg.ToPercent());
         public override void UpdateArmorSet(Player player)
         {
             player.setBonus += "\n" + Mod.GetLocalizationKey($"{LocalizationCategory}.{GetType().Name}.SetBonus").ToLangValue().ToFormatValue(MaxTurrets);

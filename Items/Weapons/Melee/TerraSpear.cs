@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Items;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Instances.Items;
@@ -32,8 +33,15 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             CreateRecipe().
                 AddIngredient<CryoblazeHymn>().
-                AddRecipeGroup(HJScarletRecipeGroup.AnySpearofDarkness).
+                AddIngredient<SpearofDarknessThrown>().
                 AddIngredient(ItemID.BrokenHeroSword).
+                AddTile(TileID.MythrilAnvil).
+                Register();
+            CreateRecipe().
+                AddIngredient<CryoblazeHymn>().
+                AddIngredient<SpearOfDarkness>().
+                AddIngredient(ItemID.BrokenHeroSword).
+                DisableDecraft().
                 AddTile(TileID.MythrilAnvil).
                 Register();
         }

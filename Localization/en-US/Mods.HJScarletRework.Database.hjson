@@ -1,9 +1,9 @@
 PrefixData: {
-	Warding: ""
-	Mencing: ""
-	Quick: ""
-	Violent: ""
-	Lucky: ""
+	Warding: Warding
+	Mencing: Mencing
+	Quick: Quick
+	Violent: Violent
+	Lucky: Lucky
 }
 
 PocketMirrorModiflication:
@@ -14,13 +14,13 @@ PocketMirrorModiflication:
 	'''
 
 GenericText: {
-	BuffDetail: ""
+	BuffDetail: Hold Left Alt for detail
 	SwitchDetail: ""
-	HoldShiftAndRightClick: ""
+	HoldShiftAndRightClick: Hold Shift and Right-Click to switch
 }
 
 ItemBelongTo: {
 	Donator: Donator Item
-	Developer: ""
-	Supporter: ""
+	Developer: Developer Item
+	Supporter: Supporter Item
 }

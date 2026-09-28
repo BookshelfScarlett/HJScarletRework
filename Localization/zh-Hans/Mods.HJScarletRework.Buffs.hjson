@@ -33,11 +33,6 @@ WatcherBuff: {
 	Description: 时间的无数同僚中最为幼小的一只
 }
 
-PanicBuff: {
-	// DisplayName: Panic Buff
-	// Description: Mods.HJScarletRework.Buffs.PanicBuff.Description
-}
-
 HerbBagBuff: {
 	DisplayName: 护林草药
 	Description: 草药的力量似乎注入了你的体内
@@ -165,7 +160,7 @@ LifeWormBuff: {
 
 CycleMadnessBuff: {
 	DisplayName: 暴击星周转
-	Description: Mods.HJScarletRework.Buffs.CycleMadnessBuff.Description
+	Description: 正在获得暴击星
 }
 
 AntiKnockbackBuff: {

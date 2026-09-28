@@ -27,7 +27,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.ShadewoodHammer).
                 AddIngredient(ItemID.CrimtaneBar, 14).
                 AddTile(TileID.Anvils).
                 Register();

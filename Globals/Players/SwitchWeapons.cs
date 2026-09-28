@@ -7,6 +7,7 @@ using HJScarletRework.Items.Armor.ExecutorAlter;
 using HJScarletRework.Items.Armor.Monk;
 using HJScarletRework.Items.Armor.Shinobi;
 using HJScarletRework.Items.Weapons.Melee;
+using HJScarletRework.Projs.Melee;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -33,6 +34,14 @@ namespace HJScarletRework.Globals.Players
             { ItemType<GalvanizedHandThrown>(), ItemType<GalvanizedHand>() },
             { ItemType<SpearofEscapeThrown>(),  ItemType<SpearOfEscape>() },
             { ItemType<LightBiteThrown>() , ItemType<LightBite>() },
+            { ItemType<GoldRapierThrown>() , ItemType<GoldRapier>() },
+            { ItemType<PlatinumRapierThrown>() , ItemType<PlatinumRapier>() },
+            { ItemType<TungstenRapierThrown>() , ItemType<TungstenRapier>() },
+            { ItemType<CopperRapierThrown>() , ItemType<CopperRapier>() },
+            { ItemType<SilverRapierThrown>() , ItemType<SilverRapier>() },
+            { ItemType<TinRapierThrown>() , ItemType<TinRapier>() },
+            { ItemType<LeadRapierThrown>() , ItemType<LeadRapier>() },
+            { ItemType<IronRapierThrown>() , ItemType<IronRapier>() },
             {ItemType<MonkHead>(), ItemID.MonkBrows },
             {ItemType<MonkBody>(), ItemID.MonkShirt},
             {ItemType<MonkLegs>(), ItemID.MonkPants},

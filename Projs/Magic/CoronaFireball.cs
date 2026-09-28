@@ -38,7 +38,7 @@ namespace HJScarletRework.Projs.Magic
             Projectile.ignoreWater = true;
             Projectile.extraUpdates = 2;
             Projectile.penetrate = 2;
-            Projectile.timeLeft = GetSeconds(5);
+            Projectile.timeLeft = GetSeconds(3);
         }
         public override void OnFirstFrame()
         {

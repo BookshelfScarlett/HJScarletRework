@@ -23,7 +23,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void ExSD()
         {
             base.ExSD();
-            Item.damage = 20;
+            Item.damage = 13;
             Item.shootSpeed = 10f;
             Item.shoot = ProjectileType<AmberYoyoProj>();
         }

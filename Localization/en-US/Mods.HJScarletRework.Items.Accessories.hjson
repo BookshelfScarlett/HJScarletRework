@@ -28,27 +28,24 @@ HeartoftheMountain: {
 }
 
 SteadyBreath: {
-	DisplayName: Precious Aim
+	DisplayName: Steady Breath
 	Tooltip:
 		'''
-		Sets critical strike chance to 20%.
-		Increases critical strike chance by 5% on crit, up to a maximum of 125%.
-		Excess critical strike chance is converted to critical damage boost.
-		While reached maximum crits, increases your damage by 10%
-		The boost is reduced upon taking damage.
-		"Seems somewhat familiar."
+		Increases ranged damage by {0} and ranged critical strike chance by {1}
+		Summons a crosshair at the cursor position; enemies targeted by the crosshair take {2} additional damage
+		Non-critical ranged attacks have an independent {3} chance to be treated as critical damage
+		Toggle crosshair visibility via accessory visibility
 		'''
 }
 
 PreciousTarget: {
-	DisplayName: Precious Target
+	DisplayName: Accurate Aim
 	Tooltip:
 		'''
-		Sets critical strike chance to 10%.
-		Increases critical strike chance by 5% on crit, up to a maximum of 115%.
-		Excess critical strike chance is converted to critical damage boost.
-		Clear the boost upon taking damage.
-		"Seems somewhat familiar."
+		Increases ranged damage by {0} and ranged critical strike chance by {1}
+		Summons a crosshair at the cursor position; enemies targeted by the crosshair take {2} additional damage
+		Non-critical ranged attacks have an independent {3} chance to be treated as critical damage
+		Toggle crosshair visibility via accessory visibility
 		'''
 }
 
@@ -92,13 +89,22 @@ SacarbWings: {
 	Tooltip:
 		'''
 		Allows flight and slow falls
+		Grants[ScarletBuff/HJScarletRework/AntiKnockbackBuff]
+		Grants immnunity to[ScarletDebuff/ContinentOfJourney/IcarusBuff], [ScarletDebuff/ContinentOfJourney/PlagueBuff], [ScarletDebuff/ContinentOfJourney/MonarchButterflyBuff] and [ScarletDebuff/ContinentOfJourney/DivineFireBuff]
+		All of your attack inflict[ScarletDebuff/HJScarletRework/TheBleachingBuff]
 		Grants infinite flight time and immunity of knockback
 		'''
 }
 
 ShadowCast: {
-	DisplayName: Shadow Cast
-	Tooltip: ""
+	DisplayName: Necro Heart
+	Tooltip:
+		'''
+		Double-tap Up/Down/Left/Right to perform a Necro Dash, passing through enemies and projectiles.
+		Passing through an enemy applies a special Infestation effect.
+		Infested enemies take powerful, contagious damage over time.
+		The Infestation effect cannot be ignored by enemies.
+		'''
 }
 
 LifeBalloon: {
@@ -130,7 +136,13 @@ ManaSavingsJar: {
 
 CycleMadness: {
 	DisplayName: Cycle Madness
-	Tooltip: ""
+	Tooltip:
+		'''
+		Clears weapon critical strike chance
+		Dealing any damage always generates a critical star
+		Each critical star picked up increases critical strike chance by {0}, up to a maximum of {2}
+		Picking up a critical star always refreshes the above effect for {1} seconds
+		'''
 }
 
 EmblemVanguard: {
@@ -183,11 +195,10 @@ ConceptualBlackKey: {
 		{0} increased executor damage and critical strike chance
 		{1} increased executor critical strike damage
 		+{2} executor armor penetration
-		After a successful Execution Strike, increase your armor penetration for a while
-		After a successful Execution Strike, reduce damage taken significantly
-		Taken damage removes this effect
+		Grants[ScarletBuff/HJScarletRework/BlackKeyExecutionBuff] on execution strike for more armor penetration
+		It also reduce damage taken significantly, but taken damage removes[ScarletBuff/HJScarletRework/BlackKeyExecutionBuff]
 		Extends invincibility frames after taking damage
-		When you take damage, restore 50 health
+		When you take damage, restore {3} health
 		"Executor, praise the Lord"
 		'''
 }
@@ -258,7 +269,8 @@ HeartoftheRuinFrost: {
 		'''
 		+{0} max health
 		Allow the player to dash into the enemy
-		Grants immunity to Knockback, Lava, Frozen, Chilled and Frostburn
+		Grants immunity to Knockback and Lava
+		Grants immunity to[ScarletDebuff/Terraria/Frozen],[ScarletDebuff/Terraria/Frostburn],[ScarletDebuff/Terraria/Frostburn2] and[ScarletDebuff/Terraria/Chilled]
 		Grants ablitiy to breath in the water
 		Grants all the effect from Frozen Shield
 		"The once-prosperous otherworldly kingdom has now crumbled and fallen silent beneath the blizzard."
@@ -304,10 +316,10 @@ CrimsonCharm: {
 	DisplayName: Greedy Mask
 	Tooltip:
 		'''
+		+2 HP/s life regen speed
 		Resets the healing amount of all healing potions to scale based on a percentage of the player's maximum health
-		Using a healing potion no longer causes Potion Sickness; instead, it applies Over Saturation to you
-		Each use of a healing potion grants you the Over Saturation effect for {1} seconds
-		While under Over Saturation, using another healing potion reduces the healing amount by {0}, down to a minimum of {2}
+		Using a healing potion now grants[ScarletBuff/HJScarletRework/CrimsonCharmBuff] instead of[ScarletDebuff/Terraria/PotionSickness] for {1} seconds 
+		Using healing potion while under[ScarletBuff/HJScarletRework/CrimsonCharmBuff] will reduces the healing amount by {0}, down to a minimum of {2}
 		Greatly increases health regen speed
 		"Unimagined madness just to stay alive"
 		'''
@@ -315,12 +327,7 @@ CrimsonCharm: {
 
 BitingClaw: {
 	DisplayName: Biting Crab Claw
-	Tooltip:
-		'''
-		When equipped, adds special catches provided by the Lostbelt Journey mod
-		Currently only provides the Diver armor set [i:HJScarletRework/DiverHead][i:HJScarletRework/DiverBody][i:HJScarletRework/DiverLegs]
-		Obtained from the ocean biome after defeating the Wall of Shadows
-		'''
+	Tooltip: When equipped, adds special catches provided by the Lostbelt Journey mod
 }
 
 PassionfruitJar: {
@@ -330,7 +337,13 @@ PassionfruitJar: {
 
 SpaceHorror: {
 	DisplayName: Space Horror
-	Tooltip: ""
+	Tooltip:
+		'''
+		Clears weapon critical strike chance
+		Dealing any damage always generates a critical star
+		Each critical star picked up increases critical strike chance by {0}, up to a maximum of {2}
+		Picking up a critical star always refreshes the above effect for {1} seconds
+		'''
 }
 
 RuShiWoWen: {
@@ -339,8 +352,8 @@ RuShiWoWen: {
 		'''
 		On first equip, instantly clears all summoned minions
 		Every {0} seconds, clears all summoned minions and randomly summons 1 minion from all minion types until the minion cap is reached
-		All minions summoned in the same batch have their base damage set to the lowest base damage among that batch, and benefit from summon damage bonuses
-		While holding this accessory, press the Interact key on a minion summoning staff in your inventory to disable that minion from being summoned
+		All minions summoned in the same batch have their base damage set to the lowest base damage among that batch, and affacted by[i:SummonerEmblem]summoner class
+		Holding this and press the Interact key on a minion summoning staff in your inventory to disable that minion from being summoned
 		Up to {1} minion types can be disabled; pressing the Interact key on this accessory removes the last minion added to the list
 		Hold Left Alt to view the ban list
 		'''
@@ -359,9 +372,10 @@ EmblemFirearm: {
 	DisplayName: Firearm Coin
 	Tooltip:
 		'''
-		Grants effects while holding an Executor Firearm or Misc
-		Increases executor critical strike damage by {0}%
-		Increases executor critical strike chance by {1}%
+		Grants effects while holding an Executor Firearm
+		Increases executor critical strike chance by {1}
+		The longer you hold the firearm, the higher your executor critical strike damage, up to a maximum of {0}%
+		Resets immediately when switching weapons
 		'''
 }
 
@@ -369,9 +383,9 @@ EmblemColdSteel: {
 	DisplayName: Cold Steel Coin
 	Tooltip:
 		'''
-		Grants effects while holding an Executor Cold Steel or Assistance
-		Increases executor critical strike damage by {0}%
-		Increases executor critical strike chance by {1}%
+		Grants effects while holding an Executor Cold Steel
+		Increases executor damage by {0} and executor critical strike chance by {1}
+		Deals additional damage to targets with lower base defense, up to a maximum of {2} additional damage
 		'''
 }
 
@@ -380,8 +394,8 @@ EmblemThrown: {
 	Tooltip:
 		'''
 		Grants effects while holding an Executor Throwing
-		Increases executor critical strike damage by {0}%
-		Increases executor critical strike chance by {1}%
+		Increases executor critical strike damage by {0}
+		Increases executor critical strike chance by {1}
 		'''
 }
 
@@ -389,7 +403,7 @@ EmblemGalaxy: {
 	DisplayName: Proof of the Stars
 	Tooltip:
 		'''
-		While equipped, press the Interact key on [i:HJScarletRework/TheSevenStar]Seven Stars in your inventory to transform it into [i:HJScarletRework/TheGreatDipper]Polaris
+		While equipped, press the Interact key on[i:HJScarletRework/TheSevenStar]Seven Stars in your inventory to transform it into[i:HJScarletRework/TheGreatDipper]Polaris
 		Polaris can only be used while Proof of the Stars is equipped
 		'''
 }
@@ -408,8 +422,8 @@ LightofHorizon: {
 	DisplayName: Light of Horizon
 	Tooltip:
 		'''
-		Grants the all ability of [i:ContinentOfJourney/Horizon]Horizon
-		Grants the all ability of [i:ContinentOfJourney/Altitude]Altitude
+		Grants the all ability of[i:ContinentOfJourney/Horizon]Horizon
+		Grants the all ability of[i:ContinentOfJourney/Altitude]Altitude
 		Grants extra accessory slot and immunity of knockback
 		Grants infinite wing and rocket boot flight
 		Increases flight and jump mobility
@@ -422,7 +436,7 @@ BambooShield: {
 	Tooltip:
 		'''
 		Grants immnuity to poison
-		Can be used as a substitute for [i:Bezoar]
+		Can be used as a substitute for[i:Bezoar]
 		'''
 }
 
@@ -443,7 +457,11 @@ PendantWitness: {
 
 CombatSlot: {
 	DisplayName: Combat Slot
-	Tooltip: ""
+	Tooltip:
+		'''
+		Grants extra accessory slot
+		...Nothing else
+		'''
 }
 
 SpellBreaker: {
@@ -451,7 +469,7 @@ SpellBreaker: {
 	Tooltip:
 		'''
 		{0} increased melee damage
-		Your melee attack inflicts[ScarletDebuff/Terraria/Venom], [ScarletDebuff/Terraria/CursedInferno] and [ScarletDebuff/Terraria/Ichor]
+		Your melee attack inflicts[ScarletDebuff/Terraria/Venom],[ScarletDebuff/Terraria/CursedInferno] and[ScarletDebuff/Terraria/Ichor]
 		Deals extra {1} damage every inflicted debuff on target
 		Has a minor cooldown upon a successful hit
 		'''
@@ -462,7 +480,7 @@ SpellBreakerAdvanced: {
 	Tooltip:
 		'''
 		{0} increased melee damage, {1} increased melee critical strike chance
-		Your melee attack inflicts[ScarletDebuff/ContinentOfJourney/PlagueBuff], [ScarletDebuff/ContinentOfJourney/DivineFireBuff] and [ScarletDebuff/ContinentOfJourney/VulnerableBuff]
+		Your melee attack inflicts[ScarletDebuff/ContinentOfJourney/PlagueBuff],[ScarletDebuff/ContinentOfJourney/DivineFireBuff] and[ScarletDebuff/ContinentOfJourney/VulnerableBuff]
 		Deals extra {1} damage every inflicted debuff on target
 		Has a minor cooldown upon a successful hit
 		'''
@@ -472,20 +490,31 @@ SpellBreakerSmall: {
 	DisplayName: Spell Breaker
 	Tooltip:
 		'''
-		Your melee attack inflict[ScarletDebuff/Terraria/Poisioned] and [ScarletDebuff/Terraria/OnFire]
+		Your melee attack inflict[ScarletDebuff/Terraria/Poisoned] and[ScarletDebuff/Terraria/OnFire]
 		Deals extra {0} damage every inflicted debuff on target
 		Has a minor cooldown upon a successful hit
 		'''
 }
 
 SelfPortraitoftheSunflower: {
-	DisplayName: Self Portrait of the Sunflower
-	Tooltip: "Enemy taken {0} more DOT damage "
+	DisplayName: Self-Portrait of the Sunflower
+	Tooltip:
+		'''
+		On hit, damage over time debuff damage taken by the enemy is amplified by {0}
+		For each debuff the enemy has, damage over time debuff damage is additionally amplified by {1}, up to a maximum of {2}
+		"In difficult times, the author cannot guarantee what happens to the work they create"
+		'''
 }
 
 SelfPortraitoftheBleachingOne: {
-	DisplayName: Self Portraitofthe Bleaching One
-	Tooltip: ""
+	DisplayName: Self-Portrait of the Bleaching One
+	Tooltip:
+		'''
+		Your attack inflict[ScarletDebuff/HJScarletRework/TheBleachingBuff]
+		On hit, damage over time debuff damage taken by the enemy is amplified by {0}
+		For each debuff the enemy has, damage over time debuff damage is additionally amplified by {1}, up to a maximum of {2}
+		"Civilization has vanished, along with that abandoned possible world"
+		'''
 }
 
 BloodThornCrown: {
@@ -500,6 +529,8 @@ HandofGods: {
 		{0} increased tile placement speed, {3} tile range
 		{1} increased wall placement speed, {2} mining speed
 		Emit lighting on cursor position, grants various exploration ability
-		You can freely place any tiles on air
+		You can freely place any tiles in air
+		The following also takes effect when placed in vanity slot:
+		Grants various exploration conveniences, and lights up the cursor position
 		'''
 }

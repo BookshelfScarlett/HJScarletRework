@@ -90,8 +90,7 @@ namespace HJScarletRework.Projs.Melee
                 {
                     new ThunderboltParticle(Projectile.Center, 0, 1.25f, Color.Gold, 40, 15f, .75f, new Vector2(0.5f, 1.5f)).Spawn();
                     new ThunderboltParticle(Projectile.Center, 0, 1.15f, Color.LightGoldenrodYellow, 40, 15f, .75f, new Vector2(.5f, 1.5f)).Spawn();
-                    ScarletSound(HJScarletSounds.Lightning_QuickHeavy, Projectile.Center, .65f, 1, .3f, pitchVariance: .1f);
-                    Projectile.timeLeft = GetSeconds(8) * Projectile.MaxUpdates;
+                    ScarletSound(HJScarletSounds.Lightning_QuickHeavy, Projectile.Center, .35f, 1, .3f, pitchVariance: .1f);
                     Vector2 pos = Projectile.Center;
                     //弹幕
                     for (int i = 0; i < 16; i++)

@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Assets.Registers;
+﻿using ContinentOfJourney.Items;
+using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
@@ -73,6 +74,14 @@ namespace HJScarletRework.Items.Weapons.Melee
                 AddIngredient<DisasterBar>(10).
                 AddTile(TileID.MythrilAnvil).
                 Register();
+            CreateRecipe().
+                AddIngredient<FierySpear>().
+                AddIngredient<LightBite>().
+                AddIngredient<DisasterBar>(10).
+                DisableDecraft().
+                AddTile(TileID.MythrilAnvil).
+                Register();
+
         }
     }
 }

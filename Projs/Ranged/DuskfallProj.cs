@@ -55,6 +55,36 @@ namespace HJScarletRework.Projs.Ranged
         public override Vector2 TileHitbox => new(16);
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
+            Projectile.timeLeft -= 75;
+            for (int i = 0; i < 24; i++)
+            {
+                Vector2 vel = (TwoPi / 24f * i).ToRotationVector2() * 8f * Main.rand.NextFloat(0f, 1f);
+
+                Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f) + vel.ToSafeNormalize() * Main.rand.NextFloat() * 2f;
+                Color color = RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.50f), Color.Orange);
+                float scale = 0.40f * Main.rand.NextFloat(0.55f, 1.1f);
+                ECSParticle.SmokeParticle(spawnpos, vel, color, Main.rand.Next(10, 41), RandRotTwoPi, Main.rand.NextFloat(.75f, 1f), scale, true, BlendState.Additive);
+            }
+            for (int j = 0; j < 15; j++)
+            {
+                Vector2 dir = RandVelTwoPi(.1f, 4.9f);
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3f) + dir * Main.rand.NextFloat(0f, 3f);
+                ECSParticle.ShinyCrossStarECS(pos, dir, RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(15, 50), 1f, 1f * Main.rand.NextFloat(.7f, .9f), .2f);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
+                Vector2 vel = RandVelTwoPi(.1f, 4.9f);
+                ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .99f * Main.rand.NextFloat(.6f, 1f), .2f);
+            }
+            for (int i = 0; i < 15; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
+                Vector2 vel = RandVelTwoPi(.1f, 4.9f);
+                ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .15f * Main.rand.NextFloat(.6f, 1f), .5f);
+            }
+            ScarletSound(SoundID.DD2_BetsyFireballImpact, Projectile.Center, 0.5f, 1, .35f);
+
             Projectile.BounceOnTile(oldVelocity);
             if (Projectile.HJScarlet().CurStoredTarget.IsLegal())
                 Projectile.tileCollide = false;
@@ -163,6 +193,7 @@ namespace HJScarletRework.Projs.Ranged
             Timer = Main.rand.Next(-10, 16);
             RandMap = Main.rand.NextFloat(.3f, .61f);
             Projectile.tileCollide = true;
+            if(AcceptIval)
             target.AddBuff(BuffType<SolarBurntBuff>(), 60);
             for (int i = 0; i < 24; i++)
             {
@@ -196,6 +227,37 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnKill(int timeLeft)
         {
+            if (Projectile.penetrate == 0)
+                return;
+            for (int i = 0; i < 24; i++)
+            {
+                Vector2 vel = (TwoPi / 24f * i).ToRotationVector2() * 8f * Main.rand.NextFloat(0f, 1f);
+
+                Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f) + vel.ToSafeNormalize() * Main.rand.NextFloat() * 2f;
+                Color color = RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.50f), Color.Orange);
+                float scale = 0.40f * Main.rand.NextFloat(0.55f, 1.1f);
+                ECSParticle.SmokeParticle(spawnpos, vel, color, Main.rand.Next(10, 41), RandRotTwoPi, Main.rand.NextFloat(.75f, 1f), scale, true, BlendState.Additive);
+            }
+            for (int j = 0; j < 15; j++)
+            {
+                Vector2 dir = RandVelTwoPi(.1f, 4.9f);
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3f) + dir * Main.rand.NextFloat(0f, 3f);
+                ECSParticle.ShinyCrossStarECS(pos, dir, RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(15, 50), 1f, 1f * Main.rand.NextFloat(.7f, .9f), .2f);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
+                Vector2 vel = RandVelTwoPi(.1f, 4.9f);
+                ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .99f * Main.rand.NextFloat(.6f, 1f), .2f);
+            }
+            for (int i = 0; i < 15; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
+                Vector2 vel = RandVelTwoPi(.1f, 4.9f);
+                ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .15f * Main.rand.NextFloat(.6f, 1f), .5f);
+            }
+            ScarletSound(SoundID.DD2_BetsyFireballImpact, Projectile.Center, 0.5f, 1, .35f);
+
             base.OnKill(timeLeft);
         }
         public BlendState BlendState => BlendState.Additive;

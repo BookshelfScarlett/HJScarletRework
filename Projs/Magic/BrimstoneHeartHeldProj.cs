@@ -50,6 +50,7 @@ namespace HJScarletRework.Projs.Magic
                 Owner.AddBuff(BuffID.Bleeding, GetSeconds(10));
                 Owner.HJScarlet().iFrameHurtAdd += GetSeconds(3);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SuicideKnifeInvisProj>(), 999, 0, Owner.whoAmI);
+                proj.ai[2] = 150;
             }
             ScarletSound(HJScarletSounds.Gaia_Explosion, Projectile.Center, .4f, 1, .2f);
             ScreenShakeSystem.AddScreenShakes(Projectile.Center, 20, 20, RandRotTwoPi);

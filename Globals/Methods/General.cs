@@ -62,6 +62,12 @@ namespace HJScarletRework.Globals.Methods
 
             return false;
         }
+        /// <summary>
+        /// 将你输入的物块距离转化为像素距离
+        /// </summary>
+        /// <param name="distance"></param>
+        /// <returns></returns>
+        public static float TilePixel(float distance) => distance * 16f;
         public static Vector2 LocalMouseWorld(this Player player) => player.HJScarlet().SyncedMouseWorld;
         public static bool PressLeftAndRightClick(this Player player)
         {

@@ -34,11 +34,7 @@ FlybackHandThrown: {
 
 LightBiteThrown: {
 	DisplayName: 蚀光矛-投掷
-	Tooltip:
-		'''
-		准许穿透10个敌人
-		飞行过程中滞留拥有较弱追踪力量的黑蚀之星
-		'''
+	Tooltip: 飞行过程中滞留拥有较弱追踪力量的黑蚀之星
 }
 
 SpearofDarknessThrown: {
@@ -272,11 +268,6 @@ FlowerofDance: {
 		掷出四把投刀，一定时间后追踪附近的敌人
 		在命中时生成一朵小花，并在投刀命中时让小花发射追踪的花瓣
 		'''
-}
-
-SeashineSword: {
-	// DisplayName: Seashine Sword
-	// Tooltip: ""
 }
 
 HighTechBlade: {

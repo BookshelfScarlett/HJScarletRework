@@ -7,7 +7,7 @@ Drop: {
 }
 
 Crafting: {
-	IsDownSlimeGodAndInEclipse: Mods.HJScarletRework.Conditions.Crafting.IsDownSlimeGodAndInEclipse
+	IsDownSlimeGodAndInEclipse: Post-Slime God and During Eclipse
 	HasFuckingCalamityMod: Mods.HJScarletRework.Conditions.Crafting.HasFuckingCalamityMod
 	NoFuckingCalamityMod: Mods.HJScarletRework.Conditions.Crafting.NoFuckingCalamityMod
 	InSingleplayer: ""

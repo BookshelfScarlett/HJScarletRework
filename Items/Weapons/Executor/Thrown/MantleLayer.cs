@@ -26,8 +26,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.AshWoodHammer).
-                AddIngredient(ItemID.HellstoneBar, 16).
+                AddIngredient(ItemID.HellstoneBar, 14).
                 AddTile(TileID.Hellforge).
                 Register();
         }

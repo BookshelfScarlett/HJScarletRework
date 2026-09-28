@@ -15,7 +15,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         {
             base.ExSD();
             Item.HJScarlet().drawBuffIconAndDetail = true;
-            Item.damage = 44;
+            Item.damage = 15;
             Item.shootSpeed = 13f;
             Item.shoot = ProjectileType<DiamondYoyoProj>();
         }

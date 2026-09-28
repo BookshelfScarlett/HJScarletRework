@@ -12,8 +12,7 @@ namespace HJScarletRework.Projs.Melee
     public class SapphireYoyoProj : GemYoyoProj
     {
         public ref float BoosterTime => ref Projectile.ai[2];
-        protected override float YoyoLength => 16f * 15;
-        protected override int YoyoLifeTime => GetSeconds(3);
+        protected override float YoyoLifeTime => 6;
         protected override int YoyoMaxUpdates => 1;
         protected override float YoyoTopSpeed => 16;
         public override void SetStaticDefaults()
