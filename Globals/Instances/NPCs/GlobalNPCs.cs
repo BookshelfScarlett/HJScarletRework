@@ -63,10 +63,6 @@ namespace HJScarletRework.Globals.Instances.NPCs
         }
         public override void PostAI(NPC npc)
         {
-            if (absoluteZeroBuffEnemy)
-            {
-                npc.velocity *= AbsoluteZeroBuff.BadMoveSpeedEnemy;
-            }
             if (StopNpcTime > 0)
                 npc.velocity *= 0.1f;
             if (StopNpcTime == 0 && PostSpeed != Vector2.Zero)

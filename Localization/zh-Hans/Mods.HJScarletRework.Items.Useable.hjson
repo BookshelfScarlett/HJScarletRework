@@ -144,11 +144,6 @@ ProvidenceHolyWater: {
 		'''
 }
 
-MadnessCritStar: {
-	// DisplayName: Madness Crit Star
-	// Tooltip: ""
-}
-
 BiomeKeyString: {
 	DisplayName: 宝藏钥匙串
 	Tooltip: 置于一个空箱子内，使该箱子充盈地牢的宝藏
@@ -314,6 +309,7 @@ FishingPaper: {
 		在开始获得空想归途添加的特殊渔获之前，你需要先获得并佩戴[i:HJScarletRework/BitingClaw]咬合蟹爪
 		特殊渔获列表：
 		[i:HJScarletRework/DiverHead][i:HJScarletRework/DiverBody][i:HJScarletRework/DiverLegs]潜航员护甲，击败[i:EaterMask]世界吞噬者/[i:BrainMask]克苏鲁之脑后，于海洋钓鱼获取
+		[i:HJScarletRework/EnchantedSwordfish]附魔剑鱼，困难模式下，于海洋获取
 		[i:HJScarletRework/EthrealSwordfish]永恒剑鱼，击败极视钟表后，于沙漠获取
 		[i:HJScarletRework/LivingReaverShark]生命掠夺鲨，击败万籁携生后，于丛林获取
 		[i:HJScarletRework/MatterSawtoothShark]物质锯齿鲨，击败化物天匠后，于雪原获取

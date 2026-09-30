@@ -4,17 +4,16 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee
 {
-    public class EthrealSwordfishHeldProj : HJScarletProj
+    public class EnchantedSwordfishHeldProj : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Melee;
         protected virtual float HoldoutRangeMin => 24f;
-        protected virtual float HoldoutRangeMax => 96f;
+        protected virtual float HoldoutRangeMax => 100f;
 
         public override void SetStaticDefaults()
         {
@@ -24,12 +23,12 @@ namespace HJScarletRework.Projs.Melee
         {
             Projectile.CloneDefaults(ProjectileID.Spear);
             Projectile.aiStyle = ProjAIStyleID.Spear;
-            Projectile.SetupImmnuity(2);
+            Projectile.SetupImmnuity(10);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ECSParticle.ShinyCrossStarECS(target.Center.ToRandCirclePos(2), RandVelTwoPi(18f), RandLerpColor(Color.LightGoldenrodYellow, Color.Gold), 40, 1, 0.64f, .2f);
-            ECSParticle.ShinyCrossStarSmall(target.Center, RandVelTwoPi(8f), Color.LightGoldenrodYellow, 40, 1, 0.6f, Main.rand.NextFloat(-.05f, .05f));
+            ECSParticle.ShinyCrossStarECS(target.Center.ToRandCirclePos(2), RandVelTwoPi(18f), RandLerpColor(Color.Red, Color.Blue), 40, 1, 0.64f, .2f);
+            ECSParticle.ShinyCrossStarSmall(target.Center, RandVelTwoPi(8f), RandLerpColor(Color.Red,Color.Blue), 40, 1, 0.6f, Main.rand.NextFloat(-.05f, .05f));
             base.OnHitNPC(target, hit, damageDone);
         }
         public override bool PreDraw(ref Color lightColor)
@@ -51,6 +50,7 @@ namespace HJScarletRework.Projs.Melee
             {
                 progress = (duration - Projectile.timeLeft) / halfDuration;
             }
+
             for (int i = 0; i < 8; i++)
                 SB.FastDraw(tex, drawPosition + (TwoPi / 8f * i).ToRotationVector2() * 1.5f * progress, Color.White.ToAddColor(), drawRotation, rotationPoint, Projectile.scale, flipSprite);
             SB.FastDraw(tex, drawPosition, Color.White, drawRotation, rotationPoint, Projectile.scale, flipSprite);
@@ -76,6 +76,7 @@ namespace HJScarletRework.Projs.Melee
             // Here 'progress' is set to a value that goes from 0.0 to 1.0 and back during the item use animation.
             if (Projectile.timeLeft < halfDuration)
             {
+                
                 progress = Projectile.timeLeft / halfDuration;
             }
             else
@@ -89,21 +90,23 @@ namespace HJScarletRework.Projs.Melee
             Projectile.spriteDirection = (Projectile.velocity.X > 0).ToDirectionInt();
             Owner.ChangeDir(Projectile.spriteDirection);
 
+
             // Avoid spawning dusts on dedicated servers
             if (!Main.dedServ)
             {
                 // These dusts are added later, for the 'ExampleMod' effect
                 if (Main.rand.NextBool(3))
                 {
-                    ECSParticle.ShrinkParticle(Projectile.Center.ToRandCirclePos(16), Projectile.velocity, RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), 45, 1, RandRotTwoPi, 0.2f, 1);
+                    ECSParticle.ShrinkParticle(Projectile.Center.ToRandCirclePos(16), Projectile.velocity, RandLerpColor(Color.Blue, Color.Red), 45, 1, RandRotTwoPi, 0.2f, 1);
                 }
 
                 if (Main.rand.NextBool(4))
                 {
-                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(16), Projectile.velocity, RandLerpColor(Color.Gold, Color.LightGoldenrodYellow), 45, 1, 0.4f, .2f);
+                    ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePos(16), Projectile.velocity, RandLerpColor(Color.Red, Color.Blue), 45, 1, 0.4f, .2f);
                 }
             }
             return false; // Don't execute vanilla AI.
         }
+
     }
 }

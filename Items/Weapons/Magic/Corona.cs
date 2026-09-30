@@ -36,7 +36,7 @@ namespace HJScarletRework.Items.Weapons.Magic
             //仅仅一个标记作用，实际上这个东西不会实际发射射弹。
             Item.shoot = ProjectileType<CoronaHeldProj>();
             Item.shootSpeed = 18f;
-            Item.mana = 54;
+            Item.mana = 42;
         }
         public override void HoldItem(Player player)
         {

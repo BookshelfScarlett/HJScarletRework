@@ -25,7 +25,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Owner.IsHolding(OriginalItemID))
                 return;
-            if (Projectile.CheckExecution())
+            if (Projectile.CheckExecution()&&Projectile.numUpdates==0)
             {
                 //将武器标记为发起处决模式
                 Projectile.HJScarlet().ExecutionStrike = true;
@@ -34,9 +34,8 @@ namespace HJScarletRework.Projs.Executor
                 //移除处决进程
                 Owner.RemoveExecutionProgress();
                 Owner.HJScarlet().tacticalExecutionInputCache = 0;
-                //处决会强行发射这枚子弹
-                Timer = AttackSpeed;
             }
+            Projectile.HJScarlet().ExecutionStrike = false;
         }
         //后坐力
         protected override void UpdateWeaponUsing()
@@ -114,8 +113,6 @@ namespace HJScarletRework.Projs.Executor
                     new SmokeParticle(firePos.ToRandCirclePos(10f) + posOffset, vel, RandLerpColor(Color.White, Color.Lerp(Color.OrangeRed, Color.Gold, 0.4f)), 40, RandRotTwoPi, 1f, 0.34f, Main.rand.NextBool()).SpawnToPriorityNonPreMult();
                 }
             }
-            if (Projectile.HJScarlet().ExecutionStrike)
-                Projectile.HJScarlet().ExecutionStrike = false;
         }
     }
 }

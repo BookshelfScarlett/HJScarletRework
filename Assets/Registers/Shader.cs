@@ -19,7 +19,6 @@ namespace HJScarletRework.Assets.Registers
         public static Effect StandardFlowShader;
         public static Effect LightningShader;
         public static Effect SlashTrailShader;
-        public static Effect FogShader;
         public static Effect EdgeMeltsShader;
         public static Effect DeepGlow;
         /// <summary>
@@ -44,7 +43,6 @@ namespace HJScarletRework.Assets.Registers
             StandardFlowShader = LoadShader(nameof(StandardFlowShader));
             LightningShader = LoadShader(nameof(LightningShader));
             SlashTrailShader = LoadShader(nameof(SlashTrailShader));
-            FogShader = LoadShader(nameof(FogShader));
             EdgeMeltsShader = LoadShader(nameof(EdgeMeltsShader));
             DeepGlow = LoadShader(nameof(DeepGlow));
             UCAPolarDistortShaderColor = LoadShader("PolarDistortShaderWithR");
@@ -58,7 +56,6 @@ namespace HJScarletRework.Assets.Registers
             RegisterMiscShader(LightningShader, ToPassName(nameof(LightningShader)), nameof(LightningShader));
             RegisterMiscShader(SlashTrailShader, ToPassName(nameof(SlashTrailShader)), nameof(SlashTrailShader));
             RegisterMiscShader(AlphaFadeNoiseColor, ToPassName("AlphaFade_Noise_OColor"), "AlphaFade_Noise_OColor");
-            RegisterMiscShader(FogShader, ToPassName(nameof(FogShader)), nameof(FogShader));
             RegisterMiscShader(EdgeMeltsShader, ToPassName(nameof(EdgeMeltsShader)), nameof(EdgeMeltsShader));
             RegisterMiscShader(DeepGlow, ToPassName(nameof(DeepGlow)), nameof(DeepGlow));
             RegisterMiscShader(UCAPolarDistortShaderColor, ToPassName("PolarDistortShaderWithR"), "PolarDistortShaderWithR");
@@ -82,7 +79,6 @@ namespace HJScarletRework.Assets.Registers
             StandardFlowShader = null;
             SlashTrailShader = null;
             LightningShader = null;
-            FogShader = null;
             EdgeMeltsShader = null;
             DeepGlow = null;
         }

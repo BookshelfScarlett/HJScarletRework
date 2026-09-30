@@ -8,18 +8,11 @@ namespace HJScarletRework.Items.Pets
 {
     public class SonItem : HJScarletPetItem
     {
+        public override int PetProjType => ProjectileType<SonProj>();
+        public override int PetBuffType => BuffType<SonBuff>();
         public override void SetStaticDefaults()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.FateWhite);
-        }
-        public override void BuffAndProj()
-        {
-            Item.DefaultToVanitypet(ProjectileType<SonProj>(), BuffType<SonBuff>());
-        }
-
-        public override void ExSD()
-        {
-            Item.CloneDefaults(ItemID.EyeOfCthulhuPetItem);
         }
 
     }

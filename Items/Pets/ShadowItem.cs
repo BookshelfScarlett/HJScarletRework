@@ -1,13 +1,12 @@
-﻿using HJScarletRework.Buffs.Pets;
+﻿using ContinentOfJourney;
+using HJScarletRework.Buffs.Pets;
 using HJScarletRework.Projs.Pets;
 
 namespace HJScarletRework.Items.Pets
 {
     public class ShadowItem : HJScarletPetItem
     {
-        public override void BuffAndProj()
-        {
-            Item.DefaultToVanitypet(ProjectileType<ShadowProj>(), BuffType<ShadowBuff>());
-        }
+        public override int PetProjType => ProjectileType<ShadowProj>();
+        public override int PetBuffType => BuffType<ShadowBuff>();
     }
 }

@@ -35,6 +35,8 @@ namespace HJScarletRework.Globals.Players
                     FastPoolHandler(1800, ItemType<MatterSawtoothShark>(), poolSizeAmt, power, ref itemDrop, ref sonar);
                 if (Player.ZoneJungle && DownedBossSystem.downedLifeGod)
                     FastPoolHandler(1800, ItemType<LivingReaverShark>(), poolSizeAmt, power, ref itemDrop, ref sonar);
+                if (Player.ZoneBeach && Main.hardMode)
+                    FastPoolHandler(1800, ItemType<EnchantedSwordfish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
                 if (DownedBossSystem.downedBarrier)
                     FastPoolHandler(1800, ItemType<DarkenRockFish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
             }

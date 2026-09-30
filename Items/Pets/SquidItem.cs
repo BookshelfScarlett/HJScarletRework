@@ -7,14 +7,7 @@ namespace HJScarletRework.Items.Pets
 {
     public class SquidItem : HJScarletPetItem
     {
-        public override void BuffAndProj()
-        {
-            Item.DefaultToVanitypet(ProjectileType<SquidProj>(), BuffType<SquidBuff>());
-        }
-
-        public override void ExSD()
-        {
-            Item.CloneDefaults(ItemID.ZephyrFish);
-        }
+        public override int PetProjType => ProjectileType<SquidProj>();
+        public override int PetBuffType => BuffType<SquidBuff>();
     }
 }

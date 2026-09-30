@@ -2,9 +2,9 @@ CandLanceThrown: {
 	DisplayName: 滴蜡枪-投掷
 	Tooltip:
 		'''
-		投掷一把不受重力影响的滴蜡枪
-		命中单位后，点燃并升起魂火灯
+		不受重力影响，并在命中时升起魂火灯
 		魂火灯会延迟落下追踪多个目标的魂火射弹
+		所有的攻击都会施加[ScarletDebuff/Terraria/Confused]
 		'''
 }
 
@@ -111,6 +111,7 @@ TonbogiriThrown: {
 		'''
 		沿途追加毒性气泡
 		消失时也会追加更多的毒性气泡
+		所有的攻击都会施加[ScarletDebuff/Terraria/Venom]
 		“我知道这有点眼熟”
 		'''
 }
@@ -156,7 +157,7 @@ TheMars: {
 		'''
 		沿途检索可被标记的最大三名敌对单位
 		消失时，向被标记的所有敌对单位追击潮汐之矛
-		攻击总会施加[ScarletDebuff/Terraria/Electrified]
+		攻击总会施加[ScarletDebuff/Terraria/Confused]
 		"外星的造物"
 		'''
 }
@@ -242,7 +243,11 @@ DragonSword: {
 
 EnchantedSwordfish: {
 	DisplayName: 附魔剑鱼
-	Tooltip: 他的眼睛怎么散发着诡异的红光？
+	Tooltip: 
+		'''
+		桑百颗够吗？
+		他的眼睛怎么散发着诡异的红光？
+		'''
 }
 
 EthrealSwordfish: {

@@ -373,6 +373,7 @@ Melee: {
 	EmeraldYoyoEmerald.DisplayName: Emerald Yoyo Emerald
 	MatterSawtoothSharkHeldProj.DisplayName: Matter Sawtooth Shark Held Proj
 	EthrealSwordfishHeldProj.DisplayName: Ethreal Swordfish Held Proj
+	EnchantedSwordfishHeldProj.DisplayName: Enchanted Swordfish Held Proj
 }
 
 Pets: {

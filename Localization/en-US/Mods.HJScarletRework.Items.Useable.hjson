@@ -135,11 +135,6 @@ ProvidenceHolyWater: {
 	Tooltip: ""
 }
 
-MadnessCritStar: {
-	DisplayName: Madness Crit Star
-	Tooltip: ""
-}
-
 BiomeKeyString: {
 	DisplayName: Treasure Keychain
 	Tooltip: Place it in an empty chest to fill it with Dungeon treasure

@@ -90,7 +90,7 @@ SacarbWings: {
 	Tooltip:
 		'''
 		可飞行或缓降，拥有无限飞行时间
-		使你[ScarletBuff/HJScarletRework/AntiknockbackBuff]，免疫[ScarletDebuff/ContinentOfJourney/IcarusBuff]，[ScarletDebuff/ContinentOfJourney/PlagueBuff]，[ScarletDebuff/ContinentOfJourney/MonarchButterflyBuff]和[ScarletDebuff/ContinentOfJourney/DivineFireBuff]
+		使你[ScarletBuff/HJScarletRework/AntiKnockbackBuff]，免疫[ScarletDebuff/ContinentOfJourney/IcarusBuff]，[ScarletDebuff/ContinentOfJourney/PlagueBuff]，[ScarletDebuff/ContinentOfJourney/MonarchButterflyBuff]和[ScarletDebuff/ContinentOfJourney/DivineFireBuff]
 		所有的攻击都会造成[ScarletDebuff/HJScarletRework/TheBleachingBuff]
 		延长受伤后的无敌帧时间
 		'''

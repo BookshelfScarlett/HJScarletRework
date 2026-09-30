@@ -158,6 +158,20 @@ namespace HJScarletRework.Globals.Instances.Items
                     DisableDecraft().
                     Register();
             }
+            Recipe.Create(ItemID.GoldenKey).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyGoldBar, 10).
+                AddIngredient(ItemID.Bone, 30).
+                DisableDecraft().
+                AddTile(TileID.Anvils).
+                Register();
+
+            Recipe.Create(ItemID.ObsidianSwordfish).
+                AddIngredient(ItemID.HotlineFishingHook).
+                AddIngredient(ItemID.HellButterfly, 300).
+                DisableDecraft().
+                AddTile(TileID.MythrilAnvil).
+                Register();
+
         }
         public void FargoMutantCrossMod()
         {

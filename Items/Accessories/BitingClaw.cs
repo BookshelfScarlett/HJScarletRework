@@ -17,6 +17,7 @@ namespace HJScarletRework.Items.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().bitingClaw = true;
+            player.fishingSkill += 10;
         }
         public override void AddRecipes()
         {

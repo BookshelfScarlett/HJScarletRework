@@ -78,11 +78,9 @@ namespace HJScarletRework.Projs.Melee
             if (HJScarletMethods.OutOffScreen(Projectile.Center))
                 return;
             ECSParticle.StarShape(Projectile.Center, Projectile.velocity.ToSafeNormalize() * .1f, Color.HotPink, 35, 1f, .840f, glowMult: 0f);
-            //new StarShape(Projectile.Center, Projectile.velocity.ToSafeNormalize() * 0.1f, RandLerpColor(Color.HotPink, Color.HotPink), .840f, 35, false).Spawn();
             if (Main.rand.NextBool())
             {
                 ECSParticle.ShinyCrossStarECS(Projectile.Center.ToRandCirclePosEdge(5f), Projectile.velocity.ToRandVelocity(ToRadians(15), 1), RandLerpColor(Color.HotPink, Color.DeepPink), 40, 1f, .46f, .2f);
-                //new ShinyCrossStar(Projectile.Center.ToRandCirclePosEdge(5f), Projectile.velocity.ToRandVelocity(ToRadians(15), 1), RandLerpColor(Color.HotPink, Color.DeepPink), 40, RandRotTwoPi, 1f, 0.46f, false, 0.2f).Spawn();
             }
         }
         public void SpawnFlower()

@@ -1,13 +1,3 @@
-ClimaticHawstring: {
-	DisplayName: 气候钓弦
-	Tooltip:
-		'''
-		击中敌人一定次数时，接下来的5秒内会连续发射热能激光
-		攻击时会有两位小型飞棍仆从协助攻击
-		“以天竿为弓，以气候为弦”
-		'''
-}
-
 BambooRocket: {
 	DisplayName: 火箭竹
 	Tooltip: 发射会追踪的竹

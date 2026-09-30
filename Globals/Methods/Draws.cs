@@ -47,9 +47,11 @@ namespace HJScarletRework.Globals.Methods
         public static RasterizerState ShowTriangleShapeForVertex(this SpriteBatch SB)
         {
             RasterizerState ori = Main.graphics.GraphicsDevice.RasterizerState;
-            RasterizerState rasterizerState = new RasterizerState();
-            rasterizerState.CullMode = CullMode.None;
-            rasterizerState.FillMode = FillMode.WireFrame;
+            RasterizerState rasterizerState = new RasterizerState
+            {
+                CullMode = CullMode.None,
+                FillMode = FillMode.WireFrame
+            };
             Main.graphics.GraphicsDevice.RasterizerState = rasterizerState;
             return ori;
         }
