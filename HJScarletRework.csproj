@@ -20,12 +20,12 @@
 	  <None Remove="Assets\Texture\Items\Equips\SakurabaEmma_Waist.png" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Assets\Texture\Projs\NPCs\" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Reference Include="ContinentOfJourney">
 	    <HintPath>..\..\ModReader\ContinentOfJourney\ContinentOfJourney.dll</HintPath>
 	  </Reference>
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Assets\Texture\Projs\NPCs\" />
 	</ItemGroup>
 
 	<!-- References -->
