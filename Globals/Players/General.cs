@@ -30,6 +30,7 @@ namespace HJScarletRework.Globals.Players
         public bool celesitalShellEffect = false;
         public bool chlorophyteHeadExecutor = false;
         public bool combatSlot = false;
+        public bool combatSlot2 = false;
         public bool cowboyExecutor = false;
         public bool creationHat = false;
         public bool crimsonCharm = false;

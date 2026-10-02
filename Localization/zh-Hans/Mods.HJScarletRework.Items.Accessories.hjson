@@ -338,9 +338,8 @@ BitingClaw: {
 	DisplayName: 咬合蟹爪
 	Tooltip:
 		'''
+		增加{0}渔力
 		佩戴后，添加由空想归途模组提供的特殊渔获
-		目前仅提供了潜航员盔甲[i:HJScarletRework/DiverHead][i:HJScarletRework/DiverBody][i:HJScarletRework/DiverLegs]
-		击败任意邪恶Boss后于海洋环境获取
 		'''
 }
 
@@ -570,5 +569,14 @@ HandofGods: {
 		你可以凭空放置物块
 		下方放置在时装栏也同样生效：
 		使你获得各种探索便利，光标位置发光
+		'''
+}
+
+CombatSlotAdvanced: {
+	DisplayName: 高级战斗镶嵌框
+	Tooltip:
+		'''
+		佩戴后允许同一行的时装栏生效
+		然后没有别的了
 		'''
 }

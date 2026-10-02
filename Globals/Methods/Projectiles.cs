@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.ReVisual.Class;
 using System;
 using Terraria;
 using Terraria.GameContent;
@@ -35,6 +36,8 @@ namespace HJScarletRework.Globals.Methods
         /// <param name="proj"></param>
         /// <returns></returns>
         public static Vector2 SafeDir(this Projectile proj) => proj.velocity.ToSafeNormalize();
+        public static Player GetPlayer(this Projectile proj) => Main.player[proj.owner];
+        public static ReVisualPlayer GetReVisualPlayer(this Projectile proj) => proj.GetPlayer().GetModPlayer<ReVisualPlayer>();
         /// <summary>
         /// 将proj的rot转化为单位向量
         /// </summary>

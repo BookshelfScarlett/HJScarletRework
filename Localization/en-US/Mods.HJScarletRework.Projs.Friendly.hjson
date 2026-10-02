@@ -44,6 +44,12 @@ Typeless: {
 	RefluxHeldProj.DisplayName: Reflux Held Proj
 	GunWitchHeldProj.DisplayName: Gun Witch Held Proj
 	PropellerRapierRangedTornadoBig.DisplayName: Propeller Rapier Ranged Tornado Big
+	RePurplePufferHeldProj.DisplayName: Re Purple Puffer Held Proj
+	TechSniperHeldProj.DisplayName: Tech Sniper Held Proj
+	TechSniperLaser.DisplayName: Tech Sniper Laser
+	TechThunder.DisplayName: Tech Thunder
+	TechCannonBullet.DisplayName: Tech Cannon Bullet
+	TechCannonHeldProj.DisplayName: Tech Cannon Held Proj
 }
 
 Executor: {
@@ -264,6 +270,7 @@ Ranged: {
 	PropellerRapierRangedTornado.DisplayName: Propeller Rapier Ranged Tornado
 	PropellerRapierRangedProj.DisplayName: Propeller Rapier Ranged Proj
 	RadiantBlazeDawnFlame.DisplayName: Radiant Blaze Dawn Flame
+	ReVisualRecoilProj.DisplayName: Re Visual Recoil Proj
 }
 
 Magic: {

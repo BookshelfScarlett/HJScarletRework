@@ -49,6 +49,7 @@ namespace HJScarletRework.Globals.Players
             emblemExecutor = false;
             emblemGalaxy = false;
             combatSlot = false;
+            combatSlot2 = false;
         }
         private void ResetArmor()
         {

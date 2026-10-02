@@ -534,3 +534,8 @@ HandofGods: {
 		Grants various exploration conveniences, and lights up the cursor position
 		'''
 }
+
+CombatSlotAdvanced: {
+	DisplayName: Combat Slot Advanced
+	Tooltip: ""
+}

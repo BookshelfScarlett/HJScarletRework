@@ -72,3 +72,25 @@ ExecutorDamageClass: {
 
 DamageClasses.ExecutorDamageClass.DisplayName: Executor Damage Class
 Projs.Enemy.SuicideKnifeInvisProj.DisplayName: Suicide Knife Invis Proj
+
+Items: {
+	TechBlade: {
+		DisplayName: Tech Blade
+		Tooltip: ""
+	}
+
+	TechSniper: {
+		DisplayName: Tech Sniper
+		Tooltip: ""
+	}
+
+	TechCannon: {
+		DisplayName: Tech Cannon
+		Tooltip: ""
+	}
+}
+
+Projectiles: {
+	TechBladeHeldProj.DisplayName: Tech Blade Held Proj
+	TechBladeLaser.DisplayName: Tech Blade Laser
+}

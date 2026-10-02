@@ -17,7 +17,7 @@ namespace HJScarletRework.Items.Accessories
         {
             Item.SetUpRarityPrice(ItemRarityID.Orange);
             Item.accessory = true;
-            Item.value = Item.buyPrice(1, 50, 0, 0);
+            Item.value = Item.buyPrice(3, 0, 0, 0);
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

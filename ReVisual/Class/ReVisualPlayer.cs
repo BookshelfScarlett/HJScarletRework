@@ -47,6 +47,14 @@ namespace HJScarletRework.ReVisual.Class
         public bool reCasta = false;
         [SaveableBool]
         public bool reSkeletronYoyo = false;
+        [SaveableBool]
+        public bool reVisualRomanCandle= false;
+        [SaveableBool]
+        public bool reVisualCrusadersCrossbow = false;
+        [SaveableBool]
+        public bool reVisualKingBeeGun = false;
+        [SaveableBool]
+        public bool reVisualBloodScepter = false;
 
 
 

@@ -50,7 +50,6 @@ namespace HJScarletRework.Globals.Instances.NPCs
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<GrassKnife>(), 4);
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<PestilenceFlower>(), 4);
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<EmblemColdSteel>(), 4);
-                    HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<EmblemFirearm>(), 4);
                     HJScarletMethods.ApplyNoBossBagLoot(ref npcLoot, ItemType<EmblemThrown>(), 4);
                     break;
                 case NPCID.WallofFlesh:
