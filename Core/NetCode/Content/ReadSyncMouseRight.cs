@@ -1,4 +1,4 @@
-using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Methods;
 using System.IO;
 using Terraria;
 using Terraria.ID;
@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Core.NetCode.Content
 {
+    // 同步某个玩家鼠标右键的按住状态，供队友端读 MouseRightOf()（例如处决/格挡类武器看主人有没有按住右键）。
     public class ReadSyncMouseRight : BaseHJHandlePack
     {
         public override void Read(BinaryReader reader, int whoAmI)
