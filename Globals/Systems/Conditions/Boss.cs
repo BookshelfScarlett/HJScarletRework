@@ -8,6 +8,10 @@ namespace HJScarletRework.Globals.Systems.Conditions
 {
     public class ScarletDownedBoss : ModSystem
     {
+        public override void UpdateUI(GameTime gameTime)
+        {
+            base.UpdateUI(gameTime);
+        }
         internal static bool _downedEOW = false;
         internal static bool _downedBOC = false;
         internal static bool _downedBloodMoon = false;

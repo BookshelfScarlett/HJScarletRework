@@ -25,4 +25,16 @@ namespace HJScarletRework.Globals.Players.AccessoriesSlot
             return isEnable;
         }
     }
+    public class CombatSlotAcceesorySlot2 : ModAccessorySlot
+    {
+        public override string Name => "CombatSlot2";
+        public override bool IsEnabled()
+        {
+            bool isEnable = Main.LocalPlayer.TryGetModPlayer<HJScarletPlayer>(out var value);
+            if (isEnable)
+                isEnable = value.combatSlot2;
+            return isEnable;
+        }
+    }
 }
+

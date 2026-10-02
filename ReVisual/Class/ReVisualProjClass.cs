@@ -21,6 +21,10 @@ namespace HJScarletRework.ReVisual.Class
         }
         public override bool PreAI(Projectile projectile)
         {
+            return base.PreAI(projectile);
+        }
+        public void AddList(Projectile projectile)
+        {
             if (TrailLength > 0)
             {
                 OldRotationList.Add(projectile.rotation);
@@ -30,10 +34,8 @@ namespace HJScarletRework.ReVisual.Class
                 if (OldPositionList.Count > TrailLength)
                     OldPositionList.RemoveAt(0);
             }
-            return base.PreAI(projectile);
+
         }
-
-
     }
     public abstract class ReVisualProjClass : GlobalProjectile
     {

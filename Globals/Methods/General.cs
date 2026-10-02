@@ -364,9 +364,9 @@ namespace HJScarletRework.Globals.Methods
         {
             tex = proj.GetTexture();
             drawPos = proj.Center - Main.screenPosition;
-            drawRot = proj.rotation + proj.spriteDirection == -1 ? Pi : 0;
+            drawRot = proj.rotation + (proj.spriteDirection == -1 ? Pi : 0);
             rotPoint = tex.Size() / 2;
-            se = proj.spriteDirection * Main.player[proj.owner].gravDir == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            se = (proj.spriteDirection * Main.player[proj.owner].gravDir) == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
         }
         /// <summary>
         /// 复制原版的治疗封装
