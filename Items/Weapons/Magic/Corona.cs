@@ -1,4 +1,4 @@
-﻿using HJScarletRework.Core.NetSync;
+﻿using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
@@ -41,9 +41,9 @@ namespace HJScarletRework.Items.Weapons.Magic
         }
         public override void HoldItem(Player player)
         {
-            if (player.HasProj(Item.shoot))
+            if (!player.IsOwnerSide())
                 return;
-            if (!HJHeldVisual.TrySpawnOwnerVisual(player, Item, damage: 0))
+            if (player.HasProj(Item.shoot))
                 return;
             for (int i = 0; i < 16; i++)
             {
@@ -54,6 +54,10 @@ namespace HJScarletRework.Items.Weapons.Magic
                 new SmokeParticle(player.Center.ToRandCirclePos(10f), -Vector2.UnitY.ToRandVelocity(ToRadians(20f), 4.7f, 18f), RandLerpColor(Color.OrangeRed, Color.Gray), 40, RandRotTwoPi, 1f, 0.24f, Main.rand.NextBool()).SpawnToPriority();
             }
             SoundEngine.PlaySound(SoundID.DD2_BetsyFlameBreath with { MaxInstances = 1, Pitch = -0.25f }, player.Center);
+            int projDamage = (int)player.GetTotalDamage<MagicDamageClass>().ApplyTo(Item.damage);
+            Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, Item.shoot, 0, Item.knockBack, player.whoAmI);
+            proj.originalDamage = projDamage;
+            proj.netUpdate = true;
         }
         public override void AddRecipes()
         {

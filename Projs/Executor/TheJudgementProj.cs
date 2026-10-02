@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
@@ -131,7 +131,7 @@ namespace HJScarletRework.Projs.Executor
                 ScreenShakeSystem.AddScreenShakes(lockHammer.Center, 30f, 100, lockHammer.velocity.ToRotation(), 0.1f, easingFunc: EaseOutBack);
                 //处死射弹。
             }
-            if (Projectile.Allow(120))
+            if (Projectile.IsOwnerSide())
             for (int i = -1; i < 2; i += 2)
             {
                 for (int j = 0; j < 30; j++)

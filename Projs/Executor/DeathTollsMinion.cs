@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
@@ -24,7 +24,6 @@ namespace HJScarletRework.Projs.Executor
         {
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
-            HJNetOwnerBound.Register(Type);
         }
         public override void ExSD()
         {
@@ -44,6 +43,12 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void AI()
         {
+            Player boundOwner = Projectile.OwnerOrNull();
+            if (boundOwner is null || boundOwner.dead)
+            {
+                Projectile.Kill();
+                return;
+            }
             if (Timer == 0)
                 CurrentTimeLeft = Projectile.timeLeft;
 

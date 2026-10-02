@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -75,7 +75,7 @@ namespace HJScarletRework.Projs.Executor
             Projectile.Opacity = Lerp(Projectile.Opacity, 1f, 0.12f);
             if (Projectile.IsOutScreen())
                 return;
-            if (!Projectile.Allow(11))
+            if (!Projectile.IsOwnerSide())
                 return;
             for (int i = 0; i < 2; i++)
             {

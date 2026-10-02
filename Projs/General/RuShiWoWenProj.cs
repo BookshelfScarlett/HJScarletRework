@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -17,7 +17,6 @@ namespace HJScarletRework.Projs.General
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting();
-            HJNetOwnerBound.Register(Type);
         }
         public override void ExSD()
         {
@@ -52,6 +51,12 @@ namespace HJScarletRework.Projs.General
 
         public override void ProjAI()
         {
+            Player boundOwner = Projectile.OwnerOrNull();
+            if (boundOwner is null || boundOwner.dead)
+            {
+                Projectile.Kill();
+                return;
+            }
             if (Owner.HJScarlet().powerLilyVanity)
             {
                 Projectile.Opacity = Lerp(Projectile.Opacity, 1.01f, 0.1f);

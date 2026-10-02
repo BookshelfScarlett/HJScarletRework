@@ -10,7 +10,7 @@ using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
 using System.IO;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -43,30 +43,7 @@ namespace HJScarletRework
         }
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {
-            if (HJNetRoute.TryDispatch(reader, whoAmI))
-                return;
-            ModPacket packet = this.GetPacket();
-            int id = reader.ReadInt32();
-            if (Main.netMode == NetmodeID.Server && id == 20260221)
-            {
-                ushort x = reader.ReadUInt16(), y = reader.ReadUInt16();
-                ushort chance = reader.ReadUInt16();
-                ushort targetType = reader.ReadUInt16();
-                packet.Write(x);
-                packet.Write(y);
-                packet.Write(chance);
-                packet.Send(-1, whoAmI);
-                HJScarletGlobalTiles autoSmelt = GetInstance<HJScarletGlobalTiles>();
-                autoSmelt.SmeltOres(x, y, chance, targetType);
-            }
-            else
-            {
-                ushort x = reader.ReadUInt16(), y = reader.ReadUInt16();
-                ushort chance = reader.ReadUInt16();
-                ushort targetType = reader.ReadUInt16();
-                HJScarletGlobalTiles autoSmelt = GetInstance<HJScarletGlobalTiles>();
-                autoSmelt.SmeltOres(x, y, chance, targetType);
-            }
+            HJNetCode.HandleHJPacket(reader, whoAmI);
         }
         public override void PostSetupContent()
         {

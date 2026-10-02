@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -31,11 +31,6 @@ namespace HJScarletRework.Projs.Executor
         public float Oscillation = 0;
         public bool UseVelocity = false;
         public ref float Timer => ref Projectile.ai[0];
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-            HJNetOwnerBound.Register(Type);
-        }
         public override void ExSD()
         {
             Projectile.width = Projectile.height = 66;
@@ -62,6 +57,12 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
+            Player boundOwner = Projectile.OwnerOrNull();
+            if (boundOwner is null || boundOwner.dead)
+            {
+                Projectile.Kill();
+                return;
+            }
             Oscillation += ToRadians(2.5f);
             if (!Helper.IsDone[0])
                 UpdateBeforeReadyStrike();

@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -71,7 +71,6 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting(8);
-            HJNetOwnerBound.Register(Type);
         }
         public override void ExSD()
         {
@@ -83,6 +82,12 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
+            Player boundOwner = Projectile.OwnerOrNull();
+            if (boundOwner is null || boundOwner.dead)
+            {
+                Projectile.Kill();
+                return;
+            }
             UpdateAttackAI();
         }
 

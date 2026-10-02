@@ -1,6 +1,6 @@
 ﻿using ContinentOfJourney.NPCs.Boss_PriestessRod;
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Handlers;
@@ -39,7 +39,6 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            HJNetOwnerBound.Register(Type);
         }
         public override void ExSD()
         {
@@ -59,6 +58,12 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
+            Player boundOwner = Projectile.OwnerOrNull();
+            if (boundOwner is null || boundOwner.dead)
+            {
+                Projectile.Kill();
+                return;
+            }
             UpdateProjGeneralState();
             bool shouldAttack = GetTargetNearMouse(out NPC target) && PlayerIsAttacking && Helper.IsDone[0];
             if (!ShouldKillRods)

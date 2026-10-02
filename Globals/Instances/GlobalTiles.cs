@@ -1,4 +1,6 @@
 ﻿using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Core.NetCode;
+using HJScarletRework.Core.NetCode.Content;
 using HJScarletRework.Items.Useables;
 using Terraria;
 using Terraria.Audio;
@@ -69,9 +71,8 @@ namespace HJScarletRework.Globals.Instances
             //处于多人服务器的情况下得手动发送数据包了
             if (Main.netMode == NetmodeID.MultiplayerClient)
             {
-                int id = 20260221;
                 ModPacket pack = GetInstance<HJScarletRework>().GetPacket();
-                pack.Write(id);
+                pack.Write(HJNetCode.PackHandleType<ReadAutoSmelt>());
                 pack.Write((ushort)i);
                 pack.Write((ushort)j);
                 pack.Write((ushort)chance);

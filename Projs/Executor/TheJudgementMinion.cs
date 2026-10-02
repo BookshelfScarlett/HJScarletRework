@@ -1,6 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
@@ -19,7 +19,6 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             Projectile.ToTrailSetting();
-            HJNetOwnerBound.Register(Type);
         }
         private ref float AttackTimer => ref Projectile.ai[0];
         private int MountedIndex = -1;
@@ -56,6 +55,12 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
+            Player boundOwner = Projectile.OwnerOrNull();
+            if (boundOwner is null || boundOwner.dead)
+            {
+                Projectile.Kill();
+                return;
+            }
             UpdateMountedStarProj();
             UpdateMountedProjAI();
         }

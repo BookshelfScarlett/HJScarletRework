@@ -1,7 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -38,7 +38,6 @@ namespace HJScarletRework.Projs.Executor
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-            HJNetOwnerBound.Register(Type);
         }
         public override void ExSD()
         {
@@ -68,6 +67,12 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void ProjAI()
         {
+            Player boundOwner = Projectile.OwnerOrNull();
+            if (boundOwner is null || boundOwner.dead)
+            {
+                Projectile.Kill();
+                return;
+            }
             Oscillation += ToRadians(2.5f);
             if (LaserShootTime < TotalLaserTime)
                 UpdateBeforeReadyStrike();

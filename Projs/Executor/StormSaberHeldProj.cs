@@ -1,5 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -44,7 +44,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override void OnFirstFrame()
         {
-            if (Projectile.AllowSound())
+            if (Projectile.IsOwnerSide())
                 ScarletSound(HJScarletSounds.TheSevenStar_Swing, Projectile.Center, 0.75f, 1, -0.1f + 0.14f * SwingTime, 0.1f);
             if (Projectile.HJScarlet().ExecutionStrike)
             {
@@ -174,7 +174,7 @@ namespace HJScarletRework.Projs.Executor
                 OldAimPos.Add(slashPosFinal);
                 if (easedProgress >= 0.95f)
                     return;
-                if (Main.rand.NextBool(4) && Projectile.Allow(3))
+                if (Main.rand.NextBool(4) && Projectile.IsOwnerSide())
                 {
                     for (int i = 0; i < 3; i++)
                     {
@@ -186,14 +186,14 @@ namespace HJScarletRework.Projs.Executor
                     }
                 }
                 {
-                    if (!Projectile.Allow(3))
+                    if (!Projectile.IsOwnerSide())
                         return;
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + tarPos.RotatedBy(TargetRotation) * 110, Main.rand.NextFloat(0.45f, 1f));
                     Vector2 dir = (pos - Projectile.Center).ToSafeNormalize(Vector2.UnitX);
                     Vector2 vel = dir.RotatedBy(PiOver2 * Projectile.spriteDirection) * Main.rand.NextFloat(.1f, 1.2f) * 5f;
                     for (int i = 0; i < 3; i++)
                     {
-                        ECSParticle.LiliesFire(pos + dir * 5 * i, vel, RandLerpColor(Color.White, Color.WhiteSmoke), Projectile.Life(45), RandRotTwoPi, .85f, Main.rand.NextFloat(.95f, 1.10f) * Projectile.scale * .21f, true, BlendState.Additive);
+                        ECSParticle.LiliesFire(pos + dir * 5 * i, vel, RandLerpColor(Color.White, Color.WhiteSmoke), 45, RandRotTwoPi, .85f, Main.rand.NextFloat(.95f, 1.10f) * Projectile.scale * .21f, true, BlendState.Additive);
                     }
                 }
 
