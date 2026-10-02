@@ -33,11 +33,6 @@ WatcherBuff: {
 	Description: The youngest among countless companions of time.
 }
 
-PanicBuff: {
-	DisplayName: Panic Buff
-	Description: Mods.HJScarletRework.Buffs.PanicBuff.Description
-}
-
 HerbBagBuff: {
 	DisplayName: Forest Herb
 	Description: The power of herbs seems to have been infused into your body.
@@ -68,8 +63,12 @@ CrimsonCharmBuff: {
 }
 
 TerraFlamethrowerBuff: {
-	DisplayName: Terra Flamethrower Buff
-	Description: Mods.HJScarletRework.Buffs.TerraFlamethrowerBuff.Description
+	DisplayName: Terra Phlogiston
+	Description:
+		'''
+		Causes enemies drip terra essence, dealing damage equal to enemy's contact damage
+		Terra essence does not damage enemies affected by this
+		'''
 }
 
 BoneSlapBuff: {
@@ -118,31 +117,49 @@ GrassPoison: {
 }
 
 AbsoluteZeroBuff: {
-	DisplayName: Absolute Zero Buff
-	Description: Mods.HJScarletRework.Buffs.AbsoluteZeroBuff.Description
+	DisplayName: Absolute Zero
+	Description:
+		'''
+		Extreme cold freezes the pulse of the living, even time begins to hesitate
+		Greatly reduces movement speed, defense, and health
+		'''
 }
 
 TheBleachingBuff: {
-	DisplayName: The Bleaching Buff
-	Description: Mods.HJScarletRework.Buffs.TheBleachingBuff.Description
+	DisplayName: The Bleaching
+	Description:
+		'''
+		The soul is fading, leaving only a shell
+		Clears defense, reduces damage dealt and health
+		'''
 }
 
 SaintChurchBuff: {
-	DisplayName: Saint Church Buff
-	Description: Mods.HJScarletRework.Buffs.SaintChurchBuff.Description
+	DisplayName: Undying Balu
+	Description:
+		'''
+		The Moon Balu, even if sunk into the abyss of death, will rise and awaken
+		Then, loathing the Dahn who rejected its teachings, it decreed their fate of never reviving after death
+		And cannot repair its own injuries
+		'''
 }
 
 LifeWormBuff: {
-	DisplayName: Life Worm Buff
-	Description: Mods.HJScarletRework.Buffs.LifeWormBuff.Description
+	DisplayName: Little All-Nature's Breath
+	Description: Growing vigorously
 }
 
 CycleMadnessBuff: {
-	DisplayName: Cycle Madness Buff
-	Description: Mods.HJScarletRework.Buffs.CycleMadnessBuff.Description
+	DisplayName: Critical Star Cycle
+	Description: Gaining critical stars
 }
 
 AntiKnockbackBuff: {
-	DisplayName: Anti Knockback Buff
-	Description: Mods.HJScarletRework.Buffs.AntiKnockbackBuff.Description
+	DisplayName: Knockback Immunity
+	Description: No longer affected by knockback
+}
+
+DiamondYoyoBuff: {
+	DisplayName: Diamond Dust
+	Description: Shines brightly, attracting dazzling gems
 }

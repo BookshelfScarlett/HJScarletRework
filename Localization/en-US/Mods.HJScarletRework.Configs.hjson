@@ -39,17 +39,22 @@ HJScarletConfigClient: {
 	}
 
 	DrawExecutionCounter: {
-		Label: Display Execute's Time
+		Label: Display Execution Progress Bar
 		Tooltip:
 			'''
-			Enables to display execute's times under the player
+			Enables to display Execution Progress Bar under the player
 			Enable by default
 			'''
 	}
 
 	ScreenShakeStrength: {
 		Label: Screen Shake Strength
-		Tooltip: ""
+		Tooltip:
+			'''
+			Allows you to adjust the strength of screen shake
+			Range is (0 - 10)x
+			Default is 1x
+			'''
 	}
 
 	SimpleImmersiveInventory: {
@@ -95,28 +100,44 @@ HJScarletConfigClient: {
 		Label: Textbox Size Adjustment
 		Tooltip:
 			'''
-			Allows you to adjust the size of extra Textboxes for items in the mod
-			If you encounter an issue where the Textbox is too large, you can adjust this setting
+			Allows you to adjust the size of extra textboxes for items in the mod
+			If you encounter an issue where the textbox is too large, you can adjust this setting
 			Default is 1, which means 100%
 			'''
 	}
 }
 
 HJScarletConfigServer: {
-	DisplayName: H J Scarlet Config Server
+	DisplayName: Lostbelt Journey Server Configs
 
 	CrossModSupport: {
-		Label: Cross Mod Support
-		Tooltip: ""
+		Label: Cross-Mod Support
+		Tooltip:
+			'''
+			When enabled, Lostbelt Journey will provide cross-mod support for some other mods, making their content fit into the progression of Homeward Journey and Lostbelt Journey
+			Disabled by default
+			'''
 	}
 
 	LostbeltJourneyTestAI: {
-		Label: Lostbelt Journey Test A I
-		Tooltip: ""
+		Label: Lostbelt Journey Boss Rework
+		Tooltip:
+			'''
+			When enabled, Lostbelt Journey will rework some existing bosses with brand-new AI, along with some new sprites and new events
+			This feature greatly affects game progression and is also one of the core parts of this mod's story
+			If you need to consider partial compatibility, you may consider disabling this option
+			[c/AA00AA:Currently won't do anything]
+			Enabled by default
+			'''
 	}
 
 	ModWeaponDamageMult: {
-		Label: Mod Weapon Damage Mult
-		Tooltip: ""
+		Label: Mod Weapon Damage Multiplier
+		Tooltip:
+			'''
+			Allows you to adjust the damage multiplier of weapons in the mod, that is, weapon strength
+			Range is 0 to 10 times. If you think the weapons in the mod are too strong, you may consider this option
+			Default is 1x
+			'''
 	}
 }

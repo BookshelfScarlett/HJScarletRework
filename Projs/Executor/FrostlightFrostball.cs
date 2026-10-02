@@ -106,6 +106,11 @@ namespace HJScarletRework.Projs.Executor
             if (Main.rand.NextBool(8))
                 ECSParticle.HRShinyOrb(Projectile.Center.ToRandCirclePos(8), Projectile.SafeDir().ToRandVelocity(ToRadians(10), 1.2f, 4.4f), RandLerpColor(Color.SkyBlue, Color.LightBlue), Main.rand.Next(30, 40), Main.rand.NextFloat(.7f, 1) * .85f, Projectile.scale * Main.rand.NextFloat(.7f, .9f) * .08f, .5f);
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.AddExecutionTimeImmediate(ItemType<Frostlight>());

@@ -38,48 +38,6 @@ Keybinds: {
 	// ParryActionKeybind.DisplayName: Parry Action Keybind
 }
 
-Projectiles: {
-	// DragonStaffHeldProj.DisplayName: Dragon Staff Held Proj
-	// DragonStaffHeldProjAlt.DisplayName: Dragon Staff Held Proj Alt
-	// DragonStaffFrieball.DisplayName: Dragon Staff Frieball
-	// DragonSummonHeldProj.DisplayName: Dragon Summon Held Proj
-	// DragonSummonProj.DisplayName: Dragon Summon Proj
-	// DragonSummonFireball.DisplayName: Dragon Summon Fireball
-	// DragonSniperBoom.DisplayName: Dragon Sniper Boom
-	// DragonSniperHeldProj.DisplayName: Dragon Sniper Held Proj
-	// DragonSniperNuke.DisplayName: Dragon Sniper Nuke
-	// DragonSniperVictim.DisplayName: Dragon Sniper Victim
-	// DragonMinionFlame.DisplayName: Dragon Minion Flame
-	// DragonMinionProj.DisplayName: Dragon Minion Proj
-	// DragonminionFireball.DisplayName: Dragonminion Fireball
-	// TechBladeHeldProj.DisplayName: Tech Blade Held Proj
-	// TechBladeLaser.DisplayName: Tech Blade Laser
-}
-
-Items: {
-	DragonSummon: {
-		// DisplayName: Dragon Summon
-		// Tooltip: ""
-	}
-
-	DragonMinion: {
-		// DisplayName: Dragon Minion
-		// Tooltip: ""
-	}
-
-	"": {
-		SkyofHorizon: {
-			// DisplayName: Lightof Horizon
-			// Tooltip: ""
-		}
-	}
-
-	TechBlade: {
-		// DisplayName: Tech Blade
-		// Tooltip: ""
-	}
-}
-
 ExecutorDamageClass: {
 	ExecutionProgress: 命中{0}次以发起处决，按住左Shift查看
 	ExecutionDescriptionName: 处决执行时
@@ -113,4 +71,4 @@ ExecutorDamageClass: {
 }
 
 DamageClasses.ExecutorDamageClass.DisplayName: 代行者伤害
-Projs.Enemy.SuicideKnifeInvisProj.DisplayName: 自损八千
+Projs.Enemy.SuicideKnifeInvisProj.DisplayName: ...自杀

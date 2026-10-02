@@ -6,7 +6,7 @@ using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Methods.Textbox;
-using HJScarletRework.Globals.Systems;
+using HJScarletRework.Globals.Systems.Conditions;
 using HJScarletRework.Items.Armor.Reaper;
 using HJScarletRework.Projs.Executor;
 using System;

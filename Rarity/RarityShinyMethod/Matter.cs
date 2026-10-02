@@ -35,6 +35,5 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
             }
             //最后更新他。
         }
-
     }
 }

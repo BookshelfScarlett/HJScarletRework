@@ -120,7 +120,7 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateFinalAnimation()
         {
             Helper.UpdateAniState(2);
-            float heldScale =  Owner.HeldItem.scale;
+            float heldScale = Owner.HeldItem.scale;
             float easedProgress = EaseInOutSin(Helper.GetAniProgress(2));
             float rot = Helper.ToCurAnimationRot(180, 185, Owner.direction, Flip, easedProgress);
             Vector2 tarPos = rot.ToTargetPosByMartix(SwordScale * heldScale);

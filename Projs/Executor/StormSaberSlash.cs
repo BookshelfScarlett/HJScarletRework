@@ -178,7 +178,7 @@ namespace HJScarletRework.Projs.Executor
 
             List<ScarletVertex> VertexList = [];
             Vector2 projVel = Projectile.velocity.SafeNormalize(Vector2.UnitX) * 42;
-            float heldscale =  Owner.HeldItem.scale;
+            float heldscale = Owner.HeldItem.scale;
             for (int i = 0; i < CenterPosList.Count; i++)
             {
                 float progress = (float)i / CenterPosList.Count;

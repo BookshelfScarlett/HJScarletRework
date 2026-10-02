@@ -25,10 +25,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Owner.IsHolding(OriginalItemID))
                 return;
-            int curExecuteCount = Owner.GetExecuteProgress();
-            if (curExecuteCount == 0)
-                return;
-            if (Owner.HJScarlet().tacticalExecutionInputCache > 0)
+            if (Projectile.CheckExecution()&&Projectile.numUpdates==0)
             {
                 //将武器标记为发起处决模式
                 Projectile.HJScarlet().ExecutionStrike = true;
@@ -37,9 +34,8 @@ namespace HJScarletRework.Projs.Executor
                 //移除处决进程
                 Owner.RemoveExecutionProgress();
                 Owner.HJScarlet().tacticalExecutionInputCache = 0;
-                //处决会强行发射这枚子弹
-                Timer = AttackSpeed;
             }
+            Projectile.HJScarlet().ExecutionStrike = false;
         }
         //后坐力
         protected override void UpdateWeaponUsing()

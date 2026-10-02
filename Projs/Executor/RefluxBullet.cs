@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
@@ -62,7 +61,7 @@ namespace HJScarletRework.Projs.Executor
             Vector2 pos = Projectile.Center;
             for (int i = 0; i < 16; i++)
             {
-                ECSParticle.SmokeParticle(pos, RandVelTwoPi(.2f, 12f), RandLerpColor(Color.LimeGreen, Color.Lime), Main.rand.Next(35, 45), RandRotTwoPi, 1, Main.rand.NextFloat(.9f, 1.1f)*.135f, Main.rand.NextBool(), BlendState.AlphaBlend);
+                ECSParticle.SmokeParticle(pos, RandVelTwoPi(.2f, 12f), RandLerpColor(Color.LimeGreen, Color.Lime), Main.rand.Next(35, 45), RandRotTwoPi, 1, Main.rand.NextFloat(.9f, 1.1f) * .135f, Main.rand.NextBool(), BlendState.AlphaBlend);
             }
             for (int i = 0; i < 16; i++)
             {
@@ -75,7 +74,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.CursedInferno, 60);
-            if (target.IsLegal() && !target.HJScarlet().refluxChain&&Projectile.HJScarlet().ExecutionStrike)
+            if (target.IsLegal() && !target.HJScarlet().refluxChain && Projectile.HJScarlet().ExecutionStrike)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<RefluxChain>(), Projectile.damage, 0, Owner.whoAmI);
                 proj.HJScarlet().CurStoredTarget = target;
@@ -85,7 +84,7 @@ namespace HJScarletRework.Projs.Executor
             for (int i = 0; i < 16; i++)
             {
                 //ECSParticle.smop(pos, RandVelTwoPi(.2f, 8f), RandLerpColor(Color.LimeGreen, Color.Lime), Main.rand.Next(35, 45), 1, RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * 1f, 0, Main.rand.NextFloat(-.08f, 0.09f), 0.9f);
-                ECSParticle.SmokeParticle(pos, RandVelTwoPi(.2f, 12f), RandLerpColor(Color.LimeGreen, Color.Lime), Main.rand.Next(35, 45), RandRotTwoPi, 1, Main.rand.NextFloat(.9f, 1.1f)*.135f, Main.rand.NextBool(), BlendState.AlphaBlend);
+                ECSParticle.SmokeParticle(pos, RandVelTwoPi(.2f, 12f), RandLerpColor(Color.LimeGreen, Color.Lime), Main.rand.Next(35, 45), RandRotTwoPi, 1, Main.rand.NextFloat(.9f, 1.1f) * .135f, Main.rand.NextBool(), BlendState.AlphaBlend);
             }
             for (int i = 0; i < 16; i++)
             {
@@ -103,8 +102,8 @@ namespace HJScarletRework.Projs.Executor
             Texture2D tex = HJScarletTexture.Particle_OpticalLineGlow.Value;
             Rectangle frame = tex.Frame();
             Vector2 ori = tex.Size() / 2;
-                SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-                DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.LimeGreen, 1f, 1f, 0.78f);
+            SB.EnterShaderArea(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+            DrawTrails(HJScarletTexture.Trail_TerraRayFlow.Texture, Color.LimeGreen, 1f, 1f, 0.78f);
             SB.EnterShaderArea();
             DrawTrails(HJScarletTexture.Noise_HeavyAura.Texture, Color.LimeGreen, 0.35f);
             DrawTrails(HJScarletTexture.Trail_ManaStreak.Texture, Color.White, 0.25f, offsetHeight: 1.1f);

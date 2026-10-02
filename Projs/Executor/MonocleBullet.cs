@@ -89,7 +89,7 @@ namespace HJScarletRework.Projs.Executor
             }
             TotalTile++;
             DoTileParticle(Projectile.Center);
-            return TotalTile>10;
+            return TotalTile > 10;
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {

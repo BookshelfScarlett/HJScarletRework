@@ -2,8 +2,9 @@ CandLanceThrown: {
 	DisplayName: Candlance Javelin
 	Tooltip:
 		'''
-		Ignit a Soulfire Lantern on hit
+		Ignit a soulfire lantern on hit
 		The lantern delays, then falls and fires homing soulfire at multiple targets
+		Soulfire has a chance to inflicts[ScarletDebuff/Terraria/Confused]
 		'''
 }
 
@@ -104,7 +105,8 @@ TonbogiriThrown: {
 	Tooltip:
 		'''
 		Add toxic bubbles along the path
-		Also add more toxic bubbles when it disappears
+		Also add more toxic bubbles on hit
+		Attacks inflict[ScarletDebuff/Terraria/Venom]
 		"Looks a bit familiar"
 		'''
 }
@@ -150,6 +152,7 @@ TheMars: {
 		'''
 		Marks up to 3 nearby hostile units along its path
 		Upon vanishing, launches Tidal Spears at all marked targets
+		Attacks inflict[ScarletDebuff/Terraria/Confused]
 		"The Creation of Alien"
 		'''
 }
@@ -177,9 +180,10 @@ CryoblazeHymn: {
 	Tooltip:
 		'''
 		Vanishes after a short time once thrown or hitting an enemy
-		Upon vanishing, creates alternating Frost and Fire Portals that fire Frost Bolts and Fire Bolts
-		Frost Bolts are slower and target two separate enemies
-		Fire Bolts are faster and deal more damage, prioritizing enemies directly hit by the spear
+		Upon vanishing, creates alternating frost and fire portals that fire frost bolts and fire bolts
+		Directly hit inflicted[ScarletDebuff/Terraria/Oiled]
+		Frost bolts are slower and target multiple separate enemies, inflicted[ScarletDebuff/Terraria/Frostburn2]
+		Fire bolts are faster and deal more damage, prioritizing enemies directly hit by the spear, inflicted[ScarletDebuff/Terraria/OnFire3]
 		"Though vastly different, they sing aloud in the same melody."
 		'''
 }
@@ -239,8 +243,14 @@ EnchantedSwordfish: {
 }
 
 EthrealSwordfish: {
-	DisplayName: Ethreal Swordfish
-	Tooltip: ""
+	DisplayName: Eternal Swordfish
+	Tooltip:
+		'''
+		Time is up, unless the rules are broken, this is an eternal destiny...
+		You already got it? Never mind
+		Condensed the power of the Time
+		...Wait, why does this even exist
+		'''
 }
 
 SamsaraofDawnlightAlter: {
@@ -257,17 +267,92 @@ FlowerofDance: {
 		'''
 }
 
-SeashineSword: {
-	DisplayName: Seashine Sword
-	Tooltip: ""
-}
-
 HighTechBlade: {
 	DisplayName: High Tech Blade
 	Tooltip: ""
 }
 
 RitualofRepose: {
-	DisplayName: Ritualof Repose
+	DisplayName: Ritual of Repose
+	Tooltip:
+		'''
+		Throw a cross skyward that descends and bursts
+		Striking all enemies worldwide with lightning and applying[ScarletDebuff/HJScarletRework/TheBleachingBuff]
+		"Oh lord, you're dead to me, rest in peace."
+		'''
+}
+
+CopperRapierThrown: {
+	DisplayName: Copper Rapier Thrown
 	Tooltip: ""
+}
+
+GoldRapierThrown: {
+	DisplayName: Gold Rapier Thrown
+	Tooltip: ""
+}
+
+IronRapierThrown: {
+	DisplayName: Iron Rapier Thrown
+	Tooltip: ""
+}
+
+LeadRapierThrown: {
+	DisplayName: Lead Rapier Thrown
+	Tooltip: ""
+}
+
+PlatinumRapierThrown: {
+	DisplayName: Platinum Rapier Thrown
+	Tooltip: ""
+}
+
+SilverRapierThrown: {
+	DisplayName: Silver Rapier Thrown
+	Tooltip: ""
+}
+
+TinRapierThrown: {
+	DisplayName: Tin Rapier Thrown
+	Tooltip: ""
+}
+
+TungstenRapierThrown: {
+	DisplayName: Tungsten Rapier Thrown
+	Tooltip: ""
+}
+
+AmberYoyo: {
+	DisplayName: Amber Yoyo
+	Tooltip: Amber will break through the enemy's formation
+}
+
+AmethystYoyo: {
+	DisplayName: Amethyst Yoyo
+	Tooltip: Amethyst will bring enemies within reach
+}
+
+DiamondYoyo: {
+	DisplayName: Diamond Yoyo
+	Tooltip: Diamond will grant [ScarletBuff/HJScarletRework/DiamondYoyoBuff] to gems
+}
+
+EmeraldYoyo: {
+	DisplayName: Emerald Yoyo
+	Tooltip: Emerald will bring you wealth
+}
+
+RubyYoyo: {
+	DisplayName: Ruby Yoyo
+	Tooltip: Ruby will heal your wounds
+}
+
+SapphireYoyo: {
+	DisplayName: Sapphire Yoyo
+	Tooltip: Sapphire will help you pursue victory
+}
+
+TopazYoyo: {
+	DisplayName: Topaz Yoyo
+	Tooltip: Topaz will ignore all obstacles
 }

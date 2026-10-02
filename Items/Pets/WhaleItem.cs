@@ -12,15 +12,8 @@ namespace HJScarletRework.Items.Pets
 {
     public class WhaleItem : HJScarletPetItem
     {
-        public override void BuffAndProj()
-        {
-            Item.DefaultToVanitypet(ProjectileType<WhaleProj>(), BuffType<WhaleBuff>());
-        }
-
-        public override void ExSD()
-        {
-            Item.CloneDefaults(ItemID.ZephyrFish);
-        }
+        public override int PetProjType => ProjectileType<WhaleProj>();
+        public override int PetBuffType => BuffType<WhaleBuff>();
     }
     public abstract class HJScarletPetItem : ModItem, ILocalizedModType
     {
@@ -35,7 +28,6 @@ namespace HJScarletRework.Items.Pets
         public virtual int PetBuffType => 0;
         public sealed override void SetDefaults()
         {
-            BuffAndProj();
             Item.damage = 0;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.value = Item.sellPrice(gold: 50);
@@ -47,7 +39,6 @@ namespace HJScarletRework.Items.Pets
             Item.buffType = PetBuffType;
             Item.shoot = PetProjType;
             Item.HJScarlet().CanDrawIcon = true;
-            ExSD();
         }
         public override bool? UseItem(Player player)
         {
@@ -55,17 +46,5 @@ namespace HJScarletRework.Items.Pets
                 player.AddBuff(Item.buffType, 3600);
             return true;
         }
-        /// <summary>
-        /// 返回真以做掉通用的tooltip方法
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="yOffset"></param>
-        /// <returns></returns>
-        public virtual bool CustomTooltipDraw(DrawableTooltipLine line, ref int yOffset) => false;
-        public virtual void ExSD() { }
-        /// <summary>
-        /// 复写这个属性，为宠物物品提供相对应的buff和proj名
-        /// </summary>
-        public virtual void BuffAndProj() { }
     }
 }

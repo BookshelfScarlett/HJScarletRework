@@ -8,6 +8,7 @@ namespace HJScarletRework.Buffs
         public override void SetStaticDefaults()
         {
             Main.buffNoSave[Type] = false;
+            Main.buffNoTimeDisplay[Type] = true;
         }
         public override void Update(Player player, ref int buffIndex)
         {

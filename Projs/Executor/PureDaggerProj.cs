@@ -124,7 +124,7 @@ namespace HJScarletRework.Projs.Executor
 
         public void UpdateBeginAnimation()
         {
-            float heldScale =  Owner.HeldItem.scale ;
+            float heldScale = Owner.HeldItem.scale;
             Helper.UpdateAniState(0);
             float easedProgress = EaseOutCubic(Helper.GetAniProgress(0));
             float beginAngle = -210f * Flip.ToDirectionInt();
@@ -176,8 +176,10 @@ namespace HJScarletRework.Projs.Executor
             TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .05f);
         }
 
+
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
             if (Projectile.numHits < 1)
             {
                 ScreenShakeSystem.AddScreenShakes(target.Center, 4, 12, Projectile.rotation, 0, easingFunc: EaseOutCubic);

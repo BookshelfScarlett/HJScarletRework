@@ -320,7 +320,7 @@ namespace HJScarletRework.Projs.Executor
             }
             //递增计时器
             Timer++;
-            int dmg = Owner.HeldItem.type == ItemType<GaiaStriker>() ? Projectile.originalDamage : Projectile.originalDamage / 2;
+            int dmg = Owner.IsHolding<GaiaStriker>() ? Projectile.originalDamage : Projectile.originalDamage / 2;
             if (Timer > count * Projectile.MaxUpdates)
             {
                 Vector2 dir = tarRot.ToRotationVector2();

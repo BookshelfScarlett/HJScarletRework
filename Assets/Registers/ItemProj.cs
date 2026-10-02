@@ -33,6 +33,7 @@ namespace HJScarletRework.Assets.Registers
         internal static Tex2DWithPath Item_DialecticsThrown { get; private set; }
         internal static Tex2DWithPath DualWraithStaffBlade { get; private set; }
         internal static Tex2DWithPath DualWraithStaff { get; private set; }
+        internal static Tex2DWithPath Cursor_Target { get;private set;  }
         public override void Load()
         {
             Wreach = new Tex2DWithPath($"{ItemPath}/{nameof(Wreach)}");
@@ -41,6 +42,7 @@ namespace HJScarletRework.Assets.Registers
             Item_DialecticsThrown = new Tex2DWithPath($"{WeaponPath}/{nameof(DialecticsThrown)}");
             DualWraithStaffBlade = new Tex2DWithPath($"{WeaponPath}/{nameof(DualWraithStaffBlade)}");
             DualWraithStaff = new Tex2DWithPath($"{WeaponPath}/{nameof(DualWraithStaff)}");
+            Cursor_Target = new Tex2DWithPath($"{ItemPath}/Equips/PreciousTarget");
         }
         public override void Unload()
         {
@@ -50,6 +52,7 @@ namespace HJScarletRework.Assets.Registers
             Item_DialecticsThrown = null;
             DualWraithStaffBlade = null;
             DualWraithStaff = null;
+            Cursor_Target = null;
         }
     }
 }

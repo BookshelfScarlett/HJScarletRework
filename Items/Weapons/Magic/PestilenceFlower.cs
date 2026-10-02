@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Weapons.Magic
         }
         public override void ExSD()
         {
-            Item.damage = 66;
+            Item.damage = 45;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true, true);
             Item.mana = 5;

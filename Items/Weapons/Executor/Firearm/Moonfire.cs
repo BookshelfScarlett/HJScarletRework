@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Database.Enums;
+﻿using HJScarletRework.Core.NetSync;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Core.NetCode;
@@ -23,7 +24,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         }
         public override void ExSD()
         {
-            Item.damage = 415;
+            Item.damage = 765;
             Item.shootSpeed = 19;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.SetUpNoUseGraphicItem(true);
@@ -53,8 +54,9 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddIngredient(ItemID.VenusMagnum).
+                AddIngredient<TheCompanion>().
                 AddIngredient<UniversalCube>(5).
+                AddIngredient(ItemID.LunarBar, 5).
                 AddIngredient(ItemID.IllegalGunParts, 15).
                 AddTile(TileID.LunarCraftingStation).
                 Register();

@@ -18,6 +18,12 @@ namespace HJScarletRework.Globals.Instances.Items
     {
         public void GlobalAccessoriesRecipe()
         {
+            Recipe.Create(ItemID.WarriorEmblem).
+                AddIngredient<EmblemExecutor>().
+                DisableDecraft().
+                AddTile(TileID.TinkerersWorkbench).
+                Register();
+
             Recipe.Create(ItemID.ManaFlower).
                 AddIngredient<ArtificalManaStar>().
                 AddIngredient(ItemID.NaturesGift).
@@ -116,12 +122,6 @@ namespace HJScarletRework.Globals.Instances.Items
                 DisableDecraft().
                 Register();
 
-            Recipe.Create(ItemID.QuadBarrelShotgun).
-                AddIngredient(ItemID.Boomstick).
-                AddIngredient(ItemID.IllegalGunParts, 5).
-                AddIngredient(ItemID.Bone, 30).
-                AddTile(TileID.Anvils).
-                Register();
         }
         public void GlobalMiscRecipes()
         {
@@ -132,7 +132,9 @@ namespace HJScarletRework.Globals.Instances.Items
                 DisableDecraft().
                 AddTile(TileID.CrystalBall).
                 Register();
-
+            Recipe.Create(ItemID.GuideVoodooDoll).
+                AddIngredient(ItemID.GuideVoodooFish).
+                Register();
 
             //墓们
             Recipe.Create(ItemID.Tombstone).
@@ -156,6 +158,20 @@ namespace HJScarletRework.Globals.Instances.Items
                     DisableDecraft().
                     Register();
             }
+            Recipe.Create(ItemID.GoldenKey).
+                AddRecipeGroup(HJScarletRecipeGroup.AnyGoldBar, 10).
+                AddIngredient(ItemID.Bone, 30).
+                DisableDecraft().
+                AddTile(TileID.Anvils).
+                Register();
+
+            Recipe.Create(ItemID.ObsidianSwordfish).
+                AddIngredient(ItemID.HotlineFishingHook).
+                AddIngredient(ItemID.HellButterfly, 300).
+                DisableDecraft().
+                AddTile(TileID.MythrilAnvil).
+                Register();
+
         }
         public void FargoMutantCrossMod()
         {
@@ -224,6 +240,5 @@ namespace HJScarletRework.Globals.Instances.Items
             GlobalMiscRecipes();
             FargoMutantCrossMod();
         }
-
     }
 }

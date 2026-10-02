@@ -40,11 +40,11 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             //初始化。
-            int projID =  type;
+            int projID = type;
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, projID, damage, knockback, player.whoAmI);
             proj.HJScarlet().HasExecutionMechanic = true;
-            if(player.GetExecutionSrike()&&player.HasProj<DeathTollsMinion>())
-            proj.HJScarlet().ExecutionStrike= true;
+            if (player.GetExecutionSrike() && player.HasProj<DeathTollsMinion>())
+                proj.HJScarlet().ExecutionStrike = true;
             return false;
         }
         public override void HoldItem(Player player)
@@ -56,7 +56,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             int damage = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);
             Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, ProjectileType<DeathTollsMinion>(), damage, Item.knockBack, player.whoAmI);
             player.RemoveExecutionProgress();
-            player.HJScarlet().tacticalExecutionInputCache= 0;
+            player.HJScarlet().tacticalExecutionInputCache = 0;
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {

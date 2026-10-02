@@ -6,14 +6,7 @@ namespace HJScarletRework.Items.Pets
 {
     public class WatcherItem : HJScarletPetItem
     {
-        public override void BuffAndProj()
-        {
-            Item.DefaultToVanitypet(ProjectileType<WatcherProj>(), BuffType<WatcherBuff>());
-        }
-
-        public override void ExSD()
-        {
-            Item.CloneDefaults(ItemID.EyeOfCthulhuPetItem);
-        }
+        public override int PetProjType => ProjectileType<WatcherProj>();
+        public override int PetBuffType => BuffType<WatcherBuff>();
     }
 }

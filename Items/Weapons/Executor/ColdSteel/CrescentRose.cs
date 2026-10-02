@@ -12,6 +12,10 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
 {
     public class CrescentRose : ExecutorWeaponClass
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override int ExecutionProgress => 40;
         public static int DefensePerAdd = 2;
         public static int MaxSoulStone = 20;

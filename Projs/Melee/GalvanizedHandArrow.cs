@@ -49,9 +49,6 @@ namespace HJScarletRework.Projs.Melee
 
             if (AttackType == Style.Attack)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center.ToRandCirclePosEdge(5f), DustID.UnusedWhiteBluePurple, Projectile.SafeDirByRot() * 3f);
-                d.scale *= 1.3f;
-                d.noGravity = true;
                 Timer++;
                 if (Timer > 8 * Projectile.extraUpdates)
                 {
@@ -87,7 +84,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            base.ModifyHitNPC(target, ref modifiers);
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

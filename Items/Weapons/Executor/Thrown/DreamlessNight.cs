@@ -55,7 +55,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             //初始化。
-            int projID =  type;
+            int projID = type;
             Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, projID, damage, knockback, player.whoAmI);
             proj.HJScarlet().HasExecutionMechanic = true;
             return false;
@@ -69,15 +69,23 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             int damage = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);
             Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, ProjectileType<DreamlessNightMinion>(), damage, Item.knockBack, player.whoAmI);
             player.RemoveExecutionProgress();
-            player.HJScarlet().tacticalExecutionInputCache= 0;
+            player.HJScarlet().tacticalExecutionInputCache = 0;
         }
         public override void AddRecipes()
         {
             CreateRecipe().
-                AddRecipeGroup(HJScarletRecipeGroup.AnyEvilHammer).
+                AddIngredient<TheDefiler>().
                 AddIngredient<JungleMadness>().
                 AddIngredient<DungeonBreaker>().
                 AddIngredient<MantleLayer>().
+                AddTile(TileID.Beds).
+                Register();
+            CreateRecipe().
+                AddIngredient<FleshGrinder>().
+                AddIngredient<JungleMadness>().
+                AddIngredient<DungeonBreaker>().
+                AddIngredient<MantleLayer>().
+                DisableDecraft().
                 AddTile(TileID.Beds).
                 Register();
         }

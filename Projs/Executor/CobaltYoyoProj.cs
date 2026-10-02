@@ -21,7 +21,6 @@ namespace HJScarletRework.Projs.Executor
             ProjectileID.Sets.YoyosLifeTimeMultiplier[Type] = GetSeconds(10);
             ProjectileID.Sets.YoyosMaximumRange[Type] = 600f;
             ProjectileID.Sets.YoyosTopSpeed[Type] = 22f / MaxUpdates;
-
             Projectile.ToTrailSetting(8, 0);
         }
         public override void ExSD()

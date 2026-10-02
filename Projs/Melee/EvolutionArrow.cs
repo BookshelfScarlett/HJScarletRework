@@ -92,6 +92,10 @@ namespace HJScarletRework.Projs.Melee
                 }
             }
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
         public override bool? CanHitNPC(NPC target)
         {
 

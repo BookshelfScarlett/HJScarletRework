@@ -576,7 +576,7 @@ namespace HJScarletRework.Globals.Players
 
         public void TitaniumHeadExecutorShard()
         {
-            if (!(titaniumHeadExecutor && Player.HeldItem.IsExecutorWeapon() && Main.mouseLeft && Player.miscCounter % 8 == 0))
+            if (!(titaniumHeadExecutor && Player.HeldItem.IsExecutorWeapon() && Main.mouseLeft && Player.miscCounter % 9 == 0&&Player.IsInInventory()))
                 return;
             int damage = (int)Player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(TitaniumHeadExecutor.ShardDamage);
             Vector2 dir = Player.Center.GetNormalVector2(Main.MouseWorld);

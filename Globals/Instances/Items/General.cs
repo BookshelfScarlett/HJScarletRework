@@ -111,7 +111,7 @@ namespace HJScarletRework.Globals.Instances.Items
                     }
                 }
             }
-            
+
             if (item.healLife > 0 && player.HJScarlet().crimsonCharm)
             {
                 player.AddBuff(BuffType<CrimsonCharmBuff>(), CrimsonCharm.OverSatuTime * 60);
@@ -166,7 +166,7 @@ namespace HJScarletRework.Globals.Instances.Items
             var usPlayer = player.HJScarlet();
             if (usPlayer.terraRecipe)
             {
-                
+
             }
             return base.UseItem(item, player);
         }

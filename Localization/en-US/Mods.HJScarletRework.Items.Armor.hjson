@@ -355,18 +355,37 @@ DragonHunterLegs: {
 
 SaintChurchHead: {
 	DisplayName: Saint Church Head
-	Tooltip: ""
-	SetBonus: ""
+	Tooltip:
+		'''
+		{0} increased executor damage, {1} increased executor critical strike chance
+		{2} increased executor critial strike damage
+		'''
+	SetBonus:
+		'''
+		On fatal damage, enter [ScarletBuff/HJScarletRework/SaintChurchBuff] and revive with {1} health
+		Healing potions and health regen disabled, +{0} aggro
+		On another fatal damage, chance to revive with {2} health, unlimited triggers
+		Each revive grants stackable {3} damage and {4} critical strike chance to your team
+		'''
 }
 
 SaintChurchLegs: {
 	DisplayName: Saint Church Legs
-	Tooltip: ""
+	Tooltip:
+		'''
+		{0} increased executor damage
+		{1} increased movement speed
+		{2} run acceleration
+		'''
 }
 
 SaintChurchBody: {
 	DisplayName: Saint Church Body
-	Tooltip: ""
+	Tooltip:
+		'''
+		{0} increased executor critical strike damage
+		{1} increased executor critical strike chance
+		'''
 }
 
 GunWitchBody: {

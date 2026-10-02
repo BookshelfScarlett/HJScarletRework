@@ -28,7 +28,7 @@ namespace HJScarletRework.Projs.General
         public override void OnFirstFrame()
         {
             Projectile.frame = Main.rand.Next(0, 12);
-            ScarletSound(SoundID.Item109, Projectile.Center, volume: .65f, pitch: 0.6f, pitchVariance: 0.3f);
+            ScarletSound(SoundID.Item109, Projectile.Center, volume: .40f, pitch: 0.6f, pitchVariance: 0.3f);
             for (int i = 0; i < 8; i++)
             {
                 ECSParticle.ShinyCrossStarECS(Projectile.Center, RandVelTwoPi(0.2f, 4.2f), Color.White, 40, 1, 0.36f);

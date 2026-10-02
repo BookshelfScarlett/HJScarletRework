@@ -8,11 +8,16 @@ using HJScarletRework.Projs.Melee;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
     public class HighTechBlade : HJScarletWeapon
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override EnumDamageClass Category => EnumDamageClass.Melee;
         public override void SetStaticDefaults()
         {

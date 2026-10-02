@@ -158,6 +158,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
             modifiers.DefenseEffectiveness *= 0;
             ScreenShakeSystem.AddScreenShakes(target.Center, 4, 12, Projectile.rotation, 0, easingFunc: EaseOutCubic);
             ECSParticle.LightntingGlow(target.Center, (Projectile.rotation + PiOver2).ToRotationVector2() * .1f, Color.White, 40, 1, .8f);

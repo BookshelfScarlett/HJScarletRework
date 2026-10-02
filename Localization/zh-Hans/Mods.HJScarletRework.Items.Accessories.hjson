@@ -325,7 +325,7 @@ CrimsonCharm: {
 	DisplayName: 嗜血面具
 	Tooltip:
 		'''
-		+2HP/s 生命恢复速度
+		+2 HP/s 生命恢复速度
 		将所有治疗药水的治疗量重设定为依据玩家生命上限的治疗百分比
 		使用治疗药水不再造成[ScarletDebuff/Terraria/PotionSickness]，相反造成[ScarletBuff/HJScarletRework/CrimsonCharmBuff]{1}秒
 		在[ScarletBuff/HJScarletRework/CrimsonCharmBuff]期间再次使用治疗药水，会减少{0}治疗量，直至{2}点
@@ -548,9 +548,9 @@ SelfPortraitoftheBleachingOne: {
 	DisplayName: 褪色之人的自画像
 	Tooltip:
 		'''
+		你的攻击可以施加[ScarletDebuff/HJScarletRework/TheBleachingBuff]
 		命中时，敌人承受的持续性减益伤害放大{0}
-		敌人每拥有1个减益，持续性减益伤害额外放大{1}，上限至{3}
-		敌人每拥有{2}个减益，施加[ScarletDebuff/HJScarletRework/TheBleachingBuff]1秒
+		敌人每拥有1个减益，持续性减益伤害额外放大{1}，上限至{2}
 		该效果发生在减益伤害放大之前
 		“文明已然消失，随同那被舍弃的可能世界。”
 		'''
@@ -567,7 +567,8 @@ HandofGods: {
 		'''
 		增加{0}物块放置速度，{3}格放置距离
 		增加{1}墙壁放置速度，{2}挖掘速度
-		使你获得各种探索便利，光标位置发光
 		你可以凭空放置物块
+		下方放置在时装栏也同样生效：
+		使你获得各种探索便利，光标位置发光
 		'''
 }

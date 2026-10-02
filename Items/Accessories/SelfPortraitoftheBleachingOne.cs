@@ -16,7 +16,7 @@ namespace HJScarletRework.Items.Accessories
         public static float ExtraDamageMult = .5f;
         public static int DoTMulter = 4;
         public static int MaxDoTCounts = 12;
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DotDamageMult.ToPercent(), ExtraDamageMult.ToPercent(), DoTMulter, MaxDoTCounts);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DotDamageMult.ToPercent(), ExtraDamageMult.ToPercent(), MaxDoTCounts);
         public override void SetStaticDefaults()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Database.Enums.ShinyRarityType.FateWhite);

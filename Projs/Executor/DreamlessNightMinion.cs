@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Core.NetCode;

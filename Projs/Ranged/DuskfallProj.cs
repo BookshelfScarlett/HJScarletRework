@@ -1,8 +1,6 @@
 ﻿using ContinentOfJourney.Buffs;
-using ContinentOfJourney.Items.Pylons;
 using ContinentOfJourney.Projectiles;
 using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.DeepGlowSystem;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -11,14 +9,9 @@ using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Ranged;
-using rail;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -62,9 +55,39 @@ namespace HJScarletRework.Projs.Ranged
         public override Vector2 TileHitbox => new(16);
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
+            Projectile.timeLeft -= 75;
+            for (int i = 0; i < 24; i++)
+            {
+                Vector2 vel = (TwoPi / 24f * i).ToRotationVector2() * 8f * Main.rand.NextFloat(0f, 1f);
+
+                Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f) + vel.ToSafeNormalize() * Main.rand.NextFloat() * 2f;
+                Color color = RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.50f), Color.Orange);
+                float scale = 0.40f * Main.rand.NextFloat(0.55f, 1.1f);
+                ECSParticle.SmokeParticle(spawnpos, vel, color, Main.rand.Next(10, 41), RandRotTwoPi, Main.rand.NextFloat(.75f, 1f), scale, true, BlendState.Additive);
+            }
+            for (int j = 0; j < 15; j++)
+            {
+                Vector2 dir = RandVelTwoPi(.1f, 4.9f);
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3f) + dir * Main.rand.NextFloat(0f, 3f);
+                ECSParticle.ShinyCrossStarECS(pos, dir, RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(15, 50), 1f, 1f * Main.rand.NextFloat(.7f, .9f), .2f);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
+                Vector2 vel = RandVelTwoPi(.1f, 4.9f);
+                ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .99f * Main.rand.NextFloat(.6f, 1f), .2f);
+            }
+            for (int i = 0; i < 15; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
+                Vector2 vel = RandVelTwoPi(.1f, 4.9f);
+                ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .15f * Main.rand.NextFloat(.6f, 1f), .5f);
+            }
+            ScarletSound(SoundID.DD2_BetsyFireballImpact, Projectile.Center, 0.5f, 1, .35f);
+
             Projectile.BounceOnTile(oldVelocity);
-            if(Projectile.HJScarlet().CurStoredTarget.IsLegal())
-            Projectile.tileCollide = false;
+            if (Projectile.HJScarlet().CurStoredTarget.IsLegal())
+                Projectile.tileCollide = false;
             return false;
         }
         public override void OnFirstFrame()
@@ -103,7 +126,7 @@ namespace HJScarletRework.Projs.Ranged
             //if (AcceptIval)
             {
                 NPC CurTarget = Projectile.HJScarlet().CurStoredTarget;
-                if (CurTarget.IsLegal()&&Timer>Projectile.MaxUpdates*15)
+                if (CurTarget.IsLegal() && Timer > Projectile.MaxUpdates * 15)
                 {
                     float speedValue = Projectile.velocity.Length();
                     float rotation = Projectile.velocity.ToRotation();
@@ -140,7 +163,7 @@ namespace HJScarletRework.Projs.Ranged
             if (Main.rand.NextBool(5))
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePosEdge(24);
-                ECSParticle.TurbulenceShinyOrb(pos, 1.5f, RandLerpColor(Color.Orange,Color.OrangeRed), 45, 1, .1f, glowMult: .4f);
+                ECSParticle.TurbulenceShinyOrb(pos, 1.5f, RandLerpColor(Color.Orange, Color.OrangeRed), 45, 1, .1f, glowMult: .4f);
                 ECSParticle.ShrinkParticle(pos, Projectile.velocity / 4f, RandLerpColor(Color.Orange, Color.OrangeRed), 45, .51f, Projectile.velocity.ToRotation(), .6f, 1);
                 //ECSParticle.ShrinkParticle(pos, Projectile.velocity / 4f, Color.White, 45, 0.75f, Projectile.velocity.ToRotation(), .20f, 1);
             }
@@ -167,11 +190,12 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Timer = Main.rand.Next(-10,16);
+            Timer = Main.rand.Next(-10, 16);
             RandMap = Main.rand.NextFloat(.3f, .61f);
             Projectile.tileCollide = true;
+            if(AcceptIval)
             target.AddBuff(BuffType<SolarBurntBuff>(), 60);
-                        for (int i = 0; i < 24; i++)
+            for (int i = 0; i < 24; i++)
             {
                 Vector2 vel = (TwoPi / 24f * i).ToRotationVector2() * 8f * Main.rand.NextFloat(0f, 1f);
 
@@ -203,13 +227,44 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnKill(int timeLeft)
         {
+            if (Projectile.penetrate == 0)
+                return;
+            for (int i = 0; i < 24; i++)
+            {
+                Vector2 vel = (TwoPi / 24f * i).ToRotationVector2() * 8f * Main.rand.NextFloat(0f, 1f);
+
+                Vector2 spawnpos = Projectile.Center.ToRandCirclePos(4f) + vel.ToSafeNormalize() * Main.rand.NextFloat() * 2f;
+                Color color = RandLerpColor(Color.Lerp(Color.Orange, Color.Red, 0.50f), Color.Orange);
+                float scale = 0.40f * Main.rand.NextFloat(0.55f, 1.1f);
+                ECSParticle.SmokeParticle(spawnpos, vel, color, Main.rand.Next(10, 41), RandRotTwoPi, Main.rand.NextFloat(.75f, 1f), scale, true, BlendState.Additive);
+            }
+            for (int j = 0; j < 15; j++)
+            {
+                Vector2 dir = RandVelTwoPi(.1f, 4.9f);
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3f) + dir * Main.rand.NextFloat(0f, 3f);
+                ECSParticle.ShinyCrossStarECS(pos, dir, RandLerpColor(Color.Orange, Color.OrangeRed), Main.rand.Next(15, 50), 1f, 1f * Main.rand.NextFloat(.7f, .9f), .2f);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
+                Vector2 vel = RandVelTwoPi(.1f, 4.9f);
+                ECSParticle.ShinyCrossStarECS(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .99f * Main.rand.NextFloat(.6f, 1f), .2f);
+            }
+            for (int i = 0; i < 15; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(2f);
+                Vector2 vel = RandVelTwoPi(.1f, 4.9f);
+                ECSParticle.HRShinyOrb(pos, vel, RandLerpColor(Color.Lerp(Color.Red, Color.Orange, .5f), Color.OrangeRed), Main.rand.Next(15, 50), 1f, .15f * Main.rand.NextFloat(.6f, 1f), .5f);
+            }
+            ScarletSound(SoundID.DD2_BetsyFireballImpact, Projectile.Center, 0.5f, 1, .35f);
+
             base.OnKill(timeLeft);
         }
         public BlendState BlendState => BlendState.Additive;
         public ScarletDrawLayer LayerToRenderTo => ScarletDrawLayer.BeforeDusts;
         public void RenderPixelated(SpriteBatch spriteBatch)
         {
-            if (!Projectile.HJScarlet().FirstFrame||!AcceptIval)
+            if (!Projectile.HJScarlet().FirstFrame || !AcceptIval)
                 return;
             HJScarletMethods.EnterShaderAreaPixel(BlendState.Additive);
             DrawTrails(HJScarletTexture.Trail_ManaStreakTiny.Texture, Color.DarkOrange);
@@ -224,29 +279,29 @@ namespace HJScarletRework.Projs.Ranged
         {
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
-            if(AcceptIval)
-            PixelatedRenderManager.BeginDrawProj = true;
+            if (AcceptIval)
+                PixelatedRenderManager.BeginDrawProj = true;
             Texture2D tex = Projectile.GetTexture();
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             //if (AcceptIval)
             {
-                int length = Projectile.oldPos.Length-5;
-            for (int i = length - 1; i >= 0; i--)
-            {
-                float ratios = (1f - i / (float)length);
-                Vector2 oldpos = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
-                Color c = Color.Lerp(Color.Orange, Color.DarkOrange, ratios).ToAddColor(10);
-                float oldscale = Lerp(.05f, 1f, ratios);
-                float opa = Lerp(.05f, 1f, ratios) * Projectile.Opacity;
-                Vector2 sharpScale = new Vector2(1f, 1f);
-                Vector2 sharpPos = oldpos - new Vector2(0, 0).RotatedBy(Projectile.oldRot[i]);
-                for (int j = -1; j < 2; j += 2)
+                int length = Projectile.oldPos.Length - 5;
+                for (int i = length - 1; i >= 0; i--)
                 {
-                    float oldRot = Projectile.oldRot[i];
-                    SB.FastDraw(tex, sharpPos, c.ToAddColor(50) * opa, oldRot, tex.Size()/2f, sharpScale * oldscale, 0);
-                    SB.FastDraw(tex, sharpPos, Color.White.ToAddColor(10) * opa, oldRot, tex.Size()/2f, sharpScale * oldscale * .5f, 0);
+                    float ratios = (1f - i / (float)length);
+                    Vector2 oldpos = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
+                    Color c = Color.Lerp(Color.Orange, Color.DarkOrange, ratios).ToAddColor(10);
+                    float oldscale = Lerp(.05f, 1f, ratios);
+                    float opa = Lerp(.05f, 1f, ratios) * Projectile.Opacity;
+                    Vector2 sharpScale = new Vector2(1f, 1f);
+                    Vector2 sharpPos = oldpos - new Vector2(0, 0).RotatedBy(Projectile.oldRot[i]);
+                    for (int j = -1; j < 2; j += 2)
+                    {
+                        float oldRot = Projectile.oldRot[i];
+                        SB.FastDraw(tex, sharpPos, c.ToAddColor(50) * opa, oldRot, tex.Size() / 2f, sharpScale * oldscale, 0);
+                        SB.FastDraw(tex, sharpPos, Color.White.ToAddColor(10) * opa, oldRot, tex.Size() / 2f, sharpScale * oldscale * .5f, 0);
+                    }
                 }
-            }
                 for (int i = 0; i < 8; i++)
                     SB.FastDraw(tex, drawPos + ((TwoPi / 8f) * i).ToRotationVector2() * 2f, Color.White.ToAddColor(), Projectile.rotation, tex.Size() / 2f, Projectile.scale, 0);
 
@@ -265,7 +320,7 @@ namespace HJScarletRework.Projs.Ranged
             Effect shader = HJScarletShader.TerrarRayLaser;
             shader.Parameters["LaserTextureSize"].SetValue(useTex.Size());
             shader.Parameters["targetSize"].SetValue(new Vector2(useTex.Width(), useTex.Height()));
-            shader.Parameters["uTime"].SetValue(-Main.GlobalTimeWrappedHourly * 170f*offsetHeight);
+            shader.Parameters["uTime"].SetValue(-Main.GlobalTimeWrappedHourly * 170f * offsetHeight);
             shader.Parameters["uColor"].SetValue(drawColor.ToVector4() * Projectile.Opacity * alphaValue * Clamp(Projectile.velocity.Length(), 0f, 1f));
             shader.Parameters["uFadeoutLength"].SetValue(0.8f);
             shader.Parameters["uFadeinLength"].SetValue(0.1f);

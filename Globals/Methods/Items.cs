@@ -3,6 +3,7 @@ using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Instances.Items;
 using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -68,6 +69,13 @@ namespace HJScarletRework.Globals.Methods
             if (item.CanApplyPrefix(prefixID))
                 item.Prefix(prefixID);
         }
+        public static int ScarletSpawnItem(IEntitySource source, Vector2 pos, Rectangle rec, int item, int stack = 1)
+        {
+            int number = Item.NewItem(source, (int)pos.X, (int)pos.Y, rec.Width, rec.Height, item, stack, noBroadcast: false, -1);
 
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+                NetMessage.SendData(MessageID.SyncItem, -1, -1, null, number, 1f);
+            return number;
+        }
     }
 }

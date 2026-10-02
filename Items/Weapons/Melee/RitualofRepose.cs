@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Core.NetCode;
@@ -66,6 +67,7 @@ namespace HJScarletRework.Items.Weapons.Melee
                 AddIngredient<SpearOfEscape>().
                 AddIngredient<EssenceofNothingness>(10).
                 AddIngredient<EssenceofDeath>(10).
+                DisableDecraft().
                 AddTile(FinalAnvilTile).
                 Register();
             CreateRecipe().

@@ -70,6 +70,11 @@ namespace HJScarletRework.Projs.Executor
         public override bool ShouldUpdatePosition() => false;
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) =>
             HJScarletMethods.LineThroughRect(Projectile.Center, Projectile.Center + Projectile.rotation.ToRotationVector2() * 900, targetHitbox, 24);
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
         public override bool PreDraw(ref Color lightColor)
         {
             PixelatedRenderManager.BeginDrawProj = true;

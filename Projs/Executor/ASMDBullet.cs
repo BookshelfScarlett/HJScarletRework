@@ -4,7 +4,6 @@ using HJScarletRework.Core.Primitives.Trail;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.ExecutorVanillaHead;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using ReLogic.Content;
 using System.Collections.Generic;

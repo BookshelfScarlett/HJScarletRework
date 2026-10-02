@@ -19,7 +19,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Caster
 
         public override void ExSD()
         {
-            Item.damage = 60;
+            Item.damage = 88;
             Item.SetUpRarityPrice(ItemRarityID.LightPurple);
             Item.shootSpeed = 21;
             Item.knockBack = 1;

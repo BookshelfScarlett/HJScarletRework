@@ -243,20 +243,32 @@ namespace HJScarletRework.Globals.Players
         }
         public void GlobalOnHitNPCWithSomething(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(sacarbWings)
+            if (sacarbWings)
             {
                 target.AddBuff(BuffType<TheBleachingBuff>(), GetSeconds(5));
             }
             if (selfPortraitType > 0)
             {
                 target.HJScarlet().isPotraitTimer = GetSeconds(5);
-                target.HJScarlet().potraityDoT = 5;
+                float DoTDamage = 1;
+                float extraDoTDamage = 0f;
+                if (selfPortraitType == ItemType<SelfPortraitoftheBleachingOne>())
+                {
+                    target.AddBuff(BuffType<TheBleachingBuff>(), GetSeconds(1));
+                    DoTDamage = SelfPortraitoftheBleachingOne.DotDamageMult;
+                    extraDoTDamage = SelfPortraitoftheBleachingOne.ExtraDamageMult;
+                }
+                if (selfPortraitType == ItemType<SelfPortraitoftheSunflower>())
+                {
+
+                    DoTDamage = SelfPortraitoftheSunflower.DotDamageMult;
+                    extraDoTDamage = SelfPortraitoftheSunflower.ExtraDamageMult;
+                }
+                target.HJScarlet().potraityDoT = DoTDamage;
                 int c = GetDotCounts(target);
                 if (c > 0)
                 {
-                    target.HJScarlet().potraityDoT += c * .5f;
-                    if (c > 3)
-                        target.AddBuff(BuffType<TheBleachingBuff>(), GetSeconds(1));
+                    target.HJScarlet().potraityDoT += c * extraDoTDamage;
                 }
             }
             if (souloftheTidalMark && stardustRuneHitHealTimer == 0)

@@ -52,6 +52,10 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void RightClick(Player player)
         {
             RangerMode = !RangerMode;
+            if (RangerMode)
+                Item.DamageType = DamageClass.Ranged;
+            else
+                Item.DamageType = ExecutorDamageClass.Instance;
             Item.NetStateChanged();
         }
         public override bool ConsumeItem(Player player) => false;
@@ -85,7 +89,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         }
         public override void HoldItem(Player player)
         {
-            int heldProjType = RangerMode ? ProjectileType<ExsanguinationHeldProjRanged>() : ProjectileType<ExsanguinationHeldProj>();
+            int heldProjType = ProjectileType<ExsanguinationHeldProj>();
             if (RangerMode)
             {
                 Item.DamageType = DamageClass.Ranged;
@@ -96,7 +100,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
                 Item.DamageType = ExecutorDamageClass.Instance;
                 Item.useAmmo = AmmoID.None;
             }
-
             if (player.HasProj(heldProjType))
                 return;
             int projDamage = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);

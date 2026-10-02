@@ -1,13 +1,3 @@
-ClimaticHawstring: {
-	DisplayName: 气候钓弦
-	Tooltip:
-		'''
-		击中敌人一定次数时，接下来的5秒内会连续发射热能激光
-		攻击时会有两位小型飞棍仆从协助攻击
-		“以天竿为弓，以气候为弦”
-		'''
-}
-
 BambooRocket: {
 	DisplayName: 火箭竹
 	Tooltip: 发射会追踪的竹
@@ -47,6 +37,22 @@ Duskfall: {
 	Tooltip:
 		'''
 		投掷追踪的着魔飞斧
-		经过圆环时，着魔飞斧命中时施加[ScarletDebuff/ContinentOfJourney/SolarBurntBuff]
+		经过圆环后命中时施加[ScarletDebuff/ContinentOfJourney/SolarBurntBuff]
 		'''
+}
+
+PropellerRapierRanged: {
+	DisplayName: 风暴螺旋桨
+	Tooltip:
+		'''
+		命中后持续释放小型龙卷风
+		经过圆环时生成一个追杀敌人的大型龙卷风
+		大型龙卷风命中时造成[ScarletDebuff/HJScarletRework/TheBleachingBuff]
+		“另一个世界真实的存在过的证明”
+		'''
+}
+
+RadiantBlazeDawn: {
+	DisplayName: 辉炎之晓
+	Tooltip: 允许穿墙
 }

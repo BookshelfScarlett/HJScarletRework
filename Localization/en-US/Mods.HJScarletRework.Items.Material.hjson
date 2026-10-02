@@ -24,6 +24,11 @@ CrownofSilveryLight: {
 
 UniversalCube: {
 	DisplayName: Universal Cube
-	Tooltip: ""
-	FlavorTooltip: ""
+	Tooltip: One of the Ascension Material
+	FlavorTooltip:
+		'''
+		Semi-matter that can change into any form or material, 
+		according to the data entered into it.
+		It is a cube in its default condition.
+		'''
 }

@@ -12,17 +12,11 @@ namespace HJScarletRework.Items.Pets
 {
     public class DracoItem : HJScarletPetItem
     {
+        public override int PetProjType => ProjectileType<DracoProj>();
+        public override int PetBuffType => BuffType<DracoBuff>();
         public override void SetStaticDefaults()
         {
             HJScarletList.ShinyRarityItemDictionary.Add(Type, ShinyRarityType.ScarletRed);
-        }
-        public override void BuffAndProj()
-        {
-            Item.DefaultToVanitypet(ProjectileType<DracoProj>(), BuffType<DracoBuff>());
-        }
-        public override void ExSD()
-        {
-            Item.CloneDefaults(ItemID.EyeOfCthulhuPetItem);
         }
         public IReadOnlyList<TooltipLine> CacheTooltipList = null;
         public override void ModifyTooltips(List<TooltipLine> tooltips)

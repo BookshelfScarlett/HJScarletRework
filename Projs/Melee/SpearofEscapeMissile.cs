@@ -202,6 +202,10 @@ namespace HJScarletRework.Projs.Melee
             }
             return true;
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             if (Projectile.velocity.X != oldVelocity.X)
@@ -215,10 +219,6 @@ namespace HJScarletRework.Projs.Melee
         public override bool? CanDamage()
         {
             return AttackType == Style.Attack || (AttackType == Style.Direct && Timer > 25f * Projectile.MaxUpdates);
-        }
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            base.ModifyHitNPC(target, ref modifiers);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

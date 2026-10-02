@@ -9,7 +9,6 @@ using HJScarletRework.Globals.Methods;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 using Terraria;
 
 namespace HJScarletRework.Projs.Executor

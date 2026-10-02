@@ -1,11 +1,17 @@
 ﻿using HJScarletRework.Globals.Executor;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class CrescentRoseHeldSkill : ExecutorHeldProj
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         public override int OriginalItemID => ItemType<CrescentRose>();
         public override string Texture => GetInstance<CrescentRoseHeldProj>().Texture;
         public override void SetStaticDefaults()

@@ -82,7 +82,7 @@ namespace HJScarletRework.Globals.Systems
                     Index = OverideCurDashID;
                 PlayerDashClass ActiveDash = DashCollection[Index];
                 // 监测是否开始冲刺
-                HandleDashBegin(out bool ThisCanDash,ActiveDash.DashDirection);
+                HandleDashBegin(out bool ThisCanDash, ActiveDash.DashDirection);
                 if (!ActiveDash.PreDash(Player))
                     return;
                 if (ThisCanDash)
@@ -298,7 +298,7 @@ namespace HJScarletRework.Globals.Systems
         /// </summary>
         public virtual bool PreDash(Player player) => true;
         public virtual bool CanHitNPC(Player player, NPC target) => true;
-        public virtual DashDirectionEnum DashDirection => DashDirectionEnum.Horizonal; 
+        public virtual DashDirectionEnum DashDirection => DashDirectionEnum.Horizonal;
         public virtual DashDamageInfo DashDamageInfo(Player player) => new(50, 3, DamageClass.Default);
         /// <summary>
         /// 这个冲刺给予的无敌时间

@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Useables
             Item.rare = ItemRarityID.Red;
             Item.value = Item.buyPrice(0, 1, 0, 0);
         }
-        public override bool CanRightClick() => true;
+        public override bool CanRightClick() => Main.keyState.PressingShift();
         public override void RightClick(Player player)
         {
             player.HJScarlet().crystallizeLoreReforgeIndex++;

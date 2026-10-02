@@ -168,6 +168,16 @@ namespace HJScarletRework.Projs.Executor
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             return base.OnTileCollide(oldVelocity);
+
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
+        public override void ModifyDamageHitbox(ref Rectangle hitbox)
+        {
+            base.ModifyDamageHitbox(ref hitbox);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

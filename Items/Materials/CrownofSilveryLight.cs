@@ -47,7 +47,7 @@ namespace HJScarletRework.Items.Materials
                 backgroundEdgeColor: Color.White,
                 textColor: Color.White,
                 textEdgeColor: Color.Black,
-                mainText : text
+                mainText: text
             );
             TextboxMethods.DrawTextboxTooltipWithBackground(line, CacheTooltipList, ref sets);
             return true;

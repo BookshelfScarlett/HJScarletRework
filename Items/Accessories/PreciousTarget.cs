@@ -29,7 +29,7 @@ namespace HJScarletRework.Items.Accessories
             player.HJScarlet().preciousTargetLevel = 1;
             if (player.HeldItem.IsLegal() && player.HeldItem.DamageType.CountsAsClass<RangedDamageClass>())
             {
-                if (!hideVisual && !player.IsInInventory())
+                if (!hideVisual)
                     player.HJScarlet().cursorID = 1;
                 if (player.whoAmI == Main.myPlayer && !player.HasProj<PreciousTargetCross>())
                 {

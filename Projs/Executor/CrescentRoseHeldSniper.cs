@@ -1,9 +1,14 @@
 ﻿using HJScarletRework.Globals.Executor;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class CrescentRoseHeldSniper : ExecutorHeldProj
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();

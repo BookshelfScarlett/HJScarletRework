@@ -96,6 +96,11 @@ namespace HJScarletRework.Projs.Executor
                     Projectile.extraUpdates = 6;
             }
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             ScarletSound(HJScarletSounds.Smash_GroundHeavy, target.Center, instances: 0, pitchVariance: .05f, pitch: .75f, volume: .7f);

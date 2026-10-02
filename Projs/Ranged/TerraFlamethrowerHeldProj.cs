@@ -88,6 +88,7 @@ namespace HJScarletRework.Projs.Ranged
 
         public void UpdateAttack()
         {
+            Owner.PickAmmo(Owner.HeldItem, out int proj2, out float speed, out int damage, out float knockback, out int usedAmmoID);
             Vector2 fireSpawnPosition = Projectile.Center + Projectile.rotation.ToRotationVector2().SafeNormalize(Vector2.UnitY) * Owner.HeldItem.width * 0.31f;
             Vector2 fireShootVelocity = Projectile.rotation.ToRotationVector2() * Owner.HeldItem.shootSpeed;
             DrawGlowingFireParticle(fireSpawnPosition);
@@ -101,7 +102,7 @@ namespace HJScarletRework.Projs.Ranged
             if (Projectile.MeetMaxUpdatesFrame(Timer, 2))
             {
                 Timer = 0;
-                Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), fireSpawnPosition.ToRandCirclePos(2), fireShootVelocity, ProjectileType<TerraFlamethrowerFlame>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), fireSpawnPosition.ToRandCirclePos(2), fireShootVelocity, ProjectileType<TerraFlamethrowerFlame>(), damage, Projectile.knockBack, Projectile.owner);
             }
         }
 

@@ -5,12 +5,10 @@ using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
-using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Magic;
 using HJScarletRework.Projs.NPCs.Enemy;
-using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -47,11 +45,12 @@ namespace HJScarletRework.Projs.Magic
                 CenterPosList.Add(finalPos.RotatedBy(PiOver2));
             }
             RandOmega = RandRotTwoPi;
-            if (!Owner.HJScarlet().brimstoneHeartKilling&&Projectile.IsMe())
+            if (!Owner.HJScarlet().brimstoneHeartKilling && Projectile.IsMe())
             {
                 Owner.AddBuff(BuffID.Bleeding, GetSeconds(10));
                 Owner.HJScarlet().iFrameHurtAdd += GetSeconds(3);
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<SuicideKnifeInvisProj>(), 999, 0, Owner.whoAmI);
+                proj.ai[2] = 150;
             }
             ScarletSound(HJScarletSounds.Gaia_Explosion, Projectile.Center, .4f, 1, .2f);
             ScreenShakeSystem.AddScreenShakes(Projectile.Center, 20, 20, RandRotTwoPi);
@@ -96,43 +95,40 @@ namespace HJScarletRework.Projs.Magic
             ScreenShakeSystem.AddScreenShakes(Projectile.Center, 10f, 10, RandRotTwoPi);
             Timer = 0;
             Vector2 dir = Owner.Center.GetNormalVector2(Main.MouseWorld);
-                for (int i = 0; i < 20; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
-                    Vector2 vel = dir.ToRandVelocity(ToRadians(15), 0.9f, 5.4f);
-                    BloodyMetaball.SpawnParticle(pos, vel, 0.20f, RandRotTwoPi, true);
-                }
-                for (int i = 0; i < 20; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
-                    Vector2 vel = dir.ToRandVelocity(ToRadians(15), 0.9f, 6.4f);
-                    BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.55f, vel.ToRotation(), false);
-                    BloodyMetaball.SpawnParticle(pos, vel * 3.7f, 0.35f, RandRotTwoPi, true);
-                }
-                for (int i = 0; i < 20; i++)
-                {
-                    Vector2 pos = Projectile.Center.ToRandCirclePosEdge(30);
-                    Vector2 vel = (dir).ToRandVelocity(ToRadians(30), 16f, 32f);
-                    float scale = Main.rand.NextFloat(0.95f, 1.175f) * 0.15f;
-                    Color c = RandLerpColor(Color.DarkRed, Color.Black);
-                    ECSParticle.BloodDrop(pos, vel, c, Main.rand.Next(40, 90), 1, scale, 1, blendstate: BlendState.AlphaBlend);
+            for (int i = 0; i < 20; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
+                Vector2 vel = dir.ToRandVelocity(ToRadians(15), 0.9f, 5.4f);
+                BloodyMetaball.SpawnParticle(pos, vel, 0.20f, RandRotTwoPi, true);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePos(3.6f);
+                Vector2 vel = dir.ToRandVelocity(ToRadians(15), 0.9f, 6.4f);
+                BloodyMetaball.SpawnParticle(pos, vel * 2.7f, 0.55f, vel.ToRotation(), false);
+                BloodyMetaball.SpawnParticle(pos, vel * 3.7f, 0.35f, RandRotTwoPi, true);
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                Vector2 pos = Projectile.Center.ToRandCirclePosEdge(30);
+                Vector2 vel = (dir).ToRandVelocity(ToRadians(30), 16f, 32f);
+                float scale = Main.rand.NextFloat(0.95f, 1.175f) * 0.15f;
+                Color c = RandLerpColor(Color.DarkRed, Color.Black);
+                ECSParticle.BloodDrop(pos, vel, c, Main.rand.Next(40, 90), 1, scale, 1, blendstate: BlendState.AlphaBlend);
 
-                }
-
+            }
+            float statLifeRatios = Clamp((float)Owner.statLife / Owner.statLifeMax2, 0, 1);
+            float damageMulter = Lerp(1f, 2.5f, (1 - statLifeRatios));
             for (int i = 0; i < 3; i++)
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePosEdge(4);
                 Vector2 vel = Projectile.SafeDir().RotateRandom(ToRadians(15f)).ToSafeNormalize() * Main.rand.NextFloat(0.9f, 1.1f) * 16f;
-                Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), pos, vel, ProjectileType<BrimstoneHeartFireball>(), Projectile.damage, Projectile.knockBack, Owner.whoAmI);
+                Projectile.NewProjectileDirect(Owner.GetSource_ItemUse(Owner.HeldItem), pos, vel, ProjectileType<BrimstoneHeartFireball>(), (int)(Projectile.damage * damageMulter), Projectile.knockBack, Owner.whoAmI);
             }
         }
 
         protected override void GlobalReset()
         {
-            if (IFrameContinueTime > 0)
-            {
-                IFrameContinueTime--;
-            }
             if (Main.rand.NextBool(12))
                 ECSParticle.Stain(Projectile.Center.ToRandCirclePos(30), -Vector2.UnitY, RandLerpColor(Color.DarkRed, Color.Crimson), 30, 1, PiOver2, 0.28f, blendstate: BlendState.AlphaBlend);
             base.GlobalReset();
@@ -155,8 +151,8 @@ namespace HJScarletRework.Projs.Magic
             Vector2 pos = Projectile.Center - Main.screenPosition;
             float rot = Main.GlobalTimeWrappedHourly * 1.2f + Projectile.rotation;
             float ringScale = progress2 * .62f * Projectile.scale;
-            SB.FastDraw(tex, pos, Color.DarkRed, rot, tex.Size() / 2f, ringScale,0);
-            SB.FastDraw(tex, pos, Color.Crimson, rot, tex.Size() / 2f, ringScale*.96f,0);
+            SB.FastDraw(tex, pos, Color.DarkRed, rot, tex.Size() / 2f, ringScale, 0);
+            SB.FastDraw(tex, pos, Color.Crimson, rot, tex.Size() / 2f, ringScale * .96f, 0);
             SB.EndShaderArea();
         }
 

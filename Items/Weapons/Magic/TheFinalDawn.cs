@@ -6,11 +6,16 @@ using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Magic
 {
     public class TheFinalDawn : HJScarletWeapon
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override EnumDamageClass Category => EnumDamageClass.Magic;
         public override void SetStaticDefaults()
         {

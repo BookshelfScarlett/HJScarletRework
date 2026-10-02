@@ -18,7 +18,6 @@ namespace HJScarletRework.Items.Accessories
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(CritDamage.ToPercent(), Crit + "%");
         public override void SetStaticDefaults()
         {
-            Type.ShimmerTo(ItemType<EmblemThrown>());
         }
         public override void ExSD()
         {
@@ -38,6 +37,14 @@ namespace HJScarletRework.Items.Accessories
                 player.HJScarlet().emblemFirearm = true;
                 player.GetCritChance<ExecutorDamageClass>() += Crit;
             }
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemID.DestroyerEmblem).
+                AddIngredient(ItemID.FragmentVortex, 10).
+                AddTile(TileID.LunarCraftingStation).
+                Register();
         }
     }
 }

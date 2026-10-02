@@ -18,6 +18,7 @@ using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Items.Weapons.Executor.Caster;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
+using HJScarletRework.Items.Weapons.Executor.Firearm;
 using HJScarletRework.Items.Weapons.Executor.Misc;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Magic;
@@ -37,6 +38,7 @@ namespace HJScarletRework.Globals.Instances.NPCs
             {
                 case NPCID.MartianSaucerCore:
                     npcLoot.AddLootSimple(ItemType<TheMars>(), 4);
+                    npcLoot.AddLootSimple(ItemType<ASMD>(), 4);
                     break;
             }
             switch (npc.type)
@@ -88,7 +90,7 @@ namespace HJScarletRework.Globals.Instances.NPCs
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<WhaleItem>(), 4);
             if (npc.type == NPCType<TheOverwatcher>())
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<WatcherItem>(), 4);
-            if(npc.type ==NPCType<TheLifebringerHead>())
+            if (npc.type == NPCType<TheLifebringerHead>())
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<LifeWormItem>(), 4);
 
             if (npc.type == NPCType<WallofShadow>())
@@ -129,7 +131,7 @@ namespace HJScarletRework.Globals.Instances.NPCs
             if (npc.type == NPCType<BigDipper>())
             {
                 HJScarletMethods.ApplyMasterLoot(ref npcLoot, ItemType<TheSevenStar>(), 1);
-           }
+            }
         }
         public override void ModifyGlobalLoot(GlobalLoot globalLoot)
         {

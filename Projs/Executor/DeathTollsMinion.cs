@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetSync;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.Enums;

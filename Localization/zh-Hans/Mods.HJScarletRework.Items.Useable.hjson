@@ -86,7 +86,7 @@ DescriptionPaper: {
 		[c/B19CD9:测试人员：]
 		论时间的涟漪，Woodi Stigma，妩媚の5妹儿，步出夏门行，溯月 Shizuku
 		[c/FFC0CB:捐赠人员：]
-		巴雷难破长夜，冰川咲，银九，曦，丰川祥子，苏利，池堂爱吃糖，咕咕叶子，Kino，林为简
+		巴雷难破长夜，冰川咲，银九，曦，丰川祥子，苏利，池堂爱吃糖，咕咕叶子，Kagura Kino，林为简
 		[c/AACCCC:非常感谢各位让本模组得以顺利落地并推进]
 		'''
 }
@@ -144,11 +144,6 @@ ProvidenceHolyWater: {
 		'''
 }
 
-MadnessCritStar: {
-	// DisplayName: Madness Crit Star
-	// Tooltip: ""
-}
-
 BiomeKeyString: {
 	DisplayName: 宝藏钥匙串
 	Tooltip: 置于一个空箱子内，使该箱子充盈地牢的宝藏
@@ -160,8 +155,9 @@ FruitofEternity: {
 		'''
 		使用后提供[ScarletBuff/HJScarletRework/FruitofEternityBuff]
 		强化自身{0}防御力，+{1}HP/s生命再生
-		任何神明类敌人在场时：
-		造成的伤害减少{2}，受击时重置速度，以1/{3}的概率随机传送
+		神明类敌人在场时
+		受击时重置速度，以1/{3}的概率随机传送
+		你对神明类敌人造成的伤害减少{2}
 		'''
 	DetailTooltip:
 		'''
@@ -258,5 +254,65 @@ SuicideKnife: {
 		使用后对自己造成高额伤害
 		方便自残
 		“饿啊！”
+		'''
+}
+
+LivingReaverShark: {
+	DisplayName: 生命掠夺鲨
+	Tooltip:
+		'''
+		手持时提供[ScarletBuff/Terraria/Regeneration]、[ScarletBuff/Terraria/Ironskin]、[ScarletBuff/Terraria/Swiftness]和[ScarletBuff/Terraria/WellFed3]
+		可开采[i:ContinentOfJourney/FinalOre]最终矿
+		凝聚了生命之神的力量
+		……等会，为什么这能存在？
+		'''
+}
+
+MatterSawtoothShark: {
+	DisplayName: 物质巨齿鲨
+	Tooltip:
+		'''
+		凝聚了物质之神的力量
+		……等会，为什么这能存在？
+		'''
+}
+
+SunWorm: {
+	DisplayName: 日光蚯蚓
+	Tooltip:
+		'''
+		凝聚了太阳之神的力量
+		……等会，为什么这能存在？
+		'''
+}
+
+DarkenRockFish: {
+	DisplayName: 暗影岩石鱼
+	Tooltip:
+		'''
+		凝聚力黑暗之地的力量
+		……等会，为什么这能存在？
+		'''
+}
+
+StarterBag: {
+	DisplayName: 漂流布袋
+	Tooltip: 一个布袋，里面有一点点物品
+}
+
+FishingPaper: {
+	DisplayName: 空想归途钓鱼指南
+	Tooltip:
+		'''
+		空想归途模组添加了新的渔获，但是因为缺少维基百科
+		因此，这里有一张指引纸条
+		在开始获得空想归途添加的特殊渔获之前，你需要先获得并佩戴[i:HJScarletRework/BitingClaw]咬合蟹爪
+		特殊渔获列表：
+		[i:HJScarletRework/DiverHead][i:HJScarletRework/DiverBody][i:HJScarletRework/DiverLegs]潜航员护甲，击败[i:EaterMask]世界吞噬者/[i:BrainMask]克苏鲁之脑后，于海洋钓鱼获取
+		[i:HJScarletRework/EnchantedSwordfish]附魔剑鱼，困难模式下，于海洋获取
+		[i:HJScarletRework/EthrealSwordfish]永恒剑鱼，击败极视钟表后，于沙漠获取
+		[i:HJScarletRework/LivingReaverShark]生命掠夺鲨，击败万籁携生后，于丛林获取
+		[i:HJScarletRework/MatterSawtoothShark]物质锯齿鲨，击败化物天匠后，于雪原获取
+		[i:HJScarletRework/DarkenRockFish]暗影岩石鱼，击败暗影墙后，于地下获取
 		'''
 }

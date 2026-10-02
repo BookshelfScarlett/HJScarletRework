@@ -1,13 +1,3 @@
-ClimaticHawstring: {
-	DisplayName: Climatic Hawstring
-	Tooltip:
-		'''
-		When landing a certain number of hits on enemies, continuously fire thermal lasers for the next 5 seconds
-		On attack, two small Flying Rod Minions assist in the attack
-		"With the sky's rod as the bow, and the breath of the climate as the string"
-		'''
-}
-
 BambooRocket: {
 	DisplayName: Bamboo Rocket
 	Tooltip: Fires homing bamboo
@@ -18,9 +8,7 @@ TerraFlamethrower: {
 	Tooltip:
 		'''
 		Bathe your enemies in the dazzling light of Terra
-		Press right-click to throw a phlogiston grenade that explodes on hit, applying Terra Phlogiston to enemies
-		The Terra Phlogiston effect causes enemies to constantly drip Terra Essence from their bodies, dealing damage equal to 100% of the enemy's contact damage
-		Terra Essence does not damage enemies affected by Terra Phlogiston
+		Press right-click to throw a phlogiston grenade that explodes, applying[ScarletDebuff/HJScarletRework/TerraFlamethrowerBuff]
 		80% chance to not consume gel
 		'''
 }
@@ -35,11 +23,36 @@ BlazingSun: {
 }
 
 PandorasBurger: {
-	DisplayName: Pandoras Burger
-	Tooltip: ""
+	DisplayName: Pandora's Burger
+	Tooltip:
+		'''
+		On use, randomly fires three different projectiles
+		Randomly selected from weapons in all enabled mods
+		"What?"
+		'''
 }
 
 Duskfall: {
 	DisplayName: Duskfall
-	Tooltip: ""
+	Tooltip:
+		'''
+		Throws a seeking possessed throwing axe
+		On hit after passing through a ring, applies [ScarletDebuff/ContinentOfJourney/SolarBurntBuff]
+		'''
+}
+
+PropellerRapierRanged: {
+	DisplayName: Storm Propeller
+	Tooltip:
+		'''
+		Continuously releases small tornadoes On Hit
+		Passing through a ring generates a large tornado that hunts down enemies
+		Large tornado applies [ScarletDebuff/HJScarletRework/TheBleachingBuff] On Hit
+		"A proof that another world truly existed"
+		'''
+}
+
+RadiantBlazeDawn: {
+	DisplayName: Radiant Blaze Dawn
+	Tooltip: Allows passing through walls
 }

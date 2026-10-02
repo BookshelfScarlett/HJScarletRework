@@ -5,11 +5,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -79,6 +74,14 @@ namespace HJScarletRework.Items.Accessories
             player.tileSpeed += TileSpeed;
             player.wallSpeed += WallSpeed;
             player.pickSpeed -= PickSpeed;
+            player.dangerSense = true;
+            player.nightVision = true;
+            player.detectCreature = true;
+            Lighting.AddLight((int)(Main.MouseWorld.X / 16f), (int)(Main.MouseWorld.Y / 16f), 2f, 2f, 2f);
+            Lighting.AddLight(player.Center, Color.White.ToVector3() * 3);
+        }
+        public override void UpdateVanity(Player player)
+        {
             player.dangerSense = true;
             player.nightVision = true;
             player.detectCreature = true;

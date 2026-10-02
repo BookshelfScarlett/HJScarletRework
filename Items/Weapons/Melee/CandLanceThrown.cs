@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Terraria;
 using Terraria.ID;
@@ -18,6 +19,7 @@ namespace HJScarletRework.Items.Weapons.Melee
             Item.knockBack = 2f;
             Item.UseSound = HJScarletSounds.Misc_MagicStaffFire with { MaxInstances = 0, Pitch = 0.1f, Volume = 0.18f, PitchVariance = 0.2f };
             Item.useTime = Item.useAnimation = 38;
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         public override Color MainTooltipColor => Color.SkyBlue;
     }

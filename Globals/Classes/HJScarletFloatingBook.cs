@@ -41,7 +41,7 @@ namespace HJScarletRework.Globals.Classes
             if (!Projectile.HJScarlet().FirstFrame)
                 OnFirstFrame();
             Projectile.timeLeft = 2;
-            if (!Owner.IsHolding(OriginalItemID)||Owner.dead)
+            if (!Owner.IsHolding(OriginalItemID) || Owner.dead)
             {
                 Helper.IsDone[0] = false;
                 Helper.IsDone[1] = false;

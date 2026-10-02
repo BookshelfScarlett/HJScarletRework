@@ -2,7 +2,7 @@ Exsanguination: {
 	DisplayName: Exsanguination
 	Tooltip:
 		'''
-		Fires a stream of bullets at extremely high frequency and ultra-high speed
+		Fires a stream of speed bullets at extremely high speed
 		All bullets fired deal true damage
 		'''
 	ExecutionStrike:
@@ -21,8 +21,8 @@ MantleLayer: {
 		'''
 	ExecutionStrike:
 		'''
-		Mantle Layer will attach to your enemy, dealing continuous damage
-		After a certain time, it will perform two heavier heavy strikes
+		Attach to your enemy, dealing continuous damage
+		Then, Perform two heavier heavy strikes
 		'''
 }
 
@@ -53,12 +53,8 @@ FleshGrinder: {
 
 JungleMadness: {
 	DisplayName: Jungle Madness
-	Tooltip: Spawns briefly flying leaves that ignore walls On Hit
-	ExecutionStrike:
-		'''
-		On return, strike back and attach to the enemy, dealing 12 instances of damage
-		Each time it deals damage, it adds rotating leaves that ignore walls
-		'''
+	Tooltip: Spawns briefly flying leaves that ignore walls on hit
+	ExecutionStrike: Strike back and attach to enemy, release rotating leaves
 }
 
 DreamlessNight: {
@@ -118,9 +114,12 @@ CrimsonScythe: {
 	DisplayName: Crimson Heavy Scythe
 	Tooltip:
 		'''
+		Grants[ScarletBuff/HJScarletRework/AntiKnockbackBuff]
 		Fourth swing has wider range
-		Each hit grants knockback immunity, causes bleed, and releases soul stones
-		You can slash the soul stones to return souls, or Right-click to harvest and heal
+		Each attack inflicts[ScarletDebuff/ContinentOfJourney/DivineFireBuff]
+		Causes bleed, and releases soul stones
+		You can slash the soul stones to return souls
+		Or, Right-click to harvest and heal
 		'''
 	ExecutionStrike:
 		'''
@@ -128,7 +127,7 @@ CrimsonScythe: {
 		During these slashes, automatically collect souls int the stones
 		Absorb one soul while returning the other to its owner
 		'''
-	FlavorTooltips: Beneath the crimson moon, none can escape her harvest
+	FlavorTooltips: Beneath the blood moon, none can escape her harvest
 	ExtraMechanic:
 		'''
 		When combined with the Front Desk Reaper set, gain the following effects:
@@ -144,18 +143,18 @@ CrimsonScythe: {
 	KillerType: {
 		OnlyCoins:
 			'''
-			Right-click this item to toggle the town NPC killing option
-			Current setting: Allows killing town NPCs, dropping only coins
+			Right-click to toggle the town NPC killing option
+			Currently allows killing town NPCs, dropping only coins
 			'''
 		AllStuff:
 			'''
-			Right-click this item to toggle the town NPC killing option
-			Current setting: Allows killing town NPCs, dropping coins and special items
+			Right-click to toggle the town NPC killing option
+			Currently allows killing town NPCs, dropping coins and items
 			'''
 		NoKilling:
 			'''
-			Right-click this item to toggle the town NPC killing option
-			Current setting: Town NPC killing is disabled
+			Right-click to toggle the town NPC killing option
+			Currently town NPC killing is disabled
 			'''
 	}
 }
@@ -268,7 +267,7 @@ FrostHammer: {
 	ExecutionStrike:
 		'''
 		Throw a snowflake that hunts down your enemy
-		When the snowflake hits an enemy, all subsequent ice cones will focus that target
+		All subsequent ice cones will focus that target
 		You can right-click on an enemy to reassign the snowflake's target
 		'''
 }
@@ -283,9 +282,9 @@ DualWraithStaff: {
 	ExecutionStrike:
 		'''
 		The staff unfolds its blade and switches to javelin mode
-		In javelin mode, it can penetrate walls and pierce up to 3 enemies
+		Javelin mode can pierce three targets
 		Seeking wraith is generated only on the first hit
-		Trigger Execution Strike again to switch back to the first form
+		Trigger Execution Strike again to switch back
 		'''
 }
 
@@ -294,7 +293,7 @@ PrunusMume: {
 	Tooltip:
 		'''
 		Toss a red plum blossom upward on hit
-		The petals scatter after a short delay and can bounce off walls once
+		The petals scatter after a short delay and can bounce off walls
 		'''
 	ExecutionStrike:
 		'''
@@ -309,19 +308,19 @@ StaffofFrostbite: {
 }
 
 GaiaStriker: {
-	DisplayName: Gaia Hammer
+	DisplayName: Gaia Striker
 	Tooltip: After a delay, bursts into bloody missiles
 	ExecutionStrike:
 		'''
-		Transforms into a special Minion Hammer on hit
-		While active, press the Interact key to switch between Staff mode and Minion mode
-		In Minion mode, it automatically attacks nearby enemies
-		In Staff mode, it releases a crimson ray; while holding the Gaia Hammer, its normal attack is replaced to enhance the ray
-		In Staff mode, each attack with the held Gaia Hammer restores a small amount of the Minion Hammer's duration
-		When duration runs out, the Gaia Hammer bursts, healing you
-		You may also hold right-click for a moment to prematurely burst the Minion Hammer, granting more healing and refunding Execution Progress
+		The Gaia Striker bursts open and transforms into a minion
+		Press the Interact key to switch between Staff mode and Minion mode
+		Minion mode automatically attacks nearby enemies
+		Staff mode releases a crimson ray, which can be enhanced by takes up normal attack
+		In Staff mode, each attack restores a small amount of duration to the minion
+		When duration is exhausted, it bursts and Heals you
+		Hold right-click to burst it early, gaining healing and refunding Execution Progress
 		'''
-	FlavorTooltips: —The most brutal aspect of Mother Earth—
+	FlavorTooltips: The most brutal aspect of Mother Earth
 
 	Conditions: {
 		FirstTime: Before first crafting and not in multiplayer
@@ -344,8 +343,8 @@ PureYinyo: {
 	Tooltip:
 		'''
 		Alternates throwing the Yin and Yang Hammers
-		The Yin Hammer inflicts both Cursed Flame and Ichor on hit, and bursts out dark shards
-		The Yang Hammer leaves behind erratic light shards along its path
+		The Yin inflicts[ScarletDebuff/Terraria/Ichor] and[ScarletDebuff/Terraria/CursedInferno], bursts out dark shards
+		The Yang leaves behind erratic light shards along its path
 		'''
 	ExecutionStrike:
 		'''
@@ -358,7 +357,7 @@ LavaFlow: {
 	DisplayName: Lava Flow
 	Tooltip:
 		'''
-		Explodes On Hit
+		Explodes on hit
 		"Old things reborn"
 		'''
 	ExecutionStrike:
@@ -372,14 +371,15 @@ StarofHope: {
 	DisplayName: Star of Hope
 	Tooltip:
 		'''
-		On swing, a shining star falls toward the cursor
+		A shining star falls toward the cursor
+		Support Effect:[ScarletBuff/HJScarletRework/StarofHoperBuff]
 		"A story of love and hope"
 		'''
 	ExecutionStrike:
 		'''
-		For the next 60 seconds, gain the "Star of Hope" buff icon
-		While the buff is active, all Executor weapons will summon shining stars on use
-		These stars add Execution Progress to the currently held weapon On Hit
+		Grants the Support Effect for 60 seconds
+		All Executor weapons will summon shining stars on use
+		These stars add Execution Progress to the currently held weapon
 		'''
 }
 
@@ -421,22 +421,25 @@ StreamingProtocol: {
 
 AngryBomb: {
 	DisplayName: Angry Bomb
-	Tooltip: Throws a bomb that locks onto the nearest target after a delay
+	Tooltip: Throws a bomb that locks onto the nearest target
 	ExecutionStrike:
 		'''
 		The bomb becomes even angrier
-		Has a wider search range and repairs itself multiple times after hitting to strike back
+		Has a wider search range and repairs itself multiple times
 		'''
 }
 
 TearEye: {
 	DisplayName: Cthulhu's Tear
-	Tooltip: A whip with slower attack speed but lower damage falloff
+	Tooltip:
+		'''
+		A whip with slower attack speed but lower damage falloff
+		Support Effect:[ScarletBuff/HJScarletRework/TearEyeBuff]
+		'''
 	ExecutionStrike:
 		'''
-		For the next 60 seconds, gain the "Cthulhu's Tear" buff icon
-		While the buff is active, Executor weapon hits grant 5%/10%/15% damage reduction
-		Also applies the Wet debuff to the Executor
+		Grants the Support Effect for 60 seconds
+		Executor weapon hits grant 5%/10%/15% damage reduction
 		'''
 }
 
@@ -445,15 +448,15 @@ ContainedBlast: {
 	Tooltip:
 		'''
 		Fires a shock round and a sticky round in quick succession
-		The shock round pierces multiple enemies, while the sticky round attaches to an enemy
+		The shock round pierces multiple enemies
+		The sticky round attaches to an enemy
 		Each enemy can have only one sticky round attached at a time
 		'''
 	ExecutionStrike:
 		'''
-		Detonates all sticky rounds on the field, granting effects based on the number of damage instances dealt:
-		- Increases Contained Blast's damage independently, up to 50%
-		- Increases Contained Blast's attack rate and makes its attacks always critically strike
-		- For a duration, shock round hits also add Execution Progress
+		Detonates all sticky rounds on the field, granting effects based on the counts:
+		Increases weapno's damage independently, up to 35%
+		Increases weapon's attack speed and guarranted critical strike
 		'''
 	FlavorTooltip: Put a lid on it.
 }
@@ -488,34 +491,42 @@ SplendidofTerra: {
 }
 
 ASMD: {
-	DisplayName: A.S.M.D
-	Tooltip: Fires an electromagnetic frost-fire shell that explodes on hit
+	DisplayName: A.S.M.D.
+	Tooltip:
+		'''
+		Fires an eletronic frost-fire shell that explodes
+		Attacks inflict[ScarletDebuff/Terraria/Frostburn2]
+		'''
 	ExecutionStrike:
 		'''
-		Implanted into the victim, dealing multiple explosive damage instances
-		The final explosion bursts out multiple ice chunks from the body, lingering on the field
-		Subsequent shell hits will cause one ice chunk to chase that enemy and grant you Execution Progress
+		Implanted into the victim and explode multiple times
+		Bursts out multiple ice chunks on final explosion, lingering on the field
+		Subsequent shell hits will cause one ice chunk to chase that enemy
 		'''
 	AlterDisplayName: ""
 }
 
 SickleAndTorch: {
 	DisplayName: Slash and Burn
-	Tooltip: Throws a torch on the third attack
+	Tooltip:
+		'''
+		Inflict[ScarletDebuff/Terraria/Oiled] on scythe hit
+		Inflict[ScarletDebuff/Terraria/OnFire3] on torch hit
+		'''
 	ExecutionStrike:
 		'''
-		Sickle attacks have stronger knockback and increase fire burn damage on hit
+		Sickle attacks have stronger knockback
 		Torch direct hits launch gravity-affected fireballs
 		'''
 }
 
 PureDagger: {
 	DisplayName: Pure White Dagger
-	Tooltip: On blade hit, grants [i:CobaltShield] knockback immunity
+	Tooltip: Grants[ScarletBuff/HJScarletRework/AntiKnockbackBuff]on hit
 	ExecutionStrike:
 		'''
-		Increases swing speed. Hits with the swing spawn Pure White Stars
-		Also increases defense by 6
+		Increases your defense by 6
+		Increases attack speed and Spawn pure stars on hit
 		'''
 }
 
@@ -529,7 +540,7 @@ Monocle: {
 	ExecutionStrike:
 		'''
 		Fires a nearly instantaneous high-speed piercing bullet
-		The bullet ricochets to the nearest target upon hitting a wall or after a short time
+		The bullet will try to ricochets to the nearest target
 		Infinite piercing, always critically strikes
 		Critical strike chance is converted to critical strike damage at a 1:1 ratio
 		'''
@@ -538,7 +549,11 @@ Monocle: {
 
 ArcticGuanDao: {
 	DisplayName: Arctic Guan Dao
-	Tooltip: Swing the guan dao to knock back nearby enemies
+	Tooltip:
+		'''
+		Swing to knock back nearby enemies
+		Attacks always inflict[ScarletDebuff/Terraria/Frostburn]
+		'''
 	ExecutionStrike:
 		'''
 		Sends a snow cloud toward the cursor position
@@ -551,7 +566,7 @@ ConferenceCall: {
 	Tooltip:
 		'''
 		Fires 5 bullets at once
-		Each bullet splits into two split shots after traveling a short distance or hitting an enemy
+		Each bullet splits into two split shots after while, or hitting an enemy
 		Split shots bounce off walls
 		'''
 	ExecutionStrike:
@@ -564,12 +579,12 @@ ConferenceCall: {
 
 GhostKnife: {
 	DisplayName: Ghost Dagger
-	Tooltip: Throws a knife in a straight line that pierces multiple enemies and pursues on hit
+	Tooltip: Throws a knife that pierces multiple enemies and pursues on hit
 	ExecutionStrike:
 		'''
-		Creates a Ghost Mark lasting 60 seconds, enhancing all Executor attacks
-		While the mark is active, Executor critical strike chance is increased by 10%
-		Also fires Ghost Daggers during attacks, which do not pursue on hit
+		Grants Ghost Mark for 60 seconds to enhance executor attacks
+		Executor critical strike chance is increased by 10%
+		Fires Ghost Daggers during attacks, which do not pursue on hit
 		'''
 }
 
@@ -578,8 +593,8 @@ DesertKnife: {
 	Tooltip: Can pierce up to 3 enemies
 	ExecutionStrike:
 		'''
-		Creates a Desert Mark lasting 120 seconds, enhancing all Executor attacks
-		While the mark is active, most Executor weapons gain +2 piercing
+		Grants Desert Mark for 120 seconds to enhance executor attacks
+		Most Executor weapons gain +2 piercing
 		Weapons that do not pierce are unaffected
 		'''
 }
@@ -589,35 +604,36 @@ DungeonKnife: {
 	Tooltip: Bounces toward the nearest enemy when hitting a wall
 	ExecutionStrike:
 		'''
-		Creates a Dungeon Mark lasting 30 seconds, enhancing all Executor attacks
-		While the mark is active, Executor defense is increased by 8
+		Grants Dungeon Mark for 30 seconds to enhance all executor attacks
+		Executor defense is increased by 8
 		Damage taken from Dungeon enemies is reduced by 85%
 		'''
 }
 
 FishronKnife: {
 	DisplayName: Duke's Fang
-	Tooltip: On Hit, spawns seeking bubbles
+	Tooltip: Spawns seeking bubbles on hit
 	ExecutionStrike:
 		'''
-		Creates a Duke Mark lasting 60 seconds, enhancing all Executor attacks
-		While the mark is active, Executor damage is increased by 20%
+		Grants Duke Mark for 60 seconds to enhance all executor attacks
+		Executor damage is increased by 20%
 		Also allows you to swim freely in water
 		'''
 }
 
 GrassKnife: {
-	DisplayName: Grass Blade
+	DisplayName: Grass Knife
 	Tooltip:
 		'''
-		Inflicts a special Jungle Venom On Hit
-		Jungle Venom deals 25/50/100 damage over time, scaling with game progression
+		Inflicts a special Jungle Venom
+		Jungle Venom deals 25/50/100 damage over time
+		Which is scaling with game progression
 		'''
 	ExecutionStrike:
 		'''
-		Creates a Jungle Mark lasting 60 seconds, enhancing all Executor attacks
-		While the mark is active, Executor applies Jungle Venom that stacks up to 10 times
-		If the target has more than 3 stacks of Jungle Venom, a direct hit with Grass Blade immediately triggers the damage
+		Grants Jungle Mark for 60 seconds to enhance all executor attacks
+		Executor applies Jungle Venom that stacks up to 10 times
+		Grass Knife direct hits trigger the damage on targets with over 3 Jungle Venom stacks
 		'''
 }
 
@@ -626,9 +642,8 @@ MoltenKnife: {
 	Tooltip: Explodes on hit
 	ExecutionStrike:
 		'''
-		Creates a Molten Mark lasting 60 seconds, enhancing all Executor attacks
-		While the mark is active, Executor adds Molten Explosion
-		Molten Explosion has a fixed frequency, deals 2.75x the damage dealt, and cannot critically strike
+		Grants Molten Mark for 60 seconds to enhance all executor attacks
+		Executor adds molten explosion, deals 2.75x damage and cannot crit
 		'''
 }
 
@@ -654,7 +669,7 @@ StormSaber: {
 		A heteromorphic product crudely reassembled from a broken blade still holding residual storm power
 		Though not authentic, it still wields some of its former might against giants
 		'''
-	ExecutionStrike: Has a larger swing range and fires larger projectiles
+	ExecutionStrike: Significantly increases attack speed
 }
 
 TheGreatDipper: {
@@ -723,30 +738,52 @@ Stella: {
 
 Headsplosion: {
 	DisplayName: Headsplosion
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltip: ""
+	Tooltip:
+		'''
+		Your attacks always critically strike, and fired bullets always cause explosions
+		Explosions always eject multiple small ricochets that cause secondary explosions
+		Small explosive ricochets inflict[ScarletDebuff/Terraria/Ichor]
+		'''
+	ExecutionStrike:
+		'''
+		Adds more small ricochets
+		Small ricochet explosions add two split ricochets
+		'''
+	FlavorTooltip: That happens all the time.
 }
 
 Moonfire: {
 	DisplayName: Moonfire
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltip: ""
+	Tooltip:
+		'''
+		An extremely precise revolver
+		Press the Interact key at any time to perform Execution Strike
+		'''
+	ExecutionStrike:
+		'''
+		Immediately fires an enhanced bullet that ricochets between multiple enemies
+		The number of ricochets are based on the Execution Progess
+		'''
+	FlavorTooltip: Meet your destiny.
 }
 
 Reflux: {
 	DisplayName: Reflux
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltip: ""
+	Tooltip: Fires spread bullets inflicting [ScarletDebuff/Terraria/CursedInferno]
+	ExecutionStrike:
+		'''
+		Fires bullets with more pierces
+		On first hit, bullets generate a chain that links two nearby targets
+		A target can be linked by up to five chains
+		'''
+	FlavorTooltip: That's gonna burn.
 }
 
 TheGarcia: {
 	DisplayName: The Garcia
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltip: ""
+	Tooltip: A shotgun with a faster fire rate
+	ExecutionStrike: Fires more bullets with less spread
+	FlavorTooltip: Rooty-tooty, pointy-shooty.
 }
 
 CrescentRose: {
@@ -758,14 +795,22 @@ CrescentRose: {
 
 CobaltYoyo: {
 	DisplayName: Cobalt Yoyo
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Causes a explosion on hit
+	ExecutionStrike:
+		'''
+		Cause multiple explosions on the hit enemy
+		Has high armor penetration
+		'''
 }
 
 TitaniumBattleShovel: {
 	DisplayName: Titanium Battle Shovel
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Stuns enemies for a short time on hit
+	ExecutionStrike:
+		'''
+		Enhances attacks for the next 10 seconds
+		Increases attack range and number of hit checks
+		'''
 }
 
 MythrilStaff: {
@@ -775,7 +820,16 @@ MythrilStaff: {
 
 TheCompanion: {
 	DisplayName: The Companion
-	Tooltip: ""
-	ExecutionStrike: ""
-	FlavorTooltip: ""
+	Tooltip:
+		'''
+		Inflicts [ScarletDebuff/Terraria/Oiled] on non-critical hits
+		Inflicts [ScarletDebuff/Terraria/OnFire3] on critical hits
+		'''
+	ExecutionStrike:
+		'''
+		Fires a bullet that always critically strikes
+		On hit, applies Hellfire to a large area of enemies
+		No target limit
+		'''
+	FlavorTooltip: You can't take the sky from me.
 }

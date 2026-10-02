@@ -3,11 +3,16 @@ using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {
     public class CrescentRoseSniperBullet : HJScarletProj, IPixelatedRenderer
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override EnumDamageClass Category => EnumDamageClass.Executor;
         public override string Texture => HJScarletTexture.InvisAsset.Path;
         public override void SetStaticDefaults()

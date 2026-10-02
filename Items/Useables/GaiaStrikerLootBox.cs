@@ -3,7 +3,7 @@ using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Globals.Systems;
+using HJScarletRework.Globals.Systems.Conditions;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Projs.General;
 using Terraria;

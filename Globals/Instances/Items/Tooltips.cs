@@ -3,12 +3,15 @@ using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Database.Localization;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using HJScarletRework.Items.Armor.Monk;
 using HJScarletRework.Items.Armor.Shinobi;
 using HJScarletRework.Rarity.RarityDrawHandler;
 using HJScarletRework.Rarity.RarityShiny;
+using ReLogic.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
@@ -58,7 +61,7 @@ namespace HJScarletRework.Globals.Instances.Items
                 {
                     //表单里有这个内容我们才写这个东西。没有则写另一条
                     string itemName = string.Empty;
-                    if(item.type>VanillaMaxItem)
+                    if (item.type > VanillaMaxItem)
                     {
                         itemName = item.ModItem.FullName;
                     }
@@ -93,25 +96,28 @@ namespace HJScarletRework.Globals.Instances.Items
                 }
             }
             //强制自动处决/手动处决的字段
-            if (ScarletItemIDSets.ForceToAutomaticExecute[item.type])
+            if (item.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
-                int index = tooltips.FindLineIndex("ExecutorWeaponTypeName", Mod.Name);
-                string path = Mod.GetLocalizationKey($"ExecutorDamageClass.ForceAutomaticExecution").ToLangValue();
-                TooltipLine line = new TooltipLine(Mod, "ForceAutomaticExecution", path)
+                if (ScarletItemIDSets.ForceToAutomaticExecute[item.type])
                 {
-                    OverrideColor = Color.Pink
-                };
-                tooltips.Insert(index + 1, line);
-            }
-            else if (ScarletItemIDSets.ForceToTacticalExecute[item.type])
-            {
-                int index = tooltips.FindLineIndex("ExecutorWeaponTypeName", Mod.Name);
-                string path = Mod.GetLocalizationKey($"ExecutorDamageClass.ForceTacticalExecution").ToLangValue();
-                TooltipLine line = new TooltipLine(Mod, "ForceTacticalExecutionLine", path)
+                    int index = tooltips.FindLineIndex("ExecutorWeaponTypeName", Mod.Name);
+                    string path = Mod.GetLocalizationKey($"ExecutorDamageClass.ForceAutomaticExecution").ToLangValue();
+                    TooltipLine line = new TooltipLine(Mod, "ForceAutomaticExecution", path)
+                    {
+                        OverrideColor = Color.Pink
+                    };
+                    tooltips.Insert(index + 1, line);
+                }
+                else if (ScarletItemIDSets.ForceToTacticalExecute[item.type])
                 {
-                    OverrideColor = Color.Pink
-                };
-                tooltips.Insert(index + 1, line);
+                    int index = tooltips.FindLineIndex("ExecutorWeaponTypeName", Mod.Name);
+                    string path = Mod.GetLocalizationKey($"ExecutorDamageClass.ForceTacticalExecution").ToLangValue();
+                    TooltipLine line = new TooltipLine(Mod, "ForceTacticalExecutionLine", path)
+                    {
+                        OverrideColor = Color.Pink
+                    };
+                    tooltips.Insert(index + 1, line);
+                }
             }
             //标记物品未完成
             if (item.HJScarlet().NotFinished)
@@ -196,7 +202,28 @@ namespace HJScarletRework.Globals.Instances.Items
                                     }
                                 }
                             }
-                            return $"       [c/{color}:{name}]";
+                            //计算图标在渲染时应占据的宽度
+                            //此时我们不知道最终的行高，但可以基于当前字体计算一个近似比例
+                            DynamicSpriteFont currentFont = FontAssets.MouseText.Value;
+                            Vector2 currentScale = Vector2.One;
+                            //近似行高，用于计算图标宽度
+                            float approximateLineHeight = currentFont.MeasureString("M").Y * currentScale.Y;
+                            //图标宽高比
+                            float iconAspectRatio = (32 + 2) / (float)32;
+                            if (texture != null)
+                            {
+                                iconAspectRatio = (texture.Width + 2) / (float)texture.Height;
+                            }
+
+                            //图标应占据的像素宽度
+                            float targetWidth = approximateLineHeight * iconAspectRatio;
+                            //测量单个空格的宽度
+                            float spaceWidth = ChatManager.GetStringSize(currentFont, " ", currentScale).X;
+                            //计算所需空格数量
+                            int spacesNeeded = (int)Math.Ceiling(targetWidth / spaceWidth);
+                            //构建占位空格字符串
+                            string placeholder = new string(' ', spacesNeeded);
+                            return $"{placeholder}[c/{color}:{name}]";
                         });
                     }, 1);
                 }
@@ -209,10 +236,31 @@ namespace HJScarletRework.Globals.Instances.Items
                 tooltips.RemoveRange(1, tooltips.Count - 1);
                 for (int j = 0; j < buffs.Count; j++)
                 {
-                    
+                    Texture2D texture = buffs[j].Item4;
+                    //计算图标在渲染时应占据的宽度
+                    //此时我们不知道最终的行高，但可以基于当前字体计算一个近似比例
+                    DynamicSpriteFont currentFont = FontAssets.MouseText.Value;
+                    Vector2 currentScale = Vector2.One;
+                    //近似行高，用于计算图标宽度
+                    float approximateLineHeight = currentFont.MeasureString("M").Y * currentScale.Y;
+                    //图标宽高比
+                    float iconAspectRatio = (32 + 2) / (float)32;
+                    if (texture != null)
+                    {
+                        iconAspectRatio = (texture.Width + 2) / (float)texture.Height;
+                    }
+                    //图标应占据的像素宽度
+                    float targetWidth = approximateLineHeight * iconAspectRatio;
+                    //测量单个空格的宽度
+                    float spaceWidth = ChatManager.GetStringSize(currentFont, " ", currentScale).X;
+                    //计算所需空格数量
+                    int spacesNeeded = (int)Math.Ceiling(targetWidth / spaceWidth);
+                    //构建占位空格字符串
+                    string placeholder = new string(' ', spacesNeeded);
+
                     //终于差不多了……加tooltip
-                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName"+j, $"        [c/{buffs[j].Item3}:{buffs[j].Item5}]");
-                    TooltipLine buffTextDescripLine = new TooltipLine(Mod, "ScarletBuffDescripName"+j, $"{buffs[j].Item6}");
+                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName" + j, $"{placeholder}[c/{buffs[j].Item3}:{buffs[j].Item5}]");
+                    TooltipLine buffTextDescripLine = new TooltipLine(Mod, "ScarletBuffDescripName" + j, $"{buffs[j].Item6}");
                     tooltips.Add(buffTextNameLine);
                     tooltips.Add(buffTextDescripLine);
                     buffs[j] = (0, tooltips.Count, buffs[j].Item3, buffs[j].Item4, buffs[j].Item5, buffs[j].Item6, buffTextNameLine.Name);
@@ -241,12 +289,23 @@ namespace HJScarletRework.Globals.Instances.Items
                 return;
             for (int i = 0; i < lines.Count; i++)
             {
+                DrawableTooltipLine line = lines[i];
                 foreach (var buf in buffs)
                 {
-                    if (buf.Item7 == lines[i].Name)
+                    if (buf.Item7 == line.Name)
                     {
-                        Vector2 pos = new Vector2(lines[i].X + buf.Item1 + 2.5f, lines[i].Y - 5f);
-                        Main.spriteBatch.Draw(buf.Item4, pos, null, Color.White, 0, Vector2.Zero, .98f, 0, 0);
+                        DynamicSpriteFont font = line.Font ?? FontAssets.MouseText.Value;
+                        Vector2 textScale = line.BaseScale;
+                        if (textScale == Vector2.Zero)
+                            textScale = Vector2.One;
+                        float lineHeight = font.MeasureString("M").Y * textScale.Y;
+                        Texture2D icon = buf.Item4;
+                        float iconScale = lineHeight / icon.Height;
+                        float scaledHeight = icon.Height * iconScale;
+
+                        float x = line.X + buf.Item1 + iconScale * 2f;
+                        float y = line.Y + (lineHeight - scaledHeight) - iconScale * 4f;
+                        Main.spriteBatch.Draw(buf.Item4, new Vector2(x, y), null, Color.White, 0, Vector2.Zero, iconScale * 1f, 0, 0);
                     }
                     if (buf.Item7 != lines[i].Name)
                         continue;

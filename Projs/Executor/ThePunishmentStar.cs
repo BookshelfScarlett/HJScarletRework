@@ -67,6 +67,13 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateAttackAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
+            if(!TargetNPC.IsLegal())
+            {
+                if(Projectile.GetTargetSafe(out NPC target))
+                {
+                    TargetNPC = target;
+                }    
+            }
             if (!Helper.IsDone[0])
             {
                 Helper.UpdateAniState(0);
@@ -111,6 +118,11 @@ namespace HJScarletRework.Projs.Executor
             if (canHit)
                 return null;
             return false;
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

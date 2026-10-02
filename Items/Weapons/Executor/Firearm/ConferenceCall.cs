@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Database.Enums;
+﻿using HJScarletRework.Core.NetSync;
+using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.List;
@@ -22,7 +23,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         }
         public override void ExSD()
         {
-            Item.damage = 54;
+            Item.damage = 60;
             Item.SetUpRarityPrice(ItemRarityID.Lime);
             Item.SetUpNoUseGraphicItem(true);
             Item.knockBack = 2f;
@@ -54,7 +55,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
                 AddIngredient(ItemID.Shotgun).
                 AddIngredient<Reflux>().
                 AddIngredient<TheGarcia>().
-                AddIngredient(ItemID.IllegalGunParts,10).
+                AddIngredient(ItemID.IllegalGunParts, 10).
                 AddIngredient(ItemID.ChlorophyteBar, 10).
                 AddTile(TileID.MythrilAnvil).
                 Register();

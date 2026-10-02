@@ -1,5 +1,4 @@
 ﻿using ContinentOfJourney.Items;
-using ContinentOfJourney.Items.Accessories.SummonerRings;
 using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Items.Weapons.Melee;
@@ -242,7 +241,7 @@ namespace HJScarletRework.Globals.Database.List
                         }
                     }
                 }
-                    
+
                 //oreType和barType的处理
                 string name = item.GetType().Name.ToLower();
                 bool isOre = name.Contains("ore") && item.createTile != -1;
@@ -289,7 +288,7 @@ namespace HJScarletRework.Globals.Database.List
             ThrownSpearList = null;
             HJSpearList = null;
             LegalFoodList = null;
-            LegalFoodListName= null;
+            LegalFoodListName = null;
             DownedBossConditionList = null;
             SummonWeaponFullName = null;
 

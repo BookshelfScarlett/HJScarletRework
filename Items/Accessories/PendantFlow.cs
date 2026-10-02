@@ -12,6 +12,11 @@ namespace HJScarletRework.Items.Accessories
 {
     public class PendantFlow : HJScarletItemClass
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         public override string AssetPath => AssetHandler.Equips;
         public override void SetStaticDefaults()
         {

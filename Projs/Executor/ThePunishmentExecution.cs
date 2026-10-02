@@ -118,6 +118,11 @@ namespace HJScarletRework.Projs.Executor
         {
             return base.OnTileCollide(oldVelocity);
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_Hit with { MaxInstances = 0, Pitch = 0.15f, PitchVariance = 0.15f }, Projectile.Center);

@@ -176,6 +176,11 @@ namespace HJScarletRework.Projs.Executor
                 SoundEngine.PlaySound(SoundID.Item4 with { Volume = 1f, Pitch = 0.8f }, Owner.Center);
             }
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //从灾厄抄写的锤子特效

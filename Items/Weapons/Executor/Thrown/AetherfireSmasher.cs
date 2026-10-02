@@ -21,21 +21,17 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         }
         public override void ExSD()
         {
-            Item.noUseGraphic = true;
-            Item.noMelee = true;
-            Item.autoReuse = true;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.UseSound = HJScarletSounds.Blunt_Swing with { MaxInstances = 1, Pitch = -0.4f, PitchVariance = 0.2f, Volume = 0.5f };
             Item.shoot = ProjectileType<AetherfireSmasherProj>();
             Item.knockBack = 6f;
             Item.DamageType = ExecutorDamageClass.Instance;
-            Item.damage = 55;
-            //这里的ut有意为之
+            Item.damage = 71;
             Item.useTime = Item.useAnimation = 12;
             Item.shootSpeed = 18f;
             Item.SetUpRarityPrice(ItemRarityID.Yellow);
+            Item.SetUpNoUseGraphicItem(false);
         }
-        //实际合成材料可随意，我个人推荐为花后
         public override void AddRecipes()
         {
             CreateRecipe().

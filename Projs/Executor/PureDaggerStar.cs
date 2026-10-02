@@ -113,6 +113,10 @@ namespace HJScarletRework.Projs.Executor
             PixelatedRenderManager.BeginDrawProj = true;
             return false;
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
         public override bool? CanHitNPC(NPC target)
         {
             bool canHit = CurTarget.IsLegal() && target.Equals(CurTarget) && AttackState == State.Homing;

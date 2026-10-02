@@ -109,6 +109,7 @@ namespace HJScarletRework.Projs.Executor
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
+            Projectile.BounceOnTile(oldVelocity);
             return false;
         }
         public override void OnFirstFrame()
@@ -118,6 +119,10 @@ namespace HJScarletRework.Projs.Executor
                 SpawnFocus();
 
             base.OnFirstFrame();
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

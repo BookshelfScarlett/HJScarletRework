@@ -61,6 +61,11 @@ namespace HJScarletRework.Projs.Melee
                 return null;
             return false;
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
+        }
+
         public override bool? CanDamage() => CanDamageTime > 50;
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {

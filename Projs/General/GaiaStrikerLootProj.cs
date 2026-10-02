@@ -75,10 +75,10 @@ namespace HJScarletRework.Projs.General
             {
                 Timer++;
                 Projectile.position += Main.rand.NextVector2Circular(5, 5);
-                if (Timer > Projectile.MaxUpdates * 30)
+                if (Timer > Projectile.MaxUpdates * 30&&Projectile.IsMe())
                 {
                     Projectile.netUpdate = true;
-                    Item.NewItem(Projectile.GetSource_FromThis(), Projectile.Center, ItemType<GaiaStriker>());
+                    HJScarletMethods.ScarletSpawnItem(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.Hitbox, ItemType<GaiaStriker>());
                     ScreenDarknessSystem.AddScreenDarkness(0.95f, 5, 20, 30, easeOut: EaseInCubic);
                     CreateBloodyExplosion();
                     Projectile.Kill();

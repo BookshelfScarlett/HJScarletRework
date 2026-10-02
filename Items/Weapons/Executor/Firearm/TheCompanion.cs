@@ -2,17 +2,12 @@
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Executor.Firearm
 {
-    public class TheCompanion:ExecutorWeaponClass
+    public class TheCompanion : ExecutorWeaponClass
     {
         public override ExecutorWeaponType ExecutorWeaponType => ExecutorWeaponType.Firearm;
         public override void ExSSD()
@@ -21,7 +16,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         }
         public override void ExSD()
         {
-            Item.damage = 21;
+            Item.damage = 42;
             Item.shootSpeed = 13;
             Item.SetUpRarityPrice(ItemRarityID.Green);
             Item.SetUpNoUseGraphicItem(true);
@@ -51,6 +46,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void AddRecipes()
         {
             CreateRecipe().
+                AddIngredient(ItemID.FlintlockPistol).
                 AddRecipeGroup(RecipeGroupID.IronBar, 10).
                 AddTile(TileID.Anvils).
                 Register();

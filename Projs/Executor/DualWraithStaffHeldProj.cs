@@ -61,7 +61,7 @@ namespace HJScarletRework.Projs.Executor
                 if (Main.rand.NextBool(12))
                     if (!Owner.channel)
                         new SmokeParticle(Projectile.Center.ToRandCirclePos(5f) + Projectile.SafeDirByRot() * Main.rand.NextFloat(-10f, 80f), Projectile.SafeDirByRot() * Main.rand.NextFloat(), RandLerpColor(Color.WhiteSmoke, Color.White), 40, RandRotTwoPi, 0.60f, 0.24f, Main.rand.NextBool()).Spawn();
-                if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike&&Owner.IsHolding(OriginalItemID))
+                if (Owner.GetExecutionSrike() && !Projectile.HJScarlet().ExecutionStrike && Owner.IsHolding(OriginalItemID))
                 {
                     Projectile.HJScarlet().ExecutionStrike = true;
                     Owner.RemoveExecutionProgress(OriginalItemID);

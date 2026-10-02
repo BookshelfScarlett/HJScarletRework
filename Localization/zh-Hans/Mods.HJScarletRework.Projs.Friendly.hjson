@@ -43,6 +43,7 @@ Typeless: {
 	// RefluxBullet.DisplayName: Reflux Bullet
 	// RefluxHeldProj.DisplayName: Reflux Held Proj
 	// GunWitchHeldProj.DisplayName: Gun Witch Held Proj
+	// PropellerRapierRangedTornadoBig.DisplayName: Propeller Rapier Ranged Tornado Big
 }
 
 Executor: {
@@ -259,6 +260,10 @@ Ranged: {
 	// BlazingSunHeldProj2.DisplayName: Blazing Sun Held Proj2
 	// DuskfallBait.DisplayName: Duskfall Bait
 	// DuskfallProj.DisplayName: Duskfall Proj
+	// PropellerRapierRanged.DisplayName: Propeller Rapier Ranged
+	// PropellerRapierRangedTornado.DisplayName: Propeller Rapier Ranged Tornado
+	// PropellerRapierRangedProj.DisplayName: Propeller Rapier Ranged Proj
+	// RadiantBlazeDawnFlame.DisplayName: Radiant Blaze Dawn Flame
 }
 
 Magic: {
@@ -277,6 +282,7 @@ Magic: {
 	// BrimstoneHeartFireball.DisplayName: Brimstone Heart Fireball
 	// LivingBoomerangMagicHeldProj.DisplayName: Living Boomerang Magic Held Proj
 	// LivingBoomerangMagicPetal.DisplayName: Living Boomerang Magic Petal
+	// LivingBoomerangMagicLeaf.DisplayName: Living Boomerang Magic Leaf
 }
 
 Melee: {
@@ -346,6 +352,28 @@ Melee: {
 	// RitualofReposeRest.DisplayName: Ritualof Repose Rest
 	// RitualofReposeStar.DisplayName: Ritualof Repose Star
 	// RitualofReposeThunder.DisplayName: Ritualof Repose Thunder
+	// CopperRapierThrownProj.DisplayName: Copper Rapier Thrown Proj
+	// GoldRapierThrownProj.DisplayName: Gold Rapier Thrown Proj
+	// IronRapierThrownProj.DisplayName: Iron Rapier Thrown Proj
+	// LeadRapierThrownProj.DisplayName: Lead Rapier Thrown Proj
+	// PlatinumRapierThrownProj.DisplayName: Platinum Rapier Thrown Proj
+	// SilverRapierThrownProj.DisplayName: Silver Rapier Thrown Proj
+	// TinRapierThrownProj.DisplayName: Tin Rapier Thrown Proj
+	// TungstenRapierThrownProj.DisplayName: Tungsten Rapier Thrown Proj
+	// AmberYoyoProj.DisplayName: Amber Yoyo Proj
+	// AmethystYoyoProj.DisplayName: Amethyst Yoyo Proj
+	// DiamondYoyoProj.DisplayName: Diamond Yoyo Proj
+	// EmeraldYoyoProj.DisplayName: Emerald Yoyo Proj
+	// SapphireYoyoProj.DisplayName: Sapphire Yoyo Proj
+	// TopazYoyoProj.DisplayName: Topaz Yoyo Proj
+	// DiamondYoyoDiamond.DisplayName: Diamond Yoyo Diamond
+	// RubyYoyoProj.DisplayName: Ruby Yoyo Proj
+	// RubyYoyoRuby.DisplayName: Ruby Yoyo Ruby
+	// AmberYoyoAmber.DisplayName: Amber Yoyo Amber
+	// EmeraldYoyoEmerald.DisplayName: Emerald Yoyo Emerald
+	// MatterSawtoothSharkHeldProj.DisplayName: Matter Sawtooth Shark Held Proj
+	// EthrealSwordfishHeldProj.DisplayName: Ethreal Swordfish Held Proj
+	// EnchantedSwordfishHeldProj.DisplayName: Enchanted Swordfish Held Proj
 }
 
 Pets: {

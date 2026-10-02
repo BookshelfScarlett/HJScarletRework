@@ -147,7 +147,7 @@ namespace HJScarletRework.Projs.Executor
 
         private void TileCollideParticle(Vector2 velo)
         {
-            SoundEngine.PlaySound(HJScarletSounds.SodomsDisaster_Hit with { MaxInstances = 0, Pitch = -0.2f }, Projectile.Center);
+            ScarletSound(HJScarletSounds.SodomsDisaster_Hit, Projectile.Center, .85f, 1, -.2f);
             Vector2 vel = velo.ToSafeNormalize();
             for (int i = 0; i < 8; i++)
             {
@@ -171,6 +171,11 @@ namespace HJScarletRework.Projs.Executor
             if (Projectile.HJScarlet().ExecutionStrike)
                 CanFocusStrike();
 
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+
+            modifiers.HitDirectionOverride = Projectile.ApplyDirectionOverride(target);
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
