@@ -54,3 +54,13 @@ namespace HJScarletRework.Items
     }
 
 }
+
+namespace HJScarletRework.Items.Weapons.Requirement
+{
+    // 根据你实际需要调整类名、成员和访问级别
+    public class WeaponRequirement
+    {
+        // 占位构造／方法
+        public WeaponRequirement() { }
+    }
+}

@@ -150,7 +150,7 @@ namespace HJScarletRework.Projs.ParryShield
                 else
                 {
                     Vector2 offset = new Vector2(ParryRange * ApplyParryShieldHorizonalRangeScale(), 0).RotatedBy(Projectile.rotation);
-                    OldParryShieldPos.Add(Projectile.position + offset);
+                    OldParryShieldPos.Add(Owner.MountedCenter + new Vector2(0f, Owner.gfxOffY) - Projectile.Size / 2f + offset);
                     OldParryShieldRot.Add(Projectile.rotation);
                     OnActuallyGoingParry(easedProgress, tarPos, offset);
                 }
