@@ -362,7 +362,7 @@ SaintChurchHead: {
 		'''
 	SetBonus:
 		'''
-		On fatal damage, enter [ScarletBuff/HJScarletRework/SaintChurchBuff] and revive with {1} health
+		On fatal damage, enter[ScarletBuff/HJScarletRework/SaintChurchBuff] and revive with {1} health
 		Healing potions and health regen disabled, +{0} aggro
 		On another fatal damage, chance to revive with {2} health, unlimited triggers
 		Each revive grants stackable {3} damage and {4} critical strike chance to your team

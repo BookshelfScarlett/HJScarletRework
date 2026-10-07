@@ -13,6 +13,7 @@ PocketMirrorModiflication:
 	你可以通过饰品可见性以启用或关闭这个功能
 	置于时装栏内默认生效
 	'''
+// ParryTeacher: ""
 
 GenericText: {
 	BuffDetail: 按住 Alt 以查看具体效果

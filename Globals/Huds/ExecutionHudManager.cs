@@ -63,24 +63,6 @@ namespace HJScarletRework.Globals.Huds
             Vector2 pos = LocalPlayer.Center + new Vector2(0, 50) - Main.screenPosition;
             pos.Y += LocalPlayer.gfxOffY;
             Texture2D t2d = HJScarletTexture.Hud_ExecutorCounter.Value;
-            //if(HJScarletList.ExecutorTypes.TryGetValue(localPlayer.HeldItem.type, out ExecutorWeaponType value));
-            //{
-            //    switch (value)
-            //    {
-            //        case ExecutorWeaponType.Throw:
-            //            t2d = HJScarletTexture.Hud_ExecutorThrown.Value; break;
-            //        case ExecutorWeaponType.ColdSteel:
-            //            t2d = HJScarletTexture.Hud_ExecutorColdSteel.Value; break;
-            //        case ExecutorWeaponType.Firearm:
-            //            t2d = HJScarletTexture.Hud_ExecutorFirearm.Value; break;
-            //        case ExecutorWeaponType.Caster:
-            //            t2d = HJScarletTexture.Hud_ExecutorCaster.Value; break;
-            //        case ExecutorWeaponType.Minion:
-            //            t2d = HJScarletTexture.Hud_ExecutorAssist.Value; break;
-            //        case ExecutorWeaponType.Misc:
-            //            t2d = HJScarletTexture.Hud_ExecutorAssist.Value; break;
-            //    }
-            //}
 
             SB.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
             //Texture2D t2d2 = TextureAssets.MagicPixel.Value;

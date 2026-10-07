@@ -3,6 +3,7 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.NPCs.Bosses.DyradEye;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -79,7 +80,7 @@ namespace HJScarletRework.Globals.Instances.NPCs
         public float dizzedStarIconLerp = 0;
         public override bool PreAI(NPC npc)
         {
-            if (parryTime > 0)
+            if (parryTime > 0&&npc.type == NPCType<DyradEyeBoss>())
             {
                 parryTime--;
                 if (parryTime < 60)
@@ -98,13 +99,12 @@ namespace HJScarletRework.Globals.Instances.NPCs
                     return true;
                 }
                 isBeingParry = true;
-                npc.position += Main.rand.NextVector2Circular(1, 1);
                 npc.velocity.X *= .96f;
                 npc.velocity.Y += 0.85f;
                 if (npc.velocity.Y > 32f)
                     npc.velocity.Y = 32f;
                 npc.noTileCollide = false;
-                return false;
+                return true;
             }
             return base.PreAI(npc);
         }
@@ -255,10 +255,11 @@ namespace HJScarletRework.Globals.Instances.NPCs
             {
                 Texture2D parryTex = TextureAssets.Buff[BuffType<ParrySpin>()].Value;
                 Vector2 yOffset = Vector2.UnitY * npc.height + Vector2.UnitY * 5.5f;
-                float reverseLerp = Clamp(Lerp(1f, 0f, dizzedStarIconLerp),0f,1f);
+                float reverseLerp = Clamp(Lerp(1f, 0f, dizzedStarIconLerp), 0f, 1f);
                 Vector2 reversLerpYOffset = Vector2.UnitY * reverseLerp * 50f;
                 yOffset = yOffset + reversLerpYOffset;
-                spriteBatch.Draw(parryTex, npc.Center.ToRandCirclePos(1*dizzedStarIconLerp) - screenPos - yOffset, null, Color.White * (dizzedStarIconLerp), 0, (parryTex.Size()) / 2f, 1, 0, 0);
+                spriteBatch.Draw(parryTex, npc.Center.ToRandCirclePos(1 * dizzedStarIconLerp) - screenPos - yOffset, null, Color.White * (dizzedStarIconLerp), 0, (parryTex.Size()) / 2f, 1, 0, 0);
+                spriteBatch.Draw(parryTex, npc.Center.ToRandCirclePos(5 * dizzedStarIconLerp * dizzedStarIconLerp) - screenPos - yOffset, null, Color.White * .72f * (dizzedStarIconLerp), 0, (parryTex.Size()) / 2f, 1, 0, 0);
             }
             base.PostDraw(npc, spriteBatch, screenPos, drawColor);
         }

@@ -24,6 +24,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Texture_RuShiWoWenFlower { get; set; }
         public static Tex2DWithPath Texture_FireBall { get; set; }
         public static Tex2DWithPath Texture_FireBallPixel { get; set; }
+        public static Tex2DWithPath Texture_ScreenMask{ get; set; }
         public void LoadTexture()
         {
             Texture_BloomRing = new Tex2DWithPath($"{Path_General}{nameof(Texture_BloomRing)}");
@@ -46,6 +47,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_RuShiWoWenFlower = new Tex2DWithPath($"{Path_General}{nameof(Texture_RuShiWoWenFlower)}");
             Texture_FireBall = new Tex2DWithPath($"{Path_General}{nameof(Texture_FireBall)}");
             Texture_FireBallPixel = new Tex2DWithPath($"{Path_General}{nameof(Texture_FireBallPixel)}");
+            Texture_ScreenMask = new Tex2DWithPath($"{Path_General}{nameof(Texture_ScreenMask)}");
 
         }
         public static void UnloadTexture()
@@ -70,6 +72,7 @@ namespace HJScarletRework.Assets.Registers
             Texture_RuShiWoWenFlower = null;
             Texture_FireBall = null;
             Texture_FireBallPixel = null;
+            Texture_ScreenMask = null;
         }
     }
 }

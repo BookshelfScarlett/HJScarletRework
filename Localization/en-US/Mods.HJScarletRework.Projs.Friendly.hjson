@@ -54,6 +54,7 @@ Typeless: {
 	PinballPurgatoryTimer.DisplayName: Pinball Purgatory Timer
 	CobaltParry.DisplayName: Cobalt Parry
 	CobaltParryShield.DisplayName: Cobalt Parry Shield
+	GeneralStringProj.DisplayName: General String Proj
 }
 
 Executor: {

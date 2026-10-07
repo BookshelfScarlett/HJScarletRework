@@ -24,7 +24,10 @@ namespace HJScarletRework.Core
             On_Main.DrawDust += ECSParticleDataManager.DrawParticle_ECS;
             //使用类射弹的实例化粒子
             On_Main.DrawDust += BaseParticleManager.DrawParticles;
+            //缩放遮罩
+            On_Main.DrawDust += ScreenZoomSystem.DrawCameraMask;
             On_Main.DrawProjectiles += SeperateVisualManager.SeperateVisual_PreProjectiles;
+
             On_Main.DrawDust += SeperateVisualManager.SeperateVisual_PostDust;
             //未使用，待删除
             On_Main.DrawPlayers_BehindNPCs += MetaballManager.DrawRenderTargetPiority;
@@ -41,6 +44,7 @@ namespace HJScarletRework.Core
             On_Main.DrawDust += DeepGlow.Hook_AfterDust;
             On_FilterManager.EndCapture += DeepGlow.DrawDeepGlow;
         }
+
         public override void Unload()
         {
             //屏幕暗化效果
@@ -51,6 +55,8 @@ namespace HJScarletRework.Core
             On_Main.DrawDust -= ECSParticleDataManager.DrawParticle_ECS;
             //使用类射弹的实例化粒子
             On_Main.DrawDust -= BaseParticleManager.DrawParticles;
+            //缩放遮罩
+            On_Main.DrawDust -= ScreenZoomSystem.DrawCameraMask;
             On_Main.DrawProjectiles -= SeperateVisualManager.SeperateVisual_PreProjectiles;
             On_Main.DrawDust -= SeperateVisualManager.SeperateVisual_PostDust;
             //待删除

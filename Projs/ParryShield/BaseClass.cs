@@ -3,8 +3,10 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Items.Useables;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Terraria;
@@ -67,6 +69,7 @@ namespace HJScarletRework.Projs.ParryShield
         /// <br>Y：结束角度相对于格挡生成时鼠标角度的偏移量。</br>
         /// </summary>
         protected virtual Vector2 ParryAngleRange => new Vector2(-185f, 185f);
+        public Vector2 _parryRange => new Vector2(ParryRange * ApplyParryShieldHorizonalRangeScale(), 0).RotatedBy(Projectile.rotation);
         private int AttackSpeed => AnimationTime * Projectile.MaxUpdates;
         public List<Vector2> OldParryShieldPos = new List<Vector2>();
         public List<float> OldParryShieldRot = new List<float>();
@@ -96,13 +99,13 @@ namespace HJScarletRework.Projs.ParryShield
                 OnFirstFrame();
 
             Projectile.velocity = Projectile.velocity.ToSafeNormalize();
-            UpdateAnimation();
             Projectile.Center = Owner.MountedCenter;
             Projectile.position.Y += Owner.gfxOffY;
             if (Owner.dead)
                 Projectile.Kill();
             else
                 Projectile.timeLeft = 2;
+            UpdateAnimation();
             Projectile.velocity = TargetRotation.ToRotationVector2();
             Projectile.spriteDirection = Flip.ToDirectionInt() * Projectile.direction;
         }
@@ -140,7 +143,7 @@ namespace HJScarletRework.Projs.ParryShield
                 float easedProgress = ApplyingParryingProgress();
                 float beginAngle = ParryAngleRange.X * Flip.ToDirectionInt();
                 float endAngle = ParryAngleRange.Y * Flip.ToDirectionInt();
-                float rot = Helper.UpdateAngle(beginAngle, endAngle, Owner.direction, easedProgress);
+                float rot = Helper.UpdateAngle(beginAngle, endAngle, Projectile.direction, easedProgress);
                 Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(Width, Height, 1);
                 Vector2 tarPos = Vector2.Transform(Vector2.UnitX, tForm) * ParryShieldScale;
                 Projectile.scale = tarPos.Length();
@@ -149,10 +152,9 @@ namespace HJScarletRework.Projs.ParryShield
                     TargetRotation = TargetRotation.AngleTowards(Owner.GetToMouseVector2(Projectile.Center).ToRotation(), .5f);
                 else
                 {
-                    Vector2 offset = new Vector2(ParryRange * ApplyParryShieldHorizonalRangeScale(), 0).RotatedBy(Projectile.rotation);
-                    OldParryShieldPos.Add(Owner.MountedCenter + new Vector2(0f, Owner.gfxOffY) - Projectile.Size / 2f + offset);
+                    OldParryShieldPos.Add(Owner.MountedCenter + new Vector2(0f, Owner.gfxOffY) - Projectile.Size / 2f + _parryRange);
                     OldParryShieldRot.Add(Projectile.rotation);
-                    OnActuallyGoingParry(easedProgress, tarPos, offset);
+                    OnActuallyGoingParry(easedProgress, tarPos, _parryRange);
                 }
                 PrevParryProgress = easedProgress;
             }
@@ -215,10 +217,14 @@ namespace HJScarletRework.Projs.ParryShield
         {
             if (Projectile.numHits < 1)
             {
-                target.AddBuff(BuffType<ParrySpin>(), GetSeconds(3));
                 StopTiming = HitStopFrame;
-                Vector2 finalDir = Owner.Center.GetNormalVector2(target.Center) - Vector2.UnitY * ParryPower;
-                target.PunchTarget(finalDir, ParryPower);
+                Vector2 offset = _parryRange;
+                Vector2 dir = ((Projectile.Center + offset).GetNormalVector2(target.Center)).ToSafeNormalize(Vector2.UnitX);
+                Vector2 finalDir = Owner.Center.GetNormalVector2(target.Center) - dir * ParryPower;
+                target.PunchTarget(dir, ParryPower);
+                target.HJScarlet().parryNoPassingWall = target.noTileCollide;
+                target.HJScarlet().parryTime = GetSeconds(5);
+                new ParryParticle(target.Center, 1, 40).Spawn();
                 ScreenShakeSystem.AddScreenShakes(target.Center, 30, 30, RandRotTwoPi, RandRotTwoPi);
                 ScarletSound(HJScarletSounds.Tlipoca_StoneBonk, target.Center, pitch: .24f, pitchVariance: .1f, variantType: 2);
                 PostOnHitNPC(target, hit, damageDone, finalDir.ToSafeNormalize());
@@ -231,27 +237,7 @@ namespace HJScarletRework.Projs.ParryShield
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            if (!Projectile.HJScarlet().FirstFrame)
-                return false;
-            Texture2D tex = Projectile.GetTexture();
-            Vector2 drawPosition = Projectile.Center - Main.screenPosition;
-            Vector2 rotationPoint = tex.Size() / 2f;
-            float drawRotation = Projectile.rotation;
-            int length = OldParryShieldPos.Count;
-            float lerp = ApplyParryShieldHorizonalRangeScale();
-            Vector2 offset = new Vector2(ParryRange * lerp, 0).RotatedBy(Projectile.rotation);
-            for (int i = length - 1; i >= 0; i--)
-            {
-                float ratios = i / (float)length;
-                Vector2 pos = OldParryShieldPos[i] - Main.screenPosition + Projectile.Size/2f;
-                float rot = OldParryShieldRot[i];
-                float opac = Lerp(0f, 1f, ratios) * .954f;
-                Color c = Color.Lerp(Color.WhiteSmoke, Color.RoyalBlue, ratios).ToAddColor(10);
-                SB.FastDraw(tex, pos, c * opac * lerp, rot, rotationPoint, Projectile.scale, 0);
-            }
-            for (int i = 0; i < 8; i++)
-                SB.FastDraw(tex, drawPosition + (TwoPi / 8f * i).ToRotationVector2() * 1.1f + offset, Color.White.ToAddColor() * lerp * lerp, drawRotation, rotationPoint, Projectile.scale, 0);
-            SB.FastDraw(tex, drawPosition + offset, Color.White * lerp * lerp, drawRotation, rotationPoint, Projectile.scale, 0);
+            
             return false;
         }
     }

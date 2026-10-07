@@ -49,6 +49,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Particle_GlowSquareThick { get; set; }
         public static Tex2DWithPath Particle_Smear { get; set; }
         public static Tex2DWithPath Particle_ThunderBolt { get; set; }
+        public static Tex2DWithPath Particle_Parry { get; set; }
         public static Texture2D Particle_SharpTear => TextureAssets.Extra[ExtrasID.SharpTears].Value;
 
 
@@ -97,6 +98,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_GlowSquareThick = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_GlowSquareThick)}");
             Particle_Smear = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_Smear)}");
             Particle_ThunderBolt = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_ThunderBolt)}");
+            Particle_Parry = new Tex2DWithPath($"{Path_Particle}{nameof(Particle_Parry)}");
 
         }
         public static void UnLoadParticle()
@@ -143,6 +145,7 @@ namespace HJScarletRework.Assets.Registers
             Particle_GlowSquare = null;
             Particle_GlowSquareBig = null;
             Particle_GlowSquareThick = null;
+            Particle_Parry = null;
             Particle_Smear = null;
         }
     }

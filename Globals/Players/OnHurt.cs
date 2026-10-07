@@ -61,7 +61,7 @@ namespace HJScarletRework.Globals.Players
                 }
                 else
                 {
-                    if (Main.rand.NextFloat() < .8f)
+                    if (Main.rand.NextFloat() < .6f)
                     {
                         saintChurchLastStanding += 1;
                         Player.RestoreHealthByPercent(SaintChurchHead.RespawnLifePercent);

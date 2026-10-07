@@ -39,6 +39,12 @@ namespace HJScarletRework.Globals.Database.IDSets
         public static bool[] Giant = NPCID.Sets.Factory.CreateBoolSet(NPCType<WorldsEndEverlastingFallingWhale>(),
             NPCID.LunarTowerNebula, NPCID.LunarTowerSolar, NPCID.LunarTowerStardust, NPCID.LunarTowerVortex,
             NPCID.MoonLordCore, NPCID.MoonLordHand, NPCID.MoonLordHead, NPCID.MoonLordLeechBlob, NPCID.MoonLordFreeEye);
+        /// <summary>
+        /// 如果为<see langword="true"/>，则该NPC会允许被格挡。空想归途所有的boss都会拥有这个字段
+        /// <br>默认集合里，包括了一些简单的Boss：史莱姆王，克苏鲁之眼</br>
+        /// </summary>
+
+        public static bool[] CanParry = NPCID.Sets.Factory.CreateBoolSet(NPCID.KingSlime, NPCID.EyeofCthulhu);
 
     }
 }

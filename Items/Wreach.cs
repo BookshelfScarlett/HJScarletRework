@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
@@ -31,17 +32,29 @@ namespace HJScarletRework.Items
             Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         private IReadOnlyList<TooltipLine> AlterTooltip = null;
-        private float LineY = -1;
+        private float LineY = 0;
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             AlterTooltip = tooltips;
             base.ModifyTooltips(tooltips);
         }
+        public override void HoldItem(Player player)
+        {
+            if (Main.mouseLeft)
+            {
+                ScreenZoomSystem.UseTexture = true;
+                LineY = Lerp(LineY, 1f, 0.1f);
+                ScreenZoomSystem.ZoomIn(SmoothStep(0, 0.37f, LineY));
+            }
+            else
+            {
+                LineY = Lerp(LineY, 0, .1f);
+            }
+        }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Stopwatch.StartNew();
             Stopwatch sw = Stopwatch.StartNew();
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15, ProjectileType<CobaltParry>(), 1, knockback, player.whoAmI);
             sw.Stop();
             // 输出经过的时间（毫秒）
             //Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

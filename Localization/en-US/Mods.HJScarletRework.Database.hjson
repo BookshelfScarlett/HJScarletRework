@@ -12,6 +12,7 @@ PocketMirrorModiflication:
 	You can enable or disable this function through accessory visibility
 	Takes effect by default when placed in vanity slot
 	'''
+ParryTeacher: ""
 
 GenericText: {
 	BuffDetail: Hold Alt for details
