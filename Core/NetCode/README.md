@@ -142,10 +142,6 @@ public override void AI()
 已经写好的：六把锤的 `*Minion`（`DeathTollsMinion` / `DreamlessNightMinion` / `EndlessWarMinion` / `TheJudgementMinion` / `DreamingLightMinion` / `ClimaticHawstringMinion`）和 `Projs/General/RuShiWoWenProj.cs`。
 
 ### 4.5 玩家级的定时生成：`PostUpdate` 会为**每个玩家**跑
-
-```csharp
-public void UpdateRandomMinionSpawn()
-{
     if (!Player.IsOwnerSide())
         return;
     ...

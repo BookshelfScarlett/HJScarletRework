@@ -10,6 +10,13 @@
         public static readonly string Useables = $"{ItemPath}/{nameof(Useables)}/";
         public static readonly string Weapons = $"{ItemPath}/{nameof(Weapons)}/";
         public static readonly string Vanity = $"{ItemPath}/{nameof(Vanity)}/";
+        public static readonly string NPCs = $"{AssetPath}{nameof(NPCs)}/";
+        public static readonly string Bosses = $"{NPCs}{nameof(Bosses)}/";
+        public static class DyradEye
+        {
+        public static readonly string DyradEyePrefix = $"{Bosses}DyradEye/";
+            public static readonly string Texture = $"{DyradEyePrefix}DyradEyeBoss";
+        }
         public static string LocalizedHelper(this string assetPath)
         {
             if (assetPath.Equals(Armors))

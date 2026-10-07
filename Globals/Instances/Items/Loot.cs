@@ -113,60 +113,32 @@ namespace HJScarletRework.Globals.Instances.Items
                     loot.AddLoot(ItemID.FrozenTurtleShell, 5);
                     loot.AddLoot(ItemID.ArcticDivingGear, 5);
                     break;
-                case ItemID.JungleFishingCrateHard:
-                    loot.AddLoot(ItemID.Bezoar, 5);
-                    loot.AddLoot(ItemID.AdhesiveBandage, 5);
-                    loot.AddLoot(ItemID.JungleRose, 5);
-                    loot.AddLoot(ItemID.NaturesGift, 5);
-                    break;
-                case ItemID.WoodenCrateHard:
-                    loot.AddLoot(ItemID.PaintSprayer, 5);
-                    loot.AddLoot(ItemID.ExtendoGrip, 5);
-                    loot.AddLoot(ItemID.PortableCementMixer, 5);
-                    loot.AddLoot(ItemID.BrickLayer, 5);
-                    break;
-                case ItemID.IronCrateHard:
+                case ItemID.GoldenCrateHard:
                     loot.AddLoot(ItemID.TigerClimbingGear, 5);
                     loot.AddLoot(ItemID.SharkToothNecklace, 5);
-                    break;
-                case ItemID.GoldenCrateHard:
-                    loot.AddLoot(ItemID.GoblinTech, 5);
-                    loot.AddLoot(ItemID.REK, 5);
-                    loot.AddLoot(ItemID.GPS, 5);
-                    break;
-                case ItemID.OceanCrateHard:
-                    loot.AddLoot(ItemID.HighTestFishingLine, 5);
-                    loot.AddLoot(ItemID.TackleBox, 5);
-                    loot.AddLoot(ItemID.AnglerEarring, 5);
                     break;
             }
             if (crateType == ItemType<QuakyCrate>())
             {
-                loot.AddLoot(ItemID.FireGauntlet, 5);
-                loot.AddLoot(ItemID.LavaWaders, 5);
-                loot.AddLoot(ItemID.LavaproofTackleBag, 5);
+                loot.AddLoot(ItemType<FishingCoinEmerial>(), 5, 5, 15);
 
             }
             if (crateType == ItemType<SolarCrate>() || crateType == ItemType<ShinyCrate>())
             {
-                loot.AddLoot(ItemID.HorseshoeBundle, 5);
-                loot.AddLoot(ItemID.CelestialStone, 5);
-
+                loot.AddLoot(ItemType<FishingCoinEmerial>(), 5, 5, 15);
             }
             if (crateType == ItemType<ForeverCrate>() || crateType == ItemType<CountdownCrate>())
             {
-                loot.AddLoot(ItemID.Shellphone, 5);
-                loot.AddLoot(ItemID.GreedyRing, 5);
 
+                loot.AddLoot(ItemType<FishingCoinEmerial>(), 5, 5, 15);
             }
             if (crateType == ItemType<CubistCrate>() || crateType == ItemType<CubeCrate>())
             {
-                loot.AddLoot(ItemID.FrozenShield, 5);
-                loot.AddLoot(ItemID.FrostsparkBoots, 5);
+                loot.AddLoot(ItemType<FishingCoinEmerial>(), 5, 5, 15);
             }
             if (crateType == ItemType<LivingCrate>() || crateType == ItemType<MembraneCrate>())
             {
-
+                loot.AddLoot(ItemType<FishingCoinEmerial>(), 5, 5, 15);
             }
         }
     }

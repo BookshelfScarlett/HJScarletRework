@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -192,7 +193,7 @@ namespace HJScarletRework.Projs.Executor
                 ECSParticle.ShinyCrossStarECS(target.Center, Projectile.rotation.ToRotationVector2().ToRandVelocity(ToRadians(10), 1.2f, 2.4f), Color.White, 45, 1, 0.4f);
             }
             modifiers.Knockback *= 1.72f;
-            if (!Projectile.IsMe())
+            if (!Projectile.CanSpawnChild())
                 return;
             foreach (var p in Main.ActiveProjectiles)
             {
@@ -219,7 +220,7 @@ namespace HJScarletRework.Projs.Executor
                 ((PureDaggerExecution)proj.ModProjectile).Flip = !Flip;
                 ((PureDaggerExecution)proj.ModProjectile).BeginTargetRotation = TargetRotation;
             }
-            else if (Main.mouseLeft)
+            else if (Owner.MouseLeftOf() && !Owner.dead)
             {
                 Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Type, Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 proj.HJScarlet().HasExecutionMechanic = true;
@@ -228,6 +229,8 @@ namespace HJScarletRework.Projs.Executor
             }
             else
             {
+                if (!Owner.IsOwnerSide())
+                    return;
                 ScarletSound(HJScarletSounds.Misc_ManaClearUse, Owner.Center, 0.55f, 1, -0.4f, 0.2f);
                 for (int i = 0; i < 26; i++)
                 {

@@ -1,5 +1,14 @@
 ﻿using HJScarletRework.Buffs;
+using HJScarletRework.Globals.Database.IDSets;
+using System;
 using Terraria;
+using Terraria.Audio;
+using Terraria.Chat;
+using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.Graphics.Shaders;
+using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Methods
@@ -46,5 +55,249 @@ namespace HJScarletRework.Globals.Methods
 
         public static float GetDamageBonusRatio(int targetDamage, int originalDamage) => ((float)targetDamage - originalDamage) / (float)originalDamage;
         public static void ApplyNoKnockbackBuff(this Player player, int frame) => player.AddBuff(BuffType<AntiKnockbackBuff>(), frame);
+        public static bool CountAsDebuff(this Player player, int buffType)
+        {
+            if (Main.debuff[buffType] && !ScarletBuffIDSets.IsStatueBuff[buffType])
+                return true;
+            return false;
+        }
+        public static void Suicide(this Player player, PlayerDeathReason damageSource, double dmg, int hitDirection, bool pvp = false, bool skipPrekill = false)
+        {
+            if (player.creativeGodMode || player.dead)
+                return;
+
+            player.StopVanityActions();
+
+            bool playSound = true;
+            bool genGore = true;
+            if (!PlayerLoader.PreKill(player, dmg, hitDirection, pvp, ref playSound, ref genGore, ref damageSource) && !skipPrekill)
+                return;
+
+            if (pvp)
+                player.pvpDeath = true;
+
+            if (player.whoAmI == Main.myPlayer)
+                Main.NotifyOfEvent(GameNotificationType.SpawnOrDeath);
+
+            if (player.pvpDeath)
+                player.numberOfDeathsPVP++;
+            else
+                player.numberOfDeathsPVE++;
+
+            player.lastDeathPostion = player.Center;
+            player.lastDeathTime = DateTime.Now;
+            player.showLastDeath = true;
+            bool overFlowing;
+            long coinsOwned = Utils.CoinsCount(out overFlowing, player.inventory);
+            if (Main.myPlayer == player.whoAmI)
+            {
+                player.lostCoins = coinsOwned;
+                player.lostCoinString = Main.ValueToCoins(player.lostCoins);
+            }
+
+
+            if (Main.myPlayer == player.whoAmI)
+                Main.mapFullscreen = false;
+
+            if (Main.myPlayer == player.whoAmI)
+            {
+                player.trashItem.SetDefaults();
+                if (player.difficulty == 0 || player.difficulty == 3)
+                {
+                    for (int i = 0; i < 59; i++)
+                    {
+                        if (player.inventory[i].stack > 0 && ((player.inventory[i].type >= ItemID.LargeAmethyst && player.inventory[i].type <= ItemID.LargeDiamond) || player.inventory[i].type == ItemID.LargeAmber))
+                        {
+                            int num = Item.NewItem(player.GetSource_Death(), (int)player.position.X, (int)player.position.Y, player.width, player.height, player.inventory[i].type);
+                            Main.item[num].netDefaults(player.inventory[i].netID);
+                            Main.item[num].Prefix(player.inventory[i].prefix);
+                            Main.item[num].stack = player.inventory[i].stack;
+                            Main.item[num].velocity.Y = (float)Main.rand.Next(-20, 1) * 0.2f;
+                            Main.item[num].velocity.X = (float)Main.rand.Next(-20, 21) * 0.2f;
+                            Main.item[num].noGrabDelay = 100;
+                            Main.item[num].favorited = false;
+                            Main.item[num].newAndShiny = false;
+                            if (Main.netMode == NetmodeID.MultiplayerClient)
+                                NetMessage.SendData(MessageID.SyncItem, -1, -1, null, num);
+
+                            player.inventory[i].SetDefaults();
+                        }
+                    }
+                }
+                else if (player.difficulty == 1)
+                {
+                    player.DropItems();
+                }
+                else if (player.difficulty == 2)
+                {
+                    player.DropItems();
+                    player.KillMeForGood();
+                }
+            }
+
+            if (!playSound)
+                goto postSound;
+
+            if (Main.dontStarveWorld || Main.tenthAnniversaryWorld)
+                SoundEngine.PlaySound(player.Male ? SoundID.DSTMaleHurt : SoundID.DSTFemaleHurt, player.position);
+            else
+                SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
+        postSound:
+
+            if (Main.tenthAnniversaryWorld)
+            {
+                for (int j = 0; j < 85; j++)
+                {
+                    int type = Main.rand.Next(139, 143);
+                    int num2 = Dust.NewDust(new Vector2(player.position.X, player.position.Y), player.width, player.height, type, 0f, -10f, 0, default(Color), 1.2f);
+                    Main.dust[num2].velocity.X += (float)Main.rand.Next(-50, 51) * 0.01f;
+                    Main.dust[num2].velocity.Y += (float)Main.rand.Next(-50, 51) * 0.01f;
+                    Main.dust[num2].velocity.X *= 1f + (float)Main.rand.Next(-50, 51) * 0.01f;
+                    Main.dust[num2].velocity.Y *= 1f + (float)Main.rand.Next(-50, 51) * 0.01f;
+                    Main.dust[num2].velocity.X += (float)Main.rand.Next(-50, 51) * 0.05f;
+                    Main.dust[num2].velocity.Y += (float)Main.rand.Next(-50, 51) * 0.05f;
+                    Main.dust[num2].scale *= 1f + (float)Main.rand.Next(-30, 31) * 0.01f;
+                }
+
+                for (int k = 0; k < 40; k++)
+                {
+                    int type2 = Main.rand.Next(276, 283);
+                    int num3 = Gore.NewGore(player.GetSource_Death(), player.position, new Vector2(0f, -10f), type2);
+                    Main.gore[num3].velocity.X += (float)Main.rand.Next(-50, 51) * 0.01f;
+                    Main.gore[num3].velocity.Y += (float)Main.rand.Next(-50, 51) * 0.01f;
+                    Main.gore[num3].velocity.X *= 1f + (float)Main.rand.Next(-50, 51) * 0.01f;
+                    Main.gore[num3].velocity.Y *= 1f + (float)Main.rand.Next(-50, 51) * 0.01f;
+                    Main.gore[num3].scale *= 1f + (float)Main.rand.Next(-20, 21) * 0.01f;
+                    Main.gore[num3].velocity.X += (float)Main.rand.Next(-50, 51) * 0.05f;
+                    Main.gore[num3].velocity.Y += (float)Main.rand.Next(-50, 51) * 0.05f;
+                }
+            }
+
+            player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
+            player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
+            player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
+            player.headVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + (float)(2 * hitDirection);
+            player.bodyVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + (float)(2 * hitDirection);
+            player.legVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + (float)(2 * hitDirection);
+            if (player.stoned || !genGore)
+            {
+                player.headPosition = Vector2.Zero;
+                player.bodyPosition = Vector2.Zero;
+                player.legPosition = Vector2.Zero;
+            }
+
+            if (!genGore)
+                goto postGore;
+
+            for (int l = 0; l < 100; l++)
+            {
+                if (player.stoned)
+                {
+                    Dust.NewDust(player.position, player.width, player.height, DustID.Stone, 2 * hitDirection, -2f);
+                }
+                else if (player.frostArmor)
+                {
+                    int num4 = Dust.NewDust(player.position, player.width, player.height, DustID.IceTorch, 2 * hitDirection, -2f);
+                    Main.dust[num4].shader = GameShaders.Armor.GetSecondaryShader(player.ArmorSetDye(), player);
+                }
+                else if (player.boneArmor)
+                {
+                    int num5 = Dust.NewDust(player.position, player.width, player.height, DustID.Bone, 2 * hitDirection, -2f);
+                    Main.dust[num5].shader = GameShaders.Armor.GetSecondaryShader(player.ArmorSetDye(), player);
+                }
+                else
+                {
+                    Dust.NewDust(player.position, player.width, player.height, DustID.Blood, 2 * hitDirection, -2f);
+                }
+            }
+        postGore:
+
+            player.mount.Dismount(player);
+            player.dead = true;
+            player.respawnTimer = GetRespawnTime(player, pvp);
+
+            PlayerLoader.Kill(player, dmg, hitDirection, pvp, damageSource);
+
+            player.immuneAlpha = 0;
+            if (!ChildSafety.Disabled)
+                player.immuneAlpha = 255;
+
+            player.palladiumRegen = false;
+            player.iceBarrier = false;
+            player.crystalLeaf = false;
+            NetworkText deathText = damageSource.GetDeathText(player.name);
+            if (Main.netMode == NetmodeID.Server)
+                ChatHelper.BroadcastChatMessage(deathText, new Color(225, 25, 25));
+            else if (Main.netMode == NetmodeID.SinglePlayer)
+                Main.NewText(deathText.ToString(), 225, 25, 25);
+
+            if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
+                NetMessage.SendPlayerDeath(player.whoAmI, damageSource, (int)dmg, hitDirection, pvp);
+
+            if (player.whoAmI == Main.myPlayer && (player.difficulty == 0 || player.difficulty == 3))
+            {
+                if (!pvp)
+                {
+                    player.DropCoins();
+                }
+                else
+                {
+                    player.lostCoins = 0L;
+                    player.lostCoinString = Main.ValueToCoins(player.lostCoins);
+                }
+            }
+
+            player.DropTombstone(coinsOwned, deathText, hitDirection);
+            if (player.whoAmI != Main.myPlayer)
+                return;
+
+            try
+            {
+                WorldGen.saveToonWhilePlaying();
+            }
+            catch
+            {
+            }
+        }
+        private static int GetRespawnTime(Player player, bool pvp)
+        {
+            int num = 300;
+            bool flag = false;
+            if (Main.netMode != NetmodeID.SinglePlayer && !pvp)
+            {
+                for (int i = 0; i < 200; i++)
+                {
+                    if (Main.npc[i].active && (Main.npc[i].boss || Main.npc[i].type == NPCID.EaterofWorldsHead || Main.npc[i].type == NPCID.EaterofWorldsBody || Main.npc[i].type == NPCID.EaterofWorldsTail) && Math.Abs(player.Center.X - Main.npc[i].Center.X) + Math.Abs(player.Center.Y - Main.npc[i].Center.Y) < 4000f)
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+
+            if (flag)
+                num += 300;
+
+            if (Main.expertMode)
+                num = (int)((double)num * 1.5);
+
+            if (flag && Main.getGoodWorld && Main.netMode != NetmodeID.SinglePlayer)
+            {
+                bool flag2 = false;
+                for (int j = 0; j < 255; j++)
+                {
+                    if (j != player.whoAmI && Main.player[j].active)
+                    {
+                        flag2 = true;
+                        break;
+                    }
+                }
+
+                if (flag2)
+                    num *= 2;
+            }
+
+            return num;
+        }
     }
 }

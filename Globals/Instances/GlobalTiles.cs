@@ -1,6 +1,6 @@
-﻿using HJScarletRework.Globals.Database.List;
-using HJScarletRework.Core.NetCode;
+﻿using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.NetCode.Content;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Items.Useables;
 using Terraria;
 using Terraria.Audio;

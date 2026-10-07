@@ -1,10 +1,13 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Projs;
 using HJScarletRework.ReVisual.Class;
 using System;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Methods
 {
@@ -669,7 +672,122 @@ namespace HJScarletRework.Globals.Methods
             }
             return true;
         }
+        public static void TrySuccessParry(this NPC target, Player Owner, float parryPower)
+        {
+                    }
         public static int ApplyDirectionOverride(this Projectile proj, NPC target) => (Main.player[proj.owner].Center.X < target.Center.X).ToDirectionInt();
+        #region 隐形爆炸生成
+        /// <summary>
+        /// 不可见爆炸射弹的生成参数
+        /// <br>所有字段均有合理默认值，调用时只需指定需要的部分</br>
+        /// </summary>
+        public record InvisBoomOptions
+        {
+            /// <summary>
+            /// 伤害类型
+            /// </summary>
+            public DamageClass DamageClass { get; init; } = DamageClass.Generic;
 
+            ///<summary>
+            ///伤害倍率
+            ///</summary>
+            public float DamageRatio { get; init; } = 1f;
+
+            /// <summary>
+            /// 爆炸的时长
+            /// </summary>
+            public int LifeTime { get; init; } = 40;
+
+            /// <summary>
+            /// 局部无敌帧
+            /// </summary>
+            public int HitCooldown { get; init; } = 40;
+
+            /// <summary>
+            /// 碰撞体积的边长
+            /// </summary>
+            public int Resize { get; init; } = 100;
+
+            /// <summary>
+            /// 命中次数（穿透次数），默认-1
+            /// </summary>
+            public int HitTime { get; init; } = -1;
+
+            /// <summary>
+            /// 命中时附加的Buff，如果为-1，表述没有
+            /// </summary>
+            public int BuffID { get; init; } = -1;
+
+            /// <summary>
+            /// Buff持续时间，如果为-1，表述不存在
+            /// </summary>
+            public int BuffTime { get; init; } = -1;
+
+            /// <summary>
+            /// 最大更新
+            /// </summary>
+            public int MaxUpdates { get; init; } = -1;
+
+            /// <summary>
+            /// 要挂载的目标
+            /// 默认为null
+            /// </summary>
+            public NPC TargetMounted { get; init; } = null;
+        }
+        /// <summary>
+        /// 快速生成一个不可见的爆炸射弹
+        /// <br>这个传参太多了，我比较建议指定部分参数传入进去</br>
+        /// <br>或者使用重载方案</br>
+        /// </summary>
+        /// <param name="proj"></param>
+        /// <returns></returns>
+        public static Projectile SpawnInvisBoom(this Projectile proj, DamageClass damageClass, float damageRatios = 1,
+            int lifeTime = 40, int hitCD = 40, int resize = 100, int hitTime = -1, int buffID = -1, int buffTime = -1, int maxUpdates = -1, NPC targetMounted = null)
+        {
+            Projectile boom = Projectile.NewProjectileDirect(proj.GetSource_FromThis(), proj.Center, Vector2.Zero, ProjectileType<InvisBoom>(), (int)(proj.damage * damageRatios), 0, proj.owner);
+            boom.ExpandHitboxBy(resize);
+            if (maxUpdates > 0)
+                boom.MaxUpdates = maxUpdates;
+            if (proj.ModProjectile is InvisBoom boom1)
+            {
+                boom1.SetUpBoom(buffID, buffTime, lifeTime, hitCD, hitTime, damageClass, targetMounted);
+            }
+            return boom;
+        }
+        /// <summary>
+        /// 快速生成一个不可见的爆炸射弹。
+        /// <br>通过 <see cref="InvisBoomOptions"/> 指定参数，未指定的部分使用默认值。</br>
+        /// </summary>
+        public static Projectile SpawnInvisBoom(this Projectile proj, InvisBoomOptions options)
+        {
+            Projectile boom = Projectile.NewProjectileDirect(
+                proj.GetSource_FromThis(),
+                proj.Center,
+                Vector2.Zero,
+                ProjectileType<InvisBoom>(),
+                (int)(proj.damage * options.DamageRatio),
+                0,
+                proj.owner);
+
+            boom.ExpandHitboxBy(options.Resize);
+
+            if (options.MaxUpdates > 0)
+                boom.MaxUpdates = options.MaxUpdates;
+
+            if (boom.ModProjectile is InvisBoom boomMod)
+            {
+                boomMod.SetUpBoom(
+                    options.BuffID,
+                    options.BuffTime,
+                    options.LifeTime,
+                    options.HitCooldown,
+                    options.HitTime,
+                    options.DamageClass,
+                    options.TargetMounted);
+            }
+
+            return boom;
+        }
+        #endregion
     }
 }

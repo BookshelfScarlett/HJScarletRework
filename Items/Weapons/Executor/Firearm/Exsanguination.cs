@@ -5,7 +5,6 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using HJScarletRework.Projs.Executor;
-using HJScarletRework.Projs.Ranged;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;

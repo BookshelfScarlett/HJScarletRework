@@ -5,6 +5,7 @@ using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Ranged;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace HJScarletRework.Items.Weapons.Ranged
@@ -22,6 +23,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.noMelee = true;
             Item.UseSound = SoundID.Item51;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.useAmmo = AmmoID.Gel;
             Item.scale = .85f;
             Item.useTime = 5;
@@ -31,6 +33,12 @@ namespace HJScarletRework.Items.Weapons.Ranged
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.UseSound = SoundID.Item45 with { MaxInstances = 1 };
             Item.knockBack = 3f;
+        }
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+
+            //Item.HoldoutProjUpdateAim(proj, 0, new Vector2(20, 0));
+            return base.Shoot(player, source, position, velocity, type, damage, knockback);
         }
         public override Vector2? HoldoutOffset()
         {

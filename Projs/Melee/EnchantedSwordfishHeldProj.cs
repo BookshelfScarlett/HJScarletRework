@@ -28,7 +28,7 @@ namespace HJScarletRework.Projs.Melee
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             ECSParticle.ShinyCrossStarECS(target.Center.ToRandCirclePos(2), RandVelTwoPi(18f), RandLerpColor(Color.Red, Color.Blue), 40, 1, 0.64f, .2f);
-            ECSParticle.ShinyCrossStarSmall(target.Center, RandVelTwoPi(8f), RandLerpColor(Color.Red,Color.Blue), 40, 1, 0.6f, Main.rand.NextFloat(-.05f, .05f));
+            ECSParticle.ShinyCrossStarSmall(target.Center, RandVelTwoPi(8f), RandLerpColor(Color.Red, Color.Blue), 40, 1, 0.6f, Main.rand.NextFloat(-.05f, .05f));
             base.OnHitNPC(target, hit, damageDone);
         }
         public override bool PreDraw(ref Color lightColor)
@@ -76,7 +76,7 @@ namespace HJScarletRework.Projs.Melee
             // Here 'progress' is set to a value that goes from 0.0 to 1.0 and back during the item use animation.
             if (Projectile.timeLeft < halfDuration)
             {
-                
+
                 progress = Projectile.timeLeft / halfDuration;
             }
             else

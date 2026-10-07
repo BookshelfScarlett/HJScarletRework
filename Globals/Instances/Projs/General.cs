@@ -148,7 +148,6 @@ namespace HJScarletRework.Globals.Instances.Projs
             }
 
             ModifyPreciousTargets(Owner, projectile);
-            ModifyDefenderEmblemBuff(Owner, projectile);
             if (Owner.HJScarlet().monkExecutor && projectile.type == ProjectileID.MonkStaffT1)
             {
                 projectile.scale *= 1.2f;
@@ -164,29 +163,6 @@ namespace HJScarletRework.Globals.Instances.Projs
             {
                 projectile.usesLocalNPCImmunity = true;
             }
-        }
-
-        private void ModifyDefenderEmblemBuff(Player owner, Projectile projectile)
-        {
-            bool legal = owner.HJScarlet().emblemVanguard && owner.HJScarlet().defenderEmblemCD == 0;
-            if (!legal)
-                return;
-            bool anohterBool = projectile.IsLegalFriendlyProj(ExecutorDamageClass.Instance) && projectile.HJScarlet().ExecutionStrike;
-            DefenderBuff = legal && anohterBool;
-        }
-
-        public void ModifyDefenderProj(Player owner, Projectile projectile, NPC target)
-        {
-            if (DefenderBuff && target.IsLegal())
-            {
-                owner.GetImmnue(ImmunityCooldownID.General, 80, true);
-                SoundEngine.PlaySound(HJScarletSounds.GrabCharge with { MaxInstances = 0 }, owner.Center);
-                owner.HJScarlet().defenderEmblemCD = GetSeconds(6);
-                for (int i = 0; i < 30; i++)
-                    new TurbulenceShinyOrb(owner.Center.ToRandCirclePos(15f), 2.4f, Color.White, 120, 0.885f, RandRotTwoPi).Spawn();
-                DefenderBuff = false;
-            }
-
         }
 
         private void ModifyPreciousTargets(Player owner, Projectile projectile)

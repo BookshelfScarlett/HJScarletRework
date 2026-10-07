@@ -74,7 +74,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             if (DownedBossSystem.downedSunGod)
             {
                 bool traditionalMode = HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase;
-                bool isPressingLeftAlt = Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt);
+                bool isPressingLeftAlt = Main.keyState.PressingAlt();
                 int requirements = Math.Max(0, ExecutionProgress);
                 string progressText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(requirements);
                 string executionText = traditionalMode && isPressingLeftAlt ? Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionDescriptionName").ToLangValue() : progressText;

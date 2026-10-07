@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Instances.Items;
+using HJScarletRework.ReVisual.Class;
 using System;
 using Terraria;
 using Terraria.DataStructures;
@@ -60,9 +61,16 @@ namespace HJScarletRework.Globals.Methods
             float targetRotation = aimVect.ToRotation();
 
             if (player.LocalMouseWorld().X < player.Center.X)
-                player.itemRotation = player.itemRotation.AngleLerp(targetRotation - ToRadians(rotationOffset)+Pi, rotationSpeed);
+                player.itemRotation = player.itemRotation.AngleLerp(targetRotation - ToRadians(rotationOffset) + Pi, rotationSpeed);
             else
                 player.itemRotation = player.itemRotation.AngleLerp(targetRotation + ToRadians(rotationOffset), rotationSpeed);
+        }
+        public static void HoldoutProjUpdateAim(this Item item, Projectile proj, float recoilPower, Vector2? offset = null)
+        {
+            if (proj.ModProjectile is ReVisualRecoilProj holdout)
+            {
+                holdout.SetUpHoldoutData(item.type, recoilPower, item.useAnimation, offset ?? Vector2.Zero);
+            }
         }
         public static void ApplyPrefixToThis(ref Item item, int prefixID)
         {

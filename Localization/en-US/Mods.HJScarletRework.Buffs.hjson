@@ -163,3 +163,27 @@ DiamondYoyoBuff: {
 	DisplayName: Diamond Dust
 	Description: Shines brightly, attracting dazzling gems
 }
+
+ForeverNightBuff: {
+	DisplayName: Restless Night
+	Description: Losing health
+}
+
+JellyfishGroupBuff: {
+	DisplayName: Jellyfish Swarm
+	Description:
+		'''
+		Blessing from a group of small jellyfish
+		Blue jellyfish increase damage by {0}, critical strike chance by {1}, and armor penetration by {2}
+		Pink jellyfish grant {3} defense, {4} damage reduction, and {5} health regeneration rate
+		Green jellyfish grant you unlimited flight time and enhance mobility
+		'''
+	Blue: Blue
+	Pink: Pink
+	Green: Green
+}
+
+ParrySpin: {
+	DisplayName: Parry Spin
+	Description: Mods.HJScarletRework.Buffs.ParrySpin.Description
+}

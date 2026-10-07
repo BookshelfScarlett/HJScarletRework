@@ -30,6 +30,13 @@ namespace HJScarletRework.Globals.Instances.Projs
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player Owner = Main.player[projectile.owner];
+            switch (projectile.type)
+            {
+                case ProjectileID.NightsEdge:
+                case ProjectileID.TrueNightsEdge:
+                    target.AddBuff(BuffType<ForeverNightBuff>(), 60);
+                    break;
+            }
             //判定是否为悠悠球
             bool isYoyo = projectile.aiStyle == ProjAIStyleID.Yoyo && projectile.DamageType.CountsAsClass<ExecutorDamageClass>();
             if (HasExecutionMechanic && ((!AddExecutionHit && projectile.numHits < 1) || isYoyo))
@@ -41,7 +48,6 @@ namespace HJScarletRework.Globals.Instances.Projs
             }
             HandleMaidReaperOnHit(Owner, projectile, target);
             HandleBlackKeyOnHit(Owner);
-            ModifyDefenderProj(Owner, projectile, target);
             if (projectile.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
                 if (Owner.HJScarlet().KnifeMarkIndex == ProjectileType<TearEyeMark>())

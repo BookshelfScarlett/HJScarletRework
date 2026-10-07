@@ -249,10 +249,13 @@ RandomNewFolder: {
 
 SuicideKnife: {
 	DisplayName: 自损八千
+	AltDisplayName: 自损八千，伤敌一万
 	Tooltip:
 		'''
 		使用后对自己造成高额伤害
 		方便自残
+		你可以切换模式，使其同样作用于被挥舞命中的玩家
+		对物品Shift+右键可以切换
 		“饿啊！”
 		'''
 }
@@ -314,5 +317,14 @@ FishingPaper: {
 		[i:HJScarletRework/LivingReaverShark]生命掠夺鲨，击败万籁携生后，于丛林获取
 		[i:HJScarletRework/MatterSawtoothShark]物质锯齿鲨，击败化物天匠后，于雪原获取
 		[i:HJScarletRework/DarkenRockFish]暗影岩石鱼，击败暗影墙后，于地下获取
+		'''
+}
+
+FishingCoinEmerial: {
+	DisplayName: 垂钓者绿宝石币
+	Tooltip:
+		'''
+		可在交易终端处兑换物品
+		“钓鱼佬的最爱”
 		'''
 }

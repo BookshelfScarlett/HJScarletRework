@@ -149,30 +149,26 @@ namespace HJScarletRework.Items.Vanity
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.IsItemName())
-            {
-                TextboxManager.FirstLineY = line.Y;
-                VanityEffectClass.DrawItemName(line, VanityData, ParticleColor1, ParticleColor2);
-                return false;
-            }
-            if (line.Name == "FlavorTooltipName" && line.Mod == Mod.Name)
-            {
-                VanityEffectClass.DrawFlavorTooltipName(line, VanityData, ParticleColor1, ParticleColor2);
-                return false;
 
-            }
-            if ((line.Name == "Vanity" || line.Name == "Equipable") && line.Mod == "Terraria")
-            {
-                VanityEffectClass.DrawMisc(line, VanityData, ParticleColor1, ParticleColor2);
-                return false;
-            }
             return true;
         }
         public override void PostDrawTooltipLine(DrawableTooltipLine line)
         {
             //通常情况下，物品不可能没有名字，而物品名称通常都在第一行，所以可以用这个来记录第一行的坐标
             if (line.IsItemName())
+            {
                 TextboxManager.FirstLineY = line.Y;
+                VanityEffectClass.DrawItemName(line, VanityData, ParticleColor1, ParticleColor2);
+            }
+            if (line.Name == "FlavorTooltipName" && line.Mod == Mod.Name)
+            {
+                VanityEffectClass.DrawFlavorTooltipName(line, VanityData, ParticleColor1, ParticleColor2);
+            }
+            if ((line.Name == "Vanity" || line.Name == "Equipable") && line.Mod == "Terraria")
+            {
+                if (Item.HJScarlet().ItemBelongTo != Globals.Database.Enums.EnumItemOwner.Donator)
+                    VanityEffectClass.DrawMisc(line, VanityData, ParticleColor1, ParticleColor2);
+            }
             if (HasFlavorTooltip)
             {
                 TextboxSettings sets = new TextboxSettings()

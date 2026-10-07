@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Methods;
 using Terraria;
@@ -37,9 +38,10 @@ namespace HJScarletRework.Globals.Classes
         }
         public override void HoldItem(Player player)
         {
-            if (player.HasProj(Item.shoot))
+            if (!player.IsOwnerSide())
                 return;
-            if (Main.myPlayer != player.whoAmI)
+
+            if (player.HasProj(Item.shoot))
                 return;
             int projDamage = (int)player.GetTotalDamage(Item.DamageType).ApplyTo(Item.damage);
             Projectile proj = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, Item.shoot, projDamage, Item.knockBack, player.whoAmI);

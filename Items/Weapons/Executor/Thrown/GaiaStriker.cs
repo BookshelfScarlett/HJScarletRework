@@ -5,7 +5,6 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Systems.Conditions;
 using HJScarletRework.Projs.Executor;
-using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -81,11 +80,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         }
         public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
         {
-            if (line.Mod == Mod.Name && line.Name == "FlavorTooltipsName")
-            {
-                DisasterRarity.DrawFlavorRarity(line);
-                return false;
-            }
             return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override void AddRecipes()

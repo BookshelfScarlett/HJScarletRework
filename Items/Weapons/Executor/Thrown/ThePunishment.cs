@@ -6,7 +6,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor.Thrown
 {
@@ -32,10 +31,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.shootSpeed = 18f;
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
             Item.SetUpNoUseGraphicItem();
-        }
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            return base.PreDrawTooltipLine(line, ref yOffset);
         }
         public override void AddRecipes()
         {

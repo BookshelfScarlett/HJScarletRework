@@ -1,5 +1,6 @@
 ﻿using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Database.Localization;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria.Localization;
@@ -121,21 +122,16 @@ namespace HJScarletRework.Globals.Methods
         }
         public static int FindLineIndex(this List<TooltipLine> tooltips, string lineName, string lineMod = "Terraria") => tooltips.FindIndex(t => t.Name == lineName && t.Mod == lineMod);
         public static int FindLineIndexLast(this List<TooltipLine> tooltips, string lineName, string lineMod = "Terraria") => tooltips.FindLastIndex(t => t.Name.Contains(lineName) && t.Mod == lineMod);
-        public static string SwapTooltipValue()
-        {
-            string keyPath = ($"Mods.HJScarletRework.SwitchWeaponTooltip");
-            return keyPath.ToLangValue();
-        }
         public static void AddSwapTooltipValueBossCondition(this List<TooltipLine> tooltips, int downedNPCID, Color? color = null)
         {
-            string listPath = "Mods.HJScarletRework.SwitchWeaponConditionList.";
-            string downedConditionPath = "Mods.HJScarletRework.SwitchWeaponConditionTooltip";
+            string listPath = "Mods.HJScarletRework.Database.DownedConditionList";
+            string downedConditionPath = ScarletTextSets.GenericText.SwitchCondition;
             string bossValue = string.Empty;
             if (HJScarletList.DownedBossConditionList.TryGetValue(downedNPCID, out string keyValue))
                 bossValue = keyValue;
             Color color1 = color ?? Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f);
             string downedValue = (listPath + bossValue).ToLangValue();
-            string listValue = downedConditionPath.ToLangValue().ToFormatValue(downedValue);
+            string listValue = downedConditionPath.ToFormatValue(downedValue);
             tooltips.CreateTooltipDirect(listValue, color1, HJScarletRework.Instance, "SwapConditionName");
 
         }
@@ -152,5 +148,6 @@ namespace HJScarletRework.Globals.Methods
                 return baseTextValue + "格式化出错";
             }
         }
+        public static bool PressingAlt(this KeyboardState keyboardState) => keyboardState.IsKeyDown(Keys.LeftAlt) || keyboardState.IsKeyDown(Keys.RightAlt);
     }
 }

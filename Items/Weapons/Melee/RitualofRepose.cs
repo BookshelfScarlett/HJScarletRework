@@ -1,9 +1,7 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Material;
-using HJScarletRework.Core.NetSync;
-using HJScarletRework.Core.ScreenEffect;
-using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Core.NetCode;
+using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;

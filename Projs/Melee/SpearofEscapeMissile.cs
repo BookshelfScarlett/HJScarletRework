@@ -92,7 +92,6 @@ namespace HJScarletRework.Projs.Melee
             if (HomingTarget != null && HomingTarget.CanBeChasedBy())
             {
                 Projectile.HomingTarget(HomingTarget.Center, -1f, 12f, 10f, 20f);
-                //Main.NewText(11);
             }
             else if (GetTargetOnNeed(out NPC target, false))
             {

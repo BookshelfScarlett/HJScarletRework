@@ -1,9 +1,11 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
+using HJScarletRework.Globals.Database.Localization;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
@@ -11,10 +13,12 @@ using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.SaintChurch;
 using HJScarletRework.Items.Useables;
 using HJScarletRework.Projs.Executor;
+using HJScarletRework.Projs.General;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players
@@ -47,7 +51,6 @@ namespace HJScarletRework.Globals.Players
             if (saintChurch)
             {
                 //是否首次死亡，如果是，将这个lastStand标记为True
-                Main.NewText(saintChurchLastStanding);
                 if (saintChurchLastStanding == 0)
                 {
                     Player.AddBuff(BuffType<SaintChurchBuff>(), GetSeconds(10) * 60);
@@ -58,7 +61,7 @@ namespace HJScarletRework.Globals.Players
                 }
                 else
                 {
-                    if (Main.rand.NextFloat()<.8f)
+                    if (Main.rand.NextFloat() < .8f)
                     {
                         saintChurchLastStanding += 1;
                         Player.RestoreHealthByPercent(SaintChurchHead.RespawnLifePercent);
@@ -123,16 +126,7 @@ namespace HJScarletRework.Globals.Players
         {
             if (mayaPumper)
             {
-
-                modifiers.Knockback *= npc.knockBackResist;
-                modifiers.Knockback *= 5f;
-                if (npc.knockBackResist != 0)
-                {
-                    float pitch = Main.rand.NextFromList<float>(0f, 0.3f, -0.3f);
-                    SoundEngine.PlaySound(HJScarletSounds.Misc_MayaPumper with { MaxInstances = 1, Variants = [1], Pitch = pitch });
-                    SpawnPumpperParticle(npc.Center.GetNormalVector2(Player.Center));
-                    ScreenShakeSystem.AddScreenShakes(Player.Center, 15f, 40, Player.velocity.ToRotation());
-                }
+                PumperHandler(npc.knockBackResist, ref modifiers, npc.Center);
             }
             float totalProjDamageModify = 1f;
             float sourceDamageModify = 1f;
@@ -154,11 +148,64 @@ namespace HJScarletRework.Globals.Players
             modifiers.FinalDamage *= totalProjDamageModify;
             modifiers.SourceDamage *= sourceDamageModify;
         }
+        public void PumperHandler(float kbResistOrKB, ref Player.HurtModifiers modifiers, Vector2 beginCenter)
+        {
+            modifiers.Knockback *= kbResistOrKB;
+            modifiers.Knockback *= 5f;
+            float pitch = Main.rand.NextFromList<float>(0f, 0.13f, -0.13f);
+            if (kbResistOrKB != 0)
+            {
+                ScreenShakeSystem.AddScreenShakes(Player.Center, 15f, 40, Player.velocity.ToRotation());
+            }
+            else
+                ScreenShakeSystem.AddScreenShakes(Player.Center, 15f, 40, RandRotTwoPi);
+            ScarletSound(HJScarletSounds.Misc_MayaPumper, Player.Center, 1, 1, pitch, 0, 1);
+
+            if (mayaPumperParty)
+            {
+                int type = mayaPumperDashType;
+                if (type == -1)
+                    type = Main.rand.Next(PinballPurgatory.WhiteType, PinballPurgatory.PinkType + 1);
+                //粉色冲刺
+                mayaPumperDashType = type;
+                if (type == PinballPurgatory.PinkType)
+                {
+                    if (mayaPumperDashTime == 0)
+                        mayaPumperDashTime = GetSeconds(4);
+                    SpawnPumpperParticleAlt(beginCenter.GetNormalVector2(Player.Center), Color.HotPink, Color.Pink);
+                }
+                else if (type == PinballPurgatory.BlueType)
+                {
+                    if (mayaPumperDashTime == 0)
+                        mayaPumperDashTime = GetSeconds(2);
+                    SpawnPumpperParticleAlt(beginCenter.GetNormalVector2(Player.Center), Color.AliceBlue, Color.SkyBlue);
+                }
+                else if (type == PinballPurgatory.OrangeType)
+                {
+                    SpawnPumpperParticleAlt(beginCenter.GetNormalVector2(Player.Center), Color.OrangeRed, Color.Orange);
+                    if (mayaPumperDashTime == 0)
+                        mayaPumperDashTime = GetSeconds(4);
+                }
+                else
+                {
+                    SpawnPumpperParticleAlt(beginCenter.GetNormalVector2(Player.Center), Color.White, Color.WhiteSmoke);
+                    if (mayaPumperDashTime == 0)
+                        mayaPumperDashTime = GetSeconds(3);
+                }
+            }
+            else
+                SpawnPumpperParticle(beginCenter.GetNormalVector2(Player.Center));
+        }
+        public void SpawnPumpperParticleAlt(Vector2 vel, Color beginColor, Color endColor)
+        {
+            for (int i = 0; i < 40; i++)
+                ECSParticle.SmokeParticle(Player.Center, vel.ToRandVelocity(ToRadians(30f), 1f, 22f), RandLerpColor(beginColor, endColor), 45, RandRotTwoPi, 0.5f, 0.25f, true, BlendState.AlphaBlend);
+        }
 
         public void SpawnPumpperParticle(Vector2 vel)
         {
             for (int i = 0; i < 40; i++)
-                new SmokeParticle(Player.Center, vel.ToRandVelocity(ToRadians(30f), 1f, 22f), RandLerpColor(Color.SkyBlue, Color.AliceBlue), 45, RandRotTwoPi, 0.5f, 0.25f, true).Spawn();
+                ECSParticle.SmokeParticle(Player.Center, vel.ToRandVelocity(ToRadians(30f), 1f, 22f), RandLerpColor(Color.RoyalBlue, Color.SkyBlue), 45, RandRotTwoPi, 0.5f, 0.25f, true, BlendState.AlphaBlend);
         }
 
         public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers)
@@ -166,7 +213,8 @@ namespace HJScarletRework.Globals.Players
             base.ModifyHitByProjectile(proj, ref modifiers);
             float totalProjDamageModify = 1f;
             float sourceDamageModify = 1f;
-            //月光花的buff，护花员的。
+            if (mayaPumper)
+                PumperHandler(proj.knockBack, ref modifiers, proj.Center);
             if (floretProtectorExecutor)
             {
                 if (modifiers.HitDirection == Player.direction)
@@ -253,6 +301,30 @@ namespace HJScarletRework.Globals.Players
         }
         public override void OnHurt(Player.HurtInfo info)
         {
+            if (mayaPumperParty && mayaPumperDashTime > 0 && mayaPumperDashType == PinballPurgatory.OrangeType)
+            {
+                ScarletSound(SoundID.DD2_BetsyFlameBreath, Player.Center, pitchVariance: .1f, instances: 0);
+                for (int i = 0; i < 9; i++)
+                {
+                    int baseDamage = info.Damage;
+                    Vector2 spawnPos = Player.Center - Vector2.UnitY * Main.rand.NextFloat(600f, 900f) + Vector2.UnitX * Main.rand.NextFloat(-1200f, 1200f);
+                    Vector2 vel = Vector2.UnitY.ToRandVelocity(ToRadians(10), 16, 21);
+                    if (Player.IsOwnerSide())
+                    {
+                        Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), spawnPos, vel, ProjectileType<PinballPurgatoryFireball>(), baseDamage * 10, 1, Player.whoAmI);
+                        proj.extraUpdates += 1;
+                    }
+                }
+            }
+            if (bloodThronCrown)
+            {
+                bloodThornCrownHit += GetSeconds(5);
+                if (bloodThornCrownHit >= GetSeconds(5) * BloodThornCrown.MaxHitCounter)
+                {
+                    NetworkText text = Mod.GetLocalization(ScarletTextSets.CustomDeath.SuicidePath).ToNetworkText();
+                    Player.Suicide(PlayerDeathReason.ByCustomReason(text), 99999, 0, false, true);
+                }
+            }
             if (Player.HasProj<MonkStaffSkillProj>())
             {
                 foreach (var projID in Main.ActiveProjectiles)

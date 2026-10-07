@@ -21,7 +21,7 @@ namespace HJScarletRework.Projs.General
             Projectile.SetUpHeldProj(0);
             //大小需要一定的容错
             Projectile.width = Projectile.height = 100;
-            
+
         }
         public override void ProjAI()
         {

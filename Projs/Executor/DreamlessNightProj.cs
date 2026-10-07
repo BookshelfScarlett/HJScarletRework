@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Globals.Classes;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.NetCode;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -184,6 +185,7 @@ namespace HJScarletRework.Projs.Executor
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             bool spawn = AttackType == State.Shoot || (AttackType == State.Return && Timer == 0f);
+            target.AddBuff(BuffType<ForeverNightBuff>(), 60);
             //如果允许生成梦境之花。则进入这个AI
             //注意我们不会重复生成
             if (spawn && !StoredNPC.Contains(target))

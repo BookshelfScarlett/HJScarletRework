@@ -1,6 +1,6 @@
-﻿using HJScarletRework.Globals.Executor;
+﻿using HJScarletRework.Core.NetCode;
+using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Core.NetCode;
 using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.ID;

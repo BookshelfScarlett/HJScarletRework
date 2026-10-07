@@ -67,12 +67,12 @@ namespace HJScarletRework.Projs.Executor
         public void UpdateAttackAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            if(!TargetNPC.IsLegal())
+            if (!TargetNPC.IsLegal())
             {
-                if(Projectile.GetTargetSafe(out NPC target))
+                if (Projectile.GetTargetSafe(out NPC target))
                 {
                     TargetNPC = target;
-                }    
+                }
             }
             if (!Helper.IsDone[0])
             {

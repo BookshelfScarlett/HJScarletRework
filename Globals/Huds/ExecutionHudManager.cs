@@ -116,10 +116,8 @@ namespace HJScarletRework.Globals.Huds
                 Vector2 pos2 = textPos + offset;
                 ChatManager.DrawColorCodedString(sb, font, numStr, pos2, shadowColor2, 0f, size * 0.5f, scale);
             }
-
             //中心白色文字
             ChatManager.DrawColorCodedString(sb, font, numStr, textPos, mainColor, 0f, size * 0.5f, scale);
-
         }
         private float GetNumberOffsetX(int number)
         {

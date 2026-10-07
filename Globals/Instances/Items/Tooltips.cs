@@ -18,6 +18,7 @@ using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI.Chat;
 
@@ -29,11 +30,32 @@ namespace HJScarletRework.Globals.Instances.Items
         public bool drawBuffIconAndDetail = false;
         public bool drawBuffIcon = false;
         public string OwnerName = string.Empty;
+        public override void SetDefaults(Item entity)
+        {
+            switch (entity.type)
+            {
+                case ItemID.NightsEdge:
+                case ItemID.TrueNightsEdge:
+                    entity.HJScarlet().drawBuffIconAndDetail = true;
+                    break;
+
+            }
+        }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
+            switch (item.type)
+            {
+                case ItemID.NightsEdge:
+                case ItemID.TrueNightsEdge:
+                    tooltips.CreateTooltipDirect(
+                        ScarletTextSets.GenericText.CombineModName(
+                            ScarletTextSets.GenericText.ApplyDoT.ToFormatValue("[ScarletDebuff/HJScarletRework/ForeverNightBuff]")),
+                        Color.LightGray, Mod, "ApplyDoTName");
+                    break;
+            }
             if (ItemBelongTo != EnumItemOwner.None)
             {
-                string keyPath = Mod.GetLocalizationKey($"ItemBelongTo.{ItemBelongTo}");
+                string keyPath = Language.GetTextValue(ScarletTextSets.DatabasePrefix + ".ItemBelongTo." + ItemBelongTo);
                 Color color = Color.White;
                 switch (ItemBelongTo)
                 {
@@ -52,8 +74,9 @@ namespace HJScarletRework.Globals.Instances.Items
             }
             if (HJScarletPlayer.AllWeaponSwapValue.Contains(item.type))
             {
-                string keyPath = Mod.GetLocalizationKey($"SwitchWeaponTooltip");
-                tooltips.CreateTooltipDirect(keyPath.ToLangValue(), Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f));
+                string pre = ScarletTextSets.GenericText.ModNamePrefix;
+                string value = pre + "\n" + ScarletTextSets.GenericText.SwitchTooltip;
+                tooltips.CreateTooltipDirect(value, Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f));
             }
             if (LocalPlayer.HJScarlet().terraRecipe)
             {
@@ -147,7 +170,7 @@ namespace HJScarletRework.Globals.Instances.Items
         private static Regex MatchingSpecificBuff = new Regex(@"([^\/]+)\/([^\/]+)");
         //要绘制的Buff列表
         //话说我们为什么要写这么长一串？
-        public List<(float, int, string, Texture2D, string, string, string)> buffs = new();
+        public List<(float, int, string, Texture2D, string, string, string, int)> buffs = new();
         public List<string> add = new();
         public void GlobalIconInsert(Item item, List<TooltipLine> tooltips)
         {
@@ -158,75 +181,85 @@ namespace HJScarletRework.Globals.Instances.Items
             //遍历tooltip行，我们开始找匹配的正则表达式
             for (int i = 0; i < tooltips.Count; i++)
             {
-                Texture2D texture = null;
-                string name = string.Empty;
-                string descrip = string.Empty;
-                float length = 0;
-                string color = string.Empty;
-                while (MatchingBuffIcon.Match(tooltips[i].Text).Success)
+                string[] subLines = tooltips[i].Text.Split('\n');
+                bool modified = false;
+                for (int sub = 0; sub < subLines.Length; sub++)
                 {
-                    tooltips[i].Text = MatchingBuffIcon.Replace(tooltips[i].Text, match =>
+                    Texture2D texture = null;
+                    string name = string.Empty;
+                    string descrip = string.Empty;
+                    float length = 0;
+                    string color = string.Empty;
+                    string subText = subLines[sub];
+                    while (MatchingBuffIcon.Match(subText).Success)
                     {
-                        return MatchingSpecificBuff.Replace(match.Groups[2].Value, keys =>
+                        subText = MatchingBuffIcon.Replace(subText, match =>
                         {
-                            color = match.Groups[1].Value switch
+                            return MatchingSpecificBuff.Replace(match.Groups[2].Value, keys =>
                             {
-                                "ScarletBuff" => "EE90EE",
-                                "ScarletDebuff" => "AAEEFF",
-                                _ => "FFFFFF"
-                            };
-                            //获取文本长度，方便定位buff的贴图绘制位置
-                            length = ChatManager.GetStringSize(FontAssets.MouseText.Value, tooltips[i].Text.Substring(0, match.Index), Vector2.One).X;
-                            //判断一遍原版的buff和mod的buff，两者的buffIcon获取区别很大
-                            if (keys.Groups[1].Value == "Terraria")
-                            {
-                                if (BuffID.Search.TryGetId(keys.Groups[2].Value, out int buffID))
+                                color = match.Groups[1].Value switch
                                 {
-                                    texture = TextureAssets.Buff[buffID].Value;
-                                    name = Lang.GetBuffName(buffID);
-                                    descrip = Lang.GetBuffDescription(buffID);
-                                    buffs.Add((length, i, color, texture, name, descrip, tooltips[i].Name));
-                                }
-                            }
-                            else
-                            {
-                                if (ModLoader.TryGetMod(keys.Groups[1].Value, out Mod mod))
+                                    "ScarletBuff" => "EE90EE",
+                                    "ScarletDebuff" => "AAEEFF",
+                                    _ => "FFFFFF"
+                                };
+                                //获取文本长度，方便定位buff的贴图绘制位置
+                                length = ChatManager.GetStringSize(FontAssets.MouseText.Value, subText.Substring(0, match.Index), Vector2.One).X;
+                                //判断一遍原版的buff和mod的buff，两者的buffIcon获取区别很大
+                                if (keys.Groups[1].Value == "Terraria")
                                 {
-                                    if (mod.TryFind(keys.Groups[2].Value, out ModBuff modBuff))
+                                    if (BuffID.Search.TryGetId(keys.Groups[2].Value, out int buffID))
                                     {
-                                        //为啥我们要request啊？有没有别的方案？
-                                        texture = Request<Texture2D>(modBuff.Texture).Value;
-                                        name = modBuff.DisplayName.Value;
-                                        descrip = modBuff.Description.Value;
-                                        buffs.Add((length, i, color, texture, name, descrip, tooltips[i].Name));
+                                        texture = TextureAssets.Buff[buffID].Value;
+                                        name = Lang.GetBuffName(buffID);
+                                        descrip = Lang.GetBuffDescription(buffID);
+                                        buffs.Add((length, i, color, texture, name, descrip, tooltips[i].Name, sub));
                                     }
                                 }
-                            }
-                            //计算图标在渲染时应占据的宽度
-                            //此时我们不知道最终的行高，但可以基于当前字体计算一个近似比例
-                            DynamicSpriteFont currentFont = FontAssets.MouseText.Value;
-                            Vector2 currentScale = Vector2.One;
-                            //近似行高，用于计算图标宽度
-                            float approximateLineHeight = currentFont.MeasureString("M").Y * currentScale.Y;
-                            //图标宽高比
-                            float iconAspectRatio = (32 + 2) / (float)32;
-                            if (texture != null)
-                            {
-                                iconAspectRatio = (texture.Width + 2) / (float)texture.Height;
-                            }
+                                else
+                                {
+                                    if (ModLoader.TryGetMod(keys.Groups[1].Value, out Mod mod))
+                                    {
+                                        if (mod.TryFind(keys.Groups[2].Value, out ModBuff modBuff))
+                                        {
+                                            //为啥我们要request啊？有没有别的方案？
+                                            texture = Request<Texture2D>(modBuff.Texture).Value;
+                                            name = modBuff.DisplayName.Value;
+                                            descrip = modBuff.Description.Value;
+                                            buffs.Add((length, i, color, texture, name, descrip, tooltips[i].Name, sub));
+                                        }
+                                    }
+                                }
+                                //计算图标在渲染时应占据的宽度
+                                //此时我们不知道最终的行高，但可以基于当前字体计算一个近似比例
+                                DynamicSpriteFont currentFont = FontAssets.MouseText.Value;
+                                Vector2 currentScale = Vector2.One;
+                                //近似行高，用于计算图标宽度
+                                float approximateLineHeight = currentFont.MeasureString("M").Y * currentScale.Y;
+                                //图标宽高比
+                                float iconAspectRatio = (32 + 2) / (float)32;
+                                if (texture != null)
+                                {
+                                    iconAspectRatio = (texture.Width + 2) / (float)texture.Height;
+                                }
 
-                            //图标应占据的像素宽度
-                            float targetWidth = approximateLineHeight * iconAspectRatio;
-                            //测量单个空格的宽度
-                            float spaceWidth = ChatManager.GetStringSize(currentFont, " ", currentScale).X;
-                            //计算所需空格数量
-                            int spacesNeeded = (int)Math.Ceiling(targetWidth / spaceWidth);
-                            //构建占位空格字符串
-                            string placeholder = new string(' ', spacesNeeded);
-                            return $"{placeholder}[c/{color}:{name}]";
-                        });
-                    }, 1);
+                                //图标应占据的像素宽度
+                                float targetWidth = approximateLineHeight * iconAspectRatio;
+                                //测量单个空格的宽度
+                                float spaceWidth = ChatManager.GetStringSize(currentFont, " ", currentScale).X;
+                                //计算所需空格数量
+                                int spacesNeeded = (int)Math.Ceiling(targetWidth / spaceWidth);
+                                //构建占位空格字符串
+                                string placeholder = new string(' ', spacesNeeded);
+                                modified = true;
+                                return $"{placeholder}[c/{color}:{name}]";
+                            });
+                        }, 1);
+                    }
+                    subLines[sub] = subText;
                 }
+                if (modified)
+                    tooltips[i].Text = string.Join("\n", subLines);
             }
             //用于写入具体的buffTooltip
             if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt) && buffs.Count != 0 && drawBuffIconAndDetail)
@@ -259,11 +292,6 @@ namespace HJScarletRework.Globals.Instances.Items
                     string placeholder = new string(' ', spacesNeeded);
 
                     //终于差不多了……加tooltip
-                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName" + j, $"{placeholder}[c/{buffs[j].Item3}:{buffs[j].Item5}]");
-                    TooltipLine buffTextDescripLine = new TooltipLine(Mod, "ScarletBuffDescripName" + j, $"{buffs[j].Item6}");
-                    tooltips.Add(buffTextNameLine);
-                    tooltips.Add(buffTextDescripLine);
-                    buffs[j] = (0, tooltips.Count, buffs[j].Item3, buffs[j].Item4, buffs[j].Item5, buffs[j].Item6, buffTextNameLine.Name);
                     if (add.Contains(buffs[j].Item5))
                     {
                         buffs.Remove(buffs[j]);
@@ -271,6 +299,12 @@ namespace HJScarletRework.Globals.Instances.Items
                     }
                     else
                         add.Add(buffs[j].Item5);
+
+                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName" + j, $"{placeholder}[c/{buffs[j].Item3}:{buffs[j].Item5}]");
+                    TooltipLine buffTextDescripLine = new TooltipLine(Mod, "ScarletBuffDescripName" + j, $"{buffs[j].Item6}");
+                    tooltips.Add(buffTextNameLine);
+                    tooltips.Add(buffTextDescripLine);
+                    buffs[j] = (0, tooltips.Count, buffs[j].Item3, buffs[j].Item4, buffs[j].Item5, buffs[j].Item6, buffTextNameLine.Name, 0);
                 }
 
             }
@@ -287,11 +321,15 @@ namespace HJScarletRework.Globals.Instances.Items
         {
             if (!(drawBuffIcon || drawBuffIconAndDetail))
                 return;
+            Dictionary<string, int> nameCounter = new();
             for (int i = 0; i < lines.Count; i++)
             {
                 DrawableTooltipLine line = lines[i];
                 foreach (var buf in buffs)
                 {
+                    if (buf.Item7 != lines[i].Name)
+                        continue;
+
                     if (buf.Item7 == line.Name)
                     {
                         DynamicSpriteFont font = line.Font ?? FontAssets.MouseText.Value;
@@ -304,11 +342,9 @@ namespace HJScarletRework.Globals.Instances.Items
                         float scaledHeight = icon.Height * iconScale;
 
                         float x = line.X + buf.Item1 + iconScale * 2f;
-                        float y = line.Y + (lineHeight - scaledHeight) - iconScale * 4f;
+                        float y = line.Y + (lineHeight + (buf.Item8 * lineHeight) - scaledHeight) - iconScale * 4f;
                         Main.spriteBatch.Draw(buf.Item4, new Vector2(x, y), null, Color.White, 0, Vector2.Zero, iconScale * 1f, 0, 0);
                     }
-                    if (buf.Item7 != lines[i].Name)
-                        continue;
                 }
             }
             add.Clear();
@@ -322,11 +358,8 @@ namespace HJScarletRework.Globals.Instances.Items
                     RarityDrawHelper.DrawCustomTooltipLine(line, Color.White, Color.White, Color.Black, 1f);
                 }
             }
-        }
-        public override bool PreDrawTooltipLine(Item item, DrawableTooltipLine line, ref int yOffset)
-        {
             if (!HJScarletConfigClient.Instance.SpecialRarity)
-                return true;
+                return;
             if (line.Name == (item.HJScarlet().ItemBelongTo + "Name") && line.Mod == Mod.Name)
             {
                 if (item.HJScarlet().ItemBelongTo == EnumItemOwner.Donator)
@@ -335,7 +368,6 @@ namespace HJScarletRework.Globals.Instances.Items
                     RareItemRarity.DrawFlavorTooltipName(line, RareItemRarity.RareType.Developer);
                 if (item.HJScarlet().ItemBelongTo == EnumItemOwner.Supporter)
                     RareItemRarity.DrawFlavorTooltipName(line, RareItemRarity.RareType.Support);
-                return false;
             }
             if (line.IsItemName())
             {
@@ -343,7 +375,6 @@ namespace HJScarletRework.Globals.Instances.Items
                 {
                     RarityDrawHelper.UpdateItemNameParticle(line, value);
                     RarityDrawHelper.UpdateItemNameDraw(line, value);
-                    return false;
                 }
             }
             if (line.Mod == Mod.Name && line.Name == "FlavorTooltipsName")
@@ -351,10 +382,9 @@ namespace HJScarletRework.Globals.Instances.Items
                 if (HJScarletList.ShinyRarityItemDictionary.TryGetValue(item.type, out ShinyRarityType value))
                 {
                     RarityDrawHelper.UpdateFlavorNameDraw(line, value);
-                    return false;
                 }
             }
-            return true;
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Tiles;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
@@ -48,9 +49,15 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override void AddRecipes()
         {
             CreateRecipe().
+                AddIngredient<FishingCoinEmerial>(30).
+                AddTile(TileType<FountainofTime>()).
+                Register();
+
+            CreateRecipe().
                 AddIngredient(ItemID.GoldenFishingRod).
                 AddIngredient<SunWorm>(300).
-                AddTile(FinalAnvilTile).
+                DisableDecraft().
+                AddTile(TileType<FountainofTime>()).
                 Register();
         }
 

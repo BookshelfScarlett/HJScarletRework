@@ -64,7 +64,11 @@ JungleMadness: {
 
 DreamlessNight: {
 	DisplayName: 无梦之夜
-	Tooltip: 命中时，释放梦境之花
+	Tooltip:
+		'''
+		命中时，释放梦境之花
+		大部分攻击施加[ScarletDebuff/HJScarletRework/ForeverNightBuff]
+		'''
 	ExecutionStrike:
 		'''
 		召唤一把模拟玩家行动的仆从锤
@@ -73,7 +77,7 @@ DreamlessNight: {
 		在场时间殆尽时将朝玩家光标方向冲刺
 		仆从锤在场时不会增加处决叠层次数
 		'''
-	FlavorTooltips: 「我于那漫漫长夜中，思念着梦的存在」
+	FlavorTooltips: 我于那漫漫长夜中，思念着梦的存在
 }
 
 TheDefiler: {
@@ -189,7 +193,11 @@ TheJudgement: {
 
 DreamingLight: {
 	DisplayName: 铸梦之光
-	Tooltip: 命中时，召唤梦境之锤
+	Tooltip:
+		'''
+		命中时，召唤梦境之锤
+		大部分攻击施加[ScarletDebuff/HJScarletRework/ForeverNightBuff]
+		'''
 	ExecutionStrike:
 		'''
 		召唤一把模拟玩家行动的仆从锤

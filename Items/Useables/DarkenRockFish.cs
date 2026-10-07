@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Tiles;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
@@ -38,5 +39,14 @@ namespace HJScarletRework.Items.Useables
         {
             base.OnHitNPC(player, target, hit, damageDone);
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient<FishingCoinEmerial>(30).
+                AddTile(TileType<FinalAnvil>()).
+                Register();
+
+        }
+
     }
 }

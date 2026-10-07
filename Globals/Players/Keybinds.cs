@@ -1,6 +1,13 @@
-﻿using HJScarletRework.Globals.Keybinds;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetCode;
+using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Globals.Graphics.Particles;
+using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.Methods;
+using HJScarletRework.Globals.ParticleSystem;
+using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
+using HJScarletRework.Projs.ParryShield;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -17,7 +24,22 @@ namespace HJScarletRework.Globals.Players
         public bool CanArmorAbility = false;
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            //HandleCrimsonCharmTrigger(triggersSet);
+            if(HJNetInput.ParryCurrent&&!Player.HasProj<CobaltParryShield>())
+            {
+                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<CobaltParryShield>(), 5, 1, Player.whoAmI);
+            }
+            if (HJNetInput.SkillJustPressed)
+            {
+                if (defenderEmblemCD == 0 && emblemVanguard)
+                {
+                    Player.GetImmnue(ImmunityCooldownID.General, GetSeconds(EmblemVanguard.InvinceTime), false);
+                    ScarletSound(HJScarletSounds.GrabCharge, Player.Center, instances: 0);
+                    defenderEmblemCD = GetSeconds(EmblemVanguard.Cooldown + EmblemVanguard.InvinceTime);
+                    for (int i = 0; i < 30; i++)
+                        ECSParticle.TurbulenceShinyOrb(Player.Center.ToRandCirclePos(15), 2.4f, Color.White, 120, 1, 0.3f, RandRotTwoPi);
+                    new GeneralMountedPlayerParticle(HJScarletTexture.Particle_RingShiny.Value, Color.White, 0, .24f, .8f, GetSeconds(3), Player.whoAmI, BlendStateID.Additive).Spawn();
+                }
+            }
             if (HJScarletKeybinds.GeneralActionKeybind.JustPressed)
             {
                 bool tier1 = PiorityTier1();

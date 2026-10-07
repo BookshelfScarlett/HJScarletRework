@@ -69,3 +69,13 @@ TendouKeiItem: {
 	DisplayName: Pink Technical Halo
 	Tooltip: ""
 }
+
+MollyItem: {
+	DisplayName: Molly Item
+	Tooltip: ""
+}
+
+TendouArisuItem: {
+	DisplayName: Tendou Arisu Item
+	Tooltip: ""
+}

@@ -1,9 +1,12 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
+using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Methods;
+using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Instances.NPCs
@@ -28,15 +31,27 @@ namespace HJScarletRework.Globals.Instances.NPCs
         public Vector2 PostSpeed = Vector2.Zero;
         public bool absoluteZeroBuffEnemy = false;
         public bool theBleachingBuffEnemy = false;
+        public bool theJellyfishGroupBuffEnemy = false;
         public int isUnderPreciousTargetCross = 2;
-
+        public bool foreverNightBuff = false;
+        public bool isBeingParry = false;
+        public bool parryNoPassingWall = false;
+        public float parryTime = 0;
+        public float parryPrevSpeed = -1;
 
         public override void ResetEffects(NPC npc)
         {
+            //没被格挡的时候，每时每刻都得查看这个nopassingwall的情况
+            if (!isBeingParry)
+            {
+                parryNoPassingWall = npc.noTileCollide;
+            }
             isBeingStabByContainedBlast = false;
             terraFlamethrowerDebuff = false;
             absoluteZeroBuffEnemy = false;
             theBleachingBuffEnemy = false;
+            foreverNightBuff = false;
+            theJellyfishGroupBuffEnemy = false;
             refluxChain = false;
             if (isBeingShadowCast > 0)
                 isBeingShadowCast--;
@@ -60,6 +75,38 @@ namespace HJScarletRework.Globals.Instances.NPCs
             if (miscCounter > 300)
                 miscCounter = 0;
 
+        }
+        public float dizzedStarIconLerp = 0;
+        public override bool PreAI(NPC npc)
+        {
+            if (parryTime > 0)
+            {
+                parryTime--;
+                if (parryTime < 60)
+                {
+                    dizzedStarIconLerp = Lerp(dizzedStarIconLerp, 0f, parryTime / 30f);
+
+                }
+                else
+                {
+                    dizzedStarIconLerp = Lerp(dizzedStarIconLerp, 1.01f, .12f);
+                }
+                if (parryTime < 1)
+                {
+                    isBeingParry = false;
+                    npc.noTileCollide = parryNoPassingWall;
+                    return true;
+                }
+                isBeingParry = true;
+                npc.position += Main.rand.NextVector2Circular(1, 1);
+                npc.velocity.X *= .96f;
+                npc.velocity.Y += 0.85f;
+                if (npc.velocity.Y > 32f)
+                    npc.velocity.Y = 32f;
+                npc.noTileCollide = false;
+                return false;
+            }
+            return base.PreAI(npc);
         }
         public override void PostAI(NPC npc)
         {
@@ -113,6 +160,16 @@ namespace HJScarletRework.Globals.Instances.NPCs
                 ApplyDoT(ref npc, TheBleachingBuff.BadLifeRegenEnemy);
                 damage = TheBleachingBuff.BadLifeRegenEnemy;
             }
+            if (foreverNightBuff)
+            {
+                ApplyDoT(ref npc, ForeverNightBuff.EnemyDoT);
+                damage = ForeverNightBuff.EnemyDoT;
+            }
+            if (theJellyfishGroupBuffEnemy)
+            {
+                ApplyDoT(ref npc, JellyfishGroupBuff.JellyfishGroupBadLifeRegenEnemy);
+                damage = JellyfishGroupBuff.JellyfishGroupBadLifeRegenEnemy / 3;
+            }
             if (isBeingShadowCast > 0)
             {
                 ApplyDoT(ref npc, 100);
@@ -145,6 +202,11 @@ namespace HJScarletRework.Globals.Instances.NPCs
             }
             if (theBleachingBuffEnemy)
             {
+            }
+            if (foreverNightBuff)
+            {
+                if (Main.rand.NextBool(4))
+                    ShadowNebulaAlt.SpawnSharpTearClean(npc.ToRandRec(), -Vector2.UnitY, Main.rand.NextFloat(.9f, 1.1f) * .31f, 60);
             }
             if (isBeingShadowCast > 0)
             {
@@ -188,6 +250,15 @@ namespace HJScarletRework.Globals.Instances.NPCs
                 Texture2D ring = HJScarletTexture.Particle_RingShiny.Value;
                 spriteBatch.Draw(ring, npc.Center - screenPos, null, Color.LimeGreen.ToAddColor(), 0, ring.ToOrigin(), 0.5f, 0, 0);
                 spriteBatch.EndShaderArea();
+            }
+            if (parryTime > 0)
+            {
+                Texture2D parryTex = TextureAssets.Buff[BuffType<ParrySpin>()].Value;
+                Vector2 yOffset = Vector2.UnitY * npc.height + Vector2.UnitY * 5.5f;
+                float reverseLerp = Clamp(Lerp(1f, 0f, dizzedStarIconLerp),0f,1f);
+                Vector2 reversLerpYOffset = Vector2.UnitY * reverseLerp * 50f;
+                yOffset = yOffset + reversLerpYOffset;
+                spriteBatch.Draw(parryTex, npc.Center.ToRandCirclePos(1*dizzedStarIconLerp) - screenPos - yOffset, null, Color.White * (dizzedStarIconLerp), 0, (parryTex.Size()) / 2f, 1, 0, 0);
             }
             base.PostDraw(npc, spriteBatch, screenPos, drawColor);
         }

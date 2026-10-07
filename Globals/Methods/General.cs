@@ -311,7 +311,7 @@ namespace HJScarletRework.Globals.Methods
         }
         public static Vector2 GetToMouseVector2(this Player player, Vector2 BeginPos)
         {
-            Vector2 vector = Main.MouseWorld - BeginPos;
+            Vector2 vector = player.LocalMouseWorld() - BeginPos;
             vector = vector.SafeNormalize(Vector2.UnitX);
             return vector;
         }
@@ -390,6 +390,27 @@ namespace HJScarletRework.Globals.Methods
             CombatText.NewText(new Rectangle((int)Owner.position.X, (int)Owner.position.Y, Owner.width, Owner.height), c, healAmt);
             if (broadcast && Main.netMode == NetmodeID.MultiplayerClient && Owner.whoAmI == Main.myPlayer)
                 NetMessage.SendData(MessageID.PlayerHeal, -1, -1, null, Owner.whoAmI, healAmt);
+        }
+        public static bool CountAsBoss(this NPC npc)
+        {
+            if (npc is null || !npc.active)
+                return false;
+            if (npc.boss && npc.type != NPCID.MartianSaucerCore)
+                return true;
+            if (npc.type == NPCID.EaterofWorldsBody || npc.type == NPCID.EaterofWorldsHead || npc.type == NPCID.EaterofWorldsTail)
+                return true;
+            return false;
+        }
+        public static bool AnyBossNPCS()
+        {
+            foreach (NPC npc in Main.ActiveNPCs)
+            {
+                if (npc.CountAsBoss())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

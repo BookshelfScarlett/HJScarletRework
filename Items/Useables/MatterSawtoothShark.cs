@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Tiles;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
@@ -37,6 +38,14 @@ namespace HJScarletRework.Items.Useables
         public override bool CanUseItem(Player player)
         {
             return true;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient<FishingCoinEmerial>(30).
+                AddTile(TileType<FountainofMatter>()).
+                Register();
+
         }
     }
 }

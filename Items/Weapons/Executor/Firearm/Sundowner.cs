@@ -1,7 +1,6 @@
-﻿using HJScarletRework.Core.NetSync;
+﻿using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
-using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Graphics.Particles;
@@ -52,7 +51,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
         public override void HoldItem(Player player)
         {
             if (!player.IsOwnerSide())
-            return;
+                return;
             if (player.HasProj<SundownerHeldProj>(out int projID))
                 return;
             Vector2 dir = player.ToMouseVector2();

@@ -54,7 +54,5 @@ namespace HJScarletRework.Globals.Handlers
                 return TextureAssets.Projectile[id].Value;
             }
         }
-
-
     }
 }

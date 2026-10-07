@@ -26,6 +26,7 @@ namespace HJScarletRework.Globals.Players
         public bool bitingClaw = false;
         public bool blackKeyDefenseTrigger = false;
         public bool blackKeyDoT = false;
+        public bool bloodThronCrown = false;
         public bool brimstoneHeartKilling = false;
         public bool celesitalShellEffect = false;
         public bool chlorophyteHeadExecutor = false;
@@ -52,7 +53,7 @@ namespace HJScarletRework.Globals.Players
         public bool firstTimeCraftGaia = false;
         public bool floretProtectorExecutor = false;
         public bool fruitofEthernity = false;
-        public bool giveMagicStorage= false;
+        public bool giveMagicStorage = false;
         public bool givePaper = true;
         public bool goldenAppleEnchanted = false;
         public bool goldenAppleEnchantedFully = false;
@@ -67,6 +68,8 @@ namespace HJScarletRework.Globals.Players
         public bool maidReaperArmor = false;
         public bool maidReaperHealUp = false;
         public bool mayaPumper = false;
+        public bool mayaPumperParty = false;
+
         public bool monkExecutor = false;
         public bool monkStaffHeal = false;
         public bool mouseHoveringBanWeaponAbility = false;
@@ -103,6 +106,7 @@ namespace HJScarletRework.Globals.Players
         public int blackKeyHeal = 0;
         public int blackKeyReduceDefense = 0;
         public int blackKeyTimer = 0;
+        public int bloodThornCrownHit = 0;
         public int climaticHawstringLaserCounter = 0;
         public int conferenceCallBuffTime = 0;
         public int containedBlastBuffTime = 0;
@@ -133,11 +137,14 @@ namespace HJScarletRework.Globals.Players
         public int genderChangeTimer = 0;
         public int goldenAppleDamageAbsorb = 0;
         public int iFrameHurtAdd = 0;
+        public int jellyfishGroupIndex = -1;
         public int lastHeldItemIndex = -1;
         public int LifeBalloonAccJumps;
         public int maidReaperHealTimer = 0;
         public int maidReaperIndex = -1;
         public int manaSavingsJar = 0;
+        public int mayaPumperDashTime = 0;
+        public int mayaPumperDashType = -1;
         public int NoSlowFall = 0;
         public int pendantLevel = 0;
         public int powerLilyCacheTimer = 0;

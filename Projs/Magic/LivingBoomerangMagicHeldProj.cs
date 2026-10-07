@@ -28,7 +28,7 @@ namespace HJScarletRework.Projs.Magic
             Projectile.SetUpHeldProj(3);
             Projectile.penetrate = -1;
             Projectile.width = Projectile.height = 100;
-            Projectile.SetupImmnuity(Projectile.MaxUpdates * 30);
+            Projectile.SetupImmnuity(Projectile.MaxUpdates * 10);
         }
         public override bool? CanDamage()
         {
@@ -120,12 +120,12 @@ namespace HJScarletRework.Projs.Magic
             Vector2 targetMountedPosition = Owner.GetToMouseVector2(Projectile.Center) * 220f;
             Projectile.velocity = Vector2.Lerp(Projectile.velocity, targetMountedPosition.ToSafeNormalize(), .05f);
             Vector2 curLength = (Owner.LocalMouseWorld() - Owner.MountedCenter);
-            float targetLength = Lerp(0, curLength.Length(), .5f);
+            float targetLength = Lerp(0, curLength.Length(), .85f);
             Vector2 tarPos = Owner.MountedCenter + Owner.Center.GetNormalVector2(Main.MouseWorld).ToSafeNormalize() * targetLength;
             float lerpValue = .05f;
             Projectile.Center = Vector2.Lerp(Projectile.Center, tarPos, lerpValue);
             Projectile.position.Y += (float)(Math.Sin(Main.GlobalTimeWrappedHourly * 1.1f) * 0.5f);
-            Projectile.spriteDirection = Projectile.direction = (Owner.LocalMouseWorld().X - Projectile.Center.X > 0).ToDirectionInt();
+            Projectile.spriteDirection = Projectile.direction = (Owner.Center.X - Projectile.Center.X < 0).ToDirectionInt();
         }
 
         public override void OnKill(int timeLeft)

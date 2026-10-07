@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Methods;
+﻿using HJScarletRework.Globals.Database.Localization;
+using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -86,8 +87,8 @@ namespace HJScarletRework.Items.Armor.ExecutorAlter
         {
             if (item.type != ApplyArmor)
                 return;
-            string keyPath = Mod.GetLocalizationKey($"SwitchWeaponTooltip");
-            tooltips.CreateTooltipDirect(keyPath.ToLangValue(), Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f));
+            string switchValue = ScarletTextSets.GenericText.ModNamePrefix + "\n" + ScarletTextSets.GenericText.SwitchTooltip;
+            tooltips.CreateTooltipDirect(switchValue, Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f));
             if (item.HJScarlet().EnableExecutorVersion)
             {
                 int flavorTooltipIndex = tooltips.FindIndex(line => line.Name == "Defense" && line.Mod == "Terraria");

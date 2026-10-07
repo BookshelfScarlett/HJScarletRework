@@ -1,4 +1,6 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Items.Material;
+using ContinentOfJourney.Tiles;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -16,10 +18,20 @@ namespace HJScarletRework.Items.Armor.Diver
         {
             Item.defense = 8;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         public override void UpdateEquip(Player player)
         {
             player.HJScarlet().critDamageExecutor += CritDamage;
+
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemType<AnglerCoin>(), 36).
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+        }
+
     }
 }

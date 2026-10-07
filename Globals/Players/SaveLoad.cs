@@ -53,7 +53,7 @@ namespace HJScarletRework.Globals.Players
         {
             tag.Add("Scarlet:" + nameof(value), value);
         }
-        public void ScarletLoadBool(ref TagCompound tag,ref bool value)
+        public void ScarletLoadBool(ref TagCompound tag, ref bool value)
         {
             value = tag.GetBool("Scarlet:" + nameof(value));
         }

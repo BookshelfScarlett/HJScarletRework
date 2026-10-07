@@ -1,6 +1,7 @@
 ﻿using ContinentOfJourney.NPCs.Boss_ScarabBelief;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -59,8 +60,6 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            //if (projHitbox.Intersects(targetHitbox))
-            //    return true;
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
             float easedProgress = EaseInBack(Helper.GetAniProgress(0));
@@ -111,16 +110,19 @@ namespace HJScarletRework.Projs.Executor
         public override void OnKill(int timeLeft)
         {
             _vertexCache.Clear();
+            if (!Projectile.CanSpawnChild())
+                return;
             if (Projectile.HJScarlet().ExecutionStrike)
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostoftheStormExecution>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity,
+                    ProjectileType<FrostoftheStormExecution>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 if (!Flip)
                     ((FrostoftheStormExecution)proj.ModProjectile).Flip = true;
                 else
                     ((FrostoftheStormExecution)proj.ModProjectile).Flip = false;
                 ((FrostoftheStormExecution)proj.ModProjectile).BeginTargetRotation = TargetRotation;
             }
-            else if (Main.mouseLeft && !Owner.dead && !Owner.CCed)
+            else if (Owner.MouseLeftOf() && !Owner.dead && !Owner.CCed)
             {
                 //挥舞结束的时候处死并立刻生成新的射弹。这样我们不用重置大部分的动画进程，实现起来稍微方便点
                 if (!Flip)
@@ -161,13 +163,14 @@ namespace HJScarletRework.Projs.Executor
         }
         public void UpdateBeginAnimation()
         {
-            if (Helper.GetAniProgress(0) > 0.3f && !SpawnProj)
+            if (Helper.GetAniProgress(0) > 0.3f && !SpawnProj && Main.myPlayer == Projectile.owner)
             {
                 SpawnProj = true;
-                SoundEngine.PlaySound(HJScarletSounds.Frostwave_Release with { Variants = [Main.rand.Next(1, 3)], MaxInstances = 0, PitchVariance = .3f, Pitch = -.05f });
-                Vector2 fireVel = (Main.MouseWorld - Owner.Center).ToSafeNormalize() * 40;
+                ScarletSound(HJScarletSounds.Frostwave_Release, Projectile.Center, .8f, 0, -.05f, .3f, Main.rand.Next(1, 3));
+                Vector2 fireVel = (Owner.LocalMouseWorld() - Owner.Center).ToSafeNormalize() * 40;
                 Vector2 pos = Owner.MountedCenter - fireVel.ToSafeNormalize() * 200;
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, fireVel, ProjectileType<FrostoftheStormSlash>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, fireVel, ProjectileType<FrostoftheStormSlash>(),
+                    Projectile.damage, Projectile.knockBack, Projectile.owner);
                 proj.HJScarlet().HasExecutionMechanic = true;
             }
             float heldscale = Owner.HeldItem.scale;

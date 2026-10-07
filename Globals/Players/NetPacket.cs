@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Core.NetCode;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Players

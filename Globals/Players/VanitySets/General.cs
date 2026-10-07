@@ -7,6 +7,7 @@ using HJScarletRework.Items.Vanity.Arceca;
 using HJScarletRework.Items.Vanity.Misc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -50,7 +51,12 @@ namespace HJScarletRework.Globals.Players.VanitySets
             "凯伊",
             "kei"
         ];
-
+        public List<string> ArisuName =
+        [
+            "爱丽丝",
+            "arisu",
+            "AL-IS"
+        ];
 
 
         public int accVanityID = -1;
@@ -59,77 +65,63 @@ namespace HJScarletRework.Globals.Players.VanitySets
         public bool lacrimosaVanity = false;
         public bool niyaniyakajuVanity = false;
         public bool keiVanity = false;
+        public bool arisuVanity = false;
+        public bool mollyVanity = false;
         public override void ResetEffects()
         {
             accVanityID = -1;
         }
+        /// <summary>本 ModPlayer 中需要持久化的所有 bool 字段名。</summary>
+        private static readonly string[] PersistedBoolFields =
+        {
+            nameof(arcaceVanity),
+            nameof(yardVanity),
+            nameof(niyaniyakajuVanity),
+            nameof(lacrimosaVanity),
+            nameof(arisuVanity),
+            nameof(keiVanity),
+            nameof(mollyVanity)
+        };
+        //这里的saveload采用了反射
+        //由于进入退出游戏只会执行一次，开销问题不大
         public override void SaveData(TagCompound tag)
         {
-            tag.Add(nameof(accVanityID), accVanityID);
-            tag.Add(nameof(arcaceVanity), arcaceVanity);
-            tag.Add(nameof(yardVanity), yardVanity);
-            tag.Add(nameof(niyaniyakajuVanity), niyaniyakajuVanity);
-            tag.Add(nameof(keiVanity), keiVanity);
-            tag.Add(nameof(lacrimosaVanity), lacrimosaVanity);
+            tag[nameof(accVanityID)] = accVanityID;
+
+            Type type = GetType();
+            foreach (string name in PersistedBoolFields)
+                tag[name] = (bool)type.GetField(name).GetValue(this);
         }
+
         public override void LoadData(TagCompound tag)
         {
             accVanityID = tag.GetInt(nameof(accVanityID));
-            arcaceVanity = tag.GetBool(nameof(arcaceVanity));
-            yardVanity = tag.GetBool(nameof(yardVanity));
-            lacrimosaVanity = tag.GetBool(nameof(lacrimosaVanity));
-            niyaniyakajuVanity = tag.GetBool(nameof(niyaniyakajuVanity));
-            keiVanity = tag.GetBool(nameof(keiVanity));
+
+            Type type = GetType();
+            foreach (string name in PersistedBoolFields)
+                type.GetField(name).SetValue(this, tag.GetBool(name));
         }
         public override void OnEnterWorld()
         {
-            if (!niyaniyakajuVanity)
+            void GetVanityQuick(ref bool value, int itemType, params string[] obj)
             {
-                string nameLow = Player.name.ToLower();
-                if (KajuName.Contains(nameLow))
+                if (!value)
                 {
-                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<KajuItem>());
-                    niyaniyakajuVanity = true;
+                    string nameLow = Player.name.ToLower();
+                    if (obj.Contains(nameLow))
+                    {
+                        Player.QuickSpawnItem(Player.GetSource_FromThis(), itemType);
+                        value = true;
+                    }
                 }
             }
-            if (!lacrimosaVanity)
-            {
-                string nameLow = Player.name.ToLower();
-                if (LacrimosaName.Contains(nameLow))
-                {
-                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<LacrimosaItem>());
-                    lacrimosaVanity = true;
-                }
-            }
-
-            if (!arcaceVanity)
-            {
-                string nameLow = Player.name.ToLower();
-                if (ArcaceName.Contains(nameLow))
-                {
-                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<ArcaeaPack>());
-                    arcaceVanity = true;
-                }
-            }
-            if (!yardVanity)
-            {
-                string nameLow = Player.name.ToLower();
-                if (YardName.Contains(nameLow))
-                {
-                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<YogsothothsYardPack>());
-                    yardVanity = true;
-                }
-            }
-            if (!keiVanity)
-            {
-                string nameLow = Player.name.ToLower();
-                if (YardName.Contains(nameLow))
-                {
-                    Player.QuickSpawnItem(Player.GetSource_FromThis(), ItemType<TendouKeiItem>());
-                    yardVanity = true;
-                }
-
-            }
+            GetVanityQuick(ref niyaniyakajuVanity, ItemType<KajuItem>(), [.. KajuName]);
+            GetVanityQuick(ref lacrimosaVanity, ItemType<LacrimosaItem>(), [.. LacrimosaName]);
+            GetVanityQuick(ref arcaceVanity, ItemType<ArcaeaPack>(), [.. ArcaceName]);
+            GetVanityQuick(ref yardVanity, ItemType<YogsothothsYardPack>(), [.. YardName]);
+            GetVanityQuick(ref keiVanity, ItemType<TendouKeiItem>(), [.. KeiName]);
+            GetVanityQuick(ref arisuVanity, ItemType<TendouArisuItem>(), [.. ArisuName]);
+            GetVanityQuick(ref mollyVanity, ItemType<MollyItem>(), "初镜巡弱杂骸音");
         }
         public override void UpdateDead()
         {
@@ -241,7 +233,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
         {
             string name = HJScarletList.VanityItemDictionary[accVanityID];
             //怎么都是特殊情况。
-            if (name == nameof(TairitsuItem) || name == nameof(TendouKeiItem))
+            if (name == nameof(TairitsuItem) || name == nameof(TendouKeiItem) || name == nameof(TendouArisuItem))
                 Player.back = EquipLoader.GetEquipSlot(Mod, name, EquipType.Back);
             Player.legs = EquipLoader.GetEquipSlot(Mod, name, EquipType.Legs);
             Player.body = EquipLoader.GetEquipSlot(Mod, name, EquipType.Body);

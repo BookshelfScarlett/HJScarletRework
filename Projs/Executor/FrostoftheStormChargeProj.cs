@@ -1,6 +1,7 @@
 ﻿using ContinentOfJourney.NPCs.Boss_ScarabBelief;
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Buffs;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -160,16 +161,20 @@ namespace HJScarletRework.Projs.Executor
 
         public override void OnKill(int timeLeft)
         {
+            if (!Projectile.CanSpawnChild())
+                return;
             if (FinalSwing)
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostoftheStormHeldProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity,
+                    ProjectileType<FrostoftheStormHeldProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 ((FrostoftheStormHeldProj)proj.ModProjectile).Flip = !Flip;
                 ((FrostoftheStormHeldProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
                 proj.HJScarlet().HasExecutionMechanic = true;
             }
             else
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Projectile.type, Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, Projectile.type,
+                    Projectile.damage, Projectile.knockBack, Projectile.owner);
                 ((FrostoftheStormChargeProj)proj.ModProjectile).Flip = !Flip;
                 ((FrostoftheStormChargeProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
                 ((FrostoftheStormChargeProj)proj.ModProjectile).CurTime = CurTime += 1;
@@ -202,11 +207,11 @@ namespace HJScarletRework.Projs.Executor
         public bool PlaySound = false;
         public void UpdateBeginAnimation()
         {
-            if (Helper.GetAniProgress(0) > 0.5f)
+            if (Helper.GetAniProgress(0) > 0.5f && Projectile.CanSpawnChild())
             {
                 if (!PlaySound)
                 {
-                    SoundEngine.PlaySound(HJScarletSounds.Frostwave_Release with { Variants = [2], MaxInstances = 0, Pitch = -.05f + .1f * CurTime });
+                    ScarletSound(HJScarletSounds.Frostwave_Release, Projectile.Center, .8f, 0, -.05f * .1f * CurTime, 0, 2);
                     PlaySound = true;
                 }
                 if (!SpawnProj && !SlowSwing)
@@ -215,16 +220,18 @@ namespace HJScarletRework.Projs.Executor
                     SpawnProj = true;
                     Vector2 fireVel = (Main.MouseWorld - Owner.Center).ToSafeNormalize() * 40;
                     Vector2 pos = Owner.MountedCenter - fireVel.ToSafeNormalize() * (300 + SlowSwing.ToInt() * 100f);
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, fireVel, ProjectileType<FrostoftheStormSlashGiant>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, fireVel,
+                        ProjectileType<FrostoftheStormSlashGiant>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                     proj.ai[2] = SlowSwing.ToInt();
                 }
             }
-            if (Helper.GetAniProgress(0) > 0.8f && !SpawnProj && SlowSwing)
+            if (Helper.GetAniProgress(0) > 0.8f && !SpawnProj && SlowSwing && Projectile.CanSpawnChild())
             {
                 SpawnProj = true;
                 Vector2 fireVel = (Main.MouseWorld - Owner.Center).ToSafeNormalize() * 40;
                 Vector2 pos = Owner.MountedCenter - fireVel.ToSafeNormalize() * (300 + SlowSwing.ToInt() * 100f);
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, fireVel, ProjectileType<FrostoftheStormSlashGiant>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), pos, fireVel,
+                    ProjectileType<FrostoftheStormSlashGiant>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
                 proj.ai[2] = SlowSwing.ToInt();
             }
 
@@ -246,11 +253,6 @@ namespace HJScarletRework.Projs.Executor
             //将其投影到矩阵上，并进行形变
             float xScale = SlowSwing ? 1.54f : 1.2f;
             float height = SlowSwing ? Height * 1.2f : 1f;
-            //if (HJScarletMethods.HasFuckingCalamity)
-            //{
-            //    xScale *= 1.14f;
-            //    height *= 1.14f;
-            //}
             Matrix tForm = Matrix.CreateRotationZ(rot) * Matrix.CreateScale(xScale, height, 1f);
             //而后再转化为射弹的目标指向，这个tarPos同时拥有指向和武器模长的信息。而不是一个单位向量
             float heldscale = Owner.HeldItem.scale;
@@ -269,11 +271,6 @@ namespace HJScarletRework.Projs.Executor
                 Matrix tFormSlash = Matrix.CreateRotationZ(slashTrailRotation) * Matrix.CreateScale(xScale, height, 1f);
                 float xScale2 = SlowSwing ? 1.7f : 1.7f;
                 float lenght = 200f;
-                //if(HJScarletMethods.HasFuckingCalamity)
-                //{
-                //    xScale2 *= 1.14f;
-                //    lenght *= 1.14f;
-                //}
                 Vector2 slashTargetPos = Vector2.Transform(Vector2.UnitX, tFormSlash) * xScale2;
                 Vector2 slashPosFinal = slashTargetPos.RotatedBy(TargetRotation) * lenght * heldscale;
                 OldAimPos.Add(slashPosFinal);
@@ -362,7 +359,6 @@ namespace HJScarletRework.Projs.Executor
             Projectile.Center = Owner.MountedCenter;
             Owner.itemTime = 2;
             Owner.itemAnimation = 2;
-            //Owner.ChangeDir(Projectile.direction);
             Owner.heldProj = Projectile.whoAmI;
             if (Owner.dead)
                 Projectile.Kill();

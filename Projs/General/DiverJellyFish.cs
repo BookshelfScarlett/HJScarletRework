@@ -1,10 +1,12 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Methods;
 using System;
+using System.IO;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -32,9 +34,23 @@ namespace HJScarletRework.Projs.General
             Projectile.Opacity = 0;
             Projectile.noEnchantmentVisuals = true;
         }
+        public bool IsApplyJellyfishBuff
+        {
+            get => Projectile.ai[2] == 1;
+            set => Projectile.ai[2] = value ? 1 : 0;
+        }
         public override void OnFirstFrame()
         {
             TextureType = Main.rand.NextFromList<int>(NPCID.GreenJellyfish, NPCID.BlueJellyfish, NPCID.PinkJellyfish);
+            Projectile.netUpdate = true;
+        }
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            TextureType = reader.ReadInt32();
+        }
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(TextureType);
         }
         public override void ProjAI()
         {
@@ -43,7 +59,39 @@ namespace HJScarletRework.Projs.General
                 Projectile.Opacity = Lerp(Projectile.Opacity, 0, 0.1f / 4f);
             }
             else
+            {
                 Projectile.Opacity = Lerp(Projectile.Opacity, 1, 0.1f / 4f);
+                if (Projectile.Opacity >= .98f)
+                {
+                    Projectile.Opacity = 1f;
+                    if (!IsApplyJellyfishBuff)
+                        foreach (var p in Main.ActivePlayers)
+                        {
+                            if (p.Hitbox.Intersects(Projectile.Hitbox) && !p.HasBuff<JellyfishGroupBuff>())
+                            {
+                                p.AddBuff(BuffType<JellyfishGroupBuff>(), GetSeconds(12));
+                                p.HJScarlet().jellyfishGroupIndex = TextureType;
+                                IsApplyJellyfishBuff = true;
+                                Projectile.netUpdate = true;
+                                switch (TextureType)
+                                {
+                                    case NPCID.GreenJellyfish:
+                                        PlayIntersectParticle(Color.LimeGreen, Color.DarkGreen, p.Center);
+                                        break;
+                                    case NPCID.PinkJellyfish:
+                                        PlayIntersectParticle(Color.HotPink, Color.Purple, p.Center);
+                                        break;
+                                    case NPCID.BlueJellyfish:
+                                        PlayIntersectParticle(Color.RoyalBlue, Color.CornflowerBlue, p.Center);
+                                        break;
+
+                                }
+
+                                break;
+                            }
+                        }
+                }
+            }
             Projectile.velocity *= 0.96f;
             UpdateParticle();
             if (Projectile.FinalUpdate())
@@ -51,7 +99,6 @@ namespace HJScarletRework.Projs.General
                 float osci = (float)(Math.Sin(Main.GlobalTimeWrappedHourly) * 0.1f);
                 Projectile.position.Y += osci;
             }
-
             Projectile.AddFrames(16 * Projectile.MaxUpdates, 4);
         }
         public void UpdateParticle()
@@ -70,7 +117,18 @@ namespace HJScarletRework.Projs.General
 
             }
         }
-
+        public void PlayIntersectParticle(Color color1, Color color2, Vector2 center)
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                new SmokeParticle(center.ToRandCirclePos(4f), RandVelTwoPi(0.1f, 5f), RandLerpColor(color1, color2), 40, RandRotTwoPi, 0.85f, 0.20f, true).Spawn();
+            }
+            for (int i = 0; i < 16; i++)
+            {
+                ECSParticle.TurbulenceShinyOrb(center.ToRandCirclePos(4), 1.4f, RandLerpColor(color1, color2), 40, 1, Main.rand.NextFloat(.8f, 1.15f) * .4f, RandRotTwoPi, .4f);
+            }
+            ScarletSound(HJScarletSounds.GrabCharge, center);
+        }
         private void ParticleHandler(Color color1, Color color2)
         {
             if (Projectile.FinalUpdateNextBool(6))
@@ -80,6 +138,12 @@ namespace HJScarletRework.Projs.General
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (!IsApplyJellyfishBuff)
+            {
+                target.AddBuff(BuffType<JellyfishGroupBuff>(), GetSeconds(12));
+                IsApplyJellyfishBuff = true;
+                Projectile.netUpdate = true;
+            }
             switch (TextureType)
             {
                 case NPCID.GreenJellyfish:

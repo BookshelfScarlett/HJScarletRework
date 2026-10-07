@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Useables
 {
-    public class FishingPaper: HJScarletItemClass
+    public class FishingPaper : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Useables;
         public override void SetStaticDefaults()

@@ -1,6 +1,7 @@
 ﻿using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Methods;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Buffs
@@ -11,6 +12,7 @@ namespace HJScarletRework.Buffs
         {
             Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
+            BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
         }
         public override void Update(Player player, ref int buffIndex)
         {

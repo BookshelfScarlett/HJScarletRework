@@ -34,12 +34,12 @@ CrossModSupport.Calamity: 灾厄联动适配
 
 Keybinds: {
 	GeneralActionKeybind.DisplayName: 互动键
-	// GenerialSkillKeybind.DisplayName: Generial Skill Keybind
-	// ParryActionKeybind.DisplayName: Parry Action Keybind
+	GenerialSkillKeybind.DisplayName: 技能键
+	ParryActionKeybind.DisplayName: 格挡键(目前没有作用)
 }
 
 ExecutorDamageClass: {
-	ExecutionProgress: 命中{0}次以发起处决，按住左Shift查看
+	ExecutionProgress: 命中{0}次以发起处决，按住Alt查看
 	ExecutionDescriptionName: 处决执行时
 	ExecutionProgressRevampedMode: 处决进程：{0} / {1}
 	ForceTacticalExecution: 处决攻击需按下 互动键 执行
@@ -94,3 +94,5 @@ Projectiles: {
 	// TechBladeHeldProj.DisplayName: Tech Blade Held Proj
 	// TechBladeLaser.DisplayName: Tech Blade Laser
 }
+
+// NPCs.DyradEyeBoss.DisplayName: Dyrad Eye Boss

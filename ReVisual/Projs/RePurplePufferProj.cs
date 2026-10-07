@@ -7,7 +7,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
 using System;
 using Terraria;
-using Terraria.GameContent.ItemDropRules;
 
 namespace HJScarletRework.ReVisual.Projs
 {
@@ -54,7 +53,7 @@ namespace HJScarletRework.ReVisual.Projs
         public override bool PreDraw(ref Color lightColor)
         {
             Projectile.GetRangedWeaponHeldProjData(out Texture2D tex, out Vector2 drawPos, out Vector2 rotPoint, out float drawRot, out SpriteEffects se);
-            SB.Draw(tex, drawPos, null, Color.White, drawRot, rotPoint, Projectile.scale, se,0);
+            SB.Draw(tex, drawPos, null, Color.White, drawRot, rotPoint, Projectile.scale, se, 0);
             return false;
         }
     }
@@ -78,7 +77,7 @@ namespace HJScarletRework.ReVisual.Projs
                         OldPositionList.RemoveAt(0);
                 }
                 ECSParticle.SmokeParticle(projectile.Center.ToRandCirclePos(3), projectile.velocity / 4f, RandLerpColor(Color.DarkViolet, Color.Violet), 40,
-                    RandRotTwoPi, 1, Main.rand.NextFloat(.9f,1.1f)*.20f, blendstate: BlendState.AlphaBlend);
+                    RandRotTwoPi, 1, Main.rand.NextFloat(.9f, 1.1f) * .20f, blendstate: BlendState.AlphaBlend);
                 ECSParticle.ShinyCrossStarECS(projectile.Center.ToRandCirclePos(6), projectile.velocity / 4f, RandLerpColor(Color.DarkViolet, Color.Violet), 40,
                     1, Main.rand.NextFloat(.9f, 1.1f) * .4f, .2f);
                 return false;

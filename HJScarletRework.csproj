@@ -21,6 +21,8 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Assets\Texture\Projs\NPCs\" />
+	  <Folder Include="Items\Armor\Rwby\" />
+	  <Folder Include="NPCs\Bosses\DyradEye\Projs\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Reference Include="ContinentOfJourney">

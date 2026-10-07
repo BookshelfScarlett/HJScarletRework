@@ -1,4 +1,6 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Items.Material;
+using ContinentOfJourney.Tiles;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using Terraria;
@@ -19,6 +21,7 @@ namespace HJScarletRework.Items.Armor.Diver
         {
             Item.defense = 6;
             Item.SetUpRarityPrice(ItemRarityID.Orange);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
         }
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DamageAdd.ToPercent());
         public override void UpdateArmorSetBetter(Player player, string setBonusPath)
@@ -29,6 +32,13 @@ namespace HJScarletRework.Items.Armor.Diver
         public override void UpdateEquip(Player player)
         {
             player.GetDamage<ExecutorDamageClass>() += DamageAdd;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient(ItemType<AnglerCoin>(), 36).
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
         }
     }
 }

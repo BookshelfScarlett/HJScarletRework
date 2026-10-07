@@ -71,3 +71,13 @@ TendouKeiItem: {
 	DisplayName: 粉色科技光环
 	Tooltip: ""
 }
+
+MollyItem: {
+	DisplayName: 茉莉的花
+	Tooltip: ""
+}
+
+TendouArisuItem: {
+	DisplayName: 蓝色科技光环
+	Tooltip: ""
+}

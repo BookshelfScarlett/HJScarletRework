@@ -2,12 +2,6 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
-using HJScarletRework.ReVisual.Projs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 
@@ -33,10 +27,10 @@ namespace HJScarletRework.ReVisual.Items
         {
             if (player.GetModPlayer<ReVisualPlayer>().reVisualPurplePuffer)
             {
-                for(int i =0;i<16;i++)
+                for (int i = 0; i < 16; i++)
                 {
-                ECSParticle.ShinyCrossStarECS(position.ToRandCirclePos(6), velocity.ToRandVelocity(ToRadians(10),1,10), RandLerpColor(Color.DarkViolet, Color.Violet), 40,
-                    1, Main.rand.NextFloat(.9f, 1.1f) * .4f, .2f);
+                    ECSParticle.ShinyCrossStarECS(position.ToRandCirclePos(6), velocity.ToRandVelocity(ToRadians(10), 1, 10), RandLerpColor(Color.DarkViolet, Color.Violet), 40,
+                        1, Main.rand.NextFloat(.9f, 1.1f) * .4f, .2f);
                 }
                 Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<ReVisualRecoilProj>(), 0, 0, player.whoAmI);
                 if (proj.ModProjectile is ReVisualRecoilProj holdout)

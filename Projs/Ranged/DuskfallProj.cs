@@ -193,8 +193,8 @@ namespace HJScarletRework.Projs.Ranged
             Timer = Main.rand.Next(-10, 16);
             RandMap = Main.rand.NextFloat(.3f, .61f);
             Projectile.tileCollide = true;
-            if(AcceptIval)
-            target.AddBuff(BuffType<SolarBurntBuff>(), 60);
+            if (AcceptIval)
+                target.AddBuff(BuffType<SolarBurntBuff>(), 60);
             for (int i = 0; i < 24; i++)
             {
                 Vector2 vel = (TwoPi / 24f * i).ToRotationVector2() * 8f * Main.rand.NextFloat(0f, 1f);

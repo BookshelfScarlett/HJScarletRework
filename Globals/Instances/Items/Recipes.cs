@@ -3,8 +3,10 @@ using ContinentOfJourney.Items.Accessories;
 using ContinentOfJourney.Items.Material;
 using ContinentOfJourney.Items.Mounts.Rudders;
 using ContinentOfJourney.Items.Placables.FishingCrate;
+using ContinentOfJourney.Tiles;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Materials;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
@@ -84,6 +86,110 @@ namespace HJScarletRework.Globals.Instances.Items
                 Register();
 
         }
+        public void EmerialCoinRecipe()
+        {
+            Recipe.Create(ItemID.AnkhCharm).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.FireGauntlet).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.LavaWaders).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.LavaproofTackleBag).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.HorseshoeBundle).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.CelestialStone).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.Shellphone).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.GreedyRing).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.FrozenShield).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.FrostsparkBoots).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.SniperScope).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.CharmofMyths).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.PutridScent).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemID.FleshKnuckles).
+                AddIngredient<FishingCoinEmerial>(50).
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            Recipe.Create(ItemType<AnglerCoin>(), 100).
+                AddIngredient<FishingCoinEmerial>().
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+
+            Recipe.Create(ItemType<AnglerGoldCoin>(), 50).
+                AddIngredient<FishingCoinEmerial>().
+                DisableDecraft().
+                AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                Register();
+            int[] earlyHardmodeBags =
+                [
+                ItemID.EyeOfCthulhuBossBag,
+                ItemID.KingSlimeBossBag,
+                ItemID.EaterOfWorldsBossBag,
+                ItemID.QueenSlimeBossBag,
+                ItemID.DeerclopsBossBag,
+                ItemID.QueenBeeBossBag,
+                ItemID.SkeletronBossBag,
+                ItemID.WallOfFleshBossBag,
+                ItemID.BrainOfCthulhuBossBag
+                ];
+            for (int i = 0; i < earlyHardmodeBags.Length; i++)
+            {
+                Recipe.Create(earlyHardmodeBags[i]).
+                    AddIngredient<FishingCoinEmerial>(150).
+                    DisableDecraft().
+                    AddTile(TileType<FishmenFreeMarketTradingSystem>()).
+                    Register();
+            }
+        }
         public void GlobalMaterialRecipes()
         {
             Recipe.Create(ItemType<FinalBar>()).
@@ -91,6 +197,9 @@ namespace HJScarletRework.Globals.Instances.Items
                 DisableDecraft().
                 AddTile(FinalAnvilTile).
                 Register();
+
+
+
         }
         public void GlobalWeaponRecipes()
         {
@@ -121,6 +230,7 @@ namespace HJScarletRework.Globals.Instances.Items
                 AddTile(TileID.DemonAltar).
                 DisableDecraft().
                 Register();
+
 
         }
         public void GlobalMiscRecipes()
@@ -239,6 +349,7 @@ namespace HJScarletRework.Globals.Instances.Items
             GlobalWeaponRecipes();
             GlobalMiscRecipes();
             FargoMutantCrossMod();
+            EmerialCoinRecipe();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace HJScarletRework.Globals.Players.VanitySets
             {
                 string name = HJScarletList.VanityItemDictionary[VanityItemType];
                 //怎么都是特殊情况。
-                if (name == nameof(TairitsuItem) || name == nameof(TendouKeiItem))
+                if (name == nameof(TairitsuItem) || name == nameof(TendouKeiItem) || name == nameof(TendouArisuItem))
                     Player.back = EquipLoader.GetEquipSlot(Mod, name, EquipType.Back);
                 Player.legs = EquipLoader.GetEquipSlot(Mod, name, EquipType.Legs);
                 Player.body = EquipLoader.GetEquipSlot(Mod, name, EquipType.Body);
@@ -90,5 +90,13 @@ namespace HJScarletRework.Globals.Players.VanitySets
     public class KeiPlayer : MenuVanityPlayer
     {
         public override int VanityItemType => ItemType<TendouKeiItem>();
+    }
+    public class MollyPlayer : MenuVanityPlayer
+    {
+        public override int VanityItemType => ItemType<MollyItem>();
+    }
+    public class ArisuPlayer : MenuVanityPlayer
+    {
+        public override int VanityItemType => ItemType<TendouArisuItem>();
     }
 }

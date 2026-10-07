@@ -1,9 +1,7 @@
 ﻿using ContinentOfJourney.Items;
-using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
-using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Melee

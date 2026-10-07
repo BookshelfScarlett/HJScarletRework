@@ -146,12 +146,12 @@ CycleMadness: {
 }
 
 EmblemVanguard: {
-	DisplayName: Vangard Emblem
+	DisplayName: Vanguard Emblem
 	Tooltip:
 		'''
-		Grants immunity to knockbacks
-		On an Execution Strike hit, grants a period of invincibility
-		This effect goes on cooldown after triggering and cannot be triggered multiple times
+		Grants knockback immunity
+		Press the Skill Key to grant yourself {0} seconds of invincibility
+		After the invincibility ends, enters a cooldown of about {1} seconds
 		'''
 }
 
@@ -304,7 +304,21 @@ HeartoftheDistantArk: {
 
 PinballPurgatory: {
 	DisplayName: Pinball Purgatory
-	Tooltip: ""
+	Tooltip:
+		'''
+		The knockback you take is multiplied by 5
+		On hit, the knockback force you receive is inversely proportional to the enemy's knockback resistance
+		If the enemy is completely immune to knockback, you will not be affected by knockback either
+		Also selects one of four different effects based on the type of marble when hit
+		"Send you to Pinball Purgatory, where four different colored marble arrows go clink clank for a prize draw"
+		'''
+	DetailTooltip:
+		'''
+		White marbles do nothing
+		Blue marbles allow you to dash in four directions for a short time
+		Pink marbles allow you to dash in four directions for a longer time
+		Orange marbles cause purgatory fireballs to fall from the sky when hit for a longer duration
+		'''
 }
 
 SlimeGodShield: {

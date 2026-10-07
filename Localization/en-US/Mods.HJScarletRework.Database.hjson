@@ -14,9 +14,26 @@ PocketMirrorModiflication:
 	'''
 
 GenericText: {
-	BuffDetail: Hold Left Alt for detail
-	SwitchDetail: ""
-	HoldShiftAndRightClick: Hold Shift and Right-Click to switch
+	BuffDetail: Hold Alt for details
+	// SwitchDetail: ""
+	HoldShiftAndRightClick: Hold Shift and right-click to switch
+	ApplyDoT: Allows applying {0}
+
+	SwitchWeapon: {
+		Tooltip: Hold and press the Interact key to switch forms
+		Visual: Hold and press the Interact key to change visual effects
+		AllFix: Also applies to: {0}
+		Condition: Switch prerequisite: Defeat <{0}>
+	}
+
+	LostbeltJourneyText: Lostbelt Journey:
+}
+
+DownedContidionList: {
+	DownedGolem: Golem
+	DownedLifeGods: The Lifebringer
+	DownedEvilBoss: Evil Boss
+	DownedPlantera: Plantera
 }
 
 ItemBelongTo: {
@@ -24,3 +41,5 @@ ItemBelongTo: {
 	Developer: Developer Item
 	Supporter: Supporter Item
 }
+
+CustomDeathReason.Suicide: Someone's dead.

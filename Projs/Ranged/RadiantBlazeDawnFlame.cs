@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
@@ -23,6 +24,7 @@ namespace HJScarletRework.Projs.Ranged
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.penetrate = 4;
+            Projectile.Opacity = 0;
             Projectile.MaxUpdates = 4;
             Projectile.timeLeft = LifeTime;
             Projectile.usesIDStaticNPCImmunity = true;
@@ -39,8 +41,8 @@ namespace HJScarletRework.Projs.Ranged
         {
             DrawShinyParticle();
             DrawShinyFire();
-
             Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.SafeDir() * OriginalSpeed * .30f, 0.03f);
+            Projectile.Opacity = Lerp(Projectile.Opacity, 1.1f, .05f);
             Timer++;
         }
 
@@ -55,7 +57,7 @@ namespace HJScarletRework.Projs.Ranged
                 Vector2 vel = offsetvec * OriginalSpeed * Lerp(.15f, .20f, lifeTimeRatios) * 1f + Projectile.SafeDir() * (Lerp(1f, 10f, lifeTimeRatios));
                 Vector2 spawnPos = Projectile.Center + offsetvec * Main.rand.NextFloat(lifeTimeRatios * 100);
                 spawnPos -= Projectile.SafeDir() * lifeTimeRatios * 100f;
-                ECSParticle.ShinyCrossStarECS(spawnPos, vel, RandLerpColor(RandLerpColor(Color.DarkViolet, Color.Violet), Color.Purple), 40, 1, .8f, 0.2f);
+                ECSParticle.ShinyCrossStarECS(spawnPos, vel, RandLerpColor(RandLerpColor(Color.DarkViolet, Color.Violet), Color.Purple), 40, Projectile.Opacity, .8f, 0.2f);
             }
         }
         private void DrawShinyFire()
@@ -63,7 +65,7 @@ namespace HJScarletRework.Projs.Ranged
             float lifetimeInterpolant = Timer / LifeTime;
             float particleScale = Lerp(0.10f, 1.24f, (float)Math.Pow(lifetimeInterpolant, 0.9f)) * 1f;
             particleScale *= (1f + lifetimeInterpolant * Main.rand.NextFloat(0.3f, .5f));
-            float opacity = Utils.GetLerpValue(0.9f, 0.57f, lifetimeInterpolant, true);
+            float opacity = Utils.GetLerpValue(0.9f, 0.57f, lifetimeInterpolant, true) * Projectile.Opacity;
             float fadeToBlack = Utils.GetLerpValue(0.67f, 0.89f, lifetimeInterpolant, true);
             Color fireColor = Color.Lerp(Color.Purple, Color.DarkViolet, Main.rand.NextFloat(0.2f, 0.8f));
             fireColor = Color.Lerp(fireColor, Color.Purple, fadeToBlack);
@@ -94,6 +96,7 @@ namespace HJScarletRework.Projs.Ranged
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            target.AddBuff(BuffType<ForeverNightBuff>(), 120);
             base.OnHitNPC(target, hit, damageDone);
         }
         public override bool PreDraw(ref Color lightColor)

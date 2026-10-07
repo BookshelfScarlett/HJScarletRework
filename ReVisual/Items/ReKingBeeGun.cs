@@ -1,12 +1,5 @@
 ﻿using ContinentOfJourney.Items;
-using HJScarletRework.Core.ParticleECS;
-using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 
@@ -17,7 +10,7 @@ namespace HJScarletRework.ReVisual.Items
         public override int ApplyItem => ItemType<KingBeeGun>();
         public override void ExHoldItem(Item item, Player player, ReVisualPlayer vp)
         {
-            vp.reVisualKingBeeGun= !vp.reVisualKingBeeGun;
+            vp.reVisualKingBeeGun = !vp.reVisualKingBeeGun;
             item.noUseGraphic = vp.reVisualKingBeeGun;
         }
         public override void UpdateInventory(Item item, Player player)

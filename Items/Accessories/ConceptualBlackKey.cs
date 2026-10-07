@@ -1,5 +1,6 @@
 ﻿using ContinentOfJourney.Items.Material;
 using HJScarletRework.Globals.Classes;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -17,6 +18,10 @@ namespace HJScarletRework.Items.Accessories
         public float CritDamage = .30f;
         public int AP = 60;
         public int HealAmit = 24;
+        public override void SetStaticDefaults()
+        {
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Database.Enums.ShinyRarityType.FateWhite);
+        }
         public override void ExSD()
         {
             Item.width = Item.height = 32;

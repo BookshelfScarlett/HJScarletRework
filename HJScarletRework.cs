@@ -6,14 +6,10 @@ global using static HJScarletRework.Globals.Handlers.RandHandler;
 global using static Microsoft.Xna.Framework.MathHelper;
 global using static Terraria.ModLoader.ModContent;
 using ContinentOfJourney.Items.Material;
-using HJScarletRework.Core.NetSync;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.List;
-using HJScarletRework.Globals.Instances;
 using HJScarletRework.Globals.Methods;
 using System.IO;
-using HJScarletRework.Core.NetCode;
-using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework

@@ -236,6 +236,7 @@ RandomNewFolder: {
 
 SuicideKnife: {
 	DisplayName: Suicide Knife
+	AltDisplayName: ""
 	Tooltip: Can damage yourself
 }
 
@@ -296,4 +297,9 @@ FishingPaper: {
 		[i:HJScarletRework/MatterSawtoothShark]Matter Sawtooth Shark, obtained in the Snow biome after defeating the Materializer
 		[i:HJScarletRework/DarkenRockFish]Darken Rockfish, obtained Underground after defeating the Wall of Shadows
 		'''
+}
+
+FishingCoinEmerial: {
+	DisplayName: Fishing Coin Emerial
+	Tooltip: Fisherman's Beloved
 }

@@ -4,18 +4,13 @@ using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Requirement;
 using HJScarletRework.Projs.Magic;
-using HJScarletRework.Projs.Melee;
-using ReLogic.Graphics;
-using System;
+using HJScarletRework.Projs.ParryShield;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.UI.Chat;
 
 namespace HJScarletRework.Items
 {
@@ -46,7 +41,7 @@ namespace HJScarletRework.Items
         {
             Stopwatch.StartNew();
             Stopwatch sw = Stopwatch.StartNew();
-            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15, ProjectileType<TechCannonBullet>(), 1, knockback, player.whoAmI);
+            Projectile proj = Projectile.NewProjectileDirect(source, position, velocity.ToSafeNormalize() * 15, ProjectileType<CobaltParry>(), 1, knockback, player.whoAmI);
             sw.Stop();
             // 输出经过的时间（毫秒）
             //Main.NewText($"执行耗时: {sw.ElapsedMilliseconds} ms");

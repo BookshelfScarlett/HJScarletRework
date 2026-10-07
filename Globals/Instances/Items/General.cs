@@ -119,7 +119,17 @@ namespace HJScarletRework.Globals.Instances.Items
             }
             return true;
         }
-
+        public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            switch (item.type)
+            {
+                case ItemID.NightsEdge:
+                case ItemID.TrueNightsEdge:
+                    target.AddBuff(BuffType<ForeverNightBuff>(), 60);
+                    break;
+            }
+            base.OnHitNPC(item, player, target, hit, damageDone);
+        }
         public override void OnConsumeItem(Item item, Player player)
         {
             if (item.type == ItemID.GenderChangePotion)

@@ -3,10 +3,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -41,7 +37,7 @@ namespace HJScarletRework.ReVisual.Class
         public Vector2 HoldProjOffset = Vector2.Zero;
         public override void ExSD()
         {
-            Projectile.SetUpHeldProj();
+            Projectile.SetUpHeldProj(0);
         }
         public override void ProjAI()
         {
@@ -59,6 +55,7 @@ namespace HJScarletRework.ReVisual.Class
             Owner.heldProj = Projectile.whoAmI; // Update the player's held projectile id
             Owner.ChangeDir(dir);
             Owner.ControlPlayerArm(Projectile.rotation);
+
             if (RecoilPower != 0)
             {
                 float pullBack = RecoilPower;
@@ -68,7 +65,9 @@ namespace HJScarletRework.ReVisual.Class
                 Projectile.Center = Owner.MountedCenter + Projectile.rotation.ToRotationVector2() * pullBack;
             }
             else
-                Projectile.Center = Owner.MountedCenter; 
+                Projectile.Center = Owner.MountedCenter;
+            Projectile.position.Y += Owner.gfxOffY;
+
         }
         public override bool ShouldUpdatePosition()
         {
@@ -80,6 +79,8 @@ namespace HJScarletRework.ReVisual.Class
         }
         public override bool PreDraw(ref Color lightColor)
         {
+            if (!Projectile.HJScarlet().FirstFrame)
+                return false;
             Texture2D tex = TextureAssets.Item[GunItemType].Value;
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
             Vector2 offset = HoldProjOffset * new Vector2(Owner.direction, 1);

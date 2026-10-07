@@ -172,3 +172,27 @@ DiamondYoyoBuff: {
 	DisplayName: 钻石星尘
 	Description: 闪耀发光，吸引炫目的宝石
 }
+
+ForeverNightBuff: {
+	DisplayName: 长夜漫漫
+	Description: 正在损失生命值
+}
+
+JellyfishGroupBuff: {
+	DisplayName: 水母集群
+	Description:
+		'''
+		来自一群小水母的祝福
+		蓝色水母会增加{0}伤害，{1}暴击概率和{2}护甲穿透
+		粉色水母会{3}防御，{4}伤害减免和{5}生命恢复速度
+		绿色水母会为你提供无限制的飞行时间，并强化机动
+		'''
+	Blue: 蓝色形态
+	Pink: 粉色形态
+	Green: 绿色形态
+}
+
+ParrySpin: {
+	// DisplayName: Parry Spin
+	// Description: Mods.HJScarletRework.Buffs.ParrySpin.Description
+}

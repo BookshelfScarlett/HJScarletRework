@@ -30,6 +30,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.useTime = Item.useAnimation = 40;
             Item.SetUpNoUseGraphicItem();
             Item.SetUpRarityPrice(ItemRarityID.LightPurple);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.shoot = ProjectileType<DreamingLightProj>();
             Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { MaxInstances = 0, Pitch = -0.5f };
             Item.useStyle = ItemUseStyleID.Swing;

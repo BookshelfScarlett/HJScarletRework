@@ -7,12 +7,12 @@ using Terraria.DataStructures;
 
 namespace HJScarletRework.ReVisual.Items
 {
-    public class ReCrusadersCrossbow:ReVisualItemClass
+    public class ReCrusadersCrossbow : ReVisualItemClass
     {
         public override int ApplyItem => ItemType<CrusadersCrossbow>();
         public override void ExHoldItem(Item item, Player player, ReVisualPlayer vp)
         {
-            vp.reVisualCrusadersCrossbow= !vp.reVisualCrusadersCrossbow;
+            vp.reVisualCrusadersCrossbow = !vp.reVisualCrusadersCrossbow;
             item.noUseGraphic = vp.reVisualCrusadersCrossbow;
         }
         public override void UpdateInventory(Item item, Player player)

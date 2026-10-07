@@ -7,7 +7,10 @@ namespace HJScarletRework.Globals.Players
         public override void PreUpdate()
         {
             if (infiniteFlightTime)
+            {
                 Player.wingTime = Player.wingTimeMax;
+                Player.rocketTime = Player.rocketTimeMax;
+            }
         }
     }
 }

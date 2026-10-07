@@ -50,6 +50,10 @@ Typeless: {
 	// TechThunder.DisplayName: Tech Thunder
 	// TechCannonBullet.DisplayName: Tech Cannon Bullet
 	// TechCannonHeldProj.DisplayName: Tech Cannon Held Proj
+	// PinballPurgatoryFireball.DisplayName: Pinball Purgatory Fireball
+	// PinballPurgatoryTimer.DisplayName: Pinball Purgatory Timer
+	// CobaltParry.DisplayName: Cobalt Parry
+	// CobaltParryShield.DisplayName: Cobalt Parry Shield
 }
 
 Executor: {

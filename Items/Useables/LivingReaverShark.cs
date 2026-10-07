@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using ContinentOfJourney.Tiles;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
@@ -38,6 +39,14 @@ namespace HJScarletRework.Items.Useables
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
             base.MeleeEffects(player, hitbox);
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe().
+                AddIngredient<FishingCoinEmerial>(30).
+                AddTile(TileType<FountainofLife>()).
+                Register();
+
         }
     }
 }

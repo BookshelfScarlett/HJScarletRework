@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Projs.Pets;
-using Terraria.ID;
 
 namespace HJScarletRework.Items.Pets
 {

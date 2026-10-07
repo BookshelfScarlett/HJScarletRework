@@ -3,7 +3,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Useables;
 using Terraria;
-using Terraria.ID;
 
 namespace HJScarletRework.Projs.NPCs.Enemy
 {

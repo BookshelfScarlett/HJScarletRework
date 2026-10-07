@@ -2,7 +2,6 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
-using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Projs.Melee;
 using Terraria.ID;
 

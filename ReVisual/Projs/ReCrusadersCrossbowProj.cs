@@ -3,11 +3,6 @@ using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.ReVisual.Projs
@@ -30,10 +25,10 @@ namespace HJScarletRework.ReVisual.Projs
                     OldPositionList.RemoveAt(0);
             }
             ECSParticle.ShinyCrossStarSmall(projectile.Center.ToRandCirclePos(6), projectile.velocity / 4f, RandLerpColor(Color.Goldenrod, Color.LightGoldenrodYellow),
-                40, 1, Main.rand.NextFloat(.9f, 1.1f) * .24f, Main.rand.NextFloat(-.05f,.05f));
-            if(Main.rand.NextBool())
-            ECSParticle.LightntingGlow(projectile.Center.ToRandCirclePosEdge(6), projectile.velocity / 4f, RandLerpColor(Color.LightGoldenrodYellow, Color.Goldenrod),
-                40, 1, 0.34f);
+                40, 1, Main.rand.NextFloat(.9f, 1.1f) * .24f, Main.rand.NextFloat(-.05f, .05f));
+            if (Main.rand.NextBool())
+                ECSParticle.LightntingGlow(projectile.Center.ToRandCirclePosEdge(6), projectile.velocity / 4f, RandLerpColor(Color.LightGoldenrodYellow, Color.Goldenrod),
+                    40, 1, 0.34f);
             //AddList(projectile);
             return base.PreAI(projectile);
         }
@@ -55,17 +50,17 @@ namespace HJScarletRework.ReVisual.Projs
                     Color edgeColor = Color.Lerp(Color.White, Color.Goldenrod, progress) * opac * 0.85f;
                     float scale2 = Lerp(1, .64f, progress);
                     Vector2 scale = new Vector2(0.33f, 1.1f) * scale2;
-                    SB.FastDraw(tex, oldPos, edgeColor.ToAddColor(), oldRot, ori, scale*1.2f, SpriteEffects.None);
+                    SB.FastDraw(tex, oldPos, edgeColor.ToAddColor(), oldRot, ori, scale * 1.2f, SpriteEffects.None);
                     SB.FastDraw(tex, oldPos, c.ToAddColor(150), oldRot, ori, scale, SpriteEffects.None);
                 }
                 Vector2 pos = projectile.Center - Main.screenPosition;
                 float rot = projectile.rotation + PiOver2;
                 Vector2 sharpScale = new Vector2(.4f, 1.3f);
-                for(int i =0;i<3;i++)
-                SB.FastDraw(tex, pos+projectile.SafeDir() * 3.5f*i, Color.Gold.ToAddColor(), rot, tex.Size()/2f, projectile.scale*sharpScale, SpriteEffects.None);
+                for (int i = 0; i < 3; i++)
+                    SB.FastDraw(tex, pos + projectile.SafeDir() * 3.5f * i, Color.Gold.ToAddColor(), rot, tex.Size() / 2f, projectile.scale * sharpScale, SpriteEffects.None);
                 tex = projectile.GetTexture();
 
-                SB.FastDraw(tex, pos, Color.White, rot, tex.Size()/2f, projectile.scale, SpriteEffects.None);
+                SB.FastDraw(tex, pos, Color.White, rot, tex.Size() / 2f, projectile.scale, SpriteEffects.None);
                 return false;
             }
             return base.PreDraw(projectile, ref lightColor);

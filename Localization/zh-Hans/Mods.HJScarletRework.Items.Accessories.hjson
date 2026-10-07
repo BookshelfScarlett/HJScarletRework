@@ -121,7 +121,7 @@ Desterrennacht: {
 		承受致死伤害时以15%的生命值再起
 		再起成功后，获得2次闪避所有攻击的机会
 		你的生命值永远不会低于20点，但仍然会受到致死的伤害
-		「依仗星旋，赠君握手」
+		“依仗星旋，赠君握手。”
 		'''
 }
 
@@ -150,8 +150,8 @@ EmblemVanguard: {
 	Tooltip:
 		'''
 		允许免疫击退
-		处决攻击命中时给予一段无敌时间
-		该效果触发后进入冷却，且无法多次触发
+		按下 技能键 为自己提供长达{0}秒的无敌时间
+		在无敌时间结束后，进入约{1}秒的冷却
 		'''
 }
 
@@ -306,9 +306,16 @@ PinballPurgatory: {
 		你承受的击退力放大5倍
 		受击时，承受的击退力量将与敌人的防击退系数成反比
 		若敌人完全防击退，你也不会受到击退的影响
-		受击时，随机选择四种不同的效果
+		同时根据受击时的弹珠类型选择四种不同的效果
 		“把你发配到弹球炼狱，在四种不同颜色的弹球之箭叮呤咣啷开奖”
 		'''
+	/* DetailTooltip:
+		'''
+		White marbles do nothing
+		Blue marbles allow you to dash in four directions for a short time
+		Pink marbles allow you to dash in four directions for a longer time
+		Orange marbles cause purgatory fireballs to fall from the sky when hit for a longer duration
+		''' */
 }
 
 SlimeGodShield: {
@@ -439,15 +446,9 @@ LightofHorizon: {
 	Tooltip:
 		'''
 		可飞行或缓降，飞行时按住下键可悬浮，极大地减少惯性
-		可飞速奔跑，并提供额外冰面与沙土行动力
-		可在液体表面行走
 		提高飞行和跳跃能力，获得无限飞行时间
-		提高跳跃速度、允许自动跳跃并免疫摔落伤害
-		提高10%移动速度
-		使你免疫击退，并获得额外饰品栏
-		使你免疫着火、火块、岩浆和绝大部分减益
-		使你游泳且获得无限的水下呼吸时间，在水面下发光
-		你走过的草地上会长出花朵
+		获得所有[i:ContinentOfJourney/Horizon]视界的能力
+		获得所有[i:ContinentOfJourney/Altitude]海拔的能力
 		“飞翔吧，向着彼方的天空”
 		'''
 }
@@ -556,8 +557,15 @@ SelfPortraitoftheBleachingOne: {
 }
 
 BloodThornCrown: {
-	DisplayName: 荆棘王冠
-	Tooltip: ""
+	DisplayName: 血染的荆棘王冠
+	Tooltip:
+		'''
+		任意Boss单位不在场时
+		增加{0}伤害减免，减少{1}伤害和{2}暴击概率
+		任意Boss单位在场时
+		增加{3}伤害
+		且受击超过{4}次时死亡
+		'''
 }
 
 HandofGods: {

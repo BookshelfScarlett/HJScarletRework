@@ -41,7 +41,7 @@ namespace HJScarletRework.ReVisual.Projs
                         RandLerpColor(Color.Red, Color.Crimson), 40, 1, 0.031f, 0);
                 }
 
-                
+
                 return false;
             }
             return base.PreAI(projectile);
@@ -160,8 +160,8 @@ namespace HJScarletRework.ReVisual.Projs
                 float glowScale = overallScale * .4f * projectile.scale;
                 Vector2 glowVec = glowScale * new Vector2(1f, 1.5f);
                 SB.EnterShaderArea();
-                SB.FastDraw(crossGlow, pos + projectile.rotation.ToRotationVector2() * 10f, Color.White*overallAlpha*.945f, projectile.rotation+PiOver2, crossGlow.Size() / 2f, glowVec, 0);
-                SB.FastDraw(crossGlow, pos + projectile.SafeDir() * 20f, Color.White*overallAlpha*.945f, projectile.rotation+PiOver2, crossGlow.Size() / 2f, glowVec, 0);
+                SB.FastDraw(crossGlow, pos + projectile.rotation.ToRotationVector2() * 10f, Color.White * overallAlpha * .945f, projectile.rotation + PiOver2, crossGlow.Size() / 2f, glowVec, 0);
+                SB.FastDraw(crossGlow, pos + projectile.SafeDir() * 20f, Color.White * overallAlpha * .945f, projectile.rotation + PiOver2, crossGlow.Size() / 2f, glowVec, 0);
                 SB.EndShaderArea();
                 return false;
             }

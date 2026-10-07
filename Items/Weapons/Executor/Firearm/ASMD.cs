@@ -1,6 +1,5 @@
-﻿using HJScarletRework.Core.NetSync;
+﻿using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.Enums;
-using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
@@ -33,9 +32,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Firearm
             Item.HJScarlet().ExecutionProj = ProjectileType<ASMDExecutionBullet>();
             Item.shootSpeed = 18f;
             Item.knockBack = 3;
-        }
-        public override void UpdateInventory(Player player)
-        {
         }
         public override bool CanShoot(Player player)
         {

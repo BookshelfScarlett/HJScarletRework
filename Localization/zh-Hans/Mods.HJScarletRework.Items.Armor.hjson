@@ -210,7 +210,14 @@ DiverBody: {
 DiverHead: {
 	DisplayName: 潜航员面罩
 	Tooltip: 增加{0}代行者伤害
-	SetBonus: 移动时沿轨迹生成在空中滞留的水母
+	SetBonus:
+		'''
+		移动时沿轨迹生成在空中滞留的水母
+		所有玩家或敌人在接触水母时提供[ScarletBuff/HJScarletRework/JellyfishGroupBuff]
+		玩家接触时会根据水母类型的不同为你提供不同的效果
+		敌人接触时则会受到持续的伤害
+		每只水母只能提供一次[ScarletBuff/HJScarletRework/JellyfishGroupBuff]
+		'''
 }
 
 DiverLegs: {

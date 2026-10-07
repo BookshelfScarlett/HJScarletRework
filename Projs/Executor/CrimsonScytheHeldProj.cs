@@ -5,6 +5,7 @@ using ContinentOfJourney.Items.Accessories.Bookmarks;
 using ContinentOfJourney.Items.Accessories.GrazeBadge;
 using ContinentOfJourney.Items.Zeus;
 using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
 using HJScarletRework.Core.Primitives.Trail;
@@ -355,8 +356,10 @@ namespace HJScarletRework.Projs.Executor
             }
             else if (!ThirdSwing || Projectile.ai[0] != 0)
             {
-                ScarletSound(HJScarletSounds.Misc_ManaClearUse, Owner.Center, 0.55f, 1, -0.84f, 0.2f);
                 Owner.ScarletHeal(2);
+                if (!Owner.IsOwnerSide())
+                    return;
+                ScarletSound(HJScarletSounds.Misc_ManaClearUse, Owner.Center, 0.55f, 1, -0.84f, 0.2f);
                 for (int i = 0; i < 92; i++)
                 {
                     Vector2 pos = Vector2.Lerp(Projectile.Center, Projectile.Center + Projectile.rotation.ToRotationVector2() * 125f, Main.rand.NextFloat(.1f, 1.78f));

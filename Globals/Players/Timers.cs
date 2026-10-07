@@ -1,6 +1,8 @@
 ﻿using HJScarletRework.Buffs;
+using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Graphics.Particles;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,9 +20,12 @@ namespace HJScarletRework.Globals.Players
         public int markProjTimer = 0;
         public int emblemFirearmTimer = 0;
         public int cycleMadnessCrtiStarTimer = 0;
+        public int jellyfishGroupBuffTime = 0;
         public void ResetTimer()
         {
             markProjTimer = 0;
+            mayaPumperDashTime = 0;
+            mayaPumperDashType = -1;
             spellBreakerTimer = 0;
             emblemFirearmTimer = 0;
             climaticHawstringLaserCounter = 0;
@@ -50,6 +55,7 @@ namespace HJScarletRework.Globals.Players
             tearEyeBuff = 0;
             bookcaseBuffTime = 0;
             cycleMadnessCrtiStarTimer = 0;
+            jellyfishGroupBuffTime = 0;
         }
         private readonly List<int> keysToRemoveCache = new();
         public void UpdateTimer()
@@ -79,6 +85,24 @@ namespace HJScarletRework.Globals.Players
                     ExecutionBuffTimeStored.Remove(key);
                 }
             }
+            if (mayaPumperDashTime > 0)
+            {
+                mayaPumperDashTime--;
+
+            }
+
+            if (mayaPumperDashTime <= 0)
+            {
+                mayaPumperDashTime = 0;
+                mayaPumperDashType = -1;
+            }
+            if (!bloodThronCrown)
+            {
+                if (bloodThornCrownHit > 0)
+                    bloodThornCrownHit--;
+            }
+            if (!Player.HasBuff<JellyfishGroupBuff>())
+                jellyfishGroupIndex = -1;
             if (cycleMadnessCrtiStarTimer > 0)
                 cycleMadnessCrtiStarTimer--;
             if (spellBreakerTimer > 0)
@@ -147,7 +171,15 @@ namespace HJScarletRework.Globals.Players
                 NoSlowFall--;
 
             if (defenderEmblemCD > 0)
+            {
                 defenderEmblemCD--;
+                if (defenderEmblemCD == 0)
+                {
+                    ScarletSound(SoundID.DD2_DarkMageAttack, Player.Center);
+                    for (int i = 0; i < 16; i++)
+                        ECSParticle.SmokeParticle(Player.ToRandRec(), -Vector2.UnitY * Main.rand.NextFloat(12), Color.White, 36, RandRotTwoPi, 1, .4f, blendstate: BlendState.AlphaBlend);
+                }
+            }
 
             if (genderChangeTimer > 0)
                 genderChangeTimer--;

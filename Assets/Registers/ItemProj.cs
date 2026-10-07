@@ -33,7 +33,7 @@ namespace HJScarletRework.Assets.Registers
         internal static Tex2DWithPath Item_DialecticsThrown { get; private set; }
         internal static Tex2DWithPath DualWraithStaffBlade { get; private set; }
         internal static Tex2DWithPath DualWraithStaff { get; private set; }
-        internal static Tex2DWithPath Cursor_Target { get;private set;  }
+        internal static Tex2DWithPath Cursor_Target { get; private set; }
         public override void Load()
         {
             Wreach = new Tex2DWithPath($"{ItemPath}/{nameof(Wreach)}");

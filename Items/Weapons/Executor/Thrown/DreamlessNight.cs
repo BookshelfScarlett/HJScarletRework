@@ -1,8 +1,8 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
-using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using System.Collections.Generic;
@@ -32,6 +32,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
             Item.useTime = Item.useAnimation = 40;
             Item.SetUpNoUseGraphicItem();
             Item.SetUpRarityPrice(ItemRarityID.LightRed);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.shoot = ProjectileType<DreamlessNightProj>();
             Item.UseSound = HJScarletSounds.Misc_KnifeToss[0] with { MaxInstances = 0, Pitch = -0.5f };
             Item.useStyle = ItemUseStyleID.Swing;
@@ -62,6 +63,8 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         }
         public override void HoldItem(Player player)
         {
+            if (!player.IsOwnerSide())
+                return;
             if (player.HasProj<DreamlessNightMinion>())
                 return;
             if (!player.GetExecutionSrike())
@@ -80,6 +83,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
                 AddIngredient<MantleLayer>().
                 AddTile(TileID.Beds).
                 Register();
+
             CreateRecipe().
                 AddIngredient<FleshGrinder>().
                 AddIngredient<JungleMadness>().

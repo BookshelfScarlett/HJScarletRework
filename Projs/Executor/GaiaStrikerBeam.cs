@@ -72,13 +72,13 @@ namespace HJScarletRework.Projs.Executor
                 Vector2 bloodVel = -Vector2.UnitY.RotatedByRandom(ToRadians(45)) * Main.rand.NextFloat(5f, 7.2f);
                 ECSParticle.BloodDrop(Projectile.Center.ToRandCirclePos(5, 5), bloodVel, RandLerpColor(Color.DarkRed, Color.Black), 60, 1f, Projectile.scale * Main.rand.NextFloat(0.8f, 1.1f) * .14f, 0, true, BlendState.AlphaBlend);
             }
-            if (Projectile.frameCounter > (3 * Projectile.MaxUpdates)&&Projectile.IsMe())
+            if (Projectile.frameCounter > (3 * Projectile.MaxUpdates) && Projectile.IsMe())
             {
                 Projectile.frameCounter = 0;
                 if (Projectile.GetTargetSafe(out NPC target, searchDistance: 1000, canPassWall: true))
                 {
                     Vector2 vel = Projectile.Center.GetNormalVector2(target.Center) * 7f;
-                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel, ProjectileType<GaiaStrikerBolt>(), (int)(Projectile.damage*.85f), Projectile.knockBack, Projectile.owner);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, vel, ProjectileType<GaiaStrikerBolt>(), (int)(Projectile.damage * .85f), Projectile.knockBack, Projectile.owner);
                     proj.ai[2] = Main.rand.Next(0, 2);
                     if (target.IsLegal())
                         ((GaiaStrikerBolt)proj.ModProjectile).CurTarget = target;

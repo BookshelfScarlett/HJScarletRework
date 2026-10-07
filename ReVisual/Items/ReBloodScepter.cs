@@ -31,8 +31,8 @@ namespace HJScarletRework.ReVisual.Items
                 {
                     ECSParticle.ShinyCrossStarECS(position.ToRandCirclePos(6), velocity.ToRandVelocity(ToRadians(10), 1, 10), RandLerpColor(Color.Crimson, Color.Red), 40,
                         1, Main.rand.NextFloat(.9f, 1.1f) * .4f, .2f);
-                ECSParticle.ShrinkParticle(position.ToRandCirclePosEdge(8), velocity.ToRandVelocity(ToRadians(10), 1, 10) , RandLerpColor(Color.Red, Color.Crimson), 40, 1,
-                    RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * .12f, 1);
+                    ECSParticle.ShrinkParticle(position.ToRandCirclePosEdge(8), velocity.ToRandVelocity(ToRadians(10), 1, 10), RandLerpColor(Color.Red, Color.Crimson), 40, 1,
+                        RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * .12f, 1);
 
                 }
                 Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, ProjectileType<ReVisualRecoilProj>(), 0, 0, player.whoAmI);

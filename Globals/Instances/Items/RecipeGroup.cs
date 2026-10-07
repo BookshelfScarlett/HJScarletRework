@@ -1,13 +1,11 @@
 ﻿using ContinentOfJourney.Items;
 using ContinentOfJourney.Items.Placables.FishingCrate;
 using HJScarletRework.Items.Accessories;
-using HJScarletRework.Items.Materials;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using HJScarletRework.Items.Weapons.Executor.Thrown;
 using HJScarletRework.Items.Weapons.Melee;
 using System;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;

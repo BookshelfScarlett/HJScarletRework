@@ -25,7 +25,7 @@ namespace HJScarletRework.Projs.Executor
         {
             if (!Owner.IsHolding(OriginalItemID))
                 return;
-            if (Projectile.CheckExecution()&&Projectile.numUpdates==0)
+            if (Projectile.CheckExecution() && Projectile.numUpdates == 0)
             {
                 //将武器标记为发起处决模式
                 Projectile.HJScarlet().ExecutionStrike = true;

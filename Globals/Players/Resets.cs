@@ -30,6 +30,7 @@ namespace HJScarletRework.Globals.Players
             selfPortraitType = -1;
             souloftheTidalMark = false;
             mayaPumper = false;
+            mayaPumperParty = false;
             crimsonCharm = false;
             bitingClaw = false;
             powerLily = false;
@@ -41,6 +42,7 @@ namespace HJScarletRework.Globals.Players
             celesitalShellEffect = false;
             cycleMadnessLevel = -1;
             spellBreakerLevel = 0;
+            bloodThronCrown = false;
 
             emblemVanguard = false;
             emblemColdSteel = false;
@@ -118,6 +120,8 @@ namespace HJScarletRework.Globals.Players
             isExecutionStrikeTriggered = false;
             KnifeMarkIndex = -1;
             theGreatDipperBuff = false;
+            bloodThornCrownHit = 0;
+            jellyfishGroupIndex = -1;
             ResetAcc();
             ResetPets();
             ResetArmor();

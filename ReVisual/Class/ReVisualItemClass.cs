@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Graphics.Particles;
+﻿using HJScarletRework.Globals.Database.Localization;
+using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Keybinds;
 using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace HJScarletRework.ReVisual.Class
         public sealed override bool InstancePerEntity => true;
         public sealed override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            tooltips.CreateTooltip(Mod.GetLocalizationKey("SwitchWeapon.Visual"), Color.LightGray);
+            tooltips.CreateTooltipDirect(ScarletTextSets.GenericText.ModNamePrefix + "\n" + ScarletTextSets.GenericText.SwitchVisual, Color.LightGray);
             ExModifyTooltips(item, tooltips);
         }
         public virtual void ExModifyTooltips(Item item, List<TooltipLine> tooltips) { }

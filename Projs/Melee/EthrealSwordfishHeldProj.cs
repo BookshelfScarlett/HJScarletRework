@@ -4,7 +4,6 @@ using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.ID;
 

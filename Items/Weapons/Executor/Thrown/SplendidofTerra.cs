@@ -2,7 +2,6 @@
 using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Rarity.RarityShiny;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -46,15 +45,6 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
                 spriteBatch.Draw(itemDrawFrame, pos + (TwoPi / 16f * i).ToRotationVector2() * 2, null, Color.Lime.ToAddColor(), rotation, ori, scale, 0, 0);
             spriteBatch.Draw(itemDrawFrame, pos, null, Color.White, rotation, ori, scale, 0, 0);
             return false;
-        }
-        public override bool PreDrawTooltipLine(DrawableTooltipLine line, ref int yOffset)
-        {
-            if (line.Mod == Mod.Name && line.Name == "FlavorTooltipsName")
-            {
-                LivingRarity.DrawFlavorRarity(line);
-                return false;
-            }
-            return base.PreDrawTooltipLine(line, ref yOffset);
         }
     }
 }

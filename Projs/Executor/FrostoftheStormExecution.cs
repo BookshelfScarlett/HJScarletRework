@@ -1,4 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
@@ -83,13 +84,17 @@ namespace HJScarletRework.Projs.Executor
                 UpdateMidAnimation();
             else
             {
-                Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity, ProjectileType<FrostoftheStormChargeProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-                //改向
-                ((FrostoftheStormChargeProj)proj.ModProjectile).Flip = false;
-                //存储当前挥舞角度
-                ((FrostoftheStormChargeProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
-                ((FrostoftheStormChargeProj)proj.ModProjectile).CurTime += 1;
-                Projectile.Kill();
+                if (Projectile.CanSpawnChild())
+                {
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity,
+                        ProjectileType<FrostoftheStormChargeProj>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    //改向
+                    ((FrostoftheStormChargeProj)proj.ModProjectile).Flip = false;
+                    //存储当前挥舞角度
+                    ((FrostoftheStormChargeProj)proj.ModProjectile).BeginTargetRotation = TargetRotation;
+                    ((FrostoftheStormChargeProj)proj.ModProjectile).CurTime += 1;
+                    Projectile.Kill();
+                }
             }
         }
         public int StarShapeLifeTime = 0;
@@ -137,7 +142,8 @@ namespace HJScarletRework.Projs.Executor
             Projectile.rotation = tarPos.ToRotation() + TargetRotation;
             Vector2 crystalPos = crystalDir * Projectile.scale * (Main.rand.NextFloat(0f, 100f)) + Projectile.Center;
             if (Main.rand.NextBool(8))
-                ECSParticle.SnowCloud(crystalPos.ToRandCirclePos(30), crystalDir * Main.rand.NextFloat(10f, 40f), RandLerpColor(Color.WhiteSmoke, Color.RoyalBlue), 40, RandRotTwoPi, .35f, Main.rand.NextFloat(.7f, 1.1f) * .35f);
+                ECSParticle.SnowCloud(crystalPos.ToRandCirclePos(30), crystalDir * Main.rand.NextFloat(10f, 40f),
+                    RandLerpColor(Color.WhiteSmoke, Color.RoyalBlue), 40, RandRotTwoPi, .35f, Main.rand.NextFloat(.7f, 1.1f) * .35f);
             crystalPos = crystalDir * Projectile.scale * (50f) + Projectile.Center;
             Vector2 posBase = crystalPos;
             Vector2 starShapeSpawnPos = posBase + Main.rand.NextFloat(TwoPi).ToRotationVector2() * Main.rand.NextFloat(120f, 190f);

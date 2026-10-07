@@ -3,11 +3,7 @@ using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Vanity;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -88,13 +84,13 @@ namespace HJScarletRework.Items.Useables
                 (GetSoftReferrenceItemID(Luiafk, "Paper"), 9999),
 
             ];
-            for(int i =0;i<itemList.Count;i++)
+            for (int i = 0; i < itemList.Count; i++)
             {
                 QuickAdd(ref itemLoot, itemList[i].Item1, itemList[i].Item2);
             }
             void QuickAdd(ref ItemLoot itemLoot, int id, int stack)
             {
-                if(id!=-1)
+                if (id != -1)
                 {
                     itemLoot.AddLootSimple(id, minQuantity: stack, maxQuantity: stack);
                 }

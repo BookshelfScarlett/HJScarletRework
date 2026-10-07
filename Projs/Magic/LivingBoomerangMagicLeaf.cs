@@ -18,8 +18,8 @@ namespace HJScarletRework.Projs.Magic
         public override void ExSD()
         {
             Projectile.MaxUpdates = 2;
-            Projectile.SetupImmnuity(Projectile.MaxUpdates * 15);
-            Projectile.penetrate = 6;
+            Projectile.SetupImmnuity(Projectile.MaxUpdates * 10);
+            Projectile.penetrate = -1;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;

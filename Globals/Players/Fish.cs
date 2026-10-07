@@ -26,19 +26,21 @@ namespace HJScarletRework.Globals.Players
                 int poolSizeAmt = poolSize / 10;
                 if (poolSizeAmt > 100)
                     poolSizeAmt = 100;
-
                 if (Player.ZoneBeach && ScarletDownedBoss.DownedEvilBosses)
+                {
                     HandleDiverArmor(poolSizeAmt, power, ref itemDrop, ref sonar);
+                    return;
+                }
                 if (Player.ZoneDesert && DownedBossSystem.downedTimeGod)
-                    FastPoolHandler(1800, ItemType<EthrealSwordfish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
+                    FastPoolHandler(1000, ItemType<EthrealSwordfish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
                 if (Player.ZoneSnow && DownedBossSystem.downedMatterGod)
-                    FastPoolHandler(1800, ItemType<MatterSawtoothShark>(), poolSizeAmt, power, ref itemDrop, ref sonar);
+                    FastPoolHandler(1000, ItemType<MatterSawtoothShark>(), poolSizeAmt, power, ref itemDrop, ref sonar);
                 if (Player.ZoneJungle && DownedBossSystem.downedLifeGod)
-                    FastPoolHandler(1800, ItemType<LivingReaverShark>(), poolSizeAmt, power, ref itemDrop, ref sonar);
+                    FastPoolHandler(1000, ItemType<LivingReaverShark>(), poolSizeAmt, power, ref itemDrop, ref sonar);
                 if (Player.ZoneBeach && Main.hardMode)
-                    FastPoolHandler(1800, ItemType<EnchantedSwordfish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
-                if (DownedBossSystem.downedBarrier)
-                    FastPoolHandler(1800, ItemType<DarkenRockFish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
+                    FastPoolHandler(1000, ItemType<EnchantedSwordfish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
+                if (DownedBossSystem.downedBarrier && !Main.dayTime)
+                    FastPoolHandler(1000, ItemType<DarkenRockFish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
             }
         }
         public void FastPoolHandler(int chanceAmt, int targetItem, int poolSizeAmt, int power, ref int itemDrop, ref AdvancedPopupRequest sonar)
@@ -53,7 +55,7 @@ namespace HJScarletRework.Globals.Players
         public void HandleDiverArmor(int poolSizeAmt, int power, ref int itemDrop, ref AdvancedPopupRequest sonar)
         {
             int fishPowerDiv = power + poolSizeAmt;
-            int chanceToCatchDiverArmor = 1750 / fishPowerDiv;
+            int chanceToCatchDiverArmor = 1000 / fishPowerDiv;
             List<int> list = [ItemType<DiverHead>(), ItemType<DiverBody>(), ItemType<DiverLegs>()];
             int increaseChanceTime = 1;
             for (int i = 0; i < Player.inventory.Length; i++)

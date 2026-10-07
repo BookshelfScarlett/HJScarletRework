@@ -6,6 +6,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Accessories
@@ -14,9 +15,15 @@ namespace HJScarletRework.Items.Accessories
     public class BloodThornCrown : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
+        public static float DR = .25f;
+        public static float DamageReduce = .25f;
+        public static int Crit = 25;
+        public static float DamageMult = .5f;
+        public static int MaxHitCounter = 3;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(DR.ToPercent(), DamageReduce.ToPercent(), Crit + "%", DamageMult.ToPercent(), MaxHitCounter);
         public override void SetStaticDefaults()
         {
-            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Database.Enums.ShinyRarityType.FateWhite);
+            HJScarletList.ShinyRarityItemDictionary.Add(Type, Globals.Database.Enums.ShinyRarityType.ScarletRed);
             ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
             ArmorIDs.Head.Sets.IsTallHat[Item.headSlot] = true;
         }
@@ -27,7 +34,7 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            base.UpdateAccessory(player, hideVisual);
+            player.HJScarlet().bloodThronCrown = true;
         }
         public override void AddRecipes()
         {

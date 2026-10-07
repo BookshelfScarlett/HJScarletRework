@@ -1,4 +1,5 @@
 ﻿using ContinentOfJourney.Items;
+using HJScarletRework.Globals.Database.Localization;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace HJScarletRework.ReVisual.Items
     {
         public override void ExModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            tooltips.CreateTooltip(Mod.GetLocalizationKey("SwitchWeapon.AllFix"), Color.LightGray, Mod, "HJScarlet", -1,
+            tooltips.CreateTooltipDirect(ScarletTextSets.GenericText.SwitchAllFix, Color.LightGray, Mod, "HJScarlet", -1,
                 GetValue(nameof(TinKnife)) + GetValue(nameof(CopperKnife)) +
                 GetValue(nameof(IronKnife)) + GetValue(nameof(LeadKnife)) +
                 GetValue(nameof(TungstenKnife)) + GetValue(nameof(SilverKnife)) +

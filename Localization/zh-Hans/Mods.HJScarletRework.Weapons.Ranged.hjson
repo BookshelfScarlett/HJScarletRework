@@ -54,5 +54,5 @@ PropellerRapierRanged: {
 
 RadiantBlazeDawn: {
 	DisplayName: 辉炎之晓
-	Tooltip: 允许穿墙
+	Tooltip: 允许穿墙，并施加[ScarletDebuff/HJScarletRework/ForeverNightBuff]
 }

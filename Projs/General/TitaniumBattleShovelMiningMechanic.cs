@@ -46,7 +46,6 @@ namespace HJScarletRework.Projs.General
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             int radius = 32;
-            Main.NewText(1);
             if (Main.dedServ)
             {
                 Point center = Projectile.Center.ToTileCoordinates();

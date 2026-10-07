@@ -15,9 +15,26 @@ PocketMirrorModiflication:
 	'''
 
 GenericText: {
-	BuffDetail: 按住左 LeftAlt 以查看具体效果
+	BuffDetail: 按住 Alt 以查看具体效果
 	// SwitchDetail: ""
 	HoldShiftAndRightClick: 按住 Shift 后右键以切换
+	ApplyDoT: 允许施加{0}
+
+	SwitchWeapon: {
+		Tooltip: 手持按下 互动键 以切换形态
+		Visual: 手持按下 互动键 以更换视觉效果
+		AllFix: 同时作用于：{0}
+		Condition: 切换前置：击败<{0}>
+	}
+
+	LostbeltJourneyText: 空想归途：
+}
+
+DownedContidionList: {
+	DownedGolem: 石巨人
+	DownedLifeGods: 万籁携生
+	DownedEvilBoss: 任意邪恶Boss
+	DownedPlantera: 世纪之花
 }
 
 ItemBelongTo: {
@@ -25,3 +42,5 @@ ItemBelongTo: {
 	Developer: 开发者物品
 	Supporter: 支援者物品
 }
+
+CustomDeathReason.Suicide: 你死了。

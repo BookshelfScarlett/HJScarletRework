@@ -91,7 +91,7 @@ namespace HJScarletRework.Globals.Executor
             {
                 //咱下次还是不要用三元表达式了。
                 bool traditionalMode = HJScarletConfigClient.Instance.TraditionalExecutionTooltipShowcase;
-                bool isPressingLeftAlt = Main.keyState.PressingShift();
+                bool isPressingLeftAlt = Main.keyState.PressingAlt();
                 int requirements = Math.Max(0, ExecutionProgress);
                 string progressText = Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionProgress").ToLangValue().ToFormatValue(requirements);
                 string executionText = (traditionalMode && isPressingLeftAlt) ? Mod.GetLocalizationKey("ExecutorDamageClass.ExecutionDescriptionName").ToLangValue() : progressText;

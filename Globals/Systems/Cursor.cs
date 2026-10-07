@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Useables;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -12,7 +11,7 @@ namespace HJScarletRework.Globals.Systems
         public static int CacheType = -1;
         public static void On_Main_DrawInterface_36_Cursor(On_Main.orig_DrawInterface_36_Cursor orig)
         {
-            if(Main.gameMenu)
+            if (Main.gameMenu)
             {
                 orig();
                 return;
@@ -55,7 +54,7 @@ namespace HJScarletRework.Globals.Systems
             SpriteBatch sb = Main.spriteBatch;
             Vector2 pos = Main.MouseScreen;
             Texture2D glow = HJScarletTexture.Particle_Smear.Value;
-            float overAllScale = 1f*CurFloat; 
+            float overAllScale = 1f * CurFloat;
             float glowScale = .65f * overAllScale;
             float count = 2;
             float timeForVisual = (float)Main.timeForVisualEffects;
@@ -72,9 +71,9 @@ namespace HJScarletRework.Globals.Systems
 
             Texture2D path = HJScarletItemProj.Cursor_Target.Value;
             //CursorTargetCross= Request<Texture2D>("HJScarletRework/Assets/Texture/Items/Equips/PreciousTarget").Value;
-            for(int i =0;i<8;i++)
-            sb.FastDraw(path, pos+(TwoPi/8f*i).ToRotationVector2()*1.2f*CurFloat, Color.White.ToAddColor(), 0, path.Size() / 2f, overAllScale, 0);
-            sb.FastDraw(path, pos, Color.White*CurFloat, 0, path.Size() / 2f, overAllScale, 0);
+            for (int i = 0; i < 8; i++)
+                sb.FastDraw(path, pos + (TwoPi / 8f * i).ToRotationVector2() * 1.2f * CurFloat, Color.White.ToAddColor(), 0, path.Size() / 2f, overAllScale, 0);
+            sb.FastDraw(path, pos, Color.White * CurFloat, 0, path.Size() / 2f, overAllScale, 0);
 
         }
     }

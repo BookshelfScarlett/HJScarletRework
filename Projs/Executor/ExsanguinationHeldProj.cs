@@ -5,7 +5,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Weapons.Executor.Firearm;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.Executor
 {

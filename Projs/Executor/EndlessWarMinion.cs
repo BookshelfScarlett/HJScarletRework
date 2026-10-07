@@ -1,5 +1,5 @@
-﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Core.NetCode;
+﻿using HJScarletRework.Core.NetCode;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;

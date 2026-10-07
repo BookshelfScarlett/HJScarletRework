@@ -75,7 +75,7 @@ namespace HJScarletRework.Projs.General
             {
                 Timer++;
                 Projectile.position += Main.rand.NextVector2Circular(5, 5);
-                if (Timer > Projectile.MaxUpdates * 30&&Projectile.IsMe())
+                if (Timer > Projectile.MaxUpdates * 30 && Projectile.IsMe())
                 {
                     Projectile.netUpdate = true;
                     HJScarletMethods.ScarletSpawnItem(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.Hitbox, ItemType<GaiaStriker>());
