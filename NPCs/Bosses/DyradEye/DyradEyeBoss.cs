@@ -82,27 +82,21 @@ namespace HJScarletRework.NPCs.Bosses.DyradEye
 
             base.AI();
         }
+        public Projectile proj = null;
         /// <summary>
         /// 树妖眼具备一个新手教程
         /// <br>需要引入空归的核心格挡机制</br>
         /// </summary>
-        /// <param name="player"></param>
-        public  Projectile proj = null;
+
         public void DoAI_BeginnerMode(Player player)
         {
-            //老大，直接使用追踪方法追这个玩家
-            //开始追踪target
-            //Vector2 home = (player.LocalMouseWorld()- NPC.Center).SafeNormalize(Vector2.UnitY);
-            //Vector2 velo = (NPC.velocity * 16 + home * 8) / (16 + 1f);
-            ////这里给了一个角度限制
-            //NPC.velocity = velo;
             if (!NPC.HJScarlet().isBeingParry)
             {
+                //16*15也就是15物块远
                 if (NPC.Distance(player.Center) > 16f * 15)
                 {
 
-                    //Move(player.Center, 24);
-                    //开始追踪target
+                    //老大，直接使用追踪方法追这个玩家
                     Vector2 home = (player.Center - NPC.Center).SafeNormalize(Vector2.UnitY);
                     float maxtime = 60;
                     float lerpValue = Utils.GetLerpValue(0f, maxtime, Timer, true);
@@ -112,29 +106,35 @@ namespace HJScarletRework.NPCs.Bosses.DyradEye
                     NPC.rotation = NPC.velocity.ToRotation();
                     NPC.spriteDirection = NPC.direction = (NPC.velocity.X > 0).ToDirectionInt();
                     NPC.dontTakeDamage = true;
-
-                    if(Main.rand.NextBool())
-                    ECSParticle.TurbulenceShinyOrb(NPC.ToRandRec(), 1.6f, Color.LimeGreen, 120, 1, 0.2f, RandRotTwoPi, .2f);
-                    if(Main.rand.NextBool())
-                    ECSParticle.LiliesPetal(NPC.ToRandRec(), NPC.velocity.ToSafeNormalize(), RandLerpColor(Color.LimeGreen, Color.DarkGreen), 100, 1, RandRotTwoPi, Main.rand.NextFloat(.8f, 1.1f)*.1f, 1f,fullBright:true,blendState:BlendState.AlphaBlend);
+                    if (Main.rand.NextBool())
+                        ECSParticle.TurbulenceShinyOrb(NPC.ToRandRec(), 1.6f, Color.LimeGreen, 120, 1, 0.2f, RandRotTwoPi, .2f);
+                    if (Main.rand.NextBool())
+                        ECSParticle.LiliesPetal(NPC.ToRandRec(), NPC.velocity.ToSafeNormalize(), RandLerpColor(Color.LimeGreen, Color.DarkGreen), 100, 1, RandRotTwoPi, Main.rand.NextFloat(.8f, 1.1f) * .1f, 1f, fullBright: true, blendState: BlendState.AlphaBlend);
                 }
                 else
                 {
+
+                    //在距离开始缩进的时候强行压住玩家的速度
                     if (player.velocity.LengthSquared() > 2f)
                         player.velocity *= .75f;
-                    if (NPC.velocity.LengthSquared() >= 5f*5f)
+                    //大于这个距离开始大减速
+                    //这里有个问题是追踪方法可能不会使树妖眼在预期的位置（树妖眼最好能和玩家保持相对水平，这是格挡最容易成功的方法）
+                    if (NPC.velocity.LengthSquared() >= 10f * 10f)
                         NPC.velocity *= .75f;
                     else
                     {
+                        //仍然进行两者的减速，但是我们开始提示进入新手教程
                         if (NPC.velocity.LengthSquared() >= .05f)
                         {
                             NPC.velocity *= .75f;
                         }
                         if (player.velocity.LengthSquared() > .1f)
                             player.velocity *= .75f;
+                        //此时让Boss允许受到伤害，这里也同样承担状态初始化的功能了，因为这里完成教程之后会直接跳转新的AI
                         if (NPC.dontTakeDamage == true)
                         {
                             SoundEngine.PlaySound(SoundID.ForceRoar with { Pitch = .3f }, NPC.Center);
+                            //生成字体，没错这个是射弹实现
                             proj = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), player.Center - Vector2.UnitY * 35, Vector2.Zero, ProjectileType<GeneralStringProj>(), 0, 0);
                             proj.timeLeft = 180;
                             ((GeneralStringProj)proj.ModProjectile).TextValue = "按下 格挡键 以格挡";
@@ -142,6 +142,7 @@ namespace HJScarletRework.NPCs.Bosses.DyradEye
                         NPC.dontTakeDamage = false;
                         ref float thisLerp = ref NPC.ai[2];
                         thisLerp = Lerp(thisLerp, 1f, 0.1f);
+                        //缩放屏幕
                         ScreenZoomSystem.ZoomIn(SmoothStep(0f, .37f, thisLerp));
                     }
                     NPC.rotation = NPC.velocity.ToRotation();
@@ -150,7 +151,7 @@ namespace HJScarletRework.NPCs.Bosses.DyradEye
             }
             else
             {
-                if(proj is not null && proj.active && proj.timeLeft>10)
+                if (proj is not null && proj.active && proj.timeLeft > 10)
                 {
                     proj.timeLeft = 10;
                 }
@@ -173,26 +174,9 @@ namespace HJScarletRework.NPCs.Bosses.DyradEye
         public void DoAI_JustSpawn(Player player)
         {
             //目前还没有祭坛，直接跳转到新手教程AI
-                          SoundEngine.PlaySound(SoundID.ForceRoar, NPC.Center);
+            SoundEngine.PlaySound(SoundID.ForceRoar, NPC.Center);
             State = AttackStyle.BeginnerMode;
             Timer = 0;
-        }
-        void Move(Vector2 targetPos, float MaxSpeed = 20f)//之前教学的惯性追击方法
-        {
-            float accSpeed = 0.5f;//设定横纵向加速度
-            if (NPC.Center.X - targetPos.X < 0f)
-                NPC.velocity.X += NPC.velocity.X < 0 ? 2 * accSpeed : accSpeed;
-            else
-                NPC.velocity.X -= NPC.velocity.X > 0 ? 2 * accSpeed : accSpeed;
-
-            if (NPC.Center.Y - targetPos.Y < 0f)
-                NPC.velocity.Y += NPC.velocity.Y < 0 ? 2 * accSpeed : accSpeed;
-            else
-                NPC.velocity.Y -= NPC.velocity.Y > 0 ? 2 * accSpeed : accSpeed;
-            if (Math.Abs(NPC.velocity.X) > MaxSpeed)//如果横向速度超越最大值，则回到最大值
-                NPC.velocity.X = MaxSpeed * Math.Sign(NPC.velocity.X);
-            if (Math.Abs(NPC.velocity.Y) > MaxSpeed)//如果纵向速度超越最大值，则回到最大值
-                NPC.velocity.Y = MaxSpeed * Math.Sign(NPC.velocity.Y);
         }
         public void Do_SwitchAI(AttackStyle targetState)
         {
@@ -214,15 +198,15 @@ namespace HJScarletRework.NPCs.Bosses.DyradEye
                 float oldRot = NPC.oldRot[i] + rotFixer;
                 Color c = Color.Lerp(Color.LightGreen, Color.LimeGreen, progress) * progress * .87f;
                 float opac = Lerp(1f, .3f, progress);
-                float scale = Lerp(1f, .45f, progress)*overAllScale;
+                float scale = Lerp(1f, .45f, progress) * overAllScale;
                 spriteBatch.FastDraw(npcTex, oldPos, c.ToAddColor() * opac * 1f, oldRot, ori, NPC.scale * scale * 1.1f, se);
                 Color c2 = Color.Lerp(Color.White, Color.LimeGreen, progress) * progress * .9f;
                 spriteBatch.FastDraw(npcTex, oldPos, c2.ToAddColor(20) * opac * .75f, oldRot, ori, NPC.scale * scale * 1, se);
             }
-                        ref float thisLerp = ref NPC.ai[2];
+            ref float thisLerp = ref NPC.ai[2];
             for (int i = 0; i < 8; i++)
-                spriteBatch.FastDraw(npcTex, drawPos+shakeing+ (TwoPi / 8f * i).ToRotationVector2() * 1.2f, Color.White.ToAddColor()*thisLerp, NPC.rotation + rotFixer, ori, NPC.scale*overAllScale, se);
-            spriteBatch.FastDraw(npcTex, drawPos+shakeing, Color.White, NPC.rotation + rotFixer, ori, NPC.scale*overAllScale, se);
+                spriteBatch.FastDraw(npcTex, drawPos + shakeing + (TwoPi / 8f * i).ToRotationVector2() * 1.2f, Color.White.ToAddColor() * thisLerp, NPC.rotation + rotFixer, ori, NPC.scale * overAllScale, se);
+            spriteBatch.FastDraw(npcTex, drawPos + shakeing, Color.White, NPC.rotation + rotFixer, ori, NPC.scale * overAllScale, se);
             return false;
         }
     }
