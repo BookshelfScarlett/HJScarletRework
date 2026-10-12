@@ -1,19 +1,15 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
-using HJScarletRework.Core.ScreenEffect;
-using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
-using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.ParryShield
 {
-    public class CobaltParryShield : BaseParryShield
+    public class EoCParryShield: BaseParryShield
     {
-        public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.CobaltShield);
+        public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.EoCShield);
         protected override int TrailCounts => 14;
         protected override float ParryShieldScale => 1.5f;
         protected override void OnActuallyGoingParry(float progress, Vector2 tarPos, Vector2 offset)
@@ -91,7 +87,7 @@ namespace HJScarletRework.Projs.ParryShield
                     float rot2 = rot + PiOver4 + (Projectile.direction < 0).ToInt() * -Pi;
                     float scale = Projectile.scale * .3f;
                     SB.FastDraw(tex2, pos, Color.RoyalBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale, 0);
-                    SB.FastDraw(tex2, pos, Color.RoyalBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale*.9f, 0);
+                    SB.FastDraw(tex2, pos, Color.RoyalBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .9f, 0);
                     SB.FastDraw(tex2, pos, Color.CornflowerBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .8f, 0);
                     SB.FastDraw(tex2, pos, Color.AliceBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .7f, 0);
                     SB.EndShaderArea();
@@ -101,3 +97,4 @@ namespace HJScarletRework.Projs.ParryShield
         }
     }
 }
+

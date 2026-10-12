@@ -328,3 +328,15 @@ FishingCoinEmerial: {
 		“钓鱼佬的最爱”
 		'''
 }
+
+TerrariaRecipeDeactive: {
+	DisplayName: 泰拉瑞亚食谱（关闭）
+	Tooltip:
+		'''
+		启用时使你依据吃下去的食物种类数量提供生命上限加成
+		每食用5份提供10点生命上限加成
+		右键以开关
+		"这可不是《我的世界》"
+		'''
+	Active: 当前状态：已关闭，不提供生命上限加成
+}

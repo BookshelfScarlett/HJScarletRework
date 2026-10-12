@@ -12,6 +12,7 @@ namespace HJScarletRework.Items.Useables
         {
             Item.rare = ItemRarityID.Lime;
             Item.value = Item.buyPrice(0, 0, 50, 0);
+            Item.maxStack = Item.CommonMaxStack;
         }
     }
 }

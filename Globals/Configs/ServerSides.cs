@@ -24,8 +24,5 @@ namespace HJScarletRework.Globals.Configs
         [Range(0, 10f)]
         [DefaultValue(1f)]
         public float ModWeaponDamageMult { get; set; }
-
-
-
     }
 }

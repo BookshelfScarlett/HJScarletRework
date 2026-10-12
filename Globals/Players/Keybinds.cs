@@ -24,9 +24,9 @@ namespace HJScarletRework.Globals.Players
         public bool CanArmorAbility = false;
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if(HJNetInput.ParryCurrent&&!Player.HasProj<CobaltParryShield>())
+            if (HJNetInput.ParryCurrent)
             {
-                Projectile proj = Projectile.NewProjectileDirect(Player.GetSource_FromThis(), Player.Center, Vector2.Zero, ProjectileType<CobaltParryShield>(), 5, 1, Player.whoAmI);
+                ParryShieldHelper();
             }
             if (HJNetInput.SkillJustPressed)
             {

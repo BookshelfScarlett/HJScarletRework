@@ -12,10 +12,6 @@ namespace HJScarletRework.Globals.Database.List
 {
     public partial class HJScarletList : ModSystem
     {
-        public static List<int> ThrownSpearList = [];
-        public static List<int> HJSpearList = [];
-        public static List<int> MaleNPC = [];
-        public static List<int> FemaleNPC = [];
         public static List<int> LegalFoodList = [];
         public static List<string> LegalFoodListName = [];
         public static List<int> SummonWeaponList = [];
@@ -29,157 +25,9 @@ namespace HJScarletRework.Globals.Database.List
         /// <br>因为会把如药水疾病与魔力病这一类效果全部加入到这个表内</br>
         /// </summary>
         public static HashSet<int> DebuffListTarget = [];
-
-        /// <summary>
-        /// 主要用于Boss方面
-        /// </summary>
-        public static Dictionary<int, string> DownedBossConditionList = [];
-        /// <summary>
-        /// 代行者处决叠层的核心机制，该字典用于存储每个代行者武器对应的总处决要求次数<br></br>
-        /// <see langword="Key"/>即键为代行者的武器ID，而对应的<see langword="Value"/>即值为该武器对应的处决要求
-        /// </summary>
-        public static Dictionary<int, int> ExecuteRequests = [];
-        public static Dictionary<int, string> VanityItemDictionary = [];
-        public static Dictionary<int, ExecutorWeaponType> ExecutorTypes = [];
-        public static Dictionary<int, string> SummonWeaponDicName = [];
         public static List<int> PandorasBurgerWeaponList = [];
         public override void Load()
         {
-            //投矛表单
-            foreach (var spear in Mod.GetContent<ThrownSpearClass>())
-            {
-                ThrownSpearList.Add(spear.Type);
-            }
-            //而后，再添加旅人归途的一些投矛。如果有的话
-            ThrownSpearList.Add(ItemType<DesertScourge>());
-            ThrownSpearList.Add(ItemType<Longinus>());
-            HJSpearList =
-            [
-                ItemType<SweetSweetStab>(),
-                ItemType<Candlance>(),
-                ItemType<WildPointer>(),
-                ItemType<SpearOfDarkness>(),
-                ItemType<LightBite>(),
-                ItemType<DeepTone>(),
-                ItemType<Tonbogiri>(),
-                ItemType<FlybackHand>(),
-                ItemType<GalvanizedHand>(),
-                ItemType<Evolution>(),
-                ItemType<Dialectics>(),
-                ItemType<SpearOfEscape>()
-            ];
-            MaleNPC =
-            [
-                NPCID.Merchant,
-                NPCID.Demolitionist,
-                NPCID.DyeTrader,
-                NPCID.GoblinTinkerer,
-                NPCID.Angler,
-                NPCID.ArmsDealer,
-                NPCID.Golfer,
-                NPCID.OldMan,
-                NPCID.Painter,
-                NPCID.TravellingMerchant,
-                NPCID.Pirate,
-                NPCID.TaxCollector,
-                NPCID.Wizard,
-                NPCID.SantaClaus,
-                NPCID.Clothier,
-                NPCID.Cyborg
-            ];
-            FemaleNPC =
-            [
-                NPCID.Dryad,
-                NPCID.Mechanic,
-                NPCID.Nurse,
-                NPCID.PartyGirl,
-                NPCID.BestiaryGirl,
-                NPCID.Steampunker,
-                NPCID.Princess,
-                NPCID.Stylist
-            ];
-            LegalFoodList =
-            [
-                ItemID.Marshmallow,
-                ItemID.JojaCola,
-                ItemID.Apple,
-                ItemID.Apricot,
-                ItemID.Banana,
-                ItemID.BlackCurrant,
-                ItemID.BloodOrange,
-                ItemID.Cherry,
-                ItemID.Coconut,
-                ItemID.Elderberry,
-                ItemID.Grapefruit,
-                ItemID.Lemon,
-                ItemID.Mango,
-                ItemID.Peach,
-                ItemID.Pineapple,
-                ItemID.Plum,
-                ItemID.Pomegranate,
-                ItemID.Rambutan,
-                ItemID.SpicyPepper,
-                ItemID.Teacup,
-                ItemID.Dragonfruit,
-                ItemID.Starfruit,
-                ItemID.ChristmasPudding,
-                ItemID.CookedFish,
-                ItemID.GingerbreadCookie,
-                ItemID.SugarCookie,
-                ItemID.PumpkinPie,
-                ItemID.FroggleBunwich,
-                ItemID.AppleJuice,
-                ItemID.BunnyStew,
-                ItemID.CookedMarshmallow,
-                ItemID.GrilledSquirrel,
-                ItemID.Lemonade,
-                ItemID.PeachSangria,
-                ItemID.RoastedBird,
-                ItemID.SauteedFrogLegs,
-                ItemID.ShuckedOyster,
-                ItemID.BowlofSoup,
-                ItemID.MonsterLasagna,
-                ItemID.PadThai,
-                ItemID.Sashimi,
-                ItemID.BananaSplit,
-                ItemID.CoffeeCup,
-                ItemID.CookedShrimp,
-                ItemID.Escargot,
-                ItemID.Fries,
-                ItemID.BananaDaiquiri,
-                ItemID.FruitJuice,
-                ItemID.LobsterTail,
-                ItemID.Pho,
-                ItemID.RoastedDuck,
-                ItemID.Burger,
-                ItemID.Pizza,
-                ItemID.Spaghetti,
-                ItemID.BloodyMoscato,
-                ItemID.MilkCarton,
-                ItemID.PinaColada,
-                ItemID.SmoothieofDarkness,
-                ItemID.TropicalSmoothie,
-                ItemID.ChickenNugget,
-                ItemID.FriedEgg,
-                ItemID.GrubSoup,
-                ItemID.IceCream,
-                ItemID.SeafoodDinner,
-                ItemID.CreamSoda,
-                ItemID.Grapes,
-                ItemID.Hotdog,
-                ItemID.Nachos,
-                ItemID.FruitSalad,
-                ItemID.PotatoChips,
-                ItemID.ShrimpPoBoy,
-                ItemID.ChocolateChipCookie,
-                ItemID.PrismaticPunch,
-                ItemID.ApplePie,
-                ItemID.Milkshake,
-                ItemID.Steak,
-                ItemID.BBQRibs,
-                ItemID.Bacon,
-                ItemID.GoldenDelight
-            ];
             for (int i = 0; i < LegalFoodList.Count; i++)
             {
                 string name = ItemID.Search.GetName(LegalFoodList[i]);
@@ -226,19 +74,21 @@ namespace HJScarletRework.Globals.Database.List
             string[] heldProjNameMaybe = ["Hold", "Held", "Spear", "Drill", "Shortsword"];
             for (int i = 0; i < ItemLoader.ItemCount; i++)
             {
-                Item item = new Item(i);
+                Item item = ContentSamples.ItemsByType[i];
                 //食物处理
                 bool isFood = item.buffType == BuffID.WellFed || item.buffType == BuffID.WellFed2 || item.buffType == BuffID.WellFed3 || ItemID.Sets.IsFood[item.type];
                 if (isFood && !LegalFoodList.Contains(item.type))
                 {
                     LegalFoodList.Add(item.type);
-                    if (i > VanillaMaxItem)
+                    ModItem modItem = item.ModItem;
+                    if (modItem is not null)
                     {
-                        ModItem modItem = item.ModItem;
-                        if (modItem is not null)
-                        {
-                            LegalFoodListName.Add(modItem.FullName);
-                        }
+                        LegalFoodListName.Add(modItem.FullName);
+                    }
+                    else
+                    {
+                        string vanillaName = ItemID.Search.GetName(i);
+                        LegalFoodListName.Add(vanillaName);
                     }
                 }
 
@@ -281,12 +131,10 @@ namespace HJScarletRework.Globals.Database.List
                 if (Main.debuff[buff.Type])
                     DebuffListTarget.Add(buff.Type);
             }
+            LoadDictionary();
         }
         public override void Unload()
         {
-            UnloadRarity();
-            ThrownSpearList = null;
-            HJSpearList = null;
             LegalFoodList = null;
             LegalFoodListName = null;
             DownedBossConditionList = null;

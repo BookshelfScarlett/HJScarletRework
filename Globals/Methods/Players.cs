@@ -61,6 +61,22 @@ namespace HJScarletRework.Globals.Methods
                 return true;
             return false;
         }
+        public static bool HasProj<T>(this Player player) where T : ModProjectile => HasProj(player, ProjectileType<T>());
+        public static bool HasProj(this Player player, int projID) => player.ownedProjectileCounts[projID] > 0;
+
+        /// <summary>
+        /// 重载一个out传参，输出你判定的拥有的proj的ID以方便后续可能需要的计算，或者别的
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="player"></param>
+        /// <param name="ProjID"></param>
+        /// <returns></returns>
+        public static bool HasProj<T>(this Player player, out int ProjID) where T : ModProjectile
+        {
+            ProjID = ProjectileType<T>();
+            return HasProj<T>(player);
+        }
+
         public static void Suicide(this Player player, PlayerDeathReason damageSource, double dmg, int hitDirection, bool pvp = false, bool skipPrekill = false)
         {
             if (player.creativeGodMode || player.dead)

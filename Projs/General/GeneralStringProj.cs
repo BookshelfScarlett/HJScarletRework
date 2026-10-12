@@ -9,7 +9,7 @@ using Terraria.UI.Chat;
 
 namespace HJScarletRework.Projs.General
 {
-    public class GeneralStringProj: HJScarletProj
+    public class GeneralStringProj : HJScarletProj
     {
         public override EnumDamageClass Category => EnumDamageClass.Typeless;
         public override string Texture => HJScarletTexture.InvisAsset.Path;

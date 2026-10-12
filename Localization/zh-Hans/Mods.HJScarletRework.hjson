@@ -71,7 +71,23 @@ ExecutorDamageClass: {
 }
 
 DamageClasses.ExecutorDamageClass.DisplayName: 代行者伤害
-Projs.Enemy.SuicideKnifeInvisProj.DisplayName: ...自杀
+
+Projs: {
+	Enemy.SuicideKnifeInvisProj.DisplayName: ...自杀
+
+	ParryShields: {
+		// AnkhParryShield.DisplayName: Ankh Parry Shield
+		// CobaltParryShield.DisplayName: Cobalt Parry Shield
+		// EoCParryShield.DisplayName: Eo C Parry Shield
+		// FrozenParryShield.DisplayName: Frozen Parry Shield
+		// HeroParryShield.DisplayName: Hero Parry Shield
+		// HuntresssBucklerParryShield.DisplayName: Huntresss Buckler Parry Shield
+		// ObsidianParryShield.DisplayName: Obsidian Parry Shield
+		// SergeantUnitedParryShield.DisplayName: Sergeant United Parry Shield
+		// SquiresParryShield.DisplayName: Squires Parry Shield
+		// PaladinsParryShield.DisplayName: Paladins Parry Shield
+	}
+}
 
 Items: {
 	TechBlade: {

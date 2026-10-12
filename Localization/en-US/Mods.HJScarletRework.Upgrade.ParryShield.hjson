@@ -1,0 +1,13 @@
+GeneralText: ""
+
+Types: {
+	CobaltShield: ""
+	ObsidianShield: ""
+	AnkhShield: ""
+	EoCShield: ""
+	FrozenShield: ""
+	HeroShield: ""
+	SquireShield: ""
+	PaladinsShield: ""
+	MasterSheild: ""
+}

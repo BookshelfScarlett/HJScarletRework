@@ -1,7 +1,6 @@
 ﻿using HJScarletRework.Assets.Registers;
 using HJScarletRework.Globals.Methods;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Graphics;
 using Terraria.ModLoader;
@@ -88,15 +87,14 @@ namespace HJScarletRework.Core.ScreenEffect
             orig(self);
             if (!UseTexture)
                 return;
-                        float v = (Math.Abs(ZoomValue - 1f));
+            float v = (Math.Abs(ZoomValue - 1f));
             float cV = Utils.GetLerpValue(1f, 0f, v, true);
             if (cV <= .02f)
                 return;
 
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-            //用纹理原始宽度计算缩放，使绘制宽度恰好等于 desiredWidth
-            Main.spriteBatch.Draw(MaskTexture, Main.LocalPlayer.Center - Main.screenPosition, null, Color.White*(cV), 0, MaskTexture.Size() / 2f, new Vector2(1)*Lerp(.3f,1f,v), 0, 0);
-            Main.spriteBatch.Draw(MaskTexture, Main.LocalPlayer.Center - Main.screenPosition, null, Color.White*(cV), 0, MaskTexture.Size() / 2f, new Vector2(1)*Lerp(.3f,1f,v), 0, 0);
+            Main.spriteBatch.Draw(MaskTexture, Main.LocalPlayer.Center - Main.screenPosition, null, Color.White * (cV), 0, MaskTexture.Size() / 2f, new Vector2(1) * Lerp(.3f, 1f, v), 0, 0);
+            Main.spriteBatch.Draw(MaskTexture, Main.LocalPlayer.Center - Main.screenPosition, null, Color.White * (cV), 0, MaskTexture.Size() / 2f, new Vector2(1) * Lerp(.3f, 1f, v), 0, 0);
             Main.spriteBatch.End();
         }
     }

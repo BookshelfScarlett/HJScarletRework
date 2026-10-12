@@ -2,6 +2,7 @@
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Melee;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Melee
 {
@@ -22,7 +23,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         public override Color MainTooltipColor => Color.AliceBlue;
         public override void AddRecipes()
         {
-            if (!HJScarletMethods.HasFuckingCalamity)
+            if (!ModLoader.HasMod("CalamityMod"))
             {
                 CreateRecipe().
                     AddIngredient<FierySpear>().

@@ -10,12 +10,5 @@ namespace HJScarletRework.Globals.Database.List
         /// 主要用于存储并引用特殊稀有度绘制
         /// </summary>
         public static Dictionary<int, ShinyRarityType> ShinyRarityItemDictionary = [];
-        public void LoadRarity()
-        {
-        }
-        public void UnloadRarity()
-        {
-
-        }
     }
 }

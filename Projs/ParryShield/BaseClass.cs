@@ -1,22 +1,22 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Buffs;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Database.Enums;
+using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Graphics.Particles;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Useables;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Terraria;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.ParryShield
 {
-    public abstract class BaseParryShield : HJScarletProj
+    public abstract class BaseParryShield : HJScarletProj,ILocalizedModType
     {
         public override EnumDamageClass Category => EnumDamageClass.Typeless;
+        //public new string LocalizationCategory => base.LocalizationCategory;
+        public new string LocalizationCategory => "Projs.ParryShields";
         public AnimationStruct Helper = new AnimationStruct(2);
         public float TargetRotation = 0;
         public bool Flip = false;
@@ -74,6 +74,10 @@ namespace HJScarletRework.Projs.ParryShield
         public List<Vector2> OldParryShieldPos = new List<Vector2>();
         public List<float> OldParryShieldRot = new List<float>();
         protected float PrevParryProgress = 0f;
+        public override void SetStaticDefaults()
+        {
+            ScarletProjIDSets.IsParryShield[Type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.friendly = true;
@@ -237,7 +241,7 @@ namespace HJScarletRework.Projs.ParryShield
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            
+
             return false;
         }
     }

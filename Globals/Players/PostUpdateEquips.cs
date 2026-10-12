@@ -15,6 +15,7 @@ using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Armor.ExecutorVanillaHead;
 using HJScarletRework.Items.Armor.Reaper;
 using HJScarletRework.Items.Armor.SaintChurch;
+using HJScarletRework.Items.Useables;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using HJScarletRework.Projs.Executor;
@@ -34,7 +35,6 @@ namespace HJScarletRework.Globals.Players
         public override void PostUpdateEquips()
         {
             HandleTerraRecipe();
-            ResetTerraRecipe();
             HandleLoveRing();
             UpdateFloretProtectorHerbSpawn();
             UpdateHerbBuff();
@@ -108,70 +108,14 @@ namespace HJScarletRework.Globals.Players
             //由于需要提供血上限，这里基本上得往reset这里写内容。
             if (!terraRecipe)
                 return;
-            //在吃食时，或者进入世界时，都会依据当前的食物表单来查看需要的血上限
-            if (resetEatenFoodCounts)
+            if (terrariaRecipeEatenFoodCounts >= 5)
             {
-                //记得重置
-                //遍历这个表单。
-                for (int i = 0; i < terraRecipe_EatenFoodList.Count; i++)
-                {
-                    //每次达到第五个，我们都重置这个计算用的单位
-                    terraRecipe_EatenFoodCounts += 1;
-                    if (terraRecipe_EatenFoodCounts > 4)
-                    {
-                        terraRecipe_EatenFoodCounts = 0;
-                        //lifeMaxMultTime会在这个地方递增
-                        terraRecipe_LifeMaxMultTime += 1;
-                    }
-                }
-                resetEatenFoodCounts = false;
-
-            }
-            if (terraRecipe_EatenFoodCounts > 4)
-            {
-                terraRecipe_EatenFoodCounts = 0;
-                terraRecipe_LifeMaxMultTime += 1;
-                SoundEngine.PlaySound(SoundID.ResearchComplete, Player.Center);
-                Player.HealEffect(terraRecipe_LifeMaxIncre);
-                for (int i = 0; i < 30; i++)
-                {
-                    float rotArgs = ToRadians((360f / 30 * i));
-                    new ShinyCrossStar(Player.Center + Vector2.UnitX.RotatedBy(rotArgs) * 12f, rotArgs.ToRotationVector2() * 2.8f, Color.White, 40, rotArgs, 1, 1f, false).Spawn();
-                }
+                terrariaRecipeEatenFoodCounts = 0;
+                ScarletSound(SoundID.ResearchComplete, Player.Center);
             }
             //全局常态提供血上限。
-            Player.statLifeMax2 += terraRecipe_LifeMaxMultTime * terraRecipe_LifeMaxIncre;
+            Player.statLifeMax2 += (terrariaRecipeEatenList.Count / 5) * TerrariaRecipe.StatLifePerAdd;
         }
-
-        public void ResetTerraRecipe()
-        {
-            if (!resetTerraRecipe)
-                return;
-            //byd你tm不是复制而是类似一个引用的用法啊？？
-            terraRecipe_NotEatenFoodList = new List<int>(HJScarletList.LegalFoodList);
-            for (int i = 0; i < terraRecipe_EatenFoodList.Count; i++)
-            {
-                int index = terraRecipe_EatenFoodList[i];
-                if (!terraRecipe_NotEatenFoodList.Contains(index))
-                {
-                    terraRecipe_EatenFoodList.RemoveAt(i);
-                }
-            }
-            for (int i = 0; i < terraRecipe_NotEatenFoodList.Count; i++)
-            {
-                int index = terraRecipe_NotEatenFoodList[i];
-                if (terraRecipe_EatenFoodList.Contains(index))
-                {
-                    terraRecipe_NotEatenFoodList.RemoveAt(i);
-                }
-            }
-            //重新计算一遍当前值。
-            resetEatenFoodCounts = true;
-            terraRecipe_EatenFoodCounts = 0;
-            terraRecipe_LifeMaxMultTime = 0;
-            resetTerraRecipe = false;
-        }
-
         public void HandleLoveRing()
         {
             if (!loveRing || genderChangeTimer < 1)

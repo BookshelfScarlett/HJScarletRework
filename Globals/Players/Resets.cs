@@ -43,7 +43,7 @@ namespace HJScarletRework.Globals.Players
             cycleMadnessLevel = -1;
             spellBreakerLevel = 0;
             bloodThronCrown = false;
-
+            terraRecipe = false;
             emblemVanguard = false;
             emblemColdSteel = false;
             emblemFirearm = false;
@@ -52,6 +52,7 @@ namespace HJScarletRework.Globals.Players
             emblemGalaxy = false;
             combatSlot = false;
             combatSlot2 = false;
+            parryShieldType = -1;
         }
         private void ResetArmor()
         {

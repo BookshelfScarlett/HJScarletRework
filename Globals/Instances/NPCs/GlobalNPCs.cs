@@ -4,7 +4,6 @@ using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.NPCs.Bosses.DyradEye;
-using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
@@ -80,7 +79,7 @@ namespace HJScarletRework.Globals.Instances.NPCs
         public float dizzedStarIconLerp = 0;
         public override bool PreAI(NPC npc)
         {
-            if (parryTime > 0&&npc.type == NPCType<DyradEyeBoss>())
+            if (parryTime > 0 && npc.type == NPCType<DyradEyeBoss>())
             {
                 parryTime--;
                 if (parryTime < 60)

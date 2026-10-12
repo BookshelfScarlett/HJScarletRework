@@ -6,12 +6,5 @@ namespace HJScarletRework.Globals.Methods
     {
         public static string CalamityMod => "CalamityMod";
         public static string HomewardJourney => "ContinentOfJourney";
-        public static bool HasFuckingCalamity
-        {
-            get
-            {
-                return ModLoader.HasMod(CalamityMod);
-            }
-        }
     }
 }

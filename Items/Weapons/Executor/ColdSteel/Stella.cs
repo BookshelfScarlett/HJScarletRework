@@ -10,10 +10,6 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
 {
     public class Stella : ExecutorWeaponClass
     {
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            return false;
-        }
 
         public override int ExecutionProgress => 50;
         public override void ExSSD()

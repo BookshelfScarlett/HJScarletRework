@@ -45,6 +45,33 @@ namespace HJScarletRework.Globals.Database.IDSets
         /// </summary>
 
         public static bool[] CanParry = NPCID.Sets.Factory.CreateBoolSet(NPCID.KingSlime, NPCID.EyeofCthulhu);
-
+        public static bool[] IsMaleNPC = NPCID.Sets.Factory.CreateBoolSet(
+            NPCID.Merchant,
+            NPCID.Demolitionist,
+            NPCID.DyeTrader,
+            NPCID.GoblinTinkerer,
+            NPCID.Angler,
+            NPCID.ArmsDealer,
+            NPCID.Golfer,
+            NPCID.OldMan,
+            NPCID.Painter,
+            NPCID.TravellingMerchant,
+            NPCID.Pirate,
+            NPCID.TaxCollector,
+            NPCID.Wizard,
+            NPCID.SantaClaus,
+            NPCID.Clothier,
+            NPCID.Cyborg
+            );
+        public static bool[] IsFemaleNPC = NPCID.Sets.Factory.CreateBoolSet(
+                NPCID.Dryad,
+                NPCID.Mechanic,
+                NPCID.Nurse,
+                NPCID.PartyGirl,
+                NPCID.BestiaryGirl,
+                NPCID.Steampunker,
+                NPCID.Princess,
+                NPCID.Stylist
+            );
     }
 }

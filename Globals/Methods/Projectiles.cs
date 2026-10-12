@@ -1,5 +1,4 @@
 ﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Projs;
 using HJScarletRework.ReVisual.Class;
@@ -674,7 +673,7 @@ namespace HJScarletRework.Globals.Methods
         }
         public static void TrySuccessParry(this NPC target, Player Owner, float parryPower)
         {
-                    }
+        }
         public static int ApplyDirectionOverride(this Projectile proj, NPC target) => (Main.player[proj.owner].Center.X < target.Center.X).ToDirectionInt();
         #region 隐形爆炸生成
         /// <summary>

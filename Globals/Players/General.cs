@@ -73,6 +73,7 @@ namespace HJScarletRework.Globals.Players
         public bool monkExecutor = false;
         public bool monkStaffHeal = false;
         public bool mouseHoveringBanWeaponAbility = false;
+        public bool parrying = false;
         public bool pocketMirror = false;
         public bool powerLily = false;
         public bool powerLilyVanity = false;
@@ -146,6 +147,7 @@ namespace HJScarletRework.Globals.Players
         public int mayaPumperDashTime = 0;
         public int mayaPumperDashType = -1;
         public int NoSlowFall = 0;
+        public int parryShieldType = -1;
         public int pendantLevel = 0;
         public int powerLilyCacheTimer = 0;
         public int powerLilyTimer = 0;
@@ -159,9 +161,8 @@ namespace HJScarletRework.Globals.Players
         public int stardustRuneHitHealTimer = 0;
         public int stardustRuneStaticHealTimer = 0;
         public int tearEyeBuff = 0;
-        public int terraRecipe_EatenFoodCounts = 0;
-        public int terraRecipe_LifeMaxIncre = 10;
-        public int terraRecipe_LifeMaxMultTime = 0;
+        public int terrariaRecipeEatenFoodCounts = 0;
+        public int terrariaRecipeEatenMultTimes = 0;
 
         // float 字段
         public float blackKeyDefenseBuff = 0;
@@ -176,14 +177,11 @@ namespace HJScarletRework.Globals.Players
         // List<string> 字段
         public List<string> ruShiWoWenBanMinionNameList = new List<string>();
         public List<string> ruShiWoWenBanMinionNameTrashList = new List<string>();
-        public List<string> terraRecipeEatenFoodNameTrashList = new List<string>();
-        public List<string> terraRecipeEatenFoodNameList = new List<string>();
-        public List<string> terraRecipeNotEatenFoodNameTrashList = new List<string>();
-        public List<string> terraRecipeNotEatenFoodNameList = new List<string>();
 
-        // List<int> 字段
-        public List<int> terraRecipe_EatenFoodList = new List<int>();
-        public List<int> terraRecipe_NotEatenFoodList = new List<int>();
+        public List<string> terrariaRecipeEatenList = new List<string>();
+        public List<string> terrariaRecipeNotEatenList = new List<string>();
+        public List<string> terrariaRecipeEatenListTrash = new List<string>();
+        public List<string> terrariaRecipeNotEatenListTrash = new List<string>();
 
         // int[] 字段
         public int[] protectorHerbTimerList = [0, 0, 0, 0, 0, 0, 0];
@@ -206,9 +204,6 @@ namespace HJScarletRework.Globals.Players
                 DrawLoveRingParticle(drawInfo.Position, drawInfo.drawPlayer);
             }
         }
-        public override void DrawPlayer(Camera camera)
-        {
-        }
         public void DrawLoveRingParticle(Vector2 position, Player drawPlayer)
         {
             if (Main.rand.NextBool(12))
@@ -218,15 +213,30 @@ namespace HJScarletRework.Globals.Players
                 new HeartParticle(pos, Vector2.UnitY * -Main.rand.NextFloat(0.51f, 2.3f), RandLerpColor(Color.Crimson, Color.HotPink), 40, 0.08f, 0.8f, fadeIn: true).Spawn();
             }
         }
-        public void SwapListForNeeded(IReadOnlyList<string> matcher, ref List<string> trasher, ref List<string> apply)
+        public void SwapListForNeeded(IReadOnlyList<string> matcher, ref List<string> trasher, ref List<string> apply,bool shouldReverse)
         {
-            for (int i = 0; i < trasher.Count; i++)
+            if (shouldReverse)
             {
-                string nameType = trasher[i];
-                if (matcher.Contains(nameType))
+                for (int i = 0; i < trasher.Count; i++)
                 {
-                    trasher.RemoveAt(i);
-                    apply.Add(nameType);
+                    string nameType = trasher[i];
+                    if (!matcher.Contains(nameType))
+                    {
+                        trasher.RemoveAt(i);
+                        apply.Add(nameType);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < trasher.Count; i++)
+                {
+                    string nameType = trasher[i];
+                    if (matcher.Contains(nameType))
+                    {
+                        trasher.RemoveAt(i);
+                        apply.Add(nameType);
+                    }
                 }
             }
         }
@@ -239,20 +249,32 @@ namespace HJScarletRework.Globals.Players
             }
             OnEnterWorldReset();
             resetTerraRecipe = true;
-            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terraRecipeNotEatenFoodNameTrashList, ref terraRecipeNotEatenFoodNameList);
-            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terraRecipeEatenFoodNameTrashList, ref terraRecipeEatenFoodNameList);
-            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terraRecipeEatenFoodNameList, ref terraRecipeEatenFoodNameTrashList);
-            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terraRecipeNotEatenFoodNameList, ref terraRecipeNotEatenFoodNameTrashList);
-            SwapListForNeeded(HJScarletList.SummonWeaponFullName, ref ruShiWoWenBanMinionNameTrashList, ref ruShiWoWenBanMinionNameList);
-            SwapListForNeeded(HJScarletList.SummonWeaponFullName, ref ruShiWoWenBanMinionNameList, ref ruShiWoWenBanMinionNameTrashList);
+            if(terrariaRecipeNotEatenList.Count < 1)
+            {
+                terrariaRecipeNotEatenList = [.. HJScarletList.LegalFoodListName];
+            }
+            //初始化
             for (int i = 0; i < HJScarletList.LegalFoodListName.Count; i++)
             {
                 string name = HJScarletList.LegalFoodListName[i];
-                if (!terraRecipeEatenFoodNameList.Contains(name) && !terraRecipeNotEatenFoodNameList.Contains(name))
-                {
-                    terraRecipeNotEatenFoodNameList.Add(name);
-                }
+
+                if (!terrariaRecipeNotEatenList.Contains(name))
+                terrariaRecipeNotEatenList.Add(name);
             }
+
+            SwapListForNeeded(HJScarletList.SummonWeaponFullName, ref ruShiWoWenBanMinionNameTrashList, ref ruShiWoWenBanMinionNameList,false);
+            SwapListForNeeded(HJScarletList.SummonWeaponFullName, ref ruShiWoWenBanMinionNameList, ref ruShiWoWenBanMinionNameTrashList,true);
+            //把垃圾内容的表单丢进去
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeEatenListTrash, ref terrariaRecipeEatenList,false);
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeEatenList, ref terrariaRecipeEatenListTrash,true);
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeNotEatenListTrash, ref terrariaRecipeNotEatenList,false);
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeNotEatenList, ref terrariaRecipeNotEatenListTrash,true);
+            for (int i = 0; i < terrariaRecipeEatenList.Count; i++)
+            {
+                string name = terrariaRecipeEatenList[i];
+                terrariaRecipeNotEatenList.Remove(name);
+            }
+
 
             for (int i = 0; i < Player.inventory.Length; i++)
             {
@@ -280,19 +302,6 @@ namespace HJScarletRework.Globals.Players
                     SwitchArmorType2(item, i, true);
                 }
             }
-        }
-
-        public void TryGiveMagicStorage()
-        {
-        }
-        private int GetSoftReferrenceItemID(Mod mod, string name)
-        {
-            int itemID = -1;
-            if (mod.TryFind(name, out ModItem value))
-            {
-                return value.Type;
-            }
-            return itemID;
         }
 
         private void SwitchArmorType2(Item item, int i, bool armorSlot = false)

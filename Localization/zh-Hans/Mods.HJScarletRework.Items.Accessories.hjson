@@ -307,15 +307,15 @@ PinballPurgatory: {
 		受击时，承受的击退力量将与敌人的防击退系数成反比
 		若敌人完全防击退，你也不会受到击退的影响
 		同时根据受击时的弹珠类型选择四种不同的效果
-		“把你发配到弹球炼狱，在四种不同颜色的弹球之箭叮呤咣啷开奖”
+		“把你发配到弹球炼狱，在四种不同颜色的弹球之间叮呤咣啷开奖”
 		'''
-	/* DetailTooltip:
+	DetailTooltip:
 		'''
-		White marbles do nothing
-		Blue marbles allow you to dash in four directions for a short time
-		Pink marbles allow you to dash in four directions for a longer time
-		Orange marbles cause purgatory fireballs to fall from the sky when hit for a longer duration
-		''' */
+		白色弹珠什么都不做
+		蓝色弹珠允许你在较短的时间内四向冲刺
+		粉色弹珠允许你在较长的时间内四向冲刺
+		橙色弹珠允许你受伤时降下炼狱火球
+		'''
 }
 
 SlimeGodShield: {

@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Globals.Database.List;
+﻿using HJScarletRework.Globals.Database.IDSets;
+using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Useables;
@@ -32,8 +33,8 @@ namespace HJScarletRework.Globals.Instances.NPCs
 
         public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
         {
-            bool isMale = HJScarletList.MaleNPC.Contains(npc.type);
-            bool isFemale = HJScarletList.FemaleNPC.Contains(npc.type);
+            bool isMale = ScarletNPCIDSets.IsMaleNPC[npc.type];
+            bool isFemale = ScarletNPCIDSets.IsFemaleNPC[npc.type];
             Player player = Main.LocalPlayer;
             if (!player.HJScarlet().loveRing)
                 return;

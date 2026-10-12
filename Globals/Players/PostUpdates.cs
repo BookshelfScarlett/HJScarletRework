@@ -38,7 +38,7 @@ namespace HJScarletRework.Globals.Players
     {
 
         // ==================== 字段 ====================
-        public int CalamityValue = HJScarletMethods.HasFuckingCalamity.ToInt();
+        public int CalamityValue = ModLoader.HasMod("CalamityMod").ToInt();
         public float blackKeyExecutorDamageAdd = 0;
         public int blackKeyExecutorCriticalChanceAdd = 0;
         public float holdingUseableTimer = 0;
@@ -274,7 +274,6 @@ namespace HJScarletRework.Globals.Players
 
         }
         #endregion
-
 
 
         // ==================== PostUpdate ====================

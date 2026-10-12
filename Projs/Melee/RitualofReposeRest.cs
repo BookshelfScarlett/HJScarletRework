@@ -40,7 +40,7 @@ namespace HJScarletRework.Projs.Melee
         }
         public override void OnFirstFrame()
         {
-            //ScarletSound(HJScarletSounds.Misc_MagicStaffFire, Owner.Center, .2f, 1, pitch: .4f);
+            ScarletSound(HJScarletSounds.Misc_MagicStaffFire, Owner.Center, .15f, 1, pitch: .4f);
 
         }
         public override bool? CanHitNPC(NPC target)

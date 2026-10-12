@@ -14,7 +14,7 @@
         public static readonly string Bosses = $"{NPCs}{nameof(Bosses)}/";
         public static class DyradEye
         {
-        public static readonly string DyradEyePrefix = $"{Bosses}DyradEye/";
+            public static readonly string DyradEyePrefix = $"{Bosses}DyradEye/";
             public static readonly string Texture = $"{DyradEyePrefix}DyradEyeBoss";
         }
         public static string LocalizedHelper(this string assetPath)

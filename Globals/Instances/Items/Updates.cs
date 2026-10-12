@@ -14,6 +14,7 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 player.HJScarlet().pocketMirror = !hideVisual;
             }
+            UpdateParryShield(item, player);
         }
         public override void UpdateVanity(Item item, Player player)
         {

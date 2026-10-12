@@ -303,3 +303,9 @@ FishingCoinEmerial: {
 	DisplayName: Fishing Coin Emerial
 	Tooltip: Fisherman's Beloved
 }
+
+TerrariaRecipeDeactive: {
+	DisplayName: Terraria Recipe Deactive
+	Tooltip: ""
+	Active: ""
+}

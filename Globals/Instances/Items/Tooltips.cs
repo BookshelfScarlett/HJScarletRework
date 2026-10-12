@@ -53,6 +53,64 @@ namespace HJScarletRework.Globals.Instances.Items
                         Color.LightGray, Mod, "ApplyDoTName");
                     break;
             }
+            ItemOwnerName(item, ref tooltips);
+
+            if (HJScarletPlayer.AllWeaponSwapValue.Contains(item.type))
+            {
+                string pre = ScarletTextSets.GenericText.ModNamePrefix;
+                string value = pre + "\n" + ScarletTextSets.GenericText.SwitchTooltip;
+                tooltips.CreateTooltipDirect(value, Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f));
+            }
+
+            if (LocalPlayer.HJScarlet().terraRecipe)
+            {
+                //表单里有这个内容我们才写这个东西。没有则写另一条
+                string itemName = string.Empty;
+                if (item.type > VanillaMaxItem)
+                {
+                    if (item.ModItem is not null)
+                        itemName = item.ModItem.FullName;
+                }
+                else
+                {
+                    itemName = ItemID.Search.GetName(item.type);
+                }
+                if (HJScarletList.LegalFoodListName.Contains(itemName))
+                {
+                    string path = Mod.GetLocalizationKey($"Items.Useable.TerrariaRecipe.");
+                    List<string> list = LocalPlayer.HJScarlet().terrariaRecipeEatenList;
+                    if (list.Contains(itemName))
+                        tooltips.CreateTooltipDirect((path + "Eaten").ToLangValue(), Color.GreenYellow);
+                    else
+                        tooltips.CreateTooltipDirect((path + "NotEaten").ToLangValue(), Color.SkyBlue);
+                }
+            }
+            ExecutorMonkShinobi(item, ref tooltips);
+            ExecutorWeaponExecuteTypes(item, ref tooltips);
+            //标记物品未完成
+            if (item.HJScarlet().NotFinished)
+            {
+                tooltips.CreateTooltip(Mod.GetLocalizationKey("NotFinished"), Color.IndianRed);
+            }
+            //无主之地系列的武器，红字文本。
+            if (item.HJScarlet().borderlandWeapon)
+            {
+                string path = Mod.GetLocalizationKey($"Weapons.Executor.{item.ModItem.Name}.FlavorTooltip");
+                int index = tooltips.FindLineIndex("Tooltip0");
+                tooltips.CreateTooltip(path, Color.Lerp(Color.DarkRed, Color.Crimson, 0.82f), LineName: "BorderlandRedLineName", index: index);
+            }
+            if (item.type == ItemID.PocketMirror)
+            {
+                int index = tooltips.FindLineIndexLast("Tooltip");
+                string path = Mod.GetLocalizationKey($"Database.PocketMirrorModiflication");
+                tooltips.CreateTooltip(path, LineName: "PocketMirrorModiflication", color: Color.SkyBlue, index: index + 2, args: Main.LocalPlayer.HJScarlet().pocketMirror.ToString());
+            }
+            ModifyParryShieldTooltip(item, tooltips);
+            InsertIconInTooltipLine(item, tooltips);
+            CacheTooltipLine = tooltips;
+        }
+        public void ItemOwnerName(Item item, ref List<TooltipLine> tooltips)
+        {
             if (ItemBelongTo != EnumItemOwner.None)
             {
                 string keyPath = Language.GetTextValue(ScarletTextSets.DatabasePrefix + ".ItemBelongTo." + ItemBelongTo);
@@ -72,34 +130,10 @@ namespace HJScarletRework.Globals.Instances.Items
                 string value = "<" + keyPath.ToLangValue() + "·" + item.HJScarlet().OwnerName + ">";
                 tooltips.CreateTooltipDirect(value, color, LineName: item.HJScarlet().ItemBelongTo + "Name");
             }
-            if (HJScarletPlayer.AllWeaponSwapValue.Contains(item.type))
-            {
-                string pre = ScarletTextSets.GenericText.ModNamePrefix;
-                string value = pre + "\n" + ScarletTextSets.GenericText.SwitchTooltip;
-                tooltips.CreateTooltipDirect(value, Color.Lerp(Color.LawnGreen, Color.LightGreen, 0.5f));
-            }
-            if (LocalPlayer.HJScarlet().terraRecipe)
-            {
-                if (HJScarletList.LegalFoodList.Contains(item.type))
-                {
-                    //表单里有这个内容我们才写这个东西。没有则写另一条
-                    string itemName = string.Empty;
-                    if (item.type > VanillaMaxItem)
-                    {
-                        itemName = item.ModItem.FullName;
-                    }
-                    else
-                    {
-                        itemName = ItemID.Search.GetName(item.type);
-                    }
-                    string path = Mod.GetLocalizationKey($"Items.Useable.TerrariaRecipe.");
-                    List<string> list = LocalPlayer.HJScarlet().terraRecipeEatenFoodNameList;
-                    if (list.Contains(itemName))
-                        tooltips.CreateTooltipDirect((path + "Eaten").ToLangValue(), Color.GreenYellow);
-                    else
-                        tooltips.CreateTooltipDirect((path + "NotEaten").ToLangValue(), Color.SkyBlue);
-                }
-            }
+
+        }
+        public void ExecutorMonkShinobi(Item item, ref List<TooltipLine> tooltips)
+        {
             //因为各种原因导致的史山
             if (LocalPlayer.HJScarlet().monkExecutor)
             {
@@ -118,6 +152,9 @@ namespace HJScarletRework.Globals.Instances.Items
                     tooltips.CreateTooltipDirect(path, Color.Thistle, null, "ShinobiBuff", -1, "35%", "15%", "200%");
                 }
             }
+        }
+        public void ExecutorWeaponExecuteTypes(Item item, ref List<TooltipLine> tooltips)
+        {
             //强制自动处决/手动处决的字段
             if (item.DamageType.CountsAsClass<ExecutorDamageClass>())
             {
@@ -142,26 +179,6 @@ namespace HJScarletRework.Globals.Instances.Items
                     tooltips.Insert(index + 1, line);
                 }
             }
-            //标记物品未完成
-            if (item.HJScarlet().NotFinished)
-            {
-                tooltips.CreateTooltip(Mod.GetLocalizationKey("NotFinished"), Color.IndianRed);
-            }
-            //无主之地系列的武器，红字文本。
-            if (item.HJScarlet().borderlandWeapon)
-            {
-                string path = Mod.GetLocalizationKey($"Weapons.Executor.{item.ModItem.Name}.FlavorTooltip");
-                int index = tooltips.FindLineIndex("Tooltip0");
-                tooltips.CreateTooltip(path, Color.Lerp(Color.DarkRed, Color.Crimson, 0.82f), LineName: "BorderlandRedLineName", index: index);
-            }
-            if (item.type == ItemID.PocketMirror)
-            {
-                int index = tooltips.FindLineIndexLast("Tooltip");
-                string path = Mod.GetLocalizationKey($"Database.PocketMirrorModiflication");
-                tooltips.CreateTooltip(path, LineName: "PocketMirrorModiflication", color: Color.SkyBlue, index: index + 2, args: Main.LocalPlayer.HJScarlet().pocketMirror.ToString());
-            }
-            InsertIconInTooltipLine(item, tooltips);
-            CacheTooltipLine = tooltips;
         }
         #region 插入图片，但是在Tooltip内
         //匹配的正则表达式
@@ -230,29 +247,8 @@ namespace HJScarletRework.Globals.Instances.Items
                                         }
                                     }
                                 }
-                                //计算图标在渲染时应占据的宽度
-                                //此时我们不知道最终的行高，但可以基于当前字体计算一个近似比例
-                                DynamicSpriteFont currentFont = FontAssets.MouseText.Value;
-                                Vector2 currentScale = Vector2.One;
-                                //近似行高，用于计算图标宽度
-                                float approximateLineHeight = currentFont.MeasureString("M").Y * currentScale.Y;
-                                //图标宽高比
-                                float iconAspectRatio = (32 + 2) / (float)32;
-                                if (texture != null)
-                                {
-                                    iconAspectRatio = (texture.Width + 2) / (float)texture.Height;
-                                }
-
-                                //图标应占据的像素宽度
-                                float targetWidth = approximateLineHeight * iconAspectRatio;
-                                //测量单个空格的宽度
-                                float spaceWidth = ChatManager.GetStringSize(currentFont, " ", currentScale).X;
-                                //计算所需空格数量
-                                int spacesNeeded = (int)Math.Ceiling(targetWidth / spaceWidth);
-                                //构建占位空格字符串
-                                string placeholder = new string(' ', spacesNeeded);
                                 modified = true;
-                                return $"{placeholder}[c/{color}:{name}]";
+                                return $"{GetDebuffPlaceholder(texture)}[c/{color}:{name}]";
                             });
                         }, 1);
                     }
@@ -262,7 +258,7 @@ namespace HJScarletRework.Globals.Instances.Items
                     tooltips[i].Text = string.Join("\n", subLines);
             }
             //用于写入具体的buffTooltip
-            if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftAlt) && buffs.Count != 0 && drawBuffIconAndDetail)
+            if (Main.keyState.PressingAlt() && buffs.Count != 0 && drawBuffIconAndDetail)
             {
                 if (tooltips.Count < 2)
                     return;
@@ -270,27 +266,6 @@ namespace HJScarletRework.Globals.Instances.Items
                 for (int j = 0; j < buffs.Count; j++)
                 {
                     Texture2D texture = buffs[j].Item4;
-                    //计算图标在渲染时应占据的宽度
-                    //此时我们不知道最终的行高，但可以基于当前字体计算一个近似比例
-                    DynamicSpriteFont currentFont = FontAssets.MouseText.Value;
-                    Vector2 currentScale = Vector2.One;
-                    //近似行高，用于计算图标宽度
-                    float approximateLineHeight = currentFont.MeasureString("M").Y * currentScale.Y;
-                    //图标宽高比
-                    float iconAspectRatio = (32 + 2) / (float)32;
-                    if (texture != null)
-                    {
-                        iconAspectRatio = (texture.Width + 2) / (float)texture.Height;
-                    }
-                    //图标应占据的像素宽度
-                    float targetWidth = approximateLineHeight * iconAspectRatio;
-                    //测量单个空格的宽度
-                    float spaceWidth = ChatManager.GetStringSize(currentFont, " ", currentScale).X;
-                    //计算所需空格数量
-                    int spacesNeeded = (int)Math.Ceiling(targetWidth / spaceWidth);
-                    //构建占位空格字符串
-                    string placeholder = new string(' ', spacesNeeded);
-
                     //终于差不多了……加tooltip
                     if (add.Contains(buffs[j].Item5))
                     {
@@ -300,14 +275,38 @@ namespace HJScarletRework.Globals.Instances.Items
                     else
                         add.Add(buffs[j].Item5);
 
-                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName" + j, $"{placeholder}[c/{buffs[j].Item3}:{buffs[j].Item5}]");
+                    TooltipLine buffTextNameLine = new TooltipLine(Mod, "ScarletBuffIconName" + j, $"{GetDebuffPlaceholder(texture)}[c/{buffs[j].Item3}:{buffs[j].Item5}]");
                     TooltipLine buffTextDescripLine = new TooltipLine(Mod, "ScarletBuffDescripName" + j, $"{buffs[j].Item6}");
                     tooltips.Add(buffTextNameLine);
                     tooltips.Add(buffTextDescripLine);
                     buffs[j] = (0, tooltips.Count, buffs[j].Item3, buffs[j].Item4, buffs[j].Item5, buffs[j].Item6, buffTextNameLine.Name, 0);
                 }
-
             }
+        }
+        public string GetDebuffPlaceholder(Texture2D texture)
+        {
+            //计算图标在渲染时应占据的宽度
+            //此时我们不知道最终的行高，但可以基于当前字体计算一个近似比例
+            DynamicSpriteFont currentFont = FontAssets.MouseText.Value;
+            Vector2 currentScale = Vector2.One;
+            //近似行高，用于计算图标宽度
+            float approximateLineHeight = currentFont.MeasureString("M").Y * currentScale.Y;
+            //图标宽高比
+            float iconAspectRatio = (32 + 2) / (float)32;
+            if (texture != null)
+            {
+                iconAspectRatio = (texture.Width + 2) / (float)texture.Height;
+            }
+            //图标应占据的像素宽度
+            float targetWidth = approximateLineHeight * iconAspectRatio;
+            //测量单个空格的宽度
+            float spaceWidth = ChatManager.GetStringSize(currentFont, " ", currentScale).X;
+            //计算所需空格数量
+            int spacesNeeded = (int)Math.Ceiling(targetWidth / spaceWidth);
+            //构建占位空格字符串
+            string placeholder = new string(' ', spacesNeeded);
+            return placeholder;
+
         }
         public void InsertIconInTooltipLine(Item item, List<TooltipLine> tooltips)
         {

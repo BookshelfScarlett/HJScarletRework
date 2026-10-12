@@ -81,37 +81,37 @@ namespace HJScarletRework.Globals.Instances.Items
             {
                 if (item.type < VanillaMaxItem)
                 {
-                    string name = ItemID.Search.GetName(item.type);
-                    if (!usPlayer.terraRecipeEatenFoodNameList.Contains(name))
+
+                    string fullName = ItemID.Search.GetName(item.type);
+                    if (HJScarletList.LegalFoodListName.Contains(fullName))
                     {
-                        usPlayer.terraRecipeEatenFoodNameList.Add(name);
-                        usPlayer.terraRecipeNotEatenFoodNameList.Remove(name);
-                        usPlayer.terraRecipe_EatenFoodCounts++;
+                        if (!usPlayer.terrariaRecipeEatenList.Contains(fullName))
+                        {
+                            usPlayer.terrariaRecipeEatenFoodCounts += 1;
+                            usPlayer.terrariaRecipeEatenList.Add(fullName);
+                        }
+                        usPlayer.terrariaRecipeNotEatenList.Remove(fullName);
                     }
+
                 }
                 else
                 {
-                    string name = item.ModItem.FullName;
-                    if (!usPlayer.terraRecipeEatenFoodNameList.Contains(name))
+                    ModItem modItem = item.ModItem;
+                    if (modItem is not null)
                     {
-                        usPlayer.terraRecipeEatenFoodNameList.Add(name);
-                        usPlayer.terraRecipeNotEatenFoodNameList.Remove(name);
-                        usPlayer.terraRecipe_EatenFoodCounts++;
-                    }
-                }
-                if (HJScarletList.LegalFoodList.Contains(item.type))
-                {
-                    //物品都是独立的实例，这里必须得把表单直接扔到玩家类里进行保存
-                    if (!usPlayer.terraRecipe_EatenFoodList.Contains(item.type))
-                    {
-                        usPlayer.terraRecipe_EatenFoodList.Add(item.type);
-                        //这里也会尝试删除这个表的一个元素
-                        usPlayer.terraRecipe_NotEatenFoodList.Remove(item.type);
-                        usPlayer.terraRecipe_EatenFoodCounts++;
+                        string fullName = modItem.FullName;
+                        if (HJScarletList.LegalFoodListName.Contains(fullName))
+                        {
+                            if (!usPlayer.terrariaRecipeEatenList.Contains(fullName))
+                            {
+                                usPlayer.terrariaRecipeEatenFoodCounts += 1;
+                                usPlayer.terrariaRecipeEatenList.Add(fullName);
+                            }
+                            usPlayer.terrariaRecipeNotEatenList.Remove(fullName);
+                        }
                     }
                 }
             }
-
             if (item.healLife > 0 && player.HJScarlet().crimsonCharm)
             {
                 player.AddBuff(BuffType<CrimsonCharmBuff>(), CrimsonCharm.OverSatuTime * 60);

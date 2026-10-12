@@ -732,8 +732,14 @@ WeHaveBookshelf: {
 
 Stella: {
 	DisplayName: Stella
-	Tooltip: ""
-	ExecutionStrike: ""
+	Tooltip: Fires possessed flame arrows
+	ExecutionStrike:
+		'''
+		Immune to damage during Execution Strike
+		After charging, automatically fires a powerful Meteor Arrow toward the cursor
+		The Meteor Arrow deals 1000% damage with an extremely wide damage area
+		Kills you after the Execution Strike ends
+		'''
 }
 
 Headsplosion: {

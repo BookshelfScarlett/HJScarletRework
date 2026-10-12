@@ -1,5 +1,7 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Projs.Executor;
+using HJScarletRework.Projs.ParryShield;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -95,5 +97,11 @@ ProjectileType<SlimeGodLightOrb>(), ProjectileType<SlimeGodLightOrb_2>(), Projec
         #endregion
             );
         public static bool[] IsHeldProj = ProjectileID.Sets.Factory.CreateBoolSet();
+        /// <summary>
+        /// 如果为<see langword="true"/>，视作该射弹为格挡盾。可以用于过滤掉一些东西
+        /// <br>默认在<see cref="BaseParryShield"/里自动添加</br>
+        /// </summary>
+
+        public static bool[] IsParryShield = ProjectileID.Sets.Factory.CreateBoolSet();
     }
 }

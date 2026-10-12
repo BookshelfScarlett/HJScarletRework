@@ -24,7 +24,7 @@ namespace HJScarletRework.Assets.Registers
         public static Tex2DWithPath Texture_RuShiWoWenFlower { get; set; }
         public static Tex2DWithPath Texture_FireBall { get; set; }
         public static Tex2DWithPath Texture_FireBallPixel { get; set; }
-        public static Tex2DWithPath Texture_ScreenMask{ get; set; }
+        public static Tex2DWithPath Texture_ScreenMask { get; set; }
         public void LoadTexture()
         {
             Texture_BloomRing = new Tex2DWithPath($"{Path_General}{nameof(Texture_BloomRing)}");

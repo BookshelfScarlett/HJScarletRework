@@ -6,6 +6,7 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.Executor;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor.Thrown
 {
@@ -34,7 +35,7 @@ namespace HJScarletRework.Items.Weapons.Executor.Thrown
         }
         public override void AddRecipes()
         {
-            if (HJScarletMethods.HasFuckingCalamity)
+            if (ModLoader.HasMod("CalamityMod"))
             {
                 CreateRecipe().
                     AddIngredient(ItemID.Pwnhammer).

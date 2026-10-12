@@ -1,10 +1,8 @@
-﻿using ContinentOfJourney.Items.Donar.BanSiZai;
-using HJScarletRework.Core.ParticleECS;
+﻿using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.ScreenEffect;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Projs.General;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -137,7 +135,7 @@ namespace HJScarletRework.NPCs.Bosses.DyradEye
                             //生成字体，没错这个是射弹实现
                             proj = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), player.Center - Vector2.UnitY * 35, Vector2.Zero, ProjectileType<GeneralStringProj>(), 0, 0);
                             proj.timeLeft = 180;
-                            ((GeneralStringProj)proj.ModProjectile).TextValue = "按下 格挡键 以格挡";
+                            ((GeneralStringProj)proj.ModProjectile).TextValue = "Press F to Parry";
                         }
                         NPC.dontTakeDamage = false;
                         ref float thisLerp = ref NPC.ai[2];
@@ -190,7 +188,7 @@ namespace HJScarletRework.NPCs.Bosses.DyradEye
             int length = NPC.oldPos.Length - 8;
             SpriteEffects se = NPC.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Vector2 shakeing = NPC.HJScarlet().isBeingParry ? Main.rand.NextVector2Circular(1.5f, 1.5f) : Vector2.Zero;
-            float overAllScale = .9f;
+            float overAllScale = 1f;
             for (int i = 0; i < length; i++)
             {
                 float progress = (float)i / length;
