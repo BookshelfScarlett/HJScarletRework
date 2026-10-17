@@ -196,3 +196,48 @@ ParrySpin: {
 	// DisplayName: Parry Spin
 	// Description: Mods.HJScarletRework.Buffs.ParrySpin.Description
 }
+
+CobaltParryBuff: {
+	// DisplayName: Cobalt Parry Buff
+	// Description: Mods.HJScarletRework.Buffs.CobaltParryBuff.Description
+}
+
+EoCParryBuff: {
+	// DisplayName: Eo C Parry Buff
+	// Description: Mods.HJScarletRework.Buffs.EoCParryBuff.Description
+}
+
+FrozenParryBuff: {
+	// DisplayName: Frozen Parry Buff
+	// Description: Mods.HJScarletRework.Buffs.FrozenParryBuff.Description
+}
+
+HuntressParryBuff: {
+	// DisplayName: Huntress Parry Buff
+	// Description: Mods.HJScarletRework.Buffs.HuntressParryBuff.Description
+}
+
+ObsidianParryBuff: {
+	// DisplayName: Obsidian Parry Buff
+	// Description: Mods.HJScarletRework.Buffs.ObsidianParryBuff.Description
+}
+
+PaladinsParryBuff: {
+	// DisplayName: Paladins Parry Buff
+	// Description: Mods.HJScarletRework.Buffs.PaladinsParryBuff.Description
+}
+
+SergantParryBuff: {
+	// DisplayName: Sergant Parry Buff
+	// Description: Mods.HJScarletRework.Buffs.SergantParryBuff.Description
+}
+
+SquireParryBuff: {
+	// DisplayName: Squire Parry Buff
+	// Description: Mods.HJScarletRework.Buffs.SquireParryBuff.Description
+}
+
+DiverBuff: {
+	DisplayName: 小小深潜者
+	Description: 来自异世的小旅者
+}

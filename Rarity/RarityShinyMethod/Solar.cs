@@ -12,7 +12,7 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
     {
         public static void DrawItemName(DrawableTooltipLine line)
         {
-            RarityDrawHelper.DrawCustomTooltipLine(line, Color.DarkOrange, Color.Lerp(Color.White, Color.DarkOrange, 0.65f), Color.White, 1);
+            RarityDrawHelper.DrawCustomTooltipLine(line, Color.DarkOrange, Color.Lerp(Color.Black, Color.DarkOrange, 0.85f), Color.White, 1);
 
         }
         public static void DrawItemNameParticle(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> particleList)

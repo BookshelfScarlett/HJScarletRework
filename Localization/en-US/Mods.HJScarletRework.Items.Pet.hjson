@@ -66,3 +66,12 @@ LifeWormItem: {
 		"Brimming with vitality"
 		'''
 }
+
+DiverItem: {
+	DisplayName: Miniature Portal
+	Tooltip:
+		'''
+		Summons a Tiny Diver
+		"Kids under 1.4m get in free."
+		'''
+}

@@ -4,6 +4,7 @@ using HJScarletRework.Globals.Methods;
 using System;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Instances.Items
@@ -15,9 +16,12 @@ namespace HJScarletRework.Globals.Instances.Items
             if (!item.IsLegal() || Main.dedServ)
                 return true;
             HandleLerpValue(item, position, scale);
+           
             if (Math.Abs(1f - simpleImmersiveBackpackValueAlt) > .03f)
             {
-                spriteBatch.Draw(TextureAssets.Item[item.type].Value, position, new Rectangle?(frame), drawColor, 0, origin, scale * simpleImmersiveBackpackValue, 0, 0f);
+                Texture2D v = TextureAssets.Item[item.type].Value;
+                //???幽灵翅膀你是何意味
+                spriteBatch.Draw(v, position, (frame), item.type == ItemID.GhostWings ? itemColor : drawColor, 0, origin, scale * simpleImmersiveBackpackValue, 0, 0f);
                 return false;
             }
             return true;

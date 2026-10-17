@@ -11,6 +11,7 @@ namespace HJScarletRework.Globals.Players
     {
         public void ParryShieldHelper()
         {
+            return;
             if (parryShieldType < 0)
                 return;
             if (HJScarletList.ParryShieldDictionary.TryGetValue(parryShieldType, out int projID))

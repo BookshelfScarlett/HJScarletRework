@@ -429,3 +429,31 @@ GunWitchLegs: {
 		增加{0}移动速度
 		'''
 }
+
+GlowMushroomBody: {
+	DisplayName: 夜光蘑菇大衣
+	Tooltip:
+		'''
+		增加{0}伤害
+		获得[ScarletBuff/Terraria/Shine]
+		'''
+}
+
+GlowMushroomHead: {
+	DisplayName: 夜光蘑菇帽
+	Tooltip:
+		'''
+		增加{0}代行者暴击概率
+		获得[ScarletBuff/Terraria/NightOwl]
+		'''
+	SetBonus:
+		'''
+		正上方来犯的射弹在接触帽子时减少25%伤害
+		该射弹也不会造成击退和较弱的减益
+		'''
+}
+
+GlowMushroomLegs: {
+	DisplayName: 夜光蘑菇裤
+	Tooltip: 增加{0}移动速度
+}

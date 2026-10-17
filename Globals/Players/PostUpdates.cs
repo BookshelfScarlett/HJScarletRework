@@ -731,7 +731,8 @@ namespace HJScarletRework.Globals.Players
                 //最后，检查是否为代行者的武器
                 if (targetItem.DamageType.CountsAsClass<ExecutorDamageClass>() & !shouldBreak)
                 {
-                    HJScarletMethods.ApplyPrefixToThis(ref targetItem, PrefixType<Phantasmic>());
+                    HJScarletMethods.ApplyPrefixToThis(ref targetItem, PrefixType<Phantasmic>(),true);
+                    shouldBreak = true;
                 }
                 //将悬浮的物品变为空气
                 inventory[slot] = item;

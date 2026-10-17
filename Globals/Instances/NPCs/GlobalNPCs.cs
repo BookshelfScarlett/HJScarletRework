@@ -79,7 +79,7 @@ namespace HJScarletRework.Globals.Instances.NPCs
         public float dizzedStarIconLerp = 0;
         public override bool PreAI(NPC npc)
         {
-            if (parryTime > 0 && npc.type == NPCType<DyradEyeBoss>())
+            if (parryTime > 0 && !npc.CountAsBoss())
             {
                 parryTime--;
                 if (parryTime < 60)

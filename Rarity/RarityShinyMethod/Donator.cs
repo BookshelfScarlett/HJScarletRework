@@ -50,7 +50,7 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
     {
         public static void DrawItemName(DrawableTooltipLine line)
         {
-            RarityDrawHelper.DrawCustomTooltipLine(line, Color.LightPink, Color.Violet, Color.White, 1);
+            RarityDrawHelper.DrawCustomTooltipLine(line, Color.LightPink, Color.Lerp(Color.Violet,Color.DarkViolet,.45f), Color.White, 1);
         }
         public static void DrawItemNameParticle(DrawableTooltipLine tooltipLine, ref List<RaritySparkle> particleList)
         {

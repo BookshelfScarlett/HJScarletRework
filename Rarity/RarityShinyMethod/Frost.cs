@@ -11,7 +11,7 @@ namespace HJScarletRework.Rarity.RarityShinyMethod
         public static void DrawItemName(DrawableTooltipLine line)
         {
             //最后更新他。
-            RarityDrawHelper.DrawCustomTooltipLine(line, Color.RoyalBlue, Color.Lerp(Color.White, Color.RoyalBlue, 0.65f), Color.White, 1);
+            RarityDrawHelper.DrawCustomTooltipLine(line, Color.RoyalBlue, Color.Lerp(Color.SkyBlue, Color.RoyalBlue, 0.75f), Color.White, 1);
         }
         public static void DrawItemNameParticle(DrawableTooltipLine line, ref List<RaritySparkle> raritySparklesList)
         {

@@ -59,7 +59,7 @@ namespace HJScarletRework.Globals.Players
             {
                 totalReduce += 1;
             }
-            reduce -= totalReduce;
+            reduce = totalReduce;
         }
         //潜在的问题是，这里实际上有可能因为写法差异导致出现多乘区
         public override void ModifyWeaponDamage(Item item, ref StatModifier damage)

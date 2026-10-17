@@ -1,36 +1,34 @@
-﻿using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Buffs.Pets;
+using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using Terraria;
+using Terraria.ID;
 
 namespace HJScarletRework.Projs.Pets
 {
-    public class SquidProj : ScarletFlyingPet
+    public class SquidProj : ScarletPetProjClass
     {
-        public override int PetFrames => 3;
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            Main.projFrames[Type] = 3;
+            ProjectileID.Sets.CharacterPreviewAnimations[Type] = ProjectileID.Sets.SimpleLoop(0, Main.projFrames[Type], 18)
+                .WithOffset(-10, -20f)
+                .WithSpriteDirection(-1)
+                .WithCode(DelegateMethods.CharacterPreview.Float);
+        }
         public override void ExSD()
         {
-            Projectile.width = 22;
-            Projectile.height = 22;
-            Projectile.ignoreWater = true;
+            Projectile.CloneDefaults(ProjectileID.ZephyrFish);
+            AIType = ProjectileID.ZephyrFish;
         }
-        public override void GetPetFlyingState(out float FlyingSpeed, out float FlyingIneritia, out bool ShouldSpeedUp, out float SpeedUpThreshold)
+        public override bool PreAI()
         {
-            FlyingSpeed = 12f;
-            FlyingIneritia = 60f;
-            ShouldSpeedUp = true;
-            SpeedUpThreshold = 600f;
+            return true;
         }
-        public override void GetPetIdleState(out Vector2 FlyingOffset, out float FlyingArea, out float FlyingDrag, out bool ShouldFlyRotate)
+        public override void AI()
         {
-            base.GetPetIdleState(out FlyingOffset, out FlyingArea, out FlyingDrag, out ShouldFlyRotate);
-        }
-        public override void SimplePetFunction()
-        {
-            SimplePetAnimation(15f);
-            if (Owner.dead)
-                Owner.HJScarlet().petSquid = false;
-
-            if (Owner.HJScarlet().petSquid)
+            if (!Owner.dead && Owner.HasBuff(BuffType<SquidBuff>()))
                 Projectile.timeLeft = 2;
         }
     }

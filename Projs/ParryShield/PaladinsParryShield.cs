@@ -95,9 +95,7 @@ namespace HJScarletRework.Projs.ParryShield
                     {
                         float arg = (TwoPi/8) * k;
                         SB.FastDraw(tex2, pos, Color.Goldenrod* ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2+arg, tex2.Size() / 2f, scale, 0);
-                        //SB.FastDraw(tex2, pos, Color.RoyalBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2 + Pi+arg, tex2.Size() / 2f, scale * .9f, 0);
                         SB.FastDraw(tex2, pos, Color.LightGoldenrodYellow* ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2+arg, tex2.Size() / 2f, scale * .9f, 0);
-                        //SB.FastDraw(tex2, pos, Color.AliceBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2+arg + PiOver2, tex2.Size() / 2f, scale, 0);
                     }
                     SB.EndShaderArea();
                 }

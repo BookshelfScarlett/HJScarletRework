@@ -176,18 +176,11 @@ namespace HJScarletRework.Projs.Melee
                 ECSParticle.ShinyCrossStarSmall(Projectile.Center.ToRandCirclePos(45 * Projectile.scale, 110 * Projectile.scale), Vector2.UnitX.RotatedBy(Projectile.rotation) * Main.rand.NextFloat(.2f, 1f) * 4f, RandLerpColor(Color.White, Color.Gold), Main.rand.Next(10, 46), 1, Main.rand.NextFloat(.65f, 1.1f) * .15f, 0f);
 
             //待一切尘埃落定，我们会给这个世界献上带来安息
-            if (Owner.CanUseHoldout(ItemType<RitualofRepose>()) && !Owner.IsInInventory() && !JustStartAttacked && AppearRatios >= 1f)
+            if (Owner.CanUseHoldout(ItemType<RitualofRepose>()) && !Owner.IsInInventory() && !JustStartAttacked && AppearRatios >= 1f&&!Owner.mouseInterface)
             {
                 if (Owner.JustPressLeftClick())
                 {
                     JustStartAttacked = true;
-                    InitAttack();
-                    return;
-                }
-                if (Owner.JustPressRightClick())
-                {
-                    JustStartAttacked = true;
-                    JustPressedRightClick = true;
                     InitAttack();
                     return;
                 }

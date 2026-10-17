@@ -72,10 +72,14 @@ namespace HJScarletRework.Globals.Methods
                 holdout.SetUpHoldoutData(item.type, recoilPower, item.useAnimation, offset ?? Vector2.Zero);
             }
         }
-        public static void ApplyPrefixToThis(ref Item item, int prefixID)
+        public static void ApplyPrefixToThis(ref Item item, int prefixID,bool passOver = false)
         {
             if (item.CanApplyPrefix(prefixID))
+                {
+                item.ResetPrefix();
                 item.Prefix(prefixID);
+
+            }
         }
         public static int ScarletSpawnItem(IEntitySource source, Vector2 pos, Rectangle rec, int item, int stack = 1)
         {

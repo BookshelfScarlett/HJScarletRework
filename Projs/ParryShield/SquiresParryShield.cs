@@ -61,7 +61,7 @@ namespace HJScarletRework.Projs.ParryShield
                 Vector2 pos = OldParryShieldPos[i] - Main.screenPosition + Projectile.Size / 2f;
                 float rot = OldParryShieldRot[i];
                 float opac = Lerp(0f, 1f, ratios) * .954f;
-                Color c = Color.Lerp(Color.WhiteSmoke, Color.RoyalBlue, ratios).ToAddColor(10);
+                Color c = Color.Lerp(Color.WhiteSmoke, Color.DarkRed, ratios).ToAddColor(10);
                 SB.FastDraw(tex, pos, c * opac * lerp, rot, rotationPoint, Projectile.scale, 0);
 
                 /*
@@ -86,12 +86,14 @@ namespace HJScarletRework.Projs.ParryShield
                     Texture2D tex2 = HJScarletTexture.Particle_Smear.Value;
                     float rot2 = rot + PiOver4 + (Projectile.direction < 0).ToInt() * -Pi;
                     float scale = Projectile.scale * .3f;
-                    SB.FastDraw(tex2, pos, Color.RoyalBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale, 0);
-                    SB.FastDraw(tex2, pos, Color.RoyalBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .9f, 0);
-                    SB.FastDraw(tex2, pos, Color.CornflowerBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .8f, 0);
-                    SB.FastDraw(tex2, pos, Color.AliceBlue * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .7f, 0);
-                    SB.EndShaderArea();
+                    for (int k = 0; k < 8; k++)
+                    {
+                        float arg = (TwoPi / 8) * k;
+                        SB.FastDraw(tex2, pos, Color.Red* ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2 + arg, tex2.Size() / 2f, scale, 0);
+                        SB.FastDraw(tex2, pos, Color.Crimson* ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2 + arg, tex2.Size() / 2f, scale * .9f, 0);
+                    }
                 }
+
             }
             return false;
         }

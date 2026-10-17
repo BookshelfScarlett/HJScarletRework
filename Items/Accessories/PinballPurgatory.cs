@@ -28,10 +28,11 @@ namespace HJScarletRework.Items.Accessories
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            tooltips.CreateTooltipDirect(ScarletTextSets.GeneralText_BuffShow.ToLangValue(), Color.LightGray, Mod, "DetailLineName");
-            string value = this.GetLocalizationKey("DetailTootlip").ToLangValue();
+            string value = this.GetLocalizationKey("DetailTooltip");
             if (Main.keyState.PressingAlt())
                 tooltips.ReplaceAllTooltip(value, Color.White);
+            else
+                tooltips.CreateTooltipDirect(ScarletTextSets.GeneralText_BuffShow.ToLangValue(), Color.LightGray, Mod, "DetailLineName");
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

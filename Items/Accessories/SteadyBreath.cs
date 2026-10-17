@@ -32,9 +32,9 @@ namespace HJScarletRework.Items.Accessories
             player.GetDamage<RangedDamageClass>() += Damage;
             player.GetCritChance<RangedDamageClass>() += Crit;
             player.HJScarlet().preciousTargetLevel = 2;
-            if (player.HeldItem.IsLegal() && player.HeldItem.DamageType.CountsAsClass<RangedDamageClass>())
+            if (player.HeldItem.IsLegal() && player.HeldItem.DamageType.CountsAsClass<RangedDamageClass>()&&!hideVisual)
             {
-                if (!hideVisual && !player.IsInInventory())
+                if (!player.IsInInventory())
                     player.HJScarlet().cursorID = 1;
                 if (player.whoAmI == Main.myPlayer && !player.HasProj<PreciousTargetCross>())
                 {

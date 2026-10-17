@@ -308,12 +308,6 @@ namespace HJScarletRework.Globals.Players
         {
             switch (item.type)
             {
-                case ItemID.RuneHat:
-                    AlterArmorType2(item.type, i, 14, false, armorSlot: armorSlot);
-                    break;
-                case ItemID.RuneRobe:
-                    AlterArmorType2(item.type, i, 22, false, armorSlot: armorSlot);
-                    break;
                 case ItemID.CowboyHat:
                     AlterArmorType2(item.type, i, CowboyHelmet.Defense, false, ItemRarityID.Orange, armorSlot);
                     break;
@@ -322,12 +316,6 @@ namespace HJScarletRework.Globals.Players
                     break;
                 case ItemID.CowboyPants:
                     AlterArmorType2(item.type, i, CowboyHelmet.Defense, false, ItemRarityID.Orange, armorSlot);
-                    break;
-                case ItemID.RainHat:
-                    AlterArmorType2(item.type, i, RaincoatHelmet.Defense, false, armorSlot: armorSlot);
-                    break;
-                case ItemID.RainCoat:
-                    AlterArmorType2(item.type, i, RaincoatChestplate.Defense, false, armorSlot: armorSlot);
                     break;
             }
 

@@ -67,3 +67,12 @@ LifeWormItem: {
 		“焕发着勃勃生机”
 		'''
 }
+
+DiverItem: {
+	DisplayName: 微型传送门
+	Tooltip:
+		'''
+		召唤幼年深潜者
+		“一米四以下儿童免门票”
+		'''
+}

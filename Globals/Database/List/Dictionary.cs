@@ -44,7 +44,8 @@ namespace HJScarletRework.Globals.Database.List
                 {ItemID.BouncingShield, ProjectileType<SergeantUnitedParryShield>()},
                 {ItemID.HeroShield, ProjectileType<HeroParryShield>()},
                 {ItemID.FrozenShield, ProjectileType<FrozenParryShield>()},
-                {ItemID.PaladinsShield, ProjectileType<PaladinsParryShield>()}
+                {ItemID.PaladinsShield, ProjectileType<PaladinsParryShield>()},
+                {ItemID.EoCShield, ProjectileType<EoCParryShield>()}
             };
         }
 

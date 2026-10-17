@@ -3,12 +3,14 @@ using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 
 namespace HJScarletRework.Items.Accessories
 {
     public class BitingClaw : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Equips;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs("10%");
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Blue);

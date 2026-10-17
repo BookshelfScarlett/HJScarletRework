@@ -16,12 +16,14 @@ namespace HJScarletRework.Globals.Instances.Items
     {
         public void UpdateParryShield(Item item, Player player)
         {
+            return;
             if (!HJScarletList.ParryShieldDictionary.ContainsKey(item.type))
                 return;
             player.HJScarlet().parryShieldType = item.type;
         }
         public void ModifyParryShieldTooltip(Item item, List<TooltipLine> tooltips)
         {
+            return;
             if (!HJScarletList.ParryShieldDictionary.ContainsKey(item.type))
                 return;
             string prefix = "Upgrade.ParryShield.";

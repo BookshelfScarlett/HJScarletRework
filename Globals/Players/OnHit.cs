@@ -213,7 +213,7 @@ namespace HJScarletRework.Globals.Players
                 //转化成功后，将值/2f，取暴击率的1/2（即20%-> 10%)
                 baseCritsbuff /= 2f;
                 //最后。直接将暴击伤害设置
-                totalCritsBonus += baseCritsbuff;
+                totalCritsBonus += (baseCritsbuff/100f);
             }
             if (modifiers.DamageType.CountsAsClass<ExecutorDamageClass>())
             {

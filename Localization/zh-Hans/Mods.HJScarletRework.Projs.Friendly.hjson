@@ -397,4 +397,5 @@ Pets: {
 	WatcherProj.DisplayName: Watcher Proj
 	WhaleProj.DisplayName: Whale Proj
 	// LifeWormProj.DisplayName: Life Worm Proj
+	// DiverProj.DisplayName: Diver Proj
 }

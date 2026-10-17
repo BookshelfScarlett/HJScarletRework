@@ -55,16 +55,12 @@ namespace HJScarletRework.Globals.Players
         public static readonly HashSet<int> AllWeaponSwapValue = new(WeaponSwapMaps.Values.Concat(WeaponSwapMaps.Keys));
         public static readonly List<int> ArmorMaps = new List<int>()
         {
-            ItemID.RuneHat,
-            ItemID.RuneRobe,
             ItemID.CowboyHat,
             ItemID.CowboyJacket,
             ItemID.CowboyPants,
             ItemID.FloretProtectorHelmet,
             ItemID.FloretProtectorChestplate,
             ItemID.FloretProtectorLegs,
-            ItemID.RainHat,
-            ItemID.RainCoat,
         };
         //一个额外的工具方法，用于反向字典映射
         public static int GetReverseWeapon(int curType)
@@ -109,12 +105,6 @@ namespace HJScarletRework.Globals.Players
             //这里实际上没什么办法，只能这样打表
             switch (item)
             {
-                case ItemID.RuneHat:
-                    AlterArmorType(item, 14, false);
-                    break;
-                case ItemID.RuneRobe:
-                    AlterArmorType(item, 22, false);
-                    break;
                 case ItemID.CowboyHat:
                     AlterArmorType(item, CowboyHelmet.Defense, false, ItemRarityID.Orange);
                     break;
@@ -123,12 +113,6 @@ namespace HJScarletRework.Globals.Players
                     break;
                 case ItemID.CowboyPants:
                     AlterArmorType(item, CowboyHelmet.Defense, false, ItemRarityID.Orange);
-                    break;
-                case ItemID.RainHat:
-                    AlterArmorType(item, RaincoatHelmet.Defense, false);
-                    break;
-                case ItemID.RainCoat:
-                    AlterArmorType(item, RaincoatChestplate.Defense, false);
                     break;
             }
             if (DownedBossSystem.downedLifeGod)

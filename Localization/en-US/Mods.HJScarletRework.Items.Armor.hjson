@@ -403,3 +403,31 @@ GunWitchLegs: {
 	DisplayName: Gun Witch Legs
 	Tooltip: ""
 }
+
+GlowMushroomBody: {
+	DisplayName: Glowing Mushroom Coat
+	Tooltip:
+		'''
+		{0} increased damage
+		Grants[ScarletBuff/Terraria/Shine]
+		'''
+}
+
+GlowMushroomHead: {
+	DisplayName: Glowing Mushroom Hat
+	Tooltip:
+		'''
+		{0} increased executor critical strike chance
+		Grants[ScarletBuff/Terraria/NightOwl]
+		'''
+	SetBonus:
+		'''
+		Projectiles coming from directly above have their damage reduced by 25% upon touching the hat
+		Such projectiles also don't cause knockback or strong debuffs
+		'''
+}
+
+GlowMushroomLegs: {
+	DisplayName: Glowing Mushroom Pants
+	Tooltip: "{0} increased movement speed"
+}
