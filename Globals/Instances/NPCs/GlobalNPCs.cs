@@ -3,7 +3,6 @@ using HJScarletRework.Buffs;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Graphics.Metaballs;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.NPCs.Bosses.DyradEye;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;

@@ -195,10 +195,10 @@ ConceptualBlackKey: {
 		{0} increased executor damage and critical strike chance
 		{1} increased executor critical strike damage
 		+{2} executor armor penetration
-		Grants[ScarletBuff/HJScarletRework/BlackKeyExecutionBuff] on execution strike for more armor penetration
-		It also reduce damage taken significantly, but taken damage removes[ScarletBuff/HJScarletRework/BlackKeyExecutionBuff]
+		Grants[ScarletBuff/HJScarletRework/BlackKeyExecutionBuff] for {3} seconds on execution strike
+		Repeatedly triggering execution strike does not refresh the duration
+		Restore {4} health while taking damage
 		Extends invincibility frames after taking damage
-		When you take damage, restore {3} health
 		"Executor, praise the Lord"
 		'''
 }
@@ -208,9 +208,8 @@ ArcBow: {
 	Tooltip:
 		'''
 		Restore {0} health while taking damage
-		Extends invincibility frames after taking damage
-		After a successful Execution Strike, reduce damage taken significantly
-		Taken damage removes this effect
+		Grants[ScarletBuff/HJScarletRework/ArcBowBuff] for {1} seconds
+		Repeatedly triggering execution strike does not refresh the duration
 		'''
 }
 
@@ -219,9 +218,8 @@ MachineGunTalisman: {
 	Tooltip:
 		'''
 		Restore {0} health while taking damage
-		Extends invincibility frames after taking damage
-		After a successful Execution Strike, reduce damage taken significantly
-		Taken damage removes this effect
+		Grants[ScarletBuff/HJScarletRework/ArcBowBuff] for {1} seconds
+		Repeatedly triggering execution strike does not refresh the duration
 		'''
 }
 
@@ -230,7 +228,8 @@ RocketCharm: {
 	Tooltip:
 		'''
 		+{0} executor armor penetration
-		On Execution Strike, further increases your armor penetration for a short period
+		Grants[ScarletBuff/HJScarletRework/ArcBowBuff] for {1} seconds
+		Repeatedly triggering execution strike does not refresh the duration
 		'''
 }
 
@@ -330,11 +329,11 @@ CrimsonCharm: {
 	DisplayName: Greedy Mask
 	Tooltip:
 		'''
-		+2 HP/s life regen speed
-		Resets the healing amount of all healing potions to scale based on a percentage of the player's maximum health
-		Using a healing potion now grants[ScarletBuff/HJScarletRework/CrimsonCharmBuff] instead of[ScarletDebuff/Terraria/PotionSickness] for {1} seconds 
+		+2 HP/s life regen speed, 1.5x natural regeneration rate
+		Resets the healing amount of all healing potions to scale based on a percentage of the max health
+		Using healing potion grants[ScarletBuff/HJScarletRework/CrimsonCharmBuff] instead of[ScarletDebuff/Terraria/PotionSickness] for {1} seconds 
+		Without[ScarletBuff/HJScarletRework/CrimsonCharmBuff], healing potions always restore 100% health
 		Using healing potion while under[ScarletBuff/HJScarletRework/CrimsonCharmBuff] will reduces the healing amount by {0}, down to a minimum of {2}
-		Greatly increases health regen speed
 		"Unimagined madness just to stay alive"
 		'''
 }
@@ -485,7 +484,7 @@ SpellBreaker: {
 		{0} increased melee damage
 		Your melee attack inflicts[ScarletDebuff/Terraria/Venom],[ScarletDebuff/Terraria/CursedInferno] and[ScarletDebuff/Terraria/Ichor]
 		Deals extra {1} damage every inflicted debuff on target
-		Has a minor cooldown upon a successful hit
+		Has a {2} frames cooldown upon a successful hit
 		'''
 }
 
@@ -495,8 +494,8 @@ SpellBreakerAdvanced: {
 		'''
 		{0} increased melee damage, {1} increased melee critical strike chance
 		Your melee attack inflicts[ScarletDebuff/ContinentOfJourney/PlagueBuff],[ScarletDebuff/ContinentOfJourney/DivineFireBuff] and[ScarletDebuff/ContinentOfJourney/VulnerableBuff]
-		Deals extra {1} damage every inflicted debuff on target
-		Has a minor cooldown upon a successful hit
+		Deals extra {2} damage every inflicted debuff on target
+		Has a {3} frames cooldown upon a successful hit
 		'''
 }
 
@@ -506,7 +505,7 @@ SpellBreakerSmall: {
 		'''
 		Your melee attack inflict[ScarletDebuff/Terraria/Poisoned] and[ScarletDebuff/Terraria/OnFire]
 		Deals extra {0} damage every inflicted debuff on target
-		Has a minor cooldown upon a successful hit
+		Has a {1} frames cooldown upon a successful hit
 		'''
 }
 
@@ -533,7 +532,14 @@ SelfPortraitoftheBleachingOne: {
 
 BloodThornCrown: {
 	DisplayName: Blood Thorn Crown
-	Tooltip: ""
+	Tooltip:
+		'''
+		If any Boss isn't present
+		Increases damage reduction by {0}, reduces damage by {1} and critical strike chance by {2}
+		If any Boss is present
+		Increases damage by {3}
+		Also dies upon being hit more than {4} times
+		'''
 }
 
 HandofGods: {

@@ -71,11 +71,11 @@ TendouKeiItem: {
 }
 
 MollyItem: {
-	DisplayName: Molly Item
+	DisplayName: Molly Molly
 	Tooltip: ""
 }
 
 TendouArisuItem: {
-	DisplayName: Tendou Arisu Item
+	DisplayName: Blue Technical Halo
 	Tooltip: ""
 }

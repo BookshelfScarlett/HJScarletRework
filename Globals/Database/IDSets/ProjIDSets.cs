@@ -1,7 +1,6 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Projs.Executor;
 using HJScarletRework.Projs.ParryShield;
-using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 

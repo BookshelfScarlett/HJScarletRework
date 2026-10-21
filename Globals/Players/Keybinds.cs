@@ -7,7 +7,6 @@ using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.ParticleSystem;
 using HJScarletRework.Items.Accessories;
 using HJScarletRework.Items.Weapons.Executor.ColdSteel;
-using HJScarletRework.Projs.ParryShield;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;

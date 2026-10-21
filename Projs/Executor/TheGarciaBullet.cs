@@ -85,7 +85,6 @@ namespace HJScarletRework.Projs.Executor
             return false;
         }
         public void DrawTrails(Asset<Texture2D> useTex, Color drawColor, float multipleSize = 1f, float alphaValue = 1f, float offsetHeight = 1f)
-
         {
             if (!Projectile.HJScarlet().FirstFrame)
                 return;

@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.ParryShield
 {
-    public class ObsidianParryShield: BaseParryShield
+    public class ObsidianParryShield : BaseParryShield
     {
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.ObsidianShield);
         protected override int TrailCounts => 14;

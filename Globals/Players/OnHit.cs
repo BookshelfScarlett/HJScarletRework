@@ -129,7 +129,7 @@ namespace HJScarletRework.Globals.Players
                         for (int i = 0; i < 32; i++)
                             ECSParticle.TurbulenceShinyOrb(target.Center.ToRandCirclePos(32), 1.2f, RandLerpColor(Color.Orange, Color.OrangeRed), 45, 1, Main.rand.NextFloat(.9f, 1.1f) * .23f, glowMult: .65f);
                         CombatText.NewText(target.Hitbox, Color.PaleGoldenrod, bounces + "x");
-                        spellBreakerTimer = 60;
+                        spellBreakerTimer = SpellBreaker.Countdown;
                         return bounces;
                     }
                 }
@@ -213,7 +213,7 @@ namespace HJScarletRework.Globals.Players
                 //转化成功后，将值/2f，取暴击率的1/2（即20%-> 10%)
                 baseCritsbuff /= 2f;
                 //最后。直接将暴击伤害设置
-                totalCritsBonus += (baseCritsbuff/100f);
+                totalCritsBonus += (baseCritsbuff / 100f);
             }
             if (modifiers.DamageType.CountsAsClass<ExecutorDamageClass>())
             {

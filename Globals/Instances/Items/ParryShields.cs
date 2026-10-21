@@ -1,11 +1,7 @@
 ﻿using HJScarletRework.Globals.Database.List;
 using HJScarletRework.Globals.Database.Localization;
 using HJScarletRework.Globals.Methods;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -30,7 +26,7 @@ namespace HJScarletRework.Globals.Instances.Items
             string genericText = Mod.GetLocalizationKey(prefix + "GeneralText").ToLangValue();
             int index = tooltips.FindLineIndexLast("Tooltip");
             string combinedValue = ScarletTextSets.GenericText.ModNamePrefix + "\n" + genericText;
-            TooltipLine line = new TooltipLine(Mod, "ParryShieldTooltipName", combinedValue) { OverrideColor = Color.LightGoldenrodYellow};
+            TooltipLine line = new TooltipLine(Mod, "ParryShieldTooltipName", combinedValue) { OverrideColor = Color.LightGoldenrodYellow };
             tooltips.Add(line);
             //tooltips.Insert(index, line);
             if (Main.keyState.PressingAlt())

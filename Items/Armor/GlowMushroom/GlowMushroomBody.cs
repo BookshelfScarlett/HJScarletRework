@@ -1,6 +1,4 @@
-﻿using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Tiles;
-using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -20,7 +18,7 @@ namespace HJScarletRework.Items.Armor.GlowMushroom
         //}
         public override void ExSD()
         {
-            Item.defense =5;
+            Item.defense = 5;
             Item.SetUpRarityPrice(ItemRarityID.Green);
             Item.HJScarlet().drawBuffIconAndDetail = true;
         }

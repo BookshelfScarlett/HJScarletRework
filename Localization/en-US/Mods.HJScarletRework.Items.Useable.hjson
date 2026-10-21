@@ -19,7 +19,7 @@ TerrariaRecipe: {
 		'''
 	Eaten: Eaten: Allows max health bonus
 	NotEaten: '''"Not eaten yet! Want to give it a try?"'''
-	Active: ""
+	Active: Currently active
 	FoodList:
 		'''
 		Eaten ({2})
@@ -67,8 +67,6 @@ DescriptionPaper: {
 		'''
 		This note is just to let you know that the Lostbelt Journey mod has added a new class: the Executor.
 		However, since the mod currently lacks sufficient armor sprites, the mod provides Executor-modified versions of the vanilla armors listed below.
-		[i:RainHat][i:RainCoat]Raincoat Set – crafted with[i:Silk]Silk
-		[i:CowboyHat][i:CowboyJacket][i:CowboyPants] Cowboy Set – crafted with[i:ShadowScale]Shadow Scale /[i:TissueSample]Tissue Sample and[i:Silk]Silk
 		[i:FloretProtectorHelmet][i:FloretProtectorChestplate][i:FloretProtectorLegs]Floret Protector Set – can be transformed after defeating The Lifebringer
 		[i:MonkBrows][i:MonkShirt][i:MonkPants]Monk Armor /[i:MonkAltHead][i:MonkAltShirt][i:MonkAltPants]Shinobi Armor – also receive Executor versions
 		All of the reworked vanity sets mentioned above gain brand new effects and set bonuses.
@@ -132,7 +130,12 @@ CursedGoldenKey: {
 
 ProvidenceHolyWater: {
 	DisplayName: Holy Water of Destiny
-	Tooltip: ""
+	Tooltip:
+		'''
+		While held, press the Interact key on a Mana Potion in your inventory to inherit its restoration amount
+		Restores an additional 10 mana when used, and is not consumed
+		"A transcendent water not of this world, capable of conducting immense mana with zero loss"
+		'''
 }
 
 BiomeKeyString: {
@@ -230,8 +233,12 @@ FreehandFrame: {
 }
 
 RandomNewFolder: {
-	DisplayName: Random New Folder
-	Tooltip: ""
+	DisplayName: New Folder (1)
+	Tooltip:
+		'''
+		Ammo for weapons that can satisfy multiple different ammo requirements at once
+		"Don't create another new folder, leave it unnamed, and throw everything in there all at once"
+		'''
 }
 
 SuicideKnife: {
@@ -300,12 +307,18 @@ FishingPaper: {
 }
 
 FishingCoinEmerial: {
-	DisplayName: Fishing Coin Emerial
+	DisplayName: Angler Emerial Coin
 	Tooltip: Fisherman's Beloved
 }
 
 TerrariaRecipeDeactive: {
-	DisplayName: Terraria Recipe Deactive
-	Tooltip: ""
-	Active: ""
+	DisplayName: Terraria Recipe (Deactive)
+	Tooltip:
+		'''
+		Grants a bonus to maximum health based on the number of different food types consumed
+		Gains 10 max health for every 5 food items consumed
+		Right-click to toggle
+		"This isn't Minecraft."
+		'''
+	Active: Currently Deactive
 }

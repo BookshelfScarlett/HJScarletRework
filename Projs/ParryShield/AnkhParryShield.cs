@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.ParryShield
 {
-    public class AnkhParryShield: BaseParryShield
+    public class AnkhParryShield : BaseParryShield
     {
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.AnkhShield);
         protected override int TrailCounts => 14;

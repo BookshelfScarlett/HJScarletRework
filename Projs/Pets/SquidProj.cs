@@ -1,6 +1,5 @@
 ﻿using HJScarletRework.Buffs.Pets;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 

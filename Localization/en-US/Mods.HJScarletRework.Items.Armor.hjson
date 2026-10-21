@@ -431,3 +431,23 @@ GlowMushroomLegs: {
 	DisplayName: Glowing Mushroom Pants
 	Tooltip: "{0} increased movement speed"
 }
+
+WesternBoyBody: {
+	DisplayName: Wild Cowboy Coat
+	Tooltip: "{0} increased critical strike chance"
+}
+
+WesternBoyHead: {
+	DisplayName: Wild Cowboy Hat
+	Tooltip: "{0} increased executor damage"
+	SetBonus:
+		'''
+		On hit, adds a revolver attack
+		Revolver deals 40 damage, affected by executor class
+		'''
+}
+
+WesternBoyLegs: {
+	DisplayName: Wild Cowboy Legs
+	Tooltip: "{0} increased movement speed"
+}

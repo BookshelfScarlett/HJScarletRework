@@ -12,7 +12,7 @@ using Terraria.ModLoader;
 
 namespace HJScarletRework.Projs.ParryShield
 {
-    public abstract class BaseParryShield : HJScarletProj,ILocalizedModType
+    public abstract class BaseParryShield : HJScarletProj, ILocalizedModType
     {
         public override EnumDamageClass Category => EnumDamageClass.Typeless;
         //public new string LocalizationCategory => base.LocalizationCategory;

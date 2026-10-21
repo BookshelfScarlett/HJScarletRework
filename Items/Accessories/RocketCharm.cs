@@ -13,17 +13,19 @@ namespace HJScarletRework.Items.Accessories
     {
         public override string AssetPath => AssetHandler.Equips;
         public int AP = 30;
+        public static int ExtraAP = 20;
         public override void ExSD()
         {
             Item.SetUpRarityPrice(ItemRarityID.Lime);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.accessory = true;
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(AP);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(AP, ConceptualBlackKey.BuffTime);
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetArmorPenetration<ExecutorDamageClass>() += AP;
-            player.HJScarlet().blackKeyDoT = true;
-            player.HJScarlet().blackKeyReduceDefense = 20;
+            player.HJScarlet().rocketCharmLevel = 1;
+            player.HJScarlet().blackKeyReduceDefense = ExtraAP;
         }
         public override void AddRecipes()
         {

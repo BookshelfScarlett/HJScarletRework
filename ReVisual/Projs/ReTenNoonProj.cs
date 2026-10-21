@@ -1,11 +1,6 @@
 ﻿using ContinentOfJourney.Projectiles;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace HJScarletRework.ReVisual.Projs
@@ -60,7 +55,7 @@ namespace HJScarletRework.ReVisual.Projs
         }
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {
-            if(projectile.GetReVisualPlayer().reTenNoon)
+            if (projectile.GetReVisualPlayer().reTenNoon)
             {
                 return false;
             }

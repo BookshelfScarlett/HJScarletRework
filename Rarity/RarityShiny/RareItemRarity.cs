@@ -118,7 +118,7 @@ namespace HJScarletRework.Rarity.RarityShiny
                 case RareType.Donator:
                     colorCombination.MainColor = Color.White;
                     colorCombination.GlowColor = Color.LightPink;
-                    colorCombination.EdgeColor = Color.Lerp(Color.Violet,Color.DarkViolet,.45f);
+                    colorCombination.EdgeColor = Color.Lerp(Color.Violet, Color.DarkViolet, .45f);
                     colorCombination.ParticleColorBegin = Color.Pink;
                     colorCombination.ParticleColorEnd = Color.DeepPink;
                     break;

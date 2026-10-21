@@ -1,6 +1,4 @@
-﻿using Terraria.ModLoader;
-
-namespace HJScarletRework.Globals.Methods
+﻿namespace HJScarletRework.Globals.Methods
 {
     public static partial class HJScarletMethods
     {

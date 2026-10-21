@@ -193,13 +193,12 @@ ConceptualBlackKey: {
 	DisplayName: 概念黑键
 	Tooltip:
 		'''
-		增加{0}代行者伤害与暴击概率，{1}代行者暴击伤害
+		增加{0}代行者伤害，暴击概率，{1}暴击伤害
 		增加{2}点代行者护甲穿透
-		处决攻击时提供[ScarletBuff/HJScarletRework/BlackKeyExecutionBuff]
-		在一段时间进一步提升自己的代行者穿透
-		大幅度降低来犯的伤害，触发后移除[ScarletBuff/HJScarletRework/BlackKeyExecutionBuff]
+		处决攻击时提供[ScarletBuff/HJScarletRework/BlackKeyExecutionBuff]{3}秒
+		重复触发处决攻击不会刷新持续时间
 		延长受伤后的无敌帧时间
-		自身被伤害时，回复{3}点生命值
+		自身被伤害时，回复{4}点生命值
 		“代行赞美主”
 		'''
 }
@@ -209,7 +208,8 @@ ArcBow: {
 	Tooltip:
 		'''
 		自身被伤害时，回复{0}点生命值
-		处决攻击后大幅度降低来犯的伤害，这一效果触发后移除
+		处决攻击时提供[ScarletBuff/HJScarletRework/ArcBowBuff]{1}秒
+		重复触发处决攻击不会刷新持续时间
 		'''
 }
 
@@ -218,7 +218,8 @@ MachineGunTalisman: {
 	Tooltip:
 		'''
 		自身被伤害时，回复{0}点生命值
-		处决攻击后大幅度降低来犯的伤害，这一效果触发后移除
+		处决攻击时提供[ScarletBuff/HJScarletRework/ArcBowBuff]{1}秒
+		重复触发处决攻击不会刷新持续时间
 		'''
 }
 
@@ -227,7 +228,8 @@ RocketCharm: {
 	Tooltip:
 		'''
 		增加{0}点代行者护甲穿透
-		发起处决攻击后，一定时间内进一步增加护甲穿透
+		处决攻击时提供[ScarletBuff/HJScarletRework/RocketCharmBuff]{1}秒
+		重复触发处决攻击不会刷新持续时间
 		'''
 }
 
@@ -332,11 +334,11 @@ CrimsonCharm: {
 	DisplayName: 嗜血面具
 	Tooltip:
 		'''
-		+2 HP/s 生命恢复速度
+		+2 HP/s 生命恢复速度，生命恢复基础再生速率1.5x
 		将所有治疗药水的治疗量重设定为依据玩家生命上限的治疗百分比
-		使用治疗药水不再造成[ScarletDebuff/Terraria/PotionSickness]，相反造成[ScarletBuff/HJScarletRework/CrimsonCharmBuff]{1}秒
+		使用治疗药水不再造成[ScarletDebuff/Terraria/PotionSickness]，但造成[ScarletBuff/HJScarletRework/CrimsonCharmBuff]{1}秒
+		在没有[ScarletBuff/HJScarletRework/CrimsonCharmBuff]时，治疗药水必定恢复100%的生命
 		在[ScarletBuff/HJScarletRework/CrimsonCharmBuff]期间再次使用治疗药水，会减少{0}治疗量，直至{2}点
-		大幅度增强生命恢复速度
 		“难以想象为了活下去竟如此疯狂”
 		'''
 }
@@ -507,7 +509,7 @@ SpellBreaker: {
 		近战攻击命中时施加[ScarletDebuff/Terraria/Venom]，[ScarletDebuff/Terraria/CursedInferno]和[ScarletDebuff/Terraria/Ichor]
 		敌人每拥有1个减益，则额外造成{1}伤害
 		该伤害加成发生在所有伤害结算之后
-		触发效果后会有短暂的冷却
+		触发效果后会进入{2}帧的冷却
 		'''
 }
 
@@ -519,7 +521,7 @@ SpellBreakerAdvanced: {
 		近战攻击命中时施加[ScarletDebuff/ContinentOfJourney/PlagueBuff]，[ScarletDebuff/ContinentOfJourney/DivineFireBuff]和[ScarletDebuff/ContinentOfJourney/VulnerableBuff]
 		敌人每拥有1个减益，则额外造成{2}伤害
 		该伤害加成发生在所有伤害结算之后
-		触发效果后会有短暂的冷却
+		触发效果后会进入{3}帧的冷却
 		'''
 }
 
@@ -530,7 +532,7 @@ SpellBreakerSmall: {
 		近战攻击命中时施加[ScarletDebuff/Terraria/Poisoned]和[ScarletDebuff/Terraria/OnFire]
 		敌人每拥有1个减益，则额外造成{0}伤害
 		该伤害加成发生在所有伤害结算之后
-		触发效果后会有短暂的冷却
+		触发效果后会进入{1}帧的冷却
 		'''
 }
 

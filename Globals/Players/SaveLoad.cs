@@ -18,9 +18,9 @@ namespace HJScarletRework.Globals.Players
             tag.Add(nameof(brimstoneHeartKilling), brimstoneHeartKilling);
             ScarletSave(ref tag, giveMagicStorage);
             tag.Add("Scarlet:" + nameof(terrariaRecipeEatenList), terrariaRecipeEatenList);
-            tag.Add("Scarlet:"+nameof(terrariaRecipeEatenListTrash), terrariaRecipeEatenListTrash);
-            tag.Add("Scarlet:"+nameof(terrariaRecipeNotEatenList), terrariaRecipeNotEatenList);
-            tag.Add("Scarlet:"+ nameof(terrariaRecipeNotEatenListTrash), terrariaRecipeNotEatenListTrash);
+            tag.Add("Scarlet:" + nameof(terrariaRecipeEatenListTrash), terrariaRecipeEatenListTrash);
+            tag.Add("Scarlet:" + nameof(terrariaRecipeNotEatenList), terrariaRecipeNotEatenList);
+            tag.Add("Scarlet:" + nameof(terrariaRecipeNotEatenListTrash), terrariaRecipeNotEatenListTrash);
             tag.Add("Scarlet:" + nameof(terrariaRecipeEatenFoodCounts), terrariaRecipeEatenFoodCounts);
         }
         public override void LoadData(TagCompound tag)
@@ -36,10 +36,10 @@ namespace HJScarletRework.Globals.Players
             crystallizeLoreReforgeIndex = tag.GetInt(nameof(crystallizeLoreReforgeIndex));
             crimsonScytheSlayNPCType = tag.GetInt(nameof(crimsonScytheSlayNPCType));
 
-            terrariaRecipeNotEatenListTrash= (List<string>)tag.GetList<string>("Scarlet:"+nameof(terrariaRecipeNotEatenListTrash));
-            terrariaRecipeNotEatenList= (List<string>)tag.GetList<string>("Scarlet:"+nameof(terrariaRecipeNotEatenList));
-            terrariaRecipeEatenList= (List<string>)tag.GetList<string>("Scarlet:"+nameof(terrariaRecipeEatenList));
-            terrariaRecipeEatenListTrash= (List<string>)tag.GetList<string>("Scarlet:"+nameof(terrariaRecipeEatenListTrash));
+            terrariaRecipeNotEatenListTrash = (List<string>)tag.GetList<string>("Scarlet:" + nameof(terrariaRecipeNotEatenListTrash));
+            terrariaRecipeNotEatenList = (List<string>)tag.GetList<string>("Scarlet:" + nameof(terrariaRecipeNotEatenList));
+            terrariaRecipeEatenList = (List<string>)tag.GetList<string>("Scarlet:" + nameof(terrariaRecipeEatenList));
+            terrariaRecipeEatenListTrash = (List<string>)tag.GetList<string>("Scarlet:" + nameof(terrariaRecipeEatenListTrash));
             terrariaRecipeEatenFoodCounts = tag.GetInt("Scarlet:" + nameof(terrariaRecipeEatenFoodCounts));
             ScarletLoadBool(ref tag, ref giveMagicStorage);
         }

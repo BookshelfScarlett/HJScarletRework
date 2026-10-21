@@ -2,11 +2,6 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 
@@ -91,10 +86,10 @@ namespace HJScarletRework.Projs.ParryShield
                     Texture2D tex2 = HJScarletTexture.Particle_Smear.Value;
                     float rot2 = rot + PiOver4 + (Projectile.direction < 0).ToInt() * -Pi;
                     float scale = Projectile.scale * .3f;
-                    SB.FastDraw(tex2, pos, Color.Crimson* ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale, 0);
-                    SB.FastDraw(tex2, pos, Color.Crimson* ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .9f, 0);
-                    SB.FastDraw(tex2, pos, Color.DarkRed* ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .8f, 0);
-                    SB.FastDraw(tex2, pos, Color.OrangeRed* ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .7f, 0);
+                    SB.FastDraw(tex2, pos, Color.Crimson * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale, 0);
+                    SB.FastDraw(tex2, pos, Color.Crimson * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .9f, 0);
+                    SB.FastDraw(tex2, pos, Color.DarkRed * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .8f, 0);
+                    SB.FastDraw(tex2, pos, Color.OrangeRed * ApplyParryShieldHorizonalRangeScale() * 1.5f, rot2, tex2.Size() / 2f, scale * .7f, 0);
                     SB.EndShaderArea();
                 }
             }

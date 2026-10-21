@@ -5,7 +5,12 @@ HoneyRegenAlt: {
 
 BlackKeyExecutionBuff: {
 	DisplayName: 概念增强
-	Description: 短暂增强你的身体素质
+	Description:
+		'''
+		全面强化身体素质
+		增加{0}点代行者护甲穿透
+		减少{1}来犯伤害的伤害，触发时移除这个效果
+		'''
 }
 
 WhaleBuff: {
@@ -240,4 +245,22 @@ SquireParryBuff: {
 DiverBuff: {
 	DisplayName: 小小深潜者
 	Description: 来自异世的小旅者
+}
+
+ArcBowBuff: {
+	DisplayName: 肉体强化
+	Description:
+		'''
+		短暂强化你的肉体
+		减少25%来犯伤害的伤害，触发时移除这个效果
+		'''
+}
+
+RocketCharmBuff: {
+	DisplayName: 进攻强化
+	Description:
+		'''
+		以投影强化你的进攻力
+		额外增加{0}点代行者护甲穿透
+		'''
 }

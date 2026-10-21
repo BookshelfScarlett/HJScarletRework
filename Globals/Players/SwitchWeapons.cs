@@ -102,19 +102,6 @@ namespace HJScarletRework.Globals.Players
         {
             if (!ArmorMaps.Contains(item))
                 return false;
-            //这里实际上没什么办法，只能这样打表
-            switch (item)
-            {
-                case ItemID.CowboyHat:
-                    AlterArmorType(item, CowboyHelmet.Defense, false, ItemRarityID.Orange);
-                    break;
-                case ItemID.CowboyJacket:
-                    AlterArmorType(item, CowboyChestplate.Defense, false, ItemRarityID.Orange);
-                    break;
-                case ItemID.CowboyPants:
-                    AlterArmorType(item, CowboyHelmet.Defense, false, ItemRarityID.Orange);
-                    break;
-            }
             if (DownedBossSystem.downedLifeGod)
             {
                 switch (item)

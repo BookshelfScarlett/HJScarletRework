@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.ParryShield
 {
-    public class SquiresParryShield: BaseParryShield
+    public class SquiresParryShield : BaseParryShield
     {
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.SquireShield);
         protected override int TrailCounts => 14;
@@ -89,8 +89,8 @@ namespace HJScarletRework.Projs.ParryShield
                     for (int k = 0; k < 8; k++)
                     {
                         float arg = (TwoPi / 8) * k;
-                        SB.FastDraw(tex2, pos, Color.Red* ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2 + arg, tex2.Size() / 2f, scale, 0);
-                        SB.FastDraw(tex2, pos, Color.Crimson* ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2 + arg, tex2.Size() / 2f, scale * .9f, 0);
+                        SB.FastDraw(tex2, pos, Color.Red * ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2 + arg, tex2.Size() / 2f, scale, 0);
+                        SB.FastDraw(tex2, pos, Color.Crimson * ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2 + arg, tex2.Size() / 2f, scale * .9f, 0);
                     }
                 }
 

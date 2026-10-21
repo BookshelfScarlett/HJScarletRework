@@ -2,17 +2,12 @@
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.ParryShield
 {
-    public class PaladinsParryShield: BaseParryShield
+    public class PaladinsParryShield : BaseParryShield
     {
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.PaladinsShield);
         protected override int TrailCounts => 14;
@@ -87,15 +82,15 @@ namespace HJScarletRework.Projs.ParryShield
                         SB.FastDraw(tex, pos + (TwoPi / 8f * i).ToRotationVector2() * 1.1f, Color.White.ToAddColor() * lerp * lerp, rot, rotationPoint, Projectile.scale, 0);
                     }
                     SB.FastDraw(tex, pos, Color.White * lerp, rot, rotationPoint, Projectile.scale, 0);
-                    SB.EnterShaderArea();   
+                    SB.EnterShaderArea();
                     Texture2D tex2 = HJScarletTexture.Particle_Smear.Value;
                     float rot2 = rot + PiOver4 + (Projectile.direction < 0).ToInt() * -Pi;
                     float scale = Projectile.scale * .3f;
                     for (int k = 0; k < 8; k++)
                     {
-                        float arg = (TwoPi/8) * k;
-                        SB.FastDraw(tex2, pos, Color.Goldenrod* ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2+arg, tex2.Size() / 2f, scale, 0);
-                        SB.FastDraw(tex2, pos, Color.LightGoldenrodYellow* ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2+arg, tex2.Size() / 2f, scale * .9f, 0);
+                        float arg = (TwoPi / 8) * k;
+                        SB.FastDraw(tex2, pos, Color.Goldenrod * ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2 + arg, tex2.Size() / 2f, scale, 0);
+                        SB.FastDraw(tex2, pos, Color.LightGoldenrodYellow * ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2 + arg, tex2.Size() / 2f, scale * .9f, 0);
                     }
                     SB.EndShaderArea();
                 }

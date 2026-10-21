@@ -1,12 +1,10 @@
 ﻿using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Configs;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Instances.Items;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 

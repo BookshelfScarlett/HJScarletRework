@@ -5,7 +5,8 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Handlers;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Globals.Players;
-using HJScarletRework.Items.Armor.ExecutorAlter;
+using HJScarletRework.Items.Accessories;
+using HJScarletRework.Items.Armor.WesternBoy;
 using HJScarletRework.Items.Weapons.Executor.Assistance;
 using HJScarletRework.Projs;
 using HJScarletRework.Projs.Executor;
@@ -115,7 +116,7 @@ namespace HJScarletRework.Globals.Instances.Projs
         {
             if (Owner.HJScarlet().cowboyExecutor && Owner.HJScarlet().cowboyRevolverTimer == 0)
             {
-                int revolverDamage = (int)Owner.GetTotalDamage<ExecutorDamageClass>().ApplyTo(CowboyHelmet.RevolerDamage);
+                int revolverDamage = (int)Owner.GetTotalDamage<ExecutorDamageClass>().ApplyTo(WesternBoyHead.RevolerDamage);
                 Projectile proj2 = Projectile.NewProjectileDirect(Owner.GetSource_FromThis(), target.Center, (-Vector2.UnitY).ToRandVelocity(ToRadians(35f), 9f, 11f), ProjectileType<CowboyRevolverProj>(), revolverDamage, 0f, Owner.whoAmI);
                 proj2.timeLeft = 300;
                 if (target.CanBeChasedBy())
@@ -126,16 +127,31 @@ namespace HJScarletRework.Globals.Instances.Projs
 
         public void HandleBlackKeyOnHit(Player owner)
         {
-            if (owner.HJScarlet().blackKeyDoT && ExecutionStrike && owner.HJScarlet().blackKeyTimer == 0)
+            bool isBlackKey = owner.HJScarlet().blackKeyDoT;
+            if (!ExecutionStrike)
+                return;
+            if (isBlackKey)
             {
-                //对的没错，这个鬼东西的减防数据存在了玩家类里面。
-                owner.AddBuff(BuffType<BlackKeyExecutionBuff>(), GetSeconds(5));
-                owner.HJScarlet().blackKeyTimer = GetSeconds(10);
-                if (owner.HJScarlet().blackKeyDefenseBuff != 0)
-                    owner.HJScarlet().blackKeyDefenseTrigger = true;
+                if (!owner.HasBuff<BlackKeyExecutionBuff>())
+                    owner.AddBuff(BuffType<BlackKeyExecutionBuff>(), GetSeconds(ConceptualBlackKey.BuffTime));
+            }
+            else
+            {
+                if (owner.HJScarlet().arcBowLevel > 0)
+                {
+                    if (!owner.HasBuff<ArcBowBuff>())
+                        owner.AddBuff(BuffType<ArcBowBuff>(), GetSeconds(ConceptualBlackKey.BuffTime));
+                    if (owner.HJScarlet().blackKeyDefenseBuff != 0)
+                        //对的没错，这个鬼东西的减防数据存在了玩家类里面。
+                        owner.HJScarlet().blackKeyDefenseTrigger = true;
+                }
+                if (owner.HJScarlet().rocketCharmLevel > 0)
+                {
+                    if (!owner.HasBuff<RocketCharmBuff>())
+                        owner.AddBuff(BuffType<RocketCharmBuff>(), GetSeconds(ConceptualBlackKey.BuffTime));
+                }
             }
         }
-
         public void HandleMaidReaperOnHit(Player owner, Projectile proj, NPC target)
         {
             if (owner.HJScarlet().maidReaperArmor && target.IsLegal())

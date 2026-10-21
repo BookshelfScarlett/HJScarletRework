@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.ParryShield
 {
-    public class HuntresssBucklerParryShield: BaseParryShield
+    public class HuntresssBucklerParryShield : BaseParryShield
     {
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.HuntressBuckler);
         protected override int TrailCounts => 14;

@@ -88,12 +88,12 @@ namespace HJScarletRework.Projs.ParryShield
                     float scale = Projectile.scale * .3f;
                     for (int k = 0; k < 8; k++)
                     {
-                        float arg = (TwoPi/8) * k;
-                        SB.FastDraw(tex2, pos, Color.DarkSeaGreen* ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2+arg, tex2.Size() / 2f, scale, 0);
-                        SB.FastDraw(tex2, pos, Color.LightSeaGreen* ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2+arg, tex2.Size() / 2f, scale * .9f, 0);
+                        float arg = (TwoPi / 8) * k;
+                        SB.FastDraw(tex2, pos, Color.DarkSeaGreen * ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2 + arg, tex2.Size() / 2f, scale, 0);
+                        SB.FastDraw(tex2, pos, Color.LightSeaGreen * ApplyParryShieldHorizonalRangeScale() * 0.5f, rot2 + arg, tex2.Size() / 2f, scale * .9f, 0);
                     }
 
-                          SB.EndShaderArea();
+                    SB.EndShaderArea();
                 }
             }
             return false;

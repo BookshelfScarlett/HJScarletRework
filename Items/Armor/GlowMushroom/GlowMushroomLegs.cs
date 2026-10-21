@@ -1,6 +1,4 @@
-﻿using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Tiles;
-using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
@@ -10,7 +8,7 @@ using Terraria.ModLoader;
 namespace HJScarletRework.Items.Armor.GlowMushroom
 {
     [AutoloadEquip(EquipType.Legs)]
-    public class GlowMushroomLegs: HJScarletArmor
+    public class GlowMushroomLegs : HJScarletArmor
     {
         public float MoveSpeed = .05f;
         public override void ExSD()
@@ -18,7 +16,7 @@ namespace HJScarletRework.Items.Armor.GlowMushroom
             Item.defense = 3;
             Item.SetUpRarityPrice(ItemRarityID.Green);
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeed.ToPercent()); 
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(MoveSpeed.ToPercent());
         public override void UpdateEquip(Player player)
         {
             player.moveSpeed += MoveSpeed;

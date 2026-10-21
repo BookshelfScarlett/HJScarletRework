@@ -1,5 +1,4 @@
-﻿using ContinentOfJourney.Items.Accessories;
-using HJScarletRework.Items.Weapons.Executor.ColdSteel;
+﻿using HJScarletRework.Items.Weapons.Executor.ColdSteel;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -63,6 +62,6 @@ namespace HJScarletRework.Globals.Database.IDSets
 
         public static bool[] CountAsWeapon = ItemID.Sets.Factory.CreateBoolSet();
 
-       
+
     }
 }

@@ -16,7 +16,7 @@ namespace HJScarletRework.Globals.Instances.Items
             if (!item.IsLegal() || Main.dedServ)
                 return true;
             HandleLerpValue(item, position, scale);
-           
+
             if (Math.Abs(1f - simpleImmersiveBackpackValueAlt) > .03f)
             {
                 Texture2D v = TextureAssets.Item[item.type].Value;

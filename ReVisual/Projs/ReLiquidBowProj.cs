@@ -2,21 +2,16 @@
 using HJScarletRework.Assets.Registers;
 using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Core.PixelatedRender;
-using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.ReVisual.Class;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 
 namespace HJScarletRework.ReVisual.Projs
 {
-    public class ReLiquidBowBolt : ReVisualProjectile 
+    public class ReLiquidBowBolt : ReVisualProjectile
     {
         protected override int ApplyProjectile => ProjectileType<LiquidBow.LiquidBowBolt>();
         protected override int TrailLength => 12;
@@ -44,12 +39,12 @@ namespace HJScarletRework.ReVisual.Projs
                     projectile.extraUpdates = 0;
                 }
 
-                ECSParticle.ShrinkParticle(projectile.Center.ToRandCirclePosEdge(6)-projectile.SafeDir()*Main.rand.NextFloat(.2f,1f)*10f, projectile.velocity / 8f, RandLerpColor(Color.RoyalBlue, Color.LightSkyBlue), 40, 1,
+                ECSParticle.ShrinkParticle(projectile.Center.ToRandCirclePosEdge(6) - projectile.SafeDir() * Main.rand.NextFloat(.2f, 1f) * 10f, projectile.velocity / 8f, RandLerpColor(Color.RoyalBlue, Color.LightSkyBlue), 40, 1,
                     RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * .12f, 1);
                 if (Main.rand.NextBool())
                 {
                     Vector2 orbVel = projectile.SafeDir().RotatedBy(Main.rand.NextFloat(ToRadians(1.5f), ToRadians(3.5f)) * Main.rand.NextBool().ToDirectionInt()) * Main.rand.NextFloat(.4f, 1.1f) * 2f;
-                    ECSParticle.HRShinyOrb(projectile.Center.ToRandCirclePos(4) -projectile.SafeDir()*Main.rand.NextFloat(.2f,1f)*10f, orbVel,
+                    ECSParticle.HRShinyOrb(projectile.Center.ToRandCirclePos(4) - projectile.SafeDir() * Main.rand.NextFloat(.2f, 1f) * 10f, orbVel,
                         RandLerpColor(Color.RoyalBlue, Color.LightSkyBlue), 40, 1, 0.051f, 0.5f);
                 }
                 return false;
@@ -59,16 +54,16 @@ namespace HJScarletRework.ReVisual.Projs
         }
         public override bool PreKill(Projectile projectile, int timeLeft)
         {
-            if(projectile.GetReVisualPlayer().reVisualLiquidBow)
+            if (projectile.GetReVisualPlayer().reVisualLiquidBow)
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    ECSParticle.ShrinkParticle(projectile.Center.ToRandCirclePos(13), RandVelTwoPi(2,6)*1.3f, RandLerpColor(Color.RoyalBlue, Color.LightSkyBlue), 80, 1,
+                    ECSParticle.ShrinkParticle(projectile.Center.ToRandCirclePos(13), RandVelTwoPi(2, 6) * 1.3f, RandLerpColor(Color.RoyalBlue, Color.LightSkyBlue), 80, 1,
                         RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * .12f, 1);
-                    ECSParticle.HRShinyOrb(projectile.Center.ToRandCirclePos(10), RandVelTwoPi(2,6)*1.3f,
+                    ECSParticle.HRShinyOrb(projectile.Center.ToRandCirclePos(10), RandVelTwoPi(2, 6) * 1.3f,
                         RandLerpColor(Color.RoyalBlue, Color.LightSkyBlue), 80, 1, 0.051f, 0.5f);
                 }
-                            SoundEngine.PlaySound( SoundID.Item10, projectile.position);
+                SoundEngine.PlaySound(SoundID.Item10, projectile.position);
 
                 return false;
             }
@@ -82,13 +77,13 @@ namespace HJScarletRework.ReVisual.Projs
                 int length = OldPositionList.Count;
                 for (int i = 0; i < length; i++)
                 {
-                    float progress =1- i / (float)length;
+                    float progress = 1 - i / (float)length;
                     Vector2 oldPos = OldPositionList[i] - Main.screenPosition;
                     float oldRot = OldRotationList[i] + PiOver2;
                     Vector2 scale = new Vector2(Lerp(0.25f, 0.08f, progress), Lerp(1.05f, 0.30f, progress));
                     Vector2 pos = oldPos;
-                    SB.Draw(starShape, pos, null, Color.Lerp(Color.DeepSkyBlue, Color.MidnightBlue, progress/2f).ToAddColor(0), oldRot, starShape.Size() / 2f, scale, 0, 0);
-                    SB.Draw(starShape, pos, null, Color.White.ToAddColor(0) *(1- progress), oldRot, starShape.Size() / 2f, scale * 0.75f, 0, 0);
+                    SB.Draw(starShape, pos, null, Color.Lerp(Color.DeepSkyBlue, Color.MidnightBlue, progress / 2f).ToAddColor(0), oldRot, starShape.Size() / 2f, scale, 0, 0);
+                    SB.Draw(starShape, pos, null, Color.White.ToAddColor(0) * (1 - progress), oldRot, starShape.Size() / 2f, scale * 0.75f, 0, 0);
                 }
                 return false;
             }
@@ -122,7 +117,7 @@ namespace HJScarletRework.ReVisual.Projs
                 }
                 //这里的改动是，在原AI的情况下，发射出去的箭矢直接不发光导致的违和
                 //这里提高了点亮度
-                Lighting.AddLight(projectile.Center,Color.SkyBlue.ToVector3()*1);
+                Lighting.AddLight(projectile.Center, Color.SkyBlue.ToVector3() * 1);
                 Projectile projectile2 = Main.projectile[(int)projectile.ai[0]];
                 if (projectile2.numHits > 0)
                 {
@@ -155,14 +150,14 @@ namespace HJScarletRework.ReVisual.Projs
         }
         public override bool PreKill(Projectile projectile, int timeLeft)
         {
-            if(projectile.GetReVisualPlayer().reVisualLiquidBow)
+            if (projectile.GetReVisualPlayer().reVisualLiquidBow)
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    ECSParticle.ShrinkParticle(projectile.Center.ToRandCirclePos(13), RandVelTwoPi(2,6)*1.3f, RandLerpColor(Color.RoyalBlue, Color.LightSkyBlue), 80, 1,
+                    ECSParticle.ShrinkParticle(projectile.Center.ToRandCirclePos(13), RandVelTwoPi(2, 6) * 1.3f, RandLerpColor(Color.RoyalBlue, Color.LightSkyBlue), 80, 1,
                         RandRotTwoPi, Main.rand.NextFloat(.9f, 1.1f) * .12f, 1);
 
-                    ECSParticle.HRShinyOrb(projectile.Center.ToRandCirclePos(10), RandVelTwoPi(2,6)*1.3f,
+                    ECSParticle.HRShinyOrb(projectile.Center.ToRandCirclePos(10), RandVelTwoPi(2, 6) * 1.3f,
                         RandLerpColor(Color.DeepSkyBlue, Color.LightSkyBlue), 80, 1, 0.051f, .5f);
                 }
 
@@ -187,7 +182,7 @@ namespace HJScarletRework.ReVisual.Projs
 
                     float sineScale = MathF.Sin((float)Main.timeForVisualEffects * 0.25f) * 0.1f;
 
-                    Vector2 AfterImagePos = OldPositionList[i] - Main.screenPosition + Main.rand.NextVector2Circular(1.5f, 1.5f)*progress; //6f
+                    Vector2 AfterImagePos = OldPositionList[i] - Main.screenPosition + Main.rand.NextVector2Circular(1.5f, 1.5f) * progress; //6f
 
                     float startScale = 1.1f + sineScale;
 

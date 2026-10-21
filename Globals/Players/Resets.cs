@@ -14,6 +14,8 @@ namespace HJScarletRework.Globals.Players
             preciousTargetLevel = 0;
             pendantLevel = 0;
             cursorID = -1;
+            arcBowLevel = -1;
+            rocketCharmLevel = -1;
             desterrennacht = false;
             manaSavingsJar = 0;
             loveRing = false;

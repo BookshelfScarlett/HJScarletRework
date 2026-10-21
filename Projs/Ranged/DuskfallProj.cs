@@ -95,34 +95,16 @@ namespace HJScarletRework.Projs.Ranged
             RandMap = Main.rand.NextFloat(.3f, .61f);
             base.OnFirstFrame();
         }
-        public override void OnSpawn(IEntitySource source)
-        {
-        }
-        public static bool isThrowingItem(Item item, out bool Knife, bool excludeStake = false)
-        {
-            Knife = false;
-
-            if ((!item.CountsAsClass(DamageClass.Ranged) || !item.consumable) && !item.CountsAsClass(DamageClass.Throwing))
-            {
-                if (item.type == 1835)
-                {
-                    return !excludeStake;
-                }
-
-                return false;
-            }
-
-            return true;
-        }
         public override void ProjAI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            OldRotList.Add(Projectile.rotation);
-            if (OldRotList.Count > Projectile.oldPos.Length)
-                OldRotList.RemoveAt(0);
             SpriteRotation += .2f * (Projectile.velocity.X > 0).ToDirectionInt();
             Projectile.rotation = SpriteRotation;
             Timer++;
+            OldRotList.Add(Projectile.rotation);
+            if (OldRotList.Count > Projectile.oldPos.Length)
+                OldRotList.RemoveAt(0);
+
             //if (AcceptIval)
             {
                 NPC CurTarget = Projectile.HJScarlet().CurStoredTarget;
@@ -158,14 +140,12 @@ namespace HJScarletRework.Projs.Ranged
                 d.velocity = Projectile.velocity / 4f;
                 d.scale = 1f;
                 d.noGravity = true;
-                //ECSParticle.ShinyCrossStarSmall(Projectile.Center.ToRandCirclePos(24), Projectile.velocity / 4f, RandLerpColor(Color.Orange, Color.OrangeRed), 45, 1, .38f, 0);
             }
             if (Main.rand.NextBool(5))
             {
                 Vector2 pos = Projectile.Center.ToRandCirclePosEdge(24);
                 ECSParticle.TurbulenceShinyOrb(pos, 1.5f, RandLerpColor(Color.Orange, Color.OrangeRed), 45, 1, .1f, glowMult: .4f);
                 ECSParticle.ShrinkParticle(pos, Projectile.velocity / 4f, RandLerpColor(Color.Orange, Color.OrangeRed), 45, .51f, Projectile.velocity.ToRotation(), .6f, 1);
-                //ECSParticle.ShrinkParticle(pos, Projectile.velocity / 4f, Color.White, 45, 0.75f, Projectile.velocity.ToRotation(), .20f, 1);
             }
             if (Projectile.IsMe())
             {
@@ -279,33 +259,31 @@ namespace HJScarletRework.Projs.Ranged
         {
             if (!Projectile.HJScarlet().FirstFrame)
                 return false;
+
             if (AcceptIval)
                 PixelatedRenderManager.BeginDrawProj = true;
             Texture2D tex = Projectile.GetTexture();
             Vector2 drawPos = Projectile.Center - Main.screenPosition;
-            //if (AcceptIval)
+            int length = Projectile.oldPos.Length - 5;
+            for (int i = length - 1; i >= 0; i--)
             {
-                int length = Projectile.oldPos.Length - 5;
-                for (int i = length - 1; i >= 0; i--)
+                float ratios = (1f - i / (float)length);
+                Vector2 oldpos = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
+                Color c = Color.Lerp(Color.Orange, Color.DarkOrange, ratios).ToAddColor(10);
+                float oldscale = Lerp(.05f, 1f, ratios);
+                float opa = Lerp(.05f, 1f, ratios) * Projectile.Opacity;
+                Vector2 sharpScale = new Vector2(1f, 1f);
+                Vector2 sharpPos = oldpos - new Vector2(0, 0).RotatedBy(Projectile.oldRot[i]);
+                for (int j = -1; j < 2; j += 2)
                 {
-                    float ratios = (1f - i / (float)length);
-                    Vector2 oldpos = Projectile.oldPos[i] - Main.screenPosition + Projectile.Size / 2f;
-                    Color c = Color.Lerp(Color.Orange, Color.DarkOrange, ratios).ToAddColor(10);
-                    float oldscale = Lerp(.05f, 1f, ratios);
-                    float opa = Lerp(.05f, 1f, ratios) * Projectile.Opacity;
-                    Vector2 sharpScale = new Vector2(1f, 1f);
-                    Vector2 sharpPos = oldpos - new Vector2(0, 0).RotatedBy(Projectile.oldRot[i]);
-                    for (int j = -1; j < 2; j += 2)
-                    {
-                        float oldRot = Projectile.oldRot[i];
-                        SB.FastDraw(tex, sharpPos, c.ToAddColor(50) * opa, oldRot, tex.Size() / 2f, sharpScale * oldscale, 0);
-                        SB.FastDraw(tex, sharpPos, Color.White.ToAddColor(10) * opa, oldRot, tex.Size() / 2f, sharpScale * oldscale * .5f, 0);
-                    }
+                    float oldRot = Projectile.oldRot[i];
+                    SB.FastDraw(tex, sharpPos, c.ToAddColor(50) * opa, oldRot, tex.Size() / 2f, sharpScale * oldscale, 0);
+                    SB.FastDraw(tex, sharpPos, Color.White.ToAddColor(10) * opa, oldRot, tex.Size() / 2f, sharpScale * oldscale * .5f, 0);
                 }
-                for (int i = 0; i < 8; i++)
-                    SB.FastDraw(tex, drawPos + ((TwoPi / 8f) * i).ToRotationVector2() * 2f, Color.White.ToAddColor(), Projectile.rotation, tex.Size() / 2f, Projectile.scale, 0);
-
             }
+            for (int i = 0; i < 8; i++)
+                SB.FastDraw(tex, drawPos + ((TwoPi / 8f) * i).ToRotationVector2() * 2f, Color.White.ToAddColor(), Projectile.rotation, tex.Size() / 2f, Projectile.scale, 0);
+
 
             SB.FastDraw(tex, drawPos, Color.White, Projectile.rotation, tex.Size() / 2f, Projectile.scale, 0);
             return false;
@@ -332,7 +310,7 @@ namespace HJScarletRework.Projs.Ranged
             if (Projectile.timeLeft < 50)
                 rad = Projectile.timeLeft / 50f * Projectile.Opacity;
 
-            int posCount = (int)((Projectile.oldPos.Length - 1) * rad);
+            int posCount = (int)((OldRotList.Count - 1) * rad);
             for (int j = 0; j < posCount; j++)
             {
                 if (Projectile.oldPos[j] != Vector2.Zero)

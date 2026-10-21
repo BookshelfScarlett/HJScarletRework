@@ -20,7 +20,7 @@ namespace HJScarletRework.Items.Weapons.Ranged
         {
             Item.consumable = true;
             Item.SetUpNoUseGraphicItem(false, true);
-            Item.damage = 246;
+            Item.damage = 196;
             Item.useTime = Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.maxStack = 9999;

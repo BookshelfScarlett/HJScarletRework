@@ -5,7 +5,12 @@ HoneyRegenAlt: {
 
 BlackKeyExecutionBuff: {
 	DisplayName: Conceptual Enhancement
-	Description: Briefly enhances your physical attributes
+	Description:
+		'''
+		Enhances your physical attributes
+		+{0} executor armor penetration
+		Reduces damage taken by {1}, removes this effect on trigger
+		'''
 }
 
 WhaleBuff: {
@@ -231,4 +236,22 @@ SquireParryBuff: {
 DiverBuff: {
 	DisplayName: Lil' Diver
 	Description: A tiny traveler from another realm
+}
+
+ArcBowBuff: {
+	DisplayName: Physical Enhancement
+	Description:
+		'''
+		Briefly enhances your physique
+		Reduces taken damage by 25%, removes this effect on triggered
+		'''
+}
+
+RocketCharmBuff: {
+	DisplayName: Offensive Enhancement
+	Description:
+		'''
+		Enhances your offensive power with a projection
+		+{0} executor armor penetration
+		'''
 }

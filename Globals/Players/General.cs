@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.Graphics;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -103,6 +102,8 @@ namespace HJScarletRework.Globals.Players
         // int 字段
         public int adamantiteHeadExecutorThunderTimer = 0;
         public int antiKnockbackTime = 0;
+        public int arcBowLevel = -1;
+        public int rocketCharmLevel = -1;
         public int ASMDBuffTime = 0;
         public int blackKeyHeal = 0;
         public int blackKeyReduceDefense = 0;
@@ -213,7 +214,7 @@ namespace HJScarletRework.Globals.Players
                 new HeartParticle(pos, Vector2.UnitY * -Main.rand.NextFloat(0.51f, 2.3f), RandLerpColor(Color.Crimson, Color.HotPink), 40, 0.08f, 0.8f, fadeIn: true).Spawn();
             }
         }
-        public void SwapListForNeeded(IReadOnlyList<string> matcher, ref List<string> trasher, ref List<string> apply,bool shouldReverse)
+        public void SwapListForNeeded(IReadOnlyList<string> matcher, ref List<string> trasher, ref List<string> apply, bool shouldReverse)
         {
             if (shouldReverse)
             {
@@ -249,7 +250,7 @@ namespace HJScarletRework.Globals.Players
             }
             OnEnterWorldReset();
             resetTerraRecipe = true;
-            if(terrariaRecipeNotEatenList.Count < 1)
+            if (terrariaRecipeNotEatenList.Count < 1)
             {
                 terrariaRecipeNotEatenList = [.. HJScarletList.LegalFoodListName];
             }
@@ -259,16 +260,16 @@ namespace HJScarletRework.Globals.Players
                 string name = HJScarletList.LegalFoodListName[i];
 
                 if (!terrariaRecipeNotEatenList.Contains(name))
-                terrariaRecipeNotEatenList.Add(name);
+                    terrariaRecipeNotEatenList.Add(name);
             }
 
-            SwapListForNeeded(HJScarletList.SummonWeaponFullName, ref ruShiWoWenBanMinionNameTrashList, ref ruShiWoWenBanMinionNameList,false);
-            SwapListForNeeded(HJScarletList.SummonWeaponFullName, ref ruShiWoWenBanMinionNameList, ref ruShiWoWenBanMinionNameTrashList,true);
+            SwapListForNeeded(HJScarletList.SummonWeaponFullName, ref ruShiWoWenBanMinionNameTrashList, ref ruShiWoWenBanMinionNameList, false);
+            SwapListForNeeded(HJScarletList.SummonWeaponFullName, ref ruShiWoWenBanMinionNameList, ref ruShiWoWenBanMinionNameTrashList, true);
             //把垃圾内容的表单丢进去
-            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeEatenListTrash, ref terrariaRecipeEatenList,false);
-            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeEatenList, ref terrariaRecipeEatenListTrash,true);
-            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeNotEatenListTrash, ref terrariaRecipeNotEatenList,false);
-            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeNotEatenList, ref terrariaRecipeNotEatenListTrash,true);
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeEatenListTrash, ref terrariaRecipeEatenList, false);
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeEatenList, ref terrariaRecipeEatenListTrash, true);
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeNotEatenListTrash, ref terrariaRecipeNotEatenList, false);
+            SwapListForNeeded(HJScarletList.LegalFoodListName, ref terrariaRecipeNotEatenList, ref terrariaRecipeNotEatenListTrash, true);
             for (int i = 0; i < terrariaRecipeEatenList.Count; i++)
             {
                 string name = terrariaRecipeEatenList[i];
@@ -306,18 +307,6 @@ namespace HJScarletRework.Globals.Players
 
         private void SwitchArmorType2(Item item, int i, bool armorSlot = false)
         {
-            switch (item.type)
-            {
-                case ItemID.CowboyHat:
-                    AlterArmorType2(item.type, i, CowboyHelmet.Defense, false, ItemRarityID.Orange, armorSlot);
-                    break;
-                case ItemID.CowboyJacket:
-                    AlterArmorType2(item.type, i, CowboyChestplate.Defense, false, ItemRarityID.Orange, armorSlot);
-                    break;
-                case ItemID.CowboyPants:
-                    AlterArmorType2(item.type, i, CowboyHelmet.Defense, false, ItemRarityID.Orange, armorSlot);
-                    break;
-            }
 
             if (DownedBossSystem.downedLifeGod)
             {

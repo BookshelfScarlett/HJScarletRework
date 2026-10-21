@@ -1,7 +1,5 @@
 ﻿using HJScarletRework.Globals.Methods;
-using System;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Globals.Classes
@@ -61,4 +59,4 @@ namespace HJScarletRework.Globals.Classes
                 Projectile.frame = 0;
         }
     }
-    }
+}

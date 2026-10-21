@@ -1,7 +1,4 @@
-﻿using ContinentOfJourney.Items;
-using ContinentOfJourney.NPCs.Boss_TheLifebringer;
-using HJScarletRework.Globals.Executor;
-using HJScarletRework.Items.Weapons.Melee;
+﻿using ContinentOfJourney.NPCs.Boss_TheLifebringer;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;

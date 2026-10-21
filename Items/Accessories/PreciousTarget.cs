@@ -27,7 +27,7 @@ namespace HJScarletRework.Items.Accessories
             player.GetDamage<RangedDamageClass>() += Damage;
             player.GetCritChance<RangedDamageClass>() += Crit;
             player.HJScarlet().preciousTargetLevel = 1;
-            if (player.HeldItem.IsLegal() && player.HeldItem.DamageType.CountsAsClass<RangedDamageClass>()&&!hideVisual)
+            if (player.HeldItem.IsLegal() && player.HeldItem.DamageType.CountsAsClass<RangedDamageClass>() && !hideVisual)
             {
                 if (!player.IsInInventory())
                     player.HJScarlet().cursorID = 1;

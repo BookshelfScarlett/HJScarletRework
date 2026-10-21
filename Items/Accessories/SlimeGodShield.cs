@@ -26,6 +26,7 @@ namespace HJScarletRework.Items.Accessories
             Item.defense = 10;
             Item.SetUpRarityPrice(ItemRarityID.Red);
             Item.master = true;
+            Item.HJScarlet().NotFinished = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

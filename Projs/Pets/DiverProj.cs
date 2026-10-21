@@ -1,12 +1,11 @@
 ﻿using HJScarletRework.Buffs.Pets;
 using HJScarletRework.Globals.Classes;
-using HJScarletRework.Globals.Methods;
 using Terraria;
 using Terraria.ID;
 
 namespace HJScarletRework.Projs.Pets
 {
-    public class DiverProj: ScarletPetProjClass
+    public class DiverProj : ScarletPetProjClass
     {
         public override void SetStaticDefaults()
         {

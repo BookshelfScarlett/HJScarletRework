@@ -11,17 +11,20 @@ namespace HJScarletRework.Items.Accessories
     {
         public override string AssetPath => AssetHandler.Equips;
         public int HealAmt = 8;
+        public static float DamageReduce = .25f;
         public override void ExSD()
         {
             Item.width = Item.height = 32;
             Item.SetUpRarityPrice(ItemRarityID.Lime);
+            Item.HJScarlet().drawBuffIconAndDetail = true;
             Item.accessory = true;
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(HealAmt);
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(HealAmt, ConceptualBlackKey.BuffTime);
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.HJScarlet().blackKeyHeal = HealAmt;
-            player.HJScarlet().blackKeyDefenseBuff = .25f;
+            player.HJScarlet().blackKeyDefenseBuff = DamageReduce;
+            player.HJScarlet().arcBowLevel = 1;
         }
         public override void AddRecipes()
         {

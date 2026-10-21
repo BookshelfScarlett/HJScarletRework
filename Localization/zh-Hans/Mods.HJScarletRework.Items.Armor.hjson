@@ -457,3 +457,23 @@ GlowMushroomLegs: {
 	DisplayName: 夜光蘑菇裤
 	Tooltip: 增加{0}移动速度
 }
+
+WesternBoyBody: {
+	DisplayName: 蛮荒牛仔衣
+	Tooltip: 增加{0}暴击概率
+}
+
+WesternBoyHead: {
+	DisplayName: 蛮荒牛仔帽
+	Tooltip: 增加{0}代行者伤害
+	SetBonus:
+		'''
+		代行者命中追加一把左轮攻击
+		左轮造成40点基础伤害，受代行者伤害加成
+		'''
+}
+
+WesternBoyLegs: {
+	DisplayName: 蛮荒牛仔裤
+	Tooltip: 增加{0}移动速度
+}

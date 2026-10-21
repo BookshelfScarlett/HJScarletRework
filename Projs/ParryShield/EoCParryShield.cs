@@ -1,5 +1,4 @@
-﻿using HJScarletRework.Assets.Registers;
-using HJScarletRework.Core.ParticleECS;
+﻿using HJScarletRework.Core.ParticleECS;
 using HJScarletRework.Globals.Database.Enums;
 using HJScarletRework.Globals.Methods;
 using Terraria;
@@ -7,7 +6,7 @@ using Terraria.ID;
 
 namespace HJScarletRework.Projs.ParryShield
 {
-    public class EoCParryShield: BaseParryShield
+    public class EoCParryShield : BaseParryShield
     {
         public override string Texture => GetVanillaAssetPath(VanillaAsset.Item, ItemID.EoCShield);
         protected override int TrailCounts => 14;

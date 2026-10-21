@@ -1,14 +1,8 @@
 ﻿using HJScarletRework.Core.SeperateVisualEffect;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
 
 namespace HJScarletRework.Globals.Graphics.SeperateVisual
 {
-    public class EoCParryDashEffect :SeperateVisualBehavior
+    public class EoCParryDashEffect : SeperateVisualBehavior
     {
         public override BlendState BlendState => BlendState.AlphaBlend;
         public override void Update()

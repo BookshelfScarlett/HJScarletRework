@@ -4,7 +4,6 @@ using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
 using HJScarletRework.Items.Materials;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
 {
@@ -23,6 +22,7 @@ namespace HJScarletRework.Items.Weapons.Executor.ColdSteel
             Item.knockBack = 2;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
+            Item.HJScarlet().NotFinished = true;
             Item.SetUpRarityPrice(ItemRarityID.Blue);
             Item.shootSpeed = 9f;
         }

@@ -1,9 +1,6 @@
-﻿using ContinentOfJourney.Items.Material;
-using ContinentOfJourney.Tiles;
-using HJScarletRework.Globals.Classes;
+﻿using HJScarletRework.Globals.Classes;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
-using HJScarletRework.Items.Armor.Diver;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -13,7 +10,7 @@ namespace HJScarletRework.Items.Armor.GlowMushroom
 {
 
     [AutoloadEquip(EquipType.Head)]
-    public class GlowMushroomHead: HJScarletArmor
+    public class GlowMushroomHead : HJScarletArmor
     {
         public override int[] ArmorSlots => [Type, ItemType<GlowMushroomBody>(), ItemType<GlowMushroomLegs>()];
         public override bool SetUpArmorSet => true;
@@ -29,12 +26,12 @@ namespace HJScarletRework.Items.Armor.GlowMushroom
             Item.SetUpRarityPrice(ItemRarityID.Green);
             Item.HJScarlet().drawBuffIconAndDetail = true;
         }
-        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crit+"%");
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Crit + "%");
         public override void UpdateArmorSetBetter(Player player, string setBonusPath)
         {
             player.setBonus += "\n" + this.GetLocalizedValue("SetBonus");
-            player.HJScarlet().raincoatExecutor= true;
-            if(player.velocity.LengthSquared()>2.5f*2.5f&&player.miscCounter%3==0)
+            player.HJScarlet().raincoatExecutor = true;
+            if (player.velocity.LengthSquared() > 2.5f * 2.5f && player.miscCounter % 3 == 0)
             {
                 Dust d = Dust.NewDustDirect(player.position, player.width, player.height, DustID.GlowingMushroom, player.velocity.X / 8f, player.velocity.Y / 8f);
                 d.noGravity = true;
