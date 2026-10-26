@@ -66,7 +66,7 @@ namespace HJScarletRework.Projs.Executor
             UpdateAnimation();
             UpdateHeldState();
             UpdatePlayerState();
-            HandleExecution();
+            //HandleExecution();
             if (OldAimPos.Count > 5 * Projectile.MaxUpdates)
                 OldAimPos.RemoveAt(0);
         }

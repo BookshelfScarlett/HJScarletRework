@@ -27,10 +27,7 @@ namespace HJScarletRework.Globals.Players
                 if (poolSizeAmt > 100)
                     poolSizeAmt = 100;
                 if (Player.ZoneBeach && ScarletDownedBoss.DownedEvilBosses)
-                {
                     HandleDiverArmor(poolSizeAmt, power, ref itemDrop, ref sonar);
-                    return;
-                }
                 if (Player.ZoneDesert && DownedBossSystem.downedTimeGod)
                     FastPoolHandler(1000, ItemType<EthrealSwordfish>(), poolSizeAmt, power, ref itemDrop, ref sonar);
                 if (Player.ZoneSnow && DownedBossSystem.downedMatterGod)
@@ -58,6 +55,7 @@ namespace HJScarletRework.Globals.Players
             int chanceToCatchDiverArmor = 1000 / fishPowerDiv;
             List<int> list = [ItemType<DiverHead>(), ItemType<DiverBody>(), ItemType<DiverLegs>()];
             int increaseChanceTime = 1;
+                Main.NewText(chanceToCatchDiverArmor);
             for (int i = 0; i < Player.inventory.Length; i++)
             {
                 if (Player.inventory[i].IsAir || Player.inventory[i] == null)

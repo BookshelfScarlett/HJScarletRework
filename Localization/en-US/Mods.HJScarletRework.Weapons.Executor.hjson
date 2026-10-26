@@ -240,8 +240,7 @@ Sundowner: {
 	DisplayName: Sundowner
 	Tooltip:
 		'''
-		Fires straight-flying missile and seeking streaming flames
-		The projectiles cause an explosion on hit
+		Fires missile and seeking streaming flames
 		"No, you won't become invincible with this."
 		'''
 	ExecutionStrike:
@@ -313,7 +312,7 @@ GaiaStriker: {
 	ExecutionStrike:
 		'''
 		The Gaia Striker bursts open and transforms into a minion
-		Press the Interact key to switch between Staff mode and Minion mode
+		Press the Action key to switch between Staff mode and Minion mode
 		Minion mode automatically attacks nearby enemies
 		Staff mode releases a crimson ray, which can be enhanced by takes up normal attack
 		In Staff mode, each attack restores a small amount of duration to the minion
@@ -372,7 +371,7 @@ StarofHope: {
 	Tooltip:
 		'''
 		A shining star falls toward the cursor
-		Support Effect:[ScarletBuff/HJScarletRework/StarofHoperBuff]
+		Support Effect:[ScarletBuff/HJScarletRework/StarofHopeBuff]
 		"A story of love and hope"
 		'''
 	ExecutionStrike:
@@ -421,21 +420,21 @@ StreamingProtocol: {
 
 AngryBomb: {
 	DisplayName: Angry Bomb
-	Tooltip: Throws a bomb that locks onto the nearest target
+	Tooltip:
+		'''
+		Chase your foes
+		May self-destruct from excessive rage
+		'''
 	ExecutionStrike:
 		'''
-		The bomb becomes even angrier
-		Has a wider search range and repairs itself multiple times
+		The bomb will not self-destruct from rage
+		Repeatedly attacks the enemy it chases
 		'''
 }
 
 TearEye: {
 	DisplayName: Cthulhu's Tear
-	Tooltip:
-		'''
-		A whip with slower attack speed but lower damage falloff
-		Support Effect:[ScarletBuff/HJScarletRework/TearEyeBuff]
-		'''
+	Tooltip: Support Effect:[ScarletBuff/HJScarletRework/TearEyeBuff]
 	ExecutionStrike:
 		'''
 		Grants the Support Effect for 60 seconds
@@ -454,8 +453,8 @@ ContainedBlast: {
 		'''
 	ExecutionStrike:
 		'''
-		Detonates all sticky rounds on the field, granting effects based on the counts:
-		Increases weapno's damage independently, up to 35%
+		Detonates all sticky rounds, granting effects based on the counts:
+		Increases weapon's damage independently, up to 35%
 		Increases weapon's attack speed and guarranted critical strike
 		'''
 	FlavorTooltip: Put a lid on it.
@@ -468,7 +467,7 @@ EndlessWar: {
 		'''
 		Transforms into a special Minion Hammer on hit
 		The suspended Minion Hammer automatically attacks nearby enemies and calls down multiple lightning strikes around itself
-		While the Minion Hammer is active, pressing the Interact key again—or when it is about to expire—performs three wide-area heavy strikes in the direction of your attack
+		While the Minion Hammer is active, pressing the Action key again—or when it is about to expire—performs three wide-area heavy strikes in the direction of your attack
 		These heavy strikes ignore defense, release lightning during the swing, and stun enemies on each hit
 		'''
 	FlavorTooltips: ""
@@ -480,7 +479,7 @@ SplendidofTerra: {
 	ExecutionStrike:
 		'''
 		Transforms into a special Minion Hammer on hit
-		While active, press the Interact key to switch between Staff mode and Minion mode
+		While active, press the Action key to switch between Staff mode and Minion mode
 		In Minion mode, it automatically attacks nearby enemies
 		In Staff mode, it releases a life ray; while holding the Splendid Terra, its normal attack is replaced to enhance the ray
 		In Staff mode, each attack with the held Splendid Terra restores a small amount of the Minion Hammer's duration
@@ -494,14 +493,14 @@ ASMD: {
 	DisplayName: A.S.M.D.
 	Tooltip:
 		'''
-		Fires an eletronic frost-fire shell that explodes
-		Attacks inflict[ScarletDebuff/Terraria/Frostburn2]
+		Explodes on hit
+		Inflict[ScarletDebuff/Terraria/Frostburn2]
 		'''
 	ExecutionStrike:
 		'''
-		Implanted into the victim and explode multiple times
-		Bursts out multiple ice chunks on final explosion, lingering on the field
-		Subsequent shell hits will cause one ice chunk to chase that enemy
+		Implants into the victim and explodes multiple times
+		The final explosion bursts out multiple ice chunks
+		Subsequent hits cause one ice chunk to chase that enemy
 		'''
 	AlterDisplayName: ""
 }
@@ -526,7 +525,7 @@ PureDagger: {
 	ExecutionStrike:
 		'''
 		Increases your defense by 6
-		Increases attack speed and Spawn pure stars on hit
+		Increases attack speed, spawn pure stars on hit
 		'''
 }
 
@@ -554,11 +553,7 @@ ArcticGuanDao: {
 		Swing to knock back nearby enemies
 		Attacks always inflict[ScarletDebuff/Terraria/Frostburn]
 		'''
-	ExecutionStrike:
-		'''
-		Sends a snow cloud toward the cursor position
-		The cloud lingers on the field and drops icicles
-		'''
+	ExecutionStrike: Summons a cloud to rain down on your foes
 }
 
 ConferenceCall: {
@@ -676,14 +671,16 @@ TheGreatDipper: {
 	DisplayName: Polaris
 	Tooltip:
 		'''
-		Fires two stars toward the cursor
-		Lights up the Big Dipper behind you
+		Fires two homing stars
+		Your attacks will light up the Big Dipper
+		Fully lit Big Dipper trigger Execution Strike
 		Execution is manual in this mode
 		'''
 	ExecutionStrike:
 		'''
-		Each swing fires seven seeking stars and lights up the Big Dipper behind you.
-		When fully lit, triggers Execution Strike, unfolding a galaxy at the cursor
+		Fires seven homing stards
+		Fully lit Big Dipper trigger Execution Strike
+		Unfolds a galaxy at the cursor
 		Execution is automatic in this mode
 		'''
 	Special: ""
@@ -763,7 +760,7 @@ Moonfire: {
 	Tooltip:
 		'''
 		An extremely precise revolver
-		Press the Interact key at any time to perform Execution Strike
+		Press the Action key at any time to perform Execution Strike
 		'''
 	ExecutionStrike:
 		'''
@@ -775,11 +772,11 @@ Moonfire: {
 
 Reflux: {
 	DisplayName: Reflux
-	Tooltip: Fires spread bullets inflicting [ScarletDebuff/Terraria/CursedInferno]
+	Tooltip: Fires spread bullets inflicting[ScarletDebuff/Terraria/CursedInferno]
 	ExecutionStrike:
 		'''
 		Fires bullets with more pierces
-		On first hit, bullets generate a chain that links two nearby targets
+		Bullets generate a chain that links two nearby targets
 		A target can be linked by up to five chains
 		'''
 	FlavorTooltip: That's gonna burn.
@@ -801,7 +798,7 @@ CrescentRose: {
 
 CobaltYoyo: {
 	DisplayName: Cobalt Yoyo
-	Tooltip: Causes a explosion on hit
+	Tooltip: Explodes on hit
 	ExecutionStrike:
 		'''
 		Cause multiple explosions on the hit enemy
@@ -828,8 +825,8 @@ TheCompanion: {
 	DisplayName: The Companion
 	Tooltip:
 		'''
-		Inflicts [ScarletDebuff/Terraria/Oiled] on non-critical hits
-		Inflicts [ScarletDebuff/Terraria/OnFire3] on critical hits
+		Inflicts[ScarletDebuff/Terraria/Oiled] on non-critical hits
+		Inflicts[ScarletDebuff/Terraria/OnFire3] on critical hits
 		'''
 	ExecutionStrike:
 		'''

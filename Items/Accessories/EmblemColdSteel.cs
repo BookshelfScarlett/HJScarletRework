@@ -15,7 +15,6 @@ namespace HJScarletRework.Items.Accessories
         public static float MaxDamageMult = .75f;
         public override void SetStaticDefaults()
         {
-            Type.ShimmerTo(ItemType<EmblemFirearm>());
         }
         public override string AssetPath => AssetHandler.Equips;
         public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(Damage.ToPercent(), Crit + "%", MaxDamageMult.ToPercent());

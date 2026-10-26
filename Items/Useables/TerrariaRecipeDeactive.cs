@@ -4,6 +4,7 @@ using HJScarletRework.Globals.Methods;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace HJScarletRework.Items.Useables
@@ -11,6 +12,7 @@ namespace HJScarletRework.Items.Useables
     public class TerrariaRecipeDeactive : HJScarletItemClass
     {
         public override string AssetPath => AssetHandler.Useables;
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(TerrariaRecipe.FoodCount, TerrariaRecipe.StatLifePerAdd);
         public override void ExSD()
         {
             Item.width = 50;

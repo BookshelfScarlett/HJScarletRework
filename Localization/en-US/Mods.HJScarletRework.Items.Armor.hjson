@@ -120,7 +120,7 @@ FishCostumeExecutor: {
 		'''
 		Allows you to swim freely in air as if it were water
 		Stores up to one Small Fish Dash when Execution Strike hits an enemy
-		Press the Interact key to release it when needed
+		Press the Action key to release it when needed
 		Submerging in lava will continuously drain life, regardless of any lava immunity items
 		'''
 }
@@ -172,7 +172,7 @@ MonkHead: {
 		Increases damage by {0}, critical strike chance by {1}
 		Increases weapon size by {2}, significantly raises attack frequency
 		Continuously releases seeking magic orbs while swinging
-		Press the Interact key to swing the weapon and provide Heal to you and your teammates
+		Press the Action key to swing the weapon and provide Heal to you and your teammates
 		Upon completing the interaction, continuously Heal yourself until near full health
 		Taking damage interrupts all healing effects	
 		'''
@@ -181,7 +181,7 @@ MonkHead: {
 		Increases damage by {0}, critical strike chance by {1}
 		Increases weapon size by {2}, significantly raises attack frequency
 		Calls down lightning on multiple nearby enemies while swinging
-		Press the Interact key to swing the weapon and provide Heal to you and your teammates
+		Press the Action key to swing the weapon and provide Heal to you and your teammates
 		Upon completing the interaction, continuously Heal yourself until near full health
 		Taking damage interrupts all healing effects
 		'''
@@ -227,7 +227,7 @@ ReaperHead: {
 	SetBonus:
 		'''
 		+2 HP/s health regeneration
-		Press the Interact key to drain an enemy's health by consuming the current weapon's Execution Progress
+		Press the Action key to drain an enemy's health by consuming the current weapon's Execution Progress
 		The health drained is determined by the enemy's current HP and the ratio of current Execution Progress to the required Execution count
 		The more health drained, the longer the cooldown of this ability; maximum drain is 5% of the enemy's current HP
 		This ability takes lower priority than manual Execution Strike

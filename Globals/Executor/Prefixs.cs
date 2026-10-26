@@ -174,7 +174,7 @@ namespace HJScarletRework.Globals.Executor
         internal const string ArmorPenetrationNameID = "HJScarletRework:PrefixArmorPenetration";
         internal const string CritDamageID = "HJScarletRework:PrefixCritDamage";
         public string ExecutionDamageValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.ExecutionDamageLine").ToLangValue();
-        public string DefenseReduceValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.DefenseReduceLine").ToLangValue();
+        public string DefenseReduceValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.DefenseReduceValue").ToLangValue();
         public string CritDamageValue => Mod.GetLocalizationKey("ExecutorDamageClass.Prefixs.CritDamageLine").ToLangValue();
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {

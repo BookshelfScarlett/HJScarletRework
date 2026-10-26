@@ -24,7 +24,7 @@ namespace HJScarletRework.Items.Weapons.Melee
         }
         public override void ExSD()
         {
-            Item.damage = 1546;
+            Item.damage = 2100;
             Item.SetUpNoUseGraphicItem(false);
             Item.SetUpRarityPrice(ItemRarityID.Purple);
             Item.HJScarlet().drawBuffIconAndDetail = true;

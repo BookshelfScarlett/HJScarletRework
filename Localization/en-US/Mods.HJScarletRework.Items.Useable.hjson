@@ -13,7 +13,7 @@ TerrariaRecipe: {
 	Tooltip:
 		'''
 		Grants a bonus to maximum health based on the number of different food types consumed
-		Gains 10 max health for every 5 food items consumed
+		Gains {1} max health for every {0} food items consumed
 		Right-click to toggle
 		"This isn't Minecraft."
 		'''
@@ -93,7 +93,7 @@ PurePrismFate: {
 	DisplayName: Pure Prism
 	Tooltip:
 		'''
-		Press the Interact key on a crafting material in your inventory to duplicate it.
+		Press the Action key on a crafting material in your inventory to duplicate it.
 		Up to 100 copies can be duplicated at once, and each duplication consumes 3 Prisms.
 		"A more refined Mana Crystal."
 		'''
@@ -103,7 +103,7 @@ UnregisteredSpiritOrigin: {
 	DisplayName: Unregistered Spirit Origin
 	Tooltip:
 		'''
-		Press the Interact key on a weapon/accessory/armor/treasure bag in your inventory to duplicate.
+		Press the Action key on a weapon/accessory/armor/treasure bag in your inventory to duplicate.
 		The Unregistered Spirit Origin itself cannot be duplicated.
 		"The overflowing remnants of a Spirit Origin."
 		'''
@@ -132,7 +132,7 @@ ProvidenceHolyWater: {
 	DisplayName: Holy Water of Destiny
 	Tooltip:
 		'''
-		While held, press the Interact key on a Mana Potion in your inventory to inherit its restoration amount
+		While held, press the Action key on a Mana Potion in your inventory to inherit its restoration amount
 		Restores an additional 10 mana when used, and is not consumed
 		"A transcendent water not of this world, capable of conducting immense mana with zero loss"
 		'''
@@ -192,6 +192,7 @@ AxeCharm: {
 	Tooltip:
 		'''
 		Right-click to toggle manual execution mode for Executor weapons
+		Press Action Key to trigger
 		Does not work on some weapons
 		'''
 	EnableTooltips: Manual Execution Mode: {0}
@@ -212,7 +213,7 @@ CrystallizedLore: {
 	DisplayName: Crystallized Lore
 	Tooltip:
 		'''
-		Press the Interact key on a weapon in your inventory to grant it the best prefix 
+		Press the Action key on a weapon in your inventory to grant it the best prefix 
 		If it fails, grants the "Demonic" prefix instead
 		If use on an accessory, it will attempt to grant it the best accessory prefix
 		Hold shift and right-click to cycle through the available accessory prefix options
@@ -316,7 +317,7 @@ TerrariaRecipeDeactive: {
 	Tooltip:
 		'''
 		Grants a bonus to maximum health based on the number of different food types consumed
-		Gains 10 max health for every 5 food items consumed
+		Gains {1} max health for every {0} food items consumed
 		Right-click to toggle
 		"This isn't Minecraft."
 		'''

@@ -33,7 +33,6 @@ namespace HJScarletRework.Globals.Instances.Items
                     itemLoot.AddLoot<GrassKnife>(4);
                     itemLoot.AddLoot<PestilenceFlower>(4);
                     itemLoot.AddLoot<EmblemColdSteel>(4);
-                    itemLoot.AddLoot<EmblemFirearm>(4);
                     itemLoot.AddLoot<EmblemThrown>(4);
                     break;
                 case ItemID.WallOfFleshBossBag:

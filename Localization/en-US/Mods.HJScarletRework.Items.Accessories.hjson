@@ -366,8 +366,8 @@ RuShiWoWen: {
 		On first equip, instantly clears all summoned minions
 		Every {0} seconds, clears all summoned minions and randomly summons 1 minion from all minion types until the minion cap is reached
 		All minions summoned in the same batch have their base damage set to the lowest base damage among that batch, and affacted by[i:SummonerEmblem]summoner class
-		Holding this and press the Interact key on a minion summoning staff in your inventory to disable that minion from being summoned
-		Up to {1} minion types can be disabled; pressing the Interact key on this accessory removes the last minion added to the list
+		Holding this and press the Action key on a minion summoning staff in your inventory to disable that minion from being summoned
+		Up to {1} minion types can be disabled; pressing the Action key on this accessory removes the last minion added to the list
 		Hold Left Alt to view the ban list
 		'''
 	BanMinionList: Minion Ban List ({1}){0}
@@ -416,7 +416,7 @@ EmblemGalaxy: {
 	DisplayName: Proof of the Stars
 	Tooltip:
 		'''
-		While equipped, press the Interact key on[i:HJScarletRework/TheSevenStar]Seven Stars in your inventory to transform it into[i:HJScarletRework/TheGreatDipper]Polaris
+		While equipped, press the Action key on[i:HJScarletRework/TheSevenStar]Seven Stars in your inventory to transform it into[i:HJScarletRework/TheGreatDipper]Polaris
 		Polaris can only be used while Proof of the Stars is equipped
 		'''
 }

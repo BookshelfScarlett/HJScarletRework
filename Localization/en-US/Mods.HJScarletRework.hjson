@@ -1,5 +1,5 @@
-SwitchWeaponTooltip: Lostbelt Journey: Press Intersect while holding the weapon to switch
-SwitchWeaponVisual: Lostbelt Journey: Press Intersect while holding the weapon to change its visual effect
+SwitchWeaponTooltip: Lostbelt Journey: Press Action while holding the weapon to switch
+SwitchWeaponVisual: Lostbelt Journey: Press Action while holding the weapon to change its visual effect
 SwitchWeaponConditionTooltip: Switch condition: Defeated<{0}>
 NotFinished: -Not Finished-
 
@@ -20,12 +20,12 @@ SwitchWeapon: {
 	Tooltip:
 		'''
 		Lostbelt Journey:
-		Press Intersect key while holding the weapon to switch
+		Press Action key while holding the weapon to switch
 		'''
 	Visual:
 		'''
 		Lostbelt Journey:
-		Press Intersect key while holding the weapon to change its visual effect
+		Press Action key while holding the weapon to change its visual effect
 		'''
 	AllFix: Also can apply to: {0}
 }
@@ -33,7 +33,7 @@ SwitchWeapon: {
 CrossModSupport.Calamity: ""
 
 Keybinds: {
-	GeneralActionKeybind.DisplayName: Interact Key
+	GeneralActionKeybind.DisplayName: Action Key
 	GenerialSkillKeybind.DisplayName: Skill Key
 	ParryActionKeybind.DisplayName: Parry Key (Currently no effect)
 }
@@ -42,7 +42,7 @@ ExecutorDamageClass: {
 	ExecutionProgress: Strike your enemy for {0} times to Execute. Press Left Alt for details
 	ExecutionDescriptionName: Execution Strike
 	ExecutionProgressRevampedMode: Execution Progress: {0} / {1}
-	ForceTacticalExecution: Press Interact key to trigger Execution Strike
+	ForceTacticalExecution: Press Action key to trigger Execution Strike
 	ForceAutomaticExecution: Execution Strike is always automatic
 	CompanionWeapon: Companion
 	DisplayName: Executor Damage

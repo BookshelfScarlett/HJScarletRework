@@ -79,12 +79,6 @@ namespace HJScarletRework.Projs.Melee
             Projectile.GetProjDrawData(out Texture2D projTex, out Vector2 drawPos, out Vector2 ori);
             int drawLength = Projectile.oldPos.Length;
             int length = Projectile.oldPos.Length;
-            //SB.EnterShaderArea();
-            //SapphireYoyoProj.DrawSmear(Projectile, Color.White*.5f, Color.Silver,1);
-            //SapphireYoyoProj.DrawSmear(Projectile, Color.White*.5f, Color.Silver,1.5f,Pi);
-            //SapphireYoyoProj.DrawSmear(Projectile, Color.White* .5f, Color.Silver,2f,PiOver2);
-            //SapphireYoyoProj.DrawSmear(Projectile, Color.White*.5f, Color.Silver,2.5f,-PiOver2);
-
             SB.EnterShaderArea();
 
             DrawTrails(HJScarletTexture.Trail_BloomDualLine.Texture, Color.White, 1f, 1f, 1.1f);
