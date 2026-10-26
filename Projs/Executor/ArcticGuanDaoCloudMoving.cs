@@ -49,7 +49,7 @@ namespace HJScarletRework.Projs.Executor
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            return true;
+            return false;
         }
         public override void OnKill(int timeLeft)
         {

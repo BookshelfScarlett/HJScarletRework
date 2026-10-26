@@ -1,4 +1,5 @@
-﻿using HJScarletRework.Core.NetCode;
+﻿using HJScarletRework.Assets.Registers;
+using HJScarletRework.Core.NetCode;
 using HJScarletRework.Globals.Database.IDSets;
 using HJScarletRework.Globals.Executor;
 using HJScarletRework.Globals.Methods;
@@ -40,9 +41,11 @@ namespace HJScarletRework.Items.Weapons.Executor.Misc
                 return;
             if (!player.GetExecutionSrike())
                 return;
+            ScarletSound(HJScarletSounds.Misc_ManaClearUse, player.Center, 0.55f, 1, -0.84f, 0.2f);
             int dmg = (int)player.GetTotalDamage<ExecutorDamageClass>().ApplyTo(Item.damage);
             Projectile proj = Projectile.NewProjectileDirect(player.GetSource_FromThis(), player.Center, player.ToMouseVector2().ToSafeNormalize() * 19f, ProjectileType<ArcticGuanDaoCloudMoving>(), dmg, 1f, player.whoAmI);
             proj.originalDamage = dmg;
+                ((ArcticGuanDaoCloudMoving)proj.ModProjectile).TargetVector2 = player.LocalMouseWorld();
             player.RemoveExecutionProgress(Type);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
